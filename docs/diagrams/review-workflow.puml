@@ -1,0 +1,214 @@
+@startuml
+' Knowledge Review and Validation Workflow
+
+title Knowledge Review Workflow (Consensus Validation)
+
+actor "Knowledge\nCurator" as Curator
+participant "Frontend\n(Vue)" as FE
+participant "Backend\n(FastAPI)" as BE
+database "MongoDB" as DB
+participant "Email\nService" as Email
+actor "Knowledge\nReviewer" as Reviewer
+actor "Knowledge\nExplorator" as Explorator
+
+== Curator Creates Knowledge ==
+
+Curator -> FE : Login (curator role)
+activate FE
+FE -> Curator : Show Data Processing page
+deactivate FE
+
+Curator -> FE : Upload document / Create fact
+activate FE
+FE -> BE : POST /api/knowledge/facts\n{content, source, tags}
+activate BE
+BE -> BE : Validate user has\ncurator role
+BE -> BE : Add created_by: curator_id\nstatus: "pending_review"
+BE -> DB : Insert fact
+activate DB
+DB -> BE : Fact created
+deactivate DB
+BE -> DB : Log audit entry
+activate DB
+DB -> BE : Logged
+deactivate DB
+BE -> Email : Notify reviewers\n"New fact pending review"
+BE -> FE : {fact_id, status}
+deactivate BE
+FE -> Curator : "Fact submitted for review"
+deactivate FE
+
+note right of Curator
+  Knowledge is NOT visible
+  to Explorators yet
+end note
+
+== Curator Views Their Pending Items ==
+
+Curator -> FE : Navigate to "My Contributions"
+activate FE
+FE -> BE : GET /api/knowledge/facts\n?created_by=me&status=pending
+activate BE
+BE -> DB : Query user's pending facts
+activate DB
+DB -> BE : List of facts
+deactivate DB
+BE -> FE : Return pending facts
+deactivate BE
+FE -> Curator : Show status badges:\n"Pending Review" (yellow)
+deactivate FE
+
+== Reviewer Reviews Knowledge ==
+
+Reviewer -> FE : Login (reviewer role)
+activate FE
+FE -> Reviewer : Show "3 items pending review"
+deactivate FE
+
+Reviewer -> FE : Navigate to Review Queue
+activate FE
+FE -> BE : GET /api/reviews/pending\n?resource_type=fact
+activate BE
+BE -> BE : Validate reviewer role
+BE -> DB : Query facts with\nstatus: "pending_review"
+activate DB
+DB -> BE : List of pending facts
+deactivate DB
+BE -> FE : Return facts
+deactivate BE
+FE -> Reviewer : Show review queue table
+deactivate FE
+
+Reviewer -> FE : Click on fact to review
+activate FE
+FE -> BE : GET /api/knowledge/facts/{id}
+activate BE
+BE -> DB : Get fact details +\nsource documents
+activate DB
+DB -> BE : Fact + context
+deactivate DB
+BE -> FE : Return full details
+deactivate BE
+FE -> Reviewer : Show review page:\n- Content\n- Source/evidence\n- Creator info\n- Related knowledge\n- Actions: Approve / Reject /\nRequest Changes
+deactivate FE
+
+alt Approve Knowledge
+    Reviewer -> FE : Click "Approve"\nAdd comments (optional)
+    activate FE
+    FE -> BE : POST /api/reviews/fact/{id}/approve\n{comments}
+    activate BE
+    BE -> BE : Validate reviewer role
+    BE -> DB : Update fact:\n- status: "published"\n- review_status: {approved, ...}
+    activate DB
+    DB -> BE : Updated
+    deactivate DB
+    BE -> DB : Log audit entry
+    activate DB
+    DB -> BE : Logged
+    deactivate DB
+    BE -> Email : Notify curator\n"Fact approved!"
+    BE -> FE : Success
+    deactivate BE
+    FE -> Reviewer : "Fact approved and published"
+    deactivate FE
+    
+    note right of Reviewer
+      Knowledge is now visible
+      to ALL users (including
+      Explorators)
+    end note
+    
+else Reject Knowledge
+    Reviewer -> FE : Click "Reject"\nEnter reason
+    activate FE
+    FE -> BE : POST /api/reviews/fact/{id}/reject\n{reason, comments}
+    activate BE
+    BE -> DB : Update fact:\n- status: "rejected"\n- review_status: {rejected, ...}
+    activate DB
+    DB -> BE : Updated
+    deactivate DB
+    BE -> DB : Log audit entry
+    activate DB
+    DB -> BE : Logged
+    deactivate DB
+    BE -> Email : Notify curator\n"Fact rejected"
+    BE -> FE : Success
+    deactivate BE
+    FE -> Reviewer : "Fact rejected"
+    deactivate FE
+    Email -> Curator : "Your fact was rejected.\nReason: Insufficient evidence"
+    
+else Request Changes
+    Reviewer -> FE : Click "Request Changes"\nEnter feedback
+    activate FE
+    FE -> BE : POST /api/reviews/fact/{id}/request-changes\n{requested_changes}
+    activate BE
+    BE -> DB : Update fact:\n- status: "changes_requested"\n- review_status: {...}
+    activate DB
+    DB -> BE : Updated
+    deactivate DB
+    BE -> DB : Log audit entry
+    activate DB
+    DB -> BE : Logged
+    deactivate DB
+    BE -> Email : Notify curator\n"Changes requested"
+    BE -> FE : Success
+    deactivate BE
+    FE -> Reviewer : "Changes requested"
+    deactivate FE
+    Email -> Curator : "Reviewer requested changes:\n..."
+    
+    Curator -> FE : Edit fact based on feedback
+    activate FE
+    FE -> BE : PUT /api/knowledge/facts/{id}\n{updated_content}
+    activate BE
+    BE -> DB : Update fact\nstatus: "pending_review"
+    activate DB
+    DB -> BE : Updated
+    deactivate DB
+    BE -> Email : Notify reviewer\n"Fact resubmitted"
+    BE -> FE : Success
+    deactivate BE
+    FE -> Curator : "Resubmitted for review"
+    deactivate FE
+end
+
+== Explorator Views Published Knowledge ==
+
+Explorator -> FE : Login (explorator role)
+activate FE
+FE -> Explorator : Show Knowledge Base
+deactivate FE
+
+Explorator -> FE : Search for facts
+activate FE
+FE -> BE : GET /api/knowledge/search\n?query=...
+activate BE
+BE -> BE : Filter: status="published" only
+BE -> DB : Query published facts
+activate DB
+DB -> BE : Published facts only
+deactivate DB
+BE -> FE : Return results
+deactivate BE
+FE -> Explorator : Show search results\n(only published knowledge)
+deactivate FE
+
+note right of Explorator
+  Explorators can ONLY see
+  published knowledge.
+  Pending/rejected items
+  are hidden.
+end note
+
+== Administrator Override ==
+
+note over BE
+  Administrators can:
+  - Publish without review
+  - Edit any knowledge
+  - Override review decisions
+  - Access all statuses
+end note
+
+@enduml

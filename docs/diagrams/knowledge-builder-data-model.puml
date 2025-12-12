@@ -1,0 +1,226 @@
+@startuml knowledge-builder-data-model
+
+' Comprehensive data model for AdvandEB Knowledge Builder (with User Management)
+
+' ============ User Management Entities ============
+
+class User {
+  +id: ObjectId
+  +google_id: string
+  +email: string
+  +name: string
+  +picture_url: string
+  +roles: [string]
+  +status: string
+  +created_at: datetime
+  +updated_at: datetime
+  +last_login: datetime
+  +metadata: dict
+}
+
+class RoleRequest {
+  +id: ObjectId
+  +user_id: ObjectId
+  +requested_roles: [string]
+  +current_roles: [string]
+  +justification: string
+  +form_data: dict
+  +status: string
+  +created_at: datetime
+  +reviewed_by: ObjectId
+  +reviewed_at: datetime
+  +review_notes: string
+}
+
+class APIKey {
+  +id: ObjectId
+  +user_id: ObjectId
+  +key_hash: string
+  +key_prefix: string
+  +name: string
+  +scopes: [string]
+  +status: string
+  +created_at: datetime
+  +expires_at: datetime
+  +last_used_at: datetime
+  +rate_limit: dict
+  +ip_whitelist: [string]
+}
+
+class AuditLog {
+  +id: ObjectId
+  +user_id: ObjectId
+  +action: string
+  +resource_type: string
+  +resource_id: ObjectId
+  +details: dict
+  +ip_address: string
+  +user_agent: string
+  +auth_method: string
+  +api_key_id: ObjectId
+  +timestamp: datetime
+}
+
+' ============ Knowledge Entities (Updated) ============
+
+class Document {
+  +id: ObjectId
+  +filename: string
+  +file_type: string
+  +file_size: int
+  +content: string
+  +facts_extracted: [ObjectId]
+  +processing_status: string
+  +created_at: datetime
+  +processed_at: datetime
+  +uploaded_by: ObjectId <<NEW>>
+  +is_day_zero: bool <<NEW>>
+  +batch_id: ObjectId <<NEW>>
+}
+
+class Fact {
+  +id: ObjectId
+  +content: string
+  +source: string
+  +confidence: float
+  +tags: [string]
+  +entities: [dict]
+  +created_at: datetime
+  +updated_at: datetime
+  +created_by: ObjectId <<NEW>>
+  +status: string <<NEW>>
+  +review_status: dict <<NEW>>
+  +is_day_zero: bool <<NEW>>
+}
+
+class StylizedFact {
+  +id: ObjectId
+  +fact_id: ObjectId
+  +summary: string
+  +importance: float
+  +relationships: [dict]
+  +graph_position: dict
+  +created_at: datetime
+  +created_by: ObjectId <<NEW>>
+  +status: string <<NEW>>
+  +review_status: dict <<NEW>>
+  +is_day_zero: bool <<NEW>>
+}
+
+class KnowledgeGraph {
+  +id: ObjectId
+  +name: string
+  +description: string
+  +nodes: [dict]
+  +edges: [dict]
+  +metadata: dict
+  +created_at: datetime
+  +updated_at: datetime
+  +created_by: ObjectId <<NEW>>
+  +status: string <<NEW>>
+  +collaborators: [ObjectId] <<NEW>>
+  +is_day_zero: bool <<NEW>>
+}
+
+' ============ Ingestion Entities (Updated) ============
+
+class IngestionBatch {
+  +id: ObjectId
+  +name: string
+  +source_root: string
+  +folders: [string]
+  +num_files: int
+  +status: string
+  +created_at: datetime
+  +updated_at: datetime
+  +created_by: ObjectId <<NEW>>
+  +is_day_zero: bool <<NEW>>
+}
+
+class IngestionJob {
+  +id: ObjectId
+  +batch_id: ObjectId
+  +source_type: string
+  +source_path_or_url: string
+  +document_id: ObjectId
+  +status: string
+  +stage: string
+  +progress: int
+  +error_message: string
+  +metadata: dict
+  +created_at: datetime
+  +updated_at: datetime
+}
+
+' ============ Agent Entities (Updated) ============
+
+class AgentSession {
+  +id: ObjectId
+  +session_id: string
+  +agent_type: string
+  +model: string
+  +messages: [dict]
+  +context: dict
+  +created_at: datetime
+  +updated_at: datetime
+  +user_id: ObjectId <<NEW>>
+  +session_type: string <<NEW>>
+}
+
+class AgentMessage {
+  +id: ObjectId
+  +session_id: ObjectId
+  +role: string
+  +content: string
+  +tool_calls: [dict]
+  +tool_results: [dict]
+  +timestamp: datetime
+}
+
+' ============ Phase 2 Entity ============
+
+class Contribution {
+  +id: ObjectId
+  +resource_type: string
+  +resource_id: ObjectId
+  +contributors: [dict]
+  +created_at: datetime
+  +updated_at: datetime
+}
+
+' ============ Relationships ============
+
+' User relationships
+User "1" -- "*" RoleRequest : requests
+User "1" -- "*" APIKey : owns
+User "1" -- "*" AuditLog : performs
+User "1" -- "*" Document : uploads
+User "1" -- "*" Fact : creates
+User "1" -- "*" StylizedFact : creates
+User "1" -- "*" KnowledgeGraph : owns
+User "1" -- "*" IngestionBatch : creates
+User "1" -- "*" AgentSession : runs
+
+User "1" -- "*" RoleRequest : reviews
+User "*" -- "*" KnowledgeGraph : collaborates_on
+
+' Knowledge relationships
+Document "1" -- "*" Fact : contains
+Fact "1" -- "1" StylizedFact : stylized_as
+StylizedFact "*" -- "*" KnowledgeGraph : included_in
+KnowledgeGraph "1" -- "*" KnowledgeGraph : references
+
+' Ingestion relationships
+IngestionBatch "1" -- "*" IngestionJob : contains
+IngestionJob "1" -- "0..1" Document : creates
+
+' Agent relationships
+AgentSession "1" -- "*" AgentMessage : has
+
+' Contribution relationships (Phase 2)
+Contribution "*" -- "1" Fact : tracks
+Contribution "*" -- "1" StylizedFact : tracks
+Contribution "*" -- "1" Document : tracks
+Contribution "*" -- "1" KnowledgeGraph : tracks
+
+@enduml

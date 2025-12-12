@@ -1,0 +1,156 @@
+% AdvandEB Development Environment Documentation
+% Printable setup and environment guide.
+
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{AdvandEB Development Environment}
+\author{AdvandEB Project}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Overview}
+
+This document provides a printable guide to the shared development environment used by the AdvandEB project. All services share a single Conda environment named \texttt{advandeb}.
+
+The main repositories are:
+
+\begin{itemize}[noitemsep]
+  \item \texttt{advandeb-knowledge-builder} -- knowledge ingestion, processing, and exploration.
+  \item \texttt{advandeb-modeling-assistant} -- modeling-focused retrieval and reasoning (planned).
+  \item \texttt{advandeb-architecture} -- system-level documentation, diagrams, and environment definition.
+\end{itemize}
+
+\section{Conda Environment}
+
+\subsection{Creating the Environment}
+
+The canonical \texttt{environment.yml} file lives in the \texttt{advandeb-architecture} repository. To create the environment:
+
+\begin{verbatim}
+conda env create -f environment.yml
+\end{verbatim}
+
+If the file changes and you need to update an existing environment:
+
+\begin{verbatim}
+conda env update -f environment.yml --prune
+\end{verbatim}
+
+\subsection{Activating the Environment}
+
+To activate the shared environment:
+
+\begin{verbatim}
+conda activate advandeb
+\end{verbatim}
+
+This environment is used for:
+
+\begin{itemize}[noitemsep]
+  \item Back-end services (FastAPI applications).
+  \item Command-line tools (e.g., \texttt{uvicorn}, \texttt{plantuml} if installed via Conda).
+  \item Any Python-based utilities for data processing and analysis.
+\end{itemize}
+
+\section{Core External Services}
+
+\subsection{MongoDB}
+
+AdvandEB services use MongoDB for persistent storage.
+
+\begin{itemize}[noitemsep]
+  \item Default URI: \texttt{mongodb://localhost:27017}
+  \item Typical environment variable: \texttt{MONGODB\_URL}
+\end{itemize}
+
+Start MongoDB using your preferred method (system service, Docker, or local binary).
+
+\subsection{Ollama}
+
+Ollama provides local hosting for large language models used by the Knowledge Builder and, in the future, the Modeling Assistant.
+
+\begin{itemize}[noitemsep]
+  \item Default base URL: \texttt{http://localhost:11434}
+  \item Typical environment variable: \texttt{OLLAMA\_BASE\_URL}
+\end{itemize}
+
+Install Ollama following its official instructions and ensure that it is running before starting any LLM-dependent services.
+
+\section{Running the Knowledge Builder}
+
+\subsection{Back-end}
+
+From the \texttt{advandeb-knowledge-builder/backend} directory:
+
+\begin{verbatim}
+conda activate advandeb
+cp .env.example .env   # edit as needed
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+\end{verbatim}
+
+Important environment variables in \texttt{backend/.env}:
+
+\begin{itemize}[noitemsep]
+  \item \texttt{MONGODB\_URL} -- MongoDB connection string.
+  \item \texttt{DATABASE\_NAME} -- database name (e.g., \texttt{advandeb\_knowledge\_builder\_kb}).
+  \item \texttt{OLLAMA\_BASE\_URL} -- Ollama endpoint.
+\end{itemize}
+
+\subsection{Front-end}
+
+From the \texttt{advandeb-knowledge-builder/frontend} directory:
+
+\begin{verbatim}
+npm install
+npm run dev
+\end{verbatim}
+
+The front-end development server typically runs at \texttt{http://localhost:3000}.
+
+\section{Running the Modeling Assistant (Planned)}
+
+The Modeling Assistant will also use the shared \texttt{advandeb} environment. A likely pattern for the future back-end service is:
+
+\begin{verbatim}
+conda activate advandeb
+# from advandeb-modeling-assistant/backend (future)
+uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+\end{verbatim}
+
+It will communicate with:
+
+\begin{itemize}[noitemsep]
+  \item The Knowledge Builder's HTTP APIs for knowledge and agent operations.
+  \item MongoDB for its own collections (e.g., scenarios, models, runs).
+\end{itemize}
+
+\section{Diagram Rendering}
+
+Architecture diagrams are stored as PlantUML files in \texttt{advandeb-architecture/diagrams}.
+
+To render all diagrams (assuming \texttt{plantuml} is installed and available):
+
+\begin{verbatim}
+conda activate advandeb
+cd advandeb-architecture/diagrams
+plantuml *.puml
+\end{verbatim}
+
+This generates image files (for example, PNGs) that can be included in LaTeX documents such as the main architecture specification.
+
+\section{Troubleshooting}
+
+\begin{itemize}[noitemsep]
+  \item If Python imports such as \texttt{fastapi} or \texttt{uvicorn} cannot be resolved, ensure that the \texttt{advandeb} environment is active and that it was created from the canonical \texttt{environment.yml}.
+  \item If diagrams fail to render with ``command not found'', install PlantUML via Conda or your preferred method and re-run the rendering commands.
+  \item For MongoDB or Ollama connection issues, verify that the services are running and that the URLs configured in your \texttt{.env} files match the actual hosts and ports.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,139 @@
+@startuml
+' Role Request Workflow for AdvandEB Knowledge Builder
+
+title Role Request and Approval Workflow
+
+actor "New User" as User
+participant "Frontend\n(Vue)" as FE
+participant "Backend\n(FastAPI)" as BE
+database "MongoDB" as DB
+participant "Email\nService" as Email
+actor "Administrator" as Admin
+
+== New User Registration ==
+
+User -> FE : Click "Sign in with Google"
+activate FE
+FE -> BE : Google OAuth flow
+activate BE
+BE -> DB : Create new user\n(status: pending_approval,\nroles: [])
+activate DB
+DB -> BE : User created
+deactivate DB
+BE -> FE : Return JWT + user info
+deactivate BE
+FE -> User : Show dashboard\n"Your account is pending\napproval"
+deactivate FE
+
+== User Requests Roles ==
+
+User -> FE : Click "Request Roles"
+activate FE
+FE -> User : Show role request form
+User -> FE : Fill form:\n- Select roles\n- Affiliation\n- Research area\n- Justification\n- References (optional)
+User -> FE : Submit request
+FE -> BE : POST /api/role-requests\n{requested_roles, form_data}
+activate BE
+BE -> BE : Validate user authenticated
+BE -> DB : Create role_request\n(status: pending)
+activate DB
+DB -> BE : Request created
+deactivate DB
+BE -> Email : Notify admins\n"New role request"
+BE -> FE : {request_id, status}
+deactivate BE
+FE -> User : "Request submitted!\nWait for admin approval"
+deactivate FE
+
+== Administrator Reviews Request ==
+
+Admin -> FE : Login (admin role)
+activate FE
+FE -> BE : GET /api/role-requests\n?status=pending
+activate BE
+BE -> DB : Query pending requests
+activate DB
+DB -> BE : List of requests
+deactivate DB
+BE -> FE : Return requests
+deactivate BE
+FE -> Admin : Show "5 pending requests"
+deactivate FE
+
+Admin -> FE : Click on request
+activate FE
+FE -> BE : GET /api/role-requests/{id}
+activate BE
+BE -> DB : Get request details
+activate DB
+DB -> BE : Request + user info
+deactivate DB
+BE -> FE : Return details
+deactivate BE
+FE -> Admin : Show:\n- User profile\n- Requested roles\n- Justification\n- Form data
+deactivate FE
+
+alt Approve Request
+    Admin -> FE : Click "Approve"
+    activate FE
+    Admin -> FE : Optionally select\nsubset of roles
+    Admin -> FE : Add notes (optional)
+    FE -> BE : PUT /api/role-requests/{id}/approve\n{approved_roles, notes}
+    activate BE
+    BE -> DB : Update request\n(status: approved)
+    activate DB
+    DB -> BE : Updated
+    deactivate DB
+    BE -> DB : Update user.roles
+    activate DB
+    DB -> BE : User updated
+    deactivate DB
+    BE -> DB : Log audit entry
+    activate DB
+    DB -> BE : Logged
+    deactivate DB
+    BE -> Email : Notify user\n"Request approved!"
+    BE -> FE : Success
+    deactivate BE
+    FE -> Admin : "Request approved"
+    deactivate FE
+    Email -> User : "Your roles have been\napproved: [Curator, Analyst]"
+    
+else Reject Request
+    Admin -> FE : Click "Reject"
+    activate FE
+    Admin -> FE : Enter reason
+    FE -> BE : PUT /api/role-requests/{id}/reject\n{reason}
+    activate BE
+    BE -> DB : Update request\n(status: rejected)
+    activate DB
+    DB -> BE : Updated
+    deactivate DB
+    BE -> DB : Log audit entry
+    activate DB
+    DB -> BE : Logged
+    deactivate DB
+    BE -> Email : Notify user\n"Request rejected"
+    BE -> FE : Success
+    deactivate BE
+    FE -> Admin : "Request rejected"
+    deactivate FE
+    Email -> User : "Your request was rejected.\nReason: ..."
+end
+
+== User Logs In After Approval ==
+
+User -> FE : Login with Google
+activate FE
+FE -> BE : OAuth flow
+activate BE
+BE -> DB : Load user + roles
+activate DB
+DB -> BE : User with roles:\n[knowledge_curator,\ndata_analyst]
+deactivate DB
+BE -> FE : JWT with roles
+deactivate BE
+FE -> User : Full access granted!\nShow all features
+deactivate FE
+
+@enduml

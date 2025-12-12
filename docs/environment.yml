@@ -1,0 +1,29 @@
+name: advandeb
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - nodejs
+  - uvicorn
+  - fastapi
+  - pydantic
+  - httpx
+  - python-dotenv
+  - aiofiles
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - networkx
+  - beautifulsoup4
+  - requests
+  - plotly
+  - pip:
+      - uvicorn[standard]
+      - motor
+      - pymongo
+      - black
+      - isort
+      - mypy

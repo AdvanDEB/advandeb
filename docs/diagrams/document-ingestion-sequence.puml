@@ -1,0 +1,48 @@
+@startuml
+' Sequence: Document ingestion and fact extraction via Knowledge Builder
+
+actor "Domain Expert" as User
+participant "KB Frontend\n(DataProcessing View)" as FE
+participant "KB Backend\n/data/upload-pdf" as BE_Data
+participant "DataProcessingService" as DPS
+participant "AgentService" as AS
+participant "AgentFramework" as AF
+participant "LocalModelClient\n(Ollama)" as LMC
+database "MongoDB" as Mongo
+
+User -> FE : Select PDF and click Upload
+FE -> BE_Data : HTTP POST /api/data/upload-pdf
+activate BE_Data
+
+BE_Data -> BE_Data : Save file to uploads/
+BE_Data -> DPS : process_pdf(file_path, filename)
+activate DPS
+
+DPS -> AS : extract_facts_from_pdf(text/metadata)
+activate AS
+
+AS -> AF : run_agent(KNOWLEDGE_BUILDER, message)
+activate AF
+
+AF -> LMC : chat.create(model="llama2", messages,...)
+activate LMC
+LMC --> AF : LLM response (facts / tool calls)
+deactivate LMC
+
+AF -> AS : AgentRunResponse (facts, stylized facts, steps)
+deactivate AF
+
+AS -> Mongo : Store extracted facts and/or stylized facts
+
+AS --> DPS : Extraction result
+deactivate AS
+
+DPS --> BE_Data : Processed document summary and extracted facts
+deactivate DPS
+
+BE_Data --> FE : HTTP 200 JSON (facts, document id, summary)
+deactivate BE_Data
+
+FE --> User : Show extraction results
+
+@enduml

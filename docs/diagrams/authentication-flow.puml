@@ -1,0 +1,88 @@
+@startuml
+' Authentication Flow Diagram for AdvandEB Knowledge Builder
+
+title Authentication Flow - Google OAuth & API Keys
+
+actor User
+participant "Frontend\n(Vue)" as FE
+participant "Backend\n(FastAPI)" as BE
+participant "Google\nOAuth 2.0" as Google
+database "MongoDB" as DB
+database "Redis" as Redis
+
+== Google OAuth Flow ==
+
+User -> FE : Click "Sign in with Google"
+FE -> Google : Redirect to OAuth consent
+Google -> User : Show consent screen
+User -> Google : Approve access
+Google -> FE : Redirect with auth code
+FE -> BE : POST /api/auth/google\n{code: "auth_code"}
+BE -> Google : Exchange code for tokens
+Google -> BE : Return user info\n(email, name, picture)
+BE -> DB : Check if user exists
+alt New User
+    BE -> DB : Create user\n(status: pending_approval,\nroles: [])
+else Existing User
+    BE -> DB : Load user + roles
+end
+BE -> BE : Generate JWT tokens\n(access + refresh)
+BE -> DB : Store refresh token
+BE -> Redis : Cache session
+BE -> FE : Return tokens + user info
+FE -> FE : Store tokens in localStorage
+FE -> User : Show dashboard
+
+== JWT Authentication ==
+
+User -> FE : Navigate to protected page
+FE -> BE : GET /api/knowledge/facts\nAuthorization: Bearer <jwt>
+BE -> BE : Validate JWT signature
+BE -> BE : Check token expiration
+alt Token Valid
+    BE -> BE : Extract user_id + roles
+    BE -> BE : Check permissions
+    BE -> DB : Query data
+    BE -> FE : Return data
+    FE -> User : Display content
+else Token Expired
+    BE -> FE : 401 Unauthorized
+    FE -> BE : POST /api/auth/refresh\n{refresh_token}
+    BE -> DB : Validate refresh token
+    BE -> BE : Generate new access token
+    BE -> FE : Return new access token
+    FE -> BE : Retry original request
+end
+
+== API Key Authentication ==
+
+User -> User : Generate API key via UI
+User -> BE : POST /api/api-keys\nAuthorization: Bearer <jwt>
+BE -> BE : Validate user role\n(Curator or Analyst)
+BE -> BE : Generate random key\n(256-bit)
+BE -> BE : Hash key (SHA-256)
+BE -> DB : Store key hash + metadata
+BE -> User : Show key ONCE\n(advk_abc123...)
+
+User -> User : Use API key in scripts
+
+User -> BE : GET /api/knowledge/search\nAuthorization: Bearer advk_abc123...
+BE -> BE : Hash provided key
+BE -> DB : Lookup key hash
+alt Key Valid
+    BE -> BE : Check expiration
+    BE -> BE : Check scopes
+    BE -> Redis : Check rate limit
+    alt Rate Limit OK
+        BE -> DB : Query data
+        BE -> DB : Update key last_used_at
+        BE -> DB : Log audit entry
+        BE -> User : Return data
+    else Rate Limit Exceeded
+        BE -> User : 429 Too Many Requests
+    end
+else Key Invalid/Expired
+    BE -> User : 401 Unauthorized
+end
+
+@enduml

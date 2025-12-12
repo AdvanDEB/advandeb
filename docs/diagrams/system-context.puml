@@ -1,0 +1,68 @@
+@startuml
+' AdvandEB System Context Diagram (Clean - High Level Only)
+
+' Define user groups
+actor "Platform Users\n(6 Roles)" as Users <<Person>>
+
+' Main platform rectangle
+rectangle "AdvandEB Platform" {
+  
+  ' Shared authentication library
+  component "advandeb-shared-utils\n(Auth Library)" as SharedUtils <<Python Package>> #LightBlue
+  
+  ' Main components
+  component "AdvandEB\nKnowledge Builder" as KB <<FastAPI + Vue>> #LightGreen
+  component "AdvandEB\nModeling Assistant" as MA <<FastAPI + Vue>> #LightCoral
+  
+  ' Internal relationships
+  KB ..> SharedUtils : imports\n(JWT, permissions)
+  MA ..> SharedUtils : imports\n(JWT, permissions)
+  MA --> KB : HTTP API calls\n(authenticated)
+}
+
+' External services
+cloud "Google OAuth 2.0" as GoogleOAuth <<External Service>>
+database "MongoDB\n(Platform Database)" as MongoDB <<Database>>
+node "Ollama\n(Local LLMs)" as Ollama <<LLM Host>>
+
+' User interactions (simplified)
+Users --> KB : Web UI + API\n(authenticated)
+Users --> MA : Web UI + API\n(authenticated)
+
+' Platform to external services
+SharedUtils --> GoogleOAuth : OAuth flow
+SharedUtils --> MongoDB : users, roles,\napi_keys, audit_logs
+
+KB --> MongoDB : knowledge data\n(facts, graphs, documents)
+MA --> MongoDB : modeling data\n(scenarios, models, results)
+
+KB --> Ollama : LLM inference
+MA --> Ollama : LLM inference
+
+note right of Users
+  6 Platform Roles:
+  • Administrator
+  • Knowledge Curator
+  • Knowledge Reviewer
+  • Agent Operator
+  • Data Analyst
+  • Knowledge Explorator
+  
+  Authentication Methods:
+  • Google OAuth (SSO)
+  • API Keys
+end note
+
+note left of SharedUtils
+  Shared Authentication Library:
+  • JWT validation
+  • API key validation
+  • Permission checking
+  • Audit logging
+  • User models (Pydantic)
+  
+  Eliminates code duplication
+  between KB and MA backends
+end note
+
+@enduml

@@ -1,0 +1,106 @@
+@startuml
+' Container diagram for AdvandEB Modeling Assistant (with Platform Auth)
+
+actor "Users\n(All Roles)" as Users
+
+node "Platform Authentication" as PlatformAuth {
+  [Google OAuth]
+  [JWT Manager]
+  [API Key Validator]
+}
+
+node "AdvandEB Modeling Assistant" as MA {
+  node "Frontend (Vue 3)" as MA_FE {
+    package "Views" {
+      [Home View]
+      [Scenario Builder]
+      [Knowledge Explorer]
+      [Model View]
+      [Results Dashboard]
+    }
+    
+    package "Shared Auth" {
+      [Auth Store (Shared)]
+      [api.js + interceptors]
+    }
+  }
+
+  node "Backend (FastAPI)" as MA_BE {
+    package "Auth Integration" {
+      [Auth Middleware]
+      [Permission Checker]
+      [Audit Logger]
+    }
+    
+    package "Routers" {
+      [scenarios.py]
+      [modeling.py]
+      [explanation.py]
+      [results.py]
+    }
+
+    package "Services" {
+      [ScenarioService]
+      [ModelAssemblyService]
+      [ExplanationService]
+      [KnowledgeBuilderClient]
+      [AuditService]
+    }
+
+    package "Models" {
+      [Scenario Models]
+      [Model Specs]
+      [Results Models]
+    }
+
+    package "Database" {
+      [Mongo Client (Motor)]
+      [Collections: scenarios,\nmodels, results]
+    }
+  }
+}
+
+database "MongoDB\n(Platform DB)" as Mongo
+node "Ollama LLM Host" as Ollama
+node "AdvandEB Knowledge Builder" as KB
+
+' User authentication (platform-wide)
+Users --> PlatformAuth : Login (OAuth or API Key)
+PlatformAuth --> Mongo : Verify user,\nload roles
+
+' User to frontend
+Users --> MA_FE : Use modeling UI
+
+' Frontend to backend (with JWT)
+MA_FE --> MA_BE : HTTP /api/*\n(JWT token)
+
+' Backend auth check
+MA_BE --> PlatformAuth : Validate token,\ncheck permissions
+
+' Backend to its own store
+MA_BE --> Mongo : Store scenarios,\nmodels, results,\naudit logs
+
+' Backend to KB APIs (with JWT)
+MA_BE --> KB : HTTP calls\n(JWT token from user)
+
+' Backend to LLM host
+MA_BE --> Ollama : LLM for explanations
+
+note right of PlatformAuth
+  Shared authentication
+  across KB and MA
+  
+  Same JWT tokens
+  Same user database
+  Same role system
+end note
+
+note right of MA_BE
+  MA validates user permissions:
+  - Curator: Can create scenarios
+  - Analyst: Advanced features
+  - Explorator: View only
+  - Admin: Full access
+end note
+
+@enduml
