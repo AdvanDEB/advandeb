@@ -1,6 +1,8 @@
 @startuml knowledge-builder-data-model
 
-' Comprehensive data model for AdvandEB Knowledge Builder (with User Management)
+' Comprehensive data model for AdvanDEB Knowledge Builder (with User Management)
+
+scale max 1920 width
 
 ' ============ User Management Entities ============
 
@@ -10,7 +12,8 @@ class User {
   +email: string
   +name: string
   +picture_url: string
-  +roles: [string]
+  +base_role: string
+  +capabilities: [string]
   +status: string
   +created_at: datetime
   +updated_at: datetime
@@ -18,11 +21,14 @@ class User {
   +metadata: dict
 }
 
-class RoleRequest {
+class CapabilityRequest {
   +id: ObjectId
   +user_id: ObjectId
-  +requested_roles: [string]
-  +current_roles: [string]
+  +request_type: string
+  +requested_base_role: string
+  +current_base_role: string
+  +requested_capabilities: [string]
+  +current_capabilities: [string]
   +justification: string
   +form_data: dict
   +status: string
@@ -191,7 +197,7 @@ class Contribution {
 ' ============ Relationships ============
 
 ' User relationships
-User "1" -- "*" RoleRequest : requests
+User "1" -- "*" CapabilityRequest : requests
 User "1" -- "*" APIKey : owns
 User "1" -- "*" AuditLog : performs
 User "1" -- "*" Document : uploads
@@ -201,7 +207,7 @@ User "1" -- "*" KnowledgeGraph : owns
 User "1" -- "*" IngestionBatch : creates
 User "1" -- "*" AgentSession : runs
 
-User "1" -- "*" RoleRequest : reviews
+User "1" -- "*" CapabilityRequest : reviews
 User "*" -- "*" KnowledgeGraph : collaborates_on
 
 ' Knowledge relationships

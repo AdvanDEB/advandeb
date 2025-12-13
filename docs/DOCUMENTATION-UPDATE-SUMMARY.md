@@ -1,29 +1,83 @@
-# AdvandEB User Management & Authentication - Documentation Update Summary
+# AdvanDEB User Management & Authentication - Documentation Update Summary
 
-**Date:** December 11, 2025  
+**Date:** December 12, 2025  
 **Status:** Complete - Ready for Implementation  
-**Last Updated:** December 11, 2025 (Corrected for platform-wide authentication)
+**Last Updated:** December 12, 2025 (Simplified to 3-tier role + capability system)
 
 ---
 
-## ⚠️ Important Architectural Correction
+## ⚠️ Important Architectural Evolution
 
 **Initial Design (v1.0)**: Originally designed authentication separately for Knowledge Builder and Modeling Assistant, with a "Service Account" role for MA to call KB.
 
-**Corrected Design (v2.0)**: Authentication is now **unified across the entire AdvandEB platform**:
+**Corrected Design (v2.0)**: Authentication unified across the entire AdvanDEB platform with 6 distinct roles:
 - ✅ Single Sign-On (SSO) - Users authenticate once for entire platform
 - ✅ Shared user database (MongoDB) - Same `users` collection for KB and MA
 - ✅ Same JWT tokens - Valid for both Knowledge Builder and Modeling Assistant APIs
 - ✅ No "Service Account" role - Removed as unnecessary with unified authentication
-- ✅ 6 user roles (not 7) - Administrator, Curator, Reviewer, Agent Operator, Analyst, Explorator
+- ✅ 6 user roles - Administrator, Curator, Reviewer, Agent Operator, Analyst, Explorator
 
-All documentation has been updated to reflect the unified platform-wide authentication model.
+**Simplified Design (v3.0)**: Role system simplified to capability-based model:
+- ✅ **3 base roles** - Administrator, Knowledge Curator, Knowledge Explorator
+- ✅ **3 optional capabilities** for Curators - Agent Access, Analytics Access, Reviewer Status
+- ✅ **Capability request workflow** - Curators can request additional permissions as needed
+- ✅ **Eliminates role redundancy** - Agent Operator, Data Analyst, and Reviewer are now capabilities, not separate roles
+- ✅ **Hierarchical permissions** - Curators gain specialized access through approved capabilities
+
+All documentation has been updated to reflect the simplified capability-based authentication model.
+
+---
+
+## Version 3.0 Changes (December 12, 2025)
+
+**Major Simplification**: Role system consolidated from 6 roles to 3 base roles + 3 capabilities
+
+### What Changed:
+
+**Before (v2.0)**: 6 distinct roles
+- Administrator
+- Knowledge Curator
+- Knowledge Reviewer
+- Agent Operator
+- Data Analyst
+- Knowledge Explorator
+
+**After (v3.0)**: 3 base roles + optional capabilities
+- **Administrator** (unchanged)
+- **Knowledge Curator** (base content creator)
+  - Can request: Agent Access, Analytics Access, Reviewer Status
+- **Knowledge Explorator** (unchanged, read-only)
+
+### Rationale:
+
+The v2.0 design had significant overlap between Knowledge Curator, Agent Operator, and Data Analyst roles. In practice, these are the same type of user (domain expert creating content) who may need different specialized capabilities at different times. The v3.0 design:
+
+- ✅ Eliminates role redundancy
+- ✅ Simplifies permission model
+- ✅ Makes capabilities more flexible (curators can request as needed)
+- ✅ Reduces administrative overhead
+- ✅ Maintains all functionality from v2.0
+
+### Database Impact:
+
+```python
+# OLD (v2.0)
+{
+  "roles": ["knowledge_curator", "agent_operator", "data_analyst"]
+}
+
+# NEW (v3.0)
+{
+  "base_role": "knowledge_curator",
+  "capabilities": ["agent_access", "analytics_access"]
+}
+```
 
 ---
 
 ## Overview
 
-This document summarizes all updates made to the AdvandEB architecture documentation to incorporate the comprehensive user management, authentication, and authorization system.
+This document summarizes all updates made to the AdvanDEB architecture documentation to incorporate the comprehensive user management, authentication, and authorization system.
 
 ---
 
@@ -275,12 +329,13 @@ The following PlantUML files were updated but PNG files need regeneration:
 
 ## Key Concepts Documented
 
-### 1. Role Hierarchy
-- **6 roles** with hierarchical inheritance (Service Account removed in v2.0)
-- **Multi-role support** (users can have multiple roles)
-- Core roles: Administrator → Knowledge Curator → Knowledge Explorator
-- Specialized roles: Knowledge Reviewer, Agent Operator, Data Analyst
-- **Platform-wide**: Same roles apply to Knowledge Builder and Modeling Assistant
+### 1. Simplified Role + Capability System (v3.0)
+- **3 base roles** - Administrator, Knowledge Curator, Knowledge Explorator
+- **3 optional capabilities** for Curators - Agent Access, Analytics Access, Reviewer Status
+- **Capability-based permissions** - Curators request specialized access as needed
+- **Eliminates redundancy** - Previous 6-role system consolidated into flexible capability model
+- **Platform-wide**: Same roles and capabilities apply to Knowledge Builder and Modeling Assistant
+- **Hierarchical access** - Capabilities add permissions on top of base role
 
 ### 2. Authentication Methods
 - **Google OAuth 2.0**: Platform-wide SSO for all components (not component-specific)
@@ -293,13 +348,16 @@ The following PlantUML files were updated but PNG files need regeneration:
 - **Status-Based Visibility**: Knowledge visibility by review status
 
 ### 4. Workflows
-- **Role Request**: Users request → Admin approves → Roles granted
-- **Knowledge Review**: Curator creates → Reviewer approves → Published
+- **Base Role Request**: New users request base role → Admin approves → Role granted
+- **Capability Request**: Existing Curators request capabilities → Admin approves → Capabilities added
+- **Knowledge Review**: Curator creates → Curator with Reviewer Status approves → Published
 - **Day Zero Seeding**: Admin creates foundational knowledge batch
 
-### 5. Database Schema
+### 5. Database Schema (v3.0 Updates)
 - **Platform-wide shared database**: Single MongoDB database for entire platform
-- **4 new collections**: users, role_requests, api_keys, audit_logs (shared across KB and MA)
+- **4 new collections**: users (with base_role + capabilities), capability_requests, api_keys, audit_logs (shared across KB and MA)
+- **User model changes**: `roles: List[str]` replaced with `base_role: str` + `capabilities: List[str]`
+- **Request model changes**: role_requests renamed to capability_requests with support for both base role and capability requests
 - **Updated existing collections**: All knowledge entities have `created_by`, `status`, `review_status`
 - **Complete audit trail**: All actions logged with user attribution and component tracking
 
@@ -384,7 +442,7 @@ All documentation is located in `/home/adeb/dev/advandeb/advandeb-architecture/`
 
 ## Summary
 
-The AdvandEB architecture documentation has been **comprehensively updated** to include a complete **platform-wide** user management and authentication system. The design includes:
+The AdvanDEB architecture documentation has been **comprehensively updated** to include a complete **platform-wide** user management and authentication system. The design includes:
 
 ✅ **6 hierarchical roles** with multi-role support (Service Account removed)  
 ✅ **Platform-wide Google OAuth 2.0** authentication (Single Sign-On)  

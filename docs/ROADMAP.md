@@ -1,17 +1,18 @@
-# AdvandEB Cross-Repository Roadmap
+# AdvanDEB Cross-Repository Roadmap
 
 ## Phase 0: User Management & Authentication (NEW - 15 weeks)
 
 **Foundation** (Weeks 1-3):
-- Implement user database models and authentication system
+- Implement user database models with base_role + capabilities structure
 - Google OAuth 2.0 integration
 - JWT and API key authentication
-- Role-based permission system
+- Capability-based permission system
 - Audit logging infrastructure
 
 **User Management** (Weeks 4-5):
-- Role request and approval workflow
-- API key management for Curators and Analysts
+- Base role request workflow (new users)
+- Capability request workflow (existing curators)
+- API key management with capability-based scopes
 - Email notification system
 - Administrator dashboard
 
@@ -42,7 +43,7 @@
 - Security audit
 - Documentation and deployment
 
-**Deliverable**: Fully authenticated platform with 6 roles, unified SSO across KB and MA, Google OAuth, API keys, review workflow, and Day Zero seeding
+**Deliverable**: Fully authenticated platform with 3 base roles + 3 capabilities, unified SSO across KB and MA, Google OAuth, API keys, review workflow, and Day Zero seeding
 
 See `USER-MANAGEMENT-PLAN.md` for detailed implementation plan.
 

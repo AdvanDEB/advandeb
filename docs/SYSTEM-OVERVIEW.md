@@ -1,4 +1,4 @@
-# AdvandEB System Overview
+# AdvanDEB System Overview
 
 ## Components
 
@@ -32,21 +32,36 @@
 
 ## User Roles
 
-The **AdvandEB Platform** (not just Knowledge Builder) supports **7 hierarchical roles** with multi-role assignment. These roles apply across all platform components (Knowledge Builder and Modeling Assistant):
+The **AdvanDEB Platform** uses a **simplified 3-tier role system** with optional specialized capabilities. These roles apply across all platform components (Knowledge Builder and Modeling Assistant):
 
-1. **Administrator** - System authority, user management, configuration across all components
-2. **Knowledge Curator** - Create/edit knowledge in KB, create scenarios/models in MA
-3. **Knowledge Reviewer** - Quality control, approve/reject knowledge and shared scenarios
-4. **Agent Operator** - Manage AI agents, custom tools in both KB and MA
-5. **Data Analyst** - Advanced queries, bulk export, API access to KB and MA data
-6. **Knowledge Explorator** - Browse published knowledge (KB) and models (MA), read-only access
+**Core Roles:**
+1. **Administrator** - System authority, user management, platform configuration across all components
+2. **Knowledge Curator** - Create/edit knowledge in KB, create scenarios/models in MA (base content creator role)
+3. **Knowledge Explorator** - Browse published knowledge (KB) and models (MA), read-only access
+
+**Specialized Capabilities** (granted to Knowledge Curators upon request/approval):
+- **Agent Access** - Permission to operate AI agents and custom tools in both KB and MA
+- **Analytics Access** - Permission to run advanced queries, bulk exports, API access to platform data
+- **Reviewer Status** - Permission to review and approve knowledge contributions from other curators
+
+**Role Hierarchy:**
+```
+Administrator (all permissions)
+├── Knowledge Curator (base content creator)
+│   ├── + Agent Access (optional)
+│   ├── + Analytics Access (optional)
+│   └── + Reviewer Status (optional)
+└── Knowledge Explorator (read-only)
+```
+
+Knowledge Curators can hold multiple specialized capabilities simultaneously (e.g., Curator + Agent Access + Analytics Access).
 
 See `USER-MANAGEMENT-PLAN.md` for complete role definitions and component-specific permissions.
 
 ## Integration Concept
  
 **Unified Platform Architecture**:
-- Both Knowledge Builder and Modeling Assistant are components of a single **AdvandEB Platform**
+- Both Knowledge Builder and Modeling Assistant are components of a single **AdvanDEB Platform**
 - They share the same MongoDB database for user management and authentication
 - Users authenticate once (Single Sign-On) and access both components with the same JWT token
 - No separate "service account" authentication - MA operates on behalf of the authenticated user

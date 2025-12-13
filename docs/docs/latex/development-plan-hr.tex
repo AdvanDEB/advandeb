@@ -1,0 +1,733 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{amsmath}
+
+\geometry{margin=2.5cm}
+
+\definecolor{titlecolor}{RGB}{0,51,102}
+\definecolor{sectioncolor}{RGB}{0,102,204}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={AdvanDEB Platforma - Plan Razvoja v3.0},
+    pdfauthor={AdvanDEB Razvojni Tim},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small AdvanDEB Platforma - Plan Razvoja}
+\fancyhead[R]{\small v3.0}
+\fancyfoot[C]{\thepage}
+
+\title{
+    \textbf{\Huge \textcolor{titlecolor}{AdvanDEB Platforma}}\\
+    \vspace{0.5cm}
+    \Large Plan Razvoja\\
+    \large Faza 0: Upravljanje Korisnicima i Autentifikacija\\
+    \vspace{0.3cm}
+    \normalsize Verzija 3.0 - Arhitektura Temeljena na Sposobnostima
+}
+
+\author{AdvanDEB Razvojni Tim}
+\date{12. prosinca 2025.}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\vspace{2cm}
+
+\begin{abstract}
+Ovaj dokument predstavlja sveobuhvatni plan razvoja AdvanDEB platforme, integriranog sustava za upravljanje biološkim znanjem i modeliranje temeljeno na jedinkama (IBM). Platforma se sastoji od dvije glavne komponente: Knowledge Builder za unos i upravljanje znanjem te Modeling Assistant za potporu IBM modeliranju. Ovaj izvještaj fokusira se na implementaciju Faze 0: uspostavljanje platformske autentifikacije, upravljanja korisnicima i infrastrukture za autorizaciju koristeći pojednostavljeni model uloga temeljen na sposobnostima.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Izvršni Sažetak}
+
+\subsection{Pregled Projekta}
+AdvanDEB platforma je sveobuhvatni sustav dizajniran za potporu biološkim istraživanjima kroz upravljanje znanjem i modeliranje temeljeno na jedinkama. Platforma integrira dvije ključne komponente:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Knowledge Builder (KB)}: FastAPI + Vue.js sustav za unos, obradu i upravljanje biološkim znanjem iz literature, web izvora i strukturiranih podataka
+    \item \textbf{Modeling Assistant (MA)}: Specijalizirana komponenta za pretraživanje znanja i zaključivanje u svrhu potpore radnim procesima modeliranja temeljenog na jedinkama
+\end{itemize}
+
+\subsection{Trenutna Faza Razvoja}
+Projekt je trenutno u \textbf{Fazi 0: Upravljanje Korisnicima i Autentifikacija}. Ova temeljna faza uspostavlja sigurnost, kontrolu pristupa i infrastrukturu za suradnju potrebnu za sve buduće mogućnosti platforme.
+
+\subsection{Ključna Arhitektonska Odluka: Pojednostavljenje v3.0}
+Nakon početnih iteracija dizajna (v1.0 i v2.0), arhitektura je pojednostavljena na model temeljen na sposobnostima:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Od}: 6 različitih uloga (Administrator, Kustos Znanja, Recenzent Znanja, Operator Agenta, Analitičar Podataka, Istraživač Znanja)
+    \item \textbf{Do}: 3 osnovne uloge (Administrator, Kustos Znanja, Istraživač Znanja) + 3 opcionalne sposobnosti (Pristup Agentima, Analitički Pristup, Status Recenzenta)
+\end{itemize}
+
+Ovo pojednostavljenje eliminira redundanciju uloga uz održavanje svih funkcionalnih zahtjeva kroz fleksibilniji model dozvola.
+
+\section{Arhitektura Sustava}
+
+\subsection{Komponente Platforme}
+
+\subsubsection{advandeb-shared-utils}
+Python paket koji pruža dijeljene uslužne programe za autentifikaciju i autorizaciju, eliminirajući dupliciranje koda između backend komponenti. Sadrži:
+\begin{itemize}
+    \item Generiranje i validaciju JWT tokena
+    \item Upravljanje API ključevima
+    \item Logiku provjere dozvola
+    \item Modele korisnika (Pydantic)
+    \item Uslužne programe za revizijsko bilježenje
+    \item Pomoćnike za Google OAuth integraciju
+\end{itemize}
+
+\subsubsection{Knowledge Builder}
+\textbf{Primarni pružatelj autentifikacije} za platformu. Sadrži:
+\begin{itemize}
+    \item Google OAuth 2.0 krajnje točke
+    \item Sučelje za upravljanje korisnicima
+    \item Radne procese za odobravanje uloga i sposobnosti
+    \item Unos i obradu znanja
+    \item Okvir AI agenata za automatiziranu ekstrakciju
+    \item Konstrukciju grafa znanja
+\end{itemize}
+
+\subsubsection{Modeling Assistant}
+Dijeli infrastrukturu autentifikacije s Knowledge Builderom:
+\begin{itemize}
+    \item Isti JWT tokeni vrijede za obje komponente
+    \item Ista baza korisnika (MongoDB)
+    \item Pretraživanje znanja iz KB podataka
+    \item Sučelje za izgradnju scenarija
+    \item Podrška za sastavljanje modela i simulaciju
+\end{itemize}
+
+\subsection{Arhitektura Autentifikacije}
+
+\subsubsection{Jedinstvena Prijava (SSO)}
+Korisnici se autentificiraju jednom putem Google OAuth 2.0 i dobivaju JWT tokene važeće za cijelu platformu. Iste vjerodajnice omogućuju pristup i Knowledge Builderu i Modeling Assistantu bez zasebne autentifikacije.
+
+\subsubsection{Metode Autentifikacije}
+\begin{enumerate}
+    \item \textbf{Google OAuth 2.0}: Primarna metoda za korisnike web sučelja
+    \item \textbf{API Ključevi}: Za programski pristup, s opsegom temeljenim na sposobnostima
+    \item \textbf{JWT Tokeni}: Kratkoživući pristupni tokeni (1 sat) + tokeni za osvježavanje (30 dana)
+\end{enumerate}
+
+\subsubsection{Platformska Baza Korisnika}
+Jedna MongoDB baza pohranjuje sve podatke vezane uz korisnike:
+\begin{itemize}
+    \item \texttt{users} kolekcija - Korisnički profili s base\_role i capabilities
+    \item \texttt{capability\_requests} kolekcija - Radni procesi za odobravanje osnovnih uloga i sposobnosti
+    \item \texttt{api\_keys} kolekcija - API ključevi važeći za cijelu platformu
+    \item \texttt{audit\_logs} kolekcija - Potpuni revizijski trag za sve komponente
+\end{itemize}
+
+\section{Model Uloga i Dozvola v3.0}
+
+\subsection{Osnovne Uloge}
+
+\subsubsection{Administrator}
+\textbf{Svrha}: Sistemska ovlast i konfiguracija platforme
+
+\textbf{Dozvole}:
+\begin{itemize}
+    \item Potpuni pristup sustavu svim komponentama
+    \item Upravljanje korisnicima (odobravanje uloga i sposobnosti)
+    \item Konfiguracija sustava
+    \item Unos početnog znanja (Day Zero)
+    \item Poništavanje bilo koje odluke recenzije
+    \item Pristup svim revizijskim zapisima
+\end{itemize}
+
+\subsubsection{Kustos Znanja}
+\textbf{Svrha}: Kreator sadržaja i stručnjak domene
+
+\textbf{Osnovne Dozvole}:
+\begin{itemize}
+    \item Učitavanje dokumenata (pojedinačno i grupno)
+    \item Kreiranje činjenica i stiliziranih činjenica
+    \item Izgradnja grafova znanja
+    \item Kreiranje scenarija i modela (u MA)
+    \item Uređivanje vlastitih doprinosa
+    \item Pregled objavljenog znanja
+\end{itemize}
+
+\textbf{Opcionalne Sposobnosti} (moraju se zatražiti i odobriti):
+\begin{itemize}
+    \item \textbf{Pristup Agentima}: Pokretanje AI agenata, korištenje prilagođenih alata, pregled zapisa agenata
+    \item \textbf{Analitički Pristup}: Napredni upiti, masovni izvoz, generiranje API ključeva
+    \item \textbf{Status Recenzenta}: Pristup redu za recenziju, odobravanje/odbijanje znanja, kontrola kvalitete
+\end{itemize}
+
+\subsubsection{Istraživač Znanja}
+\textbf{Svrha}: Korisnik samo za čitanje za pregledavanje znanja
+
+\textbf{Dozvole}:
+\begin{itemize}
+    \item Pregledavanje i pretraživanje objavljenog znanja
+    \item Pregled grafova znanja
+    \item Pregled objavljenih modela i scenarija (u MA)
+    \item Kreiranje privatnih bilješki
+    \item Izvoz ograničenih skupova podataka (za osobnu uporabu)
+    \item Spremanje upita za pretraživanje
+\end{itemize}
+
+\subsection{Radni Proces Zahtjeva za Sposobnosti}
+
+\subsubsection{Novi Korisnik - Zahtjev za Osnovnu Ulogu}
+\begin{enumerate}
+    \item Korisnik se prijavljuje putem Googlea
+    \item Status: \texttt{pending\_approval}, base\_role: \texttt{null}
+    \item Korisnik ispunjava obrazac za zahtjev uloge (odabir Kustos ili Istraživač)
+    \item Navodi pripadnost, područje istraživanja, obrazloženje
+    \item Administrator pregleda i odobrava/odbija
+    \item Korisnik prima obavijest e-mailom
+    \item Pristup dodijeljen na temelju odobrene osnovne uloge
+\end{enumerate}
+
+\subsubsection{Postojeći Kustos - Zahtjev za Sposobnost}
+\begin{enumerate}
+    \item Kustos se prijavljuje s osnovnim pristupom
+    \item Stranica profila prikazuje "Zatraži dodatne sposobnosti"
+    \item Korisnik odabire željene sposobnosti:
+    \begin{itemize}
+        \item Pristup Agentima
+        \item Analitički Pristup
+        \item Status Recenzenta
+    \end{itemize}
+    \item Navodi obrazloženje za svaku sposobnost
+    \item Administrator pregleda
+    \item Sposobnosti dodane korisničkom profilu
+    \item Korisnik odmah dobiva nove dozvole
+\end{enumerate}
+
+\subsection{Razrješavanje Dozvola}
+
+Dozvole se izračunavaju na temelju:
+\begin{equation}
+\text{Korisničke Dozvole} = \text{Dozvole Osnovne Uloge} \cup \text{Dozvole Sposobnosti}
+\end{equation}
+
+\textbf{Primjeri}:
+\begin{itemize}
+    \item Kustos (samo osnovna): Može kreirati/uređivati znanje
+    \item Kustos + Pristup Agentima: Može kreirati znanje I pokretati agente
+    \item Kustos + Analitički Pristup + Status Recenzenta: Može kreirati, izvoziti I recenzirati
+    \item Administrator: Ima sve dozvole neovisno o sposobnostima
+\end{itemize}
+
+\section{Trenutna Faza: Plan Razvoja Faze 0}
+
+\subsection{Pregled Faze}
+
+\textbf{Cilj}: Uspostaviti potpunu infrastrukturu za autentifikaciju, autorizaciju i upravljanje korisnicima za cijelu AdvanDEB platformu.
+
+\textbf{Ishod}: Potpuno autentificirana platforma s 3 osnovne uloge + 3 sposobnosti, jedinstvena prijava kroz KB i MA, Google OAuth integracija, API ključevi, radni proces recenzije znanja i mogućnost Day Zero unosa.
+
+\subsection{Plan Implementacije}
+
+\subsubsection{Faza 1: Temelj}
+\textbf{Fokus}: Backend sustav autentifikacije
+
+\textbf{Zadaci}:
+\begin{enumerate}
+    \item Kreirati \texttt{advandeb-shared-utils} repozitorij i strukturu paketa
+    \item Implementirati generiranje i validaciju JWT tokena
+    \item Implementirati Google OAuth 2.0 klijent
+    \item Kreirati User, CapabilityRequest, APIKey, AuditLog modele (Pydantic)
+    \item Implementirati funkcije provjere dozvola (has\_base\_role, has\_capability)
+    \item Postaviti uslužne programe za MongoDB vezu
+    \item Kreirati funkcije za revizijsko bilježenje
+    \item Napisati jedinične testove za uslužne programe autentifikacije
+    \item Postaviti CI/CD za dijeljeni paket
+\end{enumerate}
+
+\textbf{Ishod}: Funkcionalni \texttt{advandeb-shared-utils} paket spreman za integraciju
+
+\subsubsection{Faza 2: Backend Upravljanja Korisnicima}
+\textbf{Fokus}: Integracija Knowledge Builder backenda
+
+\textbf{Zadaci}:
+\begin{enumerate}
+    \item Dodati \texttt{advandeb-shared-utils} zavisnost KB backendu
+    \item Kreirati \texttt{/auth} usmjerivač (prijava, povratni poziv, odjava, osvježavanje)
+    \item Kreirati \texttt{/users} usmjerivač (profil, ažuriranje)
+    \item Kreirati \texttt{/capability-requests} usmjerivač (kreiranje, lista, odobravanje/odbijanje)
+    \item Kreirati \texttt{/api-keys} usmjerivač (generiranje, lista, opoziv)
+    \item Implementirati AuthMiddleware za sve postojeće rute
+    \item Implementirati RateLimiter middleware
+    \item Implementirati AuditLogger middleware
+    \item Kreirati UserService, RoleService, APIKeyService
+    \item Postaviti MongoDB kolekcije: users, capability\_requests, api\_keys, audit\_logs
+    \item Konfigurirati Google OAuth vjerodajnice
+    \item Implementirati sustav obavijesti e-mailom
+\end{enumerate}
+
+\textbf{Ishod}: Potpuno funkcionalni backend za autentifikaciju i upravljanje korisnicima
+
+\subsubsection{Faza 3: Integracija Frontenda}
+\textbf{Fokus}: Knowledge Builder frontend
+
+\textbf{Zadaci}:
+\begin{enumerate}
+    \item Kreirati Login View s Google OAuth gumbom
+    \item Kreirati Profile View (prikaz informacija korisnika, osnovne uloge, sposobnosti)
+    \item Kreirati Role Request View (za nove korisnike)
+    \item Kreirati Capability Request View (za postojeće kustose)
+    \item Kreirati Administrator Dashboard (lista korisnika, zahtjevi na čekanju)
+    \item Kreirati API Key Management View (generiranje, pregled, opoziv)
+    \item Implementirati Auth Store (Pinia/Vuex) s upravljanjem tokenima
+    \item Dodati Axios presretače za ubacivanje JWT tokena
+    \item Dodati automatsku logiku osvježavanja tokena
+    \item Ažurirati sve postojeće prikaze s renderiranjem temeljenim na dozvolama
+    \item Dodati rukovanje greškama za 401/403 odgovore
+    \item Implementirati upite "Zatraži pristup" za nedostatne dozvole
+\end{enumerate}
+
+\textbf{Ishod}: Potpuni autentificirani frontend s jedinstvenom prijavom
+
+\subsubsection{Faza 4: Radni Proces Recenzije}
+\textbf{Fokus}: Sustav validacije znanja
+
+\textbf{Zadaci}:
+\begin{enumerate}
+    \item Dodati \texttt{status} polje svim entitetima znanja (facts, stylized\_facts, graphs, documents)
+    \item Implementirati prijelaze statusa: draft → pending\_review → published/rejected/changes\_requested
+    \item Kreirati \texttt{/reviews} usmjerivač (red, odobravanje, odbijanje, zahtjev-izmjena)
+    \item Kreirati ReviewService s poslovnom logikom
+    \item Kreirati Review Queue View (za korisnike sa Status Recenzenta)
+    \item Dodati značke statusa prikazima liste znanja
+    \item Implementirati logiku dodjele recenzenata
+    \item Dodati praćenje povijesti recenzija
+    \item Kreirati nadzornu ploču recenzenta sa statistikom
+    \item Dodati obavijesti e-mailom za promjene statusa recenzije
+    \item Spriječiti samo-recenziju (korisnici ne mogu recenzirati vlastite doprinose)
+\end{enumerate}
+
+\textbf{Ishod}: Funkcionalni sustav peer recenzije za kontrolu kvalitete znanja
+
+\subsubsection{Faza 5: Day Zero i Migracija}
+\textbf{Fokus}: Početni unos znanja i migracija podataka
+
+\textbf{Zadaci}:
+\begin{enumerate}
+    \item Kreirati Day Zero radni proces grupnog unosa
+    \item Dodati \texttt{is\_day\_zero} oznaku entitetima znanja
+    \item Implementirati krajnje točke za kreiranje Day Zero (samo admin)
+    \item Dodati značke "Temeljno Znanje" u korisničkom sučelju
+    \item Migrirati postojećih 1.300 PDF-ova iz /papers direktorija
+    \item Kreirati skriptu za migraciju za naslijeđene podatke
+    \item Dodati metapodatke o pripisivanju migriranom sadržaju
+    \item Auto-odobravanje Day Zero sadržaja (preskakanje recenzije)
+    \item Kreirati nadzornu ploču za upravljanje Day Zero
+    \item Dodati grupno označavanje za Day Zero sadržaj
+    \item Testirati i validirati sve migrirane podatke
+\end{enumerate}
+
+\textbf{Ishod}: Platforma popunjena temeljnim znanjem, naslijeđeni podaci migrirani
+
+\subsubsection{Faza 6: MA Integracija i Dotjerivanje}
+\textbf{Fokus}: Autentifikacija Modeling Assistanta i završno testiranje
+
+\textbf{Zadaci}:
+\begin{enumerate}
+    \item Dodati \texttt{advandeb-shared-utils} zavisnost MA backendu
+    \item Implementirati middleware za autentifikaciju u MA koristeći dijeljenu biblioteku
+    \item Dodati JWT validaciju tokena svim MA rutama
+    \item Implementirati provjere dozvola za MA-specifične operacije (kreiranje scenarija, pokretanje simulacija)
+    \item Ažurirati MA frontend za korištenje dijeljenog Auth Store
+    \item Testirati međukomponentnu autentifikaciju (KB → MA s istim tokenom)
+    \item Dodati polje komponente revizijskim zapisima ("knowledge\_builder" vs "modeling\_assistant")
+    \item Kreirati sveobuhvatne integracijske testove
+    \item Izvršiti sigurnosnu reviziju (istek tokena, granice dozvola, ograničavanje stope)
+    \item Testiranje opterećenja (autentificirati 100+ istovremenih korisnika)
+    \item Napisati korisničku dokumentaciju (vodič za autentifikaciju, vodič za zahtjev sposobnosti)
+    \item Napisati administratorsku dokumentaciju (upravljanje korisnicima, radni procesi odobravanja)
+    \item Napisati razvojnu dokumentaciju (dodavanje novih dozvola, proširivanje sposobnosti)
+    \item Završne popravke grešaka i dotjerivanje
+\end{enumerate}
+
+\textbf{Ishod}: Jedinstvena platforma s potpunom autentifikacijom kroz KB i MA
+
+\section{Tehnički Detalji Implementacije}
+
+\subsection{Shema Baze Podataka}
+
+\subsubsection{users Kolekcija}
+\begin{verbatim}
+{
+  "_id": ObjectId,
+  "google_id": string,          // Jedinstveni
+  "email": string,
+  "name": string,
+  "picture_url": string,
+  "base_role": string,          // "administrator", "knowledge_curator",
+                                //  "knowledge_explorator"
+  "capabilities": [string],     // ["agent_access", "analytics_access",
+                                //  "reviewer_status"]
+  "status": string,             // "active", "suspended", "pending_approval"
+  "created_at": datetime,
+  "updated_at": datetime,
+  "last_login": datetime,
+  "login_count": int,
+  "metadata": {
+    "affiliation": string,
+    "research_area": string,
+    "orcid": string
+  }
+}
+\end{verbatim}
+
+\subsubsection{capability\_requests Kolekcija}
+\begin{verbatim}
+{
+  "_id": ObjectId,
+  "user_id": ObjectId,
+  "request_type": string,       // "base_role" ili "capability"
+  
+  // Za zahtjeve osnovne uloge
+  "requested_base_role": string,
+  "current_base_role": string,
+  
+  // Za zahtjeve sposobnosti
+  "requested_capabilities": [string],
+  "current_capabilities": [string],
+  
+  "justification": string,
+  "form_data": dict,
+  "status": string,             // "pending", "approved", "rejected"
+  "created_at": datetime,
+  "reviewed_by": ObjectId,
+  "reviewed_at": datetime,
+  "review_notes": string
+}
+\end{verbatim}
+
+\subsubsection{api\_keys Kolekcija}
+\begin{verbatim}
+{
+  "_id": ObjectId,
+  "user_id": ObjectId,
+  "key_hash": string,           // SHA-256 običnog ključa
+  "key_prefix": string,         // "advk_abc12345"
+  "name": string,
+  "scopes": [string],           // Auto-dodijeljeno na temelju
+                                // base_role + capabilities korisnika
+  "status": string,             // "active", "revoked", "expired"
+  "created_at": datetime,
+  "expires_at": datetime,
+  "last_used_at": datetime,
+  "rate_limit": {
+    "requests_per_minute": int,
+    "requests_per_day": int
+  }
+}
+\end{verbatim}
+
+\subsubsection{audit\_logs Kolekcija}
+\begin{verbatim}
+{
+  "_id": ObjectId,
+  "user_id": ObjectId,
+  "action": string,             // "create_fact", "approve_knowledge", itd.
+  "resource_type": string,      // "fact", "document", "scenario", itd.
+  "resource_id": ObjectId,
+  "component": string,          // "knowledge_builder" ili "modeling_assistant"
+  "details": dict,
+  "ip_address": string,
+  "user_agent": string,
+  "auth_method": string,        // "jwt", "api_key"
+  "timestamp": datetime
+}
+\end{verbatim}
+
+\subsection{API Krajnje Točke}
+
+\subsubsection{Rute Autentifikacije}
+\begin{itemize}
+    \item \texttt{GET /auth/login} - Preusmjeravanje na Google OAuth
+    \item \texttt{GET /auth/callback} - Rukovatelj povratnog poziva OAuth
+    \item \texttt{POST /auth/logout} - Poništavanje tokena
+    \item \texttt{POST /auth/refresh} - Osvježavanje pristupnog tokena
+\end{itemize}
+
+\subsubsection{Rute Upravljanja Korisnicima}
+\begin{itemize}
+    \item \texttt{GET /users/me} - Dohvati trenutni korisnički profil
+    \item \texttt{PATCH /users/me} - Ažuriraj profil
+    \item \texttt{GET /users} - Lista korisnika (samo admin)
+    \item \texttt{GET /users/:id} - Dohvati detalje korisnika (samo admin)
+\end{itemize}
+
+\subsubsection{Rute Zahtjeva za Sposobnosti}
+\begin{itemize}
+    \item \texttt{POST /capability-requests} - Kreiraj novi zahtjev
+    \item \texttt{GET /capability-requests} - Lista vlastitih zahtjeva
+    \item \texttt{GET /capability-requests/pending} - Lista na čekanju (samo admin)
+    \item \texttt{POST /capability-requests/:id/approve} - Odobri (samo admin)
+    \item \texttt{POST /capability-requests/:id/reject} - Odbij (samo admin)
+\end{itemize}
+
+\subsubsection{Rute API Ključeva}
+\begin{itemize}
+    \item \texttt{POST /api-keys} - Generiraj novi ključ
+    \item \texttt{GET /api-keys} - Lista vlastitih ključeva
+    \item \texttt{DELETE /api-keys/:id} - Opozovi ključ
+\end{itemize}
+
+\subsubsection{Rute Recenzije}
+\begin{itemize}
+    \item \texttt{GET /reviews/queue} - Stavke na čekanju za recenziju (zahtijeva Status Recenzenta)
+    \item \texttt{POST /reviews/:id/approve} - Odobri znanje
+    \item \texttt{POST /reviews/:id/reject} - Odbij znanje
+    \item \texttt{POST /reviews/:id/request-changes} - Zatraži izmjene
+\end{itemize}
+
+\subsection{Sigurnosne Razmatranja}
+
+\subsubsection{Sigurnost Tokena}
+\begin{itemize}
+    \item JWT tajni ključ: 256-bitna slučajna vrijednost pohranjena u okolini
+    \item Pristupni tokeni: Kratkoživući (1 sat) za ograničavanje prozora izloženosti
+    \item Tokeni za osvježavanje: Dugoživući (30 dana) ali sigurno pohranjeni
+    \item Rotacija tokena pri osvježavanju za sprječavanje napada ponavljanja
+    \item JTI (JWT ID) za mogućnost opoziva tokena
+\end{itemize}
+
+\subsubsection{Sigurnost API Ključeva}
+\begin{itemize}
+    \item SHA-256 hash prije pohrane (obični ključ se nikad ne pohranjuje)
+    \item Identifikacija temeljena na prefiksu (\texttt{advk\_...}) za brzo pretraživanje
+    \item Ograničavanje stope: 200-500 zahtjeva/minutu ovisno o sposobnostima
+    \item Automatski istek (30-90 dana)
+    \item Podrška za bijelu listu IP adresa (opcionalno)
+\end{itemize}
+
+\subsubsection{Ograničavanje Stope}
+\begin{itemize}
+    \item Ograničenja po korisniku temeljena na sposobnostima
+    \item Redis-bazirani algoritam token bucket
+    \item Ograničenja: Istraživač (100 zah/min), Kustos (200 zah/min), Kustos+Analitika (500 zah/min)
+    \item Dnevna ograničenja za grupne operacije
+\end{itemize}
+
+\subsubsection{Revizijsko Bilježenje}
+\begin{itemize}
+    \item Sve operacije pisanja zabilježene
+    \item Svi događaji autentifikacije zabilježeni
+    \item Sve promjene dozvola zabilježene
+    \item Nepromjenjivi zapisi (samo dodavanje)
+    \item Zadržavanje: minimalno 2 godine
+\end{itemize}
+
+\section{Strategija Testiranja}
+
+\subsection{Jedinični Testovi}
+\begin{itemize}
+    \item Sve funkcije u \texttt{advandeb-shared-utils}
+    \item Generiranje i validacija JWT
+    \item Logika provjere dozvola
+    \item Hash i validacija API ključeva
+    \item Ciljana pokrivenost: 90\%+
+\end{itemize}
+
+\subsection{Integracijski Testovi}
+\begin{itemize}
+    \item Potpuni tokovi autentifikacije (OAuth, JWT, API ključevi)
+    \item Međukomponentna autentifikacija (KB → MA)
+    \item Provođenje dozvola na svim zaštićenim rutama
+    \item Radni proces zahtjeva za sposobnosti
+    \item Radni proces recenzije
+\end{itemize}
+
+\subsection{End-to-End Testovi}
+\begin{itemize}
+    \item Registracija korisnika kroz odobrenje
+    \item Kustos zahtijeva sposobnosti
+    \item Kreiranje znanja i recenzija
+    \item Međukomponentni pristup (kreiranje u KB, pregled u MA)
+\end{itemize}
+
+\subsection{Sigurnosno Testiranje}
+\begin{itemize}
+    \item Pokušaj pristupa bez autentifikacije
+    \item Pokušaj eskalacije privilegija
+    \item Validacija isteka tokena
+    \item Provođenje ograničavanja stope
+    \item Pokušaji SQL injekcije (iako se koristi MongoDB)
+    \item Testiranje XSS ranjivosti
+\end{itemize}
+
+\section{Plan Postavljanja}
+
+\subsection{Razvojno Okruženje}
+\begin{itemize}
+    \item Lokalna MongoDB instanca
+    \item Lokalni Ollama za LLM funkcionalnost
+    \item Google OAuth testne vjerodajnice
+    \item Lažni servis za e-mail
+\end{itemize}
+
+\subsection{Staging Okruženje}
+\begin{itemize}
+    \item Hostirana MongoDB (Atlas)
+    \item Postavljeni backend (Docker kontejneri)
+    \item Postavljeni frontend (Nginx)
+    \item Prave Google OAuth vjerodajnice (testna domena)
+    \item Pravi servis za e-mail (SendGrid/Mailgun)
+\end{itemize}
+
+\subsection{Produkcijsko Okruženje}
+\begin{itemize}
+    \item Proizvodni MongoDB klaster (replica set)
+    \item Redis klaster za ograničavanje stope
+    \item Opterećenjem balansirani backend serveri
+    \item CDN za frontend resurse
+    \item SSL/TLS certifikati
+    \item Sigurnosna kopija i oporavak od katastrofe
+    \item Praćenje i upozoravanje
+\end{itemize}
+
+\section{Procjena Rizika}
+
+\subsection{Tehnički Rizici}
+
+\subsubsection{Rizik: Kompleksna Logika Dozvola}
+\textbf{Vjerojatnost}: Srednja\\
+\textbf{Utjecaj}: Visok\\
+\textbf{Ublažavanje}:
+\begin{itemize}
+    \item Sveobuhvatni jedinični testovi za funkcije dozvola
+    \item Dokumentacija matrice dozvola
+    \item Fokus pregleda koda na autorizacijskom kodu
+\end{itemize}
+
+\subsubsection{Rizik: Problemi OAuth Integracije}
+\textbf{Vjerojatnost}: Niska\\
+\textbf{Utjecaj}: Visok\\
+\textbf{Ublažavanje}:
+\begin{itemize}
+    \item Rano integracijske testiranje
+    \item Alternativa email/lozinka autentifikacija ako je potrebno
+    \item Dobro dokumentirana OAuth konfiguracija
+\end{itemize}
+
+\subsubsection{Rizik: Uska Grla Performansi}
+\textbf{Vjerojatnost}: Srednja\\
+\textbf{Utjecaj}: Srednji\\
+\textbf{Ublažavanje}:
+\begin{itemize}
+    \item Testiranje opterećenja tijekom završnih faza
+    \item Redis cache za često pristupane podatke
+    \item Indeksiranje baze na pretragama korisnika
+\end{itemize}
+
+\subsection{Projektni Rizici}
+
+\subsubsection{Rizik: Povećanje Opsega}
+\textbf{Vjerojatnost}: Srednja\\
+\textbf{Utjecaj}: Visok\\
+\textbf{Ublažavanje}:
+\begin{itemize}
+    \item Strogo pridržavanje opsega Faze 0
+    \item Zahtjevi za funkcionalnosti odgođeni za Fazu 1
+    \item Tjedni pregledi napretka
+\end{itemize}
+
+\subsubsection{Rizik: Zakašnjenja Projekta}
+\textbf{Vjerojatnost}: Srednja\\
+\textbf{Utjecaj}: Srednji\\
+\textbf{Ublažavanje}:
+\begin{itemize}
+    \item Redovito praćenje prekretnica
+    \item Rano identificiranje prepreka
+    \item Fleksibilna alokacija resursa
+\end{itemize}
+
+\section{Kriteriji Uspjeha}
+
+Faza 0 će se smatrati završenom kada:
+
+\begin{enumerate}
+    \item Sve metode autentifikacije funkcionalne (Google OAuth, JWT, API ključevi)
+    \item Sve 3 osnovne uloge + 3 sposobnosti implementirane i testirane
+    \item Radni proces zahtjeva za sposobnosti funkcionalan za osnovne uloge i sposobnosti
+    \item Radni proces recenzije znanja operativan
+    \item Postojećih 1.300 PDF-ova migrirano s Day Zero pripisivanjem
+    \item Međukomponentna autentifikacija verificirana (KB $\leftrightarrow$ MA)
+    \item Potpuno revizijsko bilježenje operativno
+    \item Sigurnosna revizija prošla
+    \item Korisnička dokumentacija potpuna
+    \item Administratorska dokumentacija potpuna
+    \item Svi jedinični, integracijski i E2E testovi prolaze
+    \item Sustav rukuje s 100+ istovremenih korisnika
+\end{enumerate}
+
+\section{Sljedeće Faze}
+
+Nakon uspješnog završetka Faze 0:
+
+\subsection{Faza 1: Stabilizacija Knowledge Buildera}
+\begin{itemize}
+    \item Ojačavanje CRUD operacija znanja s dozvolama
+    \item Stabilizacija okvira agenata s pripisivanjem korisnika
+    \item Dodavanje sveobuhvatne pokrivenosti testovima
+    \item Implementacija CI/CD pipeline
+    \item Optimizacija performansi
+\end{itemize}
+
+\subsection{Faza 2: Prototip Modeling Assistanta}
+\begin{itemize}
+    \item Finaliziranje MA ugovora o integraciji znanja
+    \item Implementacija izgradnje scenarija s dozvolama
+    \item Kreiranje sučelja za sastavljanje modela
+    \item Validacija end-to-end toka: znanje → modeliranje
+\end{itemize}
+
+\subsection{Faza 3: Poboljšana Integracija i UX}
+\begin{itemize}
+    \item Napredno pretraživanje prilagođeno slučajevima modeliranja
+    \item Vizualno istraživanje znanja u MA
+    \item Značajke suradnje (dijeljeni scenariji)
+    \item Praćenje doprinosa više korisnika
+\end{itemize}
+
+\subsection{Faza 4: Proširenja i Dodaci}
+\begin{itemize}
+    \item Mehanizam dodataka za prilagođene alate
+    \item Podrška za dodatne paradigme modeliranja
+    \item Napredne značajke suradnje (radni prostori, timovi)
+    \item Sustav povjerenja i reputacije
+\end{itemize}
+
+\section{Zaključak}
+
+Faza 0 predstavlja kritičan temelj za AdvanDEB platformu, uspostavljajući sigurnost, kontrolu pristupa i infrastrukturu za suradnju. Pojednostavljena v3.0 arhitektura temeljena na sposobnostima pruža fleksibilnost uz smanjenje kompleksnosti u usporedbi s prethodnim dizajnima.
+
+Po završetku, platforma će imati robustan, produkcijski spreman sustav autentifikacije koji se može skalirati za potporu budućim fazama.
+
+Model temeljen na sposobnostima omogućuje korisnicima da povećavaju svoj pristup kako se njihove potrebe razvijaju, podržavajući cilj platforme poticanja suradnje uz održavanje kontrole kvalitete kroz radni proces recenzije.
+
+\vspace{1cm}
+
+\noindent\textbf{Verzija Dokumenta}: 3.0\\
+\textbf{Datum}: 12. prosinca 2025.\\
+\textbf{Status}: Spremno za Implementaciju\\
+\textbf{Kontakt}: AdvanDEB Razvojni Tim
+
+\end{document}

@@ -1,38 +1,88 @@
 @startuml
 !theme plain
 
-title AdvandEB Platform - User Roles & Permissions Matrix
+title AdvanDEB Platform - User Roles & Capabilities
 
-|Role|Knowledge Builder Permissions|Modeling Assistant Permissions|
-|<#FF6B6B>**Administrator**\n(System Authority)|• Full system access\n• User management\n• System configuration\n• Day Zero seeding\n• Override any decision\n• Access all audit logs|• Full system access\n• Model templates management\n• Infrastructure configuration\n• Override any decision|
-|<#FFA500>**Knowledge Curator**\n(Expert Authority)|• Upload documents (single & batch)\n• Create facts & stylized facts\n• Build knowledge graphs\n• Run agent sessions\n• Edit own contributions\n• Generate API keys|• Create scenarios\n• Build biological models\n• Run simulations\n• Edit own scenarios\n• Generate API keys|
-|<#90EE90>**Knowledge Explorator**\n(Knowledge User)|• Browse & search published knowledge\n• View knowledge graphs\n• Run read-only agent queries\n• Create private annotations\n• Export small datasets\n• Save search queries|• View published scenarios\n• Browse model library\n• View simulation results\n• Read-only access|
-|<#FA8072>**Knowledge Reviewer**\n(Quality Control)\n= Curator + Review|• **All Curator permissions** +\n• View pending review queue\n• Approve/reject knowledge\n• Request changes\n• Edit for quality improvements\n• View review audit logs|• **All Curator permissions** +\n• Review shared scenarios\n• Validate model quality\n• Approve/reject shared models|
-|<#ADD8E6>**Agent Operator**\n(AI Specialist)\n= Curator + Agent Mgmt|• **All Curator permissions** +\n• Modify agent configurations\n• Create custom tools\n• View all agent sessions\n• Test & debug agent behaviors\n• View agent performance metrics|• **All Curator permissions** +\n• Configure modeling agents\n• Test modeling algorithms\n• Debug simulation failures\n• Performance tuning|
-|<#E6E6FA>**Data Analyst**\n(Research User)\n= Explorator + Analytics|• **All Explorator permissions** +\n• Advanced search & filtering\n• Bulk export (CSV/JSON)\n• Network analysis tools\n• Generate API keys\n• View API usage statistics|• **All Explorator permissions** +\n• Run analyses on models\n• Export simulation results\n• Advanced statistical tools\n• Generate comparative reports\n• API access to results data|
+skinparam rectangle {
+    BackgroundColor<<base>> LightYellow
+    BackgroundColor<<capability>> LightBlue
+    BorderColor Black
+}
 
-legend
-**Role Hierarchy:**
-Administrator → Knowledge Curator → Knowledge Explorator
+rectangle "**Administrator**\n(System Authority)" as Admin <<base>> #FF6B6B {
+    (Full system access)
+    (User management)
+    (System configuration)
+    (Day Zero seeding)
+    (Override any decision)
+}
 
-**Specialized Roles (Multi-Role):**
-• Knowledge Reviewer = Curator + Review Powers
-• Agent Operator = Curator + Agent Management
-• Data Analyst = Explorator + Advanced Analytics
+rectangle "**Knowledge Curator**\n(Content Creator)" as Curator <<base>> #FFA500 {
+    rectangle "Base Permissions" as CuratorBase {
+        (Upload documents)
+        (Create facts & graphs)
+        (Submit for review)
+        (Build knowledge)
+        (Create models)
+        (Edit own content)
+    }
+    
+    rectangle "Optional Capabilities" as Caps {
+        rectangle "**+ Agent Access**" as AgentCap <<capability>> {
+            (Run AI agents)
+            (Custom tools)
+            (Agent logs)
+        }
+        
+        rectangle "**+ Analytics Access**" as AnalyticsCap <<capability>> {
+            (Bulk export)
+            (API keys)
+            (Advanced queries)
+        }
+        
+        rectangle "**+ Reviewer Status**" as ReviewerCap <<capability>> {
+            (Review queue)
+            (Approve/reject)
+            (Quality control)
+        }
+    }
+}
 
-**Multi-Role Support:**
-Users can have multiple roles simultaneously
-Permissions = Union of all assigned roles
+rectangle "**Knowledge Explorator**\n(Read-Only User)" as Explorator <<base>> #90EE90 {
+    (Browse knowledge)
+    (Search content)
+    (View graphs/models)
+    (Export small datasets)
+}
 
-**Examples:**
-• [Curator + Reviewer]: Can create AND approve
-• [Curator + Agent Operator]: Can create + manage AI
-• [Explorator + Analyst]: Read access + analytics
+Admin -down-> Curator : manages
+Curator -down-> Explorator : can read like
 
-**Authentication:**
-• Google OAuth 2.0 (Primary method)
-• API Keys (Programmatic access)
-• JWT Tokens (Session management)
+note right of Curator
+    **Capability Request Model**
+    
+    Base curators can create and submit
+    content for review. Additional capabilities
+    can be requested:
+    
+    • Agent Access - for AI operations
+    • Analytics Access - for data analysis
+    • Reviewer Status - to approve others' work
+    
+    Multiple capabilities can be combined!
+end note
+
+legend left
+    **Role Model:**
+    • 3 base roles (Administrator, Curator, Explorator)
+    • 3 optional capabilities (Agent, Analytics, Reviewer)
+    • Capabilities can be combined
+    • Graduated access through request workflow
+    
+    **Authentication:**
+    • Google OAuth 2.0
+    • API Keys (capability-based scopes)
+    • JWT Tokens
 end legend
 
 @enduml

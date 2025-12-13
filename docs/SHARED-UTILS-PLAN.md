@@ -1,4 +1,4 @@
-# AdvandEB Shared Utils: Authentication & Authorization Library
+# AdvanDEB Shared Utils: Authentication & Authorization Library
 
 **Version:** 1.0  
 **Date:** December 11, 2025  
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The `advandeb-shared-utils` repository is a **Python package** that provides shared authentication, authorization, and utility functions for the entire AdvandEB platform. Both **Knowledge Builder** and **Modeling Assistant** backends import this package to ensure consistent authentication and eliminate code duplication.
+The `advandeb-shared-utils` repository is a **Python package** that provides shared authentication, authorization, and utility functions for the entire AdvanDEB platform. Both **Knowledge Builder** and **Modeling Assistant** backends import this package to ensure consistent authentication and eliminate code duplication.
 
 ### Key Features
 
@@ -212,31 +212,39 @@ async def validate_api_key(plain_key: str, api_keys_collection) -> Optional[APIK
 from typing import List, Optional
 from advandeb_shared.models.user import User
 
-# Role hierarchy
-ROLE_HIERARCHY = {
+# Base role hierarchy (v3.0)
+BASE_ROLE_HIERARCHY = {
     "administrator": 100,
     "knowledge_curator": 50,
-    "knowledge_reviewer": 50,  # Same level as curator
-    "agent_operator": 50,
-    "data_analyst": 30,
     "knowledge_explorator": 10
 }
 
-def has_role(user: User, required_role: str) -> bool:
-    """Check if user has specific role"""
-    return required_role in user.roles
+# Available capabilities
+CAPABILITIES = {
+    "agent_access": "Permission to operate AI agents and custom tools",
+    "analytics_access": "Permission to run advanced queries, bulk exports, API access",
+    "reviewer_status": "Permission to review and approve knowledge contributions"
+}
 
-def has_any_role(user: User, required_roles: List[str]) -> bool:
-    """Check if user has any of the required roles"""
-    return any(role in user.roles for role in required_roles)
+def has_base_role(user: User, required_role: str) -> bool:
+    """Check if user has specific base role"""
+    return user.base_role == required_role
 
-def has_all_roles(user: User, required_roles: List[str]) -> bool:
-    """Check if user has all required roles"""
-    return all(role in user.roles for role in required_roles)
+def has_capability(user: User, capability: str) -> bool:
+    """Check if user has specific capability"""
+    return capability in user.capabilities
+
+def has_any_capability(user: User, capabilities: List[str]) -> bool:
+    """Check if user has any of the required capabilities"""
+    return any(cap in user.capabilities for cap in capabilities)
+
+def is_admin(user: User) -> bool:
+    """Check if user is administrator"""
+    return user.base_role == "administrator"
 
 def has_permission(user: User, permission: str) -> bool:
     """
-    Check if user has specific permission based on roles
+    Check if user has specific permission based on base role and capabilities
     
     Permissions examples:
     - "read:facts"
@@ -244,25 +252,67 @@ def has_permission(user: User, permission: str) -> bool:
     - "approve:knowledge"
     - "manage:users"
     """
-    # Map permissions to roles
+    # Admins have all permissions
+    if is_admin(user):
+        return True
+    
+    # Map permissions to base roles and capabilities
     PERMISSION_MAP = {
-        # Knowledge Builder permissions
-        "read:facts": ["knowledge_explorator", "data_analyst", "knowledge_curator", "administrator"],
-        "write:facts": ["knowledge_curator", "administrator"],
-        "approve:knowledge": ["knowledge_reviewer", "administrator"],
-        "manage:users": ["administrator"],
-        "manage:agents": ["agent_operator", "administrator"],
-        "bulk:export": ["data_analyst", "administrator"],
+        # Read permissions (Explorator level)
+        "read:facts": ["knowledge_explorator", "knowledge_curator"],
+        "read:stylized_facts": ["knowledge_explorator", "knowledge_curator"],
+        "read:documents": ["knowledge_explorator", "knowledge_curator"],
+        "read:graphs": ["knowledge_explorator", "knowledge_curator"],
+        "read:models": ["knowledge_explorator", "knowledge_curator"],
         
-        # Modeling Assistant permissions
-        "read:models": ["knowledge_explorator", "data_analyst", "knowledge_curator", "administrator"],
-        "write:models": ["knowledge_curator", "administrator"],
-        "run:scenarios": ["knowledge_curator", "data_analyst", "administrator"],
-        "export:results": ["data_analyst", "administrator"],
+        # Write permissions (Curator level)
+        "write:facts": ["knowledge_curator"],
+        "write:stylized_facts": ["knowledge_curator"],
+        "upload:documents": ["knowledge_curator"],
+        "write:graphs": ["knowledge_curator"],
+        "write:models": ["knowledge_curator"],
+        "run:scenarios": ["knowledge_curator"],
+        
+        # Capability-based permissions
+        "run:agents": {"base_role": "knowledge_curator", "capability": "agent_access"},
+        "manage:agents": {"base_role": "knowledge_curator", "capability": "agent_access"},
+        "bulk:export": {"capability": "analytics_access"},
+        "analytics:advanced": {"capability": "analytics_access"},
+        "export:results": {"capability": "analytics_access"},
+        "approve:knowledge": {"capability": "reviewer_status"},
+        "reject:knowledge": {"capability": "reviewer_status"},
+        "review:queue": {"capability": "reviewer_status"},
+        
+        # Admin-only permissions
+        "manage:users": [],  # Admin only (checked above)
+        "day_zero:seed": [],  # Admin only
+        "system:config": [],  # Admin only
     }
     
-    allowed_roles = PERMISSION_MAP.get(permission, [])
-    return has_any_role(user, allowed_roles)
+    perm_config = PERMISSION_MAP.get(permission)
+    
+    if perm_config is None:
+        return False
+    
+    # Simple list of allowed base roles
+    if isinstance(perm_config, list):
+        return user.base_role in perm_config
+    
+    # Dictionary with base_role and/or capability requirements
+    if isinstance(perm_config, dict):
+        # Check base role requirement (if specified)
+        if "base_role" in perm_config:
+            if user.base_role != perm_config["base_role"]:
+                return False
+        
+        # Check capability requirement (if specified)
+        if "capability" in perm_config:
+            if not has_capability(user, perm_config["capability"]):
+                return False
+        
+        return True
+    
+    return False
 
 def is_owner(user: User, resource_user_id: str) -> bool:
     """Check if user owns the resource"""
@@ -271,11 +321,11 @@ def is_owner(user: User, resource_user_id: str) -> bool:
 def can_edit_resource(user: User, resource_user_id: str, resource_status: str) -> bool:
     """Check if user can edit a knowledge resource"""
     # Admins can edit anything
-    if has_role(user, "administrator"):
+    if is_admin(user):
         return True
     
     # Reviewers can edit during review
-    if has_role(user, "knowledge_reviewer") and resource_status == "pending_review":
+    if has_capability(user, "reviewer_status") and resource_status == "pending_review":
         return True
     
     # Users can edit own pending resources
@@ -286,9 +336,10 @@ def can_edit_resource(user: User, resource_user_id: str, resource_status: str) -
 ```
 
 **Exports**:
-- `has_role(user, role) -> bool`
-- `has_any_role(user, roles) -> bool`
-- `has_all_roles(user, roles) -> bool`
+- `has_base_role(user, role) -> bool`
+- `has_capability(user, capability) -> bool`
+- `has_any_capability(user, capabilities) -> bool`
+- `is_admin(user) -> bool`
 - `has_permission(user, permission) -> bool`
 - `is_owner(user, resource_user_id) -> bool`
 - `can_edit_resource(user, resource_user_id, status) -> bool`
@@ -537,13 +588,14 @@ from datetime import datetime
 from bson import ObjectId
 
 class User(BaseModel):
-    """Platform user model"""
+    """Platform user model (v3.0 - capability-based)"""
     id: ObjectId = Field(alias="_id")
     google_id: str
     email: EmailStr
     name: str
     picture_url: Optional[str] = None
-    roles: List[str] = []
+    base_role: str  # "administrator", "knowledge_curator", "knowledge_explorator"
+    capabilities: List[str] = []  # ["agent_access", "analytics_access", "reviewer_status"]
     status: str = "active"  # active, suspended, pending_approval
     created_at: datetime
     updated_at: datetime
@@ -555,12 +607,20 @@ class User(BaseModel):
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
 
-class RoleRequest(BaseModel):
-    """Role request model"""
+class CapabilityRequest(BaseModel):
+    """Capability or base role request model (v3.0)"""
     id: ObjectId = Field(alias="_id")
     user_id: ObjectId
-    requested_roles: List[str]
-    current_roles: List[str]
+    request_type: str  # "base_role" or "capability"
+    
+    # For base role requests (new users)
+    requested_base_role: Optional[str] = None
+    current_base_role: Optional[str] = None
+    
+    # For capability requests (existing curators)
+    requested_capabilities: List[str] = []
+    current_capabilities: List[str] = []
+    
     justification: str
     form_data: dict
     status: str  # pending, approved, rejected
@@ -719,8 +779,8 @@ async def close_database():
 [tool.poetry]
 name = "advandeb-shared"
 version = "0.1.0"
-description = "Shared authentication and utilities for AdvandEB platform"
-authors = ["AdvandEB Team"]
+description = "Shared authentication and utilities for AdvanDEB platform"
+authors = ["AdvanDEB Team"]
 readme = "README.md"
 packages = [{include = "advandeb_shared"}]
 
@@ -962,4 +1022,4 @@ poetry update advandeb-shared
 
 **Document Status**: Design Complete  
 **Next Action**: Create `advandeb-shared-utils` repository and implement Phase 1  
-**Contact**: AdvandEB Development Team
+**Contact**: AdvanDEB Development Team

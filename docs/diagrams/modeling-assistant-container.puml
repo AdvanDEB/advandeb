@@ -1,5 +1,8 @@
 @startuml
-' Container diagram for AdvandEB Modeling Assistant (with Platform Auth)
+' Container diagram for AdvanDEB Modeling Assistant (with Platform Auth)
+
+!pragma layout smetana
+scale max 1920 width
 
 actor "Users\n(All Roles)" as Users
 
@@ -9,7 +12,7 @@ node "Platform Authentication" as PlatformAuth {
   [API Key Validator]
 }
 
-node "AdvandEB Modeling Assistant" as MA {
+node "AdvanDEB Modeling Assistant" as MA {
   node "Frontend (Vue 3)" as MA_FE {
     package "Views" {
       [Home View]
@@ -62,7 +65,7 @@ node "AdvandEB Modeling Assistant" as MA {
 
 database "MongoDB\n(Platform DB)" as Mongo
 node "Ollama LLM Host" as Ollama
-node "AdvandEB Knowledge Builder" as KB
+node "AdvanDEB Knowledge Builder" as KB
 
 ' User authentication (platform-wide)
 Users --> PlatformAuth : Login (OAuth or API Key)

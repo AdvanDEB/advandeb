@@ -1,9 +1,12 @@
 @startuml
-' Container diagram for AdvandEB Knowledge Builder (Updated with Authentication)
+' Container diagram for AdvanDEB Knowledge Builder (Updated with Authentication)
+
+!pragma layout smetana
+scale max 1920 width
 
 actor "Users\n(All Roles)" as Users
 
-node "AdvandEB Knowledge Builder" as KB {
+node "AdvanDEB Knowledge Builder" as KB {
   node "Frontend (Vue 3 + Element Plus)" as KB_FE {
     package "Views" {
       [Home View]

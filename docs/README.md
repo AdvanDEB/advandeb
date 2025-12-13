@@ -1,6 +1,6 @@
-# AdvandEB Architecture
+# AdvanDEB Architecture
 
-This repository contains system-level design, planning, and documentation for the AdvandEB project.
+This repository contains system-level design, planning, and documentation for the AdvanDEB project.
 
 It covers:
 - `advandeb-knowledge-builder`: knowledge ingestion, extraction, stylization, and graph-based knowledge base.

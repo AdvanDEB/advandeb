@@ -1,4 +1,4 @@
-% AdvandEB Architecture Documentation
+% AdvanDEB Architecture Documentation
 % This LaTeX document is intended for printable/PDF output.
 
 \documentclass[11pt]{article}
@@ -8,8 +8,8 @@
 \usepackage{graphicx}
 \usepackage{enumitem}
 
-\title{AdvandEB System Architecture}
-\author{AdvandEB Project}
+\title{AdvanDEB System Architecture}
+\author{AdvanDEB Project}
 \date{\today}
 
 \begin{document}
@@ -18,7 +18,7 @@
 
 \section{Introduction}
 
-This document provides a printable overview of the AdvandEB system architecture. It summarises the main components, external services, integration patterns, and core development environment.
+This document provides a printable overview of the AdvanDEB system architecture. It summarises the main components, external services, integration patterns, and core development environment.
 
 The project consists of the following repositories:
 
@@ -30,19 +30,19 @@ The project consists of the following repositories:
 
 \section{System Overview}
 
-Figure~\ref{fig:system-context} shows the high-level system context, including primary users, the AdvandEB platform, and external services.
+Figure~\ref{fig:system-context} shows the high-level system context, including primary users, the AdvanDEB platform, and external services.
 
 % Export system-context.puml to system-context.png before building
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{../diagrams/system-context.png}
-  \caption{AdvandEB System Context}
+  \caption{AdvanDEB System Context}
   \label{fig:system-context}
 \end{figure}
 
 \section{Knowledge Builder}
 
-The AdvandEB Knowledge Builder is a FastAPI + Vue application used to construct and explore a biological knowledge base.
+The AdvanDEB Knowledge Builder is a FastAPI + Vue application used to construct and explore a biological knowledge base.
 
 Figure~\ref{fig:kb-container} shows the main containers.
  
@@ -77,7 +77,7 @@ The document ingestion and fact extraction sequence is illustrated in Figure~\re
 
 \section{Modeling Assistant}
 
-The AdvandEB Modeling Assistant is a planned component that will consume knowledge from the Knowledge Builder to support individual-based modeling.
+The AdvanDEB Modeling Assistant is a planned component that will consume knowledge from the Knowledge Builder to support individual-based modeling.
 
 Figure~\ref{fig:ma-container} shows its planned containers and dependencies.
 

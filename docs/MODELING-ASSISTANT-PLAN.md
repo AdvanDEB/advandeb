@@ -2,7 +2,7 @@
 
 ## Foundational Work
 
-- Define scope: IBM-focused retrieval and reasoning on top of the AdvandEB knowledge base.
+- Define scope: IBM-focused retrieval and reasoning on top of the AdvanDEB knowledge base.
 - Decide integration patterns with `advandeb-knowledge-builder` (HTTP APIs, shared DB, or both).
 - Design initial domain model for modeling scenarios, model specs, and outputs.
 

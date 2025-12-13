@@ -1,21 +1,21 @@
-# AdvandEB Platform: User Management & Authentication Plan
+# AdvanDEB Platform: User Management & Authentication Plan
 
-**Version:** 2.0  
-**Date:** December 11, 2025  
+**Version:** 3.0  
+**Date:** December 12, 2025  
 **Status:** Design Complete - Ready for Implementation
 
 ---
 
 ## Executive Summary
 
-This document defines the comprehensive user management, authentication, and authorization architecture for the **entire AdvandEB Platform** (Knowledge Builder + Modeling Assistant). The system implements a **unified 6-role hierarchy** with **multi-role assignment**, **Google OAuth authentication**, **API key access**, and **consensus-based validation** workflows.
+This document defines the comprehensive user management, authentication, and authorization architecture for the **entire AdvanDEB Platform** (Knowledge Builder + Modeling Assistant). The system implements a **simplified 3-tier role system** with **optional specialized capabilities**, **Google OAuth authentication**, **API key access**, and **consensus-based validation** workflows.
 
 ### Key Features
 
 - ✅ **Platform-wide unified authentication** - Single Sign-On (SSO) across all components
 - ✅ **Shared authentication library** - `advandeb-shared-utils` Python package eliminates code duplication
-- ✅ 6 user roles with hierarchical inheritance (Service Account role removed)
-- ✅ Multi-role support (users can have multiple roles simultaneously)
+- ✅ **Simplified role structure** - 3 core roles + 3 specialized capabilities (replaces complex 6-role system)
+- ✅ **Capability-based permissions** - Knowledge Curators request specialized access as needed
 - ✅ Google OAuth 2.0 authentication
 - ✅ API key authentication for programmatic access
 - ✅ Role-based permission system across Knowledge Builder and Modeling Assistant
@@ -29,100 +29,121 @@ This document defines the comprehensive user management, authentication, and aut
 
 ## 1. Role Architecture
 
-### 1.1 Role Hierarchy (Model C: Core + Specialized Multi-Role)
+### 1.1 Simplified Role Structure
 
-**Core Hierarchy:**
+**Core Roles:**
 ```
 Administrator (System Authority)
     ↓
-Knowledge Curator (Expert Authority)
+Knowledge Curator (Content Creator - can request specialized capabilities)
     ↓
-Knowledge Explorator (Knowledge User)
+Knowledge Explorator (Read-Only User)
 ```
 
-**Specialized Roles** (require base role + specialization):
-
-- **Knowledge Reviewer**: Knowledge Curator + Review/approval permissions
-- **Agent Operator**: Knowledge Curator + Agent management permissions
-- **Data Analyst**: Knowledge Explorator + Advanced analytics + API key access
+**Specialized Capabilities** (granted to Knowledge Curators upon approval):
+- **Agent Access** - Permission to operate AI agents and custom tools
+- **Analytics Access** - Permission to run advanced queries, bulk exports, API access
+- **Reviewer Status** - Permission to review and approve knowledge contributions
 
 ### 1.2 Role Definitions
 
 #### Administrator
 - **Purpose**: System-level authority and configuration
+- **Base Role**: `administrator`
 - **Key Permissions**:
-  - Full system access
-  - User management (create, edit, delete, approve roles)
+  - Full system access (all components)
+  - User management (create, edit, delete, approve role/capability requests)
   - System configuration
   - View all audit logs
   - Day Zero knowledge seeding
   - Override any review decision
   - Access all knowledge regardless of status
+  - Manage all agent configurations
+  - Full analytics and export capabilities
 
 #### Knowledge Curator
 - **Purpose**: Domain experts who create and manage knowledge
-- **Key Permissions**:
+- **Base Role**: `knowledge_curator`
+- **Key Permissions** (Base):
   - Upload documents (single and batch)
   - Create facts and stylized facts
   - Build knowledge graphs
-  - Run agent sessions
+  - Create scenarios and models (in MA)
   - Edit own contributions
-  - Generate API keys (with scoped permissions)
+  - View published knowledge
   - View own audit logs
+  
+**Optional Capabilities** (requested via Capability Request workflow):
 
-#### Knowledge Reviewer
-- **Purpose**: Quality control and validation
-- **Key Permissions**:
-  - All Knowledge Curator permissions
-  - View pending review queue
-  - Approve/reject/request changes on knowledge
-  - View review audit logs
-  - Edit knowledge for quality improvements
-
-#### Agent Operator
-- **Purpose**: AI/ML specialists managing the agent framework
-- **Key Permissions**:
-  - All Knowledge Curator permissions
-  - Modify agent configurations
-  - Create custom tools
-  - View all agent sessions
-  - View agent performance metrics
-  - Test and debug agent behaviors
-
-#### Data Analyst
-- **Purpose**: Advanced research and analysis users
-- **Key Permissions**:
-  - Full read access to all published knowledge
+- **+ Agent Access** (`capability:agent_access`)
+  - Run agent sessions
+  - View agent reasoning traces
+  - Use custom agent tools
+  - Access agent logs for own sessions
+  
+- **+ Analytics Access** (`capability:analytics_access`)
   - Advanced search and filtering
   - Bulk export (CSV, JSON)
   - Network analysis tools
   - Generate API keys for programmatic access
   - View own API usage statistics
+  
+- **+ Reviewer Status** (`capability:reviewer_status`)
+  - View pending review queue
+  - Approve/reject/request changes on knowledge
+  - View review audit logs
+  - Edit knowledge for quality improvements
+  - Cannot review own contributions
+
+**Examples:**
+- Curator (base only): Can create knowledge, no agent access, no analytics
+- Curator + Agent Access: Can create knowledge AND run AI agents
+- Curator + Analytics Access: Can create knowledge AND export data/use API
+- Curator + Reviewer Status: Can create knowledge AND review others' work
+- Curator + Agent Access + Analytics Access + Reviewer Status: Full curator with all capabilities
 
 #### Knowledge Explorator
-- **Purpose**: General knowledge consumers
+- **Purpose**: General knowledge consumers (read-only users)
+- **Base Role**: `knowledge_explorator`
 - **Key Permissions**:
   - Browse and search published knowledge
   - View knowledge graphs
-  - Run read-only agent queries
+  - View published models and scenarios (in MA)
   - Create personal annotations (private)
-  - Export limited data (small datasets)
+  - Export limited data (small datasets for personal use)
   - Save search queries
 
-### 1.3 Multi-Role Assignment
+### 1.3 Capability Assignment Model
 
-Users can have **multiple roles simultaneously**. Permissions are the **union** of all assigned roles.
+Knowledge Curators start with **base permissions only** and can request specialized capabilities as needed.
+
+**Database Model**:
+```json
+{
+  "user_id": "...",
+  "base_role": "knowledge_curator",
+  "capabilities": ["agent_access", "analytics_access"],
+  "status": "active"
+}
+```
+
+**Permission Resolution**:
+- Base role: `knowledge_curator` → base content creation permissions
+- Capability: `agent_access` → adds agent operation permissions
+- Capability: `analytics_access` → adds analytics and API permissions
+- Capability: `reviewer_status` → adds review/approval permissions
 
 **Examples**:
-- User with `[knowledge_curator, agent_operator]`: Can create knowledge AND manage agents
-- User with `[knowledge_curator, knowledge_reviewer]`: Can create AND approve knowledge
-- User with `[knowledge_explorator, data_analyst]`: Read access + analytics tools
+- User with `knowledge_curator` (no capabilities): Can only create/edit knowledge
+- User with `knowledge_curator` + `[agent_access]`: Can create knowledge AND run agents
+- User with `knowledge_curator` + `[analytics_access, reviewer_status]`: Can create, export data, AND review
+- User with `administrator`: Has all permissions (capabilities not needed)
 
 ---
 
 ## 2. Authentication Architecture
 
-**Platform-Wide Authentication**: The AdvandEB platform uses a unified authentication system shared across all components (Knowledge Builder, Modeling Assistant, and future modules). Users authenticate once and receive JWT tokens valid for the entire platform.
+**Platform-Wide Authentication**: The AdvanDEB platform uses a unified authentication system shared across all components (Knowledge Builder, Modeling Assistant, and future modules). Users authenticate once and receive JWT tokens valid for the entire platform.
 
 ### 2.1 Google OAuth 2.0 Flow
 
@@ -172,30 +193,48 @@ Users can have **multiple roles simultaneously**. Permissions are the **union** 
 **Format**: `advk_` prefix + 32-byte random (256-bit)  
 **Storage**: SHA-256 hash in database  
 **Display**: Plain text shown ONCE at creation  
-**Platform-Wide**: API keys work across all AdvandEB components (KB and MA)
+**Platform-Wide**: API keys work across all AdvanDEB components (KB and MA)
 
-**Scopes** (for Knowledge Curators):
+**Scopes** (automatically granted based on user's base role and capabilities):
+
+**Knowledge Curator** (base):
 - `read:facts`, `write:facts`
-- `read:documents`, `write:documents`
+- `read:stylized_facts`, `write:stylized_facts`
+- `read:documents`, `upload:documents`
 - `read:graphs`, `write:graphs`
-- `run:agents`
 - `read:models`, `write:models` (Modeling Assistant)
 - `run:scenarios` (Modeling Assistant)
 
-**Scopes** (for Data Analysts):
-- `read:facts`, `read:stylized_facts`
-- `read:documents`, `read:graphs`
-- `export:bulk`, `analytics:advanced`
-- `read:models`, `read:scenarios` (Modeling Assistant)
+**+ Agent Access** capability adds:
+- `run:agents`
+- `read:agent_sessions`
+- `use:agent_tools`
+
+**+ Analytics Access** capability adds:
+- `export:bulk`
+- `analytics:advanced`
 - `export:results` (Modeling Assistant)
+- Higher rate limits
+
+**+ Reviewer Status** capability adds:
+- `review:knowledge`
+- `approve:facts`, `approve:stylized_facts`
+- `reject:knowledge`
+
+**Knowledge Explorator**:
+- `read:facts`, `read:stylized_facts`, `read:documents`, `read:graphs`
+- `read:models`, `read:scenarios` (Modeling Assistant)
+- `export:limited` (small datasets only)
 
 **Expiration**:
-- Curator keys: 30 days
-- Analyst keys: 90 days
+- Curator keys (base): 30 days
+- Curator keys (with Analytics Access): 90 days
+- Explorator keys: 30 days
 
 **Rate Limits**:
-- Curator: 200 requests/minute
-- Analyst: 500 requests/minute
+- Curator (base): 200 requests/minute
+- Curator (+ Analytics Access): 500 requests/minute, 10,000 requests/day
+- Explorator: 100 requests/minute
 
 ---
 
@@ -237,36 +276,50 @@ async def require_curator(user: User = Depends(get_current_user)) -> User:
 
 ## 4. Workflows
 
-### 4.1 Role Request Workflow
+### 4.1 Role & Capability Request Workflow
 
-**User Perspective**:
+**New User - Base Role Request**:
 ```
-1. User signs in with Google → Status: "pending_approval", Roles: []
-2. Dashboard shows: "Request roles to get started"
-3. User fills role request form:
-   - Select roles (Curator, Explorator, Analyst)
+1. User signs in with Google → Status: "pending_approval", base_role: null, capabilities: []
+2. Dashboard shows: "Request access to get started"
+3. User fills base role request form:
+   - Select base role: "Knowledge Curator" or "Knowledge Explorator"
    - Affiliation
    - Research area
    - Justification
    - References (optional)
 4. User submits → Status: "Pending admin review"
 5. Admin approves → User receives email
-6. User logs in → Full access based on granted roles
+6. User logs in → Access based on granted base role
+```
+
+**Existing Curator - Capability Request**:
+```
+1. Curator logs in with base access
+2. Profile page shows: "Request additional capabilities"
+3. User selects capabilities:
+   □ Agent Access - "I need to run AI agents for automated fact extraction"
+   □ Analytics Access - "I need API access for bulk data analysis"
+   □ Reviewer Status - "I want to help review community contributions"
+4. User provides justification for each capability
+5. Admin reviews and approves/rejects
+6. Capabilities added to user's profile
+7. User immediately gains new permissions
 ```
 
 **Administrator Perspective**:
 ```
-1. Admin sees "5 pending role requests"
+1. Admin sees "3 pending base role requests, 2 pending capability requests"
 2. Admin reviews request details
 3. Admin decides:
-   - Approve all requested roles
-   - Approve subset of roles
+   - Approve requested base role or capabilities
+   - Approve partial capabilities (e.g., approve Agent Access but not Analytics)
    - Reject with reason
 4. User notified via email
 5. Audit log records decision
 ```
 
-**Diagram**: See `diagrams/role-request-workflow.puml`
+**Diagram**: See `diagrams/role-request-workflow.puml` (to be updated)
 
 ### 4.2 Knowledge Review Workflow (Phase 1: Single Reviewer)
 
@@ -330,7 +383,7 @@ async def require_curator(user: User = Depends(get_current_user)) -> User:
 
 ## 5. Database Schema
 
-**Platform-Wide Database**: The AdvandEB platform uses a **single shared MongoDB database** for user management, authentication, and audit logs. Both Knowledge Builder and Modeling Assistant components query the same `users` collection for authentication and authorization.
+**Platform-Wide Database**: The AdvanDEB platform uses a **single shared MongoDB database** for user management, authentication, and audit logs. Both Knowledge Builder and Modeling Assistant components query the same `users` collection for authentication and authorization.
 
 **Database Name**: `advandeb` (shared)
 
@@ -354,7 +407,8 @@ async def require_curator(user: User = Depends(get_current_user)) -> User:
     "email": str,
     "name": str,
     "picture_url": str,
-    "roles": List[str],  # ["knowledge_curator", "agent_operator"]
+    "base_role": str,  # "administrator", "knowledge_curator", "knowledge_explorator"
+    "capabilities": List[str],  # ["agent_access", "analytics_access", "reviewer_status"]
     "status": str,  # "active", "suspended", "pending_approval"
     "created_at": datetime,
     "updated_at": datetime,
@@ -368,13 +422,23 @@ async def require_curator(user: User = Depends(get_current_user)) -> User:
 }
 ```
 
-#### **role_requests**
+**Note**: The `capabilities` field is only applicable when `base_role` is `"knowledge_curator"`. Administrators have all permissions regardless of capabilities. Explorators cannot have additional capabilities.
+
+#### **role_requests** (renamed to **capability_requests**)
 ```python
 {
     "_id": ObjectId,
     "user_id": ObjectId,
-    "requested_roles": List[str],
-    "current_roles": List[str],
+    "request_type": str,  # "base_role" or "capability"
+    
+    # For base role requests (new users or role changes)
+    "requested_base_role": str,  # "knowledge_curator", "knowledge_explorator"
+    "current_base_role": str,
+    
+    # For capability requests (curators requesting additional permissions)
+    "requested_capabilities": List[str],  # ["agent_access", "analytics_access"]
+    "current_capabilities": List[str],
+    
     "justification": str,
     "form_data": dict,
     "status": str,  # "pending", "approved", "rejected"
@@ -384,6 +448,11 @@ async def require_curator(user: User = Depends(get_current_user)) -> User:
     "review_notes": str
 }
 ```
+
+**Usage Examples:**
+- New user requests Curator role: `request_type: "base_role"`, `requested_base_role: "knowledge_curator"`
+- Existing Curator requests Agent Access: `request_type: "capability"`, `requested_capabilities: ["agent_access"]`
+- Existing Curator requests multiple capabilities: `requested_capabilities: ["agent_access", "analytics_access", "reviewer_status"]`
 
 #### **api_keys**
 ```python
@@ -1111,4 +1180,4 @@ Implementation is successful when:
 
 **Document Status**: Design Complete  
 **Next Action**: Begin Phase 1 implementation (Backend Core)  
-**Contact**: AdvandEB Development Team
+**Contact**: AdvanDEB Development Team

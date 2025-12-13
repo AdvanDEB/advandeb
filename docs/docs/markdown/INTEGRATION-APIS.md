@@ -1,4 +1,4 @@
-# AdvandEB Integration APIs (Draft)
+# AdvanDEB Integration APIs (Draft)
 
 This document describes the **high-level HTTP API contracts** between:
 

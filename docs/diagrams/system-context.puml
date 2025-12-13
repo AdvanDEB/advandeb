@@ -1,18 +1,18 @@
 @startuml
-' AdvandEB System Context Diagram (Clean - High Level Only)
+' AdvanDEB System Context Diagram (Clean - High Level Only)
 
 ' Define user groups
-actor "Platform Users\n(6 Roles)" as Users <<Person>>
+actor "Platform Users\n(3 Base Roles)" as Users <<Person>>
 
 ' Main platform rectangle
-rectangle "AdvandEB Platform" {
+rectangle "AdvanDEB Platform" {
   
   ' Shared authentication library
   component "advandeb-shared-utils\n(Auth Library)" as SharedUtils <<Python Package>> #LightBlue
   
   ' Main components
-  component "AdvandEB\nKnowledge Builder" as KB <<FastAPI + Vue>> #LightGreen
-  component "AdvandEB\nModeling Assistant" as MA <<FastAPI + Vue>> #LightCoral
+  component "AdvanDEB\nKnowledge Builder" as KB <<FastAPI + Vue>> #LightGreen
+  component "AdvanDEB\nModeling Assistant" as MA <<FastAPI + Vue>> #LightCoral
   
   ' Internal relationships
   KB ..> SharedUtils : imports\n(JWT, permissions)
@@ -40,13 +40,15 @@ KB --> Ollama : LLM inference
 MA --> Ollama : LLM inference
 
 note right of Users
-  6 Platform Roles:
-  • Administrator
-  • Knowledge Curator
-  • Knowledge Reviewer
-  • Agent Operator
-  • Data Analyst
-  • Knowledge Explorator
+  3 Base Roles:
+  • Administrator (full access)
+  • Knowledge Curator (content creator)
+  • Knowledge Explorator (read-only)
+  
+  Curator Capabilities (optional):
+  • Agent Access
+  • Analytics Access
+  • Reviewer Status
   
   Authentication Methods:
   • Google OAuth (SSO)

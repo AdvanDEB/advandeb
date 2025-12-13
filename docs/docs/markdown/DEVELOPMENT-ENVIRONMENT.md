@@ -1,6 +1,6 @@
-# AdvandEB Development Environment
+# AdvanDEB Development Environment
 
-This document describes the **shared development environment** for all AdvandEB services.
+This document describes the **shared development environment** for all AdvanDEB services.
 
 - Single Conda environment: `advandeb`
 - Repositories:
@@ -30,7 +30,7 @@ conda env update -f environment.yml --prune
 conda activate advandeb
 ```
 
-This is the **only** Conda environment used for all AdvandEB services.
+This is the **only** Conda environment used for all AdvanDEB services.
 
 ## 2. Core Services
 
