@@ -1,0 +1,41 @@
+name: advandeb-modeling-assistant
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python
+  - python=3.11
+  - pip
+  
+  # Web Framework
+  - fastapi
+  - uvicorn
+  
+  # Database
+  - pymongo
+  
+  # Development Tools
+  - black
+  - isort
+  - mypy
+  - pytest
+  - pytest-asyncio
+  
+  # Node.js for frontend
+  - nodejs=18
+  
+  # Pip packages
+  - pip:
+      - motor
+      - pydantic==2.5.0
+      - pydantic-settings==2.1.0
+      - python-dotenv==1.0.0
+      - python-jose[cryptography]==3.3.0
+      - passlib[bcrypt]==1.7.4
+      - python-multipart==0.0.6
+      - httpx==0.25.2
+      - aiofiles==23.2.1
+      - google-auth==2.25.2
+      - google-auth-oauthlib==1.2.0
+      - google-auth-httplib2==0.2.0
+      - flake8==6.1.0
