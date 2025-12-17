@@ -35,6 +35,8 @@ class Scenario(ScenarioBase):
 
 class ModelBase(BaseModel):
     """Base model specification."""
+    model_config = {"protected_namespaces": ()}
+    
     name: str
     scenario_id: str
     description: Optional[str] = None
