@@ -62,19 +62,29 @@ Knowledge Explorator (Read-Only User)
   - Full analytics and export capabilities
 
 #### Knowledge Curator
-- **Purpose**: Domain experts who create and manage knowledge
+- **Purpose**: Domain experts who contribute to knowledge building
 - **Base Role**: `knowledge_curator`
 - **Key Permissions** (Base):
-  - Upload documents (single and batch)
-  - Create facts and stylized facts
-  - Build knowledge graphs
+  - Upload documents (single and batch) for ingestion
+  - **Suggest** facts and stylized facts (submitted for review)
+  - **Suggest** knowledge graph nodes and edges (submitted for review)
+  - **Suggest** knowledge updates and corrections
   - Create scenarios and models (in MA)
-  - Edit own contributions
   - View published knowledge
+  - View own contributions and suggestions
   - View own audit logs
+  
+**Note**: Base curators can **suggest** knowledge but cannot directly **create** facts or graph nodes. All suggestions go through review workflow. This ensures quality control while allowing broad participation.
   
 **Optional Capabilities** (requested via Capability Request workflow):
 
+- **+ Knowledge Creation** (`capability:knowledge_creation`)
+  - **Create** facts and stylized facts directly (still requires review)
+  - **Build** knowledge graph nodes and edges
+  - Edit own knowledge contributions
+  - Bypass suggestion workflow for faster iteration
+  - Cannot approve own contributions (must be reviewed)
+  
 - **+ Agent Access** (`capability:agent_access`)
   - Run agent sessions
   - View agent reasoning traces
@@ -89,18 +99,19 @@ Knowledge Explorator (Read-Only User)
   - View own API usage statistics
   
 - **+ Reviewer Status** (`capability:reviewer_status`)
-  - View pending review queue
+  - View pending review queue (suggestions and contributions)
   - Approve/reject/request changes on knowledge
   - View review audit logs
   - Edit knowledge for quality improvements
   - Cannot review own contributions
 
 **Examples:**
-- Curator (base only): Can create knowledge, no agent access, no analytics
-- Curator + Agent Access: Can create knowledge AND run AI agents
-- Curator + Analytics Access: Can create knowledge AND export data/use API
-- Curator + Reviewer Status: Can create knowledge AND review others' work
-- Curator + Agent Access + Analytics Access + Reviewer Status: Full curator with all capabilities
+- Curator (base only): Upload docs, suggest facts/nodes, view knowledge
+- Curator + Knowledge Creation: Upload docs AND create facts/nodes directly
+- Curator + Agent Access: Suggest knowledge AND run AI agents
+- Curator + Analytics Access: Suggest knowledge AND export data/use API
+- Curator + Reviewer Status: Suggest knowledge AND review others' work
+- Curator + All Capabilities: Full curator with creation, agents, analytics, and review
 
 #### Knowledge Explorator
 - **Purpose**: General knowledge consumers (read-only users)
@@ -115,7 +126,7 @@ Knowledge Explorator (Read-Only User)
 
 ### 1.3 Capability Assignment Model
 
-Knowledge Curators start with **base permissions only** and can request specialized capabilities as needed.
+Knowledge Curators start with **base permissions only** (upload, suggest) and can request specialized capabilities as needed, including the ability to directly create knowledge.
 
 **Database Model**:
 ```json
@@ -198,12 +209,16 @@ Knowledge Curators start with **base permissions only** and can request speciali
 **Scopes** (automatically granted based on user's base role and capabilities):
 
 **Knowledge Curator** (base):
-- `read:facts`, `write:facts`
-- `read:stylized_facts`, `write:stylized_facts`
+- `read:facts`, `read:stylized_facts`, `read:graphs`
+- `suggest:facts`, `suggest:stylized_facts`, `suggest:graph_nodes`
 - `read:documents`, `upload:documents`
-- `read:graphs`, `write:graphs`
 - `read:models`, `write:models` (Modeling Assistant)
 - `run:scenarios` (Modeling Assistant)
+
+**+ Knowledge Creation** capability adds:
+- `write:facts`, `write:stylized_facts`
+- `write:graphs`
+- `edit:own_knowledge`
 
 **+ Agent Access** capability adds:
 - `run:agents`
@@ -218,7 +233,8 @@ Knowledge Curators start with **base permissions only** and can request speciali
 
 **+ Reviewer Status** capability adds:
 - `review:knowledge`
-- `approve:facts`, `approve:stylized_facts`
+- `review:suggestions`
+- `approve:facts`, `approve:stylized_facts`, `approve:graph_nodes`
 - `reject:knowledge`
 
 **Knowledge Explorator**:

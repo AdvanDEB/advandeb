@@ -56,25 +56,29 @@ The **AdvanDEB Platform** uses a **simplified 3-tier role system** with optional
 
 **Core Roles:**
 1. **Administrator** - System authority, user management, platform configuration across all components
-2. **Knowledge Curator** - Create/edit knowledge in KB, create scenarios/models in MA (base content creator role)
+2. **Knowledge Curator** - Upload documents, suggest knowledge contributions (base participation role)
 3. **Knowledge Explorator** - Browse published knowledge (KB) and models (MA), read-only access
 
 **Specialized Capabilities** (granted to Knowledge Curators upon request/approval):
+- **Knowledge Creation** - Permission to directly create facts, stylized facts, and knowledge graph nodes (bypasses suggestion workflow)
 - **Agent Access** - Permission to operate AI agents and custom tools in both KB and MA
 - **Analytics Access** - Permission to run advanced queries, bulk exports, API access to platform data
-- **Reviewer Status** - Permission to review and approve knowledge contributions from other curators
+- **Reviewer Status** - Permission to review and approve knowledge contributions and suggestions from other curators
 
 **Role Hierarchy:**
 ```
 Administrator (all permissions)
-├── Knowledge Curator (base content creator)
+├── Knowledge Curator (base: upload, suggest)
+│   ├── + Knowledge Creation (optional - direct creation)
 │   ├── + Agent Access (optional)
 │   ├── + Analytics Access (optional)
 │   └── + Reviewer Status (optional)
 └── Knowledge Explorator (read-only)
 ```
 
-Knowledge Curators can hold multiple specialized capabilities simultaneously (e.g., Curator + Agent Access + Analytics Access).
+Knowledge Curators can hold multiple specialized capabilities simultaneously (e.g., Curator + Knowledge Creation + Agent Access + Reviewer Status).
+
+**Note**: Base Knowledge Curators suggest contributions (subject to review), while those with Knowledge Creation capability can create directly (still subject to review but with faster workflow).
 
 See `USER-MANAGEMENT-PLAN.md` for complete role definitions and component-specific permissions.
 
@@ -154,10 +158,16 @@ A dedicated PlantUML class diagram (`knowledge-builder-data-model.puml`) capture
 - **Status-Based Visibility**: Knowledge visibility based on review status (pending/published/rejected)
 
 **Review Workflow**:
-- Knowledge Curators submit content → status: "pending_review"
+- **Base Knowledge Curators** suggest content → status: "suggestion" → reviewed by curators with Reviewer Status
+- **Curators with Knowledge Creation** create content → status: "pending_review" → reviewed by curators with Reviewer Status
 - Knowledge Reviewers approve/reject/request changes
 - Approved content → status: "published" (visible to all)
 - All decisions logged in audit trail
+
+**Suggestion vs Creation**:
+- **Suggestions** (base curators): Lightweight proposals for facts, nodes, or updates - require review before entering system
+- **Creation** (with capability): Direct creation of knowledge entities - still requires review but has higher priority and faster workflow
+- Both paths ensure quality through review, but creation capability grants trusted users more efficiency
 
 See `USER-MANAGEMENT-PLAN.md` for complete authentication architecture and workflows.
 
