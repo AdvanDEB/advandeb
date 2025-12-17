@@ -22,14 +22,14 @@
     linkcolor=blue,
     filecolor=magenta,
     urlcolor=cyan,
-    pdftitle={AdvanDEB Platform - Architecture Rationale v12.25.1},
+    pdftitle={AdvanDEB Platform - Architecture Rationale v12.24.2},
     pdfauthor={AdvanDEB Development Team},
 }
 
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small AdvanDEB Platform - Architecture Rationale}
-\fancyhead[R]{\small v12.25.1}
+\fancyhead[R]{\small v12.24.2}
 \fancyfoot[C]{\thepage}
 
 \newtcolorbox{rationale}[1]{
@@ -45,11 +45,11 @@
     \Large Complete Architecture Rationale\\
     \large All Platform Components and Integration\\
     \vspace{0.3cm}
-    \normalsize Version 12.25.1 - Design Decisions and Justifications
+    \normalsize Version 12.24.2 - Architecture Revision December 2024
 }
 
 \author{AdvanDEB Development Team}
-\date{December 12, 2025}
+\date{December 17, 2024}
 
 \begin{document}
 
@@ -68,6 +68,129 @@ This document provides comprehensive justification for every major architectural
 \tableofcontents
 \newpage
 
+\section{ARCHITECTURE REVISION - December 2024}
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=\textbf{Important: Architecture Model Updated}]
+\textbf{This document has been updated to reflect a significant architectural revision made in December 2024.} The component roles and relationships have been clarified to better support implementation and user experience.
+\end{tcolorbox}
+
+\subsection{Revised Component Roles}
+
+The AdvanDEB Platform architecture has been revised to clarify the roles of each component:
+
+\textbf{advandeb-modeling-assistant} is now the \textbf{Main Platform GUI} and single entry point for all users. It provides:
+\begin{itemize}[noitemsep]
+    \item Complete user interface (Vue.js frontend + FastAPI backend)
+    \item Authentication and user management (Google OAuth)
+    \item Role-based access control
+    \item Chat interface, knowledge exploration, document ingestion, and modeling features
+    \item Integration of all platform capabilities in one unified interface
+\end{itemize}
+
+\textbf{advandeb-knowledge-builder} is now a \textbf{Toolkit/Package} (not a standalone application). It provides:
+\begin{itemize}[noitemsep]
+    \item Python package with robust knowledge operations
+    \item Fact extraction, stylized facts, document ingestion, graph building
+    \item No user interface - pure backend logic
+    \item Imported and used by Modeling Assistant backend
+    \item Can be used independently for batch processing
+\end{itemize}
+
+\textbf{advandeb-MCP} is a \textbf{Tool Server} for LLM agent workflows. It provides:
+\begin{itemize}[noitemsep]
+    \item Model Context Protocol (MCP) server in Rust
+    \item Exposes platform tools (both KB and MA operations) via MCP
+    \item Internal service (no authentication) for agent-powered features
+    \item Used by Modeling Assistant for chat and intelligent extraction
+    \item Wraps Knowledge Builder operations as MCP tools
+\end{itemize}
+
+\subsection{Key Changes from Previous Model}
+
+\textbf{Previous Model:}
+\begin{itemize}[noitemsep]
+    \item Knowledge Builder: Standalone FastAPI + Vue application
+    \item Modeling Assistant: Separate FastAPI + Vue application
+    \item Both had their own user interfaces and backends
+\end{itemize}
+
+\textbf{New Model:}
+\begin{itemize}[noitemsep]
+    \item Modeling Assistant: Main GUI with single frontend and backend
+    \item Knowledge Builder: Toolkit package (no UI)
+    \item MCP: Tool server exposing operations for LLM agents
+\end{itemize}
+
+\subsection{Benefits of Revised Architecture}
+
+\textbf{Simpler User Experience:}
+\begin{itemize}[noitemsep]
+    \item One application to learn and use
+    \item Single login with consistent interface
+    \item Features shown/hidden based on user role
+    \item No confusion about which component to access
+\end{itemize}
+
+\textbf{Cleaner Architecture:}
+\begin{itemize}[noitemsep]
+    \item Clear separation: GUI vs toolkit vs agent services
+    \item Knowledge Builder becomes more reusable
+    \item Easier to understand component responsibilities
+    \item Better alignment with actual implementation
+\end{itemize}
+
+\textbf{Easier Development and Deployment:}
+\begin{itemize}[noitemsep]
+    \item Single frontend codebase to maintain
+    \item KB toolkit can be versioned and tested independently
+    \item One web application to deploy (MA)
+    \item MCP developed in parallel without affecting GUI
+\end{itemize}
+
+\subsection{Impact on This Document}
+
+Throughout this rationale document, references to "Knowledge Builder" and "Modeling Assistant" should be understood in the context of this revised architecture:
+
+\begin{itemize}[noitemsep]
+    \item When discussing user interfaces, authentication, and web features: refers to \textbf{Modeling Assistant GUI}
+    \item When discussing knowledge operations, fact extraction, and graph building: refers to \textbf{Knowledge Builder toolkit}
+    \item When discussing agent workflows and LLM integration: refers to \textbf{MCP server}
+    \item When discussing integration: MA imports KB as package, MA calls MCP for agents
+\end{itemize}
+
+The fundamental architectural decisions (authentication, role model, database design, security) remain valid and are now primarily implemented in the Modeling Assistant, which serves as the platform's main interface.
+
+\subsection{Integration in New Model}
+
+\textbf{Component Relationships:}
+\begin{itemize}[noitemsep]
+    \item \textbf{Users} → authenticate with \textbf{Modeling Assistant GUI}
+    \item \textbf{MA Backend} → imports \textbf{Knowledge Builder} as Python package
+    \item \textbf{MA Backend} → calls \textbf{MCP Server} for agent features
+    \item \textbf{MCP Server} → wraps \textbf{KB operations} as MCP tools
+    \item All components share \textbf{MongoDB} database
+\end{itemize}
+
+\textbf{Data Flow Example - Document Upload:}
+\begin{enumerate}[noitemsep]
+    \item User logs into Modeling Assistant GUI
+    \item User uploads document via web interface
+    \item MA backend: \texttt{from advandeb\_kb import ingest\_document}
+    \item KB package processes and stores in MongoDB
+    \item MA returns success to frontend
+\end{enumerate}
+
+\textbf{Data Flow Example - AI Chat:}
+\begin{enumerate}[noitemsep]
+    \item User types question in MA chat interface
+    \item MA sends request to MCP server
+    \item MCP executes tools (using KB functions) and calls Ollama
+    \item MCP returns formatted response to MA
+    \item MA displays response to user
+\end{enumerate}
+
+For complete details on the revised architecture, see \texttt{ARCHITECTURE-REVISION.md} in the documentation repository.
+
 \section{Executive Summary}
 
 \subsection{Purpose and Scope}
@@ -77,10 +200,12 @@ This document provides the architectural rationale behind implementation choices
 \textbf{Comprehensive Coverage:} This document covers all major platform components:
 
 \begin{itemize}[leftmargin=*]
-    \item \textbf{Authentication \& User Management}: Google OAuth, JWT tokens, capability-based roles, API keys, audit logging, cross-component SSO
-    \item \textbf{Knowledge Builder}: Semi-supervised knowledge base construction through chatbot interaction with documents and existing knowledge, three-tier knowledge model (Facts/Stylized Facts/Graphs), AI agent framework with RAG
-    \item \textbf{Modeling Assistant}: Chatbot interface with LLM and RAG for conversational model development, knowledge base traversal, scenario-based workflow
-    \item \textbf{Integration Architecture}: API contracts, version management, data synchronization strategies
+    \item \textbf{Architecture Revision (December 2024)}: Clarification of component roles - MA as main GUI, KB as toolkit, MCP as tool server
+    \item \textbf{Authentication \& User Management}: Google OAuth (hosted by MA), JWT tokens, capability-based roles, API keys, audit logging
+    \item \textbf{Knowledge Builder Toolkit}: Fact extraction, stylized facts, document ingestion, knowledge graph building, agent workflows - provided as Python package
+    \item \textbf{Modeling Assistant GUI}: Main platform interface, chat, knowledge exploration, modeling scenarios, role-based feature access
+    \item \textbf{MCP Tool Server}: Model Context Protocol server exposing KB and MA operations for LLM agent workflows
+    \item \textbf{Integration Architecture}: Package imports, internal service calls, shared database
     \item \textbf{Data Model}: MongoDB schema design, collection structure, relationship patterns, attribution mechanisms
 \end{itemize}
 
@@ -154,21 +279,33 @@ These scale characteristics allow us to defer certain architectural complexities
 
 \section{System Architecture: The Fundamental Choices}
 
-\subsection{The Two-Component Architecture}
+\subsection{The Three-Component Architecture (Revised December 2024)}
 
-\begin{rationale}{Design Decision: Separate Knowledge Builder and Modeling Assistant}
-The platform is architecturally divided into two integrated but independent applications, rather than a single monolithic system or a complete microservices architecture.
+\begin{rationale}{Design Decision: Modeling Assistant as Main GUI, Knowledge Builder as Toolkit, MCP as Tool Server}
+The platform architecture has been revised to clarify component roles: Modeling Assistant serves as the main platform GUI and single user entry point, Knowledge Builder provides a toolkit of operations without UI, and MCP exposes platform tools for LLM agent workflows.
 \end{rationale}
 
-The decision to build two distinct applications stems from recognition that knowledge curation and model building are fundamentally different activities with different technical requirements. Knowledge Builder focuses on semi-supervised knowledge construction—curators interact with documents through chatbot interfaces, AI agents extract candidate facts, and the system maintains connections with existing knowledge to ensure consistency. This is a write-heavy, storage-intensive operation with complex natural language processing and conversational AI requirements. In contrast, Modeling Assistant is primarily a read-heavy application that consumes curated knowledge through conversational exploration to support scenario building and model conceptualization. Its technical demands center on query performance, knowledge traversal through RAG, and conversational interaction for model development.
+The architectural revision emerged from recognizing that users need \textbf{one unified interface} for all platform features, not separate applications for knowledge building versus modeling. The revised model positions:
 
-Attempting to serve both use cases from a single monolithic application would force compromises that hurt both. A unified user interface must either be powerful enough for advanced curation (overwhelming casual browsers) or simple enough for exploration (frustrating power users). Resource allocation becomes problematic when document processing competes with model execution for CPU and memory. Development velocity suffers as teams working on curation features interfere with teams building modeling capabilities.
+\textbf{Modeling Assistant as Main Platform GUI}: All users authenticate through MA and access all features—chat, knowledge exploration, document ingestion, modeling scenarios—through one interface. Role-based access control determines which features each user sees. Users with curator roles access knowledge building features; users with modeling capabilities access scenario creation. This eliminates the confusion of "which application do I use" and provides seamless workflows where users move fluidly between knowledge exploration and modeling.
 
-We considered a full microservices architecture with separate services for authentication, document processing, knowledge storage, query execution, model assembly, and simulation. This would provide maximum flexibility and independent scalability for each concern. However, the operational complexity would be overwhelming at this stage. Distributed transactions between services introduce failure modes that don't exist in integrated applications. Network latency between services adds overhead to every operation. The development team would spend more time managing service contracts and deployment orchestration than building features users need.
+\textbf{Knowledge Builder as Toolkit}: The robust knowledge operations—fact extraction algorithms, stylized fact generation, document ingestion pipelines, knowledge graph building—are complex enough to warrant a separate repository, but they don't need their own user interface. Structuring KB as a Python package allows MA to import and use its functions while also enabling standalone batch processing. The toolkit can be versioned, tested, and evolved independently while being integrated into MA's user interface.
 
-The two-component approach strikes a deliberate balance. Knowledge Builder and Modeling Assistant can be developed, tested, and deployed independently. They scale independently—KB scales with document volume while MA scales with simulation workload. Yet they share authentication infrastructure and user models, avoiding the consistency problems that plague truly distributed systems. If future growth demands it, either component could be further decomposed into microservices without affecting the other.
+\textbf{MCP as Tool Server}: Exposing platform operations as MCP tools enables LLM agent workflows—intelligent fact extraction, conversational knowledge queries, scenario analysis. The Rust-based MCP server operates as an internal service (no authentication) that MA calls for agent-powered features. It wraps KB operations as tools and provides unified Ollama integration for LLM inference. This separation allows the computationally intensive agent operations to scale independently from the web tier.
 
-This architecture accepts that integration contracts between KB and MA must be maintained carefully. Breaking changes require coordinated deployments. Integration testing is more complex than unit testing. These costs are real but manageable, and far less than the costs we avoid by not building a monolith or premature microservices.
+The previous model—with separate KB and MA applications, each having their own UI—created unnecessary complexity. Users had to understand which component to access for which task. Shared features (authentication, knowledge browsing) existed in both UIs with potential inconsistencies. Development teams duplicated frontend code and design patterns. The revised model eliminates this duplication: one GUI (MA), one toolkit (KB), one agent service (MCP).
+
+\textbf{Integration Pattern}: The revised architecture uses simple, direct integration:
+\begin{itemize}[noitemsep]
+    \item MA backend imports KB package: \texttt{from advandeb\_kb import ingest\_document}
+    \item MA backend calls MCP server via internal HTTP/WebSocket for agent features
+    \item MCP wraps KB operations as tools for LLM agents
+    \item All components share MongoDB database for data consistency
+\end{itemize}
+
+This approach maintains the benefits of component separation (KB toolkit reusable, MCP scales independently, clear module boundaries) while providing the unified user experience that scientific researchers need. The integration overhead is minimal: Python package imports are native operations, and internal service calls have negligible latency.
+
+The revised architecture explicitly optimizes for the actual user workflows: researchers don't think "now I'm doing knowledge building, now I'm doing modeling"—they fluidly explore knowledge, extract facts, build models, and iterate. The platform architecture now matches this mental model.
 
 \subsection{Shared Database Architecture}
 

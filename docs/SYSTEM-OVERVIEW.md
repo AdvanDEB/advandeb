@@ -1,34 +1,54 @@
 # AdvanDEB System Overview
 
+# AdvanDEB System Overview
+
 ## Components
 
-- **advandeb-shared-utils** (NEW)
+- **advandeb-modeling-assistant** (Main Platform GUI)
+  - Primary user interface for the entire AdvanDEB platform.
+  - FastAPI backend + Vue.js frontend for chat, knowledge exploration, and modeling.
+  - **Hosts all user authentication**: Google OAuth endpoints and user management.
+  - Role-based access control determines which features users can access.
+  - Integrates knowledge building tools from `advandeb-knowledge-builder` package.
+  - Provides interactive GUI for: document ingestion, fact extraction, knowledge graph exploration, chat interface, modeling scenarios.
+  - Users with appropriate roles can access both knowledge building and modeling features.
+  - **The single entry point** for all platform users.
+  - Imports `advandeb-knowledge-builder` as a toolkit/library.
+  - May use `advandeb-shared-utils` for authentication logic.
+
+- **advandeb-knowledge-builder** (Toolkit/Package)
+  - Robust toolkit and package for knowledge operations.
+  - Provides reusable modules for: fact extraction, stylized facts creation, document ingestion, knowledge graph building.
+  - Separate repository due to complexity and robustness of knowledge processing routines.
+  - Imported and used by `advandeb-modeling-assistant` backend.
+  - Can be used independently for batch processing or standalone knowledge operations.
+  - No user interface - pure backend logic and utilities.
+  - MongoDB integration for knowledge storage (facts, documents, graphs).
+  - Agent-based workflows using local LLMs (Ollama).
+  - Review workflow logic for knowledge validation.
+
+- **advandeb-MCP** (MCP Server - Rust)
+  - Model Context Protocol server providing tool access for LLM agents.
+  - Exposes platform tools via MCP: fact extraction, stylized fact generation, document ingestion, knowledge queries, modeling operations.
+  - Handles both knowledge building tools AND modeling assistant tools.
+  - Internal background service (no authentication required).
+  - Used by modeling assistant for agent-powered features and chat interface.
+  - Rust-based for high performance and resource efficiency.
+  - Wraps `advandeb-knowledge-builder` operations and platform capabilities as MCP tools.
+  - Direct access to Ollama for LLM inference and MongoDB for knowledge access.
+
+- **advandeb-shared-utils** (Optional - Future)
   - Python package providing shared authentication and authorization utilities.
-  - Eliminates code duplication between KB and MA backends.
-  - Contains JWT validation, API key validation, permission checking, user models, and audit logging.
-  - Both KB and MA import this package for consistent authentication behavior.
+  - Can be used by modeling assistant for JWT validation, API key validation, permission checking.
+  - User models and audit logging utilities.
   - See `SHARED-UTILS-PLAN.md` for complete specification.
-
-- **advandeb-knowledge-builder**
-  - FastAPI + Vue-based system for building a biological knowledge base from literature, web, and text.
-  - Stores facts, stylized facts, and knowledge graphs in MongoDB.
-  - Provides agent-based workflows using local LLMs (Ollama).
-  - **Primary Authentication Provider**: Hosts Google OAuth endpoints and user management for entire platform.
-  - **Review Workflow**: Consensus-based validation for knowledge contributions.
-  - Imports `advandeb-shared-utils` for authentication logic.
-
-- **advandeb-modeling-assistant**
-  - Planned component focused on knowledge retrieval and reasoning for individual-based modeling (IBM).
-  - Shares authentication infrastructure with Knowledge Builder (same JWT tokens, same user database).
-  - Users authenticated once can access both KB and MA with same credentials.
-  - Imports `advandeb-shared-utils` for authentication logic.
 
 ## External Services
 
-- **MongoDB** for persistent storage - **Shared database** for entire platform (knowledge + users + audit logs across KB and MA).
-- **Ollama** for local LLM hosting.
-- **Google OAuth 2.0** for platform-wide user authentication.
-- **Redis** for rate limiting and session caching.
+- **MongoDB** for persistent storage - knowledge base (facts, stylized facts, documents, graphs), user management, audit logs.
+- **Ollama** for local LLM hosting (used by MCP server and knowledge builder agents).
+- **Google OAuth 2.0** for user authentication (hosted by modeling assistant).
+- **Redis** (optional) for rate limiting and session caching.
 
 ## User Roles
 
@@ -61,23 +81,35 @@ See `USER-MANAGEMENT-PLAN.md` for complete role definitions and component-specif
 ## Integration Concept
  
 **Unified Platform Architecture**:
-- Both Knowledge Builder and Modeling Assistant are components of a single **AdvanDEB Platform**
-- They share the same MongoDB database for user management and authentication
-- Users authenticate once (Single Sign-On) and access both components with the same JWT token
-- No separate "service account" authentication - MA operates on behalf of the authenticated user
+- **advandeb-modeling-assistant** is the main platform GUI and single entry point for all users
+- Users authenticate via Google OAuth through the modeling assistant
+- Role-based access control determines which features are available (knowledge building, modeling, chat)
+- Knowledge building features provided by importing `advandeb-knowledge-builder` toolkit
+- MCP server provides LLM agent capabilities for chat and intelligent features
 
-**Cross-Component Data Access**:
-- Modeling Assistant can query Knowledge Builder data in two ways:
-  1. **Direct database access**: MA backend queries KB collections directly (e.g., `facts`, `knowledge_graphs`)
-  2. **Internal API calls**: MA calls KB API endpoints using user's JWT token for complex operations
+**Component Relationships**:
+- **Modeling Assistant** (main GUI) imports **Knowledge Builder** (toolkit) as a Python package/library
+- **Modeling Assistant** calls **MCP Server** for agent-powered features (chat, intelligent extraction)
+- **MCP Server** wraps **Knowledge Builder** operations as MCP tools for LLM agents
+- All components share the same **MongoDB** database for knowledge and users
+- **Modeling Assistant** hosts authentication; other components are backend services
 
-**Example Workflow**:
-1. User logs in via Google OAuth (receives JWT token)
-2. User browses Knowledge Builder to explore biological facts
-3. User navigates to Modeling Assistant to create a scenario
-4. MA uses same JWT token to verify user has `knowledge_curator` role
-5. MA queries KB database to include relevant facts in the model
-6. Both KB and MA actions logged to shared audit trail
+**Internal MCP Service**:
+- The **advandeb-MCP** server provides a standardized Model Context Protocol interface
+- Internal background service used by modeling assistant for LLM-based operations
+- No authentication layer - operates within trusted platform boundary
+- MA backend calls MCP server for agent workflows and tool execution
+- Provides unified interface to Ollama and platform capabilities
+- Exposes knowledge building tools (fact extraction, document ingestion) as MCP tools
+
+**Example User Workflow**:
+1. User logs in to **Modeling Assistant** GUI via Google OAuth (receives JWT token)
+2. Based on user role, interface shows available features (knowledge building, modeling, chat)
+3. User uploads a document → MA calls **Knowledge Builder** package for ingestion
+4. User wants AI-assisted fact extraction → MA calls **MCP Server** which uses KB tools + Ollama
+5. User explores knowledge graph → MA uses **Knowledge Builder** query functions
+6. User chats with AI agent → MA sends to **MCP Server** for LLM inference
+7. All actions logged by MA with user attribution
 
 ## Knowledge Builder Data Model (Conceptual)
 

@@ -56,12 +56,40 @@ See `USER-MANAGEMENT-PLAN.md` for detailed implementation plan.
 - Add basic test coverage and CI.
 - **Integration with authentication**: All endpoints protected, audit logging active
 
+## Phase 1.5: Bootstrap advandeb-MCP (Parallel - 6-8 weeks)
+
+**Foundation** (Weeks 1-2):
+- ✅ Rust project setup with Axum HTTP server
+- ✅ Ollama client integration and basic chat endpoint
+- ✅ Environment-based configuration
+- ✅ Health check and basic testing
+
+**MCP Protocol Implementation** (Weeks 3-5):
+- WebSocket endpoint for MCP specification
+- Tool registry and dynamic tool loading
+- Message routing and validation
+- Basic tool implementations and testing
+
+**Platform Integration** (Weeks 6-8):
+- Internal API clients for KB and MA
+- Knowledge query tools (facts, documents, graphs)
+- Platform operation tools
+- Integration testing with KB/MA backends
+- Performance optimization for internal service
+
+**Deliverable**: Production-ready internal MCP service for KB and MA agent workflows
+
+See `MCP-PLAN.md` for detailed implementation plan.
+
+---
+
 ## Phase 2: Define and Prototype advandeb-modeling-assistant
 
 - Finalize integration contracts with `advandeb-knowledge-builder`.
 - Configure MA to use shared platform authentication (same JWT tokens and user database).
 - Implement a thin prototype of the modeling assistant backend and basic UI.
 - Validate end-to-end flow: from knowledge ingestion to modeling recommendations.
+- **MCP Integration**: Use MCP server for LLM-based agent features in MA.
 
 ## Phase 3: Deepen Integration and UX
 
@@ -69,6 +97,7 @@ See `USER-MANAGEMENT-PLAN.md` for detailed implementation plan.
 - Enhance visual and interactive exploration of the knowledge used in models.
 - Add collaboration and sharing around scenarios and models.
 - Implement multi-user contribution tracking (Phase 2 of USER-MANAGEMENT-PLAN).
+- **MCP Expansion**: Enhanced MCP tools for complex knowledge graph queries and analysis.
 
 ## Phase 4: Extensions and Plugins
 
@@ -76,3 +105,4 @@ See `USER-MANAGEMENT-PLAN.md` for detailed implementation plan.
 - Extend modeling support to additional modeling paradigms as needed.
 - Advanced collaboration features (workspaces, teams).
 - Trust and reputation system for contributors.
+- **MCP Extensions**: Custom tool development for specialized workflows.

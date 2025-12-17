@@ -1,5 +1,5 @@
 @startuml
-' AdvanDEB System Context Diagram (Clean - High Level Only)
+' AdvanDEB System Context Diagram - Revised Architecture
 
 ' Define user groups
 actor "Platform Users\n(3 Base Roles)" as Users <<Person>>
@@ -7,17 +7,27 @@ actor "Platform Users\n(3 Base Roles)" as Users <<Person>>
 ' Main platform rectangle
 rectangle "AdvanDEB Platform" {
   
-  ' Shared authentication library
+  ' Main GUI Platform
+  component "AdvanDEB\nModeling Assistant\n(Main GUI)" as MA <<FastAPI + Vue>> #LightCoral {
+    component "Frontend" as MAFront <<Vue.js>>
+    component "Backend" as MABack <<FastAPI>>
+    component "Auth" as MAAuth <<Google OAuth>>
+  }
+  
+  ' Knowledge Builder as toolkit/package
+  component "advandeb-knowledge-builder\n(Toolkit/Package)" as KB <<Python Package>> #LightGreen
+  
+  ' MCP Server
+  component "advandeb-MCP\n(Internal MCP Service)" as MCP <<Rust/Axum>> #LightYellow
+  
+  ' Shared utils (optional)
   component "advandeb-shared-utils\n(Auth Library)" as SharedUtils <<Python Package>> #LightBlue
   
-  ' Main components
-  component "AdvanDEB\nKnowledge Builder" as KB <<FastAPI + Vue>> #LightGreen
-  component "AdvanDEB\nModeling Assistant" as MA <<FastAPI + Vue>> #LightCoral
-  
   ' Internal relationships
-  KB ..> SharedUtils : imports\n(JWT, permissions)
-  MA ..> SharedUtils : imports\n(JWT, permissions)
-  MA --> KB : HTTP API calls\n(authenticated)
+  MABack --> KB : imports as\npackage
+  MABack ..> SharedUtils : may import\n(auth utils)
+  MABack --> MCP : Internal calls\n(agent features)
+  MCP --> KB : wraps operations\nas MCP tools
 }
 
 ' External services
@@ -25,19 +35,17 @@ cloud "Google OAuth 2.0" as GoogleOAuth <<External Service>>
 database "MongoDB\n(Platform Database)" as MongoDB <<Database>>
 node "Ollama\n(Local LLMs)" as Ollama <<LLM Host>>
 
-' User interactions (simplified)
-Users --> KB : Web UI + API\n(authenticated)
-Users --> MA : Web UI + API\n(authenticated)
+' User interactions
+Users --> MAFront : Web UI\n(all features)
 
 ' Platform to external services
-SharedUtils --> GoogleOAuth : OAuth flow
-SharedUtils --> MongoDB : users, roles,\napi_keys, audit_logs
+MAAuth --> GoogleOAuth : OAuth flow
+MABack --> MongoDB : users, roles,\nknowledge, audit
+KB --> MongoDB : knowledge operations\n(facts, graphs, docs)
+MCP --> MongoDB : read queries\n(knowledge access)
 
-KB --> MongoDB : knowledge data\n(facts, graphs, documents)
-MA --> MongoDB : modeling data\n(scenarios, models, results)
-
-KB --> Ollama : LLM inference
-MA --> Ollama : LLM inference
+KB --> Ollama : agent workflows\n(extraction, analysis)
+MCP --> Ollama : LLM inference\n(chat, tools)
 
 note right of Users
   3 Base Roles:
@@ -50,21 +58,46 @@ note right of Users
   • Analytics Access
   • Reviewer Status
   
-  Authentication Methods:
-  • Google OAuth (SSO)
-  • API Keys
+  All access through Modeling Assistant GUI
+  Features shown based on user role
 end note
 
-note left of SharedUtils
-  Shared Authentication Library:
-  • JWT validation
-  • API key validation
-  • Permission checking
-  • Audit logging
-  • User models (Pydantic)
+note left of MA
+  Main Platform GUI:
+  • Single entry point for all users
+  • Google OAuth authentication
+  • Role-based feature access
+  • Chat interface
+  • Knowledge exploration
+  • Document ingestion UI
+  • Modeling scenarios
   
-  Eliminates code duplication
-  between KB and MA backends
+  Integrates KB as toolkit
+  Uses MCP for agent features
+end note
+
+note bottom of KB
+  Knowledge Builder Toolkit:
+  • Fact extraction logic
+  • Stylized facts generation
+  • Document ingestion routines
+  • Knowledge graph building
+  • Review workflow logic
+  
+  No UI - imported as library
+  Can be used standalone for batch ops
+end note
+
+note bottom of MCP
+  Internal MCP Service:
+  • Background service for MA
+  • No authentication required
+  • Exposes KB tools via MCP
+  • Provides LLM agent interface
+  • Chat and intelligent features
+  
+  Wraps KB operations as tools
+  Direct Ollama integration
 end note
 
 @enduml
