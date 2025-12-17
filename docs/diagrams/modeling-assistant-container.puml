@@ -1,109 +1,143 @@
 @startuml
-' Container diagram for AdvanDEB Modeling Assistant (with Platform Auth)
+' Container diagram for AdvanDEB Modeling Assistant (Main Platform GUI)
 
 !pragma layout smetana
 scale max 1920 width
 
 actor "Users\n(All Roles)" as Users
 
-node "Platform Authentication" as PlatformAuth {
-  [Google OAuth]
-  [JWT Manager]
-  [API Key Validator]
-}
-
-node "AdvanDEB Modeling Assistant" as MA {
+node "AdvanDEB Modeling Assistant\n(Main Platform GUI)" as MA {
   node "Frontend (Vue 3)" as MA_FE {
     package "Views" {
+      [Login View]
       [Home View]
+      [Chat Interface]
+      [Document Ingestion]
+      [Fact Browser]
+      [Knowledge Graph View]
       [Scenario Builder]
-      [Knowledge Explorer]
       [Model View]
-      [Results Dashboard]
+      [Admin Dashboard]
+      [Review Queue]
+      [API Key Management]
     }
     
-    package "Shared Auth" {
-      [Auth Store (Shared)]
+    package "State Management" {
+      [Auth Store]
+      [Knowledge Store]
+      [Modeling Store]
       [api.js + interceptors]
     }
   }
 
   node "Backend (FastAPI)" as MA_BE {
-    package "Auth Integration" {
+    package "Authentication" {
+      [Google OAuth Integration]
+      [JWT Manager]
+      [API Key Validator]
       [Auth Middleware]
       [Permission Checker]
-      [Audit Logger]
     }
     
-    package "Routers" {
+    package "API Routers" {
+      [auth.py]
+      [users.py]
+      [documents.py]
+      [facts.py]
+      [knowledge_graph.py]
+      [chat.py]
       [scenarios.py]
-      [modeling.py]
-      [explanation.py]
-      [results.py]
+      [models.py]
+      [reviews.py]
+      [api_keys.py]
     }
 
     package "Services" {
+      [UserService]
+      [DocumentService]
+      [FactService]
+      [GraphService]
+      [ChatService]
       [ScenarioService]
-      [ModelAssemblyService]
-      [ExplanationService]
-      [KnowledgeBuilderClient]
+      [ModelService]
+      [ReviewService]
       [AuditService]
     }
 
-    package "Models" {
-      [Scenario Models]
-      [Model Specs]
-      [Results Models]
+    package "KB Package Integration" {
+      [advandeb_kb import]
+      note right
+        Imports KB toolkit:
+        - ingest_document()
+        - extract_facts()
+        - build_graph()
+        - generate_stylized_facts()
+      end note
     }
 
     package "Database" {
       [Mongo Client (Motor)]
-      [Collections: scenarios,\nmodels, results]
+      [Collections: users, api_keys,\nfacts, stylized_facts, documents,\ngraphs, scenarios, models,\naudit_logs, reviews]
     }
   }
 }
 
-database "MongoDB\n(Platform DB)" as Mongo
+cloud "Google OAuth 2.0" as GoogleAuth
+database "MongoDB\n(Platform Database)" as Mongo
+node "advandeb-MCP\n(Tool Server)" as MCP
 node "Ollama LLM Host" as Ollama
-node "AdvanDEB Knowledge Builder" as KB
+package "advandeb-knowledge-builder\n(Python Package)" as KB_PKG {
+  [ingestion module]
+  [extraction module]
+  [stylization module]
+  [graph module]
+  [agents module]
+  [review module]
+}
 
-' User authentication (platform-wide)
-Users --> PlatformAuth : Login (OAuth or API Key)
-PlatformAuth --> Mongo : Verify user,\nload roles
+' User flows
+Users --> MA_FE : Access all features\n(knowledge + modeling)
+MA_FE --> GoogleAuth : OAuth login
 
-' User to frontend
-Users --> MA_FE : Use modeling UI
-
-' Frontend to backend (with JWT)
+' Frontend to backend
 MA_FE --> MA_BE : HTTP /api/*\n(JWT token)
 
-' Backend auth check
-MA_BE --> PlatformAuth : Validate token,\ncheck permissions
+' Auth flow
+MA_BE --> GoogleAuth : Validate OAuth tokens
+MA_BE --> Mongo : Users, roles, permissions,\nall platform data
 
-' Backend to its own store
-MA_BE --> Mongo : Store scenarios,\nmodels, results,\naudit logs
+' KB package usage
+MA_BE --> KB_PKG : Import and call\nknowledge operations
 
-' Backend to KB APIs (with JWT)
-MA_BE --> KB : HTTP calls\n(JWT token from user)
+' MCP integration
+MA_BE --> MCP : Agent features\n(chat, intelligent tools)
+MCP --> KB_PKG : Wraps KB operations\nas MCP tools
+MCP --> Ollama : LLM inference
 
-' Backend to LLM host
-MA_BE --> Ollama : LLM for explanations
+' KB package to Ollama
+KB_PKG --> Ollama : Agent workflows
 
-note right of PlatformAuth
-  Shared authentication
-  across KB and MA
+note right of MA
+  **Main Platform GUI**
+  Single entry point for all users
   
-  Same JWT tokens
-  Same user database
-  Same role system
+  Features based on role:
+  • Administrator: Full access
+  • Curator: Knowledge + modeling
+  • Explorer: Read-only
+  
+  Integrates:
+  • KB as imported package
+  • MCP for agent features
 end note
 
-note right of MA_BE
-  MA validates user permissions:
-  - Curator: Can create scenarios
-  - Analyst: Advanced features
-  - Explorator: View only
-  - Admin: Full access
+note bottom of KB_PKG
+  **Knowledge Builder Toolkit**
+  Python package (no UI)
+  Imported by MA backend
+  
+  Can also be used independently
+  for batch processing
 end note
 
 @enduml

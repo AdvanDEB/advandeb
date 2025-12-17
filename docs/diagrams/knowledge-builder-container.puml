@@ -1,116 +1,117 @@
 @startuml
-' Container diagram for AdvanDEB Knowledge Builder (Updated with Authentication)
+' Package diagram for advandeb-knowledge-builder (Toolkit/Package)
 
 !pragma layout smetana
 scale max 1920 width
 
-actor "Users\n(All Roles)" as Users
-
-node "AdvanDEB Knowledge Builder" as KB {
-  node "Frontend (Vue 3 + Element Plus)" as KB_FE {
-    package "Views" {
-      [Home View]
-      [KnowledgeBase View]
-      [DataProcessing View]
-      [Visualization View]
-      [Agents View]
-      [Ingestion View]
-    }
-    
-    package "Auth Views (New)" {
-      [Login View]
-      [Profile View]
-      [Role Request View]
-      [Admin Dashboard]
-      [Review Queue]
-      [API Key Management]
-    }
-    
-    package "State Management" {
-      [Auth Store]
-      [api.js + interceptors]
-    }
+package "advandeb-knowledge-builder\n(Python Package / Toolkit)" as KB_PKG {
+  
+  package "ingestion" {
+    [document_processor.py]
+    [pdf_extractor.py]
+    [metadata_handler.py]
+    [batch_ingestion.py]
   }
-
-  node "Backend (FastAPI)" as KB_BE {
-    package "Auth Layer (New)" {
-      [auth.py router]
-      [AuthService]
-      [GoogleOAuthClient]
-      [JWTManager]
-      [APIKeyValidator]
-      [PermissionChecker]
-    }
-    
-    package "Middleware (New)" {
-      [AuthMiddleware]
-      [RateLimiter]
-      [AuditLogger]
-    }
-
-    package "Routers" {
-      [knowledge.py]
-      [agents.py]
-      [data_processing.py]
-      [visualization.py]
-      [ingestion.py]
-      [users.py (New)]
-      [role_requests.py (New)]
-      [api_keys.py (New)]
-      [reviews.py (New)]
-    }
-
-    package "Services" {
-      [KnowledgeService]
-      [AgentService]
-      [DataProcessingService]
-      [VisualizationService]
-      [AgentFramework]
-      [LocalModelClient]
-      [ToolRegistry]
-      [UserService (New)]
-      [RoleService (New)]
-      [ReviewService (New)]
-      [AuditService (New)]
-    }
-
-    package "Models" {
-      [Knowledge Models]
-      [Agent Models]
-      [Ingestion Models]
-      [User Models (New)]
-      [Auth Models (New)]
-    }
-
-    package "Database" {
-      [Mongo Client (Motor)]
-      [Collections: facts, stylized_facts,\ngraphs, documents, agent_sessions,\nusers, role_requests, api_keys,\naudit_logs, contributions]
-    }
+  
+  package "extraction" {
+    [fact_extractor.py]
+    [entity_recognizer.py]
+    [fact_validator.py]
+    [source_attribution.py]
+  }
+  
+  package "stylization" {
+    [fact_aggregator.py]
+    [stylized_fact_generator.py]
+    [evidence_linker.py]
+  }
+  
+  package "graph" {
+    [node_manager.py]
+    [edge_manager.py]
+    [graph_builder.py]
+    [graph_query.py]
+    [traversal.py]
+  }
+  
+  package "agents" {
+    [agent_framework.py]
+    [ollama_client.py]
+    [tool_registry.py]
+    [rag_implementation.py]
+  }
+  
+  package "review" {
+    [review_queue.py]
+    [approval_logic.py]
+    [status_tracker.py]
+  }
+  
+  package "database" {
+    [mongo_client.py]
+    [collections.py]
+    [queries.py]
+  }
+  
+  package "Public API" {
+    [__init__.py]
+    note right
+      Public functions exported:
+      - ingest_document()
+      - extract_facts()
+      - generate_stylized_facts()
+      - build_knowledge_graph()
+      - query_graph()
+      - run_agent_workflow()
+      - submit_for_review()
+    end note
   }
 }
 
-cloud "Google OAuth 2.0" as GoogleAuth
-database "MongoDB" as Mongo
+database "MongoDB" as Mongo {
+  [facts collection]
+  [stylized_facts collection]
+  [documents collection]
+  [knowledge_graphs collection]
+  [reviews collection]
+}
+
 node "Ollama LLM Host" as Ollama
-database "Redis\n(Rate Limiting +\nCelery)" as Redis
 
-' User to frontend
-Users --> KB_FE : Use web UI\n(OAuth login)
+actor "Modeling Assistant\n(imports KB)" as MA
+actor "Batch Processing Scripts\n(can also use KB)" as BatchScript
+actor "MCP Server\n(wraps KB tools)" as MCP
 
-' Frontend to Google
-KB_FE --> GoogleAuth : OAuth flow
+' Usage patterns
+MA --> KB_PKG : import advandeb_kb\nCall functions
+BatchScript --> KB_PKG : Standalone usage\nfor batch operations
+MCP --> KB_PKG : Wraps as\nMCP tools
 
-' Frontend to backend
-KB_FE --> KB_BE : HTTP /api/*\n(JWT or API Key)
+' KB package dependencies
+KB_PKG --> Mongo : Read/write knowledge data
+KB_PKG --> Ollama : Agent workflows,\nLLM-based extraction
 
-' Auth flow
-KB_BE --> GoogleAuth : Validate OAuth token
-KB_BE --> Redis : Rate limit checks\nSession cache
+note top of KB_PKG
+  **Knowledge Builder as Toolkit**
+  
+  No UI - pure Python package
+  Provides reusable operations
+  Can be imported and used by:
+  • Modeling Assistant (main use)
+  • Batch processing scripts
+  • MCP server (wraps as tools)
+  • Any Python application
+  
+  Separate repo due to complexity
+  Independent versioning
+end note
 
-' Backend to DB
-KB_BE --> Mongo : Async CRUD via Motor\n+ User/Auth operations
-
-' Backend to LLM host
-KB_BE --> Ollama : HTTP LLM chat / tools
+note bottom of Mongo
+  KB package handles all
+  knowledge-related collections
+  
+  MA backend calls KB functions
+  which then interact with MongoDB
+end note
 
 @enduml
