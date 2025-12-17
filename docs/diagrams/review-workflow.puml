@@ -1,9 +1,10 @@
 @startuml
 ' Knowledge Review and Validation Workflow
 
-title Knowledge Review Workflow (Consensus Validation)
+title Knowledge Review Workflow (Suggestions and Creations)
 
-actor "Knowledge\nCurator" as Curator
+actor "Knowledge\nCurator\n(Base)" as BaseCurator
+actor "Knowledge\nCurator\n(+ Creation)" as CreationCurator
 participant "Frontend\n(Vue)" as FE
 participant "Backend\n(FastAPI)" as BE
 database "MongoDB" as DB
@@ -11,18 +12,51 @@ participant "Email\nService" as Email
 actor "Knowledge\nReviewer" as Reviewer
 actor "Knowledge\nExplorator" as Explorator
 
-== Curator Creates Knowledge ==
+== Base Curator Suggests Knowledge ==
 
-Curator -> FE : Login (curator role)
+BaseCurator -> FE : Login (base curator)
 activate FE
-FE -> Curator : Show Data Processing page
+FE -> BaseCurator : Show knowledge interface
 deactivate FE
 
-Curator -> FE : Upload document / Create fact
+BaseCurator -> FE : Suggest fact or node
+activate FE
+FE -> BE : POST /api/knowledge/suggestions\n{content, source, tags, type}
+activate BE
+BE -> BE : Validate user has\ncurator role
+BE -> BE : Add suggested_by: curator_id\nstatus: "suggestion"
+BE -> DB : Insert suggestion
+activate DB
+DB -> BE : Suggestion created
+deactivate DB
+BE -> DB : Log audit entry
+activate DB
+DB -> BE : Logged
+deactivate DB
+BE -> Email : Notify reviewers\n"New suggestion"
+BE -> FE : {suggestion_id, status}
+deactivate BE
+FE -> BaseCurator : "Suggestion submitted!"
+deactivate FE
+
+note right of BaseCurator
+  Suggestions are lightweight
+  proposals reviewed separately
+  from direct creations
+end note
+
+== Curator with Creation Creates Knowledge ==
+
+CreationCurator -> FE : Login (curator + creation)
+activate FE
+FE -> CreationCurator : Show creation tools
+deactivate FE
+
+CreationCurator -> FE : Create fact or node directly
 activate FE
 FE -> BE : POST /api/knowledge/facts\n{content, source, tags}
 activate BE
-BE -> BE : Validate user has\ncurator role
+BE -> BE : Validate user has\nknowledge_creation capability
 BE -> BE : Add created_by: curator_id\nstatus: "pending_review"
 BE -> DB : Insert fact
 activate DB
@@ -32,31 +66,17 @@ BE -> DB : Log audit entry
 activate DB
 DB -> BE : Logged
 deactivate DB
-BE -> Email : Notify reviewers\n"New fact pending review"
+BE -> Email : Notify reviewers\n"New fact (priority)"
 BE -> FE : {fact_id, status}
 deactivate BE
-FE -> Curator : "Fact submitted for review"
+FE -> CreationCurator : "Fact created, pending review"
 deactivate FE
 
-note right of Curator
-  Knowledge is NOT visible
-  to Explorators yet
+note right of CreationCurator
+  Direct creations have
+  higher priority in
+  review queue
 end note
-
-== Curator Views Their Pending Items ==
-
-Curator -> FE : Navigate to "My Contributions"
-activate FE
-FE -> BE : GET /api/knowledge/facts\n?created_by=me&status=pending
-activate BE
-BE -> DB : Query user's pending facts
-activate DB
-DB -> BE : List of facts
-deactivate DB
-BE -> FE : Return pending facts
-deactivate BE
-FE -> Curator : Show status badges:\n"Pending Review" (yellow)
-deactivate FE
 
 == Reviewer Reviews Knowledge ==
 

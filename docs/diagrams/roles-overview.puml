@@ -17,17 +17,23 @@ rectangle "**Administrator**\n(System Authority)" as Admin <<base>> #FF6B6B {
     (Override any decision)
 }
 
-rectangle "**Knowledge Curator**\n(Content Creator)" as Curator <<base>> #FFA500 {
+rectangle "**Knowledge Curator**\n(Contributor)" as Curator <<base>> #FFA500 {
     rectangle "Base Permissions" as CuratorBase {
         (Upload documents)
-        (Create facts & graphs)
-        (Submit for review)
-        (Build knowledge)
+        (Suggest facts & nodes)
+        (Suggest updates)
+        (View knowledge)
         (Create models)
-        (Edit own content)
     }
     
     rectangle "Optional Capabilities" as Caps {
+        rectangle "**+ Knowledge Creation**" as CreationCap <<capability>> {
+            (Create facts directly)
+            (Build graphs)
+            (Edit own content)
+            (Faster workflow)
+        }
+        
         rectangle "**+ Agent Access**" as AgentCap <<capability>> {
             (Run AI agents)
             (Custom tools)
@@ -41,7 +47,7 @@ rectangle "**Knowledge Curator**\n(Content Creator)" as Curator <<base>> #FFA500
         }
         
         rectangle "**+ Reviewer Status**" as ReviewerCap <<capability>> {
-            (Review queue)
+            (Review suggestions)
             (Approve/reject)
             (Quality control)
         }
@@ -61,23 +67,29 @@ Curator -down-> Explorator : can read like
 note right of Curator
     **Capability Request Model**
     
-    Base curators can create and submit
-    content for review. Additional capabilities
-    can be requested:
+    Base curators can upload and suggest
+    content. Additional capabilities unlock:
     
+    • Knowledge Creation - create directly
     • Agent Access - for AI operations
     • Analytics Access - for data analysis
-    • Reviewer Status - to approve others' work
+    • Reviewer Status - to approve others
     
     Multiple capabilities can be combined!
+    
+    **Progression:**
+    Suggest → Create → Review
 end note
 
 legend left
     **Role Model:**
     • 3 base roles (Administrator, Curator, Explorator)
-    • 3 optional capabilities (Agent, Analytics, Reviewer)
+    • 4 optional capabilities (Creation, Agent, Analytics, Reviewer)
     • Capabilities can be combined
     • Graduated access through request workflow
+    
+    **Base Curator = Suggestion-based**
+    Add Knowledge Creation capability for direct creation
     
     **Authentication:**
     • Google OAuth 2.0
