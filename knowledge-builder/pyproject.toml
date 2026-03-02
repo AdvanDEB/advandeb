@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "advandeb-kb"
+version = "0.1.0"
+description = "AdvanDEB Knowledge Builder — Python library for knowledge operations"
+requires-python = ">=3.11"
+dependencies = [
+    "motor>=3.3",
+    "pydantic>=2.5",
+    "pymongo>=4.6",
+    "python-dotenv>=1.0",
+    "httpx>=0.25",
+    "networkx>=3.2",
+    "numpy>=1.24",
+    "pandas>=2.1",
+    "scikit-learn>=1.3",
+    "spacy>=3.7",
+    "aiofiles>=23.2",
+]
+
+[project.optional-dependencies]
+ingestion = [
+    "celery>=5.3",
+    "redis>=5.0",
+    "PyPDF2>=3.0",
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "pillow>=10.1",
+    "matplotlib>=3.8",
+    "plotly>=5.17",
+    "transformers>=4.36",
+    "torch>=2.1",
+]
+dev = [
+    "pytest>=7",
+    "pytest-asyncio>=0.23",
+    "fastapi>=0.104",
+    "uvicorn[standard]>=0.24",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["advandeb_kb*"]
