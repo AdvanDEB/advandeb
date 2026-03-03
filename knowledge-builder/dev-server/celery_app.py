@@ -2,7 +2,7 @@ import os
 from celery import Celery
 from dotenv import load_dotenv
 
-from config.settings import settings
+from advandeb_kb.config.settings import settings
 
 load_dotenv()
 

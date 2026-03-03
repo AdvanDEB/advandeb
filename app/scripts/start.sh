@@ -7,7 +7,7 @@ echo ""
 # Activate conda environment
 echo "📦 Activating conda environment..."
 source ~/miniforge3/etc/profile.d/conda.sh
-conda activate advandeb-modeling-assistant
+conda activate advandeb
 
 # Check if MongoDB is running
 echo "🔍 Checking MongoDB..."
@@ -21,7 +21,7 @@ fi
 # Start backend
 echo "🔧 Starting backend..."
 cd backend
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 &
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8400 &
 BACKEND_PID=$!
 echo "   Backend PID: $BACKEND_PID"
 cd ..
@@ -41,8 +41,8 @@ cd ..
 echo ""
 echo "✅ Services started!"
 echo ""
-echo "📍 Backend:  http://localhost:8000"
-echo "📍 API Docs: http://localhost:8000/docs"
+echo "📍 Backend:  http://localhost:8400"
+echo "📍 API Docs: http://localhost:8400/docs"
 echo "📍 Frontend: http://localhost:5173"
 echo ""
 echo "Press Ctrl+C to stop all services"

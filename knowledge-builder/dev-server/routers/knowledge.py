@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Depends
 from typing import List, Dict, Any
-from advandeb_kb.models.knowledge import Fact, StylizedFact, KnowledgeGraph
+from advandeb_kb.models.knowledge import Fact, StylizedFact
 from advandeb_kb.services.knowledge_service import KnowledgeService
 from advandeb_kb.database.mongodb import get_database
 
@@ -55,33 +55,6 @@ async def create_stylized_fact(
     """Create a new stylized fact"""
     return await service.create_stylized_fact(stylized_fact)
 
-@router.get("/graphs", response_model=List[KnowledgeGraph])
-async def get_knowledge_graphs(
-    skip: int = 0,
-    limit: int = 10,
-    service: KnowledgeService = Depends(get_knowledge_service)
-):
-    """Get all knowledge graphs with pagination"""
-    return await service.get_knowledge_graphs(skip=skip, limit=limit)
-
-@router.post("/graphs", response_model=KnowledgeGraph)
-async def create_knowledge_graph(
-    graph: KnowledgeGraph,
-    service: KnowledgeService = Depends(get_knowledge_service)
-):
-    """Create a new knowledge graph"""
-    return await service.create_knowledge_graph(graph)
-
-@router.get("/graphs/{graph_id}", response_model=KnowledgeGraph)
-async def get_knowledge_graph(
-    graph_id: str,
-    service: KnowledgeService = Depends(get_knowledge_service)
-):
-    """Get a specific knowledge graph by ID"""
-    graph = await service.get_knowledge_graph(graph_id)
-    if not graph:
-        raise HTTPException(status_code=404, detail="Knowledge graph not found")
-    return graph
 
 @router.post("/search")
 async def search_knowledge(

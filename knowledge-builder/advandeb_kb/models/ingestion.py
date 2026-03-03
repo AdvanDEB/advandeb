@@ -1,59 +1,71 @@
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List, Optional, Dict, Any, Annotated
+"""
+Ingestion pipeline models: batch jobs for bulk PDF processing.
+"""
+from typing import Any, Dict, List, Optional, Literal
 from datetime import datetime
-from bson import ObjectId
+from pydantic import BaseModel, Field, ConfigDict
+
+from advandeb_kb.models.common import PyObjectId
 
 
-class PyObjectId(ObjectId):
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v):
-        if not ObjectId.is_valid(v):
-            raise ValueError("Invalid objectid")
-        return ObjectId(v)
-
-    @classmethod
-    def __get_pydantic_json_schema__(cls, field_schema):
-        field_schema.update(type="string")
-        return field_schema
+_BASE_CONFIG = ConfigDict(
+    populate_by_name=True,
+    arbitrary_types_allowed=True,
+)
 
 
 class IngestionBatch(BaseModel):
-    model_config = ConfigDict(
-        populate_by_name=True,
-        arbitrary_types_allowed=True,
-        json_encoders={ObjectId: str},
-    )
+    """A batch of documents to ingest from a local folder tree."""
 
-    id: Annotated[PyObjectId, Field(default_factory=PyObjectId, alias="_id")]
+    model_config = _BASE_CONFIG
+
+    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+
+    # Human-readable name for the batch (optional)
     name: Optional[str] = None
+
+    # Root directory that all relative folder paths are resolved against
     source_root: str
+
+    # Relative folder paths under source_root to scan for PDFs
     folders: List[str] = []
+
+    # Total number of PDF files discovered (filled in after scanning)
     num_files: int = 0
-    status: str = "pending"  # pending, running, completed, failed, mixed
+
+    # Optional general domain tag applied to all documents in this batch
+    general_domain: Optional[str] = None
+
+    status: Literal["pending", "running", "completed", "failed", "mixed"] = "pending"
+
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class IngestionJob(BaseModel):
-    model_config = ConfigDict(
-        populate_by_name=True,
-        arbitrary_types_allowed=True,
-        json_encoders={ObjectId: str},
-    )
+    """A single file or URL ingestion job within a batch."""
 
-    id: Annotated[PyObjectId, Field(default_factory=PyObjectId, alias="_id")]
+    model_config = _BASE_CONFIG
+
+    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+
     batch_id: PyObjectId
-    source_type: str = "pdf_local"  # pdf_local, pdf_upload, web, text
+
+    source_type: Literal["pdf_local", "pdf_upload", "web", "text"] = "pdf_local"
+
+    # Relative path (pdf_local), filename (pdf_upload), or URL (web/text)
     source_path_or_url: str
+
+    # Set once the Document record has been created for this job
     document_id: Optional[PyObjectId] = None
-    status: str = "pending"  # pending, queued, running, completed, failed, cancelled
-    stage: str = "pending"  # pending, text_extraction, fact_extraction, graph_update
-    progress: int = 0
+
+    status: Literal["pending", "queued", "running", "completed", "failed", "cancelled"] = "pending"
+    stage: Literal["pending", "text_extraction", "fact_extraction", "sf_matching", "completed", "failed"] = "pending"
+
+    progress: int = Field(default=0, ge=0, le=100)
     error_message: Optional[str] = None
+
     metadata: Dict[str, Any] = {}
+
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)

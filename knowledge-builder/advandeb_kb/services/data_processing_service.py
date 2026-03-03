@@ -1,17 +1,36 @@
-import PyPDF2
-import requests
-from bs4 import BeautifulSoup
-import aiofiles
+"""
+DataProcessingService — text extraction from PDFs and web pages.
+
+All I/O is async-safe: PDF reading is offloaded to a thread pool via
+asyncio.to_thread; web fetching uses httpx.AsyncClient.
+"""
+import asyncio
 import os
-from typing import List, Dict, Any, Optional
-from advandeb_kb.models.knowledge import Document, Fact
-from advandeb_kb.services.agent_service import AgentService
+import re
+import logging
+from typing import Any, Dict, List, Optional
+
+import httpx
+from bs4 import BeautifulSoup
 from bson import ObjectId
 from datetime import datetime
-import logging
-import re
+
+from advandeb_kb.models.knowledge import Document, Fact
+from advandeb_kb.services.agent_service import AgentService
 
 logger = logging.getLogger(__name__)
+
+
+def _extract_pdf_text_sync(file_path: str) -> str:
+    """Read and extract text from a PDF — runs in a thread pool."""
+    import PyPDF2
+    text = ""
+    with open(file_path, "rb") as f:
+        reader = PyPDF2.PdfReader(f)
+        for page in reader.pages:
+            text += page.extract_text() or ""
+    return text
+
 
 class DataProcessingService:
     def __init__(self, database):
@@ -20,218 +39,238 @@ class DataProcessingService:
         self.facts_collection = database.facts
         self.agent_service = AgentService(database)
 
-    async def process_pdf(self, file_path: str, filename: str) -> Dict[str, Any]:
-        """Process PDF file and extract facts"""
+    # ------------------------------------------------------------------
+    # PDF processing
+    # ------------------------------------------------------------------
+
+    async def process_pdf(
+        self,
+        file_path: str,
+        filename: str,
+        general_domain: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Extract text and facts from a local PDF file."""
         try:
-            # Extract text from PDF
-            text_content = await self._extract_pdf_text(file_path)
-            
-            # Create document record
-            file_size = os.path.getsize(file_path)
+            text_content = await asyncio.to_thread(_extract_pdf_text_sync, file_path)
+
+            file_size = await asyncio.to_thread(os.path.getsize, file_path)
             document = Document(
-                filename=filename,
-                file_type="pdf",
-                file_size=file_size,
+                title=filename,
+                source_type="pdf_local",
+                source_path=filename,
                 content=text_content,
-                processing_status="processing"
+                general_domain=general_domain,
+                processing_status="processing",
             )
-            
-            # Save document
-            doc_dict = document.dict(by_alias=True, exclude_unset=True)
-            doc_dict["_id"] = ObjectId()
-            result = await self.documents_collection.insert_one(doc_dict)
-            document_id = result.inserted_id
-            
-            # Extract facts using AI
+            doc_data = document.model_dump(by_alias=True)
+            await self.documents_collection.insert_one(doc_data)
+            document_id = document.id
+
             facts = await self.agent_service.extract_facts(text_content)
-            
-            # Save facts and link to document
-            fact_ids = []
+
+            fact_ids: List[ObjectId] = []
             for fact_text in facts:
                 fact = Fact(
                     content=fact_text,
-                    source=f"PDF: {filename}",
+                    document_id=document_id,
+                    general_domain=general_domain,
                     confidence=0.8,
-                    tags=["pdf", "extracted"]
+                    tags=["pdf", "extracted"],
                 )
-                fact_dict = fact.dict(by_alias=True, exclude_unset=True)
-                fact_dict["_id"] = ObjectId()
-                fact_result = await self.facts_collection.insert_one(fact_dict)
-                fact_ids.append(fact_result.inserted_id)
-            
-            # Update document with extracted facts
+                fact_data = fact.model_dump(by_alias=True)
+                await self.facts_collection.insert_one(fact_data)
+                fact_ids.append(fact.id)
+
             await self.documents_collection.update_one(
                 {"_id": document_id},
                 {
                     "$set": {
-                        "facts_extracted": fact_ids,
                         "processing_status": "completed",
-                        "processed_at": datetime.utcnow()
+                        "updated_at": datetime.utcnow(),
                     }
-                }
+                },
             )
-            
-            # Clean up file
-            os.remove(file_path)
-            
+
+            # Clean up uploaded temp file
+            await asyncio.to_thread(os.remove, file_path)
+
             return {
                 "document_id": str(document_id),
                 "facts_extracted": len(fact_ids),
-                "status": "completed"
+                "status": "completed",
             }
-            
+
         except Exception as e:
             logger.error(f"PDF processing error: {e}")
-            # Update document status to failed
-            if 'document_id' in locals():
+            if "document_id" in locals():
                 await self.documents_collection.update_one(
                     {"_id": document_id},
-                    {"$set": {"processing_status": "failed"}}
+                    {"$set": {"processing_status": "failed", "updated_at": datetime.utcnow()}},
                 )
             raise
 
-    async def _extract_pdf_text(self, file_path: str) -> str:
-        """Extract text from PDF file"""
-        text = ""
-        with open(file_path, 'rb') as file:
-            pdf_reader = PyPDF2.PdfReader(file)
-            for page in pdf_reader.pages:
-                text += page.extract_text()
-        return text
+    # ------------------------------------------------------------------
+    # Web page processing
+    # ------------------------------------------------------------------
 
-    async def browse_url(self, url: str, extract_facts: bool = True) -> Dict[str, Any]:
-        """Browse URL and extract content"""
-        try:
-            # Fetch webpage content
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            }
-            response = requests.get(url, headers=headers, timeout=30)
-            response.raise_for_status()
-            
-            # Parse HTML content
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            # Remove script and style elements
-            for script in soup(["script", "style"]):
-                script.decompose()
-            
-            # Extract text
-            text_content = soup.get_text()
-            
-            # Clean up text
-            lines = (line.strip() for line in text_content.splitlines())
-            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-            text_content = ' '.join(chunk for chunk in chunks if chunk)
-            
-            # Limit text length
-            text_content = text_content[:10000]  # Limit to 10k characters
-            
-            result = {
-                "url": url,
-                "title": soup.title.string if soup.title else "No title",
-                "content": text_content,
-                "word_count": len(text_content.split())
-            }
-            
-            if extract_facts:
-                # Extract facts using AI
-                facts = await self.agent_service.extract_facts(text_content)
-                result["facts"] = facts
-                
-                # Optionally save facts to database
-                fact_ids = []
-                for fact_text in facts:
-                    fact = Fact(
-                        content=fact_text,
-                        source=f"Web: {url}",
-                        confidence=0.7,
-                        tags=["web", "extracted"]
-                    )
-                    fact_dict = fact.dict(by_alias=True, exclude_unset=True)
-                    fact_dict["_id"] = ObjectId()
-                    fact_result = await self.facts_collection.insert_one(fact_dict)
-                    fact_ids.append(str(fact_result.inserted_id))
-                
-                result["fact_ids"] = fact_ids
-            
-            return result
-            
-        except Exception as e:
-            logger.error(f"URL browsing error: {e}")
-            raise
-
-    async def extract_entities(self, text: str) -> List[Dict[str, Any]]:
-        """Extract named entities from text"""
-        # Simple regex-based entity extraction
-        # In a production system, you'd use spaCy or similar NLP library
-        entities = []
-        
-        # Extract potential biological terms (simplified)
-        biological_patterns = [
-            r'\b[A-Z][a-z]+ [a-z]+\b',  # Genus species
-            r'\b\w*protein\b',          # Proteins
-            r'\b\w*enzyme\b',           # Enzymes
-            r'\b\w*gene\b',             # Genes
-            r'\b\w*cell\b',             # Cells
-            r'\b\w*tissue\b',           # Tissues
-            r'\b\w*organ\b',            # Organs
-        ]
-        
-        for pattern in biological_patterns:
-            matches = re.finditer(pattern, text, re.IGNORECASE)
-            for match in matches:
-                entity_text = match.group().strip()
-                if len(entity_text) > 2:  # Filter very short matches
-                    entities.append({
-                        "text": entity_text,
-                        "start": match.start(),
-                        "end": match.end(),
-                        "type": "BIOLOGICAL"
-                    })
-        
-        # Remove duplicates
-        unique_entities = []
-        seen = set()
-        for entity in entities:
-            if entity["text"].lower() not in seen:
-                unique_entities.append(entity)
-                seen.add(entity["text"].lower())
-        
-        return unique_entities[:20]  # Limit to 20 entities
-
-    async def process_text(self, text: str, extract_facts: bool = True, extract_entities: bool = True) -> Dict[str, Any]:
-        """Process raw text and extract facts and entities"""
-        result = {
-            "text": text,
-            "word_count": len(text.split()),
-            "character_count": len(text)
+    async def browse_url(
+        self,
+        url: str,
+        extract_facts: bool = True,
+        general_domain: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Fetch a web page, extract text, and optionally extract facts."""
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+            )
         }
-        
+        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+            response = await client.get(url, headers=headers)
+            response.raise_for_status()
+            html = response.text
+
+        soup = BeautifulSoup(html, "html.parser")
+        for tag in soup(["script", "style", "nav", "footer"]):
+            tag.decompose()
+
+        raw_text = soup.get_text(separator=" ")
+        lines = (line.strip() for line in raw_text.splitlines())
+        text_content = " ".join(chunk for line in lines for chunk in line.split("  ") if chunk)
+        text_content = text_content[:10_000]
+
+        title = soup.title.string.strip() if soup.title else url
+
+        document = Document(
+            title=title,
+            source_type="web",
+            source_path=url,
+            content=text_content,
+            general_domain=general_domain,
+            processing_status="completed",
+        )
+        doc_data = document.model_dump(by_alias=True)
+        await self.documents_collection.insert_one(doc_data)
+
+        result: Dict[str, Any] = {
+            "document_id": str(document.id),
+            "url": url,
+            "title": title,
+            "word_count": len(text_content.split()),
+        }
+
         if extract_facts:
-            facts = await self.agent_service.extract_facts(text)
-            result["facts"] = facts
-        
-        if extract_entities:
-            entities = await self.extract_entities(text)
-            result["entities"] = entities
-        
+            facts = await self.agent_service.extract_facts(text_content)
+            fact_ids: List[str] = []
+            for fact_text in facts:
+                fact = Fact(
+                    content=fact_text,
+                    document_id=document.id,
+                    general_domain=general_domain,
+                    confidence=0.7,
+                    tags=["web", "extracted"],
+                )
+                fact_data = fact.model_dump(by_alias=True)
+                await self.facts_collection.insert_one(fact_data)
+                fact_ids.append(str(fact.id))
+            result["facts_extracted"] = len(fact_ids)
+            result["fact_ids"] = fact_ids
+
         return result
 
-    async def list_documents(self, skip: int = 0, limit: int = 10) -> List[Dict[str, Any]]:
-        """List processed documents"""
-        cursor = self.documents_collection.find().skip(skip).limit(limit).sort("created_at", -1)
-        documents = []
+    # ------------------------------------------------------------------
+    # Raw text processing
+    # ------------------------------------------------------------------
+
+    async def process_text(
+        self,
+        text: str,
+        title: Optional[str] = None,
+        extract_facts: bool = True,
+        general_domain: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Store raw text as a document and optionally extract facts."""
+        document = Document(
+            title=title or "Manual text entry",
+            source_type="text",
+            content=text,
+            general_domain=general_domain,
+            processing_status="processing",
+        )
+        doc_data = document.model_dump(by_alias=True)
+        await self.documents_collection.insert_one(doc_data)
+
+        result: Dict[str, Any] = {
+            "document_id": str(document.id),
+            "word_count": len(text.split()),
+            "character_count": len(text),
+        }
+
+        if extract_facts:
+            facts = await self.agent_service.extract_facts(text)
+            fact_ids: List[str] = []
+            for fact_text in facts:
+                fact = Fact(
+                    content=fact_text,
+                    document_id=document.id,
+                    general_domain=general_domain,
+                    confidence=0.8,
+                    tags=["text", "extracted"],
+                )
+                fact_data = fact.model_dump(by_alias=True)
+                await self.facts_collection.insert_one(fact_data)
+                fact_ids.append(str(fact.id))
+            result["facts_extracted"] = len(fact_ids)
+            result["fact_ids"] = fact_ids
+
+        await self.documents_collection.update_one(
+            {"_id": document.id},
+            {"$set": {"processing_status": "completed", "updated_at": datetime.utcnow()}},
+        )
+        return result
+
+    # ------------------------------------------------------------------
+    # Entity extraction (lightweight, no LLM)
+    # ------------------------------------------------------------------
+
+    async def extract_entities(self, text: str) -> List[Dict[str, Any]]:
+        """Extract biological entity mentions via regex heuristics."""
+        patterns = [
+            (r"\b[A-Z][a-z]+ [a-z]+\b", "SPECIES"),
+            (r"\b\w*protein\b", "MOLECULE"),
+            (r"\b\w*enzyme\b", "MOLECULE"),
+            (r"\b\w*gene\b", "GENE"),
+        ]
+        seen: set = set()
+        entities: List[Dict[str, Any]] = []
+        for pattern, entity_type in patterns:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                label = match.group().strip()
+                if len(label) > 2 and label.lower() not in seen:
+                    seen.add(label.lower())
+                    entities.append({
+                        "text": label,
+                        "start": match.start(),
+                        "end": match.end(),
+                        "type": entity_type,
+                    })
+        return entities[:30]
+
+    # ------------------------------------------------------------------
+    # Document listing
+    # ------------------------------------------------------------------
+
+    async def list_documents(self, skip: int = 0, limit: int = 20) -> List[Dict[str, Any]]:
+        cursor = self.documents_collection.find().sort("created_at", -1).skip(skip).limit(limit)
+        results = []
         async for doc in cursor:
             doc["_id"] = str(doc["_id"])
-            doc["facts_extracted"] = [str(fid) for fid in doc.get("facts_extracted", [])]
-            documents.append(doc)
-        return documents
+            results.append(doc)
+        return results
 
     async def get_document(self, document_id: str) -> Optional[Dict[str, Any]]:
-        """Get document details"""
         doc = await self.documents_collection.find_one({"_id": ObjectId(document_id)})
         if doc:
             doc["_id"] = str(doc["_id"])
-            doc["facts_extracted"] = [str(fid) for fid in doc.get("facts_extracted", [])]
         return doc

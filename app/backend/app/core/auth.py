@@ -4,14 +4,13 @@ Authentication and authorization utilities.
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
-from passlib.context import CryptContext
+import bcrypt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
 from app.core.config import settings
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/token")
 
 
@@ -50,8 +49,11 @@ def verify_token(token: str) -> dict:
         )
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    """Get current authenticated user from token."""
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
+    """Get current authenticated user from token, including roles from DB."""
+    from bson import ObjectId
+    from app.core.database import get_database
+
     payload = verify_token(token)
     user_id: str = payload.get("sub")
     if user_id is None:
@@ -59,15 +61,28 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials"
         )
-    # TODO: Fetch user from database
-    return {"id": user_id, "email": payload.get("email")}
+
+    db = get_database()
+    user_doc = await db.users.find_one({"_id": ObjectId(user_id)})
+    if user_doc is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found"
+        )
+
+    return {
+        "id": str(user_doc["_id"]),
+        "email": user_doc.get("email"),
+        "roles": user_doc.get("roles", []),
+        "capabilities": user_doc.get("capabilities", []),
+    }
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify password hash."""
-    return pwd_context.verify(plain_password, hashed_password)
+    """Verify password against bcrypt hash."""
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
 
 
 def get_password_hash(password: str) -> str:
-    """Hash password."""
-    return pwd_context.hash(password)
+    """Hash password with bcrypt."""
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()

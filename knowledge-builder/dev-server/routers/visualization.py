@@ -1,103 +1,94 @@
-from fastapi import APIRouter, HTTPException, Depends
-from fastapi.responses import JSONResponse
-from typing import Dict, Any, List, Optional
-from advandeb_kb.services.visualization_service import VisualizationService
+from fastapi import APIRouter, Body, HTTPException, Query
+from typing import Any, Dict, Optional
+
 from advandeb_kb.database.mongodb import get_database
+from advandeb_kb.services.visualization_service import VisualizationService
+from advandeb_kb.services.graph_builder_service import GraphBuilderService
+from bson import ObjectId
 
 router = APIRouter()
 
-async def get_visualization_service():
+
+async def _get_service() -> VisualizationService:
     db = await get_database()
     return VisualizationService(db)
 
-@router.get("/graph/{graph_id}")
-async def get_graph_visualization(
-    graph_id: str,
-    layout: str = "spring",
-    service: VisualizationService = Depends(get_visualization_service)
-):
-    """Get graph visualization data"""
-    try:
-        graph_data = await service.get_graph_visualization(graph_id, layout)
-        return graph_data
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/graph/create")
-async def create_graph_from_facts(
-    fact_ids: List[str],
-    graph_name: str,
-    description: str = "",
-    service: VisualizationService = Depends(get_visualization_service)
-):
-    """Create a knowledge graph from selected facts"""
-    try:
-        graph = await service.create_graph_from_facts(fact_ids, graph_name, description)
-        return graph
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+def _parse_schema_id(schema_id: str) -> ObjectId:
+    if not ObjectId.is_valid(schema_id):
+        raise HTTPException(status_code=400, detail=f"Invalid schema_id: {schema_id!r}")
+    return ObjectId(schema_id)
 
-@router.get("/network-stats/{graph_id}")
-async def get_network_statistics(
-    graph_id: str,
-    service: VisualizationService = Depends(get_visualization_service)
-):
-    """Get network analysis statistics for a graph"""
-    try:
-        stats = await service.get_network_statistics(graph_id)
-        return stats
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/layout/{graph_id}")
-async def update_graph_layout(
-    graph_id: str,
-    layout_type: str,
-    layout_params: Optional[Dict[str, Any]] = None,
-    service: VisualizationService = Depends(get_visualization_service)
-):
-    """Update graph layout"""
-    try:
-        updated_graph = await service.update_graph_layout(graph_id, layout_type, layout_params)
-        return updated_graph
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# ---------------------------------------------------------------------------
+# Endpoints
+# ---------------------------------------------------------------------------
 
-@router.get("/relationships/{entity}")
-async def get_entity_relationships(
-    entity: str,
-    depth: int = 2,
-    service: VisualizationService = Depends(get_visualization_service)
-):
-    """Get relationships for a specific entity"""
-    try:
-        relationships = await service.get_entity_relationships(entity, depth)
-        return {"entity": entity, "relationships": relationships}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/cluster/{graph_id}")
-async def detect_communities(
-    graph_id: str,
-    algorithm: str = "louvain",
-    service: VisualizationService = Depends(get_visualization_service)
-):
-    """Detect communities/clusters in the knowledge graph"""
-    try:
-        communities = await service.detect_communities(graph_id, algorithm)
-        return {"communities": communities}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@router.get("/schemas", summary="List all graph schemas")
+async def list_schemas() -> Any:
+    """Return all graph schema definitions stored in the database."""
+    service = await _get_service()
+    return await service.list_schemas()
 
-@router.get("/export/{graph_id}")
-async def export_graph(
-    graph_id: str,
-    format: str = "json",
-    service: VisualizationService = Depends(get_visualization_service)
-):
-    """Export graph in various formats"""
-    try:
-        exported_data = await service.export_graph(graph_id, format)
-        return JSONResponse(content=exported_data)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/schema/{schema_id}", summary="Get nodes and edges for a schema")
+async def get_schema_graph(
+    schema_id: str,
+    layout: Optional[str] = Query(default=None, description="Layout algorithm: force, circular, random, shell"),
+    limit: int = Query(default=300, ge=1, le=5000, description="Max number of nodes to return"),
+) -> Any:
+    """Return materialized graph data for a schema.
+
+    If *layout* is provided, x/y positions are computed server-side via NetworkX.
+    If omitted, raw nodes/edges are returned without position data.
+    """
+    oid = _parse_schema_id(schema_id)
+    service = await _get_service()
+
+    if layout is not None:
+        data = await service.get_graph_with_layout(oid, layout=layout, limit=limit)
+    else:
+        data = await service.get_graph_data(oid, limit=limit)
+
+    return data
+
+
+@router.get("/schema/{schema_id}/stats", summary="Graph statistics for a schema")
+async def get_schema_stats(schema_id: str) -> Any:
+    """Return node count, edge count, and density for the schema."""
+    oid = _parse_schema_id(schema_id)
+    service = await _get_service()
+    return await service.get_stats(oid)
+
+
+@router.post("/schema/{schema_id}/rebuild", summary="Rebuild a graph schema")
+async def rebuild_schema(
+    schema_id: str,
+    body: Dict[str, Any] = Body(default={}),
+) -> Any:
+    """Rebuild nodes and edges for a schema from source collections.
+
+    - sf_support: rebuilds from stylized_facts
+    - taxonomical: rebuilds from taxonomy_nodes; accepts root_taxid and max_nodes in body
+    """
+    oid = _parse_schema_id(schema_id)
+    db = await get_database()
+
+    schema = await db.graph_schemas.find_one({"_id": oid})
+    if not schema:
+        raise HTTPException(status_code=404, detail="Schema not found")
+
+    builder = GraphBuilderService(db)
+    name = schema.get("name", "")
+
+    if name == "sf_support":
+        result = await builder.build_sf_graph(oid)
+    elif name == "taxonomical":
+        root_taxid = int(body.get("root_taxid", 40674))  # default: Mammalia
+        max_nodes = int(body.get("max_nodes", 15000))
+        result = await builder.build_taxonomy_graph(oid, root_taxid=root_taxid, max_nodes=max_nodes)
+    else:
+        raise HTTPException(status_code=400, detail=f"No rebuild strategy for schema: {name!r}")
+
+    return result

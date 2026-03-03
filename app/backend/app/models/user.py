@@ -14,8 +14,16 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    """User creation model."""
+    """User creation model (Google OAuth)."""
     google_id: str
+
+
+class UserCreateNative(BaseModel):
+    """Native user creation model (admin only)."""
+    email: EmailStr
+    full_name: Optional[str] = None
+    password: str
+    roles: List[str] = ["knowledge_explorator"]
 
 
 class UserUpdate(BaseModel):
@@ -24,23 +32,34 @@ class UserUpdate(BaseModel):
     avatar_url: Optional[str] = None
 
 
+class PasswordSet(BaseModel):
+    """Model for setting or changing a password."""
+    password: str
+
+
+class NativeLoginRequest(BaseModel):
+    """Native email/password login request."""
+    email: EmailStr
+    password: str
+
+
 class User(UserBase):
     """User model with database fields."""
-    id: str = Field(alias="_id")
-    google_id: str
+    id: str = Field(validation_alias="_id")
+    google_id: Optional[str] = None
     roles: List[str] = []
     capabilities: List[str] = []
     status: str = "active"  # active, inactive, suspended
     created_at: datetime
     updated_at: datetime
-    
+
     class Config:
         populate_by_name = True
 
 
 class UserInDB(User):
-    """User model as stored in database."""
-    pass
+    """User model as stored in database (includes sensitive fields)."""
+    password_hash: Optional[str] = None
 
 
 class TokenResponse(BaseModel):
