@@ -1,0 +1,22 @@
+# Local configuration example
+# Copy this file to local.toml and customize for your environment
+# Values here override default.toml
+
+# Uncomment and modify as needed:
+
+# bind = "0.0.0.0:8443"
+# ollama_model = "llama3"
+
+# [tls]
+# enabled = true
+# cert_path = "certs/cert.pem"
+# key_path = "certs/key.pem"
+
+# [agents]
+# health_check_interval_seconds = 15
+
+# [pool]
+# max_idle_per_agent = 10
+
+# [circuit_breaker]
+# failure_threshold = 3

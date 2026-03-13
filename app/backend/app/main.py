@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 
 from app.core.config import settings
 from app.core.database import connect_to_mongo, close_mongo_connection
-from app.api.routes import auth, users, documents, facts, knowledge_graph, chat, scenarios, models
+from app.api.routes import auth, users, documents, facts, knowledge_graph, chat, scenarios, models, ws
 
 
 @asynccontextmanager
@@ -44,6 +44,7 @@ app.include_router(knowledge_graph.router, prefix="/api/graph", tags=["knowledge
 app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 app.include_router(scenarios.router, prefix="/api/scenarios", tags=["scenarios"])
 app.include_router(models.router, prefix="/api/models", tags=["models"])
+app.include_router(ws.router, prefix="/ws", tags=["websocket"])
 
 
 @app.get("/")
@@ -58,5 +59,22 @@ async def root():
 
 @app.get("/health")
 async def health():
-    """Health check endpoint."""
-    return {"status": "healthy"}
+    """Health check endpoint with database connectivity check."""
+    from app.core.database import get_database
+    
+    health_status = {
+        "status": "healthy",
+        "service": settings.APP_NAME,
+        "version": settings.APP_VERSION
+    }
+    
+    try:
+        # Check database connectivity
+        db = await get_database()
+        await db.command("ping")
+        health_status["database"] = "connected"
+    except Exception as e:
+        health_status["status"] = "degraded"
+        health_status["database"] = f"error: {str(e)}"
+    
+    return health_status

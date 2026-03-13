@@ -1,13 +1,13 @@
 """
 Chat service - business logic for chat/AI assistant operations.
 """
-from typing import List, Dict, Any
+from typing import List, Dict, Any, AsyncIterator
 from datetime import datetime
 from bson import ObjectId
-import httpx
 
 from app.core.database import get_database
 from app.core.config import settings
+from app.clients.mcp_client import MCPClient
 
 
 class ChatService:
@@ -49,37 +49,77 @@ class ChatService:
 
         # Store AI response
         await self._store_message(session_id, ai_response)
-
-        # Update session updated_at
-        await self.sessions_collection.update_one(
-            {"_id": ObjectId(session_id)},
-            {"$set": {"updated_at": datetime.utcnow()}}
-        )
+        await self._touch_session(session_id)
 
         return {
             "message": ai_response,
             "session_id": session_id
         }
 
-    async def _get_mcp_response(self, messages: List[Dict[str, str]]) -> Dict[str, str]:
-        """Get response from MCP server."""
-        try:
-            async with httpx.AsyncClient() as client:
-                response = await client.post(
-                    f"{settings.MCP_SERVER_URL}/chat",
-                    json={"messages": messages},
-                    timeout=30.0
-                )
-                if response.status_code == 200:
-                    data = response.json()
-                    return {"role": "assistant", "content": data.get("reply", "")}
-        except Exception as e:
-            print(f"Error calling MCP server: {e}")
+    async def process_message_stream(
+        self,
+        session_id: str,
+        message: str,
+        user_id: str,
+    ) -> AsyncIterator[Dict[str, Any]]:
+        """
+        Stream chat events for the WebSocket endpoint.
 
-        return {
-            "role": "assistant",
-            "content": "Sorry, I'm having trouble connecting to the AI service."
-        }
+        Yields event dicts:
+          {"type": "agent_activity", "agent": "...", "status": "working", "task": "..."}
+          {"type": "message", "role": "assistant", "content": "...", "session_id": "..."}
+        """
+        # Ensure session exists
+        if not session_id or session_id == "new":
+            session_id = await self._create_session(user_id, message[:60])
+
+        user_msg = {"role": "user", "content": message}
+        await self._store_message(session_id, user_msg)
+
+        if not settings.MCP_SERVER_ENABLED:
+            ai_response = {
+                "role": "assistant",
+                "content": "MCP server is not enabled. This is a placeholder response.",
+            }
+            await self._store_message(session_id, ai_response)
+            await self._touch_session(session_id)
+            yield {"type": "message", **ai_response, "session_id": session_id}
+            return
+
+        mcp = MCPClient()
+        final_content = ""
+
+        async for event in mcp.stream_tool_call(
+            tool_name="chat",
+            arguments={"message": message, "session_id": session_id},
+        ):
+            event_type = event.get("type")
+
+            if event_type == "agent_activity":
+                yield event
+            elif event_type == "partial_result":
+                final_content += event.get("text", "")
+                yield event
+            elif event_type == "final_result":
+                final_content = event.get("answer", final_content)
+                ai_response = {"role": "assistant", "content": final_content}
+                await self._store_message(session_id, ai_response)
+                await self._touch_session(session_id)
+                yield {"type": "message", **ai_response, "session_id": session_id}
+            elif event_type == "error":
+                yield event
+
+    async def _get_mcp_response(self, messages: List[Dict[str, str]]) -> Dict[str, str]:
+        """Get response from MCP server (used by REST endpoint)."""
+        mcp = MCPClient()
+        return await mcp.chat(messages)
+
+    async def _touch_session(self, session_id: str) -> None:
+        """Update session updated_at timestamp."""
+        await self.sessions_collection.update_one(
+            {"_id": ObjectId(session_id)},
+            {"$set": {"updated_at": datetime.utcnow()}},
+        )
 
     async def _create_session(self, user_id: str, title: str = "") -> str:
         """Create new chat session."""

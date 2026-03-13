@@ -52,8 +52,14 @@ export default {
 
     onMounted(async () => {
       try {
-        const res = await vizAPI.listSchemas()
-        emit('schemas-loaded', res.data)
+        let res = await vizAPI.listSchemas()
+        let schemas = res.data
+        if (!schemas.length) {
+          // Auto-seed built-in schema definitions on first load
+          const seedRes = await vizAPI.seedSchemas()
+          schemas = seedRes.data.schemas || []
+        }
+        emit('schemas-loaded', schemas)
       } catch (e) {
         console.error('Failed to load schemas:', e)
         emit('schemas-loaded', [])

@@ -1,19 +1,17 @@
 <template>
-  <div class="view">
-    <h1>GraphView</h1>
-    <p>This view is under construction.</p>
-    <router-link to="/">Back to Home</router-link>
+  <div class="graph-view">
+    <KnowledgeGraph />
   </div>
 </template>
 
 <script setup lang="ts">
-// GraphView component
+import KnowledgeGraph from '@/components/graph/KnowledgeGraph.vue'
 </script>
 
 <style scoped>
-.view {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+.graph-view {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>

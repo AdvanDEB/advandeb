@@ -83,10 +83,18 @@ class DocumentService:
     async def list_documents(
         self,
         skip: int = 0,
-        limit: int = 100
+        limit: int = 100,
+        search: str = "",
+        status: str = "",
     ) -> List[Document]:
-        """List documents."""
-        cursor = self.collection.find().skip(skip).limit(limit).sort("created_at", -1)
+        """List documents with optional title search and status filter."""
+        query: dict = {}
+        if search:
+            query["title"] = {"$regex": search, "$options": "i"}
+        if status:
+            query["status"] = status
+
+        cursor = self.collection.find(query).skip(skip).limit(limit).sort("created_at", -1)
         documents = []
         async for doc in cursor:
             doc["_id"] = str(doc["_id"])

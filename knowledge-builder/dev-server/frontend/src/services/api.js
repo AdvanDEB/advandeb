@@ -8,6 +8,7 @@ const api = axios.create({
 // Visualization API
 export const vizAPI = {
   listSchemas: () => api.get('/viz/schemas'),
+  seedSchemas: () => api.post('/viz/seed'),
   getSchemaGraph: (id, limit = 5000) => api.get(`/viz/schema/${id}`, { params: { limit } }),
   getSchemaStats: (id) => api.get(`/viz/schema/${id}/stats`),
   rebuildSchema: (id, body = {}) => api.post(`/viz/schema/${id}/rebuild`, body),
@@ -23,6 +24,26 @@ export const dbAPI = {
 // Filesystem API
 export const fsAPI = {
   browse: (path) => api.get('/fs/browse', { params: { path } }),
+}
+
+// KG Builder API
+export const kgAPI = {
+  getStats: () => api.get('/kg/stats'),
+  linkSync: (rootTaxid = 40674, limit = 200, skip = 0, overwrite = false) =>
+    api.post('/kg/link/sync', null, { params: { root_taxid: rootTaxid, limit, skip, overwrite } }),
+  linkAsync: (rootTaxid = 40674, limit = 1000, skip = 0) =>
+    api.post('/kg/link', null, { params: { root_taxid: rootTaxid, limit, skip } }),
+  listRelations: (params = {}) => api.get('/kg/relations', { params }),
+  updateRelation: (id, body) => api.put(`/kg/relations/${id}`, body),
+  linkAgentSync: (model = 'mistral', limit = 20, skip = 0, overwrite = false) =>
+    api.post('/kg/link/agent/sync', null, { params: { model, limit, skip, overwrite } }),
+  linkAgentAsync: (model = 'mistral', limit = 500, skip = 0) =>
+    api.post('/kg/link/agent', null, { params: { model, limit, skip } }),
+}
+
+// Agents API
+export const agentsAPI = {
+  getModels: () => api.get('/agents/models'),
 }
 
 // Ingestion API — unchanged

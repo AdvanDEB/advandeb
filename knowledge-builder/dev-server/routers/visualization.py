@@ -88,7 +88,28 @@ async def rebuild_schema(
         root_taxid = int(body.get("root_taxid", 40674))  # default: Mammalia
         max_nodes = int(body.get("max_nodes", 15000))
         result = await builder.build_taxonomy_graph(oid, root_taxid=root_taxid, max_nodes=max_nodes)
+    elif name == "citation":
+        result = await builder.build_citation_graph(oid)
+    elif name == "knowledge_graph":
+        root_taxid = int(body.get("root_taxid", 40674))  # default: Mammalia
+        max_nodes = int(body.get("max_nodes", 15000))
+        result = await builder.build_knowledge_graph(oid, root_taxid=root_taxid, max_nodes=max_nodes)
     else:
         raise HTTPException(status_code=400, detail=f"No rebuild strategy for schema: {name!r}")
 
     return result
+
+
+@router.post("/seed", summary="Seed built-in graph schemas")
+async def seed_schemas() -> Any:
+    """Upsert all built-in schema definitions into graph_schemas collection.
+
+    Safe to call repeatedly — uses upsert on schema name.
+    Returns seed summary and the full list of schemas after seeding.
+    """
+    db = await get_database()
+    builder = GraphBuilderService(db)
+    seed_result = await builder.seed_schemas()
+    service = VisualizationService(db)
+    schemas = await service.list_schemas()
+    return {"seed": seed_result, "schemas": schemas}

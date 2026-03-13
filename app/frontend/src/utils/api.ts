@@ -22,7 +22,19 @@ api.interceptors.response.use(
       localStorage.removeItem('access_token')
       localStorage.removeItem('refresh_token')
       window.location.href = '/login'
+      return Promise.reject(error)
     }
+
+    // Surface API errors as toasts (lazy-import to avoid circular dependency)
+    try {
+      const { useNotificationsStore } = await import('@/stores/notifications')
+      const notifs = useNotificationsStore()
+      const detail = error.response?.data?.detail || error.message || 'Request failed'
+      notifs.error(String(detail))
+    } catch {
+      // pinia not ready yet (e.g. during app init) — silent
+    }
+
     return Promise.reject(error)
   }
 )

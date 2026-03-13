@@ -3,7 +3,7 @@ use axum::{
     http::{Request, StatusCode},
 };
 use http_body_util::BodyExt;
-use tower::ServiceExt;
+use tower::util::ServiceExt;
 
 fn app() -> axum::Router {
     let settings = advandeb_mcp::config::Settings::load().unwrap();

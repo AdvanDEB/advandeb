@@ -48,6 +48,13 @@
         @click="toggleDrawer('filesystem')"
         title="Filesystem browser"
       >📁 FS</button>
+
+      <button
+        class="toolbar-btn"
+        :class="{ active: activeDrawer === 'kgbuilder' }"
+        @click="toggleDrawer('kgbuilder')"
+        title="KG builder — link documents to taxa"
+      >⬡ KG</button>
     </header>
 
     <!-- Canvas area -->
@@ -75,6 +82,7 @@
         <IngestionDrawer v-if="activeDrawer === 'ingestion'" />
         <DatabaseDrawer v-if="activeDrawer === 'database'" />
         <FilesystemDrawer v-if="activeDrawer === 'filesystem'" />
+        <KGBuilderDrawer v-if="activeDrawer === 'kgbuilder'" />
       </div>
     </template>
 
@@ -93,13 +101,14 @@ import SearchOverlay from './components/SearchOverlay.vue'
 import IngestionDrawer from './drawers/IngestionDrawer.vue'
 import DatabaseDrawer from './drawers/DatabaseDrawer.vue'
 import FilesystemDrawer from './drawers/FilesystemDrawer.vue'
+import KGBuilderDrawer from './drawers/KGBuilderDrawer.vue'
 import { vizAPI } from './services/api.js'
 
 export default {
   name: 'App',
   components: {
     GraphCanvas, NodeInspector, SearchOverlay,
-    IngestionDrawer, DatabaseDrawer, FilesystemDrawer,
+    IngestionDrawer, DatabaseDrawer, FilesystemDrawer, KGBuilderDrawer,
   },
   setup() {
     const schemas = ref([])

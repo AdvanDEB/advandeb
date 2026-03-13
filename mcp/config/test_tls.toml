@@ -1,0 +1,7 @@
+# Test configuration with TLS enabled
+bind = "127.0.0.1:8443"
+
+[tls]
+enabled = true
+cert_path = "certs/cert.pem"
+key_path = "certs/key.pem"

@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 import os
 from dotenv import load_dotenv
 
-from routers import knowledge, agents, data_processing, visualization, ingestion, database, filesystem
+from routers import knowledge, agents, data_processing, visualization, ingestion, database, filesystem, kg_builder
 from advandeb_kb.database.mongodb import mongodb
 
 # Load environment variables
@@ -33,6 +33,7 @@ app.include_router(visualization.router, prefix="/api/viz", tags=["visualization
 app.include_router(ingestion.router, prefix="/api/ingestion", tags=["ingestion"])
 app.include_router(database.router, prefix="/api/db", tags=["database"])
 app.include_router(filesystem.router, prefix="/api/fs", tags=["filesystem"])
+app.include_router(kg_builder.router, prefix="/api/kg", tags=["kg_builder"])
 
 @app.on_event("startup")
 async def startup():

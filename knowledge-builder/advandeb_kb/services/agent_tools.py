@@ -4,6 +4,7 @@ Provides fact extraction, stylization, knowledge retrieval, and document process
 """
 import json
 import logging
+import re
 from typing import Dict, Any, List, Optional, Callable, Awaitable
 from datetime import datetime
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -383,6 +384,51 @@ class SummarizationTool(AgentTool):
             return {"summary": "", "error": str(e)}
 
 
+class TaxonLookupTool(AgentTool):
+    """Look up an organism name in the NCBI taxonomy database."""
+
+    def __init__(self):
+        super().__init__(
+            name="lookup_taxon",
+            description="Look up an organism's scientific or common name in the NCBI taxonomy. Returns tax_id, rank, and canonical name if found.",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Scientific or common name of the organism (e.g. 'Salmo trutta', 'brown trout')"
+                    }
+                },
+                "required": ["name"]
+            }
+        )
+
+    async def execute(self, context: Dict[str, Any], **kwargs) -> Any:
+        name = kwargs.get("name", "").strip()
+        if not name:
+            return {"found": False, "name": name, "reason": "empty name"}
+        db = context.get("db")
+        if db is None:
+            return {"found": False, "name": name, "reason": "no db context"}
+
+        taxon = await db.taxonomy_nodes.find_one(
+            {"$or": [
+                {"name": {"$regex": f"^{re.escape(name)}$", "$options": "i"}},
+                {"synonyms": {"$regex": f"^{re.escape(name)}$", "$options": "i"}},
+                {"common_names": {"$regex": f"^{re.escape(name)}$", "$options": "i"}},
+            ]},
+            {"tax_id": 1, "name": 1, "rank": 1}
+        )
+        if taxon:
+            return {
+                "found": True,
+                "tax_id": taxon["tax_id"],
+                "name": taxon["name"],
+                "rank": taxon.get("rank", "no rank"),
+            }
+        return {"found": False, "name": name}
+
+
 class ToolRegistry:
     """Registry for managing agent tools"""
     
@@ -399,6 +445,7 @@ class ToolRegistry:
         self.register_tool(KnowledgeSearchTool(self.db))
         self.register_tool(DocumentRetrievalTool(self.db))
         self.register_tool(SummarizationTool(self.model_client))
+        self.register_tool(TaxonLookupTool())
     
     def register_tool(self, tool: AgentTool):
         """Register a tool"""

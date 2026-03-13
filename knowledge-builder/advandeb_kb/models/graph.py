@@ -13,10 +13,12 @@ Graphs are materialized: GraphNode and GraphEdge documents are computed and
 stored; they are not assembled on-the-fly at query time.
 
 Built-in schemas (seeded at startup if absent):
-  - citation          : documents citing other documents
-  - sf_support        : facts supporting/opposing stylized facts
-  - taxonomical       : organism taxonomy tree
+  - citation              : documents citing other documents
+  - sf_support            : facts supporting/opposing stylized facts
+  - taxonomical           : pure organism taxonomy tree (backbone)
   - physiological_process : process relationships between SFs / entities
+  - knowledge_graph       : taxonomy backbone + documents connected by agent-
+                            determined 'studies' edges; node type = taxon rank
 """
 from typing import Any, Dict, List, Optional
 from datetime import datetime
@@ -243,6 +245,54 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
                 "label": "is child of",
                 "description": "Child taxon → parent taxon (e.g. species → genus).",
             }
+        ],
+    },
+    {
+        "name": "knowledge_graph",
+        "description": (
+            "Unified knowledge graph: taxonomy backbone (taxon nodes coloured by "
+            "rank) overlaid with document nodes connected to the taxa they study. "
+            "Document-taxon edges are produced by the knowledge-graph-building agent "
+            "and stored in document_taxon_relations."
+        ),
+        "is_builtin": True,
+        "node_types": [
+            {
+                "name": "taxon",  # node_type is overridden to rank at build time
+                "source_collection": "taxonomy_nodes",
+                "label_field": "name",
+                "properties": ["rank", "tax_id", "gbif_usage_key", "common_names"],
+                "description": (
+                    "Taxonomic node — materialized node_type is the rank "
+                    "(species, genus, family, …) for visual differentiation."
+                ),
+            },
+            {
+                "name": "document",
+                "source_collection": "documents",
+                "label_field": "title",
+                "properties": ["doi", "year", "authors", "journal", "general_domain"],
+                "description": "Scientific document (abstract or full paper).",
+            },
+        ],
+        "edge_types": [
+            {
+                "name": "is_child_of",
+                "source_node_type": "taxon",
+                "target_node_type": "taxon",
+                "label": "is child of",
+                "description": "Child taxon → parent taxon (phylogenetic tree backbone).",
+            },
+            {
+                "name": "studies",
+                "source_node_type": "document",
+                "target_node_type": "taxon",
+                "label": "studies",
+                "description": (
+                    "Document discusses or studies this organism — determined by "
+                    "the knowledge-graph-building agent via document_taxon_relations."
+                ),
+            },
         ],
     },
     {

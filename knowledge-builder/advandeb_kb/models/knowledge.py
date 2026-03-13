@@ -97,6 +97,44 @@ class StylizedFact(BaseModel):
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
 
+class DocumentTaxonRelation(BaseModel):
+    """Agent-determined link between a Document and a TaxonomyNode.
+
+    Created by the knowledge-graph-building agent when it determines that a
+    document studies or discusses a particular organism/taxon.  Curators can
+    confirm or reject agent suggestions.
+
+    The graph builder reads confirmed + suggested relations to materialise
+    `studies` edges in the `knowledge_graph` schema.
+    """
+
+    model_config = _BASE_CONFIG
+
+    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+
+    # References
+    document_id: PyObjectId        # → documents collection
+    tax_id: int                    # NCBI taxonomy ID (for fast lookup without join)
+
+    # Semantics of the link
+    relation_type: Literal["studies"] = "studies"
+
+    # Confidence score assigned by the agent (0.0–1.0)
+    confidence: float = Field(default=0.5, ge=0.0, le=1.0)
+
+    # Agent's reasoning or the text span that triggered this relation
+    evidence: str = ""
+
+    # Lifecycle: suggested by agent, then confirmed or rejected by curator
+    status: Literal["suggested", "confirmed", "rejected"] = "suggested"
+
+    # "agent" or a user_id string
+    created_by: str = "agent"
+
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+
 class FactSFRelation(BaseModel):
     """Evidence relationship between a Fact and a StylizedFact.
 

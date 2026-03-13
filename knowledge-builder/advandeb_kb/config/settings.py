@@ -21,4 +21,17 @@ class Settings:
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
     PAPERS_ROOT: str = os.getenv("PAPERS_ROOT", "../papers")
 
+    # ArangoDB settings (graph database)
+    ARANGO_URL: str = os.getenv("ARANGO_URL", "http://localhost:8529")
+    ARANGO_DB_NAME: str = os.getenv("ARANGO_DB_NAME", "advandeb_kb")
+    ARANGO_USERNAME: str = os.getenv("ARANGO_USERNAME", "root")
+    ARANGO_PASSWORD: str = os.getenv("ARANGO_PASSWORD", "adeb2026")
+
+    # ChromaDB settings (vector store — embedded/in-process mode by default)
+    CHROMA_PERSIST_DIR: str = os.getenv("CHROMA_PERSIST_DIR", "./data/chromadb")
+    CHROMA_COLLECTION: str = os.getenv("CHROMA_COLLECTION", "advandeb_chunks")
+
+    # Embedding model (sentence-transformers)
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "all-MiniLM-L6-v2")
+
 settings = Settings()

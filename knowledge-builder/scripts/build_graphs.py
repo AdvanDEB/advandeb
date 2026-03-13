@@ -22,7 +22,7 @@ from advandeb_kb.services.graph_builder_service import GraphBuilderService
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
-SCHEMA_CHOICES = ["sf_support", "taxonomical"]
+SCHEMA_CHOICES = ["sf_support", "taxonomical", "citation", "knowledge_graph"]
 
 
 async def run(schema: str, root_taxid: int, max_nodes: int) -> None:
@@ -51,6 +51,14 @@ async def run(schema: str, root_taxid: int, max_nodes: int) -> None:
             await mongodb.disconnect()
             sys.exit(1)
         result = await service.build_taxonomy_graph(schema_id, root_taxid, max_nodes)
+    elif schema == "citation":
+        result = await service.build_citation_graph(schema_id)
+    elif schema == "knowledge_graph":
+        if root_taxid is None:
+            logger.error("--root-taxid is required for knowledge_graph schema.")
+            await mongodb.disconnect()
+            sys.exit(1)
+        result = await service.build_knowledge_graph(schema_id, root_taxid, max_nodes)
     else:
         logger.error("Unknown schema: %s. Choose from: %s", schema, SCHEMA_CHOICES)
         await mongodb.disconnect()

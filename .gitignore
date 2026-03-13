@@ -1,2 +1,47 @@
 # Papers directory should not be under version control
 papers/
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+*.egg
+.Python
+build/
+dist/
+.env
+.venv
+env/
+venv/
+
+# ── Node / Frontend ──────────────────────────────────────────────────────────
+node_modules/
+dist/
+*.tsbuildinfo
+
+# ── Vite cache ────────────────────────────────────────────────────────────────
+.vite/
+
+# ── Rust build artefacts ─────────────────────────────────────────────────────
+mcp/target/
+
+# ── Certificates / secrets ───────────────────────────────────────────────────
+mcp/certs/cert.pem
+mcp/certs/key.pem
+
+# ── Data directories ─────────────────────────────────────────────────────────
+knowledge-builder/data/
+
+# ── Development logs (root level) ────────────────────────────────────────────
+DEV*-LOG.md
+
+# ── Temporary / scratch files ────────────────────────────────────────────────
+test_pdfs_*.txt
+*.tmp
+
+# ── Development / planning documentation ─────────────────────────────────────
+docs/DEV*-PLAN.md
+docs/APP-VISUALIZATION-PLAN.md
+docs/KNOWLEDGE-BUILDER-MULTI-AGENT-PLAN.md
+docs/MCP-MULTI-AGENT-COORDINATION-PLAN.md

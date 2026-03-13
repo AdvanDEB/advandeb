@@ -1,6 +1,103 @@
 # AdvanDEB Cross-Repository Roadmap
 
-## Phase 0: User Management & Authentication (NEW - 15 weeks)
+## Critical Issue: Hallucinations & Wrong Document References
+
+**Current Problem**: The system hallucinates facts and references wrong documents, undermining trust and usability for research work.
+
+**Root Cause**: 
+- Keyword-only search (regex) misses semantically similar content
+- No vector embeddings or semantic retrieval
+- Weak provenance tracking
+- Single-agent system lacks verification steps
+- No graph-based context expansion
+
+**Solution**: Multi-Agent RAG-KG Hybrid System (detailed in component plans below)
+
+---
+
+## Phase 0: Multi-Agent RAG-KG Foundation (PRIORITY - 12 weeks)
+
+**Goal**: Eliminate hallucinations by implementing semantic retrieval, multi-agent verification, and graph-augmented context with full provenance tracking.
+
+### Architecture Overview
+
+```
+┌─────────────────────────────────────────────────┐
+│         MULTI-AGENT COORDINATION                │
+│    (Agents communicate via MCP protocol)        │
+│                                                  │
+│  Query Planner → Retrieval → Graph Explorer     │
+│                      ↓              ↓            │
+│                  Synthesis ← Curator             │
+└─────────────────────┬───────────────────────────┘
+                      │
+        ┌─────────────┴──────────────┐
+        │                            │
+┌───────▼────────┐         ┌─────────▼────────┐
+│  HYBRID RAG    │         │  KNOWLEDGE GRAPH │
+│                │         │                  │
+│ • ChromaDB     │◄────────┤  • ArangoDB      │
+│   (vectors)    │ refs    │    (unified DB)  │
+│ • Sentence     │         │  • Graph edges   │
+│   Transformers │         │  • Documents     │
+│ • Reranking    │         │  • Facts & Taxa  │
+└────────────────┘         └──────────────────┘
+```
+
+### Implementation Strategy
+
+**Approach**: Vertical slices with 2-person team (full-time)
+- Build complete workflows end-to-end
+- Start with highest-value features
+- Build fresh in ArangoDB (no MongoDB migration initially)
+- Focus on production code, minimal tests during development
+
+### Slice 1: Semantic RAG Foundation (Weeks 1-4)
+
+**Deliverable**: Vector search eliminates basic hallucinations
+
+- Week 1: Infrastructure (ChromaDB, ArangoDB, sentence-transformers)
+- Week 2: Embedding service + document chunking
+- Week 3: Vector search implementation
+- Week 4: Integration with existing retrieval agent + basic testing
+
+**Success Metric**: Retrieval MRR improves from ~0.45 (keyword) to >0.70 (vector)
+
+### Slice 2: Multi-Agent Coordination (Weeks 5-8)
+
+**Deliverable**: Multiple specialized agents verify and cross-check results
+
+- Week 5: MCP agent server framework (Python)
+- Week 6: Create 3 specialized agent MCP servers (Retrieval, Graph Explorer, Synthesis)
+- Week 7: MCP Gateway routing (Rust enhancement)
+- Week 8: Query Planner agent + agent coordination workflows
+
+**Success Metric**: Multi-agent responses cite sources with full provenance, contradictions detected
+
+### Slice 3: Graph-Augmented Retrieval (Weeks 9-11)
+
+**Deliverable**: Graph structure expands context and improves relevance
+
+- Week 9: ArangoDB graph schema + edge collections
+- Week 10: Graph traversal tools + hybrid retrieval (vector + graph expansion)
+- Week 11: Graph-augmented agent workflows
+
+**Success Metric**: Graph expansion improves recall by 25%+, related facts discovered automatically
+
+### Slice 4: Production Readiness (Week 12)
+
+**Deliverable**: Stable, observable, debuggable multi-agent system
+
+- Performance optimization (caching, indexing)
+- Observability (agent activity logs, reasoning traces)
+- Error handling and graceful degradation
+- Documentation of architecture and workflows
+
+**Success Metric**: No hallucinations in test scenarios, full citation trails, <5s response time
+
+---
+
+## Phase 0.5: User Management & Authentication (15 weeks)
 
 **Foundation** (Weeks 1-3):
 - Implement user database models with base_role + capabilities structure
@@ -56,30 +153,33 @@ See `USER-MANAGEMENT-PLAN.md` for detailed implementation plan.
 - Add basic test coverage and CI.
 - **Integration with authentication**: All endpoints protected, audit logging active
 
-## Phase 1.5: Bootstrap advandeb-MCP (Parallel - 6-8 weeks)
+## Phase 1.5: App Visualization & UX (Parallel - 4 weeks)
 
-**Foundation** (Weeks 1-2):
-- ✅ Rust project setup with Axum HTTP server
-- ✅ Ollama client integration and basic chat endpoint
-- ✅ Environment-based configuration
-- ✅ Health check and basic testing
+**Goal**: User-facing graph visualization and enhanced chat interface
 
-**MCP Protocol Implementation** (Weeks 3-5):
-- WebSocket endpoint for MCP specification
-- Tool registry and dynamic tool loading
-- Message routing and validation
-- Basic tool implementations and testing
+See `APP-VISUALIZATION-PLAN.md` for details.
 
-**Platform Integration** (Weeks 6-8):
-- Internal API clients for KB and MA
-- Knowledge query tools (facts, documents, graphs)
-- Platform operation tools
-- Integration testing with KB/MA backends
-- Performance optimization for internal service
+- Interactive knowledge graph visualization (Cytoscape.js)
+- Agent activity viewer (real-time multi-agent status)
+- Provenance display (citation trails, reasoning traces)
+- Enhanced chat interface with source cards
 
-**Deliverable**: Production-ready internal MCP service for KB and MA agent workflows
+**Deliverable**: Rich UI showing how agents find and verify information
 
-See `MCP-PLAN.md` for detailed implementation plan.
+---
+
+## Phase 1.75: Bootstrap advandeb-MCP Gateway (Integrated with Phase 0)
+
+**Scope**: MCP Gateway enhancement integrated with Multi-Agent RAG-KG system
+
+- WebSocket MCP protocol implementation
+- Agent-to-agent routing and coordination
+- Tool registry with dynamic loading
+- Integration with Python MCP agent servers (from knowledge-builder)
+
+**Status**: Integrated with Phase 0 (Multi-Agent RAG-KG Foundation)
+
+See `MCP-MULTI-AGENT-COORDINATION-PLAN.md` for detailed implementation plan.
 
 ---
 

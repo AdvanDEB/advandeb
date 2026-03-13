@@ -1,0 +1,38 @@
+# Default configuration for AdvanDEB MCP Gateway
+# These values are used when not overridden by local.toml or environment variables
+
+# Server configuration
+bind = "0.0.0.0:8080"
+
+# Ollama configuration
+ollama_host = "http://localhost:11434"
+ollama_model = "llama2"
+
+# API endpoints
+kb_api_base = "http://localhost:8000"
+ma_api_base = "http://localhost:9000"
+
+# HTTP client configuration
+request_timeout_seconds = 30
+
+# Agent configuration
+[agents]
+health_check_interval_seconds = 30
+max_agents_per_tool = 10
+
+# Connection pool configuration
+[pool]
+max_idle_per_agent = 5
+connection_timeout_seconds = 10
+
+# Circuit breaker configuration
+[circuit_breaker]
+failure_threshold = 5
+timeout_seconds = 30
+half_open_max_requests = 3
+
+# TLS configuration (optional)
+# [tls]
+# enabled = false
+# cert_path = "certs/cert.pem"
+# key_path = "certs/key.pem"
