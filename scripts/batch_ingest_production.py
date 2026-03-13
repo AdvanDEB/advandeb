@@ -43,6 +43,10 @@ import time
 from pathlib import Path
 from typing import Optional
 
+# Use cached models — avoid slow HuggingFace network checks
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+os.environ.setdefault("HF_DATASETS_OFFLINE", "1")
+
 # Allow running from repo root
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "knowledge-builder"))
@@ -142,8 +146,13 @@ def _init_worker(chunk_size: int, overlap: int, dry_run: bool = False) -> None:
         os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
         logger.info("Worker %s assigned GPU %d", mp.current_process().name, gpu_id)
 
-    _worker_services["embedder"] = EmbeddingService()
+    # IMPORTANT: ChromaDB must connect BEFORE EmbeddingService loads the model.
+    # Loading sentence-transformers (PyTorch) before hnswlib causes a segfault
+    # due to conflicting OpenMP/BLAS initialization.
     _worker_services["chroma"] = ChromaDBService()
+    _worker_services["chroma"]._ensure_connected()  # force connect now
+
+    _worker_services["embedder"] = EmbeddingService()
     _worker_services["arango"] = ArangoDatabase()
     _worker_services["arango"].connect()
 
@@ -186,8 +195,14 @@ def _ingest_one(args: tuple) -> dict:
         }
         arango.upsert("documents", arango_doc)
 
-        # Embed all chunks (GPU batch)
-        texts = [c.text for c in chunks]
+        # Embed all chunks (GPU batch) — sanitize texts to remove invalid Unicode
+        def _sanitize(t: object) -> str:
+            if not isinstance(t, str) or not t:
+                return " "
+            # Replace lone surrogates and other non-encodable chars
+            return t.encode("utf-8", errors="replace").decode("utf-8", errors="replace").strip() or " "
+
+        texts = [_sanitize(c.text) for c in chunks]
         embeddings = embedder.embed_batch(texts, batch_size=EMBED_BATCH_SIZE, show_progress=False)
 
         # Store in ChromaDB

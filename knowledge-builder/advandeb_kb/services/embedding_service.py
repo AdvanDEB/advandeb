@@ -73,7 +73,8 @@ class EmbeddingService:
             show_progress_bar=show_progress,
             convert_to_tensor=False,
         )
-        return [e.tolist() for e in embeddings]
+        # Ensure plain Python floats — ChromaDB rejects numpy.float32
+        return [[float(v) for v in e] for e in embeddings]
 
     def embed_query(self, query: str) -> list[float]:
         """Alias for embed_text — semantic clarity for retrieval queries."""
