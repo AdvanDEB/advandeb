@@ -70,7 +70,7 @@ async def health():
     
     try:
         # Check database connectivity
-        db = await get_database()
+        db = get_database()
         await db.command("ping")
         health_status["database"] = "connected"
     except Exception as e:

@@ -177,10 +177,9 @@ impl AgentRegistry {
         };
 
         for (name, ws_url) in agent_entries {
-            let http_url = ws_url
-                .replacen("ws://", "http://", 1)
-                .replacen("wss://", "https://", 1);
-            let health_url = format!("{http_url}/health");
+            // Python agents serve HTTP health on ws_port + 100
+            // e.g. ws://localhost:8081 → http://localhost:8181/health
+            let health_url = derive_health_url(&ws_url);
 
             let status = match reqwest::get(&health_url).await {
                 Ok(r) if r.status().is_success() => AgentStatus::Healthy,
@@ -191,6 +190,32 @@ impl AgentRegistry {
             self.set_status(&name, status).await;
         }
     }
+}
+
+/// Derive the HTTP health URL from a WebSocket URL.
+///
+/// Convention: Python agents expose HTTP health on ws_port + 100.
+/// Example: ws://localhost:8081 → http://localhost:8181/health
+fn derive_health_url(ws_url: &str) -> String {
+    // Convert ws:// → http://
+    let http_url = ws_url
+        .replacen("ws://", "http://", 1)
+        .replacen("wss://", "https://", 1);
+
+    // Try to bump the port by 100
+    if let Some(port_start) = http_url.rfind(':') {
+        let after_colon = &http_url[port_start + 1..];
+        // Strip any path component
+        let port_str = after_colon.split('/').next().unwrap_or("");
+        if let Ok(port) = port_str.parse::<u16>() {
+            let health_port = port.saturating_add(100);
+            let base = &http_url[..port_start];
+            return format!("{base}:{health_port}/health");
+        }
+    }
+
+    // Fallback: use same port (for agents that serve health on ws port)
+    format!("{http_url}/health")
 }
 
 // ── Unit tests ────────────────────────────────────────────────────────────────

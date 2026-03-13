@@ -207,21 +207,21 @@ class ArangoDatabase:
 
         # Persistent (btree) indexes for common lookups
         persistent_indexes = [
-            ("documents", ["doi"], True),       # unique DOI
-            ("documents", ["year"], False),
-            ("facts", ["document_id"], False),
-            ("facts", ["status"], False),
-            ("stylized_facts", ["sf_number"], True),
-            ("taxa", ["tax_id"], True),
-            ("taxa", ["rank"], False),
-            ("chunks", ["document_id"], False),
-            ("chunks", ["chunk_index"], False),
+            ("documents", ["doi"], True, True),     # unique DOI, sparse (nulls excluded)
+            ("documents", ["year"], False, False),
+            ("facts", ["document_id"], False, False),
+            ("facts", ["status"], False, False),
+            ("stylized_facts", ["sf_number"], True, True),
+            ("taxa", ["tax_id"], True, True),
+            ("taxa", ["rank"], False, False),
+            ("chunks", ["document_id"], False, False),
+            ("chunks", ["chunk_index"], False, False),
         ]
-        for collection_name, fields, unique in persistent_indexes:
+        for collection_name, fields, unique, sparse in persistent_indexes:
             col = self.db.collection(collection_name)
             existing_fields = [idx["fields"] for idx in col.indexes()]
             if fields not in existing_fields:
-                col.add_persistent_index(fields=fields, unique=unique)
+                col.add_persistent_index(fields=fields, unique=unique, sparse=sparse)
                 logger.debug(
                     "Created persistent index on %s%s: %s",
                     collection_name,
