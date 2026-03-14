@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 AGENT_PORT = 8084
 
-_OLLAMA_MODEL = "llama2"
+_OLLAMA_MODEL = settings.OLLAMA_MODEL
 
 # Agent registry: name → default WebSocket URL
 AGENT_REGISTRY: dict[str, str] = {

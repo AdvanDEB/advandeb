@@ -92,7 +92,7 @@ class CuratorAgent(BaseAgent):
                         "type": "string",
                         "description": "MongoDB ObjectId of the document",
                     },
-                    "model": {"type": "string", "default": "llama2"},
+                    "model": {"type": "string", "default": settings.OLLAMA_MODEL},
                 },
                 "required": ["document_id"],
             },
@@ -185,8 +185,10 @@ class CuratorAgent(BaseAgent):
     # ------------------------------------------------------------------
 
     async def _extract_facts(
-        self, document_id: str, model: str = "llama2"
+        self, document_id: str, model: str = ""
     ) -> dict:
+        if not model:
+            model = settings.OLLAMA_MODEL
         from bson import ObjectId
 
         doc = await self._db.documents.find_one({"_id": ObjectId(document_id)})

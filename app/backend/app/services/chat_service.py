@@ -1,7 +1,7 @@
 """
 Chat service - business logic for chat/AI assistant operations.
 """
-from typing import List, Dict, Any, AsyncIterator
+from typing import List, Dict, Any, AsyncIterator, Optional
 from datetime import datetime
 from bson import ObjectId
 
@@ -90,8 +90,8 @@ class ChatService:
         final_content = ""
 
         async for event in mcp.stream_tool_call(
-            tool_name="chat",
-            arguments={"message": message, "session_id": session_id},
+            tool_name="full_pipeline",
+            arguments={"query": message, "top_k": 5},
         ):
             event_type = event.get("type")
 
@@ -159,7 +159,7 @@ class ChatService:
             })
         return sessions
 
-    async def get_session(self, session_id: str, user_id: str) -> Dict[str, Any]:
+    async def get_session(self, session_id: str, user_id: str) -> Optional[Dict[str, Any]]:
         """Get chat session with messages."""
         session = await self.sessions_collection.find_one({
             "_id": ObjectId(session_id),

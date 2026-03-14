@@ -8,6 +8,7 @@ class Settings:
 
     # Ollama settings (sole LLM provider)
     OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+    OLLAMA_MODEL: str = os.getenv("OLLAMA_MODEL", "deepseek-r1:latest")
 
     # API settings
     API_HOST: str = os.getenv("API_HOST", "0.0.0.0")

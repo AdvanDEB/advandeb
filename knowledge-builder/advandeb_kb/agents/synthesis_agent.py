@@ -27,8 +27,8 @@ logger = logging.getLogger(__name__)
 
 AGENT_PORT = 8083
 
-# Default model — override via OLLAMA_MODEL env var if needed
-_OLLAMA_MODEL = "llama2"
+# Default model — override via OLLAMA_MODEL env var
+_OLLAMA_MODEL = settings.OLLAMA_MODEL
 
 
 class SynthesisAgent(BaseAgent):
@@ -259,7 +259,7 @@ class SynthesisAgent(BaseAgent):
     # Ollama helper
     # ------------------------------------------------------------------
 
-    async def _ollama_generate(self, prompt: str, max_tokens: int = 600) -> str:
+    async def _ollama_generate(self, prompt: str, max_tokens: int = 2000) -> str:
         try:
             async with httpx.AsyncClient(timeout=60.0) as client:
                 resp = await client.post(

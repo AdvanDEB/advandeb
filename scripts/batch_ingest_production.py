@@ -134,10 +134,21 @@ def _init_worker(chunk_size: int, overlap: int, dry_run: bool = False) -> None:
         # Dry-run: only need chunker to count chunks
         return
 
-    import torch
-    from advandeb_kb.services.embedding_service import EmbeddingService
+    # CRITICAL ORDER: ChromaDB (onnxruntime) and ArangoDB MUST connect before
+    # PyTorch/sentence-transformers is imported. Loading PyTorch first causes a
+    # segfault when ChromaDB's PersistentClient tries to open the SQLite WAL.
     from advandeb_kb.services.chromadb_service import ChromaDBService
     from advandeb_kb.database.arango_client import ArangoDatabase
+
+    _worker_services["chroma"] = ChromaDBService()
+    _worker_services["chroma"]._ensure_connected()  # connect before torch loads
+
+    _worker_services["arango"] = ArangoDatabase()
+    _worker_services["arango"].connect()
+
+    # Now safe to load PyTorch + sentence-transformers
+    import torch
+    from advandeb_kb.services.embedding_service import EmbeddingService
 
     # Assign GPU by worker index (round-robin across 3 GPUs)
     worker_idx = int(mp.current_process().name.split("-")[-1]) - 1 if "-" in mp.current_process().name else 0
@@ -146,15 +157,7 @@ def _init_worker(chunk_size: int, overlap: int, dry_run: bool = False) -> None:
         os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
         logger.info("Worker %s assigned GPU %d", mp.current_process().name, gpu_id)
 
-    # IMPORTANT: ChromaDB must connect BEFORE EmbeddingService loads the model.
-    # Loading sentence-transformers (PyTorch) before hnswlib causes a segfault
-    # due to conflicting OpenMP/BLAS initialization.
-    _worker_services["chroma"] = ChromaDBService()
-    _worker_services["chroma"]._ensure_connected()  # force connect now
-
     _worker_services["embedder"] = EmbeddingService()
-    _worker_services["arango"] = ArangoDatabase()
-    _worker_services["arango"].connect()
 
 
 def _ingest_one(args: tuple) -> dict:

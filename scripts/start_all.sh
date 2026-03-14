@@ -8,8 +8,8 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 KB_DIR="$REPO_ROOT/knowledge-builder"
-MCP_BIN="$REPO_ROOT/mcp/target/release/advandeb-mcp"
-MCP_CONFIG="$REPO_ROOT/mcp/config/default.toml"
+MCP_DIR="$REPO_ROOT/mcp"
+MCP_BIN="$MCP_DIR/target/release/advandeb-mcp"
 LOGS="$REPO_ROOT/logs"
 CONDA_ENV="advandeb"
 
@@ -18,7 +18,8 @@ mkdir -p "$LOGS"
 log() { echo "[start_all] $*"; }
 
 # -----------------------------------------------------------------------
-# 1. MCP Gateway (Rust binary)
+# 1. MCP Gateway (Rust binary — must run from mcp/ so config/default.toml
+#    is found relative to CWD)
 # -----------------------------------------------------------------------
 if [[ ! -f "$MCP_BIN" ]]; then
   log "ERROR: Gateway binary not found at $MCP_BIN"
@@ -27,13 +28,23 @@ if [[ ! -f "$MCP_BIN" ]]; then
 fi
 
 log "Starting MCP Gateway on :8080..."
-"$MCP_BIN" --config "$MCP_CONFIG" \
+(cd "$MCP_DIR" && "$MCP_BIN") \
   > "$LOGS/gateway.log" 2>&1 &
 echo $! > "$LOGS/gateway.pid"
 log "  Gateway PID $(cat "$LOGS/gateway.pid") — log: $LOGS/gateway.log"
 
-# Give the gateway a moment to bind
-sleep 1
+# Wait for gateway to be ready
+for i in $(seq 1 15); do
+  if curl -sf http://localhost:8080/health > /dev/null 2>&1; then
+    log "  Gateway is ready."
+    break
+  fi
+  sleep 1
+  if [[ $i -eq 15 ]]; then
+    log "ERROR: Gateway did not respond after 15s."
+    exit 1
+  fi
+done
 
 # -----------------------------------------------------------------------
 # 2. Five specialized agents (Python, conda env advandeb)
@@ -48,17 +59,35 @@ declare -A AGENTS=(
 
 for agent_module in "${!AGENTS[@]}"; do
   port="${AGENTS[$agent_module]}"
+  health_port=$((port + 100))
   log "Starting $agent_module on ws://localhost:$port ..."
-  conda run -n "$CONDA_ENV" python -m "advandeb_kb.agents.$agent_module" \
+  (cd "$KB_DIR" && conda run -n "$CONDA_ENV" python3 -m "advandeb_kb.agents.$agent_module") \
     > "$LOGS/${agent_module}.log" 2>&1 &
   echo $! > "$LOGS/${agent_module}.pid"
   log "  $agent_module PID $(cat "$LOGS/${agent_module}.pid") — log: $LOGS/${agent_module}.log"
 done
 
 log ""
-log "All services started. Wait a few seconds then run:"
-log "  ./scripts/register_all_agents.sh"
+log "Waiting 5s for agents to initialise..."
+sleep 5
+
+# -----------------------------------------------------------------------
+# 3. Register agents with the gateway
+# -----------------------------------------------------------------------
+log "Registering agents..."
+bash "$REPO_ROOT/scripts/register_all_agents.sh"
+
+log ""
+log "All services started and registered."
+log ""
+log "Service URLs:"
+log "  MCP Gateway       http://localhost:8080/health"
+log "  MCP Agents list   http://localhost:8080/agents"
+log "  App backend       http://localhost:8400/health  (start separately)"
+log "  App frontend      http://localhost:5173          (start separately)"
 log ""
 log "To follow logs:"
 log "  tail -f $LOGS/gateway.log"
 log "  tail -f $LOGS/retrieval_agent.log"
+log ""
+log "To stop all: ./scripts/stop_all.sh"

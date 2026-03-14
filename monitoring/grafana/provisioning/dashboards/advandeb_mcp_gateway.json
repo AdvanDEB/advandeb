@@ -1,0 +1,278 @@
+{
+  "__inputs": [],
+  "__requires": [
+    { "type": "grafana", "id": "grafana", "name": "Grafana", "version": "12.0.0" },
+    { "type": "datasource", "id": "prometheus", "name": "Prometheus", "version": "1.0.0" },
+    { "type": "panel", "id": "timeseries", "name": "Time series", "version": "" },
+    { "type": "panel", "id": "stat", "name": "Stat", "version": "" },
+    { "type": "panel", "id": "gauge", "name": "Gauge", "version": "" }
+  ],
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 100,
+      "title": "Tool Calls",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 1 },
+      "id": 1,
+      "options": { "tooltip": { "mode": "multi" } },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "rate(mcp_tool_calls_total[1m])",
+          "legendFormat": "{{agent}} / {{tool}} [{{status}}]",
+          "refId": "A"
+        }
+      ],
+      "title": "Tool Call Rate (per second)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "custom": { "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 1 },
+      "id": 2,
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "mcp_tool_calls_total",
+          "legendFormat": "{{agent}} / {{tool}} [{{status}}]",
+          "refId": "A"
+        }
+      ],
+      "title": "Tool Calls (cumulative)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 9 },
+      "id": 101,
+      "title": "Latency",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "custom": { "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 10 },
+      "id": 3,
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "histogram_quantile(0.50, rate(mcp_tool_latency_seconds_bucket[5m]))",
+          "legendFormat": "p50 {{agent}}/{{tool}}",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "histogram_quantile(0.95, rate(mcp_tool_latency_seconds_bucket[5m]))",
+          "legendFormat": "p95 {{agent}}/{{tool}}",
+          "refId": "B"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "histogram_quantile(0.99, rate(mcp_tool_latency_seconds_bucket[5m]))",
+          "legendFormat": "p99 {{agent}}/{{tool}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Tool Latency Percentiles (p50/p95/p99)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "custom": { "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 10 },
+      "id": 4,
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "rate(mcp_tool_latency_seconds_sum[1m]) / rate(mcp_tool_latency_seconds_count[1m])",
+          "legendFormat": "avg {{agent}}/{{tool}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Tool Latency Average",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 18 },
+      "id": 102,
+      "title": "Connections & Workflows",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [
+          { "color": "green", "value": null },
+          { "color": "yellow", "value": 5 },
+          { "color": "red", "value": 10 }
+        ]}, "unit": "short", "min": 0 }
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 0, "y": 19 },
+      "id": 5,
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "orientation": "auto", "textMode": "auto", "colorMode": "background" },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "mcp_ws_connections",
+          "legendFormat": "WS Connections",
+          "refId": "A"
+        }
+      ],
+      "title": "Active WS Connections",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [
+          { "color": "green", "value": null }
+        ]}, "unit": "short", "min": 0 }
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 6, "y": 19 },
+      "id": 6,
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "mcp_pool_idle_connections",
+          "legendFormat": "Idle Pool",
+          "refId": "A"
+        }
+      ],
+      "title": "Idle Pool Connections",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [
+          { "color": "blue", "value": null }
+        ]}, "unit": "short", "min": 0 }
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 12, "y": 19 },
+      "id": 7,
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "mcp_workflow_runs_total",
+          "legendFormat": "Workflow Runs",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Workflow Runs",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [
+          { "color": "blue", "value": null }
+        ]}, "unit": "short", "min": 0 }
+      },
+      "gridPos": { "h": 6, "w": 6, "x": 18, "y": 19 },
+      "id": 8,
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"] }, "colorMode": "background" },
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "sum(mcp_tool_calls_total)",
+          "legendFormat": "Total Tool Calls",
+          "refId": "A"
+        }
+      ],
+      "title": "Total Tool Calls",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "custom": { "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 25 },
+      "id": 9,
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "rate(mcp_workflow_runs_total[1m])",
+          "legendFormat": "Workflow Rate",
+          "refId": "A"
+        },
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "mcp_ws_connections",
+          "legendFormat": "WS Connections",
+          "refId": "B"
+        }
+      ],
+      "title": "Workflow Rate & WS Connections Over Time",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 33 },
+      "id": 103,
+      "title": "Error Rate",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+      "fieldConfig": {
+        "defaults": { "color": { "mode": "palette-classic" }, "custom": { "lineWidth": 2, "fillOpacity": 15 }, "unit": "percentunit", "min": 0, "max": 1 },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 34 },
+      "id": 10,
+      "targets": [
+        {
+          "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
+          "expr": "rate(mcp_tool_calls_total{status=\"error\"}[1m]) / rate(mcp_tool_calls_total[1m])",
+          "legendFormat": "Error rate {{agent}}/{{tool}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Tool Call Error Rate",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "15s",
+  "schemaVersion": 39,
+  "tags": ["advandeb", "mcp"],
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "AdvanDEB MCP Gateway",
+  "uid": "advandeb-mcp-gateway",
+  "version": 1
+}

@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: AdvanDEB
+    orgId: 1
+    folder: AdvanDEB
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    options:
+      path: /etc/grafana/provisioning/dashboards
