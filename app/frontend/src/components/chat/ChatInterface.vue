@@ -143,7 +143,8 @@ onUnmounted(() => {
 
 function connectWebSocket() {
   const sessionId = currentSessionId.value
-  const wsUrl = `ws://localhost:8000/ws/chat/${sessionId}`
+  const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+  const wsUrl = `${proto}//${window.location.host}/ws/chat/${sessionId}`
   ws = new WebSocket(wsUrl)
 
   ws.onmessage = (event) => {
