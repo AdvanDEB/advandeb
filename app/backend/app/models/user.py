@@ -74,3 +74,8 @@ class GoogleAuthRequest(BaseModel):
     """Google OAuth request model."""
     code: str
     redirect_uri: str
+
+
+class RefreshTokenRequest(BaseModel):
+    """Refresh token request model."""
+    refresh_token: str

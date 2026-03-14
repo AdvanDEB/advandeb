@@ -3,11 +3,17 @@ Main FastAPI application entry point.
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
+from pathlib import Path
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 from app.core.config import settings
 from app.core.database import connect_to_mongo, close_mongo_connection
 from app.api.routes import auth, users, documents, facts, knowledge_graph, chat, scenarios, models, ws
+
+FRONTEND_DIST = Path(__file__).parent.parent.parent / "frontend" / "dist"
 
 
 @asynccontextmanager
@@ -25,6 +31,10 @@ app = FastAPI(
     version=settings.APP_VERSION,
     lifespan=lifespan,
 )
+
+# Trust X-Forwarded-Proto/For from the nginx reverse proxy so that
+# Starlette generates https:// redirect URLs when behind HTTPS termination.
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
 
 # CORS middleware
 app.add_middleware(
@@ -78,3 +88,13 @@ async def health():
         health_status["database"] = f"error: {str(e)}"
     
     return health_status
+
+
+# Serve Vue SPA static assets and fall back to index.html for client-side routing.
+# Must be mounted last so API routes take priority.
+if FRONTEND_DIST.exists():
+    app.mount("/assets", StaticFiles(directory=FRONTEND_DIST / "assets"), name="assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def spa_fallback(full_path: str):
+        return FileResponse(FRONTEND_DIST / "index.html")

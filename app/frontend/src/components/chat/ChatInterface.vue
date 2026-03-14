@@ -73,6 +73,9 @@ import MessageInput from './MessageInput.vue'
 import AgentActivity from './AgentActivity.vue'
 import ProvenanceTrail from '@/components/provenance/ProvenanceTrail.vue'
 import api from '@/utils/api'
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
 
 interface Message {
   id: string
@@ -240,7 +243,7 @@ async function handleSendMessage(text: string) {
       JSON.stringify({
         type: 'user_message',
         text,
-        user_id: 'current', // auth store user_id used here in real integration
+        user_id: authStore.user?.id ?? 'anonymous',
       })
     )
   }

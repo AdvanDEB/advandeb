@@ -5,8 +5,8 @@ from fastapi import APIRouter, HTTPException, status
 import httpx
 
 from app.core.config import settings
-from app.core.auth import create_access_token, create_refresh_token
-from app.models.user import GoogleAuthRequest, NativeLoginRequest, TokenResponse, User
+from app.core.auth import create_access_token, create_refresh_token, verify_token
+from app.models.user import GoogleAuthRequest, NativeLoginRequest, RefreshTokenRequest, TokenResponse, User
 from app.services.user_service import UserService
 
 
@@ -132,12 +132,48 @@ async def google_auth(auth_request: GoogleAuthRequest):
 
 
 @router.post("/refresh", response_model=TokenResponse)
-async def refresh_token(refresh_token: str):
-    """Refresh access token using refresh token."""
-    # TODO: Implement token refresh
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="Not implemented"
+async def refresh_token(body: RefreshTokenRequest):
+    """Refresh access token using a valid refresh token."""
+    try:
+        payload = verify_token(body.refresh_token)
+    except HTTPException:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired refresh token",
+        )
+
+    if payload.get("type") != "refresh":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token type",
+        )
+
+    user_id = payload.get("sub")
+    if not user_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid refresh token",
+        )
+
+    user_service = UserService()
+    user = await user_service.get_user_by_id(user_id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found",
+        )
+
+    new_access_token = create_access_token(
+        data={"sub": str(user.id), "email": user.email}
+    )
+    new_refresh_token = create_refresh_token(
+        data={"sub": str(user.id)}
+    )
+
+    return TokenResponse(
+        access_token=new_access_token,
+        refresh_token=new_refresh_token,
+        user=user,
     )
 
 

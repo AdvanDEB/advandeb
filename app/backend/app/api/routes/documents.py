@@ -1,7 +1,7 @@
 """
 Document management API routes.
 """
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status, UploadFile, File
 from typing import List
 
 from app.core.auth import get_current_user
@@ -26,12 +26,15 @@ async def create_document(
 
 @router.post("/upload", response_model=Document)
 async def upload_document(
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
-    current_user: dict = Depends(require_curator)
+    current_user: dict = Depends(require_curator),
 ):
-    """Upload a document file."""
+    """Upload a document file and automatically trigger embedding."""
     doc_service = DocumentService()
     document = await doc_service.upload_document(file, current_user["id"])
+    # Kick off embedding as a background task so the upload response is immediate
+    background_tasks.add_task(doc_service.process_document, document.id)
     return document
 
 
