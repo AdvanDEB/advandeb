@@ -6,13 +6,11 @@ This guide covers deploying the AdvanDEB MCP Gateway to production environments.
 
 1. [Prerequisites](#prerequisites)
 2. [Local Development](#local-development)
-3. [Docker Deployment](#docker-deployment)
-4. [Kubernetes Deployment](#kubernetes-deployment)
-5. [Configuration](#configuration)
-6. [Monitoring](#monitoring)
-7. [High Availability](#high-availability)
-8. [Security](#security)
-9. [Troubleshooting](#troubleshooting)
+3. [Configuration](#configuration)
+4. [Monitoring](#monitoring)
+5. [High Availability](#high-availability)
+6. [Security](#security)
+7. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -29,8 +27,6 @@ This guide covers deploying the AdvanDEB MCP Gateway to production environments.
 ### Software Requirements
 
 - **Rust**: 1.75 or later (for building from source)
-- **Docker**: 20.10+ (for containerized deployment)
-- **Kubernetes**: 1.25+ (for k8s deployment)
 - **TLS Certificates**: Required for HTTPS deployment
 
 ---
@@ -81,313 +77,6 @@ RUST_LOG=debug cargo test
 
 # Health check
 curl http://localhost:8080/health
-```
-
----
-
-## Docker Deployment
-
-### Building Docker Image
-
-Create a `Dockerfile`:
-
-```dockerfile
-# Multi-stage build for minimal image size
-FROM rust:1.75-bookworm as builder
-
-WORKDIR /app
-COPY . .
-
-# Build release binary
-RUN cargo build --release
-
-# Runtime image
-FROM debian:bookworm-slim
-
-# Install runtime dependencies
-RUN apt-get update && apt-get install -y \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy binary from builder
-COPY --from=builder /app/target/release/advandeb-mcp /usr/local/bin/mcp-gateway
-
-# Copy configuration files
-COPY --from=builder /app/config /app/config
-
-# Create non-root user
-RUN useradd -m -u 1000 mcp && \
-    mkdir -p /app/logs && \
-    chown -R mcp:mcp /app
-
-USER mcp
-WORKDIR /app
-
-EXPOSE 8080
-
-CMD ["mcp-gateway"]
-```
-
-Build the image:
-
-```bash
-docker build -t advandeb-mcp:latest .
-```
-
-### Running with Docker
-
-```bash
-# Basic run
-docker run -d \
-  --name mcp-gateway \
-  -p 8080:8080 \
-  advandeb-mcp:latest
-
-# With environment variables
-docker run -d \
-  --name mcp-gateway \
-  -p 8080:8080 \
-  -e ADVANDEB_MCP_BIND=0.0.0.0:8080 \
-  -e ADVANDEB_MCP_OLLAMA_HOST=http://ollama:11434 \
-  advandeb-mcp:latest
-
-# With TLS
-docker run -d \
-  --name mcp-gateway \
-  -p 8443:8443 \
-  -e ADVANDEB_MCP_TLS_ENABLED=true \
-  -e ADVANDEB_MCP_TLS_CERT_PATH=/certs/cert.pem \
-  -e ADVANDEB_MCP_TLS_KEY_PATH=/certs/key.pem \
-  -v /path/to/certs:/certs:ro \
-  advandeb-mcp:latest
-
-# With custom config
-docker run -d \
-  --name mcp-gateway \
-  -p 8080:8080 \
-  -v $(pwd)/config:/app/config:ro \
-  advandeb-mcp:latest
-```
-
-### Docker Compose
-
-Create `docker-compose.yml`:
-
-```yaml
-version: '3.8'
-
-services:
-  mcp-gateway:
-    image: advandeb-mcp:latest
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      - ADVANDEB_MCP_BIND=0.0.0.0:8080
-      - ADVANDEB_MCP_OLLAMA_HOST=http://ollama:11434
-      - RUST_LOG=info
-    volumes:
-      - ./config:/app/config:ro
-      - ./logs:/app/logs
-    depends_on:
-      - ollama
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  ollama:
-    image: ollama/ollama:latest
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama-data:/root/.ollama
-    restart: unless-stopped
-
-volumes:
-  ollama-data:
-```
-
-Run with Docker Compose:
-
-```bash
-docker-compose up -d
-docker-compose logs -f mcp-gateway
-docker-compose ps
-```
-
----
-
-## Kubernetes Deployment
-
-### Prerequisites
-
-- Kubernetes cluster (1.25+)
-- `kubectl` configured
-- Ingress controller (nginx, traefik, etc.)
-- TLS certificates (for HTTPS)
-
-### Deployment Manifests
-
-**1. ConfigMap** (`mcp-gateway-config.yaml`):
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mcp-gateway-config
-  namespace: advandeb
-data:
-  ADVANDEB_MCP_BIND: "0.0.0.0:8080"
-  ADVANDEB_MCP_OLLAMA_HOST: "http://ollama-service:11434"
-  ADVANDEB_MCP_AGENTS_HEALTH_CHECK_INTERVAL_SECONDS: "30"
-  RUST_LOG: "info"
-```
-
-**2. Secret** (for TLS):
-
-```bash
-# Create TLS secret from certificate files
-kubectl create secret tls mcp-gateway-tls \
-  --cert=/path/to/cert.pem \
-  --key=/path/to/key.pem \
-  --namespace=advandeb
-```
-
-**3. Deployment** (`mcp-gateway-deployment.yaml`):
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mcp-gateway
-  namespace: advandeb
-  labels:
-    app: mcp-gateway
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: mcp-gateway
-  template:
-    metadata:
-      labels:
-        app: mcp-gateway
-    spec:
-      containers:
-      - name: mcp-gateway
-        image: advandeb-mcp:latest
-        ports:
-        - containerPort: 8080
-          name: http
-        envFrom:
-        - configMapRef:
-            name: mcp-gateway-config
-        env:
-        - name: ADVANDEB_MCP_TLS_ENABLED
-          value: "false"  # TLS terminated at ingress
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "250m"
-          limits:
-            memory: "1Gi"
-            cpu: "1000m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 10
-          periodSeconds: 30
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        volumeMounts:
-        - name: config
-          mountPath: /app/config
-          readOnly: true
-      volumes:
-      - name: config
-        configMap:
-          name: mcp-gateway-config
-```
-
-**4. Service** (`mcp-gateway-service.yaml`):
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: mcp-gateway-service
-  namespace: advandeb
-spec:
-  selector:
-    app: mcp-gateway
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
-    name: http
-  type: ClusterIP
-```
-
-**5. Ingress** (`mcp-gateway-ingress.yaml`):
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: mcp-gateway-ingress
-  namespace: advandeb
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-    - mcp.advandeb.example.com
-    secretName: mcp-gateway-tls
-  rules:
-  - host: mcp.advandeb.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: mcp-gateway-service
-            port:
-              number: 8080
-```
-
-### Deploy to Kubernetes
-
-```bash
-# Create namespace
-kubectl create namespace advandeb
-
-# Apply manifests
-kubectl apply -f mcp-gateway-config.yaml
-kubectl apply -f mcp-gateway-deployment.yaml
-kubectl apply -f mcp-gateway-service.yaml
-kubectl apply -f mcp-gateway-ingress.yaml
-
-# Check status
-kubectl get pods -n advandeb
-kubectl get svc -n advandeb
-kubectl get ingress -n advandeb
-
-# View logs
-kubectl logs -f deployment/mcp-gateway -n advandeb
-
-# Scale replicas
-kubectl scale deployment mcp-gateway --replicas=5 -n advandeb
 ```
 
 ---
@@ -465,14 +154,14 @@ curl http://localhost:8080/pool/stats
 
 ### Horizontal Scaling
 
-The gateway is stateless and can be horizontally scaled:
+The gateway is stateless and can be horizontally scaled. Run multiple instances on different ports and load-balance with nginx:
 
 ```bash
-# Kubernetes
-kubectl scale deployment mcp-gateway --replicas=5 -n advandeb
+# Instance 1
+ADVANDEB_MCP_BIND=0.0.0.0:8080 cargo run --release
 
-# Docker Compose (with load balancer)
-docker-compose up --scale mcp-gateway=3
+# Instance 2
+ADVANDEB_MCP_BIND=0.0.0.0:8081 cargo run --release
 ```
 
 ### Load Balancing
@@ -574,10 +263,6 @@ See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for detailed troubleshooting guide.
 ```bash
 # Check if service is running
 curl http://localhost:8080/health
-
-# View logs
-docker logs mcp-gateway
-kubectl logs -f deployment/mcp-gateway -n advandeb
 
 # Check metrics
 curl http://localhost:8080/metrics | grep mcp_

@@ -314,8 +314,6 @@ cargo doc --no-deps --open
 ## Deployment
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive deployment guides including:
-- Docker deployment
-- Kubernetes deployment
 - High availability configurations
 - Production best practices
 - Security hardening

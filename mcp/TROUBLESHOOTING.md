@@ -165,9 +165,9 @@ curl http://public-ip:8080/health       # Internet
    sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
    ```
 
-3. **Check Docker port mapping**:
+3. **Verify the process is listening**:
    ```bash
-   docker ps  # Verify port mapping: 0.0.0.0:8080->8080/tcp
+   ss -tlnp | grep 8080
    ```
 
 ### WebSocket Connection Drops
@@ -258,12 +258,6 @@ RUST_LOG=debug cargo run
 ```bash
 # Check memory usage
 ps aux | grep mcp-gateway
-
-# Docker
-docker stats mcp-gateway
-
-# Kubernetes
-kubectl top pod -l app=mcp-gateway -n advandeb
 ```
 
 **Solutions**:
@@ -593,12 +587,6 @@ RUST_LOG=advandeb_mcp::gateway=debug,advandeb_mcp::mcp=trace cargo run
 ```bash
 # Redirect stdout/stderr
 cargo run > logs/gateway.log 2>&1
-
-# Docker
-docker logs mcp-gateway > gateway.log
-
-# Kubernetes
-kubectl logs -f deployment/mcp-gateway -n advandeb > gateway.log
 ```
 
 ### Useful Log Filters

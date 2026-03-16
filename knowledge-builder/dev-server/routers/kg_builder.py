@@ -1,185 +1,143 @@
 """
-KG Builder API — triggers document-taxon linking and exposes stats.
+KG Builder API — document-taxon linking, stats, curation.
 
 Endpoints:
-  GET  /api/kg/stats          — counts for documents, relations, index
-  POST /api/kg/link           — enqueue a Celery batch-linking task
-  POST /api/kg/link/sync      — run linking synchronously (small batches only)
-  PUT  /api/kg/relations/{id} — curator: confirm or reject a suggested relation
+  GET  /api/kg/stats               — counts for documents, relations, index
+  POST /api/kg/link                — async: runs in BackgroundTasks
+  POST /api/kg/link/sync           — sync: small batches (≤5000 docs)
+  POST /api/kg/link/agent          — async agent linking via BackgroundTasks
+  POST /api/kg/link/agent/sync     — sync agent linking
+  PUT  /api/kg/relations/{id}      — confirm or reject a suggested relation
+  GET  /api/kg/relations           — browse relations
 """
-from fastapi import APIRouter, Body, HTTPException, Query
-from typing import Any, Dict, Literal, Optional
+from datetime import datetime
+from typing import Any, Dict, Optional
+
+from bson import ObjectId
+from fastapi import APIRouter, BackgroundTasks, Body, HTTPException, Query
 
 from advandeb_kb.database.mongodb import get_database
 from advandeb_kb.services.kg_builder_service import KGBuilderService
 from advandeb_kb.services.kg_linker_agent_service import KGLinkerAgentService
-from bson import ObjectId
+from tasks.pipeline import run_kg_link_agent, run_kg_link_batch
 
 router = APIRouter()
-
-
-async def _get_service() -> KGBuilderService:
-    db = await get_database()
-    return KGBuilderService(db)
 
 
 # ---------------------------------------------------------------------------
 # Stats
 # ---------------------------------------------------------------------------
 
-@router.get("/stats", summary="KG builder statistics")
+@router.get("/stats")
 async def get_stats() -> Any:
-    """Return counts: total docs, linked docs, total relations, by status."""
-    service = await _get_service()
-    return await service.get_stats()
+    db = await get_database()
+    return await KGBuilderService(db).get_stats()
 
 
 # ---------------------------------------------------------------------------
-# Async (Celery) linking
+# Keyword-based linking
 # ---------------------------------------------------------------------------
 
-@router.post("/link", summary="Enqueue batch document-taxon linking (async)")
-async def enqueue_link(
-    root_taxid: int = Query(default=40674, description="NCBI root taxon ID"),
+@router.post("/link")
+async def link_async(
+    background_tasks: BackgroundTasks,
+    root_taxid: int = Query(default=40674),
     limit: int = Query(default=1000, ge=1, le=100_000),
     skip: int = Query(default=0, ge=0),
     overwrite: bool = Query(default=False),
 ) -> Any:
-    """Enqueue a Celery task to link a batch of documents to taxa.
-
-    Use GET /api/kg/stats to monitor progress.
-    """
-    try:
-        from tasks.kg_tasks import link_batch
-        task = link_batch.delay(
-            root_taxid=root_taxid,
-            limit=limit,
-            skip=skip,
-            overwrite=overwrite,
-        )
-        return {
-            "task_id": task.id,
-            "status": "queued",
-            "params": {"root_taxid": root_taxid, "limit": limit, "skip": skip},
-        }
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Celery unavailable: {e}")
+    """Enqueue batch document-taxon keyword linking (runs in background)."""
+    db = await get_database()
+    background_tasks.add_task(run_kg_link_batch, db, root_taxid, limit, skip, overwrite)
+    return {"status": "queued", "params": {"root_taxid": root_taxid, "limit": limit, "skip": skip}}
 
 
-# ---------------------------------------------------------------------------
-# Sync linking (small batches, returns result immediately)
-# ---------------------------------------------------------------------------
-
-@router.post("/link/sync", summary="Run document-taxon linking synchronously")
+@router.post("/link/sync")
 async def link_sync(
     root_taxid: int = Query(default=40674),
     limit: int = Query(default=200, ge=1, le=5_000),
     skip: int = Query(default=0, ge=0),
     overwrite: bool = Query(default=False),
 ) -> Any:
-    """Run document-taxon linking in the current request (no Celery required).
-
-    Suitable for small batches (≤ 5 000 docs). For large imports use POST /link.
-    """
+    """Run document-taxon keyword linking synchronously (small batches)."""
     db = await get_database()
-    service = KGBuilderService(db)
-    await service.ensure_indexes()
-    n_indexed = await service.build_name_index(root_taxid=root_taxid)
-    result = await service.link_documents(limit=limit, skip=skip, overwrite=overwrite)
+    svc = KGBuilderService(db)
+    await svc.ensure_indexes()
+    n_indexed = await svc.build_name_index(root_taxid=root_taxid)
+    result = await svc.link_documents(limit=limit, skip=skip, overwrite=overwrite)
     result["index_entries"] = n_indexed
     result["root_taxid"] = root_taxid
     return result
 
 
 # ---------------------------------------------------------------------------
-# Agent linking — sync (small batches, inline result)
+# Agent-based linking
 # ---------------------------------------------------------------------------
 
-@router.post("/link/agent/sync", summary="Run agent document-taxon linking synchronously")
-async def link_agent_sync(
-    model: str = Query(default="mistral", description="Ollama model name"),
-    limit: int = Query(default=20, ge=1, le=500),
-    skip: int = Query(default=0, ge=0),
-    overwrite: bool = Query(default=False),
-) -> Any:
-    """Run LLM-agent document-taxon linking inline (no Celery required).
-
-    Suitable for small batches (≤ 500 docs). For large imports use POST /link/agent.
-    """
-    db = await get_database()
-    svc = KGLinkerAgentService(db)
-    return await svc.link_documents(model=model, limit=limit, skip=skip, overwrite=overwrite)
-
-
-# ---------------------------------------------------------------------------
-# Agent linking — async (Celery)
-# ---------------------------------------------------------------------------
-
-@router.post("/link/agent", summary="Enqueue agent document-taxon linking (async)")
+@router.post("/link/agent")
 async def link_agent_async(
-    model: str = Query(default="mistral", description="Ollama model name"),
+    background_tasks: BackgroundTasks,
+    model: str = Query(default="deepseek-r1:latest"),
     limit: int = Query(default=500, ge=1, le=100_000),
     skip: int = Query(default=0, ge=0),
     overwrite: bool = Query(default=False),
 ) -> Any:
-    """Enqueue a Celery task to run the LLM agent on a batch of documents."""
-    try:
-        from tasks.kg_tasks import link_batch_agent
-        task = link_batch_agent.delay(model=model, limit=limit, skip=skip, overwrite=overwrite)
-        return {"task_id": task.id, "status": "queued", "params": {"model": model, "limit": limit, "skip": skip}}
-    except Exception as e:
-        raise HTTPException(status_code=503, detail=f"Celery unavailable: {e}")
+    """Enqueue LLM agent document-taxon linking (runs in background)."""
+    db = await get_database()
+    background_tasks.add_task(run_kg_link_agent, db, model, limit, skip, overwrite)
+    return {"status": "queued", "params": {"model": model, "limit": limit, "skip": skip}}
+
+
+@router.post("/link/agent/sync")
+async def link_agent_sync(
+    model: str = Query(default="deepseek-r1:latest"),
+    limit: int = Query(default=20, ge=1, le=500),
+    skip: int = Query(default=0, ge=0),
+    overwrite: bool = Query(default=False),
+) -> Any:
+    """Run LLM agent document-taxon linking synchronously (small batches)."""
+    db = await get_database()
+    return await KGLinkerAgentService(db).link_documents(
+        model=model, limit=limit, skip=skip, overwrite=overwrite
+    )
 
 
 # ---------------------------------------------------------------------------
 # Curator: confirm / reject relations
 # ---------------------------------------------------------------------------
 
-@router.put("/relations/{relation_id}", summary="Confirm or reject a suggested relation")
+@router.put("/relations/{relation_id}")
 async def update_relation(
     relation_id: str,
     body: Dict[str, Any] = Body(default={}),
 ) -> Any:
-    """Set status to 'confirmed' or 'rejected' on a document_taxon_relation.
-
-    Body: { "status": "confirmed" | "rejected", "curator_id": "..." }
-    """
     if not ObjectId.is_valid(relation_id):
         raise HTTPException(status_code=400, detail="Invalid relation_id")
-
     new_status: str = body.get("status", "")
     if new_status not in ("confirmed", "rejected"):
         raise HTTPException(status_code=400, detail="status must be 'confirmed' or 'rejected'")
 
-    from datetime import datetime
     db = await get_database()
     result = await db.document_taxon_relations.update_one(
         {"_id": ObjectId(relation_id)},
-        {
-            "$set": {
-                "status": new_status,
-                "updated_at": datetime.utcnow(),
-                "reviewed_by": body.get("curator_id", "curator"),
-            }
-        },
+        {"$set": {
+            "status": new_status,
+            "updated_at": datetime.utcnow(),
+            "reviewed_by": body.get("curator_id", "curator"),
+        }},
     )
     if result.matched_count == 0:
         raise HTTPException(status_code=404, detail="Relation not found")
     return {"updated": True, "status": new_status}
 
 
-# ---------------------------------------------------------------------------
-# Browse relations (for the UI)
-# ---------------------------------------------------------------------------
-
-@router.get("/relations", summary="Browse document-taxon relations")
+@router.get("/relations")
 async def list_relations(
     status: Optional[str] = Query(default=None),
     tax_id: Optional[int] = Query(default=None),
     limit: int = Query(default=50, ge=1, le=500),
     skip: int = Query(default=0, ge=0),
 ) -> Any:
-    """Return a page of document_taxon_relations with optional filters."""
     db = await get_database()
     query: Dict[str, Any] = {}
     if status:
@@ -187,16 +145,13 @@ async def list_relations(
     if tax_id is not None:
         query["tax_id"] = tax_id
 
-    from bson import ObjectId as _OID
-    from datetime import datetime as _dt
-
     docs = []
     async for rel in db.document_taxon_relations.find(query, limit=limit, skip=skip):
         rel["_id"] = str(rel["_id"])
         rel["document_id"] = str(rel["document_id"])
-        if isinstance(rel.get("created_at"), _dt):
+        if isinstance(rel.get("created_at"), datetime):
             rel["created_at"] = rel["created_at"].isoformat()
-        if isinstance(rel.get("updated_at"), _dt):
+        if isinstance(rel.get("updated_at"), datetime):
             rel["updated_at"] = rel["updated_at"].isoformat()
         docs.append(rel)
 

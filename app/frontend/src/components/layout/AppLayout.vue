@@ -70,7 +70,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 const mobileOpen = ref(false)
 
-const navLinks = [
+const baseLinks = [
   { path: '/',           icon: '⌂',  label: 'Home' },
   { path: '/chat',       icon: '💬', label: 'Chat' },
   { path: '/documents',  icon: '📄', label: 'Documents' },
@@ -79,6 +79,14 @@ const navLinks = [
   { path: '/scenarios',  icon: '⚗',  label: 'Scenarios' },
   { path: '/models',     icon: '📐', label: 'Models' },
 ]
+
+const navLinks = computed(() => {
+  const links = [...baseLinks]
+  if (authStore.hasRole('administrator') || authStore.hasRole('knowledge_curator')) {
+    links.push({ path: '/kb', icon: '🧠', label: 'Knowledge Builder' })
+  }
+  return links
+})
 
 const initials = computed(() => {
   const name = authStore.user?.full_name || authStore.user?.email || '?'

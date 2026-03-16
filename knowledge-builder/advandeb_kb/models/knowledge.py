@@ -53,7 +53,9 @@ class Fact(BaseModel):
 
     id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
     content: str
-    document_id: PyObjectId
+    document_id: PyObjectId           # primary source
+    additional_sources: List[PyObjectId] = []   # cross-linked documents reporting the same fact
+    content_fingerprint: Optional[str] = None  # normalized for deduplication
     page_number: Optional[int] = None
 
     # Named entities mentioned in the fact (organism names, process names, etc.)

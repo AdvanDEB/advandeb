@@ -600,27 +600,18 @@ Alternativa bez asynca ograničava skup operacija koje platforma može ponuditi.
 
 \section{Deployment i Operations}
 
-\subsection{Containerizacija s Docker-om}
+\subsection{Deployment}
 
-\begin{rationale}{Projektna odluka: Svaka komponenta ima Dockerfile za kontejnerizaciju}
-advandeb-modeling-assistant, advandeb-knowledge-builder workeri i advandeb-MCP server deployiraju kao Docker kontejneri orkestiranu putem docker-compose za razvoj i Kubernetes za produkciju.
-\end{rationale}
+Komponente se deployiraju nativno na host sistemu bez kontejnerizacije:
 
-Kontejnerizacija rješava "radi na mom stroju" problem koji muči tradicionalne deploymente. Developeri grade u Python virtuelnim okruženjima s specifičnim verzijama paketa. Produkcijski serveri imaju različite OS verzije, biblioteke sistema, ili konfiguracije mreže. Kod koji funkcionira lokalno zakazuje u produkciji zbog suptilnih razlika okoline.
+\begin{itemize}
+    \item advandeb-modeling-assistant: FastAPI backend s \texttt{uvicorn}, Vue.js frontend serviran kroz nginx
+    \item advandeb-knowledge-builder: Python paket instaliran kao \texttt{pip install -e .}, korišten direktno od MA backenda
+    \item advandeb-MCP server: Rust binarni (\texttt{cargo build --release}), pokrenut direktno
+    \item MongoDB, Redis, Ollama: instalirani lokalno putem OS package managera
+\end{itemize}
 
-Docker kontejneri pakuju aplikaciju s svim zavisnostima—Python runtime, sistem biblioteke, aplikacijski kod, konfiguracijske datoteke—u imutabilnu sliku. Ista slika koja je testirana u developmentu deployi u produkciju, garancija konzistentnosti. Build process je ponovljiv—docker build proizvodi identične slike iz istog Dockerfile-a.
-
-advandeb-modeling-assistant kontejner pokreće Vue.js frontend i FastAPI backend u multi-stage build-u. Prvi stage gradi frontend (npm install, npm run build), drugi stage postavi Python zavisnosti, konačni stage kopira kompiliran frontend i izvršava backend. Ova struktura optimizira veličinu slike—build alati ne dolaze u konačni kontejner.
-
-advandeb-knowledge-builder ne deployi kao dugotrajna usluga—nema HTTP krajnjih točaka. Umjesto toga, advandeb-modeling-assistant uvozi ga kao Python paket. Za batch procesiranje, KB kontejner može pokrenuti izvršavanje Celery worker procesa koji procesiraju dokumente i izvršavaju agente.
-
-advandeb-MCP server deployi kao lagani Rust binarni kontejner. Multi-stage build kompajlira Rust kod u jednom stage i kopira binarni u minimalni distroless sliku u konačnom stage-u. Rezultat je 10-50MB slika naspram stotina MB za kontejnere temeljene na Pythonu.
-
-docker-compose orkestracijom za lokalni razvoj pokreće sve servise s jednom komandom: MongoDB, Redis, Ollama, MA backend, MCP server. Developeri ne moraju ručno instalirati i konfigurirati svaki servis—\texttt{docker-compose up} započinje cijeli stack. Volume mount-ovi omogućavaju live code reload-a: mijenjanje Python koda automatski restarta servis bez rebuilding kontejnera.
-
-Za produkciju, Kubernetes orkestracijom pruža napredne sposobnosti koje docker-compose nedostaje: automatsko skaliranje (dodavanje replika kad opterećenje raste), health checks i automatsko ponovno pokretanje (restart unhealthy kontejnera), rolling updates (novi deploymenti bez downtime-a), resource limits (osiguravajući servise ne monopolizira CPU/memoriju).
-
-Alternativa bez kontejnerizacije—deployirajući direktno na VM-ove s Python virtualenvima—radi ali zahtijeva više ručnog upravljanja zavisnosti i otežava replikaciju okruženja. Za mali tim, Docker single-command development setup dramatično smanjuje onboarding trenje za nove contributore.
+Konzistentnost okoline osigurava se conda environment datotekama (\texttt{environment.yml}) i fiksiranim verzijama zavisnosti u \texttt{requirements.txt} i \texttt{Cargo.lock}.
 
 \subsection{Monitoring i observability}
 

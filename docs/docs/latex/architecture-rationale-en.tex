@@ -654,7 +654,7 @@ This environment progression provides safety nets. A bug that passes unit tests 
 
 The alternative of deploying directly to production or using only dev/prod without staging increases risk unacceptably. Development environments differ too much from production (localhost vs hosted, mock vs real external services) to catch integration issues. Production deployments without staging preview create all-or-nothing scenarios where bugs affect users before they're discovered. The staging environment specifically exists to bridge the gap between development idealism and production realism.
 
-Configuration management across environments uses environment variables and configuration files, never hardcoded values. The same code artifact (Docker container) deploys to all three environments with different configuration. This ensures that staging tests are testing the actual code that will deploy to production, not a similar-but-different version. Configuration-as-code practices (Terraform for infrastructure, Ansible for configuration) enable reproducible environment creation and disaster recovery.
+Configuration management across environments uses environment variables and configuration files, never hardcoded values. The same code artifact deploys to all three environments with different configuration. This ensures that staging tests are testing the actual code that will deploy to production, not a similar-but-different version. Configuration-as-code practices enable reproducible environment creation and disaster recovery.
 
 \section{Knowledge Builder Architecture}
 

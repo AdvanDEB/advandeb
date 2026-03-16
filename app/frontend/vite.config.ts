@@ -38,10 +38,11 @@ export default defineConfig({
       output: {
         // Manual chunking for better caching
         manualChunks: {
-          'vue-vendor': ['vue', 'vue-router', 'pinia'],
-          'graph-vendor': ['cytoscape'],
-          'ui-vendor': ['@vueuse/core'],
-          'markdown-vendor': ['marked', 'highlight.js']
+          'vue-vendor':      ['vue', 'vue-router', 'pinia'],
+          'graph-vendor':    ['cytoscape'],
+          'ui-vendor':       ['@vueuse/core'],
+          'markdown-vendor': ['marked', 'highlight.js'],
+          'sigma-vendor':    ['sigma', 'graphology', 'graphology-layout', 'graphology-layout-forceatlas2'],
         }
       }
     },

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # start_all.sh — Start MCP Gateway and all 5 specialized agents.
-# All services run natively (no Docker). Logs go to logs/
+# All services run natively. Logs go to logs/
 # Usage: ./scripts/start_all.sh
 # Stop all: ./scripts/stop_all.sh  (or kill the PIDs in logs/*.pid)
 

@@ -89,8 +89,6 @@ brew services start mongodb-community
 sudo apt-get install mongodb
 sudo systemctl start mongodb
 
-# Or use Docker
-docker run -d -p 27017:27017 --name mongodb mongo:latest
 ```
 
 ### MongoDB Atlas (Cloud)

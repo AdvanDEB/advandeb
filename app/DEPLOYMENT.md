@@ -5,21 +5,14 @@
 ### Development Mode
 
 ```bash
-# Start all services with hot-reload
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-
-# Or without docker-compose:
-# Terminal 1: Start MongoDB
-docker run -d -p 27017:27017 --name advandeb-mongo mongo:7
-
-# Terminal 2: Start backend
+# Terminal 1: Start backend
 cd backend
 cp .env.example .env  # Configure environment variables
 pip install -r requirements.txt
 pip install -e ../../knowledge-builder
 uvicorn app.main:app --reload
 
-# Terminal 3: Start frontend
+# Terminal 2: Start frontend
 cd frontend
 npm install
 npm run dev
@@ -30,17 +23,15 @@ Visit: http://localhost:5173
 ### Production Mode
 
 ```bash
-# Build and start services
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# Build frontend
+cd frontend
+npm run build
+# Serve dist/ with nginx (see frontend/nginx.conf)
 
-# View logs
-docker-compose logs -f
-
-# Stop services
-docker-compose down
+# Start backend
+cd backend
+uvicorn app.main:app --workers 4
 ```
-
-Visit: http://localhost:3000
 
 ---
 
@@ -87,14 +78,10 @@ LOG_LEVEL=INFO
 
 ### Production Environment Variables
 
-For production deployment, create a `.env.prod` file:
+For production, set these in `backend/.env`:
 
 ```env
 # MongoDB with authentication
-MONGO_ROOT_USERNAME=admin
-MONGO_ROOT_PASSWORD=secure-password-here
-
-# JWT (use strong random key)
 JWT_SECRET_KEY=production-secret-key-64-chars-minimum
 
 # Google OAuth (production credentials)
@@ -103,52 +90,14 @@ GOOGLE_CLIENT_SECRET=production-client-secret
 GOOGLE_REDIRECT_URI=https://yourdomain.com/api/auth/callback
 
 # Database
-MONGODB_URI=mongodb://admin:secure-password-here@mongodb:27017
+MONGODB_URI=mongodb://localhost:27017
 MONGODB_DB_NAME=advandeb
 
 # MCP Integration
-MCP_SERVER_URL=http://mcp:8080
+MCP_SERVER_URL=http://localhost:8080
 
 # Logging
 LOG_LEVEL=WARNING
-```
-
----
-
-## Docker Build Optimization
-
-### Frontend Build
-
-The frontend uses a multi-stage build:
-1. **Build stage**: Compiles Vue app with Vite optimizations
-   - Code splitting (vue-vendor, graph-vendor, ui-vendor, markdown-vendor)
-   - Terser minification with console.log removal
-   - No source maps in production
-2. **Serve stage**: nginx with gzip compression and caching
-
-```bash
-# Build frontend manually
-cd frontend
-docker build -t advandeb-frontend:latest .
-
-# Check build size
-docker images advandeb-frontend
-```
-
-### Backend Build
-
-The backend uses Python 3.11 slim:
-1. Installs dependencies with pip cache disabled
-2. Installs knowledge-builder as editable package
-3. Runs as non-root user (appuser)
-4. Uses 4 uvicorn workers for production
-
-```bash
-# Build backend manually (from app/ directory)
-docker build -f backend/Dockerfile -t advandeb-backend:latest .
-
-# Check build size
-docker images advandeb-backend
 ```
 
 ---
@@ -163,11 +112,7 @@ All services include health checks:
 
 Check service health:
 ```bash
-# All services
-docker-compose ps
-
-# Individual health check
-curl http://localhost:3000/health  # Frontend
+curl http://localhost:3000/health  # Frontend (nginx)
 curl http://localhost:8000/health  # Backend
 ```
 
@@ -248,10 +193,10 @@ Instrumentator().instrument(app).expose(app)
 
 ### Deployment
 
-- [ ] Build images: `docker-compose build`
-- [ ] Start services: `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
-- [ ] Verify health: `docker-compose ps`
-- [ ] Check logs: `docker-compose logs -f`
+- [ ] Build frontend: `npm run build` (from `frontend/`)
+- [ ] Start backend: `uvicorn app.main:app --workers 4`
+- [ ] Serve frontend dist/ with nginx
+- [ ] Verify health endpoints
 - [ ] Run smoke tests
 
 ### Post-deployment
@@ -270,24 +215,17 @@ Instrumentator().instrument(app).expose(app)
 ### Frontend not loading
 
 ```bash
-# Check frontend logs
-docker-compose logs frontend
-
-# Rebuild without cache
-docker-compose build --no-cache frontend
+# Check nginx is running and serving dist/
+# Ensure npm run build has been run
 ```
 
 ### Backend connection errors
 
 ```bash
-# Check backend logs
-docker-compose logs backend
-
-# Verify MongoDB connection
-docker-compose exec mongodb mongosh --eval "db.adminCommand('ping')"
-
-# Check environment variables
-docker-compose exec backend env | grep MONGODB
+# Check uvicorn output
+# Verify MongoDB is running:
+mongosh --eval "db.adminCommand('ping')"
+# Check environment variables in backend/.env
 ```
 
 ### WebSocket connection failures
@@ -302,33 +240,31 @@ docker-compose exec backend env | grep MONGODB
 
 ### Horizontal Scaling
 
-The production compose file uses `deploy.replicas` for scaling:
+Scale the backend by running multiple uvicorn workers:
 
 ```bash
-# Scale backend to 4 instances
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --scale backend=4
-
-# Scale frontend to 3 instances
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --scale frontend=3
+uvicorn app.main:app --workers 4
 ```
+
+For multiple processes, use a process manager (systemd, supervisor) and put nginx in front.
 
 ### Load Balancing
 
-For production deployments, use a reverse proxy (nginx/Traefik) in front of the compose stack:
+Use nginx as a reverse proxy in front of multiple backend instances:
 
 ```nginx
-upstream advandeb_frontend {
-    server frontend1:80;
-    server frontend2:80;
-    server frontend3:80;
+upstream advandeb_backend {
+    server 127.0.0.1:8001;
+    server 127.0.0.1:8002;
+    server 127.0.0.1:8003;
 }
 
 server {
     listen 80;
     server_name yourdomain.com;
-    
-    location / {
-        proxy_pass http://advandeb_frontend;
+
+    location /api/ {
+        proxy_pass http://advandeb_backend;
     }
 }
 ```
@@ -341,20 +277,10 @@ server {
 
 ```bash
 # Backup
-docker-compose exec mongodb mongodump --out /data/backup
+mongodump --out /path/to/backup
 
 # Restore
-docker-compose exec mongodb mongorestore /data/backup
-```
-
-### Volume Backup
-
-```bash
-# Backup volume
-docker run --rm -v advandeb_mongo_data:/data -v $(pwd):/backup alpine tar czf /backup/mongo_data_backup.tar.gz /data
-
-# Restore volume
-docker run --rm -v advandeb_mongo_data:/data -v $(pwd):/backup alpine tar xzf /backup/mongo_data_backup.tar.gz -C /
+mongorestore /path/to/backup
 ```
 
 ---
@@ -363,6 +289,5 @@ docker run --rm -v advandeb_mongo_data:/data -v $(pwd):/backup alpine tar xzf /b
 
 - [DEV3 Plan](../docs/DEV3-APP-PLAN.md)
 - [App Architecture](../docs/MODELING-ASSISTANT-PLAN.md)
-- [Docker Compose Docs](https://docs.docker.com/compose/)
 - [FastAPI Deployment](https://fastapi.tiangolo.com/deployment/)
 - [Vite Build Guide](https://vitejs.dev/guide/build.html)

@@ -39,7 +39,6 @@ The AdvanDEB Modeling Assistant is a full-stack web application that provides an
 - Embedding status tracking
 
 ✅ **Production Ready**
-- Docker deployment
 - Health checks
 - Monitoring setup
 - Security headers
@@ -58,7 +57,6 @@ app/
 │   │   ├── models/       # Pydantic models
 │   │   ├── core/         # Config, auth, database
 │   │   └── clients/      # MCP client
-│   ├── Dockerfile
 │   └── requirements.txt
 │
 ├── frontend/             # Vue 3 frontend
@@ -68,13 +66,9 @@ app/
 │   │   ├── stores/      # Pinia state management
 │   │   ├── utils/       # API client, helpers
 │   │   └── router/      # Vue Router config
-│   ├── Dockerfile
 │   ├── nginx.conf
 │   └── package.json
 │
-├── docker-compose.yml         # Base configuration
-├── docker-compose.dev.yml     # Development overrides
-├── docker-compose.prod.yml    # Production configuration
 ├── DEPLOYMENT.md              # Deployment guide
 ├── MONITORING.md              # Monitoring setup
 └── README.md                  # This file
@@ -87,25 +81,16 @@ app/
 ### Development Mode
 
 ```bash
-# Clone repository
 cd advandeb/app
 
-# Start all services (MongoDB, backend, frontend)
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-
-# Or run locally without Docker:
-
-# Terminal 1: MongoDB
-docker run -d -p 27017:27017 mongo:7
-
-# Terminal 2: Backend
+# Terminal 1: Backend
 cd backend
 cp .env.example .env  # Configure environment
 pip install -r requirements.txt
 pip install -e ../../knowledge-builder
 uvicorn app.main:app --reload
 
-# Terminal 3: Frontend
+# Terminal 2: Frontend
 cd frontend
 npm install
 npm run dev
@@ -116,20 +101,15 @@ Access the app at: **http://localhost:5173**
 ### Production Mode
 
 ```bash
-# Build and start
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# Build frontend
+cd frontend
+npm run build
 
-# Check status
-docker-compose ps
-
-# View logs
-docker-compose logs -f
-
-# Stop
-docker-compose down
+# Serve with nginx (see frontend/nginx.conf)
+# Start backend
+cd backend
+uvicorn app.main:app --workers 4
 ```
-
-Access the app at: **http://localhost:3000**
 
 ---
 
@@ -197,12 +177,6 @@ npm run build
 npx vite-bundle-visualizer
 ```
 
-**Backend:**
-```bash
-cd backend
-docker build -f Dockerfile -t advandeb-backend:latest ..
-```
-
 ### Code Quality
 
 ```bash
@@ -224,7 +198,6 @@ mypy app/
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive deployment guide including:
 - Environment configuration
-- Docker deployment
 - Health checks
 - Scaling
 - Backup/restore
@@ -293,7 +266,6 @@ When running the backend, interactive API docs are available at:
 - **Testing**: pytest + pytest-asyncio
 
 ### Infrastructure
-- **Containerization**: Docker + Docker Compose
 - **Web Server**: nginx (frontend proxy)
 - **Reverse Proxy**: nginx
 - **Monitoring**: Sentry, Prometheus (optional)
@@ -312,7 +284,6 @@ When running the backend, interactive API docs are available at:
 
 ✅ **Backend:**
 - Health check: <100ms
-- Docker image: 200MB (Python 3.11-slim)
 
 ✅ **Infrastructure:**
 - All services have health checks
@@ -354,7 +325,6 @@ Role enforcement via FastAPI dependencies.
 - Google OAuth integration
 - CORS configuration
 - Security headers (X-Frame-Options, X-Content-Type-Options, etc.)
-- Non-root Docker user (backend)
 - Environment variable secrets
 
 ---
@@ -377,14 +347,15 @@ See [DEV3-LOG.md](../DEV3-LOG.md) for detailed progress log.
 
 ### Frontend not loading
 ```bash
-docker-compose logs frontend
-docker-compose build --no-cache frontend
+# Check that the dev server or nginx is running
+npm run dev   # from frontend/
 ```
 
 ### Backend connection errors
 ```bash
-docker-compose logs backend
-docker-compose exec mongodb mongosh --eval "db.adminCommand('ping')"
+# Check backend logs from uvicorn output
+# Verify MongoDB is running:
+mongosh --eval "db.adminCommand('ping')"
 ```
 
 ### WebSocket connection failures

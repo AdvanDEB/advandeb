@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, type RouteLocationNormalized, type NavigationGuardNext } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
-const KB_ROLES = ['Administrator', 'Knowledge Curator']
+const KB_ROLES = ['administrator', 'knowledge_curator']
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +55,8 @@ const router = createRouter({
     {
       path: '/kb',
       name: 'knowledge-builder',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore — KnowledgeBuilderView uses plain JS Options API (no lang="ts")
       component: () => import('@/views/KnowledgeBuilderView.vue'),
       meta: { requiresAuth: true, requiresKB: true }
     }

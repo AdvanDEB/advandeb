@@ -194,7 +194,7 @@ MCP Server pokreće se navigiranjem u advandeb-mcp direktorij, pokretanjem cargo
 
 ### Production Deployment
 
-Produkcijski deployment AdvanDEB platforme osmišljen je za cloud-native okruženja s naglaskom na skalabilnost, pouzdanost i sigurnost. Kontejnerizacija je centralni koncept gdje se svaka komponenta deployira kao zaseban Docker kontejner s jasno definiranim zavisnostima. Kubernetes upravlja orchestracijom omogućavajući automatsko skaliranje ovisno o opterećenju i upravljanje lifecycleom svih servisa. MCP server deployira se kao interni ClusterIP servis koji nije dostupan izvan Kubernetes clustera osiguravajući dodatni sigurnosni sloj.
+Produkcijski deployment AdvanDEB platforme osmišljen je za cloud-native okruženja s naglaskom na skalabilnost, pouzdanost i sigurnost. Svaka komponenta deployi se nativno na host sistemu: FastAPI backend s uvicorn, Vue.js frontend kroz nginx, MCP server kao Rust binarni. MCP server dostupan je isključivo interno (localhost) osiguravajući dodatni sigurnosni sloj.
 
 Sigurnost je fundamentalna briga u produkcijskom okruženju. Svi vanjski endpointi zaštićeni su TLS/HTTPS certifikatima koji osiguravaju enkripciju u tranzitu. Mrežna izolacija osigurava da MCP server bude dostupan isključivo unutar Kubernetes clustera sprječavajući direktan pristup izvana. Validacija JWT tokena provodi se na svim zaštićenim endpointima prije izvršavanja bilo koje operacije. Rate limiting implementiran preko Redisa sprječava zlouporabu i DoS napade.
 

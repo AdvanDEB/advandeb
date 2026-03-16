@@ -205,23 +205,12 @@ Set up alerts for:
 - Response time > 5s
 - Downtime > 2 minutes
 
-### Docker Health Checks
+### Service Health Checks
 
-Health checks are already configured in docker-compose.yml:
-
-```yaml
-healthcheck:
-  test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-  interval: 30s
-  timeout: 10s
-  retries: 3
-  start_period: 40s
-```
-
-Monitor health with:
+Monitor health with curl or a script:
 ```bash
-docker-compose ps  # Shows health status
-docker inspect <container_id> | jq '.[0].State.Health'
+curl http://localhost:8000/health  # Backend
+curl http://localhost:3000/health  # Frontend (nginx)
 ```
 
 ---
@@ -276,16 +265,7 @@ Use a log aggregation service:
 - **Loggly**
 - **Papertrail**
 
-Configure Docker to send logs:
-```yaml
-services:
-  backend:
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
-```
+For log rotation when running with uvicorn, use `--log-config` or pipe to a log manager (logrotate, journald).
 
 ---
 

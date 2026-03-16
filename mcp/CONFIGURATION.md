@@ -164,44 +164,6 @@ For production deployments:
 3. Consider using secret management systems (Kubernetes Secrets, AWS Secrets Manager, etc.)
 4. Never commit sensitive values to version control
 
-### Docker
-
-When running in Docker, pass configuration via environment variables:
-
-```bash
-docker run -d \
-  -e ADVANDEB_MCP_BIND=0.0.0.0:8080 \
-  -e ADVANDEB_MCP_TLS_ENABLED=true \
-  -e ADVANDEB_MCP_TLS_CERT_PATH=/certs/cert.pem \
-  -e ADVANDEB_MCP_TLS_KEY_PATH=/certs/key.pem \
-  -v /path/to/certs:/certs:ro \
-  -p 8080:8080 \
-  advandeb-mcp
-```
-
-### Kubernetes
-
-Use ConfigMaps for non-sensitive configuration and Secrets for sensitive values:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mcp-gateway-config
-data:
-  ADVANDEB_MCP_BIND: "0.0.0.0:8080"
-  ADVANDEB_MCP_AGENTS_HEALTH_CHECK_INTERVAL_SECONDS: "30"
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mcp-gateway-tls
-type: Opaque
-data:
-  cert.pem: <base64-encoded-cert>
-  key.pem: <base64-encoded-key>
-```
-
 ## Troubleshooting
 
 ### Configuration not loading

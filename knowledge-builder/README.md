@@ -122,12 +122,11 @@ cp .env.example .env
 # Edit .env file with your settings
 ```
 
-4. Start MongoDB (choose one):
+4. Start MongoDB:
 
    ```bash
-   # Preferred: Install MongoDB locally (see official docs)
-   # Optional (only MongoDB in container):
-   docker run -d -p 27017:27017 --name mongodb mongo:7.0
+   # Install MongoDB locally (see https://www.mongodb.com/docs/manual/installation/)
+   sudo systemctl start mongod
    ```
 
 5. Start Ollama:
