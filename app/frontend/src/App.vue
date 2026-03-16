@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <!-- Authenticated routes use the sidebar layout -->
-    <AppLayout v-if="authStore.isAuthenticated && !isLoginRoute">
+    <AppLayout v-if="authStore.isAuthenticated && !isBareRoute">
       <router-view />
     </AppLayout>
 
-    <!-- Login / unauthenticated pages render without layout -->
+    <!-- Login and KB mode render without the sidebar layout -->
     <router-view v-else />
   </div>
 </template>
@@ -19,7 +19,9 @@ import AppLayout from '@/components/layout/AppLayout.vue'
 const authStore = useAuthStore()
 const route = useRoute()
 
-const isLoginRoute = computed(() => route.path === '/login')
+const isBareRoute = computed(() =>
+  route.path === '/login' || route.path.startsWith('/kb')
+)
 
 onMounted(async () => {
   await authStore.fetchAuthConfig()

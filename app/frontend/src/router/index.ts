@@ -1,5 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, type RouteLocationNormalized, type NavigationGuardNext } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+
+const KB_ROLES = ['Administrator', 'Knowledge Curator']
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,18 +51,30 @@ const router = createRouter({
       name: 'models',
       component: () => import('@/views/ModelsView.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/kb',
+      name: 'knowledge-builder',
+      component: () => import('@/views/KnowledgeBuilderView.vue'),
+      meta: { requiresAuth: true, requiresKB: true }
     }
   ]
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
   const authStore = useAuthStore()
-  
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({ name: 'login' })
-  } else {
-    next()
+    return
   }
+
+  if (to.meta.requiresKB && !KB_ROLES.some(role => authStore.hasRole(role))) {
+    next({ name: 'home' })
+    return
+  }
+
+  next()
 })
 
 export default router
