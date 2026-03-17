@@ -21,6 +21,18 @@
         {{ graphStats.nodes.toLocaleString() }} nodes &nbsp; {{ graphStats.edges.toLocaleString() }} edges
       </span>
 
+      <div v-if="graphStats" class="gravity-ctrl">
+        <span class="ctrl-label">hub gravity</span>
+        <input
+          type="range" min="0" max="1" step="0.05"
+          v-model.number="degreeGravity"
+          class="slider"
+          title="Hub gravity: high-degree nodes pull toward center"
+        />
+        <span class="slider-val">{{ Math.round(degreeGravity * 100) }}%</span>
+        <button class="toolbar-btn apply-btn" @click="applyDegreeGravity" title="Re-run layout">↺</button>
+      </div>
+
       <span class="spacer"></span>
 
       <button
@@ -67,6 +79,7 @@
         :schemaId="selectedSchemaId"
         :layout="selectedLayout"
         @node-selected="onNodeSelected"
+        @node-deselected="selectedNode = null"
         @stats-updated="onStatsUpdated"
         @schemas-loaded="onSchemasLoaded"
       />
@@ -122,6 +135,11 @@ export default {
     const rebuilding = ref(false)
     const toast = ref(null)
     const graphCanvasRef = ref(null)
+    const degreeGravity = ref(0)
+
+    function applyDegreeGravity() {
+      graphCanvasRef.value?.relayout(degreeGravity.value)
+    }
 
     function onSchemasLoaded(list) {
       schemas.value = list
@@ -130,6 +148,7 @@ export default {
     function onSchemaChange() {
       selectedNode.value = null
       graphStats.value = null
+      degreeGravity.value = 0
     }
 
     function onLayoutChange() {
@@ -185,6 +204,7 @@ export default {
       onSchemasLoaded, onSchemaChange, onLayoutChange,
       onNodeSelected, onStatsUpdated, onSearch,
       toggleDrawer, rebuildGraph,
+      degreeGravity, applyDegreeGravity,
     }
   },
 }
@@ -256,6 +276,37 @@ export default {
 }
 
 .spacer { flex: 1; }
+
+.gravity-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ctrl-label {
+  font-size: 10px;
+  color: #7a8a9a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.slider {
+  width: 80px;
+  accent-color: #4a90e2;
+  cursor: pointer;
+}
+
+.slider-val {
+  font-size: 10px;
+  color: #9aa;
+  min-width: 28px;
+}
+
+.apply-btn {
+  padding: 4px 8px !important;
+  font-size: 13px !important;
+}
 
 .toolbar-btn {
   padding: 5px 11px;

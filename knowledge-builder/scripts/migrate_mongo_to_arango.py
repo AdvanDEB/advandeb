@@ -74,11 +74,20 @@ def mongo_id_to_key(oid) -> str:
 def migrate_documents(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
     col = mongo_db["documents"]
     count = 0
+    seen_dois: set = set()  # track DOIs already inserted to avoid unique-constraint violations
     for doc in col.find():
+        raw_doi = doc.get("doi")
+        # If this DOI was already used by an earlier document, clear it to avoid
+        # the unique-constraint on the ArangoDB index.
+        if raw_doi and raw_doi in seen_dois:
+            raw_doi = None
+        elif raw_doi:
+            seen_dois.add(raw_doi)
+
         arango_doc = {
             "_key": mongo_id_to_key(doc["_id"]),
             "title": doc.get("title"),
-            "doi": doc.get("doi"),
+            "doi": raw_doi,
             "authors": doc.get("authors", []),
             "year": doc.get("year"),
             "journal": doc.get("journal"),
@@ -88,11 +97,17 @@ def migrate_documents(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
             "source_path": doc.get("source_path"),
             "general_domain": doc.get("general_domain"),
             "processing_status": doc.get("processing_status", "pending"),
+            "num_facts": doc.get("num_facts", 0),
+            "references": doc.get("references", []),
+            "embedding_status": doc.get("embedding_status"),
             "created_at": str(doc.get("created_at", "")),
             "updated_at": str(doc.get("updated_at", "")),
         }
         if not dry_run:
-            arango.upsert("documents", arango_doc)
+            try:
+                arango.upsert("documents", arango_doc)
+            except Exception as e:
+                logger.warning("Skipping document %s: %s", arango_doc["_key"], e)
         count += 1
     logger.info("[documents] %s %d records", "DRY" if dry_run else "migrated", count)
     return count

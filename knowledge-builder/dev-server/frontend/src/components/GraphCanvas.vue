@@ -84,10 +84,10 @@ export default {
       loadingMsg.value = 'Fetching graph data…'
 
       try {
-        const res = await vizAPI.getSchemaGraph(schemaId, 5000)
+        const res = await vizAPI.getSchemaGraph(schemaId, 100000)
         const { nodes, edges } = res.data
 
-        loadingMsg.value = `Building graph (${nodes.length} nodes)…`
+        loadingMsg.value = `Building graph (${nodes.length} nodes, ${edges.length} edges)…`
         await nextTick()
 
         graph = new Graph({ multi: true })
@@ -98,7 +98,7 @@ export default {
             nodeType: node.node_type,
             entityCollection: node.entity_collection,
             properties: node.properties || {},
-            size: 4,
+            size: nodes.length > 20000 ? 2 : nodes.length > 5000 ? 3 : 4,
             color: nodeColor(node.node_type),
             x: Math.random() * 1000,
             y: Math.random() * 1000,
@@ -157,8 +157,14 @@ export default {
     function applyLayoutToGraph(g, layoutName) {
       if (!g || g.order === 0) return
       if (layoutName === 'force' || layoutName === 'forceatlas2') {
-        const settings = forceAtlas2.inferSettings(g)
-        forceAtlas2.assign(g, { iterations: 100, settings })
+        if (g.order > 30000) {
+          // Too large for synchronous force layout — use random positions
+          random.assign(g)
+        } else {
+          const iterations = g.order > 10000 ? 30 : g.order > 3000 ? 60 : 100
+          const settings = forceAtlas2.inferSettings(g)
+          forceAtlas2.assign(g, { iterations, settings })
+        }
       } else if (layoutName === 'circular') {
         circular.assign(g)
       } else {

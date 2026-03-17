@@ -12,7 +12,7 @@ const kbApi = axios.create({
 export const vizAPI = {
   listSchemas: () => kbApi.get('/viz/schemas'),
   seedSchemas: () => kbApi.post('/viz/seed'),
-  getSchemaGraph: (id: string, limit = 5000) =>
+  getSchemaGraph: (id: string, limit = 100000) =>
     kbApi.get(`/viz/schema/${id}`, { params: { limit } }),
   getSchemaStats: (id: string) => kbApi.get(`/viz/schema/${id}/stats`),
   rebuildSchema: (id: string, body: Record<string, unknown> = {}) =>

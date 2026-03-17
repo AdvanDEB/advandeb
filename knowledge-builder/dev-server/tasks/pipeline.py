@@ -18,8 +18,27 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from advandeb_kb.config.settings import settings
 from advandeb_kb.models.ingestion import IngestionJob
 from advandeb_kb.models.knowledge import Document, Fact, FactSFRelation
+from advandeb_kb.services.chunking_service import ChunkingService
+from advandeb_kb.services.embedding_service import EmbeddingService
+from advandeb_kb.services.chromadb_service import ChromaDBService
 
 logger = logging.getLogger(__name__)
+
+# Module-level singletons — loaded once per process (heavy models)
+_chunker: Optional[ChunkingService] = None
+_embedder: Optional[EmbeddingService] = None
+_chroma: Optional[ChromaDBService] = None
+
+
+def _get_embedding_services():
+    global _chunker, _embedder, _chroma
+    if _chunker is None:
+        _chunker = ChunkingService(chunk_size=512, overlap=128)
+    if _embedder is None:
+        _embedder = EmbeddingService()
+    if _chroma is None:
+        _chroma = ChromaDBService()
+    return _chunker, _embedder, _chroma
 
 # Limit concurrent jobs (= concurrent Ollama calls) so the model isn't overwhelmed
 _JOB_SEM = asyncio.Semaphore(3)
@@ -270,9 +289,92 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
         if all_relations:
             await db.fact_sf_relations.insert_many(all_relations)
 
+        # ---- Stage 4: chunking + embedding → ChromaDB -----------------
+        await _set_job_stage(db, job.id, "embedding", progress=85)
+        chunk_count = 0
+        if text.strip():
+            try:
+                chunker, embedder, chroma = _get_embedding_services()
+                doc_id_str = str(document.id)
+
+                chunks = await asyncio.get_event_loop().run_in_executor(
+                    None, chunker.chunk_document, text, doc_id_str
+                )
+
+                if chunks:
+                    metadatas = []
+                    for chunk in chunks:
+                        meta = chunk.to_chromadb_metadata()
+                        meta["title"] = document.title or ""
+                        meta["year"] = document.year or 0 if hasattr(document, "year") else 0
+                        meta["doi"] = document.doi or "" if hasattr(document, "doi") else ""
+                        meta["general_domain"] = general_domain or ""
+                        meta["source_path"] = job.source_path_or_url
+                        metadatas.append(meta)
+
+                    texts_to_embed = [c.text for c in chunks]
+                    embeddings = await asyncio.get_event_loop().run_in_executor(
+                        None, lambda: embedder.embed_batch(texts_to_embed, show_progress=False)
+                    )
+
+                    await asyncio.get_event_loop().run_in_executor(
+                        None,
+                        lambda: chroma.add_chunks_batch(
+                            chunk_ids=[c.chunk_id for c in chunks],
+                            texts=texts_to_embed,
+                            embeddings=embeddings,
+                            metadatas=metadatas,
+                        ),
+                    )
+
+                    # Persist chunk records to MongoDB for provenance
+                    now = datetime.utcnow()
+                    chunk_docs = [
+                        {
+                            "chunk_id": c.chunk_id,
+                            "document_id": document.id,
+                            "chunk_index": c.chunk_index,
+                            "text": c.text,
+                            "char_start": c.char_start,
+                            "char_end": c.char_end,
+                            "embedded": True,
+                            "created_at": now,
+                        }
+                        for c in chunks
+                    ]
+                    for cdoc in chunk_docs:
+                        await db.chunks.replace_one(
+                            {"chunk_id": cdoc["chunk_id"]}, cdoc, upsert=True
+                        )
+
+                    chunk_count = len(chunks)
+                    await db.documents.update_one(
+                        {"_id": document.id},
+                        {"$set": {
+                            "embedding_status": "embedded",
+                            "num_chunks": chunk_count,
+                            "updated_at": datetime.utcnow(),
+                        }},
+                    )
+                    logger.info(
+                        "Job %s: embedded %d chunks into ChromaDB", job_id, chunk_count
+                    )
+            except Exception as embed_exc:
+                # Embedding failure is non-fatal — facts/SF are already saved
+                logger.warning(
+                    "Job %s: embedding failed (non-fatal): %s", job_id, embed_exc
+                )
+                await db.documents.update_one(
+                    {"_id": document.id},
+                    {"$set": {"embedding_status": "failed", "updated_at": datetime.utcnow()}},
+                )
+
         # ---- Done ------------------------------------------------------
         await _set_job_stage(db, job.id, "completed", status="completed", progress=100)
-        logger.info("Job %s: %d facts, %d SF relations", job_id, len(fact_ids), len(all_relations))
+        logger.info(
+            "Job %s: %d facts, %d SF relations, %d chunks embedded",
+            job_id, len(fact_ids), len(all_relations), chunk_count,
+        )
 
     except Exception as exc:
         logger.exception("Job %s failed: %s", job_id, exc)

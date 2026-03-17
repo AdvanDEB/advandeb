@@ -36,7 +36,7 @@ async def list_schemas() -> Any:
 async def get_schema_graph(
     schema_id: str,
     layout: Optional[str] = Query(default=None, description="Layout algorithm: force, circular, random, shell"),
-    limit: int = Query(default=300, ge=1, le=5000, description="Max number of nodes to return"),
+    limit: int = Query(default=300, ge=1, le=100_000, description="Max number of nodes to return"),
 ) -> Any:
     """Return materialized graph data for a schema.
 
