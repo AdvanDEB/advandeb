@@ -16,7 +16,7 @@
           <p>Browse and create knowledge facts</p>
         </router-link>
         
-        <router-link to="/graph" class="feature-card">
+        <router-link to="/kb" class="feature-card">
           <h3>Knowledge Graph</h3>
           <p>Explore the knowledge network</p>
         </router-link>

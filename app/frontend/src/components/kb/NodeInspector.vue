@@ -6,7 +6,21 @@
     </div>
     <div class="inspector-body">
       <div class="node-label">{{ node.label || node.id }}</div>
-      <span class="badge" :style="{ background: typeColor }">{{ node.nodeType || node.node_type }}</span>
+
+      <!-- Type badge + cluster badge (Task 4) -->
+      <div class="badge-row">
+        <span class="badge" :style="{ background: typeColor }">{{ node.nodeType || node.node_type }}</span>
+        <span v-if="clusterId !== null" class="badge cluster-badge" :title="'Cluster ' + clusterId">
+          cluster {{ clusterId }}
+        </span>
+      </div>
+
+      <!-- Degree display (Task 4) -->
+      <div v-if="degree !== null" class="field degree-field">
+        <span class="field-key">degree</span>
+        <span class="field-val">{{ degree }}</span>
+      </div>
+
       <div v-if="node.entityCollection || node.entity_collection" class="field">
         <span class="field-key">collection</span>
         <span class="field-val">{{ node.entityCollection || node.entity_collection }}</span>
@@ -18,6 +32,11 @@
           <span class="field-val">{{ formatVal(val) }}</span>
         </div>
       </div>
+
+      <!-- Load neighbors button (Task 4) -->
+      <button class="load-neighbors-btn" @click="$emit('expand-node', node.id)">
+        Load neighbors
+      </button>
     </div>
   </div>
 </template>
@@ -27,12 +46,17 @@ import { computed } from 'vue'
 
 const NODE_COLORS = {
   stylized_fact: '#4a90e2',
-  taxon: '#27ae60',
-  fact: '#e67e22',
-  document: '#e74c3c',
-  species: '#8e44ad',
-  concept: '#16a085',
-  default: '#7f8c8d',
+  taxon:         '#27ae60',
+  fact:          '#e67e22',
+  document:      '#e74c3c',
+  species:       '#8e44ad',
+  genus:         '#9b59b6',
+  family:        '#1abc9c',
+  order:         '#2ecc71',
+  class:         '#27ae60',
+  phylum:        '#16a085',
+  concept:       '#16a085',
+  default:       '#7f8c8d',
 }
 
 export default {
@@ -40,7 +64,7 @@ export default {
   props: {
     node: { type: Object, required: true },
   },
-  emits: ['close'],
+  emits: ['close', 'expand-node'],
   setup(props) {
     const typeColor = computed(() => {
       const t = props.node.nodeType || props.node.node_type || 'default'
@@ -49,13 +73,25 @@ export default {
 
     const nodeProps = computed(() => props.node.properties || null)
 
+    // cluster_id: check top-level first, then properties (Task 4)
+    const clusterId = computed(() => {
+      const cid = props.node.cluster_id ?? props.node.properties?.cluster_id ?? null
+      return cid !== null && cid !== undefined ? cid : null
+    })
+
+    // degree from __degree property (Task 4)
+    const degree = computed(() => {
+      const d = props.node.__degree ?? null
+      return d !== null ? d : null
+    })
+
     function formatVal(v) {
       if (v === null || v === undefined) return '—'
       if (Array.isArray(v)) return v.join(', ') || '—'
       return String(v)
     }
 
-    return { nodeProps, typeColor, formatVal }
+    return { nodeProps, typeColor, clusterId, degree, formatVal }
   },
 }
 </script>
@@ -115,6 +151,14 @@ export default {
   word-break: break-word;
 }
 
+.badge-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
 .badge {
   display: inline-block;
   padding: 2px 8px;
@@ -122,7 +166,12 @@ export default {
   color: #fff;
   font-size: 11px;
   font-weight: 500;
-  margin-bottom: 10px;
+}
+
+.cluster-badge {
+  background: #3a4055;
+  color: #e0e0e0;
+  border: 1px solid #4a5068;
 }
 
 .field {
@@ -130,6 +179,10 @@ export default {
   gap: 8px;
   padding: 3px 0;
   border-bottom: 1px solid #f0f0f0;
+}
+
+.degree-field {
+  margin-bottom: 4px;
 }
 
 .field-key {
@@ -157,4 +210,20 @@ export default {
   letter-spacing: 0.5px;
   margin-bottom: 6px;
 }
+
+.load-neighbors-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 7px 12px;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.load-neighbors-btn:hover { background: #357abd; }
 </style>

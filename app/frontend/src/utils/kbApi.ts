@@ -1,11 +1,18 @@
 import axios from 'axios'
 
-// Dedicated Axios instance for the Knowledge Builder dev-server backend.
-// This backend runs separately (default: port 8500) and has no authentication —
-// access is enforced at the frontend router level (requiresKB role guard).
+// KB API is now served by the main app backend under /api/kb/.
+// JWT auth is required — same token as the rest of the app.
 const kbApi = axios.create({
-  baseURL: import.meta.env.VITE_KB_API_URL ?? 'http://localhost:8500/api',
+  baseURL: '/api/kb',
   timeout: 60000,
+})
+
+kbApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
 })
 
 // ── Visualization API ──────────────────────────────────────────────────────────
@@ -17,6 +24,14 @@ export const vizAPI = {
   getSchemaStats: (id: string) => kbApi.get(`/viz/schema/${id}/stats`),
   rebuildSchema: (id: string, body: Record<string, unknown> = {}) =>
     kbApi.post(`/viz/schema/${id}/rebuild`, body),
+
+  // Virtual graph / on-demand loading
+  getSchemaOverview: (schemaId: string, limit = 200) =>
+    kbApi.get(`/viz/schema/${schemaId}/overview`, { params: { limit } }),
+  expandNode: (schemaId: string, nodeId: string, loadedIds: string[]) =>
+    kbApi.post(`/viz/schema/${schemaId}/expand/${nodeId}`, { loaded_node_ids: loadedIds }),
+  expandType: (schemaId: string, nodeType: string, loadedIds: string[]) =>
+    kbApi.post(`/viz/schema/${schemaId}/type/${nodeType}`, { loaded_node_ids: loadedIds }),
 }
 
 // ── Database API ───────────────────────────────────────────────────────────────
@@ -80,9 +95,12 @@ export const ingestionAPI = {
       timeout: 120000,
     })
   },
+  // SSE: JWT passed as ?token= because EventSource doesn't support custom headers
   streamBatchProgress: (batchId: string): EventSource => {
-    const base = (import.meta.env.VITE_KB_API_URL ?? 'http://localhost:8500/api').replace(/\/$/, '')
-    return new EventSource(`${base}/ingestion/batches/${batchId}/stream`)
+    const token = localStorage.getItem('access_token') ?? ''
+    return new EventSource(
+      `/api/kb/ingestion/batches/${batchId}/stream?token=${encodeURIComponent(token)}`
+    )
   },
 }
 

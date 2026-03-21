@@ -129,8 +129,16 @@
           <option value="confirmed">Confirmed</option>
           <option value="rejected">Rejected</option>
         </select>
+        <input
+          v-model="relTaxId"
+          type="number"
+          class="form-input sm"
+          placeholder="tax_id filter"
+          @change="loadRelations"
+        />
         <button class="btn-secondary sm" @click="loadRelations">↻</button>
       </div>
+      <div v-if="relActionError" class="status error">{{ relActionError }}</div>
       <div v-if="relLoading" class="status">Loading…</div>
       <table v-else class="data-table">
         <thead>
@@ -151,6 +159,11 @@
           <tr v-if="!relations.length"><td colspan="6" class="empty-row">No relations</td></tr>
         </tbody>
       </table>
+      <div v-if="relHasMore" class="load-more-row">
+        <button class="btn-secondary" :disabled="relLoading" @click="loadMoreRelations">
+          {{ relLoading ? 'Loading…' : 'Load more' }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -194,6 +207,11 @@ export default {
     const relations = ref([])
     const relLoading = ref(false)
     const relFilter = ref('suggested')
+    const relTaxId = ref('')
+    const relSkip = ref(0)
+    const relHasMore = ref(false)
+    const relActionError = ref('')
+    const REL_PAGE_SIZE = 50
 
     onMounted(loadStats)
 
@@ -289,27 +307,56 @@ export default {
     }
 
     async function loadRelations() {
+      // Reset to first page
+      relSkip.value = 0
+      relations.value = []
+      await fetchRelations()
+    }
+
+    async function loadMoreRelations() {
+      relSkip.value += REL_PAGE_SIZE
+      await fetchRelations()
+    }
+
+    async function fetchRelations() {
       relLoading.value = true
       try {
-        const params = { limit: 50 }
+        const params = { limit: REL_PAGE_SIZE, skip: relSkip.value }
         if (relFilter.value) params.status = relFilter.value
+        if (relTaxId.value) params.tax_id = relTaxId.value
         const res = await kgAPI.listRelations(params)
-        relations.value = res.data.relations || []
+        const page = res.data.relations || []
+        if (relSkip.value === 0) {
+          relations.value = page
+        } else {
+          relations.value = [...relations.value, ...page]
+        }
+        relHasMore.value = page.length === REL_PAGE_SIZE
       } catch (_) {
-        relations.value = []
+        relHasMore.value = false
       } finally {
         relLoading.value = false
       }
     }
 
     async function confirm(rel) {
-      await kgAPI.updateRelation(rel._id, { status: 'confirmed' })
-      rel.status = 'confirmed'
+      relActionError.value = ''
+      try {
+        await kgAPI.updateRelation(rel._id, { status: 'confirmed' })
+        await loadRelations()
+      } catch (e) {
+        relActionError.value = e.response?.data?.detail || 'Failed to confirm relation'
+      }
     }
 
     async function reject(rel) {
-      await kgAPI.updateRelation(rel._id, { status: 'rejected' })
-      rel.status = 'rejected'
+      relActionError.value = ''
+      try {
+        await kgAPI.updateRelation(rel._id, { status: 'rejected' })
+        await loadRelations()
+      } catch (e) {
+        relActionError.value = e.response?.data?.detail || 'Failed to reject relation'
+      }
     }
 
     function fmt(n) {
@@ -324,7 +371,8 @@ export default {
       availableModels, agentModel, agentLimit, agentSkip,
       agentRunning, agentResult, agentError,
       runAgentSync, runAgentAsync,
-      relations, relLoading, relFilter, loadRelations, confirm, reject,
+      relations, relLoading, relFilter, relTaxId, relSkip, relHasMore, relActionError,
+      loadRelations, loadMoreRelations, confirm, reject,
       fmt,
     }
   },
@@ -444,4 +492,5 @@ export default {
 .badge.confirmed { background: #d4edda; color: #155724; }
 .badge.rejected { background: #f8d7da; color: #721c24; }
 .empty-row { text-align: center; color: #aaa; padding: 16px !important; }
+.load-more-row { display: flex; justify-content: center; padding: 8px 0; }
 </style>

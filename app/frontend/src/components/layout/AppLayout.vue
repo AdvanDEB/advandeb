@@ -74,8 +74,7 @@ const baseLinks = [
   { path: '/',           icon: '⌂',  label: 'Home' },
   { path: '/chat',       icon: '💬', label: 'Chat' },
   { path: '/documents',  icon: '📄', label: 'Documents' },
-  { path: '/graph',      icon: '🕸',  label: 'Graph' },
-  { path: '/facts',      icon: '🔬', label: 'Facts' },
+{ path: '/facts',      icon: '🔬', label: 'Facts' },
   { path: '/scenarios',  icon: '⚗',  label: 'Scenarios' },
   { path: '/models',     icon: '📐', label: 'Models' },
 ]

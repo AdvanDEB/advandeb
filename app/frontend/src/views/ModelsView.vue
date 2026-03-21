@@ -10,7 +10,7 @@
         Build, calibrate, and visualize DEB (Dynamic Energy Budget) models
         linked directly to your knowledge graph.
       </p>
-      <router-link to="/graph" class="cta-link">
+      <router-link to="/kb" class="cta-link">
         Explore the Knowledge Graph →
       </router-link>
     </div>
