@@ -43,6 +43,7 @@ class Settings(BaseSettings):
     # Database
     MONGODB_URI: str
     MONGODB_DB_NAME: str = "advandeb"
+    KB_DB_NAME: str = "advandeb_knowledge_builder_kb"
     
     # MCP Server
     MCP_SERVER_URL: str = "http://localhost:3000"

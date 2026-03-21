@@ -10,8 +10,15 @@ from pathlib import Path
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 from app.core.config import settings
-from app.core.database import connect_to_mongo, close_mongo_connection
-from app.api.routes import auth, users, documents, facts, knowledge_graph, chat, scenarios, models, ws
+from app.core.database import connect_to_mongo, close_mongo_connection, get_database
+from app.api.routes import auth, users, documents, facts, chat, scenarios, models, ws
+from app.api.routes.kb import agents as kb_agents
+from app.api.routes.kb import visualization as kb_viz
+from app.api.routes.kb import ingestion as kb_ingestion
+from app.api.routes.kb import database as kb_db
+from app.api.routes.kb import filesystem as kb_fs
+from app.api.routes.kb import kg_builder as kb_kg
+from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 
 FRONTEND_DIST = Path(__file__).parent.parent.parent / "frontend" / "dist"
 
@@ -19,10 +26,11 @@ FRONTEND_DIST = Path(__file__).parent.parent.parent / "frontend" / "dist"
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan events."""
-    # Startup
     await connect_to_mongo()
+    db = get_database()
+    await graph_rebuild_queue.start(db)
     yield
-    # Shutdown
+    await graph_rebuild_queue.stop()
     await close_mongo_connection()
 
 
@@ -50,11 +58,16 @@ app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
 app.include_router(users.router, prefix="/api/users", tags=["users"])
 app.include_router(documents.router, prefix="/api/documents", tags=["documents"])
 app.include_router(facts.router, prefix="/api/facts", tags=["facts"])
-app.include_router(knowledge_graph.router, prefix="/api/graph", tags=["knowledge-graph"])
 app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 app.include_router(scenarios.router, prefix="/api/scenarios", tags=["scenarios"])
 app.include_router(models.router, prefix="/api/models", tags=["models"])
 app.include_router(ws.router, prefix="/ws", tags=["websocket"])
+app.include_router(kb_agents.router,    prefix="/api/kb/agents",    tags=["kb"])
+app.include_router(kb_viz.router,       prefix="/api/kb/viz",       tags=["kb"])
+app.include_router(kb_ingestion.router, prefix="/api/kb/ingestion", tags=["kb"])
+app.include_router(kb_db.router,        prefix="/api/kb/db",        tags=["kb"])
+app.include_router(kb_fs.router,        prefix="/api/kb/fs",        tags=["kb"])
+app.include_router(kb_kg.router,        prefix="/api/kb/kg",        tags=["kb"])
 
 
 @app.get("/")

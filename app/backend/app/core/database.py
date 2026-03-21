@@ -30,3 +30,8 @@ async def close_mongo_connection():
 def get_database():
     """Get database instance."""
     return db.client[settings.MONGODB_DB_NAME]
+
+
+def get_kb_database():
+    """Get the Knowledge Builder database instance (advandeb_knowledge_builder_kb)."""
+    return db.client[settings.KB_DB_NAME]
