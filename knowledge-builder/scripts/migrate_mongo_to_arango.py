@@ -255,6 +255,148 @@ def migrate_document_taxon_relations(mongo_db, arango: ArangoDatabase, dry_run: 
     return count
 
 
+def migrate_chunks(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
+    """
+    Read chunks from ChromaDB (source of truth — MongoDB chunks collection is empty)
+    and write them to ArangoDB chunks + chunk_belongs_to edge collections.
+
+    ChromaDB document_id format: 'doc_' + sha1(source_path with 'papers/' prefix)[:16]
+    We build a reverse map: chroma_doc_id → MongoDB ObjectId string.
+    """
+    import hashlib
+    import chromadb as _chromadb
+
+    chroma_path = os.environ.get(
+        "CHROMA_PERSIST_DIR",
+        str(Path(__file__).resolve().parents[1] / "data" / "chromadb"),
+    )
+    collection_name = os.environ.get("CHROMA_COLLECTION", "advandeb_chunks")
+
+    logger.info("[chunks] Opening ChromaDB at %s, collection=%s", chroma_path, collection_name)
+    chroma_client = _chromadb.PersistentClient(path=chroma_path)
+    try:
+        col = chroma_client.get_collection(collection_name)
+    except Exception as e:
+        logger.error("[chunks] ChromaDB collection not found: %s", e)
+        return 0
+
+    total_chroma = col.count()
+    logger.info("[chunks] ChromaDB has %d chunks total", total_chroma)
+
+    # Build reverse map: chroma_doc_id → MongoDB _id string
+    # ChromaDB was ingested with two different source_path styles:
+    #   1. Relative: 'papers/<number>/<filename>' (e.g. 'papers/2621/MitcHips2013.pdf')
+    #   2. Absolute: '/home/adeb/dev/advandeb/papers/<number>/<filename>'
+    # Both are SHA1-hashed and prefixed with 'doc_'.
+    papers_root = os.environ.get("PAPERS_ROOT", "/home/adeb/dev/advandeb/papers")
+    hash_to_mongo_id: dict[str, str] = {}
+    for doc in mongo_db["documents"].find({}, {"source_path": 1}):
+        sp = doc.get("source_path", "")
+        mongo_id = str(doc["_id"])
+        # Relative path with 'papers/' prefix (old ingestion style)
+        for candidate in [
+            "papers/" + sp,
+            sp,
+            os.path.join(papers_root, sp),
+        ]:
+            h = "doc_" + hashlib.sha1(candidate.encode()).hexdigest()[:16]
+            hash_to_mongo_id[h] = mongo_id
+
+    doc_count = mongo_db["documents"].count_documents({})
+    logger.info("[chunks] Built reverse map for %d documents (%d hashes)", doc_count, len(hash_to_mongo_id))
+
+    # Build a set of all valid MongoDB ObjectId strings for direct-lookup fallback
+    all_mongo_ids: set[str] = set(hash_to_mongo_id.values())
+
+    BATCH = 2000  # fetch 2000 chunks from ChromaDB at a time
+    ARANGO_BATCH = 500  # write up to 500 docs per ArangoDB bulk call
+    count_chunks = 0
+    count_edges = 0
+    count_skipped = 0
+    offset = 0
+
+    chunk_buf: list[dict] = []
+    edge_buf: list[dict] = []
+
+    def _flush_buffers() -> None:
+        nonlocal count_chunks, count_edges
+        if chunk_buf and not dry_run:
+            arango.bulk_insert_overwrite("chunks", chunk_buf)
+        count_chunks += len(chunk_buf)
+        if edge_buf and not dry_run:
+            arango.bulk_insert_overwrite("chunk_belongs_to", edge_buf)
+        count_edges += len(edge_buf)
+        chunk_buf.clear()
+        edge_buf.clear()
+
+    while offset < total_chroma:
+        result = col.get(
+            limit=BATCH,
+            offset=offset,
+            include=["metadatas", "documents"],
+        )
+        if not result["ids"]:
+            break
+
+        for chunk_id, meta, text in zip(result["ids"], result["metadatas"], result["documents"]):
+            chroma_doc_id = meta.get("document_id", "")
+            mongo_id = hash_to_mongo_id.get(chroma_doc_id)
+
+            # New-style chunks use the MongoDB ObjectId directly as document_id
+            # (e.g. chunk_id = '69b84722ec32c55db54306f6_chunk_44')
+            if mongo_id is None and "_chunk_" in chunk_id:
+                candidate_id = chunk_id.split("_chunk_")[0]
+                if candidate_id in all_mongo_ids:
+                    mongo_id = candidate_id
+
+            # Also try meta document_id directly if it looks like a MongoDB ObjectId
+            if mongo_id is None and len(chroma_doc_id) == 24 and chroma_doc_id in all_mongo_ids:
+                mongo_id = chroma_doc_id
+
+            if not mongo_id:
+                count_skipped += 1
+                continue
+
+            chunk_key = chunk_id.replace("/", "_")  # sanitize for ArangoDB key
+            chunk_buf.append({
+                "_key": chunk_key,
+                "chunk_id": chunk_id,
+                "document_id": mongo_id,
+                "chunk_index": meta.get("chunk_index", 0),
+                "text": text or "",
+                "char_start": meta.get("char_start"),
+                "char_end": meta.get("char_end"),
+                "source_path": meta.get("source_path", ""),
+                "embedded": True,
+            })
+            edge_buf.append({
+                "_key": chunk_key,
+                "_from": f"documents/{mongo_id}",
+                "_to": f"chunks/{chunk_key}",
+                "relation": "has_chunk",
+            })
+
+            if len(chunk_buf) >= ARANGO_BATCH:
+                _flush_buffers()
+
+        offset += BATCH
+        if (offset // BATCH) % 5 == 0 or offset >= total_chroma:
+            _flush_buffers()
+            logger.info(
+                "[chunks] Progress: %d/%d — chunks=%d edges=%d skipped=%d",
+                min(offset, total_chroma), total_chroma, count_chunks, count_edges, count_skipped,
+            )
+
+    _flush_buffers()  # final flush
+
+    logger.info(
+        "[chunks] %s %d chunks, %d edges, %d skipped (unmapped doc_ids)",
+        "DRY" if dry_run else "migrated",
+        count_chunks, count_edges, count_skipped,
+    )
+    return count_chunks
+
+
 # ------------------------------------------------------------------
 # Migration map
 # ------------------------------------------------------------------
@@ -266,6 +408,7 @@ MIGRATORS = {
     "fact_sf_relations": migrate_fact_sf_relations,
     "taxonomy": migrate_taxonomy,
     "document_taxon_relations": migrate_document_taxon_relations,
+    "chunks": migrate_chunks,
 }
 
 

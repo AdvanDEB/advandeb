@@ -215,6 +215,19 @@ class KGBuilderService:
                 for tax_id, rank in self._index[key]:
                     _update(tax_id, rank, "concept", f"abstract: {candidate}")
 
+        # 4. Content — scan first 8000 chars for binomial names.
+        # Only applied when abstract is absent (pdf_local docs typically lack abstracts).
+        # Require ≥2 words (binomial minimum) to suppress false positives.
+        if not doc.get("abstract"):
+            content_snippet = (doc.get("content") or "")[:8000]
+            for candidate in _candidate_names(content_snippet):
+                if " " not in candidate:
+                    continue
+                key = _normalize(candidate)
+                if key in self._index:
+                    for tax_id, rank in self._index[key]:
+                        _update(tax_id, rank, "concept", f"content: {candidate}")
+
         if not matched:
             return []
 

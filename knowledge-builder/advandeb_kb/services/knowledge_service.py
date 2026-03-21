@@ -12,6 +12,7 @@ from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from advandeb_kb.models.knowledge import Document, Fact, StylizedFact, FactSFRelation
+from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +32,7 @@ class KnowledgeService:
     async def create_document(self, document: Document) -> Document:
         data = document.model_dump(by_alias=True)
         await self.documents.insert_one(data)
+        graph_rebuild_queue.mark_dirty("citation")
         return document
 
     async def get_document(self, document_id: str) -> Optional[Document]:
@@ -59,6 +61,9 @@ class KnowledgeService:
             {"$set": fields},
             return_document=True,
         )
+        # If DOI or references changed, citation graph needs rebuilding
+        if fields.keys() & {"doi", "references", "title", "year", "authors"}:
+            graph_rebuild_queue.mark_dirty("citation")
         return Document(**doc) if doc else None
 
     async def delete_document(self, document_id: str) -> bool:
@@ -72,6 +77,7 @@ class KnowledgeService:
     async def create_fact(self, fact: Fact) -> Fact:
         data = fact.model_dump(by_alias=True)
         await self.facts.insert_one(data)
+        graph_rebuild_queue.mark_dirty("sf_support")
         return fact
 
     async def get_fact(self, fact_id: str) -> Optional[Fact]:
@@ -157,6 +163,7 @@ class KnowledgeService:
     async def create_relation(self, relation: FactSFRelation) -> FactSFRelation:
         data = relation.model_dump(by_alias=True)
         await self.fact_sf_relations.insert_one(data)
+        graph_rebuild_queue.mark_dirty("sf_support")
         return relation
 
     async def get_relation(self, relation_id: str) -> Optional[FactSFRelation]:
@@ -191,6 +198,7 @@ class KnowledgeService:
             {"$set": fields},
             return_document=True,
         )
+        graph_rebuild_queue.mark_dirty("sf_support")
         return FactSFRelation(**doc) if doc else None
 
     async def delete_relation(self, relation_id: str) -> bool:

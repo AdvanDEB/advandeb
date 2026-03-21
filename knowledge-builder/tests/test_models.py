@@ -133,9 +133,9 @@ def test_taxonomy_node():
 
 
 def test_builtin_schemas():
-    assert len(BUILTIN_SCHEMAS) == 4
+    assert len(BUILTIN_SCHEMAS) == 5
     names = {s["name"] for s in BUILTIN_SCHEMAS}
-    assert names == {"citation", "sf_support", "taxonomical", "physiological_process"}
+    assert names == {"citation", "sf_support", "taxonomical", "knowledge_graph", "physiological_process"}
 
     for raw in BUILTIN_SCHEMAS:
         schema = GraphSchema(**raw)

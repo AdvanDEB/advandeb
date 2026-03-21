@@ -262,6 +262,22 @@ class ArangoDatabase:
             return col.replace(doc)
         return col.insert(doc)
 
+    def bulk_insert_overwrite(self, collection: str, docs: list[dict]) -> dict:
+        """Bulk insert documents, replacing any existing doc with the same _key.
+
+        NOTE: do NOT use overwrite=True in import_bulk — that parameter
+        truncates the entire collection before inserting, not per-document.
+        We rely solely on on_duplicate='replace' for per-key conflict handling.
+
+        Significantly faster than calling upsert() per document.
+        Returns the raw import_bulk result dict.
+        """
+        if not docs:
+            return {"inserted": 0, "errors": 0}
+        col = self.db.collection(collection)
+        result = col.import_bulk(docs, on_duplicate="replace")
+        return result
+
     def get(self, collection: str, key: str) -> Optional[dict]:
         return self.db.collection(collection).get(key)
 

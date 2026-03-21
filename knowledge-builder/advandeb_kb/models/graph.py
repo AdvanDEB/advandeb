@@ -250,10 +250,12 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
     {
         "name": "knowledge_graph",
         "description": (
-            "Unified knowledge graph: taxonomy backbone (taxon nodes coloured by "
-            "rank) overlaid with document nodes connected to the taxa they study. "
-            "Document-taxon edges are produced by the knowledge-graph-building agent "
-            "and stored in document_taxon_relations."
+            "Full integrated knowledge graph: all domain knowledge in one schema. "
+            "Taxonomy backbone (taxon nodes typed by rank) overlaid with stylized "
+            "facts, extracted facts, and documents. All evidence edges (extracted_from, "
+            "supports, opposes), document links (studies, cites), process relations "
+            "(regulates, depends_on, exhibited_by) are materialized. Every node carries "
+            "a cluster_id for frontend coloring."
         ),
         "is_builtin": True,
         "node_types": [
@@ -261,18 +263,39 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
                 "name": "taxon",  # node_type is overridden to rank at build time
                 "source_collection": "taxonomy_nodes",
                 "label_field": "name",
-                "properties": ["rank", "tax_id", "gbif_usage_key", "common_names"],
+                "properties": ["rank", "tax_id", "gbif_usage_key", "common_names", "cluster_id"],
                 "description": (
                     "Taxonomic node — materialized node_type is the rank "
-                    "(species, genus, family, …) for visual differentiation."
+                    "(species, genus, family, …) for visual differentiation. "
+                    "cluster_id = 'taxon:<rank>'."
+                ),
+            },
+            {
+                "name": "stylized_fact",
+                "source_collection": "stylized_facts",
+                "label_field": "statement",
+                "properties": ["category", "status", "sf_number", "cluster_id"],
+                "description": (
+                    "General biological principle. cluster_id = 'sf:<category>'."
+                ),
+            },
+            {
+                "name": "fact",
+                "source_collection": "facts",
+                "label_field": "content",
+                "properties": ["confidence", "status", "entities", "cluster_id"],
+                "description": (
+                    "Extracted factual observation. cluster_id = 'fact' (all facts same cluster)."
                 ),
             },
             {
                 "name": "document",
                 "source_collection": "documents",
                 "label_field": "title",
-                "properties": ["doi", "year", "authors", "journal", "general_domain"],
-                "description": "Scientific document (abstract or full paper).",
+                "properties": ["doi", "year", "authors", "journal", "general_domain", "cluster_id"],
+                "description": (
+                    "Scientific document. cluster_id = 'doc:<general_domain>'."
+                ),
             },
         ],
         "edge_types": [
@@ -291,6 +314,57 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
                 "description": (
                     "Document discusses or studies this organism — determined by "
                     "the knowledge-graph-building agent via document_taxon_relations."
+                ),
+            },
+            {
+                "name": "extracted_from",
+                "source_node_type": "fact",
+                "target_node_type": "document",
+                "label": "extracted from",
+                "description": "Fact was extracted from this document.",
+            },
+            {
+                "name": "supports",
+                "source_node_type": "fact",
+                "target_node_type": "stylized_fact",
+                "label": "supports",
+                "description": "Fact provides supporting evidence for the stylized fact.",
+            },
+            {
+                "name": "opposes",
+                "source_node_type": "fact",
+                "target_node_type": "stylized_fact",
+                "label": "opposes",
+                "description": "Fact contradicts or provides counter-evidence for the stylized fact.",
+            },
+            {
+                "name": "cites",
+                "source_node_type": "document",
+                "target_node_type": "document",
+                "label": "cites",
+                "description": "Document A cites document B (via doc.references DOI list).",
+            },
+            {
+                "name": "regulates",
+                "source_node_type": "stylized_fact",
+                "target_node_type": "stylized_fact",
+                "label": "regulates",
+                "description": "One process/principle regulates another (via sf_sf_relations if present).",
+            },
+            {
+                "name": "depends_on",
+                "source_node_type": "stylized_fact",
+                "target_node_type": "stylized_fact",
+                "label": "depends on",
+                "description": "One process/principle depends on another (via sf_sf_relations if present).",
+            },
+            {
+                "name": "exhibited_by",
+                "source_node_type": "stylized_fact",
+                "target_node_type": "taxon",
+                "label": "exhibited by",
+                "description": (
+                    "Stylized fact is exhibited by this taxon (via sf_taxon_relations if present)."
                 ),
             },
         ],
