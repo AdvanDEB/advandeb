@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'),
     }
   },
   server: {
@@ -25,27 +25,24 @@ export default defineConfig({
     }
   },
   build: {
-    // Production optimizations
-    target: 'es2015',
+    target: 'es2020',
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,  // Remove console.log in production
+        drop_console: true,
         drop_debugger: true
       }
     },
     rollupOptions: {
       output: {
-        // Manual chunking for better caching
         manualChunks: {
           'vue-vendor':      ['vue', 'vue-router', 'pinia'],
           'markdown-vendor': ['marked', 'highlight.js'],
-          'force-graph-3d-vendor': ['3d-force-graph'],
-          'force-graph-vendor':    ['force-graph'],
+          'cosmos-vendor':   ['@cosmos.gl/graph'],
         }
       }
     },
-    chunkSizeWarningLimit: 1000,  // Warn if chunks exceed 1MB
-    sourcemap: false  // Disable sourcemaps in production for smaller size
+    chunkSizeWarningLimit: 1500,
+    sourcemap: false
   }
 })
