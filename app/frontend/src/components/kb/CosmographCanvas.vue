@@ -3,6 +3,16 @@
     <div v-if="initError" class="cosmo-error">
       <span>WebGL unavailable: {{ initError }}</span>
     </div>
+    <!-- Hover tooltip -->
+    <div
+      v-if="tooltip.visible"
+      class="cosmo-tooltip"
+      :style="{
+        left: tooltip.x + 'px',
+        top: tooltip.y + 'px',
+        transform: tooltip.flipX ? 'translate(calc(-100% - 12px), -50%)' : 'translate(12px, -50%)'
+      }"
+    >{{ tooltip.label }}</div>
   </div>
 </template>
 
@@ -16,6 +26,9 @@ import {
 } from '@/utils/kbColors'
 
 const initError = ref<string | null>(null)
+
+// Tooltip state
+const tooltip = ref({ visible: false, label: '', x: 0, y: 0, flipX: false })
 
 const props = defineProps<{
   nodes: GraphNode[]
@@ -35,6 +48,8 @@ let graph: Graph | null = null
 // Cache of the most-recently rendered visible node array.
 // Used by the onClick handler to map index → node without rebuilding.
 let _cachedVisibleNodes: GraphNode[] = []
+// Reverse map: node _id → visible index (kept in sync with _cachedVisibleNodes)
+let _idToVisibleIndex = new Map<string, number>()
 
 function getNodeColor(nodeType: string): [number, number, number, number] {
   return NODE_TYPE_COLORS[nodeType] ?? DEFAULT_NODE_COLOR
@@ -142,16 +157,29 @@ function initGraph() {
       // pushes call fitView() manually below.
       fitViewOnInit: true,
       fitViewDelay: 500,
-      onClick: (index, _pos, _ev) => {
-        if (index === undefined) {
-          emit('backgroundClick')
-        } else {
-          // Use the cached visible-node list — no rebuild needed
-          if (index < _cachedVisibleNodes.length) {
-            emit('nodeClick', _cachedVisibleNodes[index])
+        onClick: (index, _pos, _ev) => {
+          if (index === undefined) {
+            emit('backgroundClick')
+          } else {
+            // Use the cached visible-node list — no rebuild needed
+            if (index < _cachedVisibleNodes.length) {
+              emit('nodeClick', _cachedVisibleNodes[index])
+            }
           }
-        }
-      },
+        },
+        onMouseMove: (index, _pos, ev) => {
+          if (index === undefined || index >= _cachedVisibleNodes.length) {
+            tooltip.value.visible = false
+            return
+          }
+          const rect = containerEl.value!.getBoundingClientRect()
+          const x = ev.clientX - rect.left
+          const y = ev.clientY - rect.top
+          const label = _cachedVisibleNodes[index].label ?? ''
+          // Flip to left side when within 340px of the right edge
+          const flipX = x > rect.width - 340
+          tooltip.value = { visible: true, label, x, y, flipX }
+        },
     })
     pushData()
 
@@ -161,6 +189,7 @@ function initGraph() {
       graph?.render()
     })
     _resizeObserver.observe(containerEl.value)
+    containerEl.value.addEventListener('mouseleave', () => { tooltip.value.visible = false })
   } catch (e: unknown) {
     const msg = e instanceof Error ? e.message : String(e ?? 'WebGL initialisation failed')
     initError.value = msg
@@ -176,6 +205,7 @@ function pushData(autoFit = false) {
 
     // Update cache so onClick can resolve the correct node
     _cachedVisibleNodes = visibleNodes
+    _idToVisibleIndex = new Map(visibleNodes.map((n, i) => [n._id, i]))
 
     graph.setPointPositions(positions)
     graph.setPointColors(colors)
@@ -227,16 +257,30 @@ watch(
   { deep: false },
 )
 
-// Public: expose fitView for parent to call
+// Public: expose fitView and selectNode for parent to call
 defineExpose({
   fitView: () => graph?.fitView?.(400),
+  focusNode: (nodeId: string | null) => {
+    if (!graph) return
+    if (nodeId === null) {
+      // Deselect: zoom back out to fit all nodes
+      graph.fitView(500)
+      return
+    }
+    const index = _idToVisibleIndex.get(nodeId)
+    if (index === undefined) return
+    // Zoom to the node: 600ms animation, scale 4 (comfortable zoom level),
+    // canZoomOut=true so it zooms out if currently zoomed in more than scale 4
+    graph.zoomToPointByIndex(index, 600, 4, true)
+  },
 })
 </script>
 
 <style scoped>
 .cosmo-canvas {
+  flex: 1;
+  min-height: 0;
   width: 100%;
-  height: 100%;
   display: block;
   background: #0f172a;
   position: relative;
@@ -258,5 +302,22 @@ defineExpose({
   font-size: 0.85rem;
   padding: 1rem;
   text-align: center;
+}
+
+.cosmo-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 5px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  color: #e2e8f0;
+  white-space: normal;
+  max-width: 320px;
+  word-break: break-word;
+  line-height: 1.45;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 10;
 }
 </style>

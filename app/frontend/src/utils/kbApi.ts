@@ -56,6 +56,7 @@ export interface TypeCounts {
 export interface IngestionBatch {
   _id: string
   status: 'pending' | 'queued' | 'running' | 'completed' | 'failed' | 'mixed' | 'stopped' | string
+  num_files?: number
   general_domain?: string
   source_root?: string
   created_at?: string
@@ -210,9 +211,9 @@ export async function fetchBatches(limit = 20): Promise<IngestionBatch[]> {
   return data?.batches ?? data
 }
 
-export async function fetchJobs(batchId?: string, status?: string): Promise<IngestionJob[]> {
+export async function fetchJobs(batchId?: string, status?: string, limit = 2000): Promise<IngestionJob[]> {
   const { data } = await api.get('/kb/ingestion/jobs', {
-    params: { batch_id: batchId, status },
+    params: { batch_id: batchId, status, limit },
   })
   return data?.jobs ?? data
 }
@@ -265,6 +266,49 @@ export async function stopBatch(batchId: string): Promise<IngestionBatch> {
 export async function fetchSources(): Promise<SourcesResponse> {
   const { data } = await api.get('/kb/ingestion/sources')
   return data
+}
+
+// ---- KB Document metadata ---------------------------------------------------
+
+export interface KbDocumentMeta {
+  _id: string
+  title?: string | null
+  doi?: string | null
+  authors?: string[]
+  year?: number | null
+  journal?: string | null
+  abstract?: string | null
+  keywords?: string[] | string | null
+  volume?: string | number | null
+  issue?: string | number | null
+  pages?: string | null
+  isbn?: string | null
+  // OpenAlex-sourced fields
+  openalex_id?: string | null
+  pmid?: string | null
+  cited_by_count?: number | null
+  is_retracted?: boolean | null
+  source_type?: string | null
+  source_path?: string | null
+  general_domain?: string | null
+  processing_status?: string | null
+  references?: string[]
+  created_at?: string | null
+  updated_at?: string | null
+}
+
+export async function fetchKbDocument(documentId: string): Promise<KbDocumentMeta | null> {
+  try {
+    const { data } = await api.get(`/kb/documents/${documentId}`)
+    return data as KbDocumentMeta
+  } catch (err: any) {
+    const status = err?.response?.status
+    // 404 → document not in DB (normal for external citations)
+    // 422 → invalid ObjectId (external_document nodes whose entity_id is a DOI string)
+    if (status === 404 || status === 422) return null
+    console.error('[fetchKbDocument] unexpected error for id', documentId, err)
+    throw err
+  }
 }
 
 // ---- KG Builder -------------------------------------------------------------

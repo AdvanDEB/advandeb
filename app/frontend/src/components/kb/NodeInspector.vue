@@ -10,75 +10,138 @@
 
       <div class="inspector-body">
 
-        <!-- ── Document node: rich layout ────────────────────────────── -->
+        <!-- ── Document node: rich layout (metadata fetched from DB) ──── -->
         <template v-if="node.node_type === 'document' || node.node_type === 'external_document'">
 
-          <!-- Title (prominent heading) -->
-          <h3 v-if="node.properties.title" class="doc-title">{{ node.properties.title }}</h3>
-          <h3 v-else class="node-label">{{ node.label }}</h3>
-
-          <!-- Source file (muted, below title) -->
-          <p v-if="node.label && node.properties.title && node.label !== node.properties.title"
-             class="source-file">{{ node.label }}</p>
-
-          <dl class="prop-list">
-            <div v-if="node.properties.authors && (node.properties.authors as string[]).length" class="prop-row">
-              <dt>Authors</dt>
-              <dd>{{ (node.properties.authors as string[]).join(', ') }}</dd>
-            </div>
-            <div v-if="node.properties.year" class="prop-row">
-              <dt>Year</dt>
-              <dd>{{ node.properties.year }}</dd>
-            </div>
-            <div v-if="node.properties.doi" class="prop-row">
-              <dt>DOI</dt>
-              <dd>
-                <a :href="`https://doi.org/${node.properties.doi}`" target="_blank" rel="noopener"
-                   class="doi-link">{{ node.properties.doi as string }}</a>
-              </dd>
-            </div>
-            <div v-if="node.properties.journal" class="prop-row">
-              <dt>Journal</dt>
-              <dd>{{ node.properties.journal }}</dd>
-            </div>
-            <div v-if="node.properties.volume || node.properties.issue || node.properties.pages" class="prop-row">
-              <dt>Vol/Issue/Pages</dt>
-              <dd>
-                <span v-if="node.properties.volume">Vol. {{ node.properties.volume }}</span>
-                <span v-if="node.properties.issue"> · Issue {{ node.properties.issue }}</span>
-                <span v-if="node.properties.pages"> · pp. {{ node.properties.pages }}</span>
-              </dd>
-            </div>
-            <div v-if="node.degree !== undefined" class="prop-row">
-              <dt>Degree</dt>
-              <dd>{{ node.degree }}</dd>
-            </div>
-            <div v-if="node.properties.status" class="prop-row">
-              <dt>Status</dt>
-              <dd><span class="status-pill" :class="`status-${node.properties.status}`">{{ node.properties.status }}</span></dd>
-            </div>
-            <div v-if="node.properties.internal !== undefined" class="prop-row">
-              <dt>Citation type</dt>
-              <dd>{{ node.properties.internal ? 'Internal' : 'External (not in DB)' }}</dd>
-            </div>
-          </dl>
-
-          <!-- Keywords as pills -->
-          <div v-if="docKeywords.length" class="keyword-block">
-            <div class="content-label">Keywords</div>
-            <div class="keyword-pills">
-              <span v-for="kw in docKeywords" :key="kw" class="kw-pill">{{ kw }}</span>
-            </div>
+          <!-- Loading state -->
+          <div v-if="metaLoading" class="meta-loading">
+            <span class="loading-dot" />
+            <span class="loading-dot" />
+            <span class="loading-dot" />
           </div>
 
-          <!-- Abstract (collapsible) -->
-          <div v-if="node.properties.abstract" class="abstract-block">
-            <button class="abstract-toggle" @click="abstractOpen = !abstractOpen">
-              <span class="content-label" style="margin:0">Abstract</span>
-              <span class="toggle-icon">{{ abstractOpen ? '▾' : '▸' }}</span>
-            </button>
-            <p v-if="abstractOpen" class="abstract-text">{{ node.properties.abstract as string }}</p>
-          </div>
+          <!-- Error state -->
+          <p v-else-if="metaError" class="meta-error">{{ metaError }}</p>
+
+          <template v-else>
+            <!-- Title (prominent heading) -->
+            <h3 v-if="docMeta?.title" class="doc-title">{{ docMeta.title }}</h3>
+            <h3 v-else class="node-label">{{ node.label }}</h3>
+
+            <!-- Source file (muted, below title) -->
+            <p v-if="node.label && docMeta?.title && node.label !== docMeta.title"
+               class="source-file">{{ node.label }}</p>
+
+            <!-- Not-in-DB notice for external documents -->
+            <p v-if="node.node_type === 'external_document' && !docMeta" class="not-in-db">
+              External citation — not in knowledge base
+            </p>
+
+            <dl v-if="docMeta" class="prop-list">
+              <!-- Retraction warning — shown at the top if retracted -->
+              <div v-if="docMeta.is_retracted" class="prop-row">
+                <dt></dt>
+                <dd><span class="retracted-badge">RETRACTED</span></dd>
+              </div>
+              <div v-if="docMeta.authors && docMeta.authors.length" class="prop-row">
+                <dt>Authors</dt>
+                <dd>{{ docMeta.authors.join(', ') }}</dd>
+              </div>
+              <div v-if="docMeta.year" class="prop-row">
+                <dt>Year</dt>
+                <dd>{{ docMeta.year }}</dd>
+              </div>
+              <div v-if="docMeta.doi" class="prop-row">
+                <dt>DOI</dt>
+                <dd>
+                  <a :href="`https://doi.org/${docMeta.doi}`" target="_blank" rel="noopener"
+                     class="doi-link">{{ docMeta.doi }}</a>
+                </dd>
+              </div>
+              <div v-if="docMeta.isbn" class="prop-row">
+                <dt>ISBN</dt>
+                <dd>{{ docMeta.isbn }}</dd>
+              </div>
+              <div v-if="docMeta.journal" class="prop-row">
+                <dt>Journal</dt>
+                <dd>{{ docMeta.journal }}</dd>
+              </div>
+              <div v-if="docMeta.volume || docMeta.issue || docMeta.pages" class="prop-row">
+                <dt>Vol/Issue/Pages</dt>
+                <dd>
+                  <span v-if="docMeta.volume">Vol. {{ docMeta.volume }}</span>
+                  <span v-if="docMeta.issue"> · Issue {{ docMeta.issue }}</span>
+                  <span v-if="docMeta.pages"> · pp. {{ docMeta.pages }}</span>
+                </dd>
+              </div>
+              <div v-if="docMeta.cited_by_count != null" class="prop-row">
+                <dt>Citations</dt>
+                <dd>{{ docMeta.cited_by_count.toLocaleString() }}</dd>
+              </div>
+              <div v-if="docMeta.openalex_id" class="prop-row">
+                <dt>OpenAlex</dt>
+                <dd>
+                  <a :href="`https://openalex.org/${docMeta.openalex_id}`" target="_blank" rel="noopener"
+                     class="doi-link">{{ docMeta.openalex_id }}</a>
+                </dd>
+              </div>
+              <div v-if="docMeta.pmid" class="prop-row">
+                <dt>PubMed</dt>
+                <dd>
+                  <a :href="`https://pubmed.ncbi.nlm.nih.gov/${docMeta.pmid}`" target="_blank" rel="noopener"
+                     class="doi-link">{{ docMeta.pmid }}</a>
+                </dd>
+              </div>
+              <div v-if="docMeta.general_domain" class="prop-row">
+                <dt>Domain</dt>
+                <dd>{{ docMeta.general_domain }}</dd>
+              </div>
+              <div v-if="node.degree !== undefined" class="prop-row">
+                <dt>Degree</dt>
+                <dd>{{ node.degree }}</dd>
+              </div>
+              <div v-if="docMeta.processing_status" class="prop-row">
+                <dt>Status</dt>
+                <dd><span class="status-pill" :class="`status-${docMeta.processing_status}`">{{ docMeta.processing_status }}</span></dd>
+              </div>
+            </dl>
+
+            <!-- DOI-only display for external_document with no DB record -->
+            <dl v-else class="prop-list">
+              <div v-if="node.properties.doi" class="prop-row">
+                <dt>DOI</dt>
+                <dd>
+                  <a :href="`https://doi.org/${node.properties.doi}`" target="_blank" rel="noopener"
+                     class="doi-link">{{ node.properties.doi as string }}</a>
+                </dd>
+              </div>
+              <div v-if="node.degree !== undefined" class="prop-row">
+                <dt>Degree</dt>
+                <dd>{{ node.degree }}</dd>
+              </div>
+              <div v-if="node.properties.internal !== undefined" class="prop-row">
+                <dt>Citation type</dt>
+                <dd>{{ node.properties.internal ? 'Internal' : 'External (not in DB)' }}</dd>
+              </div>
+            </dl>
+
+            <!-- Keywords as pills -->
+            <div v-if="docMeta && docKeywords.length" class="keyword-block">
+              <div class="content-label">Keywords</div>
+              <div class="keyword-pills">
+                <span v-for="kw in docKeywords" :key="kw" class="kw-pill">{{ kw }}</span>
+              </div>
+            </div>
+
+            <!-- Abstract (collapsible) -->
+            <div v-if="docMeta?.abstract" class="abstract-block">
+              <button class="abstract-toggle" @click="abstractOpen = !abstractOpen">
+                <span class="content-label" style="margin:0">Abstract</span>
+                <span class="toggle-icon">{{ abstractOpen ? '▾' : '▸' }}</span>
+              </button>
+              <p v-if="abstractOpen" class="abstract-text">{{ docMeta.abstract }}</p>
+            </div>
+          </template>
 
         </template>
 
@@ -157,6 +220,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import type { GraphNode } from '@/utils/kbApi'
+import { fetchKbDocument, type KbDocumentMeta } from '@/utils/kbApi'
 
 const props = defineProps<{ node: GraphNode | null; loading?: boolean }>()
 defineEmits<{
@@ -165,12 +229,41 @@ defineEmits<{
 }>()
 
 const abstractOpen = ref(false)
+const metaLoading = ref(false)
+const metaError = ref<string | null>(null)
+const docMeta = ref<KbDocumentMeta | null>(null)
 
-// Reset abstract state when node changes
-watch(() => props.node?._id, () => { abstractOpen.value = false })
+// Fetch document metadata from the DB whenever a document node is selected.
+// entity_id is the MongoDB ObjectId string of the document record.
+watch(
+  () => props.node,
+  async (node) => {
+    abstractOpen.value = false
+    docMeta.value = null
+    metaError.value = null
+
+    if (!node) return
+    if (node.node_type !== 'document' && node.node_type !== 'external_document') return
+
+    // entity_id is the document's MongoDB _id
+    const entityId = node.entity_id
+    if (!entityId) return
+
+    metaLoading.value = true
+    try {
+      docMeta.value = await fetchKbDocument(entityId)
+    } catch (err: any) {
+      console.error('[NodeInspector] failed to load document metadata', entityId, err)
+      metaError.value = `Failed to load metadata (${err?.response?.status ?? err?.message ?? 'unknown error'})`
+    } finally {
+      metaLoading.value = false
+    }
+  },
+  { immediate: true },
+)
 
 const docKeywords = computed<string[]>(() => {
-  const kw = props.node?.properties?.keywords
+  const kw = docMeta.value?.keywords
   if (!kw) return []
   if (Array.isArray(kw)) return (kw as string[]).filter(Boolean)
   if (typeof kw === 'string') return (kw as string).split(/[,;]/).map(s => s.trim()).filter(Boolean)
@@ -240,6 +333,42 @@ const docKeywords = computed<string[]>(() => {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+}
+
+/* Loading dots */
+.meta-loading {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.5rem 0;
+  align-items: center;
+}
+.loading-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #475569;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes pulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+/* Not-in-DB notice */
+.not-in-db {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Metadata fetch error */
+.meta-error {
+  font-size: 0.72rem;
+  color: #fca5a5;
+  margin: 0;
 }
 
 /* Document title (prominent) */
@@ -328,6 +457,18 @@ const docKeywords = computed<string[]>(() => {
 .status-completed, .status-confirmed, .status-published { background: #065f46; color: #6ee7b7; }
 .status-pending, .status-suggested { background: #78350f; color: #fde68a; }
 .status-failed, .status-rejected { background: #7f1d1d; color: #fca5a5; }
+
+.retracted-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: #7f1d1d;
+  color: #fca5a5;
+  border: 1px solid #ef4444;
+  text-transform: uppercase;
+}
 
 .content-block { display: flex; flex-direction: column; gap: 0.3rem; }
 .content-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; font-weight: 600; }

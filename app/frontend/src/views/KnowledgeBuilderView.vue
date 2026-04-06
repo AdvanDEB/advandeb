@@ -60,9 +60,33 @@
           @node-click="handleNodeClick"
           @background-click="selectedNode = null"
         />
+
+        <!-- Collapsible node table panel -->
+        <NodeTablePanel
+          v-if="tableOpen && nodes.length"
+          :nodes="nodes"
+          :selectedNode="selectedNode"
+          @select="onTableRowSelect"
+        />
+
         <div class="graph-status-bar">
           <span>{{ fmtNum(nodes.length) }} nodes · {{ fmtNum(edges.length) }} edges</span>
           <span v-if="selectedSchema" class="schema-tag">{{ selectedSchema.name }}</span>
+          <button
+            v-if="selectedSchema"
+            class="graph-table-btn"
+            :class="{ active: tableOpen }"
+            :disabled="!nodes.length"
+            title="Toggle node table"
+            @click="tableOpen = !tableOpen"
+          >☰ Table</button>
+          <button
+            v-if="selectedSchema"
+            class="graph-refresh-btn"
+            :disabled="graphLoading"
+            title="Reload graph data from server"
+            @click="refreshGraph"
+          >{{ graphLoading ? '↻' : '↺' }}</button>
         </div>
       </div>
 
@@ -206,7 +230,7 @@
             <thead>
               <tr>
                 <th>Batch ID</th>
-                <th>Domain</th>
+                <th>Progress</th>
                 <th>Status</th>
                 <th>Created</th>
                 <th>Actions</th>
@@ -220,7 +244,16 @@
                 @click="loadJobsForBatch(b._id)"
               >
                 <td class="mono">{{ b._id.slice(-8) }}</td>
-                <td class="dim">{{ b.general_domain || '—' }}</td>
+                <td class="batch-progress-cell">
+                  <template v-if="batchProgress[b._id] != null">
+                    <div class="progress-bar">
+                      <div class="progress-fill" :style="{ width: `${batchProgress[b._id]}%` }" />
+                    </div>
+                    <span class="progress-label">{{ batchProgress[b._id] }}%</span>
+                  </template>
+                  <span v-else class="dim">—</span>
+                  <span v-if="b.num_files" class="batch-doc-count">{{ b.num_files }} doc{{ b.num_files === 1 ? '' : 's' }}</span>
+                </td>
                 <td>
                   <span class="status-pill" :class="`status-${b.status}`">
                     <span v-if="b.status === 'running'" class="spin-dot" />
@@ -343,6 +376,7 @@ import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import CosmographCanvas from '@/components/kb/CosmographCanvas.vue'
 import NodeInspector from '@/components/kb/NodeInspector.vue'
+import NodeTablePanel from '@/components/kb/NodeTablePanel.vue'
 import SchemaPanel from '@/components/kb/SchemaPanel.vue'
 import FolderTree from '@/components/kb/FolderTree.vue'
 import type { FolderNode } from '@/components/kb/FolderTree.vue'
@@ -400,6 +434,7 @@ const selectedStats   = ref<GraphStats | null>(null)
 const typeCounts      = ref<TypeCounts | null>(null)
 const loadedNodeIds   = ref<string[]>([])
 const canvasRef       = ref<InstanceType<typeof CosmographCanvas> | null>(null)
+const tableOpen       = ref(false)
 
 async function loadSchemas() {
   try {
@@ -412,7 +447,7 @@ async function loadSchemas() {
   } catch (e) { setError(e) }
 }
 
-watch(selectedSchema, async (schema) => {
+async function loadGraph(schema: typeof selectedSchema.value) {
   if (!schema) return
   graphLoading.value = true
   nodes.value = []
@@ -451,7 +486,13 @@ watch(selectedSchema, async (schema) => {
     edges.value = await fetchAllEdges(schema._id)
   } catch (e) { setError(e) }
   finally { graphLoading.value = false }
-})
+}
+
+watch(selectedSchema, (schema) => { loadGraph(schema) })
+
+async function refreshGraph() {
+  await loadGraph(selectedSchema.value)
+}
 
 async function loadMoreNodes() {
   // All nodes and edges are loaded on initial schema selection.
@@ -484,6 +525,15 @@ async function handleRebuild() {
 function handleNodeClick(node: GraphNode) {
   selectedNode.value = node
 }
+
+function onTableRowSelect(node: GraphNode) {
+  selectedNode.value = node
+}
+
+// Focus/unfocus the canvas whenever selectedNode changes
+watch(selectedNode, (node) => {
+  canvasRef.value?.focusNode(node ? node._id : null)
+})
 
 async function handleExpand(node: GraphNode) {
   if (!selectedSchema.value) return
@@ -629,6 +679,37 @@ async function loadJobsForBatch(batchId: string) {
   selectedBatchId.value = batchId
   try { selectedBatchJobs.value = await fetchJobs(batchId) } catch (e) { setError(e) }
 }
+
+/**
+ * Per-batch overall progress (0–100), or null when not computable.
+ * For the selected batch we use actual job progress data.
+ * For all others we derive from the batch status alone.
+ */
+const batchProgress = computed<Record<string, number | null>>(() => {
+  const map: Record<string, number | null> = {}
+  for (const b of batches.value) {
+    if (b._id === selectedBatchId.value && selectedBatchJobs.value.length) {
+      const jobs = selectedBatchJobs.value
+      const total = jobs.length
+      let sum = 0
+      for (const j of jobs) {
+        if (j.status === 'completed') sum += 100
+        else sum += j.progress ?? 0
+      }
+      map[b._id] = Math.round(sum / total)
+    } else {
+      const s = b.status
+      if (s === 'completed' || s === 'failed' || s === 'stopped' || s === 'mixed') {
+        map[b._id] = 100
+      } else if (s === 'pending' || s === 'queued') {
+        map[b._id] = 0
+      } else {
+        map[b._id] = null  // running but no job data loaded yet
+      }
+    }
+  }
+  return map
+})
 
 async function loadSources() {
   try {
@@ -953,6 +1034,36 @@ onUnmounted(() => stopBatchPolling())
   color: #64748b;
   flex-shrink: 0;
 }
+
+.graph-refresh-btn {
+  background: none;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  color: #64748b;
+  font-size: 0.85rem;
+  line-height: 1;
+  padding: 0.1rem 0.4rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.graph-refresh-btn:hover:not(:disabled) { color: #e2e8f0; border-color: #60a5fa; }
+.graph-refresh-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.graph-table-btn {
+  background: none;
+  border: 1px solid #334155;
+  border-radius: 4px;
+  color: #64748b;
+  font-size: 0.7rem;
+  line-height: 1;
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  margin-left: auto;
+}
+.graph-table-btn:hover:not(:disabled) { color: #e2e8f0; border-color: #60a5fa; }
+.graph-table-btn.active { background: #1d4ed8; border-color: #3b82f6; color: #bfdbfe; }
+.graph-table-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 .schema-tag {
   font-weight: 600;
@@ -1327,6 +1438,8 @@ onUnmounted(() => stopBatchPolling())
 .actions-cell { display: flex; gap: 0.3rem; align-items: center; }
 
 .progress-cell { display: flex; align-items: center; gap: 0.4rem; }
+.batch-progress-cell { display: flex; align-items: center; gap: 0.4rem; min-width: 100px; }
+.batch-doc-count { font-size: 0.62rem; color: #475569; white-space: nowrap; flex-shrink: 0; margin-left: 0.2rem; }
 .progress-bar { height: 6px; background: #1e293b; border-radius: 3px; width: 100%; flex: 1; }
 .progress-fill { height: 100%; background: #3b82f6; border-radius: 3px; transition: width 0.3s; }
 .progress-label { font-size: 0.65rem; color: #64748b; white-space: nowrap; flex-shrink: 0; }
