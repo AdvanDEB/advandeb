@@ -139,7 +139,7 @@ class HybridRetrievalService:
             if cached is not None:
                 return cached
 
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
 
         # 1. Embed query (blocking → run in thread pool)
         query_vec = await loop.run_in_executor(
@@ -185,7 +185,7 @@ class HybridRetrievalService:
 
     async def retrieve_for_document(self, document_id: str, top_k: int = 20) -> list[RetrievalResult]:
         """Fetch all stored chunks for a specific document (no query needed)."""
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         raw = await loop.run_in_executor(
             _executor,
             lambda: self.chromadb_svc.search(
@@ -210,7 +210,7 @@ class HybridRetrievalService:
     async def _keyword_search(
         self, query: str, limit: int = 40, domain: Optional[str] = None
     ) -> list[dict]:
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
 
         if self.arango_db is not None:
             return await loop.run_in_executor(

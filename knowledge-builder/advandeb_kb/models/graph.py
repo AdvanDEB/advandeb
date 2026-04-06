@@ -117,6 +117,13 @@ class GraphNode(BaseModel):
     label: str
     properties: Dict[str, Any] = {}
 
+    # Layout coordinates populated at rebuild time by VisualizationService
+    x: Optional[float] = None   # 3D layout x
+    y: Optional[float] = None   # 3D layout y
+    z: Optional[float] = None   # 3D layout z
+    x2d: Optional[float] = None  # 2D-optimised layout x
+    y2d: Optional[float] = None  # 2D-optimised layout y
+
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
@@ -149,7 +156,7 @@ class GraphEdge(BaseModel):
 BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
     {
         "name": "citation",
-        "description": "Citation relationships between scientific documents.",
+        "description": "Document citation network derived from DOI references and taxon co-occurrence.",
         "is_builtin": True,
         "node_types": [
             {
@@ -173,8 +180,7 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
     {
         "name": "sf_support",
         "description": (
-            "Evidence network: facts extracted from documents that support or "
-            "oppose stylized facts."
+            "Evidence network linking literature facts to stylized biological findings."
         ),
         "is_builtin": True,
         "node_types": [
@@ -226,7 +232,7 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
     },
     {
         "name": "taxonomical",
-        "description": "Taxonomic parent-child hierarchy of organisms (NCBI + GBIF).",
+        "description": "NCBI taxonomy hierarchy showing parent–child relationships between taxa.",
         "is_builtin": True,
         "node_types": [
             {
@@ -250,12 +256,7 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
     {
         "name": "knowledge_graph",
         "description": (
-            "Full integrated knowledge graph: all domain knowledge in one schema. "
-            "Taxonomy backbone (taxon nodes typed by rank) overlaid with stylized "
-            "facts, extracted facts, and documents. All evidence edges (extracted_from, "
-            "supports, opposes), document links (studies, cites), process relations "
-            "(regulates, depends_on, exhibited_by) are materialized. Every node carries "
-            "a cluster_id for frontend coloring."
+            "Fully integrated graph combining taxonomy, evidence, literature, and process relationships."
         ),
         "is_builtin": True,
         "node_types": [
@@ -372,8 +373,7 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
     {
         "name": "physiological_process",
         "description": (
-            "Relationships between biological processes and the stylized facts "
-            "and organisms that describe them."
+            "Process relationships between stylized facts and the species that exhibit them."
         ),
         "is_builtin": True,
         "node_types": [

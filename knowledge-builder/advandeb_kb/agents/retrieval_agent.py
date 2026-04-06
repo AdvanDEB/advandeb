@@ -18,6 +18,7 @@ from typing import Optional
 
 from advandeb_kb.agents.base_agent import BaseAgent
 from advandeb_kb.config.settings import settings
+from advandeb_kb.services.cache_service import CacheService
 from advandeb_kb.services.chromadb_service import ChromaDBService
 from advandeb_kb.services.embedding_service import EmbeddingService
 from advandeb_kb.services.hybrid_retrieval_service import HybridRetrievalService
@@ -50,7 +51,7 @@ class RetrievalAgent(BaseAgent):
     async def initialize(self) -> None:
         """Load embedding model and connect to ChromaDB."""
         import asyncio
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
 
         # Load embedding model in thread pool (blocking)
         self._embedding_svc = EmbeddingService()
@@ -59,9 +60,14 @@ class RetrievalAgent(BaseAgent):
         self._chroma_svc = ChromaDBService()
         self._chroma_svc._ensure_connected()
 
+        cache = CacheService(
+            redis_url=settings.REDIS_URL if settings.REDIS_URL else None,
+        )
+
         self._retrieval_svc = HybridRetrievalService(
             embedding_svc=self._embedding_svc,
             chromadb_svc=self._chroma_svc,
+            cache=cache,
             # arango_db not required — keyword search falls back to no-op if absent
         )
 
@@ -184,7 +190,7 @@ class RetrievalAgent(BaseAgent):
             return {"error": f"Chunk not found: {chunk_id}", "chunks": []}
 
         import asyncio
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         query_vec = await loop.run_in_executor(
             None, self._embedding_svc.embed_text, source["text"]
         )
@@ -197,7 +203,7 @@ class RetrievalAgent(BaseAgent):
 
     async def _embed_query(self, text: str) -> dict:
         import asyncio
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         vec = await loop.run_in_executor(None, self._embedding_svc.embed_text, text)
         return {"text": text, "dimension": len(vec), "embedding": vec}
 

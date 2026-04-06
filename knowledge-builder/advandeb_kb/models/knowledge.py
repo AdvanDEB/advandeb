@@ -27,6 +27,7 @@ class Document(BaseModel):
     journal: Optional[str] = None
     abstract: Optional[str] = None
     content: Optional[str] = None  # full extracted text
+    references: List[str] = []     # DOI strings of documents cited by this document
 
     # Where the document came from
     source_type: Literal["pdf_local", "pdf_upload", "web", "text", "manual"] = "manual"

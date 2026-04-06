@@ -65,6 +65,17 @@ class IngestionService:
             results.append(doc)
         return results
 
+    async def delete_batch(self, batch_id: str) -> bool:
+        oid = ObjectId(batch_id)
+        batch = await self.batches.find_one({"_id": oid})
+        if not batch:
+            return False
+        if batch.get("status") == "running":
+            raise ValueError("Cannot delete a batch that is currently running")
+        await self.jobs.delete_many({"batch_id": oid})
+        await self.batches.delete_one({"_id": oid})
+        return True
+
     async def update_batch_status(self, batch_id: ObjectId, status: str) -> None:
         await self.batches.update_one(
             {"_id": batch_id},
@@ -75,9 +86,30 @@ class IngestionService:
     # Jobs
     # ------------------------------------------------------------------
 
-    async def create_jobs_for_batch(self, batch: IngestionBatch) -> int:
-        """Scan source_root/folders for PDFs and create one job per file."""
+    async def create_jobs_for_batch(
+        self, batch: IngestionBatch, explicit_files: Optional[List[str]] = None
+    ) -> int:
+        """Scan source_root/folders for PDFs and create one job per file.
+
+        If ``explicit_files`` is provided (list of paths relative to source_root),
+        those are ingested directly without walking any folder.
+        """
         jobs: List[Dict[str, Any]] = []
+
+        # -- Explicit individual files (relative to source_root) ---------------
+        for rel_path in (explicit_files or []):
+            abs_path = os.path.join(batch.source_root, rel_path)
+            if not os.path.isfile(abs_path) or not rel_path.lower().endswith(".pdf"):
+                continue
+            job = IngestionJob(
+                batch_id=batch.id,
+                source_type="pdf_local",
+                source_path_or_url=rel_path,
+                metadata={"general_domain": batch.general_domain} if batch.general_domain else {},
+            )
+            jobs.append(job.model_dump(by_alias=True))
+
+        # -- Folder scan -------------------------------------------------------
         for rel_folder in batch.folders:
             folder_path = os.path.join(batch.source_root, rel_folder)
             if not os.path.isdir(folder_path):
@@ -99,6 +131,18 @@ class IngestionService:
 
         if not jobs:
             return 0
+
+        # Mark jobs whose source_path already has a completed document
+        source_paths = [j["source_path_or_url"] for j in jobs]
+        processed_paths: set = set()
+        async for doc in self.db.documents.find(
+            {"source_path": {"$in": source_paths}, "processing_status": "completed"},
+            {"source_path": 1},
+        ):
+            processed_paths.add(doc["source_path"])
+        for job in jobs:
+            if job["source_path_or_url"] in processed_paths:
+                job["already_processed"] = True
 
         await self.jobs.insert_many(jobs)
         await self.batches.update_one(

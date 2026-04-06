@@ -20,13 +20,13 @@ class Settings:
 
     # Ingestion and background processing settings
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-    PAPERS_ROOT: str = os.getenv("PAPERS_ROOT", "../papers")
+    PAPERS_ROOT: str = os.getenv("PAPERS_ROOT", "/home/adeb/DEB_library")
 
-    # ArangoDB settings (graph database)
-    ARANGO_URL: str = os.getenv("ARANGO_URL", "http://localhost:8529")
-    ARANGO_DB_NAME: str = os.getenv("ARANGO_DB_NAME", "advandeb_kb")
-    ARANGO_USERNAME: str = os.getenv("ARANGO_USERNAME", "root")
-    ARANGO_PASSWORD: str = os.getenv("ARANGO_PASSWORD", "adeb2026")
+    # Maximum number of PDFs to ingest in parallel.
+    # Set to 0 (default) to let the pipeline auto-estimate based on available
+    # VRAM, RAM, and CPU count at startup.  Set to a positive integer to pin
+    # the value regardless of hardware (e.g. INGESTION_CONCURRENCY=4).
+    INGESTION_CONCURRENCY: int = int(os.getenv("INGESTION_CONCURRENCY", "0"))
 
     # ChromaDB settings (vector store — embedded/in-process mode by default)
     CHROMA_PERSIST_DIR: str = os.getenv("CHROMA_PERSIST_DIR", "./data/chromadb")

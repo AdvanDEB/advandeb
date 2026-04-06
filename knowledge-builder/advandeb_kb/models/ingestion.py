@@ -36,7 +36,7 @@ class IngestionBatch(BaseModel):
     # Optional general domain tag applied to all documents in this batch
     general_domain: Optional[str] = None
 
-    status: Literal["pending", "running", "completed", "failed", "mixed"] = "pending"
+    status: Literal["pending", "running", "completed", "failed", "mixed", "stopped"] = "pending"
 
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
@@ -64,6 +64,9 @@ class IngestionJob(BaseModel):
 
     progress: int = Field(default=0, ge=0, le=100)
     error_message: Optional[str] = None
+
+    # True when a completed Document already exists for this source_path at scan time
+    already_processed: bool = False
 
     metadata: Dict[str, Any] = {}
 

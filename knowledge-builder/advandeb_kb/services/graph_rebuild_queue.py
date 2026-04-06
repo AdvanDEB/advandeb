@@ -38,7 +38,12 @@ logger = logging.getLogger(__name__)
 DEBOUNCE_SECONDS: float = 30.0
 
 # Default root taxid used for knowledge_graph / taxonomical rebuilds.
-DEFAULT_ROOT_TAXID: int = 33208  # Metazoa
+DEFAULT_ROOT_TAXID: int = 33208  # Animalia
+
+# Max nodes for the full taxonomical schema rebuild (Animalia subtree).
+# Set high to capture broad taxonomic coverage; the UI overview/expand pattern
+# handles navigation within the large graph.
+TAXONOMY_MAX_NODES: int = 100000
 
 
 class GraphRebuildQueue:
@@ -47,7 +52,11 @@ class GraphRebuildQueue:
     def __init__(self) -> None:
         # schema_name → timestamp of the *last* mark_dirty call
         self._dirty: Dict[str, float] = {}
-        self._lock = asyncio.Lock()
+        # Lock is created lazily inside start() so it is always bound to the
+        # correct running event loop (avoids DeprecationWarning / errors when
+        # the singleton is created at import time outside a running loop, e.g.
+        # with Gunicorn pre-fork workers).
+        self._lock: Optional[asyncio.Lock] = None
         self._task: Optional[asyncio.Task] = None
         self._db: Any = None
         self._running = False
@@ -76,6 +85,9 @@ class GraphRebuildQueue:
             return
         self._db = db
         self._running = True
+        # Create the lock here, inside a running event loop, so it is always
+        # bound to the correct loop regardless of when the singleton was constructed.
+        self._lock = asyncio.Lock()
         self._task = asyncio.create_task(self._worker(), name="graph-rebuild-worker")
         logger.info("GraphRebuildQueue: background worker started (debounce=%.0fs)", DEBOUNCE_SECONDS)
 
@@ -99,7 +111,10 @@ class GraphRebuildQueue:
             await asyncio.sleep(5)  # poll every 5 seconds
 
             now = time.monotonic()
-            async with self._lock:
+            lock = self._lock
+            if lock is None:
+                continue
+            async with lock:
                 due: Set[str] = {
                     name
                     for name, ts in list(self._dirty.items())
@@ -150,7 +165,11 @@ class GraphRebuildQueue:
                 result = await builder.build_taxonomy_graph(
                     schema_id,
                     root_taxid=DEFAULT_ROOT_TAXID,
+                    max_nodes=TAXONOMY_MAX_NODES,
                 )
+
+            elif schema_name == "physiological_process":
+                result = await builder.build_physiological_graph(schema_id)
 
             else:
                 logger.warning("GraphRebuildQueue: no rebuild strategy for '%s'", schema_name)

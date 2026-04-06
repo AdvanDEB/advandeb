@@ -23,11 +23,53 @@ logger = logging.getLogger(__name__)
 
 
 class GraphBuilderService:
-    def __init__(self, database):
+    def __init__(self, database, viz_service=None):
         self.db = database
         self.schemas = database.graph_schemas
         self.nodes = database.graph_nodes
         self.edges = database.graph_edges
+        self.viz_service = viz_service
+
+    async def _post_build_layout(self, schema_id: ObjectId, schema_name: str) -> None:
+        """Trigger layout computation if a viz_service is wired up."""
+        if self.viz_service is not None:
+            try:
+                await self.viz_service.compute_and_store_layout(schema_id, schema_name)
+            except Exception:
+                logger.exception(
+                    "post-build layout failed for schema %s — graph data is still valid",
+                    schema_name,
+                )
+
+    async def _post_build_compute_degrees(self, schema_id: ObjectId) -> None:
+        """Count edge endpoints and write degree back to each graph_node document.
+
+        This runs once after each build so that ``get_overview()`` can sort
+        by the stored ``degree`` field instead of scanning all edges in Python.
+        """
+        from pymongo import UpdateOne
+
+        degree_map: dict = {}
+        async for edge in self.edges.find(
+            {"schema_id": schema_id},
+            {"source_node_id": 1, "target_node_id": 1},
+        ):
+            s = str(edge["source_node_id"])
+            t = str(edge["target_node_id"])
+            degree_map[s] = degree_map.get(s, 0) + 1
+            degree_map[t] = degree_map.get(t, 0) + 1
+
+        ops = [
+            UpdateOne({"_id": ObjectId(nid)}, {"$set": {"degree": deg}})
+            for nid, deg in degree_map.items()
+        ]
+        if ops:
+            await self.nodes.bulk_write(ops, ordered=False)
+
+        logger.info(
+            "_post_build_compute_degrees schema=%s — updated degree for %d nodes",
+            schema_id, len(ops),
+        )
 
     # ------------------------------------------------------------------
     # Schema seeding
@@ -236,7 +278,10 @@ class GraphBuilderService:
         logger.info(
             "build_sf_graph complete — %d nodes, %d edges", total_nodes, total_edges
         )
-        return {"nodes": total_nodes, "edges": total_edges}
+        summary = {"nodes": total_nodes, "edges": total_edges}
+        await self._post_build_compute_degrees(schema_id)
+        await self._post_build_layout(schema_id, "sf_support")
+        return summary
 
     # ------------------------------------------------------------------
     # Taxonomical graph
@@ -327,7 +372,10 @@ class GraphBuilderService:
             len(node_docs),
             len(edge_docs),
         )
-        return {"nodes": len(node_docs), "edges": len(edge_docs)}
+        summary = {"nodes": len(node_docs), "edges": len(edge_docs)}
+        await self._post_build_compute_degrees(schema_id)
+        await self._post_build_layout(schema_id, "taxonomical")
+        return summary
 
     # ------------------------------------------------------------------
     # Knowledge graph (full integrated graph — all node and edge types)
@@ -751,7 +799,7 @@ class GraphBuilderService:
             backbone_count, studies_count, extracted_count, sf_relation_count,
             cites_count, regulates_count, depends_count, exhibited_count,
         )
-        return {
+        summary = {
             "nodes": total_nodes,
             "edges": total_edges,
             "taxon_nodes": len(taxon_node_docs),
@@ -767,6 +815,9 @@ class GraphBuilderService:
             "depends_on_edges": depends_count,
             "exhibited_by_edges": exhibited_count,
         }
+        await self._post_build_compute_degrees(schema_id)
+        await self._post_build_layout(schema_id, "knowledge_graph")
+        return summary
 
     # ------------------------------------------------------------------
     # Citation graph
@@ -847,11 +898,11 @@ class GraphBuilderService:
             if doc.get("doi") and str(doc["_id"]) in entity_to_node:
                 doi_to_node[doc["doi"]] = entity_to_node[str(doc["_id"])]
 
-        # ---- Phase 1: DOI-based cites edges ----
-        edge_docs: List[Dict[str, Any]] = []
+        # ---- Phase 1: DOI-based cites edges (internal + external ghost nodes) ----
+        # Collect external DOIs first so we can create ghost nodes in one batch.
+        external_dois: Dict[str, None] = {}  # ordered set
         warned_no_refs = False
         for doc in doc_list:
-            source_node_id = entity_to_node[str(doc["_id"])]
             refs = doc.get("references") or []
             if not refs and not warned_no_refs:
                 logger.warning(
@@ -861,14 +912,57 @@ class GraphBuilderService:
                 )
                 warned_no_refs = True
             for ref_doi in refs:
-                if isinstance(ref_doi, str) and ref_doi in doi_to_node:
+                if isinstance(ref_doi, str) and ref_doi not in doi_to_node:
+                    external_dois[ref_doi] = None
+
+        # Create ghost nodes for external (not-in-DB) cited documents
+        external_doi_to_node: Dict[str, ObjectId] = {}
+        if external_dois:
+            ghost_node_docs: List[Dict[str, Any]] = []
+            for doi in external_dois:
+                ghost_node_docs.append({
+                    "schema_id": schema_id,
+                    "node_type": "external_document",
+                    "entity_collection": "external",
+                    "entity_id": doi,
+                    "label": doi[:120],
+                    "properties": {
+                        "doi": doi,
+                        "internal": False,
+                        "cluster_id": "external",
+                    },
+                })
+            ghost_result = await self.nodes.insert_many(ghost_node_docs)
+            for i, doi in enumerate(external_dois):
+                external_doi_to_node[doi] = ghost_result.inserted_ids[i]
+            logger.info(
+                "build_citation_graph — %d external ghost nodes created", len(ghost_node_docs)
+            )
+
+        edge_docs: List[Dict[str, Any]] = []
+        for doc in doc_list:
+            source_node_id = entity_to_node[str(doc["_id"])]
+            refs = doc.get("references") or []
+            for ref_doi in refs:
+                if not isinstance(ref_doi, str):
+                    continue
+                if ref_doi in doi_to_node:
                     edge_docs.append({
                         "schema_id": schema_id,
                         "edge_type": "cites",
                         "source_node_id": source_node_id,
                         "target_node_id": doi_to_node[ref_doi],
                         "weight": 1.0,
-                        "properties": {"method": "doi"},
+                        "properties": {"method": "doi", "internal": True},
+                    })
+                elif ref_doi in external_doi_to_node:
+                    edge_docs.append({
+                        "schema_id": schema_id,
+                        "edge_type": "cites",
+                        "source_node_id": source_node_id,
+                        "target_node_id": external_doi_to_node[ref_doi],
+                        "weight": 0.5,
+                        "properties": {"method": "doi", "internal": False},
                     })
 
         doi_edge_count = len(edge_docs)
@@ -949,16 +1043,25 @@ class GraphBuilderService:
             await self.edges.insert_many(edge_docs)
 
         total_edges = doi_edge_count + taxon_overlap_count
+        total_nodes = len(node_docs) + len(external_doi_to_node)
         logger.info(
-            "build_citation_graph — %d nodes, %d total edges (%d DOI, %d taxon_overlap, %d docs had DOIs)",
-            len(node_docs), total_edges, doi_edge_count, taxon_overlap_count, len(doi_to_doc_id),
+            "build_citation_graph — %d nodes (%d internal, %d external ghosts), "
+            "%d total edges (%d DOI internal, %d DOI external, %d taxon_overlap)",
+            total_nodes, len(node_docs), len(external_doi_to_node),
+            total_edges, doi_edge_count - len(external_doi_to_node),
+            len(external_doi_to_node), taxon_overlap_count,
         )
-        return {
-            "nodes": len(node_docs),
+        summary = {
+            "nodes": total_nodes,
+            "internal_nodes": len(node_docs),
+            "external_ghost_nodes": len(external_doi_to_node),
             "edges": total_edges,
             "doi_edges": doi_edge_count,
             "taxon_overlap_edges": taxon_overlap_count,
         }
+        await self._post_build_compute_degrees(schema_id)
+        await self._post_build_layout(schema_id, "citation")
+        return summary
 
     # ------------------------------------------------------------------
     # Physiological-process graph
@@ -1211,10 +1314,13 @@ class GraphBuilderService:
             "%d sf_nodes, %d taxon_nodes, %d exhibited_by edges",
             len(sf_node_docs), len(taxon_node_docs), total_edges,
         )
-        return {
+        summary = {
             "nodes": total_nodes,
             "edges": total_edges,
             "sf_nodes": len(sf_node_docs),
             "taxon_nodes": len(taxon_node_docs),
             "exhibited_by_edges": total_edges,
         }
+        await self._post_build_compute_degrees(schema_id)
+        await self._post_build_layout(schema_id, "physiological_process")
+        return summary
