@@ -16,7 +16,10 @@ db = Database()
 
 async def connect_to_mongo():
     """Connect to MongoDB."""
-    db.client = AsyncIOMotorClient(settings.MONGODB_URI)
+    db.client = AsyncIOMotorClient(
+        settings.MONGODB_URI,
+        maxPoolSize=settings.MONGO_MAX_POOL_SIZE,
+    )
     print(f"Connected to MongoDB at {settings.MONGODB_URI}")
 
 

@@ -55,6 +55,12 @@ class Settings(BaseSettings):
     # CORS - comma-separated string that will be split into list
     CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
     
+    # KB ingestion
+    PAPERS_ROOT: str = "/home/adeb/DEB_library"
+
+    # MongoDB connection pool
+    MONGO_MAX_POOL_SIZE: int = 10
+
     # Logging
     LOG_LEVEL: str = "INFO"
     LOG_FILE: str = "logs/app.log"
