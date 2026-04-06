@@ -49,8 +49,6 @@ const router = createRouter({
     {
       path: '/kb',
       name: 'knowledge-builder',
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore — KnowledgeBuilderView uses plain JS Options API (no lang="ts")
       component: () => import('@/views/KnowledgeBuilderView.vue'),
       meta: { requiresAuth: true, requiresKB: true }
     }
@@ -65,7 +63,7 @@ router.beforeEach((to: RouteLocationNormalized, _from: RouteLocationNormalized, 
     return
   }
 
-  if (to.meta.requiresKB && !KB_ROLES.some(role => authStore.hasRole(role))) {
+  if (to.meta.requiresKB && !KB_ROLES.some(r => authStore.hasRole(r))) {
     next({ name: 'home' })
     return
   }

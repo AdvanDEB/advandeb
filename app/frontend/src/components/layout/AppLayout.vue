@@ -74,7 +74,7 @@ const baseLinks = [
   { path: '/',           icon: '⌂',  label: 'Home' },
   { path: '/chat',       icon: '💬', label: 'Chat' },
   { path: '/documents',  icon: '📄', label: 'Documents' },
-{ path: '/facts',      icon: '🔬', label: 'Facts' },
+  { path: '/facts',      icon: '🔬', label: 'Facts' },
   { path: '/scenarios',  icon: '⚗',  label: 'Scenarios' },
   { path: '/models',     icon: '📐', label: 'Models' },
 ]
@@ -82,7 +82,7 @@ const baseLinks = [
 const navLinks = computed(() => {
   const links = [...baseLinks]
   if (authStore.hasRole('administrator') || authStore.hasRole('knowledge_curator')) {
-    links.push({ path: '/kb', icon: '🧠', label: 'Knowledge Builder' })
+    links.push({ path: '/kb', icon: '⬡', label: 'Knowledge' })
   }
   return links
 })
