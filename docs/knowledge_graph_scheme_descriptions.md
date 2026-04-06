@@ -72,9 +72,22 @@ Connects a **document** to a **taxon** that the document is about or that appear
 ---
 
 ### cites
-Connects a **document** to another **document** it cites. Represents the citation network.
+Connects a **document** (or **external_document** ghost node) to another document it cites. Represents the citation network.
 
-`document → document`
+`document → document` (internal) or `document → external_document` (external)
+
+**Properties:**
+- `internal: true` — both source and target are in the database
+- `internal: false` — target is a cited DOI not yet in the database (ghost node)
+- `method: "doi"` — built from extracted DOI references
+- `method: "taxon_overlap"` — fallback when < 10 DOI edges exist
+
+---
+
+### external_document (node type)
+A ghost node representing a cited document whose DOI was found in the `references` field of an ingested document but which has not yet been ingested into the database. Ghost nodes allow the citation graph to show the full citation footprint even for not-yet-collected papers.
+
+**Key properties:** `doi`, `internal: false`, `cluster_id: "external"`
 
 ---
 
@@ -111,14 +124,16 @@ Connects a **chunk** to the **document** it belongs to. Represents textual conta
 ### citation_graph
 The citation network between documents. Useful for bibliometric analysis and tracing intellectual lineage.
 
-- **Nodes:** `documents`
-- **Edges:** `cites` (document → document)
+- **Nodes:** `document` (in-database papers), `external_document` (ghost nodes for cited-but-not-ingested papers)
+- **Edges:** `cites` (document → document/external_document)
 
 **Edge-building strategy — two phases:**
 
-1. **DOI-based (bibliographic):** Citation edges are built from the `references` field on each document (a list of DOI strings). This requires the ingestion pipeline to populate `doc['references']`. Edges carry `properties.method = "doi"`.
+1. **DOI-based (bibliographic):** Citation edges are built from the `references` field on each document (a list of DOI strings extracted during ingestion via regex). Edges to in-database documents carry `properties.internal = true, method = "doi"`. Edges to external (not-yet-ingested) DOIs create ghost `external_document` nodes and carry `properties.internal = false, method = "doi"`.
 
-2. **Taxon-overlap fallback (similarity-based):** If fewer than 10 DOI-based edges are produced (e.g. because `references` is not yet populated), a fallback builds `cites` edges between documents that study overlapping organisms. Similarity is Jaccard overlap of their taxon sets derived from `document_taxon_relations`. Only pairs with Jaccard ≥ 0.2 and within each document's top-5 most similar peers are included. These edges carry `properties.method = "taxon_overlap"` to distinguish them from real bibliographic citations — they represent shared research subject matter, not actual citation relationships.
+2. **Taxon-overlap fallback (similarity-based):** If fewer than 10 DOI-based edges are produced (e.g. because `references` is not yet populated), a fallback builds `cites` edges between documents that study overlapping organisms. Similarity is Jaccard overlap of their taxon sets derived from `document_taxon_relations`. Only pairs with Jaccard ≥ 0.2 and within each document's top-5 most similar peers are included. These edges carry `properties.method = "taxon_overlap"`.
+
+**Taxonomy scope change (2026-04-01):** Default root changed from Mammalia (40674) to Animalia (33208). The taxonomical schema now materialises up to 100,000 Animalia nodes; the knowledge_graph schema uses a document-guided strategy (referenced taxa + all ancestors).
 
 ---
 
