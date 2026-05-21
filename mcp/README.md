@@ -38,6 +38,8 @@ cargo test
 
 ### Running the Gateway
 
+By default the gateway binds to `127.0.0.1:8080` (loopback only) so a fresh checkout is not exposed to the wider network on first run. To make it reachable from other hosts, override the bind address either in `config/local.toml` (`bind = "0.0.0.0:8080"`) or via the environment variable `ADVANDEB_MCP_BIND=0.0.0.0:8080`. The gateway has no built-in authentication, so only bind to a non-loopback interface on trusted networks or behind a fronting proxy that enforces auth.
+
 ```bash
 # Run with default configuration (HTTP on port 8080)
 cargo run
@@ -46,7 +48,7 @@ cargo run
 ./target/release/advandeb-mcp
 ```
 
-The gateway will start and listen on `http://0.0.0.0:8080` by default.
+The gateway will start and listen on `http://127.0.0.1:8080` by default.
 
 ### Basic Usage
 

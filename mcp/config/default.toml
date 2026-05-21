@@ -2,7 +2,10 @@
 # These values are used when not overridden by local.toml or environment variables
 
 # Server configuration
-bind = "0.0.0.0:8080"
+# Safe default: bind to loopback only (no external network exposure). Operators who
+# need the gateway reachable from other hosts should override `bind` in
+# `config/local.toml` or set the `ADVANDEB_MCP_BIND` environment variable.
+bind = "127.0.0.1:8080"
 
 # Ollama configuration
 ollama_host = "http://localhost:11434"

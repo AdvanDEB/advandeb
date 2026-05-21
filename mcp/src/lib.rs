@@ -77,6 +77,42 @@ use crate::gateway::{registry::AgentRegistry, router::AgentRouter};
 use crate::mcp::protocol::ToolInfo;
 use crate::ollama::{ChatMessage, OllamaClient};
 
+#[cfg(unix)]
+use tokio::signal::unix::{signal, SignalKind};
+
+/// Wait for either `Ctrl+C` (SIGINT) or `SIGTERM` (Unix only) and resolve.
+///
+/// Used as the shutdown trigger for both the plain HTTP (`axum::serve`) and the
+/// HTTPS (`axum_server::bind_rustls`) paths so that deploys/restarts can drain
+/// in-flight HTTP and WebSocket sessions instead of dropping them hard.
+async fn shutdown_signal() {
+    let ctrl_c = async {
+        tokio::signal::ctrl_c()
+            .await
+            .expect("install Ctrl+C handler");
+    };
+
+    #[cfg(unix)]
+    let terminate = async {
+        signal(SignalKind::terminate())
+            .expect("install SIGTERM handler")
+            .recv()
+            .await;
+    };
+
+    #[cfg(not(unix))]
+    let terminate = std::future::pending::<()>();
+
+    tokio::select! {
+        _ = ctrl_c => {
+            tracing::info!("ctrl-c received, starting graceful shutdown");
+        },
+        _ = terminate => {
+            tracing::info!("SIGTERM received, starting graceful shutdown");
+        },
+    }
+}
+
 // ── Shared application state ────────────────────────────────────────────────
 
 /// Shared application state passed to all HTTP handlers.
@@ -313,9 +349,20 @@ pub async fn serve(settings: Settings) -> anyhow::Result<()> {
                 &tls_config.key_path,
             )
             .await?;
-            
+
+            // Install graceful shutdown for axum_server: spawn a task that waits for
+            // SIGINT/SIGTERM and asks the server to drain within 30s.
+            let handle = axum_server::Handle::new();
+            let shutdown_handle = handle.clone();
+            tokio::spawn(async move {
+                shutdown_signal().await;
+                tracing::info!("triggering axum_server graceful shutdown");
+                shutdown_handle.graceful_shutdown(Some(Duration::from_secs(30)));
+            });
+
             // Start HTTPS server
             axum_server::bind_rustls(addr, tls_server_config)
+                .handle(handle)
                 .serve(app.into_make_service())
                 .await?;
         } else {
@@ -325,7 +372,10 @@ pub async fn serve(settings: Settings) -> anyhow::Result<()> {
                 ollama_model = %state.settings.ollama_model,
                 "Starting AdvanDEB MCP Gateway"
             );
-            axum::serve(tokio::net::TcpListener::bind(addr).await?, app).await?;
+            let listener = tokio::net::TcpListener::bind(addr).await?;
+            axum::serve(listener, app)
+                .with_graceful_shutdown(shutdown_signal())
+                .await?;
         }
     } else {
         info!(
@@ -334,8 +384,11 @@ pub async fn serve(settings: Settings) -> anyhow::Result<()> {
             ollama_model = %state.settings.ollama_model,
             "Starting AdvanDEB MCP Gateway"
         );
-        axum::serve(tokio::net::TcpListener::bind(addr).await?, app).await?;
+        let listener = tokio::net::TcpListener::bind(addr).await?;
+        axum::serve(listener, app)
+            .with_graceful_shutdown(shutdown_signal())
+            .await?;
     }
-    
+
     Ok(())
 }
