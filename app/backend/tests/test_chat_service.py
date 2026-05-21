@@ -1,15 +1,26 @@
 """
 Unit tests for ChatService.
-MongoDB calls are patched so no live database is required.
+
+The MongoDB layer is patched via ``app.services.chat_service.get_database`` so
+no live MongoDB connection is required. The MCP gateway is patched via
+``app.services.chat_service.MCPClient`` so no live WebSocket is opened.
 """
-import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
+from __future__ import annotations
+
 from datetime import datetime
+from unittest.mock import AsyncMock, MagicMock, patch
+
+import pytest
+
+
+# ---------------------------------------------------------------------------
+# Fixtures
+# ---------------------------------------------------------------------------
 
 
 @pytest.fixture
 def mock_db():
-    """Return a mock Motor database."""
+    """Return a mock Motor-style async database with chat collections."""
     db = MagicMock()
     db.chat_sessions = MagicMock()
     db.chat_messages = MagicMock()
@@ -18,136 +29,197 @@ def mock_db():
 
 @pytest.fixture
 def chat_service(mock_db):
-    """ChatService with patched database and MCP client."""
-    with patch("app.services.chat_service.get_database", return_value=mock_db):
+    """ChatService instance built against a mocked database."""
+    with patch(
+        "app.services.chat_service.get_database",
+        return_value=mock_db,
+    ):
         from app.services.chat_service import ChatService
+
         svc = ChatService()
     return svc, mock_db
 
 
-# ── send_message ──────────────────────────────────────────────────────────────
-
-@pytest.mark.asyncio
-async def test_send_message_creates_session_when_none(chat_service):
-    svc, db = chat_service
-
-    inserted_id = MagicMock()
-    inserted_id.__str__ = lambda s: "new-session-id"
-    db.chat_sessions.insert_one = AsyncMock(return_value=MagicMock(inserted_id=inserted_id))
-    db.chat_messages.insert_one = AsyncMock()
-    db.chat_sessions.update_one = AsyncMock()
-
-    with patch.object(svc, "_get_mcp_response", new=AsyncMock(return_value={
-        "role": "assistant", "content": "Hello"
-    })):
-        with patch("app.services.chat_service.settings") as mock_settings:
-            mock_settings.MCP_SERVER_ENABLED = True
-            result = await svc.send_message(
-                messages=[{"role": "user", "content": "Hi"}],
-                session_id="",
-                user_id="user-1",
-            )
-
-    assert "session_id" in result
-    assert result["message"]["role"] == "assistant"
+# ---------------------------------------------------------------------------
+# send_message — MCP disabled branch
+# ---------------------------------------------------------------------------
 
 
 @pytest.mark.asyncio
-async def test_send_message_mcp_disabled_returns_placeholder(chat_service):
-    svc, db = chat_service
-
-    inserted_id = MagicMock()
-    inserted_id.__str__ = lambda s: "sess-2"
-    db.chat_sessions.insert_one = AsyncMock(return_value=MagicMock(inserted_id=inserted_id))
-    db.chat_messages.insert_one = AsyncMock()
-    db.chat_sessions.update_one = AsyncMock()
+async def test_send_message_mcp_disabled_returns_message(chat_service):
+    """When MCP is disabled, send_message returns a friendly notice."""
+    svc, _db = chat_service
 
     with patch("app.services.chat_service.settings") as mock_settings:
         mock_settings.MCP_SERVER_ENABLED = False
-        result = await svc.send_message(
-            messages=[{"role": "user", "content": "test"}],
+        response = await svc.send_message(
+            [{"role": "user", "content": "hi"}],
             session_id="",
             user_id="u1",
         )
 
-    assert "placeholder" in result["message"]["content"].lower()
+    # Shape: {"message": {...}, "session_id": ...}
+    assert "message" in response
+    assert "session_id" in response
+    assert isinstance(response["message"], dict)
+    assert response["message"]["role"] == "assistant"
+    assert "not enabled" in response["message"]["content"].lower()
 
 
-# ── _touch_session ────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# send_message — MCP enabled, success path
+# ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
-async def test_touch_session_updates_timestamp(chat_service):
-    svc, db = chat_service
-    db.chat_sessions.update_one = AsyncMock()
+async def test_send_message_calls_mcp_when_enabled(chat_service):
+    """When MCP is enabled, send_message delegates to MCPClient.call_tool."""
+    svc, _db = chat_service
 
-    await svc._touch_session("507f1f77bcf86cd799439011")
+    with patch("app.services.chat_service.settings") as mock_settings, patch(
+        "app.services.chat_service.MCPClient"
+    ) as MockMCPClient:
+        mock_settings.MCP_SERVER_ENABLED = True
 
-    db.chat_sessions.update_one.assert_awaited_once()
-    call_args = db.chat_sessions.update_one.call_args
-    assert "updated_at" in call_args[0][1]["$set"]
+        mock_instance = MockMCPClient.return_value
+        mock_instance.call_tool = AsyncMock(
+            return_value={
+                "answer": "ok",
+                "citations": [],
+                "session_id": "s1",
+            }
+        )
+
+        response = await svc.send_message(
+            [{"role": "user", "content": "hi"}],
+            session_id="",
+            user_id="u1",
+        )
+
+    mock_instance.call_tool.assert_awaited_once()
+    assert response["message"]["role"] == "assistant"
+    assert response["message"]["content"] == "ok"
+    assert response["message"]["citations"] == []
+    assert response["session_id"] == "s1"
 
 
-# ── list_sessions ─────────────────────────────────────────────────────────────
+# ---------------------------------------------------------------------------
+# send_message — MCP enabled, failure path
+# ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
-async def test_list_sessions_returns_sorted_list(chat_service):
+async def test_send_message_mcp_failure_returns_error_message(chat_service):
+    """If MCPClient.call_tool raises, send_message returns an Error: message."""
+    svc, _db = chat_service
+
+    with patch("app.services.chat_service.settings") as mock_settings, patch(
+        "app.services.chat_service.MCPClient"
+    ) as MockMCPClient:
+        mock_settings.MCP_SERVER_ENABLED = True
+
+        mock_instance = MockMCPClient.return_value
+        mock_instance.call_tool = AsyncMock(side_effect=RuntimeError("boom"))
+
+        response = await svc.send_message(
+            [{"role": "user", "content": "hi"}],
+            session_id="",
+            user_id="u1",
+        )
+
+    assert response["message"]["role"] == "assistant"
+    assert response["message"]["content"].startswith("Error:")
+    assert "boom" in response["message"]["content"]
+
+
+# ---------------------------------------------------------------------------
+# list_sessions — sort order preserved from cursor
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_list_sessions_sorted_descending(chat_service):
+    """Sessions are returned in the order produced by the (mocked) cursor."""
     svc, db = chat_service
 
     now = datetime.utcnow()
+
+    # _id objects whose str() is deterministic
+    id_newer = MagicMock()
+    id_newer.__str__ = lambda self: "sess-newer"
+    id_older = MagicMock()
+    id_older.__str__ = lambda self: "sess-older"
+
+    session_docs = [
+        {
+            "_id": id_newer,
+            "title": "Newer",
+            "created_at": now,
+            "updated_at": now,
+        },
+        {
+            "_id": id_older,
+            "title": "Older",
+            "created_at": now,
+            "updated_at": now,
+        },
+    ]
+
+    async def _aiter(self):
+        for doc in session_docs:
+            yield doc
+
     mock_cursor = MagicMock()
     mock_cursor.sort = MagicMock(return_value=mock_cursor)
+    mock_cursor.__aiter__ = _aiter
 
-    async def async_iter(self):
-        for item in [
-            {"_id": MagicMock(__str__=lambda s: "s1"), "title": "A", "created_at": now, "updated_at": now},
-            {"_id": MagicMock(__str__=lambda s: "s2"), "title": "B", "created_at": now, "updated_at": now},
-        ]:
-            yield item
-
-    mock_cursor.__aiter__ = async_iter
     db.chat_sessions.find = MagicMock(return_value=mock_cursor)
 
     sessions = await svc.list_sessions("user-1")
+
     assert len(sessions) == 2
-    assert sessions[0]["title"] == "A"
+    assert sessions[0]["id"] == "sess-newer"
+    assert sessions[0]["title"] == "Newer"
+    assert sessions[1]["id"] == "sess-older"
+    assert sessions[1]["title"] == "Older"
+
+    # Verify sort was called descending on updated_at
+    mock_cursor.sort.assert_called_once_with("updated_at", -1)
+
+
+# ---------------------------------------------------------------------------
+# get_session — invalid ObjectId returns None
+# ---------------------------------------------------------------------------
 
 
 @pytest.mark.asyncio
-async def test_get_session_preserves_evidence_mode_and_citations(chat_service):
+async def test_get_session_returns_none_for_invalid_objectid(chat_service):
+    """A malformed session_id must short-circuit to None (no DB call)."""
     svc, db = chat_service
 
-    now = datetime.utcnow()
-    db.chat_sessions.find_one = AsyncMock(return_value={
-        "_id": MagicMock(__str__=lambda s: "sess-1"),
-        "title": "Research",
-        "created_at": now,
-        "updated_at": now,
-    })
+    db.chat_sessions.find_one = AsyncMock()
 
-    mock_cursor = MagicMock()
+    result = await svc.get_session("not-an-objectid", "user-1")
 
-    async def async_iter(self):
-        for item in [{
-            "_id": MagicMock(__str__=lambda s: "m1"),
-            "role": "assistant",
-            "content": "Answer",
-            "citations": [{
-                "citation_id": "chunk:c1",
-                "marker": "1",
-                "source_type": "chunk",
-                "evidence_text": "Evidence",
-            }],
-            "evidence_mode": "local",
-            "timestamp": now,
-        }]:
-            yield item
+    assert result is None
+    db.chat_sessions.find_one.assert_not_awaited()
 
-    mock_cursor.sort = MagicMock(return_value=mock_cursor)
-    mock_cursor.__aiter__ = async_iter
-    db.chat_messages.find = MagicMock(return_value=mock_cursor)
 
-    session = await svc.get_session("507f1f77bcf86cd799439011", "user-1")
+# ---------------------------------------------------------------------------
+# rename_session — invalid ObjectId returns False
+# ---------------------------------------------------------------------------
 
-    assert session is not None
-    assert session["messages"][0]["evidence_mode"] == "local"
-    assert session["messages"][0]["citations"][0]["citation_id"] == "chunk:c1"
+
+@pytest.mark.asyncio
+async def test_rename_session_returns_false_for_invalid_objectid(chat_service):
+    """A malformed session_id must short-circuit rename to False."""
+    svc, db = chat_service
+
+    db.chat_sessions.update_one = AsyncMock()
+
+    result = await svc.rename_session(
+        "not-an-objectid", "user-1", "New Title"
+    )
+
+    assert result is False
+    db.chat_sessions.update_one.assert_not_awaited()
