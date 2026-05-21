@@ -151,6 +151,73 @@ class MCPServer:
     # WebSocket server lifecycle
     # ------------------------------------------------------------------
 
+    # ------------------------------------------------------------------
+    # Streaming tool registry (tools/stream method)
+    # ------------------------------------------------------------------
+
+    def register_streaming_tool(
+        self,
+        name: str,
+        handler: Callable,
+        description: str = "",
+        input_schema: Optional[dict] = None,
+    ) -> None:
+        """Register a streaming tool.
+
+        The handler must be an async generator that yields event dicts and
+        finally yields a dict with ``"_final": True`` as the last item
+        (which is sent as the JSON-RPC ``result``).
+
+        Intermediate yields are sent as:
+            {"id": <msg_id>, "event": <event_dict>}
+
+        The final yield (``"_final": True``) is sent as:
+            {"id": <msg_id>, "result": <final_dict_without_"_final">}
+        """
+        # Store under a separate namespace so they don't clash with normal tools
+        self._tools[f"__stream__{name}"] = ToolDefinition(
+            name=f"__stream__{name}",
+            description=description,
+            input_schema=input_schema or {"type": "object", "properties": {}},
+            handler=handler,
+        )
+        logger.debug("MCPServer: registered streaming tool '%s'", name)
+
+    async def handle_streaming_message(self, raw: str, websocket) -> None:
+        """Handle a ``tools/stream`` request by writing multiple messages to websocket."""
+        try:
+            msg = json.loads(raw)
+        except json.JSONDecodeError as exc:
+            await websocket.send(self._error(None, -32700, f"Parse error: {exc}"))
+            return
+
+        msg_id = msg.get("id")
+        params = msg.get("params", {})
+        tool_name = params.get("name")
+        arguments = params.get("arguments", {})
+
+        key = f"__stream__{tool_name}"
+        if not tool_name or key not in self._tools:
+            await websocket.send(
+                self._error(msg_id, -32601, f"Unknown streaming tool: {tool_name}")
+            )
+            return
+
+        tool = self._tools[key]
+        try:
+            async for item in tool.handler(**arguments):
+                if item.get("_final"):
+                    # Strip the sentinel and send as final result
+                    final = {k: v for k, v in item.items() if k != "_final"}
+                    await websocket.send(json.dumps({"id": msg_id, "result": final}))
+                    return
+                else:
+                    # Intermediate event
+                    await websocket.send(json.dumps({"id": msg_id, "event": item}))
+        except Exception as exc:
+            logger.exception("Streaming tool '%s' raised: %s", tool_name, exc)
+            await websocket.send(self._error(msg_id, -32000, str(exc)))
+
     async def start(self) -> None:
         """Start the WebSocket server (runs indefinitely)."""
         try:
@@ -167,8 +234,19 @@ class MCPServer:
 
         async def _handler(websocket):
             async for message in websocket:
-                response = await self.handle_message(message)
-                await websocket.send(response)
+                try:
+                    msg = json.loads(message)
+                except json.JSONDecodeError:
+                    await websocket.send(
+                        self._error(None, -32700, "Parse error")
+                    )
+                    continue
+
+                if msg.get("method") == "tools/stream":
+                    await self.handle_streaming_message(message, websocket)
+                else:
+                    response = await self.handle_message(message)
+                    await websocket.send(response)
 
         async with websockets.serve(_handler, self.host, self.port):
             await asyncio.Future()  # run forever

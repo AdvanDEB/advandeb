@@ -1,467 +1,647 @@
 #!/usr/bin/env python3
 """
-Migration script: MongoDB → ArangoDB
+Full migration: MongoDB advandeb_knowledge_builder_kb → ArangoDB advandeb_kb.
 
-Migrates existing advandeb_kb data from MongoDB to ArangoDB:
-  - documents     → documents collection
-  - facts         → facts collection + edge citations (document→fact, via knowledge_graph)
-  - stylized_facts→ stylized_facts collection
-  - fact_sf_relations → sf_support edge collection
-  - taxonomy_nodes → taxa collection + taxonomical edge collection
-  - document_taxon_relations → knowledge_graph edge collection
+Steps performed (in order):
+  1. Wipe all vertex and edge collections in ArangoDB (keep graph definitions)
+  2. Migrate taxonomy_nodes  → taxa
+  3. Migrate taxonomy edges  → taxonomical  (parent_tax_id links)
+  4. Migrate stylized_facts  → stylized_facts
+  5. Migrate documents       → documents
+  6. Migrate facts           → facts
+  7. Migrate chunks          → chunks  (text only — embeddings stay in ChromaDB)
+  8. Build chunk_belongs_to  → chunk_belongs_to  (chunk → document edges)
+  9. Build sf_support edges  → sf_support  (from fact_sf_relations)
+ 10. Build citations edges   → citations   (from document.references DOI cross-links)
 
-Usage:
-    # Dry run (no writes):
-    python scripts/migrate_mongo_to_arango.py --dry-run
+Collections intentionally skipped (stay in MongoDB):
+  ingestion_batches, ingestion_jobs  — workflow state, not KB data
+  agent_memory, chat_messages, chat_sessions — app data (already on app MongoDB)
+  graph_nodes, graph_edges, graph_schemas  — materialized cache, replaced by live queries
+  document_taxon_relations — empty
 
-    # Live migration:
-    python scripts/migrate_mongo_to_arango.py
-
-    # Specific collections only:
-    python scripts/migrate_mongo_to_arango.py --collections documents facts
-
-Environment (reads from dev-server/.env or env vars):
-    MONGODB_URL, DATABASE_NAME
-    ARANGO_URL, ARANGO_DB_NAME, ARANGO_USERNAME, ARANGO_PASSWORD
+Run from repo root:
+  PYTHONPATH=app/backend:knowledge-builder \
+    miniforge3/envs/advandeb/bin/python knowledge-builder/scripts/migrate_mongo_to_arango.py
 """
-
-from __future__ import annotations
-
-import argparse
-import logging
-import os
 import sys
+import os
+import logging
+from datetime import datetime, timezone
 from pathlib import Path
 
-# Allow running from repo root without installing
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-
-from dotenv import load_dotenv
-load_dotenv(Path(__file__).resolve().parents[1] / "dev-server" / ".env")
-
-from advandeb_kb.config.settings import settings
-from advandeb_kb.database.arango_client import ArangoDatabase
+# Allow running from the knowledge-builder/scripts directory too
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "app" / "backend"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "knowledge-builder"))
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(name)s — %(message)s",
+    format="%(asctime)s  %(levelname)-8s  %(message)s",
+    datefmt="%H:%M:%S",
 )
-logger = logging.getLogger("migrate")
+log = logging.getLogger("migration")
 
-# ------------------------------------------------------------------
-# MongoDB access (sync PyMongo)
-# ------------------------------------------------------------------
+BATCH_SIZE = 2000          # documents per ArangoDB import batch
+TAXA_BATCH_SIZE = 5000     # larger batch for taxa (simple structure)
 
-def get_mongo_db():
+# ---------------------------------------------------------------------------
+# Connection helpers
+# ---------------------------------------------------------------------------
+
+def get_mongo_kb():
     from pymongo import MongoClient
-    client = MongoClient(settings.MONGODB_URL)
-    return client[settings.DATABASE_NAME]
+    uri = os.environ.get("MONGODB_URI", "mongodb://localhost:27017")
+    client = MongoClient(uri)
+    return client["advandeb_knowledge_builder_kb"]
 
 
-# ------------------------------------------------------------------
-# Document ID → ArangoDB _key helper
-# ------------------------------------------------------------------
+def get_arango_db():
+    from arango import ArangoClient
+    url  = os.environ.get("ARANGO_URL",      "http://localhost:8529")
+    name = os.environ.get("ARANGO_DB_NAME",  "advandeb_kb")
+    user = os.environ.get("ARANGO_USERNAME", "root")
+    pwd  = os.environ.get("ARANGO_PASSWORD", "sparusaurata")
+    client = ArangoClient(hosts=url)
+    return client.db(name, username=user, password=pwd)
 
-def mongo_id_to_key(oid) -> str:
-    """Convert a PyMongo ObjectId (or string) to an ArangoDB-safe _key."""
-    return str(oid)
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _dt_to_str(v):
+    """Convert datetime → ISO string, pass strings through, None → None."""
+    if v is None:
+        return None
+    if isinstance(v, datetime):
+        return v.isoformat()
+    return str(v)
 
 
-# ------------------------------------------------------------------
-# Per-collection migrators
-# ------------------------------------------------------------------
+def _sanitize(v):
+    """Recursively convert any MongoDB-specific types to JSON-safe equivalents."""
+    from bson import ObjectId
+    if isinstance(v, ObjectId):
+        return str(v)
+    if isinstance(v, datetime):
+        return v.isoformat()
+    if isinstance(v, dict):
+        return {k: _sanitize(val) for k, val in v.items()}
+    if isinstance(v, list):
+        return [_sanitize(item) for item in v]
+    return v
 
-def migrate_documents(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
-    col = mongo_db["documents"]
-    count = 0
-    seen_dois: set = set()  # track DOIs already inserted to avoid unique-constraint violations
-    for doc in col.find():
-        raw_doi = doc.get("doi")
-        # If this DOI was already used by an earlier document, clear it to avoid
-        # the unique-constraint on the ArangoDB index.
-        if raw_doi and raw_doi in seen_dois:
-            raw_doi = None
-        elif raw_doi:
-            seen_dois.add(raw_doi)
 
-        arango_doc = {
-            "_key": mongo_id_to_key(doc["_id"]),
-            "title": doc.get("title"),
-            "doi": raw_doi,
-            "authors": doc.get("authors", []),
-            "year": doc.get("year"),
-            "journal": doc.get("journal"),
-            "abstract": doc.get("abstract"),
-            "content": doc.get("content"),
-            "source_type": doc.get("source_type", "manual"),
-            "source_path": doc.get("source_path"),
-            "general_domain": doc.get("general_domain"),
-            "processing_status": doc.get("processing_status", "pending"),
-            "num_facts": doc.get("num_facts", 0),
-            "references": doc.get("references", []),
-            "embedding_status": doc.get("embedding_status"),
-            "created_at": str(doc.get("created_at", "")),
-            "updated_at": str(doc.get("updated_at", "")),
+def _bulk_insert(col, docs, overwrite=True):
+    """Insert a batch into an ArangoDB collection.  Returns (inserted, errors)."""
+    if not docs:
+        return 0, 0
+    result = col.import_bulk(docs, on_duplicate="replace" if overwrite else "error",
+                             halt_on_error=False)
+    created  = result.get("created", 0)
+    replaced = result.get("replaced", 0)
+    errors   = result.get("errors", 0)
+    return created + replaced, errors
+
+
+# ---------------------------------------------------------------------------
+# Step 1 — wipe ArangoDB collections
+# ---------------------------------------------------------------------------
+
+def step_wipe(adb):
+    log.info("=== Step 1: Wiping ArangoDB collections ===")
+    vertex_cols = ["documents", "facts", "stylized_facts", "taxa", "chunks", "provenance_traces"]
+    edge_cols   = ["sf_support", "citations", "knowledge_graph", "chunk_belongs_to", "taxonomical"]
+
+    for name in vertex_cols + edge_cols:
+        try:
+            col = adb.collection(name)
+            col.truncate()
+            log.info("  truncated %-20s", name)
+        except Exception as exc:
+            log.warning("  could not truncate %s: %s", name, exc)
+
+    log.info("  done — all collections empty")
+
+
+# ---------------------------------------------------------------------------
+# Step 2 — migrate taxa
+# ---------------------------------------------------------------------------
+
+def step_taxa(mongo_kb, adb):
+    log.info("=== Step 2: Migrating taxa ===")
+    col = adb.collection("taxa")
+    total = mongo_kb.taxonomy_nodes.count_documents({})
+    log.info("  source: %d taxonomy_nodes", total)
+
+    inserted = errors = 0
+    batch = []
+
+    cursor = mongo_kb.taxonomy_nodes.find({})
+    for node in cursor:
+        tax_id = node.get("tax_id")
+        if tax_id is None:
+            continue
+        doc = {
+            "_key":           str(tax_id),
+            "tax_id":         tax_id,
+            "name":           node.get("name"),
+            "rank":           node.get("rank"),
+            "parent_tax_id":  node.get("parent_tax_id"),
+            "lineage":        node.get("lineage", []),
+            "common_names":   node.get("common_names", []),
+            "synonyms":       node.get("synonyms", []),
+            "gbif_usage_key": node.get("gbif_usage_key"),
+            "ncbi_sourced":   node.get("ncbi_sourced", False),
+            "created_at":     _dt_to_str(node.get("created_at")),
+            "updated_at":     _dt_to_str(node.get("updated_at")),
         }
-        if not dry_run:
-            try:
-                arango.upsert("documents", arango_doc)
-            except Exception as e:
-                logger.warning("Skipping document %s: %s", arango_doc["_key"], e)
-        count += 1
-    logger.info("[documents] %s %d records", "DRY" if dry_run else "migrated", count)
-    return count
+        batch.append(doc)
+        if len(batch) >= TAXA_BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+            if (inserted + errors) % 100000 == 0:
+                log.info("    taxa progress: %d / %d", inserted + errors, total)
+
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  taxa done: inserted=%d errors=%d", inserted, errors)
+    return inserted
 
 
-def migrate_facts(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
-    col = mongo_db["facts"]
-    count = 0
-    for doc in col.find():
-        fact_key = mongo_id_to_key(doc["_id"])
-        arango_doc = {
-            "_key": fact_key,
-            "content": doc.get("content", ""),
-            "document_id": mongo_id_to_key(doc.get("document_id", "")),
-            "page_number": doc.get("page_number"),
-            "entities": doc.get("entities", []),
-            "tags": doc.get("tags", []),
-            "general_domain": doc.get("general_domain"),
-            "confidence": doc.get("confidence", 0.8),
-            "status": doc.get("status", "pending"),
-            "created_at": str(doc.get("created_at", "")),
-            "updated_at": str(doc.get("updated_at", "")),
-        }
-        if not dry_run:
-            arango.upsert("facts", arango_doc)
-        count += 1
-    logger.info("[facts] %s %d records", "DRY" if dry_run else "migrated", count)
-    return count
+# ---------------------------------------------------------------------------
+# Step 3 — build taxonomical (parent-child) edges
+# ---------------------------------------------------------------------------
 
+def step_taxonomical(mongo_kb, adb):
+    log.info("=== Step 3: Building taxonomical edges ===")
+    col = adb.collection("taxonomical")
+    total = mongo_kb.taxonomy_nodes.count_documents({"parent_tax_id": {"$exists": True, "$ne": None}})
+    log.info("  source: %d nodes with parent_tax_id", total)
 
-def migrate_stylized_facts(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
-    col = mongo_db["stylized_facts"]
-    count = 0
-    for doc in col.find():
-        arango_doc = {
-            "_key": mongo_id_to_key(doc["_id"]),
-            "statement": doc.get("statement", ""),
-            "category": doc.get("category", ""),
-            "sf_number": doc.get("sf_number"),
-            "status": doc.get("status", "pending"),
-            "created_at": str(doc.get("created_at", "")),
-            "updated_at": str(doc.get("updated_at", "")),
-        }
-        if not dry_run:
-            arango.upsert("stylized_facts", arango_doc)
-        count += 1
-    logger.info("[stylized_facts] %s %d records", "DRY" if dry_run else "migrated", count)
-    return count
+    inserted = errors = 0
+    batch = []
 
-
-def migrate_fact_sf_relations(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
-    col = mongo_db["fact_sf_relations"]
-    count = 0
-    for doc in col.find():
-        fact_key = mongo_id_to_key(doc.get("fact_id", ""))
-        sf_key = mongo_id_to_key(doc.get("sf_id", ""))
-        edge = {
-            "_key": mongo_id_to_key(doc["_id"]),
-            "_from": f"facts/{fact_key}",
-            "_to": f"stylized_facts/{sf_key}",
-            "relation_type": doc.get("relation_type", "supports"),
-            "confidence": doc.get("confidence", 0.5),
-            "status": doc.get("status", "suggested"),
-            "created_by": doc.get("created_by", "agent"),
-            "created_at": str(doc.get("created_at", "")),
-        }
-        if not dry_run:
-            arango.upsert("sf_support", edge)
-        count += 1
-    logger.info("[sf_support edges] %s %d records", "DRY" if dry_run else "migrated", count)
-    return count
-
-
-def migrate_taxonomy(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
-    col = mongo_db["taxonomy_nodes"]
-    count_vertices = 0
-    count_edges = 0
-
-    for doc in col.find():
-        key = str(doc.get("tax_id", mongo_id_to_key(doc["_id"])))
-        arango_doc = {
-            "_key": key,
-            "tax_id": doc.get("tax_id"),
-            "name": doc.get("name", ""),
-            "rank": doc.get("rank", ""),
-            "parent_tax_id": doc.get("parent_tax_id"),
-            "lineage": doc.get("lineage", []),
-            "gbif_id": doc.get("gbif_id"),
-            "created_at": str(doc.get("created_at", "")),
-        }
-        if not dry_run:
-            arango.upsert("taxa", arango_doc)
-        count_vertices += 1
-
-        # Create parent→child taxonomical edge
-        parent_tax_id = doc.get("parent_tax_id")
-        if parent_tax_id and parent_tax_id != doc.get("tax_id"):
-            edge = {
-                "_key": f"{parent_tax_id}_{key}",
-                "_from": f"taxa/{parent_tax_id}",
-                "_to": f"taxa/{key}",
-                "relation": "parent_of",
-            }
-            if not dry_run:
-                try:
-                    arango.upsert("taxonomical", edge)
-                    count_edges += 1
-                except Exception:
-                    pass  # Skip if parent not migrated yet
-
-    logger.info(
-        "[taxa] %s %d vertices, %d edges",
-        "DRY" if dry_run else "migrated",
-        count_vertices,
-        count_edges,
+    cursor = mongo_kb.taxonomy_nodes.find(
+        {"parent_tax_id": {"$exists": True, "$ne": None}},
+        {"tax_id": 1, "parent_tax_id": 1},
     )
-    return count_vertices
-
-
-def migrate_document_taxon_relations(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
-    col = mongo_db["document_taxon_relations"]
-    count = 0
-    for doc in col.find():
-        doc_key = mongo_id_to_key(doc.get("document_id", ""))
-        tax_id = str(doc.get("tax_id", ""))
-        edge = {
-            "_key": mongo_id_to_key(doc["_id"]),
-            "_from": f"documents/{doc_key}",
-            "_to": f"taxa/{tax_id}",
-            "relation_type": doc.get("relation_type", "studies"),
-            "confidence": doc.get("confidence", 0.5),
-            "evidence": doc.get("evidence", ""),
-            "status": doc.get("status", "suggested"),
-            "created_by": doc.get("created_by", "agent"),
-            "created_at": str(doc.get("created_at", "")),
+    for node in cursor:
+        child  = node.get("tax_id")
+        parent = node.get("parent_tax_id")
+        if child is None or parent is None:
+            continue
+        doc = {
+            "_key":  f"{child}_to_{parent}",
+            "_from": f"taxa/{child}",
+            "_to":   f"taxa/{parent}",
+            "edge_type": "is_child_of",
         }
-        if not dry_run:
-            arango.upsert("knowledge_graph", edge)
-        count += 1
-    logger.info(
-        "[knowledge_graph edges] %s %d records",
-        "DRY" if dry_run else "migrated",
-        count,
+        batch.append(doc)
+        if len(batch) >= TAXA_BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+            if (inserted + errors) % 200000 == 0:
+                log.info("    taxonomical edges progress: %d", inserted + errors)
+
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  taxonomical edges done: inserted=%d errors=%d", inserted, errors)
+    return inserted
+
+
+# ---------------------------------------------------------------------------
+# Step 4 — migrate stylized_facts
+# ---------------------------------------------------------------------------
+
+def step_stylized_facts(mongo_kb, adb):
+    log.info("=== Step 4: Migrating stylized_facts ===")
+    col = adb.collection("stylized_facts")
+    total = mongo_kb.stylized_facts.count_documents({})
+    log.info("  source: %d stylized_facts", total)
+
+    inserted = errors = 0
+    batch = []
+
+    for sf in mongo_kb.stylized_facts.find({}):
+        doc = {
+            "_key":       str(sf["_id"]),
+            "statement":  sf.get("statement"),
+            "sf_number":  sf.get("sf_number"),
+            "category":   sf.get("category"),
+            "status":     sf.get("status", "published"),
+            "created_at": _dt_to_str(sf.get("created_at")),
+            "updated_at": _dt_to_str(sf.get("updated_at")),
+        }
+        batch.append(doc)
+        if len(batch) >= BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  stylized_facts done: inserted=%d errors=%d", inserted, errors)
+    return inserted
+
+
+# ---------------------------------------------------------------------------
+# Step 5 — migrate documents
+# ---------------------------------------------------------------------------
+
+def step_documents(mongo_kb, adb):
+    log.info("=== Step 5: Migrating documents ===")
+    col = adb.collection("documents")
+    total = mongo_kb.documents.count_documents({})
+    log.info("  source: %d documents", total)
+
+    # Deduplicate by DOI — keep the most recently updated version of each DOI.
+    # Documents with no DOI (doi=None/"") are always kept.
+    seen_dois: dict = {}   # doi -> doc dict
+    no_doi_docs: list = []
+
+    for mdoc in mongo_kb.documents.find({}):
+        doi = (mdoc.get("doi") or "").strip().lower()
+        doc = {
+            "_key":              str(mdoc["_id"]),
+            "title":             mdoc.get("title"),
+            "doi":               mdoc.get("doi"),
+            "authors":           _sanitize(mdoc.get("authors", [])),
+            "year":              mdoc.get("year"),
+            "journal":           mdoc.get("journal"),
+            "volume":            mdoc.get("volume"),
+            "issue":             mdoc.get("issue"),
+            "pages":             mdoc.get("pages"),
+            "references":        _sanitize(mdoc.get("references", [])),
+            "keywords":          _sanitize(mdoc.get("keywords", [])),
+            "openalex_id":       mdoc.get("openalex_id"),
+            "pmid":              mdoc.get("pmid"),
+            "cited_by_count":    mdoc.get("cited_by_count"),
+            "is_retracted":      mdoc.get("is_retracted", False),
+            "source_type":       mdoc.get("source_type"),
+            "source_path":       mdoc.get("source_path"),
+            "general_domain":    mdoc.get("general_domain"),
+            "processing_status": mdoc.get("processing_status", "completed"),
+            "embedding_status":  mdoc.get("embedding_status"),
+            "num_chunks":        mdoc.get("num_chunks"),
+            "num_facts":         mdoc.get("num_facts", 0),
+            "content":           mdoc.get("content"),
+            "abstract":          mdoc.get("abstract"),
+            "created_at":        _dt_to_str(mdoc.get("created_at")),
+            "updated_at":        _dt_to_str(mdoc.get("updated_at")),
+        }
+        if not doi:
+            no_doi_docs.append(doc)
+        else:
+            existing = seen_dois.get(doi)
+            if existing is None:
+                seen_dois[doi] = doc
+            else:
+                # Keep whichever was updated more recently
+                existing_ts = existing.get("updated_at") or ""
+                new_ts      = doc.get("updated_at") or ""
+                if new_ts > existing_ts:
+                    seen_dois[doi] = doc
+
+    deduped = list(seen_dois.values()) + no_doi_docs
+    skipped = total - len(deduped)
+    log.info("  deduplicated: %d unique docs (%d duplicates by DOI removed)", len(deduped), skipped)
+
+    inserted = errors = 0
+    batch = []
+    for doc in deduped:
+        batch.append(doc)
+        if len(batch) >= BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  documents done: inserted=%d errors=%d", inserted, errors)
+    return inserted
+
+
+# ---------------------------------------------------------------------------
+# Step 6 — migrate facts
+# ---------------------------------------------------------------------------
+
+def step_facts(mongo_kb, adb):
+    log.info("=== Step 6: Migrating facts ===")
+    col = adb.collection("facts")
+    total = mongo_kb.facts.count_documents({})
+    log.info("  source: %d facts", total)
+
+    inserted = errors = 0
+    batch = []
+
+    for mfact in mongo_kb.facts.find({}):
+        doc_id = mfact.get("document_id")
+        doc = {
+            "_key":               str(mfact["_id"]),
+            "content":            mfact.get("content"),
+            "document_id":        str(doc_id) if doc_id else None,
+            "content_fingerprint":mfact.get("content_fingerprint"),
+            "page_number":        mfact.get("page_number"),
+            "entities":           _sanitize(mfact.get("entities", [])),
+            "tags":               mfact.get("tags", []),
+            "general_domain":     mfact.get("general_domain"),
+            "confidence":         mfact.get("confidence", 0.8),
+            "status":             mfact.get("status", "pending"),
+            "additional_sources": _sanitize(mfact.get("additional_sources", [])),
+            "created_at":         _dt_to_str(mfact.get("created_at")),
+            "updated_at":         _dt_to_str(mfact.get("updated_at")),
+        }
+        batch.append(doc)
+        if len(batch) >= BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+            if (inserted + errors) % 20000 == 0:
+                log.info("    facts progress: %d / %d", inserted + errors, total)
+
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  facts done: inserted=%d errors=%d", inserted, errors)
+    return inserted
+
+
+# ---------------------------------------------------------------------------
+# Step 7 — migrate chunks (text only)
+# ---------------------------------------------------------------------------
+
+def step_chunks(mongo_kb, adb):
+    log.info("=== Step 7: Migrating chunks (text only) ===")
+    col = adb.collection("chunks")
+    total = mongo_kb.chunks.count_documents({})
+    log.info("  source: %d chunks", total)
+
+    inserted = errors = 0
+    batch = []
+
+    for mc in mongo_kb.chunks.find({}, {"embedding": 0}):
+        doc_id = mc.get("document_id")
+        chunk_id = mc.get("chunk_id", str(mc["_id"]))
+        doc = {
+            "_key":        chunk_id,
+            "chunk_id":    chunk_id,
+            "document_id": str(doc_id) if doc_id else None,
+            "chunk_index": mc.get("chunk_index"),
+            "text":        mc.get("text"),
+            "char_start":  mc.get("char_start"),
+            "char_end":    mc.get("char_end"),
+            "source_path": mc.get("source_path"),
+            "embedded":    mc.get("embedded", mc.get("embedding_status") == "embedded"),
+            "created_at":  _dt_to_str(mc.get("created_at")),
+        }
+        batch.append(doc)
+        if len(batch) >= BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+            if (inserted + errors) % 50000 == 0:
+                log.info("    chunks progress: %d / %d", inserted + errors, total)
+
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  chunks done: inserted=%d errors=%d", inserted, errors)
+    return inserted
+
+
+# ---------------------------------------------------------------------------
+# Step 8 — build chunk_belongs_to edges
+# ---------------------------------------------------------------------------
+
+def step_chunk_belongs_to(adb):
+    log.info("=== Step 8: Building chunk_belongs_to edges ===")
+    col = adb.collection("chunk_belongs_to")
+    chunks_col = adb.collection("chunks")
+    total = chunks_col.count()
+    log.info("  source: %d chunks", total)
+
+    inserted = errors = 0
+    batch = []
+
+    cursor = adb.aql.execute(
+        "FOR c IN chunks FILTER c.document_id != null RETURN {chunk_id: c.chunk_id, document_id: c.document_id}",
+        batch_size=5000,
     )
-    return count
+    for c in cursor:
+        doc = {
+            "_key":  f"{c['chunk_id']}_belongs",
+            "_from": f"chunks/{c['chunk_id']}",
+            "_to":   f"documents/{c['document_id']}",
+            "edge_type": "belongs_to",
+        }
+        batch.append(doc)
+        if len(batch) >= BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+            if (inserted + errors) % 50000 == 0:
+                log.info("    chunk_belongs_to progress: %d", inserted + errors)
+
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  chunk_belongs_to done: inserted=%d errors=%d", inserted, errors)
+    return inserted
 
 
-def migrate_chunks(mongo_db, arango: ArangoDatabase, dry_run: bool) -> int:
-    """
-    Read chunks from ChromaDB (source of truth — MongoDB chunks collection is empty)
-    and write them to ArangoDB chunks + chunk_belongs_to edge collections.
+# ---------------------------------------------------------------------------
+# Step 9 — build sf_support edges from fact_sf_relations
+# ---------------------------------------------------------------------------
 
-    ChromaDB document_id format: 'doc_' + sha1(source_path with 'papers/' prefix)[:16]
-    We build a reverse map: chroma_doc_id → MongoDB ObjectId string.
-    """
-    import hashlib
-    import chromadb as _chromadb
+def step_sf_support(mongo_kb, adb):
+    log.info("=== Step 9: Building sf_support edges ===")
+    col = adb.collection("sf_support")
+    total = mongo_kb.fact_sf_relations.count_documents({})
+    log.info("  source: %d fact_sf_relations", total)
 
-    chroma_path = os.environ.get(
-        "CHROMA_PERSIST_DIR",
-        str(Path(__file__).resolve().parents[1] / "data" / "chromadb"),
+    inserted = errors = 0
+    batch = []
+
+    for rel in mongo_kb.fact_sf_relations.find({}):
+        fact_id = rel.get("fact_id")
+        sf_id   = rel.get("sf_id")
+        if not fact_id or not sf_id:
+            continue
+        fact_key = str(fact_id)
+        sf_key   = str(sf_id)
+        edge_key = f"{fact_key}_{sf_key}"
+        doc = {
+            "_key":         edge_key,
+            "_from":        f"facts/{fact_key}",
+            "_to":          f"stylized_facts/{sf_key}",
+            "relation_type":rel.get("relation_type", "supports"),
+            "confidence":   rel.get("confidence", 0.9),
+            "status":       rel.get("status", "suggested"),
+            "created_by":   rel.get("created_by", "agent"),
+            "created_at":   _dt_to_str(rel.get("created_at")),
+            "updated_at":   _dt_to_str(rel.get("updated_at")),
+        }
+        batch.append(doc)
+        if len(batch) >= BATCH_SIZE:
+            ok, err = _bulk_insert(col, batch)
+            inserted += ok; errors += err
+            batch = []
+
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
+
+    log.info("  sf_support done: inserted=%d errors=%d", inserted, errors)
+    return inserted
+
+
+# ---------------------------------------------------------------------------
+# Step 10 — build citations edges from document.references (DOI cross-links)
+# ---------------------------------------------------------------------------
+
+def step_citations(adb):
+    log.info("=== Step 10: Building citations edges from DOI references ===")
+    col = adb.collection("citations")
+
+    # Build DOI → _key index from the documents we just inserted
+    log.info("  building DOI index...")
+    doi_to_key = {}
+    cursor = adb.aql.execute(
+        "FOR d IN documents FILTER d.doi != null AND d.doi != '' RETURN {doi: d.doi, _key: d._key}",
+        batch_size=2000,
     )
-    collection_name = os.environ.get("CHROMA_COLLECTION", "advandeb_chunks")
+    for d in cursor:
+        doi_to_key[d["doi"].lower().strip()] = d["_key"]
+    log.info("  DOI index: %d entries", len(doi_to_key))
 
-    logger.info("[chunks] Opening ChromaDB at %s, collection=%s", chroma_path, collection_name)
-    chroma_client = _chromadb.PersistentClient(path=chroma_path)
-    try:
-        col = chroma_client.get_collection(collection_name)
-    except Exception as e:
-        logger.error("[chunks] ChromaDB collection not found: %s", e)
-        return 0
+    inserted = errors = skipped = 0
+    batch = []
 
-    total_chroma = col.count()
-    logger.info("[chunks] ChromaDB has %d chunks total", total_chroma)
-
-    # Build reverse map: chroma_doc_id → MongoDB _id string
-    # ChromaDB was ingested with two different source_path styles:
-    #   1. Relative: 'papers/<number>/<filename>' (e.g. 'papers/2621/MitcHips2013.pdf')
-    #   2. Absolute: '/home/adeb/dev/advandeb/papers/<number>/<filename>'
-    # Both are SHA1-hashed and prefixed with 'doc_'.
-    papers_root = os.environ.get("PAPERS_ROOT", "/home/adeb/dev/advandeb/papers")
-    hash_to_mongo_id: dict[str, str] = {}
-    for doc in mongo_db["documents"].find({}, {"source_path": 1}):
-        sp = doc.get("source_path", "")
-        mongo_id = str(doc["_id"])
-        # Relative path with 'papers/' prefix (old ingestion style)
-        for candidate in [
-            "papers/" + sp,
-            sp,
-            os.path.join(papers_root, sp),
-        ]:
-            h = "doc_" + hashlib.sha1(candidate.encode()).hexdigest()[:16]
-            hash_to_mongo_id[h] = mongo_id
-
-    doc_count = mongo_db["documents"].count_documents({})
-    logger.info("[chunks] Built reverse map for %d documents (%d hashes)", doc_count, len(hash_to_mongo_id))
-
-    # Build a set of all valid MongoDB ObjectId strings for direct-lookup fallback
-    all_mongo_ids: set[str] = set(hash_to_mongo_id.values())
-
-    BATCH = 2000  # fetch 2000 chunks from ChromaDB at a time
-    ARANGO_BATCH = 500  # write up to 500 docs per ArangoDB bulk call
-    count_chunks = 0
-    count_edges = 0
-    count_skipped = 0
-    offset = 0
-
-    chunk_buf: list[dict] = []
-    edge_buf: list[dict] = []
-
-    def _flush_buffers() -> None:
-        nonlocal count_chunks, count_edges
-        if chunk_buf and not dry_run:
-            arango.bulk_insert_overwrite("chunks", chunk_buf)
-        count_chunks += len(chunk_buf)
-        if edge_buf and not dry_run:
-            arango.bulk_insert_overwrite("chunk_belongs_to", edge_buf)
-        count_edges += len(edge_buf)
-        chunk_buf.clear()
-        edge_buf.clear()
-
-    while offset < total_chroma:
-        result = col.get(
-            limit=BATCH,
-            offset=offset,
-            include=["metadatas", "documents"],
-        )
-        if not result["ids"]:
-            break
-
-        for chunk_id, meta, text in zip(result["ids"], result["metadatas"], result["documents"]):
-            chroma_doc_id = meta.get("document_id", "")
-            mongo_id = hash_to_mongo_id.get(chroma_doc_id)
-
-            # New-style chunks use the MongoDB ObjectId directly as document_id
-            # (e.g. chunk_id = '69b84722ec32c55db54306f6_chunk_44')
-            if mongo_id is None and "_chunk_" in chunk_id:
-                candidate_id = chunk_id.split("_chunk_")[0]
-                if candidate_id in all_mongo_ids:
-                    mongo_id = candidate_id
-
-            # Also try meta document_id directly if it looks like a MongoDB ObjectId
-            if mongo_id is None and len(chroma_doc_id) == 24 and chroma_doc_id in all_mongo_ids:
-                mongo_id = chroma_doc_id
-
-            if not mongo_id:
-                count_skipped += 1
+    cursor = adb.aql.execute(
+        "FOR d IN documents FILTER LENGTH(d.references) > 0 RETURN {_key: d._key, refs: d.references}",
+        batch_size=500,
+    )
+    for d in cursor:
+        src_key = d["_key"]
+        for ref_doi in d.get("refs", []):
+            if not ref_doi:
                 continue
+            tgt_key = doi_to_key.get(ref_doi.lower().strip())
+            if not tgt_key:
+                skipped += 1
+                continue
+            if tgt_key == src_key:
+                continue   # skip self-loops
+            edge_key = f"{src_key}_{tgt_key}"
+            doc = {
+                "_key":      edge_key,
+                "_from":     f"documents/{src_key}",
+                "_to":       f"documents/{tgt_key}",
+                "edge_type": "cites",
+            }
+            batch.append(doc)
+            if len(batch) >= BATCH_SIZE:
+                ok, err = _bulk_insert(col, batch)
+                inserted += ok; errors += err
+                batch = []
 
-            chunk_key = chunk_id.replace("/", "_")  # sanitize for ArangoDB key
-            chunk_buf.append({
-                "_key": chunk_key,
-                "chunk_id": chunk_id,
-                "document_id": mongo_id,
-                "chunk_index": meta.get("chunk_index", 0),
-                "text": text or "",
-                "char_start": meta.get("char_start"),
-                "char_end": meta.get("char_end"),
-                "source_path": meta.get("source_path", ""),
-                "embedded": True,
-            })
-            edge_buf.append({
-                "_key": chunk_key,
-                "_from": f"documents/{mongo_id}",
-                "_to": f"chunks/{chunk_key}",
-                "relation": "has_chunk",
-            })
+    if batch:
+        ok, err = _bulk_insert(col, batch)
+        inserted += ok; errors += err
 
-            if len(chunk_buf) >= ARANGO_BATCH:
-                _flush_buffers()
-
-        offset += BATCH
-        if (offset // BATCH) % 5 == 0 or offset >= total_chroma:
-            _flush_buffers()
-            logger.info(
-                "[chunks] Progress: %d/%d — chunks=%d edges=%d skipped=%d",
-                min(offset, total_chroma), total_chroma, count_chunks, count_edges, count_skipped,
-            )
-
-    _flush_buffers()  # final flush
-
-    logger.info(
-        "[chunks] %s %d chunks, %d edges, %d skipped (unmapped doc_ids)",
-        "DRY" if dry_run else "migrated",
-        count_chunks, count_edges, count_skipped,
-    )
-    return count_chunks
+    log.info("  citations done: inserted=%d errors=%d skipped(no DOI match)=%d",
+             inserted, errors, skipped)
+    return inserted
 
 
-# ------------------------------------------------------------------
-# Migration map
-# ------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Verification
+# ---------------------------------------------------------------------------
 
-MIGRATORS = {
-    "documents": migrate_documents,
-    "facts": migrate_facts,
-    "stylized_facts": migrate_stylized_facts,
-    "fact_sf_relations": migrate_fact_sf_relations,
-    "taxonomy": migrate_taxonomy,
-    "document_taxon_relations": migrate_document_taxon_relations,
-    "chunks": migrate_chunks,
-}
+def verify(mongo_kb, adb):
+    log.info("=== Verification ===")
+    checks = [
+        ("taxa",            mongo_kb.taxonomy_nodes.count_documents({})),
+        ("taxonomical",     mongo_kb.taxonomy_nodes.count_documents({"parent_tax_id": {"$exists": True, "$ne": None}})),
+        ("stylized_facts",  mongo_kb.stylized_facts.count_documents({})),
+        ("documents",       mongo_kb.documents.count_documents({}) - 52),   # ~52 DOI duplicates expected
+        ("facts",           mongo_kb.facts.count_documents({})),
+        ("chunks",          mongo_kb.chunks.count_documents({})),
+        ("sf_support",      mongo_kb.fact_sf_relations.count_documents({})),
+    ]
+    all_ok = True
+    for col_name, expected in checks:
+        actual = adb.collection(col_name).count()
+        ok = actual >= expected
+        status = "OK" if ok else "MISMATCH"
+        log.info("  %-22s  expected>=%d  actual=%d  %s", col_name, expected, actual, status)
+        if not ok:
+            all_ok = False
+
+    # citations — just report count (no direct mongo source to compare)
+    citations_count = adb.collection("citations").count()
+    chunk_bt_count  = adb.collection("chunk_belongs_to").count()
+    log.info("  %-22s  actual=%d", "citations",        citations_count)
+    log.info("  %-22s  actual=%d", "chunk_belongs_to", chunk_bt_count)
+
+    if all_ok:
+        log.info("  All counts verified OK")
+    else:
+        log.warning("  Some counts did not match — check errors above")
+    return all_ok
 
 
-# ------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # Main
-# ------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="Migrate MongoDB → ArangoDB")
-    parser.add_argument("--dry-run", action="store_true", help="Preview without writing")
-    parser.add_argument(
-        "--collections",
-        nargs="+",
-        choices=list(MIGRATORS.keys()),
-        default=list(MIGRATORS.keys()),
-        help="Which collections to migrate (default: all)",
-    )
-    parser.add_argument("--drop-existing", action="store_true", help="Drop ArangoDB collections first")
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--resume-from", default="wipe",
+        choices=["wipe","taxa","taxonomical","stylized_facts","documents",
+                 "facts","chunks","chunk_belongs_to","sf_support","citations","verify"],
+        help="Skip earlier steps and resume from this step")
     args = parser.parse_args()
+    rf = args.resume_from
 
-    if args.dry_run:
-        logger.info("=== DRY RUN — no data will be written ===")
+    start = datetime.now()
+    log.info("Migration started at %s (resume-from=%s)", start.strftime("%Y-%m-%d %H:%M:%S"), rf)
 
-    # Connect MongoDB
-    logger.info("Connecting to MongoDB: %s / %s", settings.MONGODB_URL, settings.DATABASE_NAME)
-    mongo_db = get_mongo_db()
+    mongo_kb = get_mongo_kb()
+    adb      = get_arango_db()
 
-    # Connect ArangoDB
-    arango = ArangoDatabase()
-    if not args.dry_run:
-        logger.info("Connecting to ArangoDB: %s / %s", settings.ARANGO_URL, settings.ARANGO_DB_NAME)
-        arango.connect()
-        arango.setup_schema(drop_existing=args.drop_existing)
-    else:
-        logger.info("(Skipping ArangoDB connection in dry-run mode)")
+    steps = ["wipe","taxa","taxonomical","stylized_facts","documents",
+             "facts","chunks","chunk_belongs_to","sf_support","citations","verify"]
+    run_from = steps.index(rf)
 
-    # Run migrators
-    totals = {}
-    for name in args.collections:
-        try:
-            totals[name] = MIGRATORS[name](mongo_db, arango, dry_run=args.dry_run)
-        except Exception as exc:
-            logger.error("Failed to migrate %s: %s", name, exc)
-            totals[name] = -1
+    if run_from <= steps.index("wipe"):             step_wipe(adb)
+    if run_from <= steps.index("taxa"):             step_taxa(mongo_kb, adb)
+    if run_from <= steps.index("taxonomical"):      step_taxonomical(mongo_kb, adb)
+    if run_from <= steps.index("stylized_facts"):   step_stylized_facts(mongo_kb, adb)
+    if run_from <= steps.index("documents"):        step_documents(mongo_kb, adb)
+    if run_from <= steps.index("facts"):            step_facts(mongo_kb, adb)
+    if run_from <= steps.index("chunks"):           step_chunks(mongo_kb, adb)
+    if run_from <= steps.index("chunk_belongs_to"): step_chunk_belongs_to(adb)
+    if run_from <= steps.index("sf_support"):       step_sf_support(mongo_kb, adb)
+    if run_from <= steps.index("citations"):        step_citations(adb)
+    verify(mongo_kb, adb)
 
-    # Summary
-    logger.info("=== Migration Summary ===")
-    for name, count in totals.items():
-        status = "ERROR" if count < 0 else ("DRY" if args.dry_run else "OK")
-        logger.info("  %-30s %s  %d", name, status, max(count, 0))
-
-    if not args.dry_run:
-        logger.info("Final ArangoDB stats: %s", arango.stats())
+    elapsed = (datetime.now() - start).total_seconds()
+    log.info("Migration complete in %.1f seconds (%.1f minutes)", elapsed, elapsed / 60)
 
 
 if __name__ == "__main__":

@@ -212,6 +212,13 @@ async def run_batch(
     if not await service.get_batch(batch_id):
         raise HTTPException(status_code=404, detail="Batch not found")
 
+    # Reset failed/cancelled jobs so they can be retried (e.g. after a mixed batch).
+    retriable = {"$in": ["failed", "cancelled"]}
+    await db.ingestion_jobs.update_many(
+        {"batch_id": ObjectId(batch_id), "status": retriable},
+        {"$set": {"status": "pending", "error_message": None, "updated_at": datetime.utcnow()}},
+    )
+
     pending = await db.ingestion_jobs.count_documents(
         {"batch_id": ObjectId(batch_id), "status": "pending"}
     )

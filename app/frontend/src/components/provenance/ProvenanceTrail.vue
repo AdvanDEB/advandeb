@@ -171,7 +171,7 @@ watch(
     expandedChunk.value = null
     chunkContext.value = {}
     try {
-      const { data: result } = await api.get(`/graph/provenance/${id}`)
+      const { data: result } = await api.get(`/graph/provenance/${encodeURIComponent(id)}`)
       data.value = result
     } catch {
       error.value = 'Could not load provenance data.'
@@ -189,7 +189,7 @@ function toggleChunk(chunkId: string) {
 async function loadContext(chunkId: string) {
   if (chunkContext.value[chunkId]) return
   try {
-    const { data: result } = await api.get(`/graph/chunk/${chunkId}/context?window=2`)
+    const { data: result } = await api.get(`/graph/chunk/${encodeURIComponent(chunkId)}/context?window=2`)
     chunkContext.value[chunkId] = result.context || []
   } catch {
     // ignore silently

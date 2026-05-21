@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 
 from app.core.auth import get_current_user
-from app.core.database import get_kb_database as get_database
+from app.core.database import get_arango_db
 from app.core.dependencies import require_curator
 from advandeb_kb.services.agent_service import AgentService
 
@@ -13,7 +13,7 @@ async def list_ollama_models(
     current_user: dict = Depends(require_curator),
 ) -> dict:
     """List available Ollama models."""
-    db = get_database()
+    db = get_arango_db()
     try:
         models = await AgentService(db).list_ollama_models()
         return {"models": models}

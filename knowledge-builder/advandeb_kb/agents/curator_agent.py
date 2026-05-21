@@ -43,9 +43,7 @@ class CuratorAgent(BaseAgent):
     def __init__(self, port: int = AGENT_PORT, host: str = "localhost"):
         super().__init__(name="curator_agent", port=port, host=host)
         self._db = None
-        self._knowledge_svc = None
         self._agent_svc = None
-        self._graph_builder_svc = None
 
     # ------------------------------------------------------------------
     # Lifecycle
@@ -53,29 +51,13 @@ class CuratorAgent(BaseAgent):
 
     async def initialize(self) -> None:
         from motor.motor_asyncio import AsyncIOMotorClient
-        from advandeb_kb.services.knowledge_service import KnowledgeService
         from advandeb_kb.services.agent_service import AgentService
-        from advandeb_kb.services.graph_builder_service import GraphBuilderService
 
         client = AsyncIOMotorClient(settings.MONGODB_URL)
         self._db = client[settings.DATABASE_NAME]
-
-        self._knowledge_svc = KnowledgeService(self._db)
         self._agent_svc = AgentService(self._db)
-        self._graph_builder_svc = GraphBuilderService(self._db)
 
-        # Ensure builtin graph schemas are seeded
-        await self._graph_builder_svc.seed_schemas()
-
-        doc_count = await self._db.documents.count_documents({})
-        fact_count = await self._db.facts.count_documents({})
-        sf_count = await self._db.stylized_facts.count_documents({})
-        logger.info(
-            "CuratorAgent initialized — docs=%d facts=%d sfs=%d",
-            doc_count,
-            fact_count,
-            sf_count,
-        )
+        logger.info("CuratorAgent initialized (ArangoDB mode — graph data served live)")
 
     def register_tools(self) -> None:
         self.server.register_tool(
@@ -128,6 +110,7 @@ class CuratorAgent(BaseAgent):
                             "knowledge_graph",
                             "citation",
                             "physiological_process",
+                            "chatbot",
                         ],
                     },
                     "clear_existing": {"type": "boolean", "default": False},
@@ -307,30 +290,18 @@ class CuratorAgent(BaseAgent):
     async def _build_knowledge_graph(
         self, schema_name: str, clear_existing: bool = False
     ) -> dict:
-        BUILD_MAP = {
-            "sf_support": self._graph_builder_svc.build_sf_graph,
-            "taxonomical": self._graph_builder_svc.build_taxonomy_graph,
-            "knowledge_graph": self._graph_builder_svc.build_knowledge_graph,
-            "citation": self._graph_builder_svc.build_citation_graph,
+        """
+        Graph data is now queried live from ArangoDB — no pre-build step needed.
+        This tool is retained for API compatibility but performs no work.
+        """
+        VALID = {"sf_support", "taxonomical", "knowledge_graph", "citation",
+                 "physiological_process", "chatbot"}
+        if schema_name not in VALID:
+            return {"error": f"Unknown schema: {schema_name}. Valid: {sorted(VALID)}"}
+        return {
+            "schema": schema_name,
+            "message": "No build needed — graph data is queried live from ArangoDB.",
         }
-
-        if schema_name not in BUILD_MAP and schema_name != "physiological_process":
-            return {"error": f"Unknown schema: {schema_name}"}
-
-        if clear_existing:
-            await self._graph_builder_svc.clear_graph(schema_name)
-
-        try:
-            if schema_name in BUILD_MAP:
-                stats = await BUILD_MAP[schema_name]()
-            else:
-                # physiological_process — no dedicated builder yet
-                stats = {"message": "physiological_process schema seeded but not built"}
-        except Exception as exc:
-            logger.error("build_knowledge_graph %s failed: %s", schema_name, exc)
-            return {"error": str(exc), "schema": schema_name}
-
-        return {"schema": schema_name, "stats": stats}
 
     # ------------------------------------------------------------------
     # Tool: get_curation_queue

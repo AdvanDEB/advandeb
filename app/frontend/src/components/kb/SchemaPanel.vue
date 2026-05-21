@@ -9,9 +9,16 @@
           :class="['schema-item', { active: modelValue?._id === s._id }]"
           @click="$emit('update:modelValue', s)"
         >
-          <span class="schema-name">{{ s.name }}</span>
+          <div class="schema-item-row">
+            <span class="schema-name">{{ s.name }}</span>
+            <span
+              v-if="s.artifact"
+              :class="['artifact-badge', `artifact-badge--${s.artifact.status}`]"
+              :title="artifactBadgeTitle(s.artifact)"
+            >{{ artifactBadgeLabel(s.artifact.status) }}</span>
+          </div>
           <span v-if="statsBySchema[s._id]" class="schema-stat">
-            {{ fmtNum(statsBySchema[s._id].nodes) }}n · {{ fmtNum(statsBySchema[s._id].edges) }}e
+            {{ fmtNum(statsBySchema[s._id].nodes ?? statsBySchema[s._id].node_count) }}n · {{ fmtNum(statsBySchema[s._id].edges ?? statsBySchema[s._id].edge_count) }}e
           </span>
         </li>
       </ul>
@@ -55,22 +62,14 @@
 
     <div v-if="selectedStats" class="panel-section stats-section">
       <div class="section-label">Stats</div>
-      <div class="stat-row"><span>Nodes</span><strong>{{ fmtNum(selectedStats.nodes) }}</strong></div>
-      <div class="stat-row"><span>Edges</span><strong>{{ fmtNum(selectedStats.edges) }}</strong></div>
+      <div class="stat-row"><span>Nodes</span><strong>{{ fmtNum(selectedStats.nodes ?? selectedStats.node_count) }}</strong></div>
+      <div class="stat-row"><span>Edges</span><strong>{{ fmtNum(selectedStats.edges ?? selectedStats.edge_count) }}</strong></div>
       <div v-if="selectedStats.density" class="stat-row">
         <span>Density</span><strong>{{ selectedStats.density.toFixed(6) }}</strong>
       </div>
     </div>
 
     <div class="panel-actions">
-      <button
-        v-if="modelValue"
-        class="panel-btn primary"
-        :disabled="rebuilding"
-        @click="$emit('rebuild')"
-      >
-        {{ rebuilding ? 'Rebuilding…' : 'Rebuild Graph' }}
-      </button>
       <button class="panel-btn" @click="$emit('fitView')">Fit View</button>
     </div>
   </aside>
@@ -79,6 +78,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { GraphSchema, GraphStats, TypeCounts } from '@/utils/kbApi'
+import type { GraphArtifactMeta } from '@/types/graphArtifact'
 import { NODE_TYPE_HEX, DEFAULT_NODE_HEX, EDGE_TYPE_HEX, DEFAULT_EDGE_HEX } from '@/utils/kbColors'
 
 // Edge types that should always appear in the sidebar even when count is 0
@@ -92,12 +92,10 @@ const props = defineProps<{
   typeCounts: TypeCounts | null
   hiddenTypes: Set<string>
   hiddenEdgeTypes: Set<string>
-  rebuilding: boolean
 }>()
 
 const emit = defineEmits<{
   (e: 'update:modelValue', schema: GraphSchema): void
-  (e: 'rebuild'): void
   (e: 'fitView'): void
   (e: 'toggleType', type: string): void
   (e: 'toggleEdgeType', type: string): void
@@ -132,6 +130,30 @@ function nodeTypeColor(type: string): string {
 
 function edgeTypeColor(type: string): string {
   return EDGE_TYPE_HEX[type] ?? DEFAULT_EDGE_HEX
+}
+
+function artifactBadgeLabel(status: GraphArtifactMeta['status']): string {
+  switch (status) {
+    case 'ready': return '●'
+    case 'stale': return '◑'
+    case 'building': return '⟳'
+    case 'failed': return '✕'
+    case 'missing': return '?'
+    case 'too_large_for_browser': return '⚠'
+    default: return '?'
+  }
+}
+
+function artifactBadgeTitle(meta: GraphArtifactMeta): string {
+  switch (meta.status) {
+    case 'ready': return `Ready · built ${meta.built_at ? new Date(meta.built_at).toLocaleDateString() : 'unknown'}`
+    case 'stale': return 'Stale — will rebuild on next load'
+    case 'building': return 'Building artifact…'
+    case 'failed': return `Build failed: ${meta.error ?? 'unknown error'}`
+    case 'missing': return 'Artifact not yet built'
+    case 'too_large_for_browser': return 'Graph too large for browser rendering'
+    default: return meta.status
+  }
 }
 </script>
 
@@ -184,6 +206,29 @@ function edgeTypeColor(type: string): string {
 
 .schema-name { font-size: 0.78rem; color: #e2e8f0; font-weight: 500; }
 .schema-stat { font-size: 0.65rem; color: #64748b; }
+
+.schema-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.artifact-badge {
+  font-size: 0.6rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.artifact-badge--ready    { color: #4ade80; }
+.artifact-badge--stale    { color: #facc15; }
+.artifact-badge--building { color: #60a5fa; animation: spin 1.2s linear infinite; }
+.artifact-badge--failed   { color: #f87171; }
+.artifact-badge--missing  { color: #475569; }
+.artifact-badge--too_large_for_browser { color: #fb923c; }
+
+@keyframes spin {
+  from { display: inline-block; transform: rotate(0deg); }
+  to   { display: inline-block; transform: rotate(360deg); }
+}
 
 .filter-list {
   list-style: none;

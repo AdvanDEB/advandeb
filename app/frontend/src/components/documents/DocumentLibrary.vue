@@ -11,10 +11,12 @@
 
       <select v-model="statusFilter" @change="fetchDocuments" class="status-filter">
         <option value="">All statuses</option>
+        <option value="suggestion">Suggestions</option>
         <option value="pending">Pending</option>
         <option value="processing">Processing</option>
         <option value="completed">Completed</option>
         <option value="failed">Failed</option>
+        <option value="rejected">Rejected</option>
       </select>
 
       <span class="count-badge">{{ documents.length }} document{{ documents.length !== 1 ? 's' : '' }}</span>
@@ -53,14 +55,6 @@
 
         <!-- Actions -->
         <div class="doc-actions" @click.stop>
-          <button
-            v-if="doc.status === 'pending'"
-            class="action-btn embed"
-            title="Trigger embedding"
-            @click="embedDoc(doc.id)"
-          >
-            ⚙
-          </button>
           <button
             class="action-btn delete"
             title="Delete document"
@@ -107,10 +101,12 @@ const statusFilter = ref('')
 const notifs = useNotificationsStore()
 
 const STATUS_LABELS: Record<string, string> = {
+  suggestion: 'Suggestion',
   pending: 'Pending',
   processing: 'Processing…',
   completed: 'Indexed',
   failed: 'Failed',
+  rejected: 'Rejected',
 }
 
 let debounceTimer: ReturnType<typeof setTimeout>
@@ -136,16 +132,6 @@ async function fetchDocuments() {
     }))
   } finally {
     loading.value = false
-  }
-}
-
-async function embedDoc(docId: string) {
-  try {
-    await api.post(`/documents/${docId}/embed`)
-    notifs.success('Embedding queued')
-    await fetchDocuments()
-  } catch {
-    // error toast handled by api interceptor
   }
 }
 
@@ -293,10 +279,12 @@ defineExpose({ fetchDocuments })
   padding: 0.1rem 0.35rem;
 }
 
+.status-badge.suggestion { background: #fef3c7; color: #92400e; }
 .status-badge.pending    { background: #fef9c3; color: #713f12; }
 .status-badge.processing { background: #dbeafe; color: #1e40af; }
 .status-badge.completed  { background: #dcfce7; color: #166534; }
 .status-badge.failed     { background: #fee2e2; color: #991b1b; }
+.status-badge.rejected   { background: #f1f5f9; color: #64748b; }
 
 .facts-count {
   font-size: 0.7rem;
@@ -327,6 +315,5 @@ defineExpose({ fetchDocuments })
   color: #6b7280;
 }
 
-.action-btn.embed:hover { background: #dbeafe; color: #1d4ed8; }
 .action-btn.delete:hover { background: #fee2e2; color: #dc2626; }
 </style>

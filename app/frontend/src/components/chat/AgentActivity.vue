@@ -10,6 +10,7 @@
       v-for="agent in agents"
       :key="agent.name"
       class="agent-card"
+      :class="agent.status"
     >
       <div class="agent-header">
         <div class="agent-name-row">
@@ -21,7 +22,7 @@
         </span>
       </div>
 
-      <!-- Working state -->
+      <!-- Working / thinking state -->
       <div v-if="agent.status === 'working'" class="agent-working">
         <div class="task-row">
           <span class="spinner-inline"></span>
@@ -29,14 +30,15 @@
         </div>
       </div>
 
-      <!-- Completed state -->
+      <!-- Completed state — show task + result summary -->
       <div v-if="agent.status === 'completed'" class="agent-done">
-        ✓ {{ agent.resultSummary || 'Done' }}
+        <div class="done-task">✓ {{ agent.currentTask || 'Done' }}</div>
+        <div v-if="agent.resultSummary" class="done-result">{{ truncate(agent.resultSummary, 180) }}</div>
       </div>
 
       <!-- Error state -->
       <div v-if="agent.status === 'error'" class="agent-error">
-        ✗ Error occurred
+        ✗ {{ agent.currentTask || 'Error occurred' }}
       </div>
     </div>
 
@@ -86,6 +88,11 @@ function getElapsed(startedAt?: number): string {
   if (!startedAt) return '0'
   return ((now.value - startedAt) / 1000).toFixed(1)
 }
+
+function truncate(text: string, max: number): string {
+  if (!text) return ''
+  return text.length > max ? text.slice(0, max) + '…' : text
+}
 </script>
 
 <style scoped>
@@ -93,7 +100,8 @@ function getElapsed(startedAt?: number): string {
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
+  overflow-y: auto;
 }
 
 .panel-title {
@@ -102,6 +110,7 @@ function getElapsed(startedAt?: number): string {
   color: #374151;
   border-bottom: 1px solid #e5e7eb;
   padding-bottom: 0.5rem;
+  flex-shrink: 0;
 }
 
 .idle-state {
@@ -116,7 +125,12 @@ function getElapsed(startedAt?: number): string {
   border: 1px solid #e5e7eb;
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
+  transition: border-color 0.2s;
 }
+
+.agent-card.working  { border-color: #93c5fd; background: #eff6ff; }
+.agent-card.completed { border-color: #6ee7b7; background: #f0fdf4; }
+.agent-card.error    { border-color: #fca5a5; background: #fef2f2; }
 
 .agent-header {
   display: flex;
@@ -137,10 +151,10 @@ function getElapsed(startedAt?: number): string {
   flex-shrink: 0;
 }
 
-.status-dot.idle { background: #9ca3af; }
-.status-dot.working { background: #3b82f6; animation: pulse 1.4s ease-in-out infinite; }
+.status-dot.idle      { background: #9ca3af; }
+.status-dot.working   { background: #3b82f6; animation: pulse 1.4s ease-in-out infinite; }
 .status-dot.completed { background: #10b981; }
-.status-dot.error { background: #ef4444; }
+.status-dot.error     { background: #ef4444; }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
@@ -149,12 +163,13 @@ function getElapsed(startedAt?: number): string {
 
 .agent-name {
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .elapsed {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: #2563eb;
+  font-variant-numeric: tabular-nums;
 }
 
 .agent-working {
@@ -163,19 +178,20 @@ function getElapsed(startedAt?: number): string {
 
 .task-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.4rem;
 }
 
 .spinner-inline {
   width: 12px;
   height: 12px;
-  border: 2px solid #d1d5db;
+  border: 2px solid #bfdbfe;
   border-top-color: #3b82f6;
   border-radius: 50%;
   display: inline-block;
   animation: spin 0.7s linear infinite;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 @keyframes spin {
@@ -184,13 +200,29 @@ function getElapsed(startedAt?: number): string {
 
 .task-label {
   font-size: 0.75rem;
-  color: #4b5563;
+  color: #1d4ed8;
+  line-height: 1.4;
+  word-break: break-word;
 }
 
 .agent-done {
   margin-top: 0.35rem;
+}
+
+.done-task {
   font-size: 0.75rem;
   color: #059669;
+  font-weight: 500;
+}
+
+.done-result {
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  color: #374151;
+  line-height: 1.4;
+  word-break: break-word;
+  padding-left: 0.9rem;
+  border-left: 2px solid #6ee7b7;
 }
 
 .agent-error {
@@ -200,13 +232,14 @@ function getElapsed(startedAt?: number): string {
 }
 
 .workflow-trace {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   border-top: 1px solid #e5e7eb;
   padding-top: 0.75rem;
+  flex-shrink: 0;
 }
 
 .trace-title {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: #374151;
   margin-bottom: 0.4rem;
@@ -217,28 +250,31 @@ function getElapsed(startedAt?: number): string {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .trace-step {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #6b7280;
   display: flex;
   gap: 0.25rem;
   flex-wrap: wrap;
+  align-items: baseline;
 }
 
 .trace-num {
   color: #9ca3af;
   font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
 }
 
 .trace-agent {
-  font-weight: 500;
+  font-weight: 600;
   color: #374151;
 }
 
 .trace-action {
   color: #6b7280;
+  word-break: break-all;
 }
 </style>

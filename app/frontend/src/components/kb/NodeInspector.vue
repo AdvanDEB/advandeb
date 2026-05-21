@@ -150,6 +150,14 @@
           <h3 class="node-label">{{ node.label }}</h3>
 
           <dl class="prop-list">
+            <div v-if="node.properties.snapshot_kind === 'cluster'" class="prop-row">
+              <dt>Cluster size</dt>
+              <dd>{{ node.properties.child_node_count }}</dd>
+            </div>
+            <div v-if="node.properties.snapshot_kind === 'cluster' && node.properties.dominant_node_type" class="prop-row">
+              <dt>Dominant type</dt>
+              <dd>{{ node.properties.dominant_node_type }}</dd>
+            </div>
             <div v-if="node.degree !== undefined" class="prop-row">
               <dt>Degree</dt>
               <dd>{{ node.degree }}</dd>
@@ -207,11 +215,6 @@
           </div>
         </template>
 
-        <div class="inspector-actions">
-          <button class="action-btn" :disabled="loading" @click="$emit('expand', node)">
-            {{ loading ? 'Loading…' : 'Expand neighbors' }}
-          </button>
-        </div>
       </div>
     </aside>
   </Transition>
@@ -225,7 +228,6 @@ import { fetchKbDocument, type KbDocumentMeta } from '@/utils/kbApi'
 const props = defineProps<{ node: GraphNode | null; loading?: boolean }>()
 defineEmits<{
   (e: 'close'): void
-  (e: 'expand', node: GraphNode): void
 }>()
 
 const abstractOpen = ref(false)

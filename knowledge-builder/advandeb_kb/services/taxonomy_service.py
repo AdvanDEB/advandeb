@@ -1,21 +1,37 @@
 """
-TaxonomyService — query and traverse the taxonomy tree.
+TaxonomyService — query and traverse the taxonomy tree via ArangoDB.
 
-Requires the taxonomy_nodes collection to be populated by
-scripts/import_taxonomy.py before use.
+The `taxa` collection holds NCBI taxonomy nodes.  Each document has:
+  - _key        : str(tax_id)  e.g. "9606"
+  - tax_id      : int          e.g. 9606
+  - name        : str          scientific name
+  - rank        : str          e.g. "species", "genus", "family"
+  - parent_tax_id : int
+  - lineage     : List[int]    ancestor tax_ids from root to parent (pre-materialised)
+  - synonyms    : List[str]
+  - common_names: List[str]
 """
+from __future__ import annotations
+
+import asyncio
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Optional
 
-from motor.motor_asyncio import AsyncIOMotorDatabase
+from advandeb_kb.database.arango_client import ArangoDatabase
 
 logger = logging.getLogger(__name__)
 
+_executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="taxonomy-svc")
+
 
 class TaxonomyService:
-    def __init__(self, database: AsyncIOMotorDatabase):
+    def __init__(self, database: ArangoDatabase):
         self.db = database
-        self.col = database.taxonomy_nodes
+
+    async def _run(self, fn, *args, **kwargs):
+        loop = asyncio.get_running_loop()
+        return await loop.run_in_executor(_executor, lambda: fn(*args, **kwargs))
 
     # ------------------------------------------------------------------
     # Lookup
@@ -23,35 +39,50 @@ class TaxonomyService:
 
     async def get_by_taxid(self, tax_id: int) -> Optional[Dict[str, Any]]:
         """Fetch a single node by NCBI tax_id."""
-        doc = await self.col.find_one({"tax_id": tax_id}, {"_id": 0})
-        return doc
+        def _get():
+            col = self.db.db.collection("taxa")
+            doc = col.get(str(tax_id))
+            if doc:
+                doc.pop("_rev", None)
+            return doc
+        return await self._run(_get)
 
     async def get_by_name(self, name: str, exact: bool = True) -> List[Dict[str, Any]]:
         """Look up taxa by scientific name or synonym.
 
         exact=True  → case-insensitive exact match on `name` field
-        exact=False → regex prefix / contains search
+        exact=False → LIKE contains on name, synonyms, and common_names
         """
         if exact:
-            query = {"name": {"$regex": f"^{name}$", "$options": "i"}}
+            aql = """
+            FOR doc IN taxa
+                FILTER LOWER(doc.name) == LOWER(@name)
+                LIMIT 20
+                RETURN UNSET(doc, '_rev')
+            """
+            bind: Dict[str, Any] = {"name": name}
         else:
-            query = {
-                "$or": [
-                    {"name": {"$regex": name, "$options": "i"}},
-                    {"synonyms": {"$regex": name, "$options": "i"}},
-                    {"common_names": {"$regex": name, "$options": "i"}},
-                ]
-            }
-        cursor = self.col.find(query, {"_id": 0}).limit(20)
-        return [doc async for doc in cursor]
+            aql = """
+            FOR doc IN taxa
+                FILTER LIKE(doc.name, @pat, true)
+                    OR (doc.synonyms != null AND @name IN doc.synonyms)
+                    OR (doc.common_names != null AND @name IN doc.common_names)
+                LIMIT 20
+                RETURN UNSET(doc, '_rev')
+            """
+            bind = {"pat": f"%{name}%", "name": name}
+        return await self._run(self.db.aql, aql, bind)
 
     async def search(self, query: str, limit: int = 20) -> List[Dict[str, Any]]:
-        """Full-text search over name, synonyms, and common_names."""
-        cursor = self.col.find(
-            {"$text": {"$search": query}},
-            {"_id": 0, "score": {"$meta": "textScore"}},
-        ).sort([("score", {"$meta": "textScore"})]).limit(limit)
-        return [doc async for doc in cursor]
+        """Full-text search over name, synonyms, and common_names via AQL LIKE."""
+        aql = """
+        FOR doc IN taxa
+            FILTER LIKE(doc.name, @pat, true)
+            LIMIT @limit
+            RETURN UNSET(doc, '_rev')
+        """
+        rows = await self._run(self.db.aql, aql, {"pat": f"%{query}%", "limit": limit})
+        return rows
 
     # ------------------------------------------------------------------
     # Tree traversal
@@ -62,7 +93,7 @@ class TaxonomyService:
 
         Uses the pre-materialised `lineage` array — O(n) in lineage length.
         """
-        node = await self.col.find_one({"tax_id": tax_id}, {"_id": 0})
+        node = await self.get_by_taxid(tax_id)
         if not node:
             return []
 
@@ -70,15 +101,19 @@ class TaxonomyService:
         if not ancestor_ids:
             return [node]
 
-        # Fetch all ancestors in one query, then order them
-        cursor = self.col.find(
-            {"tax_id": {"$in": ancestor_ids}}, {"_id": 0}
-        )
-        by_id: Dict[int, Dict] = {}
-        async for doc in cursor:
-            by_id[doc["tax_id"]] = doc
+        def _fetch_ancestors():
+            str_keys = [str(tid) for tid in ancestor_ids]
+            aql = """
+            FOR doc IN taxa
+                FILTER doc._key IN @keys
+                RETURN UNSET(doc, '_rev')
+            """
+            rows = self.db.aql(aql, {"keys": str_keys})
+            by_id = {r["tax_id"]: r for r in rows}
+            ordered = [by_id[tid] for tid in ancestor_ids if tid in by_id]
+            return ordered
 
-        ordered = [by_id[tid] for tid in ancestor_ids if tid in by_id]
+        ordered = await self._run(_fetch_ancestors)
         ordered.append(node)
         return ordered
 
@@ -88,10 +123,13 @@ class TaxonomyService:
         limit: int = 200,
     ) -> List[Dict[str, Any]]:
         """Return direct children of a node."""
-        cursor = self.col.find(
-            {"parent_tax_id": tax_id}, {"_id": 0}
-        ).limit(limit)
-        return [doc async for doc in cursor]
+        aql = """
+        FOR doc IN taxa
+            FILTER doc.parent_tax_id == @tax_id
+            LIMIT @limit
+            RETURN UNSET(doc, '_rev')
+        """
+        return await self._run(self.db.aql, aql, {"tax_id": tax_id, "limit": limit})
 
     async def get_subtree_ids(self, tax_id: int) -> List[int]:
         """Return tax_ids of all descendants (including the node itself).
@@ -99,14 +137,12 @@ class TaxonomyService:
         Uses the lineage array: any node whose lineage contains tax_id is
         a descendant.
         """
-        cursor = self.col.find(
-            {"$or": [
-                {"tax_id": tax_id},
-                {"lineage": tax_id},
-            ]},
-            {"tax_id": 1, "_id": 0},
-        )
-        return [doc["tax_id"] async for doc in cursor]
+        aql = """
+        FOR doc IN taxa
+            FILTER doc.tax_id == @tax_id OR @tax_id IN doc.lineage
+            RETURN doc.tax_id
+        """
+        return await self._run(self.db.aql, aql, {"tax_id": tax_id})
 
     async def get_rank_members(
         self,
@@ -115,20 +151,31 @@ class TaxonomyService:
         limit: int = 100,
     ) -> List[Dict[str, Any]]:
         """List all nodes at a given rank, optionally restricted to a subtree."""
-        query: Dict[str, Any] = {"rank": rank}
+        bind: Dict[str, Any] = {"rank": rank, "limit": limit}
+        ancestor_filter = ""
         if ancestor_taxid is not None:
-            query["lineage"] = ancestor_taxid
-        cursor = self.col.find(query, {"_id": 0}).limit(limit)
-        return [doc async for doc in cursor]
+            ancestor_filter = "FILTER @ancestor_taxid IN doc.lineage OR doc.tax_id == @ancestor_taxid"
+            bind["ancestor_taxid"] = ancestor_taxid
+        aql = f"""
+        FOR doc IN taxa
+            FILTER doc.rank == @rank
+            {ancestor_filter}
+            LIMIT @limit
+            RETURN UNSET(doc, '_rev')
+        """
+        return await self._run(self.db.aql, aql, bind)
 
     # ------------------------------------------------------------------
     # Utility
     # ------------------------------------------------------------------
 
     async def count(self) -> int:
-        return await self.col.count_documents({})
+        def _count():
+            return self.db.db.collection("taxa").count()
+        return await self._run(_count)
 
     async def is_populated(self) -> bool:
-        """Return True if the taxonomy collection has at least one document."""
-        doc = await self.col.find_one({}, {"_id": 1})
-        return doc is not None
+        """Return True if the taxa collection has at least one document."""
+        def _check():
+            return self.db.db.collection("taxa").count() > 0
+        return await self._run(_check)

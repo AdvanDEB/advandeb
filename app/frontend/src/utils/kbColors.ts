@@ -18,6 +18,8 @@ export const NODE_TYPE_COLORS: Record<string, [number, number, number, number]> 
   fact:              [52/255,  211/255, 153/255, 1.0],   // emerald-400
   stylized_fact:     [251/255, 191/255,  36/255, 1.0],   // amber-400
   taxon:             [167/255, 139/255, 250/255, 1.0],   // violet-400
+  user:              [248/255, 113/255, 113/255, 1.0],   // red-400
+  chat_session:      [125/255, 211/255, 252/255, 1.0],   // sky-300
   species:           [192/255, 132/255, 252/255, 1.0],   // purple-400
   genus:             [167/255, 139/255, 250/255, 1.0],   // violet-400
   family:            [139/255,  92/255, 246/255, 1.0],   // violet-500
@@ -33,6 +35,8 @@ export const NODE_TYPE_HEX: Record<string, string> = {
   fact:              '#34d399',  // emerald-400
   stylized_fact:     '#fbbf24',  // amber-400
   taxon:             '#a78bfa',  // violet-400
+  user:              '#f87171',  // red-400
+  chat_session:      '#7dd3fc',  // sky-300
   species:           '#c084fc',  // purple-400
   genus:             '#a78bfa',  // violet-400
   family:            '#8b5cf6',  // violet-500
@@ -57,6 +61,8 @@ export const EDGE_TYPE_COLORS: Record<string, [number, number, number, number]> 
   regulates:      [255/255, 160/255,  60/255, 0.51],
   depends_on:     [ 60/255, 180/255, 220/255, 0.51],
   exhibited_by:   [180/255,  60/255, 220/255, 0.51],
+  has_session:    [248/255, 113/255, 113/255, 0.45],
+  references_document: [125/255, 211/255, 252/255, 0.45],
 }
 
 export const EDGE_TYPE_HEX: Record<string, string> = {
@@ -69,6 +75,8 @@ export const EDGE_TYPE_HEX: Record<string, string> = {
   regulates:      '#ffa03c',
   depends_on:     '#3cb4dc',
   exhibited_by:   '#b43cdc',
+  has_session:    '#f87171',
+  references_document: '#7dd3fc',
 }
 
 export const DEFAULT_EDGE_COLOR: [number, number, number, number] = [128/255, 128/255, 128/255, 0.39]

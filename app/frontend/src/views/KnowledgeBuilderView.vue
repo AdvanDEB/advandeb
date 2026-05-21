@@ -36,8 +36,6 @@
         :type-counts="typeCounts"
         :hidden-types="hiddenTypes"
         :hidden-edge-types="hiddenEdgeTypes"
-        :rebuilding="rebuilding"
-        @rebuild="handleRebuild"
         @fit-view="canvasRef?.fitView()"
         @toggle-type="toggleType"
         @toggle-edge-type="toggleEdgeType"
@@ -47,36 +45,81 @@
         <div v-if="!selectedSchema" class="graph-empty">
           Select a graph schema to visualise
         </div>
-        <div v-else-if="graphLoading" class="graph-empty">
-          Loading graph data…
-        </div>
-        <CosmographCanvas
-          v-else
-          ref="canvasRef"
-          :nodes="nodes"
-          :edges="edges"
-          :hidden-types="hiddenTypes"
-          :hidden-edge-types="hiddenEdgeTypes"
-          @node-click="handleNodeClick"
-          @background-click="selectedNode = null"
-        />
+        <div v-else class="graph-stage">
+          <CosmographCanvas
+            v-if="hasGraphData"
+            ref="canvasRef"
+            :bundle="graphBundle"
+            :hidden-types="hiddenTypes"
+            :hidden-edge-types="hiddenEdgeTypes"
+            @node-click="handleNodeClick"
+            @background-click="selectedNode = null"
+          />
+          <div v-else class="graph-empty">
+            {{ graphEmptyMessage }}
+          </div>
 
-        <!-- Collapsible node table panel -->
-        <NodeTablePanel
-          v-if="tableOpen && nodes.length"
-          :nodes="nodes"
-          :selectedNode="selectedNode"
-          @select="onTableRowSelect"
-        />
+          <div v-if="graphOverlayVisible" class="graph-loading-overlay">
+            <div class="graph-loading-card">
+              <div class="graph-loading-title">{{ graphLoad.message }}</div>
+              <div
+                :class="[
+                  'progress-bar',
+                  'graph-progress-bar',
+                  { 'progress-bar--indeterminate': graphLoad.indeterminate },
+                ]"
+              >
+                <div
+                  class="progress-fill"
+                  :class="{ 'progress-fill--indeterminate': graphLoad.indeterminate }"
+                  :style="graphLoad.indeterminate ? undefined : { width: `${graphProgressPercent}%` }"
+                />
+              </div>
+              <div class="graph-loading-meta">
+                <span>{{ graphProgressDetail }}</span>
+                <span v-if="!graphLoad.indeterminate">{{ graphProgressLabel }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collapsible node table panel -->
+          <NodeTablePanel
+            v-if="tableOpen && graphBundle"
+            :nodes="bundleToNodeList"
+            :selectedNode="selectedNode"
+            @select="onTableRowSelect"
+          />
+        </div>
 
         <div class="graph-status-bar">
-          <span>{{ fmtNum(nodes.length) }} nodes · {{ fmtNum(edges.length) }} edges</span>
+          <span>{{ fmtNum(graphBundle?.nodeCount ?? 0) }} nodes · {{ fmtNum(graphBundle?.edgeCount ?? 0) }} edges</span>
           <span v-if="selectedSchema" class="schema-tag">{{ selectedSchema.name }}</span>
+          <div
+            v-if="graphLoading"
+            class="graph-inline-progress"
+            :title="graphProgressDetail"
+          >
+            <span class="graph-inline-label">{{ graphLoad.message }}</span>
+            <div
+              :class="[
+                'progress-bar',
+                'graph-inline-progress-bar',
+                { 'progress-bar--indeterminate': graphLoad.indeterminate },
+              ]"
+            >
+              <div
+                class="progress-fill"
+                :class="{ 'progress-fill--indeterminate': graphLoad.indeterminate }"
+                :style="graphLoad.indeterminate ? undefined : { width: `${graphProgressPercent}%` }"
+              />
+            </div>
+            <span class="progress-label">{{ graphProgressLabel }}</span>
+          </div>
           <button
             v-if="selectedSchema"
             class="graph-table-btn"
             :class="{ active: tableOpen }"
-            :disabled="!nodes.length"
+            :disabled="!graphBundle"
             title="Toggle node table"
             @click="tableOpen = !tableOpen"
           >☰ Table</button>
@@ -94,7 +137,6 @@
         :node="selectedNode"
         :loading="graphLoading"
         @close="selectedNode = null"
-        @expand="handleExpand"
       />
     </div>
 
@@ -368,11 +410,151 @@
         </p>
       </div>
     </div>
+
+    <!-- TAB: Suggestions -->
+    <div v-show="activeTab === 'suggestions'" class="tab-content suggestions-tab">
+      <div class="tab-inner suggestions-inner">
+
+        <!-- ── Document suggestions ─────────────────────────────── -->
+        <section class="sugg-section">
+          <div class="section-header">
+            <h2>Document Suggestions
+              <span class="sugg-count" v-if="docSuggestions.length">({{ docSuggestions.length }})</span>
+            </h2>
+            <button class="btn sm" @click="loadSuggestions">Refresh</button>
+          </div>
+          <p class="dim small">Documents uploaded by users pending KB ingestion. Approve to queue for the ingestion pipeline; reject to discard.</p>
+
+          <div v-if="suggLoading" class="empty-state">Loading…</div>
+          <div v-else-if="!docSuggestions.length" class="empty-state">No document suggestions</div>
+          <table v-else class="data-table sugg-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Uploaded</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="doc in docSuggestions" :key="doc._id">
+                <td class="sugg-title">{{ doc.title || '(untitled)' }}</td>
+                <td class="dim">{{ doc.source_type }}</td>
+                <td class="dim">{{ fmtDate(doc.created_at) }}</td>
+                <td class="actions-cell">
+                  <button
+                    class="btn xs primary"
+                    :disabled="pendingDocIds.has(doc._id)"
+                    @click="handleDocAction(doc._id, 'approve')"
+                  >{{ pendingDocIds.has(doc._id) ? '…' : 'Approve' }}</button>
+                  <button
+                    class="btn xs danger"
+                    :disabled="pendingDocIds.has(doc._id)"
+                    @click="handleDocAction(doc._id, 'reject')"
+                  >{{ pendingDocIds.has(doc._id) ? '…' : 'Reject' }}</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- ── Fact suggestions ──────────────────────────────────── -->
+        <section class="sugg-section">
+          <div class="section-header">
+            <h2>Fact Suggestions
+              <span class="sugg-count" v-if="factSuggestions.length">({{ factSuggestions.length }})</span>
+            </h2>
+          </div>
+          <p class="dim small">Facts submitted by users. Publish to make them visible in the KB; reject to discard.</p>
+
+          <div v-if="suggLoading" class="empty-state">Loading…</div>
+          <div v-else-if="!factSuggestions.length" class="empty-state">No fact suggestions</div>
+          <table v-else class="data-table sugg-table">
+            <thead>
+              <tr>
+                <th>Statement</th>
+                <th>Tags</th>
+                <th>Confidence</th>
+                <th>Submitted</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="fact in factSuggestions" :key="fact._id">
+                <td class="sugg-statement">{{ fact.statement }}</td>
+                <td>
+                  <span v-for="tag in (fact.tags ?? [])" :key="tag" class="tag-chip">{{ tag }}</span>
+                </td>
+                <td class="dim">{{ fact.confidence != null ? Math.round((fact.confidence as number) * 100) + '%' : '—' }}</td>
+                <td class="dim">{{ fmtDate(fact.created_at) }}</td>
+                <td class="actions-cell">
+                  <button
+                    class="btn xs primary"
+                    :disabled="pendingFactIds.has(fact._id)"
+                    @click="handleFactAction(fact._id, 'published')"
+                  >{{ pendingFactIds.has(fact._id) ? '…' : 'Publish' }}</button>
+                  <button
+                    class="btn xs danger"
+                    :disabled="pendingFactIds.has(fact._id)"
+                    @click="handleFactAction(fact._id, 'rejected')"
+                  >{{ pendingFactIds.has(fact._id) ? '…' : 'Reject' }}</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- ── Stylized fact suggestions ─────────────────────────── -->
+        <section class="sugg-section">
+          <div class="section-header">
+            <h2>Stylized Fact Suggestions
+              <span class="sugg-count" v-if="sfSuggestions.length">({{ sfSuggestions.length }})</span>
+            </h2>
+          </div>
+          <p class="dim small">Stylized facts submitted by users. Publish to make them citable; reject to discard.</p>
+
+          <div v-if="suggLoading" class="empty-state">Loading…</div>
+          <div v-else-if="!sfSuggestions.length" class="empty-state">No stylized fact suggestions</div>
+          <table v-else class="data-table sugg-table">
+            <thead>
+              <tr>
+                <th>Summary</th>
+                <th>Tags</th>
+                <th>Submitted</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="sf in sfSuggestions" :key="sf._id">
+                <td class="sugg-statement">{{ sf.summary }}</td>
+                <td>
+                  <span v-for="tag in (sf.tags ?? [])" :key="tag" class="tag-chip">{{ tag }}</span>
+                </td>
+                <td class="dim">{{ fmtDate(sf.created_at) }}</td>
+                <td class="actions-cell">
+                  <button
+                    class="btn xs primary"
+                    :disabled="pendingSfIds.has(sf._id)"
+                    @click="handleSfAction(sf._id, 'published')"
+                  >{{ pendingSfIds.has(sf._id) ? '…' : 'Publish' }}</button>
+                  <button
+                    class="btn xs danger"
+                    :disabled="pendingSfIds.has(sf._id)"
+                    @click="handleSfAction(sf._id, 'rejected')"
+                  >{{ pendingSfIds.has(sf._id) ? '…' : 'Reject' }}</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import CosmographCanvas from '@/components/kb/CosmographCanvas.vue'
 import NodeInspector from '@/components/kb/NodeInspector.vue'
@@ -381,20 +563,27 @@ import SchemaPanel from '@/components/kb/SchemaPanel.vue'
 import FolderTree from '@/components/kb/FolderTree.vue'
 import type { FolderNode } from '@/components/kb/FolderTree.vue'
 import {
-  fetchSchemas, fetchStats, fetchTypeCounts,
-  expandNode, rebuildSchema, resetKnowledgeBase,
-  fetchNodeTypesPaged, fetchAllEdges,
+  fetchSchemas,
+  fetchGraphArtifact,
+  fetchArtifactStatus,
+  resetKnowledgeBase,
   fetchCollections, fetchCollectionDocs as _fetchCollectionDocs,
   fetchBatches as _fetchBatches, fetchJobs,
   runBatch as _runBatch, deleteBatch as _deleteBatch, stopBatch as _stopBatch,
   fetchSources as _fetchSources, scanFolders, fetchFolderFiles,
   fetchKgStats as _fetchKgStats, linkDocuments,
   uploadPdf,
+  fetchDocumentSuggestions, approveDocument,
+  fetchFactSuggestions, reviewFact,
+  fetchStylizedFactSuggestions, reviewStylizedFact,
 } from '@/utils/kbApi'
 import type {
-  GraphSchema, GraphNode, GraphEdge, GraphStats, TypeCounts,
+  GraphSchema, GraphNode, GraphStats, TypeCounts,
   IngestionBatch, IngestionJob, CollectionInfo, KgStats, SourceEntry,
+  DocumentSuggestion, FactSuggestion, StylizedFactSuggestion,
 } from '@/utils/kbApi'
+import type { GraphRenderBundle } from '@/types/graphArtifact'
+import GraphArtifactWorker from '@/workers/graphArtifactWorker?worker'
 
 const authStore = useAuthStore()
 
@@ -405,6 +594,7 @@ const TABS = [
   { id: 'ingestion', label: 'Ingestion' },
   { id: 'database', label: 'Database' },
   { id: 'kg', label: 'KG Builder' },
+  { id: 'suggestions', label: 'Suggestions' },
 ]
 const activeTab = ref<string>('graph')
 
@@ -422,104 +612,273 @@ function setError(e: unknown) {
 
 const schemas         = ref<GraphSchema[]>([])
 const selectedSchema  = ref<GraphSchema | null>(null)
-const nodes           = ref<GraphNode[]>([])
-const edges           = ref<GraphEdge[]>([])
+const graphBundle     = ref<GraphRenderBundle | null>(null)
 const graphLoading    = ref(false)
-const rebuilding      = ref(false)
 const selectedNode    = ref<GraphNode | null>(null)
 const hiddenTypes     = ref<Set<string>>(new Set())
 const hiddenEdgeTypes = ref<Set<string>>(new Set())
 const statsBySchema   = ref<Record<string, GraphStats>>({})
 const selectedStats   = ref<GraphStats | null>(null)
 const typeCounts      = ref<TypeCounts | null>(null)
-const loadedNodeIds   = ref<string[]>([])
 const canvasRef       = ref<InstanceType<typeof CosmographCanvas> | null>(null)
 const tableOpen       = ref(false)
+
+// Derive a flat GraphNode[] from the bundle for NodeTablePanel
+const bundleToNodeList = computed<GraphNode[]>(() => {
+  if (!graphBundle.value) return []
+  return graphBundle.value.nodeSummaries.map(s => ({
+    _id: s.id,
+    schema_id: graphBundle.value!.schemaId,
+    node_type: s.type,
+    entity_collection: s.entity_collection,
+    entity_id: s.entity_id,
+    label: s.label,
+    properties: s.props,
+    degree: s.degree,
+  }))
+})
+
+type GraphLoadMode = 'schema' | 'refresh'
+
+interface GraphLoadState {
+  active: boolean
+  mode: GraphLoadMode | null
+  message: string
+  detail: string
+  completed: number
+  total: number | null
+  indeterminate: boolean
+  overlay: boolean
+}
+
+const DEFAULT_GRAPH_LOAD: GraphLoadState = {
+  active: false,
+  mode: null,
+  message: '',
+  detail: '',
+  completed: 0,
+  total: null,
+  indeterminate: false,
+  overlay: false,
+}
+
+const graphLoad = ref<GraphLoadState>({ ...DEFAULT_GRAPH_LOAD })
+
+const hasGraphData = computed(() => graphBundle.value !== null)
+
+const graphOverlayVisible = computed(() => graphLoad.value.active && graphLoad.value.overlay)
+
+const graphProgressPercent = computed(() => {
+  const { active, indeterminate, total, completed } = graphLoad.value
+  if (!active || indeterminate || !total || total <= 0) return 0
+  return Math.max(0, Math.min(100, Math.round((completed / total) * 100)))
+})
+
+const graphProgressLabel = computed(() => (
+  graphLoad.value.indeterminate || !graphLoad.value.total
+    ? 'Loading'
+    : `${graphProgressPercent.value}%`
+))
+
+const graphProgressDetail = computed(() => {
+  if (graphLoad.value.detail) return graphLoad.value.detail
+  if (graphLoad.value.indeterminate || !graphLoad.value.total) return 'Working…'
+  return `${graphLoad.value.completed}/${graphLoad.value.total} steps`
+})
+
+const graphEmptyMessage = computed(() => (
+  graphLoading.value ? 'Preparing graph data…' : 'This graph is empty'
+))
+
+let graphLoadToken = 0
+
+function beginGraphLoad(options: {
+  mode: GraphLoadMode
+  message: string
+  detail?: string
+  total?: number | null
+  indeterminate?: boolean
+  overlay?: boolean
+}) {
+  graphLoading.value = true
+  graphLoad.value = {
+    ...DEFAULT_GRAPH_LOAD,
+    active: true,
+    mode: options.mode,
+    message: options.message,
+    detail: options.detail ?? '',
+    total: options.total ?? null,
+    indeterminate: options.indeterminate ?? false,
+    overlay: options.overlay ?? false,
+  }
+}
+
+function updateGraphLoad(options: Partial<Omit<GraphLoadState, 'active' | 'mode'>> & { mode?: GraphLoadMode | null }) {
+  if (!graphLoad.value.active) return
+  graphLoad.value = {
+    ...graphLoad.value,
+    ...options,
+  }
+}
+
+function endGraphLoad() {
+  graphLoading.value = false
+  graphLoad.value = { ...DEFAULT_GRAPH_LOAD }
+}
+
+// Active worker — terminated on schema switch so stale bundles are dropped
+let _artifactWorker: Worker | null = null
+
+function terminateWorker() {
+  if (_artifactWorker) { _artifactWorker.terminate(); _artifactWorker = null }
+}
+
+async function loadGraph(
+  schema: typeof selectedSchema.value,
+  options: { mode?: GraphLoadMode } = {},
+): Promise<boolean> {
+  if (!schema) return false
+  const requestToken = ++graphLoadToken
+  const schemaId = schema._id
+  const mode = options.mode ?? 'schema'
+  const overlay = mode === 'schema' || !hasGraphData.value
+
+  if (mode === 'schema') {
+    selectedNode.value = null
+    terminateWorker()
+  }
+
+  beginGraphLoad({
+    mode,
+    message: mode === 'refresh' ? 'Refreshing graph…' : 'Loading graph…',
+    detail: mode === 'schema' ? 'Fetching artifact' : 'Fetching artifact',
+    total: 3,
+    overlay,
+  })
+
+  let success = false
+  try {
+    // Step 1 — check artifact status; if not ready, trigger rebuild
+    updateGraphLoad({ completed: 1, message: 'Checking artifact…', detail: schema.name })
+    const status = await fetchArtifactStatus(schemaId)
+    if (requestToken !== graphLoadToken) return false
+
+    if (status.status === 'missing' || status.status === 'building') {
+      // Artifact not ready yet — show indeterminate progress and poll
+      updateGraphLoad({
+        completed: 1,
+        message: status.status === 'building' ? 'Artifact is building…' : 'Artifact missing — queuing build…',
+        detail: 'Please wait',
+        indeterminate: true,
+        overlay: true,
+      })
+      // Poll until ready or failed
+      let pollStatus = status.status
+      while (pollStatus === 'building' || pollStatus === 'missing') {
+        await new Promise(r => setTimeout(r, 2000))
+        if (requestToken !== graphLoadToken) return false
+        const s = await fetchArtifactStatus(schemaId)
+        if (requestToken !== graphLoadToken) return false
+        pollStatus = s.status as typeof pollStatus
+      }
+      if (pollStatus === 'failed') {
+        setError(new Error(`Graph artifact for "${schema.name}" failed to build`))
+        return false
+      }
+      updateGraphLoad({ indeterminate: false })
+    }
+
+    // Step 2 — download artifact
+    updateGraphLoad({ completed: 2, message: 'Downloading graph data…', detail: schema.name, indeterminate: false })
+    const artifact = await fetchGraphArtifact(schemaId)
+    if (requestToken !== graphLoadToken) return false
+
+    // Step 3 — parse in worker, build render bundle
+    updateGraphLoad({
+      completed: 3,
+      message: 'Building render buffers…',
+      detail: `${fmtNum(artifact.nodes.length)} nodes · ${fmtNum(artifact.edges.length)} edges`,
+    })
+
+    const bundle = await new Promise<GraphRenderBundle>((resolve, reject) => {
+      terminateWorker()
+      const worker = new GraphArtifactWorker()
+      _artifactWorker = worker
+      worker.onmessage = (ev) => {
+        _artifactWorker = null
+        if (ev.data.type === 'ready') resolve(ev.data.bundle)
+        else reject(new Error(ev.data.error ?? 'Worker error'))
+        worker.terminate()
+      }
+      worker.onerror = (e) => {
+        _artifactWorker = null
+        reject(new Error(e.message ?? 'Worker crashed'))
+        worker.terminate()
+      }
+      worker.postMessage({ type: 'build-render-bundle', artifact })
+    })
+
+    if (requestToken !== graphLoadToken) return false
+
+    // Atomically swap buffers
+    selectedStats.value = {
+      node_count: bundle.nodeCount,
+      nodes: bundle.nodeCount,
+      edge_count: bundle.edgeCount,
+      edges: bundle.edgeCount,
+      density: bundle.stats.density,
+    }
+    typeCounts.value = bundle.typeCounts
+    statsBySchema.value = { ...statsBySchema.value, [schemaId]: selectedStats.value }
+    graphBundle.value = bundle
+
+    updateGraphLoad({
+      detail: `${fmtNum(bundle.nodeCount)} nodes · ${fmtNum(bundle.edgeCount)} edges ready`,
+    })
+
+    await nextTick()
+    success = true
+  } catch (e) {
+    if (requestToken === graphLoadToken) setError(e)
+  } finally {
+    if (requestToken === graphLoadToken) endGraphLoad()
+  }
+
+  return success
+}
+
+watch(selectedSchema, (schema, previousSchema) => {
+  if (schema?._id !== previousSchema?._id) {
+    selectedNode.value = null
+  }
+  loadGraph(schema, { mode: 'schema' })
+})
+
+async function refreshGraph() {
+  await loadGraph(selectedSchema.value, { mode: 'refresh' })
+}
 
 async function loadSchemas() {
   try {
     const list = await fetchSchemas()
     schemas.value = list
-    // Load stats for each schema in background
-    for (const s of list) {
-      fetchStats(s._id).then(st => { statsBySchema.value = { ...statsBySchema.value, [s._id]: st } }).catch(() => {})
-    }
-  } catch (e) { setError(e) }
-}
-
-async function loadGraph(schema: typeof selectedSchema.value) {
-  if (!schema) return
-  graphLoading.value = true
-  nodes.value = []
-  edges.value = []
-  selectedNode.value = null
-  loadedNodeIds.value = []
-  typeCounts.value = null
-  try {
-    const [stats, types] = await Promise.all([
-      fetchStats(schema._id),
-      fetchTypeCounts(schema._id),
-    ])
-    selectedStats.value = stats
-    typeCounts.value = types
-
-    // Load all nodes page-by-page across every type
-    const PAGE = 500
-    const allNodes: GraphNode[] = []
-    const loadedSet = new Set<string>()
-    for (const [type, count] of Object.entries(types.node_types)) {
-      const pages = Math.ceil((count as number) / PAGE)
-      for (let p = 0; p < pages; p++) {
-        const result = await fetchNodeTypesPaged(schema._id, type, p, PAGE)
-        for (const n of result.nodes) {
-          if (!loadedSet.has(n._id)) {
-            allNodes.push(n)
-            loadedSet.add(n._id)
-          }
+    // Seed statsBySchema from artifact meta embedded in schema list
+    for (const schema of list) {
+      if (schema.artifact && (schema.artifact.status === 'ready' || schema.artifact.status === 'stale')) {
+        statsBySchema.value = {
+          ...statsBySchema.value,
+          [schema._id]: {
+            node_count: schema.artifact.node_count,
+            nodes: schema.artifact.node_count,
+            edge_count: schema.artifact.edge_count,
+            edges: schema.artifact.edge_count,
+            density: schema.artifact.density,
+          },
         }
       }
     }
-    nodes.value = allNodes
-    loadedNodeIds.value = [...loadedSet]
-
-    // Fetch all edges in one shot
-    edges.value = await fetchAllEdges(schema._id)
+    if (!selectedSchema.value && list.length > 0) selectedSchema.value = list[0]
   } catch (e) { setError(e) }
-  finally { graphLoading.value = false }
-}
-
-watch(selectedSchema, (schema) => { loadGraph(schema) })
-
-async function refreshGraph() {
-  await loadGraph(selectedSchema.value)
-}
-
-async function loadMoreNodes() {
-  // All nodes and edges are loaded on initial schema selection.
-  // This function is kept as a no-op to avoid breaking any callers.
-}
-
-async function handleRebuild() {
-  if (!selectedSchema.value) return
-  rebuilding.value = true
-  try {
-    await rebuildSchema(selectedSchema.value._id)
-    // Re-load after a short delay to allow the rebuild to kick off
-    setTimeout(() => {
-      if (!selectedSchema.value) { rebuilding.value = false; return }
-      fetchStats(selectedSchema.value._id)
-        .then(stats => {
-          selectedStats.value = stats
-          if (selectedSchema.value)
-            statsBySchema.value = { ...statsBySchema.value, [selectedSchema.value._id]: stats }
-        })
-        .catch(e => setError(e))
-        .finally(() => { rebuilding.value = false })
-    }, 2000)
-  } catch (e) {
-    setError(e)
-    rebuilding.value = false
-  }
 }
 
 function handleNodeClick(node: GraphNode) {
@@ -534,22 +893,6 @@ function onTableRowSelect(node: GraphNode) {
 watch(selectedNode, (node) => {
   canvasRef.value?.focusNode(node ? node._id : null)
 })
-
-async function handleExpand(node: GraphNode) {
-  if (!selectedSchema.value) return
-  graphLoading.value = true
-  try {
-    const data = await expandNode(selectedSchema.value._id, node._id, loadedNodeIds.value)
-    const newNodes = data.nodes.filter(n => !loadedNodeIds.value.includes(n._id))
-    // Deduplicate incoming edges against what's already in the graph
-    const existingEdgeIds = new Set(edges.value.map(e => e._id))
-    const newEdges = data.edges.filter(e => !existingEdgeIds.has(e._id))
-    nodes.value = [...nodes.value, ...newNodes]
-    edges.value = [...edges.value, ...newEdges]
-    loadedNodeIds.value = [...loadedNodeIds.value, ...newNodes.map(n => n._id)]
-  } catch (e) { setError(e) }
-  finally { graphLoading.value = false }
-}
 
 function toggleType(type: string) {
   const next = new Set(hiddenTypes.value)
@@ -571,9 +914,9 @@ async function confirmReset() {
   try {
     const result = await resetKnowledgeBase()
     alert(`Reset complete. Deleted: ${JSON.stringify(result.deleted)}`)
-    nodes.value = []
-    edges.value = []
+    graphBundle.value = null
     selectedNode.value = null
+    terminateWorker()
     await loadSchemas()
   } catch (e) { setError(e) }
   finally { resetting.value = false }
@@ -873,6 +1216,70 @@ async function runKgLink(overwrite: boolean) {
   try { await linkDocuments(1000, overwrite); await loadKgStats() } catch (e) { setError(e) }
 }
 
+// ---- Suggestions tab --------------------------------------------------------
+
+const docSuggestions  = ref<DocumentSuggestion[]>([])
+const factSuggestions = ref<FactSuggestion[]>([])
+const sfSuggestions   = ref<StylizedFactSuggestion[]>([])
+const suggLoading     = ref(false)
+const pendingDocIds   = ref<Set<string>>(new Set())
+const pendingFactIds  = ref<Set<string>>(new Set())
+const pendingSfIds    = ref<Set<string>>(new Set())
+
+async function loadSuggestions() {
+  suggLoading.value = true
+  try {
+    const [docs, facts, sfs] = await Promise.all([
+      fetchDocumentSuggestions('suggestion'),
+      fetchFactSuggestions('suggestion'),
+      fetchStylizedFactSuggestions('suggestion'),
+    ])
+    docSuggestions.value  = docs
+    factSuggestions.value = facts
+    sfSuggestions.value   = sfs
+  } catch (e) { setError(e) }
+  finally { suggLoading.value = false }
+}
+
+async function handleDocAction(docId: string, action: 'approve' | 'reject') {
+  pendingDocIds.value = new Set([...pendingDocIds.value, docId])
+  try {
+    await approveDocument(docId, action)
+    docSuggestions.value = docSuggestions.value.filter(d => d._id !== docId)
+  } catch (e) { setError(e) }
+  finally {
+    const next = new Set(pendingDocIds.value)
+    next.delete(docId)
+    pendingDocIds.value = next
+  }
+}
+
+async function handleFactAction(factId: string, status: 'published' | 'rejected') {
+  pendingFactIds.value = new Set([...pendingFactIds.value, factId])
+  try {
+    await reviewFact(factId, status)
+    factSuggestions.value = factSuggestions.value.filter(f => f._id !== factId)
+  } catch (e) { setError(e) }
+  finally {
+    const next = new Set(pendingFactIds.value)
+    next.delete(factId)
+    pendingFactIds.value = next
+  }
+}
+
+async function handleSfAction(sfId: string, status: 'published' | 'rejected') {
+  pendingSfIds.value = new Set([...pendingSfIds.value, sfId])
+  try {
+    await reviewStylizedFact(sfId, status)
+    sfSuggestions.value = sfSuggestions.value.filter(s => s._id !== sfId)
+  } catch (e) { setError(e) }
+  finally {
+    const next = new Set(pendingSfIds.value)
+    next.delete(sfId)
+    pendingSfIds.value = next
+  }
+}
+
 // ---- Helpers ----------------------------------------------------------------
 
 function fmtNum(n: number): string {
@@ -898,9 +1305,10 @@ watch(activeTab, async (tab) => {
   if (tab === 'database' && !collections.value.length) await loadCollections()
   if (tab === 'ingestion') await loadBatches()
   if (tab === 'kg' && !kgStats.value) await loadKgStats()
+  if (tab === 'suggestions') await loadSuggestions()
 })
 
-onUnmounted(() => stopBatchPolling())
+onUnmounted(() => { stopBatchPolling(); terminateWorker() })
 </script>
 
 <style scoped>
@@ -1014,6 +1422,12 @@ onUnmounted(() => stopBatchPolling())
   position: relative;
 }
 
+.graph-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
 .graph-empty {
   flex: 1;
   display: flex;
@@ -1026,12 +1440,78 @@ onUnmounted(() => stopBatchPolling())
 .graph-status-bar {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
   padding: 0.3rem 0.75rem;
   background: #1e293b;
   border-top: 1px solid #334155;
   font-size: 0.7rem;
   color: #64748b;
+  flex-shrink: 0;
+}
+
+.graph-loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+}
+
+.graph-loading-card {
+  width: min(360px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.94);
+  box-shadow: 0 20px 40px rgba(2, 6, 23, 0.45);
+}
+
+.graph-loading-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.graph-loading-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.graph-progress-bar {
+  height: 8px;
+}
+
+.graph-inline-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  max-width: 360px;
+}
+
+.graph-inline-label {
+  min-width: 0;
+  font-size: 0.68rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.graph-inline-progress-bar {
+  width: 140px;
   flex-shrink: 0;
 }
 
@@ -1068,6 +1548,17 @@ onUnmounted(() => stopBatchPolling())
 .schema-tag {
   font-weight: 600;
   color: #60a5fa;
+}
+
+.overview-badge {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fb923c;
+  border: 1px solid #fb923c44;
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
 }
 
 .sm-btn {
@@ -1442,7 +1933,18 @@ onUnmounted(() => stopBatchPolling())
 .batch-doc-count { font-size: 0.62rem; color: #475569; white-space: nowrap; flex-shrink: 0; margin-left: 0.2rem; }
 .progress-bar { height: 6px; background: #1e293b; border-radius: 3px; width: 100%; flex: 1; }
 .progress-fill { height: 100%; background: #3b82f6; border-radius: 3px; transition: width 0.3s; }
+.progress-bar--indeterminate { position: relative; overflow: hidden; }
+.progress-fill--indeterminate {
+  width: 38%;
+  transition: none;
+  animation: graph-progress-indeterminate 1.2s ease-in-out infinite;
+}
 .progress-label { font-size: 0.65rem; color: #64748b; white-space: nowrap; flex-shrink: 0; }
+
+@keyframes graph-progress-indeterminate {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(320%); }
+}
 
 .empty-state { padding: 2rem; text-align: center; color: #475569; font-size: 0.85rem; }
 
@@ -1504,6 +2006,59 @@ onUnmounted(() => stopBatchPolling())
 .stat-value { font-size: 1.4rem; font-weight: 700; color: #e2e8f0; }
 
 .kg-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+/* ---- Suggestions tab ------------------------------------------------------- */
+.suggestions-tab { overflow-y: auto; }
+
+.suggestions-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sugg-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sugg-count {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #64748b;
+  margin-left: 0.4rem;
+}
+
+.sugg-table { table-layout: auto; }
+.sugg-table th:last-child { width: 130px; }
+
+.sugg-title {
+  font-size: 0.8rem;
+  color: #e2e8f0;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sugg-statement {
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  max-width: 400px;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.tag-chip {
+  display: inline-block;
+  background: #1e3a5f;
+  color: #93c5fd;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  margin-right: 2px;
+  white-space: nowrap;
+}
 
 /* ---- Utilities ------------------------------------------------------------- */
 .mono { font-family: monospace; }

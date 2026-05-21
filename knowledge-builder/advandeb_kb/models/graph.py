@@ -371,6 +371,95 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
         ],
     },
     {
+        "name": "chatbot",
+        "description": (
+            "Chat session network — shows per-user conversations and the knowledge-base "
+            "entities (documents, facts, stylized facts, taxa) they referenced."
+        ),
+        "is_builtin": True,
+        "node_types": [
+            {
+                "name": "user",
+                "source_collection": "chat_sessions",
+                "label_field": "user_id",
+                "properties": ["user_id"],
+                "description": "A user who has had at least one chat session.",
+            },
+            {
+                "name": "chat_session",
+                "source_collection": "chat_sessions",
+                "label_field": "title",
+                "properties": ["user_id", "created_at"],
+                "description": "A single chat session (conversation thread).",
+            },
+            {
+                "name": "document",
+                "source_collection": "documents",
+                "label_field": "title",
+                "properties": ["doi", "year", "authors", "journal"],
+                "description": "A document cited in at least one chat message.",
+            },
+            {
+                "name": "fact",
+                "source_collection": "facts",
+                "label_field": "content",
+                "properties": ["confidence", "status"],
+                "description": "A fact extracted from a cited document.",
+            },
+            {
+                "name": "stylized_fact",
+                "source_collection": "stylized_facts",
+                "label_field": "statement",
+                "properties": ["category", "status"],
+                "description": "A stylized fact linked to a cited document via facts.",
+            },
+            {
+                "name": "taxon",
+                "source_collection": "taxonomy_nodes",
+                "label_field": "name",
+                "properties": ["rank", "tax_id"],
+                "description": "A taxon studied by a cited document.",
+            },
+        ],
+        "edge_types": [
+            {
+                "name": "has_session",
+                "source_node_type": "user",
+                "target_node_type": "chat_session",
+                "label": "has session",
+                "description": "User owns this chat session.",
+            },
+            {
+                "name": "references_document",
+                "source_node_type": "chat_session",
+                "target_node_type": "document",
+                "label": "references",
+                "description": "Chat session cited this document in a message.",
+            },
+            {
+                "name": "references_fact",
+                "source_node_type": "chat_session",
+                "target_node_type": "fact",
+                "label": "references fact",
+                "description": "Chat session indirectly references this fact via a cited document.",
+            },
+            {
+                "name": "references_stylized_fact",
+                "source_node_type": "chat_session",
+                "target_node_type": "stylized_fact",
+                "label": "references SF",
+                "description": "Chat session indirectly references this stylized fact via facts.",
+            },
+            {
+                "name": "references_taxon",
+                "source_node_type": "chat_session",
+                "target_node_type": "taxon",
+                "label": "references taxon",
+                "description": "Chat session indirectly references this taxon via a cited document.",
+            },
+        ],
+    },
+    {
         "name": "physiological_process",
         "description": (
             "Process relationships between stylized facts and the species that exhibit them."

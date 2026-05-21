@@ -29,6 +29,18 @@ class Document(BaseModel):
     content: Optional[str] = None  # full extracted text
     references: List[str] = []     # DOI strings of documents cited by this document
 
+    # Bibliographic detail
+    keywords: List[str] = []
+    volume: Optional[str] = None
+    issue: Optional[str] = None
+    pages: Optional[str] = None
+
+    # External identifiers and metrics (populated by OpenAlex enrichment)
+    openalex_id: Optional[str] = None   # bare Work ID, e.g. "W1972661416"
+    pmid: Optional[str] = None
+    cited_by_count: Optional[int] = None
+    is_retracted: bool = False
+
     # Where the document came from
     source_type: Literal["pdf_local", "pdf_upload", "web", "text", "manual"] = "manual"
     source_path: Optional[str] = None  # relative path (batch), filename (upload), or URL (web)

@@ -17,7 +17,15 @@ from __future__ import annotations
 import asyncio
 import logging
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 from typing import Optional
+
+# Load .env so ARANGO_PASSWORD etc. are available when running under systemd
+try:
+    from dotenv import load_dotenv as _load_dotenv
+    _load_dotenv(Path(__file__).resolve().parents[4] / "app" / "backend" / ".env")
+except Exception:
+    pass
 
 from advandeb_kb.agents.base_agent import BaseAgent
 from advandeb_kb.database.arango_client import ArangoDatabase

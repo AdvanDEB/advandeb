@@ -40,10 +40,17 @@ class Settings(BaseSettings):
         """True when all three Google OAuth credentials are configured."""
         return bool(self.GOOGLE_CLIENT_ID and self.GOOGLE_CLIENT_SECRET and self.GOOGLE_REDIRECT_URI)
     
-    # Database
+    # MongoDB — app layer (users, auth, chat, user submissions)
     MONGODB_URI: str
     MONGODB_DB_NAME: str = "advandeb"
+    # Transitional: KB_DB_NAME used during MongoDB→ArangoDB migration. Remove after migration.
     KB_DB_NAME: str = "advandeb_knowledge_builder_kb"
+
+    # ArangoDB — KB primary store
+    ARANGO_URL: str = "http://localhost:8529"
+    ARANGO_DB_NAME: str = "advandeb_kb"
+    ARANGO_USERNAME: str = "root"
+    ARANGO_PASSWORD: str = ""
     
     # MCP Server
     MCP_SERVER_URL: str = "http://localhost:3000"
@@ -57,6 +64,10 @@ class Settings(BaseSettings):
     
     # KB ingestion
     PAPERS_ROOT: str = "/home/adeb/DEB_library"
+
+    # Graph artifacts
+    GRAPH_ARTIFACT_DIR: str = "data/graph_artifacts"
+    GRAPH_ARTIFACT_LAYOUT_NAME: str = "schema_default_v1"
 
     # MongoDB connection pool
     MONGO_MAX_POOL_SIZE: int = 10

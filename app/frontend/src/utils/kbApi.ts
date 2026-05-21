@@ -2,12 +2,16 @@
  * Typed helpers for the Knowledge Builder API (/api/kb/*)
  */
 import api from './api'
+import type { GraphArtifact, GraphArtifactMeta } from '@/types/graphArtifact'
 
 export interface GraphSchema {
   _id: string
   name: string
+  description?: string
+  is_builtin?: boolean
   node_types?: unknown[]
   edge_types?: unknown[]
+  artifact?: GraphArtifactMeta
 }
 
 export interface GraphNode {
@@ -36,6 +40,16 @@ export interface GraphEdge {
 export interface GraphData {
   nodes: GraphNode[]
   edges: GraphEdge[]
+}
+
+export interface GraphSnapshotView extends GraphData {
+  schema: string
+  mode: 'root' | 'expanded_cluster' | string
+  expanded_cluster_id: string | null
+  snapshot_version: number
+  built_at?: string
+  stats: GraphStats & { cluster_count?: number }
+  type_counts: TypeCounts
 }
 
 export interface GraphStats {
@@ -101,11 +115,46 @@ export async function fetchSchemas(): Promise<GraphSchema[]> {
   return data
 }
 
+export async function fetchArtifactStatus(schemaId: string): Promise<GraphArtifactMeta> {
+  const { data } = await api.get(`/kb/viz/schema/${schemaId}/status`)
+  return data
+}
+
+export async function fetchGraphArtifact(schemaId: string): Promise<GraphArtifact> {
+  const { data } = await api.get(`/kb/viz/schema/${schemaId}/artifact`)
+  return data
+}
+
 // ---- Graph data -------------------------------------------------------------
 
 export async function fetchOverview(schemaId: string, limit = 200): Promise<GraphData> {
   const { data } = await api.get(`/kb/viz/schema/${schemaId}/overview`, {
     params: { limit },
+  })
+  return data
+}
+
+export async function fetchGraphWithLayout(
+  schemaId: string,
+  limit = 50_000,
+  layout = 'force',
+): Promise<GraphData> {
+  const { data } = await api.get(`/kb/viz/schema/${schemaId}`, {
+    params: { limit, layout },
+  })
+  return data
+}
+
+export async function fetchSnapshotView(
+  schemaId: string,
+  expandCluster?: string | null,
+  rebuild = false,
+): Promise<GraphSnapshotView> {
+  const { data } = await api.get(`/kb/viz/schema/${schemaId}/snapshot`, {
+    params: {
+      expand_cluster: expandCluster ?? undefined,
+      rebuild: rebuild || undefined,
+    },
   })
   return data
 }
@@ -320,5 +369,86 @@ export async function linkDocuments(limit = 1000, overwrite = false): Promise<un
 
 export async function fetchKgStats(): Promise<KgStats> {
   const { data } = await api.get('/kb/kg/stats')
+  return data
+}
+
+// ---- Suggestions (documents & facts) ----------------------------------------
+
+export interface DocumentSuggestion {
+  _id: string
+  title: string
+  source_type: string
+  status: string
+  uploader_id?: string
+  extracted_facts_count?: number
+  metadata?: Record<string, unknown>
+  created_at?: string
+  updated_at?: string
+}
+
+export interface FactSuggestion {
+  _id: string
+  statement: string
+  status: string
+  tags?: string[]
+  confidence?: number | null
+  source_document_id?: string | null
+  creator_id?: string
+  review_comment?: string | null
+  created_at?: string
+  updated_at?: string
+}
+
+export interface StylizedFactSuggestion {
+  _id: string
+  summary: string
+  status: string
+  tags?: string[]
+  supporting_fact_ids?: string[]
+  creator_id?: string
+  review_comment?: string | null
+  created_at?: string
+  updated_at?: string
+}
+
+export async function fetchDocumentSuggestions(status = 'suggestion', limit = 100): Promise<DocumentSuggestion[]> {
+  const { data } = await api.get('/documents', { params: { status, limit } })
+  return data
+}
+
+export async function approveDocument(
+  documentId: string,
+  action: 'approve' | 'reject',
+  comment?: string,
+): Promise<{ updated: boolean; status: string; batch_id?: string }> {
+  const { data } = await api.patch(`/documents/${documentId}/approve`, { action, comment })
+  return data
+}
+
+export async function fetchFactSuggestions(statusFilter = 'suggestion', limit = 100): Promise<FactSuggestion[]> {
+  const { data } = await api.get('/facts', { params: { status_filter: statusFilter, limit } })
+  return data
+}
+
+export async function reviewFact(
+  factId: string,
+  status: 'published' | 'rejected' | 'pending_review',
+  reviewComment?: string,
+): Promise<{ updated: boolean; status: string }> {
+  const { data } = await api.patch(`/facts/${factId}/review`, { status, review_comment: reviewComment })
+  return data
+}
+
+export async function fetchStylizedFactSuggestions(statusFilter = 'suggestion', limit = 100): Promise<StylizedFactSuggestion[]> {
+  const { data } = await api.get('/facts/stylized/', { params: { status_filter: statusFilter, limit } })
+  return data
+}
+
+export async function reviewStylizedFact(
+  sfId: string,
+  status: 'published' | 'rejected',
+  reviewComment?: string,
+): Promise<{ updated: boolean; status: string }> {
+  const { data } = await api.patch(`/facts/stylized/${sfId}/review`, { status, review_comment: reviewComment })
   return data
 }

@@ -2,6 +2,8 @@
 Main FastAPI application entry point.
 """
 import os
+import logging
+import logging.handlers
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -11,8 +13,29 @@ from pathlib import Path
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 from app.core.config import settings
-from app.core.database import connect_to_mongo, close_mongo_connection, get_database
-from app.api.routes import auth, users, documents, facts, chat, scenarios, models, ws
+
+# ── File logging ────────────────────────────────────────────────────────────
+def _configure_logging() -> None:
+    """Wire up a rotating file handler using LOG_LEVEL / LOG_FILE from settings."""
+    log_level = getattr(logging, settings.LOG_LEVEL.upper(), logging.INFO)
+    log_path = settings.LOG_FILE  # relative to CWD (WorkingDirectory in systemd unit)
+    os.makedirs(os.path.dirname(log_path) or ".", exist_ok=True)
+    handler = logging.handlers.RotatingFileHandler(
+        log_path, maxBytes=10 * 1024 * 1024, backupCount=5, encoding="utf-8"
+    )
+    handler.setFormatter(logging.Formatter(
+        "%(asctime)s %(levelname)-8s %(name)s: %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S",
+    ))
+    root = logging.getLogger()
+    root.setLevel(log_level)
+    root.addHandler(handler)
+
+_configure_logging()
+# ────────────────────────────────────────────────────────────────────────────
+
+from app.core.database import connect_to_mongo, close_mongo_connection, get_database, get_kb_database, ensure_app_indexes
+from app.api.routes import auth, users, documents, facts, chat, scenarios, models, ws, graph
 from app.api.routes.kb import agents as kb_agents
 from app.api.routes.kb import visualization as kb_viz
 from app.api.routes.kb import visualization_stream as kb_viz_stream
@@ -20,8 +43,8 @@ from app.api.routes.kb import ingestion as kb_ingestion
 from app.api.routes.kb import database as kb_db
 from app.api.routes.kb import filesystem as kb_fs
 from app.api.routes.kb import kg_builder as kb_kg
+from app.api.routes.kb import documents as kb_documents
 from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
-from advandeb_kb.database.ensure_indexes import ensure_kb_indexes
 from app.kb.watchdog import batch_watchdog
 
 # Resolve the frontend dist directory.  Can be overridden via the
@@ -73,17 +96,15 @@ async def lifespan(app: FastAPI):
     """Application lifespan events."""
     await connect_to_mongo()
     db = get_database()
-    from app.core.database import get_kb_database
-    kb_db_instance = get_kb_database()
-    await ensure_kb_indexes(kb_db_instance)
+    await ensure_app_indexes(db)
 
     # Singleton background tasks — only start in the primary worker so that
     # multiple Uvicorn/Gunicorn workers don't each run their own independent
     # rebuild loop or watchdog scanner.
     primary = _is_primary_worker()
     if primary:
-        await graph_rebuild_queue.start(kb_db_instance)
-        await batch_watchdog.start(kb_db_instance)
+        await graph_rebuild_queue.start()
+        await batch_watchdog.start(get_kb_database())
     else:
         import logging
         logging.getLogger(__name__).info(
@@ -126,6 +147,7 @@ app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 app.include_router(scenarios.router, prefix="/api/scenarios", tags=["scenarios"])
 app.include_router(models.router, prefix="/api/models", tags=["models"])
 app.include_router(ws.router, prefix="/ws", tags=["websocket"])
+app.include_router(graph.router, prefix="/api/graph", tags=["graph"])
 app.include_router(kb_agents.router,      prefix="/api/kb/agents",    tags=["kb"])
 app.include_router(kb_viz.router,         prefix="/api/kb/viz",       tags=["kb"])
 app.include_router(kb_viz_stream.router,  prefix="/api/kb/viz",       tags=["kb"])
@@ -133,6 +155,7 @@ app.include_router(kb_ingestion.router,   prefix="/api/kb/ingestion", tags=["kb"
 app.include_router(kb_db.router,          prefix="/api/kb/db",        tags=["kb"])
 app.include_router(kb_fs.router,          prefix="/api/kb/fs",        tags=["kb"])
 app.include_router(kb_kg.router,          prefix="/api/kb/kg",        tags=["kb"])
+app.include_router(kb_documents.router,   prefix="/api/kb/documents", tags=["kb"])
 
 
 @app.get("/")

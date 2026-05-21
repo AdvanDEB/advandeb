@@ -10,6 +10,13 @@ from advandeb_kb.models.graph import (
     EdgeTypeDefinition,
     BUILTIN_SCHEMAS,
 )
+from advandeb_kb.models.chat import (
+    CitationRef,
+    ChatAnswerPayload,
+    make_citation_id,
+    parse_citation_id,
+    strip_collection_prefix,
+)
 
 __all__ = [
     "PyObjectId",
@@ -26,4 +33,9 @@ __all__ = [
     "NodeTypeDefinition",
     "EdgeTypeDefinition",
     "BUILTIN_SCHEMAS",
+    "CitationRef",
+    "ChatAnswerPayload",
+    "make_citation_id",
+    "parse_citation_id",
+    "strip_collection_prefix",
 ]

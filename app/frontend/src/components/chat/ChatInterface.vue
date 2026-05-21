@@ -72,24 +72,11 @@ import MessageList from './MessageList.vue'
 import MessageInput from './MessageInput.vue'
 import AgentActivity from './AgentActivity.vue'
 import ProvenanceTrail from '@/components/provenance/ProvenanceTrail.vue'
+import type { ChatMessage as Message, CitationRef as Citation } from '@/types/chat'
 import api from '@/utils/api'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
-
-interface Message {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-  citations?: Citation[]
-  timestamp?: string
-}
-
-interface Citation {
-  id: string
-  index: number
-  text: string
-}
 
 interface AgentStatus {
   name: string
@@ -121,6 +108,8 @@ const responding = ref(false)
 const rightPanel = ref<'activity' | 'provenance'>('activity')
 const activeProvenanceId = ref<string | null>(null)
 const suggestedQuestions = ref<string[]>([])
+// Map from server message_id → local message array index for reconnect catch-up
+const generatingMessageIds = ref<Set<string>>(new Set())
 let ws: WebSocket | null = null
 
 const currentSessionTitle = computed(() => {
@@ -129,10 +118,17 @@ const currentSessionTitle = computed(() => {
 })
 
 const AGENT_DISPLAY_NAMES: Record<string, string> = {
+  // Legacy names
   planner: 'Query Planner',
   retrieval: 'Retrieval Agent',
   synthesis: 'Synthesis Agent',
   validator: 'Validator',
+  // Actual names emitted by chatbot_agent ReAct loop
+  chatbot: 'Chatbot',
+  retrieval_agent: 'Retrieval Agent',
+  graph_explorer: 'Graph Explorer',
+  synthesis_agent: 'Synthesis Agent',
+  knowledge_agent: 'Knowledge Agent',
 }
 
 onMounted(async () => {
@@ -147,7 +143,9 @@ onUnmounted(() => {
 function connectWebSocket() {
   const sessionId = currentSessionId.value
   const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  const wsUrl = `${proto}//${window.location.host}/ws/chat/${sessionId}`
+  const token = authStore.accessToken
+  const tokenParam = token ? `?token=${encodeURIComponent(token)}` : ''
+  const wsUrl = `${proto}//${window.location.host}/ws/chat/${sessionId}${tokenParam}`
   ws = new WebSocket(wsUrl)
 
   ws.onmessage = (event) => {
@@ -155,7 +153,16 @@ function connectWebSocket() {
     handleServerEvent(data)
   }
 
-  ws.onclose = () => {
+  ws.onclose = (ev) => {
+    // 4401 = invalid/expired token — don't reconnect, surface the error
+    if (ev.code === 4401) {
+      messages.value.push({
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        content: 'Session expired. Please log in again.',
+      })
+      return
+    }
     // Attempt reconnect after 2s if session is active
     setTimeout(() => {
       if (currentSessionId.value) connectWebSocket()
@@ -171,14 +178,47 @@ function handleServerEvent(event: Record<string, unknown>) {
       action: (event.task as string) || (event.status as string) || '',
       timestamp: Date.now(),
     })
+  } else if (event.type === 'generating') {
+    // Reconnect catch-up: the server found an in-progress generation.
+    // Insert a spinner placeholder message so the user sees something while
+    // the ReAct loop finishes in the background.
+    const mid = event.message_id as string
+    if (mid && !generatingMessageIds.value.has(mid)) {
+      generatingMessageIds.value.add(mid)
+      messages.value.push({
+        id: mid,
+        role: 'assistant',
+        content: '',
+        generating: true,
+      })
+      responding.value = true
+    }
   } else if (event.type === 'message') {
+    const citations = mapCitations((event.citations as Record<string, unknown>[]) || [])
+
+    const incomingId = event.message_id as string | undefined
     const msg: Message = {
-      id: crypto.randomUUID(),
+      id: incomingId || crypto.randomUUID(),
       role: event.role as 'user' | 'assistant',
       content: event.content as string,
-      citations: (event.citations as Citation[]) || [],
+      citations,
+      generating: false,
+      evidence_mode: event.evidence_mode as Message['evidence_mode'],
     }
-    messages.value.push(msg)
+
+    // Replace a spinner placeholder if one exists for this message_id
+    if (incomingId && generatingMessageIds.value.has(incomingId)) {
+      const idx = messages.value.findIndex((m) => m.id === incomingId)
+      if (idx !== -1) {
+        messages.value[idx] = msg
+      } else {
+        messages.value.push(msg)
+      }
+      generatingMessageIds.value.delete(incomingId)
+    } else {
+      messages.value.push(msg)
+    }
+
     responding.value = false
 
     if (event.session_id && event.session_id !== currentSessionId.value) {
@@ -207,10 +247,14 @@ function updateAgentStatus(event: Record<string, unknown>) {
   const agentName = event.agent as string
   const existing = activeAgents.value.find((a) => a.name === agentName)
 
+  // Map 'thinking' → 'working' so the spinner and elapsed timer show
+  const rawStatus = (event.status as string) || 'working'
+  const mappedStatus = rawStatus === 'thinking' ? 'working' : rawStatus
+
   const updated: AgentStatus = {
     name: agentName,
     displayName: AGENT_DISPLAY_NAMES[agentName] || agentName,
-    status: (event.status as AgentStatus['status']) || 'working',
+    status: mappedStatus as AgentStatus['status'],
     currentTask: event.task as string | undefined,
     resultSummary: event.result as string | undefined,
     startedAt: existing?.startedAt ?? Date.now(),
@@ -243,7 +287,6 @@ async function handleSendMessage(text: string) {
       JSON.stringify({
         type: 'user_message',
         text,
-        user_id: authStore.user?.id ?? 'anonymous',
       })
     )
   }
@@ -264,12 +307,16 @@ async function loadSession(sessionId: string) {
 
   try {
     const { data } = await api.get(`/chat/sessions/${sessionId}`)
-    messages.value = (data.messages || []).map((m: Record<string, unknown>) => ({
-      id: m.id || crypto.randomUUID(),
-      role: m.role,
-      content: m.content,
-      timestamp: m.timestamp,
-    }))
+    messages.value = (data.messages || []).map((m: Record<string, unknown>) => {
+      return {
+        id: (m.id as string) || crypto.randomUUID(),
+        role: m.role as 'user' | 'assistant',
+        content: m.content as string,
+        citations: mapCitations((m.citations as Record<string, unknown>[]) || []),
+        timestamp: m.timestamp as string | undefined,
+        evidence_mode: m.evidence_mode as Message['evidence_mode'],
+      }
+    })
   } catch {
     messages.value = []
   }
@@ -303,9 +350,44 @@ function exportConversation() {
   URL.revokeObjectURL(url)
 }
 
-function openProvenance(citation: { id: string }) {
-  activeProvenanceId.value = citation.id
+function openProvenance(citation: Citation) {
+  activeProvenanceId.value = citation.citation_id
   rightPanel.value = 'provenance'
+}
+
+function mapCitations(rawCitations: Record<string, unknown>[]): Citation[] {
+  return rawCitations.map((citation) => mapCitation(citation))
+}
+
+function mapCitation(citation: Record<string, unknown>): Citation {
+  const legacyNumber = citation.number as number | undefined
+  const legacyMarker = typeof legacyNumber === 'number' ? String(legacyNumber) : ''
+  const citationId =
+    (citation.citation_id as string | undefined) ||
+    (citation.chunk_id as string | undefined) ||
+    (citation.document_id as string | undefined) ||
+    legacyMarker ||
+    crypto.randomUUID()
+
+  return {
+    citation_id: citationId,
+    marker: (citation.marker as string | undefined) || legacyMarker || '?',
+    source_type: (citation.source_type as Citation['source_type'] | undefined) || 'chunk',
+    document_id: citation.document_id as string | undefined,
+    chunk_id: citation.chunk_id as string | undefined,
+    fact_id: citation.fact_id as string | undefined,
+    stylized_fact_id: citation.stylized_fact_id as string | undefined,
+    evidence_text:
+      (citation.evidence_text as string | undefined) ||
+      (citation.text_snippet as string | undefined) ||
+      '',
+    title: citation.title as string | undefined,
+    authors: citation.authors as string[] | undefined,
+    year: citation.year as string | number | undefined,
+    journal: citation.journal as string | undefined,
+    doi: citation.doi as string | undefined,
+    url: citation.url as string | undefined,
+  }
 }
 
 function formatDate(iso?: string): string {

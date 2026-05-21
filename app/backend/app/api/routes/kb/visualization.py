@@ -1,65 +1,211 @@
-from fastapi import APIRouter, Body, Depends, HTTPException, Query
+"""Visualization API routes for graph snapshots and live graph helpers."""
+import asyncio
+import logging
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from bson import ObjectId
+from fastapi import APIRouter, Body, Depends, HTTPException, Query
+from fastapi.responses import FileResponse
 
-from app.core.database import get_kb_database as get_database
+from app.core.database import get_arango_db, get_database, get_kb_database
 from app.core.dependencies import require_curator
-from advandeb_kb.services.visualization_service import VisualizationService
-from advandeb_kb.services.graph_builder_service import GraphBuilderService
+from app.core.config import settings
+from advandeb_kb.services.graph_artifact_builder import GraphArtifactBuilder
+from advandeb_kb.services.graph_query_service import GraphQueryService
+from advandeb_kb.services.graph_artifact_store import GraphArtifactStore
+from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
+from advandeb_kb.services.graph_snapshot_service import GraphSnapshotService
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
+_executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="viz")
+
+VALID_SCHEMAS = {
+    "citation", "sf_support", "taxonomical",
+    "knowledge_graph", "physiological_process", "chatbot",
+}
+
+LIVE_FALLBACK_LIMIT = 50_000
 
 
-def _parse_schema_id(schema_id: str) -> ObjectId:
-    if not ObjectId.is_valid(schema_id):
-        raise HTTPException(status_code=400, detail=f"Invalid schema_id: {schema_id!r}")
-    return ObjectId(schema_id)
+def _get_service() -> GraphQueryService:
+    arango_db = get_arango_db()
+    app_db = get_database()
+    return GraphQueryService(arango_db, app_mongo_db=app_db)
+
+
+def _get_snapshot_service() -> GraphSnapshotService:
+    arango_db = get_arango_db()
+    app_db = get_database()
+    kb_db = get_kb_database()
+    return GraphSnapshotService(arango_db, kb_mongo_db=kb_db, app_mongo_db=app_db)
+
+
+def _get_artifact_builder() -> GraphArtifactBuilder:
+    arango_db = get_arango_db()
+    app_db = get_database()
+    kb_db = get_kb_database()
+    return GraphArtifactBuilder(arango_db, kb_mongo_db=kb_db, app_mongo_db=app_db)
+
+
+def _get_artifact_store() -> GraphArtifactStore:
+    return GraphArtifactStore(get_kb_database(), settings.GRAPH_ARTIFACT_DIR)
+
+
+def _validate_schema(schema_id: str) -> str:
+    """Schema IDs are now schema name strings — validate and return."""
+    if schema_id not in VALID_SCHEMAS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unknown schema: {schema_id!r}. Valid schemas: {sorted(VALID_SCHEMAS)}",
+        )
+    return schema_id
+
+
+def _compute_stats(nodes: List[Dict[str, Any]], edges: List[Dict[str, Any]]) -> Dict[str, Any]:
+    node_count = len(nodes)
+    edge_count = len(edges)
+    density = 0.0
+    if node_count > 1:
+        max_edges = node_count * (node_count - 1)
+        density = edge_count / max_edges if max_edges else 0.0
+    return {
+        "node_count": node_count,
+        "edge_count": edge_count,
+        "nodes": node_count,
+        "edges": edge_count,
+        "density": density,
+    }
+
+
+def _compute_type_counts(nodes: List[Dict[str, Any]], edges: List[Dict[str, Any]]) -> Dict[str, Any]:
+    node_types: Dict[str, int] = {}
+    edge_types: Dict[str, int] = {}
+    for node in nodes:
+        node_type = node.get("node_type", "unknown")
+        node_types[node_type] = node_types.get(node_type, 0) + 1
+    for edge in edges:
+        edge_type = edge.get("edge_type", "related")
+        edge_types[edge_type] = edge_types.get(edge_type, 0) + 1
+    return {"node_types": node_types, "edge_types": edge_types}
+
+
+def _snapshot_view_is_empty(view: Dict[str, Any]) -> bool:
+    stats = view.get("stats") or {}
+    node_count = int(stats.get("node_count") or stats.get("nodes") or 0)
+    return node_count > 0 and len(view.get("nodes") or []) == 0
+
+
+async def _build_live_snapshot_view(schema_name: str) -> Dict[str, Any]:
+    svc = _get_service()
+    data = await svc.get_graph_with_layout(schema_name, layout="force", limit=LIVE_FALLBACK_LIMIT)
+    nodes = data.get("nodes", [])
+    edges = data.get("edges", [])
+    return {
+        "schema": schema_name,
+        "mode": "live_fallback",
+        "expanded_cluster_id": None,
+        "snapshot_version": 0,
+        "built_at": None,
+        "nodes": nodes,
+        "edges": edges,
+        "stats": _compute_stats(nodes, edges),
+        "type_counts": _compute_type_counts(nodes, edges),
+    }
 
 
 @router.get("/schemas", summary="List all graph schemas")
 async def list_schemas(
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return all graph schema definitions stored in the database."""
-    db = get_database()
-    return await VisualizationService(db).list_schemas()
+    """Return all graph schema definitions."""
+    loop = asyncio.get_running_loop()
+    svc = _get_service()
+    schemas = await loop.run_in_executor(_executor, svc.list_schemas)
+    artifact_builder = _get_artifact_builder()
+    artifact_meta = await artifact_builder.list_public_meta_map()
+    for schema in schemas:
+        schema["artifact"] = artifact_meta.get(
+            schema["_id"],
+            _get_artifact_store().normalize_meta(schema["_id"], schema["name"], None),
+        )
+    return schemas
 
 
 @router.get("/schema/{schema_id}", summary="Get nodes and edges for a schema")
 async def get_schema_graph(
     schema_id: str,
     layout: Optional[str] = Query(default=None),
-    limit: int = Query(default=2000, ge=1, le=5000),
+    limit: Optional[int] = Query(default=None, ge=1),
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return materialized graph data for a schema.
-
-    If the schema has never been built (zero nodes), automatically triggers a
-    rebuild so the first open of a schema always shows data.
-    """
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-    service = VisualizationService(db)
-
-    # Auto-rebuild on first open: if the graph is empty, build it now.
-    node_count = await db.graph_nodes.count_documents({"schema_id": oid})
-    if node_count == 0:
-        schema = await db.graph_schemas.find_one({"_id": oid})
-        if schema:
-            builder = GraphBuilderService(db)
-            name = schema.get("name", "")
-            if name == "sf_support":
-                await builder.build_sf_graph(oid)
-            elif name == "citation":
-                await builder.build_citation_graph(oid)
-            # taxonomical / knowledge_graph / physiological_process require
-            # extra parameters, so skip auto-rebuild for those — user must
-            # click "↺ Rebuild" manually.
-
+    """Return graph data for a schema, queried live from ArangoDB."""
+    name = _validate_schema(schema_id)
+    svc = _get_service()
     if layout is not None:
-        return await service.get_graph_with_layout(oid, layout=layout, limit=limit)
-    return await service.get_graph_data(oid, limit=limit)
+        return await svc.get_graph_with_layout(name, layout=layout, limit=limit)
+    return await svc.get_graph_data(name, limit=limit)
+
+
+@router.get("/schema/{schema_id}/status", summary="Get artifact status for a schema")
+async def get_schema_artifact_status(
+    schema_id: str,
+    current_user: dict = Depends(require_curator),
+) -> Any:
+    name = _validate_schema(schema_id)
+    builder = _get_artifact_builder()
+    return await builder.get_public_meta(name, name)
+
+
+@router.get("/schema/{schema_id}/artifact", summary="Download the current full graph artifact")
+async def get_schema_artifact(
+    schema_id: str,
+    current_user: dict = Depends(require_curator),
+) -> Any:
+    name = _validate_schema(schema_id)
+    store = _get_artifact_store()
+    meta = await store.get_public_meta(name, name)
+    storage_path = meta.get("storage_path") or ""
+    if not storage_path:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No graph artifact is available for schema {name!r}. Trigger a rebuild first.",
+        )
+
+    file_path = store.resolve_storage_path(storage_path)
+    if not file_path.exists() or not file_path.is_file():
+        raise HTTPException(status_code=404, detail=f"Artifact file missing for schema {name!r}")
+
+    headers = {
+        "Content-Encoding": "gzip",
+        "ETag": meta.get("sha256", ""),
+        "X-Graph-Build-Id": meta.get("build_id", ""),
+    }
+    return FileResponse(
+        Path(file_path),
+        media_type="application/json",
+        filename=f"{name}-{meta.get('build_id', 'artifact')}.json.gz",
+        headers=headers,
+    )
+
+
+@router.get("/schema/{schema_id}/snapshot", summary="Get stable graph snapshot view")
+async def get_schema_snapshot(
+    schema_id: str,
+    expand_cluster: Optional[str] = Query(default=None),
+    rebuild: bool = Query(default=False),
+    current_user: dict = Depends(require_curator),
+) -> Any:
+    """Return the materialized root graph or one expanded cluster view."""
+    name = _validate_schema(schema_id)
+    svc = _get_snapshot_service()
+    view = await svc.get_view(name, expanded_cluster_id=expand_cluster, force_rebuild=rebuild)
+    if _snapshot_view_is_empty(view):
+        logger.warning("Empty snapshot view for schema=%s expand_cluster=%s; using live fallback", name, expand_cluster)
+        return await _build_live_snapshot_view(name)
+    return view
 
 
 @router.get("/schema/{schema_id}/stats", summary="Graph statistics for a schema")
@@ -68,58 +214,49 @@ async def get_schema_stats(
     current_user: dict = Depends(require_curator),
 ) -> Any:
     """Return node count, edge count, and density for the schema."""
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-    return await VisualizationService(db).get_stats(oid)
+    name = _validate_schema(schema_id)
+    artifact_builder = _get_artifact_builder()
+    meta = await artifact_builder.get_public_meta(name, name)
+    if meta.get("status") == "ready" and meta.get("node_count", 0) >= 0:
+        return {
+            "node_count": meta.get("node_count", 0),
+            "edge_count": meta.get("edge_count", 0),
+            "nodes": meta.get("node_count", 0),
+            "edges": meta.get("edge_count", 0),
+            "density": meta.get("density", 0.0),
+        }
+    svc = _get_service()
+    return await svc.get_stats(name)
 
 
-@router.post("/schema/{schema_id}/rebuild", summary="Rebuild a graph schema")
+@router.post("/schema/{schema_id}/rebuild", summary="Queue a full graph artifact rebuild")
 async def rebuild_schema(
     schema_id: str,
     body: Dict[str, Any] = Body(default={}),
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Rebuild nodes and edges for a schema from source collections."""
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-
-    schema = await db.graph_schemas.find_one({"_id": oid})
-    if not schema:
-        raise HTTPException(status_code=404, detail="Schema not found")
-
-    builder = GraphBuilderService(db, viz_service=VisualizationService(db))
-    name = schema.get("name", "")
-
-    if name == "sf_support":
-        return await builder.build_sf_graph(oid)
-    elif name == "taxonomical":
-        root_taxid = int(body.get("root_taxid", 40674))
-        max_nodes = int(body.get("max_nodes", 15000))
-        return await builder.build_taxonomy_graph(oid, root_taxid=root_taxid, max_nodes=max_nodes)
-    elif name == "citation":
-        return await builder.build_citation_graph(oid)
-    elif name == "knowledge_graph":
-        root_taxid = int(body.get("root_taxid", 40674))
-        max_nodes = int(body.get("max_nodes", 15000))
-        return await builder.build_knowledge_graph(oid, root_taxid=root_taxid, max_nodes=max_nodes)
-    elif name == "physiological_process":
-        root_taxid_raw = body.get("root_taxid")
-        root_taxid = int(root_taxid_raw) if root_taxid_raw is not None else None
-        return await builder.build_physiological_graph(oid, root_taxid=root_taxid)
-    else:
-        raise HTTPException(status_code=400, detail=f"No rebuild strategy for schema: {name!r}")
+    """Queue a background rebuild of the full graph artifact for a schema."""
+    name = _validate_schema(schema_id)
+    await graph_rebuild_queue.enqueue_rebuild(name)
+    return {
+        "schema": name,
+        "message": "Graph artifact rebuild queued.",
+        "status": "queued",
+    }
 
 
-@router.post("/seed", summary="Seed built-in graph schemas")
+@router.post("/seed", summary="No-op (schemas are static)")
 async def seed_schemas(
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Upsert all built-in schema definitions. Safe to call repeatedly."""
-    db = get_database()
-    builder = GraphBuilderService(db)
-    seed_result = await builder.seed_schemas()
-    schemas = await VisualizationService(db).list_schemas()
-    return {"seed": seed_result, "schemas": schemas}
+    """
+    Graph schemas are now statically defined — no database seeding needed.
+    Returns the list of available schemas.
+    """
+    loop = asyncio.get_running_loop()
+    svc = _get_service()
+    schemas = await loop.run_in_executor(_executor, svc.list_schemas)
+    return {"seed": {"seeded": 0, "skipped": len(schemas)}, "schemas": schemas}
 
 
 @router.get("/schema/{schema_id}/overview", summary="Get overview graph (top nodes by degree)")
@@ -128,15 +265,10 @@ async def get_schema_overview(
     limit: int = Query(default=200, ge=1, le=5000),
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return the top-N nodes by degree plus all edges between them.
-
-    Useful for a fast first-load of large schemas — returns hub nodes that
-    connect to the most other nodes, giving a representative overview without
-    loading the full graph.
-    """
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-    return await VisualizationService(db).get_overview(oid, limit=limit)
+    """Return the top-N nodes by degree plus all edges between them."""
+    name = _validate_schema(schema_id)
+    svc = _get_service()
+    return await svc.get_overview(name, limit=limit)
 
 
 @router.get("/schema/{schema_id}/edges", summary="Get all edges for a schema")
@@ -144,14 +276,10 @@ async def get_schema_edges(
     schema_id: str,
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return every edge for the schema.
-
-    Called after all nodes have been loaded (e.g. via 'Load all nodes') so
-    the full edge set can be rendered in a single request.
-    """
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-    return await VisualizationService(db).get_all_edges(oid)
+    """Return every edge for the schema."""
+    name = _validate_schema(schema_id)
+    svc = _get_service()
+    return await svc.get_all_edges(name)
 
 
 @router.post("/schema/{schema_id}/expand/{node_id}", summary="Expand a node (load 1-hop neighbors)")
@@ -161,18 +289,11 @@ async def expand_node(
     body: Dict[str, Any] = Body(default={}),
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return 1-hop neighbors of `node_id` not already in `loaded_node_ids`.
-
-    Request body:
-        { "loaded_node_ids": ["id1", "id2", ...] }
-
-    Response includes the new neighbor nodes and all edges connecting them to
-    `node_id` or to any already-loaded node.
-    """
-    oid = _parse_schema_id(schema_id)
+    """Return 1-hop neighbors of node_id not already in loaded_node_ids."""
+    name = _validate_schema(schema_id)
     loaded_node_ids: List[str] = body.get("loaded_node_ids", [])
-    db = get_database()
-    return await VisualizationService(db).expand_node(oid, node_id=node_id, loaded_node_ids=loaded_node_ids)
+    svc = _get_service()
+    return await svc.expand_node(name, node_id=node_id, loaded_node_ids=loaded_node_ids)
 
 
 @router.post("/schema/{schema_id}/type/{node_type}", summary="Load all nodes of a given type")
@@ -182,38 +303,24 @@ async def get_type_nodes(
     body: Dict[str, Any] = Body(default={}),
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return all nodes of `node_type` not already in `loaded_node_ids`.
-
-    Request body:
-        { "loaded_node_ids": ["id1", "id2", ...] }
-
-    Response includes the new nodes and all edges connecting them to any
-    already-loaded node.
-    """
-    oid = _parse_schema_id(schema_id)
+    """Return all nodes of node_type not already in loaded_node_ids."""
+    name = _validate_schema(schema_id)
     loaded_node_ids: List[str] = body.get("loaded_node_ids", [])
-    db = get_database()
-    return await VisualizationService(db).get_type_nodes(oid, node_type=node_type, loaded_node_ids=loaded_node_ids)
+    svc = _get_service()
+    return await svc.get_type_nodes(name, node_type=node_type, loaded_node_ids=loaded_node_ids)
 
 
-@router.post("/schema/{schema_id}/layout", summary="Recompute and persist layout for a schema")
+@router.post("/schema/{schema_id}/layout", summary="No-op (layout is on-demand)")
 async def recompute_layout(
     schema_id: str,
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Recompute and persist layout for an existing schema graph.
-
-    Useful for adjusting layout parameters without running a full rebuild.
     """
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-    schema_doc = await db.graph_schemas.find_one({"_id": oid})
-    if not schema_doc:
-        raise HTTPException(status_code=404, detail="Schema not found")
-    schema_name = schema_doc.get("name", "")
-    svc = VisualizationService(db)
-    result = await svc.compute_and_store_layout(oid, schema_name)
-    return result
+    Layout is now computed on-demand per request — no persistent storage.
+    Use GET /schema/{id}?layout=force to get data with layout applied.
+    """
+    name = _validate_schema(schema_id)
+    return {"schema": name, "message": "Layout is computed on-demand. Use ?layout=force on the graph endpoint."}
 
 
 @router.get(
@@ -227,15 +334,11 @@ async def get_type_nodes_paged(
     page_size: int = Query(default=500, ge=1, le=2000),
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return a page of nodes of ``node_type``, with pagination metadata.
-
-    Replaces the old ``POST /schema/{id}/type/{type}`` for new frontend code.
-    Edges are not included — load them on demand via ``expand_node``.
-    """
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-    return await VisualizationService(db).get_type_nodes_paged(
-        oid, node_type=node_type, page=page, page_size=page_size
+    """Return a page of nodes of node_type, with pagination metadata."""
+    name = _validate_schema(schema_id)
+    svc = _get_service()
+    return await svc.get_type_nodes_paged(
+        name, node_type=node_type, page=page, page_size=page_size
     )
 
 
@@ -247,11 +350,12 @@ async def get_type_counts(
     schema_id: str,
     current_user: dict = Depends(require_curator),
 ) -> Any:
-    """Return ``{node_type: count}`` and ``{edge_type: count}`` for the schema.
-
-    Lets the frontend render filter bars / expand buttons without loading any
-    actual node documents.
-    """
-    oid = _parse_schema_id(schema_id)
-    db = get_database()
-    return await VisualizationService(db).get_type_counts(oid)
+    """Return {node_type: count} and {edge_type: count} for the schema."""
+    name = _validate_schema(schema_id)
+    artifact_builder = _get_artifact_builder()
+    meta = await artifact_builder.get_public_meta(name, name)
+    type_counts = meta.get("type_counts") or {}
+    if type_counts.get("node_types") or type_counts.get("edge_types"):
+        return type_counts
+    svc = _get_service()
+    return await svc.get_type_counts(name)

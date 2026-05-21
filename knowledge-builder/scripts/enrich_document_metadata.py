@@ -135,7 +135,7 @@ async def crossref_lookup(
     params: Dict[str, Any] = {
         "query.title": title,
         "rows": 3,
-        "select": "DOI,title,author,published,reference",
+        "select": "DOI,title,author,published,published-print,published-online,container-title,abstract,reference",
     }
     if year:
         params["filter"] = f"from-pub-date:{year - 1},until-pub-date:{year + 1}"
@@ -204,6 +204,23 @@ def _extract_year(item: Dict[str, Any]) -> Optional[int]:
     return None
 
 
+def _extract_journal(item: Dict[str, Any]) -> Optional[str]:
+    """Extract journal/container title from CrossRef item."""
+    titles = item.get("container-title") or []
+    return titles[0].strip() if titles else None
+
+
+def _extract_abstract(item: Dict[str, Any]) -> Optional[str]:
+    """Extract and clean abstract from CrossRef item (strips JATS XML tags)."""
+    raw = item.get("abstract")
+    if not raw:
+        return None
+    import re as _re
+    cleaned = _re.sub(r"<[^>]+>", " ", raw)
+    cleaned = _re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned or None
+
+
 # ---------------------------------------------------------------------------
 # Per-document processing
 # ---------------------------------------------------------------------------
@@ -236,7 +253,8 @@ async def enrich_one(
     has_year = doc.get("year") is not None
     has_authors = bool(doc.get("authors"))
 
-    if not force and has_doi and has_year and has_authors:
+    has_abstract = bool(doc.get("abstract"))
+    if not force and has_doi and has_year and has_authors and has_abstract:
         return str(doc_id), "skipped"
 
     update: Dict[str, Any] = {}
@@ -274,9 +292,17 @@ async def enrich_one(
                 ref_dois = _extract_reference_dois(cr_item)
                 if ref_dois:
                     update["references"] = ref_dois
+                # Journal
+                journal = _extract_journal(cr_item)
+                if journal and not doc.get("journal"):
+                    update["journal"] = journal
+                # Abstract
+                abstract = _extract_abstract(cr_item)
+                if abstract and (not doc.get("abstract") or force):
+                    update["abstract"] = abstract
                 logger.debug(
-                    "  %s sim=%.2f doi=%s refs=%d",
-                    title_field[:50], sim, doi, len(ref_dois),
+                    "  %s sim=%.2f doi=%s refs=%d abstract=%s",
+                    title_field[:50], sim, doi, len(ref_dois), bool(abstract),
                 )
             else:
                 logger.debug(
@@ -329,6 +355,7 @@ async def run(
             {"doi": None},
             {"year": None},
             {"authors": {"$size": 0}},
+            {"abstract": None},
         ]
 
     total = await db.documents.count_documents(query)

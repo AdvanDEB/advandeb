@@ -15,20 +15,29 @@ from __future__ import annotations
 import json
 import logging
 import re
+from pathlib import Path
 from typing import Any, Optional
 
 import httpx
 
+# Load .env so settings are populated when running under systemd
+try:
+    from dotenv import load_dotenv as _load_dotenv
+    _load_dotenv(Path(__file__).resolve().parents[4] / "app" / "backend" / ".env")
+except Exception:
+    pass
+
 from advandeb_kb.agents.base_agent import BaseAgent
 from advandeb_kb.config.settings import settings
+from advandeb_kb.models.chat import CitationRef, make_citation_id, strip_collection_prefix
 from advandeb_kb.models.provenance import GraphPathStep, ProvenanceTrace
 
 logger = logging.getLogger(__name__)
 
 AGENT_PORT = 8083
 
-# Default model — override via OLLAMA_MODEL env var
-_OLLAMA_MODEL = settings.OLLAMA_MODEL
+# Default answer model — benchmark-gated via CHAT_ANSWER_MODEL.
+_OLLAMA_MODEL = settings.CHAT_ANSWER_MODEL
 
 
 class SynthesisAgent(BaseAgent):
@@ -152,6 +161,7 @@ class SynthesisAgent(BaseAgent):
         return {
             "answer": answer,
             "citations": citations,
+            "evidence_mode": "local",
             "provenance": provenance,
             "source_count": len(chunks),
         }
@@ -217,7 +227,7 @@ class SynthesisAgent(BaseAgent):
     ) -> list[dict]:
         """
         Parse [N] markers in answer_text and map to source chunks.
-        Returns list of citation dicts: {number, chunk_id, document_id, text_snippet}.
+        Returns canonical citation dicts.
         """
         cited_numbers = {int(m) for m in re.findall(r"\[(\d+)\]", answer_text)}
         citations = []
@@ -226,12 +236,19 @@ class SynthesisAgent(BaseAgent):
             if 0 <= idx < len(chunks):
                 chunk = chunks[idx]
                 meta = chunk.get("metadata", {})
-                citations.append({
-                    "number": num,
-                    "chunk_id": chunk.get("chunk_id", chunk.get("id", "")),
-                    "document_id": meta.get("document_id", ""),
-                    "text_snippet": chunk.get("text", "")[:200],
-                })
+                chunk_id = strip_collection_prefix(
+                    str(chunk.get("chunk_id") or chunk.get("id") or chunk.get("_key") or "")
+                )
+                citations.append(
+                    CitationRef(
+                        citation_id=make_citation_id("chunk", chunk_id),
+                        marker=str(num),
+                        source_type="chunk",
+                        document_id=meta.get("document_id") or chunk.get("document_id") or None,
+                        chunk_id=chunk_id or None,
+                        evidence_text=chunk.get("text", "")[:200],
+                    ).model_dump()
+                )
         return citations
 
     # ------------------------------------------------------------------
@@ -260,19 +277,40 @@ class SynthesisAgent(BaseAgent):
     # ------------------------------------------------------------------
 
     async def _ollama_generate(self, prompt: str, max_tokens: int = 2000) -> str:
+        """Call Ollama /api/generate with streaming so tokens are logged as they arrive.
+        No timeout — the connection stays alive until Ollama finishes generating.
+        """
         try:
-            async with httpx.AsyncClient(timeout=60.0) as client:
-                resp = await client.post(
+            tokens: list[str] = []
+            async with httpx.AsyncClient(timeout=None) as client:
+                async with client.stream(
+                    "POST",
                     f"{self._ollama_url}/api/generate",
                     json={
                         "model": _OLLAMA_MODEL,
                         "prompt": prompt,
-                        "stream": False,
-                        "options": {"num_predict": max_tokens},
+                        "stream": True,
+                        "options": {
+                            "num_predict": max_tokens,
+                            "num_ctx": settings.CHAT_ANSWER_NUM_CTX,
+                        },
                     },
-                )
-                resp.raise_for_status()
-                return resp.json().get("response", "").strip()
+                ) as resp:
+                    resp.raise_for_status()
+                    async for line in resp.aiter_lines():
+                        if not line:
+                            continue
+                        try:
+                            chunk = json.loads(line)
+                        except json.JSONDecodeError:
+                            continue
+                        token = chunk.get("response", "")
+                        if token:
+                            tokens.append(token)
+                            logger.debug("synthesis_agent token: %s", token)
+                        if chunk.get("done"):
+                            break
+            return "".join(tokens).strip()
         except Exception as exc:
             logger.error("Ollama generate failed: %s", exc)
             return f"[Generation failed: {exc}]"

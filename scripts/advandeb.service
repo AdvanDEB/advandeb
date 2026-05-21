@@ -1,6 +1,7 @@
 [Unit]
 Description=AdvanDEB Modeling Assistant (FastAPI + Vue SPA)
-After=network.target
+After=network.target advandeb-stack.service
+Requires=advandeb-stack.service
 
 [Service]
 Type=simple

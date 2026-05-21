@@ -1,190 +1,116 @@
+"""Graph artifact invalidation and rebuild queue.
+
+Callers mark schemas dirty whenever ingestion or curation mutates the KB.
+The background worker rebuilds each schema's full graph artifact out of band.
 """
-GraphRebuildQueue — debounced automatic graph rebuild service.
+from __future__ import annotations
 
-Usage
------
-Import the singleton and mark schemas as dirty from anywhere in the app:
-
-    from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
-    graph_rebuild_queue.mark_dirty("sf_support")
-    graph_rebuild_queue.mark_dirty("citation")
-    graph_rebuild_queue.mark_dirty("knowledge_graph")
-
-The background worker (started once at app startup) coalesces dirty flags
-and rebuilds the affected graph schema(s) once the dirty flag has been set
-for at least DEBOUNCE_SECONDS (default 30) without another mark_dirty call.
-
-This avoids hammering the graph builder during a batch ingestion run that
-processes hundreds of PDFs — the rebuild only fires when the pipeline goes
-quiet.
-
-Start / stop
-------------
-Call `await graph_rebuild_queue.start(db)` on FastAPI startup and
-`await graph_rebuild_queue.stop()` on shutdown.
-
-The `db` argument must be an AsyncIOMotorDatabase instance pointing to the
-advandeb operational database (DATABASE_NAME=advandeb).
-"""
 import asyncio
 import logging
-import time
-from typing import Any, Dict, Optional, Set
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
-# How many seconds of idle time (no new mark_dirty calls for that schema)
-# before a rebuild is triggered.
-DEBOUNCE_SECONDS: float = 30.0
-
-# Default root taxid used for knowledge_graph / taxonomical rebuilds.
-DEFAULT_ROOT_TAXID: int = 33208  # Animalia
-
-# Max nodes for the full taxonomical schema rebuild (Animalia subtree).
-# Set high to capture broad taxonomic coverage; the UI overview/expand pattern
-# handles navigation within the large graph.
-TAXONOMY_MAX_NODES: int = 100000
-
 
 class GraphRebuildQueue:
-    """Debounced background service that auto-rebuilds graph schemas."""
+    """Tracks graph schemas that need their full graph artifact rebuilt."""
 
     def __init__(self) -> None:
-        # schema_name → timestamp of the *last* mark_dirty call
-        self._dirty: Dict[str, float] = {}
-        # Lock is created lazily inside start() so it is always bound to the
-        # correct running event loop (avoids DeprecationWarning / errors when
-        # the singleton is created at import time outside a running loop, e.g.
-        # with Gunicorn pre-fork workers).
-        self._lock: Optional[asyncio.Lock] = None
-        self._task: Optional[asyncio.Task] = None
-        self._db: Any = None
-        self._running = False
-
-    # ------------------------------------------------------------------
-    # Public API — call from pipeline / service hooks
-    # ------------------------------------------------------------------
+        self._dirty: set[str] = set()
+        self._task: asyncio.Task | None = None
+        self._wake_event: asyncio.Event | None = None
+        self._stop_event: asyncio.Event | None = None
+        self._builder = None
 
     def mark_dirty(self, schema_name: str) -> None:
-        """Mark a schema as needing a rebuild.
+        """Mark a schema so the background worker rebuilds its graph artifact."""
+        self._dirty.add(schema_name)
+        if self._wake_event is not None:
+            self._wake_event.set()
+        logger.info("GraphRebuildQueue.mark_dirty(%r)", schema_name)
 
-        Thread-safe (only updates a plain dict + float; GIL protects us).
-        Can be called from sync or async code without awaiting.
-        """
-        self._dirty[schema_name] = time.monotonic()
-        logger.debug("GraphRebuildQueue: marked dirty → %s", schema_name)
+    def is_dirty(self, schema_name: str) -> bool:
+        return schema_name in self._dirty
 
-    # ------------------------------------------------------------------
-    # Lifecycle
-    # ------------------------------------------------------------------
+    def clear_dirty(self, schema_name: str) -> None:
+        self._dirty.discard(schema_name)
 
-    async def start(self, db: Any) -> None:
-        """Start the background worker.  Call once from FastAPI startup."""
-        if self._running:
-            logger.warning("GraphRebuildQueue: already running")
+    async def enqueue_rebuild(self, schema_name: str) -> None:
+        self.mark_dirty(schema_name)
+
+    async def get_builder(self):
+        if self._builder is not None:
+            return self._builder
+
+        from app.core.database import get_arango_db, get_database, get_kb_database
+        from advandeb_kb.services.graph_artifact_builder import GraphArtifactBuilder
+
+        self._builder = GraphArtifactBuilder(
+            get_arango_db(),
+            get_kb_database(),
+            get_database(),
+        )
+        await self._builder.ensure_indexes()
+        return self._builder
+
+    async def start(self, db: Any = None) -> None:
+        """Lifecycle hook kept for main.py compatibility."""
+        if self._task is not None and not self._task.done():
             return
-        self._db = db
-        self._running = True
-        # Create the lock here, inside a running event loop, so it is always
-        # bound to the correct loop regardless of when the singleton was constructed.
-        self._lock = asyncio.Lock()
-        self._task = asyncio.create_task(self._worker(), name="graph-rebuild-worker")
-        logger.info("GraphRebuildQueue: background worker started (debounce=%.0fs)", DEBOUNCE_SECONDS)
+        self._wake_event = asyncio.Event()
+        self._stop_event = asyncio.Event()
+        builder = await self.get_builder()
+
+        # Heal any artifacts that were left in 'building' state by a previous
+        # crash / SIGKILL — reset them to 'missing' so they get queued below.
+        try:
+            store = builder.store
+            await store.kb_db[store.META_COLLECTION].update_many(
+                {"status": "building"},
+                {"$set": {"status": "missing"}},
+            )
+            logger.info("GraphRebuildQueue: reset stuck 'building' artifacts to 'missing'")
+        except Exception:
+            logger.exception("GraphRebuildQueue: failed to reset stuck building artifacts")
+
+        meta_map = await builder.list_public_meta_map()
+        for schema in builder.query_service.list_schemas():
+            if meta_map.get(schema["_id"], {}).get("status") not in ("ready", "stale"):
+                self._dirty.add(schema["_id"])
+                logger.info("GraphRebuildQueue: queued missing artifact for %s", schema["_id"])
+        self._task = asyncio.create_task(self._run(), name="graph-artifact-rebuild-queue")
+        logger.info("GraphRebuildQueue: graph artifact rebuild queue active, %d schemas queued", len(self._dirty))
 
     async def stop(self) -> None:
-        """Stop the background worker.  Call from FastAPI shutdown."""
-        self._running = False
-        if self._task and not self._task.done():
-            self._task.cancel()
+        """Lifecycle hook."""
+        if self._stop_event is not None:
+            self._stop_event.set()
+        if self._wake_event is not None:
+            self._wake_event.set()
+        if self._task is not None:
             try:
                 await self._task
-            except asyncio.CancelledError:
-                pass
-        logger.info("GraphRebuildQueue: background worker stopped")
+            finally:
+                self._task = None
+        self._builder = None
 
-    # ------------------------------------------------------------------
-    # Worker loop
-    # ------------------------------------------------------------------
-
-    async def _worker(self) -> None:
-        while self._running:
-            await asyncio.sleep(5)  # poll every 5 seconds
-
-            now = time.monotonic()
-            lock = self._lock
-            if lock is None:
+    async def _run(self) -> None:
+        assert self._wake_event is not None
+        assert self._stop_event is not None
+        while not self._stop_event.is_set():
+            if not self._dirty:
+                await self._wake_event.wait()
+                self._wake_event.clear()
                 continue
-            async with lock:
-                due: Set[str] = {
-                    name
-                    for name, ts in list(self._dirty.items())
-                    if now - ts >= DEBOUNCE_SECONDS
-                }
-                for name in due:
-                    del self._dirty[name]
 
-            for schema_name in due:
-                await self._rebuild(schema_name)
-
-    # ------------------------------------------------------------------
-    # Rebuild dispatch
-    # ------------------------------------------------------------------
-
-    async def _rebuild(self, schema_name: str) -> None:
-        if self._db is None:
-            logger.error("GraphRebuildQueue: db not set, cannot rebuild %s", schema_name)
-            return
-
-        logger.info("GraphRebuildQueue: rebuilding schema '%s' …", schema_name)
-        try:
-            from advandeb_kb.services.graph_builder_service import GraphBuilderService
-            builder = GraphBuilderService(self._db)
-            await builder.seed_schemas()
-
-            schema = await builder.get_schema_by_name(schema_name)
-            if schema is None:
-                logger.warning("GraphRebuildQueue: schema '%s' not found in DB", schema_name)
-                return
-
-            schema_id = schema["_id"]
-
-            if schema_name == "sf_support":
-                result = await builder.build_sf_graph(schema_id)
-
-            elif schema_name == "citation":
-                result = await builder.build_citation_graph(schema_id)
-
-            elif schema_name == "knowledge_graph":
-                result = await builder.build_knowledge_graph(
-                    schema_id,
-                    root_taxid=DEFAULT_ROOT_TAXID,
-                    max_nodes=10000,  # generous cap; strategy fetches only referenced taxa + ancestors
-                )
-
-            elif schema_name == "taxonomical":
-                result = await builder.build_taxonomy_graph(
-                    schema_id,
-                    root_taxid=DEFAULT_ROOT_TAXID,
-                    max_nodes=TAXONOMY_MAX_NODES,
-                )
-
-            elif schema_name == "physiological_process":
-                result = await builder.build_physiological_graph(schema_id)
-
-            else:
-                logger.warning("GraphRebuildQueue: no rebuild strategy for '%s'", schema_name)
-                return
-
-            logger.info(
-                "GraphRebuildQueue: '%s' rebuilt — %s",
-                schema_name,
-                result,
-            )
-
-        except Exception:
-            logger.exception("GraphRebuildQueue: rebuild of '%s' failed", schema_name)
-            # Re-mark dirty so it retries after another debounce cycle
-            self.mark_dirty(schema_name)
+            schema_name = sorted(self._dirty)[0]
+            self._dirty.discard(schema_name)
+            try:
+                builder = await self.get_builder()
+                logger.info("GraphRebuildQueue: rebuilding artifact for %s", schema_name)
+                await builder.build_schema_artifact(schema_name)
+            except Exception:
+                logger.exception("GraphRebuildQueue: artifact rebuild failed for %s", schema_name)
 
 
 # Module-level singleton — import this everywhere

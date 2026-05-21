@@ -110,3 +110,44 @@ async def test_list_sessions_returns_sorted_list(chat_service):
     sessions = await svc.list_sessions("user-1")
     assert len(sessions) == 2
     assert sessions[0]["title"] == "A"
+
+
+@pytest.mark.asyncio
+async def test_get_session_preserves_evidence_mode_and_citations(chat_service):
+    svc, db = chat_service
+
+    now = datetime.utcnow()
+    db.chat_sessions.find_one = AsyncMock(return_value={
+        "_id": MagicMock(__str__=lambda s: "sess-1"),
+        "title": "Research",
+        "created_at": now,
+        "updated_at": now,
+    })
+
+    mock_cursor = MagicMock()
+
+    async def async_iter(self):
+        for item in [{
+            "_id": MagicMock(__str__=lambda s: "m1"),
+            "role": "assistant",
+            "content": "Answer",
+            "citations": [{
+                "citation_id": "chunk:c1",
+                "marker": "1",
+                "source_type": "chunk",
+                "evidence_text": "Evidence",
+            }],
+            "evidence_mode": "local",
+            "timestamp": now,
+        }]:
+            yield item
+
+    mock_cursor.sort = MagicMock(return_value=mock_cursor)
+    mock_cursor.__aiter__ = async_iter
+    db.chat_messages.find = MagicMock(return_value=mock_cursor)
+
+    session = await svc.get_session("507f1f77bcf86cd799439011", "user-1")
+
+    assert session is not None
+    assert session["messages"][0]["evidence_mode"] == "local"
+    assert session["messages"][0]["citations"][0]["citation_id"] == "chunk:c1"

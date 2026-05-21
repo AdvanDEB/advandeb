@@ -2,7 +2,7 @@
 Chat API routes.
 """
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
 from app.core.auth import get_current_user
@@ -18,6 +18,30 @@ class ChatMessage(BaseModel):
     content: str
 
 
+class CitationResponse(BaseModel):
+    """Canonical citation payload exposed to the frontend."""
+
+    citation_id: str
+    marker: str
+    source_type: str
+    document_id: Optional[str] = None
+    chunk_id: Optional[str] = None
+    fact_id: Optional[str] = None
+    stylized_fact_id: Optional[str] = None
+    evidence_text: str = ""
+    title: Optional[str] = None
+    authors: List[str] = Field(default_factory=list)
+    year: Optional[str | int] = None
+    journal: Optional[str] = None
+    doi: Optional[str] = None
+    url: Optional[str] = None
+
+
+class ChatMessageResponse(ChatMessage):
+    citations: List[CitationResponse] = Field(default_factory=list)
+    evidence_mode: Optional[str] = None
+
+
 class ChatRequest(BaseModel):
     """Chat request model."""
     messages: List[ChatMessage]
@@ -26,8 +50,9 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     """Chat response model."""
-    message: ChatMessage
+    message: ChatMessageResponse
     session_id: str
+    suggested_questions: List[str] = Field(default_factory=list)
 
 
 class RenameSessionRequest(BaseModel):

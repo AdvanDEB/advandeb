@@ -237,22 +237,37 @@ class QueryPlannerAgent(BaseAgent):
             f"Return ONLY valid JSON. Keep it to 2-3 steps."
         )
         try:
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                resp = await client.post(
+            tokens: list[str] = []
+            async with httpx.AsyncClient(timeout=None) as client:
+                async with client.stream(
+                    "POST",
                     f"{self._ollama_url}/api/generate",
                     json={
                         "model": _OLLAMA_MODEL,
                         "prompt": prompt,
-                        "stream": False,
+                        "stream": True,
                         "format": "json",
                     },
-                )
-                resp.raise_for_status()
-                raw = resp.json().get("response", "{}")
-                parsed = json.loads(raw)
-                steps = parsed.get("steps", [])
-                if steps and isinstance(steps, list):
-                    return steps
+                ) as resp:
+                    resp.raise_for_status()
+                    async for line in resp.aiter_lines():
+                        if not line:
+                            continue
+                        try:
+                            chunk = json.loads(line)
+                        except json.JSONDecodeError:
+                            continue
+                        token = chunk.get("response", "")
+                        if token:
+                            tokens.append(token)
+                            logger.debug("query_planner token: %s", token)
+                        if chunk.get("done"):
+                            break
+            raw = "".join(tokens)
+            parsed = json.loads(raw)
+            steps = parsed.get("steps", [])
+            if steps and isinstance(steps, list):
+                return steps
         except Exception as exc:
             logger.warning("LLM planning failed: %s — using template", exc)
         return None

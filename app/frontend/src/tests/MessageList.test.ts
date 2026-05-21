@@ -38,7 +38,12 @@ describe('MessageList', () => {
       id: '1',
       role: 'assistant' as const,
       content: 'Some answer',
-      citations: [{ id: 'c1', index: 1, text: 'Source A' }],
+      citations: [{
+        citation_id: 'chunk:c1',
+        marker: '1',
+        source_type: 'chunk' as const,
+        evidence_text: 'Source A',
+      }],
     }]
     const wrapper = mount(MessageList, { props: { messages } })
     expect(wrapper.find('.citation-badge').exists()).toBe(true)
@@ -50,12 +55,17 @@ describe('MessageList', () => {
       id: '1',
       role: 'assistant' as const,
       content: 'Answer',
-      citations: [{ id: 'cit-42', index: 1, text: 'Source' }],
+      citations: [{
+        citation_id: 'chunk:cit-42',
+        marker: '1',
+        source_type: 'chunk' as const,
+        evidence_text: 'Source',
+      }],
     }]
     const wrapper = mount(MessageList, { props: { messages } })
     await wrapper.find('.citation-badge').trigger('click')
     const emitted = wrapper.emitted('show-provenance')
     expect(emitted).toBeTruthy()
-    expect((emitted![0][0] as any).id).toBe('cit-42')
+    expect((emitted![0][0] as any).citation_id).toBe('chunk:cit-42')
   })
 })

@@ -14,7 +14,18 @@ Run as standalone process:
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 from typing import Optional
+
+# Load .env so settings are populated when running under systemd
+try:
+    from dotenv import load_dotenv as _load_dotenv
+    _load_dotenv(Path(__file__).resolve().parents[4] / "app" / "backend" / ".env")
+except Exception:
+    pass
+
+from motor.motor_asyncio import AsyncIOMotorClient
+from pymongo import MongoClient
 
 from advandeb_kb.agents.base_agent import BaseAgent
 from advandeb_kb.config.settings import settings
@@ -43,13 +54,14 @@ class RetrievalAgent(BaseAgent):
         self._embedding_svc: Optional[EmbeddingService] = None
         self._chroma_svc: Optional[ChromaDBService] = None
         self._retrieval_svc: Optional[HybridRetrievalService] = None
+        self._mongo_client: Optional[MongoClient] = None
 
     # ------------------------------------------------------------------
     # Lifecycle
     # ------------------------------------------------------------------
 
     async def initialize(self) -> None:
-        """Load embedding model and connect to ChromaDB."""
+        """Load embedding model and connect to ChromaDB and MongoDB."""
         import asyncio
         loop = asyncio.get_running_loop()
 
@@ -60,6 +72,10 @@ class RetrievalAgent(BaseAgent):
         self._chroma_svc = ChromaDBService()
         self._chroma_svc._ensure_connected()
 
+        # Connect to MongoDB for keyword search (sync pymongo — runs in thread pool)
+        self._mongo_client = MongoClient(settings.MONGODB_URL)
+        mongo_db = self._mongo_client[settings.DATABASE_NAME]
+
         cache = CacheService(
             redis_url=settings.REDIS_URL if settings.REDIS_URL else None,
         )
@@ -68,7 +84,7 @@ class RetrievalAgent(BaseAgent):
             embedding_svc=self._embedding_svc,
             chromadb_svc=self._chroma_svc,
             cache=cache,
-            # arango_db not required — keyword search falls back to no-op if absent
+            mongo_db=mongo_db,
         )
 
         logger.info(

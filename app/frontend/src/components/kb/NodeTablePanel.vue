@@ -144,8 +144,9 @@ const PROP_KEYS = ['doi', 'year', 'authors', 'journal', 'rank', 'tax_id', 'confi
 
 function formatProps(node: GraphNode): string {
   const parts: string[] = []
+  const props = node.properties ?? {}
   for (const k of PROP_KEYS) {
-    const v = node.properties[k]
+    const v = props[k]
     if (v === undefined || v === null || v === '') continue
     if (Array.isArray(v)) {
       if (v.length) parts.push(`${k}: ${(v as string[]).slice(0, 2).join(', ')}${v.length > 2 ? '…' : ''}`)
@@ -162,8 +163,9 @@ function formatProps(node: GraphNode): string {
 
 function formatPropsLong(node: GraphNode): string {
   const parts: string[] = []
+  const props = node.properties ?? {}
   for (const k of PROP_KEYS) {
-    const v = node.properties[k]
+    const v = props[k]
     if (v === undefined || v === null || v === '') continue
     if (Array.isArray(v)) {
       parts.push(`${k}: ${(v as string[]).join(', ')}`)

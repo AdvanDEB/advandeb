@@ -1,20 +1,16 @@
 """
-Ingestion batch watchdog — detects and recovers stuck batches.
+Ingestion batch watchdog — detects orphaned batches after a server crash.
 
-Two responsibilities:
-1. *Startup scan*: on server start, immediately mark as ``"failed"`` any batch
-   that has been in ``"running"`` status for longer than BATCH_TIMEOUT_MINUTES.
-   This handles batches that were orphaned by a previous server crash or restart.
+On startup, any batch that was left in ``"running"`` status from a *previous*
+server process is considered orphaned and its jobs are reset to ``"pending"``
+so they can be retried.  The watchdog does NOT impose any time limit on how
+long a batch may run — large batches with LLM processing can legitimately take
+many hours and must never be killed by an arbitrary timeout.
 
-2. *Recurring check*: every WATCHDOG_INTERVAL_SECONDS, repeat the same scan so
-   that newly-stuck batches are caught without requiring another restart.
-
-A batch is considered "stuck" when:
-  - ``status == "running"``  AND
-  - ``updated_at`` is older than ``BATCH_TIMEOUT_MINUTES`` ago
-
-When a stuck batch is found, all of its ``running`` and ``queued`` jobs are also
-transitioned to ``"failed"`` with an appropriate error message.
+A batch is considered orphaned (and recoverable) only on server startup, when
+we know the previous process is gone.  During normal operation the watchdog
+merely logs a warning if a batch has been running for an unusually long time,
+but takes no destructive action.
 """
 import asyncio
 import logging
@@ -24,76 +20,83 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 logger = logging.getLogger(__name__)
 
-# How long (minutes) a batch may stay "running" before being considered stuck.
-BATCH_TIMEOUT_MINUTES: int = 30
-
-# How often (seconds) to poll for stuck batches after startup.
+# How often (seconds) to log a warning about long-running batches.
 WATCHDOG_INTERVAL_SECONDS: int = 300  # 5 minutes
 
+# How long (minutes) before we start warning about a long-running batch.
+# This is purely informational — no action is taken.
+WARN_AFTER_MINUTES: int = 60
 
-async def recover_stuck_batches(db: AsyncIOMotorDatabase) -> int:
-    """
-    Mark all stuck batches as ``"failed"`` and their stuck jobs as ``"failed"``.
 
-    Returns the number of batches recovered.
+async def recover_orphaned_batches(db: AsyncIOMotorDatabase) -> int:
     """
-    cutoff = datetime.utcnow() - timedelta(minutes=BATCH_TIMEOUT_MINUTES)
+    Called once on server startup.  Resets any batch that was left in
+    ``"running"`` status by a previous (now-dead) server process.
+
+    Jobs are reset to ``"pending"`` so they can be retried immediately by
+    clicking Run again.  Returns the number of batches recovered.
+    """
     recovered = 0
 
-    async for batch in db.ingestion_batches.find(
-        {"status": "running", "updated_at": {"$lt": cutoff}}
-    ):
+    async for batch in db.ingestion_batches.find({"status": "running"}):
         batch_id = batch["_id"]
         batch_id_str = str(batch_id)
         age_minutes = (datetime.utcnow() - batch.get("updated_at", datetime.utcnow())).total_seconds() / 60
 
         logger.warning(
-            "Watchdog: batch %s has been running for %.1f minutes — marking failed",
+            "Watchdog [startup]: batch %s was left running (%.1f min) by previous process — resetting jobs to pending",
             batch_id_str,
             age_minutes,
         )
 
         now = datetime.utcnow()
 
-        # Fail all jobs still in an active state for this batch
+        # Reset active jobs to pending so they can be retried
         await db.ingestion_jobs.update_many(
-            {"batch_id": batch_id, "status": {"$in": ["running", "queued", "pending"]}},
+            {"batch_id": batch_id, "status": {"$in": ["running", "queued"]}},
             {"$set": {
-                "status": "failed",
-                "error_message": "batch timed out — recovered by watchdog on server restart",
+                "status": "pending",
+                "stage": "pending",
+                "error_message": "server restarted — job reset to pending for retry",
                 "updated_at": now,
             }},
         )
 
-        # Fail the batch itself
+        # Mark batch as mixed/failed so user sees it needs to be re-run
         await db.ingestion_batches.update_one(
             {"_id": batch_id},
-            {"$set": {"status": "failed", "updated_at": now}},
+            {"$set": {"status": "mixed", "updated_at": now}},
         )
 
         recovered += 1
 
     if recovered:
-        logger.info("Watchdog: recovered %d stuck batch(es)", recovered)
+        logger.info("Watchdog [startup]: recovered %d orphaned batch(es) — click Run to retry", recovered)
     else:
-        logger.debug("Watchdog: no stuck batches found")
+        logger.debug("Watchdog [startup]: no orphaned batches found")
 
     return recovered
 
 
 async def _watchdog_loop(db: AsyncIOMotorDatabase) -> None:
-    """Periodically scan for stuck batches. Runs until cancelled."""
-    logger.info(
-        "Watchdog started — timeout=%d min, interval=%d s",
-        BATCH_TIMEOUT_MINUTES,
-        WATCHDOG_INTERVAL_SECONDS,
-    )
+    """Periodically log warnings about long-running batches. Never kills them."""
+    logger.info("Watchdog started — warn_after=%d min, interval=%d s (no destructive timeouts)",
+                WARN_AFTER_MINUTES, WATCHDOG_INTERVAL_SECONDS)
     while True:
         await asyncio.sleep(WATCHDOG_INTERVAL_SECONDS)
         try:
-            await recover_stuck_batches(db)
+            cutoff = datetime.utcnow() - timedelta(minutes=WARN_AFTER_MINUTES)
+            async for batch in db.ingestion_batches.find(
+                {"status": "running", "updated_at": {"$lt": cutoff}}
+            ):
+                age_minutes = (datetime.utcnow() - batch.get("updated_at", datetime.utcnow())).total_seconds() / 60
+                logger.info(
+                    "Watchdog: batch %s still running after %.1f minutes (this is normal for large batches)",
+                    str(batch["_id"]),
+                    age_minutes,
+                )
         except Exception:
-            logger.exception("Watchdog: error during stuck-batch scan")
+            logger.exception("Watchdog: error during running-batch scan")
 
 
 class BatchWatchdog:
@@ -103,14 +106,12 @@ class BatchWatchdog:
         self._task: asyncio.Task | None = None
 
     async def start(self, db: AsyncIOMotorDatabase) -> None:
-        """Run the startup scan immediately, then launch the background loop."""
-        # Startup scan — runs synchronously before yielding to the server
+        """Run the startup orphan recovery, then launch the background loop."""
         try:
-            await recover_stuck_batches(db)
+            await recover_orphaned_batches(db)
         except Exception:
             logger.exception("Watchdog: error during startup scan")
 
-        # Background loop
         self._task = asyncio.create_task(
             _watchdog_loop(db), name="ingestion-watchdog"
         )

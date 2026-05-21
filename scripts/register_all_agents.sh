@@ -105,6 +105,7 @@ fetch_and_register "graph_explorer"     8082
 fetch_and_register "synthesis_agent"    8083
 fetch_and_register "query_planner"      8084
 fetch_and_register "curator_agent"      8085
+fetch_and_register "chatbot_agent"      8086
 
 rm -f "$HELPER"
 

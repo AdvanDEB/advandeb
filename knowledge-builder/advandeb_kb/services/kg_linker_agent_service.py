@@ -2,21 +2,26 @@
 KGLinkerAgentService — links documents to taxonomy nodes via an Ollama LLM agent.
 
 The agent reads each document's title + abstract and calls the lookup_taxon
-tool for each organism it identifies. Results are written to
-document_taxon_relations (same schema as KGBuilderService).
+tool for each organism it identifies. Results are written to the
+`knowledge_graph` edge collection in ArangoDB (same as KGBuilderService).
 
 Usage:
-    svc = KGLinkerAgentService(db)
+    svc = KGLinkerAgentService(arango_db)
     result = await svc.link_documents(model="mistral", limit=100)
 """
+import asyncio
 import json
 import logging
 import re
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import Any, Dict, List
 
+from advandeb_kb.database.arango_client import ArangoDatabase
+
 logger = logging.getLogger(__name__)
 
+_executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="kg-linker-agent")
 
 _SYSTEM_PROMPT = """\
 You are a taxonomy expert analysing biology and ecology papers.
@@ -39,8 +44,12 @@ _CONF = {"species": 0.82, "genus": 0.72, "default": 0.62}
 
 
 class KGLinkerAgentService:
-    def __init__(self, database):
+    def __init__(self, database: ArangoDatabase):
         self.db = database
+
+    async def _run(self, fn, *args, **kwargs):
+        loop = asyncio.get_running_loop()
+        return await loop.run_in_executor(_executor, lambda: fn(*args, **kwargs))
 
     async def link_documents(
         self,
@@ -50,22 +59,35 @@ class KGLinkerAgentService:
         overwrite: bool = False,
         max_tool_calls: int = 20,
     ) -> Dict[str, Any]:
-        """Process documents and write document_taxon_relations."""
-        exclude_ids: set = set()
-        if not overwrite:
-            async for rel in self.db.document_taxon_relations.find(
-                {"created_by": "kg_linker_agent"}, {"document_id": 1}
-            ):
-                exclude_ids.add(str(rel["document_id"]))
+        """Process documents and write knowledge_graph edges."""
+        def _fetch_excluded():
+            if overwrite:
+                return set()
+            rows = self.db.aql(
+                "FOR e IN knowledge_graph "
+                "FILTER e.created_by == 'kg_linker_agent' "
+                "RETURN DISTINCT PARSE_IDENTIFIER(e._from).key"
+            )
+            return {r for r in rows}
+
+        def _fetch_docs():
+            return self.db.aql(
+                "FOR doc IN documents LIMIT @skip, @limit "
+                "RETURN {_key: doc._key, title: doc.title, abstract: doc.abstract}",
+                {"skip": skip, "limit": limit},
+            )
+
+        exclude_keys = await self._run(_fetch_excluded)
+        docs = await self._run(_fetch_docs)
 
         docs_processed = docs_linked = relations_written = 0
-        now = datetime.utcnow()
+        now_iso = datetime.utcnow().isoformat()
 
-        async for doc in self.db.documents.find({}, limit=limit, skip=skip):
-            if not overwrite and str(doc["_id"]) in exclude_ids:
+        for doc in docs:
+            if not overwrite and doc["_key"] in exclude_keys:
                 continue
             docs_processed += 1
-            relations = await self._link_document(doc, model, max_tool_calls, now)
+            relations = await self._link_document(doc, model, max_tool_calls, now_iso)
             if relations:
                 await self._upsert_relations(relations)
                 docs_linked += 1
@@ -82,7 +104,7 @@ class KGLinkerAgentService:
         }
 
     async def _link_document(
-        self, doc: Dict, model: str, max_tool_calls: int, now: datetime
+        self, doc: Dict, model: str, max_tool_calls: int, now_iso: str
     ) -> List[Dict]:
         from advandeb_kb.services.local_model_provider import LocalModelClient
 
@@ -107,13 +129,13 @@ class KGLinkerAgentService:
                     )
                     content = resp["choices"][0]["message"]["content"].strip()
                 except Exception as exc:
-                    logger.warning("Ollama call failed for doc %s: %s", doc.get("_id"), exc)
+                    logger.warning("Ollama call failed for doc %s: %s", doc.get("_key"), exc)
                     break
 
                 try:
                     data = json.loads(content)
                 except (json.JSONDecodeError, ValueError):
-                    break  # non-JSON → done
+                    break
 
                 if data.get("done"):
                     break
@@ -133,20 +155,20 @@ class KGLinkerAgentService:
                         if tax_id not in matched or matched[tax_id][0] < conf:
                             matched[tax_id] = (conf, f"agent: {name}")
                 else:
-                    break  # unexpected JSON format → done
+                    break
 
-        doc_oid = doc["_id"]
+        doc_key = doc["_key"]
         return [
             {
-                "document_id": doc_oid,
-                "tax_id": tax_id,
+                "_from": f"documents/{doc_key}",
+                "_to": f"taxa/{tax_id}",
                 "relation_type": "studies",
                 "confidence": round(conf, 3),
                 "evidence": evidence,
                 "status": "suggested",
                 "created_by": "kg_linker_agent",
-                "created_at": now,
-                "updated_at": now,
+                "created_at": now_iso,
+                "updated_at": now_iso,
             }
             for tax_id, (conf, evidence) in matched.items()
         ]
@@ -154,14 +176,21 @@ class KGLinkerAgentService:
     async def _lookup_taxon(self, name: str) -> Dict:
         if not name:
             return {"found": False}
-        taxon = await self.db.taxonomy_nodes.find_one(
-            {"$or": [
-                {"name": {"$regex": f"^{re.escape(name)}$", "$options": "i"}},
-                {"synonyms": {"$regex": f"^{re.escape(name)}$", "$options": "i"}},
-                {"common_names": {"$regex": f"^{re.escape(name)}$", "$options": "i"}},
-            ]},
-            {"tax_id": 1, "name": 1, "rank": 1}
-        )
+
+        def _query():
+            escaped = re.escape(name)
+            rows = self.db.aql(
+                """
+                FOR doc IN taxa
+                    FILTER LOWER(doc.name) == LOWER(@name)
+                    LIMIT 1
+                    RETURN {tax_id: doc.tax_id, name: doc.name, rank: doc.rank}
+                """,
+                {"name": name},
+            )
+            return rows[0] if rows else None
+
+        taxon = await self._run(_query)
         if taxon:
             return {
                 "found": True,
@@ -172,13 +201,20 @@ class KGLinkerAgentService:
         return {"found": False, "name": name}
 
     async def _upsert_relations(self, relations: List[Dict]) -> None:
-        from pymongo import UpdateOne
-        ops = [
-            UpdateOne(
-                {"document_id": r["document_id"], "tax_id": r["tax_id"]},
-                {"$setOnInsert": r},
-                upsert=True,
-            )
-            for r in relations
-        ]
-        await self.db.document_taxon_relations.bulk_write(ops, ordered=False)
+        def _upsert():
+            for rel in relations:
+                self.db.db.aql.execute(
+                    """
+                    UPSERT {_from: @from, _to: @to, relation_type: @rtype}
+                    INSERT @doc
+                    UPDATE {}
+                    IN knowledge_graph
+                    """,
+                    bind_vars={
+                        "from": rel["_from"],
+                        "to": rel["_to"],
+                        "rtype": rel["relation_type"],
+                        "doc": rel,
+                    },
+                )
+        await self._run(_upsert)

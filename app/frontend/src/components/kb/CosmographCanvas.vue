@@ -20,6 +20,7 @@
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { Graph } from '@cosmos.gl/graph'
 import type { GraphNode, GraphEdge } from '@/utils/kbApi'
+import type { GraphRenderBundle, GraphRenderNodeSummary } from '@/types/graphArtifact'
 import {
   NODE_TYPE_COLORS, DEFAULT_NODE_COLOR,
   EDGE_TYPE_COLORS, DEFAULT_EDGE_COLOR,
@@ -31,8 +32,11 @@ const initError = ref<string | null>(null)
 const tooltip = ref({ visible: false, label: '', x: 0, y: 0, flipX: false })
 
 const props = defineProps<{
-  nodes: GraphNode[]
-  edges: GraphEdge[]
+  // Artifact bundle path (preferred — pre-built typed arrays)
+  bundle?: GraphRenderBundle | null
+  // Legacy raw-node path (still used while migrating; ignored when bundle present)
+  nodes?: GraphNode[]
+  edges?: GraphEdge[]
   hiddenTypes?: Set<string>
   hiddenEdgeTypes?: Set<string>
 }>()
@@ -45,10 +49,12 @@ const emit = defineEmits<{
 const containerEl = ref<HTMLDivElement | null>(null)
 let graph: Graph | null = null
 
-// Cache of the most-recently rendered visible node array.
-// Used by the onClick handler to map index → node without rebuilding.
-let _cachedVisibleNodes: GraphNode[] = []
-// Reverse map: node _id → visible index (kept in sync with _cachedVisibleNodes)
+// Cache of the most-recently rendered node list / summaries.
+// Used by the onClick / onMouseMove handlers.
+let _cachedNodeIds: string[] = []
+let _cachedHoverLabels: string[] = []
+let _cachedNodeSummaries: GraphRenderNodeSummary[] = []
+// Reverse map: node id → visible index
 let _idToVisibleIndex = new Map<string, number>()
 
 function getNodeColor(nodeType: string): [number, number, number, number] {
@@ -65,6 +71,10 @@ function getEdgeColor(edgeType: string, props_: Record<string, unknown>): [numbe
 function getNodeSize(degree: number | undefined): number {
   const d = degree ?? 0
   return Math.min(20, 2 + Math.log2(d + 1) * 2.5)
+}
+
+function hasValid2dCoords(node: GraphNode): node is GraphNode & { x2d: number; y2d: number } {
+  return Number.isFinite(node.x2d) && Number.isFinite(node.y2d)
 }
 
 // ---- Build typed arrays from nodes/edges ------------------------------------
@@ -89,7 +99,7 @@ function buildGraphData(nodes: GraphNode[], edges: GraphEdge[], hiddenTypes?: Se
     // Use pre-computed layout if available; for nodes without coords use a
     // stable deterministic spread based on index so they don't jump on
     // re-render (e.g. after type filter toggle).
-    if (n.x2d !== undefined && n.y2d !== undefined) {
+    if (hasValid2dCoords(n)) {
       positions[i * 2]     = n.x2d
       positions[i * 2 + 1] = n.y2d
     } else {
@@ -121,7 +131,7 @@ function buildGraphData(nodes: GraphNode[], edges: GraphEdge[], hiddenTypes?: Se
     const e = validEdges[i]
     linkArr[i * 2]     = idToIndex.get(e.source_node_id)!
     linkArr[i * 2 + 1] = idToIndex.get(e.target_node_id)!
-    const [r, g, b, a] = getEdgeColor(e.edge_type, e.properties)
+    const [r, g, b, a] = getEdgeColor(e.edge_type, e.properties ?? {})
     linkColors[i * 4]     = r
     linkColors[i * 4 + 1] = g
     linkColors[i * 4 + 2] = b
@@ -142,14 +152,14 @@ function initGraph() {
   try {
     graph = new Graph(containerEl.value, {
       backgroundColor: '#0f172a',
-      // Better force-directed layout parameters to spread nodes evenly
+      // Leave more breathing room when we need a client-side fallback layout.
       simulationGravity: 0.1,
-      simulationRepulsion: 1.5,
+      simulationRepulsion: 2.2,
       simulationRepulsionTheta: 1.15,
       simulationFriction: 0.85,
       simulationLinkSpring: 0.5,
-      simulationLinkDistance: 30,
-      simulationDecay: 2000,
+      simulationLinkDistance: 70,
+      simulationDecay: 5000,
       simulationCenter: 0.1,
       pointSizeScale: 1,
       scalePointsOnZoom: true,
@@ -161,22 +171,31 @@ function initGraph() {
           if (index === undefined) {
             emit('backgroundClick')
           } else {
-            // Use the cached visible-node list — no rebuild needed
-            if (index < _cachedVisibleNodes.length) {
-              emit('nodeClick', _cachedVisibleNodes[index])
+            if (index < _cachedNodeSummaries.length) {
+              const s = _cachedNodeSummaries[index]
+              // Emit in the GraphNode shape that the rest of the app expects
+              emit('nodeClick', {
+                _id: s.id,
+                schema_id: '',
+                node_type: s.type,
+                entity_collection: s.entity_collection,
+                entity_id: s.entity_id,
+                label: s.label,
+                properties: s.props,
+                degree: s.degree,
+              } satisfies GraphNode)
             }
           }
         },
         onMouseMove: (index, _pos, ev) => {
-          if (index === undefined || index >= _cachedVisibleNodes.length) {
+          if (index === undefined || index >= _cachedHoverLabels.length) {
             tooltip.value.visible = false
             return
           }
           const rect = containerEl.value!.getBoundingClientRect()
           const x = ev.clientX - rect.left
           const y = ev.clientY - rect.top
-          const label = _cachedVisibleNodes[index].label ?? ''
-          // Flip to left side when within 340px of the right edge
+          const label = _cachedHoverLabels[index] ?? ''
           const flipX = x > rect.width - 340
           tooltip.value = { visible: true, label, x, y, flipX }
         },
@@ -200,12 +219,69 @@ function initGraph() {
 function pushData(autoFit = false) {
   if (!graph) return
   try {
-    const { visibleNodes, positions, colors, sizes, linkArr, linkColors, linkWidths } =
-      buildGraphData(props.nodes, props.edges, props.hiddenTypes, props.hiddenEdgeTypes)
+    // ── Bundle path (artifact-backed, pre-built typed arrays) ─────────────
+    if (props.bundle) {
+      const b = props.bundle
 
-    // Update cache so onClick can resolve the correct node
-    _cachedVisibleNodes = visibleNodes
+      // Apply type visibility filters by rebuilding a visibility mask when
+      // hiddenTypes is set. For now we pass the full arrays unfiltered — the
+      // type-filter path for bundle mode will be added in a follow-up once
+      // the artifact pipeline is stable.
+      _cachedNodeIds = b.nodeIds
+      _cachedHoverLabels = b.hoverLabels
+      _cachedNodeSummaries = b.nodeSummaries
+      _idToVisibleIndex = new Map(b.nodeIds.map((id, i) => [id, i]))
+
+      console.log('[CosmographCanvas] pushData bundle:', {
+        nodeCount: b.nodeCount,
+        edgeCount: b.edgeCount,
+        linkIndicesLength: b.linkIndices.length,
+        linkIndicesSample: Array.from(b.linkIndices.slice(0, 10)),
+        linkColorsLength: b.linkColors.length,
+        linkWidthsLength: b.linkWidths.length,
+      })
+
+      graph.setPointPositions(b.pointPositions)
+      graph.setPointColors(b.pointColors)
+      graph.setPointSizes(b.pointSizes)
+      graph.setLinks(b.linkIndices)
+      graph.setLinkColors(b.linkColors)
+      graph.setLinkWidths(b.linkWidths)
+
+      // All artifact nodes have server-side layout coords — freeze simulation.
+      graph.stop()
+      graph.render(0)
+
+      if (autoFit) {
+        if (_fitViewTimer !== null) clearTimeout(_fitViewTimer)
+        _fitViewTimer = setTimeout(() => {
+          graph?.fitView(400)
+          _fitViewTimer = null
+        }, 80)
+      }
+      return
+    }
+
+    // ── Legacy raw-node path ───────────────────────────────────────────────
+    const rawNodes = props.nodes ?? []
+    const rawEdges = props.edges ?? []
+    const { visibleNodes, positions, colors, sizes, linkArr, linkColors, linkWidths } =
+      buildGraphData(rawNodes, rawEdges, props.hiddenTypes, props.hiddenEdgeTypes)
+
+    _cachedNodeIds = visibleNodes.map(n => n._id)
+    _cachedHoverLabels = visibleNodes.map(n => n.label ?? '')
+    _cachedNodeSummaries = visibleNodes.map(n => ({
+      id: n._id,
+      type: n.node_type,
+      label: n.label,
+      degree: n.degree ?? 0,
+      entity_collection: n.entity_collection,
+      entity_id: n.entity_id,
+      props: n.properties,
+    }))
     _idToVisibleIndex = new Map(visibleNodes.map((n, i) => [n._id, i]))
+
+    const shouldFreeze = visibleNodes.length > 0 && visibleNodes.every(hasValid2dCoords)
 
     graph.setPointPositions(positions)
     graph.setPointColors(colors)
@@ -213,19 +289,21 @@ function pushData(autoFit = false) {
     graph.setLinks(linkArr)
     graph.setLinkColors(linkColors)
     graph.setLinkWidths(linkWidths)
-    // render() processes pending data into GPU buffers and (re)starts the frame loop
-    graph.render()
 
-    // After a fresh data load, fit the view once the simulation has had
-    // time to run.  fitViewOnInit only fires once (on the very first render
-    // after Graph construction), so we need to trigger it ourselves for
-    // every subsequent dataset.
+    if (shouldFreeze) {
+      graph.stop()
+      graph.render(0)
+    } else {
+      graph.start(1)
+      graph.render()
+    }
+
     if (autoFit) {
       if (_fitViewTimer !== null) clearTimeout(_fitViewTimer)
       _fitViewTimer = setTimeout(() => {
         graph?.fitView(400)
         _fitViewTimer = null
-      }, 600)
+      }, shouldFreeze ? 80 : 600)
     }
   } catch (e: unknown) {
     console.error('[CosmographCanvas] pushData failed:', e)
@@ -245,13 +323,15 @@ onUnmounted(() => {
 })
 
 watch(
-  () => [props.nodes, props.edges, props.hiddenTypes, props.hiddenEdgeTypes] as const,
+  () => [props.bundle, props.nodes, props.edges, props.hiddenTypes, props.hiddenEdgeTypes] as const,
   (newVal, oldVal) => {
     if (graph) {
-      // Auto-fit whenever the nodes/edges arrays themselves change (new dataset).
-      // For hiddenTypes/hiddenEdgeTypes-only changes (filtering) we skip auto-fit.
-      const nodesChanged = oldVal ? newVal[0] !== oldVal[0] || newVal[1] !== oldVal[1] : true
-      pushData(nodesChanged)
+      // Auto-fit whenever the bundle or the raw nodes/edges arrays change.
+      // For filter-only changes (hiddenTypes/hiddenEdgeTypes) we skip auto-fit.
+      const dataChanged = oldVal
+        ? newVal[0] !== oldVal[0] || newVal[1] !== oldVal[1] || newVal[2] !== oldVal[2]
+        : true
+      pushData(dataChanged)
     }
   },
   { deep: false },
@@ -263,14 +343,11 @@ defineExpose({
   focusNode: (nodeId: string | null) => {
     if (!graph) return
     if (nodeId === null) {
-      // Deselect: zoom back out to fit all nodes
       graph.fitView(500)
       return
     }
     const index = _idToVisibleIndex.get(nodeId)
     if (index === undefined) return
-    // Zoom to the node: 600ms animation, scale 4 (comfortable zoom level),
-    // canZoomOut=true so it zooms out if currently zoomed in more than scale 4
     graph.zoomToPointByIndex(index, 600, 4, true)
   },
 })
