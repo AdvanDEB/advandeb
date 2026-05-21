@@ -38,7 +38,7 @@ import logging
 import os
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -96,8 +96,8 @@ def create_document_record(db, pdf_path: Path, papers_root: Path, domain: Option
         "general_domain": domain,
         "processing_status": "pending",
         "embedding_status": "pending",
-        "created_at": datetime.utcnow(),
-        "updated_at": datetime.utcnow(),
+        "created_at": datetime.now(timezone.utc),
+        "updated_at": datetime.now(timezone.utc),
     }
     db.documents.insert_one(doc)
     return str(doc["_id"])
@@ -124,7 +124,7 @@ def extract_and_store_text(db, document_id: str, pdf_path: Path) -> bool:
                 "$set": {
                     "content": text,
                     "processing_status": "completed",
-                    "updated_at": datetime.utcnow(),
+                    "updated_at": datetime.now(timezone.utc),
                 }
             },
         )
@@ -134,7 +134,7 @@ def extract_and_store_text(db, document_id: str, pdf_path: Path) -> bool:
         from bson import ObjectId
         db.documents.update_one(
             {"_id": ObjectId(document_id)},
-            {"$set": {"processing_status": "failed", "updated_at": datetime.utcnow()}},
+            {"$set": {"processing_status": "failed", "updated_at": datetime.now(timezone.utc)}},
         )
         return False
 

@@ -16,7 +16,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from advandeb_kb.database.arango_client import ArangoDatabase
@@ -29,7 +29,7 @@ _executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="knowledge-svc"
 
 
 def _now_iso() -> str:
-    return datetime.utcnow().isoformat()
+    return datetime.now(timezone.utc).isoformat()
 
 
 def _doc_to_model(raw: dict, model_cls):

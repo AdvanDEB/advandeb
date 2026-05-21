@@ -7,7 +7,7 @@ the KB ArangoDB.  A curator approval triggers ingestion into the KB.
 """
 import asyncio
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 
 from bson import ObjectId
@@ -50,8 +50,8 @@ class UserSubmissionService:
             {
                 "uploader_id": uploader_id,
                 "status": "suggestion",
-                "created_at": datetime.utcnow(),
-                "updated_at": datetime.utcnow(),
+                "created_at": datetime.now(timezone.utc),
+                "updated_at": datetime.now(timezone.utc),
             }
         )
         result = await self.doc_submissions.insert_one(doc)
@@ -101,8 +101,8 @@ class UserSubmissionService:
             },
             "uploader_id": uploader_id,
             "status": "suggestion",
-            "created_at": datetime.utcnow(),
-            "updated_at": datetime.utcnow(),
+            "created_at": datetime.now(timezone.utc),
+            "updated_at": datetime.now(timezone.utc),
         }
         result = await self.doc_submissions.insert_one(doc)
         doc["_id"] = str(result.inserted_id)
@@ -165,7 +165,7 @@ class UserSubmissionService:
                         "status": "rejected",
                         "reviewer_id": reviewer_id,
                         "review_comment": comment,
-                        "updated_at": datetime.utcnow(),
+                        "updated_at": datetime.now(timezone.utc),
                     }
                 },
             )
@@ -179,7 +179,7 @@ class UserSubmissionService:
                     "status": "pending",
                     "reviewer_id": reviewer_id,
                     "review_comment": comment,
-                    "updated_at": datetime.utcnow(),
+                    "updated_at": datetime.now(timezone.utc),
                 }
             },
         )
@@ -218,7 +218,7 @@ class UserSubmissionService:
                     "$set": {
                         "num_files": 1,
                         "status": "running",
-                        "updated_at": datetime.utcnow(),
+                        "updated_at": datetime.now(timezone.utc),
                     }
                 },
             )
@@ -272,8 +272,8 @@ class UserSubmissionService:
             {
                 "creator_id": creator_id,
                 "status": "suggestion",
-                "created_at": datetime.utcnow(),
-                "updated_at": datetime.utcnow(),
+                "created_at": datetime.now(timezone.utc),
+                "updated_at": datetime.now(timezone.utc),
             }
         )
         result = await self.fact_submissions.insert_one(doc)
@@ -323,7 +323,7 @@ class UserSubmissionService:
                     "review_status": new_status,
                     "reviewer_id": reviewer_id,
                     "review_comment": review_comment,
-                    "updated_at": datetime.utcnow(),
+                    "updated_at": datetime.now(timezone.utc),
                 }
             },
         )
@@ -345,8 +345,8 @@ class UserSubmissionService:
             {
                 "creator_id": creator_id,
                 "status": "suggestion",
-                "created_at": datetime.utcnow(),
-                "updated_at": datetime.utcnow(),
+                "created_at": datetime.now(timezone.utc),
+                "updated_at": datetime.now(timezone.utc),
             }
         )
         result = await self.sf_submissions.insert_one(doc)
@@ -388,7 +388,7 @@ class UserSubmissionService:
                     "status": new_status,
                     "reviewer_id": reviewer_id,
                     "review_comment": review_comment,
-                    "updated_at": datetime.utcnow(),
+                    "updated_at": datetime.now(timezone.utc),
                 }
             },
         )

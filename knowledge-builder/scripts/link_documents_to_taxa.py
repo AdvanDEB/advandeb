@@ -58,10 +58,10 @@ async def run(
         if dry_run:
             # Show what would be matched for first 5 documents
             logger.info("Dry-run — sampling 5 documents:")
-            from datetime import datetime
+            from datetime import datetime, timezone
             count = 0
             async for doc in db.documents.find({}, limit=5, skip=skip):
-                relations = service._match_document(doc, datetime.utcnow())
+                relations = service._match_document(doc, datetime.now(timezone.utc))
                 logger.info(
                     "  doc %s (%d chars abstract) → %d taxon matches",
                     str(doc["_id"])[-6:],

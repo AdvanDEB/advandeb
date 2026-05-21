@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from typing import Any, Dict, List, Optional, Union
 from enum import Enum
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 class AgentType(str, Enum):
@@ -46,7 +46,7 @@ class AgentMessage(BaseModel):
     content: str
     tool_calls: List[ToolCall] = Field(default_factory=list)
     tool_results: List[ToolResult] = Field(default_factory=list)
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class AgentSession(BaseModel):
@@ -56,8 +56,8 @@ class AgentSession(BaseModel):
     model: str = "llama2"
     messages: List[AgentMessage] = Field(default_factory=list)
     context: Dict[str, Any] = Field(default_factory=dict)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class AgentRunRequest(BaseModel):
@@ -76,7 +76,7 @@ class AgentRunStep(BaseModel):
     step_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     step_type: str  # "message", "tool_call", "tool_result"
     content: Any
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class AgentRunResponse(BaseModel):
@@ -101,7 +101,7 @@ class KnowledgeNode(BaseModel):
     bibtex: Optional[str] = None
     importance: float = 0.5
     confidence: float = 0.5
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     metadata: Dict[str, Any] = Field(default_factory=dict)
 
 

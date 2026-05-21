@@ -7,7 +7,7 @@ no live MongoDB connection is required. The MCP gateway is patched via
 """
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -142,7 +142,7 @@ async def test_list_sessions_sorted_descending(chat_service):
     """Sessions are returned in the order produced by the (mocked) cursor."""
     svc, db = chat_service
 
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
 
     # _id objects whose str() is deterministic
     id_newer = MagicMock()

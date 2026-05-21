@@ -4,7 +4,7 @@ Ingestion API — PDF upload, batch management, progress streaming.
 import asyncio
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from bson import ObjectId
@@ -98,7 +98,7 @@ async def upload_pdf(
     await db.ingestion_jobs.insert_one(job.model_dump(by_alias=True))
     await db.ingestion_batches.update_one(
         {"_id": batch.id},
-        {"$set": {"num_files": 1, "status": "running", "updated_at": datetime.utcnow()}},
+        {"$set": {"num_files": 1, "status": "running", "updated_at": datetime.now(timezone.utc)}},
     )
     background_tasks.add_task(run_pdf_job, str(job.id), db)
 
@@ -216,7 +216,7 @@ async def run_batch(
     retriable = {"$in": ["failed", "cancelled"]}
     await db.ingestion_jobs.update_many(
         {"batch_id": ObjectId(batch_id), "status": retriable},
-        {"$set": {"status": "pending", "error_message": None, "updated_at": datetime.utcnow()}},
+        {"$set": {"status": "pending", "error_message": None, "updated_at": datetime.now(timezone.utc)}},
     )
 
     pending = await db.ingestion_jobs.count_documents(
@@ -227,11 +227,11 @@ async def run_batch(
 
     await db.ingestion_jobs.update_many(
         {"batch_id": ObjectId(batch_id), "status": "pending"},
-        {"$set": {"status": "queued", "updated_at": datetime.utcnow()}},
+        {"$set": {"status": "queued", "updated_at": datetime.now(timezone.utc)}},
     )
     await db.ingestion_batches.update_one(
         {"_id": ObjectId(batch_id)},
-        {"$set": {"status": "running", "updated_at": datetime.utcnow()}},
+        {"$set": {"status": "running", "updated_at": datetime.now(timezone.utc)}},
     )
     background_tasks.add_task(run_batch_worker, batch_id, db)
     return {"batch_id": batch_id, "jobs_enqueued": pending}
@@ -280,7 +280,7 @@ async def stop_batch(
             detail=f"Batch is already in a terminal state: {batch_doc.get('status')}",
         )
 
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
 
     # Cancel all jobs that haven't finished yet
     await db.ingestion_jobs.update_many(

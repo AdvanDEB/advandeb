@@ -12,7 +12,7 @@ RetrievalContext:
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, Field
@@ -76,7 +76,7 @@ class ProvenanceTrace(BaseModel):
     # If LLM reranking was used
     reranked: bool = False
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     class Config:
         populate_by_name = True
@@ -118,7 +118,7 @@ class RetrievalContext(BaseModel):
     # Wall-clock time for the full retrieval in ms
     latency_ms: Optional[float] = None
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     def to_provenance_trace(
         self,

@@ -2,7 +2,7 @@
 Ingestion pipeline models: batch jobs for bulk PDF processing.
 """
 from typing import Any, Dict, List, Optional, Literal
-from datetime import datetime
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field, ConfigDict
 
 from advandeb_kb.models.common import PyObjectId
@@ -38,8 +38,8 @@ class IngestionBatch(BaseModel):
 
     status: Literal["pending", "running", "completed", "failed", "mixed", "stopped"] = "pending"
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class IngestionJob(BaseModel):
@@ -70,5 +70,5 @@ class IngestionJob(BaseModel):
 
     metadata: Dict[str, Any] = {}
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

@@ -11,7 +11,7 @@ import os
 import re
 import subprocess
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from bson import ObjectId
@@ -276,7 +276,7 @@ async def _set_job_stage(
         "stage": stage if stage else "pending",
         "status": status,
         "progress": progress,
-        "updated_at": datetime.utcnow(),
+        "updated_at": datetime.now(timezone.utc),
     }
     if error_message is not None:
         update["error_message"] = error_message
@@ -1177,7 +1177,7 @@ async def _update_batch_status(db: AsyncIOMotorDatabase, batch_id: ObjectId) -> 
         batch_status = "mixed"
     await db.ingestion_batches.update_one(
         {"_id": batch_id},
-        {"$set": {"status": batch_status, "updated_at": datetime.utcnow()}},
+        {"$set": {"status": batch_status, "updated_at": datetime.now(timezone.utc)}},
     )
 
 
@@ -1205,7 +1205,7 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
             {"_id": oid},
             {"$set": {"already_processed": True, "status": "completed",
                       "stage": "completed", "progress": 100,
-                      "updated_at": datetime.utcnow()}},
+                      "updated_at": datetime.now(timezone.utc)}},
         )
         await _update_batch_status(db, job.batch_id)
         logger.info("Job %s: skipped — document already processed", job_id)
@@ -1266,7 +1266,7 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
         )
         await db.ingestion_jobs.update_one(
             {"_id": job.id},
-            {"$set": {"document_id": document.id, "updated_at": datetime.utcnow()}},
+            {"$set": {"document_id": document.id, "updated_at": datetime.now(timezone.utc)}},
         )
 
         # ---- Stage 2: fact extraction ----------------------------------
@@ -1287,7 +1287,7 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
         ):
             existing_map[doc["content_fingerprint"]] = doc["_id"]
 
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         new_facts: List[Dict[str, Any]] = []
         fact_ids: List[Optional[ObjectId]] = []
         dup_fps: List[str] = []  # fingerprints of duplicates (for bulk update)
@@ -1321,7 +1321,7 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
 
         await db.documents.update_one(
             {"_id": document.id},
-            {"$set": {"processing_status": "completed", "updated_at": datetime.utcnow()}},
+            {"$set": {"processing_status": "completed", "updated_at": datetime.now(timezone.utc)}},
         )
 
         # ---- Stage 3: SF matching --------------------------------------
@@ -1401,7 +1401,7 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
                         ),
                     )
 
-                    now = datetime.utcnow()
+                    now = datetime.now(timezone.utc)
                     chunk_docs = [
                         {
                             "chunk_id": c.chunk_id,
@@ -1427,7 +1427,7 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
                         {"$set": {
                             "embedding_status": "embedded",
                             "num_chunks": chunk_count,
-                            "updated_at": datetime.utcnow(),
+                            "updated_at": datetime.now(timezone.utc),
                         }},
                     )
                     logger.info("Job %s: embedded %d chunks into ChromaDB", job_id, chunk_count)
@@ -1435,7 +1435,7 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
                 logger.warning("Job %s: embedding failed (non-fatal): %s", job_id, embed_exc)
                 await db.documents.update_one(
                     {"_id": document.id},
-                    {"$set": {"embedding_status": "failed", "updated_at": datetime.utcnow()}},
+                    {"$set": {"embedding_status": "failed", "updated_at": datetime.now(timezone.utc)}},
                 )
 
         # ---- Done ------------------------------------------------------

@@ -8,7 +8,7 @@ Usage (from app/backend/):
 import os
 import sys
 import getpass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # Load .env from app/backend/
@@ -51,8 +51,8 @@ def main():
         "roles": ["administrator"],
         "capabilities": [],
         "status": "active",
-        "created_at": datetime.utcnow(),
-        "updated_at": datetime.utcnow(),
+        "created_at": datetime.now(timezone.utc),
+        "updated_at": datetime.now(timezone.utc),
     })
 
     print(f"Admin user '{email}' created.")

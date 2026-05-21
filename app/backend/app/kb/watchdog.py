@@ -14,7 +14,7 @@ but takes no destructive action.
 """
 import asyncio
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
@@ -41,7 +41,7 @@ async def recover_orphaned_batches(db: AsyncIOMotorDatabase) -> int:
     async for batch in db.ingestion_batches.find({"status": "running"}):
         batch_id = batch["_id"]
         batch_id_str = str(batch_id)
-        age_minutes = (datetime.utcnow() - batch.get("updated_at", datetime.utcnow())).total_seconds() / 60
+        age_minutes = (datetime.now(timezone.utc) - batch.get("updated_at", datetime.now(timezone.utc))).total_seconds() / 60
 
         logger.warning(
             "Watchdog [startup]: batch %s was left running (%.1f min) by previous process — resetting jobs to pending",
@@ -49,7 +49,7 @@ async def recover_orphaned_batches(db: AsyncIOMotorDatabase) -> int:
             age_minutes,
         )
 
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
 
         # Reset active jobs to pending so they can be retried
         await db.ingestion_jobs.update_many(
@@ -85,11 +85,11 @@ async def _watchdog_loop(db: AsyncIOMotorDatabase) -> None:
     while True:
         await asyncio.sleep(WATCHDOG_INTERVAL_SECONDS)
         try:
-            cutoff = datetime.utcnow() - timedelta(minutes=WARN_AFTER_MINUTES)
+            cutoff = datetime.now(timezone.utc) - timedelta(minutes=WARN_AFTER_MINUTES)
             async for batch in db.ingestion_batches.find(
                 {"status": "running", "updated_at": {"$lt": cutoff}}
             ):
-                age_minutes = (datetime.utcnow() - batch.get("updated_at", datetime.utcnow())).total_seconds() / 60
+                age_minutes = (datetime.now(timezone.utc) - batch.get("updated_at", datetime.now(timezone.utc))).total_seconds() / 60
                 logger.info(
                     "Watchdog: batch %s still running after %.1f minutes (this is normal for large batches)",
                     str(batch["_id"]),

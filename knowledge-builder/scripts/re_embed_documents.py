@@ -38,7 +38,7 @@ import asyncio
 import logging
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -155,7 +155,7 @@ async def process_batch(
                         {"_id": doc["_id"]},
                         {"$set": {
                             "embedding_status": "no_text",
-                            "updated_at": datetime.utcnow(),
+                            "updated_at": datetime.now(timezone.utc),
                         }},
                     )
                     logger.debug("Skip (no text): %s", doc_id)
@@ -166,7 +166,7 @@ async def process_batch(
                         {"$set": {
                             "embedding_status": "embedded",
                             "num_chunks": chunk_count,
-                            "updated_at": datetime.utcnow(),
+                            "updated_at": datetime.now(timezone.utc),
                         }},
                     )
                     logger.debug("Embedded %d chunks: %s", chunk_count, doc_id)
@@ -179,7 +179,7 @@ async def process_batch(
                         {"_id": doc["_id"]},
                         {"$set": {
                             "embedding_status": "failed",
-                            "updated_at": datetime.utcnow(),
+                            "updated_at": datetime.now(timezone.utc),
                         }},
                     )
                 except Exception:

@@ -32,7 +32,7 @@ import json
 import logging
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterator, List, Optional
 
@@ -209,7 +209,7 @@ async def run_import(
     dry_run: bool,
     batch_size: int,
 ) -> Dict[str, Any]:
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     total = 0
     inserted = 0
     errors = 0

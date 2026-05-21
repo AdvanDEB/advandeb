@@ -14,7 +14,7 @@ import asyncio
 import json
 import logging
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, List
 
 import httpx
@@ -105,8 +105,8 @@ async def _match_one(
                 "confidence": float(m.get("confidence", 0.5)),
                 "status": "suggested",
                 "created_by": "agent",
-                "created_at": datetime.utcnow(),
-                "updated_at": datetime.utcnow(),
+                "created_at": datetime.now(timezone.utc),
+                "updated_at": datetime.now(timezone.utc),
             }
             await db.fact_sf_relations.insert_one(rel)
             written += 1

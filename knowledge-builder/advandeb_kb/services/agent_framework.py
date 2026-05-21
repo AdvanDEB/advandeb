@@ -5,7 +5,7 @@ Implements Knowledge Builder and Modeling/Inference agents.
 import json
 import asyncio
 from typing import Dict, Any, List, Optional, AsyncIterator
-from datetime import datetime
+from datetime import datetime, timezone
 import logging
 
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -63,7 +63,7 @@ class BaseAgent:
     
     async def save_session(self, session: AgentSession):
         """Save session to database"""
-        session.updated_at = datetime.utcnow()
+        session.updated_at = datetime.now(timezone.utc)
         await self.db["agent_sessions"].update_one(
             {"session_id": session.session_id},
             {"$set": session.model_dump()},

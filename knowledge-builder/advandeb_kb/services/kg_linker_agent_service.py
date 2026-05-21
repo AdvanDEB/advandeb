@@ -14,7 +14,7 @@ import json
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 from advandeb_kb.database.arango_client import ArangoDatabase
@@ -81,7 +81,7 @@ class KGLinkerAgentService:
         docs = await self._run(_fetch_docs)
 
         docs_processed = docs_linked = relations_written = 0
-        now_iso = datetime.utcnow().isoformat()
+        now_iso = datetime.now(timezone.utc).isoformat()
 
         for doc in docs:
             if not overwrite and doc["_key"] in exclude_keys:

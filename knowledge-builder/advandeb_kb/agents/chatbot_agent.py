@@ -27,7 +27,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -813,7 +813,7 @@ class ChatbotAgent(BaseAgent):
 
         # Create a new session
         title = first_message[:80].strip()
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         result = await db.chat_sessions.insert_one({
             "user_id": user_id,
             "title": title,
@@ -828,7 +828,7 @@ class ChatbotAgent(BaseAgent):
         try:
             await self._chat_db.chat_sessions.update_one(
                 {"_id": ObjectId(session_id)},
-                {"$set": {"updated_at": datetime.utcnow()}},
+                {"$set": {"updated_at": datetime.now(timezone.utc)}},
             )
         except Exception as exc:
             logger.warning("touch_session failed: %s", exc)
@@ -854,7 +854,7 @@ class ChatbotAgent(BaseAgent):
         while the ReAct loop is still running will find any ``status="generating"``
         messages and show a spinner.
         """
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         if message_id:
             update_doc = {
                 "content": content,
@@ -929,7 +929,7 @@ class ChatbotAgent(BaseAgent):
             "assistant_answer": assistant_answer,
             "tool_calls_made": tool_calls_made,
             "citations": citations,
-            "created_at": datetime.utcnow(),
+            "created_at": datetime.now(timezone.utc),
         })
 
 

@@ -27,7 +27,7 @@ import asyncio
 import logging
 import re
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
 from advandeb_kb.database.arango_client import ArangoDatabase
@@ -178,7 +178,7 @@ class KGBuilderService:
             """
             docs = self.db.aql(aql, {"skip": skip, "limit": limit})
 
-            now_iso = datetime.utcnow().isoformat()
+            now_iso = datetime.now(timezone.utc).isoformat()
             docs_processed = 0
             docs_linked = 0
             relations_written = 0

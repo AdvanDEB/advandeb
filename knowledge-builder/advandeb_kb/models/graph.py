@@ -21,7 +21,7 @@ Built-in schemas (seeded at startup if absent):
                             determined 'studies' edges; node type = taxon rank
 """
 from typing import Any, Dict, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field, ConfigDict
 
 from advandeb_kb.models.common import PyObjectId
@@ -91,8 +91,8 @@ class GraphSchema(BaseModel):
     # Whether this schema was created by the system (True) or by a user (False)
     is_builtin: bool = False
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 # ---------------------------------------------------------------------------
@@ -124,8 +124,8 @@ class GraphNode(BaseModel):
     x2d: Optional[float] = None  # 2D-optimised layout x
     y2d: Optional[float] = None  # 2D-optimised layout y
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class GraphEdge(BaseModel):
@@ -146,7 +146,7 @@ class GraphEdge(BaseModel):
 
     properties: Dict[str, Any] = {}
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 # ---------------------------------------------------------------------------

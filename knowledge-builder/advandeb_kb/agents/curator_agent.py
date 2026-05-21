@@ -350,7 +350,7 @@ class CuratorAgent(BaseAgent):
         self, relation_id: str, confirmed_by: str = "curator"
     ) -> dict:
         from bson import ObjectId
-        from datetime import datetime
+        from datetime import datetime, timezone
 
         result = await self._db.fact_sf_relations.update_one(
             {"_id": ObjectId(relation_id)},
@@ -358,7 +358,7 @@ class CuratorAgent(BaseAgent):
                 "$set": {
                     "status": "confirmed",
                     "confirmed_by": confirmed_by,
-                    "updated_at": datetime.utcnow(),
+                    "updated_at": datetime.now(timezone.utc),
                 }
             },
         )
@@ -371,7 +371,7 @@ class CuratorAgent(BaseAgent):
         self, relation_id: str, rejected_by: str = "curator"
     ) -> dict:
         from bson import ObjectId
-        from datetime import datetime
+        from datetime import datetime, timezone
 
         result = await self._db.fact_sf_relations.update_one(
             {"_id": ObjectId(relation_id)},
@@ -379,7 +379,7 @@ class CuratorAgent(BaseAgent):
                 "$set": {
                     "status": "rejected",
                     "rejected_by": rejected_by,
-                    "updated_at": datetime.utcnow(),
+                    "updated_at": datetime.now(timezone.utc),
                 }
             },
         )

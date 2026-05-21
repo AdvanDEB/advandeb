@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional
 import httpx
 from bs4 import BeautifulSoup
 from bson import ObjectId
-from datetime import datetime
+from datetime import datetime, timezone
 
 from advandeb_kb.models.knowledge import Document, Fact
 from advandeb_kb.services.agent_service import AgentService
@@ -86,7 +86,7 @@ class DataProcessingService:
                 {
                     "$set": {
                         "processing_status": "completed",
-                        "updated_at": datetime.utcnow(),
+                        "updated_at": datetime.now(timezone.utc),
                     }
                 },
             )
@@ -105,7 +105,7 @@ class DataProcessingService:
             if "document_id" in locals():
                 await self.documents_collection.update_one(
                     {"_id": document_id},
-                    {"$set": {"processing_status": "failed", "updated_at": datetime.utcnow()}},
+                    {"$set": {"processing_status": "failed", "updated_at": datetime.now(timezone.utc)}},
                 )
             raise
 
@@ -226,7 +226,7 @@ class DataProcessingService:
 
         await self.documents_collection.update_one(
             {"_id": document.id},
-            {"$set": {"processing_status": "completed", "updated_at": datetime.utcnow()}},
+            {"$set": {"processing_status": "completed", "updated_at": datetime.now(timezone.utc)}},
         )
         return result
 

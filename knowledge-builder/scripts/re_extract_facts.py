@@ -23,7 +23,7 @@ import json
 import logging
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -170,7 +170,7 @@ async def _match_stylized_facts(
                 "relation_type": m.get("relation_type", "supports"),
                 "confidence": float(m.get("confidence", 0.5)),
                 "status": "suggested",
-                "created_at": datetime.utcnow(),
+                "created_at": datetime.now(timezone.utc),
             }
             await db.fact_sf_relations.insert_one(rel)
             written += 1
@@ -220,7 +220,7 @@ async def process_one(
         return str(doc_id), "dry_run", len(fact_texts)
 
     # Insert facts
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     fact_docs = [
         {
             "content": ft,

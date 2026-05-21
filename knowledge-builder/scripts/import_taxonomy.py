@@ -37,7 +37,7 @@ import tarfile
 import tempfile
 import urllib.request
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Iterator, List, Optional, Set, Tuple
 
@@ -166,7 +166,7 @@ def iter_documents(
     lineages: Dict[int, List[int]],
 ) -> Iterator[Dict]:
     """Yield MongoDB documents ready for insert_many."""
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     for tax_id, lineage in lineages.items():
         node = nodes[tax_id]
         name_info = names.get(tax_id, {})

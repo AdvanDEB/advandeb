@@ -6,7 +6,7 @@ Heavy processing (PDF extraction, fact extraction, SF matching) is done
 inside Celery tasks that call into DataProcessingService and AgentService.
 """
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from bson import ObjectId
@@ -79,7 +79,7 @@ class IngestionService:
     async def update_batch_status(self, batch_id: ObjectId, status: str) -> None:
         await self.batches.update_one(
             {"_id": batch_id},
-            {"$set": {"status": status, "updated_at": datetime.utcnow()}},
+            {"$set": {"status": status, "updated_at": datetime.now(timezone.utc)}},
         )
 
     # ------------------------------------------------------------------
@@ -147,7 +147,7 @@ class IngestionService:
         await self.jobs.insert_many(jobs)
         await self.batches.update_one(
             {"_id": batch.id},
-            {"$set": {"num_files": len(jobs), "updated_at": datetime.utcnow()}},
+            {"$set": {"num_files": len(jobs), "updated_at": datetime.now(timezone.utc)}},
         )
         return len(jobs)
 
@@ -199,11 +199,11 @@ class IngestionService:
     async def update_job_status(self, job_id: ObjectId, **fields: Any) -> None:
         await self.jobs.update_one(
             {"_id": job_id},
-            {"$set": {"updated_at": datetime.utcnow(), **fields}},
+            {"$set": {"updated_at": datetime.now(timezone.utc), **fields}},
         )
 
     async def link_document_to_job(self, job_id: ObjectId, document: Document) -> None:
         await self.jobs.update_one(
             {"_id": job_id},
-            {"$set": {"document_id": document.id, "updated_at": datetime.utcnow()}},
+            {"$set": {"document_id": document.id, "updated_at": datetime.now(timezone.utc)}},
         )

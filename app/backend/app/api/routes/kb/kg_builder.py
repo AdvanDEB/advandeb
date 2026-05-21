@@ -6,7 +6,7 @@ Document-taxon relations are stored as edges in the ArangoDB
 """
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, BackgroundTasks, Body, Depends, HTTPException, Query
@@ -113,7 +113,7 @@ async def update_relation(
         col.update({
             "_key": relation_key,
             "status": new_status,
-            "updated_at": datetime.utcnow().isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat(),
             "reviewed_by": body.get("curator_id", current_user.get("id", "curator")),
         })
         return True

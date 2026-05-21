@@ -50,7 +50,7 @@ import os
 import re
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -365,7 +365,7 @@ def _registry_from_citations(citations: list[dict]) -> EvidenceRegistry:
 
 def generate_report(model_results: dict[str, list[dict]], out_dir: Path) -> str:
     """Write JSON report and return Markdown summary."""
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
 
     # Aggregate per-model
     summary: dict[str, Any] = {}

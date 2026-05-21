@@ -6,7 +6,7 @@ order, family, genus, species, ...). The parent-child tree is encoded via
 parent_tax_id and a pre-materialized lineage array for fast ancestor queries.
 """
 from typing import List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field, ConfigDict
 
 from advandeb_kb.models.common import PyObjectId
@@ -51,5 +51,5 @@ class TaxonomyNode(BaseModel):
     # Whether this node was imported from NCBI (True) or added from GBIF only
     ncbi_sourced: bool = True
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

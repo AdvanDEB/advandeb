@@ -2,7 +2,7 @@
 Core knowledge entities: Document, Fact, StylizedFact, FactSFRelation.
 """
 from typing import List, Optional, Literal
-from datetime import datetime
+from datetime import datetime, timezone
 from pydantic import BaseModel, Field, ConfigDict
 
 from advandeb_kb.models.common import PyObjectId
@@ -50,8 +50,8 @@ class Document(BaseModel):
 
     processing_status: Literal["pending", "processing", "completed", "failed"] = "pending"
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class Fact(BaseModel):
@@ -81,8 +81,8 @@ class Fact(BaseModel):
     confidence: float = Field(default=0.8, ge=0.0, le=1.0)
     status: Literal["pending", "reviewed", "published", "rejected"] = "pending"
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class StylizedFact(BaseModel):
@@ -108,8 +108,8 @@ class StylizedFact(BaseModel):
 
     status: Literal["pending", "published", "rejected"] = "pending"
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class DocumentTaxonRelation(BaseModel):
@@ -146,8 +146,8 @@ class DocumentTaxonRelation(BaseModel):
     # "agent" or a user_id string
     created_by: str = "agent"
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class FactSFRelation(BaseModel):
@@ -174,5 +174,5 @@ class FactSFRelation(BaseModel):
     # user_id string or the literal "agent" for automated suggestions
     created_by: str = "agent"
 
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
