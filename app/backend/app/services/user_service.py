@@ -1,14 +1,24 @@
 """
 User service - business logic for user management.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
+
+import bcrypt
 from bson import ObjectId
 from fastapi import HTTPException, status
 
 from app.core.auth import get_password_hash, verify_password
 from app.core.database import get_database
 from app.models.user import User, UserCreate, UserUpdate
+
+
+# Precomputed dummy bcrypt hash used to keep authenticate_user's timing
+# constant regardless of whether the email exists. Computed once at import time.
+_DUMMY_BCRYPT_HASH = bcrypt.hashpw(b"dummy", bcrypt.gensalt()).decode()
+
+# Roles accepted by assign_role / remove_role.
+VALID_ROLES = frozenset({"administrator", "knowledge_curator", "knowledge_explorator"})
 
 
 class UserService:
@@ -38,7 +48,7 @@ class UserService:
                 update_fields["avatar_url"] = avatar_url
 
             if update_fields:
-                update_fields["updated_at"] = datetime.utcnow()
+                update_fields["updated_at"] = datetime.now(timezone.utc)
                 await self.collection.update_one(
                     {"_id": user_doc["_id"]},
                     {"$set": update_fields}
@@ -57,8 +67,8 @@ class UserService:
             "roles": ["knowledge_explorator"],  # Default role
             "capabilities": [],
             "status": "active",
-            "created_at": datetime.utcnow(),
-            "updated_at": datetime.utcnow()
+            "created_at": datetime.now(timezone.utc),
+            "updated_at": datetime.now(timezone.utc)
         }
 
         result = await self.collection.insert_one(new_user)
@@ -87,8 +97,8 @@ class UserService:
             "roles": roles,
             "capabilities": [],
             "status": "active",
-            "created_at": datetime.utcnow(),
-            "updated_at": datetime.utcnow()
+            "created_at": datetime.now(timezone.utc),
+            "updated_at": datetime.now(timezone.utc)
         }
 
         result = await self.collection.insert_one(new_user)
@@ -96,13 +106,17 @@ class UserService:
         return User(**new_user)
 
     async def authenticate_user(self, email: str, password: str) -> Optional[User]:
-        """Verify email/password credentials. Returns User on success, None on failure."""
-        user_doc = await self.collection.find_one({"email": email})
-        if not user_doc:
-            return None
+        """Verify email/password credentials. Returns User on success, None on failure.
 
-        password_hash = user_doc.get("password_hash")
+        Always runs bcrypt verification (against a dummy hash if no user / no
+        password_hash) to avoid leaking user existence via response timing.
+        """
+        user_doc = await self.collection.find_one({"email": email})
+        password_hash = user_doc.get("password_hash") if user_doc else None
+
         if not password_hash:
+            # Run verify against a dummy hash to equalise timing, then fail.
+            verify_password(password, _DUMMY_BCRYPT_HASH)
             return None
 
         if not verify_password(password, password_hash):
@@ -117,7 +131,7 @@ class UserService:
             {"_id": ObjectId(user_id)},
             {"$set": {
                 "password_hash": get_password_hash(new_password),
-                "updated_at": datetime.utcnow()
+                "updated_at": datetime.now(timezone.utc)
             }}
         )
 
@@ -132,7 +146,7 @@ class UserService:
     async def update_user(self, user_id: str, user_update: UserUpdate) -> User:
         """Update user profile."""
         update_data = user_update.model_dump(exclude_unset=True)
-        update_data["updated_at"] = datetime.utcnow()
+        update_data["updated_at"] = datetime.now(timezone.utc)
 
         await self.collection.update_one(
             {"_id": ObjectId(user_id)},
@@ -152,22 +166,32 @@ class UserService:
 
     async def assign_role(self, user_id: str, role: str) -> User:
         """Assign role to user."""
+        if role not in VALID_ROLES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Unknown role: {role!r}",
+            )
         await self.collection.update_one(
             {"_id": ObjectId(user_id)},
             {
                 "$addToSet": {"roles": role},
-                "$set": {"updated_at": datetime.utcnow()}
+                "$set": {"updated_at": datetime.now(timezone.utc)}
             }
         )
         return await self.get_user_by_id(user_id)
 
     async def remove_role(self, user_id: str, role: str) -> User:
         """Remove role from user."""
+        if role not in VALID_ROLES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Unknown role: {role!r}",
+            )
         await self.collection.update_one(
             {"_id": ObjectId(user_id)},
             {
                 "$pull": {"roles": role},
-                "$set": {"updated_at": datetime.utcnow()}
+                "$set": {"updated_at": datetime.now(timezone.utc)}
             }
         )
         return await self.get_user_by_id(user_id)

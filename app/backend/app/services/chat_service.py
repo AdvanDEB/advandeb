@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 import uuid
 from typing import AsyncIterator, Dict, Any, List, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from bson import ObjectId
 
 import websockets  # type: ignore
@@ -28,10 +28,6 @@ import websockets  # type: ignore
 from app.core.database import get_database
 from app.core.config import settings
 from app.clients.mcp_client import MCPClient
-
-# Direct WebSocket URL to chatbot_agent — bypasses the MCP gateway so we can
-# receive intermediate streaming events without waiting for the loop to finish.
-_CHATBOT_AGENT_WS = "ws://localhost:8086"
 
 
 class ChatService:
@@ -96,7 +92,7 @@ class ChatService:
         })
 
         try:
-            async with websockets.connect(_CHATBOT_AGENT_WS) as ws:
+            async with websockets.connect(settings.CHATBOT_AGENT_WS) as ws:
                 await ws.send(payload)
                 async for raw in ws:
                     try:
@@ -264,7 +260,7 @@ class ChatService:
 
         result = await self.sessions_collection.update_one(
             {"_id": oid, "user_id": user_id},
-            {"$set": {"title": title, "updated_at": datetime.utcnow()}},
+            {"$set": {"title": title, "updated_at": datetime.now(timezone.utc)}},
         )
         return result.matched_count > 0
 

@@ -1,6 +1,8 @@
 """
 Authentication API routes.
 """
+import logging
+
 from fastapi import APIRouter, HTTPException, status
 import httpx
 
@@ -9,6 +11,8 @@ from app.core.auth import create_access_token, create_refresh_token, verify_toke
 from app.models.user import GoogleAuthRequest, NativeLoginRequest, RefreshTokenRequest, TokenResponse, User
 from app.services.user_service import UserService
 
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -46,6 +50,12 @@ async def native_login(login_request: NativeLoginRequest):
         refresh_token=refresh_token,
         user=user
     )
+
+
+@router.post("/token", response_model=TokenResponse)
+async def token_endpoint(login_request: NativeLoginRequest):
+    """Alias for /login used by OAuth2PasswordBearer (Swagger 'Authorize')."""
+    return await native_login(login_request)
 
 
 @router.post("/google", response_model=TokenResponse)
@@ -124,10 +134,11 @@ async def google_auth(auth_request: GoogleAuthRequest):
 
     except HTTPException:
         raise
-    except Exception as e:
+    except Exception:
+        logger.exception("Google OAuth failed")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"Authentication failed: {str(e)}"
+            detail="Authentication failed"
         )
 
 

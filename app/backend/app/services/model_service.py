@@ -1,7 +1,7 @@
 """
 Model service - business logic for model management.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 from bson import ObjectId
 
@@ -24,8 +24,8 @@ class ModelService:
             "status": "draft",
             "version": 1,
             "provenance": [],
-            "created_at": datetime.utcnow(),
-            "updated_at": datetime.utcnow()
+            "created_at": datetime.now(timezone.utc),
+            "updated_at": datetime.now(timezone.utc)
         })
         
         result = await self.collection.insert_one(model_data)
@@ -66,7 +66,7 @@ class ModelService:
     ) -> Model:
         """Update model."""
         update_data = model_update.model_dump()
-        update_data["updated_at"] = datetime.utcnow()
+        update_data["updated_at"] = datetime.now(timezone.utc)
         
         # Increment version on update
         await self.collection.update_one(

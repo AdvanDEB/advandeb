@@ -1,7 +1,7 @@
 """
 Scenario service - business logic for scenario management.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 from bson import ObjectId
 
@@ -26,8 +26,8 @@ class ScenarioService:
         scenario_data.update({
             "creator_id": creator_id,
             "status": "draft",
-            "created_at": datetime.utcnow(),
-            "updated_at": datetime.utcnow()
+            "created_at": datetime.now(timezone.utc),
+            "updated_at": datetime.now(timezone.utc)
         })
         
         result = await self.collection.insert_one(scenario_data)
@@ -63,7 +63,7 @@ class ScenarioService:
     ) -> Scenario:
         """Update scenario."""
         update_data = scenario_update.model_dump()
-        update_data["updated_at"] = datetime.utcnow()
+        update_data["updated_at"] = datetime.now(timezone.utc)
         
         await self.collection.update_one(
             {"_id": ObjectId(scenario_id)},
