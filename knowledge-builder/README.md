@@ -1,346 +1,180 @@
-# AdvanDEB Knowledge Builder
+# advandeb_kb
 
-AdvanDEB knowledge-base builder for agglomeration of knowledge on physiology, morphology, anatomy, and bioenergetics of organisms.
+**advandeb_kb** is a Python package providing knowledge-base operations for the AdvanDEB platform. It is consumed as a library by the main AdvanDEB app (`pip install -e ../knowledge-builder`) — it is not a standalone service and has no UI.
+
+The package aggregates knowledge on physiology, morphology, anatomy, and bioenergetics of organisms, and exposes services for fact storage, ingestion, semantic retrieval, and knowledge-graph construction.
 
 ## Overview
 
-AdvanDEB Knowledge Builder is a comprehensive knowledge management system that provides powerful tools for:
+`advandeb_kb` provides the building blocks for the platform's knowledge layer:
 
-- **Knowledge Base Management**: Store and organize facts, stylized facts, and knowledge graphs
-- **AI-Powered Extraction**: Leverage locally hosted Ollama LLM models for intelligent fact extraction
-- **Data Processing**: Ingest PDFs, browse web content, and process raw text
-- **Interactive Visualization**: Create and explore knowledge graphs with network analysis
-- **Semantic Search**: Discover relationships and connections in your knowledge base
+- **Knowledge base management**: Store and organize facts, stylized facts, and knowledge graphs
+- **AI-powered extraction**: Leverage locally hosted Ollama LLM models for fact extraction
+- **Data processing**: Ingest PDFs, browse web content, and process raw text
+- **Semantic search**: Discover relationships and connections in the knowledge base
+- **Graph construction**: Build and update ArangoDB-backed knowledge graphs
+
+All user-facing UI (chat, visualization, document library, etc.) lives in the main `app/` of the AdvanDEB monorepo; this package only exposes Python services.
 
 ## Architecture
 
 ### Components
 
-- **Backend**: FastAPI (Python) with MongoDB storage
-- **Frontend**: Vue.js 3 with Element Plus UI components
-- **AI Integration**: Ollama LLM hosting (native, in-house only)
-- **Visualization**: D3.js for interactive graph rendering
-- **Database**: MongoDB (native install; optional single-container just for MongoDB if you prefer)
-- **Environment Management**: Conda (or venv) for Python, npm for JavaScript
+- **Storage**: MongoDB for facts and metadata; ArangoDB for graph data; ChromaDB for vector embeddings
+- **AI integration**: Ollama LLM hosting (native, in-house only)
+- **Environment management**: Conda (or venv) for Python
 
 ## Features
 
-### Core Functionality
+### Core functionality
 
-- ✅ MongoDB-based knowledge storage
-- ✅ Ollama LLM hosting support (localhost/remote)
-- ✅ Web browsing capabilities
-- ✅ PDF document ingestion
-- ✅ Stylized fact extraction
-- ✅ Interactive graph visualization
-- ✅ Network analysis and community detection
+- MongoDB-based knowledge storage
+- Ollama LLM hosting support (localhost/remote)
+- Web browsing capabilities
+- PDF document ingestion
+- Stylized fact extraction
+- Network analysis and community detection (programmatic; rendering is done by the host app)
 
-### Data Processing
+### Data processing
 
-- **PDF Upload**: Extract facts from scientific documents
-- **Web Browsing**: Collect content from web sources
-- **Text Processing**: Extract entities and facts from raw text
-- **Entity Recognition**: Identify biological terms and concepts
+- **PDF ingestion**: Extract facts from scientific documents
+- **Web browsing**: Collect content from web sources
+- **Text processing**: Extract entities and facts from raw text
+- **Entity recognition**: Identify biological terms and concepts
 
-### Knowledge Organization
+### Knowledge organization
 
-- **Facts**: Store individual pieces of information with confidence scores
-- **Stylized Facts**: Enhanced facts with importance ratings and relationships
-- **Knowledge Graphs**: Visual networks showing connections between concepts
-- **Search & Discovery**: Find related information and explore connections
+- **Facts**: Individual pieces of information with confidence scores
+- **Stylized facts**: Enhanced facts with importance ratings and relationships
+- **Knowledge graphs**: Networks of concepts and relations stored in ArangoDB
+- **Search and discovery**: Programmatic APIs for related-information lookup
 
-### AI Integration
+### AI integration
 
-- **Fact Extraction**: Automated extraction using LLM models
-- **Content Stylization**: Convert raw facts to structured knowledge
-- **Chat Interface**: Interactive AI assistant for knowledge exploration
-- **Model Support**: Utilize any Ollama-hosted local models
+- **Fact extraction**: Automated extraction using LLM models
+- **Content stylization**: Convert raw facts to structured knowledge
+- **Model support**: Any Ollama-hosted local model
 
-## Quick Start
+## Library usage
 
-### Prerequisites
+The package is imported by the main app. Canonical imports:
+
+```python
+from advandeb_kb import KnowledgeService, IngestionService
+```
+
+Other services available from the package (see `advandeb_kb/__init__.py` for the authoritative list):
+
+```python
+from advandeb_kb.services import (
+    KnowledgeService,
+    IngestionService,
+)
+```
+
+A typical embedded use, from the main app's backend:
+
+```python
+from advandeb_kb import KnowledgeService
+
+knowledge = KnowledgeService()
+facts = await knowledge.search_facts(query="...")
+```
+
+The main app wires these services into its FastAPI routes; `advandeb_kb` itself does not register HTTP routes or start a server.
+
+## Development setup
+
+Prerequisites:
 
 - **Conda/Miniforge**: For Python environment management (https://github.com/conda-forge/miniforge)
-- **Node.js & npm**: For frontend development (https://nodejs.org/)
 - **MongoDB**: For data storage (https://docs.mongodb.com/manual/installation/)
+- **ArangoDB**: For graph storage (installed locally via OS package manager, no Docker)
 - **Ollama**: For LLM services (https://ollama.ai)
 
-### Native Development Setup (Recommended)
+Steps:
 
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/AdvanDEB/advandeb-knowledge-builder.git
-   cd advandeb-knowledge-builder
-   ```
-
-2. Run the setup script:
-
-   ```bash
-   ./setup.sh
-   ```
-
-3. Start the services:
-
-   ```bash
-   # Terminal 1: Start backend
-   conda activate advandeb-knowledge-builder-backend
-   cd backend
-   uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-
-   # Terminal 2: Start frontend
-   cd frontend
-   npm run dev
-
-   # Terminal 3: Start Ollama (if not running)
-   ollama serve
-   ```
-
-4. Access the application:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- API Documentation: http://localhost:8000/docs
-
-### Manual Installation
-
-#### Backend Setup
-
-1. Navigate to backend directory:
 ```bash
-cd backend
+# 1. Clone the AdvanDEB monorepo
+git clone <advandeb-monorepo-url>
+cd advandeb/knowledge-builder
+
+# 2. Activate the shared conda environment
+conda activate advandeb
+
+# 3. Install the package in editable mode
+pip install -e .
 ```
 
-2. Create conda environment:
+To use it from the main app's backend:
+
 ```bash
-conda env create -f environment.yml
-conda activate advandeb-knowledge-builder-backend
+cd ../app/backend
+pip install -e ../../knowledge-builder
 ```
 
-3. Configure environment:
+### Supporting services
+
 ```bash
-cp .env.example .env
-# Edit .env file with your settings
-```
+# MongoDB (system service)
+sudo systemctl start mongod
 
-4. Start MongoDB:
-
-   ```bash
-   # Install MongoDB locally (see https://www.mongodb.com/docs/manual/installation/)
-   sudo systemctl start mongod
-   ```
-
-5. Start Ollama:
-```bash
-# Install Ollama from https://ollama.ai
+# Ollama
 ollama serve
-ollama pull llama2  # Pull a model
+ollama pull llama2
 ```
-
-6. Run the backend:
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-#### Frontend Setup
-
-1. Navigate to frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start development server:
-```bash
-npm run dev
-```
-
-## Usage Guide
-
-### 1. Data Processing
-- **Upload PDFs**: Go to Data Processing → PDF Upload
-- **Browse Web Content**: Enter URLs to extract content
-- **Process Text**: Paste text for fact extraction
-
-### 2. Knowledge Base
-- **View Facts**: Browse extracted facts with confidence scores
-- **Stylized Facts**: View enhanced facts with relationships
-- **Knowledge Graphs**: Explore visual representations
-
-### 3. AI Agents
-- **Chat Interface**: Interact with AI for knowledge exploration
-- **Fact Extraction**: Use AI to extract facts from text
-- **Fact Stylization**: Convert facts to structured format
-
-### 4. Visualization
-- **Graph Viewer**: Visualize knowledge graphs interactively
-- **Network Analysis**: Analyze graph properties and statistics
-- **Community Detection**: Find clusters in knowledge networks
-- **Export Options**: Save graphs in various formats
 
 ## Configuration
 
-### Environment Variables
+`advandeb_kb` reads configuration from environment variables (loaded via `advandeb_kb.config.settings`). The host application is responsible for setting these; defaults are sensible for a local dev install.
 
 ```bash
-# MongoDB Settings
+# MongoDB
 MONGODB_URL=mongodb://localhost:27017
 DATABASE_NAME=advandeb_knowledge_builder_kb
 
-# Ollama Settings
+# Ollama
 OLLAMA_BASE_URL=http://localhost:11434
 
-# API Settings
-API_HOST=0.0.0.0
-API_PORT=8000
+# ChromaDB (embedded mode)
+CHROMA_PERSIST_DIR=./chroma_data
 
-# File Upload Settings
+# File upload (used by ingestion service)
 MAX_FILE_SIZE=50000000
 UPLOAD_DIR=uploads
 ```
 
-### AI Model Configuration
+### AI model configuration
 
-Install and run Ollama locally (no external API keys required)
-   ```bash
-   # Install Ollama
-   curl -fsSL https://ollama.ai/install.sh | sh
-   
-   # Start Ollama service
-   ollama serve
-   
-   # Pull required models
-   ollama pull llama2
-   ollama pull codellama
-   ```
-
-## API Documentation
-
-The backend provides a comprehensive REST API. Access the interactive documentation at:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-### Key Endpoints
-
-- `/api/knowledge/*` - Knowledge base operations
-- `/api/agents/*` - AI agent interactions (Ollama-only)
-- `/api/data/*` - Data processing operations
-- `/api/viz/*` - Visualization and graph operations
-
-## Development
-
-### Quick Development Setup
-
-For developers who want to get started quickly:
+Install and run Ollama locally (no external API keys required):
 
 ```bash
-# Clone and setup
-git clone https://github.com/AdvanDEB/advandeb-knowledge-builder.git
-cd advandeb-knowledge-builder
-./setup.sh
+# Install Ollama
+curl -fsSL https://ollama.ai/install.sh | sh
 
-# Alternative: Use Makefile commands
-make setup     # Run setup script
-make backend   # Start backend (in one terminal)
-make frontend  # Start frontend (in another terminal)
+# Start Ollama service
+ollama serve
+
+# Pull required models
+ollama pull llama2
+ollama pull codellama
 ```
 
-For manual startup:
-```bash
-# Start development servers (in separate terminals)
-conda activate advandeb-knowledge-builder-backend
-cd backend && uvicorn main:app --reload &
-cd frontend && npm run dev &
-
-# Start external services
-ollama serve &  # If not already running
-```
-
-### Development Workflow
-
-1. **Backend Development**:
-   ```bash
-   conda activate advandeb-knowledge-builder-backend
-   cd backend
-   uvicorn main:app --reload  # Auto-reload on changes
-   ```
-
-2. **Frontend Development**:
-   ```bash
-   cd frontend
-   npm run dev  # Hot reload enabled
-   ```
-
-3. **Environment Management**:
-   ```bash
-   # Update Python dependencies
-   conda env update -f backend/environment.yml
-   
-   # Update JavaScript dependencies  
-   cd frontend && npm install
-   
-   # Or use Makefile for convenience
-   make install  # Update all dependencies
-   make clean    # Clean and reset environments
-   ```
-
-4. **Development Shortcuts**:
-   ```bash
-   # Use Makefile for common tasks
-   make help     # Show available commands
-   make setup    # Initial setup
-   make backend  # Start backend server
-   make frontend # Start frontend server
-   ```
-
-### Project Structure
+## Project structure
 
 ```
-advandeb-knowledge-builder/
-├── backend/                 # FastAPI backend
-│   ├── routers/            # API route handlers
-│   ├── services/           # Business logic
-│   ├── models/             # Data models
-│   ├── database/           # Database configuration
-│   ├── config/             # Application settings
-│   └── environment.yml     # Conda environment
-├── frontend/               # Vue.js frontend
-│   ├── src/
-│   │   ├── views/          # Page components
-│   │   ├── components/     # Reusable components
-│   │   └── services/       # API clients
-│   └── package.json        # npm dependencies
-├── docs/                   # Documentation
-└── setup.sh              # Native development setup
+knowledge-builder/
+├── advandeb_kb/             # Installable Python package
+│   ├── __init__.py          # Public API surface
+│   ├── config/              # Settings (env-driven)
+│   ├── database/            # MongoDB / ArangoDB / ChromaDB clients
+│   ├── models/              # Pydantic models
+│   ├── services/            # KnowledgeService, IngestionService, etc.
+│   └── agents/              # Multi-agent LLM workers
+├── pyproject.toml
+└── environment.yml
 ```
 
-### Contributing
+## Repository
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-For questions and support:
-- Create an issue on GitHub
-- Check the documentation
-- Review the API documentation
-
-## Roadmap
-
-- [ ] Advanced entity linking
-- [ ] Real-time collaboration
-- [ ] Enhanced graph algorithms
-- [ ] Mobile application
-- [ ] Plugin system
-- [ ] Advanced search capabilities
+This package is part of the AdvanDEB monorepo at https://github.com/AdvanDEB (placeholder).

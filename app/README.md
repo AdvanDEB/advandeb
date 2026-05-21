@@ -1,9 +1,7 @@
 # AdvanDEB Modeling Assistant - App
 
-**Status**: ✅ Production Ready  
-**Version**: 0.1.0  
-**Developer**: Dev 3 (Full-stack Vue/FastAPI)  
-**Development Timeline**: 12 weeks (100% complete)
+**Status**: Internal beta — under active development (2026-05).
+**Version**: 0.1.0
 
 ---
 
@@ -13,36 +11,30 @@ The AdvanDEB Modeling Assistant is a full-stack web application that provides an
 
 ### Key Features
 
-✅ **Real-time Chat Interface**
+**Real-time Chat Interface**
 - WebSocket-based streaming chat
 - Agent activity visualization
 - Markdown rendering with syntax highlighting
 - Multi-session management
 - Export conversations
 
-✅ **Interactive Knowledge Graph**
-- Cytoscape.js visualization
+**Interactive Knowledge Graph**
+- Cosmograph WebGL canvas
 - Multiple layouts (Force, Tree, Circle, Rings)
 - Node filtering and search
 - Graph expansion
-- 3 graph types: Knowledge, Citation, Taxonomy
+- Multiple graph types (Knowledge, Citation, Taxonomy)
 
-✅ **Provenance Tracking**
-- Full citation trails (Answer → Facts → Chunks → Documents)
+**Provenance Tracking**
+- Citation trails (Answer → Facts → Chunks → Documents)
 - Expandable chunk context
 - Source document linking
 
-✅ **Document Management**
+**Document Management**
 - Drag-and-drop upload
 - PDF processing
 - Search and filtering
 - Embedding status tracking
-
-✅ **Production Ready**
-- Health checks
-- Monitoring setup
-- Security headers
-- Performance optimized
 
 ---
 
@@ -50,7 +42,7 @@ The AdvanDEB Modeling Assistant is a full-stack web application that provides an
 
 ```
 app/
-├── backend/               # FastAPI backend
+├── backend/               # FastAPI backend (serves /api/* and the built SPA)
 │   ├── app/
 │   │   ├── api/routes/   # API endpoints
 │   │   ├── services/     # Business logic
@@ -59,14 +51,13 @@ app/
 │   │   └── clients/      # MCP client
 │   └── requirements.txt
 │
-├── frontend/             # Vue 3 frontend
+├── frontend/             # Vue 3 frontend (built into backend's static dir)
 │   ├── src/
 │   │   ├── views/       # Page components
 │   │   ├── components/  # Reusable components
 │   │   ├── stores/      # Pinia state management
 │   │   ├── utils/       # API client, helpers
 │   │   └── router/      # Vue Router config
-│   ├── nginx.conf
 │   └── package.json
 │
 ├── DEPLOYMENT.md              # Deployment guide
@@ -83,33 +74,36 @@ app/
 ```bash
 cd advandeb/app
 
-# Terminal 1: Backend
+# Terminal 1: Backend (serves /api/* on :8400)
 cd backend
 cp .env.example .env  # Configure environment
 pip install -r requirements.txt
 pip install -e ../../knowledge-builder
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --port 8400
 
-# Terminal 2: Frontend
+# Terminal 2: Frontend dev server (Vite, hot-reload on :5173)
 cd frontend
 npm install
 npm run dev
 ```
 
-Access the app at: **http://localhost:5173**
+Access the dev UI at: **http://localhost:5173** (proxies `/api/*` to the backend on :8400).
 
 ### Production Mode
 
+In production there is no separate web server in front of the app — the FastAPI backend serves both the JSON API at `/api/*` and the built Vue SPA from `frontend/dist/` on port **8400**.
+
 ```bash
-# Build frontend
+# Build the frontend (output goes to frontend/dist/)
 cd frontend
 npm run build
 
-# Serve with nginx (see frontend/nginx.conf)
-# Start backend
-cd backend
-uvicorn app.main:app --workers 4
+# Run the backend; it will mount and serve dist/
+cd ../backend
+uvicorn app.main:app --port 8400
 ```
+
+For canonical ops instructions (systemd unit, service management, environment), see [`RUNNING.md`](../RUNNING.md) at the repo root.
 
 ---
 
@@ -122,7 +116,7 @@ uvicorn app.main:app --workers 4
 JWT_SECRET_KEY=your-secret-key-here
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
-GOOGLE_REDIRECT_URI=http://localhost:8000/api/auth/callback
+GOOGLE_REDIRECT_URI=http://localhost:8400/api/auth/callback
 MONGODB_URI=mongodb://localhost:27017
 ```
 
@@ -130,7 +124,7 @@ MONGODB_URI=mongodb://localhost:27017
 ```env
 MCP_SERVER_URL=http://localhost:8080
 OLLAMA_BASE_URL=http://localhost:11434
-CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+CORS_ORIGINS=http://localhost:5173
 LOG_LEVEL=INFO
 ```
 
@@ -149,9 +143,6 @@ cd frontend
 # Unit tests (Vitest)
 npm test
 npm run test:watch
-
-# E2E tests (Playwright)
-npm run test:e2e
 ```
 
 **Backend:**
@@ -171,7 +162,7 @@ pytest --cov=app --cov-report=html
 ```bash
 cd frontend
 npm run build
-# Output: dist/
+# Output: dist/ (served by the FastAPI backend in production)
 
 # Analyze bundle size
 npx vite-bundle-visualizer
@@ -196,11 +187,7 @@ mypy app/
 
 ## Deployment
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive deployment guide including:
-- Environment configuration
-- Health checks
-- Scaling
-- Backup/restore
+See [DEPLOYMENT.md](DEPLOYMENT.md) for deployment guide and [`RUNNING.md`](../RUNNING.md) for canonical ops instructions.
 
 ---
 
@@ -209,7 +196,6 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive deployment guide including:
 See [MONITORING.md](MONITORING.md) for monitoring setup including:
 - Sentry error tracking
 - Prometheus metrics
-- Lighthouse CI
 - Structured logging
 - Alert configuration
 
@@ -218,8 +204,8 @@ See [MONITORING.md](MONITORING.md) for monitoring setup including:
 ## API Documentation
 
 When running the backend, interactive API docs are available at:
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+- **Swagger UI**: http://localhost:8400/docs
+- **ReDoc**: http://localhost:8400/redoc
 
 ### Key Endpoints
 
@@ -253,9 +239,9 @@ When running the backend, interactive API docs are available at:
 - **State Management**: Pinia
 - **Routing**: Vue Router
 - **Styling**: Tailwind CSS
-- **Graph**: Cytoscape.js
+- **Graph**: Cosmograph (WebGL)
 - **Markdown**: marked + highlight.js
-- **Testing**: Vitest + Playwright
+- **Testing**: Vitest
 
 ### Backend
 - **Framework**: FastAPI
@@ -266,41 +252,26 @@ When running the backend, interactive API docs are available at:
 - **Testing**: pytest + pytest-asyncio
 
 ### Infrastructure
-- **Web Server**: nginx (frontend proxy)
-- **Reverse Proxy**: nginx
+- **Web server**: FastAPI (uvicorn) on :8400 — serves API and the built SPA
 - **Monitoring**: Sentry, Prometheus (optional)
 
 ---
 
-## Performance Metrics
+## Project Timeline
 
-### Achieved Metrics (Week 12)
-
-✅ **Frontend:**
-- Initial load: 2.1s (target: <3s)
-- Bundle size: 645KB gzipped (target: <1MB)
-- Build time: 4.3s
-- Lighthouse score: 95/100 (target: >90)
-
-✅ **Backend:**
-- Health check: <100ms
-
-✅ **Infrastructure:**
-- All services have health checks
-- Security headers configured
-- Production-ready with resource limits
+See [`docs/ROADMAP.md`](../docs/ROADMAP.md) for current phase status and outstanding work.
 
 ---
 
 ## Integration
 
-### With Dev 1 (Knowledge Builder)
-- Imports `advandeb_kb` package
+### With Knowledge Builder
+- Imports `advandeb_kb` package (`pip install -e ../../knowledge-builder`)
 - Shares MongoDB collections
 - Uses provenance data format
 - Retrieves graph data from ArangoDB (via KB)
 
-### With Dev 2 (MCP Gateway)
+### With MCP Gateway
 - MCP client for tool calls
 - WebSocket streaming for agent updates
 - No authentication (internal service)
@@ -329,51 +300,41 @@ Role enforcement via FastAPI dependencies.
 
 ---
 
-## Project Timeline
-
-**Week 1-2**: Backend MCP integration + Chat interface  
-**Week 3-4**: Agent visualization + Provenance display  
-**Week 5-6**: Knowledge graph + Mid-point integration  
-**Week 7-8**: Document management + Graph enhancements  
-**Week 9-10**: Advanced chat features + UI polish  
-**Week 11**: Testing (unit + E2E + backend)  
-**Week 12**: Production deployment ✅
-
-See [DEV3-LOG.md](../DEV3-LOG.md) for detailed progress log.
-
----
-
 ## Troubleshooting
 
 ### Frontend not loading
 ```bash
-# Check that the dev server or nginx is running
-npm run dev   # from frontend/
+# In dev: make sure the Vite dev server is running on :5173
+cd frontend && npm run dev
+
+# In prod: the FastAPI backend serves frontend/dist/ — make sure you ran
+#   npm run build
+# and that the backend is up on :8400.
 ```
 
 ### Backend connection errors
 ```bash
-# Check backend logs from uvicorn output
+# Check backend logs from uvicorn (or journalctl -u advandeb)
 # Verify MongoDB is running:
 mongosh --eval "db.adminCommand('ping')"
 ```
 
 ### WebSocket connection failures
-- Check nginx is proxying `/ws/*`
-- Verify `proxy_read_timeout` in nginx.conf
+- Verify the backend is reachable on :8400
 - Check backend WebSocket registration in `main.py`
+- In dev, confirm the Vite proxy forwards `/ws/*` to the backend
 
 ---
 
 ## Resources
 
-- [Development Plan](../docs/DEV3-APP-PLAN.md)
-- [Development Log](../DEV3-LOG.md)
+- [Roadmap](../docs/ROADMAP.md)
+- [System overview](../docs/SYSTEM-OVERVIEW.md)
+- [Running the app](../RUNNING.md)
 - [Deployment Guide](DEPLOYMENT.md)
 - [Monitoring Guide](MONITORING.md)
 - [Vue 3 Docs](https://vuejs.org/)
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
-- [Cytoscape.js Docs](https://js.cytoscape.org/)
 
 ---
 
@@ -383,14 +344,4 @@ mongosh --eval "db.adminCommand('ping')"
 
 ---
 
-## Contributors
-
-- **Dev 3**: Full-stack development (Vue 3 + FastAPI)
-- **Dev 1**: Knowledge Builder integration
-- **Dev 2**: MCP Gateway integration
-
----
-
-**Status**: ✅ Production Ready  
-**Last Updated**: 2026-03-13  
-**Next Steps**: Coordinate with Dev 1 & Dev 2 for full system deployment
+**Last Updated**: 2026-05-18
