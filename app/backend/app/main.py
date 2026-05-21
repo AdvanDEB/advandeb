@@ -11,8 +11,11 @@ from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 from pathlib import Path
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 from app.core.config import settings
+from app.core.limiter import limiter
 
 # ── File logging ────────────────────────────────────────────────────────────
 def _configure_logging() -> None:
@@ -124,6 +127,11 @@ app = FastAPI(
     version=settings.APP_VERSION,
     lifespan=lifespan,
 )
+
+# slowapi rate limiting (S8) — limiter instance lives in app.core.limiter so
+# route modules can share it without circular-importing from app.main.
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Trust X-Forwarded-Proto/For from the nginx reverse proxy so that
 # Starlette generates https:// redirect URLs when behind HTTPS termination.

@@ -1,6 +1,7 @@
 """
 Authentication and authorization utilities.
 """
+import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import JWTError, jwt
@@ -29,9 +30,14 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
 
 
 def create_refresh_token(data: dict) -> str:
-    """Create JWT refresh token."""
+    """Create JWT refresh token.
+
+    Each refresh token gets a unique ``jti`` (JWT ID) claim so that individual
+    tokens can be revoked server-side via ``revoke_refresh_token``.
+    """
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS)
+    to_encode["jti"] = uuid.uuid4().hex
     to_encode.update({"exp": expire, "type": "refresh"})
     encoded_jwt = jwt.encode(to_encode, settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
     return encoded_jwt
@@ -110,3 +116,30 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 def get_password_hash(password: str) -> str:
     """Hash password with bcrypt."""
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+
+# ---------------------------------------------------------------------------
+# Refresh-token revocation
+# ---------------------------------------------------------------------------
+
+async def revoke_refresh_token(jti: str, exp: datetime) -> None:
+    """Record a refresh token as revoked.
+
+    The ``exp`` datetime mirrors the JWT's ``exp`` claim so a TTL index on
+    ``revoked_tokens.exp`` can auto-prune stale entries once the token would
+    have expired anyway.
+    """
+    from app.core.database import get_database
+    db = get_database()
+    await db.revoked_tokens.update_one(
+        {"jti": jti},
+        {"$set": {"jti": jti, "exp": exp}},
+        upsert=True,
+    )
+
+
+async def is_refresh_token_revoked(jti: str) -> bool:
+    """Return True if the given refresh-token jti has been revoked."""
+    from app.core.database import get_database
+    db = get_database()
+    return await db.revoked_tokens.find_one({"jti": jti}) is not None

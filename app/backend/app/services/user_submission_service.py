@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from typing import List, Optional
 
 from bson import ObjectId
+from bson.errors import InvalidId
 from fastapi import UploadFile
 
 from app.core.database import get_database
@@ -109,7 +110,11 @@ class UserSubmissionService:
         return DocumentSubmission(**doc)
 
     async def get_document_submission(self, submission_id: str) -> Optional[DocumentSubmission]:
-        doc = await self.doc_submissions.find_one({"_id": ObjectId(submission_id)})
+        try:
+            oid = ObjectId(submission_id)
+        except (InvalidId, TypeError):
+            return None
+        doc = await self.doc_submissions.find_one({"_id": oid})
         if doc:
             doc["_id"] = str(doc["_id"])
             return DocumentSubmission(**doc)
@@ -153,13 +158,18 @@ class UserSubmissionService:
         approve → marks status as 'pending' and triggers KB ingestion pipeline.
         reject  → marks status as 'rejected'.
         """
-        doc = await self.doc_submissions.find_one({"_id": ObjectId(submission_id)})
+        try:
+            oid = ObjectId(submission_id)
+        except (InvalidId, TypeError):
+            return {"updated": False, "error": "Submission not found"}
+
+        doc = await self.doc_submissions.find_one({"_id": oid})
         if not doc:
             return {"updated": False, "error": "Submission not found"}
 
         if action == "reject":
             await self.doc_submissions.update_one(
-                {"_id": ObjectId(submission_id)},
+                {"_id": oid},
                 {
                     "$set": {
                         "status": "rejected",
@@ -173,7 +183,7 @@ class UserSubmissionService:
 
         # approve: flip to pending, trigger KB ingestion
         await self.doc_submissions.update_one(
-            {"_id": ObjectId(submission_id)},
+            {"_id": oid},
             {
                 "$set": {
                     "status": "pending",
@@ -240,6 +250,10 @@ class UserSubmissionService:
 
     async def delete_document_submission(self, submission_id: str) -> None:
         """Delete a document submission."""
+        try:
+            oid = ObjectId(submission_id)
+        except (InvalidId, TypeError):
+            return
         # Also clean up any ChromaDB / vector embeddings if the doc was processed
         try:
             from advandeb_kb.services.chromadb_service import ChromaDBService
@@ -255,7 +269,7 @@ class UserSubmissionService:
                 submission_id,
                 exc,
             )
-        await self.doc_submissions.delete_one({"_id": ObjectId(submission_id)})
+        await self.doc_submissions.delete_one({"_id": oid})
 
     # ------------------------------------------------------------------
     # Fact submissions
@@ -281,7 +295,11 @@ class UserSubmissionService:
         return FactSubmission(**doc)
 
     async def get_fact_submission(self, submission_id: str) -> Optional[FactSubmission]:
-        doc = await self.fact_submissions.find_one({"_id": ObjectId(submission_id)})
+        try:
+            oid = ObjectId(submission_id)
+        except (InvalidId, TypeError):
+            return None
+        doc = await self.fact_submissions.find_one({"_id": oid})
         if doc:
             doc["_id"] = str(doc["_id"])
             return FactSubmission(**doc)
@@ -315,8 +333,12 @@ class UserSubmissionService:
         new_status: str,  # "published" | "rejected" | "pending_review"
         review_comment: Optional[str] = None,
     ) -> dict:
+        try:
+            oid = ObjectId(submission_id)
+        except (InvalidId, TypeError):
+            return {"updated": False, "error": "Fact submission not found"}
         result = await self.fact_submissions.update_one(
-            {"_id": ObjectId(submission_id)},
+            {"_id": oid},
             {
                 "$set": {
                     "status": new_status,
@@ -381,8 +403,12 @@ class UserSubmissionService:
         new_status: str,  # "published" | "rejected"
         review_comment: Optional[str] = None,
     ) -> dict:
+        try:
+            oid = ObjectId(submission_id)
+        except (InvalidId, TypeError):
+            return {"updated": False, "error": "Stylized fact submission not found"}
         result = await self.sf_submissions.update_one(
-            {"_id": ObjectId(submission_id)},
+            {"_id": oid},
             {
                 "$set": {
                     "status": new_status,

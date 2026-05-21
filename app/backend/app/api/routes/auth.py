@@ -2,12 +2,20 @@
 Authentication API routes.
 """
 import logging
+from datetime import datetime, timezone
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Request, status
 import httpx
 
 from app.core.config import settings
-from app.core.auth import create_access_token, create_refresh_token, verify_token
+from app.core.auth import (
+    create_access_token,
+    create_refresh_token,
+    is_refresh_token_revoked,
+    revoke_refresh_token,
+    verify_token,
+)
+from app.core.limiter import limiter
 from app.models.user import GoogleAuthRequest, NativeLoginRequest, RefreshTokenRequest, TokenResponse, User
 from app.services.user_service import UserService
 
@@ -24,7 +32,8 @@ async def get_auth_config():
 
 
 @router.post("/login", response_model=TokenResponse)
-async def native_login(login_request: NativeLoginRequest):
+@limiter.limit("10/minute")
+async def native_login(request: Request, login_request: NativeLoginRequest):
     """
     Authenticate with email and password.
     Returns JWT tokens on success, 401 on invalid credentials.
@@ -53,13 +62,14 @@ async def native_login(login_request: NativeLoginRequest):
 
 
 @router.post("/token", response_model=TokenResponse)
-async def token_endpoint(login_request: NativeLoginRequest):
+async def token_endpoint(request: Request, login_request: NativeLoginRequest):
     """Alias for /login used by OAuth2PasswordBearer (Swagger 'Authorize')."""
-    return await native_login(login_request)
+    return await native_login(request, login_request)
 
 
 @router.post("/google", response_model=TokenResponse)
-async def google_auth(auth_request: GoogleAuthRequest):
+@limiter.limit("10/minute")
+async def google_auth(request: Request, auth_request: GoogleAuthRequest):
     """
     Authenticate with Google OAuth 2.0.
     Exchange authorization code for tokens and create/update user.
@@ -143,8 +153,13 @@ async def google_auth(auth_request: GoogleAuthRequest):
 
 
 @router.post("/refresh", response_model=TokenResponse)
-async def refresh_token(body: RefreshTokenRequest):
-    """Refresh access token using a valid refresh token."""
+@limiter.limit("10/minute")
+async def refresh_token(request: Request, body: RefreshTokenRequest):
+    """Refresh access token using a valid refresh token.
+
+    On success, the OLD refresh token's ``jti`` is immediately revoked
+    (refresh-token rotation), so a stolen refresh token can only be used once.
+    """
     try:
         payload = verify_token(body.refresh_token)
     except HTTPException:
@@ -157,6 +172,15 @@ async def refresh_token(body: RefreshTokenRequest):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token type",
+        )
+
+    # Refresh-token revocation check (S9). Tokens minted before the jti rollout
+    # have no jti claim — treat those as not-revoked for backwards compatibility.
+    old_jti = payload.get("jti")
+    if old_jti and await is_refresh_token_revoked(old_jti):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Refresh token has been revoked",
         )
 
     user_id = payload.get("sub")
@@ -174,6 +198,16 @@ async def refresh_token(body: RefreshTokenRequest):
             detail="User not found",
         )
 
+    # Rotation: revoke the OLD refresh token before minting the new pair so
+    # it cannot be replayed. Skip for legacy tokens without a jti.
+    if old_jti:
+        exp_claim = payload.get("exp")
+        if isinstance(exp_claim, (int, float)):
+            old_exp_dt = datetime.fromtimestamp(exp_claim, tz=timezone.utc)
+        else:
+            old_exp_dt = datetime.now(timezone.utc)
+        await revoke_refresh_token(old_jti, old_exp_dt)
+
     new_access_token = create_access_token(
         data={"sub": str(user.id), "email": user.email}
     )
@@ -189,7 +223,29 @@ async def refresh_token(body: RefreshTokenRequest):
 
 
 @router.post("/logout")
-async def logout():
-    """Logout user (invalidate tokens)."""
-    # TODO: Implement token blacklisting if needed
-    return {"message": "Logged out successfully"}
+async def logout(body: RefreshTokenRequest):
+    """Logout user by revoking the supplied refresh token.
+
+    Idempotent: always returns 200 with the same payload, regardless of
+    whether the token was valid, already revoked, or already expired. This
+    prevents leaking information about whether a given token string is
+    currently active.
+    """
+    try:
+        payload = verify_token(body.refresh_token, expected_type="refresh")
+    except HTTPException:
+        return {"message": "Logged out"}
+    except Exception:
+        # Defensive: any decode error → still respond OK.
+        return {"message": "Logged out"}
+
+    jti = payload.get("jti")
+    exp_claim = payload.get("exp")
+    if jti and isinstance(exp_claim, (int, float)):
+        exp_dt = datetime.fromtimestamp(exp_claim, tz=timezone.utc)
+        try:
+            await revoke_refresh_token(jti, exp_dt)
+        except Exception:
+            logger.exception("Failed to record refresh-token revocation for jti=%s", jti)
+
+    return {"message": "Logged out"}

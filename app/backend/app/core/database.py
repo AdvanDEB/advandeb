@@ -152,4 +152,14 @@ async def ensure_app_indexes(app_db) -> None:
         name="sf_sub_status_created",
     )
 
+    # revoked_tokens — refresh token revocation list (S9).
+    # TTL index on `exp` auto-prunes entries once the token would have expired
+    # anyway, so the collection stays bounded.
+    await app_db.revoked_tokens.create_index(
+        "exp", expireAfterSeconds=0, background=True, name="revoked_tokens_ttl"
+    )
+    await app_db.revoked_tokens.create_index(
+        "jti", unique=True, background=True, name="revoked_tokens_jti"
+    )
+
     logger.info("ensure_app_indexes: submission collection indexes verified/created")
