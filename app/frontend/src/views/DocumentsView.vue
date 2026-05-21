@@ -28,9 +28,8 @@ function handleUploaded(_docId: string) {
   libraryRef.value?.fetchDocuments()
 }
 
-function handleOpenDoc(doc: any) {
-  // TODO Week 11: open document viewer / PDF preview
-  console.log('Open doc', doc)
+function handleOpenDoc(_doc: any) {
+  // TODO Week 11: open document viewer / PDF preview (use _doc when implementing)
 }
 </script>
 

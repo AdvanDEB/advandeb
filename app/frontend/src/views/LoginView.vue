@@ -73,6 +73,10 @@ async function handleNativeLogin() {
 
 function handleGoogleLogin() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
+  if (!clientId) {
+    errorMessage.value = 'Google sign-in is not configured.'
+    return
+  }
   const redirectUri = `${window.location.origin}/login`
   const scope = 'openid email profile'
 
@@ -95,7 +99,7 @@ const code = urlParams.get('code')
 if (code) {
   const redirectUri = `${window.location.origin}/login`
   authStore.login(code, redirectUri).then(() => {
-    router.push('/')
+    router.replace({ name: 'home', query: {} })
   }).catch((error) => {
     console.error('Google login failed:', error)
     errorMessage.value = 'Google sign-in failed. Please try again.'

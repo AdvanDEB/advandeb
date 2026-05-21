@@ -232,15 +232,6 @@ function pushData(autoFit = false) {
       _cachedNodeSummaries = b.nodeSummaries
       _idToVisibleIndex = new Map(b.nodeIds.map((id, i) => [id, i]))
 
-      console.log('[CosmographCanvas] pushData bundle:', {
-        nodeCount: b.nodeCount,
-        edgeCount: b.edgeCount,
-        linkIndicesLength: b.linkIndices.length,
-        linkIndicesSample: Array.from(b.linkIndices.slice(0, 10)),
-        linkColorsLength: b.linkColors.length,
-        linkWidthsLength: b.linkWidths.length,
-      })
-
       graph.setPointPositions(b.pointPositions)
       graph.setPointColors(b.pointColors)
       graph.setPointSizes(b.pointSizes)
