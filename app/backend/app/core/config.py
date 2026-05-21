@@ -2,6 +2,7 @@
 Application configuration settings.
 """
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import field_validator
 from typing import List, Optional
 
 
@@ -53,9 +54,12 @@ class Settings(BaseSettings):
     ARANGO_PASSWORD: str = ""
     
     # MCP Server
-    MCP_SERVER_URL: str = "http://localhost:3000"
+    MCP_SERVER_URL: str = "http://localhost:8080"
     MCP_SERVER_ENABLED: bool = True
-    
+
+    # Chatbot agent WebSocket endpoint (used by the chat WS bridge in B10)
+    CHATBOT_AGENT_WS: str = "ws://localhost:8086"
+
     # Ollama
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     
@@ -80,6 +84,27 @@ class Settings(BaseSettings):
     def cors_origins_list(self) -> List[str]:
         """Convert CORS_ORIGINS string to list."""
         return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
+
+    @field_validator("JWT_SECRET_KEY")
+    @classmethod
+    def _validate_jwt_secret_key(cls, value: str, info) -> str:
+        """Reject empty / weak / example JWT_SECRET_KEY values outside development.
+
+        ENVIRONMENT is declared before JWT_SECRET_KEY, so by Pydantic v2's
+        declaration-order validation it is already present in ``info.data``.
+        """
+        environment = info.data.get("ENVIRONMENT", "development")
+        if environment != "development":
+            if (
+                not value
+                or len(value) < 32
+                or "your-secret-key-here" in value
+            ):
+                raise ValueError(
+                    "JWT_SECRET_KEY is unset or uses the example value; "
+                    f"refusing to start with ENVIRONMENT={environment}"
+                )
+        return value
 
 
 settings = Settings()
