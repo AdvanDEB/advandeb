@@ -168,17 +168,16 @@ async def root():
     }
 
 
-@app.get("/health")
-async def health():
-    """Health check endpoint with database connectivity check."""
+async def _health_payload() -> dict:
+    """Build the health-check payload, including a MongoDB ping."""
     from app.core.database import get_database
-    
+
     health_status = {
         "status": "healthy",
         "service": settings.APP_NAME,
         "version": settings.APP_VERSION
     }
-    
+
     try:
         # Check database connectivity
         db = get_database()
@@ -187,8 +186,29 @@ async def health():
     except Exception as e:
         health_status["status"] = "degraded"
         health_status["database"] = f"error: {str(e)}"
-    
+
     return health_status
+
+
+@app.get("/health")
+async def health():
+    """Health check endpoint with database connectivity check."""
+    return await _health_payload()
+
+
+@app.get("/api/health", tags=["health"])
+async def api_health():
+    """Canonical production health-check endpoint.
+
+    Mirrors ``/health`` exactly (same payload, same database ping), but lives
+    under ``/api/*`` so it survives deployments where the reverse proxy
+    (Cloudflare/nginx) only forwards ``/api/*`` to FastAPI and serves
+    everything else from the Vue SPA bundle. In such setups ``/health`` is
+    shadowed by the SPA fallback and returns ``index.html`` instead of JSON,
+    breaking external monitoring. Use this endpoint for uptime checks in
+    production; ``/health`` remains available for local development.
+    """
+    return await _health_payload()
 
 
 # Serve Vue SPA static assets and fall back to index.html for client-side routing.
