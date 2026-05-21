@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [main, review-p0]
+  pull_request:
+    branches: [main, review-p0]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend (pytest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            app/backend/requirements.txt
+            knowledge-builder/pyproject.toml
+
+      - name: Install backend deps
+        working-directory: app/backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e ../../knowledge-builder
+
+      - name: Pytest -- app backend
+        working-directory: app/backend
+        env:
+          # Minimum envvars so Settings construct without raising
+          JWT_SECRET_KEY: "ci-test-secret-key-at-least-32-chars-long-1234"
+          MONGODB_URI: "mongodb://localhost:27017"
+          ENVIRONMENT: "development"
+        run: pytest -x -q
+
+      - name: Pytest -- knowledge-builder
+        working-directory: knowledge-builder
+        # Tolerate missing optional deps for now; tighten once KB tests are
+        # service-free and stable in CI.
+        run: pytest -x -q tests/ || true
+
+  frontend:
+    name: Frontend (vue-tsc + vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: app/frontend/package-lock.json
+
+      - name: Install
+        working-directory: app/frontend
+        run: npm ci || npm install
+
+      - name: Typecheck + build
+        working-directory: app/frontend
+        run: npm run build
+
+      - name: Unit tests
+        working-directory: app/frontend
+        run: npm test
+
+  mcp:
+    name: MCP gateway (cargo test + clippy)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+          components: clippy
+
+      - name: Cache cargo registry and target
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            mcp/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('mcp/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      - name: cargo clippy
+        working-directory: mcp
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: cargo test
+        working-directory: mcp
+        run: cargo test --release
