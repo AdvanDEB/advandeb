@@ -77,6 +77,7 @@ const baseLinks = [
   { path: '/facts',      icon: '🔬', label: 'Facts' },
   { path: '/scenarios',  icon: '⚗',  label: 'Scenarios' },
   { path: '/models',     icon: '📐', label: 'Models' },
+  { path: '/settings/llm-keys', icon: '🔑', label: 'LLM Keys' },
 ]
 
 const navLinks = computed(() => {

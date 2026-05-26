@@ -47,6 +47,12 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/settings/llm-keys',
+      name: 'llm-keys',
+      component: () => import('@/views/LLMKeysView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/kb',
       name: 'knowledge-builder',
       component: () => import('@/views/KnowledgeBuilderView.vue'),
