@@ -43,3 +43,11 @@ pypdf==4.3.1
 
 # Knowledge Builder Integration
 # advandeb-knowledge-builder @ git+https://github.com/AdvanDEB/advandeb-knowledge-builder.git
+
+# BYOK — encryption of user-supplied LLM API keys at rest
+cryptography==42.0.5
+# Provider SDKs (lazy-imported; only needed when a user configures that provider).
+# Also declared as the `byok` optional-dependency group of advandeb_kb.
+anthropic>=0.40.0
+openai>=1.40.0
+google-generativeai>=0.8.0

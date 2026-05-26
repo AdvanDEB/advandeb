@@ -79,11 +79,37 @@ class Settings(BaseSettings):
     # Logging
     LOG_LEVEL: str = "INFO"
     LOG_FILE: str = "logs/app.log"
+
+    # BYOK — Fernet key for encrypting user-supplied LLM API keys at rest.
+    # Generate with:
+    #   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+    # Leave unset to disable the BYOK feature; the rest of the app still boots.
+    LLM_KEY_ENCRYPTION_KEY: Optional[str] = None
     
     @property
     def cors_origins_list(self) -> List[str]:
         """Convert CORS_ORIGINS string to list."""
         return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
+
+    @field_validator("LLM_KEY_ENCRYPTION_KEY")
+    @classmethod
+    def _validate_llm_key_encryption_key(cls, value: Optional[str]) -> Optional[str]:
+        """Allow None (BYOK disabled). If set, must be a Fernet-accepted 44-char base64 key."""
+        if value in (None, ""):
+            return None
+        # Fernet keys are URL-safe base64-encoded 32-byte values → 44 chars total.
+        if len(value) != 44:
+            raise ValueError(
+                "LLM_KEY_ENCRYPTION_KEY must be a 44-char URL-safe base64 Fernet key "
+                "(generate with: python -c \"from cryptography.fernet import Fernet; "
+                "print(Fernet.generate_key().decode())\")"
+            )
+        try:
+            from cryptography.fernet import Fernet
+            Fernet(value.encode())
+        except Exception as exc:  # noqa: BLE001
+            raise ValueError(f"LLM_KEY_ENCRYPTION_KEY is not a valid Fernet key: {exc}") from exc
+        return value
 
     @field_validator("JWT_SECRET_KEY")
     @classmethod

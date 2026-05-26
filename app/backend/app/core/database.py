@@ -162,4 +162,15 @@ async def ensure_app_indexes(app_db) -> None:
         "jti", unique=True, background=True, name="revoked_tokens_jti"
     )
 
+    # user_llm_keys — BYOK key store. Unique on (user_id, provider, label) so a
+    # user gets at most one unlabeled key per provider; additional keys per
+    # provider must be distinguished by a label. Matches the duplicate check in
+    # LLMKeyService.create_key().
+    await app_db.user_llm_keys.create_index(
+        [("user_id", 1), ("provider", 1), ("label", 1)],
+        unique=True,
+        background=True,
+        name="user_llm_keys_owner_provider_label",
+    )
+
     logger.info("ensure_app_indexes: submission collection indexes verified/created")
