@@ -60,6 +60,18 @@ class RenameSessionRequest(BaseModel):
     title: str
 
 
+class SessionLLMConfig(BaseModel):
+    """Per-session BYOK LLM configuration.
+
+    ``provider`` "ollama" (or no ``key_id``) means use the default local model.
+    ``mode`` "react" always runs on Ollama regardless of provider.
+    """
+    provider: str = "ollama"
+    mode: str = "final"
+    model: Optional[str] = None
+    key_id: Optional[str] = None
+
+
 @router.post("/", response_model=ChatResponse)
 async def send_message(
     request: ChatRequest,
@@ -110,3 +122,52 @@ async def rename_chat_session(
     if not ok:
         raise HTTPException(status_code=404, detail="Session not found")
     return {"id": session_id, "title": body.title}
+
+
+@router.get("/sessions/{session_id}/llm")
+async def get_session_llm(
+    session_id: str,
+    current_user: dict = Depends(get_current_user)
+) -> Dict[str, Any]:
+    """Get the per-session BYOK LLM config (defaults to local Ollama)."""
+    chat_service = ChatService()
+    config = await chat_service.get_session_llm_config(session_id, current_user["id"])
+    return config or {"provider": "ollama", "mode": "final"}
+
+
+@router.put("/sessions/{session_id}/llm")
+async def set_session_llm(
+    session_id: str,
+    body: SessionLLMConfig,
+    current_user: dict = Depends(get_current_user)
+) -> Dict[str, Any]:
+    """Set the per-session BYOK LLM config.
+
+    A non-ollama provider requires a ``key_id`` the current user owns.
+    """
+    user_id = current_user["id"]
+
+    if body.provider != "ollama":
+        if not body.key_id:
+            raise HTTPException(
+                status_code=422,
+                detail="key_id is required for non-ollama providers",
+            )
+        from app.services.llm_key_service import LLMKeyService
+        owned = await LLMKeyService().list_keys(user_id)
+        match = next((k for k in owned if k.id == body.key_id), None)
+        if match is None:
+            raise HTTPException(status_code=404, detail="LLM key not found")
+        if match.provider != body.provider:
+            raise HTTPException(
+                status_code=422,
+                detail="key_id does not match the selected provider",
+            )
+
+    chat_service = ChatService()
+    ok = await chat_service.set_session_llm_config(
+        session_id, user_id, body.model_dump()
+    )
+    if not ok:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return body.model_dump()

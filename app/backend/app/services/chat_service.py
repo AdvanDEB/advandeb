@@ -66,6 +66,46 @@ class ChatService:
         if not session_id or session_id == "new":
             session_id = "new"
 
+        # BYOK final-answer path: synthesize in-backend with the user's own key.
+        # No token-level streaming yet — emit a status event, then the answer.
+        byok_config = await self.get_session_llm_config(session_id, user_id)
+        if self._byok_applies(byok_config):
+            from app.services.byok_chat_service import (
+                ByokChatService,
+                ByokSynthesisError,
+            )
+
+            provider = byok_config["provider"]
+            yield {
+                "type": "agent_activity",
+                "agent": "chatbot",
+                "status": "working",
+                "task": f"Reasoning with your {provider} model…",
+            }
+            try:
+                result = await ByokChatService().answer(
+                    query=message,
+                    session_id=session_id,
+                    user_id=user_id,
+                    provider=provider,
+                    key_id=byok_config["key_id"],
+                    model=byok_config.get("model"),
+                )
+            except ByokSynthesisError as exc:
+                yield {"type": "error", "detail": str(exc)}
+                return
+            yield {
+                "type": "message",
+                "role": "assistant",
+                "content": result["answer"],
+                "citations": result["citations"],
+                "evidence_mode": result["evidence_mode"],
+                "suggested_questions": result["suggested_questions"],
+                "session_id": result["session_id"],
+                "message_id": result["message_id"],
+            }
+            return
+
         if not settings.MCP_SERVER_ENABLED:
             yield {
                 "type": "message",
@@ -147,6 +187,39 @@ class ChatService:
             (m["content"] for m in reversed(messages) if m.get("role") == "user"),
             "",
         )
+
+        # BYOK final-answer path: synthesize in-backend with the user's own key.
+        byok_config = await self.get_session_llm_config(session_id, user_id)
+        if self._byok_applies(byok_config):
+            from app.services.byok_chat_service import (
+                ByokChatService,
+                ByokSynthesisError,
+            )
+
+            try:
+                result = await ByokChatService().answer(
+                    query=last_user,
+                    session_id=session_id,
+                    user_id=user_id,
+                    provider=byok_config["provider"],
+                    key_id=byok_config["key_id"],
+                    model=byok_config.get("model"),
+                )
+            except ByokSynthesisError as exc:
+                return {
+                    "message": {"role": "assistant", "content": f"Error: {exc}"},
+                    "session_id": session_id,
+                }
+            return {
+                "message": {
+                    "role": "assistant",
+                    "content": result["answer"],
+                    "citations": result["citations"],
+                    "evidence_mode": result["evidence_mode"],
+                },
+                "session_id": result["session_id"],
+                "suggested_questions": result["suggested_questions"],
+            }
 
         if not settings.MCP_SERVER_ENABLED:
             return {
@@ -246,8 +319,58 @@ class ChatService:
             "title": session.get("title", ""),
             "created_at": session.get("created_at"),
             "updated_at": session.get("updated_at"),
+            "llm_config": session.get("llm_config"),
             "messages": messages,
         }
+
+    # ------------------------------------------------------------------
+    # Per-session LLM (BYOK) configuration
+    # ------------------------------------------------------------------
+
+    async def get_session_llm_config(
+        self, session_id: str, user_id: str
+    ) -> Optional[Dict[str, Any]]:
+        """Return the stored ``llm_config`` for a session, or None."""
+        if not session_id or session_id in ("", "new"):
+            return None
+        try:
+            oid = ObjectId(session_id)
+        except Exception:
+            return None
+        doc = await self.sessions_collection.find_one(
+            {"_id": oid, "user_id": user_id}, {"llm_config": 1}
+        )
+        return (doc or {}).get("llm_config")
+
+    async def set_session_llm_config(
+        self, session_id: str, user_id: str, config: Dict[str, Any]
+    ) -> bool:
+        """Persist a session's ``llm_config`` (provider/mode/model/key_id)."""
+        try:
+            oid = ObjectId(session_id)
+        except Exception:
+            return False
+        result = await self.sessions_collection.update_one(
+            {"_id": oid, "user_id": user_id},
+            {"$set": {"llm_config": config, "updated_at": datetime.now(timezone.utc)}},
+        )
+        return result.matched_count > 0
+
+    @staticmethod
+    def _byok_applies(config: Optional[Dict[str, Any]]) -> bool:
+        """True when a session should be answered by the in-backend BYOK path.
+
+        BYOK handles non-ollama providers in ``final`` mode only. ``react`` mode
+        (or an ollama provider) degrades to the standard chatbot_agent path.
+        """
+        if not config:
+            return False
+        provider = config.get("provider")
+        return (
+            bool(config.get("key_id"))
+            and provider not in (None, "", "ollama")
+            and config.get("mode", "final") != "react"
+        )
 
     async def rename_session(
         self, session_id: str, user_id: str, title: str

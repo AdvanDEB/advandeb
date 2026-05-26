@@ -25,8 +25,24 @@
         <!-- Chat toolbar -->
         <div class="chat-toolbar">
           <span class="session-title-display">{{ currentSessionTitle }}</span>
-          <button class="toolbar-btn" title="Export conversation" @click="exportConversation">⬇ Export</button>
+          <div class="toolbar-actions">
+            <button
+              class="toolbar-btn"
+              :class="{ active: showLLMConfig }"
+              title="Choose which model answers"
+              @click="showLLMConfig = !showLLMConfig"
+            >
+              🔑 {{ llmConfigLabel }}
+            </button>
+            <button class="toolbar-btn" title="Export conversation" @click="exportConversation">⬇ Export</button>
+          </div>
         </div>
+
+        <LLMConfigPanel
+          v-if="showLLMConfig"
+          :model-value="llmConfig"
+          @update:model-value="onLLMConfigUpdate"
+        />
 
         <MessageList :messages="messages" @show-provenance="openProvenance" />
 
@@ -71,8 +87,10 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import MessageList from './MessageList.vue'
 import MessageInput from './MessageInput.vue'
 import AgentActivity from './AgentActivity.vue'
+import LLMConfigPanel from './LLMConfigPanel.vue'
 import ProvenanceTrail from '@/components/provenance/ProvenanceTrail.vue'
 import type { ChatMessage as Message, CitationRef as Citation } from '@/types/chat'
+import type { LLMSessionConfig } from '@/types/llm'
 import api from '@/utils/api'
 import { useAuthStore } from '@/stores/auth'
 
@@ -112,10 +130,39 @@ const suggestedQuestions = ref<string[]>([])
 const generatingMessageIds = ref<Set<string>>(new Set())
 let ws: WebSocket | null = null
 
+// Per-session LLM (BYOK) config. `pendingLLMConfig` holds a choice made before
+// a brand-new session exists; it is persisted once the session_id arrives.
+const showLLMConfig = ref(false)
+const llmConfig = ref<LLMSessionConfig | null>(null)
+const pendingLLMConfig = ref<LLMSessionConfig | null>(null)
+
+const PROVIDER_SHORT: Record<string, string> = {
+  ollama: 'Local', anthropic: 'Claude', openai: 'ChatGPT',
+  gemini: 'Gemini', github_models: 'GitHub',
+}
+
 const currentSessionTitle = computed(() => {
   const s = sessions.value.find((s) => s.id === currentSessionId.value)
   return s?.title || 'New conversation'
 })
+
+const llmConfigLabel = computed(() =>
+  PROVIDER_SHORT[llmConfig.value?.provider || 'ollama'] || 'Local',
+)
+
+async function onLLMConfigUpdate(cfg: LLMSessionConfig) {
+  llmConfig.value = cfg
+  if (currentSessionId.value && currentSessionId.value !== 'new') {
+    try {
+      await api.put(`/chat/sessions/${currentSessionId.value}/llm`, cfg)
+    } catch {
+      // interceptor surfaces the error
+    }
+  } else {
+    // No session yet — apply once one is created.
+    pendingLLMConfig.value = cfg
+  }
+}
 
 const AGENT_DISPLAY_NAMES: Record<string, string> = {
   // Legacy names
@@ -222,7 +269,13 @@ function handleServerEvent(event: Record<string, unknown>) {
     responding.value = false
 
     if (event.session_id && event.session_id !== currentSessionId.value) {
-      currentSessionId.value = event.session_id as string
+      const newId = event.session_id as string
+      currentSessionId.value = newId
+      // Persist any LLM choice made before this session existed.
+      if (pendingLLMConfig.value) {
+        api.put(`/chat/sessions/${newId}/llm`, pendingLLMConfig.value).catch(() => {})
+        pendingLLMConfig.value = null
+      }
       fetchSessions()
     }
 
@@ -307,6 +360,8 @@ async function loadSession(sessionId: string) {
 
   try {
     const { data } = await api.get(`/chat/sessions/${sessionId}`)
+    llmConfig.value = (data.llm_config as LLMSessionConfig) || null
+    pendingLLMConfig.value = null
     messages.value = (data.messages || []).map((m: Record<string, unknown>) => {
       return {
         id: (m.id as string) || crypto.randomUUID(),
@@ -512,6 +567,9 @@ function formatDate(iso?: string): string {
 }
 
 .toolbar-btn:hover { background: #f3f4f6; }
+.toolbar-btn.active { background: #eff6ff; border-color: #bfdbfe; color: #2563eb; }
+
+.toolbar-actions { display: flex; gap: 0.4rem; align-items: center; }
 
 .suggestions {
   padding: 0.5rem 1rem;
