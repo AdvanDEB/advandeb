@@ -340,6 +340,8 @@ async function handleSendMessage(text: string) {
       JSON.stringify({
         type: 'user_message',
         text,
+        // Inline config so a brand-new session uses the chosen model immediately.
+        llm_config: llmConfig.value || undefined,
       })
     )
   }

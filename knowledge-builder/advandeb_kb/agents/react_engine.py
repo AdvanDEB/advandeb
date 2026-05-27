@@ -190,6 +190,7 @@ class ReactEngine:
         conversation_history: Optional[list[dict]] = None,
         max_steps: int = MAX_STEPS,
         num_ctx: int = 8192,
+        provider: Optional[Any] = None,
     ):
         self._ollama_url = ollama_url
         self._model = model
@@ -198,6 +199,12 @@ class ReactEngine:
         self._history = conversation_history or []
         self._max_steps = max_steps
         self._num_ctx = num_ctx
+        # Optional BYOK provider (advandeb_kb.services.llm_providers.BaseLLMProvider).
+        # When set, the reasoning LLM calls go to this provider instead of Ollama,
+        # so the user's own Claude/OpenAI/Gemini/GitHub model drives the multi-step
+        # ReAct loop. The OpenAI-compatible message shape is identical to Ollama's
+        # /api/chat, so no message translation is needed here.
+        self._provider = provider
 
     # ------------------------------------------------------------------
     # Public API
@@ -657,6 +664,25 @@ class ReactEngine:
           - Each chunk is logged at DEBUG level so the agent logs show live
             progress even for very slow 70B generation.
         """
+        # BYOK path: drive the reasoning step with the user's own provider.
+        if self._provider is not None:
+            try:
+                resp = await self._provider.chat_completion(
+                    model=self._model,
+                    messages=messages,
+                    stream=False,
+                    temperature=0.3,
+                    max_tokens=max_tokens,
+                )
+                choices = resp.get("choices") or []
+                if choices:
+                    content = (choices[0].get("message") or {}).get("content", "")
+                    return (content or "").strip()
+                return ""
+            except Exception as exc:
+                logger.error("BYOK provider chat failed: %s", exc)
+                return ""
+
         try:
             tokens: list[str] = []
             async with httpx.AsyncClient(timeout=None) as client:

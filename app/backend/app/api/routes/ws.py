@@ -126,11 +126,18 @@ async def ws_chat(
             if not text:
                 continue
 
+            # Optional per-message LLM config (provider/model/key_id) — lets a
+            # brand-new session use the chosen BYOK model on its first message.
+            llm_config = data.get("llm_config")
+            if not isinstance(llm_config, dict):
+                llm_config = None
+
             # Stream all events back to the client as they arrive
             async for event in chat_service.process_message_stream(
                 session_id=active_session_id,
                 message=text,
                 user_id=server_user_id,
+                llm_config=llm_config,
             ):
                 if event.get("type") == "message" and event.get("session_id"):
                     active_session_id = str(event["session_id"])

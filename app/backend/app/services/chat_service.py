@@ -47,6 +47,7 @@ class ChatService:
         session_id: str,
         message: str,
         user_id: str,
+        llm_config: Optional[Dict[str, Any]] = None,
     ) -> AsyncIterator[Dict[str, Any]]:
         """
         Stream chat events for the WebSocket endpoint.
@@ -54,6 +55,11 @@ class ChatService:
         Connects directly to chatbot_agent:8086 using the ``tools/stream``
         protocol so each ReAct step (thought, tool call, observation) is
         forwarded to the browser as it happens — not batched at the end.
+
+        When a BYOK provider is selected (``llm_config`` inline from the client,
+        or the session's stored config), the provider/model/key_id are passed to
+        the agent, which decrypts the key and drives the multi-step ReAct loop
+        with the user's own model. The plaintext key never leaves the agent host.
 
         Emits:
           {"type": "agent_activity", "agent": "chatbot",   "status": "thinking",  "task": "<thought>"}
@@ -66,46 +72,6 @@ class ChatService:
         if not session_id or session_id == "new":
             session_id = "new"
 
-        # BYOK final-answer path: synthesize in-backend with the user's own key.
-        # No token-level streaming yet — emit a status event, then the answer.
-        byok_config = await self.get_session_llm_config(session_id, user_id)
-        if self._byok_applies(byok_config):
-            from app.services.byok_chat_service import (
-                ByokChatService,
-                ByokSynthesisError,
-            )
-
-            provider = byok_config["provider"]
-            yield {
-                "type": "agent_activity",
-                "agent": "chatbot",
-                "status": "working",
-                "task": f"Reasoning with your {provider} model…",
-            }
-            try:
-                result = await ByokChatService().answer(
-                    query=message,
-                    session_id=session_id,
-                    user_id=user_id,
-                    provider=provider,
-                    key_id=byok_config["key_id"],
-                    model=byok_config.get("model"),
-                )
-            except ByokSynthesisError as exc:
-                yield {"type": "error", "detail": str(exc)}
-                return
-            yield {
-                "type": "message",
-                "role": "assistant",
-                "content": result["answer"],
-                "citations": result["citations"],
-                "evidence_mode": result["evidence_mode"],
-                "suggested_questions": result["suggested_questions"],
-                "session_id": result["session_id"],
-                "message_id": result["message_id"],
-            }
-            return
-
         if not settings.MCP_SERVER_ENABLED:
             yield {
                 "type": "message",
@@ -116,18 +82,28 @@ class ChatService:
             }
             return
 
+        # Resolve the LLM config: inline (works for brand-new sessions) wins,
+        # else the session's stored config.
+        config = llm_config or await self.get_session_llm_config(session_id, user_id)
+        arguments: Dict[str, Any] = {
+            "query": message,
+            "session_id": session_id,
+            "user_id": user_id,
+            "top_k": 8,
+        }
+        if config and config.get("key_id") and config.get("provider") not in (None, "", "ollama"):
+            arguments["llm_provider"] = config["provider"]
+            arguments["llm_key_id"] = config["key_id"]
+            if config.get("model"):
+                arguments["llm_model"] = config["model"]
+
         payload = json.dumps({
             "jsonrpc": "2.0",
             "id": str(uuid.uuid4()),
             "method": "tools/stream",
             "params": {
                 "name": "chat_stream",
-                "arguments": {
-                    "query": message,
-                    "session_id": session_id,
-                    "user_id": user_id,
-                    "top_k": 8,
-                },
+                "arguments": arguments,
             },
         })
 

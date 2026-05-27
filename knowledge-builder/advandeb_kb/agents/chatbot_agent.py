@@ -163,6 +163,20 @@ class ChatbotAgent(BaseAgent):
                     "default": settings.CHAT_DEFAULT_TOP_K,
                     "description": "Max chunks to retrieve per search",
                 },
+                "llm_provider": {
+                    "type": "string",
+                    "description": "BYOK provider slug (anthropic/openai/gemini/"
+                                   "github_models). Omit or 'ollama' for the local model.",
+                },
+                "llm_model": {
+                    "type": "string",
+                    "description": "Model name for the BYOK provider (optional).",
+                },
+                "llm_key_id": {
+                    "type": "string",
+                    "description": "Stored user_llm_keys _id; the agent decrypts it "
+                                   "to drive reasoning with the user's own model.",
+                },
             },
             "required": ["query", "session_id"],
         }
@@ -199,6 +213,9 @@ class ChatbotAgent(BaseAgent):
         session_id: str,
         user_id: str = "anonymous",
         top_k: int = settings.CHAT_DEFAULT_TOP_K,
+        llm_provider: Optional[str] = None,
+        llm_model: Optional[str] = None,
+        llm_key_id: Optional[str] = None,
     ) -> dict:
         """
         Main chat tool — runs the ReAct loop and returns a full result dict.
@@ -239,14 +256,23 @@ class ChatbotAgent(BaseAgent):
         # 5. Build tool dispatch table
         tool_dispatch = self._build_tool_dispatch(top_k)
 
-        # 6. Run the ReAct loop
+        # 5b. Resolve a BYOK provider (None → local Ollama model).
+        provider = await self._build_byok_provider(llm_provider, llm_key_id, user_id)
+        model = (
+            (llm_model or getattr(provider, "default_model", self._model))
+            if provider is not None
+            else self._model
+        )
+
+        # 6. Run the ReAct loop (driven by the BYOK provider when present)
         engine = ReactEngine(
             ollama_url=self._ollama_url,
-            model=self._model,
+            model=model,
             tool_dispatch=tool_dispatch,
             on_event=on_event,
             conversation_history=history,
             num_ctx=settings.CHAT_ANSWER_NUM_CTX,
+            provider=provider,
         )
 
         final_status = "done"
@@ -262,6 +288,8 @@ class ChatbotAgent(BaseAgent):
                 "steps_taken": 0,
             }
             final_status = "failed"
+        finally:
+            await self._close_provider(provider)
 
         answer = result["answer"]
         citations = result["citations"]
@@ -331,6 +359,9 @@ class ChatbotAgent(BaseAgent):
         session_id: str,
         user_id: str = "anonymous",
         top_k: int = settings.CHAT_DEFAULT_TOP_K,
+        llm_provider: Optional[str] = None,
+        llm_model: Optional[str] = None,
+        llm_key_id: Optional[str] = None,
     ):
         """
         Async generator version of _chat that yields intermediate events in
@@ -386,7 +417,17 @@ class ChatbotAgent(BaseAgent):
             # ── Step 2: Run pipeline or ReAct ─────────────────────────────
             tool_dispatch = self._build_tool_dispatch(top_k)
 
-            use_pipeline = settings.CHAT_MODE != "react"
+            # Resolve a BYOK provider. When the user brings their own model we
+            # always run the multi-step ReAct loop on it (the deterministic
+            # pipeline delegates synthesis to the Ollama-only synthesis_agent).
+            provider = await self._build_byok_provider(llm_provider, llm_key_id, user_id)
+            byok_model = (
+                (llm_model or getattr(provider, "default_model", self._model))
+                if provider is not None
+                else self._model
+            )
+
+            use_pipeline = settings.CHAT_MODE != "react" and provider is None
             final_status = "done"
 
             if use_pipeline:
@@ -419,15 +460,21 @@ class ChatbotAgent(BaseAgent):
                         "suggested_questions": [],
                     }
             else:
+                loop_label = (
+                    f"Starting reasoning loop on your {llm_provider} model…"
+                    if provider is not None
+                    else "Starting reasoning loop…"
+                )
                 await emit({"type": "status", "agent": "chatbot",
-                            "status": "working", "task": "Starting reasoning loop…"})
+                            "status": "working", "task": loop_label})
                 engine = ReactEngine(
                     ollama_url=self._ollama_url,
-                    model=self._model,
+                    model=byok_model,
                     tool_dispatch=tool_dispatch,
                     on_event=on_event,
                     conversation_history=history,
                     num_ctx=settings.CHAT_ANSWER_NUM_CTX,
+                    provider=provider,
                 )
 
                 engine_result = {}
@@ -463,6 +510,8 @@ class ChatbotAgent(BaseAgent):
                         "steps_taken": 0,
                     }
                     final_status = "failed"
+
+            await self._close_provider(provider)
 
             result = engine_result
             answer = result["answer"]
@@ -790,6 +839,82 @@ class ChatbotAgent(BaseAgent):
             info = doc_map.get(doc_id, {})
             enriched.append({**c, **info})
         return enriched
+
+    # ------------------------------------------------------------------
+    # BYOK provider resolution
+    # ------------------------------------------------------------------
+
+    def _decrypt_llm_key(self, encrypted: str) -> Optional[str]:
+        """Decrypt a stored BYOK key using LLM_KEY_ENCRYPTION_KEY from the env.
+
+        The agent stack sources app/backend/.env, so the same Fernet key the
+        backend uses is available here. The plaintext lives only for the life
+        of one request and is never logged.
+        """
+        import os
+
+        key = os.getenv("LLM_KEY_ENCRYPTION_KEY")
+        if not key or not encrypted:
+            if not key:
+                logger.warning(
+                    "LLM_KEY_ENCRYPTION_KEY not set in agent env — BYOK disabled"
+                )
+            return None
+        try:
+            from cryptography.fernet import Fernet
+
+            return Fernet(key.encode()).decrypt(encrypted.encode()).decode()
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("BYOK key decrypt failed: %s", exc)
+            return None
+
+    async def _build_byok_provider(
+        self, llm_provider: Optional[str], llm_key_id: Optional[str], user_id: str
+    ):
+        """Return an instantiated BYOK provider for this request, or None.
+
+        Looks up the encrypted key in user_llm_keys (scoped to user_id),
+        decrypts it, and builds the provider via the registry. Any failure
+        falls back to None so the caller uses the local Ollama model.
+        """
+        if not llm_key_id or llm_provider in (None, "", "ollama"):
+            return None
+        try:
+            doc = await self._chat_db.user_llm_keys.find_one(
+                {"_id": ObjectId(llm_key_id), "user_id": user_id}
+            )
+        except Exception:
+            doc = None
+        if not doc:
+            logger.warning(
+                "BYOK key %s not found for user %s — using local model",
+                llm_key_id, user_id,
+            )
+            return None
+        plaintext = self._decrypt_llm_key(doc.get("encrypted_key", ""))
+        if not plaintext:
+            return None
+        try:
+            from advandeb_kb.services.llm_providers import get_provider
+
+            provider = get_provider(doc.get("provider", llm_provider), api_key=plaintext)
+            logger.info(
+                "BYOK: using provider=%s for user=%s (key=%s)",
+                doc.get("provider", llm_provider), user_id, llm_key_id,
+            )
+            return provider
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("BYOK provider build failed: %s — using local model", exc)
+            return None
+
+    @staticmethod
+    async def _close_provider(provider) -> None:
+        if provider is None:
+            return
+        try:
+            await provider.close()
+        except Exception:  # noqa: BLE001
+            logger.debug("BYOK provider close raised", exc_info=True)
 
     async def _ensure_session(
         self, session_id: str, user_id: str, first_message: str

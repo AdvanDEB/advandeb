@@ -21,13 +21,13 @@
       <label>Reasoning</label>
       <select v-model="selectedMode" @change="emitConfig">
         <option value="final">Final answer (fast)</option>
-        <option value="react">ReAct (multi-step, Ollama only)</option>
+        <option value="react">ReAct (multi-step)</option>
       </select>
     </div>
 
-    <p v-if="reactWithByok" class="hint warn">
-      ReAct multi-step reasoning currently runs on local Ollama. Your selected key
-      will be used for the final-answer mode instead.
+    <p v-if="selectedSource !== 'ollama'" class="hint">
+      Your {{ providerLabel(selectedProviderName) }} model will run the full
+      multi-step agent (retrieval → reasoning → cited answer) over the knowledge base.
     </p>
     <p v-else-if="keys.length === 0" class="hint">
       No personal keys yet —
@@ -76,10 +76,6 @@ const modelOptions = computed(() => {
   const p = providers.value.find((x) => x.name === selectedProviderName.value)
   return p?.available_models ?? []
 })
-
-const reactWithByok = computed(
-  () => selectedMode.value === 'react' && selectedSource.value !== 'ollama',
-)
 
 function emitConfig() {
   const cfg: LLMSessionConfig = {
