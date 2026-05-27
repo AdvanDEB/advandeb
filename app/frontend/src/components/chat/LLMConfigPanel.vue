@@ -51,7 +51,7 @@ const providers = ref<Provider[]>([])
 // selectedSource is either "ollama" or a stored key id.
 const selectedSource = ref<string>('ollama')
 const selectedModel = ref<string>('')
-const selectedMode = ref<LLMMode>('final')
+const selectedMode = ref<LLMMode>('react')
 
 const PROVIDER_LABELS: Record<string, string> = {
   anthropic: 'Claude',
@@ -100,11 +100,14 @@ onMounted(async () => {
   } catch {
     // interceptor toasts; panel still works with the Ollama default
   }
-  // Hydrate from an existing session config if provided.
+  // Hydrate from an existing session config if provided, else default to the
+  // user's most recent key (so a key holder gets their own model by default).
   if (props.modelValue) {
     selectedMode.value = props.modelValue.mode
     if (props.modelValue.key_id) selectedSource.value = props.modelValue.key_id
     if (props.modelValue.model) selectedModel.value = props.modelValue.model
+  } else if (keys.value.length > 0) {
+    selectedSource.value = keys.value[0].id // listKeys() returns most-recent first
   }
   emitConfig()
 })

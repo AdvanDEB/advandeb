@@ -90,7 +90,8 @@ import AgentActivity from './AgentActivity.vue'
 import LLMConfigPanel from './LLMConfigPanel.vue'
 import ProvenanceTrail from '@/components/provenance/ProvenanceTrail.vue'
 import type { ChatMessage as Message, CitationRef as Citation } from '@/types/chat'
-import type { LLMSessionConfig } from '@/types/llm'
+import type { LLMKey, LLMSessionConfig } from '@/types/llm'
+import { listKeys } from '@/utils/llmKeysApi'
 import api from '@/utils/api'
 import { useAuthStore } from '@/stores/auth'
 
@@ -135,6 +136,20 @@ let ws: WebSocket | null = null
 const showLLMConfig = ref(false)
 const llmConfig = ref<LLMSessionConfig | null>(null)
 const pendingLLMConfig = ref<LLMSessionConfig | null>(null)
+// The user's stored BYOK keys; when present, the most recent one becomes the
+// default model for chat, and reasoning defaults to multi-step.
+const userKeys = ref<LLMKey[]>([])
+
+function defaultLLMConfig(): LLMSessionConfig | null {
+  const key = userKeys.value[0] // listKeys() returns most-recent first
+  if (!key) return null
+  return {
+    provider: key.provider,
+    mode: 'react',
+    model: key.default_model || undefined,
+    key_id: key.id,
+  }
+}
 
 const PROVIDER_SHORT: Record<string, string> = {
   ollama: 'Local', anthropic: 'Claude', openai: 'ChatGPT',
@@ -179,6 +194,17 @@ const AGENT_DISPLAY_NAMES: Record<string, string> = {
 }
 
 onMounted(async () => {
+  try {
+    userKeys.value = await listKeys()
+  } catch {
+    userKeys.value = []
+  }
+  // New conversation defaults to the user's own model + multi-step reasoning.
+  const def = defaultLLMConfig()
+  if (def) {
+    llmConfig.value = def
+    pendingLLMConfig.value = def
+  }
   await fetchSessions()
   connectWebSocket()
 })
@@ -353,6 +379,10 @@ function startNewSession() {
   messages.value = []
   activeAgents.value = []
   workflowTrace.value = []
+  // Re-apply the BYOK default so a fresh conversation uses the user's model.
+  const def = defaultLLMConfig()
+  llmConfig.value = def
+  pendingLLMConfig.value = def
   connectWebSocket()
 }
 
@@ -362,7 +392,8 @@ async function loadSession(sessionId: string) {
 
   try {
     const { data } = await api.get(`/chat/sessions/${sessionId}`)
-    llmConfig.value = (data.llm_config as LLMSessionConfig) || null
+    // Use the session's saved config, else fall back to the BYOK default.
+    llmConfig.value = (data.llm_config as LLMSessionConfig) || defaultLLMConfig()
     pendingLLMConfig.value = null
     messages.value = (data.messages || []).map((m: Record<string, unknown>) => {
       return {
