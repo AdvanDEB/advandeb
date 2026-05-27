@@ -40,6 +40,15 @@ def _split_system(messages: List[Dict[str, str]]) -> Tuple[Optional[str], List[D
     return system, rest
 
 
+def _is_temperature_rejection(exc: Exception) -> bool:
+    """True when an Anthropic 400 is about the `temperature` parameter.
+
+    Some 2025+ Claude models deprecate `temperature`; the fix is to resend the
+    request without it rather than fail the whole turn.
+    """
+    return "temperature" in str(exc).lower()
+
+
 class AnthropicProvider(BaseLLMProvider):
     """Anthropic Claude provider using the ``anthropic`` async SDK."""
 
@@ -82,22 +91,32 @@ class AnthropicProvider(BaseLLMProvider):
                 temperature=temperature,
                 max_tokens=effective_max_tokens,
             )
+        kwargs_out: Dict[str, Any] = {
+            "model": model,
+            "messages": msgs,
+            "temperature": temperature,
+            "max_tokens": effective_max_tokens,
+        }
+        if system:
+            kwargs_out["system"] = system
         try:
-            kwargs_out: Dict[str, Any] = {
-                "model": model,
-                "messages": msgs,
-                "temperature": temperature,
-                "max_tokens": effective_max_tokens,
-            }
-            if system:
-                kwargs_out["system"] = system
             resp = await self._client.messages.create(**kwargs_out)
         except self._anthropic.AuthenticationError as e:
             raise ProviderAuthError(str(e), self.provider_name) from e
         except self._anthropic.APIStatusError as e:
-            raise ProviderError(
-                str(e), provider=self.provider_name, code=str(e.status_code)
-            ) from e
+            # Newer Claude models deprecate `temperature`; retry once without it.
+            if _is_temperature_rejection(e) and "temperature" in kwargs_out:
+                kwargs_out.pop("temperature", None)
+                try:
+                    resp = await self._client.messages.create(**kwargs_out)
+                except self._anthropic.APIStatusError as e2:
+                    raise ProviderError(
+                        str(e2), provider=self.provider_name, code=str(e2.status_code)
+                    ) from e2
+            else:
+                raise ProviderError(
+                    str(e), provider=self.provider_name, code=str(e.status_code)
+                ) from e
         except Exception as e:
             raise ProviderError(str(e), provider=self.provider_name) from e
 
@@ -144,35 +163,18 @@ class AnthropicProvider(BaseLLMProvider):
         if system:
             kwargs_out["system"] = system
         try:
-            async with self._client.messages.stream(**kwargs_out) as stream_ctx:
-                async for text in stream_ctx.text_stream:
-                    if not text:
-                        continue
-                    yield {
-                        "object": "chat.completion.chunk",
-                        "created": int(time.time()),
-                        "model": model,
-                        "choices": [
-                            {
-                                "index": 0,
-                                "delta": {"content": text},
-                                "finish_reason": None,
-                            }
-                        ],
-                    }
-                final = await stream_ctx.get_final_message()
-            yield {
-                "object": "chat.completion.chunk",
-                "created": int(time.time()),
-                "model": model,
-                "choices": [
-                    {
-                        "index": 0,
-                        "delta": {},
-                        "finish_reason": (final.stop_reason if final else "stop") or "stop",
-                    }
-                ],
-            }
+            try:
+                async for chunk in self._emit_stream(kwargs_out, model):
+                    yield chunk
+                return
+            except self._anthropic.APIStatusError as e:
+                # Newer models reject `temperature`; the error is raised at stream
+                # open before any chunk is emitted, so retrying is safe.
+                if not (_is_temperature_rejection(e) and "temperature" in kwargs_out):
+                    raise
+                kwargs_out.pop("temperature", None)
+            async for chunk in self._emit_stream(kwargs_out, model):
+                yield chunk
         except self._anthropic.AuthenticationError as e:
             raise ProviderAuthError(str(e), self.provider_name) from e
         except self._anthropic.APIStatusError as e:
@@ -181,6 +183,36 @@ class AnthropicProvider(BaseLLMProvider):
             ) from e
         except Exception as e:
             raise ProviderError(str(e), provider=self.provider_name) from e
+
+    async def _emit_stream(
+        self, kwargs_out: Dict[str, Any], model: str
+    ) -> AsyncIterator[Dict[str, Any]]:
+        """One streaming attempt — yields OpenAI-compatible delta chunks."""
+        async with self._client.messages.stream(**kwargs_out) as stream_ctx:
+            async for text in stream_ctx.text_stream:
+                if not text:
+                    continue
+                yield {
+                    "object": "chat.completion.chunk",
+                    "created": int(time.time()),
+                    "model": model,
+                    "choices": [
+                        {"index": 0, "delta": {"content": text}, "finish_reason": None}
+                    ],
+                }
+            final = await stream_ctx.get_final_message()
+        yield {
+            "object": "chat.completion.chunk",
+            "created": int(time.time()),
+            "model": model,
+            "choices": [
+                {
+                    "index": 0,
+                    "delta": {},
+                    "finish_reason": (final.stop_reason if final else "stop") or "stop",
+                }
+            ],
+        }
 
     async def validate(self) -> bool:
         try:
