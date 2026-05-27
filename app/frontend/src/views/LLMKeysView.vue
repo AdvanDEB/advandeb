@@ -3,9 +3,9 @@
     <header class="page-header">
       <h1>LLM API Keys</h1>
       <p class="subtitle">
-        Bring your own keys for Claude, ChatGPT, Gemini, or GitHub Models. Keys are
-        encrypted at rest and used only for chat reasoning over your knowledge base.
-        We store and display only the last four characters.
+        Bring your own keys for Claude, ChatGPT, Gemini, or GitHub Models. Your key is
+        used only to power chat reasoning over the AdvanDEB knowledge base, and is
+        encrypted at rest. We store and display only the last four characters.
       </p>
     </header>
 
