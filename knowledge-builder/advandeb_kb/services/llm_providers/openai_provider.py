@@ -39,6 +39,7 @@ class OpenAIProvider(BaseLLMProvider):
         import openai  # type: ignore
 
         self._openai = openai
+        self._api_key = api_key
         effective_base_url = base_url or self._base_url
         client_kwargs: Dict[str, Any] = {"api_key": api_key}
         if effective_base_url:
@@ -97,15 +98,19 @@ class OpenAIProvider(BaseLLMProvider):
         except Exception as e:
             raise ProviderError(str(e), provider=self.provider_name) from e
 
-    async def validate(self) -> bool:
+    #: Prefixes of chat-capable model families, used to filter the catalog
+    #: (which also returns embeddings, TTS, image, and moderation models).
+    _CHAT_MODEL_PREFIXES = ("gpt-", "chatgpt", "o1", "o3", "o4")
+
+    async def list_models(self) -> List[str]:
+        """Return the account's chat-capable model IDs, live.
+
+        ``models.list()`` returns every model the key can see — including
+        embeddings/audio/image models — so filter down to chat families and
+        sort for a stable picker order.
+        """
         try:
-            await self._client.chat.completions.create(
-                model=self.default_model,
-                messages=[{"role": "user", "content": "ping"}],
-                max_tokens=1,
-                temperature=0.0,
-            )
-            return True
+            resp = await self._client.models.list()
         except self._openai.AuthenticationError as e:
             raise ProviderAuthError(str(e), self.provider_name) from e
         except self._openai.APIStatusError as e:
@@ -114,6 +119,18 @@ class OpenAIProvider(BaseLLMProvider):
             ) from e
         except Exception as e:
             raise ProviderError(str(e), provider=self.provider_name) from e
+
+        ids = [m.id for m in resp.data if getattr(m, "id", None)]
+        chat = [i for i in ids if i.lower().startswith(self._CHAT_MODEL_PREFIXES)]
+        # If the heuristic matched nothing (e.g. a custom deployment), don't
+        # hide everything — fall back to the raw list.
+        return sorted(chat or ids)
+
+    async def validate(self) -> bool:
+        # A successful authenticated list call proves the key works without
+        # depending on any particular (possibly retired) model name.
+        await self.list_models()
+        return True
 
     async def close(self) -> None:
         close = getattr(self._client, "close", None)

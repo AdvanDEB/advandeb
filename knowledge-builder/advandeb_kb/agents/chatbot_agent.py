@@ -868,6 +868,104 @@ class ChatbotAgent(BaseAgent):
             logger.warning("BYOK key decrypt failed: %s", exc)
             return None
 
+    async def _resolve_oauth_token(self, doc: dict) -> Optional[str]:
+        """Decrypt an OAuth access token, refreshing it (GitHub) if expired.
+
+        Mirrors the backend's LLMKeyService.get_credential so OAuth credentials
+        (e.g. GitHub Models via device flow) work in ReAct mode too. Refresh is
+        best-effort — on any failure we fall back to the stored token (a 401
+        then makes the caller drop to the local model).
+        """
+        access = self._decrypt_llm_key(doc.get("encrypted_access_token", ""))
+        if not access:
+            return None
+        expires_at = doc.get("access_token_expires_at")
+        enc_refresh = doc.get("encrypted_refresh_token")
+        if not expires_at or not enc_refresh:
+            return access  # non-expiring token (operator disabled token expiry)
+
+        from datetime import datetime, timedelta, timezone
+
+        if getattr(expires_at, "tzinfo", None) is None:
+            try:
+                expires_at = expires_at.replace(tzinfo=timezone.utc)
+            except Exception:  # noqa: BLE001
+                return access
+        if datetime.now(timezone.utc) < (expires_at - timedelta(seconds=60)):
+            return access
+        if doc.get("provider") != "github_models":
+            return access
+
+        refresh_token = self._decrypt_llm_key(enc_refresh)
+        if not refresh_token:
+            return access
+        refreshed = await self._refresh_github(refresh_token)
+        new_access = (refreshed or {}).get("access_token")
+        if not new_access:
+            return access
+        # Re-encrypt + persist so subsequent requests reuse the fresh token.
+        try:
+            import os
+
+            from cryptography.fernet import Fernet
+
+            key = os.getenv("LLM_KEY_ENCRYPTION_KEY")
+            if key:
+                f = Fernet(key.encode())
+                update = {"encrypted_access_token": f.encrypt(new_access.encode()).decode()}
+                if refreshed.get("refresh_token"):
+                    update["encrypted_refresh_token"] = f.encrypt(
+                        refreshed["refresh_token"].encode()
+                    ).decode()
+                if refreshed.get("expires_at"):
+                    update["access_token_expires_at"] = refreshed["expires_at"]
+                await self._chat_db.user_llm_keys.update_one(
+                    {"_id": doc["_id"]}, {"$set": update}
+                )
+        except Exception as exc:  # noqa: BLE001
+            logger.debug("oauth token re-persist failed: %s", exc)
+        return new_access
+
+    @staticmethod
+    async def _refresh_github(refresh_token: str) -> Optional[dict]:
+        """Exchange a GitHub refresh token for a new access token, or None."""
+        import os
+
+        client_id = os.getenv("GITHUB_OAUTH_CLIENT_ID")
+        if not client_id:
+            return None
+        try:
+            import httpx
+
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                resp = await client.post(
+                    "https://github.com/login/oauth/access_token",
+                    data={
+                        "client_id": client_id,
+                        "grant_type": "refresh_token",
+                        "refresh_token": refresh_token,
+                    },
+                    headers={"Accept": "application/json"},
+                )
+                data = resp.json() if resp.content else {}
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("github token refresh failed: %s", type(exc).__name__)
+            return None
+        expires_at = None
+        try:
+            secs = int(data.get("expires_in"))
+            if secs > 0:
+                from datetime import datetime, timedelta, timezone
+
+                expires_at = datetime.now(timezone.utc) + timedelta(seconds=secs)
+        except (TypeError, ValueError):
+            pass
+        return {
+            "access_token": data.get("access_token"),
+            "refresh_token": data.get("refresh_token"),
+            "expires_at": expires_at,
+        }
+
     async def _build_byok_provider(
         self, llm_provider: Optional[str], llm_key_id: Optional[str], user_id: str
     ):
@@ -891,7 +989,12 @@ class ChatbotAgent(BaseAgent):
                 llm_key_id, user_id,
             )
             return None
-        plaintext = self._decrypt_llm_key(doc.get("encrypted_key", ""))
+        if doc.get("credential_type") == "oauth":
+            # OAuth credential (e.g. GitHub Models via device flow): the usable
+            # secret is the access token, refreshed first if it has expired.
+            plaintext = await self._resolve_oauth_token(doc)
+        else:
+            plaintext = self._decrypt_llm_key(doc.get("encrypted_key", ""))
         if not plaintext:
             return None
         try:

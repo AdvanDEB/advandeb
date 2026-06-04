@@ -23,6 +23,8 @@
             <th class="col-type"  @click="setSort('node_type')">Type<SortIcon :col="'node_type'" :sortKey="sortKey" :sortDir="sortDir" /></th>
             <th class="col-label" @click="setSort('label')">Label<SortIcon :col="'label'" :sortKey="sortKey" :sortDir="sortDir" /></th>
             <th class="col-deg"   @click="setSort('degree')">Deg<SortIcon :col="'degree'" :sortKey="sortKey" :sortDir="sortDir" /></th>
+            <th class="col-sup"   @click="setSort('supports')" title="Supporting edges">Sup<SortIcon :col="'supports'" :sortKey="sortKey" :sortDir="sortDir" /></th>
+            <th class="col-opp"   @click="setSort('opposes')" title="Opposing edges">Opp<SortIcon :col="'opposes'" :sortKey="sortKey" :sortDir="sortDir" /></th>
             <th class="col-eid">Entity ID</th>
             <th class="col-props">Properties</th>
           </tr>
@@ -41,11 +43,13 @@
             </td>
             <td class="col-label-cell" :title="node.label">{{ node.label }}</td>
             <td class="col-deg-cell">{{ node.degree ?? '—' }}</td>
+            <td class="col-sup-cell">{{ node.supports ?? '—' }}</td>
+            <td class="col-opp-cell">{{ node.opposes ?? '—' }}</td>
             <td class="col-eid-cell mono" :title="node.entity_id">{{ node.entity_id || '—' }}</td>
             <td class="col-props-cell" :title="formatPropsLong(node)">{{ formatProps(node) }}</td>
           </tr>
           <tr v-if="filteredNodes.length === 0">
-            <td colspan="5" class="ntp-empty">No nodes match the current filter</td>
+            <td colspan="7" class="ntp-empty">No nodes match the current filter</td>
           </tr>
         </tbody>
       </table>
@@ -114,12 +118,13 @@ const filteredNodes = computed<GraphNode[]>(() => {
   // sort
   const key = sortKey.value
   const dir = sortDir.value === 'asc' ? 1 : -1
+  const NUMERIC_KEYS = new Set(['degree', 'supports', 'opposes'])
   list = [...list].sort((a, b) => {
     let av: any = (a as any)[key] ?? ''
     let bv: any = (b as any)[key] ?? ''
-    if (key === 'degree') {
-      av = (a.degree ?? -1)
-      bv = (b.degree ?? -1)
+    if (NUMERIC_KEYS.has(key)) {
+      av = (a as any)[key] ?? -1
+      bv = (b as any)[key] ?? -1
     }
     if (av < bv) return -1 * dir
     if (av > bv) return  1 * dir
@@ -136,7 +141,7 @@ function setSort(col: string) {
     sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
   } else {
     sortKey.value = col
-    sortDir.value = col === 'degree' ? 'desc' : 'asc'
+    sortDir.value = (col === 'degree' || col === 'supports' || col === 'opposes') ? 'desc' : 'asc'
   }
 }
 
@@ -293,10 +298,14 @@ function formatPropsLong(node: GraphNode): string {
 .col-type  { width: 130px; }
 .col-label { width: auto;  }
 .col-deg   { width: 48px; text-align: right; }
+.col-sup   { width: 48px; text-align: right; }
+.col-opp   { width: 48px; text-align: right; }
 .col-eid   { width: 110px; }
 .col-props { width: 240px; }
 
 .col-deg-cell   { text-align: right; color: #94a3b8; }
+.col-sup-cell   { text-align: right; color: #34e778; }
+.col-opp-cell   { text-align: right; color: #ff7a7a; }
 .col-eid-cell   { color: #475569; font-size: 0.65rem; }
 .col-props-cell { color: #64748b; }
 .col-label-cell { color: #e2e8f0; }

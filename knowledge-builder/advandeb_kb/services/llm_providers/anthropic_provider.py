@@ -214,14 +214,20 @@ class AnthropicProvider(BaseLLMProvider):
             ],
         }
 
-    async def validate(self) -> bool:
+    async def list_models(self) -> List[str]:
+        """Return the account's available Claude model IDs, live.
+
+        ``client.models.list()`` auto-paginates; iterating it yields every
+        model the key can see. Cheaper than a completion and never depends on a
+        hardcoded (possibly retired) model name.
+        """
         try:
-            await self._client.messages.create(
-                model=self.default_model,
-                max_tokens=1,
-                messages=[{"role": "user", "content": "ping"}],
-            )
-            return True
+            out: List[str] = []
+            async for m in self._client.models.list():
+                mid = getattr(m, "id", None)
+                if mid:
+                    out.append(mid)
+            return out
         except self._anthropic.AuthenticationError as e:
             raise ProviderAuthError(str(e), self.provider_name) from e
         except self._anthropic.APIStatusError as e:
@@ -230,6 +236,11 @@ class AnthropicProvider(BaseLLMProvider):
             ) from e
         except Exception as e:
             raise ProviderError(str(e), provider=self.provider_name) from e
+
+    async def validate(self) -> bool:
+        # A successful authenticated list call proves the key works.
+        await self.list_models()
+        return True
 
     async def close(self) -> None:
         close = getattr(self._client, "close", None)

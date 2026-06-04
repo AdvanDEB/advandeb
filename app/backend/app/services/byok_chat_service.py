@@ -83,10 +83,12 @@ class ByokChatService:
         from advandeb_kb.services.llm_providers import get_provider
         from advandeb_kb.services.llm_providers.base import ProviderError
 
-        api_key = await self.keys.get_decrypted_key(user_id, key_id)
+        # Works for both pasted api keys and OAuth credentials (e.g. GitHub
+        # Models via device flow); get_credential refreshes expired tokens.
+        api_key = await self.keys.get_credential(user_id, key_id)
         if not api_key:
             raise ByokSynthesisError(
-                "The selected LLM key could not be found or decrypted."
+                "The selected LLM credential could not be found or decrypted."
             )
 
         sid = await self._ensure_session(session_id, user_id, query)

@@ -6,6 +6,8 @@ from typing import Optional
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Query
 
+from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
+
 from app.core.auth import verify_token
 from app.core.database import get_database
 from app.services.chat_service import ChatService
@@ -141,6 +143,9 @@ async def ws_chat(
             ):
                 if event.get("type") == "message" and event.get("session_id"):
                     active_session_id = str(event["session_id"])
+                    # Chatbot graph artifact depends on chat_sessions /
+                    # chat_messages; refresh it once the turn lands.
+                    graph_rebuild_queue.mark_dirty("chatbot")
                 await websocket.send_text(json.dumps(event, default=str))
 
     except WebSocketDisconnect:

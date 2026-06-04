@@ -173,4 +173,17 @@ async def ensure_app_indexes(app_db) -> None:
         name="user_llm_keys_owner_provider_label",
     )
 
+    # user_oauth_flows — in-progress OAuth device flows. The device code is a
+    # short-lived secret; a TTL index auto-prunes abandoned/finished flows so the
+    # collection stays bounded (GitHub device codes expire in ~15 min).
+    await app_db.user_oauth_flows.create_index(
+        "created_at", expireAfterSeconds=900, background=True, name="user_oauth_flows_ttl"
+    )
+    await app_db.user_oauth_flows.create_index(
+        [("flow_id", 1), ("user_id", 1)],
+        unique=True,
+        background=True,
+        name="user_oauth_flows_flow_user",
+    )
+
     logger.info("ensure_app_indexes: submission collection indexes verified/created")

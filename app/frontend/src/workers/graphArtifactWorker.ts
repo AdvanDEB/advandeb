@@ -32,14 +32,20 @@ function buildRenderBundle(artifact: GraphArtifact): GraphRenderBundle {
   const pointColors = new Float32Array(nodeCount * 4)
   const pointSizes = new Float32Array(nodeCount)
   const nodeIds = new Array<string>(nodeCount)
+  const nodeTypes = new Array<string>(nodeCount)
   const hoverLabels = new Array<string>(nodeCount)
   const nodeSummaries = new Array(nodeCount)
   const idToIndex = new Map<string, number>()
+  // Per-node tallies of supporting/opposing edges (sf_support graph), indexed
+  // to match artifact.nodes. Each edge increments both endpoints.
+  const supportsCounts = new Int32Array(nodeCount)
+  const opposesCounts = new Int32Array(nodeCount)
 
   for (let i = 0; i < nodeCount; i++) {
     const node: GraphArtifactNode = artifact.nodes[i]
     idToIndex.set(node.id, i)
     nodeIds[i] = node.id
+    nodeTypes[i] = node.type
     hoverLabels[i] = node.label
     nodeSummaries[i] = {
       id: node.id,
@@ -49,10 +55,17 @@ function buildRenderBundle(artifact: GraphArtifact): GraphRenderBundle {
       entity_collection: node.entity_collection,
       entity_id: node.entity_id,
       props: node.props,
+      supports: 0,
+      opposes: 0,
     }
 
-    pointPositions[i * 2] = node.x2d
-    pointPositions[i * 2 + 1] = node.y2d
+    // Spread nodes in a sunflower spiral within a small coordinate range so
+    // cosmos can rescale them into its spaceSize. Using radius ≤ 100 ensures
+    // the bounding box stays well under spaceSize (4096) for any realistic graph.
+    const angle = i * 2.399963  // golden angle
+    const radius = Math.sqrt(i + 1)  // grows slowly, stays bounded
+    pointPositions[i * 2]     = Math.cos(angle) * radius
+    pointPositions[i * 2 + 1] = Math.sin(angle) * radius
     const [r, g, b, a] = NODE_TYPE_COLORS[node.type] ?? DEFAULT_NODE_COLOR
     pointColors[i * 4] = r
     pointColors[i * 4 + 1] = g
@@ -65,17 +78,33 @@ function buildRenderBundle(artifact: GraphArtifact): GraphRenderBundle {
   const linkIndices = new Float32Array(validEdges.length * 2)
   const linkColors = new Float32Array(validEdges.length * 4)
   const linkWidths = new Float32Array(validEdges.length)
+  const edgeTypes = new Array<string>(validEdges.length)
 
   for (let i = 0; i < validEdges.length; i++) {
     const edge = validEdges[i]
-    linkIndices[i * 2] = idToIndex.get(edge.source) as number
-    linkIndices[i * 2 + 1] = idToIndex.get(edge.target) as number
+    edgeTypes[i] = edge.type
+    const sourceIdx = idToIndex.get(edge.source) as number
+    const targetIdx = idToIndex.get(edge.target) as number
+    linkIndices[i * 2] = sourceIdx
+    linkIndices[i * 2 + 1] = targetIdx
+    if (edge.type === 'supports') {
+      supportsCounts[sourceIdx]++
+      supportsCounts[targetIdx]++
+    } else if (edge.type === 'opposes') {
+      opposesCounts[sourceIdx]++
+      opposesCounts[targetIdx]++
+    }
     const [r, g, b, a] = edgeColor(edge)
     linkColors[i * 4] = r
     linkColors[i * 4 + 1] = g
     linkColors[i * 4 + 2] = b
     linkColors[i * 4 + 3] = a
     linkWidths[i] = Math.max(1.5, (edge.weight ?? 1) * 4.5)
+  }
+
+  for (let i = 0; i < nodeCount; i++) {
+    nodeSummaries[i].supports = supportsCounts[i]
+    nodeSummaries[i].opposes = opposesCounts[i]
   }
 
   return {
@@ -91,6 +120,8 @@ function buildRenderBundle(artifact: GraphArtifact): GraphRenderBundle {
     linkColors,
     linkWidths,
     nodeIds,
+    nodeTypes,
+    edgeTypes,
     hoverLabels,
     nodeSummaries,
     typeCounts: artifact.type_counts,

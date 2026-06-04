@@ -11,15 +11,38 @@ All lookups target the ArangoDB KB (advandeb_kb).
 """
 import asyncio
 import logging
+import re
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, Optional
 
-from app.core.database import get_arango_db
+from bson import ObjectId
+
+from app.core.database import get_arango_db, get_database, get_kb_database
 from advandeb_kb.models.chat import parse_citation_id, strip_collection_prefix
 
 logger = logging.getLogger(__name__)
 
 _executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="provenance-svc")
+
+_OBJECT_ID_RE = re.compile(r"^[0-9a-f]{24}$")
+
+# Match a document by the tail of its source_path ("<folder>/<file>.pdf") or, as a
+# weaker fallback, just the filename. Used to recover the source document for chunks
+# whose document_id does not resolve directly (legacy `doc_*` ingestion lineage).
+_DOC_BY_SOURCE_PATH_AQL = """
+LET parts = SPLIT(@sp, '/')
+LET filename = parts[-1]
+LET tail = LENGTH(parts) >= 2 ? CONCAT(parts[-2], '/', parts[-1]) : filename
+FOR d IN documents
+    FILTER d.source_path != null
+    LET sp = d.source_path
+    LET exact = (sp == tail OR RIGHT(sp, LENGTH(tail) + 1) == CONCAT('/', tail))
+    LET byname = (LAST(SPLIT(sp, '/')) == filename)
+    FILTER exact OR byname
+    SORT exact ? 0 : 1
+    LIMIT 1
+    RETURN d
+"""
 
 
 class ProvenanceService:
@@ -27,6 +50,8 @@ class ProvenanceService:
 
     def __init__(self):
         self.arango = get_arango_db()
+        self._app_db = get_database()       # MongoDB advandeb — document metadata
+        self._kb_db = get_kb_database()      # MongoDB KB — document metadata (fallback)
 
     async def _run(self, fn, *args, **kwargs):
         loop = asyncio.get_running_loop()
@@ -102,7 +127,7 @@ class ProvenanceService:
     async def _provenance_from_chunk(self, chunk: dict, citation_id: str) -> dict:
         chunk_key = chunk.get("_key", "")
         doc_id = chunk.get("document_id", "")
-        document = await self._fetch_document(doc_id)
+        document = await self._fetch_document(doc_id, source_path=chunk.get("source_path"))
         return {
             "citation_id": citation_id,
             "answer": {"excerpt": chunk.get("text", "")[:200]},
@@ -168,21 +193,121 @@ class ProvenanceService:
     # Document lookup
     # ------------------------------------------------------------------
 
-    async def _fetch_document(self, doc_id: str) -> Optional[dict]:
+    async def _fetch_document(
+        self, doc_id: str, source_path: Optional[str] = None
+    ) -> Optional[dict]:
+        """Resolve a cited chunk/fact to its source document.
+
+        Chunk citations come from two ingestion lineages with different ID
+        schemes, and not every ``document_id`` resolves directly in ArangoDB.
+        Resolution is therefore attempted in order:
+
+          1. ArangoDB ``documents`` by key (the common, rich case).
+          2. MongoDB by ObjectId — recovers documents missing from ArangoDB and
+             yields a ``source_path`` to upgrade to a richer record.
+          3. ArangoDB ``documents`` matched by ``source_path`` — recovers the
+             rich record for the legacy ``doc_*`` lineage (which has no resolvable
+             ``document_id``) and upgrades thin MongoDB records.
+          4. The thin MongoDB record, if nothing richer was found.
+        """
         doc_key = strip_collection_prefix(doc_id)
-        if not doc_key:
+
+        # 1. ArangoDB by key
+        if doc_key:
+            doc = await self._run(lambda: self.arango.get("documents", doc_key))
+            if doc:
+                return self._shape_document(doc)
+
+        # 2. MongoDB by ObjectId (also a source of source_path for step 3)
+        mongo_doc = await self._fetch_mongo_document(doc_key)
+        effective_path = source_path or (mongo_doc.get("source_path") if mongo_doc else None)
+
+        # 3. Richer record matched by source_path — ArangoDB first, then MongoDB.
+        if effective_path:
+            rich = await self._fetch_document_by_source_path(effective_path)
+            if rich:
+                return rich
+            mongo_by_path = await self._fetch_mongo_document_by_source_path(effective_path)
+            if mongo_by_path:
+                return self._shape_document(mongo_by_path)
+
+        # 4. Fall back to the thin MongoDB record
+        if mongo_doc:
+            return self._shape_document(mongo_doc)
+
+        return None
+
+    async def _fetch_mongo_document(self, doc_key: str) -> Optional[dict]:
+        """Look up a document by ObjectId in the app then KB MongoDB databases."""
+        if not doc_key or not _OBJECT_ID_RE.match(doc_key):
             return None
-        def _lookup():
-            return self.arango.get("documents", doc_key)
-        doc = await self._run(_lookup)
-        if not doc:
+        try:
+            oid = ObjectId(doc_key)
+        except Exception:
             return None
+        for db in (self._app_db, self._kb_db):
+            if db is None:
+                continue
+            try:
+                doc = await db.documents.find_one({"_id": oid})
+            except Exception as exc:
+                logger.warning("_fetch_mongo_document lookup failed: %s", exc)
+                doc = None
+            if doc:
+                return doc
+        return None
+
+    async def _fetch_document_by_source_path(self, source_path: str) -> Optional[dict]:
+        """Match an ArangoDB document by the tail/filename of its source_path."""
+        if not source_path:
+            return None
+        rows = await self._run(
+            lambda: self.arango.aql(_DOC_BY_SOURCE_PATH_AQL, {"sp": source_path})
+        )
+        if not rows:
+            return None
+        return self._shape_document(rows[0])
+
+    async def _fetch_mongo_document_by_source_path(self, source_path: str) -> Optional[dict]:
+        """Match a MongoDB document by the tail/filename of its source_path.
+
+        MongoDB stores source_path relative ("<folder>/<file>.pdf") while chunk
+        source paths may be absolute, so match is anchored at the end of the
+        stored value: prefer "<folder>/<file>", fall back to bare filename.
+        """
+        parts = str(source_path).replace("\\", "/").split("/")
+        filename = parts[-1]
+        if not filename:
+            return None
+        tail = "/".join(parts[-2:]) if len(parts) >= 2 else filename
+        patterns = [re.compile(re.escape(tail) + "$")]
+        if tail != filename:
+            patterns.append(re.compile(re.escape(filename) + "$"))
+        for db in (self._app_db, self._kb_db):
+            if db is None:
+                continue
+            for pat in patterns:
+                try:
+                    doc = await db.documents.find_one({"source_path": pat})
+                except Exception as exc:
+                    logger.warning("_fetch_mongo_document_by_source_path failed: %s", exc)
+                    doc = None
+                if doc:
+                    return doc
+        return None
+
+    @staticmethod
+    def _shape_document(doc: dict) -> dict:
+        """Normalise an ArangoDB or MongoDB document into the trail's doc shape."""
+        did = doc.get("_key") or str(doc.get("_id") or "")
+        doi = doc.get("doi")
+        doi = doi if doi and str(doi) != "None" else None
         return {
-            "id": doc.get("_key", ""),
-            "title": doc.get("title", "Unknown"),
-            "authors": doc.get("authors", ""),
+            "id": did,
+            "title": doc.get("title") or "Unknown",
+            "authors": doc.get("authors") or "",
             "year": doc.get("year"),
-            "url": doc.get("url") or (f"https://doi.org/{doc['doi']}" if doc.get("doi") else None),
+            "url": doc.get("url") or (f"https://doi.org/{doi}" if doi else None),
         }
 
     # ------------------------------------------------------------------

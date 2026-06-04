@@ -8,13 +8,23 @@ on POST and is never returned: list/create responses carry only ``key_last_4``.
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from pydantic import BaseModel
 
 from app.core.auth import get_current_user
+from app.core.config import settings
 from app.core.limiter import limiter
 from app.models.llm_key import LLMKey, LLMKeyCreate
 from app.services.llm_key_service import LLMKeyService
 
 router = APIRouter()
+
+
+class OAuthPollRequest(BaseModel):
+    """Inbound body for the device-flow poll endpoint."""
+
+    flow_id: str
+
+
 
 
 @router.get("/providers")
@@ -51,6 +61,58 @@ async def create_my_key(
         label=body.label,
         default_model=body.default_model,
     )
+
+
+@router.get("/oauth/config")
+async def oauth_config(current_user: dict = Depends(get_current_user)):
+    """Which sanctioned OAuth connect flows are available (drives the UI)."""
+    return {"github_enabled": settings.github_oauth_enabled}
+
+
+@router.post("/oauth/github/start")
+@limiter.limit("5/minute")
+async def start_github_oauth(
+    request: Request,
+    current_user: dict = Depends(get_current_user),
+):
+    """Begin the GitHub device flow. Returns user_code + verification_uri + flow_id."""
+    if not settings.github_oauth_enabled:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="GitHub connect is not configured on this server.",
+        )
+    from app.services.github_oauth_service import GitHubOAuthService
+
+    return await GitHubOAuthService().start(current_user["id"])
+
+
+@router.post("/oauth/github/poll")
+@limiter.limit("30/minute")
+async def poll_github_oauth(
+    request: Request,
+    body: OAuthPollRequest,
+    current_user: dict = Depends(get_current_user),
+):
+    """Poll a pending GitHub device flow. On completion the new credential is stored."""
+    if not settings.github_oauth_enabled:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="GitHub connect is not configured on this server.",
+        )
+    from app.services.github_oauth_service import GitHubOAuthService
+
+    return await GitHubOAuthService().poll(current_user["id"], body.flow_id)
+
+
+@router.get("/{key_id}/models")
+@limiter.limit("30/minute")
+async def list_my_key_models(
+    request: Request,
+    key_id: str,
+    current_user: dict = Depends(get_current_user),
+):
+    """Live model catalog for a stored key, used by the chat model picker."""
+    return await LLMKeyService().list_models_for_key(current_user["id"], key_id)
 
 
 @router.post("/{key_id}/test")

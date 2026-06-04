@@ -15,17 +15,10 @@
       <form class="add-form" @submit.prevent="onCreate">
         <div class="field">
           <label for="provider">Provider</label>
-          <select id="provider" v-model="form.provider" @change="onProviderChange">
+          <select id="provider" v-model="form.provider">
             <option v-for="p in providers" :key="p.name" :value="p.name">
               {{ providerLabel(p.name) }}
             </option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="model">Default model</label>
-          <select id="model" v-model="form.default_model">
-            <option v-for="m in modelsForSelected" :key="m" :value="m">{{ m }}</option>
           </select>
         </div>
 
@@ -51,6 +44,33 @@
       </form>
     </section>
 
+    <!-- Connect an account via a sanctioned OAuth device flow -->
+    <section v-if="oauthConfig.github_enabled" class="card">
+      <h2>Connect with GitHub</h2>
+      <p class="muted connect-note">
+        Authorize with your GitHub account to use <strong>GitHub Models</strong> —
+        no API key to paste. This uses GitHub's free, rate-limited model catalog
+        (not a paid Copilot subscription).
+      </p>
+      <button class="btn primary" :disabled="connecting" @click="onConnectGithub">
+        {{ connecting ? 'Waiting for authorization…' : 'Connect with GitHub' }}
+      </button>
+    </section>
+
+    <!-- Device-flow modal -->
+    <div v-if="device" class="modal-backdrop" @click.self="cancelDevice">
+      <div class="modal">
+        <h3>Authorize on GitHub</h3>
+        <p class="muted">Enter this code on GitHub to connect your account:</p>
+        <div class="user-code">{{ device.user_code }}</div>
+        <a class="btn primary open-link" :href="device.verification_uri" target="_blank" rel="noopener">
+          Open github.com/login/device
+        </a>
+        <p class="device-status">{{ deviceStatus }}</p>
+        <button class="btn small" @click="cancelDevice">Cancel</button>
+      </div>
+    </div>
+
     <!-- Stored keys -->
     <section class="card">
       <h2>Stored keys</h2>
@@ -72,7 +92,12 @@
             <td>{{ providerLabel(k.provider) }}</td>
             <td>{{ k.label || '—' }}</td>
             <td>{{ k.default_model || '—' }}</td>
-            <td><code>••••{{ k.key_last_4 }}</code></td>
+            <td>
+              <code v-if="k.credential_type === 'oauth'" title="Connected via GitHub OAuth">
+                @{{ k.account_label || 'connected' }}
+              </code>
+              <code v-else>••••{{ k.key_last_4 }}</code>
+            </td>
             <td>{{ k.last_used_at ? formatDate(k.last_used_at) : 'never' }}</td>
             <td class="actions">
               <button class="btn small" :disabled="testingId === k.id" @click="onTest(k)">
@@ -90,16 +115,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useNotificationsStore } from '@/stores/notifications'
 import {
   createKey,
   deleteKey,
+  getOauthConfig,
   listKeys,
   listProviders,
+  pollGithubOauth,
+  startGithubOauth,
   testKey,
 } from '@/utils/llmKeysApi'
-import type { LLMKey, LLMProvider, Provider } from '@/types/llm'
+import type {
+  DeviceFlowStart,
+  LLMKey,
+  LLMProvider,
+  OAuthConfig,
+  Provider,
+} from '@/types/llm'
 
 const notifs = useNotificationsStore()
 
@@ -109,6 +143,13 @@ const loading = ref(true)
 const creating = ref(false)
 const testingId = ref<string | null>(null)
 const deletingId = ref<string | null>(null)
+
+// OAuth "Connect with GitHub" device flow.
+const oauthConfig = ref<OAuthConfig>({ github_enabled: false })
+const connecting = ref(false)
+const device = ref<DeviceFlowStart | null>(null)
+const deviceStatus = ref('')
+let pollTimer: number | undefined
 
 const PROVIDER_LABELS: Record<string, string> = {
   anthropic: 'Anthropic (Claude)',
@@ -120,19 +161,12 @@ const PROVIDER_LABELS: Record<string, string> = {
 
 const form = reactive<{
   provider: LLMProvider
-  default_model: string
   label: string
   api_key: string
 }>({
   provider: 'anthropic',
-  default_model: '',
   label: '',
   api_key: '',
-})
-
-const modelsForSelected = computed(() => {
-  const p = providers.value.find((x) => x.name === form.provider)
-  return p?.available_models ?? []
 })
 
 function providerLabel(name: string): string {
@@ -145,12 +179,6 @@ function formatDate(iso: string): string {
   } catch {
     return iso
   }
-}
-
-function onProviderChange() {
-  // Default the model picker to the provider's first/default model.
-  const p = providers.value.find((x) => x.name === form.provider)
-  form.default_model = p?.default_model || p?.available_models?.[0] || ''
 }
 
 async function refreshKeys() {
@@ -168,13 +196,13 @@ async function onCreate() {
   if (!form.api_key) return
   creating.value = true
   try {
-    await createKey({
+    const created = await createKey({
       provider: form.provider,
       api_key: form.api_key,
       label: form.label || undefined,
-      default_model: form.default_model || undefined,
     })
-    notifs.success(`${providerLabel(form.provider)} key validated and saved`)
+    const modelNote = created.default_model ? ` (model: ${created.default_model})` : ''
+    notifs.success(`${providerLabel(form.provider)} key validated and saved${modelNote}`)
     form.api_key = ''
     form.label = ''
     await refreshKeys()
@@ -214,12 +242,77 @@ async function onDelete(k: LLMKey) {
   }
 }
 
+async function onConnectGithub() {
+  connecting.value = true
+  try {
+    device.value = await startGithubOauth()
+    deviceStatus.value = 'Waiting for you to authorize on GitHub…'
+    window.open(device.value.verification_uri, '_blank', 'noopener')
+    schedulePoll(device.value.flow_id, device.value.interval)
+  } catch {
+    // interceptor toasts the failure
+    connecting.value = false
+  }
+}
+
+function schedulePoll(flowId: string, intervalSec: number) {
+  pollTimer = window.setTimeout(async () => {
+    if (!device.value) return
+    try {
+      const res = await pollGithubOauth(flowId)
+      if (res.status === 'complete') {
+        const who = res.key?.account_label ? ` as @${res.key.account_label}` : ''
+        notifs.success(`GitHub connected${who} — GitHub Models is ready`)
+        cancelDevice()
+        await refreshKeys()
+        return
+      }
+      if (res.status === 'denied') {
+        deviceStatus.value = 'Authorization was denied on GitHub.'
+        stopPolling()
+        return
+      }
+      if (res.status === 'expired') {
+        deviceStatus.value = 'The code expired. Close this and try again.'
+        stopPolling()
+        return
+      }
+      // pending / slow_down → keep polling (respect a bumped interval).
+      const next = res.status === 'slow_down' && res.interval ? res.interval : intervalSec
+      schedulePoll(flowId, next)
+    } catch {
+      deviceStatus.value = 'Connection check failed. Close this and try again.'
+      stopPolling()
+    }
+  }, intervalSec * 1000)
+}
+
+function stopPolling() {
+  connecting.value = false
+  if (pollTimer) {
+    window.clearTimeout(pollTimer)
+    pollTimer = undefined
+  }
+}
+
+function cancelDevice() {
+  device.value = null
+  deviceStatus.value = ''
+  stopPolling()
+}
+
+onUnmounted(stopPolling)
+
 onMounted(async () => {
   try {
     providers.value = await listProviders()
-    onProviderChange()
   } catch {
     // interceptor toasts
+  }
+  try {
+    oauthConfig.value = await getOauthConfig()
+  } catch {
+    // leave disabled on failure
   }
   await refreshKeys()
 })
@@ -294,4 +387,40 @@ onMounted(async () => {
 .keys-table code { background: #f3f4f6; padding: 0.1rem 0.35rem; border-radius: 4px; }
 .actions { display: flex; gap: 0.4rem; }
 .muted { color: #9ca3af; font-size: 0.9rem; }
+
+.connect-note { margin-bottom: 1rem; max-width: 560px; line-height: 1.5; }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.modal {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.75rem 2rem;
+  width: min(420px, 90vw);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: center;
+}
+.modal h3 { font-size: 1.15rem; font-weight: 700; color: #111827; }
+.user-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #111827;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+}
+.open-link { text-decoration: none; display: inline-block; }
+.device-status { color: #6b7280; font-size: 0.85rem; min-height: 1.2em; }
 </style>

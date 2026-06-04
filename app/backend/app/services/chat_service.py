@@ -25,6 +25,8 @@ from bson import ObjectId
 
 import websockets  # type: ignore
 
+from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
+
 from app.core.database import get_database
 from app.core.config import settings
 from app.clients.mcp_client import MCPClient
@@ -186,6 +188,7 @@ class ChatService:
                     "message": {"role": "assistant", "content": f"Error: {exc}"},
                     "session_id": session_id,
                 }
+            graph_rebuild_queue.mark_dirty("chatbot")
             return {
                 "message": {
                     "role": "assistant",
@@ -227,6 +230,7 @@ class ChatService:
                 "session_id": session_id,
             }
 
+        graph_rebuild_queue.mark_dirty("chatbot")
         return {
             "message": {
                 "role": "assistant",

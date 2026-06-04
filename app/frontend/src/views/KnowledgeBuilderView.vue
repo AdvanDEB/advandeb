@@ -36,9 +36,11 @@
         :type-counts="typeCounts"
         :hidden-types="hiddenTypes"
         :hidden-edge-types="hiddenEdgeTypes"
+        :display="displayConfig"
         @fit-view="canvasRef?.fitView()"
         @toggle-type="toggleType"
         @toggle-edge-type="toggleEdgeType"
+        @update:display="displayConfig = $event"
       />
 
       <div class="graph-center">
@@ -52,6 +54,7 @@
             :bundle="graphBundle"
             :hidden-types="hiddenTypes"
             :hidden-edge-types="hiddenEdgeTypes"
+            :display="displayConfig"
             @node-click="handleNodeClick"
             @background-click="selectedNode = null"
           />
@@ -81,15 +84,15 @@
               </div>
             </div>
           </div>
-
-          <!-- Collapsible node table panel -->
-          <NodeTablePanel
-            v-if="tableOpen && graphBundle"
-            :nodes="bundleToNodeList"
-            :selectedNode="selectedNode"
-            @select="onTableRowSelect"
-          />
         </div>
+
+        <!-- Collapsible node table panel -->
+        <NodeTablePanel
+          v-if="tableOpen && graphBundle"
+          :nodes="bundleToNodeList"
+          :selectedNode="selectedNode"
+          @select="onTableRowSelect"
+        />
 
         <div class="graph-status-bar">
           <span>{{ fmtNum(graphBundle?.nodeCount ?? 0) }} nodes · {{ fmtNum(graphBundle?.edgeCount ?? 0) }} edges</span>
@@ -583,6 +586,7 @@ import type {
   DocumentSuggestion, FactSuggestion, StylizedFactSuggestion,
 } from '@/utils/kbApi'
 import type { GraphRenderBundle } from '@/types/graphArtifact'
+import type { DisplayConfig } from '@/components/kb/CosmographCanvas.vue'
 import GraphArtifactWorker from '@/workers/graphArtifactWorker?worker'
 
 const authStore = useAuthStore()
@@ -622,6 +626,7 @@ const selectedStats   = ref<GraphStats | null>(null)
 const typeCounts      = ref<TypeCounts | null>(null)
 const canvasRef       = ref<InstanceType<typeof CosmographCanvas> | null>(null)
 const tableOpen       = ref(false)
+const displayConfig   = ref<Partial<DisplayConfig>>({})
 
 // Derive a flat GraphNode[] from the bundle for NodeTablePanel
 const bundleToNodeList = computed<GraphNode[]>(() => {
@@ -635,6 +640,8 @@ const bundleToNodeList = computed<GraphNode[]>(() => {
     label: s.label,
     properties: s.props,
     degree: s.degree,
+    supports: s.supports,
+    opposes: s.opposes,
   }))
 })
 
@@ -1316,7 +1323,7 @@ onUnmounted(() => { stopBatchPolling(); terminateWorker() })
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #0f172a;
+  background: #0a0b0f;
   color: #e2e8f0;
   font-family: system-ui, sans-serif;
   overflow: hidden;
@@ -1329,8 +1336,8 @@ onUnmounted(() => { stopBatchPolling(); terminateWorker() })
   gap: 1rem;
   padding: 0 1rem;
   height: 44px;
-  background: #1e293b;
-  border-bottom: 1px solid #334155;
+  background: #0f1117;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
   flex-shrink: 0;
 }
 
@@ -1443,10 +1450,10 @@ onUnmounted(() => { stopBatchPolling(); terminateWorker() })
   flex-wrap: wrap;
   gap: 0.75rem;
   padding: 0.3rem 0.75rem;
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  background: #0f1117;
+  border-top: 1px solid rgba(255,255,255,0.06);
   font-size: 0.7rem;
-  color: #64748b;
+  color: #4a5270;
   flex-shrink: 0;
 }
 

@@ -5,13 +5,30 @@
  * Responses carry `key_last_4` for display.
  */
 import api from './api'
-import type { LLMKey, LLMKeyCreate, Provider } from '@/types/llm'
+import type {
+  DeviceFlowPoll,
+  DeviceFlowStart,
+  LLMKey,
+  LLMKeyCreate,
+  OAuthConfig,
+  Provider,
+  ProviderModels,
+} from '@/types/llm'
 
 const BASE = '/users/me/llm-keys'
 
 /** Catalog of BYOK providers + their selectable models (excludes ollama). */
 export async function listProviders(): Promise<Provider[]> {
   const { data } = await api.get<Provider[]>(`${BASE}/providers`)
+  return data
+}
+
+/**
+ * Fetch the live model catalog a stored key can actually use. The plaintext
+ * secret stays on the server; the UI asks by key id.
+ */
+export async function fetchKeyModels(keyId: string): Promise<ProviderModels> {
+  const { data } = await api.get<ProviderModels>(`${BASE}/${keyId}/models`)
   return data
 }
 
@@ -36,4 +53,24 @@ export async function testKey(keyId: string): Promise<{ ok: boolean; model: stri
 /** Delete a stored key. */
 export async function deleteKey(keyId: string): Promise<void> {
   await api.delete(`${BASE}/${keyId}`)
+}
+
+/** Which sanctioned OAuth connect flows the server has configured. */
+export async function getOauthConfig(): Promise<OAuthConfig> {
+  const { data } = await api.get<OAuthConfig>(`${BASE}/oauth/config`)
+  return data
+}
+
+/** Begin the GitHub device flow. Returns the user code + verification URI. */
+export async function startGithubOauth(): Promise<DeviceFlowStart> {
+  const { data } = await api.post<DeviceFlowStart>(`${BASE}/oauth/github/start`)
+  return data
+}
+
+/** Poll a pending GitHub device flow once. */
+export async function pollGithubOauth(flowId: string): Promise<DeviceFlowPoll> {
+  const { data } = await api.post<DeviceFlowPoll>(`${BASE}/oauth/github/poll`, {
+    flow_id: flowId,
+  })
+  return data
 }

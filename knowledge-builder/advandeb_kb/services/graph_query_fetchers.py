@@ -458,13 +458,12 @@ async def fetch_chatbot_graph(
     # 2. Cited document IDs from messages
     session_to_doc_ids: Dict[str, set] = {}
     async for msg in app_mongo_db.chat_messages.find(
-        {"sources": {"$exists": True}},
-        {"session_id": 1, "sources": 1},
+        {"citations": {"$exists": True, "$ne": []}},
+        {"session_id": 1, "citations": 1},
     ):
         sess_id = str(msg.get("session_id", ""))
-        sources = msg.get("sources") or []
-        for src in sources:
-            doc_id = src.get("document_id") or src.get("id")
+        for cit in msg.get("citations") or []:
+            doc_id = cit.get("document_id") or cit.get("id")
             if doc_id:
                 session_to_doc_ids.setdefault(sess_id, set()).add(str(doc_id))
 

@@ -90,6 +90,20 @@ class BaseLLMProvider(ABC):
         insert time so we never persist invalid keys.
         """
 
+    async def list_models(self) -> List[str]:
+        """Return the chat model IDs this credential can actually use.
+
+        The default implementation returns the curated, hardcoded
+        ``available_models`` — used as an offline fallback and for providers
+        with no live catalog. Network-backed providers override this to query
+        the vendor's live model list so the UI never offers a retired model
+        (the original cause of the ``gemini-1.5-flash`` 404s).
+
+        Implementations that hit the network should raise ``ProviderAuthError``
+        on bad credentials so this method can double as a key validator.
+        """
+        return list(self.available_models)
+
     @abstractmethod
     async def close(self) -> None:
         """Release any underlying SDK / httpx client resources."""

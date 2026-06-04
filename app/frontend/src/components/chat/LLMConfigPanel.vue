@@ -11,8 +11,8 @@
     </div>
 
     <div class="row" v-if="modelOptions.length">
-      <label>Model</label>
-      <select v-model="selectedModel" @change="emitConfig">
+      <label>Model<span v-if="loadingModels" class="loading-dot" title="Loading models…"> …</span></label>
+      <select v-model="selectedModel" :disabled="loadingModels" @change="emitConfig">
         <option v-for="m in modelOptions" :key="m" :value="m">{{ m }}</option>
       </select>
     </div>
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { listKeys, listProviders } from '@/utils/llmKeysApi'
+import { fetchKeyModels, listKeys, listProviders } from '@/utils/llmKeysApi'
 import type { LLMKey, LLMMode, LLMSessionConfig, Provider } from '@/types/llm'
 
 const props = defineProps<{ modelValue?: LLMSessionConfig | null }>()
@@ -52,6 +52,10 @@ const providers = ref<Provider[]>([])
 const selectedSource = ref<string>('ollama')
 const selectedModel = ref<string>('')
 const selectedMode = ref<LLMMode>('react')
+
+// Live model catalog per stored key id, fetched on demand and cached.
+const modelsByKey = ref<Record<string, string[]>>({})
+const loadingModels = ref(false)
 
 const PROVIDER_LABELS: Record<string, string> = {
   anthropic: 'Claude',
@@ -73,6 +77,10 @@ const selectedKey = computed<LLMKey | null>(() =>
 const selectedProviderName = computed(() => selectedKey.value?.provider ?? 'ollama')
 
 const modelOptions = computed(() => {
+  const key = selectedKey.value
+  // Prefer the live catalog for the selected key; fall back to curated list
+  // (e.g. while the catalog is still loading, or for Ollama).
+  if (key && modelsByKey.value[key.id]) return modelsByKey.value[key.id]
   const p = providers.value.find((x) => x.name === selectedProviderName.value)
   return p?.available_models ?? []
 })
@@ -87,14 +95,62 @@ function emitConfig() {
   emit('update:modelValue', cfg)
 }
 
-// When the source changes, default the model to the key's default or first option.
-watch(selectedSource, () => {
+/** Pick the best model from a list, preferring an already-chosen valid one. */
+function chooseModel(models: string[], ...preferred: (string | null | undefined)[]): string {
+  for (const p of preferred) {
+    if (p && models.includes(p)) return p
+  }
+  return models[0] ?? ''
+}
+
+/**
+ * Load (and cache) the live model catalog for the selected source, then pick a
+ * sensible model. Ollama has no per-key catalog, so it uses the curated list.
+ */
+async function loadModelsForSource() {
   const key = selectedKey.value
-  const p = providers.value.find((x) => x.name === selectedProviderName.value)
-  selectedModel.value = key?.default_model || p?.default_model || p?.available_models?.[0] || ''
-})
+  if (!key) {
+    // Ollama: keep the server default (empty = backend decides).
+    selectedModel.value = ''
+    emitConfig()
+    return
+  }
+
+  const cached = modelsByKey.value[key.id]
+  if (cached) {
+    selectedModel.value = chooseModel(cached, selectedModel.value, key.default_model)
+    emitConfig()
+    return
+  }
+
+  // Show a provisional pick from the curated list while the catalog loads.
+  selectedModel.value = chooseModel(modelOptions.value, selectedModel.value, key.default_model)
+  emitConfig()
+
+  loadingModels.value = true
+  try {
+    const res = await fetchKeyModels(key.id)
+    if (res.models.length) {
+      modelsByKey.value[key.id] = res.models
+      selectedModel.value = chooseModel(
+        res.models,
+        selectedModel.value,
+        key.default_model,
+        res.default_model,
+      )
+      emitConfig()
+    }
+  } catch {
+    // interceptor toasts; the curated fallback remains usable
+  } finally {
+    loadingModels.value = false
+  }
+}
+
+watch(selectedSource, loadModelsForSource)
 
 onMounted(async () => {
+  const initialSource = selectedSource.value
   try {
     ;[keys.value, providers.value] = await Promise.all([listKeys(), listProviders()])
   } catch {
@@ -109,7 +165,11 @@ onMounted(async () => {
   } else if (keys.value.length > 0) {
     selectedSource.value = keys.value[0].id // listKeys() returns most-recent first
   }
-  emitConfig()
+  // If selectedSource changed above, the watcher already loads the catalog;
+  // otherwise (still Ollama) emit the initial config ourselves.
+  if (selectedSource.value === initialSource) {
+    await loadModelsForSource()
+  }
 })
 </script>
 
@@ -138,6 +198,7 @@ onMounted(async () => {
   border-radius: 6px;
   font-size: 0.85rem;
 }
+.loading-dot { color: #3b82f6; font-weight: 700; }
 .hint { font-size: 0.78rem; color: #6b7280; margin: 0; }
 .hint.warn { color: #b45309; }
 .hint a { color: #3b82f6; }

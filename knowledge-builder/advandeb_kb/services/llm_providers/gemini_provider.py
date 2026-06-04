@@ -94,11 +94,13 @@ class GeminiProvider(BaseLLMProvider):
     """Gemini chat provider using the ``google-generativeai`` SDK."""
 
     provider_name = "gemini"
-    default_model = "gemini-1.5-flash"
+    # Offline fallback only — the live catalog is fetched via list_models().
+    # Kept current so the UI is sane even before a key is entered.
+    default_model = "gemini-2.5-flash"
     available_models = [
-        "gemini-1.5-flash",
-        "gemini-1.5-pro",
-        "gemini-2.0-flash-exp",
+        "gemini-2.5-flash",
+        "gemini-2.5-pro",
+        "gemini-2.0-flash",
     ]
 
     def __init__(self, api_key: str):
@@ -229,18 +231,35 @@ class GeminiProvider(BaseLLMProvider):
             "choices": [{"index": 0, "delta": {}, "finish_reason": "stop"}],
         }
 
-    async def validate(self) -> bool:
+    async def list_models(self) -> List[str]:
+        """Return Gemini models that support ``generateContent``, live.
+
+        ``genai.list_models()`` is a blocking, authenticated call — run it on a
+        worker thread. Model names come back as ``models/<id>``; strip the
+        prefix to match what callers pass to ``generate_content``.
+        """
+
+        def _list() -> List[str]:
+            out: List[str] = []
+            for m in self._genai.list_models():
+                methods = getattr(m, "supported_generation_methods", []) or []
+                if "generateContent" not in methods:
+                    continue
+                name = getattr(m, "name", "") or ""
+                out.append(name[len("models/"):] if name.startswith("models/") else name)
+            return out
+
         try:
-            gen_model = self._build_model(self.default_model, None)
-            await asyncio.to_thread(
-                gen_model.generate_content,
-                [{"role": "user", "parts": [{"text": "ping"}]}],
-                generation_config={"temperature": 0.0, "max_output_tokens": 1},
-            )
-            return True
+            return await asyncio.to_thread(_list)
         except Exception as e:
             self._raise_translated(e)
-            return False  # pragma: no cover
+            return []  # pragma: no cover - _raise_translated always raises
+
+    async def validate(self) -> bool:
+        # A successful authenticated list call proves the key works without
+        # depending on any particular (possibly retired) model name.
+        await self.list_models()
+        return True
 
     async def close(self) -> None:
         # google-generativeai uses a process-global session; nothing to close.

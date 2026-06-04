@@ -40,6 +40,20 @@ class Settings(BaseSettings):
     def google_oauth_enabled(self) -> bool:
         """True when all three Google OAuth credentials are configured."""
         return bool(self.GOOGLE_CLIENT_ID and self.GOOGLE_CLIENT_SECRET and self.GOOGLE_REDIRECT_URI)
+
+    # GitHub OAuth device flow (BYOK "Connect with GitHub" → GitHub Models).
+    # Register your own GitHub App with Device Flow enabled + `Models: read`
+    # permission, and put its client ID here. No client secret is needed for the
+    # device flow. Leave unset to hide the feature. GITHUB_OAUTH_SCOPE is only
+    # used by classic OAuth Apps (GitHub Apps derive access from their granted
+    # permissions and ignore it).
+    GITHUB_OAUTH_CLIENT_ID: Optional[str] = None
+    GITHUB_OAUTH_SCOPE: Optional[str] = None
+
+    @property
+    def github_oauth_enabled(self) -> bool:
+        """True when a GitHub OAuth client id is configured."""
+        return bool(self.GITHUB_OAUTH_CLIENT_ID)
     
     # MongoDB — app layer (users, auth, chat, user submissions)
     MONGODB_URI: str

@@ -85,6 +85,10 @@ export interface GraphRenderNodeSummary {
   entity_collection: string
   entity_id: string
   props: Record<string, unknown>
+  /** Count of incident `supports` edges (sf_support graph). */
+  supports: number
+  /** Count of incident `opposes` edges (sf_support graph). */
+  opposes: number
 }
 
 export interface GraphRenderBundle {
@@ -100,6 +104,8 @@ export interface GraphRenderBundle {
   linkColors: Float32Array
   linkWidths: Float32Array
   nodeIds: string[]
+  nodeTypes: string[]
+  edgeTypes: string[]
   hoverLabels: string[]
   nodeSummaries: GraphRenderNodeSummary[]
   typeCounts: {

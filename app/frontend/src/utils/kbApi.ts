@@ -25,6 +25,8 @@ export interface GraphNode {
   x2d?: number
   y2d?: number
   degree?: number
+  supports?: number
+  opposes?: number
 }
 
 export interface GraphEdge {
