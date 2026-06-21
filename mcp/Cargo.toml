@@ -30,7 +30,7 @@ axum = { version = "0.7", features = ["macros", "json"] }
 tokio = { version = "1.37", features = ["macros", "rt-multi-thread"] }
 http-body-util = "0.1"
 tower = { version = "0.4", features = ["util"] }
-criterion = { version = "0.5", features = ["html_reports", "async_tokio"] }
+criterion = { version = "0.8", features = ["html_reports", "async_tokio"] }
 
 [[bench]]
 name = "gateway_benchmarks"
