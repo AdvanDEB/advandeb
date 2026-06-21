@@ -24,6 +24,7 @@ from advandeb_kb.services.graph_query_serialization import (
     _compute_degrees,
     _serialize_edge,
     _serialize_vertex,
+    FACT_NODE_TYPES,
 )
 
 logger = logging.getLogger(__name__)
@@ -67,6 +68,8 @@ def fetch_graph_sync(
         return fetch_knowledge_graph(db, limit)
     if schema_name == "physiological_process":
         return fetch_physiological(db, limit)
+    if schema_name == "reproduction":
+        return fetch_reproduction(db, limit)
     return {"nodes": [], "edges": []}
 
 
@@ -277,9 +280,9 @@ def fetch_knowledge_graph(db: ArangoDatabase, limit: Optional[int]) -> Dict[str,
             edges.append(se)
 
     # synthesize extracted_from edges from fact.document_id
-    doc_keys = {n["_id"] for n in nodes if n["node_type"] == "document"}
+    doc_keys = {n["_id"] for n in nodes if n["node_type"] in ("document", "abstract")}
     for n in nodes:
-        if n["node_type"] == "fact":
+        if n["node_type"] in FACT_NODE_TYPES:
             doc_id = n["properties"].get("document_id", "")
             if doc_id and doc_id in doc_keys:
                 edges.append({
@@ -289,6 +292,132 @@ def fetch_knowledge_graph(db: ArangoDatabase, limit: Optional[int]) -> Dict[str,
                     "edge_type": "extracted_from",
                     "weight": 1.0,
                 })
+
+    _compute_degrees(nodes, edges)
+    return {"nodes": nodes, "edges": edges}
+
+
+def fetch_reproduction(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, Any]:
+    """Reproduction-domain subgraph.
+
+    Documents tagged ``general_domain == 'reproduction'`` plus the facts extracted
+    from them, the stylized facts those facts support/oppose, and the taxa those
+    documents study — and the edges among them. Mirrors ``fetch_knowledge_graph``
+    but scoped to the reproduction domain rather than the whole KB.
+    """
+    node_limit = None if limit is None else max(1, limit // 4)
+    node_limit_clause, node_bind = _aql_limit("lim", node_limit)
+    edge_limit_clause, edge_bind = _aql_limit("lim", limit)
+
+    # Documents scoped to the reproduction domain. Prefer abstracts that have
+    # already been processed (so the graph surfaces their extracted conclusions /
+    # background knowledge / citations); fall back to bare abstracts only if none
+    # have been processed yet.
+    docs = aql(db,
+        f"FOR d IN documents FILTER d.general_domain == 'reproduction' "
+        f"AND d.processing_status == 'completed' {node_limit_clause} RETURN d",
+        node_bind,
+    )
+    if not docs:
+        docs = aql(db,
+            f"FOR d IN documents FILTER d.general_domain == 'reproduction' {node_limit_clause} RETURN d",
+            node_bind,
+        )
+    doc_nodes = [_serialize_vertex(d, "document") for d in docs]
+    doc_key_set = {n["_id"] for n in doc_nodes}
+    if not doc_key_set:
+        return {"nodes": [], "edges": []}
+    doc_keys = list(doc_key_set)
+
+    # Facts extracted from those documents (fact.document_id == document _key)
+    facts = aql(db,
+        f"FOR f IN facts FILTER f.document_id IN @doc_keys {node_limit_clause} RETURN f",
+        {"doc_keys": doc_keys, **node_bind},
+    )
+    fact_nodes = [_serialize_vertex(f, "fact") for f in facts]
+    fact_keys = [n["_id"] for n in fact_nodes]
+
+    # Stylized facts supported/opposed by those facts
+    sf_edges_raw: List[Dict[str, Any]] = []
+    sf_nodes: List[Dict[str, Any]] = []
+    if fact_keys:
+        sf_edges_raw = aql(db,
+            """
+            FOR e IN sf_support
+                FILTER PARSE_IDENTIFIER(e._from).key IN @fact_keys
+                RETURN {_from: e._from, _to: e._to, _key: e._key,
+                        rel: e.relation_type || 'supports',
+                        w: e.weight || e.confidence || 1.0}
+            """,
+            {"fact_keys": fact_keys},
+        )
+        sf_key_set = sorted({e["_to"].split("/")[-1] for e in sf_edges_raw if e.get("_to")})
+        if sf_key_set:
+            sfs = aql(db,
+                "FOR s IN stylized_facts FILTER s._key IN @sf_keys RETURN s",
+                {"sf_keys": sf_key_set},
+            )
+            sf_nodes = [_serialize_vertex(s, "stylized_fact") for s in sfs]
+
+    # Taxa studied by those documents (knowledge_graph edge: documents/<k> → taxa/<k>)
+    studies_edges_raw = aql(db,
+        """
+        FOR e IN knowledge_graph
+            FILTER e._from IN @doc_vertex_ids AND STARTS_WITH(e._to, 'taxa/')
+            RETURN {_from: e._from, _to: e._to, _key: e._key, w: e.confidence || 1.0}
+        """,
+        {"doc_vertex_ids": [f"documents/{k}" for k in doc_keys]},
+    )
+    taxon_nodes: List[Dict[str, Any]] = []
+    taxon_key_set = sorted({e["_to"].split("/")[-1] for e in studies_edges_raw if e.get("_to")})
+    if taxon_key_set:
+        taxa = aql(db,
+            "FOR t IN taxa FILTER t._key IN @taxon_keys RETURN t",
+            {"taxon_keys": taxon_key_set},
+        )
+        taxon_nodes = [_serialize_vertex(t, "taxon") for t in taxa]
+
+    nodes = doc_nodes + fact_nodes + sf_nodes + taxon_nodes
+    all_keys = {n["_id"] for n in nodes}
+
+    edges: List[Dict[str, Any]] = []
+
+    # citation edges among reproduction documents
+    raw_citations = aql(db,
+        f"FOR e IN citations {edge_limit_clause} "
+        f"RETURN {{_from:e._from,_to:e._to,_key:e._key,w:e.weight||1.0}}",
+        edge_bind,
+    )
+    for e in raw_citations:
+        se = _serialize_edge(e["_from"], e["_to"], "cites", float(e.get("w", 1.0)), e.get("_key", ""))
+        if se["source_node_id"] in doc_key_set and se["target_node_id"] in doc_key_set:
+            edges.append(se)
+
+    # supports / opposes (fact → stylized_fact)
+    for e in sf_edges_raw:
+        etype = "supports" if e.get("rel", "supports") == "supports" else "opposes"
+        se = _serialize_edge(e["_from"], e["_to"], etype, float(e.get("w", 1.0)), e.get("_key", ""))
+        if se["source_node_id"] in all_keys and se["target_node_id"] in all_keys:
+            edges.append(se)
+
+    # studies (document → taxon)
+    for e in studies_edges_raw:
+        se = _serialize_edge(e["_from"], e["_to"], "studies", float(e.get("w", 1.0)), e.get("_key", ""))
+        if se["source_node_id"] in all_keys and se["target_node_id"] in all_keys:
+            edges.append(se)
+
+    # extracted_from (fact → document), synthesized from fact.document_id
+    for fn in fact_nodes:
+        doc_id = fn["properties"].get("document_id", "")
+        if doc_id and doc_id in doc_key_set:
+            edges.append({
+                "_id": f"extracted_{fn['_id']}_{doc_id}",
+                "source_node_id": fn["_id"],
+                "target_node_id": doc_id,
+                "edge_type": "extracted_from",
+                "weight": 1.0,
+                "properties": {},
+            })
 
     _compute_degrees(nodes, edges)
     return {"nodes": nodes, "edges": edges}

@@ -51,6 +51,13 @@ _SCHEMA_ARANGO: Dict[str, Dict[str, Any]] = {
         "edge_colls": ["sf_support", "knowledge_graph"],
         "named_graph": None,
     },
+    "reproduction": {
+        # Same collections as knowledge_graph, but the fetcher scopes documents
+        # to general_domain == "reproduction" and derives the rest from them.
+        "vertex_colls": ["documents", "facts", "stylized_facts", "taxa"],
+        "edge_colls": ["citations", "sf_support", "knowledge_graph"],
+        "named_graph": None,
+    },
     "chatbot": {
         # Special: requires app MongoDB for chat data.
         # Handled separately in fetch_chatbot_graph().
@@ -65,8 +72,36 @@ _SCHEMA_ARANGO: Dict[str, Dict[str, Any]] = {
 # Node / edge serializers (produce plain JSON-serializable dicts)
 # ---------------------------------------------------------------------------
 
+# Fact sub-types extracted from abstracts get their own graph node types so the
+# UI can style/filter conclusions vs background knowledge vs citations.
+_FACT_SUBTYPES = ("conclusion", "background_knowledge", "citation")
+FACT_NODE_TYPES = ("fact",) + _FACT_SUBTYPES
+
+
+def _fact_node_type(doc: Dict[str, Any]) -> str:
+    ft = doc.get("fact_type")
+    return ft if ft in _FACT_SUBTYPES else "fact"
+
+
+def _document_node_type(doc: Dict[str, Any]) -> str:
+    """Distinguish abstract-only records from full papers.
+
+    Abstract imports (e.g. the OpenAlex reproduction corpus) are stored with
+    ``source_type == "web"`` and only carry an abstract; full papers come from
+    PDF ingestion. The graph exposes them as distinct node types so the UI can
+    style/filter them separately.
+    """
+    return "abstract" if doc.get("source_type") == "web" else "document"
+
+
 def _serialize_vertex(doc: Dict[str, Any], node_type: str) -> Dict[str, Any]:
     """Convert an ArangoDB vertex document to a graph node dict."""
+    # Refine generic "document" into "abstract" vs "document" (full paper),
+    # and generic "fact" into its extracted sub-type (conclusion/background/citation).
+    if node_type == "document":
+        node_type = _document_node_type(doc)
+    elif node_type == "fact":
+        node_type = _fact_node_type(doc)
     key = doc.get("_key", "")
     return {
         "_id": key,
@@ -100,7 +135,11 @@ def _serialize_edge(e_from: str, e_to: str, edge_type: str,
 def _node_type_to_collection(node_type: str) -> str:
     mapping = {
         "document": "documents",
+        "abstract": "documents",
         "fact": "facts",
+        "conclusion": "facts",
+        "background_knowledge": "facts",
+        "citation": "facts",
         "stylized_fact": "stylized_facts",
         "taxon": "taxa",
         "user": "users",
@@ -110,9 +149,9 @@ def _node_type_to_collection(node_type: str) -> str:
 
 
 def _get_label(doc: Dict[str, Any], node_type: str) -> str:
-    if node_type == "document":
+    if node_type in ("document", "abstract"):
         return doc.get("title", doc.get("_key", ""))
-    if node_type == "fact":
+    if node_type in FACT_NODE_TYPES:
         return doc.get("content", doc.get("_key", ""))
     if node_type == "stylized_fact":
         return doc.get("statement", doc.get("_key", ""))
@@ -126,10 +165,12 @@ def _get_label(doc: Dict[str, Any], node_type: str) -> str:
 
 
 def _get_cluster_id(doc: Dict[str, Any], node_type: str) -> str:
+    if node_type == "abstract":
+        return f"abstract:{doc.get('general_domain', 'unknown')}"
     if node_type == "document":
         return f"doc:{doc.get('general_domain', 'unknown')}"
-    if node_type == "fact":
-        return "fact"
+    if node_type in FACT_NODE_TYPES:
+        return node_type  # cluster conclusions/background/citations separately
     if node_type == "stylized_fact":
         return f"sf:{doc.get('category', 'uncategorized')}"
     if node_type == "taxon":
@@ -139,10 +180,10 @@ def _get_cluster_id(doc: Dict[str, Any], node_type: str) -> str:
 
 def _extract_properties(doc: Dict[str, Any], node_type: str) -> Dict[str, Any]:
     """Extract the relevant properties subset for each node type."""
-    if node_type == "document":
+    if node_type in ("document", "abstract"):
         return {k: doc.get(k) for k in ("doi", "year", "authors", "journal", "general_domain")}
-    if node_type == "fact":
-        return {k: doc.get(k) for k in ("confidence", "status", "entities", "document_id")}
+    if node_type in FACT_NODE_TYPES:
+        return {k: doc.get(k) for k in ("confidence", "status", "entities", "document_id", "fact_type")}
     if node_type == "stylized_fact":
         return {k: doc.get(k) for k in ("category", "status", "sf_number")}
     if node_type == "taxon":

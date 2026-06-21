@@ -12,6 +12,7 @@ import logging
 import time
 from typing import Any, AsyncIterator, Dict, List, Optional, Tuple
 
+from advandeb_kb.config.settings import settings
 from advandeb_kb.services.llm_providers.base import (
     BaseLLMProvider,
     ProviderAuthError,
@@ -19,6 +20,15 @@ from advandeb_kb.services.llm_providers.base import (
 )
 
 logger = logging.getLogger(__name__)
+
+# Models that support adaptive thinking + the `effort` control. Older Claude
+# models (and any future ones we haven't tagged) gracefully skip it.
+_ADAPTIVE_MODELS = ("opus-4-6", "opus-4-7", "opus-4-8", "sonnet-4-6", "fable-5", "mythos-5")
+
+
+def _supports_adaptive(model: str) -> bool:
+    m = (model or "").lower()
+    return any(tag in m for tag in _ADAPTIVE_MODELS)
 
 
 def _split_system(messages: List[Dict[str, str]]) -> Tuple[Optional[str], List[Dict[str, str]]]:
@@ -99,24 +109,38 @@ class AnthropicProvider(BaseLLMProvider):
         }
         if system:
             kwargs_out["system"] = system
+
+        # Adaptive thinking + effort for capable models. Capable models also
+        # reject `temperature`, so drop it here (older models keep it).
+        adaptive = settings.CHAT_ADAPTIVE_THINKING and _supports_adaptive(model)
+        if adaptive:
+            kwargs_out["thinking"] = {"type": "adaptive"}
+            kwargs_out["output_config"] = {"effort": settings.CHAT_THINKING_EFFORT}
+            kwargs_out.pop("temperature", None)
+
         try:
-            resp = await self._client.messages.create(**kwargs_out)
+            try:
+                resp = await self._final_message(kwargs_out)
+            except self._anthropic.APIStatusError as e:
+                # Graceful degradation: strip advanced params the model/SDK rejects
+                # (adaptive thinking / effort), or `temperature` on newer models.
+                changed = False
+                if "thinking" in kwargs_out or "output_config" in kwargs_out:
+                    kwargs_out.pop("thinking", None)
+                    kwargs_out.pop("output_config", None)
+                    changed = True
+                if _is_temperature_rejection(e) and "temperature" in kwargs_out:
+                    kwargs_out.pop("temperature", None)
+                    changed = True
+                if not changed:
+                    raise
+                resp = await self._final_message(kwargs_out)
         except self._anthropic.AuthenticationError as e:
             raise ProviderAuthError(str(e), self.provider_name) from e
         except self._anthropic.APIStatusError as e:
-            # Newer Claude models deprecate `temperature`; retry once without it.
-            if _is_temperature_rejection(e) and "temperature" in kwargs_out:
-                kwargs_out.pop("temperature", None)
-                try:
-                    resp = await self._client.messages.create(**kwargs_out)
-                except self._anthropic.APIStatusError as e2:
-                    raise ProviderError(
-                        str(e2), provider=self.provider_name, code=str(e2.status_code)
-                    ) from e2
-            else:
-                raise ProviderError(
-                    str(e), provider=self.provider_name, code=str(e.status_code)
-                ) from e
+            raise ProviderError(
+                str(e), provider=self.provider_name, code=str(e.status_code)
+            ) from e
         except Exception as e:
             raise ProviderError(str(e), provider=self.provider_name) from e
 
@@ -144,6 +168,17 @@ class AnthropicProvider(BaseLLMProvider):
                 "total_tokens": in_tok + out_tok,
             },
         }
+
+    async def _final_message(self, kwargs_out: Dict[str, Any]):
+        """Run a non-streaming request via the streaming API and return the final
+        Message. Using ``messages.stream(...).get_final_message()`` instead of
+        ``messages.create(...)`` avoids the SDK's non-streaming timeout guard, so
+        large ``max_tokens`` (long answers, up to the model's 128K output) neither
+        raise nor hit HTTP timeouts. The return value has the same shape as
+        ``messages.create`` (``.content`` / ``.usage`` / ``.stop_reason``).
+        """
+        async with self._client.messages.stream(**kwargs_out) as stream_ctx:
+            return await stream_ctx.get_final_message()
 
     async def _stream(
         self,

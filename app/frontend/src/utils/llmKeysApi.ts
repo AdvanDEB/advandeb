@@ -32,6 +32,12 @@ export async function fetchKeyModels(keyId: string): Promise<ProviderModels> {
   return data
 }
 
+/** Locally-available Ollama models (for the chat model picker, "Local" source). */
+export async function fetchLocalModels(): Promise<ProviderModels> {
+  const { data } = await api.get<ProviderModels>('/chat/local-models')
+  return data
+}
+
 /** List the current user's stored keys (no plaintext). */
 export async function listKeys(): Promise<LLMKey[]> {
   const { data } = await api.get<LLMKey[]>(BASE)

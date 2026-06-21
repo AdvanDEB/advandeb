@@ -165,7 +165,14 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
                 "label_field": "title",
                 "properties": ["doi", "year", "authors", "journal"],
                 "description": "A scientific paper or other ingested source.",
-            }
+            },
+            {
+                "name": "abstract",
+                "source_collection": "documents",
+                "label_field": "title",
+                "properties": ["doi", "year", "authors", "journal", "general_domain"],
+                "description": "Abstract-only record (source_type='web', e.g. OpenAlex import).",
+            },
         ],
         "edge_types": [
             {
@@ -298,6 +305,16 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
                     "Scientific document. cluster_id = 'doc:<general_domain>'."
                 ),
             },
+            {
+                "name": "abstract",
+                "source_collection": "documents",
+                "label_field": "title",
+                "properties": ["doi", "year", "authors", "journal", "general_domain", "cluster_id"],
+                "description": (
+                    "Abstract-only record (source_type='web', e.g. OpenAlex import). "
+                    "cluster_id = 'abstract:<general_domain>'."
+                ),
+            },
         ],
         "edge_types": [
             {
@@ -367,6 +384,103 @@ BUILTIN_SCHEMAS: List[Dict[str, Any]] = [
                 "description": (
                     "Stylized fact is exhibited by this taxon (via sf_taxon_relations if present)."
                 ),
+            },
+        ],
+    },
+    {
+        "name": "reproduction",
+        "description": (
+            "Reproduction-domain knowledge graph: documents tagged "
+            "general_domain='reproduction' with the facts extracted from them, the "
+            "stylized facts those facts support/oppose, and the taxa they study."
+        ),
+        "is_builtin": True,
+        "node_types": [
+            {
+                "name": "document",
+                "source_collection": "documents",
+                "label_field": "title",
+                "properties": ["doi", "year", "authors", "journal", "general_domain", "cluster_id"],
+                "description": "Reproduction-domain document (general_domain='reproduction').",
+            },
+            {
+                "name": "abstract",
+                "source_collection": "documents",
+                "label_field": "title",
+                "properties": ["doi", "year", "authors", "journal", "general_domain", "cluster_id"],
+                "description": "Abstract-only record (OpenAlex import, source_type='web') — distinct from a full paper.",
+            },
+            {
+                "name": "conclusion",
+                "source_collection": "facts",
+                "label_field": "content",
+                "properties": ["confidence", "status", "document_id", "fact_type", "cluster_id"],
+                "description": "Main conclusion extracted from the abstract (fact_type='conclusion').",
+            },
+            {
+                "name": "background_knowledge",
+                "source_collection": "facts",
+                "label_field": "content",
+                "properties": ["confidence", "status", "document_id", "fact_type", "cluster_id"],
+                "description": "Fact implied by the abstract from general/prior knowledge (fact_type='background_knowledge').",
+            },
+            {
+                "name": "citation",
+                "source_collection": "facts",
+                "label_field": "content",
+                "properties": ["confidence", "status", "document_id", "fact_type", "cluster_id"],
+                "description": "Another work/paper the abstract refers to (fact_type='citation').",
+            },
+            {
+                "name": "stylized_fact",
+                "source_collection": "stylized_facts",
+                "label_field": "statement",
+                "properties": ["category", "status", "sf_number", "cluster_id"],
+                "description": "Stylized fact supported/opposed by a reproduction fact.",
+            },
+            {
+                "name": "taxon",
+                "source_collection": "taxa",
+                "label_field": "name",
+                "properties": ["rank", "tax_id", "gbif_usage_key", "common_names", "cluster_id"],
+                "description": "Taxon studied by a reproduction document.",
+            },
+        ],
+        "edge_types": [
+            {
+                "name": "cites",
+                "source_node_type": "document",
+                "target_node_type": "document",
+                "label": "cites",
+                "description": "Reproduction document A cites reproduction document B.",
+            },
+            {
+                "name": "extracted_from",
+                "source_node_type": "fact",
+                "target_node_type": "document",
+                "label": "extracted from",
+                "description": "Fact was extracted from this reproduction document.",
+            },
+            {
+                "name": "supports",
+                "source_node_type": "fact",
+                "target_node_type": "stylized_fact",
+                "label": "supports",
+                "description": "Fact provides supporting evidence for the stylized fact.",
+            },
+            {
+                "name": "opposes",
+                "source_node_type": "fact",
+                "target_node_type": "stylized_fact",
+                "label": "opposes",
+                "description": "Fact contradicts the stylized fact.",
+            },
+            {
+                "name": "studies",
+                "source_node_type": "document",
+                "target_node_type": "taxon",
+                "label": "studies",
+                "description": "Reproduction document studies this organism.",
             },
         ],
     },

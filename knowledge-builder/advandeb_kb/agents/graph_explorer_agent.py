@@ -166,6 +166,24 @@ class GraphExplorerAgent(BaseAgent):
                 "required": ["document_id"],
             },
         )
+        self.server.register_tool(
+            name="search_stylized_facts",
+            handler=self._search_stylized_facts,
+            description=(
+                "Keyword-search the curated stylized facts (high-level, vetted "
+                "bioenergetics/DEB principles) by query. Use for research "
+                "questions to surface relevant curated facts directly, even when "
+                "no document chunk links to them in the graph."
+            ),
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string"},
+                    "limit": {"type": "integer", "default": 10},
+                },
+                "required": ["query"],
+            },
+        )
 
     # ------------------------------------------------------------------
     # Tool implementations
@@ -223,6 +241,16 @@ class GraphExplorerAgent(BaseAgent):
             lambda: self._graph_svc.find_related_facts(stylized_fact_id, direction, limit),
         )
         return {"stylized_fact_id": stylized_fact_id, "count": len(facts), "facts": facts}
+
+    async def _search_stylized_facts(self, query: str, limit: int = 10) -> dict:
+        if not self._graph_svc:
+            return self._unavailable()
+        loop = asyncio.get_event_loop()
+        facts = await loop.run_in_executor(
+            _executor,
+            lambda: self._graph_svc.search_stylized_facts(query, limit),
+        )
+        return {"query": query, "count": len(facts), "stylized_facts": facts}
 
     async def _traverse_graph(
         self,

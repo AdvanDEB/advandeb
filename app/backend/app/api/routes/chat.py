@@ -6,10 +6,37 @@ from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
 from app.core.auth import get_current_user
+from app.core.config import settings
 from app.services.chat_service import ChatService
 
 
 router = APIRouter()
+
+
+@router.get("/local-models")
+async def list_local_models(
+    current_user: dict = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """List locally-available Ollama models for the chat model picker.
+
+    Queries Ollama's ``/api/tags`` directly so any authenticated user can pick a
+    local model for their session (the curator-only KB endpoint is for admin UI).
+    Returns an empty list (the UI then falls back to the server default) when
+    Ollama is unreachable.
+    """
+    import httpx
+    from advandeb_kb.config.settings import settings as kb_settings
+
+    models: List[str] = []
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            resp = await client.get(f"{settings.OLLAMA_BASE_URL}/api/tags")
+            resp.raise_for_status()
+            data = resp.json()
+            models = [m["name"] for m in data.get("models", []) if m.get("name")]
+    except Exception:
+        models = []
+    return {"models": models, "default_model": kb_settings.CHAT_ANSWER_MODEL}
 
 
 class ChatMessage(BaseModel):

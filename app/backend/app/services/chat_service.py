@@ -98,6 +98,9 @@ class ChatService:
             arguments["llm_key_id"] = config["key_id"]
             if config.get("model"):
                 arguments["llm_model"] = config["model"]
+        elif config and config.get("model"):
+            # Local Ollama path: honour an explicitly selected local model.
+            arguments["llm_model"] = config["model"]
 
         payload = json.dumps({
             "jsonrpc": "2.0",
@@ -131,11 +134,14 @@ class ChatService:
                         # Final result — emit message event
                         result = msg["result"]
                         actual_sid = result.get("session_id", session_id)
+                        citations = await self._enrich_citations(
+                            result.get("citations", [])
+                        )
                         yield {
                             "type": "message",
                             "role": "assistant",
                             "content": result.get("answer", ""),
-                            "citations": result.get("citations", []),
+                            "citations": citations,
                             "evidence_mode": result.get("evidence_mode", "local"),
                             "suggested_questions": result.get("suggested_questions", []),
                             "session_id": actual_sid,
@@ -230,17 +236,33 @@ class ChatService:
                 "session_id": session_id,
             }
 
+        citations = await self._enrich_citations(result.get("citations", []))
         graph_rebuild_queue.mark_dirty("chatbot")
         return {
             "message": {
                 "role": "assistant",
                 "content": result.get("answer", ""),
-                "citations": result.get("citations", []),
+                "citations": citations,
                 "evidence_mode": result.get("evidence_mode", "local"),
             },
             "session_id": result.get("session_id", session_id),
             "suggested_questions": result.get("suggested_questions", []),
         }
+
+    @staticmethod
+    async def _enrich_citations(citations: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Resolve every citation to its source document (best-effort).
+
+        Ensures references coming back from the chatbot agent carry document
+        provenance (title/authors/year/url) and not just a bare chunk id.
+        """
+        if not citations:
+            return citations
+        from app.services.provenance_service import ProvenanceService
+        try:
+            return await ProvenanceService().enrich_citations(citations)
+        except Exception:  # noqa: BLE001 — never fail the answer over enrichment
+            return citations
 
     # ------------------------------------------------------------------
     # Session management — reads/writes app chat DB

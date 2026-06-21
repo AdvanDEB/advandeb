@@ -14,6 +14,7 @@ Use run_in_executor when calling from async contexts.
 from __future__ import annotations
 
 import logging
+import re
 from typing import Any, Optional
 
 from advandeb_kb.database.arango_client import ArangoDatabase
@@ -230,6 +231,40 @@ class GraphExpansionService:
             return self.db.aql(aql, bind_vars={"sf_id": sf_arango_id})[:limit]
         except Exception as exc:
             logger.warning("find_related_facts failed: %s", exc)
+            return []
+
+    def search_stylized_facts(
+        self, query: str, limit: int = 10
+    ) -> list[dict[str, Any]]:
+        """Keyword-search curated stylized facts by statement text.
+
+        Gives the chat a query-based path to the curated stylized_facts
+        collection even when a retrieved chunk is not linked into the support
+        graph. Ranks by how many query terms appear in the statement.
+        """
+        terms = [t for t in re.findall(r"[a-z0-9]+", (query or "").lower()) if len(t) > 2]
+        if not terms:
+            return []
+        aql = """
+        FOR sf IN stylized_facts
+            FILTER sf.status != "rejected"
+            LET hay = LOWER(sf.statement)
+            LET score = LENGTH(FOR t IN @terms FILTER CONTAINS(hay, t) RETURN 1)
+            FILTER score > 0
+            SORT score DESC, sf.sf_number ASC
+            LIMIT @limit
+            RETURN {
+                id: sf._key,
+                statement: sf.statement,
+                category: sf.category,
+                sf_number: sf.sf_number,
+                match_score: score
+            }
+        """
+        try:
+            return self.db.aql(aql, bind_vars={"terms": terms, "limit": limit})
+        except Exception as exc:
+            logger.warning("search_stylized_facts failed: %s", exc)
             return []
 
     def find_taxa_for_document(self, document_id: str) -> list[dict[str, Any]]:

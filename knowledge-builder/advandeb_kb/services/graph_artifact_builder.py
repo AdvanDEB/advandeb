@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Tuple
 from uuid import uuid4
@@ -10,6 +11,8 @@ from uuid import uuid4
 from app.core.config import settings
 from advandeb_kb.services.graph_artifact_store import GraphArtifactStore
 from advandeb_kb.services.graph_query_service import GraphQueryService, _apply_layout, _compute_degrees
+
+logger = logging.getLogger(__name__)
 
 
 def _now_iso() -> str:
@@ -128,9 +131,19 @@ class GraphArtifactBuilder:
         build_id: str,
         source_revision: str,
     ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
-        data = await self.query_service.get_graph_data(schema_id, limit=None)
+        # Cap how much of the graph a single rebuild loads (0 = unlimited).
+        # Bounds memory + layout cost — notably the live "chatbot" schema, which
+        # grows unbounded as conversations accumulate.
+        max_nodes = getattr(settings, "GRAPH_ARTIFACT_MAX_NODES", 0) or None
+        data = await self.query_service.get_graph_data(schema_id, limit=max_nodes)
         nodes = list(data.get("nodes") or [])
         edges = list(data.get("edges") or [])
+        if max_nodes and len(nodes) >= max_nodes:
+            logger.warning(
+                "GraphArtifactBuilder: schema %r hit the node cap (%d); artifact is "
+                "truncated. Raise GRAPH_ARTIFACT_MAX_NODES if a fuller graph is needed.",
+                schema_id, max_nodes,
+            )
 
         _compute_degrees(nodes, edges)
         if nodes:

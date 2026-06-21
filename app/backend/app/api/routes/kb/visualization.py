@@ -25,6 +25,7 @@ _executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="viz")
 VALID_SCHEMAS = {
     "citation", "sf_support", "taxonomical",
     "knowledge_graph", "physiological_process", "chatbot",
+    "reproduction",
 }
 
 LIVE_FALLBACK_LIMIT = 50_000

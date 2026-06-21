@@ -86,6 +86,16 @@ class Settings(BaseSettings):
     # Graph artifacts
     GRAPH_ARTIFACT_DIR: str = "data/graph_artifacts"
     GRAPH_ARTIFACT_LAYOUT_NAME: str = "schema_default_v1"
+    # Rebuild-queue pacing. Callers mark schemas dirty on every mutation (chat
+    # marks "chatbot" dirty per message); without pacing the worker rebuilds the
+    # full graph back-to-back, pinning a CPU and ratcheting RSS. SETTLE coalesces
+    # bursts; MIN_INTERVAL is the floor between two rebuilds of the same schema.
+    GRAPH_ARTIFACT_REBUILD_SETTLE_SECONDS: float = 5.0
+    GRAPH_ARTIFACT_REBUILD_MIN_INTERVAL_SECONDS: float = 120.0
+    # Hard cap on nodes loaded when building an artifact (0 = unlimited). Bounds
+    # the memory + layout cost of a single rebuild — notably the live "chatbot"
+    # schema, which grows without bound as conversations accumulate.
+    GRAPH_ARTIFACT_MAX_NODES: int = 50000
 
     # MongoDB connection pool
     MONGO_MAX_POOL_SIZE: int = 10

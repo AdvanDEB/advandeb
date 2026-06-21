@@ -10,6 +10,7 @@ from __future__ import annotations
 import logging
 from typing import Any, AsyncIterator, Dict, List, Optional
 
+from advandeb_kb.config.settings import settings
 from advandeb_kb.services.llm_providers.base import (
     BaseLLMProvider,
     ProviderAuthError,
@@ -66,11 +67,22 @@ class OpenAIProvider(BaseLLMProvider):
         # Pass through any caller-supplied extras (tools, response_format, ...).
         call_kwargs.update(kwargs)
 
+        # Reasoning-effort for reasoning-capable models (o-series, gpt-5, …).
+        # Non-reasoning models reject it → we strip and retry (graceful no-op).
+        if settings.CHAT_ADAPTIVE_THINKING and "reasoning_effort" not in call_kwargs:
+            call_kwargs["reasoning_effort"] = settings.CHAT_THINKING_EFFORT
+
         if stream:
             return self._stream(call_kwargs)
 
         try:
-            resp = await self._client.chat.completions.create(**call_kwargs)
+            try:
+                resp = await self._client.chat.completions.create(**call_kwargs)
+            except self._openai.APIStatusError as e:
+                if "reasoning_effort" not in call_kwargs:
+                    raise
+                call_kwargs.pop("reasoning_effort", None)
+                resp = await self._client.chat.completions.create(**call_kwargs)
         except self._openai.AuthenticationError as e:
             raise ProviderAuthError(str(e), self.provider_name) from e
         except self._openai.APIStatusError as e:

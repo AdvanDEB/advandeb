@@ -3,7 +3,7 @@
     <div class="row">
       <label>Model source</label>
       <select v-model="selectedSource" @change="emitConfig">
-        <option value="ollama">Ollama (local default)</option>
+        <option value="ollama">Ollama (local)</option>
         <option v-for="k in keys" :key="k.id" :value="k.id">
           {{ providerLabel(k.provider) }}{{ k.label ? ` · ${k.label}` : '' }} ••••{{ k.key_last_4 }}
         </option>
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { fetchKeyModels, listKeys, listProviders } from '@/utils/llmKeysApi'
+import { fetchKeyModels, fetchLocalModels, listKeys, listProviders } from '@/utils/llmKeysApi'
 import type { LLMKey, LLMMode, LLMSessionConfig, Provider } from '@/types/llm'
 
 const props = defineProps<{ modelValue?: LLMSessionConfig | null }>()
@@ -56,6 +56,10 @@ const selectedMode = ref<LLMMode>('react')
 // Live model catalog per stored key id, fetched on demand and cached.
 const modelsByKey = ref<Record<string, string[]>>({})
 const loadingModels = ref(false)
+
+// Locally-available Ollama models (the "Local" source), fetched once and cached.
+const ollamaModels = ref<string[]>([])
+const ollamaDefault = ref<string>('')
 
 const PROVIDER_LABELS: Record<string, string> = {
   anthropic: 'Claude',
@@ -78,9 +82,11 @@ const selectedProviderName = computed(() => selectedKey.value?.provider ?? 'olla
 
 const modelOptions = computed(() => {
   const key = selectedKey.value
+  // Ollama (Local): the locally-installed models reported by the backend.
+  if (!key) return ollamaModels.value
   // Prefer the live catalog for the selected key; fall back to curated list
-  // (e.g. while the catalog is still loading, or for Ollama).
-  if (key && modelsByKey.value[key.id]) return modelsByKey.value[key.id]
+  // (e.g. while the catalog is still loading).
+  if (modelsByKey.value[key.id]) return modelsByKey.value[key.id]
   const p = providers.value.find((x) => x.name === selectedProviderName.value)
   return p?.available_models ?? []
 })
@@ -110,8 +116,21 @@ function chooseModel(models: string[], ...preferred: (string | null | undefined)
 async function loadModelsForSource() {
   const key = selectedKey.value
   if (!key) {
-    // Ollama: keep the server default (empty = backend decides).
-    selectedModel.value = ''
+    // Ollama (Local): fetch the installed models once, then pick one. An empty
+    // selection means "let the backend use its default model".
+    if (!ollamaModels.value.length) {
+      loadingModels.value = true
+      try {
+        const res = await fetchLocalModels()
+        ollamaModels.value = res.models
+        ollamaDefault.value = res.default_model
+      } catch {
+        // interceptor toasts; empty list falls back to the backend default
+      } finally {
+        loadingModels.value = false
+      }
+    }
+    selectedModel.value = chooseModel(ollamaModels.value, selectedModel.value, ollamaDefault.value)
     emitConfig()
     return
   }

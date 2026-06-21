@@ -26,9 +26,12 @@ from typing import Any, Dict, List, Optional
 
 from bson import ObjectId
 
+from advandeb_kb.config.settings import settings
+
 from app.clients.mcp_client import MCPClient
 from app.core.database import get_database
 from app.services.llm_key_service import LLMKeyService
+from app.services.provenance_service import ProvenanceService
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +75,7 @@ class ByokChatService:
         key_id: str,
         model: Optional[str] = None,
         top_k: int = 8,
-        max_tokens: int = 800,
+        max_tokens: Optional[int] = None,
     ) -> Dict[str, Any]:
         """Produce a cited answer for ``query`` using the user's BYOK provider.
 
@@ -82,6 +85,10 @@ class ByokChatService:
         """
         from advandeb_kb.services.llm_providers import get_provider
         from advandeb_kb.services.llm_providers.base import ProviderError
+
+        # Generous output budget — 800 truncated multi-paragraph cited answers.
+        if not max_tokens:
+            max_tokens = settings.CHAT_ANSWER_MAX_TOKENS
 
         # Works for both pasted api keys and OAuth credentials (e.g. GitHub
         # Models via device flow); get_credential refreshes expired tokens.
@@ -141,6 +148,9 @@ class ByokChatService:
 
         answer = _extract_answer_text(resp)
         citations = self._extract_citations(answer, chunks)
+        # Resolve each citation to its source document so every reference carries
+        # provenance (title/authors/year/url) — not just a bare chunk id.
+        citations = await ProvenanceService().enrich_citations(citations)
 
         message_id = await self._store_message(
             sid, role="assistant", content=answer,

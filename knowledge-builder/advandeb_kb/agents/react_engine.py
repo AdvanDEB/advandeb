@@ -71,7 +71,19 @@ bioenergetics research assistant and briefly describe what you can help with.
 
 RESEARCH QUERIES: For any factual or scientific question, you MUST call hybrid_search \
 at least once before writing a Final Answer. Never answer a research question from \
-memory alone — always search the knowledge base first.
+memory alone — always search the knowledge base first. For questions about general \
+principles, patterns, or "what is known about …", ALSO call search_stylized_facts to \
+pull in curated, vetted stylized facts, and cite them as [SF1], [SF2], … in your answer.
+
+THOROUGH EXPLORATION: For non-trivial questions, do not stop after a single search. \
+Run several hybrid_search calls covering distinct facets of the question (different key \
+terms, mechanisms, taxa, or modeling frameworks), and use search_stylized_facts for \
+curated principles. Prefer gathering broad, specific evidence over answering quickly.
+
+GROUNDING (TRUE TO THE SOURCES): Base every factual claim on the Observations and cite \
+the supporting source for it. Do not generalize beyond what the sources actually say; \
+when the evidence is thin, mixed, or absent, state that explicitly rather than \
+overstating certainty.
 
 GRAPH CONTEXT (AUTOMATIC): After every hybrid_search the system automatically runs \
 expand_context on the retrieved chunks and injects the results as an additional \
@@ -146,7 +158,13 @@ related work.
    Return organisms (taxa) studied in a given document.
    Arguments: {"document_id": "<string>"}
 
-5. synthesize_answer
+5. search_stylized_facts
+   Keyword-search curated stylized facts (high-level, vetted bioenergetics/DEB \
+principles) by query. Use alongside hybrid_search for principle/pattern questions \
+to surface curated facts directly. Cite returned facts as [SF1], [SF2], ….
+   Arguments: {"query": "<string>", "limit": <int, default 10>}
+
+6. synthesize_answer
    Generate a cited answer from chunks and graph context. Use this as the \
 final step when you have gathered enough context via the other tools.
    Arguments: {"query": "<string>", "chunks": [<chunk dicts>], \
@@ -191,6 +209,7 @@ class ReactEngine:
         max_steps: int = MAX_STEPS,
         num_ctx: int = 8192,
         provider: Optional[Any] = None,
+        answer_max_tokens: int = 1200,
     ):
         self._ollama_url = ollama_url
         self._model = model
@@ -199,6 +218,11 @@ class ReactEngine:
         self._history = conversation_history or []
         self._max_steps = max_steps
         self._num_ctx = num_ctx
+        # Per-LLM-call output cap. Each ReAct step (Thought/Action and the Final
+        # Answer) uses this — raise it to allow longer final answers. Intermediate
+        # steps naturally stop after emitting an action, so a higher cap mostly
+        # benefits the final answer.
+        self._answer_max_tokens = answer_max_tokens
         # Optional BYOK provider (advandeb_kb.services.llm_providers.BaseLLMProvider).
         # When set, the reasoning LLM calls go to this provider instead of Ollama,
         # so the user's own Claude/OpenAI/Gemini/GitHub model drives the multi-step
@@ -321,6 +345,11 @@ class ReactEngine:
                     )
                     continue
 
+                # Faithfulness check: flag (non-destructively) an answer that
+                # cites none of the retrieved sources.
+                final_text = self._with_grounding_note(
+                    final_text, gathered_chunks, tool_calls_made
+                )
                 await self._emit({"type": "final_answer", "text": final_text})
                 # Citations are built deterministically from all gathered chunks.
                 # Inline markers ([1], [G2], …) promote cited chunks to the front
@@ -425,7 +454,7 @@ class ReactEngine:
                 if new_chunks and "expand_context" in self._tools:
                     chunk_ids = [
                         c.get("chunk_id") or c.get("id")
-                        for c in new_chunks[:10]
+                        for c in new_chunks[:20]
                         if c.get("chunk_id") or c.get("id")
                     ]
                     if chunk_ids:
@@ -650,7 +679,30 @@ class ReactEngine:
     # Ollama helper
     # ------------------------------------------------------------------
 
-    async def _ollama_chat(self, messages: list[dict], max_tokens: int = 1200) -> str:
+    @staticmethod
+    def _with_grounding_note(
+        text: str, gathered_chunks: list[dict], tool_calls_made: list
+    ) -> str:
+        """Append a transparency note when a research answer cites no sources.
+
+        Non-destructive: if tool calls were made and chunks were retrieved but the
+        answer carries no [1]/[G1]/[SF1] markers, flag that uncited statements are
+        not verified against the knowledge base. Leaves grounded (or explicitly
+        general-knowledge) answers untouched.
+        """
+        if not tool_calls_made or not gathered_chunks:
+            return text
+        if re.search(r"\[(?:SF|G)?\d+\]", text):
+            return text
+        if "general bioenergetics knowledge" in text.lower():
+            return text
+        return text.rstrip() + (
+            "\n\n_⚠️ Grounding note: this answer cites none of the retrieved "
+            "sources — treat uncited statements as not verified against the "
+            "knowledge base._"
+        )
+
+    async def _ollama_chat(self, messages: list[dict], max_tokens: Optional[int] = None) -> str:
         """Call Ollama /api/chat with streaming so tokens are logged as they arrive.
 
         Using /api/chat (rather than /api/generate) ensures that the system
@@ -664,6 +716,8 @@ class ReactEngine:
           - Each chunk is logged at DEBUG level so the agent logs show live
             progress even for very slow 70B generation.
         """
+        if max_tokens is None:
+            max_tokens = self._answer_max_tokens
         # BYOK path: drive the reasoning step with the user's own provider.
         if self._provider is not None:
             try:
