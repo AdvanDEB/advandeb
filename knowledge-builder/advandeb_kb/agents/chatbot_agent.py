@@ -637,6 +637,12 @@ class ChatbotAgent(BaseAgent):
             args.setdefault("limit", 10)
             return await self._graph_client.call_tool("search_stylized_facts", args)
 
+        async def claim_consensus(args: dict) -> dict:
+            return await self._graph_client.call_tool("claim_consensus", args)
+
+        async def find_by_taxon(args: dict) -> dict:
+            return await self._graph_client.call_tool("find_by_taxon", args)
+
         async def synthesize_answer(args: dict) -> dict:
             return await self._synthesis_client.call_tool("synthesize_answer", args)
 
@@ -647,6 +653,8 @@ class ChatbotAgent(BaseAgent):
             "find_related_facts": find_related_facts,
             "find_taxa_for_document": find_taxa_for_document,
             "search_stylized_facts": search_stylized_facts,
+            "claim_consensus": claim_consensus,
+            "find_by_taxon": find_by_taxon,
             "synthesize_answer": synthesize_answer,
         }
 

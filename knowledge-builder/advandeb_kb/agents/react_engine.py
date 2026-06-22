@@ -75,6 +75,18 @@ memory alone — always search the knowledge base first. For questions about gen
 principles, patterns, or "what is known about …", ALSO call search_stylized_facts to \
 pull in curated, vetted stylized facts, and cite them as [SF1], [SF2], … in your answer.
 
+SUPPORT / CONTRADICT / CONSENSUS: When the user asks which references support or \
+contradict a statement, or asks for the consensus on a claim, call claim_consensus \
+with that claim FIRST. It returns vetted supporting and opposing references (with \
+authors/year/journal/doi) from the curated evidence graph — build the requested table \
+or list from its supports[] and opposes[] rows, then optionally run hybrid_search to \
+add any references the curated graph missed.
+
+TAXON SCOPING: When a question is restricted to a taxonomic group ("within the \
+family/class/genus X", "in <organism>"), call find_by_taxon(name) first to get that \
+group's member organism names, then include those names in your hybrid_search queries \
+so results stay within the clade. For "across all animal phyla", do not scope.
+
 THOROUGH EXPLORATION: For non-trivial questions, do not stop after a single search. \
 Run several hybrid_search calls covering distinct facets of the question (different key \
 terms, mechanisms, taxa, or modeling frameworks), and use search_stylized_facts for \
@@ -164,7 +176,21 @@ principles) by query. Use alongside hybrid_search for principle/pattern question
 to surface curated facts directly. Cite returned facts as [SF1], [SF2], ….
    Arguments: {"query": "<string>", "limit": <int, default 10>}
 
-6. synthesize_answer
+6. claim_consensus
+   For a free-text CLAIM, return vetted support-vs-challenge evidence: the closest \
+curated stylized fact(s) plus supporting and opposing facts, each with its source \
+document (title, authors, year, journal, doi). USE THIS FIRST for "list references \
+that support/contradict …", "consensus on …", and any support/challenge table \
+request — then build the table from its supports[]/opposes[] rows.
+   Arguments: {"claim": "<string>", "sf_top": <int, default 3>, "limit_facts": <int, default 60>}
+
+7. find_by_taxon
+   Resolve a taxonomic group name (family, class, order, genus, species, or common \
+name) to its member organism names. Use to scope a question to a clade — take the \
+returned names and add them to your hybrid_search queries.
+   Arguments: {"name": "<string>", "max_names": <int, default 150>, "ranks": ["species","genus"]}
+
+8. synthesize_answer
    Generate a cited answer from chunks and graph context. Use this as the \
 final step when you have gathered enough context via the other tools.
    Arguments: {"query": "<string>", "chunks": [<chunk dicts>], \

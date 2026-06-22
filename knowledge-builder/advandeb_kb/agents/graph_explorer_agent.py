@@ -184,6 +184,47 @@ class GraphExplorerAgent(BaseAgent):
                 "required": ["query"],
             },
         )
+        self.server.register_tool(
+            name="claim_consensus",
+            handler=self._claim_consensus,
+            description=(
+                "Given a free-text scientific CLAIM, return structured "
+                "support-vs-challenge evidence: the closest curated stylized "
+                "fact(s) and their supporting and opposing facts, each joined to "
+                "its source document (title, authors, year, journal, doi). Use "
+                "this for 'list references that support/contradict …', 'consensus "
+                "on …', and support/challenge table questions."
+            ),
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "claim": {"type": "string"},
+                    "sf_top": {"type": "integer", "default": 3},
+                    "limit_facts": {"type": "integer", "default": 60},
+                },
+                "required": ["claim"],
+            },
+        )
+        self.server.register_tool(
+            name="find_by_taxon",
+            handler=self._find_by_taxon,
+            description=(
+                "Resolve a taxonomic group name (family, class, order, genus, "
+                "species, or common name) to its member organism names. Use to "
+                "scope a question to a clade ('within the family/class X'): take "
+                "the returned names and include them in hybrid_search queries. "
+                "Document-level taxon links are sparse, so scope by these names."
+            ),
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string"},
+                    "max_names": {"type": "integer", "default": 150},
+                    "ranks": {"type": "array", "items": {"type": "string"}},
+                },
+                "required": ["name"],
+            },
+        )
 
     # ------------------------------------------------------------------
     # Tool implementations
@@ -251,6 +292,38 @@ class GraphExplorerAgent(BaseAgent):
             lambda: self._graph_svc.search_stylized_facts(query, limit),
         )
         return {"query": query, "count": len(facts), "stylized_facts": facts}
+
+    async def _claim_consensus(
+        self, claim: str, sf_top: int = 3, limit_facts: int = 60
+    ) -> dict:
+        if not self._graph_svc:
+            return self._unavailable()
+        loop = asyncio.get_event_loop()
+        rows = await loop.run_in_executor(
+            _executor,
+            lambda: self._graph_svc.claim_consensus(claim, sf_top, limit_facts),
+        )
+        support_total = sum(r.get("support_count", 0) for r in rows)
+        oppose_total = sum(r.get("oppose_count", 0) for r in rows)
+        return {
+            "claim": claim,
+            "matched": len(rows),
+            "support_total": support_total,
+            "oppose_total": oppose_total,
+            "consensus": rows,
+        }
+
+    async def _find_by_taxon(
+        self, name: str, max_names: int = 150, ranks: Optional[list] = None
+    ) -> dict:
+        if not self._graph_svc:
+            return self._unavailable()
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(
+            _executor,
+            lambda: self._graph_svc.find_by_taxon(name, max_names, ranks),
+        )
+        return result or {"matched": [], "best": None, "names": []}
 
     async def _traverse_graph(
         self,

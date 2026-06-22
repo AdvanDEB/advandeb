@@ -267,6 +267,128 @@ class GraphExpansionService:
             logger.warning("search_stylized_facts failed: %s", exc)
             return []
 
+    def claim_consensus(
+        self, claim: str, sf_top: int = 3, limit_facts: int = 60
+    ) -> list[dict[str, Any]]:
+        """Structured support-vs-challenge evidence for a free-text claim.
+
+        Matches the claim to the closest curated stylized fact(s), then walks the
+        ``sf_support`` edges to return supporting and opposing facts, each joined
+        to its source document (title/authors/year/journal/doi). Powers the
+        consensus / "list references that support|contradict" table queries from
+        vetted structured data rather than chunk guessing.
+        """
+        terms = [t for t in re.findall(r"[a-z0-9]+", (claim or "").lower()) if len(t) > 2]
+        if not terms:
+            return []
+        aql = """
+        LET sfs = (
+            FOR sf IN stylized_facts
+                FILTER sf.status != "rejected"
+                LET score = LENGTH(FOR t IN @terms FILTER CONTAINS(LOWER(sf.statement), t) RETURN 1)
+                FILTER score > 0
+                SORT score DESC, sf.sf_number ASC
+                LIMIT @sf_top
+                RETURN sf
+        )
+        FOR sf IN sfs
+            LET edges = (
+                FOR e IN sf_support
+                    FILTER e._to == sf._id
+                    LET f = DOCUMENT(e._from)
+                    FILTER f != null
+                    LET d = f.document_id != null ? DOCUMENT(CONCAT("documents/", f.document_id)) : null
+                    LIMIT @limit_facts
+                    RETURN {
+                        relation: e.relation_type,
+                        confidence: e.confidence,
+                        fact: f.content,
+                        page: f.page_number,
+                        document: d != null ? {
+                            id: f.document_id, title: d.title, authors: d.authors,
+                            year: d.year, journal: d.journal, doi: d.doi,
+                            is_retracted: d.is_retracted, cited_by_count: d.cited_by_count
+                        } : { id: f.document_id }
+                    }
+            )
+            RETURN {
+                stylized_fact: sf.statement,
+                category: sf.category,
+                match_terms: LENGTH(FOR t IN @terms FILTER CONTAINS(LOWER(sf.statement), t) RETURN 1),
+                supports: edges[* FILTER CURRENT.relation == "supports"],
+                opposes: edges[* FILTER CURRENT.relation == "opposes"],
+                support_count: LENGTH(edges[* FILTER CURRENT.relation == "supports"]),
+                oppose_count: LENGTH(edges[* FILTER CURRENT.relation == "opposes"])
+            }
+        """
+        try:
+            return self.db.aql(
+                aql,
+                bind_vars={"terms": terms, "sf_top": sf_top, "limit_facts": limit_facts},
+            )
+        except Exception as exc:
+            logger.warning("claim_consensus failed: %s", exc)
+            return []
+
+    def find_by_taxon(
+        self, name: str, max_names: int = 150, ranks: Optional[list[str]] = None
+    ) -> dict[str, Any]:
+        """Resolve a taxon name (family/class/genus/species/common name) to its
+        member organism names, for scoping literature searches to a clade.
+
+        Document↔taxon graph links are sparse, so this returns the clade's member
+        names (the taxon + its descendants via the NCBI ``lineage``); the caller
+        includes those names in hybrid_search queries to focus on the group.
+        """
+        if not name or not name.strip():
+            return {}
+        aql = """
+        LET q = LOWER(@name)
+        LET matches = (
+            FOR t IN taxa
+                FILTER LOWER(t.name) == q
+                    OR q IN (FOR s IN t.synonyms RETURN LOWER(s))
+                    OR q IN (FOR c IN t.common_names RETURN LOWER(c))
+                    OR (@allow_contains AND CONTAINS(LOWER(t.name), q))
+                SORT LENGTH(t.name) ASC
+                LIMIT 5
+                RETURN t
+        )
+        LET best = FIRST(matches)
+        LET descendants = best == null ? [] : (
+            FOR t IN taxa
+                FILTER best.tax_id IN t.lineage
+                FILTER @ranks == null OR t.rank IN @ranks
+                LIMIT @max_names
+                RETURN t.name
+        )
+        RETURN {
+            matched: (FOR m IN matches RETURN {name: m.name, rank: m.rank, tax_id: m.tax_id}),
+            best: best == null ? null : {name: best.name, rank: best.rank, tax_id: best.tax_id},
+            names: best == null ? [] : APPEND([best.name], descendants),
+            truncated: LENGTH(descendants) >= @max_names
+        }
+        """
+        try:
+            # Exact/synonym match first; fall back to substring if nothing found.
+            for allow_contains in (False, True):
+                res = self.db.aql(
+                    aql,
+                    bind_vars={
+                        "name": name.strip(),
+                        "max_names": max_names,
+                        "ranks": ranks,
+                        "allow_contains": allow_contains,
+                    },
+                )
+                out = res[0] if res else {}
+                if out.get("best"):
+                    return out
+            return out
+        except Exception as exc:
+            logger.warning("find_by_taxon failed: %s", exc)
+            return {}
+
     def find_taxa_for_document(self, document_id: str) -> list[dict[str, Any]]:
         """
         Return taxa linked to a document via the knowledge_graph edges.
