@@ -1,0 +1,884 @@
+{
+  "sf_id": "genphys_08",
+  "category": "General Physiology",
+  "statement": "Scaling of maximal feeding rate with size should depend on transport network morphology.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets bear directly on the claim that feeding/uptake scaling depends on transport network morphology. Snippets [1], [3], [7], and [14] explicitly discuss how anatomical resource-supply networks and transport models drive metabolic and assimilation scaling exponents (e.g., 3/4-power for network constraints vs 2/3 for surface laws), which directly links feeding/uptake rate scaling to transport morphology. Snippets [16] and [17] from Kooijman explain that feeding rates tend to be proportional to surface area when transportation costs scale with surface area, tying feeding scaling to transport/supply geometry. Snippets [4] and [15] show empirically variable exponents (often deviating from 2/3 or 2), consistent with the idea that morphology shapes the scaling rather than a single universal law. No snippet contradicts the fact; most relevant ones support it, though many remaining snippets merely describe DEB feeding formulations (surface-area-proportional uptake) without explicitly addressing network morphology. Support is moderate and coherent in direction, hence evidence_strength 2 and consensus_direction 3."
+      },
+      "n_references": 9,
+      "references": {
+        "69b887b6ecbd4702b29a5552": {
+          "title": "Main2015.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3023422956466675
+        },
+        "69b8a4b7ecbd4702b29a7790": {
+          "title": "RenRoss2001.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3199878931045532
+        },
+        "69b89ebaecbd4702b29a6f8e": {
+          "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3396415710449219
+        },
+        "69b8476cec32c55db5430963": {
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35352277755737305
+        },
+        "69b89345ecbd4702b29a6358": {
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36752957105636597
+        },
+        "69b88b44ecbd4702b29a59c9": {
+          "title": "Glazier et al. - 2020 - Effects of Fish Predators on the Mass‐Related Ener.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36987483501434326
+        },
+        "69b84824ec32c55db5430b7f": {
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.37135303020477295
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.37332093715667725
+        },
+        "69b86fe0ecbd4702b29a3542": {
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3740350008010864
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b887b6ecbd4702b29a5552",
+          "title": "Main2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3023,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "rate with body mass can be 11 interpreted intuitively as design constraints on the rate of energy and material flows within 12 organisms. In ‘transport models’, nutrients are delivered through a network to ‘terminal units’ 13 (WBE) or ‘service volumes’ (Banavar et al. 2002) , each with an invariant metabolic rate (i.e. 14 maintenance cost). Network design constraints imply that the volume of animal associated with 15 each terminal unit increases with body mass, and that there is a matching between supply and 16 demand. Since terminal units have fixed metabolic rates, metabolic rate per unit mass decreases 17"
+        },
+        {
+          "document_id": "69b8a4b7ecbd4702b29a7790",
+          "title": "RenRoss2001.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.32,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "nal to length cubed,they assume uptake is proportional to W2/3(Wisbody tissue weight).Both the ﬁltration and ingestion rates areknown to be size dependent (e.g. Kooijman,1986a; Nisbet et al., 1996). However because en-ergy reserves do not contribute directly to the sizeof the feeding apparatus, weight is not the mostappropriate variable to use in describing the rela-tionship between food uptake and size (Kooij-man, 1993). Perhaps a more appropriate methodis to use the surface area of the feeding apparatusto describe the size dependency of these rates(Kooijman, 1993). Because it is dif ﬁcult to mea-"
+        },
+        {
+          "document_id": "69b89ebaecbd4702b29a6f8e",
+          "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3396,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "foraging behaviour,suggesting ways in which the DEB state variables ofreserve and structure could be further extended.DiscussionThe discussed theories for metabolic scaling each offeridealised ‘canonical’ models. The similarity in the pre-dicted interspeciﬁc scaling of metabolic rate with bodymass can be interpreted intuitively as design constraintson the rate of energy and material ﬂows within organisms.In ‘transport models’, nutrients are delivered through anetwork to ‘terminal units’ (WBE) or ‘service volumes’(Banavar et al. 2002), each with an invariant metabolicrate (i.e. maintenance cost). Network design constraints"
+        },
+        {
+          "document_id": "69b8a4b7ecbd4702b29a7790",
+          "title": "RenRoss2001.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3427,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "Newell, 1983; Doering and Ovi-att, 1986; Bougrier et al., 1995) with the exponenttypically in the range 0.4 –0.8. On theoreticalgrounds, Kooijman and Metz (1984) have arguedthat uptake should be proportional to the surfacearea of the feeding apparatus. Assuming thatstructural tissue weight is proportional to volume,and that volume is proportional to length cubed,they assume uptake is proportional to W2/3(Wisbody tissue weight).Both the ﬁltration and ingestion rates are"
+        },
+        {
+          "document_id": "69b847b5ec32c55db54309ff",
+          "title": "Føre et al. - 2016 - Modelling growth performance and feeding behaviour.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3459,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ismore thoroughly explained and discussed in Føre et al. (2009) .In our model, the feed intake depended strongly on the maximumgut capacity of the ﬁsh, which in turn increased with the size of theﬁsh. Furthermore, the maximum movement speed of the modelledﬁsh was set to be an expression depending on the body length of theﬁsh (Føre et al., 2009 ). These two model features may together lead tothe emergence of an effect in which larger ﬁsh are better able to captureand consume feed than the smaller individuals due to their higher feedintake capacity and larger mobility. This could in turn result in monop-"
+        },
+        {
+          "document_id": "69b84747ec32c55db54307cb",
+          "title": "Oliveira et al. - 2024 - A multi-tier methodology for the estimation of ind.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3497,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "be attributed to changesin size and ingestion characteristics.The surface-specific maximum assimilation rate {̇ 𝑝𝐴𝑚}is directlyrelated to ingestion and has an influence in the growth and the max-imum size of organisms. It is typically used to model changes in size,particularly between males and females by proxy of the zoom factor𝑧(Kooijman , 1986 ). Moreover, it is diet dependent and can modelchanges in feed net energy content.The digestion efficiency 𝜅𝑋is the parameter, of the five hypothe-sized, that is strictly related to feeding, in the sense that it is the onlyone that does not appear in the growth equation. Furthermore, feed"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3535,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "on of the ﬂuidvolume in a transport network (Banavar et al., 1999); mini-mization of heat-ﬂow resistance within the body (Bejan,2001); maximization of the area of resource-exchange sur-faces (West et al., 1999 b); or maximization of foraging ef-ﬁciency (Witting, 1995, 1997). In these ‘speciﬁcoptimization’ models, body size is viewed as a constraint onmetabolic scaling relationships. By contrast, the model ofKozŁowski & Weiner (1997) focuses on optimization at thelevel of whole-organism reproductive ﬁtness (in particular,optimal allocation between growth and reproduction; seeVariation in the scaling of metabolism 631"
+        },
+        {
+          "document_id": "69b87048ecbd4702b29a35c2",
+          "title": "Kooy2009a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3549,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "it is much larger, the individuals will starve to death.We have two different spatial units, that of the individual (in {h·Xm},Lband LX) and of the environment (in X,Kand Ls), here chosen as cmand m, respectively. Speed is primarily controlled by the saturationconstant K. The social interaction increases with decreasing numberof food particles per individual. The variance increases with foodlength LX, but decreases in time because of the smoothing capacity ofthe individual increases with size (the catabolic ﬂux is inverselyproportional to a length measure.We have 8 parameters X#,K#,Lb,LX,{h·Xm},k·M,g,μ·for feeding and"
+        },
+        {
+          "document_id": "69b86fe5ecbd4702b29a355a",
+          "title": "JageMart2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3651,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "L2). We can easily experiment with other scalings for the fulllife cycle, or just a part of it (see e.g., Kooijman et al., 2011;Augustine et al., 2011 ). The feeding ﬂux is given byJX¼fJaXmL2with JaXm¼JaAmyAXð5Þwhere fis the scaled functional response, which is the actualfeeding rate at a certain food level divided by the maximumfeeding rate for its current size. The scaled response fis thusbetween 0 (no food) and 1 ( ad libitum food). The maximumspeci ﬁc assimilation rate ðJaAmÞis used as the primary parameter;the speci ﬁc feeding rate ðJaXmÞis derived from it, using the yield of"
+        },
+        {
+          "document_id": "69b89562ecbd4702b29a6622",
+          "title": "FujiKend2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3653,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "00, Fujiwara et al. 2004).1442 MASAMI FUJIWARA ET AL. Ecology, Vol. 86, No. 6FIG. 1. Energy ¯ow within individuals (see Kooijman[2000] for details). The feeding rate is assumed to be pro-portional to the surface area of individuals. A ®xed fractionof energy ¯ux coming out of the reserve is used for main-tenance and growth, and the rest is used for reproduction,including development of reproductive organs.Here we present an analysis of individual size tra-"
+        },
+        {
+          "document_id": "69b84794ec32c55db54309b4",
+          "title": "DesfSonn2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3659,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "w is provided below.The model here describes the flow of mass in dry weight (though energy can be used) from uptake via feeding and then distributed to fulfil the requirements of physiological processes. Food is processed in the form of assim -ilates, which are split according to a constant fraction κ which separates the mass flux to somatic maintenance and growth (the soma; κ ) and the flux to maturation and reproduction (1 − κ ). The scaled functional response f , which is the actual feeding rate divided by the maximum feeding rate at that body size (0 = starvation, 1 = ad"
+        },
+        {
+          "document_id": "69b89345ecbd4702b29a6358",
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3675,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "and White (2012) proposed to overcome this issue by making the parameter κ, which governs allocation between growth and devel -opment/reproduction, temperature-dependent. Another possibility worth investigating is that the model includes a rate-parameter, the specific searching rate ⊔lFm⊓, that does not need to scale in the same way than physiological parameters, as it is a physical parameter related to food capture rather than metabolism. This parameter influences how much the individual feeds at a given food density compared to its maximum feeding rate, i.e. the functional response, which is given by f XX"
+        },
+        {
+          "document_id": "69b87eb1ecbd4702b29a49d0",
+          "title": "Haberle et al. - 2023 - Effects of climate change on gilthead seabream aqu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3687,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ate of decrease at upper boundary (K); see Table A.2). Feed, as a source of energy, is given through a functional response f, a saturating function representing the feed density corresponding to starvation (f 0) up to ad-libitum feeding (f 1). The functional response determines the actual feeding rate of the individual as a I. Haberle et al. Aquaculture 578 (2024) 7400523fraction of the size-specific maximal feeding rate. The model has the ability to simulate and track standard biometric measurements, length and weight, throughout the rearing process, thus allowing for determi -"
+        },
+        {
+          "document_id": "69b88b44ecbd4702b29a59c9",
+          "title": "Glazier et al. - 2020 - Effects of Fish Predators on the Mass‐Related Ener.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3699,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "Models of Biological Scaling Biological scaling relationships often follow power functions with exponents near 2/3 or 3/4. Surface area to volume constraints on resource uptake or metabolic waste removal may yield 2/3‐power scaling relationships (‘surface law’ [27,105,106]), whereas size‐dependent constraints of anatomical resource ‐supply networks may yield 3/4‐power scaling relationships (3/4‐power law [106–108]. Our results provide only limited support for these ‘laws’. The near 2/3‐power scaling of food assimilation rate in the laboratory for G. minus populations"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3714,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "s and Kooijman 1989), although Hallam, Lassiter, et al. (1990) assume it to relate to the gut volume scaling to the cube of the body length. Unfortunately, the study of McMahon (1965) does not give a clear description how the linear function of the size-ingestion relationship was obtained. Hence, I used McMahon’s data of maximum feeding rates (cf. Fig. 8.6) to recalculate the dependence of Imax on body size (Fig. 8.11). It is best described by a power function with an exponent of 2.41. However, exponents deviating from 2 have also been reported for length-ﬁltering rate relationships,"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3733,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "trates a small sample of methods, roughlyclassified with respect to active movements by prey and predator. The food items can bevery small with respect to the body size of the individual and rather evenly distributedover the environment, or the food can occur in a few big chunks. This section brieflymentions some feeding strategies and explains why feeding rates tend to be proportionalto the surface area when a small individual is compared to a large one of the same species.(Comparisons between species are made in Chapter 8, {287}.) The examples illustrate a"
+        },
+        {
+          "document_id": "69b86fe0ecbd4702b29a3542",
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.374,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "th ese costs cancel against an3.1. Feeding 63increased digestion eﬃciency, due to the increased gut residenc e time, cf. {247}.The second way to accommodate feeding costs without complicat ing the model struc-ture is when the feeding costs are independent of the feeding r ate and proportional to bodyvolume. They then show up as part of the maintenance costs, cf. {76}. This argumentcan be used to understand that feeding rates for some species tend to be proportional tosurface area if transportation costs are also proportional to sur face area, so that cruising"
+        },
+        {
+          "document_id": "69b880b8ecbd4702b29a4c06",
+          "title": "EverKooy89.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3743,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "only a few studies use dynamic models for energy budgets, and explicitly account for changes in size: PALOHEIMO et al. (1982); KOOIJMAN (1986a, b); LYNCH (1989); GURNEY et al. (1989). In this paper we present experimental confirmation of the model formulation for the size-dependent feeding process of Daphnia magna presented in KOOIJMAN & METZ (1983). We then extend the model for feeding to include the digestion process. We feel that the feeding pro- cess can only be fully understood by evaluating what happens after feeding. We have tried to evaluate to what extent a model for feeding,"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "The stylized fact concerns how the scaling of maximal feeding rate with body size depends on transport network morphology. Only a few snippets bear directly on this. Snippets [1] and [7] argue that a decelerating mean rate of water transport (a transport-network limitation) controls food uptake and maximum size in mytilid bivalves, offering partial support consistent with morphology/transport influencing feeding rate scaling. Snippets [2] and [9] discuss the West et al. fractal nutrient supply network model and Kozlowski's cell-size/number model, which link metabolic-rate scaling exponents to supply network geometry—conceptually supportive of the idea that transport morphology determines size scaling, though they address metabolic rather than feeding rate specifically. The remaining snippets concern social feeding, foraging behavior, offspring provisioning, and general life-history allometry, and are off-topic or only loosely related. No snippet contradicts the fact, but direct, quantitative evidence tying maximal feeding rate scaling to transport network morphology is sparse and indirect. Overall support is weak, with no conflict, leaving the evidence insufficient-to-mildly-corroborating."
+      },
+      "n_references": 2,
+      "references": {
+        "W1968287417": {
+          "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+          "doi": "10.1080/00785326.1976.10425457",
+          "year": "1976",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35068202018737793
+        },
+        "W2060967407": {
+          "title": "Relationship of metabolic rate to body size in Orthoptera",
+          "doi": "10.1665/1082-6467-17.2.301",
+          "year": "2008",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3507624864578247
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W1968287417",
+          "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+          "doi": "10.1080/00785326.1976.10425457",
+          "year": "1976",
+          "distance": 0.3507,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "be attained depends upon the body size at which the growth efficiency starts to decline and the rate at which it is declining. It is argued that the declining growth efficiency above a critical body size results from a decelerating mean rate of water transport. The reduced rate of water transport, that is, of food uptake, may be the main factor that determines the maximum size the species, or the individual, can attain."
+        },
+        {
+          "document_id": "W2060967407",
+          "title": "Relationship of metabolic rate to body size in Orthoptera",
+          "doi": "10.1665/1082-6467-17.2.301",
+          "year": "2008",
+          "distance": 0.3508,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "Metabolic rate determines an individual's rate of resource acquisition, assimilation, growth, survival and reproduction. Studies involving a broad range of taxa and body sizes typically result in whole-organism metabolic rate scaling to the ¾ power of body mass. Competing models have been proposed to explain this allometric relationship. The nutrient supply network model of West et al. (1997) proposes that the ¾ power relationship results from the fractal nature of space-filling nutrient supply networks."
+        },
+        {
+          "document_id": "W4401728308",
+          "title": "Migratory-derived resources induce elongated food chains through middle-up food web effects",
+          "doi": "10.1186/s40462-024-00496-4",
+          "year": "2024",
+          "distance": 0.3937,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "e densities occurred almost exclusively in populations with migration and represents an altered energy pathway to the food web. The presence of large cannibalistic charr feeding on smaller ones that have a similar trophic level as charr from strictly resident populations (based on stomach content) coupled with steeper δ 15 N-size regression slopes illustrate the general increase of food chain length in systems with migration. Conclusions Our results thus suggest that the consumption of migration-derived resources may result in longer food chains through middle-up rather than bottom-up effects."
+        },
+        {
+          "document_id": "W2157283432",
+          "title": "Energetic Constraints, Size Gradients, and Size Limits in Benthic Marine Invertebrates",
+          "doi": "10.1093/icb/42.4.853",
+          "year": "2002",
+          "distance": 0.4012,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ke increases with immersion time, generating size gradients with small individuals often found at upper limits of distribution. Wave action can have similar effects, limiting feeding time or success, although certain species benefit from wave dislodgment of their prey; this also results in gradients of size and morphology. The difference between energy intake and metabolic (and/or behavioral) costs can be used to determine an energetic optimal size for individuals in such populations."
+        },
+        {
+          "document_id": "W2341247010",
+          "title": "Bioenergetic Responses by Pacific Salmon to Climate and Ecosystem V ariation",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.4151,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "species); 2) feeding rate as a proportion of the theoretical maximum consumption rate, a measure of relative food availability; and 3) growth efficiency, a measure of how much food was required to achieve the observed growth rate."
+        },
+        {
+          "document_id": "W2404664536",
+          "title": "The effect of rank order on feed intake and growth of fattening pigs.",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.4214,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "to the feeding station the dominant barrows stayed significantly longer at the feeding place than their subordinate pen mates. Additionally, they showed a higher weight at the end of the fattening period and a higher weight gain per day of fattening. As to the frequency of the visits to the feeding station there was no significant difference between high-ranking and low-ranking animals during the period of observation."
+        },
+        {
+          "document_id": "W1968287417",
+          "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+          "doi": "10.1080/00785326.1976.10425457",
+          "year": "1976",
+          "distance": 0.4237,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "absorbed food energy into growth and reproduction, and to evaluate which factors control these maximum net growth efficiencies. It is concluded that high maximum growth efficiencies can be maintained at a constant level up to a certain critical body size above which the maximum growth efficiency declines with increasing size. The critical body size at which growth efficiency starts to decline is independent of the initial level of maximum growth efficiency. The maximum body size that can be attained depends upon the body size at which the growth efficiency starts to decline and the rate at which it is declining."
+        },
+        {
+          "document_id": "W1830358549",
+          "title": "The evolution of animal societies: monogamy, group-living and conflict in a coral-dwelling fish",
+          "doi": "10.25903/m05m-f173",
+          "year": "2024",
+          "distance": 0.4251,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "thin size-based queues, and (2) subordinates are capable of regulating their own growth to avoid inflicting costs on dominants. Supplemental feeding resulted in elevated growth rates of subordinates in both the presence and absence of the breeding female, suggesting that food limitation on subordinates due to competitive exclusion by dominants promotes the maintenance of size differences within size-based queues."
+        },
+        {
+          "document_id": "W2060967407",
+          "title": "Relationship of metabolic rate to body size in Orthoptera",
+          "doi": "10.1665/1082-6467-17.2.301",
+          "year": "2008",
+          "distance": 0.4286,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "et al. (1997) proposes that the ¾ power relationship results from the fractal nature of space-filling nutrient supply networks. The model of Kozlowski et al. (2003) proposes that the scaling of metabolic rate with body mass will vary from 2/3 to 1 among different taxa, depending on the degree to which increasing body size depends on increasing cell size or number. The present study measured resting metabolic rates across a broad range of body sizes in nymphs of Melanoplus sanguinipes F. and also analyzed published reports of metabolic rates in adult Orthoptera."
+        },
+        {
+          "document_id": "W2004747217",
+          "title": "Effect of Restricted Feeding During the Growing Period on Reproductive Performance of Large Type White Turkeys",
+          "doi": "10.3382/ps.0420008",
+          "year": "1963",
+          "distance": 0.4304,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "CONSIDERABLE interest in recent years has centered around feeding systems which bring about a decrease in the plane of nutrition either through the restriction of a “complete” ration or the full feeding of an “incomplete” ration at some interval during the growing period."
+        },
+        {
+          "document_id": "W1996102509",
+          "title": "Bioenergetics of Stock and Recruitment",
+          "doi": "10.1139/f80-129",
+          "year": "1980",
+          "distance": 0.4313,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "y their reproductive effort; (2) the increase in surplus energy with body size can be linked to the theory of optimal foraging; and (3) the intensity of density-dependent growth, which influences the shape of the recruitment curve, is an increasing function of the generation time of the prey organisms of different species."
+        },
+        {
+          "document_id": "W2006405178",
+          "title": "Growth Model of <i>Daphnia</i>",
+          "doi": "10.1139/f82-084",
+          "year": "1982",
+          "distance": 0.4328,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "quent experimental results. Contrary to many higher organisms, the assimilation efficiency increases with increasing body size. This may be, at least in part, the reason why larger body-sized zooplankton tend to dominate in aquatic ecosystems when not controlled by predators. The uptake rate per body weight as a function of cell concentration can be described by Michaelis–Menten type equations, but not the assimilation rate."
+        },
+        {
+          "document_id": "W4226040415",
+          "title": "Offspring Size, Provisioning and Performance as  a Function of Maternal Investment in Direct  Developing Whelks",
+          "doi": "10.26686/wgtn.17003509.v1",
+          "year": "2012",
+          "distance": 0.4346,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "of variation was at the smallest scale (i.e. among sites), with substantial variation also occurring within and among females. Between and within species differences in hatching size reflected juvenile performance when fed, regardless of whether subjected to desiccation stress. When starved however, species-specific and size differences in performance were less significant."
+        },
+        {
+          "document_id": "W2056805279",
+          "title": "Body Size and Net Energy Gain in Gape-Limited Predators: A Model",
+          "doi": "10.2307/1565167",
+          "year": "1996",
+          "distance": 0.4372,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ease, maximum ingestible prey size increases more rapidly with predator size, or if mean body size of available prey decreases. Variation in swallowing capacity among equal-sized predators results in a difference in net energy gains that is at a maximum in intermediate-sized individuals. The model generates seven testable predictions. (1) Smaller body size does not confer an energetic advantage during periods of prey scarcity. (2) Mortality due to energy shortage sets lower and upper limits to body size. (3) Temporal shifts in size-frequency distribution of prey will result in oscillating survival selection on body size."
+        },
+        {
+          "document_id": "W2084385306",
+          "title": "The Location Theory of Animal Populations: The Case of a Spatially Uniform Food Distribution",
+          "doi": "10.1086/284425",
+          "year": "1985",
+          "distance": 0.4373,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "s of movement and competition and of the benefits of the greater food supply available with a longer radius of the search area. An analysis of the model indicated that (1) less efficient movers occupy larger territories at lower population densities than more efficient movers; (2) intraspecific competition is more likely to be observed in a population of more efficient movers than among less efficient movers; (3) changes in food density will decrease territory size, either increase or decrease food intake, and increase population less than proportionally;"
+        },
+        {
+          "document_id": "W1999732322",
+          "title": "Parental provisioning in house wrens: effects of varying brood size and consequences for offspring",
+          "doi": "10.1093/beheco/aru153",
+          "year": "2014",
+          "distance": 0.44,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "elivered more food per nestling to enlarged broods, and less to small broods, as nestlings grew and approached asymptotic size. Although parents delivered a greater amount of prey to larger broods, the amount of food per nestling was initially higher for nestlings in small broods, and the amount of food delivered early in nestling development, particularly by males, affected offspring body mass, survival to fledging, and recruitment to the breeding population. However, provisioning rates were negatively associated with prey size, suggesting a trade-off between prey quantity and size."
+        },
+        {
+          "document_id": "W1987125501",
+          "title": "Size-dependent competition in a gregarious porcelain crab Petrolisthes cinctipes (Anomura: Porcellanidae)",
+          "doi": "10.3354/meps267219",
+          "year": "2004",
+          "distance": 0.4407,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "gregation without quantifying the concomitant costs; this study quantifies these costs. In field and laboratory experiments, P. cinctipes growth rates declined with increasing conspecific density and this decline was more severe for smaller individuals. P. cinctipes also fed less frequently at high density, and this effect was more pronounced for smaller individuals. This indicates that size-dependent agonistic interactions in P. cinctipes have effects on feeding rate and, ultimately, on growth rate. Resource levels were manipulated in laboratory experiments by using filtered and unfiltered seawater."
+        },
+        {
+          "document_id": "W2041266012",
+          "title": "Life-history implications of the allometric scaling of growth",
+          "doi": "10.1016/j.jtbi.2014.05.022",
+          "year": "2014",
+          "distance": 0.4408,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Theor. Biol. 254:197) which has the advantage that the underlying allometric scaling of net energy intake can be freely chosen. First, we reformulate this model such that individual size is given in meaningful units of length and weight, facilitating the model׳s interpretation and application. Second, we show that even though different allometric scaling relationships can produce practically identical growth trajectories, the accompanying reproductive investments are highly dependent on the chosen allometric exponent."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly engage with the idea that metabolic/feeding rate scaling with body size arises from transport network design constraints. Snippets 1, 3, 7, 14, and 21 explicitly describe transport-network (WBE/Banavar) models in which network morphology determines how metabolic and resource-supply rates scale with mass. Snippet 13 ties maximum food uptake and body size limits directly to the rate of water transport (a transport-network argument in bivalves). DEB-oriented snippets (2, 4) frame feeding/uptake as surface-area dependent, an alternative geometric constraint that is consistent in spirit. No snippet contradicts the stylized fact; the remaining snippets are topically about feeding or growth but do not bear on transport-network morphology. Overall there is moderate, consistent corroboration with no conflicting evidence, though much of the support is theoretical rather than direct empirical demonstration."
+      },
+      "n_references": 7,
+      "references": {
+        "69b887b6ecbd4702b29a5552": {
+          "title": "Main2015.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3023422956466675
+        },
+        "69b8a4b7ecbd4702b29a7790": {
+          "title": "RenRoss2001.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3199878931045532
+        },
+        "69b89ebaecbd4702b29a6f8e": {
+          "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3396415710449219
+        },
+        "69b8476cec32c55db5430963": {
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35352277755737305
+        },
+        "69b89345ecbd4702b29a6358": {
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36752957105636597
+        },
+        "W1968287417": {
+          "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+          "doi": "10.1080/00785326.1976.10425457",
+          "year": "1976",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35068202018737793
+        },
+        "W2060967407": {
+          "title": "Relationship of metabolic rate to body size in Orthoptera",
+          "doi": "10.1665/1082-6467-17.2.301",
+          "year": "2008",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3507624864578247
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b887b6ecbd4702b29a5552",
+          "title": "Main2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3023,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "rate with body mass can be 11 interpreted intuitively as design constraints on the rate of energy and material flows within 12 organisms. In ‘transport models’, nutrients are delivered through a network to ‘terminal units’ 13 (WBE) or ‘service volumes’ (Banavar et al. 2002) , each with an invariant metabolic rate (i.e. 14 maintenance cost). Network design constraints imply that the volume of animal associated with 15 each terminal unit increases with body mass, and that there is a matching between supply and 16 demand. Since terminal units have fixed metabolic rates, metabolic rate per unit mass decreases 17"
+        },
+        {
+          "document_id": "69b8a4b7ecbd4702b29a7790",
+          "title": "RenRoss2001.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.32,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "nal to length cubed,they assume uptake is proportional to W2/3(Wisbody tissue weight).Both the ﬁltration and ingestion rates areknown to be size dependent (e.g. Kooijman,1986a; Nisbet et al., 1996). However because en-ergy reserves do not contribute directly to the sizeof the feeding apparatus, weight is not the mostappropriate variable to use in describing the rela-tionship between food uptake and size (Kooij-man, 1993). Perhaps a more appropriate methodis to use the surface area of the feeding apparatusto describe the size dependency of these rates(Kooijman, 1993). Because it is dif ﬁcult to mea-"
+        },
+        {
+          "document_id": "69b89ebaecbd4702b29a6f8e",
+          "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3396,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "foraging behaviour,suggesting ways in which the DEB state variables ofreserve and structure could be further extended.DiscussionThe discussed theories for metabolic scaling each offeridealised ‘canonical’ models. The similarity in the pre-dicted interspeciﬁc scaling of metabolic rate with bodymass can be interpreted intuitively as design constraintson the rate of energy and material ﬂows within organisms.In ‘transport models’, nutrients are delivered through anetwork to ‘terminal units’ (WBE) or ‘service volumes’(Banavar et al. 2002), each with an invariant metabolicrate (i.e. maintenance cost). Network design constraints"
+        },
+        {
+          "document_id": "69b8a4b7ecbd4702b29a7790",
+          "title": "RenRoss2001.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3427,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "Newell, 1983; Doering and Ovi-att, 1986; Bougrier et al., 1995) with the exponenttypically in the range 0.4 –0.8. On theoreticalgrounds, Kooijman and Metz (1984) have arguedthat uptake should be proportional to the surfacearea of the feeding apparatus. Assuming thatstructural tissue weight is proportional to volume,and that volume is proportional to length cubed,they assume uptake is proportional to W2/3(Wisbody tissue weight).Both the ﬁltration and ingestion rates are"
+        },
+        {
+          "document_id": "69b847b5ec32c55db54309ff",
+          "title": "Føre et al. - 2016 - Modelling growth performance and feeding behaviour.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3459,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ismore thoroughly explained and discussed in Føre et al. (2009) .In our model, the feed intake depended strongly on the maximumgut capacity of the ﬁsh, which in turn increased with the size of theﬁsh. Furthermore, the maximum movement speed of the modelledﬁsh was set to be an expression depending on the body length of theﬁsh (Føre et al., 2009 ). These two model features may together lead tothe emergence of an effect in which larger ﬁsh are better able to captureand consume feed than the smaller individuals due to their higher feedintake capacity and larger mobility. This could in turn result in monop-"
+        },
+        {
+          "document_id": "69b84747ec32c55db54307cb",
+          "title": "Oliveira et al. - 2024 - A multi-tier methodology for the estimation of ind.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3497,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "be attributed to changesin size and ingestion characteristics.The surface-specific maximum assimilation rate {̇ 𝑝𝐴𝑚}is directlyrelated to ingestion and has an influence in the growth and the max-imum size of organisms. It is typically used to model changes in size,particularly between males and females by proxy of the zoom factor𝑧(Kooijman , 1986 ). Moreover, it is diet dependent and can modelchanges in feed net energy content.The digestion efficiency 𝜅𝑋is the parameter, of the five hypothe-sized, that is strictly related to feeding, in the sense that it is the onlyone that does not appear in the growth equation. Furthermore, feed"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3535,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "on of the ﬂuidvolume in a transport network (Banavar et al., 1999); mini-mization of heat-ﬂow resistance within the body (Bejan,2001); maximization of the area of resource-exchange sur-faces (West et al., 1999 b); or maximization of foraging ef-ﬁciency (Witting, 1995, 1997). In these ‘speciﬁcoptimization’ models, body size is viewed as a constraint onmetabolic scaling relationships. By contrast, the model ofKozŁowski & Weiner (1997) focuses on optimization at thelevel of whole-organism reproductive ﬁtness (in particular,optimal allocation between growth and reproduction; seeVariation in the scaling of metabolism 631"
+        },
+        {
+          "document_id": "69b87048ecbd4702b29a35c2",
+          "title": "Kooy2009a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3549,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "it is much larger, the individuals will starve to death.We have two different spatial units, that of the individual (in {h·Xm},Lband LX) and of the environment (in X,Kand Ls), here chosen as cmand m, respectively. Speed is primarily controlled by the saturationconstant K. The social interaction increases with decreasing numberof food particles per individual. The variance increases with foodlength LX, but decreases in time because of the smoothing capacity ofthe individual increases with size (the catabolic ﬂux is inverselyproportional to a length measure.We have 8 parameters X#,K#,Lb,LX,{h·Xm},k·M,g,μ·for feeding and"
+        },
+        {
+          "document_id": "69b86fe5ecbd4702b29a355a",
+          "title": "JageMart2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3651,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "L2). We can easily experiment with other scalings for the fulllife cycle, or just a part of it (see e.g., Kooijman et al., 2011;Augustine et al., 2011 ). The feeding ﬂux is given byJX¼fJaXmL2with JaXm¼JaAmyAXð5Þwhere fis the scaled functional response, which is the actualfeeding rate at a certain food level divided by the maximumfeeding rate for its current size. The scaled response fis thusbetween 0 (no food) and 1 ( ad libitum food). The maximumspeci ﬁc assimilation rate ðJaAmÞis used as the primary parameter;the speci ﬁc feeding rate ðJaXmÞis derived from it, using the yield of"
+        },
+        {
+          "document_id": "69b89562ecbd4702b29a6622",
+          "title": "FujiKend2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3653,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "00, Fujiwara et al. 2004).1442 MASAMI FUJIWARA ET AL. Ecology, Vol. 86, No. 6FIG. 1. Energy ¯ow within individuals (see Kooijman[2000] for details). The feeding rate is assumed to be pro-portional to the surface area of individuals. A ®xed fractionof energy ¯ux coming out of the reserve is used for main-tenance and growth, and the rest is used for reproduction,including development of reproductive organs.Here we present an analysis of individual size tra-"
+        },
+        {
+          "document_id": "69b84794ec32c55db54309b4",
+          "title": "DesfSonn2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3659,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "w is provided below.The model here describes the flow of mass in dry weight (though energy can be used) from uptake via feeding and then distributed to fulfil the requirements of physiological processes. Food is processed in the form of assim -ilates, which are split according to a constant fraction κ which separates the mass flux to somatic maintenance and growth (the soma; κ ) and the flux to maturation and reproduction (1 − κ ). The scaled functional response f , which is the actual feeding rate divided by the maximum feeding rate at that body size (0 = starvation, 1 = ad"
+        },
+        {
+          "document_id": "69b89345ecbd4702b29a6358",
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3675,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "and White (2012) proposed to overcome this issue by making the parameter κ, which governs allocation between growth and devel -opment/reproduction, temperature-dependent. Another possibility worth investigating is that the model includes a rate-parameter, the specific searching rate ⊔lFm⊓, that does not need to scale in the same way than physiological parameters, as it is a physical parameter related to food capture rather than metabolism. This parameter influences how much the individual feeds at a given food density compared to its maximum feeding rate, i.e. the functional response, which is given by f XX"
+        },
+        {
+          "document_id": "W1968287417",
+          "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+          "doi": "10.1080/00785326.1976.10425457",
+          "year": "1976",
+          "distance": 0.3507,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "be attained depends upon the body size at which the growth efficiency starts to decline and the rate at which it is declining. It is argued that the declining growth efficiency above a critical body size results from a decelerating mean rate of water transport. The reduced rate of water transport, that is, of food uptake, may be the main factor that determines the maximum size the species, or the individual, can attain."
+        },
+        {
+          "document_id": "W2060967407",
+          "title": "Relationship of metabolic rate to body size in Orthoptera",
+          "doi": "10.1665/1082-6467-17.2.301",
+          "year": "2008",
+          "distance": 0.3508,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "Metabolic rate determines an individual's rate of resource acquisition, assimilation, growth, survival and reproduction. Studies involving a broad range of taxa and body sizes typically result in whole-organism metabolic rate scaling to the ¾ power of body mass. Competing models have been proposed to explain this allometric relationship. The nutrient supply network model of West et al. (1997) proposes that the ¾ power relationship results from the fractal nature of space-filling nutrient supply networks."
+        },
+        {
+          "document_id": "W4401728308",
+          "title": "Migratory-derived resources induce elongated food chains through middle-up food web effects",
+          "doi": "10.1186/s40462-024-00496-4",
+          "year": "2024",
+          "distance": 0.3937,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "e densities occurred almost exclusively in populations with migration and represents an altered energy pathway to the food web. The presence of large cannibalistic charr feeding on smaller ones that have a similar trophic level as charr from strictly resident populations (based on stomach content) coupled with steeper δ 15 N-size regression slopes illustrate the general increase of food chain length in systems with migration. Conclusions Our results thus suggest that the consumption of migration-derived resources may result in longer food chains through middle-up rather than bottom-up effects."
+        },
+        {
+          "document_id": "W2157283432",
+          "title": "Energetic Constraints, Size Gradients, and Size Limits in Benthic Marine Invertebrates",
+          "doi": "10.1093/icb/42.4.853",
+          "year": "2002",
+          "distance": 0.4012,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ke increases with immersion time, generating size gradients with small individuals often found at upper limits of distribution. Wave action can have similar effects, limiting feeding time or success, although certain species benefit from wave dislodgment of their prey; this also results in gradients of size and morphology. The difference between energy intake and metabolic (and/or behavioral) costs can be used to determine an energetic optimal size for individuals in such populations."
+        },
+        {
+          "document_id": "W2341247010",
+          "title": "Bioenergetic Responses by Pacific Salmon to Climate and Ecosystem V ariation",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.4151,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "species); 2) feeding rate as a proportion of the theoretical maximum consumption rate, a measure of relative food availability; and 3) growth efficiency, a measure of how much food was required to achieve the observed growth rate."
+        },
+        {
+          "document_id": "W2404664536",
+          "title": "The effect of rank order on feed intake and growth of fattening pigs.",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.4214,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "to the feeding station the dominant barrows stayed significantly longer at the feeding place than their subordinate pen mates. Additionally, they showed a higher weight at the end of the fattening period and a higher weight gain per day of fattening. As to the frequency of the visits to the feeding station there was no significant difference between high-ranking and low-ranking animals during the period of observation."
+        },
+        {
+          "document_id": "W1968287417",
+          "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+          "doi": "10.1080/00785326.1976.10425457",
+          "year": "1976",
+          "distance": 0.4237,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "absorbed food energy into growth and reproduction, and to evaluate which factors control these maximum net growth efficiencies. It is concluded that high maximum growth efficiencies can be maintained at a constant level up to a certain critical body size above which the maximum growth efficiency declines with increasing size. The critical body size at which growth efficiency starts to decline is independent of the initial level of maximum growth efficiency. The maximum body size that can be attained depends upon the body size at which the growth efficiency starts to decline and the rate at which it is declining."
+        },
+        {
+          "document_id": "W1830358549",
+          "title": "The evolution of animal societies: monogamy, group-living and conflict in a coral-dwelling fish",
+          "doi": "10.25903/m05m-f173",
+          "year": "2024",
+          "distance": 0.4251,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "thin size-based queues, and (2) subordinates are capable of regulating their own growth to avoid inflicting costs on dominants. Supplemental feeding resulted in elevated growth rates of subordinates in both the presence and absence of the breeding female, suggesting that food limitation on subordinates due to competitive exclusion by dominants promotes the maintenance of size differences within size-based queues."
+        },
+        {
+          "document_id": "W2060967407",
+          "title": "Relationship of metabolic rate to body size in Orthoptera",
+          "doi": "10.1665/1082-6467-17.2.301",
+          "year": "2008",
+          "distance": 0.4286,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "et al. (1997) proposes that the ¾ power relationship results from the fractal nature of space-filling nutrient supply networks. The model of Kozlowski et al. (2003) proposes that the scaling of metabolic rate with body mass will vary from 2/3 to 1 among different taxa, depending on the degree to which increasing body size depends on increasing cell size or number. The present study measured resting metabolic rates across a broad range of body sizes in nymphs of Melanoplus sanguinipes F. and also analyzed published reports of metabolic rates in adult Orthoptera."
+        },
+        {
+          "document_id": "W2004747217",
+          "title": "Effect of Restricted Feeding During the Growing Period on Reproductive Performance of Large Type White Turkeys",
+          "doi": "10.3382/ps.0420008",
+          "year": "1963",
+          "distance": 0.4304,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "CONSIDERABLE interest in recent years has centered around feeding systems which bring about a decrease in the plane of nutrition either through the restriction of a “complete” ration or the full feeding of an “incomplete” ration at some interval during the growing period."
+        },
+        {
+          "document_id": "W1996102509",
+          "title": "Bioenergetics of Stock and Recruitment",
+          "doi": "10.1139/f80-129",
+          "year": "1980",
+          "distance": 0.4313,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "y their reproductive effort; (2) the increase in surplus energy with body size can be linked to the theory of optimal foraging; and (3) the intensity of density-dependent growth, which influences the shape of the recruitment curve, is an increasing function of the generation time of the prey organisms of different species."
+        },
+        {
+          "document_id": "W2006405178",
+          "title": "Growth Model of <i>Daphnia</i>",
+          "doi": "10.1139/f82-084",
+          "year": "1982",
+          "distance": 0.4328,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "quent experimental results. Contrary to many higher organisms, the assimilation efficiency increases with increasing body size. This may be, at least in part, the reason why larger body-sized zooplankton tend to dominate in aquatic ecosystems when not controlled by predators. The uptake rate per body weight as a function of cell concentration can be described by Michaelis–Menten type equations, but not the assimilation rate."
+        }
+      ]
+    }
+  }
+}

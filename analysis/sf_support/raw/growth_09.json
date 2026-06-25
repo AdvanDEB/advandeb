@@ -1,0 +1,834 @@
+{
+  "sf_id": "growth_09",
+  "category": "Growth",
+  "statement": "Increase in temperature reduces ultimate length in some species.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly support the stylized fact through the temperature-size rule (TSR), which states that many ectotherms reach smaller ultimate sizes at warmer temperatures. Snippet 3 explicitly defines the TSR (smaller sizes under warmer temperatures), and snippet 6 corroborates this with a reported negative correlation between temperature and size for ectotherms; snippet 11 references Bergmann's rule (larger sizes in cooler climates), which is consistent. One snippet (10) reports a contrary finding where warming increased mean body size, though the authors note this does not necessarily contradict the TSR. Most remaining snippets concern thermal performance, metabolic rates, and tolerance ranges without directly bearing on ultimate length responses to temperature. Overall the corpus offers moderate but clear support, predominantly corroborating the fact with only minor conflicting evidence."
+      },
+      "n_references": 4,
+      "references": {
+        "69b89345ecbd4702b29a6358": {
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3041025996208191
+        },
+        "69b84852ec32c55db5430bd9": {
+          "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3126688003540039
+        },
+        "69b875f0ecbd4702b29a3dd1": {
+          "title": "Audzijonyte et al. - 2022 - Changes in benthic and pelagic production interact.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.32894062995910645
+        },
+        "69b88365ecbd4702b29a4fd2": {
+          "title": "Martin and Barboza - .pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3296734094619751
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b87003ecbd4702b29a357b",
+          "title": "Teix2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2774,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "temperature variation will affect metabolic rates and consequently the growth rate (Konarzewski et al., 1998; Kooijman, 2010a; Zonneveld and Kooijman, 1993) . T h e g r o w t h p a t t e r n o f t h e M i c r o n e s i a n K i n g f i s h e r a l s o d e v i a t e s f r o m t h e v o n B e r t a l a n f f y g r o w t h p a t t e r n b u t f o r a d i f f e r e n t reason. This species exhibits a consistent increase in body weight u p t o v a l u e s t h a t a r e h i g h e r t h a n t h e o b s e r v e d a v e r a g e a d u l t b o d y weight , f o l l o w e d b y a"
+        },
+        {
+          "document_id": "69b84770ec32c55db543097b",
+          "title": "Stavrakidis-Zachou et al. - 2023 - A bioenergetics approach to modelling tolerance li.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.293,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "hysiology and their overall performance ( Crozier and Hutchings,2014 ;Islam et al., 2020 ). For each species, there are speci ﬁctemperatures within which it performs optimally. As we moveaway from this range, performance tends to decrease andeventually diminishes when critical temperature thresholds areexceeded. These critical temperatures de ﬁne the tolerance rangeof a species, i.e. the temperature range over which it can survive andperform metabolically ( Pörtner et al., 2017 ). Indeed, thermalthresholds not only differ between species, but also appear to beinﬂuenced by factors such as the size and developmental stage of the"
+        },
+        {
+          "document_id": "69b89345ecbd4702b29a6358",
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3041,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "affects differentially growth and development. 1.Introduction Temperature has profound influence on the physiology, morphology, and life history of ectotherms (Hochachka and Somero, 2002 ; Angilletta, 2009 ). Among these impacts, the size of individuals is consistently observed to respond to temperature in many different species from a variety of taxa. The temperature-size rule (TSR) refers to the observation that a wide variety of organisms reach smaller sizes and mature at smaller size under warmer temperatures (Atkinson, 1994 ). Unraveling the mechanisms causing the TSR is the topic of intense research and"
+        },
+        {
+          "document_id": "69b88bebecbd4702b29a5a6a",
+          "title": "MontHelm2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3053,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "small increases in temperatures canhave a significant impact on physiological performance (Fig. 1). The relatively small differ-ence between optimal and lethal temperatures in this species, however, also increases its risk ofmortality during extreme events. In contrast, the other two species showed a generalist thermalbehavior where the broader width of their thermal niches combined with shallower slope andlower performance peaks ( M. galloprovincialis = 15.99 μmol h−1;B. pharaonis =1 2 . 7 5 μmolh−1; Table S2) are likely to mirror their invasiveness features, allowing them to colonize new"
+        },
+        {
+          "document_id": "69b88bebecbd4702b29a5a6a",
+          "title": "MontHelm2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3063,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "00 Climatic Change (2016) 139:293 –306increased thermal performance, and the increased potential to exceed thermal lethal limitsduring rare but extreme events. Such trade-offs can be complex, but they show that consid-eration of a species ’thermal performance curve (Fig. 1) can be highly informative. As anexample, following adaptive thermoregulation theory, the small Mytilaster behaves as a"
+        },
+        {
+          "document_id": "69b84852ec32c55db5430bd9",
+          "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3127,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "y displays an inverse relationship with 2314 body size at maturity. Bergmann (1847) revealed an increase in body size with 2315 increasing latitude (or decreasing temperature) in intraspecific comparisons of 2316 endotherms species, which led to the proposition of a general rule for temperature and 2317 organism body size. A negative correlation between temperature and size at maturity 2318 and offspring size has since been reported for ectotherm species and was coined as the 2319 temperature-size rule (Atkinson, 1994; Atkinson et al., 2001). The temperature-size 2320"
+        },
+        {
+          "document_id": "69b88c97ecbd4702b29a5b05",
+          "title": "FreiCard2010_Temperature tolerance North Sea species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3178,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ciﬁc maintenance rate appeared todecrease with increasing optimal temperature, temp-erature sensitivity and range of temperaturetolerance. This might suggest that species with highoptimal temperatures, living in ﬂuctuating tempera-ture environments, or those having greater metabolicsensitivity are compensated by having relatively lowerassimilation rates and, surprisingly, lower maintenancecosts. Generalizing these tendencies, species livingunder low and constant temperatures can afford a rela-tively high assimilation. On the other hand, species"
+        },
+        {
+          "document_id": "69b8476bec32c55db543095d",
+          "title": "Grim2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3249,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "did adapt to temp eratureinsilico, at least to smooth temperature increase, and that this adaptation is high ly groupdependent.SinceHuertasetal.[2011], severalstudieshavebeenconductedtodeﬁ netheabilityofeach species to adapt to temperature [Costas et al., 2014a,b, Padﬁeld et al., 2015b]. It ishowevernotknownhowtheshapeofthethermalgrowthcurveevolvesd uringadaptation,as well as the process by which cardinal temperatures change. Several hypotheses existdepending on the constraints playing a role during evolution [Angill etta, 2009, Knieset al., 2009] (ﬁg. 1.8). If the species are not thermodynamically constraine d (i.e.if the"
+        },
+        {
+          "document_id": "69b87459ecbd4702b29a3bb5",
+          "title": "VeerCard2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3269,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Fig. 2 .2.1.2. Optimal temperature in relation to body volumeThere is substantial evidence in a number of ﬁsh species that young(small) juvenile ﬁsh can exploit (grow well in) a larger range intemperatures than either earlier or later life stages (e.g. Pörtner andFarrell, 2008 ) and that juvenile ﬁshes select higher temperatures thando older (larger) conspeci ﬁcs (McCauley and Huggins, 1979; Lafranceet al., 2005 ). Similar suggestions have also been made for variousﬂatﬁsh species ( Jonassen et al., 1999; Yamashita et al., 2001 ) includingplaice ( Kuipers and Fonds, 1978; Fonds et al., 1992 ) although the"
+        },
+        {
+          "document_id": "69b875f0ecbd4702b29a3dd1",
+          "title": "Audzijonyte et al. - 2022 - Changes in benthic and pelagic production interact.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3289,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "l. 2004, Brown 647 et al. 2004, Forster et al. 2011) , although the exact mechanisms remain debated (Pauly and Cheung 2018, 648 Audzijonyte et al. 2019a, Wootton et al. 2022). In contrast our study reports that physiological responses to 649 warming generally increased, rather than decreased, mean species body sizes. This does not necessarily 650 contradict the temperature -size rule or “shrinking” fish paradigm, because this paradigm at an intra- specific 651"
+        },
+        {
+          "document_id": "69b88365ecbd4702b29a4fd2",
+          "title": "Martin and Barboza - .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3297,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "tory. Schmidt-Nielsen theorizedthat allometric scaling of surface-area-to-volumeratio ( b=0.67) increased heat retention as ani-mals increased body size, which would favorsurvival in cold environments for larger ani-mals. Speakman and Kr /C19ol theorized that heatdissipation limits to thermoregulatory costsunder rising heat loads limited reproductionand growth and affects life history and bodysize of animals. Bergmann ’s rule predicts ther-mal conservatism of animals for cooler climatesat higher latitudes will produce larger individu-als within and across species than warmer cli-mates at lower latitudes."
+        },
+        {
+          "document_id": "69b89810ecbd4702b29a683a",
+          "title": "Stavrakidis-Zachou et al. - 2024 - Modeling the bioenergetics of two herbivorous fish.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3334,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "h as growth and reproduction, and hence their overall physi-ological performance (Crozier and Hutchings, 2014). Each species hasspecific temperature ranges that are optimal for its metabolic function-ing. Deviating from this range typically results in a decline in metabolicperformance (Neuheimer et al., 2011), eventually diminishing whencritical temperature thresholds are surpassed (Pörtner and Peck, 2010).Consequently, warming may impose physiological stress on the nativepopulations, forcing them to function within temperature ranges closeto their upper thermal threshold (Albouy et al., 2013; Ben Rais Lasram"
+        },
+        {
+          "document_id": "69b8a934ecbd4702b29a7dae",
+          "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.334,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "anges by influencing dispersal rate and heat tolerance, and shifts in phenology by shortening generation times. 62 REFERENCES Ahti PA, Kuparinen A, Uusi -Heikkilä S (2020) Size does matter —the eco -evolutionary effects of changing body size in fish. Environmental Reviews, 28, 311 -324. Alster CJ, Weller ZD, von Fischer JC (2018) A meta -analysis of temp erature sensitivity as a microbial trait. Global Change Biology, 24, 4211 -4224. Atkinson D (1994) Temperature and organism size: a biological law for ectotherms? Advances in Ecological Research, 25, 1 -58."
+        },
+        {
+          "document_id": "69b88ef7ecbd4702b29a5e5e",
+          "title": "KooyHeng2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.338,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": ") con-specific, its specific respiration rate will be higher, just as expected for inter-species comparisons, but for a totally different reason: Overhead costs of growth make the difference. Fully grown mice and elephants, to the contrary, both do not grow. Temperature Temperature directly affects metabolic rates, expressed quantitatively by the Arrhenius relationship. In a variety of species, large body sizes have also led to the control of body temperature for accelerating metabolic functions, which is impossible for unicellular organisms. Some Arum species can elevate"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3386,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "(in this case growth). Current evidence suggests that this anti -predator response is adaptive (genotypic), but phenotypically plastic responses (acclimation) may also be involved in this case and those involving other ecological effects. For example, the effect of temperature on b and L of metabolic scaling relationships may be immediate, as observed in various species subjected to short -term temperature changes in the laboratory ([429 –431] and other references cited in [18]). Temper ature effects on b and L may also be the result of long -term acclimation or adaptation, as observed in comparisons of fish and crustaceans"
+        },
+        {
+          "document_id": "69b8476bec32c55db543095d",
+          "title": "Grim2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3393,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ng evolution [Angill etta, 2009, Knieset al., 2009] (ﬁg. 1.8). If the species are not thermodynamically constraine d (i.e.if theeﬀect of warming does not favour growth in an Arrhenius-like way), th en the thermalgrowth curve would only horizontally transpose (horizontal shift hypoth esis). In theother case, higher temperatures are expected to sustain higher growt h rates (higheris better hypothesis). The thermal niche width is not obviously con stant, and thuscan decrease (specialist-generalist hypothesis) or increase (hotte r is broader hypothesis)71. INTRODUCTIONTime (days)Temperature (°C)AB"
+        },
+        {
+          "document_id": "69b87459ecbd4702b29a3bb5",
+          "title": "VeerCard2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3393,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "are the Arrhenius temperatures for the rate of decrease at bothboundaries (for more details see Kooijman, 2000 ). For reasons ofsimplicity, optimal temperatures and the range in temperatures aremodelled by correcting the ingestion rate for the fraction of enzymesthat are in an active state. The fraction of active enzymes in relation totemperature was calculated for plaice from the data on temperaturetolerance range by Fonds et al. (1992) and is presented in Fig. 2 .2.1.2. Optimal temperature in relation to body volumeThere is substantial evidence in a number of ﬁsh species that young"
+        },
+        {
+          "document_id": "69b84757ec32c55db5430936",
+          "title": "Kooy88c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3405,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "et us focus on mammals, which range from pigmy shrew to bluewhale. They keep the body temperature at about 37°C. We see that therelationship between the inverse von Bertalanffy growth rate and the24ultimate size is close to linear (i.e. the slope of the line in thelog-log plot is almost 1). Some species, like the vampire bat (whichdrops its body temperature when not active), and small sea-mammals(which spend a lot of energy in developing an insulating fat layer)grow relatively slowly, while others, like the danish dog (which hasbeen bred from racing dogs and, for this reason, is probably equipped"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly support the stylized fact via the temperature-size rule (TSR), which states that ectotherms developing at higher temperatures reach smaller asymptotic/ultimate sizes. Snippet 4 explicitly states the TSR (larger asymptotic length in cold), snippet 17 reports the TSR holds in >80% of ectotherm species studied, and snippet 18 corroborates with larger sizes at lower temperature in hydra. Snippet 1 references temperature-induced life-history shifts toward smaller size in Daphnia, consistent with the fact. No snippet contradicts the pattern. However, most remaining snippets concern thermal tolerance, reproduction, or pigmentation and are off-topic, so the supporting evidence, while clearly aligned and unconflicting, is moderate in volume rather than abundant. Direction is corroborated."
+      },
+      "n_references": 3,
+      "references": {
+        "W2286552881": {
+          "title": "Evaluation of alternative hypotheses to explain temperature-induced life history shifts in Daphnia",
+          "doi": "10.1093/plankt/fbh013",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3132733106613159
+        },
+        "W2997312133": {
+          "title": "From individuals to populations: How intraspecific competition shapes thermal reaction norms",
+          "doi": "10.1111/1365-2435.13516",
+          "year": "2019",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3297688961029053
+        },
+        "W4387816984": {
+          "title": "Temperature‐dependent scaling of fitness traits with body size in hydra",
+          "doi": "10.1111/1365-2435.14457",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.35482633113861084
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2286552881",
+          "title": "Evaluation of alternative hypotheses to explain temperature-induced life history shifts in Daphnia",
+          "doi": "10.1093/plankt/fbh013",
+          "year": "2004",
+          "distance": 0.3133,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "s suggested to explain life history shifts induced by raised temperature using parthenogenetic clones from two Daphnia species. Explanation 1 proposes that the life history shifts could be adaptive if increased temperature is used as an indirect cue to indicate increased risk from size-selective predators. Explanation 2 proposes that at larger body size energy becomes more limiting as temperature increases because of a less favourable assimilation: metabolism balance."
+        },
+        {
+          "document_id": "W4294303046",
+          "title": "The importance of considering the duration of extreme temperatures when investigating responses to climate change",
+          "doi": "10.1111/gcb.16381",
+          "year": "2022",
+          "distance": 0.324,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "cycle, but decreased their reproductive activities during the second breeding cycle when exposed to sustained high temperature. This reduced their courtship success and resulted in fewer offspring. Thus, a species expected to cope well with higher temperature suffers fitness reductions when the duration of high temperature is prolonged. The results stress the importance of considering the duration of extreme environmental conditions when investigating the impact that human activities have on species. Responses to short‐term exposures cannot be extrapolated to assess responses to longer periods of extreme conditions."
+        },
+        {
+          "document_id": "W2921581491",
+          "title": "Cold acclimation response of non-native Italian wall lizard (Podarcis siculus) populations from New York and California",
+          "doi": "10.15368/theses.2018.135",
+          "year": "2018",
+          "distance": 0.327,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "events and increasing variability of temperatures during winter are already being observed as consequences of a warming planet. Though direction of change in physiological variables in response to cold is well studied in ectotherms, the extent to which traits can change and the rate at which they can change is not.\\nWe compared the extent and rate of change in cold tolerance (CTmin) between two long-term captive populations of the Italian wall lizard (Podarcis siculus) during a lab cold-acclimation treatment."
+        },
+        {
+          "document_id": "W2997312133",
+          "title": "From individuals to populations: How intraspecific competition shapes thermal reaction norms",
+          "doi": "10.1111/1365-2435.13516",
+          "year": "2019",
+          "distance": 0.3298,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "Abstract Most ectotherms follow the temperature‐size rule (TSR): in cold environments individuals grow slowly but reach a large asymptotic length. Intraspecific competition can induce plastic changes of growth rate and asymptotic length and competition may itself be modulated by temperature. Our aim was to disentangle the joint effects of temperature and intraspecific competition on growth rate and asymptotic length."
+        },
+        {
+          "document_id": "W4289277938",
+          "title": "Alternative Reproductive Tactics Associated with Variable Sensory Biology and Thermal Physiology in Male Centris pallida (Hymenoptera: Apidae) Bees",
+          "doi": "10.17918/00001166",
+          "year": "2022",
+          "distance": 0.3335,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Climate change is predicted to cause significant increases in global temperatures that will place many species under temperature-dependent selection. The consequences of climate change may be especially severe for ectothermic species, which rely heavily on their environment to maintain a non-lethal body temperature. Little attention has been paid to the potential effects of climate change on variable morphology, physiology, or behavior within a species."
+        },
+        {
+          "document_id": "W2125635124",
+          "title": "The Effect of Temperature on Phenotypes of the Invasive European Green Crab: Physiologic Mechanisms that Facilitate Invasion Success",
+          "doi": "10.15760/etd.1004",
+          "year": "2000",
+          "distance": 0.3361,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "expression, a cellular mechanism underlying thermal tolerance threshold, is greater in invasive organisms than in native ones. 4) Acclimation to higher temperatures can promote a greater range of thermal tolerance for invasives compared to natives."
+        },
+        {
+          "document_id": "W4386475089",
+          "title": "Shifts in survival and reproduction after chronic warming enhance the potential of a marine copepod to persist under extreme heat events",
+          "doi": "10.1093/plankt/fbad037",
+          "year": "2023",
+          "distance": 0.3369,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract The study of a species’ thermal tolerance and vital rates responses provides useful metrics to characterize its vulnerability to ocean warming. Under prolonged thermal stress, plastic and adaptive processes can adjust the physiology of organisms. Yet it is uncertain whether the species can expand their upper thermal limits to cope with rapid and extreme changes in environmental temperature."
+        },
+        {
+          "document_id": "W2872531695",
+          "title": "Thermal Physiology and Developmental Plasticity of Pigmentation in the Harlequin Bug (Hemiptera: Pentatomidae)",
+          "doi": "10.1093/jisesa/iey066",
+          "year": "2018",
+          "distance": 0.3397,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Traits that promote the maintenance of body temperatures within an optimal range provide advantages to ectothermic species. Pigmentation plasticity is found in many insects and enhances thermoregulatory potential as increased melanization can result in greater heat retention."
+        },
+        {
+          "document_id": "W2022535050",
+          "title": "Studies on laboratory cultures of dune sand nematodes",
+          "doi": "10.1080/00222937000770111",
+          "year": "1970",
+          "distance": 0.3412,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ndity and fertility decline with increasing temperature, but increase with temperature in the other four species. Except for M. potohikus all species showed temperature limitation in the range 7–28°C and, except for A. syrtisus, decrease in generation time with increase in temperature."
+        },
+        {
+          "document_id": "W1038858580",
+          "title": "Phenotypic plasticity in thermal tolerance : life history strategy of an invasive freshwater fish",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.3436,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "Background:\\nTemperature has a fundamental effect on organisms because it alters the speed of biochemical reactions and thus metabolism. This influence scales up to have ecosystem wide effects as the life history strategies of individual species differ in response to temperature. With the prospect of increasing global temperatures ecosystem functions could be interrupted."
+        },
+        {
+          "document_id": "W2312950146",
+          "title": "Different temperature tolerance of northern and southern European populations of a freshwater Isopod Crustacean species (Asellus aquaticus L.)",
+          "doi": "10.1127/1863-9135/2011/0179-0193",
+          "year": "2011",
+          "distance": 0.3472,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "iles was greater than that of adults and the southern population had the highest proportion of temperature-resistant juveniles. The results confirm the importance of body size in the response to rising temperature and suggest that life stage should be taken into account in thermal adaptation studies. Analyses of intraspecific variability across different thermal regimes associated with the different latitudes illustrate how rising temperature can affect biological traits."
+        },
+        {
+          "document_id": "W2469396524",
+          "title": "Heat resistance throughout ontogeny: body size constrains thermal tolerance",
+          "doi": "10.1111/gcb.13407",
+          "year": "2016",
+          "distance": 0.3487,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract Heat tolerance is a trait of paramount ecological importance and may determine a species' ability to cope with ongoing climate change. Although critical thermal limits have consequently received substantial attention in recent years, their potential variation throughout ontogeny remained largely neglected. We investigate whether such neglect may bias conclusions regarding a species' sensitivity to climate change."
+        },
+        {
+          "document_id": "W2623772364",
+          "title": "Implications of the thermal environment for terrestrial wildlife management",
+          "doi": "10.1002/wsb.772",
+          "year": "2017",
+          "distance": 0.3491,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ABSTRACT How organisms respond to and are influenced by temperature is one of the most fundamental aspects of ecology. Temperature affects animal physiology, behavior, survival, and reproduction. At broader spatial and temporal scales, temperature affects animal distributions, speciation, and evolution."
+        },
+        {
+          "document_id": "W3033984747",
+          "title": "Phenotypic Responses to and Genetic Architecture of Sterility Following Exposure to Sub-Lethal Temperature During Development",
+          "doi": "10.3389/fgene.2020.00573",
+          "year": "2020",
+          "distance": 0.3498,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Thermal tolerance range, based on temperatures that result in incapacitating effects, influences species' distributions and has been used to predict species' response to increasing temperature. Reproductive performance may also be negatively affected at less extreme temperatures, but such sublethal heat-induced sterility has been relatively ignored in studies addressing the potential effects of, and ability of species' to respond to, predicted climate warming."
+        },
+        {
+          "document_id": "W4389148598",
+          "title": "Using warming tolerances to predict understory plant responses to climate change",
+          "doi": "10.1111/gcb.17064",
+          "year": "2023",
+          "distance": 0.3512,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Abstract Climate change is pushing species towards and potentially beyond their critical thermal limits. The extent to which species can cope with temperatures exceeding their critical thermal limits is still uncertain."
+        },
+        {
+          "document_id": "W3112667079",
+          "title": "Plasticity in reproductive traits of an intertidal rocky shore chiton (Polyplacophora: Chitonida) under pre-ENSO and ENSO events",
+          "doi": "10.1093/mollus/eyaa033",
+          "year": "2020",
+          "distance": 0.3513,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "y temperature and live at their upper thermal limits (Helmuth et al., 2006; Vinagre et al., 2019). As life-history traits (i.e. size at birth, growth, reproduction and size at death) are vulnerable to temperature changes in ectothermic organisms, they reflect the phenotypic expression of the interaction between genotypic and environmental influences (Cole, 1954; Stearns, 1992; Begg, 2005). It is therefore likely that changes in growth and reproduction help to maximize fitness under given constraints."
+        },
+        {
+          "document_id": "W4387816984",
+          "title": "Temperature‐dependent scaling of fitness traits with body size in hydra",
+          "doi": "10.1111/1365-2435.14457",
+          "year": "2023",
+          "distance": 0.3548,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "Abstract Body size strongly depends on developmental temperature. In more than 80% of the ectotherm species investigated, including bacteria, protists, invertebrates and vertebrates, individuals developing at lower temperatures exhibit protracted growth and achieve larger sizes than individuals developing at higher temperatures (referred to as the ‘temperature‐size rule’, TSR)."
+        },
+        {
+          "document_id": "W4387816984",
+          "title": "Temperature‐dependent scaling of fitness traits with body size in hydra",
+          "doi": "10.1111/1365-2435.14457",
+          "year": "2023",
+          "distance": 0.355,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "eased more steeply with size in cold, compared with warmer temperature. Females showed similar, though less emphasized, trends. Reduced animals in the cold had slower sexual development and were less able to undergo compensatory growth, suggesting temperature‐dependent constraints on physiological performance. Reduced and enlarged males differed dramatically in the expression of reproductive genes at low, but not at higher temperature, while in females, a complex transcriptomic restructuring was seen."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly support the stylized fact through the temperature-size rule (TSR), which holds that ectotherms reach smaller ultimate/asymptotic sizes under warmer temperatures: snippet 3 explicitly states organisms 'reach smaller sizes... under warmer temperatures,' snippet 16 describes the TSR ('in cold environments individuals... reach a large asymptotic length'), and snippet 6 cites the negative correlation between temperature and size at maturity. Snippet 13 (Daphnia life-history shifts) and snippet 11 (Bergmann's rule) are corroborative. One snippet (10) reports warming increasing body size in their model, providing a counterpoint, though it explicitly notes this need not contradict the intraspecific TSR. The remaining snippets are about thermal tolerance, performance curves, or are off-topic, contributing little. Overall the relevant evidence is moderate in strength and predominantly corroborates the fact, with only minor conflict."
+      },
+      "n_references": 6,
+      "references": {
+        "69b89345ecbd4702b29a6358": {
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3041025996208191
+        },
+        "69b84852ec32c55db5430bd9": {
+          "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3126688003540039
+        },
+        "69b875f0ecbd4702b29a3dd1": {
+          "title": "Audzijonyte et al. - 2022 - Changes in benthic and pelagic production interact.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.32894062995910645
+        },
+        "69b88365ecbd4702b29a4fd2": {
+          "title": "Martin and Barboza - .pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3296734094619751
+        },
+        "W2286552881": {
+          "title": "Evaluation of alternative hypotheses to explain temperature-induced life history shifts in Daphnia",
+          "doi": "10.1093/plankt/fbh013",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3132733106613159
+        },
+        "W2997312133": {
+          "title": "From individuals to populations: How intraspecific competition shapes thermal reaction norms",
+          "doi": "10.1111/1365-2435.13516",
+          "year": "2019",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3297688961029053
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b87003ecbd4702b29a357b",
+          "title": "Teix2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2774,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "temperature variation will affect metabolic rates and consequently the growth rate (Konarzewski et al., 1998; Kooijman, 2010a; Zonneveld and Kooijman, 1993) . T h e g r o w t h p a t t e r n o f t h e M i c r o n e s i a n K i n g f i s h e r a l s o d e v i a t e s f r o m t h e v o n B e r t a l a n f f y g r o w t h p a t t e r n b u t f o r a d i f f e r e n t reason. This species exhibits a consistent increase in body weight u p t o v a l u e s t h a t a r e h i g h e r t h a n t h e o b s e r v e d a v e r a g e a d u l t b o d y weight , f o l l o w e d b y a"
+        },
+        {
+          "document_id": "69b84770ec32c55db543097b",
+          "title": "Stavrakidis-Zachou et al. - 2023 - A bioenergetics approach to modelling tolerance li.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.293,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "hysiology and their overall performance ( Crozier and Hutchings,2014 ;Islam et al., 2020 ). For each species, there are speci ﬁctemperatures within which it performs optimally. As we moveaway from this range, performance tends to decrease andeventually diminishes when critical temperature thresholds areexceeded. These critical temperatures de ﬁne the tolerance rangeof a species, i.e. the temperature range over which it can survive andperform metabolically ( Pörtner et al., 2017 ). Indeed, thermalthresholds not only differ between species, but also appear to beinﬂuenced by factors such as the size and developmental stage of the"
+        },
+        {
+          "document_id": "69b89345ecbd4702b29a6358",
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3041,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "affects differentially growth and development. 1.Introduction Temperature has profound influence on the physiology, morphology, and life history of ectotherms (Hochachka and Somero, 2002 ; Angilletta, 2009 ). Among these impacts, the size of individuals is consistently observed to respond to temperature in many different species from a variety of taxa. The temperature-size rule (TSR) refers to the observation that a wide variety of organisms reach smaller sizes and mature at smaller size under warmer temperatures (Atkinson, 1994 ). Unraveling the mechanisms causing the TSR is the topic of intense research and"
+        },
+        {
+          "document_id": "69b88bebecbd4702b29a5a6a",
+          "title": "MontHelm2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3053,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "small increases in temperatures canhave a significant impact on physiological performance (Fig. 1). The relatively small differ-ence between optimal and lethal temperatures in this species, however, also increases its risk ofmortality during extreme events. In contrast, the other two species showed a generalist thermalbehavior where the broader width of their thermal niches combined with shallower slope andlower performance peaks ( M. galloprovincialis = 15.99 μmol h−1;B. pharaonis =1 2 . 7 5 μmolh−1; Table S2) are likely to mirror their invasiveness features, allowing them to colonize new"
+        },
+        {
+          "document_id": "69b88bebecbd4702b29a5a6a",
+          "title": "MontHelm2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3063,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "00 Climatic Change (2016) 139:293 –306increased thermal performance, and the increased potential to exceed thermal lethal limitsduring rare but extreme events. Such trade-offs can be complex, but they show that consid-eration of a species ’thermal performance curve (Fig. 1) can be highly informative. As anexample, following adaptive thermoregulation theory, the small Mytilaster behaves as a"
+        },
+        {
+          "document_id": "69b84852ec32c55db5430bd9",
+          "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3127,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "y displays an inverse relationship with 2314 body size at maturity. Bergmann (1847) revealed an increase in body size with 2315 increasing latitude (or decreasing temperature) in intraspecific comparisons of 2316 endotherms species, which led to the proposition of a general rule for temperature and 2317 organism body size. A negative correlation between temperature and size at maturity 2318 and offspring size has since been reported for ectotherm species and was coined as the 2319 temperature-size rule (Atkinson, 1994; Atkinson et al., 2001). The temperature-size 2320"
+        },
+        {
+          "document_id": "69b88c97ecbd4702b29a5b05",
+          "title": "FreiCard2010_Temperature tolerance North Sea species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3178,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ciﬁc maintenance rate appeared todecrease with increasing optimal temperature, temp-erature sensitivity and range of temperaturetolerance. This might suggest that species with highoptimal temperatures, living in ﬂuctuating tempera-ture environments, or those having greater metabolicsensitivity are compensated by having relatively lowerassimilation rates and, surprisingly, lower maintenancecosts. Generalizing these tendencies, species livingunder low and constant temperatures can afford a rela-tively high assimilation. On the other hand, species"
+        },
+        {
+          "document_id": "69b8476bec32c55db543095d",
+          "title": "Grim2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3249,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "did adapt to temp eratureinsilico, at least to smooth temperature increase, and that this adaptation is high ly groupdependent.SinceHuertasetal.[2011], severalstudieshavebeenconductedtodeﬁ netheabilityofeach species to adapt to temperature [Costas et al., 2014a,b, Padﬁeld et al., 2015b]. It ishowevernotknownhowtheshapeofthethermalgrowthcurveevolvesd uringadaptation,as well as the process by which cardinal temperatures change. Several hypotheses existdepending on the constraints playing a role during evolution [Angill etta, 2009, Knieset al., 2009] (ﬁg. 1.8). If the species are not thermodynamically constraine d (i.e.if the"
+        },
+        {
+          "document_id": "69b87459ecbd4702b29a3bb5",
+          "title": "VeerCard2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3269,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Fig. 2 .2.1.2. Optimal temperature in relation to body volumeThere is substantial evidence in a number of ﬁsh species that young(small) juvenile ﬁsh can exploit (grow well in) a larger range intemperatures than either earlier or later life stages (e.g. Pörtner andFarrell, 2008 ) and that juvenile ﬁshes select higher temperatures thando older (larger) conspeci ﬁcs (McCauley and Huggins, 1979; Lafranceet al., 2005 ). Similar suggestions have also been made for variousﬂatﬁsh species ( Jonassen et al., 1999; Yamashita et al., 2001 ) includingplaice ( Kuipers and Fonds, 1978; Fonds et al., 1992 ) although the"
+        },
+        {
+          "document_id": "69b875f0ecbd4702b29a3dd1",
+          "title": "Audzijonyte et al. - 2022 - Changes in benthic and pelagic production interact.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3289,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "l. 2004, Brown 647 et al. 2004, Forster et al. 2011) , although the exact mechanisms remain debated (Pauly and Cheung 2018, 648 Audzijonyte et al. 2019a, Wootton et al. 2022). In contrast our study reports that physiological responses to 649 warming generally increased, rather than decreased, mean species body sizes. This does not necessarily 650 contradict the temperature -size rule or “shrinking” fish paradigm, because this paradigm at an intra- specific 651"
+        },
+        {
+          "document_id": "69b88365ecbd4702b29a4fd2",
+          "title": "Martin and Barboza - .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3297,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "tory. Schmidt-Nielsen theorizedthat allometric scaling of surface-area-to-volumeratio ( b=0.67) increased heat retention as ani-mals increased body size, which would favorsurvival in cold environments for larger ani-mals. Speakman and Kr /C19ol theorized that heatdissipation limits to thermoregulatory costsunder rising heat loads limited reproductionand growth and affects life history and bodysize of animals. Bergmann ’s rule predicts ther-mal conservatism of animals for cooler climatesat higher latitudes will produce larger individu-als within and across species than warmer cli-mates at lower latitudes."
+        },
+        {
+          "document_id": "69b89810ecbd4702b29a683a",
+          "title": "Stavrakidis-Zachou et al. - 2024 - Modeling the bioenergetics of two herbivorous fish.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3334,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "h as growth and reproduction, and hence their overall physi-ological performance (Crozier and Hutchings, 2014). Each species hasspecific temperature ranges that are optimal for its metabolic function-ing. Deviating from this range typically results in a decline in metabolicperformance (Neuheimer et al., 2011), eventually diminishing whencritical temperature thresholds are surpassed (Pörtner and Peck, 2010).Consequently, warming may impose physiological stress on the nativepopulations, forcing them to function within temperature ranges closeto their upper thermal threshold (Albouy et al., 2013; Ben Rais Lasram"
+        },
+        {
+          "document_id": "W2286552881",
+          "title": "Evaluation of alternative hypotheses to explain temperature-induced life history shifts in Daphnia",
+          "doi": "10.1093/plankt/fbh013",
+          "year": "2004",
+          "distance": 0.3133,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "s suggested to explain life history shifts induced by raised temperature using parthenogenetic clones from two Daphnia species. Explanation 1 proposes that the life history shifts could be adaptive if increased temperature is used as an indirect cue to indicate increased risk from size-selective predators. Explanation 2 proposes that at larger body size energy becomes more limiting as temperature increases because of a less favourable assimilation: metabolism balance."
+        },
+        {
+          "document_id": "W4294303046",
+          "title": "The importance of considering the duration of extreme temperatures when investigating responses to climate change",
+          "doi": "10.1111/gcb.16381",
+          "year": "2022",
+          "distance": 0.324,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "cycle, but decreased their reproductive activities during the second breeding cycle when exposed to sustained high temperature. This reduced their courtship success and resulted in fewer offspring. Thus, a species expected to cope well with higher temperature suffers fitness reductions when the duration of high temperature is prolonged. The results stress the importance of considering the duration of extreme environmental conditions when investigating the impact that human activities have on species. Responses to short‐term exposures cannot be extrapolated to assess responses to longer periods of extreme conditions."
+        },
+        {
+          "document_id": "W2921581491",
+          "title": "Cold acclimation response of non-native Italian wall lizard (Podarcis siculus) populations from New York and California",
+          "doi": "10.15368/theses.2018.135",
+          "year": "2018",
+          "distance": 0.327,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "events and increasing variability of temperatures during winter are already being observed as consequences of a warming planet. Though direction of change in physiological variables in response to cold is well studied in ectotherms, the extent to which traits can change and the rate at which they can change is not.\\nWe compared the extent and rate of change in cold tolerance (CTmin) between two long-term captive populations of the Italian wall lizard (Podarcis siculus) during a lab cold-acclimation treatment."
+        },
+        {
+          "document_id": "W2997312133",
+          "title": "From individuals to populations: How intraspecific competition shapes thermal reaction norms",
+          "doi": "10.1111/1365-2435.13516",
+          "year": "2019",
+          "distance": 0.3298,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "Abstract Most ectotherms follow the temperature‐size rule (TSR): in cold environments individuals grow slowly but reach a large asymptotic length. Intraspecific competition can induce plastic changes of growth rate and asymptotic length and competition may itself be modulated by temperature. Our aim was to disentangle the joint effects of temperature and intraspecific competition on growth rate and asymptotic length."
+        },
+        {
+          "document_id": "W4289277938",
+          "title": "Alternative Reproductive Tactics Associated with Variable Sensory Biology and Thermal Physiology in Male Centris pallida (Hymenoptera: Apidae) Bees",
+          "doi": "10.17918/00001166",
+          "year": "2022",
+          "distance": 0.3335,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Climate change is predicted to cause significant increases in global temperatures that will place many species under temperature-dependent selection. The consequences of climate change may be especially severe for ectothermic species, which rely heavily on their environment to maintain a non-lethal body temperature. Little attention has been paid to the potential effects of climate change on variable morphology, physiology, or behavior within a species."
+        },
+        {
+          "document_id": "W2125635124",
+          "title": "The Effect of Temperature on Phenotypes of the Invasive European Green Crab: Physiologic Mechanisms that Facilitate Invasion Success",
+          "doi": "10.15760/etd.1004",
+          "year": "2000",
+          "distance": 0.3361,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "expression, a cellular mechanism underlying thermal tolerance threshold, is greater in invasive organisms than in native ones. 4) Acclimation to higher temperatures can promote a greater range of thermal tolerance for invasives compared to natives."
+        },
+        {
+          "document_id": "W4386475089",
+          "title": "Shifts in survival and reproduction after chronic warming enhance the potential of a marine copepod to persist under extreme heat events",
+          "doi": "10.1093/plankt/fbad037",
+          "year": "2023",
+          "distance": 0.3369,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract The study of a species’ thermal tolerance and vital rates responses provides useful metrics to characterize its vulnerability to ocean warming. Under prolonged thermal stress, plastic and adaptive processes can adjust the physiology of organisms. Yet it is uncertain whether the species can expand their upper thermal limits to cope with rapid and extreme changes in environmental temperature."
+        },
+        {
+          "document_id": "W2872531695",
+          "title": "Thermal Physiology and Developmental Plasticity of Pigmentation in the Harlequin Bug (Hemiptera: Pentatomidae)",
+          "doi": "10.1093/jisesa/iey066",
+          "year": "2018",
+          "distance": 0.3397,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Traits that promote the maintenance of body temperatures within an optimal range provide advantages to ectothermic species. Pigmentation plasticity is found in many insects and enhances thermoregulatory potential as increased melanization can result in greater heat retention."
+        },
+        {
+          "document_id": "W2022535050",
+          "title": "Studies on laboratory cultures of dune sand nematodes",
+          "doi": "10.1080/00222937000770111",
+          "year": "1970",
+          "distance": 0.3412,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ndity and fertility decline with increasing temperature, but increase with temperature in the other four species. Except for M. potohikus all species showed temperature limitation in the range 7–28°C and, except for A. syrtisus, decrease in generation time with increase in temperature."
+        },
+        {
+          "document_id": "W1038858580",
+          "title": "Phenotypic plasticity in thermal tolerance : life history strategy of an invasive freshwater fish",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.3436,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Background:\\nTemperature has a fundamental effect on organisms because it alters the speed of biochemical reactions and thus metabolism. This influence scales up to have ecosystem wide effects as the life history strategies of individual species differ in response to temperature. With the prospect of increasing global temperatures ecosystem functions could be interrupted."
+        },
+        {
+          "document_id": "W2312950146",
+          "title": "Different temperature tolerance of northern and southern European populations of a freshwater Isopod Crustacean species (Asellus aquaticus L.)",
+          "doi": "10.1127/1863-9135/2011/0179-0193",
+          "year": "2011",
+          "distance": 0.3472,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "iles was greater than that of adults and the southern population had the highest proportion of temperature-resistant juveniles. The results confirm the importance of body size in the response to rising temperature and suggest that life stage should be taken into account in thermal adaptation studies. Analyses of intraspecific variability across different thermal regimes associated with the different latitudes illustrate how rising temperature can affect biological traits."
+        },
+        {
+          "document_id": "W2469396524",
+          "title": "Heat resistance throughout ontogeny: body size constrains thermal tolerance",
+          "doi": "10.1111/gcb.13407",
+          "year": "2016",
+          "distance": 0.3487,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract Heat tolerance is a trait of paramount ecological importance and may determine a species' ability to cope with ongoing climate change. Although critical thermal limits have consequently received substantial attention in recent years, their potential variation throughout ontogeny remained largely neglected. We investigate whether such neglect may bias conclusions regarding a species' sensitivity to climate change."
+        }
+      ]
+    }
+  }
+}

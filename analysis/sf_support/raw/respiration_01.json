@@ -1,0 +1,843 @@
+{
+  "sf_id": "respiration_01",
+  "category": "Respiration",
+  "statement": "Freshly laid eggs/seeds initially use negligible amounts of dioxygen.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The corpus contains multiple, mutually consistent statements affirming the stylized fact that freshly laid eggs and seeds initially use negligible dioxygen. This is presented as a core DEB respiration fact (R1/O1) across several foundational sources (Kooijman 2010, Sousa & Domingos 2007/2008/2010, Sous2007, Kooy2012), often with supporting empirical citations (Romijn & Lokhorst 1951; Pettit 1982; Bucher 1983; Whitehead 1987). Snippet 2 explicitly extends the claim to plant seeds. Several snippets are merely topically adjacent (bird-egg O2 diffusion limitation, hypoxia studies, toxicant exposure, yolk-feeding model details) and are scored neutral, but none of the snippets contradict the fact. Overall the evidence is strong and the consensus clearly corroborates the stylized fact."
+      },
+      "n_references": 7,
+      "references": {
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.26756787300109863
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3153870701789856
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.35052424669265747
+        },
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3636881113052368
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3930280804634094
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3966803550720215
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.4111168384552002
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2676,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "9 ;Kooijman 2000,pp. 96 )G6 egg size covaries with the nutritional status ofthe motheranimals ( Rossiter 1991 a,b;Glazier 1992 ;Bertram & Strathmann 1998 ;Heath et al.1999 ;McIntyre & Gooding 2000 ;Yoshinagaet al. 2001 ;Loman 2002 ;Nager et al. 2006 )respiration R1 freshly laid eggs do not use dioxygen insigniﬁcant amountsanimals ( Romijn & Lokhorst 1951 ;Pettit 1982 ;Bucher 1983 ;Whitehead 1987 )R2 the use of dioxygen increases with decreasingmass in embryos and increases with mass injuveniles and adultsanimals ( Romijn & Lokhorst 1951 ;Richman1958 ;Pettit 1982 ;Bucher 1983 ;Whitehead1987 ;Clarke & Johnston 1999 ;Savage et al."
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3154,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "dioxygen and does not produce carbondioxide. (The shells of bird eggs initially produce a little carbon dioxide [125, 468].) Inmany species, this is a resting stage. This especially holds for plants, where seeds areequivalent to eggs; seeds can be dormant for many years and the number of dormant seedsgreatly exceeds the number of non-dormant individuals [461]. Many seeds (particularlyberries) require to be treated by the digestive juices of a particular animal species forgermination; others need fire, see {412}. Although the seed or egg exchanges gas andwater with the environment, it is otherwise a rather closed system."
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3505,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3599,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3601,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "om Richman[960]. The deb-based curve 0 .0336 L2+0.01845 L3as well as the standard allo-metric curve 0 .0516 L2.437are plotted ontop of each other, but they are so simi-lar that this is hardly visible. If you lookhard, you will notice that the line widthvaries a little.length, mmO2consumption, µl/hthe dissipating power˙pD=Vm[ ˙pM] l3+ (1κ−1)l3p+l2lT+ (1−κR)(1κ−1) l2e−l+lTe/g1 +e/g+l3−l3p!!(4.50)Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases duringdevelopment; see Figure 4.20. In juveniles and adults, dioxygen consumption is usually"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3637,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)"
+        },
+        {
+          "document_id": "69b847d4ec32c55db5430a9e",
+          "title": "Kooy2015_en.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3654,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": ".This strongly suggests that other reasons must exist to cease growing, andthat cartilage is replaced it improve bone structure.The second example concerns the di usion of dioxygen through the eggshell, which is generally seen as a rate-limiting factor in the development ofbird eggs. This idea rests on the observation of a strongly negative correlationbetween maximum dioxygen consumption and di usion resistance of the eggTheoretical Biology, a specialisation in integration 35shell. Models show, however, that energy use, that corresponds with the use ofdioxygen of the embryo, develops similar to that of the neonate. This suggests"
+        },
+        {
+          "document_id": "69b88ceeecbd4702b29a5b7e",
+          "title": "Jager et al. - 2022 - Testing a simple energy-budget model for yolk-feed.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3775,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "was no clear change in carbon content over development,the content in yolk and structure must be similar. For the estimation ofoxygen use, an additional parameter is the respiratory quotient ( 𝐹𝑅𝑄):the moles of CO2eliminated per mole of O2taken up. Following Jageret al. (2018 ), we take 0.8 as a reasonable value. Hatching time couldbe directly observed in the experiments, and is only used in the modelin the calculation of the total dry weight: the chorion (and other eggmaterials such as the gum layer) will contribute to weight for the eggstage only.The actual temperatures in the two sets of experiments (BG1 and"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3859,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ativekinetics of embryo development. Bull. Math. Biol. 55,609–635.2464 T. Sousa et al. Review. A formal metabolic theory of lifePhil. Trans. R. Soc. B (2008)7. APPENDICESA. Appendix IProof. (Proposition 3.7)It follows from Eq. 3.6 and Eq. 3.10.Proof. (Proposition 3.8)Empirical evidence shows that eggs use dioxygen (R2) but fre shly laid eggs do not (R1). Thus,there are metabolic processes occurring during the embryo s tage that are not present at the beg-gining (fresh laid egg). The energy used in all metabolic pro cesses comes from reserves (As-"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.393,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ight approximately proportional to cubed time [34] animals [34, 115]The von Bertalanffy growth rate of bacteria [48, pp.276-282]different species corrected for a common body yeasts [48, pp.276-282]temperature decreases almost proportional to animals [48, pp.276-282]maximum body lengthReproduction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78]but decreases with size inter-speciﬁcallyRespiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3967,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4111,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "the von Bertalanffy growth rate of bacteria [41, p.276-282]different species corrected for a common body yeasts [41, p.276-282]temperature decreases almost linearly with the animals [41, p.276-282]logarithm of the species maximum sizeG5 The logarithm of the von Bertalanffy growth rate for animals [19], [41, p.96]organisms of the same species at different foodavailabilities decreases linearly with ultimate lengthRespiration R1 Freshly laid eggs do not use dioxygen in signiﬁcant animals [6, 62, 67, 87]amountsR2 The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4205,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": ", which is supported by theempirical evidence that organisms can have a variablestoichiometry (S1). The reserve does not requiremaintenance because it is continuously used andreplenished, while the structure requires maintenancebecause it is continuously degraded and reconstructed.This is supported by the fact that freshly laid eggs(composed only of reserve) do not use dioxygen insigniﬁcant amounts and that the use of dioxygenincreases with decreasing mass in the embryo as thereserves are transformed into structure and withincreasing structure in the juvenile and adult (R1, R2).Feeding is considered to be proportional to surface"
+        },
+        {
+          "document_id": "69b8687eecbd4702b29a2cf5",
+          "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4217,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "it matters a lot how we compare exactly and what is taken as reference. For instance, when we suggest that dioxygen availabil -ity or toxicity of accumulated nitrogen waste limit embryo size, we do not imply that the embryo actually experiences such limitation or toxic effects, only that egg size is such that these problems are avoided. The large literature on bird egg development stresses the role of O2 limitation (Hoyt & Rahn, 1980 ; Tazawa et al., 1983 ; Visschedijk, 1968 ; Visschedijk & Rahn, 1983 ). The authors point that the maximum flux through the pores is egg- size independent, from hummingbird to"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4228,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ion or damage to the SU to fit the model to early-life data for four DO treatments. We evaluated which parameter or combination of parameters, when adjusted with the correction factor, was able to best account for the full set of hypoxia responses observed in experiments and thus allow inference of mechanism.2.Methods2.1. DEBkiss model descriptionThe material flows are shown in Fig. 1. The yolk in an egg is treated as a buffer of “food ” for the developing embryo that initially has an infinitesimally small structural biomass. In this regard, DEBkiss differs from standard DEB where the yolk is considered to be “reserve ” whose"
+        },
+        {
+          "document_id": "69b873ececbd4702b29a3b55",
+          "title": "Jager et al. - 2018 - Simple energy-budget model for yolk-feeding stages.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4231,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.45,
+          "text": "ted from the total fresh egg (0.07 mg/mm3;Finn et al., 1995).Overall, the ﬁt is very good, but several issues can be observed oncloser inspection. Starting with the total dry weight ( Fig. 2d): the modelpredicts a decrease of total dry weight over the egg stage, which is notshown in the data. As the egg membrane severely restricts uptake ofsolutes, the burning of yolk (mass ﬂuxJD) should lead to a loss of dryweight as the embryo develops (closely linked to the observed re-spiration rate). Eggs may be taking up some minerals from water, butno increase in ash content was observed in this study ( Finn et al., 1995)."
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4284,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "urity maint enance is intimately relatedwith the second law of thermodynamics (P2): the level of matu rity would decrease in theabsence of energy spent in its maintenance because the highe r the level of maturity thefurther away is the system from equilibrium.Empirical evidence (R1) shows that freshly laid eggs do not r equire maintenance be-cause aerobic organisms use dioxygen in chemical reactions that yield energy. Thus, 1)freshly laid eggs do not have structure and 2) reserve does no t require maintenance. Re-serves can have active metabolic functions but do not requir e maintenance because they"
+        },
+        {
+          "document_id": "69b8a08fecbd4702b29a7206",
+          "title": "KlokHjor2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4322,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "iated with these lipids may be incorporated simultaneous-ly, causing lower egg survival (5 in Fig. 1 ).Jensen and Carroll (2010)further reported an increase in the time between clutches with WSF(16 EPA) concentration in C. glacialis (Table 1 ), which suggests in-crease in the costs of egg production (4 in Fig. 1 ).None of the authors found negative effects on hatchability of di-rectly exposed eggs. Passive uptake by eggs therefore seems unlikely.Having a protective layer and being generally chemically inert, apartfrom gas exchange, eggs tend to be isolated for toxicants ( Kooijman,2010; Villalobos et al., 2000 )."
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the snippets directly address the stylized fact that freshly laid eggs/seeds initially consume negligible dioxygen. Most snippets concern egg contaminants (mercury, PCBs, DDE, dioxins), hatchability effects of toxins/antioxidants, or reproductive performance, which are off-topic. A few touch on oxygen tangentially: snippet [2] notes low dissolved oxygen reduces metabolic rates during fruit fly egg storage, snippet [16] discusses hypoxia effects on cowpea bruchid reproduction, and snippet [10] reports reduced oxygen consumption in non-viable heme-depleted eggs—but none measure or describe the time-course of oxygen uptake in freshly laid eggs to confirm or refute initial negligible respiration. Snippet [17] mentions oxidation of organic compounds during incubation but does not characterize the early phase. Therefore the corpus provides no real evidence either supporting or contradicting the fact; evidence is sparse and the direction is effectively neutral/insufficient."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W2323551895",
+          "title": "Peregrine falcon egg pollutants",
+          "doi": "10.1080/02772248.2015.1126717",
+          "year": "2016",
+          "distance": 0.3525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ship behavior. The average Hg concentration in the peregrine falcon eggs from 2009 is almost four times higher than this level. MeHg accounted for 82.5% of the Hg present in the eggs of 2009 and 2010. The cell test DR CALUX® for screening of dioxin-like activities can be used to detect not only the 29 regulated dioxin-like substances but also many other persistent organic pollutants with dioxin-like potencies, such as mixed halogenated dioxins/biphenyls. In our case, the results of bioanalytical screening methods showed no additional effect of other compounds with dioxin-like activity."
+        },
+        {
+          "document_id": "W2221237338",
+          "title": "A PROTOCOL FOR STORAGE AND LONG-DISTANCE SHIPMENT OF MEDITERRANEAN FRUIT FLY (DIPTERA: TEPHRITIDAE) EGGS. II. ASSESSMENT OF THE OPTIMAL TEMPERATURE AND SUBSTRATE FOR MALE-ONLY PRODUCTION",
+          "doi": "10.1653/0015-4040(2007)90[110:apfsal]2.0.co;2",
+          "year": "2007",
+          "distance": 0.358,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "concentration of dissolved oxygen in the substrate during storage and the quality and survival of the stored/transported eggs. Apparently low levels of dissolved oxygen reduce metabolic rates, allowing the storage period to be prolonged."
+        },
+        {
+          "document_id": "W2323551895",
+          "title": "Peregrine falcon egg pollutants",
+          "doi": "10.1080/02772248.2015.1126717",
+          "year": "2016",
+          "distance": 0.3836,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "case, the results of bioanalytical screening methods showed no additional effect of other compounds with dioxin-like activity. Ninety-three out of 177 analytes sought could be detected in the eggs. Chlorinated paraffins, organotin compounds, some pesticides that are still in use, and phthalic esters with the exception of traces of diethylhexyl phthalate could be excluded. All pollutants found in the eggs belong to substance classes banned by the Stockholm and Minamata Conventions."
+        },
+        {
+          "document_id": "W2150523676",
+          "title": "Changes in productivity and contaminants in bald eagles nesting along the lower Columbia River, USA",
+          "doi": "10.1897/03-621.1",
+          "year": "2005",
+          "distance": 0.385,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "use. Decreases in DDE (p = 0.022) and total PCBs (p = 0.0004) in eggs from older breeding areas occurred between study periods. Productivity was not correlated to contaminants, but DDE, PCBs, and dioxin-like chemicals exceeded estimated no-effect values. Some dioxin-like contaminants in eggs were correlated to nest location, with highest concentrations occurring toward the river's mouth where productivity was lowest."
+        },
+        {
+          "document_id": "W2122369768",
+          "title": "THE INFLUENCE OF LEACHATES FROM ROOTS OF MORNINGGLORY (IPOMOEA LACUNOSA), HEMP SESBANIA (SESBANIA EXALTATA), AND JOHNSONGRASS (SORGHUM HALEPENSE) ON REPRODUCTION OF ROTYLENCHULUS RENIFORMIS WITH EMPHASIS ON THE ECLOSION AND HATCHING OF EGGS",
+          "doi": "",
+          "year": "2008",
+          "distance": 0.4126,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ced into sterile 3-ml capacity wells. Eggs were enumerated and assigned to the appropriate developmental category over 10 days. Reductions in the development and hatch of eggs occurred with nonfiltered portions of leachates from all three weeds. Over four experiments, 91% of eggs in distilled water hatched by day 10. Significantly reduced hatch occurred with eggs in-cubated in leachates; averaging 59% for morningglory, 57% for hemp sesbania and 53% for johnsongrass. There were no differences in egg development and hatch in control and leachate samples that passed through a 0.45-pm filter."
+        },
+        {
+          "document_id": "W2046982159",
+          "title": "DDE, Selenium, Mercury, and White-Faced Ibis Reproduction at Carson Lake, Nevada",
+          "doi": "10.2307/3809606",
+          "year": "1989",
+          "distance": 0.4135,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "eding grounds, but concentrationsmore » in eggs did not reach levels sufficient to impact the production of 7-10 day old young. Potential Se and especially Hg accumulation during the remainder of the summer was high, but actual effects on growing young and adults remain unknown.« less"
+        },
+        {
+          "document_id": "W2326974289",
+          "title": "The Effect of a Purified Water-Soluble Fraction of a Fusarium roseum ‘Graminearum’ Culture on Reproduction of White Leghorn Females",
+          "doi": "10.3382/ps.0641077",
+          "year": "1985",
+          "distance": 0.4199,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "when these toxic diets were replaced with control diets. The majority of embryo mortality occurred during 5 days of incubation. The major mycotoxins responsible for reduced hatchability of fertile eggs appeared to be water soluble components of F. roseum 'Graminearum' and not trichothecenes or zearalenone."
+        },
+        {
+          "document_id": "W2083757201",
+          "title": "Non-Additive and Sex-Linked Genetic Effects on Egg Production in a Randombred Population ,",
+          "doi": "10.3382/ps.0400662",
+          "year": "1961",
+          "distance": 0.4218,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "of non-additive variance was larger for production for 365 days as compared with shorter production periods up to four months. Fuchs and Krueger (1957) reported that non-additive effects appeared to be important in egg production in single and three-way crosses but of questionable magnitude in pure strains. According to Jerome, King and Henderson (1956), . . ."
+        },
+        {
+          "document_id": "W2320260605",
+          "title": "The Biology and Ecology of Eulimnadia antlei Mackin (Conchostraca)",
+          "doi": "10.2307/3670065",
+          "year": "1972",
+          "distance": 0.4222,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "er. The eggs they deposited were removed with a pipet the next day and stored in screw cap vials of water from the same beaker. Eggs used for an experiment were taken from the same lot to insure uniformity and mixed: frequently during counting to insure randomness."
+        },
+        {
+          "document_id": "W2014126009",
+          "title": "Silencing of Maternal Heme-binding Protein Causes Embryonic Mitochondrial Dysfunction and Impairs Embryogenesis in the Blood Sucking Insect Rhodnius prolixus",
+          "doi": "10.1074/jbc.m113.504985",
+          "year": "2013",
+          "distance": 0.4258,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "heme-depleted eggs (white eggs). A lack of RHBP did not alter oocyte fecundation. However, produced white eggs were nonviable. Embryo development cellularization and vitellin yolk protein degradation, processes that normally occur in early stages of embryogenesis, were compromised in white eggs. Total cytochrome c content, cytochrome c oxidase activity, citrate synthase activity, and oxygen consumption, parameters that indicate mitochondrial function, were significantly reduced in white eggs compared with normal dark red eggs."
+        },
+        {
+          "document_id": "W2010259313",
+          "title": "Environmental Contaminants in Bald Eagles in the Columbia River Estuary",
+          "doi": "10.2307/3808994",
+          "year": "1993",
+          "distance": 0.4268,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ons (i.e., [ge]1.00 young/occupied site). DDE and PCB's had a deleterious effect on reproduction of bald eagles in the estuary. The role dioxins play in eagle reproduction remains unclear, but concentrations in eagle eggs were similar to those in laboratory studies on other species where dioxins adversely affected hatchability of eggs. Probable sourcemore » of these contaminants include dredged river sediments and hydroelectric dams, and the proper management of each may reduce the amount of contaminants released into the Columbia River estuary. 46 refs., 1 fig., 4 tabs.« less"
+        },
+        {
+          "document_id": "W2011192691",
+          "title": "Effect of Natural Antioxidant on Oxidative Stability of Eggs and Productive and Reproductive Performance of Laying Hens",
+          "doi": "10.3923/ijps.2008.134.150",
+          "year": "2008",
+          "distance": 0.4285,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "dehyede formation in egg yolk and had positive effect on oxidative stability of shell eggs storage at room temperature(16oC±2). Addition of 1.0% oregano, rosemary or 0.5% curcuma longa significantly increased the percentages of fertility. While 1.0% thyme or 0.5-1.0% curcuma longa significantly increased the percentages of hatchability of fresh eggs. It could be concluded from this study that herbs could be used as natural antioxidants during laying period."
+        },
+        {
+          "document_id": "W4231684306",
+          "title": "The Role of DDE, PCB, Coplanar PCB and Eggshell Parameters for Reproduction in the White-tailed Sea Eagle (Haliaeetus albicilla) in Sweden",
+          "doi": "10.1639/0044-7447(2002)031[0386:trodpc]2.0.co;2",
+          "year": "2002",
+          "distance": 0.4319,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "eggshell measurements. A desiccation index (Di) value was calculated for each egg as a measure of water loss through the shell. In the highly contaminated Bp, p,p´-DDE concentrations in the eggs decreased continuously and 5-fold during the study period and PCB concentrations decreased 3-fold from the mid 1980s. The PCB pattern changed slightly over time towards more high-chlorinated congeners but the relative toxicity of the PCB mixture, expressed as 2,3,7,8-tetrachlorodibenzo-p-dioxin equivalents (TEQ), remained constant and TEQ can be assumed to have decreased in a similar way as PCB over time."
+        },
+        {
+          "document_id": "W2027656886",
+          "title": "A complete analysis of winter flounder (Pleuronectes americanus) egg contaminants with respect to early reproduction, with a review of their toxicity and other environmental concentrations",
+          "doi": "10.1080/10641269609388590",
+          "year": "1996",
+          "distance": 0.4339,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "e samples, some being higher, others lower than egg concentrations linked to diminished reproduction of other resource species. Associations of individual contaminants of all chemical groups were mostly consistent with their uptake, metabolism, cumulation, toxicity, and egg concentration. Pesticides (20% of the mean total organic contaminant load of 3.2 μg/g dry weight) most strongly and significantly associated with increased mortality and defect of flounder embryos, followed by PAHs (10% of the organic contaminant load) and then metals."
+        },
+        {
+          "document_id": "W2159108994",
+          "title": "Dicofol (kelthane®)-induced eggshell thinning in captive american kestrels",
+          "doi": "10.1002/etc.5620090813",
+          "year": "1990",
+          "distance": 0.4342,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "0 μg/g reduced hatchability of eggs. Both these raptors showed eggshell changes without serious effects on production of young. Available data show dicofol only equal to or less effective than DDE as a shell-thinning agent. Also, DDE may have more impact than dicofol on such critical aspects of reproduction as egg hatchability and survivability of hatchlings. Field studies of dicofol residues in food chains and of residue concentrations in eggs vs. nesting success from areas of heavy dicofol use are needed to judge this chemical's ecological impact."
+        },
+        {
+          "document_id": "W2441850565",
+          "title": "Hypoxia Treatment of Callosobruchus maculatus Females and Its Effects on Reproductive Output and Development of Progeny Following Exposure",
+          "doi": "10.3390/insects7020026",
+          "year": "2016",
+          "distance": 0.437,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ffect the number of eggs laid during 48 or 72 h of exposure, but 2% and 5% oxygen did negatively affected total egg production. Increasing the exposure time from 48 to 72 h further depressed lifetime reproductive output. Maternal and egg exposure to hypoxia reduced the number of progeny that reached adulthood. Lower adult emergence was observed from eggs laid under low oxygen and longer exposure times. These data demonstrate that hermetic conditions depress the egg-laying behavior of cowpea bruchids and the successful development of their progeny."
+        },
+        {
+          "document_id": "W2116723029",
+          "title": "PHYSIOLOGICAL ONTOGENY",
+          "doi": "10.1085/jgp.9.1.1",
+          "year": "1925",
+          "distance": 0.4381,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "hy and discussion. It is surprising that no biochemists have estimated the changing water content of the egg during incubation. Many of the analyses reported in Needham's review were expressed in per cent of total weight or per cent of dry solid, and consequently are of questionable value, since these latter functions are themselves changing; the former due to water evaporation and the latter through the addition of shell constituents and the burning of oxidizable organic compounds."
+        },
+        {
+          "document_id": "W4362470303",
+          "title": "The Effect of In Ovo Administration of Rosemary Essential Oil on Hatchability, Relative Hatching Weight, and Embryo Mortality Rate in Japanese Quail (Coturnix coturnix japonica)",
+          "doi": "10.3390/ani13071217",
+          "year": "2023",
+          "distance": 0.4403,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "-injected), positive control (30 µL sterile distilled water/egg), and two treated groups with 1 and 3 µL oil/egg, respectively. The concentration of 3 µL/egg showed a toxic effect on embryonic development, as revealed by the significantly (p = 0.015) higher post-injection mortality rate (18.21%) compared to 1 µL/egg with 8.3%. Furthermore, hatchability was significantly increased (p = 0.0001) with 1 µL/egg compared to 3 µL/egg with 69.1% and 44.48%, respectively. No significant difference was observed between the concentration of 1 µL/egg and the control groups (p = 0.822)."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple DEB-core references explicitly state this stylized fact (R1/O1): freshly laid eggs and plant seeds initially use negligible/hardly any dioxygen, with dioxygen consumption rapidly increasing during development (snippets 1, 2, 5, 6, 9, 10, 11, 12). Several cite supporting empirical literature (Romijn & Lokhorst, Pettit, Bucher, Whitehead). Snippet 2 extends the point to seeds as dormant resting stages. No snippet contradicts the fact; the remaining snippets (13-24) are off-topic (egg contaminants, hatchability, genetics) and rated neutral. The relevant evidence is consistent, multiple, and clearly corroborating."
+      },
+      "n_references": 7,
+      "references": {
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.26756787300109863
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3153870701789856
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.35052424669265747
+        },
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3636881113052368
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3930280804634094
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3966803550720215
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4111168384552002
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2676,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "9 ;Kooijman 2000,pp. 96 )G6 egg size covaries with the nutritional status ofthe motheranimals ( Rossiter 1991 a,b;Glazier 1992 ;Bertram & Strathmann 1998 ;Heath et al.1999 ;McIntyre & Gooding 2000 ;Yoshinagaet al. 2001 ;Loman 2002 ;Nager et al. 2006 )respiration R1 freshly laid eggs do not use dioxygen insigniﬁcant amountsanimals ( Romijn & Lokhorst 1951 ;Pettit 1982 ;Bucher 1983 ;Whitehead 1987 )R2 the use of dioxygen increases with decreasingmass in embryos and increases with mass injuveniles and adultsanimals ( Romijn & Lokhorst 1951 ;Richman1958 ;Pettit 1982 ;Bucher 1983 ;Whitehead1987 ;Clarke & Johnston 1999 ;Savage et al."
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3154,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "dioxygen and does not produce carbondioxide. (The shells of bird eggs initially produce a little carbon dioxide [125, 468].) Inmany species, this is a resting stage. This especially holds for plants, where seeds areequivalent to eggs; seeds can be dormant for many years and the number of dormant seedsgreatly exceeds the number of non-dormant individuals [461]. Many seeds (particularlyberries) require to be treated by the digestive juices of a particular animal species forgermination; others need fire, see {412}. Although the seed or egg exchanges gas andwater with the environment, it is otherwise a rather closed system."
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3505,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3599,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3601,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "om Richman[960]. The deb-based curve 0 .0336 L2+0.01845 L3as well as the standard allo-metric curve 0 .0516 L2.437are plotted ontop of each other, but they are so simi-lar that this is hardly visible. If you lookhard, you will notice that the line widthvaries a little.length, mmO2consumption, µl/hthe dissipating power˙pD=Vm[ ˙pM] l3+ (1κ−1)l3p+l2lT+ (1−κR)(1κ−1) l2e−l+lTe/g1 +e/g+l3−l3p!!(4.50)Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases duringdevelopment; see Figure 4.20. In juveniles and adults, dioxygen consumption is usually"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3637,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)"
+        },
+        {
+          "document_id": "69b847d4ec32c55db5430a9e",
+          "title": "Kooy2015_en.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3654,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": ".This strongly suggests that other reasons must exist to cease growing, andthat cartilage is replaced it improve bone structure.The second example concerns the di usion of dioxygen through the eggshell, which is generally seen as a rate-limiting factor in the development ofbird eggs. This idea rests on the observation of a strongly negative correlationbetween maximum dioxygen consumption and di usion resistance of the eggTheoretical Biology, a specialisation in integration 35shell. Models show, however, that energy use, that corresponds with the use ofdioxygen of the embryo, develops similar to that of the neonate. This suggests"
+        },
+        {
+          "document_id": "69b88ceeecbd4702b29a5b7e",
+          "title": "Jager et al. - 2022 - Testing a simple energy-budget model for yolk-feed.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3775,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "was no clear change in carbon content over development,the content in yolk and structure must be similar. For the estimation ofoxygen use, an additional parameter is the respiratory quotient ( 𝐹𝑅𝑄):the moles of CO2eliminated per mole of O2taken up. Following Jageret al. (2018 ), we take 0.8 as a reasonable value. Hatching time couldbe directly observed in the experiments, and is only used in the modelin the calculation of the total dry weight: the chorion (and other eggmaterials such as the gum layer) will contribute to weight for the eggstage only.The actual temperatures in the two sets of experiments (BG1 and"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3859,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "ativekinetics of embryo development. Bull. Math. Biol. 55,609–635.2464 T. Sousa et al. Review. A formal metabolic theory of lifePhil. Trans. R. Soc. B (2008)7. APPENDICESA. Appendix IProof. (Proposition 3.7)It follows from Eq. 3.6 and Eq. 3.10.Proof. (Proposition 3.8)Empirical evidence shows that eggs use dioxygen (R2) but fre shly laid eggs do not (R1). Thus,there are metabolic processes occurring during the embryo s tage that are not present at the beg-gining (fresh laid egg). The energy used in all metabolic pro cesses comes from reserves (As-"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.393,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "ight approximately proportional to cubed time [34] animals [34, 115]The von Bertalanffy growth rate of bacteria [48, pp.276-282]different species corrected for a common body yeasts [48, pp.276-282]temperature decreases almost proportional to animals [48, pp.276-282]maximum body lengthReproduction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78]but decreases with size inter-speciﬁcallyRespiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3967,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4111,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "the von Bertalanffy growth rate of bacteria [41, p.276-282]different species corrected for a common body yeasts [41, p.276-282]temperature decreases almost linearly with the animals [41, p.276-282]logarithm of the species maximum sizeG5 The logarithm of the von Bertalanffy growth rate for animals [19], [41, p.96]organisms of the same species at different foodavailabilities decreases linearly with ultimate lengthRespiration R1 Freshly laid eggs do not use dioxygen in signiﬁcant animals [6, 62, 67, 87]amountsR2 The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "W2323551895",
+          "title": "Peregrine falcon egg pollutants",
+          "doi": "10.1080/02772248.2015.1126717",
+          "year": "2016",
+          "distance": 0.3525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ship behavior. The average Hg concentration in the peregrine falcon eggs from 2009 is almost four times higher than this level. MeHg accounted for 82.5% of the Hg present in the eggs of 2009 and 2010. The cell test DR CALUX® for screening of dioxin-like activities can be used to detect not only the 29 regulated dioxin-like substances but also many other persistent organic pollutants with dioxin-like potencies, such as mixed halogenated dioxins/biphenyls. In our case, the results of bioanalytical screening methods showed no additional effect of other compounds with dioxin-like activity."
+        },
+        {
+          "document_id": "W2221237338",
+          "title": "A PROTOCOL FOR STORAGE AND LONG-DISTANCE SHIPMENT OF MEDITERRANEAN FRUIT FLY (DIPTERA: TEPHRITIDAE) EGGS. II. ASSESSMENT OF THE OPTIMAL TEMPERATURE AND SUBSTRATE FOR MALE-ONLY PRODUCTION",
+          "doi": "10.1653/0015-4040(2007)90[110:apfsal]2.0.co;2",
+          "year": "2007",
+          "distance": 0.358,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "concentration of dissolved oxygen in the substrate during storage and the quality and survival of the stored/transported eggs. Apparently low levels of dissolved oxygen reduce metabolic rates, allowing the storage period to be prolonged."
+        },
+        {
+          "document_id": "W2323551895",
+          "title": "Peregrine falcon egg pollutants",
+          "doi": "10.1080/02772248.2015.1126717",
+          "year": "2016",
+          "distance": 0.3836,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "case, the results of bioanalytical screening methods showed no additional effect of other compounds with dioxin-like activity. Ninety-three out of 177 analytes sought could be detected in the eggs. Chlorinated paraffins, organotin compounds, some pesticides that are still in use, and phthalic esters with the exception of traces of diethylhexyl phthalate could be excluded. All pollutants found in the eggs belong to substance classes banned by the Stockholm and Minamata Conventions."
+        },
+        {
+          "document_id": "W2150523676",
+          "title": "Changes in productivity and contaminants in bald eagles nesting along the lower Columbia River, USA",
+          "doi": "10.1897/03-621.1",
+          "year": "2005",
+          "distance": 0.385,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "use. Decreases in DDE (p = 0.022) and total PCBs (p = 0.0004) in eggs from older breeding areas occurred between study periods. Productivity was not correlated to contaminants, but DDE, PCBs, and dioxin-like chemicals exceeded estimated no-effect values. Some dioxin-like contaminants in eggs were correlated to nest location, with highest concentrations occurring toward the river's mouth where productivity was lowest."
+        },
+        {
+          "document_id": "W2122369768",
+          "title": "THE INFLUENCE OF LEACHATES FROM ROOTS OF MORNINGGLORY (IPOMOEA LACUNOSA), HEMP SESBANIA (SESBANIA EXALTATA), AND JOHNSONGRASS (SORGHUM HALEPENSE) ON REPRODUCTION OF ROTYLENCHULUS RENIFORMIS WITH EMPHASIS ON THE ECLOSION AND HATCHING OF EGGS",
+          "doi": "",
+          "year": "2008",
+          "distance": 0.4126,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ced into sterile 3-ml capacity wells. Eggs were enumerated and assigned to the appropriate developmental category over 10 days. Reductions in the development and hatch of eggs occurred with nonfiltered portions of leachates from all three weeds. Over four experiments, 91% of eggs in distilled water hatched by day 10. Significantly reduced hatch occurred with eggs in-cubated in leachates; averaging 59% for morningglory, 57% for hemp sesbania and 53% for johnsongrass. There were no differences in egg development and hatch in control and leachate samples that passed through a 0.45-pm filter."
+        },
+        {
+          "document_id": "W2046982159",
+          "title": "DDE, Selenium, Mercury, and White-Faced Ibis Reproduction at Carson Lake, Nevada",
+          "doi": "10.2307/3809606",
+          "year": "1989",
+          "distance": 0.4135,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "eding grounds, but concentrationsmore » in eggs did not reach levels sufficient to impact the production of 7-10 day old young. Potential Se and especially Hg accumulation during the remainder of the summer was high, but actual effects on growing young and adults remain unknown.« less"
+        },
+        {
+          "document_id": "W2326974289",
+          "title": "The Effect of a Purified Water-Soluble Fraction of a Fusarium roseum ‘Graminearum’ Culture on Reproduction of White Leghorn Females",
+          "doi": "10.3382/ps.0641077",
+          "year": "1985",
+          "distance": 0.4199,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "when these toxic diets were replaced with control diets. The majority of embryo mortality occurred during 5 days of incubation. The major mycotoxins responsible for reduced hatchability of fertile eggs appeared to be water soluble components of F. roseum 'Graminearum' and not trichothecenes or zearalenone."
+        },
+        {
+          "document_id": "W2083757201",
+          "title": "Non-Additive and Sex-Linked Genetic Effects on Egg Production in a Randombred Population ,",
+          "doi": "10.3382/ps.0400662",
+          "year": "1961",
+          "distance": 0.4218,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "of non-additive variance was larger for production for 365 days as compared with shorter production periods up to four months. Fuchs and Krueger (1957) reported that non-additive effects appeared to be important in egg production in single and three-way crosses but of questionable magnitude in pure strains. According to Jerome, King and Henderson (1956), . . ."
+        },
+        {
+          "document_id": "W2320260605",
+          "title": "The Biology and Ecology of Eulimnadia antlei Mackin (Conchostraca)",
+          "doi": "10.2307/3670065",
+          "year": "1972",
+          "distance": 0.4222,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "er. The eggs they deposited were removed with a pipet the next day and stored in screw cap vials of water from the same beaker. Eggs used for an experiment were taken from the same lot to insure uniformity and mixed: frequently during counting to insure randomness."
+        },
+        {
+          "document_id": "W2014126009",
+          "title": "Silencing of Maternal Heme-binding Protein Causes Embryonic Mitochondrial Dysfunction and Impairs Embryogenesis in the Blood Sucking Insect Rhodnius prolixus",
+          "doi": "10.1074/jbc.m113.504985",
+          "year": "2013",
+          "distance": 0.4258,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "heme-depleted eggs (white eggs). A lack of RHBP did not alter oocyte fecundation. However, produced white eggs were nonviable. Embryo development cellularization and vitellin yolk protein degradation, processes that normally occur in early stages of embryogenesis, were compromised in white eggs. Total cytochrome c content, cytochrome c oxidase activity, citrate synthase activity, and oxygen consumption, parameters that indicate mitochondrial function, were significantly reduced in white eggs compared with normal dark red eggs."
+        },
+        {
+          "document_id": "W2010259313",
+          "title": "Environmental Contaminants in Bald Eagles in the Columbia River Estuary",
+          "doi": "10.2307/3808994",
+          "year": "1993",
+          "distance": 0.4268,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ons (i.e., [ge]1.00 young/occupied site). DDE and PCB's had a deleterious effect on reproduction of bald eagles in the estuary. The role dioxins play in eagle reproduction remains unclear, but concentrations in eagle eggs were similar to those in laboratory studies on other species where dioxins adversely affected hatchability of eggs. Probable sourcemore » of these contaminants include dredged river sediments and hydroelectric dams, and the proper management of each may reduce the amount of contaminants released into the Columbia River estuary. 46 refs., 1 fig., 4 tabs.« less"
+        },
+        {
+          "document_id": "W2011192691",
+          "title": "Effect of Natural Antioxidant on Oxidative Stability of Eggs and Productive and Reproductive Performance of Laying Hens",
+          "doi": "10.3923/ijps.2008.134.150",
+          "year": "2008",
+          "distance": 0.4285,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "dehyede formation in egg yolk and had positive effect on oxidative stability of shell eggs storage at room temperature(16oC±2). Addition of 1.0% oregano, rosemary or 0.5% curcuma longa significantly increased the percentages of fertility. While 1.0% thyme or 0.5-1.0% curcuma longa significantly increased the percentages of hatchability of fresh eggs. It could be concluded from this study that herbs could be used as natural antioxidants during laying period."
+        }
+      ]
+    }
+  }
+}

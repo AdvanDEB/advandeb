@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import logging
 import re
+from datetime import datetime, timezone
 from typing import Any, Optional
 
 from advandeb_kb.database.arango_client import ArangoDatabase
@@ -322,13 +323,47 @@ class GraphExpansionService:
             }
         """
         try:
-            return self.db.aql(
+            rows = self.db.aql(
                 aql,
                 bind_vars={"terms": terms, "sf_top": sf_top, "limit_facts": limit_facts},
             )
         except Exception as exc:
             logger.warning("claim_consensus failed: %s", exc)
             return []
+        return [self._add_citation_signals(r) for r in rows]
+
+    @staticmethod
+    def _add_citation_signals(row: dict[str, Any]) -> dict[str, Any]:
+        """Annotate each consensus reference with retraction + citation-impact
+        ("zombie") signals from the OpenAlex backfill, and roll them up per
+        stylized fact.
+
+        Per reference: ``retracted``, ``citations_per_year`` (age-adjusted), and
+        ``low_impact`` (old + barely cited). ``citations_per_year`` is None when
+        the source document has not been enriched yet. Aggregates let the caller
+        flag claims propped up by retracted or fading literature.
+        """
+        this_year = datetime.now(timezone.utc).year
+
+        def annotate(item: dict[str, Any]) -> dict[str, Any]:
+            d = item.get("document") or {}
+            yr, cbc = d.get("year"), d.get("cited_by_count")
+            cpy = None
+            if isinstance(yr, (int, float)) and yr and isinstance(cbc, (int, float)):
+                cpy = round(cbc / max(1, this_year - int(yr) + 1), 2)
+            item["retracted"] = bool(d.get("is_retracted"))
+            item["citations_per_year"] = cpy
+            item["low_impact"] = bool(
+                cpy is not None and cpy < 1.0 and yr and (this_year - int(yr)) >= 8
+            )
+            return item
+
+        for key in ("supports", "opposes"):
+            items = [annotate(i) for i in (row.get(key) or [])]
+            row[key] = items
+            row[f"{key}_retracted"] = sum(1 for i in items if i["retracted"])
+            row[f"{key}_low_impact"] = sum(1 for i in items if i["low_impact"])
+        return row
 
     def find_by_taxon(
         self, name: str, max_names: int = 150, ranks: Optional[list[str]] = None

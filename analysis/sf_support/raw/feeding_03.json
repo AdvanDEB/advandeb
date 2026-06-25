@@ -1,0 +1,893 @@
+{
+  "sf_id": "feeding_03",
+  "category": "Feeding",
+  "statement": "At abundant food, feeding rate is at a maximum, independent of food density.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly corroborate the stylized fact. Snippet [8] explicitly states the fact verbatim, and snippets [2], [5], [10], [12], and [14] describe the hyperbolic (type II) functional response in which ingestion/feeding rate saturates to a maximum at high food density and becomes effectively independent of food concentration (e.g., the incipient limiting level in [2], the >80% saturation threshold in [12]). Snippets [3], [7], [9], [13] support the related scaled functional response framework where f approaches 1 at abundant food. The only contradicting note is [18], which discusses social/ratio-dependent feeding effects making feeding rate not solely a function of food density, but this is presented as an open extension rather than a refutation of the saturation principle. Overall the corpus strongly and consistently supports the fact."
+      },
+      "n_references": 11,
+      "references": {
+        "69b88001ecbd4702b29a4b03": {
+          "title": "Vano2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.30518805980682373
+        },
+        "69b87930ecbd4702b29a420e": {
+          "title": "Martin et al. - 2022 - Modelling the effects of variability in feeding ra.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.30592745542526245
+        },
+        "69b84741ec32c55db543079b": {
+          "title": "DiekMetz1984.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3180316686630249
+        },
+        "69b8476bec32c55db5430960": {
+          "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3296865224838257
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33110547065734863
+        },
+        "69b880d5ecbd4702b29a4c18": {
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33222800493240356
+        },
+        "69b88ef7ecbd4702b29a5e5e": {
+          "title": "KooyHeng2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33467787504196167
+        },
+        "69b84757ec32c55db5430936": {
+          "title": "Kooy88c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3362092971801758
+        },
+        "69b870afecbd4702b29a3697": {
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33959531784057617
+        },
+        "69b86756ecbd4702b29a2c46": {
+          "title": "MullNisb2000.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33992433547973633
+        },
+        "69b87048ecbd4702b29a35c2": {
+          "title": "Kooy2009a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3473225235939026
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2934,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "is of constant food density, implies an implicitmechanism for replacing food that has been eaten. A more realistic comparison ispossible on the basis of a constant food ﬂux, rather than a constant food density,assuming that food production is set by environmental conditions (such as lightand nutrient availability). Whenfood issupplied toa closed homogeneous volumewith individuals, where no harvesting through intrinsic or extrinsic causes occurs,the population will grow to a size where food input just matches the maintenanceneeds of the individuals. In this situation, individuals neither grow nor reproduce."
+        },
+        {
+          "document_id": "69b88001ecbd4702b29a4b03",
+          "title": "Vano2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3052,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ht than inadults, and that the dependency of maximum ingestion rate(Imax; at unlimited food conditions) on length can be approx-imated by Eq. (2)(Table 1 ). This makes maximum food intaketo increase faster than body weight in juveniles, but scalesit to surface area rather than to body weight in adults.•Ingestion as a function of food concentration ( F)Ingestion rate increases proportional to food availabilityuntil a saturation-threshold is reached (incipient limit-ing level; ILL) above which it becomes constant ( Lampert,1987 ). Although ingestion rates can strongly depend on the"
+        },
+        {
+          "document_id": "69b87930ecbd4702b29a420e",
+          "title": "Martin et al. - 2022 - Modelling the effects of variability in feeding ra.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3059,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "es the density of food in the environment (g(food) ×m\u00002) and H (g(food) ×m\u00002) is the half-saturation food density at which food consumption rate, JX (g(food) ×day\u00001) is half of its maximum. When food is available ad libitum, X∞ and therefore f1 (Van der Meer, 2006; Kooijman et al., 2008; Jager et al., 2013 ). Using food availability as a proxy for observations of food consumption in this way relies on the assumption that, when provided with as much food as they can eat, animals eat as much as they can. In other studies, f has been fixed to one during calibration and then"
+        },
+        {
+          "document_id": "69b89b26ecbd4702b29a6cb5",
+          "title": "Haberle et al. - 2023 - Fish condition as an indicator of stock status In.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3144,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "without the need for ad- hoc assumptions and additional parameters.Other density- dependence mechanisms could, however, also be active. For example, density- dependent mortality (Rose et al., 2001 ; Stige et al., 2019 ) or cannibalism (Canales et al., 2020 ; Ricard et al., 2016 ) could limit population size significantly below the one determined by total food availability. If factors other than food con -trol population growth, the population might never reach the state where competition for food is strong enough to impact individual energy status and, consequently, individual traits such as condition"
+        },
+        {
+          "document_id": "69b84741ec32c55db543079b",
+          "title": "DiekMetz1984.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.318,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "will denote weight, .L - ,1/3 l.rrgth and x fooddens ity .i{e start r¡ith indivídual growth. Tt is assumed that ingestion equalst¡t(x).Lz = ur(*)r2l3 with f (\") = #. The basís for this assumption isthat the maximum rate of food intake of an animal should equal the maximumdigestion rate which scales with the surface area of the digestive apparatus.Moreover, for filter feeders (and also for many other feeding Lypes) thefood intake at low food densities is proportíonal to food density times thesurface area of the food catching apparatus. A hyperbolic relation betlnreen"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3199,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "e instead of two ( Fig. S1.8.B ). Density -dependent regulation. Population density autoregulates through competition for food resources. This pro cedure relies on the monitoring of population density in relation to the carrying capacity and allows stabilizing the model. The model calculates the current population density and quantifies the competition effect on food availability depending on how far from the carrying capacity (K) the population density (P) is, and updates food availability in accordance. It is considered that at each timestep, a certain amount of food is available in the environment (f env)"
+        },
+        {
+          "document_id": "69b8476bec32c55db5430960",
+          "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3297,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "hysiological maximum boundbecause an animal cannot assimilate an unlimited amount offood even if available. Hence, Qis given by:Q¼Qmf; ð4Þwhere fis a functional response that is dependent on theresource density representing a non-dimensional fraction,bounded between 0 and 1, of the maximum metabolic limitQmforQ.We consider the classical consumer –resource concept of thefunctional response fbetween the consumption rate (i.e.amount of food eaten per unit time) and food density (Solomon1949) to mechanistically link foraging and assimilation (Visser2007; Pawar et al. 2012). For simplicity, we deﬁne this relation-"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3311,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "produce, grow and survive for some time\u000fAt abundant food, the feeding rate is at some maximum, independent of food densityGrowth\u000fMany species continue to grow after reproduction has started\u000fGrowth of isomorphic organisms at abundant food is well described by the von Bertalan y growthcurve\u000fFor di erent constant food levels the inverse von Bertalan y growth rate increases linearly withultimate length\u000fThe von Bertalan y growth rate of di erent species decreases almost linearly with the maximumbody length\u000fFetuses increase in weight approximately proportional to cubed timeReproduction"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3322,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "is sectionassume that food density is constant; it is also conceptuallyimportant to see what extra information on energetics canbe gained from comparison of food densities.Although steps 1 to 5 use values of the scaled functionalresponse, this does not necessarily involve measurements onfeeding, since the scaled functional response equals thescaled ultimate length, f¼LN/Lm, for instance. To obtainthe maximum length, we need observations at abundantfood. Steps 4 and 5 compare feeding, growth and re-production at several food levels. For supply systems scaledfunctional responses might be chosen rather far apart from"
+        },
+        {
+          "document_id": "69b88ef7ecbd4702b29a5e5e",
+          "title": "KooyHeng2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3347,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "conservation of time to quantify feeding rate as a function of food density in the environment. In its simplest formulation the maximum feeding rate follows from the time required to process food items; this not only includes the mechanical handling but also digestion and further metabolic transformation to reserve(s). The switching between searching and handling causes food intake to depend hyperbolically on the rate of encounters with food items under a wide range of “details” for the various sub-processes. From a more abstract point of view the feeding process has a lot in common"
+        },
+        {
+          "document_id": "69b847b7ec32c55db5430a0b",
+          "title": "Diekmann e.a. - 2010 - Daphnia revisited local stability and bifurcation.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.336,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "the size at birth of individuals(ii) g(ξ,S), the rate of growth of an individual, as a function of size ξand foodconcentration S(iii)β(ξ, S), the probability per unit of time of giving birth, as a function of size ξand food concentration S(iv)μ(ξ, S), the probability per unit of time of dying, as a function of size ξandfood concentration S(v)γ(ξ, S), the rate of food consumption of an individual, as a function of size ξand food concentration S(vi) the dynamics of the resource Sin the absence of consumersBased on these ingredients, one may now either start with a ﬁnite number of individ-"
+        },
+        {
+          "document_id": "69b84757ec32c55db5430936",
+          "title": "Kooy88c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3362,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "t at constant food density, but that the parameters of thevon Bertalanffy growth curve can now be interpreted in terms of energyflows. This allows a comparison of species.The requirement that food density is constant may be relaxed iffood is abundant in view of the hyperbolic functional response. As longas the food density is larger than 4 times the saturation constant(defined as the food density at which food intake is half the maximumvalue), food intake is larger than 80% of the maximum intake, whichmakes it practically indistinguishable from constant.2.4 Size measures"
+        },
+        {
+          "document_id": "69b870afecbd4702b29a3697",
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3396,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "mains constant, the growing biomass will converge to a constantchemical composition. This means that the reserve density remainsconstant along the growth process. If food is abundant, organisms canreach the maximum reserve density. The reserve density for growingorganisms at any constant food level is proportional to the scaled func-tion response, implying that the higher the constant food level is, thehigher the reserve density at equilibrium will be. While nutrient uptakeis a function of environmental concentrations (in autotrophs) or foodsupply (heterotrophs), the mobilization of reserves (catabolic power)"
+        },
+        {
+          "document_id": "69b86756ecbd4702b29a2c46",
+          "title": "MullNisb2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3399,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "s, which may feed and reproduce.\u000fThe rate of food uptake is proportional to the surface area of an organism, and is a hyperbolicfunction of the food density (type II functional response).\u000fEnergyassimilatedfromfoodbecomespartofthereserves. Thedynamicsoftheenergyreservedensity are ﬁrst order, with a rate that is inversely proportional to the volumetric length of anorganism.\u000fA ﬁxed fraction of the energy released from the reserves is commited to somatic maintenanceand growth; the remainder is used for maturity maintenance, and development or reproduction."
+        },
+        {
+          "document_id": "69b87ddaecbd4702b29a484d",
+          "title": "Augu2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.345,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "nd Discussion 333.2.3 Stochastic feeding moduleSuppose that food density, in terms of particles per volume, is constant, such asin a polyculture (e.g. Best et al., 2010). We simplify the system by consideringall food items to be of constant chemical composition with mass MX(\u0016mol).Each sh is either searching for food (i.e. f= 0) or handling food (i.e. f= 1).Time interval spent handling food this inversely proportional to squared length(of the individual), so larger individuals take less time to handle a food item.f_JXAmgis the surface-area speci c maximum intake rate (in C-mol food per"
+        },
+        {
+          "document_id": "69b8816fecbd4702b29a4d5e",
+          "title": "Accolla et al. - 2022 - Modeling Pesticide Effects on Multiple Threatened .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3452,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ing population size structure, especiallyin ﬁsh [ 70]. However, in our model, organisms do not compete for food without exposurebecause we did not ﬁnd evidence in the literature of density-dependent food limitation.Therefore, we looked at the role played by another form of density dependence, sinceﬁsh populations can also be affected by size-dependent cannibalistic interactions betweendifferent age cohorts [ 70,71]. Because we aimed to achieve stable population dynamics,density dependence was calibrated differently for each species, as it strongly depended"
+        },
+        {
+          "document_id": "69b87048ecbd4702b29a35c2",
+          "title": "Kooy2009a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3465,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "it is much larger, the individuals will starve to death.We have two different spatial units, that of the individual (in {h·Xm},Lband LX) and of the environment (in X,Kand Ls), here chosen as cmand m, respectively. Speed is primarily controlled by the saturationconstant K. The social interaction increases with decreasing numberof food particles per individual. The variance increases with foodlength LX, but decreases in time because of the smoothing capacity ofthe individual increases with size (the catabolic ﬂux is inverselyproportional to a length measure.We have 8 parameters X#,K#,Lb,LX,{h·Xm},k·M,g,μ·for feeding and"
+        },
+        {
+          "document_id": "69b87048ecbd4702b29a35c2",
+          "title": "Kooy2009a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3473,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "be realistic,but serves well for the point I wanted to make.Even at intimidation length zero, the ﬁsh interact by increasing thejumping rate of food particles, which decreases the feeding rate. Sofeeding rate is no longer a function of food density only, and thismechanisms has the potential of enhancing co-existence of more thanone species on a single food source. Yet it is an open question how strongthe effect actually is. This links up with the revived discussion that isinitiated by the work of Arditi and Ginzburg about feeding being densitydependent ( Akçakaya et al., 1995; Harmand and Godon, 2006 )."
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets directly addresses the functional-response claim that feeding rate saturates to a maximum independent of food density at abundant food. The corpus is dominated by population ecology, density-dependence, foraging behavior, and reproduction topics. A few snippets touch tangentially on relative food availability (snippet 1, theoretical maximum consumption rate) or saturation/satiation effects (snippets 10/15, animals being more selective when food is common), but none provides explicit evidence affirming or refuting a saturating maximum feeding rate. Snippet 1's reference to a 'theoretical maximum consumption rate' is the closest conceptual link but does not test the independence-from-density claim. Therefore evidence is weak/sparse with no clear support or contradiction, leaving the corpus essentially uninformative on this stylized fact."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W2341247010",
+          "title": "Bioenergetic Responses by Pacific Salmon to Climate and Ecosystem V ariation",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.2941,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "species); 2) feeding rate as a proportion of the theoretical maximum consumption rate, a measure of relative food availability; and 3) growth efficiency, a measure of how much food was required to achieve the observed growth rate."
+        },
+        {
+          "document_id": "W2146051138",
+          "title": "INDIVIDUAL DIFFERENCES BETWEEN ANIMALS AND THE NATURAL REGULATION OF THEIR NUMBERS",
+          "doi": "",
+          "year": "1978",
+          "distance": 0.3356,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "a constant inflow of food, animal density is lower and food density is higher when emigration occurs, than without emigration. (4) Regulation of population density by emigration allows for the adjustment of this density to the amount of food, in such a way that mortality is not directly due to food shortage but to other agents (predators, adverse weather conditions, etc.). (5) Animals with overlapping generations and cyclic changes in population density can emigrate at lower density level, than that determined by food supply at any given point in time."
+        },
+        {
+          "document_id": "W2332537321",
+          "title": "Some effects of varying calcium and phosphorus intake on the estrus cycle and reproduction in the rat",
+          "doi": "10.3733/hilg.v05n05p101",
+          "year": "1930",
+          "distance": 0.3582,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "be complete in all dietary essentials except for the limited period of time during which an animal may draw upon its reserves. The same factors are also involved in the rate of growth and of fattening on range feed of our food animals. Growth, fattening, and rate of reproduction vary greatly in different sections. The quantity and quality of the natural feed supply depends to a considerable extent upon the composition of the soil on which it is grown."
+        },
+        {
+          "document_id": "W2076182211",
+          "title": "Effects of Multiple, Predator‐Induced Behaviors on Short‐term Producer‐Grazer Dynamics in Open Systems",
+          "doi": "10.1086/303390",
+          "year": "2000",
+          "distance": 0.3763,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ying capacity) affect the dynamics of producers and grazers at temporal scales shorter than consumer and predator reproduction. The model predicts that producer biomass increases and that both the density of foraging grazers and the feeding rate of predators decrease with predator density. These predictions hold although total (foraging + nonforaging) grazer density may actually increase with predator density. The latter will occur whenever the benefit of higher resource density outweighs the increased risk of predation."
+        },
+        {
+          "document_id": "W1978259688",
+          "title": "Evolutionarily stable foraging speeds in feeding scrambles: a model and an experimental test",
+          "doi": "10.1098/rspb.1995.0091",
+          "year": "1995",
+          "distance": 0.3774,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "mpetitor density, is described. An individual can increase speed (at some energetic cost) to gain a greater share of resources. The predictions are that if food input per competitor is constant (density independence), the ess foraging speed should increase with density, but if food input per patch is constant (density dependence), then the ESS foraging speed should decrease with density. The predictions of this model are tested in an experiment using different densities of cichlid fish, Aequidens portalegrensis, scrambling for food at a discrete resource patch."
+        },
+        {
+          "document_id": "W2735179178",
+          "title": "Influence of density‐dependent competition on foraging and migratory behavior of a subtropical colonial seabird",
+          "doi": "10.1002/ece3.3216",
+          "year": "2017",
+          "distance": 0.3778,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Density‐dependent competition for food resources influences both foraging ecology and reproduction in a variety of animals."
+        },
+        {
+          "document_id": "W2125343515",
+          "title": "Group size, energy budgets, and population dynamic complexity",
+          "doi": "",
+          "year": "2006",
+          "distance": 0.379,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "y with population density; social interaction within groups amplifies or attenuates the degree of density-dependent starvation. Mortality from predation increases with forager population density. Individuals surviving both predation and starvation go on to breed. Combining mortality and reproduction yields a generalized Ricker map for the population dynamics. Ranges of key variables: The rate at which an individual finds food clumps decreases with, does not depend on, and then increases with group size. The variance in the food energy per clump is less than, equal to, and then exceeds mean clump size."
+        },
+        {
+          "document_id": "W3087565753",
+          "title": "Resource pulses increase the diversity of successful competitors in a multi‐species stream fish assemblage",
+          "doi": "10.1002/ecs2.3211",
+          "year": "2020",
+          "distance": 0.386,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "Abstract Food resources are often patchily distributed through space and time and are classified as resource pulses when hyperabundant. Resource pulses can benefit growth, reproduction, and abundance of various consumers. Yet, it is relatively unknown how such resources are partitioned among competing consumers and how this is influenced by the magnitude of the pulse."
+        },
+        {
+          "document_id": "W2165007446",
+          "title": "Recruitment Limitation as a Consequence of Natural Selection for Use of Restricted Feeding Habitats and Predation Risk Taking by Juvenile Fishes",
+          "doi": "10.1139/f93-229",
+          "year": "1993",
+          "distance": 0.3924,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "viable sizes for later survival and reproduction plus an additional time inversely proportional to the predation risk per time. Combining the food availability and optimal foraging time predictions leads to stock–recruitment patterns similar to classic Beverton–Holt and Ricker forms, depending on how food organisms respond over time. Very strong density-dependent mortality can occur even without noticeable changes in juvenile growth rates or average food densities over large spatial scales, but intraspecific competitive effects should always be evident through density-dependent changes in foraging time."
+        },
+        {
+          "document_id": "W2152552739",
+          "title": "The Role of Time and Energy in Food Preference",
+          "doi": "10.1086/282455",
+          "year": "1966",
+          "distance": 0.3931,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "A model which relates optimal food preference relationships and caloric yield per unit time of potential food sources is derived. It is suggested, on the basis of this model, that: 1) Food preferences can be adequately described only if a number of factors other than relative frequencies in the diet and relative abundances of the food types are known. 2) Animals should be more selective in their choice of foods when satiated or when food is common, more indiscriminate when starved or when food is scarce."
+        },
+        {
+          "document_id": "W1878573721",
+          "title": "Temporally structured density-dependence and population management",
+          "doi": "",
+          "year": "1999",
+          "distance": 0.4053,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "density-dependent mortality. Such an ordering of events in time may have profound influences on the dynamics of the population. The extra mortality due to harvesting may either be additive or compensatory depending on the strength of the density-dependence and the ordering of events. Population stability is also strongly affected by the temporal structure of density-dependence. Moreover, the yield and the (unconstrained) optimal harvest rate will vary depending on when harvesting occurs in the annual cycle."
+        },
+        {
+          "document_id": "W2005706163",
+          "title": "Density-Dependent Processes in the Life History of Fishes: Evidence from Laboratory Populations of Zebrafish Danio rerio",
+          "doi": "10.1371/journal.pone.0037550",
+          "year": "2012",
+          "distance": 0.4077,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "dence in mortality was strong during the early juvenile phase but declined thereafter and virtually ceased prior to maturation. Provision of feed in proportion to individual requirements (easing resource limitation) removed density dependence in growth and substantially reduced density dependence in mortality, thus indicating that 'bottom-up' effects act on growth as well as mortality, but most strongly on growth. Both growth and mortality played an important role in population regulation, with density-dependent growth having the greater impact on population biomass while mortality had the greatest impact on numbers."
+        },
+        {
+          "document_id": "W2146051138",
+          "title": "INDIVIDUAL DIFFERENCES BETWEEN ANIMALS AND THE NATURAL REGULATION OF THEIR NUMBERS",
+          "doi": "",
+          "year": "1978",
+          "distance": 0.4079,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "sly been taken into account by theoretical ecologists, although it is of basic importance for regulation of population density. (2) Unequal resource partitioning increases the stability of a confined population and allows emigration of some population members into suboptimal and hostile areas to evolve by individual selection. (3) In a local habitat supplied by a constant inflow of food, animal density is lower and food density is higher when emigration occurs, than without emigration."
+        },
+        {
+          "document_id": "W3120459183",
+          "title": "The Pandemic Health Crisis and Its Implications for Food and Nutritional Security in Latin America",
+          "doi": "10.1159/000512958",
+          "year": "2020",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "routines, implying a reorganization of their vital structure and the necessary activities for its maintenance and reproduction. The restriction of circulation with the requirement to prepare food inside the home imposes food planning with options with some degree of industrial processing. In the diet of isolation, among the likely changes in food consumption models, there will certainly be an increase in ultraprocessed foods, mainly because containment measures have altered the dynamics of circulation and local trade of fresh products."
+        },
+        {
+          "document_id": "W2152552739",
+          "title": "The Role of Time and Energy in Food Preference",
+          "doi": "10.1086/282455",
+          "year": "1966",
+          "distance": 0.4104,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "lective in their choice of foods when satiated or when food is common, more indiscriminate when starved or when food is scarce. 3) Animals may eat one food type with greater frequency, relative to its abundance, than another even if the other food is richer and more efficiently exploited. This occurs in situations of high relative abundance of the first food type. 4) The extent to which predators tend to pass by potential food items may be used to evaluate the role of food in the population limitation of a predator species. 5) Food preferences appear to change readily and appropriately to changes in the environment."
+        },
+        {
+          "document_id": "W2004747217",
+          "title": "Effect of Restricted Feeding During the Growing Period on Reproductive Performance of Large Type White Turkeys",
+          "doi": "10.3382/ps.0420008",
+          "year": "1963",
+          "distance": 0.4176,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "CONSIDERABLE interest in recent years has centered around feeding systems which bring about a decrease in the plane of nutrition either through the restriction of a “complete” ration or the full feeding of an “incomplete” ration at some interval during the growing period."
+        },
+        {
+          "document_id": "W3008022503",
+          "title": "Local conspecific density does not influence reproductive output in a secondary cavity-nesting songbird",
+          "doi": "10.1093/auk/ukaa002",
+          "year": "2020",
+          "distance": 0.4187,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "objective was to test for effects of food limitation, as mediated by conspecific local densities, on measures of productivity. We monitored breeding pairs and recorded the total number of fledglings produced along with several components of reproductive output (clutch size, hatching success, nestling survival, and probability of attempting a second brood), rates of nestling provisioning, and nestling body condition prior to fledging. We predicted that if the availability of food were affected by local densities, then one or more of these parameters measuring reproduction would be affected negatively."
+        },
+        {
+          "document_id": "W2905664392",
+          "title": "Feeding in Parrotfishes: The Influence of Species, Body Size, and Temperature",
+          "doi": "10.1201/9781315118079-6",
+          "year": "2018",
+          "distance": 0.4192,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Feeding, the process by which animals acquire nutrients, and hence energy for maintenance, growth and reproduction, is central to the health of individuals and populations. Indeed, variation in nutritional quality and quantity of diets are one of the most important determinants of animal fitness (Sterner and Elser 2002), and has led to several theories that relate the availability and/or quality of dietary resources to the foraging decisions of animals (e.g., Optimal Foraging Theory; Smith 1978)."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly affirm the stylized fact: snippet 8 states it almost verbatim ('At abundant food, the feeding rate is at some maximum, independent of food density'), and snippets 2, 5, 7, 10, and 12 describe the hyperbolic/saturating functional response in which ingestion increases with food density up to an incipient limiting level and then becomes constant at saturation. Snippet 12 explicitly explains that above ~4x the saturation constant intake is practically indistinguishable from the constant maximum, and snippets 3 and 9 invoke f=1 (scaled functional response of one) at ad libitum food. No snippets contradict the fact; the many density-dependence/ecology snippets (4, 16-24) are off-topic and address population regulation rather than the individual feeding-rate saturation. The evidence is strong and consistent."
+      },
+      "n_references": 8,
+      "references": {
+        "69b88001ecbd4702b29a4b03": {
+          "title": "Vano2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.30518805980682373
+        },
+        "69b87930ecbd4702b29a420e": {
+          "title": "Martin et al. - 2022 - Modelling the effects of variability in feeding ra.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.30592745542526245
+        },
+        "69b84741ec32c55db543079b": {
+          "title": "DiekMetz1984.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3180316686630249
+        },
+        "69b8476bec32c55db5430960": {
+          "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3296865224838257
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33110547065734863
+        },
+        "69b880d5ecbd4702b29a4c18": {
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33222800493240356
+        },
+        "69b88ef7ecbd4702b29a5e5e": {
+          "title": "KooyHeng2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33467787504196167
+        },
+        "69b84757ec32c55db5430936": {
+          "title": "Kooy88c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3362092971801758
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2934,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "is of constant food density, implies an implicitmechanism for replacing food that has been eaten. A more realistic comparison ispossible on the basis of a constant food ﬂux, rather than a constant food density,assuming that food production is set by environmental conditions (such as lightand nutrient availability). Whenfood issupplied toa closed homogeneous volumewith individuals, where no harvesting through intrinsic or extrinsic causes occurs,the population will grow to a size where food input just matches the maintenanceneeds of the individuals. In this situation, individuals neither grow nor reproduce."
+        },
+        {
+          "document_id": "69b88001ecbd4702b29a4b03",
+          "title": "Vano2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3052,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ht than inadults, and that the dependency of maximum ingestion rate(Imax; at unlimited food conditions) on length can be approx-imated by Eq. (2)(Table 1 ). This makes maximum food intaketo increase faster than body weight in juveniles, but scalesit to surface area rather than to body weight in adults.•Ingestion as a function of food concentration ( F)Ingestion rate increases proportional to food availabilityuntil a saturation-threshold is reached (incipient limit-ing level; ILL) above which it becomes constant ( Lampert,1987 ). Although ingestion rates can strongly depend on the"
+        },
+        {
+          "document_id": "69b87930ecbd4702b29a420e",
+          "title": "Martin et al. - 2022 - Modelling the effects of variability in feeding ra.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3059,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "es the density of food in the environment (g(food) ×m\u00002) and H (g(food) ×m\u00002) is the half-saturation food density at which food consumption rate, JX (g(food) ×day\u00001) is half of its maximum. When food is available ad libitum, X∞ and therefore f1 (Van der Meer, 2006; Kooijman et al., 2008; Jager et al., 2013 ). Using food availability as a proxy for observations of food consumption in this way relies on the assumption that, when provided with as much food as they can eat, animals eat as much as they can. In other studies, f has been fixed to one during calibration and then"
+        },
+        {
+          "document_id": "69b89b26ecbd4702b29a6cb5",
+          "title": "Haberle et al. - 2023 - Fish condition as an indicator of stock status In.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3144,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "without the need for ad- hoc assumptions and additional parameters.Other density- dependence mechanisms could, however, also be active. For example, density- dependent mortality (Rose et al., 2001 ; Stige et al., 2019 ) or cannibalism (Canales et al., 2020 ; Ricard et al., 2016 ) could limit population size significantly below the one determined by total food availability. If factors other than food con -trol population growth, the population might never reach the state where competition for food is strong enough to impact individual energy status and, consequently, individual traits such as condition"
+        },
+        {
+          "document_id": "69b84741ec32c55db543079b",
+          "title": "DiekMetz1984.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.318,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "will denote weight, .L - ,1/3 l.rrgth and x fooddens ity .i{e start r¡ith indivídual growth. Tt is assumed that ingestion equalst¡t(x).Lz = ur(*)r2l3 with f (\") = #. The basís for this assumption isthat the maximum rate of food intake of an animal should equal the maximumdigestion rate which scales with the surface area of the digestive apparatus.Moreover, for filter feeders (and also for many other feeding Lypes) thefood intake at low food densities is proportíonal to food density times thesurface area of the food catching apparatus. A hyperbolic relation betlnreen"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3199,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "e instead of two ( Fig. S1.8.B ). Density -dependent regulation. Population density autoregulates through competition for food resources. This pro cedure relies on the monitoring of population density in relation to the carrying capacity and allows stabilizing the model. The model calculates the current population density and quantifies the competition effect on food availability depending on how far from the carrying capacity (K) the population density (P) is, and updates food availability in accordance. It is considered that at each timestep, a certain amount of food is available in the environment (f env)"
+        },
+        {
+          "document_id": "69b8476bec32c55db5430960",
+          "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3297,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "hysiological maximum boundbecause an animal cannot assimilate an unlimited amount offood even if available. Hence, Qis given by:Q¼Qmf; ð4Þwhere fis a functional response that is dependent on theresource density representing a non-dimensional fraction,bounded between 0 and 1, of the maximum metabolic limitQmforQ.We consider the classical consumer –resource concept of thefunctional response fbetween the consumption rate (i.e.amount of food eaten per unit time) and food density (Solomon1949) to mechanistically link foraging and assimilation (Visser2007; Pawar et al. 2012). For simplicity, we deﬁne this relation-"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3311,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "produce, grow and survive for some time\u000fAt abundant food, the feeding rate is at some maximum, independent of food densityGrowth\u000fMany species continue to grow after reproduction has started\u000fGrowth of isomorphic organisms at abundant food is well described by the von Bertalan y growthcurve\u000fFor di erent constant food levels the inverse von Bertalan y growth rate increases linearly withultimate length\u000fThe von Bertalan y growth rate of di erent species decreases almost linearly with the maximumbody length\u000fFetuses increase in weight approximately proportional to cubed timeReproduction"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3322,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "is sectionassume that food density is constant; it is also conceptuallyimportant to see what extra information on energetics canbe gained from comparison of food densities.Although steps 1 to 5 use values of the scaled functionalresponse, this does not necessarily involve measurements onfeeding, since the scaled functional response equals thescaled ultimate length, f¼LN/Lm, for instance. To obtainthe maximum length, we need observations at abundantfood. Steps 4 and 5 compare feeding, growth and re-production at several food levels. For supply systems scaledfunctional responses might be chosen rather far apart from"
+        },
+        {
+          "document_id": "69b88ef7ecbd4702b29a5e5e",
+          "title": "KooyHeng2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3347,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "conservation of time to quantify feeding rate as a function of food density in the environment. In its simplest formulation the maximum feeding rate follows from the time required to process food items; this not only includes the mechanical handling but also digestion and further metabolic transformation to reserve(s). The switching between searching and handling causes food intake to depend hyperbolically on the rate of encounters with food items under a wide range of “details” for the various sub-processes. From a more abstract point of view the feeding process has a lot in common"
+        },
+        {
+          "document_id": "69b847b7ec32c55db5430a0b",
+          "title": "Diekmann e.a. - 2010 - Daphnia revisited local stability and bifurcation.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.336,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "the size at birth of individuals(ii) g(ξ,S), the rate of growth of an individual, as a function of size ξand foodconcentration S(iii)β(ξ, S), the probability per unit of time of giving birth, as a function of size ξand food concentration S(iv)μ(ξ, S), the probability per unit of time of dying, as a function of size ξandfood concentration S(v)γ(ξ, S), the rate of food consumption of an individual, as a function of size ξand food concentration S(vi) the dynamics of the resource Sin the absence of consumersBased on these ingredients, one may now either start with a ﬁnite number of individ-"
+        },
+        {
+          "document_id": "69b84757ec32c55db5430936",
+          "title": "Kooy88c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3362,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "t at constant food density, but that the parameters of thevon Bertalanffy growth curve can now be interpreted in terms of energyflows. This allows a comparison of species.The requirement that food density is constant may be relaxed iffood is abundant in view of the hyperbolic functional response. As longas the food density is larger than 4 times the saturation constant(defined as the food density at which food intake is half the maximumvalue), food intake is larger than 80% of the maximum intake, whichmakes it practically indistinguishable from constant.2.4 Size measures"
+        },
+        {
+          "document_id": "W2341247010",
+          "title": "Bioenergetic Responses by Pacific Salmon to Climate and Ecosystem V ariation",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.2941,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "species); 2) feeding rate as a proportion of the theoretical maximum consumption rate, a measure of relative food availability; and 3) growth efficiency, a measure of how much food was required to achieve the observed growth rate."
+        },
+        {
+          "document_id": "W2146051138",
+          "title": "INDIVIDUAL DIFFERENCES BETWEEN ANIMALS AND THE NATURAL REGULATION OF THEIR NUMBERS",
+          "doi": "",
+          "year": "1978",
+          "distance": 0.3356,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "a constant inflow of food, animal density is lower and food density is higher when emigration occurs, than without emigration. (4) Regulation of population density by emigration allows for the adjustment of this density to the amount of food, in such a way that mortality is not directly due to food shortage but to other agents (predators, adverse weather conditions, etc.). (5) Animals with overlapping generations and cyclic changes in population density can emigrate at lower density level, than that determined by food supply at any given point in time."
+        },
+        {
+          "document_id": "W2332537321",
+          "title": "Some effects of varying calcium and phosphorus intake on the estrus cycle and reproduction in the rat",
+          "doi": "10.3733/hilg.v05n05p101",
+          "year": "1930",
+          "distance": 0.3582,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "be complete in all dietary essentials except for the limited period of time during which an animal may draw upon its reserves. The same factors are also involved in the rate of growth and of fattening on range feed of our food animals. Growth, fattening, and rate of reproduction vary greatly in different sections. The quantity and quality of the natural feed supply depends to a considerable extent upon the composition of the soil on which it is grown."
+        },
+        {
+          "document_id": "W2076182211",
+          "title": "Effects of Multiple, Predator‐Induced Behaviors on Short‐term Producer‐Grazer Dynamics in Open Systems",
+          "doi": "10.1086/303390",
+          "year": "2000",
+          "distance": 0.3763,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ying capacity) affect the dynamics of producers and grazers at temporal scales shorter than consumer and predator reproduction. The model predicts that producer biomass increases and that both the density of foraging grazers and the feeding rate of predators decrease with predator density. These predictions hold although total (foraging + nonforaging) grazer density may actually increase with predator density. The latter will occur whenever the benefit of higher resource density outweighs the increased risk of predation."
+        },
+        {
+          "document_id": "W1978259688",
+          "title": "Evolutionarily stable foraging speeds in feeding scrambles: a model and an experimental test",
+          "doi": "10.1098/rspb.1995.0091",
+          "year": "1995",
+          "distance": 0.3774,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "mpetitor density, is described. An individual can increase speed (at some energetic cost) to gain a greater share of resources. The predictions are that if food input per competitor is constant (density independence), the ess foraging speed should increase with density, but if food input per patch is constant (density dependence), then the ESS foraging speed should decrease with density. The predictions of this model are tested in an experiment using different densities of cichlid fish, Aequidens portalegrensis, scrambling for food at a discrete resource patch."
+        },
+        {
+          "document_id": "W2735179178",
+          "title": "Influence of density‐dependent competition on foraging and migratory behavior of a subtropical colonial seabird",
+          "doi": "10.1002/ece3.3216",
+          "year": "2017",
+          "distance": 0.3778,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Density‐dependent competition for food resources influences both foraging ecology and reproduction in a variety of animals."
+        },
+        {
+          "document_id": "W2125343515",
+          "title": "Group size, energy budgets, and population dynamic complexity",
+          "doi": "",
+          "year": "2006",
+          "distance": 0.379,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "y with population density; social interaction within groups amplifies or attenuates the degree of density-dependent starvation. Mortality from predation increases with forager population density. Individuals surviving both predation and starvation go on to breed. Combining mortality and reproduction yields a generalized Ricker map for the population dynamics. Ranges of key variables: The rate at which an individual finds food clumps decreases with, does not depend on, and then increases with group size. The variance in the food energy per clump is less than, equal to, and then exceeds mean clump size."
+        },
+        {
+          "document_id": "W3087565753",
+          "title": "Resource pulses increase the diversity of successful competitors in a multi‐species stream fish assemblage",
+          "doi": "10.1002/ecs2.3211",
+          "year": "2020",
+          "distance": 0.386,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Food resources are often patchily distributed through space and time and are classified as resource pulses when hyperabundant. Resource pulses can benefit growth, reproduction, and abundance of various consumers. Yet, it is relatively unknown how such resources are partitioned among competing consumers and how this is influenced by the magnitude of the pulse."
+        },
+        {
+          "document_id": "W2165007446",
+          "title": "Recruitment Limitation as a Consequence of Natural Selection for Use of Restricted Feeding Habitats and Predation Risk Taking by Juvenile Fishes",
+          "doi": "10.1139/f93-229",
+          "year": "1993",
+          "distance": 0.3924,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "viable sizes for later survival and reproduction plus an additional time inversely proportional to the predation risk per time. Combining the food availability and optimal foraging time predictions leads to stock–recruitment patterns similar to classic Beverton–Holt and Ricker forms, depending on how food organisms respond over time. Very strong density-dependent mortality can occur even without noticeable changes in juvenile growth rates or average food densities over large spatial scales, but intraspecific competitive effects should always be evident through density-dependent changes in foraging time."
+        },
+        {
+          "document_id": "W2152552739",
+          "title": "The Role of Time and Energy in Food Preference",
+          "doi": "10.1086/282455",
+          "year": "1966",
+          "distance": 0.3931,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "A model which relates optimal food preference relationships and caloric yield per unit time of potential food sources is derived. It is suggested, on the basis of this model, that: 1) Food preferences can be adequately described only if a number of factors other than relative frequencies in the diet and relative abundances of the food types are known. 2) Animals should be more selective in their choice of foods when satiated or when food is common, more indiscriminate when starved or when food is scarce."
+        },
+        {
+          "document_id": "W1878573721",
+          "title": "Temporally structured density-dependence and population management",
+          "doi": "",
+          "year": "1999",
+          "distance": 0.4053,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "density-dependent mortality. Such an ordering of events in time may have profound influences on the dynamics of the population. The extra mortality due to harvesting may either be additive or compensatory depending on the strength of the density-dependence and the ordering of events. Population stability is also strongly affected by the temporal structure of density-dependence. Moreover, the yield and the (unconstrained) optimal harvest rate will vary depending on when harvesting occurs in the annual cycle."
+        },
+        {
+          "document_id": "W2005706163",
+          "title": "Density-Dependent Processes in the Life History of Fishes: Evidence from Laboratory Populations of Zebrafish Danio rerio",
+          "doi": "10.1371/journal.pone.0037550",
+          "year": "2012",
+          "distance": 0.4077,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "dence in mortality was strong during the early juvenile phase but declined thereafter and virtually ceased prior to maturation. Provision of feed in proportion to individual requirements (easing resource limitation) removed density dependence in growth and substantially reduced density dependence in mortality, thus indicating that 'bottom-up' effects act on growth as well as mortality, but most strongly on growth. Both growth and mortality played an important role in population regulation, with density-dependent growth having the greater impact on population biomass while mortality had the greatest impact on numbers."
+        }
+      ]
+    }
+  }
+}

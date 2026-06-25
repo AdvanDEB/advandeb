@@ -1,0 +1,814 @@
+{
+  "sf_id": "feeding_04",
+  "category": "Feeding",
+  "statement": "Organisms show a transient increase in metabolic rate independent of body mass after ingesting food (heat increment of feeding).",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Two snippets directly address the heat increment of feeding (HIF) / specific dynamic action (SDA): snippet 10 explicitly describes HIF as waste heat generated when digesting food, reducing energy available for other processes, and snippet 12 states the heat increment of feeding (SDA) has metabolic effects throughout the body and scales near isometrically with body mass in many animals—directly supporting a body-mass-independent transient metabolic increase after feeding. Snippet 16 alludes to elevated energy dissipation during meal processing, weakly supporting. The remaining snippets concern general metabolic scaling, temperature effects, food limitation, or growth and are topically related to DEB/metabolism but do not bear directly on the heat increment of feeding phenomenon. No snippet contradicts the fact. Overall support is moderate (a couple of clear, on-point references) with no conflicting evidence, hence consensus is corroborated."
+      },
+      "n_references": 3,
+      "references": {
+        "69b8478cec32c55db543099c": {
+          "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3287466764450073
+        },
+        "69b87789ecbd4702b29a3f47": {
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33143264055252075
+        },
+        "69b87535ecbd4702b29a3cb8": {
+          "title": "LopePont2015.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33367788791656494
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86c45ecbd4702b29a3129",
+          "title": "MoreMend2022.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.267,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "should benoted that if all individuals are fed with the same amountof food regardless of temperature treatment, the decrease inreproductive performance could be related to a higher energydemand from the individuals at higher temperatures.Since metabolic rates increase with temperature, foodrequirements also increase. Up to a certain temperaturethreshold, if an organism ingests enough food, these require-ments will be met. However, at high-enough temperatures, thefood intake may not be enough to sustain the overall energydemand, leading to deprioritization of nonessential functionssuch as growth, reproduction or immunity. Moreover,"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2899,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "er 1, Fabri -Ruiz et al. in press - Chapter 3 ). This may be consistent with our knowledge of physiological peculiarities of SO organisms, namely metabolisms adapted to low temp eratures ( Peck 2016, Peck et al. 2018 ), with poor abilities to acclimate to warmer temperatures ( Peck et al. 2014 ) and a noticeable adaptation to low and seasonal food inputs ( Lawrence and McClintock 1994 ). However, this may also be partly explained by an erroneous representation of food availability and a misleading evaluation of the relationship between food availability and energetic performances as it is implemented in the"
+        },
+        {
+          "document_id": "69b84744ec32c55db54307b0",
+          "title": "CasaBody2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.296,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "theory./C2112015 Elsevier Ltd. All rights reserved.1. IntroductionMetabolic rate has been studied across many organisms, duringontogeny within a species or over short periods of time related tobehavioral activities of individuals ( Nisbet et al., 2012; Maino andKearney, 2014 ). Metabolic rate has been found to increase withbody mass, a phenomenon named metabolic scaling that is wide-spread in nature ( West et al., 1997; Ehnes et al., 2011 ). Metabolicrate is deﬁned as the energy turnover of an organism and is usually"
+        },
+        {
+          "document_id": "69b8668becbd4702b29a2b14",
+          "title": "JohnHods2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3078,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "principles of physiological ecology, and generally follows themethodology of Sibly et al. (2013) . Individuals assimilate energyfrom ingested food (Ingestion and Energy Uptake ) and expendavailable energy on maintenance (Maintenance ), growth (Growth )and reproduction (Reproduction ) in the order of priority outlinedin Fig. 1. Total available energy is limited by the amount offood an organism can ingest, whilst mass and temperature havescaling effects on individual metabolic rates (Brown et al., 2004 ).A.S.A. Johnston et al. / Ecological Modelling 280 (2014) 5–17 7"
+        },
+        {
+          "document_id": "69b889ceecbd4702b29a581c",
+          "title": "Kearney - 2021 - What is the status of metabolic theory one century.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3096,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "individual, we are merely left with a‘metabolic pattern of ecology ’.The term ‘metabolic rate ’or‘metabolism ’is closely associ-ated with direct or indirect (e.g. respiration) measures of heatproduction by organisms. This is because heat productiondirectly links to the use of energy for work in most organisms.But metabolism is of course much more than heat produc-tion; it includes all the processes by which an organism takesup and transforms energy and materials for growth, develop-ment, maintenance and reproduction. Individual ‘growth ’models (IGMs) aim to capture some or all of these processes"
+        },
+        {
+          "document_id": "69b89a28ecbd4702b29a6b28",
+          "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.311,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "of body size. In a rare and elegant example, Bernhardt et al. (2018) manipulated metabolic rate by growing phytoplankton under different thermal regimes. Their results were consistent with theoretical expectations based on the temperature-dependence of metabolic rate—population density at carrying capacity decreased with increasing metabolic rates at higher temperatures (Reuman et al. 2014). While strongly suggestive of a link between metabolic rate and demography, other effects of temperature on biological processes cannot be excluded. Few studies vary metabolic rate"
+        },
+        {
+          "document_id": "69b89ff7ecbd4702b29a7133",
+          "title": "Mauritsson - 2024 - Application of Metabolic Theory in Models for Grow.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.313,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "y, the metabolic rate tend to increase with body mass and temperature. However, these relationships are not linear. Based on ob-servations within and across species, it has for long been known that the metabolic rate ( R) of organisms approximately scales with body mass (W) according to a n allometric relation in the shape power function , R ≈ aWb, where a is a normalization constant and b is an allometric 6 exponent [12]. Furthermore, it often is assumed that the metabolic rate is affected by the body temperature in a similar wa y as the reaction rate between two compounds in gas phase are affected by temperature [13],"
+        },
+        {
+          "document_id": "69b88b44ecbd4702b29a59c9",
+          "title": "Glazier et al. - 2020 - Effects of Fish Predators on the Mass‐Related Ener.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3132,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "and 4.3). As such, they indicate the insightful value of taking an integrated view of how predators affect the ontogenetic scaling of energy intake and expenditure in prey organisms. Our results also have implications for theoretical growth models based on comparing the scaling of assimilation rate with that of the rate of maintenance or resting metabolism (see Section 4.5). In addition, they highlight the importance of adaptive evolution and biological regulation in the body‐mass scaling of energetic processes and its response to ecological factors."
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3222,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "of the organisation of metabolism. How-ever, similarities between organisms, like von Bertalanff y’s growth curves and Kleiber’slaw on metabolic rate, suggest that mechanisms that control the uptake and use of metabo-lites are common to all organisms. These and other empirical patterns widespread in bi-ology should be the ultimate test to any metabolic theory tha t hopes for generality. Thepresent study (1) collects empirical evidence on growth, st oichiometry, feeding, respira-tion and indirect calorimetry and presents it in a simpliﬁed manner as stylized empirical"
+        },
+        {
+          "document_id": "69b8478cec32c55db543099c",
+          "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3287,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ng, HIF, was identiﬁed as being relatively inﬂuential. This parameter controls the amount of energy generated as waste heat when digesting food resources, and therefore determines the amount of energy available from ingested food which is available for other physiological processes such as growth, reproduction, and maintenance. In nature, the heat increment of feeding is inﬂuenced by various factors such as diet composition, food quantity, and environmental conditions, and it can vary signiﬁcantly among different mammal species. Therefore, it may not be well understood for all mammals, and empirical measurements may not be available"
+        },
+        {
+          "document_id": "69b89345ecbd4702b29a6358",
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3295,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "to be fueled with energy (van der Have and de Jong, 1996 ; Angilletta and Dunham 2003 ; Morita et al., 2010 ; Hoefnagel et al., 2018 ). Both feeding and metabolic rates usually increase within a certain range of temperatures, but it is also commonly observed that feeding rates decline at high temperatures (Huey and Kingsolver, 2019 ; Lindmark et al., 2022 ), and the temperature sensitivity of feeding is often found to differ from that of metabolism (Vasseur and McCann, 2005 ; Fussman et al., 2014 ). Asymmetry between the increasing meta-bolic demands and the ability of the organism to meet these demands"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3314,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "er) [19]. Systems 2014 , 2 476 The MLBH predicts that metabolic scaling should approach isometry ( b ~ 1) whenever metabolism is largely affected by an energy -demanding process that has pervasive whole -body effects (and thus is V-related) [19]. This effect appears to be true not only for growth and locomotory activity, but also for food processing. The heat increment of feeding or specific dynamic action (SDA), which has metabolic effects throughout the body , has been shown to scale with near isometry in a variety of animals [355]."
+        },
+        {
+          "document_id": "69b84721ec32c55db54306f3",
+          "title": "Thommen e.a. - 2019 - Body size-dependent energy storage causes Kleiber’.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3323,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ife.38187.010Figure supplement 3. Degrowth rates are independent of feeding history.DOI: https://doi.org/10.7554/eLife.38187.011Thommen et al. eLife 2019;8:e38187. DOI: https://doi.org/10.7554/eLife.38187 6 of 29Research article Physics of Living SystemsFigure 3. Size-dependent scaling of energy content explains growth/degrowth dynamics. ( A) Planarian energy balance model. At the organismal level,changes in the physiological energy content Eresult from a change in the net energy influx J(feeding) and/or heat loss P(metabolic rate). Dividing E,J"
+        },
+        {
+          "document_id": "69b88f29ecbd4702b29a5ea1",
+          "title": "WhitKear2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3329,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": ") Metabolic scaling in insects supportsthe predictions of the WBE model. J Insect Physiol. doi:10.1016/j.jinsphys.2011.1001.1011Rixon RH, Stevenson JAF (1957) Factors inﬂuencing survival of ratsin fasting. Metabolic rate and body weight loss. Am J Physiol188:332–336Roberts MF, Lightfoot EN, Porter WP (2010) A new model for thebody size–metabolism relationship. Physiol Biochem Zool83:395–405Roberts MF, Lightfoot EN, Porter WP (2011) Basal metabolic rate ofendotherms can be modeled using heat-transfer principles andphysiological concepts: reply to ‘‘Can the basal metabolic rate of"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b5b",
+          "title": "JageAlda2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3337,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ms behind the model.Food limitation decreases the amount of energy availablefor the organism, which is covered by decreasing therelative ingestion rate ( f) in equations 5 and 6. Foodlimitation indirectly inﬂuences respiration by affectingbody size in equation 7. A temperature increase is expectedto increase physiological rates such as the growth andreproduction rate in ectotherms, because all molecularreactions will proceed faster at higher temperatures."
+        },
+        {
+          "document_id": "69b87535ecbd4702b29a3cb8",
+          "title": "LopePont2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3337,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "on thechoice of energy sources after a fasting period (Aranda et al.2001 ). Capacity for fast growth (faster meal processing andenergy mobilisation capacity, implying higher energy dissipa-tion and requiring more frequent meals) may trade-o ﬀagainsttolerance to food deprivation (Dupont-Prinet et al. 2010 ). Thephysiological basis for this trade-o ﬀremains to be identiﬁed(McKenzie et al. 2014 ). The ﬁsh characterized by higher FCElost less weight loss during food deprivation and exhibitedlower weight gain during re-feeding (Grima et al. 2010 ;b u tDupont-Prinet et al. 2010 ). These contrasting energetic strate-"
+        },
+        {
+          "document_id": "69b88f29ecbd4702b29a5ea1",
+          "title": "WhitKear2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3344,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "looly JF, Brown JH, West GB, Savage VM, Charnov EL (2001)Effects of size and temperature on metabolic rate. Science293:2248–2251Ginzburg L, Damuth J (2008) The space-lifetime hypothesis: viewingorganisms in four dimensions, literally. Am Nat 171:125–131Glazier DS (1985) Relationship between metabolic rate and energyexpenditure for lactation in Peromyscus . Comp Biochem PhysiolA Comp Physiol 80:587–590Glazier DS (2005) Beyond the ‘3/4-power law’: variation in the intra-and interspeciﬁc scaling of metabolic rate in animals. Biol Rev80:1–52Glazier DS (2008) Effects of metabolic level on the body size scaling"
+        },
+        {
+          "document_id": "69b87e04ecbd4702b29a4888",
+          "title": "FitzBrow2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3404,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Individuals receiving a low food ration or exposed tochronic heat stress during daily emersion had signiﬁcantlyless tissue mass at the end of the experiment than musselsgiven a high food ration or exposed to low stress. There wasalso, however, some evidence of an interaction betweenfood and temperature (Table 1; Fig. 3)."
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact concerns the heat increment of feeding (specific dynamic action, SDA): a transient rise in metabolic rate following food ingestion. Two snippets directly address SDA in fish (10 and 12), explicitly describing the metabolic cost of processing meals and the SDA response, which corroborates the existence of a post-prandial metabolic increment. Snippet 1 supports the concept indirectly by noting that basal metabolic rate must be measured 12-18 hours after food ingestion to avoid the feeding-related elevation, implicitly confirming that feeding raises metabolic rate. The remaining snippets are largely off-topic, concerning allometric scaling, temperature effects, reproductive trade-offs, and general metabolic variation, with no direct bearing on the heat increment of feeding. No snippet contradicts the fact. Overall the supporting evidence is clear but sparse (only two-three relevant snippets), yielding moderate strength and a corroborating direction."
+      },
+      "n_references": 3,
+      "references": {
+        "W1992905748": {
+          "title": "THE BASAL METABOLIC RATE IN EXOPHTHALMIC GOITRE (1917 CASES) WITH A BRIEF DESCRIPTION OF THE TECHNIC USED AT THE MAYO CLINIC",
+          "doi": "10.1210/endo-4-1-71",
+          "year": "1920",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.31459665298461914
+        },
+        "W4380046112": {
+          "title": "Why do some fish grow faster than others?",
+          "doi": "10.1111/faf.12770",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3659238815307617
+        },
+        "W2754951267": {
+          "title": "Fish face a trade-off between ‘eating big’ for growth efficiency and ‘eating small’ to retain aerobic capacity",
+          "doi": "10.1098/rsbl.2017.0298",
+          "year": "2017",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36915379762649536
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W1992905748",
+          "title": "THE BASAL METABOLIC RATE IN EXOPHTHALMIC GOITRE (1917 CASES) WITH A BRIEF DESCRIPTION OF THE TECHNIC USED AT THE MAYO CLINIC",
+          "doi": "10.1210/endo-4-1-71",
+          "year": "1920",
+          "distance": 0.3146,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "\"In each mammal there is a basal metabolism\" (19). By the term \"basal metabolism\" or better, \"basal metabolic rate,\" of an organism is meant the minimal heat production of that organism, measured from twelve to eighteen hours after the ingestion of food and with the organism at complete muscular rest."
+        },
+        {
+          "document_id": "W2264303507",
+          "title": "Benefits of Group Living Include Increased Feeding Efficiency and Lower Mass Loss during Desiccation in the Social and Inbreeding Spider Stegodyphus dumicola",
+          "doi": "10.3389/fphys.2016.00018",
+          "year": "2016",
+          "distance": 0.3231,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ation. Because energetic expenditure is temperature sensitive, some assays were performed under varying temperature conditions. We found that feeding efficiency increased with group size, and the rate of weight loss was higher in solitary individuals than in animals in groups of various sizes during desiccation. Interestingly, this was not translated into differences in survival or in standard metabolic rate. We did not detect any group size effects for other parameters, and group size effects did not co-vary with experimental temperature in a predictive manner."
+        },
+        {
+          "document_id": "W2559148707",
+          "title": "Interspecific allometric scaling of unicellular organisms as an evolutionary process of food chain creation",
+          "doi": "10.48550/arxiv.1611.09824",
+          "year": "2016",
+          "distance": 0.3293,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Metabolism of living organisms is a foundation of life. The metabolic rate (energy production per unit time) increases slower than organisms' mass. When this phenomenon is considered across different species, it is called interspecific allometric scaling, whose causes are unknown. We argue that the cause of interspecific allometric scaling is the total effect of physiological and adaptation mechanisms inherent to organisms composing a food chain."
+        },
+        {
+          "document_id": "W2025614469",
+          "title": "The Combined Effects of Food and Temperature on the Life History Parameters of <i>Brachionus patulus</i><scp>MULLER</scp> (Rotifera)",
+          "doi": "10.1002/iroh.19910760207",
+          "year": "1991",
+          "distance": 0.3361,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "investigated. Both food and temperature, independently and in interaction, significantly influenced nearly all the parameters. The reproductive performance was a direct function of the food level, but the magnitude of food effect was temperature‐dependent. The observed temperature × food interaction effects are explained in terms of the energetics of resource apportionment between metabolism and reproduction."
+        },
+        {
+          "document_id": "W2325812105",
+          "title": "Winter Starvation in Captive Common Barn-Owls: Bioenergetics during Refeeding",
+          "doi": "10.2307/4088411",
+          "year": "1993",
+          "distance": 0.341,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "2;± 0.6% for energy. This slight increase could only be attributed to a reduction of the energy lost in pellet production (i.e. to a higher effectiveness in gastric digestion). The energetic cost of daily change in body mass was estimated in both sexes and both feeding periods, and appeared to be constant (10.8 3;2;± 1.1 kJ I g fresh body mass). Using this value, the part of the daily metabolized energy invested in the existence metabolism was calculated. After four days of refeeding, existence metabolism paradoxically appeared similar or even higher than before fasting, while the body mass was still lower than the initial value."
+        },
+        {
+          "document_id": "W2324388523",
+          "title": "Seasonal Acclimatization and Latitudinal Compensation in Metabolism: Do They Exist?",
+          "doi": "10.2307/2389880",
+          "year": "1993",
+          "distance": 0.3452,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ion and food availability), a great deal of attention has been directed at understanding the effects of changes in temperature. This is partly because environmental temperature is a simple parameter to measure and record (see Vogel 1981), but also because the effects of temperature on the physiology of organisms appear to be simple and straightforward: everybody knows that a lower temperature slows things down. Studies of metabolic rate in relation to temperature have played a significant role in shaping current ideas of how organisms adapt to a seasonal environment and to latitude."
+        },
+        {
+          "document_id": "W2306645327",
+          "title": "Correction of Heat Production for Changes in Live Weight of Cattle in Balance Experiments",
+          "doi": "10.2527/jas1942.12145x",
+          "year": "1942",
+          "distance": 0.3588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "n a series of feeding periods in which analyses of feed and excreta are made and does not concern animals in the fasting state. It deals primarily with the matter of accepting with confidence the results of the balances of nitrogen and carbon rather than live weight changes as indicated by scales. The usual methods of correction of the heat production of animals to correspond to a uniform live weight depend on the conception that the basal metabolism is proportional to the surface area, or to some power of the body weight. The accepted relationship existing between surface area and basal metabolism is not questioned."
+        },
+        {
+          "document_id": "W2398215473",
+          "title": "Metabolic rate covaries with fitness and the pace of the life history in the field",
+          "doi": "10.1098/rspb.2016.0323",
+          "year": "2016",
+          "distance": 0.3627,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Metabolic rate reflects the ‘pace of life’ in every organism. Metabolic rate is related to an organism's capacity for essential maintenance, growth and reproduction—all of which interact to affect fitness. Although thousands of measurements of metabolic rate have been made, the microevolutionary forces that shape metabolic rate remain poorly resolved."
+        },
+        {
+          "document_id": "W2605954809",
+          "title": "Energetic Models of Human Nutritional Evolution",
+          "doi": "10.1093/oso/9780195183474.003.0018",
+          "year": "2006",
+          "distance": 0.364,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "onary research for several reasons. First, food energy represents a critical interface between organisms and their environment. The search for food energy, its consumption, and ultimately its allocation for biological processes are all critical aspects of an organism’s ecology (McNab, 2002). In addition, the energy dynamic between organisms and their environments—energy expenditure in relation to energy consumed—has important adaptive consequences for both survival and reproduction. Energy thus provides a useful currency for measuring fitness."
+        },
+        {
+          "document_id": "W4380046112",
+          "title": "Why do some fish grow faster than others?",
+          "doi": "10.1111/faf.12770",
+          "year": "2023",
+          "distance": 0.3659,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "vated baseline metabolism – at least when food is plentiful – which may be linked with gut morphology and digestive efficiency. The net energy gained from a meal (as calculated from the specific dynamic action (SDA) coefficient) is optimised with larger meal sizes, but the digestion of large meals can erode the aerobic metabolic scope available for other critical activities such as predator avoidance, perhaps at an interindividual level. Thus, complex interactions between an individual's genes and environment are likely to regulate the growth phenotype."
+        },
+        {
+          "document_id": "W2784259034",
+          "title": "Understanding variation in metabolic rate",
+          "doi": "10.1242/jeb.166876",
+          "year": "2018",
+          "distance": 0.3667,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ABSTRACT Metabolic rate reflects an organism's capacity for growth, maintenance and reproduction, and is likely to be a target of selection. Physiologists have long sought to understand the causes and consequences of within-individual to among-species variation in metabolic rates – how metabolic rates relate to performance and how they should evolve. Traditionally, this has been viewed from a mechanistic perspective, relying primarily on hypothesis-driven approaches."
+        },
+        {
+          "document_id": "W2754951267",
+          "title": "Fish face a trade-off between ‘eating big’ for growth efficiency and ‘eating small’ to retain aerobic capacity",
+          "doi": "10.1098/rsbl.2017.0298",
+          "year": "2017",
+          "distance": 0.3692,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ocesses can have physical and physiological trade-offs with other critical functions, many of which are not clearly understood. Using an ambush predator, barramundi ( Lates calcarifer ), fed meals ranging 0.6–3.4% of body mass, we examined interrelations between meal size, growth efficiency and surplus aerobic metabolic capacity (aerobic scope, AS). Large meals required a greater absolute investment of energy to process (a larger so-called specific dynamic action, SDA), but the percentage of digestible meal energy required in the SDA response (SDA coefficient) decreased with increasing meal size."
+        },
+        {
+          "document_id": "W2066879059",
+          "title": "Variations of metabolism and feed efficiency in laying R.I.R.-hens in relation to prenatal environmental temperatures",
+          "doi": "10.1051/rnd:19820505",
+          "year": "1982",
+          "distance": 0.3723,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "er fasting heat production, resulting in lower maintenance requirement and higher energy balance mainly composed of fat energy. This was paralleled by a lower feed conversion rate during growth and reproduction. In fasting conditions, these animals showed a lower oxidative metabolism of fats and proteins."
+        },
+        {
+          "document_id": "W2775316903",
+          "title": "Geographic variation in life‐history traits: factors shaping energy investment in reproduction in a highland dwelling rodent",
+          "doi": "10.1111/jzo.12523",
+          "year": "2017",
+          "distance": 0.376,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "heses propose mechanisms by which it occurs. Central and external limits to energy acquisition have been traditionally assumed. Hence, digestive limitations, periods of low food availability or demanding cold conditions would restrict this input. However, under warm conditions endotherms also face the need to dissipate heat from metabolic processes. From this perspective, a high metabolic rate process, such as lactation, would be restricted under increasing ambient temperatures ( T a )."
+        },
+        {
+          "document_id": "W2515870068",
+          "title": "AN EXPERIMENTAL ANALYSIS OF REPRODUCTIVE EFFORT",
+          "doi": "",
+          "year": "1980",
+          "distance": 0.3789,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "hence the measurement of repro- ductive effort (the proportion of an individual's total energy intake devoted to reproduction). Increased temperature was associated with increased total reproduction and decreased growth at all food levels, although total production (sum of reproduction + growth) was essentially the same at all temperatures. Increased food intake led to higher fecundity at two of the three temperatures, while reproductive effort actually declined with increased food intake at two temperatures."
+        },
+        {
+          "document_id": "W643878598",
+          "title": "Energy for animal life",
+          "doi": "10.1093/oso/9780198500537.001.0001",
+          "year": "1999",
+          "distance": 0.3851,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "nd choosing food. Of course, animal energy isn't simply a question of feeding, and several chapters in turn look at energy use. The energy costs of motion - of running, swimming, and flight - are discussed in one chapter, and the energetic demands of growth and reproduction in another. A chapter on body temperature shows how the processes of life go faster at higher temperatures, and discusses how animals regulate their temperature."
+        },
+        {
+          "document_id": "W2772143593",
+          "title": "Individuals exhibit consistent differences in their metabolic rates across changing thermal conditions",
+          "doi": "10.1016/j.cbpa.2017.11.021",
+          "year": "2017",
+          "distance": 0.3859,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Metabolic rate has been linked to growth, reproduction, and survival at the individual level and is thought to have far reaching consequences for the ecology and evolution of organisms. However, metabolic rates must be consistent (i.e. repeatable) over at least some portion of the lifetime in order to predict their longer-term effects on population dynamics and how they will respond to selection."
+        },
+        {
+          "document_id": "W2052197960",
+          "title": "Associations between basal metabolic rate and reproductive performance in C57BL/6J mice",
+          "doi": "10.1242/jeb.02625",
+          "year": "2006",
+          "distance": 0.386,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "SUMMARY Basal metabolic rate (BMR) is highly variable, both between and within species. One hypothesis is that this variation may be linked to the capacity for sustained rate of energy expenditure, leading to associations between high BMR and performance during energy-demanding periods of life history, such as reproduction. However, despite the attractive nature of this hypothesis,previous studies have failed to show an association between BMR and fecundity."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly address the heat increment of feeding (HIF) / specific dynamic action (SDA), which is the phenomenon described in the stylized fact. Snippet 10 explicitly describes HIF as the energy generated as waste heat when digesting food. Snippet 12 describes the heat increment of feeding/SDA as having metabolic effects throughout the body and scaling near isometry. Snippets 22 and 24 describe the SDA response (transient metabolic cost of processing meals) in fish. Snippet 13 defines basal metabolism as measured after the post-prandial effect subsides, indirectly supporting a transient feeding-induced rise. No snippets contradict the fact. The body-mass-independence aspect is less directly addressed (snippet 12 even notes isometric scaling), so support is moderate rather than strong, but the direction of evidence is clearly corroborating."
+      },
+      "n_references": 5,
+      "references": {
+        "69b8478cec32c55db543099c": {
+          "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3287466764450073
+        },
+        "69b87789ecbd4702b29a3f47": {
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33143264055252075
+        },
+        "W1992905748": {
+          "title": "THE BASAL METABOLIC RATE IN EXOPHTHALMIC GOITRE (1917 CASES) WITH A BRIEF DESCRIPTION OF THE TECHNIC USED AT THE MAYO CLINIC",
+          "doi": "10.1210/endo-4-1-71",
+          "year": "1920",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.31459665298461914
+        },
+        "W4380046112": {
+          "title": "Why do some fish grow faster than others?",
+          "doi": "10.1111/faf.12770",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3659238815307617
+        },
+        "W2754951267": {
+          "title": "Fish face a trade-off between ‘eating big’ for growth efficiency and ‘eating small’ to retain aerobic capacity",
+          "doi": "10.1098/rsbl.2017.0298",
+          "year": "2017",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36915379762649536
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86c45ecbd4702b29a3129",
+          "title": "MoreMend2022.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.267,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "should benoted that if all individuals are fed with the same amountof food regardless of temperature treatment, the decrease inreproductive performance could be related to a higher energydemand from the individuals at higher temperatures.Since metabolic rates increase with temperature, foodrequirements also increase. Up to a certain temperaturethreshold, if an organism ingests enough food, these require-ments will be met. However, at high-enough temperatures, thefood intake may not be enough to sustain the overall energydemand, leading to deprioritization of nonessential functionssuch as growth, reproduction or immunity. Moreover,"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2899,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "er 1, Fabri -Ruiz et al. in press - Chapter 3 ). This may be consistent with our knowledge of physiological peculiarities of SO organisms, namely metabolisms adapted to low temp eratures ( Peck 2016, Peck et al. 2018 ), with poor abilities to acclimate to warmer temperatures ( Peck et al. 2014 ) and a noticeable adaptation to low and seasonal food inputs ( Lawrence and McClintock 1994 ). However, this may also be partly explained by an erroneous representation of food availability and a misleading evaluation of the relationship between food availability and energetic performances as it is implemented in the"
+        },
+        {
+          "document_id": "69b84744ec32c55db54307b0",
+          "title": "CasaBody2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.296,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "theory./C2112015 Elsevier Ltd. All rights reserved.1. IntroductionMetabolic rate has been studied across many organisms, duringontogeny within a species or over short periods of time related tobehavioral activities of individuals ( Nisbet et al., 2012; Maino andKearney, 2014 ). Metabolic rate has been found to increase withbody mass, a phenomenon named metabolic scaling that is wide-spread in nature ( West et al., 1997; Ehnes et al., 2011 ). Metabolicrate is deﬁned as the energy turnover of an organism and is usually"
+        },
+        {
+          "document_id": "69b8668becbd4702b29a2b14",
+          "title": "JohnHods2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3078,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "principles of physiological ecology, and generally follows themethodology of Sibly et al. (2013) . Individuals assimilate energyfrom ingested food (Ingestion and Energy Uptake ) and expendavailable energy on maintenance (Maintenance ), growth (Growth )and reproduction (Reproduction ) in the order of priority outlinedin Fig. 1. Total available energy is limited by the amount offood an organism can ingest, whilst mass and temperature havescaling effects on individual metabolic rates (Brown et al., 2004 ).A.S.A. Johnston et al. / Ecological Modelling 280 (2014) 5–17 7"
+        },
+        {
+          "document_id": "69b889ceecbd4702b29a581c",
+          "title": "Kearney - 2021 - What is the status of metabolic theory one century.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3096,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "individual, we are merely left with a‘metabolic pattern of ecology ’.The term ‘metabolic rate ’or‘metabolism ’is closely associ-ated with direct or indirect (e.g. respiration) measures of heatproduction by organisms. This is because heat productiondirectly links to the use of energy for work in most organisms.But metabolism is of course much more than heat produc-tion; it includes all the processes by which an organism takesup and transforms energy and materials for growth, develop-ment, maintenance and reproduction. Individual ‘growth ’models (IGMs) aim to capture some or all of these processes"
+        },
+        {
+          "document_id": "69b89a28ecbd4702b29a6b28",
+          "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.311,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "of body size. In a rare and elegant example, Bernhardt et al. (2018) manipulated metabolic rate by growing phytoplankton under different thermal regimes. Their results were consistent with theoretical expectations based on the temperature-dependence of metabolic rate—population density at carrying capacity decreased with increasing metabolic rates at higher temperatures (Reuman et al. 2014). While strongly suggestive of a link between metabolic rate and demography, other effects of temperature on biological processes cannot be excluded. Few studies vary metabolic rate"
+        },
+        {
+          "document_id": "69b89ff7ecbd4702b29a7133",
+          "title": "Mauritsson - 2024 - Application of Metabolic Theory in Models for Grow.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.313,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "y, the metabolic rate tend to increase with body mass and temperature. However, these relationships are not linear. Based on ob-servations within and across species, it has for long been known that the metabolic rate ( R) of organisms approximately scales with body mass (W) according to a n allometric relation in the shape power function , R ≈ aWb, where a is a normalization constant and b is an allometric 6 exponent [12]. Furthermore, it often is assumed that the metabolic rate is affected by the body temperature in a similar wa y as the reaction rate between two compounds in gas phase are affected by temperature [13],"
+        },
+        {
+          "document_id": "69b88b44ecbd4702b29a59c9",
+          "title": "Glazier et al. - 2020 - Effects of Fish Predators on the Mass‐Related Ener.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3132,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "and 4.3). As such, they indicate the insightful value of taking an integrated view of how predators affect the ontogenetic scaling of energy intake and expenditure in prey organisms. Our results also have implications for theoretical growth models based on comparing the scaling of assimilation rate with that of the rate of maintenance or resting metabolism (see Section 4.5). In addition, they highlight the importance of adaptive evolution and biological regulation in the body‐mass scaling of energetic processes and its response to ecological factors."
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3222,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "of the organisation of metabolism. How-ever, similarities between organisms, like von Bertalanff y’s growth curves and Kleiber’slaw on metabolic rate, suggest that mechanisms that control the uptake and use of metabo-lites are common to all organisms. These and other empirical patterns widespread in bi-ology should be the ultimate test to any metabolic theory tha t hopes for generality. Thepresent study (1) collects empirical evidence on growth, st oichiometry, feeding, respira-tion and indirect calorimetry and presents it in a simpliﬁed manner as stylized empirical"
+        },
+        {
+          "document_id": "69b8478cec32c55db543099c",
+          "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3287,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ng, HIF, was identiﬁed as being relatively inﬂuential. This parameter controls the amount of energy generated as waste heat when digesting food resources, and therefore determines the amount of energy available from ingested food which is available for other physiological processes such as growth, reproduction, and maintenance. In nature, the heat increment of feeding is inﬂuenced by various factors such as diet composition, food quantity, and environmental conditions, and it can vary signiﬁcantly among different mammal species. Therefore, it may not be well understood for all mammals, and empirical measurements may not be available"
+        },
+        {
+          "document_id": "69b89345ecbd4702b29a6358",
+          "title": "Richard et al. - 2024 - The temperature-size rule in the context of Dynami.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3295,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "to be fueled with energy (van der Have and de Jong, 1996 ; Angilletta and Dunham 2003 ; Morita et al., 2010 ; Hoefnagel et al., 2018 ). Both feeding and metabolic rates usually increase within a certain range of temperatures, but it is also commonly observed that feeding rates decline at high temperatures (Huey and Kingsolver, 2019 ; Lindmark et al., 2022 ), and the temperature sensitivity of feeding is often found to differ from that of metabolism (Vasseur and McCann, 2005 ; Fussman et al., 2014 ). Asymmetry between the increasing meta-bolic demands and the ability of the organism to meet these demands"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3314,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "er) [19]. Systems 2014 , 2 476 The MLBH predicts that metabolic scaling should approach isometry ( b ~ 1) whenever metabolism is largely affected by an energy -demanding process that has pervasive whole -body effects (and thus is V-related) [19]. This effect appears to be true not only for growth and locomotory activity, but also for food processing. The heat increment of feeding or specific dynamic action (SDA), which has metabolic effects throughout the body , has been shown to scale with near isometry in a variety of animals [355]."
+        },
+        {
+          "document_id": "W1992905748",
+          "title": "THE BASAL METABOLIC RATE IN EXOPHTHALMIC GOITRE (1917 CASES) WITH A BRIEF DESCRIPTION OF THE TECHNIC USED AT THE MAYO CLINIC",
+          "doi": "10.1210/endo-4-1-71",
+          "year": "1920",
+          "distance": 0.3146,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "\"In each mammal there is a basal metabolism\" (19). By the term \"basal metabolism\" or better, \"basal metabolic rate,\" of an organism is meant the minimal heat production of that organism, measured from twelve to eighteen hours after the ingestion of food and with the organism at complete muscular rest."
+        },
+        {
+          "document_id": "W2264303507",
+          "title": "Benefits of Group Living Include Increased Feeding Efficiency and Lower Mass Loss during Desiccation in the Social and Inbreeding Spider Stegodyphus dumicola",
+          "doi": "10.3389/fphys.2016.00018",
+          "year": "2016",
+          "distance": 0.3231,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ation. Because energetic expenditure is temperature sensitive, some assays were performed under varying temperature conditions. We found that feeding efficiency increased with group size, and the rate of weight loss was higher in solitary individuals than in animals in groups of various sizes during desiccation. Interestingly, this was not translated into differences in survival or in standard metabolic rate. We did not detect any group size effects for other parameters, and group size effects did not co-vary with experimental temperature in a predictive manner."
+        },
+        {
+          "document_id": "W2559148707",
+          "title": "Interspecific allometric scaling of unicellular organisms as an evolutionary process of food chain creation",
+          "doi": "10.48550/arxiv.1611.09824",
+          "year": "2016",
+          "distance": 0.3293,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Metabolism of living organisms is a foundation of life. The metabolic rate (energy production per unit time) increases slower than organisms' mass. When this phenomenon is considered across different species, it is called interspecific allometric scaling, whose causes are unknown. We argue that the cause of interspecific allometric scaling is the total effect of physiological and adaptation mechanisms inherent to organisms composing a food chain."
+        },
+        {
+          "document_id": "W2025614469",
+          "title": "The Combined Effects of Food and Temperature on the Life History Parameters of <i>Brachionus patulus</i><scp>MULLER</scp> (Rotifera)",
+          "doi": "10.1002/iroh.19910760207",
+          "year": "1991",
+          "distance": 0.3361,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "investigated. Both food and temperature, independently and in interaction, significantly influenced nearly all the parameters. The reproductive performance was a direct function of the food level, but the magnitude of food effect was temperature‐dependent. The observed temperature × food interaction effects are explained in terms of the energetics of resource apportionment between metabolism and reproduction."
+        },
+        {
+          "document_id": "W2325812105",
+          "title": "Winter Starvation in Captive Common Barn-Owls: Bioenergetics during Refeeding",
+          "doi": "10.2307/4088411",
+          "year": "1993",
+          "distance": 0.341,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "2;± 0.6% for energy. This slight increase could only be attributed to a reduction of the energy lost in pellet production (i.e. to a higher effectiveness in gastric digestion). The energetic cost of daily change in body mass was estimated in both sexes and both feeding periods, and appeared to be constant (10.8 3;2;± 1.1 kJ I g fresh body mass). Using this value, the part of the daily metabolized energy invested in the existence metabolism was calculated. After four days of refeeding, existence metabolism paradoxically appeared similar or even higher than before fasting, while the body mass was still lower than the initial value."
+        },
+        {
+          "document_id": "W2324388523",
+          "title": "Seasonal Acclimatization and Latitudinal Compensation in Metabolism: Do They Exist?",
+          "doi": "10.2307/2389880",
+          "year": "1993",
+          "distance": 0.3452,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ion and food availability), a great deal of attention has been directed at understanding the effects of changes in temperature. This is partly because environmental temperature is a simple parameter to measure and record (see Vogel 1981), but also because the effects of temperature on the physiology of organisms appear to be simple and straightforward: everybody knows that a lower temperature slows things down. Studies of metabolic rate in relation to temperature have played a significant role in shaping current ideas of how organisms adapt to a seasonal environment and to latitude."
+        },
+        {
+          "document_id": "W2306645327",
+          "title": "Correction of Heat Production for Changes in Live Weight of Cattle in Balance Experiments",
+          "doi": "10.2527/jas1942.12145x",
+          "year": "1942",
+          "distance": 0.3588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n a series of feeding periods in which analyses of feed and excreta are made and does not concern animals in the fasting state. It deals primarily with the matter of accepting with confidence the results of the balances of nitrogen and carbon rather than live weight changes as indicated by scales. The usual methods of correction of the heat production of animals to correspond to a uniform live weight depend on the conception that the basal metabolism is proportional to the surface area, or to some power of the body weight. The accepted relationship existing between surface area and basal metabolism is not questioned."
+        },
+        {
+          "document_id": "W2398215473",
+          "title": "Metabolic rate covaries with fitness and the pace of the life history in the field",
+          "doi": "10.1098/rspb.2016.0323",
+          "year": "2016",
+          "distance": 0.3627,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Metabolic rate reflects the ‘pace of life’ in every organism. Metabolic rate is related to an organism's capacity for essential maintenance, growth and reproduction—all of which interact to affect fitness. Although thousands of measurements of metabolic rate have been made, the microevolutionary forces that shape metabolic rate remain poorly resolved."
+        },
+        {
+          "document_id": "W2605954809",
+          "title": "Energetic Models of Human Nutritional Evolution",
+          "doi": "10.1093/oso/9780195183474.003.0018",
+          "year": "2006",
+          "distance": 0.364,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "onary research for several reasons. First, food energy represents a critical interface between organisms and their environment. The search for food energy, its consumption, and ultimately its allocation for biological processes are all critical aspects of an organism’s ecology (McNab, 2002). In addition, the energy dynamic between organisms and their environments—energy expenditure in relation to energy consumed—has important adaptive consequences for both survival and reproduction. Energy thus provides a useful currency for measuring fitness."
+        },
+        {
+          "document_id": "W4380046112",
+          "title": "Why do some fish grow faster than others?",
+          "doi": "10.1111/faf.12770",
+          "year": "2023",
+          "distance": 0.3659,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "vated baseline metabolism – at least when food is plentiful – which may be linked with gut morphology and digestive efficiency. The net energy gained from a meal (as calculated from the specific dynamic action (SDA) coefficient) is optimised with larger meal sizes, but the digestion of large meals can erode the aerobic metabolic scope available for other critical activities such as predator avoidance, perhaps at an interindividual level. Thus, complex interactions between an individual's genes and environment are likely to regulate the growth phenotype."
+        },
+        {
+          "document_id": "W2784259034",
+          "title": "Understanding variation in metabolic rate",
+          "doi": "10.1242/jeb.166876",
+          "year": "2018",
+          "distance": 0.3667,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ABSTRACT Metabolic rate reflects an organism's capacity for growth, maintenance and reproduction, and is likely to be a target of selection. Physiologists have long sought to understand the causes and consequences of within-individual to among-species variation in metabolic rates – how metabolic rates relate to performance and how they should evolve. Traditionally, this has been viewed from a mechanistic perspective, relying primarily on hypothesis-driven approaches."
+        },
+        {
+          "document_id": "W2754951267",
+          "title": "Fish face a trade-off between ‘eating big’ for growth efficiency and ‘eating small’ to retain aerobic capacity",
+          "doi": "10.1098/rsbl.2017.0298",
+          "year": "2017",
+          "distance": 0.3692,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ocesses can have physical and physiological trade-offs with other critical functions, many of which are not clearly understood. Using an ambush predator, barramundi ( Lates calcarifer ), fed meals ranging 0.6–3.4% of body mass, we examined interrelations between meal size, growth efficiency and surplus aerobic metabolic capacity (aerobic scope, AS). Large meals required a greater absolute investment of energy to process (a larger so-called specific dynamic action, SDA), but the percentage of digestible meal energy required in the SDA response (SDA coefficient) decreased with increasing meal size."
+        }
+      ]
+    }
+  }
+}

@@ -191,9 +191,12 @@ class GraphExplorerAgent(BaseAgent):
                 "Given a free-text scientific CLAIM, return structured "
                 "support-vs-challenge evidence: the closest curated stylized "
                 "fact(s) and their supporting and opposing facts, each joined to "
-                "its source document (title, authors, year, journal, doi). Use "
-                "this for 'list references that support/contradict …', 'consensus "
-                "on …', and support/challenge table questions."
+                "its source document (title, authors, year, journal, doi) plus "
+                "citation signals (cited_by_count, citations_per_year, retracted, "
+                "low_impact). Use for 'list references that support/contradict …', "
+                "'consensus on …', support/challenge tables, AND citation-decay / "
+                "'zombie theory' questions (use retracted_refs / low_impact_refs "
+                "and per-reference citations_per_year)."
             ),
             input_schema={
                 "type": "object",
@@ -305,11 +308,19 @@ class GraphExplorerAgent(BaseAgent):
         )
         support_total = sum(r.get("support_count", 0) for r in rows)
         oppose_total = sum(r.get("oppose_count", 0) for r in rows)
+        retracted_total = sum(
+            r.get("supports_retracted", 0) + r.get("opposes_retracted", 0) for r in rows
+        )
+        low_impact_total = sum(
+            r.get("supports_low_impact", 0) + r.get("opposes_low_impact", 0) for r in rows
+        )
         return {
             "claim": claim,
             "matched": len(rows),
             "support_total": support_total,
             "oppose_total": oppose_total,
+            "retracted_refs": retracted_total,
+            "low_impact_refs": low_impact_total,
             "consensus": rows,
         }
 

@@ -1,0 +1,904 @@
+{
+  "sf_id": "respiration_05",
+  "category": "Respiration",
+  "statement": "Intraspecific scaling of maximum dioxygen use changes with developmental stage.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact states that intraspecific oxygen-use scaling changes with developmental stage. Numerous snippets (1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 16) explicitly state the canonical DEB respiration stylized fact: oxygen use increases with DECREASING mass in embryos but increases WITH mass in juveniles and adults — a direct qualitative reversal of the scaling relationship across developmental stages, exactly the pattern claimed. Snippet 1 adds mechanistic explanation (reserve loss in embryos vs. structure-driven maintenance in juveniles/adults; weight-specific O2 use declining over the life cycle). Snippet 12 supports the general notion that the metabolic-rate trajectory varies over the life cycle. Several snippets are listed citations (multiple references), reinforcing empirical grounding. Off-topic or only tangential items (8, 14, 15, 17, 18) do not contradict the fact. There is no contradicting evidence in the corpus, yielding strong, multiply-corroborated support."
+      },
+      "n_references": 8,
+      "references": {
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2617499828338623
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2955896258354187
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2962443232536316
+        },
+        "69b89d63ecbd4702b29a6eb3": {
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.32516878843307495
+        },
+        "69b86b37ecbd4702b29a303e": {
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.39062702655792236
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.397405743598938
+        },
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3976205587387085
+        },
+        "69b84857ec32c55db5430bf1": {
+          "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.39896827936172485
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2617,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2956,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113]The use of dioxygen scales approximately with body weight raised animals [10, 84, 91]to a power close to 0.75 [45]Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88]after ingesting food (heat increment of feeding)Ageing Lifespan increases with size for endotherms, animals [19, 85]but is independent of size in ectotherms"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2962,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3053,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3252,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "embryos, but increases with mass in juvenilesand adultsThe use of dioxygen scales with body mass raisedto a power close to 0.75Stoichiometry Well-fed animals have a di erent body chemicalcomposition than poorly-fed organismsAnimals growing with constant food density con-verge to a constant chemical compositionReproduction Reproduction increases with size intra-speci cally,but decreases with size inter-speci cally2 DEB, DEVELOPMENT AND CRITICISMS 6Table 2: The basic assumptions of the standard DEB model. After Kooij-man [9]1. An organism is characterized by a structural body, reserves, and matu-"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3622,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "ight approximately proportional to cubed time [34] animals [34, 115]The von Bertalanffy growth rate of bacteria [48, pp.276-282]different species corrected for a common body yeasts [48, pp.276-282]temperature decreases almost proportional to animals [48, pp.276-282]maximum body lengthReproduction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78]but decreases with size inter-speciﬁcallyRespiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3906,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "s in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heatincrement of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starvedvs well-fed)S2The chemical composition of organisms at constant food density of constantcomposition becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygenE2Dissipating heat for heterotrophic isomorphs under aerobic conditions is a"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3947,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "present, thehandling of reactive oxygen species (ROS) became importantto reduce damage to the metabolic machinery and especiallyto DNA. This especially holds true for tissues of cells withnon-reversible differentiation; this excludes e.g.plants.Specialised proteins (peroxidase dismutases) were developedand their effectiveness was tuned to compromise betweensurvival of the juvenile period and the use of ROS togenerate genetic variability among gametes. The latter isimportant to allow adaptation to long-term environmentalchanges that are too large for adaptation within a givengenome. Big-bodied species are vulnerable; the body size"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3974,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "do not use dioxygen in signiﬁcant animals [6, 62, 67, 87]amountsR2 The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87]R3 The use of dioxygen scales with body weight raised animals [11, 65, 71]to a power close to 0.75 [38]R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68]after ingesting food independent of their body mass -the heat increment of feedingTable 5.1: Stylized facts and empirical evidence on feeding, growth an d respiration.Stylized Facts Empirical Evidence"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3976,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)"
+        },
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3978,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ile stage that does notreproduceR2Reproduction increases with size intra-speci ﬁcally, but decreases with size inter-speciﬁcallyR3A range of constant low food levels exists at which an individual can survive, butnot reproduceR4Growth can be simultaneous with reproduction, but growth can also cease longbefore reproduction is initiatedRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increaseswith mass in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75"
+        },
+        {
+          "document_id": "69b84857ec32c55db5430bf1",
+          "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.399,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ion at best. Feeding and temperature affect metabolic ratesubstantially, as does body size (both intra- and inter-speci ﬁcally).The trajectory of metabolic rate over the life cycle of an individual andthe inter-species variation are well understood quantitatively by theDEB theory ( Kooijman, 1986, 2001 ). The DEB theory makes no (direct)assumption about the use of dioxygen and obtains it by closing themass balance for chemical elements (carbon, hydrogen, oxygen andnitrogen). The implication is that the use of dioxygen can only beevaluated in combination with the production ﬂux of water, carbon-"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.402,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "e stage that does not reproduceR2Reproduction increases with size intra-specifically, but decreases with size inter-specificallyR3A range of constant low food levels exists at which an individual can survive, but not reproduceR4Growth can be simultaneous with reproduction, but growth can also cease long before reproductionis initiatedR5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults"
+        },
+        {
+          "document_id": "69b8a5edecbd4702b29a791c",
+          "title": "Stevenson et al. - Connecting Suborganismal Data to Bioenergetic Proc.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.403,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "titativepredictions of chemical exposures to individuals, starting from suborganismal data. We use early –life stage exposure ofFundulus heteroclitus to dioxin ‐like chemicals (DLCs) and connect AOP key events to DEB processes through “damage ”thatis produced at a rate proportional to the internal toxicant concentration. We use transcriptomic data of ﬁsh embryos exposedto DLCs to translate molecular indicators of damage into changes in DEB parameters (damage increases somatic main-tenance costs) and DEB models to predict sublethal and lethal effects on young ﬁsh. By changing a small subset of model"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4061,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "mposition of reserve and structure match,no dioxygen is used. In other words: all use of dioxygen that is linked to growth comesfrom the growth overheads, if the elemental composition of reserve and structure match.98 4. Univariate DEB models-0.05 0 0.05 0.1 0 0.2 0.4 0.6 0.8 1j, mol.mol−1h−1scaled specific growth rate ˙ r/˙rmH2OHCO−3NH3H∗-0.05 0 0.05 0 0.2 0.4 0.6 0.8 1j, mol.mol−1h−1scaled specific growth rate ˙ r/˙rmN2NO−3ENO−2Figure 4.7: The specific fluxes of the compounds as a function of the specific growth rateas fraction of the maximum of ˙ rm= 0.003 h−1of the anammox bacteria. DEB Parameters:"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4131,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "the von Bertalanffy growth rate of bacteria [41, p.276-282]different species corrected for a common body yeasts [41, p.276-282]temperature decreases almost linearly with the animals [41, p.276-282]logarithm of the species maximum sizeG5 The logarithm of the von Bertalanffy growth rate for animals [19], [41, p.96]organisms of the same species at different foodavailabilities decreases linearly with ultimate lengthRespiration R1 Freshly laid eggs do not use dioxygen in signiﬁcant animals [6, 62, 67, 87]amountsR2 The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "69b847d4ec32c55db5430a9e",
+          "title": "Kooy2015_en.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4151,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": ".This strongly suggests that other reasons must exist to cease growing, andthat cartilage is replaced it improve bone structure.The second example concerns the di usion of dioxygen through the eggshell, which is generally seen as a rate-limiting factor in the development ofbird eggs. This idea rests on the observation of a strongly negative correlationbetween maximum dioxygen consumption and di usion resistance of the eggTheoretical Biology, a specialisation in integration 35shell. Models show, however, that energy use, that corresponds with the use ofdioxygen of the embryo, develops similar to that of the neonate. This suggests"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4157,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "fects of parent hy -poxia exposure early in the development of the F1 gen -eration. They measured the effect of hypoxia (4 kPa) during the ﬁrst 6 days of development (juvenile phase) on growth, reproduction, and respiration rate of parents and their offspring (F1 generation) from the ﬁrst three broods. Parental D. magna exposed to hypoxia during days 0 to 6 grew slower during days 9 to 15 than con -trols, but the body mass (without eggs) reached a pla -teau in both exposed and control females at the same level. This growth curves (in terms of mass) showing linear growth after maturation and no further mass gain"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Two snippets directly bear on the stylized fact. Snippet [7] explicitly measures metabolic allometry/oxygen consumption across developmental stages in Bombyx mori and notes scaling coefficients differing across stages, strongly supporting that the scaling of dioxygen use changes with developmental stage. Snippet [10] shows respiration (ETS) rates differing by developmental stage in fish larvae versus juveniles, also consistent. The remaining snippets concern oxygen as a developmental morphogen, hypoxia effects on embryos, redox biology, dioxin toxicity, or epigenetics, and do not address intraspecific scaling of maximum oxygen use across ontogeny. Thus evidence is moderate (mainly one strong and one supporting reference) and what evidence exists points in the supporting direction with no contradiction."
+      },
+      "n_references": 2,
+      "references": {
+        "W1999703385": {
+          "title": "Metabolic Allometry during Development and Metamorphosis of the Silkworm<i>Bombyx mori</i>: Analyses, Patterns, and Mechanisms",
+          "doi": "10.1086/648393",
+          "year": "2010",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4425877332687378
+        },
+        "W4317740004": {
+          "title": "Energetic Implications of Morphological Changes between Fish Larval and Juvenile Stages Using Geometric Morphometrics of Body Shape",
+          "doi": "10.3390/ani13030370",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.45150256156921387
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W3141161820",
+          "title": "The tolerance to hypoxia is defined by a time-sensitive response of the gene regulatory network in sea urchin embryos",
+          "doi": "10.1242/dev.195859",
+          "year": "2021",
+          "distance": 0.3995,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ABSTRACT Deoxygenation, the reduction of oxygen level in the oceans induced by global warming and anthropogenic disturbances, is a major threat to marine life. This change in oxygen level could be especially harmful to marine embryos that use endogenous hypoxia and redox gradients as morphogens during normal development."
+        },
+        {
+          "document_id": "W3042918462",
+          "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+          "doi": "10.1002/bies.202000025",
+          "year": "2020",
+          "distance": 0.4044,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Oxygen is a key regulator of both development and homeostasis and a promising candidate to bridge the influence of the environment and the evolution of new traits. To clarify the various ways in which oxygen may modulate embryogenesis, its effects are reviewed at distinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed."
+        },
+        {
+          "document_id": "W2998633070",
+          "title": "The Redox Theory of Development",
+          "doi": "10.1089/ars.2019.7976",
+          "year": "2019",
+          "distance": 0.4213,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "sub>-rich environment. Regulation of redox-sensitive processes to control development is likely to be evolutionarily conserved. <b><i>Recent Advances:</i></b> During early embryonic development, the conceptus is exposed to varying levels of O<sub>2</sub>. Oxygen and redox-sensitive elements can be regulated to promote normal development, defined as changes to cellular mass, morphology, biochemistry, and function, suggesting that O<sub>2</sub> is a developmental morphogen. During periods of O<sub>2</sub> fluctuation, embryos are \"reprogrammed,\" on the genomic and metabolic levels."
+        },
+        {
+          "document_id": "W2011481091",
+          "title": "A comparative perspective on epigenetics",
+          "doi": "10.1242/jeb.118075",
+          "year": "2015",
+          "distance": 0.4288,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "‘off’ – when an adaptation might be considered to be ‘on’ in one generation but switched off in subsequent generations (p. 80). ‘Less frequently have studies considered whether the phenomenon is graded in some form within or across generations’, says Burggren. Proposing that epigenetic phenomena decline (wash out) or even build up gradually (wash in) over generations, Burggren describes the transgenerational effects of dioxin exposure in rats and tributylitin exposure in the aquatic larvae of Chironomus riparius. He also explains that epigenetic phenotypic effects can be lost across broods of the same generation."
+        },
+        {
+          "document_id": "W4205704260",
+          "title": "The Pressing Issue of Micro- and Nanoplastic Contamination: Profiling the Reproductive Alterations Mediated by Oxidative Stress",
+          "doi": "10.3390/antiox11020193",
+          "year": "2022",
+          "distance": 0.4386,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "embryonic and offspring development, and survival have been shown in most studies and often related to a broken redox balance. All these detrimental effects are inversely related to particle size, whereas they are closely linked to shape, plastic polymer type, superficial functionalization, concentration, and time of exposure. To date, the studies provide insights into the health impacts, but no conclusions can be drawn for reproduction toxicity. The main implication of the few studies on antioxidant substances reveals their potential role in mitigating MP-induced toxic effects."
+        },
+        {
+          "document_id": "W2125726311",
+          "title": "REDOX regulation of early embryo development",
+          "doi": "10.1530/rep.0.1230479",
+          "year": "2002",
+          "distance": 0.4406,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "on. Such a shift in metabolic pathway preference is desirable as the embryo faces an increasingly hypoxic environment in utero. We hypothesize that this shift in metabolic preference is associated with a change in the reduction-oxidation (REDOX) state within the embryo, affecting not only the energy production required for development, but also the activity of REDOX-sensitive transcription factors, which may alter gene expression patterns."
+        },
+        {
+          "document_id": "W1999703385",
+          "title": "Metabolic Allometry during Development and Metamorphosis of the Silkworm<i>Bombyx mori</i>: Analyses, Patterns, and Mechanisms",
+          "doi": "10.1086/648393",
+          "year": "2010",
+          "distance": 0.4426,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "all developmental stages and within each stage would not reflect conventional scaling coefficients (e.g., b not equal to 0.75). Histology, gross morphology, body surface and cross-sectional area, total lipid content, and cytochrome c oxidase activity levels (as evidence of the total metabolic potential of mitochondria) were determined across development. Also measured were oxygen consumption, carbon dioxide production, and the respiratory exchange ratio."
+        },
+        {
+          "document_id": "W2187109492",
+          "title": "Fish embryo and juvenile size under hypoxia in the mouth-brooding African cichlid Pseudocrenilabrus multicolor",
+          "doi": "10.1093/czoolo/58.3.401",
+          "year": "2012",
+          "distance": 0.4435,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract We used a field survey and a laboratory rearing experiment to (a) examine response (size and survival) to life-long hypoxia in offspring of the African maternal mouth-brooding cichlid Pseudocrenilabrus multicolor victoriae (Seegers) and (b) explore the degree to which developmental response can be environmentally-induced. Embryo size metrics were quantified in 9 field populations across a range of dissolved oxygen (DO) concentrations."
+        },
+        {
+          "document_id": "W2001765747",
+          "title": "Caterpillars selected for large body size and short development time are more susceptible to oxygen‐related stress",
+          "doi": "10.1002/ece3.551",
+          "year": "2013",
+          "distance": 0.4483,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "responses to hyperoxia with greater reductions in juvenile and adult mass, growth rate, and survival than the other two lines. Hypoxia generally negatively affected survival and growth/size, but the lines responded similarly. These results are mostly consistent with the hypothesis that simultaneous acquisition of large body sizes and short development times leads to reduced capacities for coping with stressful conditions including oxidative damage. This result is of particular importance in that natural selection tends to decrease development time and increase body size."
+        },
+        {
+          "document_id": "W4317740004",
+          "title": "Energetic Implications of Morphological Changes between Fish Larval and Juvenile Stages Using Geometric Morphometrics of Body Shape",
+          "doi": "10.3390/ani13030370",
+          "year": "2023",
+          "distance": 0.4515,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "is (GMA). The results revealed a decrease in morphological variability (i.e., morphological disparity) with the somatic growth. The main changes affected head size, elongation, and widening of the body. Given that this variability could affect the metabolism, some individuals with different morphologies and in different ontogenetic developmental stages were selected to estimate their potential respiration rate using the Electron Transport System (ETS) analysis. Differences were detected depending on the developmental stage, and being significantly smaller after 54 days post-hatching."
+        },
+        {
+          "document_id": "W4410404782",
+          "title": "Oxygen levels regulating embryonic genome activation",
+          "doi": "10.69622/28731794",
+          "year": "2025",
+          "distance": 0.4581,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "is knowledge to understand the impact that oxygen levels have on in vitro embryo development, especially on EGA and metabolism. We found that the highest blastocyst formation rate happened in hypoxic culture conditions that induced timely EGA and energy metabolism genes. On the contrary, normoxia slowed down maternal transcript degradation, which is necessary for the embryo to achieve totipotency and reprogramming."
+        },
+        {
+          "document_id": "W2408168992",
+          "title": "Hospitals and plastics. Dioxin prevention and medical waste incinerators.",
+          "doi": "",
+          "year": "1996",
+          "distance": 0.4588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ted globally, and every member of the human population is exposed to them, primarily through the food supply and mothers' milk. An emerging body of information suggests that dioxin contamination has reached a level that may pose a large-scale, long-term public health risk. Of particular concern are dioxin's effects on reproduction, development, immune system function, and carcinogenesis. Medical waste incineration is a major source of dioxins."
+        },
+        {
+          "document_id": "W2133872744",
+          "title": "Oxidative stress as a life‐history constraint: the role of reactive oxygen species in shaping phenotypes from conception to death",
+          "doi": "10.1111/j.1365-2435.2010.01750.x",
+          "year": "2010",
+          "distance": 0.4588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "e concept can be expanded to include the disruption of reduction : oxidation (redox) reactions involved in cellular signalling. In this review, we consider how the need to circumvent oxidation may shape the phenotypes of organisms throughout their life and that of their offspring, underpinning a diverse range of life‐history trade‐offs. 2. A recent explosion of interest in this field has shown that both ROS production and the capacity of animals to deal with it change from early development through to adulthood, and vary with environmental conditions and lifestyle."
+        },
+        {
+          "document_id": "W4311875468",
+          "title": "Divergent Carry-Over Effects of Hypoxia during the Early Development of Abalone",
+          "doi": "10.1021/acs.est.2c04975",
+          "year": "2022",
+          "distance": 0.4633,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "After being exposed to environmental stimuli during early developmental stages, some organisms may gain or weaken physiological regulating abilities, which would have long-lasting effects on their performance. Environmental hypoxia events can have significant effects on marine organisms, but for breeding programs and other practical applications, it is important to further explore the long-term physiological effects of early hypoxia exposure in economically significant species."
+        },
+        {
+          "document_id": "W2980808608",
+          "title": "Organic Pellet Decomposition Induces Mortality of Lake Trout Embryos in Yellowstone Lake",
+          "doi": "10.1002/tafs.10208",
+          "year": "2019",
+          "distance": 0.464,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "aused dissolved oxygen ( DO ) concentrations to temporarily decline to lethal levels (&lt;3.4 mg/L) within days of application. Embryo mortalities during the first exposure period (days 1–6 following application) were high at all treatment levels (1.75–28.0 kg/m 2 ) at the substrate surface and within interstices 20 cm below the surface, varying from 97 ± 1.8% (mean ± SE ) to 100 ± 0.0%, but may have been enhanced by a handling effect (exposure to sunlight). Embryo mortalities during the second exposure period (days 11–22) were highest 20 cm below the surface, varying from 78 ± 9.7% to 100 ± 0.0%."
+        },
+        {
+          "document_id": "W3123539635",
+          "title": "Stress-Induced Evolutionary Innovation: A Mechanism for the Origin of Cell Types",
+          "doi": "10.20944/preprints201809.0193.v1",
+          "year": "2018",
+          "distance": 0.4671,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Understanding the evolutionary role of environmentally-induced phenotypic variation (i.e., environmental plasticity) is an important issue in developmental evolution. One of the major physiological responses to environmental changes is cellular stress, which is counteracted by a generic stress reaction that detoxifies the cell, refolds proteins, and repairs DNA damage."
+        },
+        {
+          "document_id": "W3042918462",
+          "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+          "doi": "10.1002/bies.202000025",
+          "year": "2020",
+          "distance": 0.4675,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "istinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed. Then, the effects of microenvironmental oxygen on metabolism, stemness, and differentiation throughout embryogenesis are discussed. Last, the interplay between ecology and development are reexamined with a focus on the evolution of tetrapods, including during the emergence of a novel mechanism that shapes amniote limbs—interdigital cell death."
+        },
+        {
+          "document_id": "W2897328485",
+          "title": "A Reassessment of Birth Defects for Children of Participants of the Air Force Health Study",
+          "doi": "10.4236/ojepi.2018.84015",
+          "year": "2018",
+          "distance": 0.4676,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "of 10 parts per trillion for a high dioxin level, and not adjusting for multiple conceptions/children of the same participant. Using data for all participants with measured dioxin levels, both veterans who served in Operation Ranch Hand and other non-Ranch Hand veterans, and after accounting for correlation within children of the same participant, the occurrence for children fathered after the start of the first tour of a major defect, a non-major defect, and multiple defects depended significantly on participants having a high dioxin level. These conclusions were not changed by consideration of covariates."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple DEB-theory sources (snippets 1-7, 9-11) explicitly state the stylized fact that dioxygen use scales differently across developmental stages: increasing with decreasing mass in embryos but increasing with mass in juveniles and adults. This directly affirms that intraspecific scaling of maximum dioxygen use changes with developmental stage. Snippet 1 gives the mechanistic rationale (reserve loss during embryo development vs. structure-driven maintenance in juveniles/adults). Empirical studies (19, 22) independently document stage-dependent metabolic scaling and developmental-stage differences in respiration rate in silkworm and fish, corroborating the pattern. The remaining snippets concern oxygen/redox effects on development or unrelated topics and are neutral. No snippet contradicts the fact, so the evidence is strong and consistent."
+      },
+      "n_references": 10,
+      "references": {
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2617499828338623
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2955896258354187
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2962443232536316
+        },
+        "69b89d63ecbd4702b29a6eb3": {
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.32516878843307495
+        },
+        "69b86b37ecbd4702b29a303e": {
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.39062702655792236
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.397405743598938
+        },
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3976205587387085
+        },
+        "69b84857ec32c55db5430bf1": {
+          "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.39896827936172485
+        },
+        "W1999703385": {
+          "title": "Metabolic Allometry during Development and Metamorphosis of the Silkworm<i>Bombyx mori</i>: Analyses, Patterns, and Mechanisms",
+          "doi": "10.1086/648393",
+          "year": "2010",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4425877332687378
+        },
+        "W4317740004": {
+          "title": "Energetic Implications of Morphological Changes between Fish Larval and Juvenile Stages Using Geometric Morphometrics of Body Shape",
+          "doi": "10.3390/ani13030370",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.45150256156921387
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2617,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2956,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113]The use of dioxygen scales approximately with body weight raised animals [10, 84, 91]to a power close to 0.75 [45]Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88]after ingesting food (heat increment of feeding)Ageing Lifespan increases with size for endotherms, animals [19, 85]but is independent of size in ectotherms"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2962,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3053,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3252,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "embryos, but increases with mass in juvenilesand adultsThe use of dioxygen scales with body mass raisedto a power close to 0.75Stoichiometry Well-fed animals have a di erent body chemicalcomposition than poorly-fed organismsAnimals growing with constant food density con-verge to a constant chemical compositionReproduction Reproduction increases with size intra-speci cally,but decreases with size inter-speci cally2 DEB, DEVELOPMENT AND CRITICISMS 6Table 2: The basic assumptions of the standard DEB model. After Kooij-man [9]1. An organism is characterized by a structural body, reserves, and matu-"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3622,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ight approximately proportional to cubed time [34] animals [34, 115]The von Bertalanffy growth rate of bacteria [48, pp.276-282]different species corrected for a common body yeasts [48, pp.276-282]temperature decreases almost proportional to animals [48, pp.276-282]maximum body lengthReproduction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78]but decreases with size inter-speciﬁcallyRespiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3906,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "s in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heatincrement of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starvedvs well-fed)S2The chemical composition of organisms at constant food density of constantcomposition becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygenE2Dissipating heat for heterotrophic isomorphs under aerobic conditions is a"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3947,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "present, thehandling of reactive oxygen species (ROS) became importantto reduce damage to the metabolic machinery and especiallyto DNA. This especially holds true for tissues of cells withnon-reversible differentiation; this excludes e.g.plants.Specialised proteins (peroxidase dismutases) were developedand their effectiveness was tuned to compromise betweensurvival of the juvenile period and the use of ROS togenerate genetic variability among gametes. The latter isimportant to allow adaptation to long-term environmentalchanges that are too large for adaptation within a givengenome. Big-bodied species are vulnerable; the body size"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3974,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "do not use dioxygen in signiﬁcant animals [6, 62, 67, 87]amountsR2 The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87]R3 The use of dioxygen scales with body weight raised animals [11, 65, 71]to a power close to 0.75 [38]R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68]after ingesting food independent of their body mass -the heat increment of feedingTable 5.1: Stylized facts and empirical evidence on feeding, growth an d respiration.Stylized Facts Empirical Evidence"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3976,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)"
+        },
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3978,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ile stage that does notreproduceR2Reproduction increases with size intra-speci ﬁcally, but decreases with size inter-speciﬁcallyR3A range of constant low food levels exists at which an individual can survive, butnot reproduceR4Growth can be simultaneous with reproduction, but growth can also cease longbefore reproduction is initiatedRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increaseswith mass in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75"
+        },
+        {
+          "document_id": "69b84857ec32c55db5430bf1",
+          "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.399,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ion at best. Feeding and temperature affect metabolic ratesubstantially, as does body size (both intra- and inter-speci ﬁcally).The trajectory of metabolic rate over the life cycle of an individual andthe inter-species variation are well understood quantitatively by theDEB theory ( Kooijman, 1986, 2001 ). The DEB theory makes no (direct)assumption about the use of dioxygen and obtains it by closing themass balance for chemical elements (carbon, hydrogen, oxygen andnitrogen). The implication is that the use of dioxygen can only beevaluated in combination with the production ﬂux of water, carbon-"
+        },
+        {
+          "document_id": "W3141161820",
+          "title": "The tolerance to hypoxia is defined by a time-sensitive response of the gene regulatory network in sea urchin embryos",
+          "doi": "10.1242/dev.195859",
+          "year": "2021",
+          "distance": 0.3995,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ABSTRACT Deoxygenation, the reduction of oxygen level in the oceans induced by global warming and anthropogenic disturbances, is a major threat to marine life. This change in oxygen level could be especially harmful to marine embryos that use endogenous hypoxia and redox gradients as morphogens during normal development."
+        },
+        {
+          "document_id": "W3042918462",
+          "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+          "doi": "10.1002/bies.202000025",
+          "year": "2020",
+          "distance": 0.4044,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "Abstract Oxygen is a key regulator of both development and homeostasis and a promising candidate to bridge the influence of the environment and the evolution of new traits. To clarify the various ways in which oxygen may modulate embryogenesis, its effects are reviewed at distinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed."
+        },
+        {
+          "document_id": "W2998633070",
+          "title": "The Redox Theory of Development",
+          "doi": "10.1089/ars.2019.7976",
+          "year": "2019",
+          "distance": 0.4213,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "sub>-rich environment. Regulation of redox-sensitive processes to control development is likely to be evolutionarily conserved. <b><i>Recent Advances:</i></b> During early embryonic development, the conceptus is exposed to varying levels of O<sub>2</sub>. Oxygen and redox-sensitive elements can be regulated to promote normal development, defined as changes to cellular mass, morphology, biochemistry, and function, suggesting that O<sub>2</sub> is a developmental morphogen. During periods of O<sub>2</sub> fluctuation, embryos are \"reprogrammed,\" on the genomic and metabolic levels."
+        },
+        {
+          "document_id": "W2011481091",
+          "title": "A comparative perspective on epigenetics",
+          "doi": "10.1242/jeb.118075",
+          "year": "2015",
+          "distance": 0.4288,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "‘off’ – when an adaptation might be considered to be ‘on’ in one generation but switched off in subsequent generations (p. 80). ‘Less frequently have studies considered whether the phenomenon is graded in some form within or across generations’, says Burggren. Proposing that epigenetic phenomena decline (wash out) or even build up gradually (wash in) over generations, Burggren describes the transgenerational effects of dioxin exposure in rats and tributylitin exposure in the aquatic larvae of Chironomus riparius. He also explains that epigenetic phenotypic effects can be lost across broods of the same generation."
+        },
+        {
+          "document_id": "W4205704260",
+          "title": "The Pressing Issue of Micro- and Nanoplastic Contamination: Profiling the Reproductive Alterations Mediated by Oxidative Stress",
+          "doi": "10.3390/antiox11020193",
+          "year": "2022",
+          "distance": 0.4386,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "embryonic and offspring development, and survival have been shown in most studies and often related to a broken redox balance. All these detrimental effects are inversely related to particle size, whereas they are closely linked to shape, plastic polymer type, superficial functionalization, concentration, and time of exposure. To date, the studies provide insights into the health impacts, but no conclusions can be drawn for reproduction toxicity. The main implication of the few studies on antioxidant substances reveals their potential role in mitigating MP-induced toxic effects."
+        },
+        {
+          "document_id": "W2125726311",
+          "title": "REDOX regulation of early embryo development",
+          "doi": "10.1530/rep.0.1230479",
+          "year": "2002",
+          "distance": 0.4406,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "on. Such a shift in metabolic pathway preference is desirable as the embryo faces an increasingly hypoxic environment in utero. We hypothesize that this shift in metabolic preference is associated with a change in the reduction-oxidation (REDOX) state within the embryo, affecting not only the energy production required for development, but also the activity of REDOX-sensitive transcription factors, which may alter gene expression patterns."
+        },
+        {
+          "document_id": "W1999703385",
+          "title": "Metabolic Allometry during Development and Metamorphosis of the Silkworm<i>Bombyx mori</i>: Analyses, Patterns, and Mechanisms",
+          "doi": "10.1086/648393",
+          "year": "2010",
+          "distance": 0.4426,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "all developmental stages and within each stage would not reflect conventional scaling coefficients (e.g., b not equal to 0.75). Histology, gross morphology, body surface and cross-sectional area, total lipid content, and cytochrome c oxidase activity levels (as evidence of the total metabolic potential of mitochondria) were determined across development. Also measured were oxygen consumption, carbon dioxide production, and the respiratory exchange ratio."
+        },
+        {
+          "document_id": "W2187109492",
+          "title": "Fish embryo and juvenile size under hypoxia in the mouth-brooding African cichlid Pseudocrenilabrus multicolor",
+          "doi": "10.1093/czoolo/58.3.401",
+          "year": "2012",
+          "distance": 0.4435,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract We used a field survey and a laboratory rearing experiment to (a) examine response (size and survival) to life-long hypoxia in offspring of the African maternal mouth-brooding cichlid Pseudocrenilabrus multicolor victoriae (Seegers) and (b) explore the degree to which developmental response can be environmentally-induced. Embryo size metrics were quantified in 9 field populations across a range of dissolved oxygen (DO) concentrations."
+        },
+        {
+          "document_id": "W2001765747",
+          "title": "Caterpillars selected for large body size and short development time are more susceptible to oxygen‐related stress",
+          "doi": "10.1002/ece3.551",
+          "year": "2013",
+          "distance": 0.4483,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "responses to hyperoxia with greater reductions in juvenile and adult mass, growth rate, and survival than the other two lines. Hypoxia generally negatively affected survival and growth/size, but the lines responded similarly. These results are mostly consistent with the hypothesis that simultaneous acquisition of large body sizes and short development times leads to reduced capacities for coping with stressful conditions including oxidative damage. This result is of particular importance in that natural selection tends to decrease development time and increase body size."
+        },
+        {
+          "document_id": "W4317740004",
+          "title": "Energetic Implications of Morphological Changes between Fish Larval and Juvenile Stages Using Geometric Morphometrics of Body Shape",
+          "doi": "10.3390/ani13030370",
+          "year": "2023",
+          "distance": 0.4515,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "is (GMA). The results revealed a decrease in morphological variability (i.e., morphological disparity) with the somatic growth. The main changes affected head size, elongation, and widening of the body. Given that this variability could affect the metabolism, some individuals with different morphologies and in different ontogenetic developmental stages were selected to estimate their potential respiration rate using the Electron Transport System (ETS) analysis. Differences were detected depending on the developmental stage, and being significantly smaller after 54 days post-hatching."
+        },
+        {
+          "document_id": "W4410404782",
+          "title": "Oxygen levels regulating embryonic genome activation",
+          "doi": "10.69622/28731794",
+          "year": "2025",
+          "distance": 0.4581,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "is knowledge to understand the impact that oxygen levels have on in vitro embryo development, especially on EGA and metabolism. We found that the highest blastocyst formation rate happened in hypoxic culture conditions that induced timely EGA and energy metabolism genes. On the contrary, normoxia slowed down maternal transcript degradation, which is necessary for the embryo to achieve totipotency and reprogramming."
+        },
+        {
+          "document_id": "W2408168992",
+          "title": "Hospitals and plastics. Dioxin prevention and medical waste incinerators.",
+          "doi": "",
+          "year": "1996",
+          "distance": 0.4588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ted globally, and every member of the human population is exposed to them, primarily through the food supply and mothers' milk. An emerging body of information suggests that dioxin contamination has reached a level that may pose a large-scale, long-term public health risk. Of particular concern are dioxin's effects on reproduction, development, immune system function, and carcinogenesis. Medical waste incineration is a major source of dioxins."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,904 @@
+{
+  "sf_id": "respiration_03",
+  "category": "Respiration",
+  "statement": "Dioxygen use by isomorphs scales approximately with body weight raised to the power 0.75 (Kleiber's law).",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple DEB-domain snippets (1, 2, 3, 4, 6, 14) explicitly and repeatedly state the stylized fact that dioxygen use by isomorphs scales with body weight to a power close to 0.75 (Kleiber's law), constituting strong corroborating support within the DEB framework. Several other snippets (5, 7, 12, 13, 15, 18) push back on the universality of the 3/4 exponent, noting broad distributions of scaling exponents, deviations toward isometry, and that 0.75 was originally an empirical approximation rather than a universal law. However, the stylized fact is deliberately worded as 'approximately' and 'close to 0.75,' which the supporting evidence affirms; the critical snippets mainly contest universality rather than the approximate central tendency (snippet 18 even notes the mode is ~0.74). On balance the fact as stated is clearly and repeatedly corroborated, so evidence is strong and the consensus direction is corroborative, with acknowledged caveats about exponent variability."
+      },
+      "n_references": 11,
+      "references": {
+        "69b86b37ecbd4702b29a303e": {
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36343181133270264
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.39232337474823
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3934895396232605
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.401222825050354
+        },
+        "69b847c5ec32c55db5430a4a": {
+          "title": "GlazHirs2015.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.40564966201782227
+        },
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4103701114654541
+        },
+        "69b847e9ec32c55db5430ad7": {
+          "title": "WhitKear2011.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.4126584529876709
+        },
+        "69b8a4f9ecbd4702b29a77fa": {
+          "title": "Schramm e.a. - 2018 - Effects of fat and exoskeletal mass on the mass sc.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.4511823058128357
+        },
+        "69b84852ec32c55db5430bd9": {
+          "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.4513760805130005
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.45151567459106445
+        },
+        "69b8476cec32c55db5430963": {
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 0,
+          "contradicts": 2,
+          "best_distance": 0.4519924521446228
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3634,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "s in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heatincrement of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starvedvs well-fed)S2The chemical composition of organisms at constant food density of constantcomposition becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygenE2Dissipating heat for heterotrophic isomorphs under aerobic conditions is a"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3923,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113]The use of dioxygen scales approximately with body weight raised animals [10, 84, 91]to a power close to 0.75 [45]Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88]after ingesting food (heat increment of feeding)Ageing Lifespan increases with size for endotherms, animals [19, 85]but is independent of size in ectotherms"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3935,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4012,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b847c5ec32c55db5430a4a",
+          "title": "GlazHirs2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4056,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "1.00 +0.16b(4)copepodites and adults 2.84 +0.20a(20) 0.68 –0.70 0.72 +0.22b(7)aBased on dry mass, carbon mass or nitrogen mass.bBased on dry body mass.rspb.royalsocietypublishing.org Proc. R. Soc. B 282: 201423026 on February 28, 2018 http://rspb.royalsocietypublishing.org/ Downloaded from biphasic or triphasic metabolic scaling appear to be ‘skin-breathers’ (i.e. they can absorb oxygen and expel dissolvedwaste products such as CO 2through their thin, permeableinteguments) [40,41]. Some can even absorb nutrientsthrough their body surfaces and metabolize them in their tis-sues [40,42]. Remarkably, the body-mass scaling slope for"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4104,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ltsanimals ( Romijn & Lokhorst 1951 ;Richman1958 ;Pettit 1982 ;Bucher 1983 ;Whitehead1987 ;Clarke & Johnston 1999 ;Savage et al.2004 )R3 the use of dioxygen scales approximately withbody weight raised to power 0.75 ( Kleiber1932 )animals ( Richman 1958 ;Clarke & Johnston1999 ;Savage et al. 2004 )R4 organisms show a transient increase in meta-bolic rate independent of their body massafter ingesting food—the heat increment offeedinganimals ( Janes & Chappell 1995 ;Chappell et al.1997 ;Hawkins et al. 1997 ;Rosen & Trites1997 ;Nespolo et al. 2005 )"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430ad7",
+          "title": "WhitKear2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4127,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.55,
+          "text": "Peck and Barnes 2004) and assuming awater content of 84% (Stebbing 1971).mansen et al. 2001) but shows a metabolic scaling expo-nent close to isometry (Hughes and Hughes 1986). In thiscase, the difference can be attributed to the growth formofElectra , which deviates increasingly from circular as size"
+        },
+        {
+          "document_id": "69b885f4ecbd4702b29a5315",
+          "title": "Tomlinson - Applications and implications of ecological energe.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4398,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "O, whereas heavy isotopes of hydrogen (2H or3H) are lost onlyas H2O [66,67] . Therefore, the difference between the hydrogen andoxygen isotope turnover rate is indicative of CO2production [66,67] ,which is linked to metabolic rate and energetic requirements. However,there are several assumptions behind the DLW technique that are notalways met [65,66] (see Table 1 in main text), thus restricting its use insome taxa, such as amphibians [68], diving birds, and mammals [69], andorganisms of small body size [70–72] . Finally, the18O isotope is expensiveto procure and analyse [66,68] and these costs have proven prohibitive for"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4415,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "with isotopes. All molecules have the samekinetic energy mc2/2; if the mass mof an isotope is larger, its velocity cis smaller.Fractionation can occur in the selective uptake of dioxygen and carbon dioxide (mostlyby phototrophs) and in the selective release of carbon dioxide, nitrogenous waste andwater. The latter might be of some importance for terrestrial organisms, where this releaseis associated with a phase transition for liquid (= organism) to gas. The isotope frequencyin assimilation, dissipation and/or growth has expectationn0kij=nijβ0kijβ0kij−1 + 1 /γ0ij,son0kOO=2β0kOOβ0kOO−1 + 1 /γ0OO(3.23)For odds ratio β0k"
+        },
+        {
+          "document_id": "69b888ffecbd4702b29a56d0",
+          "title": "Gerg2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4416,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Kooijman (2010) in a dynamic energy budget (DEB) approach. In isomorphs, i.e. animals c onserving shape during growth, body 68 volume is assumed proportional to body length to th e power of three. Isomorphism applies to the majority of species (Kooijman 2010) and also wi ll hold true for N. maculata and D. magna . Body weight can be described as a function of bod y volume multiplied by a factor of mass density. In Daphnia , density of body dry weight is empirical derived f rom laboratory data, whereas, for reasons of simplicity, mass dens ity is assumed to be 1 mg/mm 3 in"
+        },
+        {
+          "document_id": "69b84865ec32c55db5430c36",
+          "title": "JageRava2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.448,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "d to have a similar composition, so for the respiration pre-dictions, the difference can be ignored). This can be converted intocarbon ﬂuxes by multiplying with the weight of carbon per unit ofdry body weight (dC), to moles using the molar weight of carbon,and subsequently to moles of dioxygen assuming a respiration quo-tient of 0.9 (as was used in Jager and Ravagnan, 2015 ). The ﬂuxeswill be expressed per dry weight of animal by dividing by the drybody weight:WV= dVL3(8)It should be noted that WVis the structural body weight. Krill willbuild up a seasonal lipid storage (see e.g., Båmstedt, 1976 ), and since"
+        },
+        {
+          "document_id": "69b8a4f9ecbd4702b29a77fa",
+          "title": "Schramm e.a. - 2018 - Effects of fat and exoskeletal mass on the mass sc.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4512,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "must involve a single mass-scaling exponent for metabolism,typically either 0.67 ( Sarrus and Rameaux, 1839; White and Seymour,2003 )o r0 . 7 5( Blaxter, 1989; Kleiber, 1932; Savage et al., 2004;Schmidt-Nielsen, 1984; West et al., 1997, 1999 ). Interestingly, theexponent value of 0.75 was originally proposed by Kleiber (1932) ,n o tas a manifestation of biological laws but as an approximation of em-pirical data that aimed to facilitate utilitarian calculations with a sliderule ( Brody, 1934, 1946 ). At odds with a universal biological law thatdetermines metabolic scaling, the exponent bhas been reported to"
+        },
+        {
+          "document_id": "69b84852ec32c55db5430bd9",
+          "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4514,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.65,
+          "text": "metabolic rate ( R) versus body mass ( m), 85 where log (𝑅) = log(𝑎)+ 𝑏ோlog(𝑚) and a is the scaling coefficient. The dashed 86 blue line represents isometric scaling of metabolic rate with body size (𝑏ோ= 1). The 87 solid green and orange lines represent deviations from isometry, where 𝑏ோ= 0.75 and 88 𝑏ோ= 1.25, respectively. 89 90 Despite widespread diversity in the scaling of metabolic rate within and across 91 organisms, it is commonly assumed that metabolic rate ( 𝑅) scales with body mass ( 𝑀) 92 to the ଷସ power, a value that has been argued to be a universal metabolic scaling 93 exponent (West, Brown and Enquist, 1997). Such ଷ"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4515,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "do not use dioxygen in signiﬁcant animals [6, 62, 67, 87]amountsR2 The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87]R3 The use of dioxygen scales with body weight raised animals [11, 65, 71]to a power close to 0.75 [38]R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68]after ingesting food independent of their body mass -the heat increment of feedingTable 5.1: Stylized facts and empirical evidence on feeding, growth an d respiration.Stylized Facts Empirical Evidence"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.452,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.75,
+          "text": "ring approaches, andother kinds of manipulative experiments; e.g. Moruppa,1990; Rollo, 1995; Moody, Pomp & Nielsen, 1997; Selmanet al., 2001).V. CONCLUSIONS(1) To advance our understanding of the scaling ofmetabolism with body size, we should expand our focusbeyond the 3/4-power scaling law, which is not universalwithin or among species. Rather than one scaling relation,there is a diversity of scaling relations that requiresexplanation.(2) Existing theoretical models cannot explain the fullrange of variation in metabolic scaling that is observed ata variety of scales from individual species to all of life."
+        },
+        {
+          "document_id": "69b88a75ecbd4702b29a58c9",
+          "title": "Emme2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4524,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "dag 6 december 2012 om 14:00 uurin de amﬁtheater Vauquelin van de universiteit,Esplanade de la Paix, 1400 CaendoorAntoine Emmerygeboren te Montauban, Frankrijkpromotoren: prof. dr. S.A.L.M. Kooijmanprof. dr. S. Lefebvrecopromotor: dr. M. Alunno-BrusciaTo my familyand friendsContents1 Introduction 11.1 The isotopic tool: deﬁnition, generalities and applica tions . . . 21.1.1 Strength and weakness . . . . . . . . . . . . . . . . . . . 31.1.2 Incorporation and fractionation of stable isotopes . . . . 31.1.3 Mixing models and diet reconstruction studies . . . . . 61.2 Bioenergetic models . . . . . . . . . . . . . . . . . . . . . . . . 7"
+        },
+        {
+          "document_id": "69b879e7ecbd4702b29a42c6",
+          "title": "BurgRyan2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4537,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "hysiologically interconnected within a structuralindividual (Vuorisalo & Tuomi 1986; Glazier2014a).Overview of metabolic scalingAlthough not always addressed, considerations ofmetabolic scaling must ﬁrst deﬁne metabolism.Metabolism is often loosely deﬁned as the processof converting energy and materials into living struc-tures and activities, including cellular and tissuemaintenance, growth, reproduction, movement, andthermoregulation (Brown et al. 2004; Glazier 2015).Most analyses measure the rate of oxygen uptake asa direct measure of aerobic respiration, but alterna-"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4552,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "th this evidence.First, although the mode (0.74) of the metabolic scalingexponents compiled by Peters (1983) is very nearly 3/4,the distribution of values is quite broad ( <0.5 to>1.0) andincludes values that have been shown to be signiﬁcantlydiﬀerent from 0.75 (see also KozŁowski, Konarzewski &Gawelczyk, 2003 a,b). Although a substantial percentage(49%) of the exponents is between 0.7 and 0.8, a slightlylarger percentage lies outside this range (51%: see Fig. 4.1in Peters, 1983). The distribution of interspeciﬁc metabolicscaling exponents is similarly broad in Withers’ (1992)"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 1,
+        "rationale": "Almost all snippets are off-topic (toxicology, reproduction, materials science) and bear no relation to oxygen consumption scaling with body mass. The only snippet directly addressing metabolic scaling is [13], which explicitly argues that the 3/4-power law is not universal and that pelagic animals often scale isometrically, thereby contradicting (or at least qualifying) the stylized fact. Snippets [16], [17], and [18] touch on oxygen/metabolic rate and body size but do not provide quantitative support for a 0.75 exponent. There is no clear supporting evidence in this corpus, and the one relevant snippet pushes against universality, so evidence strength is weak and the direction leans contradicted/mixed."
+      },
+      "n_references": 1,
+      "references": {
+        "W2143117770": {
+          "title": "The 3/4-Power Law Is Not Universal: Evolution of Isometric, Ontogenetic Metabolic Scaling in Pelagic Animals",
+          "doi": "10.1641/0006-3568(2006)56[325:tplinu]2.0.co;2",
+          "year": "2006",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.5388615131378174
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2620667172",
+          "title": "Codling moth : biotic potential of males and colony vigor of three laboratory strains /",
+          "doi": "10.5962/bhl.title.134804",
+          "year": "1980",
+          "distance": 0.4924,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Facetsofthebioticpotentialofmalesofthreecodlingmothcolonies,laboratoryrearedsince1960,1973,and1974forapproximately156,32,and32generationsincolonization,respectively,werecompared.Fifty-ninemalesfromeachcolonywereused.Parameterscomparedwere:numberofmalesmating,numberofmatings,numberofmatingspermale,numberofeggs,percentegghatch,numberofeggspermale,malelon-gevity,anddistributionandfrequencyofmultiplematingsamongmales.Evaluationofthefindingsshowedthatthecolonybegunin1974hadagreaterbioticpotentialthantheothertwo"
+        },
+        {
+          "document_id": "W2071832423",
+          "title": "Some Factors Affecting Age at Puberty and the First 90 Days of Lactation in Holstein Heifers",
+          "doi": "10.3168/jds.s0022-0302(60)90288-5",
+          "year": "1960",
+          "distance": 0.5122,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "antlybyageatpuberty(--0.25,P<.05)andcalvingweight(0.21,P<.05).Significantamountsofvariationintheageatwhichananimalattainspubertyhavebeenascribedbothtogeneticandto'certainidentifiableenvironmentalfactors.Footeetal."
+        },
+        {
+          "document_id": "W2131658622",
+          "title": "Biaxial mechanical evaluation of cholecyst‐derived extracellular matrix: A weakly anisotropic potential tissue engineered biomaterial",
+          "doi": "10.1002/jbm.a.30943",
+          "year": "2007",
+          "distance": 0.5153,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "isotropic and it has the ability to support large strains across a physiological loading regime. © 2007 Wiley Periodicals, Inc. J Biomed Mater Res, 2007"
+        },
+        {
+          "document_id": "W2388470274",
+          "title": "CHAPTER 10. Scale‐up of Extraction Processes",
+          "doi": "10.1039/9781849737579-00363",
+          "year": "2013",
+          "distance": 0.5212,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "The challenge of finding scale‐up criteria that allow the reproduction of laboratory data at higher scales is discussed in this chapter. The main factors that should be considered when scaling‐up extraction processes will be presented, and the nature of thermodynamic and mass transfer changes implied by scale‐up will be extensively discussed. The chapter contains an overview of the latest developments and applications in the field of natural products."
+        },
+        {
+          "document_id": "W4291987281",
+          "title": "NTP-CERHR Monograph on the Potential Human Reproductive and Developmental Effects of Propylene Glycol (PG).",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.5241,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "34 mg/kg body weight/day for a 70 kg person, which is over 300 -fold lower than the highest dose tested in laboratory animals. NTP-CERHR monographs are transmitted to federal and state agencies, interested parties, and the public and are available in electronic PDF format on the CERHR web site (http://cerhr.niehs.nih.gov) and in printed text or CD-ROM from the CERHR (National Institute of Environmental Health Sciences, P.O. Box 12233, MD EC-32, Research Triangle Park, NC; fax: 919-316-4511)."
+        },
+        {
+          "document_id": "W2982966582",
+          "title": "Study of the effect of four generic lambda-cyhalothrin pesticides on the reproductive function of male wistar han rats",
+          "doi": "10.33273/2663-4570-2018-82-83-2-3-24-33",
+          "year": "2018",
+          "distance": 0.5297,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "all studies substances is the dose of 0,3 mg/kg body weight. In the range of studied doses, there is a dose-effect dependence. Key words: pesticides, cyhalothrin, lambda-cyhalothrin, gonadotoxicity, reproductive toxicity."
+        },
+        {
+          "document_id": "W2326241514",
+          "title": "Chronic exposure to MDMA (ecstasy)induces DNA damage, impairs functional antioxidant cellular defenses, enhances the lipid peroxidation process and alters testes histopathology in male rat.",
+          "doi": "10.21608/ejhm.2013.15992",
+          "year": "2013",
+          "distance": 0.5325,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ratstreatedwith30mg/kgbodyweightecstasyfor(,15,30,45)daysbyoralgavage.Thethirdgroup(45days)wasfollowedby15withdrawalperiod(W15).Results:Theactivitiesofsuperoxidedismutase,catalase,glutathionereductaseandglutathioneperoxidaseintesticularhomogenateweredecreasedwhilethelevelsoflipidperoxidationincreasedsignificantlyinthetreatedratsascomparedwiththecorrespondinggroupofcontrolanimals.Ingroup30mg,only,arachidonicacidwassignificantlyelevatedinthetesticularhomogenatewhilelinoleicacidwasdecresedwhencomparedtocontrol.TestisDNAfragmentationwasobservedin30mggroup,butnot10.mg.Itisconcludedthatlowdosesofecstasyexposure(10mg/Kg)hadmoderate"
+        },
+        {
+          "document_id": "W2225362281",
+          "title": "Biodegradable radiation delivery system utilizing glass microspheres and ethylenediaminetetraacetate chelation therapy",
+          "doi": "10.1002/jbm.a.30076",
+          "year": "2004",
+          "distance": 0.5336,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "afely deliver a localized dose (100 Gy) of beta radiation. Once injected, the microspheres react nonuniformly with body fluids. The nonradioactive, lithium‐borate component is dissolved from the glass, whereas the radioactive 165 Dy reacts with phosphate anions in the body fluids, and becomes “chemically” trapped in a solid, dysprosium phosphate reaction product that has the same size as the unreacted microsphere. The glass microspheres lose ≈80% of their weight after nonuniform reaction (&lt;1 day), but the dysprosium phosphate reaction product is slowly metabolized by the body over several months."
+        },
+        {
+          "document_id": "W2036095529",
+          "title": "Acute and Chronic Toxicity of Soluble Fractions of Industrial Solid Wastes on<i>Daphnia magna</i>and<i>Vibrio fischeri</i>",
+          "doi": "10.1100/2012/643904",
+          "year": "2012",
+          "distance": 0.5336,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "><mml:mrow><mml:mtext>50,48 h</mml:mtext></mml:mrow></mml:msub><mml:mo>=</mml:mo><mml:mn>2.21</mml:mn></mml:mrow></mml:math>%). A textile waste induced the highest toxicity level to Vibrio fischeri (sample TX2,<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:msub><mml:mrow><mml:mtext>CE</mml:mtext></mml:mrow><mml:mrow><mml:mtext>50,30 min</mml:mtext></mml:mrow></mml:msub><mml:mo>=</mml:mo><mml:mn>12.08</mml:mn></mml:mrow></mml:math>%). All samples of pulp and paper wastes, and a textile waste (sample TX2) induced chronic effects on reproduction, length, and longevity of Daphnia magna ."
+        },
+        {
+          "document_id": "W2013607464",
+          "title": "A Bayesian Approach to Analyzing Ecotoxicological Data",
+          "doi": "10.1021/es801418x",
+          "year": "2008",
+          "distance": 0.536,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Standardized chronic toxicity tests are usually analyzed using a NOEC (no observed effect concentration) or ECx (x% effect concentration) calculation. However,these methods provide very little information for the material cost they entail. It has been proposed that biology-based methods, such as the DEBtox approach, would make better use of the data available. DEBtox deals with the energy balance between physiological processes, and gives insight on how a compound disturbs it."
+        },
+        {
+          "document_id": "W2905526122",
+          "title": "Evaluation of antifertility potential of ketoconazole and assessment of its reversible effect on concomitant treatment with metformin and Hydroxytyrosol in rats",
+          "doi": "10.31024/ajpp.2019.5.1.1",
+          "year": "2018",
+          "distance": 0.5369,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "testedthetoxiceffectofKetoconazolealoneanditsnormalizationeffectintheformulatedKetoconazoleandMetforminwithHydroxytyrosol20mg/mlsuspension(KMH)at5,10,20mg/kg.p.o."
+        },
+        {
+          "document_id": "W65715028",
+          "title": "The influence of dissolved humic material (humic, fulvic and hydrophilic acids) on marine phytoplankton",
+          "doi": "10.23860/diss-4149",
+          "year": "1996",
+          "distance": 0.5381,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "iration rates, but decreased oxygen evolution by 30% at concentrations $\\\\ge$25 $\\\\mu$g ml$\\\\sp{-1}$ due to attenuation of PAR. A molecular fractionation experiment suggested that responses can be attributed to particular molecular weight fractions: responses to hydrophilic acids to the $&lt;$500 molecular weight fraction, responses to fulvic acid to the $&lt;$1,000 and $&gt;$10,000 molecular weight fractions and responses to humic acid to a $&gt;$500 to $&gt;$10,000 range of molecular weights."
+        },
+        {
+          "document_id": "W2143117770",
+          "title": "The 3/4-Power Law Is Not Universal: Evolution of Isometric, Ontogenetic Metabolic Scaling in Pelagic Animals",
+          "doi": "10.1641/0006-3568(2006)56[325:tplinu]2.0.co;2",
+          "year": "2006",
+          "distance": 0.5389,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.85,
+          "text": "Abstract It is commonly assumed that metabolic rate scales with body mass to the 3/4 power. However, during ontogeny, the metabolic rate of pelagic (open-water) animals often scales isometrically (in a 1:1 proportion) with body mass. This is a robust pattern, occurring in five different phyla. It can also be seen by comparing pelagic and benthic (bottom-dwelling) species within phyla, as well as pelagic larvae and benthic adults within species."
+        },
+        {
+          "document_id": "W1992447619",
+          "title": "Physiological energetics of mussel larvae (Mytilus edulis). I. Shell growth and biomass",
+          "doi": "10.3354/meps017283",
+          "year": "1984",
+          "distance": 0.5414,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ue dry weight, tissue wet weight, total wet weight and shell weight were calculated.Eggs, trochophores and the food organism I. galbana were analysed for their elemental composition (CHN).Body growth was estimated by data on shell growth and body weight."
+        },
+        {
+          "document_id": "W1925715618",
+          "title": "Urinary excretion of adrenocortical steroid metabolites by pre-term human infants: Trends from birth until 3 months post term",
+          "doi": "10.1080/07435809609043771",
+          "year": "1996",
+          "distance": 0.5414,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ated with body weight, eg: on week 1, 0.06-0.20 and on week 24, 0.15-0.72. progression over this period was essentially linear. The ratio (mean (SD)) of 11-oxo/11-hydroxy metabolites decreased from 10.0 (8.2) to 2.3 (0.4) in the same period, p = < 0.10, while that of 20-oxo/20-hydroxy metabolites increased from 0.18 (0.07) to 1.08 (0.42), p = < 0.04. The ratio of metabolites with 5 oxygen functions relative to 6 increased from 0.38 (0.16) to 1.36 (0.43), p = < 0.04."
+        },
+        {
+          "document_id": "W1519282726",
+          "title": "Studies in the evolution of endothermy: mammals from reptiles",
+          "doi": "",
+          "year": "1984",
+          "distance": 0.5414,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "and similar oxygen consumptions (measured using cytochrome oxidase) per mg of protein for liver, brain and kidney mitochondria. Isolated mammalian lung, heart and skeletal muscle mitochondria however, consumed twice the amount of oxygen consumed by the same reptilian mitochondria per gram of mitochondrial protein.\\nTo assess the use of energy by the same mammalian and reptilian species the \"in vitro\" oxygen consumption of liver, kidney and brain tissues were measured. \"Sodium dependent\" metabolism (i.e., the amount of energy used on pumping Na+ out and K+ into the cells of tissues) was also measured in these tissues."
+        },
+        {
+          "document_id": "W3150148261",
+          "title": "Biological factors affecting variability of persistent pollutant levels in cetaceans",
+          "doi": "10.47536/jcrm.v1i1.264",
+          "year": "1999",
+          "distance": 0.5416,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "nents of the same population when diet is subject to age-related or sex-related variations. The effect of body size is complex. Excretion rate and activity of detoxifying enzymes decrease as body weight increases, processes which would lead to higher pollutant concentrations in large animals. In contrast, a high metabolic rate, which is inversely correlated to body size, is associated with high pollutant concentrations. These opposing effects usually result in higher residue levels in smaller individuals. Body composition affects the contribution of each body compartment to the overall pollutant load."
+        },
+        {
+          "document_id": "W2526644607",
+          "title": "A STUDY OF OXYGEN METABOLISM IN<i>DROSOPHILA MELANOGASTER</i>",
+          "doi": "10.2307/1536653",
+          "year": "1925",
+          "distance": 0.5423,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "tes of oxygen consumption are very irregular and vary in a manner highly suggestive of the influence of environmental agencies. The not infrequently pronounced elevations above the general level of metabolism lend support to the conclusion that the metabolic rates for comparable samples of respiring tissue are not necessarily fixed within narrow limits. Finally, it has proved impossible to find a metabolic difference between the sexes or to detect any difference in metabolism between inbred and noninbred stocks."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple DEB-theory snippets (1, 2, 3, 4, 6) directly and explicitly state the stylized fact—that dioxygen use by isomorphs scales approximately with body weight to a power close to 0.75 (Kleiber's law)—and cite empirical support (Kleiber 1932, Savage et al. 2004). Snippet 12 corroborates the 0.75 exponent's empirical origin while noting it is an approximation rather than a strict law. A few snippets (5, 7) report deviations from 0.75 (near-isometric or biphasic scaling in skin-breathers and modular organisms), but these concern recognized exceptions and do not undermine the 'approximate' nature of the claim. The remainder are off-topic. Overall the corpus strongly corroborates the stylized fact with only minor qualifying conflict."
+      },
+      "n_references": 8,
+      "references": {
+        "69b86b37ecbd4702b29a303e": {
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36343181133270264
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.39232337474823
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3934895396232605
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.401222825050354
+        },
+        "69b847c5ec32c55db5430a4a": {
+          "title": "GlazHirs2015.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.40564966201782227
+        },
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4103701114654541
+        },
+        "69b847e9ec32c55db5430ad7": {
+          "title": "WhitKear2011.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.4126584529876709
+        },
+        "69b8a4f9ecbd4702b29a77fa": {
+          "title": "Schramm e.a. - 2018 - Effects of fat and exoskeletal mass on the mass sc.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4511823058128357
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3634,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "s in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heatincrement of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starvedvs well-fed)S2The chemical composition of organisms at constant food density of constantcomposition becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygenE2Dissipating heat for heterotrophic isomorphs under aerobic conditions is a"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3923,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.97,
+          "text": "do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113]The use of dioxygen scales approximately with body weight raised animals [10, 84, 91]to a power close to 0.75 [45]Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88]after ingesting food (heat increment of feeding)Ageing Lifespan increases with size for endotherms, animals [19, 85]but is independent of size in ectotherms"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3935,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4012,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.97,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b847c5ec32c55db5430a4a",
+          "title": "GlazHirs2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4056,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "1.00 +0.16b(4)copepodites and adults 2.84 +0.20a(20) 0.68 –0.70 0.72 +0.22b(7)aBased on dry mass, carbon mass or nitrogen mass.bBased on dry body mass.rspb.royalsocietypublishing.org Proc. R. Soc. B 282: 201423026 on February 28, 2018 http://rspb.royalsocietypublishing.org/ Downloaded from biphasic or triphasic metabolic scaling appear to be ‘skin-breathers’ (i.e. they can absorb oxygen and expel dissolvedwaste products such as CO 2through their thin, permeableinteguments) [40,41]. Some can even absorb nutrientsthrough their body surfaces and metabolize them in their tis-sues [40,42]. Remarkably, the body-mass scaling slope for"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4104,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ltsanimals ( Romijn & Lokhorst 1951 ;Richman1958 ;Pettit 1982 ;Bucher 1983 ;Whitehead1987 ;Clarke & Johnston 1999 ;Savage et al.2004 )R3 the use of dioxygen scales approximately withbody weight raised to power 0.75 ( Kleiber1932 )animals ( Richman 1958 ;Clarke & Johnston1999 ;Savage et al. 2004 )R4 organisms show a transient increase in meta-bolic rate independent of their body massafter ingesting food—the heat increment offeedinganimals ( Janes & Chappell 1995 ;Chappell et al.1997 ;Hawkins et al. 1997 ;Rosen & Trites1997 ;Nespolo et al. 2005 )"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430ad7",
+          "title": "WhitKear2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4127,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "Peck and Barnes 2004) and assuming awater content of 84% (Stebbing 1971).mansen et al. 2001) but shows a metabolic scaling expo-nent close to isometry (Hughes and Hughes 1986). In thiscase, the difference can be attributed to the growth formofElectra , which deviates increasingly from circular as size"
+        },
+        {
+          "document_id": "69b885f4ecbd4702b29a5315",
+          "title": "Tomlinson - Applications and implications of ecological energe.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4398,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "O, whereas heavy isotopes of hydrogen (2H or3H) are lost onlyas H2O [66,67] . Therefore, the difference between the hydrogen andoxygen isotope turnover rate is indicative of CO2production [66,67] ,which is linked to metabolic rate and energetic requirements. However,there are several assumptions behind the DLW technique that are notalways met [65,66] (see Table 1 in main text), thus restricting its use insome taxa, such as amphibians [68], diving birds, and mammals [69], andorganisms of small body size [70–72] . Finally, the18O isotope is expensiveto procure and analyse [66,68] and these costs have proven prohibitive for"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4415,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "with isotopes. All molecules have the samekinetic energy mc2/2; if the mass mof an isotope is larger, its velocity cis smaller.Fractionation can occur in the selective uptake of dioxygen and carbon dioxide (mostlyby phototrophs) and in the selective release of carbon dioxide, nitrogenous waste andwater. The latter might be of some importance for terrestrial organisms, where this releaseis associated with a phase transition for liquid (= organism) to gas. The isotope frequencyin assimilation, dissipation and/or growth has expectationn0kij=nijβ0kijβ0kij−1 + 1 /γ0ij,son0kOO=2β0kOOβ0kOO−1 + 1 /γ0OO(3.23)For odds ratio β0k"
+        },
+        {
+          "document_id": "69b888ffecbd4702b29a56d0",
+          "title": "Gerg2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4416,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Kooijman (2010) in a dynamic energy budget (DEB) approach. In isomorphs, i.e. animals c onserving shape during growth, body 68 volume is assumed proportional to body length to th e power of three. Isomorphism applies to the majority of species (Kooijman 2010) and also wi ll hold true for N. maculata and D. magna . Body weight can be described as a function of bod y volume multiplied by a factor of mass density. In Daphnia , density of body dry weight is empirical derived f rom laboratory data, whereas, for reasons of simplicity, mass dens ity is assumed to be 1 mg/mm 3 in"
+        },
+        {
+          "document_id": "69b84865ec32c55db5430c36",
+          "title": "JageRava2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.448,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "d to have a similar composition, so for the respiration pre-dictions, the difference can be ignored). This can be converted intocarbon ﬂuxes by multiplying with the weight of carbon per unit ofdry body weight (dC), to moles using the molar weight of carbon,and subsequently to moles of dioxygen assuming a respiration quo-tient of 0.9 (as was used in Jager and Ravagnan, 2015 ). The ﬂuxeswill be expressed per dry weight of animal by dividing by the drybody weight:WV= dVL3(8)It should be noted that WVis the structural body weight. Krill willbuild up a seasonal lipid storage (see e.g., Båmstedt, 1976 ), and since"
+        },
+        {
+          "document_id": "69b8a4f9ecbd4702b29a77fa",
+          "title": "Schramm e.a. - 2018 - Effects of fat and exoskeletal mass on the mass sc.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4512,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "must involve a single mass-scaling exponent for metabolism,typically either 0.67 ( Sarrus and Rameaux, 1839; White and Seymour,2003 )o r0 . 7 5( Blaxter, 1989; Kleiber, 1932; Savage et al., 2004;Schmidt-Nielsen, 1984; West et al., 1997, 1999 ). Interestingly, theexponent value of 0.75 was originally proposed by Kleiber (1932) ,n o tas a manifestation of biological laws but as an approximation of em-pirical data that aimed to facilitate utilitarian calculations with a sliderule ( Brody, 1934, 1946 ). At odds with a universal biological law thatdetermines metabolic scaling, the exponent bhas been reported to"
+        },
+        {
+          "document_id": "W2620667172",
+          "title": "Codling moth : biotic potential of males and colony vigor of three laboratory strains /",
+          "doi": "10.5962/bhl.title.134804",
+          "year": "1980",
+          "distance": 0.4924,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Facetsofthebioticpotentialofmalesofthreecodlingmothcolonies,laboratoryrearedsince1960,1973,and1974forapproximately156,32,and32generationsincolonization,respectively,werecompared.Fifty-ninemalesfromeachcolonywereused.Parameterscomparedwere:numberofmalesmating,numberofmatings,numberofmatingspermale,numberofeggs,percentegghatch,numberofeggspermale,malelon-gevity,anddistributionandfrequencyofmultiplematingsamongmales.Evaluationofthefindingsshowedthatthecolonybegunin1974hadagreaterbioticpotentialthantheothertwo"
+        },
+        {
+          "document_id": "W2071832423",
+          "title": "Some Factors Affecting Age at Puberty and the First 90 Days of Lactation in Holstein Heifers",
+          "doi": "10.3168/jds.s0022-0302(60)90288-5",
+          "year": "1960",
+          "distance": 0.5122,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "antlybyageatpuberty(--0.25,P<.05)andcalvingweight(0.21,P<.05).Significantamountsofvariationintheageatwhichananimalattainspubertyhavebeenascribedbothtogeneticandto'certainidentifiableenvironmentalfactors.Footeetal."
+        },
+        {
+          "document_id": "W2131658622",
+          "title": "Biaxial mechanical evaluation of cholecyst‐derived extracellular matrix: A weakly anisotropic potential tissue engineered biomaterial",
+          "doi": "10.1002/jbm.a.30943",
+          "year": "2007",
+          "distance": 0.5153,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "isotropic and it has the ability to support large strains across a physiological loading regime. © 2007 Wiley Periodicals, Inc. J Biomed Mater Res, 2007"
+        },
+        {
+          "document_id": "W2388470274",
+          "title": "CHAPTER 10. Scale‐up of Extraction Processes",
+          "doi": "10.1039/9781849737579-00363",
+          "year": "2013",
+          "distance": 0.5212,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "The challenge of finding scale‐up criteria that allow the reproduction of laboratory data at higher scales is discussed in this chapter. The main factors that should be considered when scaling‐up extraction processes will be presented, and the nature of thermodynamic and mass transfer changes implied by scale‐up will be extensively discussed. The chapter contains an overview of the latest developments and applications in the field of natural products."
+        },
+        {
+          "document_id": "W4291987281",
+          "title": "NTP-CERHR Monograph on the Potential Human Reproductive and Developmental Effects of Propylene Glycol (PG).",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.5241,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "34 mg/kg body weight/day for a 70 kg person, which is over 300 -fold lower than the highest dose tested in laboratory animals. NTP-CERHR monographs are transmitted to federal and state agencies, interested parties, and the public and are available in electronic PDF format on the CERHR web site (http://cerhr.niehs.nih.gov) and in printed text or CD-ROM from the CERHR (National Institute of Environmental Health Sciences, P.O. Box 12233, MD EC-32, Research Triangle Park, NC; fax: 919-316-4511)."
+        },
+        {
+          "document_id": "W2982966582",
+          "title": "Study of the effect of four generic lambda-cyhalothrin pesticides on the reproductive function of male wistar han rats",
+          "doi": "10.33273/2663-4570-2018-82-83-2-3-24-33",
+          "year": "2018",
+          "distance": 0.5297,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "all studies substances is the dose of 0,3 mg/kg body weight. In the range of studied doses, there is a dose-effect dependence. Key words: pesticides, cyhalothrin, lambda-cyhalothrin, gonadotoxicity, reproductive toxicity."
+        },
+        {
+          "document_id": "W2326241514",
+          "title": "Chronic exposure to MDMA (ecstasy)induces DNA damage, impairs functional antioxidant cellular defenses, enhances the lipid peroxidation process and alters testes histopathology in male rat.",
+          "doi": "10.21608/ejhm.2013.15992",
+          "year": "2013",
+          "distance": 0.5325,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ratstreatedwith30mg/kgbodyweightecstasyfor(,15,30,45)daysbyoralgavage.Thethirdgroup(45days)wasfollowedby15withdrawalperiod(W15).Results:Theactivitiesofsuperoxidedismutase,catalase,glutathionereductaseandglutathioneperoxidaseintesticularhomogenateweredecreasedwhilethelevelsoflipidperoxidationincreasedsignificantlyinthetreatedratsascomparedwiththecorrespondinggroupofcontrolanimals.Ingroup30mg,only,arachidonicacidwassignificantlyelevatedinthetesticularhomogenatewhilelinoleicacidwasdecresedwhencomparedtocontrol.TestisDNAfragmentationwasobservedin30mggroup,butnot10.mg.Itisconcludedthatlowdosesofecstasyexposure(10mg/Kg)hadmoderate"
+        },
+        {
+          "document_id": "W2225362281",
+          "title": "Biodegradable radiation delivery system utilizing glass microspheres and ethylenediaminetetraacetate chelation therapy",
+          "doi": "10.1002/jbm.a.30076",
+          "year": "2004",
+          "distance": 0.5336,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "afely deliver a localized dose (100 Gy) of beta radiation. Once injected, the microspheres react nonuniformly with body fluids. The nonradioactive, lithium‐borate component is dissolved from the glass, whereas the radioactive 165 Dy reacts with phosphate anions in the body fluids, and becomes “chemically” trapped in a solid, dysprosium phosphate reaction product that has the same size as the unreacted microsphere. The glass microspheres lose ≈80% of their weight after nonuniform reaction (&lt;1 day), but the dysprosium phosphate reaction product is slowly metabolized by the body over several months."
+        },
+        {
+          "document_id": "W2036095529",
+          "title": "Acute and Chronic Toxicity of Soluble Fractions of Industrial Solid Wastes on<i>Daphnia magna</i>and<i>Vibrio fischeri</i>",
+          "doi": "10.1100/2012/643904",
+          "year": "2012",
+          "distance": 0.5336,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "><mml:mrow><mml:mtext>50,48 h</mml:mtext></mml:mrow></mml:msub><mml:mo>=</mml:mo><mml:mn>2.21</mml:mn></mml:mrow></mml:math>%). A textile waste induced the highest toxicity level to Vibrio fischeri (sample TX2,<mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:msub><mml:mrow><mml:mtext>CE</mml:mtext></mml:mrow><mml:mrow><mml:mtext>50,30 min</mml:mtext></mml:mrow></mml:msub><mml:mo>=</mml:mo><mml:mn>12.08</mml:mn></mml:mrow></mml:math>%). All samples of pulp and paper wastes, and a textile waste (sample TX2) induced chronic effects on reproduction, length, and longevity of Daphnia magna ."
+        },
+        {
+          "document_id": "W2013607464",
+          "title": "A Bayesian Approach to Analyzing Ecotoxicological Data",
+          "doi": "10.1021/es801418x",
+          "year": "2008",
+          "distance": 0.536,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Standardized chronic toxicity tests are usually analyzed using a NOEC (no observed effect concentration) or ECx (x% effect concentration) calculation. However,these methods provide very little information for the material cost they entail. It has been proposed that biology-based methods, such as the DEBtox approach, would make better use of the data available. DEBtox deals with the energy balance between physiological processes, and gives insight on how a compound disturbs it."
+        },
+        {
+          "document_id": "W2905526122",
+          "title": "Evaluation of antifertility potential of ketoconazole and assessment of its reversible effect on concomitant treatment with metformin and Hydroxytyrosol in rats",
+          "doi": "10.31024/ajpp.2019.5.1.1",
+          "year": "2018",
+          "distance": 0.5369,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "testedthetoxiceffectofKetoconazolealoneanditsnormalizationeffectintheformulatedKetoconazoleandMetforminwithHydroxytyrosol20mg/mlsuspension(KMH)at5,10,20mg/kg.p.o."
+        },
+        {
+          "document_id": "W65715028",
+          "title": "The influence of dissolved humic material (humic, fulvic and hydrophilic acids) on marine phytoplankton",
+          "doi": "10.23860/diss-4149",
+          "year": "1996",
+          "distance": 0.5381,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "iration rates, but decreased oxygen evolution by 30% at concentrations $\\\\ge$25 $\\\\mu$g ml$\\\\sp{-1}$ due to attenuation of PAR. A molecular fractionation experiment suggested that responses can be attributed to particular molecular weight fractions: responses to hydrophilic acids to the $&lt;$500 molecular weight fraction, responses to fulvic acid to the $&lt;$1,000 and $&gt;$10,000 molecular weight fractions and responses to humic acid to a $&gt;$500 to $&gt;$10,000 range of molecular weights."
+        }
+      ]
+    }
+  }
+}

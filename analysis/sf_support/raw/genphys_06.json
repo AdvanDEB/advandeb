@@ -1,0 +1,763 @@
+{
+  "sf_id": "genphys_06",
+  "category": "General Physiology",
+  "statement": "Simpler transport network morphologies (also passive transport systems) should have lower maintenance.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets bear on the link between transport-system complexity and maintenance cost. Snippet 18 explicitly states the DEB assumption that volume-specific maintenance costs depend on cell complexity, directly supporting the idea that simpler systems have lower maintenance. Snippets 1, 5, 9, and 11 develop the argument that passive diffusion is cheaper/'free' while active transport is costly and only favored as cells become larger and more complex, consistent with simpler/passive systems entailing lower maintenance. Snippet 8 (Krogh) notes that simple passive diffusion suffices for small organisms' maintenance, whereas active processes become necessary in larger cells, again aligning with the fact. Snippet 17 links maintenance overhead to extra transformations and compound complexity. None of the snippets contradict the stylized fact; the remainder are topically related (metabolic scaling, RTN/WBE critiques) but do not directly test the maintenance-vs-complexity claim. Overall the corpus offers moderate, coherent support with no conflict, hence corroborated direction but only moderate strength because most evidence is theoretical/assumption-based rather than experimental."
+      },
+      "n_references": 4,
+      "references": {
+        "69b87bb1ecbd4702b29a4587": {
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.4378931522369385
+        },
+        "69b87789ecbd4702b29a3f47": {
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5238361954689026
+        },
+        "69b8478eec32c55db54309a5": {
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5377674102783203
+        },
+        "69b869c0ecbd4702b29a2e45": {
+          "title": "VeerCard2006.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5395826101303101
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4379,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "the negative inﬂuence of such ﬂuctuations an organism canroughly evolve in two ways: become larger or become more organized. Butthese strategies cannot be considered separately, because on the one hand amore organized and thus more complex system will take more space. On theother hand, bigger and more complex systems demand additional complexity(organization) to keep their elements stable with respect to each other.One form of such stabilization is (an infrastructure with) active transport.Put more directly: the reason for active transport is that diﬀusion –thealternative–slowsdownatleastinverselyproportionaltoincreasingdistance."
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4772,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "e MTE started with a rather technical paper by Westet al. [18], using principles of uid dynamics to show that optimal transportnetworks yield a supply rate to the cells that scales with the 3/4 power ofbody mass. The network design, which could for example represent the car-diovascular network of a mammal, was based on certain speci c assumptions,such as that the capillaries have to reach all cells. Optimal was de ned ashaving minimal energy loss through dissipation and wave re ections. Theapproach was applauded by many, but also heavily criticized, both by what"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4959,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "e -transport networks, system composition, or resource demand) ; and (3) experimental evidence showing that manipulation of the postulated mechanism alters b as predicted (see Table 1). At the organismal level, only the SA and RD theories are supported by all three kinds of evidence. SC theory is currently supported by indirect and direct correlational evidence, but not experimental evidence. By contrast , RT theory is presently suppor ted only by indirect evidence. Furthermore, RT theory is contradicted by several observations described in Sections 1, 4.2, 5.2, 6 and 7. Therefore, surprisingly RT theory (including the WBE model"
+        },
+        {
+          "document_id": "69b87429ecbd4702b29a3b7a",
+          "title": "TrooKooi2005a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4998,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "care ofthe vertical transport ( m2day/H110021), the evo-/H110025Kp9.10Vlutionary equilibrium (SS) will be stable unless zbecomesequal to or larger than unity. This implies that, if theyhave an intrinsic disadvantage to specialization, the or-ganisms will always evolve to a mixotrophic strategy andremain on it. Apparently, the substrate gradients resultingfrom molecular diffusion are not sufﬁcient to “counteract”such a disadvantage.In real life, however, vertical transport is not restricted"
+        },
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5037,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "tly: the reason for active transport is that diﬀusion –thealternative–slowsdownatleastinverselyproportionaltoincreasingdistance.This implies that –given that the turnover of a centrally produced mole-cule must remain constant– the concentration diﬀerence needed between theplace of production and consumption with growing distance between thembecomes larger and larger, which would eventually lead to overcrowding ofthe cytoplasm and consequently lower the diﬀusion constant, just like in anovercrowded place people will cease moving altogether.1On the other hand diﬀusion slows down inversely proportional to the (ef-"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.516,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "This co-evolvedwith an increase in the difference between standard andpeak metabolic rates, closed circulation systems, advancedforms of endothermy , immune systems and hormonalregulation systems. The physical design of these organisms,such as the capacity of transport networks, is designed tomeet the peak metabolic performance, but gives littleinformation about standard metabolic performance. Theminimization of transport costs in space-filling fractally-branching (closed) circulation systems has been suggested asthe reason why animals tend to respire at rate proportionalto their weight to the power 3/4 (West, Wooddruff &"
+        },
+        {
+          "document_id": "69b8a123ecbd4702b29a72ea",
+          "title": "Jusup et al. - 2022 - Social physics.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5196,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ans-portation network, Physica A 388 (2009) 2061–2071.[396] F. Xie, D. Levinson, Modeling the growth of transportation networks:A comprehensive review, Netw. Spat. Econ. 9 (2009) 291–307.[397] S. Derrible, C. Kennedy, Applications of graph theory and networkscience to transit network design, Transp. Rev. 31 (2011) 495–519.[398] W.-B. Du, X.-L. Zhou, M. Jusup, Z. Wang, Physics of transportation:Towards optimal capacity using the multilayer network framework,Sci. Rep. 6 (2016) 19059.[399] M. Rosas-Casals, S. Valverde, R. V. Solé, Topological vulnerabilityof the European power grid under errors and attacks, Int. J. Bifurc."
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5238,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ce Transport (RT) Models Krogh [183] calculated that simple passive diffusion should be sufficient for mee ting the maintenance requirements of small organisms (<500 μg). Because of their high surface area to volume ratio, small protozoans can maintain normal aerobic metabolic rates even at very low ambient oxygen levels [184]. However, other active processes, such as cytoplasmic streaming, may be necessary in relatively large cells. West and Brown [65] suggested that fractal resource -transport networks may operate at the intracellular level, thus causing 3/4 -power scaling, as reported by Hemmingsen [9]. However , the"
+        },
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5243,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "novercrowded place people will cease moving altogether.1On the other hand diﬀusion slows down inversely proportional to the (ef-fective) size of the molecules which again implies that as the cell becomesmore complex and hence consist more and more of complex and thus biggermolecules that active transport becomes more and more favorable. Cruciallythere is a point where it pays to invest in active transport; that’s when mo-lecular motors enter; enter also the accompanying infrastructure; enter thecontemporary “science ﬁction” like images of cells as highly complex wellorganised chemical factories with ‘conveyor belts’ [ 1,65]."
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5254,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ences clear for smaller transport rates.The uptake of product evolves from concentration-based to flux-based (see Figure 10.10);this comes with an increase of the maximum throughput rate and a qualitative change inbehaviour of the steady-state amounts of structure around this growth rate: the symbiosisbecomes independent of the extracellular product concentration. The role of the productspartly degrades from an ecological to a physiological one. Figure 10.8 illustrates this instep 6, where the steady-state amounts of structure at the maximum throughput rate is"
+        },
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.526,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "rm cells swim, unicellular organisms move and stayin shape, the way that cells split their chromosomes into separate parts afterDNA replication and even the way that certain molecules and organelles gettransported across cells.5152 3. KINESINEspecially this last property may seem rudimentary at a ﬁrst glance: be-cause of the aqueous environment in cells it would seem much less costlyand hence more eﬃcient to let spontaneous diﬀusion take care of transporta-tion for free. Why would evolution ever favor something so relatively costlyas active transport? Basically, for the same reason that modern society"
+        },
+        {
+          "document_id": "69b8737fecbd4702b29a3adf",
+          "title": "Maury e.a. - 2019 - Damage-related protein turnover explains inter-spe.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5264,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "erlooked in the DEB theory.7.2. The « waste to hurry » hypothesisKooijman (2014) proposes the “Waste to Hurry ”hypothesis to ex-plain the decreasing trend of volume-speci ﬁc maintenance rate withmaximum length. The “Waste to Hurry ”is an evolutionary argument. Itstates that high maintenance is a way to speed-up metabolism to trackeﬃciently high frequency changes in environmental conditions. Highmaintenance would therefore be an adaptation to variable environ-ments. The hypothesis proposed here doesn't contradict the “Waste toHurry ”. On the contrary, it provides clear mechanisms for it. In our"
+        },
+        {
+          "document_id": "69b892c4ecbd4702b29a6287",
+          "title": "HirsGlaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5276,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "rom a centralhub (e.g. heart), as assumed in current RTN models (Westet al. 1999; Banavar et al. 2010; Dodds 2010), or from muchof the external surface, which may be a more reasonableassumption for many aquatic invertebrates that respirethrough their integument and whose shape becomes moreelongate or ﬂattened during growth. The functionally impor-tant paths within transport networks would therefore bebetween the external surface and each mitochondrion ratherthan radiating from a central heart to each mitochondrion.When body shape changes during growth, average pathlengths within transport networks that match the distribution"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5302,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "The effect of increasing hart beat inopen circulatory systems on transport at the periphery is much less. West et al [1516] sug-gested in error that branching tubing systems are really wide-spread and were fussy aboutwhat is transported in what systems for what function. They mentioned tracheal tubes ininsects, but these tubes cannot branch because the inner lining is attached to the moult;this moulting system would be impossible with branched tubes. They even mentionedmicro-organisms, but branching systems in micro-organisms still need to be discovered;"
+        },
+        {
+          "document_id": "69b8a04becbd4702b29a71a8",
+          "title": "KearWhit2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5309,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "http://www.journals.uchicago.edu/t-and-c).Testing Metabolic Theories 559studies suggesting a mixture of responses of cell volumeto body size. Since DEB theory predicts an increase in therelative amount of reserve with interspeciﬁc shifts in size,one might also expect some cell volumes to increase tohouse this reserve, as discussed above. This leaves openthe intriguing possibility that the network design predictedby WBE to minimize transport costs also happens to alignwith the scaling of reserve and its impact on the energyrequirements of service volumes.Metabolic Scaling and R eserve Manipulation"
+        },
+        {
+          "document_id": "69b892c4ecbd4702b29a6287",
+          "title": "HirsGlaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5318,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "this study or DEB theory, but contradictspredictions of current RTN models.However, delivery of resources and wastes between theexternal environment and mitochondria throughout the bodydepend on both the area of exchange surfaces and the designof the transport network within the organism, and both wouldbe expected to be consistent with metabolic scaling relation-"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5378,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "suffice,maintenance costs are met from structure, and cells shrink.Paying maintenance from structure is less efficient than fromreserve directly , because it involves an extra transformation(namely from reserve to structure). The preference for reserveas the substrate rather than structure, would have been weakoriginally , later becoming stronger (see Appendix A.3b).Since the turnover rate of compounds in structure dependson the type of compound (some rates are possibly very low),the metabolites derived from these compounds do notnecessarily cover all metabolic needs.The waste (linked to maintenance and the overhead of"
+        },
+        {
+          "document_id": "69b869c0ecbd4702b29a2e45",
+          "title": "VeerCard2006.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5396,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "h ( Kooij-man, 2000 ).With respect to the volume-specific maintenancecosts [ p ˙M], the basic assumption is that the maintenanceof cells is considered to be the major part of themaintenance of the whole individual. Furthermore, theDEB theory assumes that the maintenance costs of a celldepend on the complexity of the cell ( Kooijman, 2000 ).The membrane pacemaker theory illustrates that thisassumption may well be a realistic one ( Hulbert andElse, 2005 ). The assumption implies that in relatedspecies, the volume-specific maintenance costs per unit"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "All 18 snippets concern urban/industrial transportation networks (BRT systems, rail vehicles, European transport policy, bicycle infrastructure, multimodal travel systems) and have no bearing on the biological/physiological claim that simpler transport network morphologies (e.g., passive transport systems in organisms) should incur lower maintenance costs in DEB theory. The retrieval matched on the term 'transport network' but in an entirely unrelated domain. None of the snippets provide evidence either supporting or contradicting the stylized fact, so the corpus offers no usable evidence."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W3118990205",
+          "title": "Co-producing urban transport systems: adapting a global model in Dar es Salaam",
+          "doi": "10.1080/15487733.2020.1862545",
+          "year": "2021",
+          "distance": 0.462,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ere dysfunctional or absent that BRT operations could be secured and contribute to a transition of the city’s transport sector. Accordingly, a sustainable transition depends more on socio-technical practices, the fluidity of the system, and the adaptation of its users rather than on global standards or technological innovation."
+        },
+        {
+          "document_id": "W2003757183",
+          "title": "Conception, organisation et évaluation de réseaux de transport locaux durables",
+          "doi": "10.3917/riss.176.0243",
+          "year": "2003",
+          "distance": 0.4699,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Résumé Le présent article traite des rapports entre l’espace urbain et les transports, en particulier de la conception et de l’évaluation de réseaux de transport locaux durables."
+        },
+        {
+          "document_id": "W636320077",
+          "title": "Contribution à l'élaboration d'un optimiseur de structures mécaniques sous contraintes statiques et/ou dynamiques : Application a l'étude des véhicules de transport guidés",
+          "doi": "",
+          "year": "1996",
+          "distance": 0.4734,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "La conception des vehicules de transports guides fait appel a de plus en plus de domaines en mecanique. Aussi nous etudions le potentiel d'utilisation d'un optimiseur de structure. L'etude se decompose en deux etapes: l'elaboration d'un outil industriel d'optimisation, a la fois general, robuste, efficace et facilement utilisable dans un bureau d'etudes ; une exploitation de ce logiciel sur un site de conception de vehicules ferroviaires."
+        },
+        {
+          "document_id": "W2085934568",
+          "title": "Utilisation of Decision Tables for Proposal of Transfer Node Conception",
+          "doi": "10.7307/ptt.v24i5.1178",
+          "year": "1970",
+          "distance": 0.4745,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "The key issue in improving the appeal of public mass transport is the optimal arrangement of transfer nodes. The objective is to propose a comfortable, simple and safe environment for both passengers and operators, and a solution which is economical to construct and operate. Although each transfer node is unique and specific, it is beneficial to have a general idea on the layout of a project to construct or reconstruct such a transfer node."
+        },
+        {
+          "document_id": "W2003757183",
+          "title": "Conception, organisation et évaluation de réseaux de transport locaux durables",
+          "doi": "10.3917/riss.176.0243",
+          "year": "2003",
+          "distance": 0.4778,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ssité de bien analyser les réseaux de transport. La section finale définit toute une série de techniques d’analyse des réseaux. En conclusion, les auteurs relèvent que les systèmes de déplacement durables peuvent être encouragés par une augmentation des densités urbaines et par des schémas de voirie qui favorisent les modes de transport écologiquement plus rationnels. Pour atteindre cet objectif, il faut mettre l’accent sur la quantification de la performance de ces schémas. Les techniques d’évaluation quantitatives deviendront à l’avenir un élément essentiel de l’aménagement urbain."
+        },
+        {
+          "document_id": "W2003757183",
+          "title": "Conception, organisation et évaluation de réseaux de transport locaux durables",
+          "doi": "10.3917/riss.176.0243",
+          "year": "2003",
+          "distance": 0.4801,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "l’espace urbain et les transports, en particulier de la conception et de l’évaluation de réseaux de transport locaux durables. Il se veut une contribution à l’évolution conceptuelle induite par les idées nouvelles en matière organisation des communications en milieu urbain désormais intégrées par les décideurs pour prendre en compte les ensembles complexes d’activités dont les réseaux routiers sont le support ; les modalités par lesquelles l’urbanisme peut faciliter un recours accru à des modes de transport durables ;"
+        },
+        {
+          "document_id": "W2804560946",
+          "title": "Modelling European combined transport as an industrial system",
+          "doi": "10.13140/rg.2.1.3649.7125",
+          "year": "1994",
+          "distance": 0.4838,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "when the basics of European combined transport are familiar to the reader, the search for a conceptual framework is presented. Four literature sources are surveyed and evaluated for suitable approaches for the study and a synthesised method is presented.\\nThe method starts out from the basic conceptions of the network approach: actors, activities and resources. Influences from the systems approach are used for adapting the approach to cover the entire combined transport system and not just a link between two companies that is the primary subject of the network approach."
+        },
+        {
+          "document_id": "W2998162685",
+          "title": "Multilayer network analysis unravels haulage vehicles as a hidden threat to the British swine industry",
+          "doi": "10.1111/tbed.13459",
+          "year": "2019",
+          "distance": 0.4908,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": ":mrow> </mml:math> that lorries are left contaminated by pathogens, hence accounting for the temporal aspect of contact events. For increasing <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mi>Δ</mml:mi> <mml:mi>s</mml:mi></mml:mrow> </mml:math> , descriptive network analyses were performed to assess the role of haulage on network connectivity."
+        },
+        {
+          "document_id": "W2027171909",
+          "title": "Performing the city: a body and a bicycle take on Birmingham, UK",
+          "doi": "10.1080/14649360500353046",
+          "year": "2005",
+          "distance": 0.4916,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "política de transporte sobre el papel de la bicicleta en la resolución de los problemas de congestión urbano y sostenibilidad. Keywords: performanceaffectcyclingsustainable transportBirminghamperformanceaffectcyclismetransport durableBirminghaminterrelaciónafectoviaje en bicicletatransporte sostenibleBirmingham Acknowledgements This paper started life as a seminar presentation at the first meeting of the tabula rasa research network in the School of Geography, Earth and Environmental Sciences, University of Birmingham—thanks to all those who subsequently gave advice and comment on the early drafts."
+        },
+        {
+          "document_id": "W192452077",
+          "title": "Système Interactif d'Aide au Déplacement Multimodal (SIADM)",
+          "doi": "",
+          "year": "2006",
+          "distance": 0.493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "The objective of this work is the realization of a system allowing to assist the travellers, and to facilitate their movement in normal and degraded functioning of the transport network. This system aims to minimize the waiting time of the travellers, in degraded mode, at exchanges stations and to assure them, as well as possible, the continuity of their journey in the multimodal transport networks. So it improves the quality of the service returned to the travellers in order to inform them."
+        },
+        {
+          "document_id": "W3166837094",
+          "title": "The Role of Politics in the Historical Transport Networks of the Iberian Peninsula and the Pyrenees from Roman Times to the Nineteenth Century",
+          "doi": "10.1017/ssh.2021.12",
+          "year": "2021",
+          "distance": 0.4935,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "in transport networks. This article focuses on the calculation of the connectivity to analyze the intermodal transport systems. The use of network science analyses to study historical roads has resulted in a great tool to visualize and understand the connectivity of the territories of each studied period and compare the evolution, changes, and continuities of the transport network."
+        },
+        {
+          "document_id": "W2405106542",
+          "title": "A Pseudo-Panel Approach",
+          "doi": "",
+          "year": "1999",
+          "distance": 0.4969,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "lected over time. The importance of dynamics in transport has been recognised for some time,1 and the arguments are well known. These include pervasiveness of habits, uncertainty, and im perfect information regarding alternatives and prices, costs of adjustment, transaction costs, search costs, expectations and arguments concerning the life cycle, and permanent income. Despite this, equilibrium models have formed the basis of most transport analysis until quite recently. By their very nature such models assume the existence of a unique equilibrium, and in empirical implementation generally assume that this equi"
+        },
+        {
+          "document_id": "W1571388139",
+          "title": "TRANSEUROPEJSKIE SIECI TRANSPORTOWE - TEN-T",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.4992,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "re distant partners. Efficient European transport network has to be characterized by high technical and exploitative standards. Creation of the European transport system should be easier thanks to the EU conception related to trans-european transport networks. Modern infrastructure will contribute to the economic growth and improvement in economic cooperation and can became a motor for Europe's competitiveness."
+        },
+        {
+          "document_id": "W1571388139",
+          "title": "TRANSEUROPEJSKIE SIECI TRANSPORTOWE - TEN-T",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.5058,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "One of the major objectives of the Common Transport Policy is the creation of coherent and effective transport systemwhich would embrace not only EU member states but would also make it possible to integrate the transport with other European countries and more distant partners. Efficient European transport network has to be characterized by high technical and exploitative standards."
+        },
+        {
+          "document_id": "W68142559",
+          "title": "Contribution à la modélisation multi-physique : électro-vibro-acoustique et aérothermique de machines de traction",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.5066,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Le developpement important ces dernieres annees du secteur du transport s’est accompagne d’une inquietude accrue pour le respect de l’environnement. Bien que le transport ferroviaire presente une efficacite energetique elevee, il n’en est pas pour autant denue de nuisances environnementales. L’integration du developpement durable lors de la conception optimale de machines electriques devient alors indeniable. Cela impose de tenir compte simultanement d’un grand nombre de phenomenes physiques."
+        },
+        {
+          "document_id": "W4317732152",
+          "title": "ҰЛЫБРИТАНИЯНЫҢ КӨЛІК ЖҮЙЕСІНІҢ ТАРИХЫ",
+          "doi": "10.58420/itk.2021.70.1.017",
+          "year": "2021",
+          "distance": 0.5182,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "1973 the sustainability of transport has been a major issue, encompassing renewable resources, carbon emissions and pollution. Government has worked towards greater sustainability but it remains a major challenge. Alternatives: transport systems have been relatively stable over the last century, qualifying the idea of an imminent breakthrough to a new phase of transport. History suggests that change is as much a matter of recycling the old as introducing the new. The past thus remains an important resource for transport alternatives in the future."
+        },
+        {
+          "document_id": "W202403586",
+          "title": "Conception et optimisation distribuée d'un système d'information d'aide à la mobilité urbaine : une approche multi-agent pour la recherche et la composition des services liés au transport",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.5214,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Research tasks presented in this thesis belongs to the French national project VIATIC.MOBILITE from the industrial cluster I-TRANS « France highlights leading-edge technology in rail systems and innovative transport » (http://www.i-trans.org/index.htm). Nowadays, information related on displacement and mobility in a transport network represents certainly a significant potential."
+        },
+        {
+          "document_id": "W2914489674",
+          "title": "Bridge management system within the strategic roads as an element of smart city",
+          "doi": "10.1088/1755-1315/214/1/012054",
+          "year": "2019",
+          "distance": 0.5252,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "build intelligent solutions improving transport, energy technology, tourism and many other fields that constitute the economy. The basis of the operation should be an efficient communication infrastructure, because the dynamics of the economic development is significantly dependent on the efficiency and the reliability of the communication system. It can be also stated that the development of the transport networks, including those on highly urbanised areas, is essential to ensure proper functioning of economic and social life."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several DEB-relevant snippets bear on the fact that simpler/passive transport systems incur lower maintenance costs. Snippet 8 is the most direct: Krogh's calculation that simple passive diffusion suffices for small organisms' maintenance, with active processes only needed at larger sizes, directly supports the idea that passive transport is the cheaper, lower-maintenance option. Snippets 1, 5, 9, and 11 from Wier2005 reinforce this by framing active transport as a costly investment adopted only when diffusion becomes inadequate (i.e., implying passive/simpler transport is cheaper to maintain). The remaining DEB snippets (2, 3, 6, 10, 12) touch on transport networks or maintenance scaling but do not directly address the maintenance cost of simpler vs. complex morphologies, and the large block of urban/societal transport-network papers (13-24) are entirely off-topic. No snippet contradicts the fact. Support is moderate—drawn largely from one or two sources—but consistent and unopposed."
+      },
+      "n_references": 2,
+      "references": {
+        "69b87bb1ecbd4702b29a4587": {
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.4378931522369385
+        },
+        "69b87789ecbd4702b29a3f47": {
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5238361954689026
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4379,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "the negative inﬂuence of such ﬂuctuations an organism canroughly evolve in two ways: become larger or become more organized. Butthese strategies cannot be considered separately, because on the one hand amore organized and thus more complex system will take more space. On theother hand, bigger and more complex systems demand additional complexity(organization) to keep their elements stable with respect to each other.One form of such stabilization is (an infrastructure with) active transport.Put more directly: the reason for active transport is that diﬀusion –thealternative–slowsdownatleastinverselyproportionaltoincreasingdistance."
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4772,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "e MTE started with a rather technical paper by Westet al. [18], using principles of uid dynamics to show that optimal transportnetworks yield a supply rate to the cells that scales with the 3/4 power ofbody mass. The network design, which could for example represent the car-diovascular network of a mammal, was based on certain speci c assumptions,such as that the capillaries have to reach all cells. Optimal was de ned ashaving minimal energy loss through dissipation and wave re ections. Theapproach was applauded by many, but also heavily criticized, both by what"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4959,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "e -transport networks, system composition, or resource demand) ; and (3) experimental evidence showing that manipulation of the postulated mechanism alters b as predicted (see Table 1). At the organismal level, only the SA and RD theories are supported by all three kinds of evidence. SC theory is currently supported by indirect and direct correlational evidence, but not experimental evidence. By contrast , RT theory is presently suppor ted only by indirect evidence. Furthermore, RT theory is contradicted by several observations described in Sections 1, 4.2, 5.2, 6 and 7. Therefore, surprisingly RT theory (including the WBE model"
+        },
+        {
+          "document_id": "69b87429ecbd4702b29a3b7a",
+          "title": "TrooKooi2005a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4998,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "care ofthe vertical transport ( m2day/H110021), the evo-/H110025Kp9.10Vlutionary equilibrium (SS) will be stable unless zbecomesequal to or larger than unity. This implies that, if theyhave an intrinsic disadvantage to specialization, the or-ganisms will always evolve to a mixotrophic strategy andremain on it. Apparently, the substrate gradients resultingfrom molecular diffusion are not sufﬁcient to “counteract”such a disadvantage.In real life, however, vertical transport is not restricted"
+        },
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5037,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "tly: the reason for active transport is that diﬀusion –thealternative–slowsdownatleastinverselyproportionaltoincreasingdistance.This implies that –given that the turnover of a centrally produced mole-cule must remain constant– the concentration diﬀerence needed between theplace of production and consumption with growing distance between thembecomes larger and larger, which would eventually lead to overcrowding ofthe cytoplasm and consequently lower the diﬀusion constant, just like in anovercrowded place people will cease moving altogether.1On the other hand diﬀusion slows down inversely proportional to the (ef-"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.516,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "This co-evolvedwith an increase in the difference between standard andpeak metabolic rates, closed circulation systems, advancedforms of endothermy , immune systems and hormonalregulation systems. The physical design of these organisms,such as the capacity of transport networks, is designed tomeet the peak metabolic performance, but gives littleinformation about standard metabolic performance. Theminimization of transport costs in space-filling fractally-branching (closed) circulation systems has been suggested asthe reason why animals tend to respire at rate proportionalto their weight to the power 3/4 (West, Wooddruff &"
+        },
+        {
+          "document_id": "69b8a123ecbd4702b29a72ea",
+          "title": "Jusup et al. - 2022 - Social physics.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5196,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ans-portation network, Physica A 388 (2009) 2061–2071.[396] F. Xie, D. Levinson, Modeling the growth of transportation networks:A comprehensive review, Netw. Spat. Econ. 9 (2009) 291–307.[397] S. Derrible, C. Kennedy, Applications of graph theory and networkscience to transit network design, Transp. Rev. 31 (2011) 495–519.[398] W.-B. Du, X.-L. Zhou, M. Jusup, Z. Wang, Physics of transportation:Towards optimal capacity using the multilayer network framework,Sci. Rep. 6 (2016) 19059.[399] M. Rosas-Casals, S. Valverde, R. V. Solé, Topological vulnerabilityof the European power grid under errors and attacks, Int. J. Bifurc."
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5238,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ce Transport (RT) Models Krogh [183] calculated that simple passive diffusion should be sufficient for mee ting the maintenance requirements of small organisms (<500 μg). Because of their high surface area to volume ratio, small protozoans can maintain normal aerobic metabolic rates even at very low ambient oxygen levels [184]. However, other active processes, such as cytoplasmic streaming, may be necessary in relatively large cells. West and Brown [65] suggested that fractal resource -transport networks may operate at the intracellular level, thus causing 3/4 -power scaling, as reported by Hemmingsen [9]. However , the"
+        },
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5243,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "novercrowded place people will cease moving altogether.1On the other hand diﬀusion slows down inversely proportional to the (ef-fective) size of the molecules which again implies that as the cell becomesmore complex and hence consist more and more of complex and thus biggermolecules that active transport becomes more and more favorable. Cruciallythere is a point where it pays to invest in active transport; that’s when mo-lecular motors enter; enter also the accompanying infrastructure; enter thecontemporary “science ﬁction” like images of cells as highly complex wellorganised chemical factories with ‘conveyor belts’ [ 1,65]."
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5254,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ences clear for smaller transport rates.The uptake of product evolves from concentration-based to flux-based (see Figure 10.10);this comes with an increase of the maximum throughput rate and a qualitative change inbehaviour of the steady-state amounts of structure around this growth rate: the symbiosisbecomes independent of the extracellular product concentration. The role of the productspartly degrades from an ecological to a physiological one. Figure 10.8 illustrates this instep 6, where the steady-state amounts of structure at the maximum throughput rate is"
+        },
+        {
+          "document_id": "69b87bb1ecbd4702b29a4587",
+          "title": "Wier2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.526,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "rm cells swim, unicellular organisms move and stayin shape, the way that cells split their chromosomes into separate parts afterDNA replication and even the way that certain molecules and organelles gettransported across cells.5152 3. KINESINEspecially this last property may seem rudimentary at a ﬁrst glance: be-cause of the aqueous environment in cells it would seem much less costlyand hence more eﬃcient to let spontaneous diﬀusion take care of transporta-tion for free. Why would evolution ever favor something so relatively costlyas active transport? Basically, for the same reason that modern society"
+        },
+        {
+          "document_id": "69b8737fecbd4702b29a3adf",
+          "title": "Maury e.a. - 2019 - Damage-related protein turnover explains inter-spe.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5264,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "erlooked in the DEB theory.7.2. The « waste to hurry » hypothesisKooijman (2014) proposes the “Waste to Hurry ”hypothesis to ex-plain the decreasing trend of volume-speci ﬁc maintenance rate withmaximum length. The “Waste to Hurry ”is an evolutionary argument. Itstates that high maintenance is a way to speed-up metabolism to trackeﬃciently high frequency changes in environmental conditions. Highmaintenance would therefore be an adaptation to variable environ-ments. The hypothesis proposed here doesn't contradict the “Waste toHurry ”. On the contrary, it provides clear mechanisms for it. In our"
+        },
+        {
+          "document_id": "W3118990205",
+          "title": "Co-producing urban transport systems: adapting a global model in Dar es Salaam",
+          "doi": "10.1080/15487733.2020.1862545",
+          "year": "2021",
+          "distance": 0.462,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ere dysfunctional or absent that BRT operations could be secured and contribute to a transition of the city’s transport sector. Accordingly, a sustainable transition depends more on socio-technical practices, the fluidity of the system, and the adaptation of its users rather than on global standards or technological innovation."
+        },
+        {
+          "document_id": "W2003757183",
+          "title": "Conception, organisation et évaluation de réseaux de transport locaux durables",
+          "doi": "10.3917/riss.176.0243",
+          "year": "2003",
+          "distance": 0.4699,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Résumé Le présent article traite des rapports entre l’espace urbain et les transports, en particulier de la conception et de l’évaluation de réseaux de transport locaux durables."
+        },
+        {
+          "document_id": "W636320077",
+          "title": "Contribution à l'élaboration d'un optimiseur de structures mécaniques sous contraintes statiques et/ou dynamiques : Application a l'étude des véhicules de transport guidés",
+          "doi": "",
+          "year": "1996",
+          "distance": 0.4734,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "La conception des vehicules de transports guides fait appel a de plus en plus de domaines en mecanique. Aussi nous etudions le potentiel d'utilisation d'un optimiseur de structure. L'etude se decompose en deux etapes: l'elaboration d'un outil industriel d'optimisation, a la fois general, robuste, efficace et facilement utilisable dans un bureau d'etudes ; une exploitation de ce logiciel sur un site de conception de vehicules ferroviaires."
+        },
+        {
+          "document_id": "W2085934568",
+          "title": "Utilisation of Decision Tables for Proposal of Transfer Node Conception",
+          "doi": "10.7307/ptt.v24i5.1178",
+          "year": "1970",
+          "distance": 0.4745,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "The key issue in improving the appeal of public mass transport is the optimal arrangement of transfer nodes. The objective is to propose a comfortable, simple and safe environment for both passengers and operators, and a solution which is economical to construct and operate. Although each transfer node is unique and specific, it is beneficial to have a general idea on the layout of a project to construct or reconstruct such a transfer node."
+        },
+        {
+          "document_id": "W2003757183",
+          "title": "Conception, organisation et évaluation de réseaux de transport locaux durables",
+          "doi": "10.3917/riss.176.0243",
+          "year": "2003",
+          "distance": 0.4778,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ssité de bien analyser les réseaux de transport. La section finale définit toute une série de techniques d’analyse des réseaux. En conclusion, les auteurs relèvent que les systèmes de déplacement durables peuvent être encouragés par une augmentation des densités urbaines et par des schémas de voirie qui favorisent les modes de transport écologiquement plus rationnels. Pour atteindre cet objectif, il faut mettre l’accent sur la quantification de la performance de ces schémas. Les techniques d’évaluation quantitatives deviendront à l’avenir un élément essentiel de l’aménagement urbain."
+        },
+        {
+          "document_id": "W2003757183",
+          "title": "Conception, organisation et évaluation de réseaux de transport locaux durables",
+          "doi": "10.3917/riss.176.0243",
+          "year": "2003",
+          "distance": 0.4801,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "l’espace urbain et les transports, en particulier de la conception et de l’évaluation de réseaux de transport locaux durables. Il se veut une contribution à l’évolution conceptuelle induite par les idées nouvelles en matière organisation des communications en milieu urbain désormais intégrées par les décideurs pour prendre en compte les ensembles complexes d’activités dont les réseaux routiers sont le support ; les modalités par lesquelles l’urbanisme peut faciliter un recours accru à des modes de transport durables ;"
+        },
+        {
+          "document_id": "W2804560946",
+          "title": "Modelling European combined transport as an industrial system",
+          "doi": "10.13140/rg.2.1.3649.7125",
+          "year": "1994",
+          "distance": 0.4838,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "when the basics of European combined transport are familiar to the reader, the search for a conceptual framework is presented. Four literature sources are surveyed and evaluated for suitable approaches for the study and a synthesised method is presented.\\nThe method starts out from the basic conceptions of the network approach: actors, activities and resources. Influences from the systems approach are used for adapting the approach to cover the entire combined transport system and not just a link between two companies that is the primary subject of the network approach."
+        },
+        {
+          "document_id": "W2998162685",
+          "title": "Multilayer network analysis unravels haulage vehicles as a hidden threat to the British swine industry",
+          "doi": "10.1111/tbed.13459",
+          "year": "2019",
+          "distance": 0.4908,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": ":mrow> </mml:math> that lorries are left contaminated by pathogens, hence accounting for the temporal aspect of contact events. For increasing <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mi>Δ</mml:mi> <mml:mi>s</mml:mi></mml:mrow> </mml:math> , descriptive network analyses were performed to assess the role of haulage on network connectivity."
+        },
+        {
+          "document_id": "W2027171909",
+          "title": "Performing the city: a body and a bicycle take on Birmingham, UK",
+          "doi": "10.1080/14649360500353046",
+          "year": "2005",
+          "distance": 0.4916,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "política de transporte sobre el papel de la bicicleta en la resolución de los problemas de congestión urbano y sostenibilidad. Keywords: performanceaffectcyclingsustainable transportBirminghamperformanceaffectcyclismetransport durableBirminghaminterrelaciónafectoviaje en bicicletatransporte sostenibleBirmingham Acknowledgements This paper started life as a seminar presentation at the first meeting of the tabula rasa research network in the School of Geography, Earth and Environmental Sciences, University of Birmingham—thanks to all those who subsequently gave advice and comment on the early drafts."
+        },
+        {
+          "document_id": "W192452077",
+          "title": "Système Interactif d'Aide au Déplacement Multimodal (SIADM)",
+          "doi": "",
+          "year": "2006",
+          "distance": 0.493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "The objective of this work is the realization of a system allowing to assist the travellers, and to facilitate their movement in normal and degraded functioning of the transport network. This system aims to minimize the waiting time of the travellers, in degraded mode, at exchanges stations and to assure them, as well as possible, the continuity of their journey in the multimodal transport networks. So it improves the quality of the service returned to the travellers in order to inform them."
+        },
+        {
+          "document_id": "W3166837094",
+          "title": "The Role of Politics in the Historical Transport Networks of the Iberian Peninsula and the Pyrenees from Roman Times to the Nineteenth Century",
+          "doi": "10.1017/ssh.2021.12",
+          "year": "2021",
+          "distance": 0.4935,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "in transport networks. This article focuses on the calculation of the connectivity to analyze the intermodal transport systems. The use of network science analyses to study historical roads has resulted in a great tool to visualize and understand the connectivity of the territories of each studied period and compare the evolution, changes, and continuities of the transport network."
+        },
+        {
+          "document_id": "W2405106542",
+          "title": "A Pseudo-Panel Approach",
+          "doi": "",
+          "year": "1999",
+          "distance": 0.4969,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "lected over time. The importance of dynamics in transport has been recognised for some time,1 and the arguments are well known. These include pervasiveness of habits, uncertainty, and im perfect information regarding alternatives and prices, costs of adjustment, transaction costs, search costs, expectations and arguments concerning the life cycle, and permanent income. Despite this, equilibrium models have formed the basis of most transport analysis until quite recently. By their very nature such models assume the existence of a unique equilibrium, and in empirical implementation generally assume that this equi"
+        }
+      ]
+    }
+  }
+}

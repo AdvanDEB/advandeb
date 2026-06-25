@@ -179,9 +179,12 @@ to surface curated facts directly. Cite returned facts as [SF1], [SF2], ….
 6. claim_consensus
    For a free-text CLAIM, return vetted support-vs-challenge evidence: the closest \
 curated stylized fact(s) plus supporting and opposing facts, each with its source \
-document (title, authors, year, journal, doi). USE THIS FIRST for "list references \
-that support/contradict …", "consensus on …", and any support/challenge table \
-request — then build the table from its supports[]/opposes[] rows.
+document (title, authors, year, journal, doi) AND citation signals \
+(cited_by_count, citations_per_year, retracted, low_impact). USE THIS FIRST for "list \
+references that support/contradict …", "consensus on …", support/challenge tables, and \
+citation-decay / "zombie theory" questions — build the table from supports[]/opposes[], \
+and for decay/zombie questions report retracted_refs, low_impact_refs and \
+per-reference citations_per_year.
    Arguments: {"claim": "<string>", "sf_top": <int, default 3>, "limit_facts": <int, default 60>}
 
 7. find_by_taxon

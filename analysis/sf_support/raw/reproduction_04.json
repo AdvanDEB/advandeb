@@ -1,0 +1,1004 @@
+{
+  "sf_id": "reproduction_04",
+  "category": "Reproduction",
+  "statement": "Egg size (or initial reserve) covaries with the nutritional status of the mother.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The corpus provides strong, multiple supporting references for the stylized fact that egg size / initial reserve covaries with maternal nutritional status. The core DEB maternal-effect rule—that reserve density at birth equals the mother's reserve density at egg formation, so well-fed mothers produce well-fed offspring—is stated explicitly across several foundational sources (snippets 9, 13, 15, 18) and empirically corroborated in Daphnia (6, 7) and Daphnia/copepod growth models (2). Several snippets, however, note exceptions where some species (poeciliid fishes, daphnids, Sancassania mites) produce larger eggs under poor feeding, and direct measurements (5, 13, 14, 16) show egg size/volume decreasing with increasing food—an inverse relationship that partly contradicts a simple positive covariation. Despite these documented exceptions, the dominant pattern affirmed in the DEB literature is that egg reserve covaries with maternal nutritional status, so the consensus is corroborative while acknowledging recognized counterexamples."
+      },
+      "n_references": 9,
+      "references": {
+        "69b847bcec32c55db5430a20": {
+          "title": "Sardi et al. - 2023 - Simulating the Effects of Temperature and Food Ava.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.32578450441360474
+        },
+        "69b87580ecbd4702b29a3d3d": {
+          "title": "GurnMcCa1990.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3270397186279297
+        },
+        "69b8a412ecbd4702b29a76c4": {
+          "title": "Kooy2009b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 1,
+          "contradicts": 1,
+          "best_distance": 0.36268043518066406
+        },
+        "69b84824ec32c55db5430b7f": {
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 3,
+          "contradicts": 1,
+          "best_distance": 0.3635985255241394
+        },
+        "69b88288ecbd4702b29a4eb7": {
+          "title": "Pecquerie et al. - 2009 - Modeling fish growth and reproduction in the conte.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36988377571105957
+        },
+        "69b880d5ecbd4702b29a4c18": {
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.37123358249664307
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3742339611053467
+        },
+        "69b84720ec32c55db54306ea": {
+          "title": "AuguGagn2011.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.37487632036209106
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3792027235031128
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847bcec32c55db5430a20",
+          "title": "Sardi et al. - 2023 - Simulating the Effects of Temperature and Food Ava.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3258,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "articular area, for which specific temperature and food densit y functions could be implemented, as was done in, e.g., [55,56]. Mother’s nutritional status determines the egg size . Egg size and the availability of energy from the yolk are conditioned to the mother’s status (i.e., see the maternal effect in [20], [65]. Without information on the mother’s status and in the context of constant food avail-ability in simulated environments, eggs of a sp ecies were assumed to be of the same size throughout the simulation. Devauchelle et al. [66], however, reported smaller S. solea eggs"
+        },
+        {
+          "document_id": "69b87580ecbd4702b29a3d3d",
+          "title": "GurnMcCa1990.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.327,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "egg is furnished with a quantity of inherited reserves which increases linearly with the feeding status of the mother-as mea- sured by the ratio of the assimilate committed to eggs during an intermolt compared to the maximum amount that could be committed by an individual of the same length. There are several pieces of evidence to support this picture (Tessier et al. 1983, Goulden and Henry 1986) and it is confirmed by our own observations (E. McCauley et al., unpublished manuscript). Thus at the conclusion of our validation exercise we have evolved an individual growth model (set out in"
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3416,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ory, although the theory does not explain the variation i n egg sizes.104 3. Energy acquisition and usehouse mouse, Mus musculustime, dembryo weight, gimpala, Aepyceros melampustime, dembryo wet weight, kgFigure 3.18: Foetal weight development in mammals. Parameters are given in Table 3.2.Foetal developmentFoetal development diﬀers from that in eggs in that energy re serves are supplied continu-ously via the placenta. The feeding and digestion processes are n ot involved. Otherwise,foetal development is taken to be identical to egg developme nt, with initial reserves that"
+        },
+        {
+          "document_id": "69b8a412ecbd4702b29a76c4",
+          "title": "Kooy2009b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3481,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "birth, and initial amount of reserve covarywith maximum length. Parameter values that quantify metabolic traits are rather pre-dictable, while life history parameters, such as the maturity at birth, are highly adap-table (from an evolutionary point of view). Within particular taxa the variation is less,however. The primary parameter that is in control of length at birth is the maturity atbirth. Previously [ 18, p. 283] I discussed the logic behind the relatively small egg size"
+        },
+        {
+          "document_id": "69b8a412ecbd4702b29a76c4",
+          "title": "Kooy2009b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3627,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "s [ 3]. However, some species seem to producelarge eggs under poor feeding conditions, e.g. some poeciliid ﬁshes [ 30], daphnids[10] and Sancassania mites [ 2]. Moreover, egg size can vary within a clutch [ 6,28,35],according to geographical distribution [ 33], with age [ 26] and race.DEB theory speciﬁes the costs for structure, the somatic and maturity maintenancecosts and the processes of growth and maturation. The additional speciﬁcation ofthe reserve density at birth to accomodate maternal effects also speciﬁes the initial"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3636,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "an those produced at high food concentrations or in the 1st clutch. There were signiﬁcant two-way interactions involving clone, which indicated clonal effects contributing to variabil -ity across food levels and clutch numbers. When they related the egg masses found in all their experimental results, they found a strong correlation between the mother’s size and the mass of its eggs (Fig. 12.3). Note that egg size is strongly correlated with neonate length and maturation size (Lampert 1993). Hence, it can be expected that female body size has an important inﬂu -ence of various life-history traits (see below)"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3642,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ance’ of acquired traits (Burggren 2014) have rarely been assessed (see be -low). One ecologically important maternal effect is transmitted by the size of the parthenogenetic Daphnia eggs. Egg size (volume) is inﬂuenced by various envi -ronmental factors, e.g. food availability (Glazier 1992; Trubetskova and Lampert 1995). However, keeping all conditions equal, the most important determinant of egg size is a positive relationship to the mother’s body length (Green 1954, 1956b; Ebert 1993; Lampert 1993a; Gabsi, Schäffer, et al. 2014). This causes an im -portant maternal effect as the size of an egg translates"
+        },
+        {
+          "document_id": "69b89254ecbd4702b29a61fe",
+          "title": "PethRoos2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3682,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "egg x (RF batch x V), and 2) the oocytes of each batch, must have had enough time to reach full development, O Dev > ODev Time For these rules, we assumed that energy content of 1 egg, E egg was 0.15 J egg-1 based on mean values of 5600 J g-1 WW egg-1 (Valdés, 1993) and 27.7 µg egg-1 (Somarakis, 1999) as used by Politikos et al (2011). The relative batch fecundity (RF batch) was set at 550 eggs cm-3 after considering mean estimates of between 226 to 646 eggs g-1 of gonad-free weight of mature female (Somarakis et al. 2004) and a (wet) structural density of 1 g cm-3"
+        },
+        {
+          "document_id": "69b88288ecbd4702b29a4eb7",
+          "title": "Pecquerie et al. - 2009 - Modeling fish growth and reproduction in the conte.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3699,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "was available, else it was fully emptied. With tBdenoting thetime point at a spawning event, we had:ERðtB+dtÞ=ERðtBÞ−E⁎BðB:3ÞandEBðtB+dtÞ=0 ðB:4ÞThe fecundity per batch (number of eggs) was given by F=EB⁎/E0,w i t hE0(J) the egg energy content. The energy content of an egg depended onthe state of the female at the time of spawning. As stated by Kooijman(2000, 2009) , we assumed that an offspring at birth would have the samescaled reserve density as the female a t spawning ; a well-fed female wouldproduce offsprings in good condition. Hence, the reserve at birth is given"
+        },
+        {
+          "document_id": "69b885e0ecbd4702b29a52f6",
+          "title": "Kooy86b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3711,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "J, Math. Biology (1986) 23:163-185 ,Journal of\" Mathematical Molosy O Springer-Verlag 1986 What the hen can tell about her eggs: egg development on the basis of energy budgets S. A. L. M. Kooijman Netherlands Organization for Applied Scientific Research, TNO, P.O. Box 217, 2600 AE Delft, The Netherlands* Abstract. By a simple model involving the state variables size and storage, it is possible to describe a wide variety of observations on the feeding, growth,"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3712,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "aconstant food level, which corresponds with some functionalresponse f, then the reserve density of the embryo at birthequals mEb¼fmEm. These initial conditions imply vonBertalanffy growth at constant food availability right afterbirth. Foetal development is a variant of egg development.The initial amount of reserve is given in the Appendix andthe computational aspects are discussed in Kooijman(2008).Maturity at birth MHbis a primary parameter. Length atbirth Lband age at birth abare functions of parameters andthe nutritional state of the mother, via f. To avoid mass inthe first estimation steps, we scale MHbwith the specific"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3716,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ss than (3.5/70)1/3/0.15 ¼2.5 year. A larger value would be inconsistentwith DEB theory for any combination of parameter values.The relationship between foetal and egg development isgiven in Kooijman (2000) (see also Section VI). The factthat reserve contributes to mass is here not important,because weak homeostasis implies that reserve makes upa constant fraction of mass, as long as the baby and adultexperience similar food conditions.Age zero is defined as the start of development, an eventthat is not always easy to observe or to infer; sometimes theage at birth seems to be longer than the maximum possible"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3742,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "Maternal effects explain, for instance, whythe batch fecundity of the anchovy Engraulis increases during the spawning season inresponse to a decrease in food availability [876]. However, some species seem to producelarge eggs under poor feeding conditions, e.g. some poeciliid fishes [954], daphnids [412]andSancassania mites [82]. Moreover, egg size can vary within a clutch [314, 822, 1217],according to geographical distribution [1066], with age [769] and race. Nonetheless, thepattern that the reserve density at birth [ Eb] equals the reserve density [ E] of the mother"
+        },
+        {
+          "document_id": "69b84720ec32c55db54306ea",
+          "title": "AuguGagn2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3749,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "ebra ﬁsh.Forbes et al. (2010) suggest that egg size is decidedduring oocyte maturation and observe that higher food intake comeswith the production of smaller eggs of poorer quality.We measured egg dry mass of mature females ( N364 dpf, 26 °C, adlibitum feeding) for each spawning event during a 2 month reproduc-tion trial and found values ranging from 30 to 105 ( Augustineunpublished 2010 ). This large variation makes it dif ﬁcult to judge themodel assumption on the maternal effect. Future extensions of themodel might include this variation.The data did not allow us to study the effect of temperature outside"
+        },
+        {
+          "document_id": "69b8a412ecbd4702b29a76c4",
+          "title": "Kooy2009b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3776,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "of holometabolic insects [ 19, Fig. 7.24].The reserve density, i.e. the ratio of the amounts of reserve and structure, at birthtends to covary with that of the mother at egg production; well-fed mothers give birthto well-fed offspring. Such maternal effects are typical and have been found in e.g.birds [ 29], reptiles, amphibians [ 25], ﬁshes [ 12], insects [ 26,31,32], crustaceans [ 9],rotifers [ 36], echinoderms and bivalves [ 3]. However, some species seem to producelarge eggs under poor feeding conditions, e.g. some poeciliid ﬁshes [ 30], daphnids"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3784,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "r, but more numerous, until a limit of minimum viable offspring size is reached. The effect of the mother’s food level on mass and quality of ﬁrst-brood eggs was investigated by Boersma (1997a). He raised D. magna at four concen -trations of S. acutus (obliquus ), 0.1, 0.2, 0.4, and 1.0 mg C L-1 as the ILC is about 0.4 mg C L-1. Eggs were analyzed for their volume, ash-free dry mass (ADM), carbon content, and lipid (triglyceride) content. With increasing food concentration, the egg volume de -creased from 0.037 mm3 egg-1 to 0.025 mm3 egg-1. The ADM per egg decreased as well as the amount of car -"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3789,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "1993; Lampert 1993a; Gabsi, Schäffer, et al. 2014). This causes an im -portant maternal effect as the size of an egg translates into neonate size, and neonate size is positively related to juvenile growth (Ebert 1993), size at the ﬁrst repro -duction (Fig. 6.31) of the offspring (Lampert 1993a, 1994b), and the intrinsic rate (r) of population growth (Boersma 1997a). Hence, offspring of a larger mother have higher ﬁtness regardless of the factors controlling female body size (instar, clonal differences). This rela -tionship can also be found for sexual eggs. Boersma, Boriss, et al. (2000) found larger females to produce"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3792,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ses at birth. Parameter values:g= 0.1,k= 0.1,vbH= 0.01 and 0.1 (curves starting at highest eb).2.6.2 Maturation ceasing at birthThe maternal effect in the standard deb model states that the reserve density at birthequals that of the mother at egg formation. This rule not only captures the dominantempirical pattern, but also avoids a parameter for the initial amount of reserve and ithas the property that growth at constant food is of the von Bertalanffy type at all fooddensities directly since birth. In starving mothers, this might be a low value, but lowerboundaries exist for viable eggs."
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly support the stylized fact that egg size/initial reserve covaries with maternal nutritional status. The strongest are [16] (Northern Lapwings: maternal mass and condition positively correlated with egg volume, with condition depending on food availability), [15] (Yellow Dung Fly: maternal adult feeding/nutritional status strongly affects egg size and reproductive output), and [14] (Sociable Weaver: egg mass varies with allocation, modulated by helper-mediated resource availability). Others ([3],[5],[6],[9]) provide moderate corroborating context linking nutritional/resource status to egg provisioning. Snippet [2] is partly contradictory, finding no relationship between fecundity/nutritional metrics and reproduction in lobsters, though it concerns fecundity more than egg size per se. Many snippets are neutral, focusing on egg-size effects on offspring or female-size–fecundity relationships rather than maternal nutritional status. Overall the corpus moderately and consistently supports the fact, with little direct contradiction."
+      },
+      "n_references": 8,
+      "references": {
+        "W4225879141": {
+          "title": "Recent declines in American lobster fecundity in southern New England: drivers and implications",
+          "doi": "10.1093/icesjms/fsac083",
+          "year": "2022",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.34102344512939453
+        },
+        "W2122278343": {
+          "title": "Resource use for reproduction depends on spring arrival time and wintering area in an arctic breeding shorebird",
+          "doi": "10.1111/j.1600-048x.2010.04965.x",
+          "year": "2010",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3437683582305908
+        },
+        "W2997640464": {
+          "title": "Nutritional Aspects of Breeding in Birds",
+          "doi": "",
+          "year": "2002",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3491770625114441
+        },
+        "W304175675": {
+          "title": "Food Limitation And The Adaptive Significance Of Clutch Size In American Coots (fulica Americana)",
+          "doi": "",
+          "year": "1991",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3505796194076538
+        },
+        "W2163840236": {
+          "title": "Factors affecting egg maturation in the bean weevil <i>Callosobruchus maculatus</i>",
+          "doi": "10.1111/j.1365-3032.1989.tb00943.x",
+          "year": "1989",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36049532890319824
+        },
+        "W2062530132": {
+          "title": "Maternal Effects in Relation to Helper Presence in the Cooperatively Breeding Sociable Weaver",
+          "doi": "10.1371/journal.pone.0059336",
+          "year": "2013",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3685535192489624
+        },
+        "W2164476860": {
+          "title": "Maternal effects and their consequences for offspring fitness in the Yellow Dung Fly",
+          "doi": "10.1046/j.1365-2435.1999.00269.x",
+          "year": "1999",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3696083426475525
+        },
+        "W2505104573": {
+          "title": "Correlates of Egg-Size Variation in Polygynously Breeding Northern Lapwings",
+          "doi": "10.2307/4089255",
+          "year": "1997",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.370469331741333
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2054795231",
+          "title": "Effects of male genetic contribution and paternal investment to egg and hatchling size in the cricket, <i>Gryllus firmus</i>",
+          "doi": "10.1046/j.1420-9101.1998.11020135.x",
+          "year": "1998",
+          "distance": 0.306,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Abstract Egg provisions represent the complete energy supply of oviparous organisms from fertilization until hatching, and egg size is generally correlated with initial offspring size and a suite of other early fitness related traits. Since egg size is determined by the mother, little attention has been given to potential sources of paternal effects on either egg size or initial offspring size."
+        },
+        {
+          "document_id": "W4225879141",
+          "title": "Recent declines in American lobster fecundity in southern New England: drivers and implications",
+          "doi": "10.1093/icesjms/fsac083",
+          "year": "2022",
+          "distance": 0.341,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "y based on counts of late-stage eggs nearing hatch; and compared realized fecundity to historical data (1980s) from the region. Generalized linear modeling revealed that female size was a significant predictor of both potential and realized fecundity as expected, but that ESD status did not result in differences in fecundity. Dry weight was the only difference in nutritional content egg–1 between non-diseased and diseased females. There was also no relationship detected between potential fecundity and any nutritional metric from non-diseased females."
+        },
+        {
+          "document_id": "W2122278343",
+          "title": "Resource use for reproduction depends on spring arrival time and wintering area in an arctic breeding shorebird",
+          "doi": "10.1111/j.1600-048x.2010.04965.x",
+          "year": "2010",
+          "distance": 0.3438,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ope (δ 13 C) values of the local diet and of maternal plasma, cellular blood, feather and claw with those of the eggs produced. Our results revealed that early breeding females utilize resources for egg production that were acquired recently at staging areas, whereas later breeding females mostly relied on nutrients derived from local food sources. These findings suggest that the resource allocation strategy used for reproduction differs among females, and varies depending on the timing of arrival and the start of reproduction."
+        },
+        {
+          "document_id": "W2941544898",
+          "title": "Maternal Effects and the Evolution of Chinook Salmon",
+          "doi": "",
+          "year": "2018",
+          "distance": 0.3475,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "raits, which suggests that egg size has the capacity to significantly influence the adaptive response of early life phenotypes. I also assessed the effect of egg nutrient composition, which is a transgenerational maternal effect, on the expression of offspring phenotypes and determined that both the fatty acid and proximate composition of eggs influenced offspring phenotypes above and beyond the effect of egg size. Importantly, the effects of both egg size and nutrient composition were temperature dependent. A primary concern for many studies of maternal effects is the lack of in-situ studies."
+        },
+        {
+          "document_id": "W2997640464",
+          "title": "Nutritional Aspects of Breeding in Birds",
+          "doi": "",
+          "year": "2002",
+          "distance": 0.3492,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "This study set out to investigate the relationships between dietary nutrition, female quality and egg production. Representing a considerable investment of her resources, a female bird deposits all the chemical nutrients required for the growth of an avian embryo within a sealed unit over a short period of time."
+        },
+        {
+          "document_id": "W304175675",
+          "title": "Food Limitation And The Adaptive Significance Of Clutch Size In American Coots (fulica Americana)",
+          "doi": "",
+          "year": "1991",
+          "distance": 0.3506,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "tle sign of nutritional stress during breeding, although supplemental feeding did result in increased fat and protein reserves. Among postlaying female coots, there were significant positive correlations between size of reserves and measures of previous reproductive performance. These observations lend further support to the idea that individual females are inherently \"superior\" or \"inferior\" breeders, but they do not give any indication why this might be so.;I conclude that coots are not food limited during egg laying or incubation."
+        },
+        {
+          "document_id": "W2021486768",
+          "title": "Maternal effects of egg size on emu<i>Dromaius novaehollandiae</i>egg composition and hatchling phenotype",
+          "doi": "10.1242/jeb.00792",
+          "year": "2004",
+          "distance": 0.3513,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "400 g to&amp;gt;700 g, to examine the influence of maternal investment in eggs on the morphology and physiology of hatchlings. Female emus provisioned larger eggs with a greater absolute amount of energy, nutrients and water in the yolk and albumen. Variation in maternal investment was reflected in differences in hatchling size, which increased isometrically with egg size. Egg size also influenced the physiology of developing emu embryos, such that late-term embryonic metabolic rate was positively correlated with egg size and embryos developing in larger eggs consumed more yolk during development."
+        },
+        {
+          "document_id": "W2291224998",
+          "title": "The Adaptive Significance of Nutrient Reserves to Breeding American Coots: A Reassessment",
+          "doi": "10.2307/1370227",
+          "year": "1997",
+          "distance": 0.3575,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "Female American Coots (Fulica americana) lay large clutches of nutrient-rich eggs, and both sexes assist with incubation and brood-rearing. We studied the role of stored fat, protein, and ash reserves in meeting the nutritional demands of reproduction by analyzing carcass composition of 138 male and 181 female coots collected in southwestern Manitoba during 1987-1991."
+        },
+        {
+          "document_id": "W2163840236",
+          "title": "Factors affecting egg maturation in the bean weevil <i>Callosobruchus maculatus</i>",
+          "doi": "10.1111/j.1365-3032.1989.tb00943.x",
+          "year": "1989",
+          "distance": 0.3605,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "s and mates are available, eggs are laid at a rate determined by the number of oviposition sites, and mature at a similar rate. If seeds or mates are absent then a small number of eggs are laid, but oocytes continue to mature until the oviduct‐capacity is approached. The number of eggs that a female can store is dependent on her body weight and does not correlate with the number of ovarioles. If, after a period in which oocyte development has been halted, conditions for egg‐laying become suitable, then egg maturation can be re‐started, but only after the oviducts have been emptied of eggs."
+        },
+        {
+          "document_id": "W2054795231",
+          "title": "Effects of male genetic contribution and paternal investment to egg and hatchling size in the cricket, <i>Gryllus firmus</i>",
+          "doi": "10.1046/j.1420-9101.1998.11020135.x",
+          "year": "1998",
+          "distance": 0.3629,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "the eggs that the female laid, suggesting an effect of male size of the amount of nutrients the female receives from her mates. The results of this study suggest that paternal effects may be both more common and more profound than previously thought, and that studies examining early fitness traits that are correlated to egg size or initial body size, in oviparous animals, should consider the possibility and importance of the paternal contribution."
+        },
+        {
+          "document_id": "W1969357313",
+          "title": "Reproduction of Panulirus Longipes Longipes in Calatagan, Batangas, Philippines",
+          "doi": "10.1163/156854094x00341",
+          "year": "1994",
+          "distance": 0.3639,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "gests that individuals can produce at least 2 broods in rapid succession particularly during the warmer months of March to May. The smallest females with eggs and mature ovaries were 41.8 and 41.4 mm CL size, respectively. The disproportionate increase in the growth of the third walking leg of the males relative to the females indicate that males reach first functional sexual maturity between 55.0-60.0 mm CL. The relationship between the total number of eggs (E) carried and the size of the female (CL) is expressed by the relationship: E = -291063 + 7387 CL over the size range 43.0-85.4 mm CL."
+        },
+        {
+          "document_id": "W1824994794",
+          "title": "Non-oviposition of Mature Eggs by Female Fluvial Red-spotted Masu Salmon",
+          "doi": "10.2331/fishsci.60.37",
+          "year": "1994",
+          "distance": 0.3664,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ad both well-developed gonads and ovulated eggs, indicating that they spawn at least twice during their lifetime (iteroparity). The smaller the female body size, the more the retention of ovulated eggs and their proportion of the overall egg total. Such eggs are probably resorbed for energy during the non-spawning season, hence improving their growth and/or survivorship and, consequently, future reproductive success."
+        },
+        {
+          "document_id": "W2324596757",
+          "title": "Effects of Egg Size and Density on Metamorphic Traits in Tadpoles of the Natterjack Toad (Bufo calamita)",
+          "doi": "10.2307/1564855",
+          "year": "1992",
+          "distance": 0.3668,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ptive. Much variation in egg size exists within populations, and this variation is related to female body size (Tejedo, 1992a). In this report we examined in the laboratory the relationships between two maternally induced variables (egg size and early hatchling size) and four fitness traits: size at metamorphosis; time of development; growth rate; and survival. The relationship was assessed for larvae of different sibships from a single population, under a range of density treatments. Moreover, growth trajectories and covariation between body size at metamorphosis and developmental time were analyzed across the different densities."
+        },
+        {
+          "document_id": "W2062530132",
+          "title": "Maternal Effects in Relation to Helper Presence in the Cooperatively Breeding Sociable Weaver",
+          "doi": "10.1371/journal.pone.0059336",
+          "year": "2013",
+          "distance": 0.3686,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "assisted by helpers. This effect is predicted by current maternal allocation theory, but has not been previously investigated. We studied egg mass and contents in sociable weavers (Philetairus socius). We found that egg mass decreased with group size, while fledgling mass did not vary, suggesting that helpers may compensate for the reduced investment in eggs. We found no differences in eggs' carotenoid contents, but females assisted by helpers produced eggs with lower hormonal content, specifically testosterone, androstenedione (A4) and corticosterone levels."
+        },
+        {
+          "document_id": "W2164476860",
+          "title": "Maternal effects and their consequences for offspring fitness in the Yellow Dung Fly",
+          "doi": "10.1046/j.1365-2435.1999.00269.x",
+          "year": "1999",
+          "distance": 0.3696,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "how maternal body size and adult nutritional status affected her fecundity, longevity and egg size were first investigated. 3. Second, it was investigated how female age and adult nutritional experience, mediated through the effects of egg size or egg quality, influenced the performance of offspring at different larval densities. 4. Maternal size was less important than maternal adult feeding in increasing reproductive output. Without food restriction, large females had larger clutch sizes and higher oviposition rates, whereas under food restriction this advantage was reversed in favour of small females. 5."
+        },
+        {
+          "document_id": "W2505104573",
+          "title": "Correlates of Egg-Size Variation in Polygynously Breeding Northern Lapwings",
+          "doi": "10.2307/4089255",
+          "year": "1997",
+          "distance": 0.3705,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "pwings maternal mass and condition are positively correlated with egg volume (Galbraith 1988c, Blomqvist and Johansson 1995, T. Lislevandpers.comm.).Maternalconditiondependsonextrinsicfactorsatthebreedingsite(e.g.availabilityoffood,theopportunitytoforageeffectively,andweather)andonintrinsicfactorsrelatedtogeneticpredisposition,oracquiredpreviously(DrentandDaan1980,H6gstedt1980,SchluterandGustafsson1993).Inthisstudy,Iinvestigatedwhetherfemalesofdifferentmatingstatusinapopulationofpolygynouslybreeding(23to41%overfourseasons)NorthernLapwingsdifferedintheirclutchinvestment.Imeasuredandanalyzedeggsizeofindividualfemaleswhilecontrolling"
+        },
+        {
+          "document_id": "W3043019913",
+          "title": "Reproductive Characteristics of Landlocked Fall Chinook Salmon from Lake Oahe, South Dakota",
+          "doi": "",
+          "year": "2016",
+          "distance": 0.3729,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": ", while relative fecundity based on female length peaked in 2003 at 5.64 eggs/mm with the lowest value of 2.93 eggs/mm in 2000. Mean egg size for all years combined was 5.33 eggs/mL of water displaced, but was extremely variable, with the smallest eggs in 1998 and largest in 2015. Survival to the eyed-egg stage of development ranged from 0 to 100% for individual spawns, with an overall mean of 31.2%. Total fecundity was significantly correlated with both length and weight, and linear relationships between fecundity and female length, fecundity and egg size, and female length and egg size were observed."
+        },
+        {
+          "document_id": "W4385705253",
+          "title": "Potential rate of reproduction for some geographically separate populations of Pseudocalanus spp.",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.3741,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ive rate was computed as the mean number of eggs per sac divided by 1.25 times the embryonic duration at the given temperature. Also computed was the amount of egg matter produced per day as a percentage of body carbon (and dry weight) of female weight for all localities. The relationships for females from the southern North Sea were obtained for \"viable eggs\", but they should be treated with reserve. A more suitable expression describing egg production in the southern North Sea is the equation for females from the English Channel obtained here."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly and explicitly support the stylized fact. DEB-specific sources (Pecquerie et al. [9], Kooijman & Sousa [11], Sardi et al. [1]) state that offspring reserve density / egg size depends on the nutritional state of the mother (well-fed females produce offspring in good condition). Empirical works on Daphnia [6,7], copepod-style assimilate models [2], and bird/fish maternal-effects studies [16,17,19] corroborate that egg size or provisioning covaries with maternal condition or size. The main tension comes from snippets [5] and [14]: [5] notes some species produce larger eggs under poor feeding conditions (an inverse relationship in certain taxa), and [14] found no link between fecundity/egg content and nutritional metrics in lobsters. These show the covariation is not universal in sign, but they do not deny that egg size covaries with maternal nutritional status—if anything they confirm a relationship exists, just sometimes inverse. Overall the evidence is strong and consensus is corroborating, with limited and explicable conflict."
+      },
+      "n_references": 13,
+      "references": {
+        "69b847bcec32c55db5430a20": {
+          "title": "Sardi et al. - 2023 - Simulating the Effects of Temperature and Food Ava.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.32578450441360474
+        },
+        "69b87580ecbd4702b29a3d3d": {
+          "title": "GurnMcCa1990.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3270397186279297
+        },
+        "69b8a412ecbd4702b29a76c4": {
+          "title": "Kooy2009b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.36268043518066406
+        },
+        "69b84824ec32c55db5430b7f": {
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3635985255241394
+        },
+        "69b88288ecbd4702b29a4eb7": {
+          "title": "Pecquerie et al. - 2009 - Modeling fish growth and reproduction in the conte.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36988377571105957
+        },
+        "69b880d5ecbd4702b29a4c18": {
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.37123358249664307
+        },
+        "W2054795231": {
+          "title": "Effects of male genetic contribution and paternal investment to egg and hatchling size in the cricket, <i>Gryllus firmus</i>",
+          "doi": "10.1046/j.1420-9101.1998.11020135.x",
+          "year": "1998",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3059641718864441
+        },
+        "W4225879141": {
+          "title": "Recent declines in American lobster fecundity in southern New England: drivers and implications",
+          "doi": "10.1093/icesjms/fsac083",
+          "year": "2022",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.34102344512939453
+        },
+        "W2122278343": {
+          "title": "Resource use for reproduction depends on spring arrival time and wintering area in an arctic breeding shorebird",
+          "doi": "10.1111/j.1600-048x.2010.04965.x",
+          "year": "2010",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3437683582305908
+        },
+        "W2941544898": {
+          "title": "Maternal Effects and the Evolution of Chinook Salmon",
+          "doi": "",
+          "year": "2018",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34747183322906494
+        },
+        "W2997640464": {
+          "title": "Nutritional Aspects of Breeding in Birds",
+          "doi": "",
+          "year": "2002",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3491770625114441
+        },
+        "W2021486768": {
+          "title": "Maternal effects of egg size on emu<i>Dromaius novaehollandiae</i>egg composition and hatchling phenotype",
+          "doi": "10.1242/jeb.00792",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3513205051422119
+        },
+        "W2163840236": {
+          "title": "Factors affecting egg maturation in the bean weevil <i>Callosobruchus maculatus</i>",
+          "doi": "10.1111/j.1365-3032.1989.tb00943.x",
+          "year": "1989",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36049532890319824
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847bcec32c55db5430a20",
+          "title": "Sardi et al. - 2023 - Simulating the Effects of Temperature and Food Ava.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3258,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "articular area, for which specific temperature and food densit y functions could be implemented, as was done in, e.g., [55,56]. Mother’s nutritional status determines the egg size . Egg size and the availability of energy from the yolk are conditioned to the mother’s status (i.e., see the maternal effect in [20], [65]. Without information on the mother’s status and in the context of constant food avail-ability in simulated environments, eggs of a sp ecies were assumed to be of the same size throughout the simulation. Devauchelle et al. [66], however, reported smaller S. solea eggs"
+        },
+        {
+          "document_id": "69b87580ecbd4702b29a3d3d",
+          "title": "GurnMcCa1990.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.327,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "egg is furnished with a quantity of inherited reserves which increases linearly with the feeding status of the mother-as mea- sured by the ratio of the assimilate committed to eggs during an intermolt compared to the maximum amount that could be committed by an individual of the same length. There are several pieces of evidence to support this picture (Tessier et al. 1983, Goulden and Henry 1986) and it is confirmed by our own observations (E. McCauley et al., unpublished manuscript). Thus at the conclusion of our validation exercise we have evolved an individual growth model (set out in"
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3416,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ory, although the theory does not explain the variation i n egg sizes.104 3. Energy acquisition and usehouse mouse, Mus musculustime, dembryo weight, gimpala, Aepyceros melampustime, dembryo wet weight, kgFigure 3.18: Foetal weight development in mammals. Parameters are given in Table 3.2.Foetal developmentFoetal development diﬀers from that in eggs in that energy re serves are supplied continu-ously via the placenta. The feeding and digestion processes are n ot involved. Otherwise,foetal development is taken to be identical to egg developme nt, with initial reserves that"
+        },
+        {
+          "document_id": "69b8a412ecbd4702b29a76c4",
+          "title": "Kooy2009b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3481,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "birth, and initial amount of reserve covarywith maximum length. Parameter values that quantify metabolic traits are rather pre-dictable, while life history parameters, such as the maturity at birth, are highly adap-table (from an evolutionary point of view). Within particular taxa the variation is less,however. The primary parameter that is in control of length at birth is the maturity atbirth. Previously [ 18, p. 283] I discussed the logic behind the relatively small egg size"
+        },
+        {
+          "document_id": "69b8a412ecbd4702b29a76c4",
+          "title": "Kooy2009b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3627,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.8,
+          "text": "s [ 3]. However, some species seem to producelarge eggs under poor feeding conditions, e.g. some poeciliid ﬁshes [ 30], daphnids[10] and Sancassania mites [ 2]. Moreover, egg size can vary within a clutch [ 6,28,35],according to geographical distribution [ 33], with age [ 26] and race.DEB theory speciﬁes the costs for structure, the somatic and maturity maintenancecosts and the processes of growth and maturation. The additional speciﬁcation ofthe reserve density at birth to accomodate maternal effects also speciﬁes the initial"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3636,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "an those produced at high food concentrations or in the 1st clutch. There were signiﬁcant two-way interactions involving clone, which indicated clonal effects contributing to variabil -ity across food levels and clutch numbers. When they related the egg masses found in all their experimental results, they found a strong correlation between the mother’s size and the mass of its eggs (Fig. 12.3). Note that egg size is strongly correlated with neonate length and maturation size (Lampert 1993). Hence, it can be expected that female body size has an important inﬂu -ence of various life-history traits (see below)"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3642,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ance’ of acquired traits (Burggren 2014) have rarely been assessed (see be -low). One ecologically important maternal effect is transmitted by the size of the parthenogenetic Daphnia eggs. Egg size (volume) is inﬂuenced by various envi -ronmental factors, e.g. food availability (Glazier 1992; Trubetskova and Lampert 1995). However, keeping all conditions equal, the most important determinant of egg size is a positive relationship to the mother’s body length (Green 1954, 1956b; Ebert 1993; Lampert 1993a; Gabsi, Schäffer, et al. 2014). This causes an im -portant maternal effect as the size of an egg translates"
+        },
+        {
+          "document_id": "69b89254ecbd4702b29a61fe",
+          "title": "PethRoos2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3682,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "egg x (RF batch x V), and 2) the oocytes of each batch, must have had enough time to reach full development, O Dev > ODev Time For these rules, we assumed that energy content of 1 egg, E egg was 0.15 J egg-1 based on mean values of 5600 J g-1 WW egg-1 (Valdés, 1993) and 27.7 µg egg-1 (Somarakis, 1999) as used by Politikos et al (2011). The relative batch fecundity (RF batch) was set at 550 eggs cm-3 after considering mean estimates of between 226 to 646 eggs g-1 of gonad-free weight of mature female (Somarakis et al. 2004) and a (wet) structural density of 1 g cm-3"
+        },
+        {
+          "document_id": "69b88288ecbd4702b29a4eb7",
+          "title": "Pecquerie et al. - 2009 - Modeling fish growth and reproduction in the conte.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3699,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "was available, else it was fully emptied. With tBdenoting thetime point at a spawning event, we had:ERðtB+dtÞ=ERðtBÞ−E⁎BðB:3ÞandEBðtB+dtÞ=0 ðB:4ÞThe fecundity per batch (number of eggs) was given by F=EB⁎/E0,w i t hE0(J) the egg energy content. The energy content of an egg depended onthe state of the female at the time of spawning. As stated by Kooijman(2000, 2009) , we assumed that an offspring at birth would have the samescaled reserve density as the female a t spawning ; a well-fed female wouldproduce offsprings in good condition. Hence, the reserve at birth is given"
+        },
+        {
+          "document_id": "69b885e0ecbd4702b29a52f6",
+          "title": "Kooy86b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3711,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "J, Math. Biology (1986) 23:163-185 ,Journal of\" Mathematical Molosy O Springer-Verlag 1986 What the hen can tell about her eggs: egg development on the basis of energy budgets S. A. L. M. Kooijman Netherlands Organization for Applied Scientific Research, TNO, P.O. Box 217, 2600 AE Delft, The Netherlands* Abstract. By a simple model involving the state variables size and storage, it is possible to describe a wide variety of observations on the feeding, growth,"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3712,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "aconstant food level, which corresponds with some functionalresponse f, then the reserve density of the embryo at birthequals mEb¼fmEm. These initial conditions imply vonBertalanffy growth at constant food availability right afterbirth. Foetal development is a variant of egg development.The initial amount of reserve is given in the Appendix andthe computational aspects are discussed in Kooijman(2008).Maturity at birth MHbis a primary parameter. Length atbirth Lband age at birth abare functions of parameters andthe nutritional state of the mother, via f. To avoid mass inthe first estimation steps, we scale MHbwith the specific"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3716,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ss than (3.5/70)1/3/0.15 ¼2.5 year. A larger value would be inconsistentwith DEB theory for any combination of parameter values.The relationship between foetal and egg development isgiven in Kooijman (2000) (see also Section VI). The factthat reserve contributes to mass is here not important,because weak homeostasis implies that reserve makes upa constant fraction of mass, as long as the baby and adultexperience similar food conditions.Age zero is defined as the start of development, an eventthat is not always easy to observe or to infer; sometimes theage at birth seems to be longer than the maximum possible"
+        },
+        {
+          "document_id": "W2054795231",
+          "title": "Effects of male genetic contribution and paternal investment to egg and hatchling size in the cricket, <i>Gryllus firmus</i>",
+          "doi": "10.1046/j.1420-9101.1998.11020135.x",
+          "year": "1998",
+          "distance": 0.306,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "Abstract Egg provisions represent the complete energy supply of oviparous organisms from fertilization until hatching, and egg size is generally correlated with initial offspring size and a suite of other early fitness related traits. Since egg size is determined by the mother, little attention has been given to potential sources of paternal effects on either egg size or initial offspring size."
+        },
+        {
+          "document_id": "W4225879141",
+          "title": "Recent declines in American lobster fecundity in southern New England: drivers and implications",
+          "doi": "10.1093/icesjms/fsac083",
+          "year": "2022",
+          "distance": 0.341,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "y based on counts of late-stage eggs nearing hatch; and compared realized fecundity to historical data (1980s) from the region. Generalized linear modeling revealed that female size was a significant predictor of both potential and realized fecundity as expected, but that ESD status did not result in differences in fecundity. Dry weight was the only difference in nutritional content egg–1 between non-diseased and diseased females. There was also no relationship detected between potential fecundity and any nutritional metric from non-diseased females."
+        },
+        {
+          "document_id": "W2122278343",
+          "title": "Resource use for reproduction depends on spring arrival time and wintering area in an arctic breeding shorebird",
+          "doi": "10.1111/j.1600-048x.2010.04965.x",
+          "year": "2010",
+          "distance": 0.3438,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "ope (δ 13 C) values of the local diet and of maternal plasma, cellular blood, feather and claw with those of the eggs produced. Our results revealed that early breeding females utilize resources for egg production that were acquired recently at staging areas, whereas later breeding females mostly relied on nutrients derived from local food sources. These findings suggest that the resource allocation strategy used for reproduction differs among females, and varies depending on the timing of arrival and the start of reproduction."
+        },
+        {
+          "document_id": "W2941544898",
+          "title": "Maternal Effects and the Evolution of Chinook Salmon",
+          "doi": "",
+          "year": "2018",
+          "distance": 0.3475,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "raits, which suggests that egg size has the capacity to significantly influence the adaptive response of early life phenotypes. I also assessed the effect of egg nutrient composition, which is a transgenerational maternal effect, on the expression of offspring phenotypes and determined that both the fatty acid and proximate composition of eggs influenced offspring phenotypes above and beyond the effect of egg size. Importantly, the effects of both egg size and nutrient composition were temperature dependent. A primary concern for many studies of maternal effects is the lack of in-situ studies."
+        },
+        {
+          "document_id": "W2997640464",
+          "title": "Nutritional Aspects of Breeding in Birds",
+          "doi": "",
+          "year": "2002",
+          "distance": 0.3492,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "This study set out to investigate the relationships between dietary nutrition, female quality and egg production. Representing a considerable investment of her resources, a female bird deposits all the chemical nutrients required for the growth of an avian embryo within a sealed unit over a short period of time."
+        },
+        {
+          "document_id": "W304175675",
+          "title": "Food Limitation And The Adaptive Significance Of Clutch Size In American Coots (fulica Americana)",
+          "doi": "",
+          "year": "1991",
+          "distance": 0.3506,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.45,
+          "text": "tle sign of nutritional stress during breeding, although supplemental feeding did result in increased fat and protein reserves. Among postlaying female coots, there were significant positive correlations between size of reserves and measures of previous reproductive performance. These observations lend further support to the idea that individual females are inherently \"superior\" or \"inferior\" breeders, but they do not give any indication why this might be so.;I conclude that coots are not food limited during egg laying or incubation."
+        },
+        {
+          "document_id": "W2021486768",
+          "title": "Maternal effects of egg size on emu<i>Dromaius novaehollandiae</i>egg composition and hatchling phenotype",
+          "doi": "10.1242/jeb.00792",
+          "year": "2004",
+          "distance": 0.3513,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "400 g to&amp;gt;700 g, to examine the influence of maternal investment in eggs on the morphology and physiology of hatchlings. Female emus provisioned larger eggs with a greater absolute amount of energy, nutrients and water in the yolk and albumen. Variation in maternal investment was reflected in differences in hatchling size, which increased isometrically with egg size. Egg size also influenced the physiology of developing emu embryos, such that late-term embryonic metabolic rate was positively correlated with egg size and embryos developing in larger eggs consumed more yolk during development."
+        },
+        {
+          "document_id": "W2291224998",
+          "title": "The Adaptive Significance of Nutrient Reserves to Breeding American Coots: A Reassessment",
+          "doi": "10.2307/1370227",
+          "year": "1997",
+          "distance": 0.3575,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "Female American Coots (Fulica americana) lay large clutches of nutrient-rich eggs, and both sexes assist with incubation and brood-rearing. We studied the role of stored fat, protein, and ash reserves in meeting the nutritional demands of reproduction by analyzing carcass composition of 138 male and 181 female coots collected in southwestern Manitoba during 1987-1991."
+        },
+        {
+          "document_id": "W2163840236",
+          "title": "Factors affecting egg maturation in the bean weevil <i>Callosobruchus maculatus</i>",
+          "doi": "10.1111/j.1365-3032.1989.tb00943.x",
+          "year": "1989",
+          "distance": 0.3605,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "s and mates are available, eggs are laid at a rate determined by the number of oviposition sites, and mature at a similar rate. If seeds or mates are absent then a small number of eggs are laid, but oocytes continue to mature until the oviduct‐capacity is approached. The number of eggs that a female can store is dependent on her body weight and does not correlate with the number of ovarioles. If, after a period in which oocyte development has been halted, conditions for egg‐laying become suitable, then egg maturation can be re‐started, but only after the oviducts have been emptied of eggs."
+        },
+        {
+          "document_id": "W2054795231",
+          "title": "Effects of male genetic contribution and paternal investment to egg and hatchling size in the cricket, <i>Gryllus firmus</i>",
+          "doi": "10.1046/j.1420-9101.1998.11020135.x",
+          "year": "1998",
+          "distance": 0.3629,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "the eggs that the female laid, suggesting an effect of male size of the amount of nutrients the female receives from her mates. The results of this study suggest that paternal effects may be both more common and more profound than previously thought, and that studies examining early fitness traits that are correlated to egg size or initial body size, in oviparous animals, should consider the possibility and importance of the paternal contribution."
+        },
+        {
+          "document_id": "W1969357313",
+          "title": "Reproduction of Panulirus Longipes Longipes in Calatagan, Batangas, Philippines",
+          "doi": "10.1163/156854094x00341",
+          "year": "1994",
+          "distance": 0.3639,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "gests that individuals can produce at least 2 broods in rapid succession particularly during the warmer months of March to May. The smallest females with eggs and mature ovaries were 41.8 and 41.4 mm CL size, respectively. The disproportionate increase in the growth of the third walking leg of the males relative to the females indicate that males reach first functional sexual maturity between 55.0-60.0 mm CL. The relationship between the total number of eggs (E) carried and the size of the female (CL) is expressed by the relationship: E = -291063 + 7387 CL over the size range 43.0-85.4 mm CL."
+        },
+        {
+          "document_id": "W1824994794",
+          "title": "Non-oviposition of Mature Eggs by Female Fluvial Red-spotted Masu Salmon",
+          "doi": "10.2331/fishsci.60.37",
+          "year": "1994",
+          "distance": 0.3664,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ad both well-developed gonads and ovulated eggs, indicating that they spawn at least twice during their lifetime (iteroparity). The smaller the female body size, the more the retention of ovulated eggs and their proportion of the overall egg total. Such eggs are probably resorbed for energy during the non-spawning season, hence improving their growth and/or survivorship and, consequently, future reproductive success."
+        }
+      ]
+    }
+  }
+}

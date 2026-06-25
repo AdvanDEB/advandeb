@@ -1,0 +1,904 @@
+{
+  "sf_id": "growth_07",
+  "category": "Growth",
+  "statement": "Foetuses increase in weight exponentially.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 1,
+        "rationale": "The corpus is split between two distinct treatments. The core DEB-theory snippets (Kooijman texts [1], [9], [10], [14] and the Sousa derivations [8], [16]) consistently and explicitly state that foetal weight increases approximately proportional to CUBED time — i.e., the curve only superficially resembles exponential growth but is in fact less steep, with doubling times that increase by a factor of 2^(1/3). This is a direct contradiction of the stylized fact as literally stated. The supporting snippets ([2], [3], [4], [6], [11]) all originate from the Mauritsson/Maur applied PCB-modelling work, which adopts exponential foetal growth as a simplifying assumption (citing Peters 1983), not as a validated empirical finding within DEB theory. Thus, while several snippets nominally 'support' exponential growth, they reflect a modelling convenience rather than corroborating evidence, whereas the foundational DEB literature explicitly favors the cubed-time (Huggett-Widdas) relation. The weight of authoritative DEB evidence therefore leans against the exact stylized fact, yielding a predominantly contradicted/mixed direction."
+      },
+      "n_references": 8,
+      "references": {
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.24842989444732666
+        },
+        "69b8a0d0ecbd4702b29a7257": {
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.3168697953224182
+        },
+        "69b847bbec32c55db5430a1a": {
+          "title": "MaurDesf2022_SI.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.32786476612091064
+        },
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3589109778404236
+        },
+        "69b867c2ecbd4702b29a2ca0": {
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.36078065633773804
+        },
+        "69b86fe0ecbd4702b29a3542": {
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3657252788543701
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3716164827346802
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3731496334075928
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2484,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.95,
+          "text": "ace that remains in proportion to thetotal surface area of the foetus itself. This is consistent with the deb model, which givesthe energy interpretation of the single parameter. The graph of foetal weight against ageresembles an exponential growth curve, but in fact it is less steep; the model has theproperty that subsequent weight doubling times increase by a factor 21/3= 1.26, whilethere is no increase in the case of exponential growth.The fit is again excellent; see Figure 2.15. It is representative for the data collected inTable 2.3 taken from [1295]. A time lag for the start of foetal growth has to be incorpo-"
+        },
+        {
+          "document_id": "69b8a0d0ecbd4702b29a7257",
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3169,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "o growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as: 𝑊0(𝜏̂)= 𝑊 00𝑒𝑔0(𝜏̂−(∆𝜏 𝑙+∆𝜏 𝑑)) , ∆𝜏 𝑙+ ∆𝜏 𝑑≤ 𝜏̂ ≤ 1 (18) Here, 𝑊00 is the initial foet al weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant . At the end of the gestation period, the foetus has reached the birth weight ; 𝑊0(1) = 𝑊 𝑏𝑖𝑟𝑡ℎ . It is assumed that new-born pups continue to growth exponentially with the same growth rate as foetus es during the lactation period. Hence, the body weight of a pup at time 𝜏̂ during the lactation period is obtained as:"
+        },
+        {
+          "document_id": "69b8a0d0ecbd4702b29a7257",
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3253,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": ", elimination and growth dilution, whereas concentration changes in females are governed by dietary uptake, elimination, growth dilution and vertical transfer. Moreover, the PCB concentration increases in foetus es due to vertical transfer, which affect the PCB concentration in new-born pups at the start of the next year. Body Growth Since the toxicokinetics involve feeding and growth dilution, linked to body size and its cha nge, a model for body growth is acquired. Foetus es are assumed to growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as:"
+        },
+        {
+          "document_id": "69b847bbec32c55db5430a1a",
+          "title": "MaurDesf2022_SI.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3279,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "1983) . Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏)=𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) ,∆𝜏𝑙+∆𝜏𝑑≤𝜏≤1 yr (1) Here, 𝑊00 is the initial fetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant. At the end of the gestation period, the fetus has reached the birth weight 𝑊𝑏𝑖𝑟𝑡ℎ. Hence, the initial fetal weight 𝑊00 is calculated as: 𝑊00=𝑊𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (2) For simplicity it is assumed that new -born pups continue to grow exponentially with the same growth rate as fetuses during the lactation period. The body weight of a pup at time 𝜏 during the lactation period is obtained as:"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3302,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "actual foetal weight in mammals, wherefluids that surround the foetus, the placenta, the increased uterus and milk accumulation(in the later stages of the pregnancy) contribute to the extra weight. Most of the fluidsbecome lost, the increased uterus shrinks after birth, and the placenta is typically eatenby the mother; the latter two factors recover part of the costs. Milk production is typicallypaid via up-regulation of assimilation. These complications modify the total efficiencya bit. In their discussion of life history and evolutionary implications, they ignore that"
+        },
+        {
+          "document_id": "69b847bbec32c55db5430a1a",
+          "title": "MaurDesf2022_SI.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3515,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ion in new-born pups at the start of the next year. Archives of Environmental Contamination and Toxicology 5 2.1 Growth model In order to calculate growth dilution rates and keep track of body weights (affecting rates of feeding, vertical transfer and PCB elimination), a sub model for body growth was established (Fig. 4) . Fetuses are assumed to growth exponentially during the gestation period (Peters 1983) . Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏)=𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) ,∆𝜏𝑙+∆𝜏𝑑≤𝜏≤1 yr (1)"
+        },
+        {
+          "document_id": "69b89262ecbd4702b29a6224",
+          "title": "Harwood et al. - 2022 - Final Report Further Development Of Marine Mammal.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3526,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "supporting our assumption that TP = 330 days. We estimated foetal weight at age using the following formula derived by Hauksson et al. (2011) from the same sample: 𝑆𝑎= 0.00003682 .𝐿𝑎2.758 We assumed that growth in length was linear from birth to age TL (with a predicted length of 415 cm at this age) and then used Christensen (1981) growth curve 𝐿𝑎= 907 .0−(907 .0−415 )𝑒−0.000389 𝑎 (re-parameterised to match the formulation used by Hin et al. 2019) from this age onwards. Structural mass at age ( Sa) was calculated from La using Hauksson et al.’s (2011) formula for foetuses."
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3589,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.9,
+          "text": "lumeof the foetus is proportional to cubed timeVðtÞZ_vt3/C18/C193: ð3:34ÞEquation (3.34) is validated by the empirical data thatsuggest that foetal weight is proportional to cubed time(G3) because the structural volume of the foetus isproportional to weight when the reserve density is constant(see electronic supplementary material, appendix II).Proposition 3.26 (intraspeciﬁc Kleiber’s law). Themetabolic rate measured by the dioxygen consumption _JO2offasting animals is proportional to wawith a2[0.66,1]. Ifanimals have the same reserve density e, then theproportionality constant is the same ."
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3608,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.9,
+          "text": "tV= ˙vV2/3so (3.25)V(t) = ( ˙ vt/3)3(3.26)This growth curve was proposed by Huggett and Widdas [434] in 19 51. Payne and Wheeler[694] explained it by assuming that the growth rate is determin ed by the rate at whichnutrients are supplied to the foetus across a surface that remai ns in proportion to thetotal surface area of the foetus itself. This is consistent with t hedeb model, which givesthe energy interpretation of the single parameter. The graph of foetal weight against ageresembles an exponential growth curve, but in fact it is less ste ep; the model has the"
+        },
+        {
+          "document_id": "69b86fe0ecbd4702b29a3542",
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3657,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.9,
+          "text": "letionof the reserves. The approximation [ E] =∞reduces the growth equation (3.12) toddtV= ˙vV2/3so (3.20)V(t) = ( ˙vt/3)3(3.21)This growth curve was proposed by Huggett and Widdas [341] in 19 51. Payne and Wheeler[536] explained it by assuming that the growth rate is determin ed by the rate at whichnutrients are supplied to the foetus across a surface that remai ns in proportion to the total90 3. Energy acquisition and useFigure 3.16: Foetal weight development in mammals.house mouse, Mus musculus impala, Aepyceros melampussurface area of the foetus itself. This is consistent with the deb model, which gives the"
+        },
+        {
+          "document_id": "69b8a0d0ecbd4702b29a7257",
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3661,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ulated, based on body size data for Baltic grey seals. Foetuses are assumed to grow exponentially during the gestation period : 𝑊0(𝜏̂)= 𝑊 00𝑒𝑔0(𝜏̂−(∆𝜏 𝑙+∆𝜏 𝑑)) , ∆𝜏 𝑙+ ∆𝜏 𝑑≤ 𝜏̂ ≤ 1 (165) At the end of the gestation period, the foetus has reached the birth weight ; 𝑊0(1) = 𝑊 𝑏𝑖𝑟𝑡ℎ . Hence, the initial foetal weight 𝑊00 is calculated as: 𝑊00= 𝑊 𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (166) New-born pups continue to grow exponentially, with the same growth rate as foetuses, during the lactation period : 𝑊1(𝜏̂)= 𝑊 00𝑒𝑔0(∆𝜏𝑔+𝜏̂) , 0 ≤ 𝜏̂ < ∆𝜏 𝑙 (167) At the end of the lactation period, pups reach weaning weight ; 𝑊1(∆𝜏𝑙) = 𝑊 𝑤𝑒𝑎𝑛 . Hence, the exponential"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3683,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "the linear ones that arediscussed above [797], which further supports the generality of this conclusion.7.7 Mother–foetus systemAt birth of the baby, the human mother produces 3500 g baby, 900 g placenta and 900 gamniotic fluid, while she increased her blood volume with 2000 g, her body fluids with1500 g, her uterine with 900 g and her breasts with 500 g; the latter in preparation of milkproduction. This all on top of an increase in reserve, so more than three times the massof the baby is involved in pregnancy.164 7. Extensions of DEB modelstime since birth, dwet weight, gtime since birth, dwet weight, g"
+        },
+        {
+          "document_id": "69b87fc6ecbd4702b29a4abd",
+          "title": "Kooijman and Augustine - 2022 - The comparative energetics of the carnivorans and .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3685,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "laceasanevent,althoughthetransitiontosolidfoodisactuallygradualin practice.The costs for foetal development in a DEB context areslightly smaller than for egg development in a DEB context(because egg development slows down due to reserve deplet-ing, while maintenance costs increase), but this can easily betheotherwayaroundifoverheadcostsforfoetaldevelopmentare included. The weight associated with pregnancy at deliv-ery is typically more than three times the weight of the baby;part of this extra weight is resorbed by the mother.The hazard rate for death by aging is taken proportional"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3716,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.95,
+          "text": "creases almost linearly with the maximumbody length due to the increase of the (maximum) reserve capacity, see Subsection 8.2.2.G3Huggett and Widdas (1951) already observed that foetuses increase in weight approximatelyproportional to cubed time, see Table 11.1; Their model is a special case of the standarddebmodel, see Subsection 2.6.2.R1Allocation to reproduction is initiated when maturity reaches the puberty threshold, seeSubsection 2.5.2.R2Reproduction increases intra-specifically between a squared and a cubed length, see Section2.7, but inter-specifically it decreases approximately proportional to length, see Subsection8.2.2."
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.373,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "me, this translates via (3.2) into thewet weight developmentWw(t) =wEE0µE−(gwE[MEm]−dV)\u0012V1/30+t˙v3\u00133−wE[MEm]4V1/3m \u0012V1/30+t˙v3\u00134−V4/30!(7.80)Tests against experimental data quickly show that the contribution of the third term,which relates to maintenance losses, is too small to be noticed. So the weight-at-timecurve reduces to a three-parameter one. It fits the data excellently, see Figure 7.20. Justas in foetuses, the start of the development of the pupa can be delayed, in a period knownas the diapause. The precise triggers that start development are largely unknown."
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3731,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.85,
+          "text": "the volume of the structure by dV./squaresolidThe structural volume of the foetus can be converted to weigh t (Eq. 5.57) using aconstant because he has unlimited access to food, i.e., the r eserves of the mother. Inthis case, Eq. 5.56 is validated by the empirical data that su ggests that foetal weight isproportional to cubed time (G3).Proposition 5.3.15 (Intraspeciﬁc Kleiber’s Law) The metabolic rate measured by thedioxygen consumption of animals of the same species, ˙JO2kept under fasting conditions,118 Chapter 5for a short time, is proportional to wαwithα∈[0.66,1]. If animals have the same reserve"
+        },
+        {
+          "document_id": "69b89262ecbd4702b29a6224",
+          "title": "Harwood et al. - 2022 - Final Report Further Development Of Marine Mammal.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3744,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "the foetus, because this is treated as part of the female’s core mass), up to a maximum of (1 -Κ).It . If this amount of energy is less than the energy required for growth, the growth rate of the female and her foetus is reduced accordingly. The balance of the energy intake is allocated to metabolism. If this is insufficient to cover all of the costs of metabolism, reserves must be metabolised. Values of Κ < 0.5 indicate that growth is prioritised over metabolism. Because there is no empirical information that can be used to estimate a value for K we explored the implications of a wide range of values for this"
+        },
+        {
+          "document_id": "69b87af2ecbd4702b29a4487",
+          "title": "Zimm2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3775,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "while maximum length ( Li) and dry weight ( Wi)are underestimated, length ( Lb) and weight at birth ( Wb) are overestimated. InZonneveld and Kooijman (1989), a time lag of 2 days at the beginning of thedevelopment was included to better ﬁt the observed growth curves during thedevelopment in the egg. Indeed, in the ﬁrst days of the development, the embryomainly seems to increase in complexity, and not much in size (see Horstmann(1958)). In the current model, this time lag is not included, which might explainwhy the weight and length at birth are overestimated, while the duration of the"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly affirm the stylized fact: [8] and [17] explicitly state that fetal weight tends to increase exponentially in the middle part of gestation, with [2] employing exponential models to predict foetal fresh weights, and [6] and [9] documenting rapidly increasing foetal growth/mass during gestation. The main nuance is interspecies and stage-dependent variation: [17] notes sheep show a semilog curve convex toward the weight axis (fractional gain greater early), and [10] cites ultrasonographic evidence that human late-gestation growth is linear rather than exponential, indicating the exponential pattern is mostly a mid-gestation phenomenon rather than uniform across the whole gestation. Overall the corpus moderately and consistently supports the exponential mid-gestation growth pattern with caveats about late-gestation deceleration, so support is corroborated but qualified."
+      },
+      "n_references": 4,
+      "references": {
+        "W2157877632": {
+          "title": "A note on live-weight adjustment for pregnancy in cows",
+          "doi": "10.1017/s0003356100035881",
+          "year": "1978",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3058452010154724
+        },
+        "W2340787298": {
+          "title": "Growth, Development and Composition of the Ovine Conceptus and Mammary Gland During Pregnancy",
+          "doi": "10.2527/jas1974.383613x",
+          "year": "1974",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3155750036239624
+        },
+        "W1992739922": {
+          "title": "Factors Influencing Fetal Growth",
+          "doi": "10.1542/neo.2-6-e119",
+          "year": "2001",
+          "corpus": "reproduction",
+          "n_chunks": 3,
+          "supports": 2,
+          "contradicts": 1,
+          "best_distance": 0.3234281539916992
+        },
+        "W2979089137": {
+          "title": "STUDIES ON THE PLACENTA OF THE SHEEP (OVIS ARIES L.)",
+          "doi": "10.1530/jrf.0.0070307",
+          "year": "1964",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.323681116104126
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W1964289928",
+          "title": "A Perinatal Growth Chart for International Reference",
+          "doi": "10.1111/j.1651-2227.1985.tb10129.x",
+          "year": "1985",
+          "distance": 0.2869,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "e usually observed after 40 weeks’gestation is considered to be due to the constraint of fetal growth and is therefore ignored. Arguments are advanced for believing that there is a normal distribution of weight around the central tendency at this time, and that, for practical purposes, normally growing fetuses and infants have an almost identical potential growth velocity during this period and differ for the most part only in the weight they have achieved at 28 weeks’gestation. Using these assumptions a versatile reference chart for international use has been created that is easy to remember and to construct."
+        },
+        {
+          "document_id": "W2157877632",
+          "title": "A note on live-weight adjustment for pregnancy in cows",
+          "doi": "10.1017/s0003356100035881",
+          "year": "1978",
+          "distance": 0.3058,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "e-weight by subtracting the weight of the gravid uterus and products of conception was biologically and practically meaningful. Two exponential models using polynomial coefficients were derived from published data to predict the fresh weights, at any time during gestation, of the foetus (calculated from calf birth weight) and the gravid uterus and foetal membranes and fluids."
+        },
+        {
+          "document_id": "W2055928978",
+          "title": "Specific foetal growth rates of cetaceans",
+          "doi": "10.1111/j.1469-7998.1973.tb04656.x",
+          "year": "1973",
+          "distance": 0.3086,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "to stop feeding and lose body fat to the foetus during late pregnancy, at the time when the foetal increase in size is maximal. The causes of the differences in growth and metabolism of the two groups are unknown, apart from those imposed by differences in their ecology."
+        },
+        {
+          "document_id": "W2404327115",
+          "title": "Effect of maternal weight gain on fetal, infant, and childhood death and on cognitive development.",
+          "doi": "",
+          "year": "1982",
+          "distance": 0.3122,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ion between maternal weight gain and fetal and neonatal death, the implications of this are uncertain and are herein discussed. When the analysis was confined to pregnancies with gestational periods greater than 35 weeks, there was no effect of maternal weight gain on fetal, neonatal, infant, or childhood death. Children whose mothers gained between 5 and 29 lb during their pregnancy scored higher on the Raven Coloured Progressive Matrices test at age 5 than did those whose mothers gained less than 5 or more than 29 lb."
+        },
+        {
+          "document_id": "W3111631772",
+          "title": "Twin conception reduces birth weight and gestation length in sheep, regardless of fetal number in late gestation",
+          "doi": "",
+          "year": "2009",
+          "distance": 0.3128,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "irth weight and gestation length are therefore influenced by fetal number both at the time of conception and in late gestation. Further studies will determine whether this altered growth has longterm implications for growth and risk of disease."
+        },
+        {
+          "document_id": "W2340787298",
+          "title": "Growth, Development and Composition of the Ovine Conceptus and Mammary Gland During Pregnancy",
+          "doi": "10.2527/jas1974.383613x",
+          "year": "1974",
+          "distance": 0.3156,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": ", 71, 129 and 199 g/d while those of twin fetuses averaged 47, 153, 236 and 202 g/d at days 80, 100, 120 and 140, respectively. Fetus(es) as a proportion of total conceptus weight increased from 14% at day 70 to 70% at day 140, while membranes and fluids decreased from 37 to 8% and 49 to 22%, respectively, over the same period. There were no significant differences due to number of fetuses carried."
+        },
+        {
+          "document_id": "W2050998188",
+          "title": "Effect of mother’s physical condition during pregnancy and lactation on postnatal growth and reproductive success of offspring in water vole Arvicola terrestris",
+          "doi": "10.1134/s1062360408020069",
+          "year": "2008",
+          "distance": 0.3218,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ith the storage fat weight was 0.67. The metabolic resources of the mother's body proved to favor faster offspring development. The female offspring weight at the age of 3 and 10 weeks as well as adult ones positively correlated with the mother's nutritional state in pregnancy, while the male offspring weight demonstrated a similar correlation at the age of 3 and 6 weeks. Increased negative energy balance during lactation proved to decrease the offspring weight in both sexes after separation from mother and at the age of 6 weeks."
+        },
+        {
+          "document_id": "W1992739922",
+          "title": "Factors Influencing Fetal Growth",
+          "doi": "10.1542/neo.2-6-e119",
+          "year": "2001",
+          "distance": 0.3234,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "tation surface area of the uterus, and uterine circulation, which together support the growth of the placenta and its function. Obviously, small fetuses of small parents or large fetuses of large parents do not reflect fetal growth restriction or fetal overgrowth, respectively. Their rates of growth are normal for their genome and for maternal size. Unless maternal constraint is particularly prominent, such fetuses would not grow faster or to a larger size if more nutrients were provided.In most species, fetal weight tends to increase exponentially in the middle part of gestation, but there is considerable interspecies variation."
+        },
+        {
+          "document_id": "W2979089137",
+          "title": "STUDIES ON THE PLACENTA OF THE SHEEP (OVIS ARIES L.)",
+          "doi": "10.1530/jrf.0.0070307",
+          "year": "1964",
+          "distance": 0.3237,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "clear evidence of the formation of new caruncles but there was evidence that the number of caruncles may decline spontaneously. It is concluded that, while very little placental tissue is necessary to allow gestation to reach the 100th day, when foetal weight begins to increase rapidly, subsequent foetal growth is limited by the size of the placenta. The results also show that estimation of foetal age from physical dimensions of the foetus may be grossly misleading."
+        },
+        {
+          "document_id": "W1992739922",
+          "title": "Factors Influencing Fetal Growth",
+          "doi": "10.1542/neo.2-6-e119",
+          "year": "2001",
+          "distance": 0.3265,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "lowing of fetal growth rate in the third trimester following the mid-gestational exponential increase in fetal weight (12)(13). In contrast, more recent ultrasonographic observations show that human fetal growth is linear over the latter third of gestation, with no tendency for slowing of fetal growth that would produce the flattening of the fetal growth curve derived from the cross-sectional studies (14)."
+        },
+        {
+          "document_id": "W2410834955",
+          "title": "The effects of strenuous exercise on maternal rats and their developing fetuses.",
+          "doi": "",
+          "year": "1983",
+          "distance": 0.3281,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "unaffected. However, there were significant differences between the maternal weights of the two groups at the end of gestation. The prepartal weight difference was 36.0g (PC group heavier) and this was reduced post-partally to 14.9g which remained significant. These differences in maternal weights were suggested to reflect a decreased amount of amniotic fluid for the fetuses of the PR group during gestation and also a reduction in maternal body fat for the PR group."
+        },
+        {
+          "document_id": "W2320247698",
+          "title": "A model for the effects of energy nutrition on the pregnant ewe",
+          "doi": "10.1017/s0003356100023618",
+          "year": "1979",
+          "distance": 0.3332,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ithin limits, to protect the foetus. If this does not produce the energy required for optimal growth, foetal growth is reduced. Published experimental results are compared with predictions of the model when run under similar conditions; in general, predictions of total maternal weight at the end of pregnancy are within 5 % of those observed in the experiments. Model predictions of the effects of some particular nutritional regimes during pregnancy are presented and the sensitivity of the predictions of the model to certain of the assumptions made in its construction are discussed."
+        },
+        {
+          "document_id": "W2146467499",
+          "title": "Normal Prenatal and Postnatal Development of the Hooded Rat and the Effects of Prenatal Treatment with Growth Hormone",
+          "doi": "",
+          "year": "1974",
+          "distance": 0.3351,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "of the gestation period; (ii) an increase in body-weight of the gravid rat which was maintained, in part, throughout lactation. Autopsy on postnatal day 40 showed that a definite growth response had occurred.&lt;/p&gt; &lt;p&gt;Naturally occurring differences in maternal body-weight were subsequently studied. Body-weight of the mother was not related to gestation period, litter-size, or birth-weight of the offspring, but was found to be inversely correlated with nest-time. Heavy mothers spent less time with their litters, and imparted a slight developmental precocity to them, compared with light mothers."
+        },
+        {
+          "document_id": "W3091478940",
+          "title": "Studies on the induction of pregnancy and the number of fetuses during pregnancy in rats",
+          "doi": "10.12750/jarb.35.3.232",
+          "year": "2020",
+          "distance": 0.3363,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "was 11.9 on average. The number of fetuses on the 8th and 10th days of pregnancy were 15.2 ± 0.4 and 15.4 ± 0.3, respectively. On the contrary, the number of fetuses on the 12th day of pregnancy was 12.9 ± 0.6, which was significantly (p < 0.05) decreased compared to the 10th day of pregnancy, and the number of fetuses was similar until delivery. As a result of investigating the change of body weight according to the birth weight and growth stage after delivery, the birth weight of female and male was 9.2 ± 2.0 g and 9.8 ± 2.5 g, respectively."
+        },
+        {
+          "document_id": "W1984561057",
+          "title": "Twin Birth Weight Standards",
+          "doi": "10.1159/000102055",
+          "year": "2007",
+          "distance": 0.3371,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "n and delivery. At 37 weeks of gestation, a difference of &gt;1 kg existed between favourable and adverse prenatal environment. Up to 40 weeks, sex, site of the umbilical cord, parity, and birth order had a greater influence on birth weight than zygosity, chorionicity and fusion of the placentas. From 34 weeks on, the birth weight of the second-born twin deviated and after 40 weeks, birth weight of monozygotic monochorionic twins dropped, while the other twins continued to grow."
+        },
+        {
+          "document_id": "W3111631772",
+          "title": "Twin conception reduces birth weight and gestation length in sheep, regardless of fetal number in late gestation",
+          "doi": "",
+          "year": "2009",
+          "distance": 0.3377,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "eduction of twin pregnancies to singletons in early gestation, birthweight and gestation length remain less than in singletons. These are the first experimental data demonstrating that gestation length and birthweight in twin fetuses are determined, at least in part, in early gestation. However, the significantly greater birthweight in reductions compared with twins indicates that there is additional constraint of growth in late gestation. Birth weight and gestation length are therefore influenced by fetal number both at the time of conception and in late gestation."
+        },
+        {
+          "document_id": "W1992739922",
+          "title": "Factors Influencing Fetal Growth",
+          "doi": "10.1542/neo.2-6-e119",
+          "year": "2001",
+          "distance": 0.3402,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "fetal weight tends to increase exponentially in the middle part of gestation, but there is considerable interspecies variation. In sheep, a semilogarithmic plot of fetal weight versus gestational age yields a curve convex toward the weight axis, indicating that the fractional weight gain is greater in early gestation (12). In humans, cross-sectional evaluations of newborn weight versus gestational age tends to produce a typical S-shaped curve, with an apparent slowing of fetal growth rate in the third trimester following the mid-gestational exponential increase in fetal weight (12)(13)."
+        },
+        {
+          "document_id": "W4376505289",
+          "title": "Birth size after embryo cryopreservation: larger by all measures?",
+          "doi": "10.1093/humrep/dead094",
+          "year": "2023",
+          "distance": 0.3406,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract STUDY QUESTION Are the changes in birthweight after frozen and fresh embryo transfer associated with corresponding changes in other measures of foetal growth and placental efficiency?"
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 2,
+        "rationale": "The corpus is genuinely mixed. Several snippets (2, 3, 4, 6, 11) explicitly model foetal weight as exponential during gestation, and snippet 20 states fetal weight tends to increase exponentially in mid-gestation, providing direct support. However, the core DEB-theory sources (1, 9, 10) explicitly state that foetal growth only resembles an exponential curve but is in fact less steep, and snippet 8 asserts foetal weight is proportional to cubed time (V proportional to t^3), which directly contradicts strict exponential growth. Snippet 22 notes linear growth in the third trimester. Thus the exponential characterization is an approximation/assumption used in some applied models, while the more mechanistic DEB sources contradict pure exponentiality. The evidence is moderate but the direction is conflicted, warranting a neutral/insufficient consensus rating."
+      },
+      "n_references": 8,
+      "references": {
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.24842989444732666
+        },
+        "69b8a0d0ecbd4702b29a7257": {
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.3168697953224182
+        },
+        "69b847bbec32c55db5430a1a": {
+          "title": "MaurDesf2022_SI.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.32786476612091064
+        },
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3589109778404236
+        },
+        "69b867c2ecbd4702b29a2ca0": {
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.36078065633773804
+        },
+        "69b86fe0ecbd4702b29a3542": {
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3657252788543701
+        },
+        "W2157877632": {
+          "title": "A note on live-weight adjustment for pregnancy in cows",
+          "doi": "10.1017/s0003356100035881",
+          "year": "1978",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3058452010154724
+        },
+        "W1992739922": {
+          "title": "Factors Influencing Fetal Growth",
+          "doi": "10.1542/neo.2-6-e119",
+          "year": "2001",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 1,
+          "contradicts": 1,
+          "best_distance": 0.3234281539916992
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2484,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.95,
+          "text": "ace that remains in proportion to thetotal surface area of the foetus itself. This is consistent with the deb model, which givesthe energy interpretation of the single parameter. The graph of foetal weight against ageresembles an exponential growth curve, but in fact it is less steep; the model has theproperty that subsequent weight doubling times increase by a factor 21/3= 1.26, whilethere is no increase in the case of exponential growth.The fit is again excellent; see Figure 2.15. It is representative for the data collected inTable 2.3 taken from [1295]. A time lag for the start of foetal growth has to be incorpo-"
+        },
+        {
+          "document_id": "69b8a0d0ecbd4702b29a7257",
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3169,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "o growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as: 𝑊0(𝜏̂)= 𝑊 00𝑒𝑔0(𝜏̂−(∆𝜏 𝑙+∆𝜏 𝑑)) , ∆𝜏 𝑙+ ∆𝜏 𝑑≤ 𝜏̂ ≤ 1 (18) Here, 𝑊00 is the initial foet al weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant . At the end of the gestation period, the foetus has reached the birth weight ; 𝑊0(1) = 𝑊 𝑏𝑖𝑟𝑡ℎ . It is assumed that new-born pups continue to growth exponentially with the same growth rate as foetus es during the lactation period. Hence, the body weight of a pup at time 𝜏̂ during the lactation period is obtained as:"
+        },
+        {
+          "document_id": "69b8a0d0ecbd4702b29a7257",
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3253,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": ", elimination and growth dilution, whereas concentration changes in females are governed by dietary uptake, elimination, growth dilution and vertical transfer. Moreover, the PCB concentration increases in foetus es due to vertical transfer, which affect the PCB concentration in new-born pups at the start of the next year. Body Growth Since the toxicokinetics involve feeding and growth dilution, linked to body size and its cha nge, a model for body growth is acquired. Foetus es are assumed to growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as:"
+        },
+        {
+          "document_id": "69b847bbec32c55db5430a1a",
+          "title": "MaurDesf2022_SI.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3279,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "1983) . Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏)=𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) ,∆𝜏𝑙+∆𝜏𝑑≤𝜏≤1 yr (1) Here, 𝑊00 is the initial fetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant. At the end of the gestation period, the fetus has reached the birth weight 𝑊𝑏𝑖𝑟𝑡ℎ. Hence, the initial fetal weight 𝑊00 is calculated as: 𝑊00=𝑊𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (2) For simplicity it is assumed that new -born pups continue to grow exponentially with the same growth rate as fetuses during the lactation period. The body weight of a pup at time 𝜏 during the lactation period is obtained as:"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3302,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "actual foetal weight in mammals, wherefluids that surround the foetus, the placenta, the increased uterus and milk accumulation(in the later stages of the pregnancy) contribute to the extra weight. Most of the fluidsbecome lost, the increased uterus shrinks after birth, and the placenta is typically eatenby the mother; the latter two factors recover part of the costs. Milk production is typicallypaid via up-regulation of assimilation. These complications modify the total efficiencya bit. In their discussion of life history and evolutionary implications, they ignore that"
+        },
+        {
+          "document_id": "69b847bbec32c55db5430a1a",
+          "title": "MaurDesf2022_SI.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3515,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ion in new-born pups at the start of the next year. Archives of Environmental Contamination and Toxicology 5 2.1 Growth model In order to calculate growth dilution rates and keep track of body weights (affecting rates of feeding, vertical transfer and PCB elimination), a sub model for body growth was established (Fig. 4) . Fetuses are assumed to growth exponentially during the gestation period (Peters 1983) . Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏)=𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) ,∆𝜏𝑙+∆𝜏𝑑≤𝜏≤1 yr (1)"
+        },
+        {
+          "document_id": "69b89262ecbd4702b29a6224",
+          "title": "Harwood et al. - 2022 - Final Report Further Development Of Marine Mammal.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3526,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "supporting our assumption that TP = 330 days. We estimated foetal weight at age using the following formula derived by Hauksson et al. (2011) from the same sample: 𝑆𝑎= 0.00003682 .𝐿𝑎2.758 We assumed that growth in length was linear from birth to age TL (with a predicted length of 415 cm at this age) and then used Christensen (1981) growth curve 𝐿𝑎= 907 .0−(907 .0−415 )𝑒−0.000389 𝑎 (re-parameterised to match the formulation used by Hin et al. 2019) from this age onwards. Structural mass at age ( Sa) was calculated from La using Hauksson et al.’s (2011) formula for foetuses."
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3589,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.9,
+          "text": "lumeof the foetus is proportional to cubed timeVðtÞZ_vt3/C18/C193: ð3:34ÞEquation (3.34) is validated by the empirical data thatsuggest that foetal weight is proportional to cubed time(G3) because the structural volume of the foetus isproportional to weight when the reserve density is constant(see electronic supplementary material, appendix II).Proposition 3.26 (intraspeciﬁc Kleiber’s law). Themetabolic rate measured by the dioxygen consumption _JO2offasting animals is proportional to wawith a2[0.66,1]. Ifanimals have the same reserve density e, then theproportionality constant is the same ."
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3608,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.95,
+          "text": "tV= ˙vV2/3so (3.25)V(t) = ( ˙ vt/3)3(3.26)This growth curve was proposed by Huggett and Widdas [434] in 19 51. Payne and Wheeler[694] explained it by assuming that the growth rate is determin ed by the rate at whichnutrients are supplied to the foetus across a surface that remai ns in proportion to thetotal surface area of the foetus itself. This is consistent with t hedeb model, which givesthe energy interpretation of the single parameter. The graph of foetal weight against ageresembles an exponential growth curve, but in fact it is less ste ep; the model has the"
+        },
+        {
+          "document_id": "69b86fe0ecbd4702b29a3542",
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3657,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.9,
+          "text": "letionof the reserves. The approximation [ E] =∞reduces the growth equation (3.12) toddtV= ˙vV2/3so (3.20)V(t) = ( ˙vt/3)3(3.21)This growth curve was proposed by Huggett and Widdas [341] in 19 51. Payne and Wheeler[536] explained it by assuming that the growth rate is determin ed by the rate at whichnutrients are supplied to the foetus across a surface that remai ns in proportion to the total90 3. Energy acquisition and useFigure 3.16: Foetal weight development in mammals.house mouse, Mus musculus impala, Aepyceros melampussurface area of the foetus itself. This is consistent with the deb model, which gives the"
+        },
+        {
+          "document_id": "69b8a0d0ecbd4702b29a7257",
+          "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3661,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ulated, based on body size data for Baltic grey seals. Foetuses are assumed to grow exponentially during the gestation period : 𝑊0(𝜏̂)= 𝑊 00𝑒𝑔0(𝜏̂−(∆𝜏 𝑙+∆𝜏 𝑑)) , ∆𝜏 𝑙+ ∆𝜏 𝑑≤ 𝜏̂ ≤ 1 (165) At the end of the gestation period, the foetus has reached the birth weight ; 𝑊0(1) = 𝑊 𝑏𝑖𝑟𝑡ℎ . Hence, the initial foetal weight 𝑊00 is calculated as: 𝑊00= 𝑊 𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (166) New-born pups continue to grow exponentially, with the same growth rate as foetuses, during the lactation period : 𝑊1(𝜏̂)= 𝑊 00𝑒𝑔0(∆𝜏𝑔+𝜏̂) , 0 ≤ 𝜏̂ < ∆𝜏 𝑙 (167) At the end of the lactation period, pups reach weaning weight ; 𝑊1(∆𝜏𝑙) = 𝑊 𝑤𝑒𝑎𝑛 . Hence, the exponential"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3683,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "the linear ones that arediscussed above [797], which further supports the generality of this conclusion.7.7 Mother–foetus systemAt birth of the baby, the human mother produces 3500 g baby, 900 g placenta and 900 gamniotic fluid, while she increased her blood volume with 2000 g, her body fluids with1500 g, her uterine with 900 g and her breasts with 500 g; the latter in preparation of milkproduction. This all on top of an increase in reserve, so more than three times the massof the baby is involved in pregnancy.164 7. Extensions of DEB modelstime since birth, dwet weight, gtime since birth, dwet weight, g"
+        },
+        {
+          "document_id": "W1964289928",
+          "title": "A Perinatal Growth Chart for International Reference",
+          "doi": "10.1111/j.1651-2227.1985.tb10129.x",
+          "year": "1985",
+          "distance": 0.2869,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "e usually observed after 40 weeks’gestation is considered to be due to the constraint of fetal growth and is therefore ignored. Arguments are advanced for believing that there is a normal distribution of weight around the central tendency at this time, and that, for practical purposes, normally growing fetuses and infants have an almost identical potential growth velocity during this period and differ for the most part only in the weight they have achieved at 28 weeks’gestation. Using these assumptions a versatile reference chart for international use has been created that is easy to remember and to construct."
+        },
+        {
+          "document_id": "W2157877632",
+          "title": "A note on live-weight adjustment for pregnancy in cows",
+          "doi": "10.1017/s0003356100035881",
+          "year": "1978",
+          "distance": 0.3058,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "e-weight by subtracting the weight of the gravid uterus and products of conception was biologically and practically meaningful. Two exponential models using polynomial coefficients were derived from published data to predict the fresh weights, at any time during gestation, of the foetus (calculated from calf birth weight) and the gravid uterus and foetal membranes and fluids."
+        },
+        {
+          "document_id": "W2055928978",
+          "title": "Specific foetal growth rates of cetaceans",
+          "doi": "10.1111/j.1469-7998.1973.tb04656.x",
+          "year": "1973",
+          "distance": 0.3086,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "to stop feeding and lose body fat to the foetus during late pregnancy, at the time when the foetal increase in size is maximal. The causes of the differences in growth and metabolism of the two groups are unknown, apart from those imposed by differences in their ecology."
+        },
+        {
+          "document_id": "W2404327115",
+          "title": "Effect of maternal weight gain on fetal, infant, and childhood death and on cognitive development.",
+          "doi": "",
+          "year": "1982",
+          "distance": 0.3122,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ion between maternal weight gain and fetal and neonatal death, the implications of this are uncertain and are herein discussed. When the analysis was confined to pregnancies with gestational periods greater than 35 weeks, there was no effect of maternal weight gain on fetal, neonatal, infant, or childhood death. Children whose mothers gained between 5 and 29 lb during their pregnancy scored higher on the Raven Coloured Progressive Matrices test at age 5 than did those whose mothers gained less than 5 or more than 29 lb."
+        },
+        {
+          "document_id": "W3111631772",
+          "title": "Twin conception reduces birth weight and gestation length in sheep, regardless of fetal number in late gestation",
+          "doi": "",
+          "year": "2009",
+          "distance": 0.3128,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "irth weight and gestation length are therefore influenced by fetal number both at the time of conception and in late gestation. Further studies will determine whether this altered growth has longterm implications for growth and risk of disease."
+        },
+        {
+          "document_id": "W2340787298",
+          "title": "Growth, Development and Composition of the Ovine Conceptus and Mammary Gland During Pregnancy",
+          "doi": "10.2527/jas1974.383613x",
+          "year": "1974",
+          "distance": 0.3156,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": ", 71, 129 and 199 g/d while those of twin fetuses averaged 47, 153, 236 and 202 g/d at days 80, 100, 120 and 140, respectively. Fetus(es) as a proportion of total conceptus weight increased from 14% at day 70 to 70% at day 140, while membranes and fluids decreased from 37 to 8% and 49 to 22%, respectively, over the same period. There were no significant differences due to number of fetuses carried."
+        },
+        {
+          "document_id": "W2050998188",
+          "title": "Effect of mother’s physical condition during pregnancy and lactation on postnatal growth and reproductive success of offspring in water vole Arvicola terrestris",
+          "doi": "10.1134/s1062360408020069",
+          "year": "2008",
+          "distance": 0.3218,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ith the storage fat weight was 0.67. The metabolic resources of the mother's body proved to favor faster offspring development. The female offspring weight at the age of 3 and 10 weeks as well as adult ones positively correlated with the mother's nutritional state in pregnancy, while the male offspring weight demonstrated a similar correlation at the age of 3 and 6 weeks. Increased negative energy balance during lactation proved to decrease the offspring weight in both sexes after separation from mother and at the age of 6 weeks."
+        },
+        {
+          "document_id": "W1992739922",
+          "title": "Factors Influencing Fetal Growth",
+          "doi": "10.1542/neo.2-6-e119",
+          "year": "2001",
+          "distance": 0.3234,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "tation surface area of the uterus, and uterine circulation, which together support the growth of the placenta and its function. Obviously, small fetuses of small parents or large fetuses of large parents do not reflect fetal growth restriction or fetal overgrowth, respectively. Their rates of growth are normal for their genome and for maternal size. Unless maternal constraint is particularly prominent, such fetuses would not grow faster or to a larger size if more nutrients were provided.In most species, fetal weight tends to increase exponentially in the middle part of gestation, but there is considerable interspecies variation."
+        },
+        {
+          "document_id": "W2979089137",
+          "title": "STUDIES ON THE PLACENTA OF THE SHEEP (OVIS ARIES L.)",
+          "doi": "10.1530/jrf.0.0070307",
+          "year": "1964",
+          "distance": 0.3237,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "clear evidence of the formation of new caruncles but there was evidence that the number of caruncles may decline spontaneously. It is concluded that, while very little placental tissue is necessary to allow gestation to reach the 100th day, when foetal weight begins to increase rapidly, subsequent foetal growth is limited by the size of the placenta. The results also show that estimation of foetal age from physical dimensions of the foetus may be grossly misleading."
+        },
+        {
+          "document_id": "W1992739922",
+          "title": "Factors Influencing Fetal Growth",
+          "doi": "10.1542/neo.2-6-e119",
+          "year": "2001",
+          "distance": 0.3265,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "lowing of fetal growth rate in the third trimester following the mid-gestational exponential increase in fetal weight (12)(13). In contrast, more recent ultrasonographic observations show that human fetal growth is linear over the latter third of gestation, with no tendency for slowing of fetal growth that would produce the flattening of the fetal growth curve derived from the cross-sectional studies (14)."
+        },
+        {
+          "document_id": "W2410834955",
+          "title": "The effects of strenuous exercise on maternal rats and their developing fetuses.",
+          "doi": "",
+          "year": "1983",
+          "distance": 0.3281,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "unaffected. However, there were significant differences between the maternal weights of the two groups at the end of gestation. The prepartal weight difference was 36.0g (PC group heavier) and this was reduced post-partally to 14.9g which remained significant. These differences in maternal weights were suggested to reflect a decreased amount of amniotic fluid for the fetuses of the PR group during gestation and also a reduction in maternal body fat for the PR group."
+        },
+        {
+          "document_id": "W2320247698",
+          "title": "A model for the effects of energy nutrition on the pregnant ewe",
+          "doi": "10.1017/s0003356100023618",
+          "year": "1979",
+          "distance": 0.3332,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ithin limits, to protect the foetus. If this does not produce the energy required for optimal growth, foetal growth is reduced. Published experimental results are compared with predictions of the model when run under similar conditions; in general, predictions of total maternal weight at the end of pregnancy are within 5 % of those observed in the experiments. Model predictions of the effects of some particular nutritional regimes during pregnancy are presented and the sensitivity of the predictions of the model to certain of the assumptions made in its construction are discussed."
+        }
+      ]
+    }
+  }
+}

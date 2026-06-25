@@ -1,0 +1,783 @@
+{
+  "sf_id": "growth_08",
+  "category": "Growth",
+  "statement": "At constant food density, no substantial shrinking occurs independent of ageing.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Snippet [3] is the verbatim statement of the stylized fact, drawn from the canonical DEB list of empirical patterns, and constitutes direct affirmation. Several other snippets corroborate the underlying mechanism: [2] explicitly notes that shrinkage would violate energy conservation under sustained feeding; [9], [13], and [16] confirm that shrinking is tied to starvation/prolonged cessation of feeding rather than occurring at constant food, with [13] noting shrinking was excluded as not occurring in their constant-food case. No snippet contradicts the fact. The remaining snippets concern aging, indeterminate growth, lifespan, and maturity timing, and are topically related to DEB but neutral with respect to the shrinking claim. Overall the corpus is consistent and supportive (moderate strength because most direct support traces to one canonical source), with no conflicting evidence."
+      },
+      "n_references": 4,
+      "references": {
+        "69b8a265ecbd4702b29a74df": {
+          "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2732362151145935
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3157045841217041
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34171926975250244
+        },
+        "69b88ec8ecbd4702b29a5e03": {
+          "title": "Kooi and Kooijman - 2020 - A cohort projection method to follow DEB-structure.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3546818494796753
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2684,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ndthelowermortalityriskoflarge-sized individuals.Anindeterminate grower may increase its life span by directing energy away fromreproduction. Thistypeofindividual isalsomorelikely tosurviveaperiodoffoodshortage. Ourconclusion underpins theﬁndingsof Masoro and Austad (1996)thatareduction of allocation to reproduction enhances survival during unpredictableshort-term periods of starvation.Thepresent simple model for aging does not have the property of increasing thelife span for low food density for indeterminates. Although it has been observedthat food restriction slows aging ( Finch,1990), the strength of the present simple"
+        },
+        {
+          "document_id": "69b8a265ecbd4702b29a74df",
+          "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2732,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "shrinkage would violate energy conservation. Along with the size of the organism, we kept track of the scaled maturity density to illustrate how age and length at puberty change with food availability. As the va lue of fdecreases, age at puberty increases because time required for the cumulative investment of energy into maturation to reach the level necessary for a stage transition increases as food decreases. Simultaneously, length at puberty decreases with fdue to the considerable decline in the growth rate.7. Allometry in DEB"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3157,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "nt food is well described by the von Bertalanffy; atconstant food density, no substantial shrinking occurs independent of ageingG2The inverse von Bertalanffy growth rate increases linearly with ultimate length both intra-specifically (or different constant food levels) and inter-specifically for large body sizesG3Foetuses increase in weight approximately proportional to cubed timeReproductionR1Many species (almost all animals and plants) have a juvenile stage that does not reproduceR2Reproduction increases with size intra-specifically, but decreases with size inter-specifically"
+        },
+        {
+          "document_id": "69b87a1decbd4702b29a4345",
+          "title": "Vaugeois et al. - 2022 - Population modeling to inform management and recov.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3233,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "aging are based on in -dividual energetics and interactions with the environ -ment. Background mortality is a stage ‐dependent,external cause of death. Dead individuals are removedbefore the next action. After each individual updates,the density of all food items is updated (what one in -dividual has eaten is removed). When all individualshave been updated, all food items are updatedaccording to their logistic growth function (see Sup -porting Information S1, section 2.9).Reproduction (see Supporting Information S1, section2.7.2): Only adults with a minimum amount of energyallocated to reproduction (UR, day cm−2) are able to re -"
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3274,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ation growth rate ˙ r(right) ofthe indeterminate (solid) and the determinate (dotted) ani mals as a function of the partitioningfraction κat abundant food ( f= 1). Parameters: see Figure 8.10, and κR= 1,¨ha= 5 10−7d−1.Comparison of (8.5) and (8.7) shows that the life span of the inde terminate animalexceeds that of the determinate one if V∞> V(ap), which is always the case. The reasonis in the decreasing speciﬁc oxygen consumption for increasing b ody size,{135}. Theassumption that death by aging is negligibly small before puber ty obviously breaks downwhen the juvenile period becomes excessively large."
+        },
+        {
+          "document_id": "69b8a934ecbd4702b29a7dae",
+          "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3309,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ast to the pattern of crossed curves driven by temperature, different food levels lead to a pat tern of nested curves where the growth curve under limiting food is nested below the growth curve under unlimited food (Figure 1). Interestingly, food restriction may also be beneficial to the lifespan of organisms as this restriction reduces the productio n of senescence -accelerating oxidizing agents during metabolism (Sohal and Weindruch 1996; Gredilla et al. 2001; Speakman 2005), resulting in a “eat little die old” strategy. The effects of food on fecundity (which"
+        },
+        {
+          "document_id": "69b87859ecbd4702b29a405a",
+          "title": "SherElln2002.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3319,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "xperimental evidencesup-porting the predictions of decreased growth and de-layed maturity. Kirk (1997a) observed that adult bodysize ofB. calyci¯orus decreases with decreased foodlevel. In separate experiments, Guisande et al. (1993)and Halbach (1970a) observed an increase in age atmaturity with decreased food concentration.The model also predicts that variability in food sup-"
+        },
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3358,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "f ﬁtness. However, if the ﬁtness measure is lifespan reproduction, indeterminate growth may result even with constant mortality,provided it is not very high. Unlike Perrinet al.(1993), our result originatesfrom an increased production (catabolic power) and a decreased mortality forindeterminate growers. Moreover, weexplicitly takeintoaccount thattheresultingsize increase involves an increase in maintenance as well.Our results show that for constant food density, indeterminate growth always"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3417,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "y of storage materials over structuralbiomass is perhaps even less strict in species that shrink during starvation. Species with(permanent or non-permanent) exoskeletons usually do not shrink in physical dimensions,but the volume-specific energy content nonetheless decreases during starvation.If an individual ceases reproduction during starvation, any consistent specification ofddtemust be continuous in f,eandl. One possibility is by first obeying maturity maintenancerequirements, then switching on reproduction gradually if food intake increases from a lowlevel.4.1.5 Shrinking and the turnover of structure"
+        },
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3435,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ncrease involves an increase in maintenance as well.Our results show that for constant food density, indeterminate growth alwaysleads to longer life span. The reason is in the decreasing speciﬁc oxygenconsumption for increasing body size, an empirically well known phenomenon(Kleiber,1932;Whithers,1992),whichisimpliedbythemodelassumptions listedinTable 1(Kooijman,2000)andthelowermortalityriskoflarge-sized individuals.Anindeterminate grower may increase its life span by directing energy away from"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.35,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "hanges during thelife cycle.(2) Step 2: Growth at a single food densitySuppose that only information on growth at one food levelis available, resulting in a scaled functional response f1(i.e.some value between 0 and 1). Food density does not need tobe constant, as long as it is abundant ( f1’1Þ.W eh a v en oinformation about how length at birth depends on foodlevel, so we are forced to assume that the somatic andmaturity rate coefficients are equal, _kM¼ _kJ, which impliesthat stage transitions occur at a fixed length as well. Thisassumption simplifies matters considerably; until pubertywe have U"
+        },
+        {
+          "document_id": "69b87859ecbd4702b29a405a",
+          "title": "SherElln2002.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3528,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "suddenly switching allocation from oneprocess to another (Perrin et al. 1993).Although life histories are qualitatively similaracross environments, they differ quantitatively. Inharsher environments, individuals tend to grow less,storemore,anddelaymaturity.Forajuvenilethatdoesnot experience food deprivation, age at maturity is 1.1,1.9, and 2.3 d for E1, E2, and E3, respectively. How-ever, actual age at maturity depends on thefoodsupplyhistory,asdoesgrowthandstorage(seeResults:Normsof reaction ).Indeterminate growthIf food supply is constant, the optimal growth strat-"
+        },
+        {
+          "document_id": "69b88ec8ecbd4702b29a5e03",
+          "title": "Kooi and Kooijman - 2020 - A cohort projection method to follow DEB-structure.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3547,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "year.During prolonged starvation, shrinking and rejuvenation can occur,with consequences for survival. We refer to the comments(Kooijman, 2010a) (section “Shrinking during starvation” and “Re-juvenation during starvation”) for a detailed discussion. We assumethat shrinking does not occur in our case study and this was checked forall results presented.B.W.KooiandS.A.L.M.Kooijman Ecological Modelling 436 (2020) 10929832.3. AgingaccelerationandhazardGenerally aging is neglected in population dynamic studies becausethe loss rate due to trophic interaction is taken to be dominant, except"
+        },
+        {
+          "document_id": "69b8a7b6ecbd4702b29a7ba1",
+          "title": "NisbGurn1989.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3567,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ly agreed to be low. Senescence is well docu- mented, there being good evidence (Porter et al., 1983) that life is shorter when food is plentiful. We are currently evaluating evidence that might give pointers to the mechanisms of senescence in Daphnia; pending completion of this investi- gation we have not incorporated senescence explicitly in the model, but instead modify the assumed background mortality rate to give plausible average life- times. To model starvation mortality, we again argue that the appropriate determinant is likely to be average food intake over a time comparable with one moult, and on"
+        },
+        {
+          "document_id": "69b86fe0ecbd4702b29a3542",
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3635,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "on the scaled food densities asestimated from the ultimate volumes ( 3, right), which gave f= 0.877, 0.915, 0.955, 0.977, 0.988.The resulting ﬁve aging accelerations are plotted in the rig ht ﬁgure ( △). They proved to dependlinearly on food density, with an intercept that is consiste nt with the aging acceleration foundfor daphnids.contained such a factor, it is likely that it builds up in the ro tifer proportionally to theconcentration in the environment. The hazard rate at zero fo od density should reveal the‘pure’ aging acceleration ¨ pa. For this reason the intercept of the linear relationship was"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3644,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "n continue long after feeding is ceased,shrinking and rejuvenation can occur if digestion is ceased for too long. The growth pe-riod in birds is typically shorter than that in mammals, relative to the life span. Sincegrowth is asymptotic and contributions from growth can affect the results (even if actualgrowth per day is negligibly small). Fully grown individuals can suffer from ageing, whichtypically reduces metabolic rates (quantified as effects of damage compounds on param-eter values). Last but not least, differences in nutritional conditions can easily dominate"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3648,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "onates cannot maintaintheir state of maturity.Comparison of (8.5) and (8.7) shows that the life span of the indeterminate animalexceeds that of the determinate one if V∞> V(ap), which is always the case. The reasonis in the decreasing specific oxygen consumption for increasing body size. The assumptionthat death by aging is negligibly small before puberty obviously breaks down when thejuvenile period becomes excessively large.Figure 8.8 gives the life span reproduction and the population growth rate as a functionof the partition coefficient at abundant food ( f= 1), and shows that the differences"
+        },
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3649,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "rty which equalsthe ultimate size of the animal.3. RESULTS3.1.Comparisonofreproductivetraits. Inthissectionwecomparethelifespan,thereproduction rate,thelifespanreproduction, andthepopulation growthrateforthe two allocation strategies for constant food density.Thehazard rate, which reﬂects aging in our model, increases with age for bothallocationstrategies. Thisincreaseiscausedbytheaccumulationofdamage. Com-parisonoftheapproximate equations (10)and(12)showsthatthehazardrateofthedeterminate animal exceeds thatof theindeterminate one if V∞>V(ap),wh ichis"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the snippets directly address whether substantial shrinking occurs (or is absent) at constant food density independent of ageing. The corpus focuses on reproductive senescence, longevity, diet restriction, and trade-offs between growth/reproduction/aging. The closest, snippet [14], notes temporary reductions in individual growth rates and a shift to smaller individuals, but this concerns population size structure under resource fluctuation rather than individual shrinking at constant food, and does not bear clearly on the stylized fact. Snippets [12] and [6] discuss growth under feeding regimes but address lifespan and maturation rather than shrinking. No snippet provides evidence affirming or contradicting the absence of substantial shrinking at constant food independent of ageing. Evidence is therefore sparse/weak and effectively neutral with respect to the stylized fact."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W2121294442",
+          "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+          "doi": "10.1111/geb.12244",
+          "year": "2014",
+          "distance": 0.3622,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "pment, older age at first reproduction and hence to increased longevity. Individuals live longer in captivity than in the wild. Herbivorous and omnivorous squamates live for longer than carnivorous ones. We postulate that low‐quality nutrition reduces growth rates, promotes a relative decline in reproductive rates and thus prolongs life. Main conclusions Our results support key predictions from life‐history theory and suggest that reproducing more slowly and at older ages, being herbivorous and, plausibly, lowering metabolism, result in increased longevity."
+        },
+        {
+          "document_id": "W4388178511",
+          "title": "Diversity, plasticity and asynchrony of actuarial and reproductive senescence in the Collembola Folsomia candida (Willem, 1902)",
+          "doi": "10.3389/fevo.2023.1112045",
+          "year": "2023",
+          "distance": 0.363,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "e fully fed. Clutch size increased as female become older and then declined progressively after reproduction reached a maximum. This age decline in fertility went along with a progressive slowing down of the pace of the egg-laying, a reduction of egg quality (more sterile eggs), while egg size undergoes little change with age. We found that the onset of reproductive decline occurred before the beginning of actuarial senescence, and show that escaping senescence is physiologically possible for certain lineages under dietary restricted conditions."
+        },
+        {
+          "document_id": "W4411177159",
+          "title": "The implication of size scaling of physiological rates on growth allometry of bivalve mollusks: a comparative study in mixed populations of two congeneric clam species",
+          "doi": "10.1007/s10750-025-05919-w",
+          "year": "2025",
+          "distance": 0.3709,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract The continuous decline in size (age)-specific growth rate over the life span is an important feature of the life history of many animal populations. Differential size scaling of physiological rates has been invoked to account for such negative allometry in most currently available growth models."
+        },
+        {
+          "document_id": "W4389163550",
+          "title": "Relationships among Development, Growth, Body Size, Reproduction, Aging, and Longevity – Trade-Offs and Pace-Of-Life",
+          "doi": "10.1134/s0006297923110020",
+          "year": "2023",
+          "distance": 0.3748,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Relationships of growth, metabolism, reproduction, and body size to the biological process of aging and longevity have been studied for decades and various unifying “theories of aging” have been proposed to account for the observed associations. In general, fast development, early sexual maturation leading to early reproductive effort, as well as production of many offspring, have been linked to shorter lifespans."
+        },
+        {
+          "document_id": "W2026027623",
+          "title": "Bridging Developmental Boundaries: Lifelong Dietary Patterns Modulate Life Histories in a Parthenogenetic Insect",
+          "doi": "10.1371/journal.pone.0111654",
+          "year": "2014",
+          "distance": 0.3749,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ve maturity was positively correlated with both adult and reproductive lifespans but negatively correlated with total lifespan. Food limitation had opposing effects on lifespan depending on when it was imposed, as it protracted development in juveniles but hastened death in adults. Food limitation also constrained reproduction regardless of when food was limited, although decreased fecundity was especially pronounced in individuals that were food-limited as late juveniles and adults."
+        },
+        {
+          "document_id": "W2332925236",
+          "title": "An Experimental Study of the Trade-Offs Between Age and Size at Maturity: Effects of Energy Availability",
+          "doi": "10.2307/2390116",
+          "year": "1994",
+          "distance": 0.3788,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "(ii) How do the resulting differences in age or size at reproduction (if any) translate into long-term effects on fecundity? 2. We found that individuals on a low-energy diet grew more slowly, matured at a later age, and had smaller clutch sizes than did females on a high-energy diet. However, not all individuals on the high-energy diet matured at the same time. Thirty per cent of these latter individuals matured at 20 months of age at a relatively small body size, whereas the remainder matured at 32 months of age and at a larger body size"
+        },
+        {
+          "document_id": "W4407292238",
+          "title": "Nutrition regulates reproductive senescence and terminal investment across the reproductive cycle of a long-lived mammal",
+          "doi": "10.1038/s41598-025-86807-0",
+          "year": "2025",
+          "distance": 0.3795,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "From conception to weaning, age-related patterns of reproduction were influenced by both body fat and environmental conditions. Reproductive senescence was clear across the entire reproductive cycle, although allocation to offspring was partly mediated by nutrition. Terminal investment, however, was most evident towards the end of the annual reproductive cycle and unveiled only when considering nutritional condition and food availability; during years with poor resource availability, older mothers raised larger juveniles (i.e., 6-months old)."
+        },
+        {
+          "document_id": "W4394749507",
+          "title": "Relationships among development, growth, body size, reproduction, aging, and longevity - trade-offs and pace-of-life",
+          "doi": "10.31857/s0320972523110039",
+          "year": "2023",
+          "distance": 0.3808,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Relationships of growth, metabolism, reproduction, and body size to the biological process of aging and longevity have been studied for decades and various unifying “theories of aging” have been proposed to account for the observed associations. In general, fast development, early sexual maturation leading to early reproductive effort, as well as production of many offspring, have been linked to shorter lifespans."
+        },
+        {
+          "document_id": "W2001040922",
+          "title": "DOES INCREASED MORTALITY FAVOR THE EVOLUTION OF MORE RAPID SENESCENCE?",
+          "doi": "10.1111/j.1558-5646.1993.tb01241.x",
+          "year": "1993",
+          "distance": 0.381,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "lation dynamics are density independent, extrinsic mortality should not alter the senescence rate favored by natural selection. If population growth is density dependent and populations are stable, the effect of extrinsic mortality depends on the age specificity of the density dependence and on whether survival or reproduction (or both) are functions of density. It is possible that higher extrinsic mortality will increase the rate of senescence at all ages, decrease the rate at all ages, or increase it at some ages while decreasing it at others."
+        },
+        {
+          "document_id": "W2072777192",
+          "title": "An empirical test of evolutionary theories for reproductive senescence and reproductive effort in the garter snake <i>Thamnophis elegans</i>",
+          "doi": "10.1098/rspb.2006.0072",
+          "year": "2007",
+          "distance": 0.39,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "t, and (iii) reproductive effort remains constant in fast-growth individuals with age, but declines in slow-growth individuals. This illustration of increasing fecundity with age, even at the latest ages, deviates from standard expectations for reproductive senescence, as does the lack of increases in reproductive effort. We discuss our findings in light of recent theories regarding the phenomenon of increased reproduction throughout life in organisms with indeterminate growth and its potential to offset theoretical expectations for the ubiquity of senescence."
+        },
+        {
+          "document_id": "W3096509365",
+          "title": "Reproductive senescence in a short‐lived fish",
+          "doi": "10.1111/1365-2656.13382",
+          "year": "2020",
+          "distance": 0.3917,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "short life span. The onset of reproductive senescence was postponed compared to animals that cease growing at sexual maturity. Fish and other animals with post‐maturity growth have long been considered insusceptible to ageing but this conclusion may be related to the previous lack of longitudinal data rather than to the absence of reproductive senescence in such organisms."
+        },
+        {
+          "document_id": "W2034144268",
+          "title": "The impact of dietary restriction, intermittent feeding and compensatory growth on reproductive investment and lifespan in a short-lived fish",
+          "doi": "10.1098/rspb.2008.0357",
+          "year": "2008",
+          "distance": 0.3927,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "growth (following the deprivation) and reproductive investment, a factor that has rarely been measured in studies of lifespan. Using three-spined sticklebacks, we show for the first time that while animals subjected to an intermittent feeding regime can grow as large as continuously fed controls that receive the same total amount of food, and can maintain reproductive investment, they have a shorter lifespan. Furthermore, we show that this reduction in lifespan is linked to rapid skeletal growth rate and is due to an increase in the instantaneous risk of mortality rather than in the rate of senescence."
+        },
+        {
+          "document_id": "W2042423695",
+          "title": "A revolution for aging research",
+          "doi": "10.1007/s10522-006-9001-6",
+          "year": "2006",
+          "distance": 0.4066,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "should depend on the last age of reproduction in a population's evolutionary history, a prediction that has been corroborated. While lifelong heterogeneity should reduce average age-specific mortality in late life whenever it is pronounced, the cessation of aging in late life can be explained by plateaus in the forces of natural selection whether lifelong heterogeneity is present or not. The discovery that aging ceases is one of the most significant discoveries in recent aging research, with potentially revolutionary scientific implications."
+        },
+        {
+          "document_id": "W2025437584",
+          "title": "Resource‐mediated demographic variation during the midsummer succession of a cladoceran community",
+          "doi": "10.1111/j.1365-2427.1986.tb01009.x",
+          "year": "1986",
+          "distance": 0.4072,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "growth rates was short‐lived in the life table experiments; growth rates returned to pre‐decline levels by the end of July. 4. Two effects of temporary reductions in individual growth rates when size‐specific fecundity and size at maturation are constant are (1) that size structure is temporarily shifted to smaller individuals, and (2) the potential rate of population growth is reduced because of delays in reproduction."
+        },
+        {
+          "document_id": "W2472213267",
+          "title": "Inevitable senescence? contributions to evolutionary-demographic theory.",
+          "doi": "",
+          "year": "2006",
+          "distance": 0.4073,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "uggest that species with the ca pability of continued growth after the onset of reproduction are candidates for non-senescence. The results of my vitality-based model suggest that the costs of growth and maintenance and, to an almost equal extent, the costs of reproduction are major determinants of the choice between and sustenance. My dissertation can be viewed as a theoretical exploration of the inter-species diversity of aging, i.e., of how varied aging can be for different species and of what factors determine whether a species' strategy involves sustenance or senescence."
+        },
+        {
+          "document_id": "W2128563117",
+          "title": "Density‐dependent life history and the dynamics of small populations",
+          "doi": "10.1111/1365-2656.12109",
+          "year": "2013",
+          "distance": 0.4077,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "dependence of reproduction was partly explained by positive effects of body size on age at first reproduction and clutch size. Parturition date decreased with density in sparse populations and then increased, providing one of the first empirical evidence of a component Allee effect in the phenology of reproduction. Population growth rate (λ) was most affected by variations in juvenile and yearling survival. However, density at equilibrium was most affected by juvenile access to reproduction and yearling clutch size."
+        },
+        {
+          "document_id": "W2087519015",
+          "title": "Density Dependence Triggers Runaway Selection of Reduced Senescence",
+          "doi": "10.1371/journal.pcbi.0030256",
+          "year": "2007",
+          "distance": 0.409,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "out requirement for special life-history characteristics such as indeterminate somatic growth or increasing fecundity with age. The evolution of nonsenescence from senescence is robust to the presence of exogenous adult mortality, which tends instead to increase the age-independent component of vitality loss. We simulate examples of runaway selection leading to negligible senescence and even intrinsic immortality."
+        },
+        {
+          "document_id": "W2219835953",
+          "title": "Effects of diet restriction on life history in a sexually cannibalistic spider",
+          "doi": "10.1111/bij.12730",
+          "year": "2015",
+          "distance": 0.4091,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Diet restriction increases longevity while reducing fecundity in a broad range of organisms. However, there are exceptions to this rule, and the causes of these exceptions remain unclear. One hypothesis is that short‐lived, semelparous organisms gain no benefit from increased longevity regardless of nutritional resources. Another hypothesis is that organisms may alter their behaviour to compensate for nutrient deficiencies."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Snippet [3] is a near-verbatim statement of the stylized fact, listing it as a recognized growth pattern (G1) in DEB theory, and is the strongest direct support. Snippet [9] discusses shrinking specifically in the context of starvation, implying that at constant (adequate) food density shrinking is tied to food shortage rather than occurring spontaneously, which is consistent with the fact. Snippet [2] explicitly notes that shrinkage would violate energy conservation and frames growth at constant food in von Bertalanffy terms, broadly supporting the fact. Snippet [6] describes nested growth curves under constant differing food levels (no shrinking implied). The remaining snippets address aging, reproductive senescence, food-restriction effects on maturity/lifespan, and life-history trade-offs, but do not bear directly on whether substantial shrinking occurs at constant food independent of ageing. No snippet contradicts the fact. Support is moderate—anchored largely by one direct DEB-theory statement plus a few consistent mentions—so evidence_strength is 2 with a corroborated consensus direction of 3."
+      },
+      "n_references": 4,
+      "references": {
+        "69b8a265ecbd4702b29a74df": {
+          "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2732362151145935
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3157045841217041
+        },
+        "69b8a934ecbd4702b29a7dae": {
+          "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3309057950973511
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34171926975250244
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2684,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ndthelowermortalityriskoflarge-sized individuals.Anindeterminate grower may increase its life span by directing energy away fromreproduction. Thistypeofindividual isalsomorelikely tosurviveaperiodoffoodshortage. Ourconclusion underpins theﬁndingsof Masoro and Austad (1996)thatareduction of allocation to reproduction enhances survival during unpredictableshort-term periods of starvation.Thepresent simple model for aging does not have the property of increasing thelife span for low food density for indeterminates. Although it has been observedthat food restriction slows aging ( Finch,1990), the strength of the present simple"
+        },
+        {
+          "document_id": "69b8a265ecbd4702b29a74df",
+          "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2732,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "shrinkage would violate energy conservation. Along with the size of the organism, we kept track of the scaled maturity density to illustrate how age and length at puberty change with food availability. As the va lue of fdecreases, age at puberty increases because time required for the cumulative investment of energy into maturation to reach the level necessary for a stage transition increases as food decreases. Simultaneously, length at puberty decreases with fdue to the considerable decline in the growth rate.7. Allometry in DEB"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3157,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "nt food is well described by the von Bertalanffy; atconstant food density, no substantial shrinking occurs independent of ageingG2The inverse von Bertalanffy growth rate increases linearly with ultimate length both intra-specifically (or different constant food levels) and inter-specifically for large body sizesG3Foetuses increase in weight approximately proportional to cubed timeReproductionR1Many species (almost all animals and plants) have a juvenile stage that does not reproduceR2Reproduction increases with size intra-specifically, but decreases with size inter-specifically"
+        },
+        {
+          "document_id": "69b87a1decbd4702b29a4345",
+          "title": "Vaugeois et al. - 2022 - Population modeling to inform management and recov.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3233,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "aging are based on in -dividual energetics and interactions with the environ -ment. Background mortality is a stage ‐dependent,external cause of death. Dead individuals are removedbefore the next action. After each individual updates,the density of all food items is updated (what one in -dividual has eaten is removed). When all individualshave been updated, all food items are updatedaccording to their logistic growth function (see Sup -porting Information S1, section 2.9).Reproduction (see Supporting Information S1, section2.7.2): Only adults with a minimum amount of energyallocated to reproduction (UR, day cm−2) are able to re -"
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3274,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ation growth rate ˙ r(right) ofthe indeterminate (solid) and the determinate (dotted) ani mals as a function of the partitioningfraction κat abundant food ( f= 1). Parameters: see Figure 8.10, and κR= 1,¨ha= 5 10−7d−1.Comparison of (8.5) and (8.7) shows that the life span of the inde terminate animalexceeds that of the determinate one if V∞> V(ap), which is always the case. The reasonis in the decreasing speciﬁc oxygen consumption for increasing b ody size,{135}. Theassumption that death by aging is negligibly small before puber ty obviously breaks downwhen the juvenile period becomes excessively large."
+        },
+        {
+          "document_id": "69b8a934ecbd4702b29a7dae",
+          "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3309,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ast to the pattern of crossed curves driven by temperature, different food levels lead to a pat tern of nested curves where the growth curve under limiting food is nested below the growth curve under unlimited food (Figure 1). Interestingly, food restriction may also be beneficial to the lifespan of organisms as this restriction reduces the productio n of senescence -accelerating oxidizing agents during metabolism (Sohal and Weindruch 1996; Gredilla et al. 2001; Speakman 2005), resulting in a “eat little die old” strategy. The effects of food on fecundity (which"
+        },
+        {
+          "document_id": "69b87859ecbd4702b29a405a",
+          "title": "SherElln2002.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3319,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "xperimental evidencesup-porting the predictions of decreased growth and de-layed maturity. Kirk (1997a) observed that adult bodysize ofB. calyci¯orus decreases with decreased foodlevel. In separate experiments, Guisande et al. (1993)and Halbach (1970a) observed an increase in age atmaturity with decreased food concentration.The model also predicts that variability in food sup-"
+        },
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3358,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "f ﬁtness. However, if the ﬁtness measure is lifespan reproduction, indeterminate growth may result even with constant mortality,provided it is not very high. Unlike Perrinet al.(1993), our result originatesfrom an increased production (catabolic power) and a decreased mortality forindeterminate growers. Moreover, weexplicitly takeintoaccount thattheresultingsize increase involves an increase in maintenance as well.Our results show that for constant food density, indeterminate growth always"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3417,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "y of storage materials over structuralbiomass is perhaps even less strict in species that shrink during starvation. Species with(permanent or non-permanent) exoskeletons usually do not shrink in physical dimensions,but the volume-specific energy content nonetheless decreases during starvation.If an individual ceases reproduction during starvation, any consistent specification ofddtemust be continuous in f,eandl. One possibility is by first obeying maturity maintenancerequirements, then switching on reproduction gradually if food intake increases from a lowlevel.4.1.5 Shrinking and the turnover of structure"
+        },
+        {
+          "document_id": "69b89eadecbd4702b29a6f7e",
+          "title": "LikaKooy2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3435,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ncrease involves an increase in maintenance as well.Our results show that for constant food density, indeterminate growth alwaysleads to longer life span. The reason is in the decreasing speciﬁc oxygenconsumption for increasing body size, an empirically well known phenomenon(Kleiber,1932;Whithers,1992),whichisimpliedbythemodelassumptions listedinTable 1(Kooijman,2000)andthelowermortalityriskoflarge-sized individuals.Anindeterminate grower may increase its life span by directing energy away from"
+        },
+        {
+          "document_id": "69b880d5ecbd4702b29a4c18",
+          "title": "KooySous2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.35,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "hanges during thelife cycle.(2) Step 2: Growth at a single food densitySuppose that only information on growth at one food levelis available, resulting in a scaled functional response f1(i.e.some value between 0 and 1). Food density does not need tobe constant, as long as it is abundant ( f1’1Þ.W eh a v en oinformation about how length at birth depends on foodlevel, so we are forced to assume that the somatic andmaturity rate coefficients are equal, _kM¼ _kJ, which impliesthat stage transitions occur at a fixed length as well. Thisassumption simplifies matters considerably; until pubertywe have U"
+        },
+        {
+          "document_id": "69b87859ecbd4702b29a405a",
+          "title": "SherElln2002.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3528,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "suddenly switching allocation from oneprocess to another (Perrin et al. 1993).Although life histories are qualitatively similaracross environments, they differ quantitatively. Inharsher environments, individuals tend to grow less,storemore,anddelaymaturity.Forajuvenilethatdoesnot experience food deprivation, age at maturity is 1.1,1.9, and 2.3 d for E1, E2, and E3, respectively. How-ever, actual age at maturity depends on thefoodsupplyhistory,asdoesgrowthandstorage(seeResults:Normsof reaction ).Indeterminate growthIf food supply is constant, the optimal growth strat-"
+        },
+        {
+          "document_id": "W2121294442",
+          "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+          "doi": "10.1111/geb.12244",
+          "year": "2014",
+          "distance": 0.3622,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "pment, older age at first reproduction and hence to increased longevity. Individuals live longer in captivity than in the wild. Herbivorous and omnivorous squamates live for longer than carnivorous ones. We postulate that low‐quality nutrition reduces growth rates, promotes a relative decline in reproductive rates and thus prolongs life. Main conclusions Our results support key predictions from life‐history theory and suggest that reproducing more slowly and at older ages, being herbivorous and, plausibly, lowering metabolism, result in increased longevity."
+        },
+        {
+          "document_id": "W4388178511",
+          "title": "Diversity, plasticity and asynchrony of actuarial and reproductive senescence in the Collembola Folsomia candida (Willem, 1902)",
+          "doi": "10.3389/fevo.2023.1112045",
+          "year": "2023",
+          "distance": 0.363,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "e fully fed. Clutch size increased as female become older and then declined progressively after reproduction reached a maximum. This age decline in fertility went along with a progressive slowing down of the pace of the egg-laying, a reduction of egg quality (more sterile eggs), while egg size undergoes little change with age. We found that the onset of reproductive decline occurred before the beginning of actuarial senescence, and show that escaping senescence is physiologically possible for certain lineages under dietary restricted conditions."
+        },
+        {
+          "document_id": "W4411177159",
+          "title": "The implication of size scaling of physiological rates on growth allometry of bivalve mollusks: a comparative study in mixed populations of two congeneric clam species",
+          "doi": "10.1007/s10750-025-05919-w",
+          "year": "2025",
+          "distance": 0.3709,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract The continuous decline in size (age)-specific growth rate over the life span is an important feature of the life history of many animal populations. Differential size scaling of physiological rates has been invoked to account for such negative allometry in most currently available growth models."
+        },
+        {
+          "document_id": "W4389163550",
+          "title": "Relationships among Development, Growth, Body Size, Reproduction, Aging, and Longevity – Trade-Offs and Pace-Of-Life",
+          "doi": "10.1134/s0006297923110020",
+          "year": "2023",
+          "distance": 0.3748,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Relationships of growth, metabolism, reproduction, and body size to the biological process of aging and longevity have been studied for decades and various unifying “theories of aging” have been proposed to account for the observed associations. In general, fast development, early sexual maturation leading to early reproductive effort, as well as production of many offspring, have been linked to shorter lifespans."
+        },
+        {
+          "document_id": "W2026027623",
+          "title": "Bridging Developmental Boundaries: Lifelong Dietary Patterns Modulate Life Histories in a Parthenogenetic Insect",
+          "doi": "10.1371/journal.pone.0111654",
+          "year": "2014",
+          "distance": 0.3749,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ve maturity was positively correlated with both adult and reproductive lifespans but negatively correlated with total lifespan. Food limitation had opposing effects on lifespan depending on when it was imposed, as it protracted development in juveniles but hastened death in adults. Food limitation also constrained reproduction regardless of when food was limited, although decreased fecundity was especially pronounced in individuals that were food-limited as late juveniles and adults."
+        },
+        {
+          "document_id": "W2332925236",
+          "title": "An Experimental Study of the Trade-Offs Between Age and Size at Maturity: Effects of Energy Availability",
+          "doi": "10.2307/2390116",
+          "year": "1994",
+          "distance": 0.3788,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "(ii) How do the resulting differences in age or size at reproduction (if any) translate into long-term effects on fecundity? 2. We found that individuals on a low-energy diet grew more slowly, matured at a later age, and had smaller clutch sizes than did females on a high-energy diet. However, not all individuals on the high-energy diet matured at the same time. Thirty per cent of these latter individuals matured at 20 months of age at a relatively small body size, whereas the remainder matured at 32 months of age and at a larger body size"
+        },
+        {
+          "document_id": "W4407292238",
+          "title": "Nutrition regulates reproductive senescence and terminal investment across the reproductive cycle of a long-lived mammal",
+          "doi": "10.1038/s41598-025-86807-0",
+          "year": "2025",
+          "distance": 0.3795,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "From conception to weaning, age-related patterns of reproduction were influenced by both body fat and environmental conditions. Reproductive senescence was clear across the entire reproductive cycle, although allocation to offspring was partly mediated by nutrition. Terminal investment, however, was most evident towards the end of the annual reproductive cycle and unveiled only when considering nutritional condition and food availability; during years with poor resource availability, older mothers raised larger juveniles (i.e., 6-months old)."
+        },
+        {
+          "document_id": "W4394749507",
+          "title": "Relationships among development, growth, body size, reproduction, aging, and longevity - trade-offs and pace-of-life",
+          "doi": "10.31857/s0320972523110039",
+          "year": "2023",
+          "distance": 0.3808,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Relationships of growth, metabolism, reproduction, and body size to the biological process of aging and longevity have been studied for decades and various unifying “theories of aging” have been proposed to account for the observed associations. In general, fast development, early sexual maturation leading to early reproductive effort, as well as production of many offspring, have been linked to shorter lifespans."
+        },
+        {
+          "document_id": "W2001040922",
+          "title": "DOES INCREASED MORTALITY FAVOR THE EVOLUTION OF MORE RAPID SENESCENCE?",
+          "doi": "10.1111/j.1558-5646.1993.tb01241.x",
+          "year": "1993",
+          "distance": 0.381,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "lation dynamics are density independent, extrinsic mortality should not alter the senescence rate favored by natural selection. If population growth is density dependent and populations are stable, the effect of extrinsic mortality depends on the age specificity of the density dependence and on whether survival or reproduction (or both) are functions of density. It is possible that higher extrinsic mortality will increase the rate of senescence at all ages, decrease the rate at all ages, or increase it at some ages while decreasing it at others."
+        },
+        {
+          "document_id": "W2072777192",
+          "title": "An empirical test of evolutionary theories for reproductive senescence and reproductive effort in the garter snake <i>Thamnophis elegans</i>",
+          "doi": "10.1098/rspb.2006.0072",
+          "year": "2007",
+          "distance": 0.39,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "t, and (iii) reproductive effort remains constant in fast-growth individuals with age, but declines in slow-growth individuals. This illustration of increasing fecundity with age, even at the latest ages, deviates from standard expectations for reproductive senescence, as does the lack of increases in reproductive effort. We discuss our findings in light of recent theories regarding the phenomenon of increased reproduction throughout life in organisms with indeterminate growth and its potential to offset theoretical expectations for the ubiquity of senescence."
+        },
+        {
+          "document_id": "W3096509365",
+          "title": "Reproductive senescence in a short‐lived fish",
+          "doi": "10.1111/1365-2656.13382",
+          "year": "2020",
+          "distance": 0.3917,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "short life span. The onset of reproductive senescence was postponed compared to animals that cease growing at sexual maturity. Fish and other animals with post‐maturity growth have long been considered insusceptible to ageing but this conclusion may be related to the previous lack of longitudinal data rather than to the absence of reproductive senescence in such organisms."
+        },
+        {
+          "document_id": "W2034144268",
+          "title": "The impact of dietary restriction, intermittent feeding and compensatory growth on reproductive investment and lifespan in a short-lived fish",
+          "doi": "10.1098/rspb.2008.0357",
+          "year": "2008",
+          "distance": 0.3927,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "growth (following the deprivation) and reproductive investment, a factor that has rarely been measured in studies of lifespan. Using three-spined sticklebacks, we show for the first time that while animals subjected to an intermittent feeding regime can grow as large as continuously fed controls that receive the same total amount of food, and can maintain reproductive investment, they have a shorter lifespan. Furthermore, we show that this reduction in lifespan is linked to rapid skeletal growth rate and is due to an increase in the instantaneous risk of mortality rather than in the rate of senescence."
+        }
+      ]
+    }
+  }
+}
