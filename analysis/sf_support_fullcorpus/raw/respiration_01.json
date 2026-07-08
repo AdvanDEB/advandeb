@@ -1,0 +1,1628 @@
+{
+  "sf_id": "respiration_01",
+  "category": "Respiration",
+  "statement": "Freshly laid eggs/seeds initially use negligible amounts of dioxygen.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several DEB sources (snippets 2, 3, 9, 16) explicitly state that freshly laid eggs or seeds hardly respire and use negligible dioxygen, providing strong direct support. One source (snippet 10) reports measurable oxygen consumption in unfertilized eggs, which contradicts the stylized fact but is limited to a few taxa and does not overturn the general pattern. The remaining excerpts are either unrelated to early‑stage respiration or discuss later developmental phases, contributing little to the claim. Overall, the corpus contains multiple high‑relevance supportive statements outweighing the isolated contradictory evidence, yielding moderate overall evidential strength and a consensus that corroborates the stylized fact."
+          },
+          "n_references": 5,
+          "references": {
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2247
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2255
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2609
+            },
+            "2710": {
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.264
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2855
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2222,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2247,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2255,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2436,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "er than strictly necessary. The levelling of dioxygen consumption prior to hatching also occurs in very dif- ferent species that do not have an egg shell (Kooijman, 1986b), and therefore cannot be caused by the limiting O2 flux. DEB theory takes this as a result of depleting reserve, which not only causes a levelling of, but even a decline of dioxygen use prior to hatching, as is really clear in eggs of the pig-­nosed turtle, Carettochelys insculpta, and the Australian freshwater crocodile, Crocodylus johnsoni (Zonneveld & Kooijman, 1993), where embryos delay hatching by waiting for their nest mates to be ready for synchronous hatching. Coherence and consistency are crucial conditions for co"
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2498,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "abil- ity or toxicity of accumulated nitrogen waste limit embryo size, we do not imply that the embryo actually experiences such limitation or toxic effects, only that egg size is such that these problems are avoided. The large literature on bird egg development stresses the role of O2 limitation (Hoyt & Rahn, 1980; Tazawa et al., 1983; Visschedijk, 1968; Visschedijk & Rahn, 1983). The authors point that the maximum flux through the pores is egg-­size independent, from hummingbird to ostrich, and point to the levelling of dioxygen consumption prior to pipping. This implies that O2 is actually limited. If true, we disagree with this view. The constancy of maximum dioxygen flux through the por"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2536,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "g regulating mechanisms and concentration gradients and de- fense systems. The need to allocate energy to maturity maintenance is intimately related with the second law of thermodynamics (P2): the level of maturity would decrease in the absence of energy spent in its maintenance because the higher the level of maturity the further away is the system from equilibrium. Empirical evidence (R1) shows that freshly laid eggs do not require maintenance be- cause aerobic organisms use dioxygen in chemical reactions that yield energy. Thus, 1) freshly laid eggs do not have structure and 2) reserve does not require maintenance. Re- serves can have active metabolic functions but do not require maintena"
+            },
+            {
+              "document_id": "2903",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2581,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "us, there are metabolic processes occurring during the embryo stage that are not present at the beg- gining (fresh laid egg). The energy used in all metabolic processes comes from reserves (As- sumption 3.4) implying that eggs must have reserve. However, reserve is not produced during the embryo stage because the organism does not feed (Assumptions 3.2 and 3.4), i.,e., freshly laid eggs must have reserve. Also, freshly laid eggs can not have a signiﬁcant amount of structure because they do not pay maintenance (Assumption 3.5). Thus, freshly laid eggs are composed of reserve only. Proof. (Proposition 3.9) The z + 2 stoichiometric coefﬁcients a1 to az, b1 and b2 of the assimilation process (Eq"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2598,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2609,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "2710",
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.264,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.8,
+              "text": "Borei 1948) and meiotic growth is halted (Went 1982). Depending on the species, ripe eggs may remain viable in this state for several days (Whitaker 1931; Holcomb et al. 2004) and, although meiotically halted, may be far from inactive. Measurable oxygen consumption rates have been observed in unfertilized eggs for a variety of species (Whi- taker 1931; Borei 1948; Horwitz 1965; Tyler, Tyler & Piatigorsky 1968; Davenport & Lonnig 1980) and may indicate the generation of energy through the Krebs Cycle. Unfertilized eggs contain all the necessary components of protein synthesis, including mRNAs (Tyler 1963; Tyler et al. 1968) and evidence of protein synthesis has been demonstrated in ripe, unfe"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2702,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes the correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reﬂects the total use of energy E0−Eb. Since, like the energy investment in a single egg E0, the amount of energy at birth Eb = [Em]Vb is also proportional to V4/3, the loss of water must be a ﬁxed proportion of egg volume. Rahn, Ar and Paganelli [26,745] found that it is some 15% of the initial egg weight. If the use of energy relates to water loss directly, one would expect the initial loss rate to be small and build "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2769,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "lls of bird eggs initially produce a little carbon dioxide [125, 468].) In many species, this is a resting stage. This especially holds for plants, where seeds are equivalent to eggs; seeds can be dormant for many years and the number of dormant seeds greatly exceeds the number of non-dormant individuals [461]. Many seeds (particularly berries) require to be treated by the digestive juices of a particular animal species for germination; others need fire, see {412}. Although the seed or egg exchanges gas and water with the environment, it is otherwise a rather closed system. Foetal development represents a variation on embryo development, where the mother [Page 22] 1.1. Individuals as dynamic"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2795,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "the reserve flux that is allocated to growth and actually fixed into new tissue. The relationship simplifies if the nitrogenous waste contains no carbon (nCN = 0). For embryos and juveniles we have ˙pG + ˙pD = ˙pC, but adults fix carbon in embryonic reserves. This change at puberty results in a stepwise decrease in carbon dioxide production as illustrated in Figure 4.15. Table 2.5 gives the required powers: for adults we have the growth power ˙pG = Vm[ ˙pM]l2 e−l−lT 1+e/g and, for k = 1, [Page 161] 144 Univariate DEB models Figure 4.20: The water stick insect Rana- tra linearis deposits its eggs in floating decay- ing plant material, where dioxygen availability is usually poor. The eggs are "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2819,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "se of energy (stored in lipids, etc.) relates to the water that will evaporate from bird eggs. Part of this water is formed by the oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes the correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reflects the total use of energy E0−Eb. Since, like the energy investment in a single egg E0, the amount of energy at birth Eb = [Em]Vb = z4[Eref m ]V ref b , the loss of water must be a fixed proportion of egg volume. Rahn, Ar and Paganelli [31, 930] found that it is some 15 % of the initial "
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2837,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ck if metamorphosis is really happening so close to birth. 0 10 20 0 5 10 wet mass, g A 0 10 20 0 2 4 6 x 10 4 time, d cumulated # eggs B 0 10 20 50 100 150 200 250 O2, µmol/d C 20 40 60 50 100 150 200 250 bell diameter, mm O2, µmol/d D 0 5 10 50 100 150 200 250 wet mass, g O2, µmol/d E 0 10 20 0 500 1000 1500 2000 time, d O2, µmol/g/d F Figure 9: Predicted variability in dioxygen consumption. The model assumes δM = 0.13, f = 0.46 (solid line), f = 0 (dashed line) and T = 28◦C. Predicted wet mass (A), reproductive output (B) and dioxygen consumption (C) for individual A during the 14 days feeding followed by 6 day starvation; source: Larson (1987a). Red circle (A) are data. The black line (A"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2855,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "al volume of the embryo can realistically be assumed to be negligibly small. At this stage it hardly respires, i.e. it uses no oxygen and does not produce carbon dioxide. (The shells of bird eggs initially produce a little carbon dioxide [99,376].) In many species, this is a resting stage. This especially holds for plants, where seeds are equivalent to eggs; seeds can be dormant for many years and the number of dormant seeds greatly exceeds the number of non-dormant individuals [371]. Many seeds (particularly berries) require to be treated by the digestive juices of a particular animal species for germination. No seedlings of the tambulacoque tree Calvaria major were found after the extincti"
+            },
+            {
+              "document_id": "2881",
+              "title": "Bars2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2867,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "cant for all concentrations tested (p < 0.05, Dunnett’s post hoc test). The corresponding EC50 at 21 d was 23.7 ng Sn/L (CI: 2.2 – 189.4 ng Sn/L). All eggs produced by parents exposed to 473 ng Sn/L exhibited polyembryony. In contrast, TPT induced no significant effects on the viability of eggs produced by exposed adults at the tested concentration range. 2.4. Discussion 2.4.1. Chronic effects of organotins in L. stagnalis The TBT metabolite concentrations were very low (i.e., below the quantification limit), which suggests that degradation might not be the most significant process contributing to the decrease in TBT concentration in water. Losses were probably mostly due to adsorption in mu"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2889,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "se of energy (stored in lipids etc.) relates to water that will evaporate from bird eggs. Part of this water is formed by the oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes a correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reﬂects the total use of energy E0−Eb. Since, like the energy investment into a single egg E0, the amount of energy at birth Eb = [Em]Vb is also proportional to V4/3, the loss of water must be a ﬁxed proportion of egg volume. Rahn, Ar and Paganelli [578,19] found that it is some 15% of the initial eg"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The majority of the retrieved abstracts focus on dioxin and PCB contamination in eggs, with no discussion of oxygen consumption by freshly laid eggs or seeds. Only one abstract (snippet 8) touches on egg oxygen supply mechanisms, but it does not provide quantitative evidence that newly deposited eggs use negligible dioxygen; it merely describes diffusion pathways. Consequently the corpus offers essentially no direct support for the stylized fact, yielding weak overall evidence and a neutral consensus."
+          },
+          "n_references": 0,
+          "references": {},
+          "snippets": [
+            {
+              "document_id": "W2139031919",
+              "title": "Dioxins in organic eggs: a review",
+              "doi": "https://doi.org/10.1016/s1573-5214(06)80023-0",
+              "year": "2006",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Eggs contribute for about 4% to the daily dioxin intake of humans. Research among layer farms in the Netherlands and other EU countries has shown that organic eggs contain more dioxin than conventional ones and that a significant number of organic farms produce eggs with a dioxin content that exceeds the EU standard. The hens' intake of dioxins from various sources leads to an increase in the dioxin content of organic eggs. These sources include plants, feed, soil, worms and insects, and compared with hens on conventional and free-range farms, organic hens make more use of these sources due to better access to the outdoor run. Plants appear to be relatively unimportant as a source of dioxins"
+            },
+            {
+              "document_id": "W2151704685",
+              "title": "Effect of Flock Size on Dioxin Levels in Eggs from Chickens Kept Outside",
+              "doi": "https://doi.org/10.1093/ps/86.9.2042",
+              "year": "2007",
+              "distance": 0.2354,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "To decrease dioxin uptake by the general population the European Union (EU) has set limits to the dioxin content of many foodstuffs including eggs. Eggs from free foraging chickens are known to have a higher dioxin content compared with confined laying hens, and the question is whether these eggs can adhere to current EU regulations. The aim of the study was to investigate parameters that are involved in the contamination of eggs from chickens raised under organic conditions. Samples from 34 organic farms including soil and earthworm samples were collected between September and December of the year 2003. Dioxin levels were assayed by gas chromatography-mass spectrometry. Various parameters w"
+            },
+            {
+              "document_id": "W2160596515",
+              "title": "Carry-over of dioxins and PCBs from feed and soil to eggs at low contamination levels – influence of mycotoxin binders on the carry-over from feed to eggs",
+              "doi": "https://doi.org/10.1080/02652030500512037",
+              "year": "2006",
+              "distance": 0.2356,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Laying hens were fed with compound feed containing six different levels of dioxins, dioxin-like PCBs and indicator PCBs for a period of 56 days. This was followed by a period of 56 days on clean feed. Dioxin levels in feed varied from background levels to three times the current EU tolerance limit of 0.75 ng TEQ/kg. At all dose levels a rapid increase was observed in the dioxin levels in eggs. There was a clear linear dose-response relationship between the dioxin levels in eggs and feed. The feed containing 0.4 ng TEQ dioxins per kg resulted in egg levels just above the EU limit of 3 pg TEQ/g fat. Dioxin-like and indicator PCB residues followed a pattern very similar to that of dioxins. Expo"
+            },
+            {
+              "document_id": "W3008336639",
+              "title": "Free-range chicken eggs as a bioindicator of dioxin contamination in Vietnam, including long-term Agent Orange impact",
+              "doi": "https://doi.org/10.1016/j.emcon.2020.02.003",
+              "year": "2020",
+              "distance": 0.2441,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "PCDD/Fs contamination of free-range chicken eggs and soils from private Vietnam households was studied. The possibility of using free-range eggs as bio-indicators of dioxin contamination was considered as the soil-chicken-egg exposure pathway is considered to be the most sensitive exposure pathway of dioxins in soils to humans. A large territory from Dong Nai province in the south to Lao Cai province in the north was covered by the research. All analyses were performed by HRGC-HRMS method. PCDD/Fs levels in eggs from the majority of southern households exceeded the EC limit for eggs and egg products (2.5 pg WHO-TEQ2005 g−1 lipid). Total TEQs ranged from 0.4 to 361 pg WHO-TEQ2005 g−1 lipid in"
+            },
+            {
+              "document_id": "W4401510516",
+              "title": "Polychlorinated dibenzo- <i>p</i> -dioxin and dibenzofuran contamination of free-range eggs: estimation of the laying hen’s soil ingestion based on a toxicokinetic model, and human consumption recommendations",
+              "doi": "https://doi.org/10.1080/19440049.2024.2384416",
+              "year": "2024",
+              "distance": 0.2537,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Polychlorinated dibenzo-<i>p</i>-dioxins and dibenzofurans (PCDD/Fs) are ubiquitous in the environment. The main route of human exposure is through food consumption. Soil contamination can be problematic for sanitary safety depending on the usage of the soil, such as farming. In case of environmental soil contamination with PCDD/Fs, hen’s eggs may be contaminated due to soil ingestion by hens. For this reason, it is important to understand the parameters that influence eggs’ contamination when hens are raised in contaminated areas. After the discovery of a contaminated area in Lausanne (Switzerland), we collected hens’ eggs from ten domestic-produced eggs and one farm. Based on PCDD/F measur"
+            },
+            {
+              "document_id": "W2491533279",
+              "title": "23. Dioxins in eggs",
+              "doi": "https://doi.org/10.3920/978-90-8686-804-9_23",
+              "year": "2015",
+              "distance": 0.2542,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Numerous chemicals present in food of animal origin, such as meat, milk, fish, and eggs can affect human health. Ubiquitous dioxins and related compounds are among them. Dioxin contamination of eggs has attracted much attention in recent years. The research papers have shown an increase in the dioxin concentrations of free-range eggs. Hens may be exposed to dioxins from different and often unexpected sources. This article reviews dioxins sources in the environment, direct and indirect transmission pathways to the food chain, possible dioxin sources in hen eggs, the growing health threat from contaminated free-range eggs, and the relationship with food safety and consumer health. The informat"
+            },
+            {
+              "document_id": "W2048100741",
+              "title": "Coexposure of Dioxin-like Polychlorinated Biphenyls and Polychlorinated Dibenzo-<i>p</i>-dioxins and Dibenzofurans in Free-Range Hens and Implications Derived from Congener Profile Analysis",
+              "doi": "https://doi.org/10.1021/jf204468s",
+              "year": "2012",
+              "distance": 0.2589,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The consumption of free-range eggs is becoming more popular worldwide. We analyzed the levels of 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and their congener profiles from 6 free-range and 12 caged egg samples. The mean levels of dl-PCBs in the free-range samples were 5.4 times higher than those in caged eggs. All egg samples exhibited at least two characteristic dl-PCB congener patterns, which reflected distinctive contamination sources. Additionally, for the first time, we demonstrated that the dl-PCB levels in the free-range eggs were highly correlated with elevated levels of 17 polychlorinated dibenzo-p-dioxins and dibenzofurans (PCDD/Fs) (r = 0.986; p < 0.001), indicating a coe"
+            },
+            {
+              "document_id": "W2113190099",
+              "title": "Two Designs of Marine Egg Masses and their Divergent Consequences for Oxygen Supply and Desiccation in Air",
+              "doi": "https://doi.org/10.1093/icb/39.2.253",
+              "year": "1999",
+              "distance": 0.2591,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Two common types of egg masses rely on differing routes of supply of oxygen in water. When embryos are embedded in a gelatinous matrix, oxygen is supplied by diffusion through the gel, and thicker masses require more gel per embryo. When an adherent mass of eggs lacks a gel matrix, oxygen can be provided from water flowing through the open interstices between eggs, and larger eggs provide larger channels and thus less resistance to flow. Both types occur intertidally, where they are periodically exposed to air. Exposure to air can have a greater effect on oxygen supply via interstices than on supply via gel. Oxygen diffusing in interstices drained of water provides increased rates of supply "
+            },
+            {
+              "document_id": "W3209688462",
+              "title": "The influence of different production systems on dioxin and PCB levels in chicken eggs from Emilia-Romagna and Lombardy regions (Italy) over 2017–2019 and consequent dietary exposure assessment",
+              "doi": "https://doi.org/10.1080/19440049.2021.1991003",
+              "year": "2021",
+              "distance": 0.2599,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Hen eggs from farms with different production systems (organic, free range, barn, and in cage) sited in two regions of Italy (Emilia-Romagna and Lombardy) were collected from 2017 to 2019 to monitor the levels of 17 polychlorinated dibenzo-<i>p</i>-dioxin/dibenzofurans (PCDD/Fs), 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and the 6 non-dioxin-like polychlorinated biphenyl indicators (ndl-PCBs). Average concentrations of PCDD/Fs (0.21 pg WHO<sub>(2005)</sub>-TEQ/g fat), PCDD/Fs + dl-PCBs (0.43 pg WHO<sub>(2005)</sub>-TEQ/g fat) and ndl-PCBs (6.41 ng/g fat) were below the maximum limits established at European level in eggs, but significantly higher amounts of PCDD/Fs and PCDD/Fs + dl-"
+            },
+            {
+              "document_id": "W2902585309",
+              "title": "Contaminants in eggs: dioxins/PCBs and other toxic substances and their possible health implications",
+              "doi": "https://doi.org/10.3920/978-90-8686-877-3_17",
+              "year": "2018",
+              "distance": 0.2623,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Table eggs belong to the one of most important components of our daily diet, being a natural source of vitamins and proteins but unfortunately also of chemical contaminants. Free range poultry, as well as other animals, are very good bioindicators of environmental contamination. Together with the feed and soil, laying hens pick up different pollutants and store them in their tissues and organs. These accumulating toxic substances are also excreted into birds' eggs. Therefore egg consumers may constitute a group at risk because intake of contaminants may exceed toxicological reference values, set to protect their health. Thus this chapter focusses primarily on sources and toxicity of dioxins "
+            },
+            {
+              "document_id": "W2563833612",
+              "title": "Dioxins, furans, and polychlorinated biphenyls in hen eggs – a new source of hazard for consumers?",
+              "doi": "https://doi.org/10.1515/bvip-2015-0078",
+              "year": "2015",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract The paper presents the results of testing eggs for the content of dioxins and polychlorinated biphenyls (PCBs), determination of the sources that caused the presence of high concentrations of these compounds which exceeded the acceptable contamination levels, and assessment of consumer health risk caused by the consumption of eggs with excessive contents of investigated compounds. In about 9% of free range eggs and 17% of organic eggs, the content of PCDD/Fs was two- or threefold higher than the acceptable limits, and in some samples the concentration of investigated compounds exceeded the maximum concentration levels. Based on the profile of the compounds, it was confirmed in sever"
+            },
+            {
+              "document_id": "W1979513688",
+              "title": "Exposure to 3,3′,4,4′,5-pentachlorobiphenyl during embryonic development has a minimal effect on the cytochrome P4501A response to 2,3,7,8-tetrachlorodibenzo-<i>P</i>-dioxin in cultured chicken embryo hepatocytes",
+              "doi": "https://doi.org/10.1897/05-520r.1",
+              "year": "2006",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Concentrations of dioxin-like compounds in avian eggs can vary substantially between individuals, species, and collection sites. Although the inducibility of cytochrome P4501A (CYP1A) in hepatocyte cultures is commonly used to predict species sensitivity to environmental contaminants, it is not known how exposure to dioxin-like compounds during embryonic development might alter this biomarker response. To investigate this question, we injected vehicle or 0.4, 0.8, or 1.6 μg/kg of 3,3ǐ,4,4ǐ,5-pentachlorobiphenyl (PCB 126) into the air cell of fertilized chicken eggs before incubation, and we measured CYP1A endpoints in cultured hepatocytes of day-19 embryos from each treatment group."
+            },
+            {
+              "document_id": "W1613867128",
+              "title": "Contaminants in eggs: effects of feed and environment",
+              "doi": "https://doi.org/10.13140/2.1.4580.7049",
+              "year": "2007",
+              "distance": 0.2637,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Introduction Chlorinated pesticides and (halogenated) environmental contaminants can enter laying hens in a variety of ways. The most important way is via the feed (including soil intake). However, direct application on the animal and contact with the skin as well as inhalation via the airways should not be ruled out. Most components of animal feed are digested and absorbed during passage trough the intestinal tract. Digestion and absorption of nutritive components have been extensively studied. In contrast, digestion and absorption of unwanted substances like dioxins, pesticides, heavy metals, drugs and polycyclic hydrocarbons is often not considered. Yet, they are often analyzed both in fe"
+            },
+            {
+              "document_id": "W1977305488",
+              "title": "Bactericidal Activity, Eggshell Conductance, and Hatchability Effects of Ozone Versus Formaldehyde Disinfection ,",
+              "doi": "https://doi.org/10.3382/ps.0681074",
+              "year": "1989",
+              "distance": 0.2638,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Ozone and formaldehyde were evaluated as disinfectants in a prototype laboratory setter against microorganisms that are naturally present on fertile, freshly laid, broiler hatching eggs. Significantly lower microbial counts of over 2.5 log10 (P less than .05) were observed for water-misted and ozonated (2.83% by weight) eggs or formaldehyde-fumigated (triple strength) eggs than for control and water-misted eggs. Eggshell conductance studies as measured by egg moisture losses in a desiccator showed no significant differences (P greater than .05) among untreated, water misted, ozonated (3.06% by weight) with water mist, or formaldehyde (triple strength)-fumigated eggs. Hatchability was signifi"
+            },
+            {
+              "document_id": "W2143487462",
+              "title": "DRIED WHOLE EGG POWDER: V. DEFINITION AND PROPERTIES OF LOW GRADE EGG POWDERS",
+              "doi": "https://doi.org/10.1139/cjr43d-020",
+              "year": "1943",
+              "distance": 0.2647,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The point at which 50% of tasters regarded dried whole egg preparations as unsuitable for human consumption coincided with a rating of 2.7 on a scale ranging from 10 for excellent, fresh egg to 0 for repulsive material. The protein fraction of these low grade samples had deteriorated badly, as shown by fluorescence measurements. The fat fraction showed no evidence of peroxide oxygen formation."
+            },
+            {
+              "document_id": "W2017928777",
+              "title": "A toxicokinetic model for the carry-over of dioxins and PCBs from feed and soil to eggs",
+              "doi": "https://doi.org/10.1080/02652030500512045",
+              "year": "2006",
+              "distance": 0.2648,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "A mathematical model for the kinetics of carry-over of dioxins and dioxin-like PCBs from feed mixed with contaminated oil to eggs has been developed. This model incorporates uptake of the compounds over the gut wall and their subsequent transport by blood, distribution over the body, hepatic metabolism and excretion through egg yolk fat. The model is analysed with respect to the possibility of identifying as yet unknown model parameters by fitting these to the experimental data. The model was fitted to the experimental data on the carry-over from feed to eggs. The calibrated model was applied to calculate the steady-state concentrations in eggs which were compared to European Maximum Residue"
+            },
+            {
+              "document_id": "W2122025963",
+              "title": "Contamination of free‐range chicken eggs with dioxins and dioxin‐like polychlorinated biphenyls",
+              "doi": "https://doi.org/10.1002/mnfr.200500201",
+              "year": "2006",
+              "distance": 0.2651,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Dioxins and dioxin‐like (DL) polychlorinated biphenyls (PCB) are persistent organic pollutants that enter the body mainly by food intake. A small margin exists between current exposure levels in the human population and the levels causing biological effects. Therefore, stringent control of concentrations of these contaminants in food and feed is needed. Eggs from free‐range chicken are increasingly becoming an important part of the diet. These eggs have a higher risk of being contaminated with increased levels of dioxins and DL‐PCB than barn or cage eggs. Ingestion of soil particles from environmentally contaminated areas may contribute to elevated dioxin levels in free‐range chicke"
+            },
+            {
+              "document_id": "W2114267651",
+              "title": "Ability of Hydrogen Peroxide and Timsen to Eliminate Artificially Inoculated Salmonella from Fertile Broiler Eggs",
+              "doi": "https://doi.org/10.1093/japr/11.3.266",
+              "year": "2002",
+              "distance": 0.2655,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Varying levels (105 to 107/egg) of Salmonella Typhimurium were inoculated onto fertile hatching eggs by immersion. After this, the inoculated eggs were untreated (control), water treated, hydrogen peroxide (1.5%) treated, or Timsen treated (n-alkyl dimethyl benzyl ammonium chloride as a commercial bactericide-fungicide). Hydrogen peroxide was superior to Timsen as an egg treatment to eliminate artificially inoculated Salmonella from fertile eggs, but one-third of the treated eggs remained Salmonella positive. This study demonstrates how difficult it is to eliminate Salmonella that contaminate fertile hatching eggs. Until a more effective system or process is devised and commercially implemen"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Several DEB‑theory sources (snippets 2, 3, 6, 9, and 12) explicitly state that freshly laid eggs or seeds initially have little to no dioxygen consumption, with O₂ use rising sharply during embryonic development. These statements are clear, directly address the stylized fact, and have high relevance scores. Only one snippet (10) reports measurable oxygen consumption in unfertilized eggs, which could be interpreted as contradictory but does not quantify the rate relative to later stages; its relevance is moderate. The preponderance of strong supporting evidence outweighs this isolated contrary note, leading to a classification of strong overall evidence and a consensus that the fact is corroborated."
+          },
+          "n_references": 4,
+          "references": {
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2247
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2255
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2536
+            },
+            "2710": {
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.264
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2222,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2247,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2255,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2436,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "er than strictly necessary. The levelling of dioxygen consumption prior to hatching also occurs in very dif- ferent species that do not have an egg shell (Kooijman, 1986b), and therefore cannot be caused by the limiting O2 flux. DEB theory takes this as a result of depleting reserve, which not only causes a levelling of, but even a decline of dioxygen use prior to hatching, as is really clear in eggs of the pig-­nosed turtle, Carettochelys insculpta, and the Australian freshwater crocodile, Crocodylus johnsoni (Zonneveld & Kooijman, 1993), where embryos delay hatching by waiting for their nest mates to be ready for synchronous hatching. Coherence and consistency are crucial conditions for co"
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2498,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "abil- ity or toxicity of accumulated nitrogen waste limit embryo size, we do not imply that the embryo actually experiences such limitation or toxic effects, only that egg size is such that these problems are avoided. The large literature on bird egg development stresses the role of O2 limitation (Hoyt & Rahn, 1980; Tazawa et al., 1983; Visschedijk, 1968; Visschedijk & Rahn, 1983). The authors point that the maximum flux through the pores is egg-­size independent, from hummingbird to ostrich, and point to the levelling of dioxygen consumption prior to pipping. This implies that O2 is actually limited. If true, we disagree with this view. The constancy of maximum dioxygen flux through the por"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2536,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "g regulating mechanisms and concentration gradients and de- fense systems. The need to allocate energy to maturity maintenance is intimately related with the second law of thermodynamics (P2): the level of maturity would decrease in the absence of energy spent in its maintenance because the higher the level of maturity the further away is the system from equilibrium. Empirical evidence (R1) shows that freshly laid eggs do not require maintenance be- cause aerobic organisms use dioxygen in chemical reactions that yield energy. Thus, 1) freshly laid eggs do not have structure and 2) reserve does not require maintenance. Re- serves can have active metabolic functions but do not require maintena"
+            },
+            {
+              "document_id": "2903",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2581,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "us, there are metabolic processes occurring during the embryo stage that are not present at the beg- gining (fresh laid egg). The energy used in all metabolic processes comes from reserves (As- sumption 3.4) implying that eggs must have reserve. However, reserve is not produced during the embryo stage because the organism does not feed (Assumptions 3.2 and 3.4), i.,e., freshly laid eggs must have reserve. Also, freshly laid eggs can not have a signiﬁcant amount of structure because they do not pay maintenance (Assumption 3.5). Thus, freshly laid eggs are composed of reserve only. Proof. (Proposition 3.9) The z + 2 stoichiometric coefﬁcients a1 to az, b1 and b2 of the assimilation process (Eq"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2598,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2609,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "2710",
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.264,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "Borei 1948) and meiotic growth is halted (Went 1982). Depending on the species, ripe eggs may remain viable in this state for several days (Whitaker 1931; Holcomb et al. 2004) and, although meiotically halted, may be far from inactive. Measurable oxygen consumption rates have been observed in unfertilized eggs for a variety of species (Whi- taker 1931; Borei 1948; Horwitz 1965; Tyler, Tyler & Piatigorsky 1968; Davenport & Lonnig 1980) and may indicate the generation of energy through the Krebs Cycle. Unfertilized eggs contain all the necessary components of protein synthesis, including mRNAs (Tyler 1963; Tyler et al. 1968) and evidence of protein synthesis has been demonstrated in ripe, unfe"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2702,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "e oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes the correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reﬂects the total use of energy E0−Eb. Since, like the energy investment in a single egg E0, the amount of energy at birth Eb = [Em]Vb is also proportional to V4/3, the loss of water must be a ﬁxed proportion of egg volume. Rahn, Ar and Paganelli [26,745] found that it is some 15% of the initial egg weight. If the use of energy relates to water loss directly, one would expect the initial loss rate to be small and build "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2769,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "lls of bird eggs initially produce a little carbon dioxide [125, 468].) In many species, this is a resting stage. This especially holds for plants, where seeds are equivalent to eggs; seeds can be dormant for many years and the number of dormant seeds greatly exceeds the number of non-dormant individuals [461]. Many seeds (particularly berries) require to be treated by the digestive juices of a particular animal species for germination; others need fire, see {412}. Although the seed or egg exchanges gas and water with the environment, it is otherwise a rather closed system. Foetal development represents a variation on embryo development, where the mother [Page 22] 1.1. Individuals as dynamic"
+            },
+            {
+              "document_id": "W2139031919",
+              "title": "Dioxins in organic eggs: a review",
+              "doi": "https://doi.org/10.1016/s1573-5214(06)80023-0",
+              "year": "2006",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Eggs contribute for about 4% to the daily dioxin intake of humans. Research among layer farms in the Netherlands and other EU countries has shown that organic eggs contain more dioxin than conventional ones and that a significant number of organic farms produce eggs with a dioxin content that exceeds the EU standard. The hens' intake of dioxins from various sources leads to an increase in the dioxin content of organic eggs. These sources include plants, feed, soil, worms and insects, and compared with hens on conventional and free-range farms, organic hens make more use of these sources due to better access to the outdoor run. Plants appear to be relatively unimportant as a source of dioxins"
+            },
+            {
+              "document_id": "W2151704685",
+              "title": "Effect of Flock Size on Dioxin Levels in Eggs from Chickens Kept Outside",
+              "doi": "https://doi.org/10.1093/ps/86.9.2042",
+              "year": "2007",
+              "distance": 0.2354,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "To decrease dioxin uptake by the general population the European Union (EU) has set limits to the dioxin content of many foodstuffs including eggs. Eggs from free foraging chickens are known to have a higher dioxin content compared with confined laying hens, and the question is whether these eggs can adhere to current EU regulations. The aim of the study was to investigate parameters that are involved in the contamination of eggs from chickens raised under organic conditions. Samples from 34 organic farms including soil and earthworm samples were collected between September and December of the year 2003. Dioxin levels were assayed by gas chromatography-mass spectrometry. Various parameters w"
+            },
+            {
+              "document_id": "W2160596515",
+              "title": "Carry-over of dioxins and PCBs from feed and soil to eggs at low contamination levels – influence of mycotoxin binders on the carry-over from feed to eggs",
+              "doi": "https://doi.org/10.1080/02652030500512037",
+              "year": "2006",
+              "distance": 0.2356,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Laying hens were fed with compound feed containing six different levels of dioxins, dioxin-like PCBs and indicator PCBs for a period of 56 days. This was followed by a period of 56 days on clean feed. Dioxin levels in feed varied from background levels to three times the current EU tolerance limit of 0.75 ng TEQ/kg. At all dose levels a rapid increase was observed in the dioxin levels in eggs. There was a clear linear dose-response relationship between the dioxin levels in eggs and feed. The feed containing 0.4 ng TEQ dioxins per kg resulted in egg levels just above the EU limit of 3 pg TEQ/g fat. Dioxin-like and indicator PCB residues followed a pattern very similar to that of dioxins. Expo"
+            },
+            {
+              "document_id": "W3008336639",
+              "title": "Free-range chicken eggs as a bioindicator of dioxin contamination in Vietnam, including long-term Agent Orange impact",
+              "doi": "https://doi.org/10.1016/j.emcon.2020.02.003",
+              "year": "2020",
+              "distance": 0.2441,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "PCDD/Fs contamination of free-range chicken eggs and soils from private Vietnam households was studied. The possibility of using free-range eggs as bio-indicators of dioxin contamination was considered as the soil-chicken-egg exposure pathway is considered to be the most sensitive exposure pathway of dioxins in soils to humans. A large territory from Dong Nai province in the south to Lao Cai province in the north was covered by the research. All analyses were performed by HRGC-HRMS method. PCDD/Fs levels in eggs from the majority of southern households exceeded the EC limit for eggs and egg products (2.5 pg WHO-TEQ2005 g−1 lipid). Total TEQs ranged from 0.4 to 361 pg WHO-TEQ2005 g−1 lipid in"
+            },
+            {
+              "document_id": "W4401510516",
+              "title": "Polychlorinated dibenzo- <i>p</i> -dioxin and dibenzofuran contamination of free-range eggs: estimation of the laying hen’s soil ingestion based on a toxicokinetic model, and human consumption recommendations",
+              "doi": "https://doi.org/10.1080/19440049.2024.2384416",
+              "year": "2024",
+              "distance": 0.2537,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Polychlorinated dibenzo-<i>p</i>-dioxins and dibenzofurans (PCDD/Fs) are ubiquitous in the environment. The main route of human exposure is through food consumption. Soil contamination can be problematic for sanitary safety depending on the usage of the soil, such as farming. In case of environmental soil contamination with PCDD/Fs, hen’s eggs may be contaminated due to soil ingestion by hens. For this reason, it is important to understand the parameters that influence eggs’ contamination when hens are raised in contaminated areas. After the discovery of a contaminated area in Lausanne (Switzerland), we collected hens’ eggs from ten domestic-produced eggs and one farm. Based on PCDD/F measur"
+            },
+            {
+              "document_id": "W2491533279",
+              "title": "23. Dioxins in eggs",
+              "doi": "https://doi.org/10.3920/978-90-8686-804-9_23",
+              "year": "2015",
+              "distance": 0.2542,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Numerous chemicals present in food of animal origin, such as meat, milk, fish, and eggs can affect human health. Ubiquitous dioxins and related compounds are among them. Dioxin contamination of eggs has attracted much attention in recent years. The research papers have shown an increase in the dioxin concentrations of free-range eggs. Hens may be exposed to dioxins from different and often unexpected sources. This article reviews dioxins sources in the environment, direct and indirect transmission pathways to the food chain, possible dioxin sources in hen eggs, the growing health threat from contaminated free-range eggs, and the relationship with food safety and consumer health. The informat"
+            },
+            {
+              "document_id": "W2048100741",
+              "title": "Coexposure of Dioxin-like Polychlorinated Biphenyls and Polychlorinated Dibenzo-<i>p</i>-dioxins and Dibenzofurans in Free-Range Hens and Implications Derived from Congener Profile Analysis",
+              "doi": "https://doi.org/10.1021/jf204468s",
+              "year": "2012",
+              "distance": 0.2589,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The consumption of free-range eggs is becoming more popular worldwide. We analyzed the levels of 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and their congener profiles from 6 free-range and 12 caged egg samples. The mean levels of dl-PCBs in the free-range samples were 5.4 times higher than those in caged eggs. All egg samples exhibited at least two characteristic dl-PCB congener patterns, which reflected distinctive contamination sources. Additionally, for the first time, we demonstrated that the dl-PCB levels in the free-range eggs were highly correlated with elevated levels of 17 polychlorinated dibenzo-p-dioxins and dibenzofurans (PCDD/Fs) (r = 0.986; p < 0.001), indicating a coe"
+            },
+            {
+              "document_id": "W2113190099",
+              "title": "Two Designs of Marine Egg Masses and their Divergent Consequences for Oxygen Supply and Desiccation in Air",
+              "doi": "https://doi.org/10.1093/icb/39.2.253",
+              "year": "1999",
+              "distance": 0.2591,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Two common types of egg masses rely on differing routes of supply of oxygen in water. When embryos are embedded in a gelatinous matrix, oxygen is supplied by diffusion through the gel, and thicker masses require more gel per embryo. When an adherent mass of eggs lacks a gel matrix, oxygen can be provided from water flowing through the open interstices between eggs, and larger eggs provide larger channels and thus less resistance to flow. Both types occur intertidally, where they are periodically exposed to air. Exposure to air can have a greater effect on oxygen supply via interstices than on supply via gel. Oxygen diffusing in interstices drained of water provides increased rates of supply "
+            },
+            {
+              "document_id": "W3209688462",
+              "title": "The influence of different production systems on dioxin and PCB levels in chicken eggs from Emilia-Romagna and Lombardy regions (Italy) over 2017–2019 and consequent dietary exposure assessment",
+              "doi": "https://doi.org/10.1080/19440049.2021.1991003",
+              "year": "2021",
+              "distance": 0.2599,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Hen eggs from farms with different production systems (organic, free range, barn, and in cage) sited in two regions of Italy (Emilia-Romagna and Lombardy) were collected from 2017 to 2019 to monitor the levels of 17 polychlorinated dibenzo-<i>p</i>-dioxin/dibenzofurans (PCDD/Fs), 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and the 6 non-dioxin-like polychlorinated biphenyl indicators (ndl-PCBs). Average concentrations of PCDD/Fs (0.21 pg WHO<sub>(2005)</sub>-TEQ/g fat), PCDD/Fs + dl-PCBs (0.43 pg WHO<sub>(2005)</sub>-TEQ/g fat) and ndl-PCBs (6.41 ng/g fat) were below the maximum limits established at European level in eggs, but significantly higher amounts of PCDD/Fs and PCDD/Fs + dl-"
+            },
+            {
+              "document_id": "W2902585309",
+              "title": "Contaminants in eggs: dioxins/PCBs and other toxic substances and their possible health implications",
+              "doi": "https://doi.org/10.3920/978-90-8686-877-3_17",
+              "year": "2018",
+              "distance": 0.2623,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Table eggs belong to the one of most important components of our daily diet, being a natural source of vitamins and proteins but unfortunately also of chemical contaminants. Free range poultry, as well as other animals, are very good bioindicators of environmental contamination. Together with the feed and soil, laying hens pick up different pollutants and store them in their tissues and organs. These accumulating toxic substances are also excreted into birds' eggs. Therefore egg consumers may constitute a group at risk because intake of contaminants may exceed toxicological reference values, set to protect their health. Thus this chapter focusses primarily on sources and toxicity of dioxins "
+            },
+            {
+              "document_id": "W2563833612",
+              "title": "Dioxins, furans, and polychlorinated biphenyls in hen eggs – a new source of hazard for consumers?",
+              "doi": "https://doi.org/10.1515/bvip-2015-0078",
+              "year": "2015",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract The paper presents the results of testing eggs for the content of dioxins and polychlorinated biphenyls (PCBs), determination of the sources that caused the presence of high concentrations of these compounds which exceeded the acceptable contamination levels, and assessment of consumer health risk caused by the consumption of eggs with excessive contents of investigated compounds. In about 9% of free range eggs and 17% of organic eggs, the content of PCDD/Fs was two- or threefold higher than the acceptable limits, and in some samples the concentration of investigated compounds exceeded the maximum concentration levels. Based on the profile of the compounds, it was confirmed in sever"
+            },
+            {
+              "document_id": "W1979513688",
+              "title": "Exposure to 3,3′,4,4′,5-pentachlorobiphenyl during embryonic development has a minimal effect on the cytochrome P4501A response to 2,3,7,8-tetrachlorodibenzo-<i>P</i>-dioxin in cultured chicken embryo hepatocytes",
+              "doi": "https://doi.org/10.1897/05-520r.1",
+              "year": "2006",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Concentrations of dioxin-like compounds in avian eggs can vary substantially between individuals, species, and collection sites. Although the inducibility of cytochrome P4501A (CYP1A) in hepatocyte cultures is commonly used to predict species sensitivity to environmental contaminants, it is not known how exposure to dioxin-like compounds during embryonic development might alter this biomarker response. To investigate this question, we injected vehicle or 0.4, 0.8, or 1.6 μg/kg of 3,3ǐ,4,4ǐ,5-pentachlorobiphenyl (PCB 126) into the air cell of fertilized chicken eggs before incubation, and we measured CYP1A endpoints in cultured hepatocytes of day-19 embryos from each treatment group."
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly and explicitly support the stylized fact that freshly laid eggs/seeds initially use negligible dioxygen. Snippets [2], [3], [9], and [16] state plainly that eggs hardly use dioxygen initially (with consumption increasing during development), and [3] explicitly extends this to plant seeds. Snippets [6] and [7] provide theoretical DEB grounding (eggs are reserve-only, no maintenance), and [12] notes the dormant/resting nature of eggs and seeds. The only countervailing evidence is [10], which reports measurable oxygen consumption in unfertilized eggs of some species; however this concerns unfertilized/ripe eggs (a meiotically halted state) rather than the freshly fertilized/laid egg at the start of development, and is a relatively minor caveat. Snippets [4] and [5] concern O2 limitation near hatching, not initial use. Overall the corpus strongly and consistently corroborates the fact with little genuine conflict."
+          },
+          "n_references": 6,
+          "references": {
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2247
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2255
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2536
+            },
+            "2903": {
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2581
+            },
+            "2710": {
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.264
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2702
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2222,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2247,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2255,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.97,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2436,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "er than strictly necessary. The levelling of dioxygen consumption prior to hatching also occurs in very dif- ferent species that do not have an egg shell (Kooijman, 1986b), and therefore cannot be caused by the limiting O2 flux. DEB theory takes this as a result of depleting reserve, which not only causes a levelling of, but even a decline of dioxygen use prior to hatching, as is really clear in eggs of the pig-­nosed turtle, Carettochelys insculpta, and the Australian freshwater crocodile, Crocodylus johnsoni (Zonneveld & Kooijman, 1993), where embryos delay hatching by waiting for their nest mates to be ready for synchronous hatching. Coherence and consistency are crucial conditions for co"
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2498,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "abil- ity or toxicity of accumulated nitrogen waste limit embryo size, we do not imply that the embryo actually experiences such limitation or toxic effects, only that egg size is such that these problems are avoided. The large literature on bird egg development stresses the role of O2 limitation (Hoyt & Rahn, 1980; Tazawa et al., 1983; Visschedijk, 1968; Visschedijk & Rahn, 1983). The authors point that the maximum flux through the pores is egg-­size independent, from hummingbird to ostrich, and point to the levelling of dioxygen consumption prior to pipping. This implies that O2 is actually limited. If true, we disagree with this view. The constancy of maximum dioxygen flux through the por"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2536,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "g regulating mechanisms and concentration gradients and de- fense systems. The need to allocate energy to maturity maintenance is intimately related with the second law of thermodynamics (P2): the level of maturity would decrease in the absence of energy spent in its maintenance because the higher the level of maturity the further away is the system from equilibrium. Empirical evidence (R1) shows that freshly laid eggs do not require maintenance be- cause aerobic organisms use dioxygen in chemical reactions that yield energy. Thus, 1) freshly laid eggs do not have structure and 2) reserve does not require maintenance. Re- serves can have active metabolic functions but do not require maintena"
+            },
+            {
+              "document_id": "2903",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2581,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "us, there are metabolic processes occurring during the embryo stage that are not present at the beg- gining (fresh laid egg). The energy used in all metabolic processes comes from reserves (As- sumption 3.4) implying that eggs must have reserve. However, reserve is not produced during the embryo stage because the organism does not feed (Assumptions 3.2 and 3.4), i.,e., freshly laid eggs must have reserve. Also, freshly laid eggs can not have a signiﬁcant amount of structure because they do not pay maintenance (Assumption 3.5). Thus, freshly laid eggs are composed of reserve only. Proof. (Proposition 3.9) The z + 2 stoichiometric coefﬁcients a1 to az, b1 and b2 of the assimilation process (Eq"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2598,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2609,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "2710",
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.264,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.7,
+              "text": "Borei 1948) and meiotic growth is halted (Went 1982). Depending on the species, ripe eggs may remain viable in this state for several days (Whitaker 1931; Holcomb et al. 2004) and, although meiotically halted, may be far from inactive. Measurable oxygen consumption rates have been observed in unfertilized eggs for a variety of species (Whi- taker 1931; Borei 1948; Horwitz 1965; Tyler, Tyler & Piatigorsky 1968; Davenport & Lonnig 1980) and may indicate the generation of energy through the Krebs Cycle. Unfertilized eggs contain all the necessary components of protein synthesis, including mRNAs (Tyler 1963; Tyler et al. 1968) and evidence of protein synthesis has been demonstrated in ripe, unfe"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2702,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "e oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes the correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reﬂects the total use of energy E0−Eb. Since, like the energy investment in a single egg E0, the amount of energy at birth Eb = [Em]Vb is also proportional to V4/3, the loss of water must be a ﬁxed proportion of egg volume. Rahn, Ar and Paganelli [26,745] found that it is some 15% of the initial egg weight. If the use of energy relates to water loss directly, one would expect the initial loss rate to be small and build "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2769,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "lls of bird eggs initially produce a little carbon dioxide [125, 468].) In many species, this is a resting stage. This especially holds for plants, where seeds are equivalent to eggs; seeds can be dormant for many years and the number of dormant seeds greatly exceeds the number of non-dormant individuals [461]. Many seeds (particularly berries) require to be treated by the digestive juices of a particular animal species for germination; others need fire, see {412}. Although the seed or egg exchanges gas and water with the environment, it is otherwise a rather closed system. Foetal development represents a variation on embryo development, where the mother [Page 22] 1.1. Individuals as dynamic"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2795,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "the reserve flux that is allocated to growth and actually fixed into new tissue. The relationship simplifies if the nitrogenous waste contains no carbon (nCN = 0). For embryos and juveniles we have ˙pG + ˙pD = ˙pC, but adults fix carbon in embryonic reserves. This change at puberty results in a stepwise decrease in carbon dioxide production as illustrated in Figure 4.15. Table 2.5 gives the required powers: for adults we have the growth power ˙pG = Vm[ ˙pM]l2 e−l−lT 1+e/g and, for k = 1, [Page 161] 144 Univariate DEB models Figure 4.20: The water stick insect Rana- tra linearis deposits its eggs in floating decay- ing plant material, where dioxygen availability is usually poor. The eggs are "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2819,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "se of energy (stored in lipids, etc.) relates to the water that will evaporate from bird eggs. Part of this water is formed by the oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes the correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reflects the total use of energy E0−Eb. Since, like the energy investment in a single egg E0, the amount of energy at birth Eb = [Em]Vb = z4[Eref m ]V ref b , the loss of water must be a fixed proportion of egg volume. Rahn, Ar and Paganelli [31, 930] found that it is some 15 % of the initial "
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2837,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ck if metamorphosis is really happening so close to birth. 0 10 20 0 5 10 wet mass, g A 0 10 20 0 2 4 6 x 10 4 time, d cumulated # eggs B 0 10 20 50 100 150 200 250 O2, µmol/d C 20 40 60 50 100 150 200 250 bell diameter, mm O2, µmol/d D 0 5 10 50 100 150 200 250 wet mass, g O2, µmol/d E 0 10 20 0 500 1000 1500 2000 time, d O2, µmol/g/d F Figure 9: Predicted variability in dioxygen consumption. The model assumes δM = 0.13, f = 0.46 (solid line), f = 0 (dashed line) and T = 28◦C. Predicted wet mass (A), reproductive output (B) and dioxygen consumption (C) for individual A during the 14 days feeding followed by 6 day starvation; source: Larson (1987a). Red circle (A) are data. The black line (A"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2855,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "al volume of the embryo can realistically be assumed to be negligibly small. At this stage it hardly respires, i.e. it uses no oxygen and does not produce carbon dioxide. (The shells of bird eggs initially produce a little carbon dioxide [99,376].) In many species, this is a resting stage. This especially holds for plants, where seeds are equivalent to eggs; seeds can be dormant for many years and the number of dormant seeds greatly exceeds the number of non-dormant individuals [371]. Many seeds (particularly berries) require to be treated by the digestive juices of a particular animal species for germination. No seedlings of the tambulacoque tree Calvaria major were found after the extincti"
+            },
+            {
+              "document_id": "2881",
+              "title": "Bars2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2867,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "cant for all concentrations tested (p < 0.05, Dunnett’s post hoc test). The corresponding EC50 at 21 d was 23.7 ng Sn/L (CI: 2.2 – 189.4 ng Sn/L). All eggs produced by parents exposed to 473 ng Sn/L exhibited polyembryony. In contrast, TPT induced no significant effects on the viability of eggs produced by exposed adults at the tested concentration range. 2.4. Discussion 2.4.1. Chronic effects of organotins in L. stagnalis The TBT metabolite concentrations were very low (i.e., below the quantification limit), which suggests that degradation might not be the most significant process contributing to the decrease in TBT concentration in water. Losses were probably mostly due to adsorption in mu"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2889,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "se of energy (stored in lipids etc.) relates to water that will evaporate from bird eggs. Part of this water is formed by the oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes a correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reﬂects the total use of energy E0−Eb. Since, like the energy investment into a single egg E0, the amount of energy at birth Eb = [Em]Vb is also proportional to V4/3, the loss of water must be a ﬁxed proportion of egg volume. Rahn, Ar and Paganelli [578,19] found that it is some 15% of the initial eg"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the 18 snippets directly address the stylized fact that freshly laid eggs/seeds initially consume negligible dioxygen. The overwhelming majority concern dioxin/PCB contamination of chicken eggs, egg disinfection, or egg powder quality—topically about eggs but irrelevant to embryonic respiration onset. Snippet 8 touches on oxygen supply to marine egg masses but concerns diffusion physics in egg masses, not the negligible early respiration of freshly laid eggs. There is no supporting or contradicting evidence in this corpus, so evidence strength is weak and the direction is best classified as insufficient/neutral."
+          },
+          "n_references": 0,
+          "references": {},
+          "snippets": [
+            {
+              "document_id": "W2139031919",
+              "title": "Dioxins in organic eggs: a review",
+              "doi": "https://doi.org/10.1016/s1573-5214(06)80023-0",
+              "year": "2006",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Eggs contribute for about 4% to the daily dioxin intake of humans. Research among layer farms in the Netherlands and other EU countries has shown that organic eggs contain more dioxin than conventional ones and that a significant number of organic farms produce eggs with a dioxin content that exceeds the EU standard. The hens' intake of dioxins from various sources leads to an increase in the dioxin content of organic eggs. These sources include plants, feed, soil, worms and insects, and compared with hens on conventional and free-range farms, organic hens make more use of these sources due to better access to the outdoor run. Plants appear to be relatively unimportant as a source of dioxins"
+            },
+            {
+              "document_id": "W2151704685",
+              "title": "Effect of Flock Size on Dioxin Levels in Eggs from Chickens Kept Outside",
+              "doi": "https://doi.org/10.1093/ps/86.9.2042",
+              "year": "2007",
+              "distance": 0.2354,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "To decrease dioxin uptake by the general population the European Union (EU) has set limits to the dioxin content of many foodstuffs including eggs. Eggs from free foraging chickens are known to have a higher dioxin content compared with confined laying hens, and the question is whether these eggs can adhere to current EU regulations. The aim of the study was to investigate parameters that are involved in the contamination of eggs from chickens raised under organic conditions. Samples from 34 organic farms including soil and earthworm samples were collected between September and December of the year 2003. Dioxin levels were assayed by gas chromatography-mass spectrometry. Various parameters w"
+            },
+            {
+              "document_id": "W2160596515",
+              "title": "Carry-over of dioxins and PCBs from feed and soil to eggs at low contamination levels – influence of mycotoxin binders on the carry-over from feed to eggs",
+              "doi": "https://doi.org/10.1080/02652030500512037",
+              "year": "2006",
+              "distance": 0.2356,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Laying hens were fed with compound feed containing six different levels of dioxins, dioxin-like PCBs and indicator PCBs for a period of 56 days. This was followed by a period of 56 days on clean feed. Dioxin levels in feed varied from background levels to three times the current EU tolerance limit of 0.75 ng TEQ/kg. At all dose levels a rapid increase was observed in the dioxin levels in eggs. There was a clear linear dose-response relationship between the dioxin levels in eggs and feed. The feed containing 0.4 ng TEQ dioxins per kg resulted in egg levels just above the EU limit of 3 pg TEQ/g fat. Dioxin-like and indicator PCB residues followed a pattern very similar to that of dioxins. Expo"
+            },
+            {
+              "document_id": "W3008336639",
+              "title": "Free-range chicken eggs as a bioindicator of dioxin contamination in Vietnam, including long-term Agent Orange impact",
+              "doi": "https://doi.org/10.1016/j.emcon.2020.02.003",
+              "year": "2020",
+              "distance": 0.2441,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "PCDD/Fs contamination of free-range chicken eggs and soils from private Vietnam households was studied. The possibility of using free-range eggs as bio-indicators of dioxin contamination was considered as the soil-chicken-egg exposure pathway is considered to be the most sensitive exposure pathway of dioxins in soils to humans. A large territory from Dong Nai province in the south to Lao Cai province in the north was covered by the research. All analyses were performed by HRGC-HRMS method. PCDD/Fs levels in eggs from the majority of southern households exceeded the EC limit for eggs and egg products (2.5 pg WHO-TEQ2005 g−1 lipid). Total TEQs ranged from 0.4 to 361 pg WHO-TEQ2005 g−1 lipid in"
+            },
+            {
+              "document_id": "W4401510516",
+              "title": "Polychlorinated dibenzo- <i>p</i> -dioxin and dibenzofuran contamination of free-range eggs: estimation of the laying hen’s soil ingestion based on a toxicokinetic model, and human consumption recommendations",
+              "doi": "https://doi.org/10.1080/19440049.2024.2384416",
+              "year": "2024",
+              "distance": 0.2537,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Polychlorinated dibenzo-<i>p</i>-dioxins and dibenzofurans (PCDD/Fs) are ubiquitous in the environment. The main route of human exposure is through food consumption. Soil contamination can be problematic for sanitary safety depending on the usage of the soil, such as farming. In case of environmental soil contamination with PCDD/Fs, hen’s eggs may be contaminated due to soil ingestion by hens. For this reason, it is important to understand the parameters that influence eggs’ contamination when hens are raised in contaminated areas. After the discovery of a contaminated area in Lausanne (Switzerland), we collected hens’ eggs from ten domestic-produced eggs and one farm. Based on PCDD/F measur"
+            },
+            {
+              "document_id": "W2491533279",
+              "title": "23. Dioxins in eggs",
+              "doi": "https://doi.org/10.3920/978-90-8686-804-9_23",
+              "year": "2015",
+              "distance": 0.2542,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Numerous chemicals present in food of animal origin, such as meat, milk, fish, and eggs can affect human health. Ubiquitous dioxins and related compounds are among them. Dioxin contamination of eggs has attracted much attention in recent years. The research papers have shown an increase in the dioxin concentrations of free-range eggs. Hens may be exposed to dioxins from different and often unexpected sources. This article reviews dioxins sources in the environment, direct and indirect transmission pathways to the food chain, possible dioxin sources in hen eggs, the growing health threat from contaminated free-range eggs, and the relationship with food safety and consumer health. The informat"
+            },
+            {
+              "document_id": "W2048100741",
+              "title": "Coexposure of Dioxin-like Polychlorinated Biphenyls and Polychlorinated Dibenzo-<i>p</i>-dioxins and Dibenzofurans in Free-Range Hens and Implications Derived from Congener Profile Analysis",
+              "doi": "https://doi.org/10.1021/jf204468s",
+              "year": "2012",
+              "distance": 0.2589,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The consumption of free-range eggs is becoming more popular worldwide. We analyzed the levels of 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and their congener profiles from 6 free-range and 12 caged egg samples. The mean levels of dl-PCBs in the free-range samples were 5.4 times higher than those in caged eggs. All egg samples exhibited at least two characteristic dl-PCB congener patterns, which reflected distinctive contamination sources. Additionally, for the first time, we demonstrated that the dl-PCB levels in the free-range eggs were highly correlated with elevated levels of 17 polychlorinated dibenzo-p-dioxins and dibenzofurans (PCDD/Fs) (r = 0.986; p < 0.001), indicating a coe"
+            },
+            {
+              "document_id": "W2113190099",
+              "title": "Two Designs of Marine Egg Masses and their Divergent Consequences for Oxygen Supply and Desiccation in Air",
+              "doi": "https://doi.org/10.1093/icb/39.2.253",
+              "year": "1999",
+              "distance": 0.2591,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Two common types of egg masses rely on differing routes of supply of oxygen in water. When embryos are embedded in a gelatinous matrix, oxygen is supplied by diffusion through the gel, and thicker masses require more gel per embryo. When an adherent mass of eggs lacks a gel matrix, oxygen can be provided from water flowing through the open interstices between eggs, and larger eggs provide larger channels and thus less resistance to flow. Both types occur intertidally, where they are periodically exposed to air. Exposure to air can have a greater effect on oxygen supply via interstices than on supply via gel. Oxygen diffusing in interstices drained of water provides increased rates of supply "
+            },
+            {
+              "document_id": "W3209688462",
+              "title": "The influence of different production systems on dioxin and PCB levels in chicken eggs from Emilia-Romagna and Lombardy regions (Italy) over 2017–2019 and consequent dietary exposure assessment",
+              "doi": "https://doi.org/10.1080/19440049.2021.1991003",
+              "year": "2021",
+              "distance": 0.2599,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Hen eggs from farms with different production systems (organic, free range, barn, and in cage) sited in two regions of Italy (Emilia-Romagna and Lombardy) were collected from 2017 to 2019 to monitor the levels of 17 polychlorinated dibenzo-<i>p</i>-dioxin/dibenzofurans (PCDD/Fs), 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and the 6 non-dioxin-like polychlorinated biphenyl indicators (ndl-PCBs). Average concentrations of PCDD/Fs (0.21 pg WHO<sub>(2005)</sub>-TEQ/g fat), PCDD/Fs + dl-PCBs (0.43 pg WHO<sub>(2005)</sub>-TEQ/g fat) and ndl-PCBs (6.41 ng/g fat) were below the maximum limits established at European level in eggs, but significantly higher amounts of PCDD/Fs and PCDD/Fs + dl-"
+            },
+            {
+              "document_id": "W2902585309",
+              "title": "Contaminants in eggs: dioxins/PCBs and other toxic substances and their possible health implications",
+              "doi": "https://doi.org/10.3920/978-90-8686-877-3_17",
+              "year": "2018",
+              "distance": 0.2623,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Table eggs belong to the one of most important components of our daily diet, being a natural source of vitamins and proteins but unfortunately also of chemical contaminants. Free range poultry, as well as other animals, are very good bioindicators of environmental contamination. Together with the feed and soil, laying hens pick up different pollutants and store them in their tissues and organs. These accumulating toxic substances are also excreted into birds' eggs. Therefore egg consumers may constitute a group at risk because intake of contaminants may exceed toxicological reference values, set to protect their health. Thus this chapter focusses primarily on sources and toxicity of dioxins "
+            },
+            {
+              "document_id": "W2563833612",
+              "title": "Dioxins, furans, and polychlorinated biphenyls in hen eggs – a new source of hazard for consumers?",
+              "doi": "https://doi.org/10.1515/bvip-2015-0078",
+              "year": "2015",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract The paper presents the results of testing eggs for the content of dioxins and polychlorinated biphenyls (PCBs), determination of the sources that caused the presence of high concentrations of these compounds which exceeded the acceptable contamination levels, and assessment of consumer health risk caused by the consumption of eggs with excessive contents of investigated compounds. In about 9% of free range eggs and 17% of organic eggs, the content of PCDD/Fs was two- or threefold higher than the acceptable limits, and in some samples the concentration of investigated compounds exceeded the maximum concentration levels. Based on the profile of the compounds, it was confirmed in sever"
+            },
+            {
+              "document_id": "W1979513688",
+              "title": "Exposure to 3,3′,4,4′,5-pentachlorobiphenyl during embryonic development has a minimal effect on the cytochrome P4501A response to 2,3,7,8-tetrachlorodibenzo-<i>P</i>-dioxin in cultured chicken embryo hepatocytes",
+              "doi": "https://doi.org/10.1897/05-520r.1",
+              "year": "2006",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Concentrations of dioxin-like compounds in avian eggs can vary substantially between individuals, species, and collection sites. Although the inducibility of cytochrome P4501A (CYP1A) in hepatocyte cultures is commonly used to predict species sensitivity to environmental contaminants, it is not known how exposure to dioxin-like compounds during embryonic development might alter this biomarker response. To investigate this question, we injected vehicle or 0.4, 0.8, or 1.6 μg/kg of 3,3ǐ,4,4ǐ,5-pentachlorobiphenyl (PCB 126) into the air cell of fertilized chicken eggs before incubation, and we measured CYP1A endpoints in cultured hepatocytes of day-19 embryos from each treatment group."
+            },
+            {
+              "document_id": "W1613867128",
+              "title": "Contaminants in eggs: effects of feed and environment",
+              "doi": "https://doi.org/10.13140/2.1.4580.7049",
+              "year": "2007",
+              "distance": 0.2637,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Introduction Chlorinated pesticides and (halogenated) environmental contaminants can enter laying hens in a variety of ways. The most important way is via the feed (including soil intake). However, direct application on the animal and contact with the skin as well as inhalation via the airways should not be ruled out. Most components of animal feed are digested and absorbed during passage trough the intestinal tract. Digestion and absorption of nutritive components have been extensively studied. In contrast, digestion and absorption of unwanted substances like dioxins, pesticides, heavy metals, drugs and polycyclic hydrocarbons is often not considered. Yet, they are often analyzed both in fe"
+            },
+            {
+              "document_id": "W1977305488",
+              "title": "Bactericidal Activity, Eggshell Conductance, and Hatchability Effects of Ozone Versus Formaldehyde Disinfection ,",
+              "doi": "https://doi.org/10.3382/ps.0681074",
+              "year": "1989",
+              "distance": 0.2638,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Ozone and formaldehyde were evaluated as disinfectants in a prototype laboratory setter against microorganisms that are naturally present on fertile, freshly laid, broiler hatching eggs. Significantly lower microbial counts of over 2.5 log10 (P less than .05) were observed for water-misted and ozonated (2.83% by weight) eggs or formaldehyde-fumigated (triple strength) eggs than for control and water-misted eggs. Eggshell conductance studies as measured by egg moisture losses in a desiccator showed no significant differences (P greater than .05) among untreated, water misted, ozonated (3.06% by weight) with water mist, or formaldehyde (triple strength)-fumigated eggs. Hatchability was signifi"
+            },
+            {
+              "document_id": "W2143487462",
+              "title": "DRIED WHOLE EGG POWDER: V. DEFINITION AND PROPERTIES OF LOW GRADE EGG POWDERS",
+              "doi": "https://doi.org/10.1139/cjr43d-020",
+              "year": "1943",
+              "distance": 0.2647,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The point at which 50% of tasters regarded dried whole egg preparations as unsuitable for human consumption coincided with a rating of 2.7 on a scale ranging from 10 for excellent, fresh egg to 0 for repulsive material. The protein fraction of these low grade samples had deteriorated badly, as shown by fluorescence measurements. The fat fraction showed no evidence of peroxide oxygen formation."
+            },
+            {
+              "document_id": "W2017928777",
+              "title": "A toxicokinetic model for the carry-over of dioxins and PCBs from feed and soil to eggs",
+              "doi": "https://doi.org/10.1080/02652030500512045",
+              "year": "2006",
+              "distance": 0.2648,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "A mathematical model for the kinetics of carry-over of dioxins and dioxin-like PCBs from feed mixed with contaminated oil to eggs has been developed. This model incorporates uptake of the compounds over the gut wall and their subsequent transport by blood, distribution over the body, hepatic metabolism and excretion through egg yolk fat. The model is analysed with respect to the possibility of identifying as yet unknown model parameters by fitting these to the experimental data. The model was fitted to the experimental data on the carry-over from feed to eggs. The calibrated model was applied to calculate the steady-state concentrations in eggs which were compared to European Maximum Residue"
+            },
+            {
+              "document_id": "W2122025963",
+              "title": "Contamination of free‐range chicken eggs with dioxins and dioxin‐like polychlorinated biphenyls",
+              "doi": "https://doi.org/10.1002/mnfr.200500201",
+              "year": "2006",
+              "distance": 0.2651,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Dioxins and dioxin‐like (DL) polychlorinated biphenyls (PCB) are persistent organic pollutants that enter the body mainly by food intake. A small margin exists between current exposure levels in the human population and the levels causing biological effects. Therefore, stringent control of concentrations of these contaminants in food and feed is needed. Eggs from free‐range chicken are increasingly becoming an important part of the diet. These eggs have a higher risk of being contaminated with increased levels of dioxins and DL‐PCB than barn or cage eggs. Ingestion of soil particles from environmentally contaminated areas may contribute to elevated dioxin levels in free‐range chicke"
+            },
+            {
+              "document_id": "W2114267651",
+              "title": "Ability of Hydrogen Peroxide and Timsen to Eliminate Artificially Inoculated Salmonella from Fertile Broiler Eggs",
+              "doi": "https://doi.org/10.1093/japr/11.3.266",
+              "year": "2002",
+              "distance": 0.2655,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Varying levels (105 to 107/egg) of Salmonella Typhimurium were inoculated onto fertile hatching eggs by immersion. After this, the inoculated eggs were untreated (control), water treated, hydrogen peroxide (1.5%) treated, or Timsen treated (n-alkyl dimethyl benzyl ammonium chloride as a commercial bactericide-fungicide). Hydrogen peroxide was superior to Timsen as an egg treatment to eliminate artificially inoculated Salmonella from fertile eggs, but one-third of the treated eggs remained Salmonella positive. This study demonstrates how difficult it is to eliminate Salmonella that contaminate fertile hatching eggs. Until a more effective system or process is devised and commercially implemen"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple DEB sources directly state the stylized fact: snippet [2] ('Initially, eggs hardly use dioxygen'), [3] explicitly lists it as fact O1 ('Animal eggs and plant seeds initially hardly use dioxygen'), and [9] ('freshly laid eggs do not use dioxygen in significant amounts'). Snippets [6] and [7] support this via the DEB rationale that fresh eggs are reserve-only and pay no maintenance. Snippet [12] supports the seed-equivalence and resting-stage aspect. Only [10] presents some tension, noting measurable oxygen consumption in unfertilized eggs of some species, but this concerns unfertilized rather than freshly laid fertilized eggs and does not strongly contradict the qualitative 'negligible initially' claim. The remaining snippets (dioxin contamination of chicken eggs, etc.) are off-topic. Overall the corpus strongly corroborates the stylized fact."
+          },
+          "n_references": 7,
+          "references": {
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2247
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2255
+            },
+            "3582": {
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2436
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2536
+            },
+            "2903": {
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2581
+            },
+            "2710": {
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.264
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2702
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2222,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2247,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2255,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2436,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "er than strictly necessary. The levelling of dioxygen consumption prior to hatching also occurs in very dif- ferent species that do not have an egg shell (Kooijman, 1986b), and therefore cannot be caused by the limiting O2 flux. DEB theory takes this as a result of depleting reserve, which not only causes a levelling of, but even a decline of dioxygen use prior to hatching, as is really clear in eggs of the pig-­nosed turtle, Carettochelys insculpta, and the Australian freshwater crocodile, Crocodylus johnsoni (Zonneveld & Kooijman, 1993), where embryos delay hatching by waiting for their nest mates to be ready for synchronous hatching. Coherence and consistency are crucial conditions for co"
+            },
+            {
+              "document_id": "3582",
+              "title": "Marn and Kooijman - 2022 - The comparative energetics of the turtles and croc.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2498,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "abil- ity or toxicity of accumulated nitrogen waste limit embryo size, we do not imply that the embryo actually experiences such limitation or toxic effects, only that egg size is such that these problems are avoided. The large literature on bird egg development stresses the role of O2 limitation (Hoyt & Rahn, 1980; Tazawa et al., 1983; Visschedijk, 1968; Visschedijk & Rahn, 1983). The authors point that the maximum flux through the pores is egg-­size independent, from hummingbird to ostrich, and point to the levelling of dioxygen consumption prior to pipping. This implies that O2 is actually limited. If true, we disagree with this view. The constancy of maximum dioxygen flux through the por"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2536,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "g regulating mechanisms and concentration gradients and de- fense systems. The need to allocate energy to maturity maintenance is intimately related with the second law of thermodynamics (P2): the level of maturity would decrease in the absence of energy spent in its maintenance because the higher the level of maturity the further away is the system from equilibrium. Empirical evidence (R1) shows that freshly laid eggs do not require maintenance be- cause aerobic organisms use dioxygen in chemical reactions that yield energy. Thus, 1) freshly laid eggs do not have structure and 2) reserve does not require maintenance. Re- serves can have active metabolic functions but do not require maintena"
+            },
+            {
+              "document_id": "2903",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2581,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "us, there are metabolic processes occurring during the embryo stage that are not present at the beg- gining (fresh laid egg). The energy used in all metabolic processes comes from reserves (As- sumption 3.4) implying that eggs must have reserve. However, reserve is not produced during the embryo stage because the organism does not feed (Assumptions 3.2 and 3.4), i.,e., freshly laid eggs must have reserve. Also, freshly laid eggs can not have a signiﬁcant amount of structure because they do not pay maintenance (Assumption 3.5). Thus, freshly laid eggs are composed of reserve only. Proof. (Proposition 3.9) The z + 2 stoichiometric coefﬁcients a1 to az, b1 and b2 of the assimilation process (Eq"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2598,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2609,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "2710",
+              "title": "MainPirt2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.264,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "Borei 1948) and meiotic growth is halted (Went 1982). Depending on the species, ripe eggs may remain viable in this state for several days (Whitaker 1931; Holcomb et al. 2004) and, although meiotically halted, may be far from inactive. Measurable oxygen consumption rates have been observed in unfertilized eggs for a variety of species (Whi- taker 1931; Borei 1948; Horwitz 1965; Tyler, Tyler & Piatigorsky 1968; Davenport & Lonnig 1980) and may indicate the generation of energy through the Krebs Cycle. Unfertilized eggs contain all the necessary components of protein synthesis, including mRNAs (Tyler 1963; Tyler et al. 1968) and evidence of protein synthesis has been demonstrated in ripe, unfe"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2702,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "e oxidation of energy-rich compounds, and part of it consists of the watery matrix in which the compounds are embedded for the purpose of giving enzymes the correct environment and for transport of the products. The total loss of water during the incubation period, therefore, reﬂects the total use of energy E0−Eb. Since, like the energy investment in a single egg E0, the amount of energy at birth Eb = [Em]Vb is also proportional to V4/3, the loss of water must be a ﬁxed proportion of egg volume. Rahn, Ar and Paganelli [26,745] found that it is some 15% of the initial egg weight. If the use of energy relates to water loss directly, one would expect the initial loss rate to be small and build "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2769,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "lls of bird eggs initially produce a little carbon dioxide [125, 468].) In many species, this is a resting stage. This especially holds for plants, where seeds are equivalent to eggs; seeds can be dormant for many years and the number of dormant seeds greatly exceeds the number of non-dormant individuals [461]. Many seeds (particularly berries) require to be treated by the digestive juices of a particular animal species for germination; others need fire, see {412}. Although the seed or egg exchanges gas and water with the environment, it is otherwise a rather closed system. Foetal development represents a variation on embryo development, where the mother [Page 22] 1.1. Individuals as dynamic"
+            },
+            {
+              "document_id": "W2139031919",
+              "title": "Dioxins in organic eggs: a review",
+              "doi": "https://doi.org/10.1016/s1573-5214(06)80023-0",
+              "year": "2006",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Eggs contribute for about 4% to the daily dioxin intake of humans. Research among layer farms in the Netherlands and other EU countries has shown that organic eggs contain more dioxin than conventional ones and that a significant number of organic farms produce eggs with a dioxin content that exceeds the EU standard. The hens' intake of dioxins from various sources leads to an increase in the dioxin content of organic eggs. These sources include plants, feed, soil, worms and insects, and compared with hens on conventional and free-range farms, organic hens make more use of these sources due to better access to the outdoor run. Plants appear to be relatively unimportant as a source of dioxins"
+            },
+            {
+              "document_id": "W2151704685",
+              "title": "Effect of Flock Size on Dioxin Levels in Eggs from Chickens Kept Outside",
+              "doi": "https://doi.org/10.1093/ps/86.9.2042",
+              "year": "2007",
+              "distance": 0.2354,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "To decrease dioxin uptake by the general population the European Union (EU) has set limits to the dioxin content of many foodstuffs including eggs. Eggs from free foraging chickens are known to have a higher dioxin content compared with confined laying hens, and the question is whether these eggs can adhere to current EU regulations. The aim of the study was to investigate parameters that are involved in the contamination of eggs from chickens raised under organic conditions. Samples from 34 organic farms including soil and earthworm samples were collected between September and December of the year 2003. Dioxin levels were assayed by gas chromatography-mass spectrometry. Various parameters w"
+            },
+            {
+              "document_id": "W2160596515",
+              "title": "Carry-over of dioxins and PCBs from feed and soil to eggs at low contamination levels – influence of mycotoxin binders on the carry-over from feed to eggs",
+              "doi": "https://doi.org/10.1080/02652030500512037",
+              "year": "2006",
+              "distance": 0.2356,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Laying hens were fed with compound feed containing six different levels of dioxins, dioxin-like PCBs and indicator PCBs for a period of 56 days. This was followed by a period of 56 days on clean feed. Dioxin levels in feed varied from background levels to three times the current EU tolerance limit of 0.75 ng TEQ/kg. At all dose levels a rapid increase was observed in the dioxin levels in eggs. There was a clear linear dose-response relationship between the dioxin levels in eggs and feed. The feed containing 0.4 ng TEQ dioxins per kg resulted in egg levels just above the EU limit of 3 pg TEQ/g fat. Dioxin-like and indicator PCB residues followed a pattern very similar to that of dioxins. Expo"
+            },
+            {
+              "document_id": "W3008336639",
+              "title": "Free-range chicken eggs as a bioindicator of dioxin contamination in Vietnam, including long-term Agent Orange impact",
+              "doi": "https://doi.org/10.1016/j.emcon.2020.02.003",
+              "year": "2020",
+              "distance": 0.2441,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "PCDD/Fs contamination of free-range chicken eggs and soils from private Vietnam households was studied. The possibility of using free-range eggs as bio-indicators of dioxin contamination was considered as the soil-chicken-egg exposure pathway is considered to be the most sensitive exposure pathway of dioxins in soils to humans. A large territory from Dong Nai province in the south to Lao Cai province in the north was covered by the research. All analyses were performed by HRGC-HRMS method. PCDD/Fs levels in eggs from the majority of southern households exceeded the EC limit for eggs and egg products (2.5 pg WHO-TEQ2005 g−1 lipid). Total TEQs ranged from 0.4 to 361 pg WHO-TEQ2005 g−1 lipid in"
+            },
+            {
+              "document_id": "W4401510516",
+              "title": "Polychlorinated dibenzo- <i>p</i> -dioxin and dibenzofuran contamination of free-range eggs: estimation of the laying hen’s soil ingestion based on a toxicokinetic model, and human consumption recommendations",
+              "doi": "https://doi.org/10.1080/19440049.2024.2384416",
+              "year": "2024",
+              "distance": 0.2537,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Polychlorinated dibenzo-<i>p</i>-dioxins and dibenzofurans (PCDD/Fs) are ubiquitous in the environment. The main route of human exposure is through food consumption. Soil contamination can be problematic for sanitary safety depending on the usage of the soil, such as farming. In case of environmental soil contamination with PCDD/Fs, hen’s eggs may be contaminated due to soil ingestion by hens. For this reason, it is important to understand the parameters that influence eggs’ contamination when hens are raised in contaminated areas. After the discovery of a contaminated area in Lausanne (Switzerland), we collected hens’ eggs from ten domestic-produced eggs and one farm. Based on PCDD/F measur"
+            },
+            {
+              "document_id": "W2491533279",
+              "title": "23. Dioxins in eggs",
+              "doi": "https://doi.org/10.3920/978-90-8686-804-9_23",
+              "year": "2015",
+              "distance": 0.2542,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Numerous chemicals present in food of animal origin, such as meat, milk, fish, and eggs can affect human health. Ubiquitous dioxins and related compounds are among them. Dioxin contamination of eggs has attracted much attention in recent years. The research papers have shown an increase in the dioxin concentrations of free-range eggs. Hens may be exposed to dioxins from different and often unexpected sources. This article reviews dioxins sources in the environment, direct and indirect transmission pathways to the food chain, possible dioxin sources in hen eggs, the growing health threat from contaminated free-range eggs, and the relationship with food safety and consumer health. The informat"
+            },
+            {
+              "document_id": "W2048100741",
+              "title": "Coexposure of Dioxin-like Polychlorinated Biphenyls and Polychlorinated Dibenzo-<i>p</i>-dioxins and Dibenzofurans in Free-Range Hens and Implications Derived from Congener Profile Analysis",
+              "doi": "https://doi.org/10.1021/jf204468s",
+              "year": "2012",
+              "distance": 0.2589,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The consumption of free-range eggs is becoming more popular worldwide. We analyzed the levels of 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and their congener profiles from 6 free-range and 12 caged egg samples. The mean levels of dl-PCBs in the free-range samples were 5.4 times higher than those in caged eggs. All egg samples exhibited at least two characteristic dl-PCB congener patterns, which reflected distinctive contamination sources. Additionally, for the first time, we demonstrated that the dl-PCB levels in the free-range eggs were highly correlated with elevated levels of 17 polychlorinated dibenzo-p-dioxins and dibenzofurans (PCDD/Fs) (r = 0.986; p < 0.001), indicating a coe"
+            },
+            {
+              "document_id": "W2113190099",
+              "title": "Two Designs of Marine Egg Masses and their Divergent Consequences for Oxygen Supply and Desiccation in Air",
+              "doi": "https://doi.org/10.1093/icb/39.2.253",
+              "year": "1999",
+              "distance": 0.2591,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Two common types of egg masses rely on differing routes of supply of oxygen in water. When embryos are embedded in a gelatinous matrix, oxygen is supplied by diffusion through the gel, and thicker masses require more gel per embryo. When an adherent mass of eggs lacks a gel matrix, oxygen can be provided from water flowing through the open interstices between eggs, and larger eggs provide larger channels and thus less resistance to flow. Both types occur intertidally, where they are periodically exposed to air. Exposure to air can have a greater effect on oxygen supply via interstices than on supply via gel. Oxygen diffusing in interstices drained of water provides increased rates of supply "
+            },
+            {
+              "document_id": "W3209688462",
+              "title": "The influence of different production systems on dioxin and PCB levels in chicken eggs from Emilia-Romagna and Lombardy regions (Italy) over 2017–2019 and consequent dietary exposure assessment",
+              "doi": "https://doi.org/10.1080/19440049.2021.1991003",
+              "year": "2021",
+              "distance": 0.2599,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Hen eggs from farms with different production systems (organic, free range, barn, and in cage) sited in two regions of Italy (Emilia-Romagna and Lombardy) were collected from 2017 to 2019 to monitor the levels of 17 polychlorinated dibenzo-<i>p</i>-dioxin/dibenzofurans (PCDD/Fs), 12 dioxin-like polychlorinated biphenyls (dl-PCBs) and the 6 non-dioxin-like polychlorinated biphenyl indicators (ndl-PCBs). Average concentrations of PCDD/Fs (0.21 pg WHO<sub>(2005)</sub>-TEQ/g fat), PCDD/Fs + dl-PCBs (0.43 pg WHO<sub>(2005)</sub>-TEQ/g fat) and ndl-PCBs (6.41 ng/g fat) were below the maximum limits established at European level in eggs, but significantly higher amounts of PCDD/Fs and PCDD/Fs + dl-"
+            },
+            {
+              "document_id": "W2902585309",
+              "title": "Contaminants in eggs: dioxins/PCBs and other toxic substances and their possible health implications",
+              "doi": "https://doi.org/10.3920/978-90-8686-877-3_17",
+              "year": "2018",
+              "distance": 0.2623,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Table eggs belong to the one of most important components of our daily diet, being a natural source of vitamins and proteins but unfortunately also of chemical contaminants. Free range poultry, as well as other animals, are very good bioindicators of environmental contamination. Together with the feed and soil, laying hens pick up different pollutants and store them in their tissues and organs. These accumulating toxic substances are also excreted into birds' eggs. Therefore egg consumers may constitute a group at risk because intake of contaminants may exceed toxicological reference values, set to protect their health. Thus this chapter focusses primarily on sources and toxicity of dioxins "
+            },
+            {
+              "document_id": "W2563833612",
+              "title": "Dioxins, furans, and polychlorinated biphenyls in hen eggs – a new source of hazard for consumers?",
+              "doi": "https://doi.org/10.1515/bvip-2015-0078",
+              "year": "2015",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract The paper presents the results of testing eggs for the content of dioxins and polychlorinated biphenyls (PCBs), determination of the sources that caused the presence of high concentrations of these compounds which exceeded the acceptable contamination levels, and assessment of consumer health risk caused by the consumption of eggs with excessive contents of investigated compounds. In about 9% of free range eggs and 17% of organic eggs, the content of PCDD/Fs was two- or threefold higher than the acceptable limits, and in some samples the concentration of investigated compounds exceeded the maximum concentration levels. Based on the profile of the compounds, it was confirmed in sever"
+            },
+            {
+              "document_id": "W1979513688",
+              "title": "Exposure to 3,3′,4,4′,5-pentachlorobiphenyl during embryonic development has a minimal effect on the cytochrome P4501A response to 2,3,7,8-tetrachlorodibenzo-<i>P</i>-dioxin in cultured chicken embryo hepatocytes",
+              "doi": "https://doi.org/10.1897/05-520r.1",
+              "year": "2006",
+              "distance": 0.2631,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Concentrations of dioxin-like compounds in avian eggs can vary substantially between individuals, species, and collection sites. Although the inducibility of cytochrome P4501A (CYP1A) in hepatocyte cultures is commonly used to predict species sensitivity to environmental contaminants, it is not known how exposure to dioxin-like compounds during embryonic development might alter this biomarker response. To investigate this question, we injected vehicle or 0.4, 0.8, or 1.6 μg/kg of 3,3ǐ,4,4ǐ,5-pentachlorobiphenyl (PCB 126) into the air cell of fertilized chicken eggs before incubation, and we measured CYP1A endpoints in cultured hepatocytes of day-19 embryos from each treatment group."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

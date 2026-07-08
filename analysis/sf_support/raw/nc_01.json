@@ -1,0 +1,723 @@
+{
+  "sf_id": "nc_01",
+  "category": "N:C ratio",
+  "statement": "N:C increases with dilution rate in nutrient limiting conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Direct support comes primarily from a single source (LoreMarq2010.pdf): snippet [1] explicitly states and explains that N:C increases with dilution rate under nutrient (nitrogen) limiting conditions, mechanistically attributing it to increased N-reserve density and decreased C-reserve density, while snippet [2] frames this as the modeled stylized fact (SF1) and snippet [13] lists it formally as a stylized fact (SF1). Snippet [3] is the complementary light/carbon-limited case (N:C decreases) and does not contradict the nutrient-limited claim. The remaining snippets concern related DEB/quota modeling, uptake kinetics, or other ratios (C:N seasonal, PER, N:P) without bearing directly on the dilution-rate dependence under nutrient limitation. Thus the fact is clearly corroborated with no conflicting evidence, but the supporting evidence derives essentially from one paper, so overall strength is moderate."
+      },
+      "n_references": 1,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2401127815246582
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2401,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "nsities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282limiting (in this case nitrogen limiting) conditions, as predicted by SF1. This happens not only 283because of the increase of N-reserve density (which obviously is needed to support higher 284speciﬁc growth rates) but also because C-reserve density decreases. The ﬁrst point is simply 285due to the increase of nitrogen source concentration and the consequent increase of _|ENA. 286Furthermore, higher dilution rates reduce the rejected ﬂux for the non-limiting reserve – in this 287"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2559,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2968,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "ases with dilution rate. 307Due to the increase in C-reserve density and the decrease in N-reserve density, it is clear that 308the N:C ratio decreases with dilution rate in light or carbon limiting conditions. However, it must 309be noted that the N:C values for this simulation are outside the typical range of values due 310to the excessive accumulation of nitrogen. This suggests that either the fraction of rejection 311ﬂux incorporated in N-reserve \u0014ENis too high or that there are other relevant processes not 312considered in the proposed model (e.g. energy costs for nitrogen assimilation). 313"
+        },
+        {
+          "document_id": "69b8a45becbd4702b29a7749",
+          "title": "Eich2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3086,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "comparison with batch or chem ostat data (Martinussen & Thingstad 1987). In these studies, this model has been used to describe limitation by nitrogen (N), phosphor (P) or carbon (C). This allows flexibility in biomass composition in term of C, N and P, where as Monod model assumes constant composition. In this kind of model , growth depends on a surplus pool of nutrients inside the cell, named ce ll quota, and not on the outside concentration of limiting nutrient directly as in Monod model. The growth rate is controlled only by the cell quota (C , N or P) which is closest to"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3126,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "on the dilution rate:[N.l] [GN]DnN D. (3)3.1. Carbon in nitrogen -limited phytoplanktonIn a previous paper (Zonneveld, 1996), Ishowed that the uptake capacity (i.e. the uptakerate given saturating conditions of the nutrient inthe environment) for a non-limiting nutrient canbe considered to depend on the density of thetransient pool of the limiting nutrient. A similarapproach is followed by Geider et al. (1998). Theprecise form of this dependence may differ be-tween species and the nutrients considered. I herepostulate three basic patterns, see Fig. 2."
+        },
+        {
+          "document_id": "69b870afecbd4702b29a3697",
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.315,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "poses, so that in sim-ulations where χNexceeds χNmaxthe state variable values will returnmore swiftly to the allowable interval.Understanding that in Eq. (34) νNaccounts for the uptake or assim-ilation of the nutrient and −r/C15ξNis the dilution by growth term, noticethat the term −r/C15nNVaccounts for the transfer of nutrients from reserveto structure X V.S i n c e r/C15¼g/C15V−g/C15Mone can conclude that g/C15Vis simply theuse of nutrient to produce X Vandg/C15Mis the return of nutrients from X Vdue the payment of maintenance that uses only the carbon componentof structure. The fact that the term uses nNVmeans that there are no"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3226,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "anisms ’ metabolic processes adjust throughout the year, storing or using carbon and nitrogen based on what is available in the environme nt. The high C :N ratio in late summer suggests that, by this time, the plant has maximized its carbon reserves in response to reduced nitrogen and high light availability , reflecting a strategy to manage nutrient scarcity. This internal adjustment process emphasizes the crucial link between external nutrient availability and the internal biochemical balance of the organism. Figure 4.6. Individual model output. Whole plant molar C:N ratio for the entire"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3298,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "r bothscenarios suggest that PER remains constant at around 8 %during the nutrient-replete period (Fig. 4d, solid lines). Duringthe intermediate phase, PER rapidly increases (Fig. 4d, dash-dot lines) to reach its maximum value within the nutrient-limited 20phase (53 %in the N-limited scenario, 64.5 %P-limited scenario) (Fig. 4d, asterisks). Comparing the two scenarios, in theintermediate phase and early nutrient-limited phase, PER is higher in the N-limited scenario, while, overall, the highest PER isobserved in the late nutrient-limited phase in the P-limited scenario (Fig. 4d)."
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3307,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "g the N-replete phase DOC is almost entirelycomprised by DOC L(mean value throughout the N-replete phase: 99%, Fig. 2.4 b, solid31Figure 2.3: Structural mass-speciﬁc rates. (a) Net speciﬁc growth rate, (b) speciﬁc primaryproduction (PP) rate, (c) speciﬁc DOC release rate and (d) Percentage Extracellular Release(PER). Vertical dotted line marks the two phases of nutrient availability (N-replete, N-limited).line). As nutrient limitation progresses, the fraction of DOC H(Fig. 2.4 b, dashed line),progressively increases, as a result of the increased relative importance of the jDOC;Rﬂux"
+        },
+        {
+          "document_id": "69b86617ecbd4702b29a29e7",
+          "title": "Voor2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3309,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "the dilution (ﬂow-through) rate D, the fraction of thevolume replaced per unit of time, and the nutrient density Nrin the inﬂow.The inﬂux of nutrient, DNr, the outﬂow of nutrient, DN, and the outﬂow ofthe population, DR, are the terms that model the interaction of the populationwith the environment.The consumption of the nutrient by the population is modelle d with aHolling type II functional response (Holling, 1959), that i ncludes the maximumingestion rate INR, the maximum growth rate θNR(the ratio of the growthrate and ingestion rate is called the assimilation eﬃciency in ecology or yield"
+        },
+        {
+          "document_id": "69b89963ecbd4702b29a6a17",
+          "title": "Peac2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3317,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "ombines the Droop equation andLiebig's law of the minimum into an expression for growth rate,\u0016i=\u0016maxi\u00141\u0000maxj\u0012Qminj;iQj;i\u0013\u0015(2.19)for species i=B, Z and nutrient j=N,P,C. Here Qj;irepresents the quota (cellularnutrient content) of nutrient j in species i. Qminj;iis the minimum quota for reproduction(Droop (1974)). \u0016maxiis the apparent maximal growth rate achieved asymptotically foran in nite quota. Producer nutrient uptake ( Vj;B) follows Michaelis-Menten kineticsand decreases linearly with quota,Vj;B=Vmaxj;B\u0012[j]Kj;B+ [j]\u0013 Qmaxj;B\u0000Qj;BQmaxj;B\u0000Qminj;B!(2.20)for j=N,P,C. Here Vmax"
+        },
+        {
+          "document_id": "69b870afecbd4702b29a3697",
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3332,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "epends on the af ﬁnity ( κN)given by:νextN¼κNN½/C138: ð13ÞNote that Nis the generic designation for the nutrients, which in thiscase can be nitrogen or phosphate, and [ N] represents the concentrationof nutrient. Finally, the realized uptake is the minimum of the internaland external uptake rates multiplied by the carbon quota concentration:νN¼min νintN;νextN/C16/C17: ð14ÞThe equation de ﬁnes the realized or effective uptake,νN, as the minimum of available nutrient, νNext(supply-driven), and theamount needed for achieving maximum nutrient quota, νNint(demand-driven). During dark periods the respiration may cause the realized up-"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3364,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3365,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "r nutrient xis limiting ( l) or not ( n).The aggregate assimilation capacity for carbon in nitrogen-limited growth is the sum ofthree different uptake capacities, each of which may be indicated by its own superscript.These three uptake capacities are either independent of the nitrogen density (superscript 0),proportional to the nitrogen density (superscript p), or proportional to the speciﬁc growthrate, which implies hyperbolically dependent on the nitrogen density (superscript h).Maintenance costs (pg carbon per mm3per day) [MC]XN Nitrogen concentration in the environment (molar)"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3375,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "to bemN/p131VddtV nN[Nl][GN]\u001b[Nl]. (2)At steady-state in a chemostat, the speciﬁcgrowth rate mequals the dilution rate, D. Com-bined with Eq. (2) this yields an expression for thedensity of the transient nutrient pool in steady-state, as dependent on the dilution rate:[N.l] [GN]DnN D. (3)3.1. Carbon in nitrogen -limited phytoplanktonIn a previous paper (Zonneveld, 1996), I"
+        },
+        {
+          "document_id": "69b88f39ecbd4702b29a5eb2",
+          "title": "AndeBoer2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3385,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "sence of K* K*NCexcess C in the diet. Carbon will limit growth if thesupply of C (uf) relative to demand ( uZ/ ) is less thanK*Cthat of N (supply 1, demand 1/ ), i.e., uf,uZ, K*K*K*NC Notherwise N limits. A threshold elemental ratio, de- u*f®nes the transition point between the two modes oflimitation:K*uNZu*5. (1)fK*CRealized GGEs for C and N, depending on mode oflimitation, are thenC limitation: K5K*K5K*(u/u) (2)CC NC f ZN limitation: K5K*K5K*(u/u). (3)NN CN Z fIf, when limiting, assimilated (non-egested) C can po-"
+        },
+        {
+          "document_id": "69b847baec32c55db5430a17",
+          "title": "KooyGras2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3403,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "al Biosciences 210 (2007) 378–394 381for a total constant amount of nutrient Nin the system, while the amounts of producers Pandconsumers Ccan change in time. The chemical indices nNPandnNCstand for producers’ and con-sumers’ nutrient content per carbon and are constant as well. This means that P(t)2(0,N/nNP)andC(t)2[0,N/nNC).Following [16], the change in the amounts of producers P(t) and consumers C(t) is given byddtP¼ _rPP/C0jPCwith _rP¼_kNmNyNPþmNand jP¼jPmPKþPð2ÞddtC¼ð _rC/C0 _hCÞCwith _rC¼ð _r/C01CPþ _r/C01CN/C0ð _rCPþ _rCNÞ/C01Þ/C01ð3Þ_rCP¼yCPjPand _rCN¼yCNmNjP"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3408,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "he P-limited scenario, where C:P and N:P ratios increase. At the onset of the intermediate phase and the depletion of nutrients,C:N ratio rapidly deviates to reach its maximum at the end of the intermediate phase, while C:P ratio has a rapid increase inthe P-limited scenario, but no considerable deviation in the N-limited scenario. C:N and C:P ratios reach their highest value inthe N-limited and P-limited scenarios, respectively. In addition, the biomass N:P ratio during the nutrient-limited phase has anoverall maximum value in the P-limited scenario and an overall minimum value in the N-limited scenario. The variations of 25"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the snippets directly address the relationship between N:C ratio and dilution rate under nutrient-limiting (chemostat-type) conditions, which is the core of the stylized fact. The corpus is dominated by plant/soil nitrogen fertilization studies, stoichiometry in invertebrates, dinoflagellate feeding, and litter decomposition—topically adjacent to elemental stoichiometry but not bearing on the specific dilution-rate dependence. Snippet 12 touches on steady-state growth rate and C:N partitioning but in soybean somatic embryos, not in the chemostat dilution-rate framing, and does not confirm an increasing N:C with growth/dilution rate. No snippet provides direct supporting or contradicting evidence, so the evidence is weak/sparse and the direction is insufficiently determined."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W4285677734",
+          "title": "Kinetics of nitrogen in sodic soil of Kumulur village, Trichy District, Tamil Nadu under different organic and inorganic amendments",
+          "doi": "10.31018/jans.v14isi.3572",
+          "year": "2022",
+          "distance": 0.366,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d along with amendments, a significant (CD-0.05%) buildup in available N contents was observed over the application of N alone. Available nitrogen (325 kg ha-1), nitrate nitrogen (102 kg ha-1) and ammonical nitrogen (205 kg ha-1) were significantly increased due to the addition of amendments. However, the decline in available N with incubation period was only marginal when nitrogen was applied along with amendments. An increase in NH4-N at 30 DAI might be due to the release of nutrients."
+        },
+        {
+          "document_id": "W2003789116",
+          "title": "Stoichiometric mismatch between littoral invertebrates and their periphyton food",
+          "doi": "10.1127/0003-9136/2006/0165-0145",
+          "year": "2006",
+          "distance": 0.3734,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n C:P and C:N ratios were often high and constantly above the Redfield ratio that is considered optimal for autotrophic growth. In contrast to the pronounced fluctuations in the nutrient ratios of their food resource, the herbivorous macroinvertebrates showed only very little variation in their nutrient ratios, which indicated that they are homeostatic, i.e., physiologically restricted to a comparatively narrow range of C:P and C:N ratios."
+        },
+        {
+          "document_id": "W2101794623",
+          "title": "Effect of Nitrogen Fertilization upon the Yield and Digestibility of Aftermath Timothy Forages Fed to Dairy Heifers",
+          "doi": "10.3168/jds.s0022-0302(63)88962-6",
+          "year": "1963",
+          "distance": 0.3766,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "e nutrients 0-50 lb of nitrogen 153.2% increase, 50-100 lb of nitrogen 9.9% increase, and 100-200 lb of nitrogen 2.8% increase. Recent work byPoulton et al. (7) and Mellin et al. (6), at this station, and others including Reid et al. (10) and Martz et al."
+        },
+        {
+          "document_id": "W3148075632",
+          "title": "Impact of zebra mussel (Dreissena polymorpha) on phosphorus cycling and chlorophyll in lakes",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.3909,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "r clarity (without reducing nutrient levels) and ultimately resulting in a decoupling of the nutrient-chlorophyll relationship. To assess decoupling we compared P a d chlorophyll a (chl a ) estimates with the Dillon and Rigler (19'74) P chl a relationship, which predicts chl a levels for a given concentration of The P chl a relationship assumes that P is the limiting nutrient, and departures from the relationship imply that P has been replaced by alternative limiting factors such as grazing pressure (Kaiser et al. 1994)."
+        },
+        {
+          "document_id": "W2089097995",
+          "title": "Feeding in the mixotrophic dinoflagellate Ceratium furca is influenced by intracellular nutrient concentrations",
+          "doi": "10.3354/meps262137",
+          "year": "2003",
+          "distance": 0.392,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "quotas and ratios are more critical than absolute inorganic nutrient concentrations in regulating feeding behavior of C. furca. KEY WORDS: Dinoflagellate mixotrophy · Phagotrophy · Nutrient limitation · Photosynthesis · Ceratium furca Full text in pdf format PreviousNextExport citation RSS - Facebook - Tweet - linkedIn Cited by Published in MEPS Vol. 262. Online publication date: November 07, 2003 Print ISSN: 0171-8630; Online ISSN: 1616-1599 Copyright © 2003 Inter-Research."
+        },
+        {
+          "document_id": "W2740860467",
+          "title": "Effects of prey of different nutrient quality on elemental nutrient budgets in Noctiluca scintillans",
+          "doi": "10.1038/s41598-017-05991-w",
+          "year": "2017",
+          "distance": 0.3957,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "nd mass balance models, it was found that excretion of C, N, and P by Noctiluca is highly affected by prey nutritional quality. However, based on modeling results, nutrients seem efficiently retained in actively feeding Noctiluca for reproduction rather than directly released as was shown experimentally in starved cells. Moreover, actively feeding Noctiluca tend to retain P and preferentially release N, highlighting its susceptible to P-limitation. Recycling of N and P by Noctiluca may supply substantial nutrients for phytoplankton growth, especially following bloom senescence."
+        },
+        {
+          "document_id": "W4280540908",
+          "title": "Effects of increased precipitation on C, N and P stoichiometry at different growth stages of a cold desert annual",
+          "doi": "10.1016/j.gecco.2022.e02158",
+          "year": "2022",
+          "distance": 0.3988,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "during the vegetative stage; culm N concentration decreased and P concentration increased and then decreased with plant growth. Increased precipitation significantly increased the leaf N and P concentration and decreased the C:N and C:P ratios at the vegetative growth stage, but leaf N:P was lower than 14 during the whole growth stage. Increased precipitation could improve the leaf N and P resorption efficiency to cope with the reproduction allocation, and the root nutrients are more sensitive to increased precipitation."
+        },
+        {
+          "document_id": "W2897161194",
+          "title": "Confounding factors in algal phosphorus limitation experiments",
+          "doi": "10.1371/journal.pone.0205684",
+          "year": "2018",
+          "distance": 0.4077,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Assessing algal nutrient limitation is critical for understanding the interaction of primary production and nutrient cycling in streams, and nutrient diffusing substrate (NDS) experiments are often used to determine limiting nutrients such as nitrogen (N) and phosphorus (P). Unexpectedly, many experiments have also shown decreased algal biomass on NDS P treatments compared to controls."
+        },
+        {
+          "document_id": "W3134120578",
+          "title": "Nitrogen Leaching and Nitrogen Balance under Differing Nitrogen Fertilization for Sugarcane Cultivation on a Subtropical Island",
+          "doi": "10.3390/w13050740",
+          "year": "2021",
+          "distance": 0.4089,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "kg ha−1). However, application of 0 N in the first fertilization would lead to a substantial reduction in yield in all seasons. Reducing the amount of N in the first application (i.e., replacing T1 with T2) improved N recovery by 9.7–11.9% and reduced N leaching by 13 kg ha−1. These results suggest that halving the amount of N used in the first application can improve N fertilizer use efficiency and reduce N loss to groundwater."
+        },
+        {
+          "document_id": "W4313641088",
+          "title": "Nitrogen increases soil organic carbon accrual and alters its functionality",
+          "doi": "10.1111/gcb.16588",
+          "year": "2023",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ydrolytic enzymes. However, the positive responses of MAOC to N enrichment were correlated with increases in microbial biomass. Our results suggest that although reactive N deposition could facilitate soil C sequestration to some extent, it might decrease the nutrient density, turnover time, and resistance to disturbance of the SOC pool. Our study provides mechanistic insights into the effects of N enrichment on the SOC pool and its functionality at global scale, which is pivotal for understanding soil C dynamics especially in future scenarios with more frequent and severe perturbations."
+        },
+        {
+          "document_id": "W4398246077",
+          "title": "Stoichiometry of litter decomposition under the effects of climate change and nutrient enrichment: A meta-analysis",
+          "doi": "10.1007/s11104-024-06718-3",
+          "year": "2024",
+          "distance": 0.411,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "(approximately one year) stages of decomposition and analysed the specific effects taking into account climate and plant type. Results The C:N and C:P ratios decreased in most warming and nutrient enrichment scenarios, leading to losses of litter C content, while the N:P ratio remained more resilient and affected by water availability. Furthermore, the abundance of resources (water and N + P) fosters the decomposition of litter. The nutrient mobilisation increases for both P and N under non-limited nutrient enrichment and it is faster for N than for P when water increases its availability."
+        },
+        {
+          "document_id": "W2100451086",
+          "title": "Influence of carbon to nitrogen ratios on soybean somatic embryo (cv. Jack) growth and composition",
+          "doi": "10.1093/jxb/ert138",
+          "year": "2013",
+          "distance": 0.4125,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "N ratio are likely to influence the partitioning of resources between the various storage products, especially protein and oil. As postulated, at steady-state growth rates, embryo protein content was strongly correlated with decreasing C:N ratios and increasing glutamine consumption rates. However, oil content remained relatively unchanged across the C:N ratio range tested, and resources were instead directed towards the starch and residual biomass (estimated by mass balance) pools in response to increasing C:N ratios."
+        },
+        {
+          "document_id": "W3106494406",
+          "title": "Response of Medical Cannabis (Cannabis sativa L.) to Nitrogen Supply Under Long Photoperiod",
+          "doi": "10.3389/fpls.2020.572293",
+          "year": "2020",
+          "distance": 0.4148,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "st under the optimal N level of 160 mgL<sup>-1</sup> N, with differences between organs in the extent of nutrient accumulation. The majority of the nutrients tested, including P, Zn, Mn, Fe, and Cu, tended to accumulate in the roots > leaves > stem, while K and Na tended to accumulate in the stem > leaves > roots, and total N, Ca, and Mg accumulated in leaves > roots > stem. Taken together, the results demonstrate that the optimal N level for plant development and function at the vegetative growth phase is 160 mgL<sup>-1</sup> N."
+        },
+        {
+          "document_id": "W2482045212",
+          "title": "Physiological Mechanisms of Nitrogen Absorption and Assimilation in Plants under Stressful Conditions",
+          "doi": "10.1201/b16675-29",
+          "year": "2014",
+          "distance": 0.4158,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nstituent of nucleic acids that serve as genetic material and regulate vital processes like growth, reproduction, and heredity. Being a principal macronutrient, N has a special place in plant nutrition, and plants require it in large amounts. Though N is the most abundant element in our atmosphere, majority of the plants cannot utilize it directly in the elemental form. An adequate supply of N in the soil is essential to maintain proper growth and yield of crops."
+        },
+        {
+          "document_id": "W2030825066",
+          "title": "Regulatory Mechanisms of Reproductive Effort in Plants 1. Plasticity in Reproductive Energy Allocation and Propagule Output of <i>Helianthus annuus</i> L. (Compositae) Cultivated at Varying Densities and Nitrogen Levels",
+          "doi": "10.1111/j.1442-1984.1986.tb00010.x",
+          "year": "1986",
+          "distance": 0.416,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "decreasing soil nitrogen levels. However, differences due to different N‐levels were not as great as those to changing density. One of the most significant findings was that seed production under limited resource availability, i.e., lack of ample solar radiation and soil nutrients, due to strong interference at higher density plots, is exceedingly costlty , This was most clearly demonstrated by a very sharp increase in relative energy partitioning to a single propagule in response to the increased density and decreasing nitrogen levels, the relative energy cost to a single achcne (R A ) increasing from one to twenty‐fourfold."
+        },
+        {
+          "document_id": "W1976372564",
+          "title": "Increased Toxicity of Karenia brevis during Phosphate Limited Growth: Ecological and Evolutionary Implications",
+          "doi": "10.1371/journal.pone.0058545",
+          "year": "2013",
+          "distance": 0.4208,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "e %C-PbTx was inversely related to the specific growth rate in both the nutrient-replete and P-limited cultures of all strains. This inverse relationship is consistent with an evolutionary tradeoff between carbon investment in PbTxs and other grazing defenses, and C investment in growth and reproduction. In aquatic environments where nutrient supply and grazing pressure often vary on different temporal and spatial scales, this tradeoff would be selectively advantageous as it would result in increased net population growth rates."
+        },
+        {
+          "document_id": "W2289116958",
+          "title": "Food Quality and Cannibalism in the Red Land Crab, Gecarcinus lateralis",
+          "doi": "10.1086/physzool.57.3.30163720",
+          "year": "1984",
+          "distance": 0.4219,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Nitrogen (N) is a scarce and perhaps limiting nutrient for many herbivores. Herbivore populations that are able to adjust density rapidly in response to changes in ambient N levels would be able to optimize growth, survival, and reproduction during periods when N is more available and to avoid habitat depletion and mass starvation should N availability decline."
+        },
+        {
+          "document_id": "W2093728139",
+          "title": "NUTRIENT STOICHIOMETRY IN PINGUICULA VULGARIS: NUTRIENT AVAILABILITY, PLANT SIZE, AND REPRODUCTIVE STATUS",
+          "doi": "10.1890/04-0354",
+          "year": "2005",
+          "distance": 0.4223,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "n influences nutrient ratios, and how much the ratios of nutrients to mass and nutrients to each other change through ontogeny. This information is needed to assess the physiological and ecological consequences of plant nutrient composition and to what extent plants function as balanced systems in acquisition and allocation of resources. We studied the variation in nutrient stoichiometry (i.e., the ratio between contents of different nutrients within a plant) in relation to three factors: (1) environmental availability of nitrogen, (2) plant size, and (3) reproductive status."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Two snippets (1 and 2) directly and explicitly support the stylized fact, stating that the N:C ratio increases with dilution rate under nutrient (nitrogen) limiting conditions, with a mechanistic explanation (increased N-reserve density and decreased C-reserve density), and identifying it as a predicted stylized fact (SF1) simulated by their model. Snippet 3 from the same source addresses the complementary case (light/carbon limitation, where N:C decreases) which does not contradict the fact since it concerns a different limiting condition. The remaining snippets are largely off-topic or only tangentially relate to DEB, nutrient quotas, dilution rates, or stoichiometry without bearing on the specific claim. There is no contradicting evidence; the clear support comes from a single source, so evidence strength is moderate but consensus is corroborated."
+      },
+      "n_references": 1,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2401127815246582
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2401,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "nsities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282limiting (in this case nitrogen limiting) conditions, as predicted by SF1. This happens not only 283because of the increase of N-reserve density (which obviously is needed to support higher 284speciﬁc growth rates) but also because C-reserve density decreases. The ﬁrst point is simply 285due to the increase of nitrogen source concentration and the consequent increase of _|ENA. 286Furthermore, higher dilution rates reduce the rejected ﬂux for the non-limiting reserve – in this 287"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2559,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2968,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.7,
+          "text": "ases with dilution rate. 307Due to the increase in C-reserve density and the decrease in N-reserve density, it is clear that 308the N:C ratio decreases with dilution rate in light or carbon limiting conditions. However, it must 309be noted that the N:C values for this simulation are outside the typical range of values due 310to the excessive accumulation of nitrogen. This suggests that either the fraction of rejection 311ﬂux incorporated in N-reserve \u0014ENis too high or that there are other relevant processes not 312considered in the proposed model (e.g. energy costs for nitrogen assimilation). 313"
+        },
+        {
+          "document_id": "69b8a45becbd4702b29a7749",
+          "title": "Eich2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3086,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "comparison with batch or chem ostat data (Martinussen & Thingstad 1987). In these studies, this model has been used to describe limitation by nitrogen (N), phosphor (P) or carbon (C). This allows flexibility in biomass composition in term of C, N and P, where as Monod model assumes constant composition. In this kind of model , growth depends on a surplus pool of nutrients inside the cell, named ce ll quota, and not on the outside concentration of limiting nutrient directly as in Monod model. The growth rate is controlled only by the cell quota (C , N or P) which is closest to"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3126,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "on the dilution rate:[N.l] [GN]DnN D. (3)3.1. Carbon in nitrogen -limited phytoplanktonIn a previous paper (Zonneveld, 1996), Ishowed that the uptake capacity (i.e. the uptakerate given saturating conditions of the nutrient inthe environment) for a non-limiting nutrient canbe considered to depend on the density of thetransient pool of the limiting nutrient. A similarapproach is followed by Geider et al. (1998). Theprecise form of this dependence may differ be-tween species and the nutrients considered. I herepostulate three basic patterns, see Fig. 2."
+        },
+        {
+          "document_id": "69b870afecbd4702b29a3697",
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.315,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "poses, so that in sim-ulations where χNexceeds χNmaxthe state variable values will returnmore swiftly to the allowable interval.Understanding that in Eq. (34) νNaccounts for the uptake or assim-ilation of the nutrient and −r/C15ξNis the dilution by growth term, noticethat the term −r/C15nNVaccounts for the transfer of nutrients from reserveto structure X V.S i n c e r/C15¼g/C15V−g/C15Mone can conclude that g/C15Vis simply theuse of nutrient to produce X Vandg/C15Mis the return of nutrients from X Vdue the payment of maintenance that uses only the carbon componentof structure. The fact that the term uses nNVmeans that there are no"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3226,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "anisms ’ metabolic processes adjust throughout the year, storing or using carbon and nitrogen based on what is available in the environme nt. The high C :N ratio in late summer suggests that, by this time, the plant has maximized its carbon reserves in response to reduced nitrogen and high light availability , reflecting a strategy to manage nutrient scarcity. This internal adjustment process emphasizes the crucial link between external nutrient availability and the internal biochemical balance of the organism. Figure 4.6. Individual model output. Whole plant molar C:N ratio for the entire"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3298,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "r bothscenarios suggest that PER remains constant at around 8 %during the nutrient-replete period (Fig. 4d, solid lines). Duringthe intermediate phase, PER rapidly increases (Fig. 4d, dash-dot lines) to reach its maximum value within the nutrient-limited 20phase (53 %in the N-limited scenario, 64.5 %P-limited scenario) (Fig. 4d, asterisks). Comparing the two scenarios, in theintermediate phase and early nutrient-limited phase, PER is higher in the N-limited scenario, while, overall, the highest PER isobserved in the late nutrient-limited phase in the P-limited scenario (Fig. 4d)."
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3307,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "g the N-replete phase DOC is almost entirelycomprised by DOC L(mean value throughout the N-replete phase: 99%, Fig. 2.4 b, solid31Figure 2.3: Structural mass-speciﬁc rates. (a) Net speciﬁc growth rate, (b) speciﬁc primaryproduction (PP) rate, (c) speciﬁc DOC release rate and (d) Percentage Extracellular Release(PER). Vertical dotted line marks the two phases of nutrient availability (N-replete, N-limited).line). As nutrient limitation progresses, the fraction of DOC H(Fig. 2.4 b, dashed line),progressively increases, as a result of the increased relative importance of the jDOC;Rﬂux"
+        },
+        {
+          "document_id": "69b86617ecbd4702b29a29e7",
+          "title": "Voor2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3309,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "the dilution (ﬂow-through) rate D, the fraction of thevolume replaced per unit of time, and the nutrient density Nrin the inﬂow.The inﬂux of nutrient, DNr, the outﬂow of nutrient, DN, and the outﬂow ofthe population, DR, are the terms that model the interaction of the populationwith the environment.The consumption of the nutrient by the population is modelle d with aHolling type II functional response (Holling, 1959), that i ncludes the maximumingestion rate INR, the maximum growth rate θNR(the ratio of the growthrate and ingestion rate is called the assimilation eﬃciency in ecology or yield"
+        },
+        {
+          "document_id": "69b89963ecbd4702b29a6a17",
+          "title": "Peac2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3317,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ombines the Droop equation andLiebig's law of the minimum into an expression for growth rate,\u0016i=\u0016maxi\u00141\u0000maxj\u0012Qminj;iQj;i\u0013\u0015(2.19)for species i=B, Z and nutrient j=N,P,C. Here Qj;irepresents the quota (cellularnutrient content) of nutrient j in species i. Qminj;iis the minimum quota for reproduction(Droop (1974)). \u0016maxiis the apparent maximal growth rate achieved asymptotically foran in nite quota. Producer nutrient uptake ( Vj;B) follows Michaelis-Menten kineticsand decreases linearly with quota,Vj;B=Vmaxj;B\u0012[j]Kj;B+ [j]\u0013 Qmaxj;B\u0000Qj;BQmaxj;B\u0000Qminj;B!(2.20)for j=N,P,C. Here Vmax"
+        },
+        {
+          "document_id": "69b870afecbd4702b29a3697",
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3332,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "epends on the af ﬁnity ( κN)given by:νextN¼κNN½/C138: ð13ÞNote that Nis the generic designation for the nutrients, which in thiscase can be nitrogen or phosphate, and [ N] represents the concentrationof nutrient. Finally, the realized uptake is the minimum of the internaland external uptake rates multiplied by the carbon quota concentration:νN¼min νintN;νextN/C16/C17: ð14ÞThe equation de ﬁnes the realized or effective uptake,νN, as the minimum of available nutrient, νNext(supply-driven), and theamount needed for achieving maximum nutrient quota, νNint(demand-driven). During dark periods the respiration may cause the realized up-"
+        },
+        {
+          "document_id": "W4285677734",
+          "title": "Kinetics of nitrogen in sodic soil of Kumulur village, Trichy District, Tamil Nadu under different organic and inorganic amendments",
+          "doi": "10.31018/jans.v14isi.3572",
+          "year": "2022",
+          "distance": 0.366,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "d along with amendments, a significant (CD-0.05%) buildup in available N contents was observed over the application of N alone. Available nitrogen (325 kg ha-1), nitrate nitrogen (102 kg ha-1) and ammonical nitrogen (205 kg ha-1) were significantly increased due to the addition of amendments. However, the decline in available N with incubation period was only marginal when nitrogen was applied along with amendments. An increase in NH4-N at 30 DAI might be due to the release of nutrients."
+        },
+        {
+          "document_id": "W2003789116",
+          "title": "Stoichiometric mismatch between littoral invertebrates and their periphyton food",
+          "doi": "10.1127/0003-9136/2006/0165-0145",
+          "year": "2006",
+          "distance": 0.3734,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n C:P and C:N ratios were often high and constantly above the Redfield ratio that is considered optimal for autotrophic growth. In contrast to the pronounced fluctuations in the nutrient ratios of their food resource, the herbivorous macroinvertebrates showed only very little variation in their nutrient ratios, which indicated that they are homeostatic, i.e., physiologically restricted to a comparatively narrow range of C:P and C:N ratios."
+        },
+        {
+          "document_id": "W2101794623",
+          "title": "Effect of Nitrogen Fertilization upon the Yield and Digestibility of Aftermath Timothy Forages Fed to Dairy Heifers",
+          "doi": "10.3168/jds.s0022-0302(63)88962-6",
+          "year": "1963",
+          "distance": 0.3766,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "e nutrients 0-50 lb of nitrogen 153.2% increase, 50-100 lb of nitrogen 9.9% increase, and 100-200 lb of nitrogen 2.8% increase. Recent work byPoulton et al. (7) and Mellin et al. (6), at this station, and others including Reid et al. (10) and Martz et al."
+        },
+        {
+          "document_id": "W3148075632",
+          "title": "Impact of zebra mussel (Dreissena polymorpha) on phosphorus cycling and chlorophyll in lakes",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.3909,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "r clarity (without reducing nutrient levels) and ultimately resulting in a decoupling of the nutrient-chlorophyll relationship. To assess decoupling we compared P a d chlorophyll a (chl a ) estimates with the Dillon and Rigler (19'74) P chl a relationship, which predicts chl a levels for a given concentration of The P chl a relationship assumes that P is the limiting nutrient, and departures from the relationship imply that P has been replaced by alternative limiting factors such as grazing pressure (Kaiser et al. 1994)."
+        },
+        {
+          "document_id": "W2089097995",
+          "title": "Feeding in the mixotrophic dinoflagellate Ceratium furca is influenced by intracellular nutrient concentrations",
+          "doi": "10.3354/meps262137",
+          "year": "2003",
+          "distance": 0.392,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "quotas and ratios are more critical than absolute inorganic nutrient concentrations in regulating feeding behavior of C. furca. KEY WORDS: Dinoflagellate mixotrophy · Phagotrophy · Nutrient limitation · Photosynthesis · Ceratium furca Full text in pdf format PreviousNextExport citation RSS - Facebook - Tweet - linkedIn Cited by Published in MEPS Vol. 262. Online publication date: November 07, 2003 Print ISSN: 0171-8630; Online ISSN: 1616-1599 Copyright © 2003 Inter-Research."
+        },
+        {
+          "document_id": "W2740860467",
+          "title": "Effects of prey of different nutrient quality on elemental nutrient budgets in Noctiluca scintillans",
+          "doi": "10.1038/s41598-017-05991-w",
+          "year": "2017",
+          "distance": 0.3957,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nd mass balance models, it was found that excretion of C, N, and P by Noctiluca is highly affected by prey nutritional quality. However, based on modeling results, nutrients seem efficiently retained in actively feeding Noctiluca for reproduction rather than directly released as was shown experimentally in starved cells. Moreover, actively feeding Noctiluca tend to retain P and preferentially release N, highlighting its susceptible to P-limitation. Recycling of N and P by Noctiluca may supply substantial nutrients for phytoplankton growth, especially following bloom senescence."
+        },
+        {
+          "document_id": "W4280540908",
+          "title": "Effects of increased precipitation on C, N and P stoichiometry at different growth stages of a cold desert annual",
+          "doi": "10.1016/j.gecco.2022.e02158",
+          "year": "2022",
+          "distance": 0.3988,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "during the vegetative stage; culm N concentration decreased and P concentration increased and then decreased with plant growth. Increased precipitation significantly increased the leaf N and P concentration and decreased the C:N and C:P ratios at the vegetative growth stage, but leaf N:P was lower than 14 during the whole growth stage. Increased precipitation could improve the leaf N and P resorption efficiency to cope with the reproduction allocation, and the root nutrients are more sensitive to increased precipitation."
+        },
+        {
+          "document_id": "W2897161194",
+          "title": "Confounding factors in algal phosphorus limitation experiments",
+          "doi": "10.1371/journal.pone.0205684",
+          "year": "2018",
+          "distance": 0.4077,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Assessing algal nutrient limitation is critical for understanding the interaction of primary production and nutrient cycling in streams, and nutrient diffusing substrate (NDS) experiments are often used to determine limiting nutrients such as nitrogen (N) and phosphorus (P). Unexpectedly, many experiments have also shown decreased algal biomass on NDS P treatments compared to controls."
+        },
+        {
+          "document_id": "W3134120578",
+          "title": "Nitrogen Leaching and Nitrogen Balance under Differing Nitrogen Fertilization for Sugarcane Cultivation on a Subtropical Island",
+          "doi": "10.3390/w13050740",
+          "year": "2021",
+          "distance": 0.4089,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "kg ha−1). However, application of 0 N in the first fertilization would lead to a substantial reduction in yield in all seasons. Reducing the amount of N in the first application (i.e., replacing T1 with T2) improved N recovery by 9.7–11.9% and reduced N leaching by 13 kg ha−1. These results suggest that halving the amount of N used in the first application can improve N fertilizer use efficiency and reduce N loss to groundwater."
+        },
+        {
+          "document_id": "W4313641088",
+          "title": "Nitrogen increases soil organic carbon accrual and alters its functionality",
+          "doi": "10.1111/gcb.16588",
+          "year": "2023",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ydrolytic enzymes. However, the positive responses of MAOC to N enrichment were correlated with increases in microbial biomass. Our results suggest that although reactive N deposition could facilitate soil C sequestration to some extent, it might decrease the nutrient density, turnover time, and resistance to disturbance of the SOC pool. Our study provides mechanistic insights into the effects of N enrichment on the SOC pool and its functionality at global scale, which is pivotal for understanding soil C dynamics especially in future scenarios with more frequent and severe perturbations."
+        },
+        {
+          "document_id": "W4398246077",
+          "title": "Stoichiometry of litter decomposition under the effects of climate change and nutrient enrichment: A meta-analysis",
+          "doi": "10.1007/s11104-024-06718-3",
+          "year": "2024",
+          "distance": 0.411,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "(approximately one year) stages of decomposition and analysed the specific effects taking into account climate and plant type. Results The C:N and C:P ratios decreased in most warming and nutrient enrichment scenarios, leading to losses of litter C content, while the N:P ratio remained more resilient and affected by water availability. Furthermore, the abundance of resources (water and N + P) fosters the decomposition of litter. The nutrient mobilisation increases for both P and N under non-limited nutrient enrichment and it is faster for N than for P when water increases its availability."
+        },
+        {
+          "document_id": "W2100451086",
+          "title": "Influence of carbon to nitrogen ratios on soybean somatic embryo (cv. Jack) growth and composition",
+          "doi": "10.1093/jxb/ert138",
+          "year": "2013",
+          "distance": 0.4125,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "N ratio are likely to influence the partitioning of resources between the various storage products, especially protein and oil. As postulated, at steady-state growth rates, embryo protein content was strongly correlated with decreasing C:N ratios and increasing glutamine consumption rates. However, oil content remained relatively unchanged across the C:N ratio range tested, and resources were instead directed towards the starch and residual biomass (estimated by mass balance) pools in response to increasing C:N ratios."
+        }
+      ]
+    }
+  }
+}

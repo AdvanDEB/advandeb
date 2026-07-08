@@ -46,9 +46,10 @@ function submit() {
 
 <style scoped>
 .message-input-area {
-  border-top: 1px solid #e5e7eb;
-  padding: 0.75rem 1rem;
+  flex: 1;
   background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.5rem 0;
 }
 
 form {

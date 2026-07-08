@@ -1,0 +1,1890 @@
+{
+  "sf_id": "feeding_04",
+  "category": "Feeding",
+  "statement": "Organisms show a transient increase in metabolic rate independent of body mass after ingesting food (heat increment of feeding).",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Two excerpts (snippets 1 and 14) explicitly state that organisms exhibit a transient, mass‑independent rise in metabolic rate after feeding—the heat increment of feeding—providing clear direct support. A third excerpt (snippet 2) reports increased respiration linked to feeding, offering additional but less specific corroboration. Only one source (snippet 3) suggests no immediate respiratory response to food intake, constituting a modest contradiction. The remaining texts are unrelated or only tangentially related to the claim. Overall, the corpus contains multiple strong, direct pieces of evidence and minimal contradictory information, yielding a high evidence strength and a consensus that the stylized fact is well supported."
+          },
+          "n_references": 4,
+          "references": {
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1658
+            },
+            "3064": {
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2231
+            },
+            "2993": {
+              "title": "Kooy88c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2239
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2449
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1658,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87] R3 The use of dioxygen scales with body weight raised animals [11, 65, 71] to a power close to 0.75 [38] R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68] after ingesting food independent of their body mass - the heat increment of feeding Table 5.1: Stylized facts and empirical evidence on feeding, growth and respiration. Stylized Facts Empirical Evidence Stoichiometry S1 Well-fed organisms have a different body chemical animals [9, 14, 29, 56] composition than poorly-fed organisms yeasts [20] S2 Organisms growing with constant food density animals converge to a constant chemical compos"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2231,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "emical techniques. Body mass and all body nutrients declined sharply from the ﬁrst day onwards. By contrast, the CO2 produced and the O2 consumed increased steadily. Starving females showed the opposite trend, identifying foraging as the reason for the respiration increase of feeding females. Two complementary physiological processes explain the unexpected relationship between increasing metabolic rate and declining body weight. First, host hemolymph is a highly unbalanced food, and the excess nutrients (protein and carbohydrate) need to be voided, partially through excretion and partially through respiration. Second, a foraging young female produces eggs at an increasing rate during the ﬁrs"
+            },
+            {
+              "document_id": "2993",
+              "title": "Kooy88c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2239,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.7,
+              "text": "s. As all biological rate processes, the von Bertalanffy growth rate depends on temperature. The observed rates will be corrected for dif- ferences in temperature, in order to analyse the remaining variation in growth rates. 2. A MODEL FOR GROWTH 2.1 Stored energy Changes in food intake generally do not result in momentary changes in processes like respiration and growth. The rates of these processes seem to depend on an average of food intake over the recent past. This suggests that energy buffers govern rates. An obvious buffer is the food present in gut and stomach but, for most species, the time constant of this buffer is too short to explain the graded effect of a change in the (mean) f"
+            },
+            {
+              "document_id": "3668",
+              "title": "Stavrakidis-Zachou et al. - 2023 - A bioenergetics approach to modelling tolerance li.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2315,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "teau or may even decline (Pörtner et al., 2017; Leonard and Skov, 2022), which is due to a temporary cessation of energy-consuming processes such as growth and reproduction in an attempt by organisms to divert energy to conservation and self-maintenance processes. The observation that the standard metabolic rate continues to increase with temperature in a fashion resembling Equation 1 rather than Equation 4, is central to the approach presented here and is related to the energy needs SMR represents. That is, regardless of the organism’s ability to repair temperature-induced damage (such as DNA damage, protein denaturation, free radical formation), the induction of such damage increases expon"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2329,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3103",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.233,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "nutrients, wastes or heat flow (Figure 5). If the body surface of an organism is permeable to fluxes of resources and wastes, then its area relative to body volume may affect the rates at which resources are supplied to and wastes removed from metabolic processes. As a result, the scaling of SA [Page 41] Systems 2014, 2 491 with respect to body volume or mass may also affect the scaling of metabolic rate. Evidence for this modulating effect includes (1) a significantly positive correlation between the scaling exponents for SA and metabolic rate in soft-bodied pelagic invertebrates with permeable integuments; and (2) the lack of such a correlation in hard-bodied pelagic arthropods with exoske"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2333,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "mbryonic stage, and after birth, here deﬁned as the onset of feeding, it further increases during the juvenile and adult stages till the individual is fully grown, and then decreases somewhat at old age. Several factors are responsible for this increase in metabolic rate during ontogeny, increase in body size being one of them. Many papers since the 19th century have tried to explain why metabolic rate tends to in- crease with body mass to the power 3/4, and whether or not it is exactly this power law, or only approximately so; log–log plotting can easily give the misleading impression of accuracy. It is generally agreed that several processes contribute to metabolic rate, such as feeding an"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2341,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "t-eaten). During the energy intake procedure, animals encountering a food cell that has not updated its resource levels for that timestep update it based on the time since last eaten and the resource accumulation rates per timestep (r-growth-ts), up to the maximum resource level (max-resources). After updating resource values, animals consume resources from the cell, and the food level drops accordingly to the amount consumed. After both energetic costs and ingested energy are determined, the overall energy balance is updated (energy-allocation). It is then evaluated whether the animals can meet their current costs based solely on the ingested energy (energy-assimilated), or if they need to "
+            },
+            {
+              "document_id": "2691",
+              "title": "Jusup et al. - 2014 - Simple measurements reveal the feeding history, th.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "in ﬁsh (Kooijman et al., 2011), but physiological evidence suggests that increasingly efﬁcient energy assimilation and utilization are responsible, i.e. a type M acceleration of growth observed in many ﬁsh species (Lika et al., 2014). During the exponential growth, multiple physiological changes thought to improve food assimilation and ingestion have been observed. For example, the ﬁrst appearance of gastric glands and pyloric caeca, together with a sharp increase in the speciﬁc activity of trypsin-like and pepsin-like di- gestive enzymes, points to an improvement in food assimilation (Kaji, 2003). Simultaneously, the larvae undertake a number of anatomical transformations that represent an "
+            },
+            {
+              "document_id": "3268",
+              "title": "Predicting shifting sustainability trade‐offs in m.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2357,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "2010; Sar\u0001a et al., 2012). Central to the DEB the- ory is the concept that food and body temperature (BT) are the primary drivers of an individual’s metabolic machinery (Sar\u0001a, Palmeri, Montalto, Rinaldi, & Widdows, 2013). The amount of ingested energy available for biological processes is regulated within the DEB 2 | SAR\u0001A ET AL. [Page 3] theory by the Holling’s functional responses (Holling, 1959). Once food is ingested, the amount of energy that flows through the organism depends at some extent on physiological rates. As all physiological rates depend on body temperature, BT is an important driver, in particular for ectotherms, such as fish and shellfish, as their BT is close to that of t"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2438,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "ntiﬁed using either heat production with calorimetry or CO2 production and O2 consumption with respirometry (Sibly et al., 2012). The simplest mechanistic explanations for metabolic scaling do however not apply to growth of individuals for many insect spe- cies (Maino and Kearney, 2014). For example, respiration rate increases while body mass decreases through time during the embryonic stage (see Kooijman, 1986; Kooijman, 2010). Another case is the pupal stage of holometabolous insects, which shows a U-shaped respiration curve through time while the body mass of the animal decreases (Maino and Kearney, 2014). Thus, the general rule of increased metabolic rate with increased body weight requi"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2441,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "and they found that the appendage beat rate Fig. 8.4 Ingestion rates of D. magna (3 mm body size) at increasing concen- trations of 32P-labelled food organisms of different size, a bacterium (Esch- erichia coli), a green alga (Chlorella vulgaris), a yeast (Saccharomyces cere- visiae), and a ciliate (Tetrahymena pyriformis). (modiﬁed from McMahon and Rigler 1965) [Page 167] 154 of was not dependent on the body size of D. magna. Counts of appendage beat rates and mandibular rates by Watts and Young (1980) at concentrations of Chlo- rella below the ILC were close to the results of McMa- hon and Rigler (1963). The rectilinear model produces a sharp inﬂec- tion at the ILC, which is not a very pro"
+            },
+            {
+              "document_id": "2457",
+              "title": "Mauritsson - 2024 - Application of Metabolic Theory in Models for Grow.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2448,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ion and other activities (RA), costs for processing food (RF), overhead costs for growth of new biomass (RG), and costs for maintaining existing biomass (RM): = + + + A F G M R R R R R . (2) 3.2 Effects of body size and temperature on metabolic rate The metabolic rate of organisms vary with their body size, temperature and chemical composition in a way that appears to be quite regular [1]. A large organism usually consumes more energy than a smaller organism and chemical reactions are known to occur faster at higher temperatures. Consequently, the metabolic rate tend to increase with body mass and temperature. However, these relationships are not linear. Based on ob- servations within and ac"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2449,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 Dissipating heat for heterotrophic isomorphs under aerobic conditions is a weighted sum of three mass flows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typicall"
+            },
+            {
+              "document_id": "2731",
+              "title": "Maino og Kearney - 2017 - The universality of the von Bertalanffy growth cur.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2449,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "under constant conditions. However, in Maino and Kearney [9] it was demonstrated that insect biomass growth efﬁciency and energy density increase with development. In addition, the growth rate of insects was slower than exponential but faster than von Bertalanffy growth. Reasons for deviations from the standard DEB model (or von Bertalanffy growth) are diverse, with some studies suggesting acceleration may be caused by changes in body shape [15,16]. More commonly it is thought that phys- iological constraints on food assimilation may be important drivers. Jager et al. [17] found that food limitation in juvenile nematodes could explain deviations from the standard model and, more recently, fo"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2453,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "tabolic rate contributions of the feeding and reproductive processes supplements the contribution of the structural mass and lead to the observed trend. We extend our explanations to other insect groups and discuss the potential for uniﬁcation using Dynamic Energy Budget theory. \u0002 2015 Elsevier Ltd. All rights reserved. 1. Introduction Metabolic rate has been studied across many organisms, during ontogeny within a species or over short periods of time related to behavioral activities of individuals (Nisbet et al., 2012; Maino and Kearney, 2014). Metabolic rate has been found to increase with body mass, a phenomenon named metabolic scaling that is wide- spread in nature (West et al., 1997; Eh"
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2469,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "wer than the case where ontogenetic effects were considered (full model). In insects, metabolic rate has been shown to scale with exponents higher than 2/3. Addol-Bediako et al. (2002) found insect respiration to scale with interspecific mass with an exponent of 0.77, while more recent and larger studies (∼400 insects) conducted independently by Chown et al. (2007) and Ehnes et al. (2011), found metabolic rate scaled with an exponent between 0.75 and 0.81. This range over- laps with the 95% confidence interval of our estimate for the interspecific scaling of assimilation rate and supports the expectation based on the energetic balancing of supply and demand in insects. As assimilated energy "
+            },
+            {
+              "document_id": "3771",
+              "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.247,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ive response to warming (Fryxell et al. 2020; Arendt 2015), our experimental findings suggest otherwise. Consequences of the TSR on energetic efficiency and ingestion rate Whether the functional response was fitted to the per capita or mass-specific ingestion rate, our findings indicate that the ingestion rate was higher for Daphnia tested at 26 °C than at 18 °C. The increase in ingestion rate at elevated temperatures has been commonly observed in previous studies (Englund et al. 2011; Sentis, Hemptinne, and Brodeur 2012), and is often attributed to increased metabolism and activity under warming. Our observations revealed that, when the functional response was fitted to the mass-specific in"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The majority of the abstracts (≈12) explicitly report a post‑prandial rise in metabolic rate—often termed specific dynamic action or diet‑induced thermogenesis—across a wide taxonomic range (fish, amphibians, reptiles, mammals, insects, marine invertebrates). These findings describe a transient increase that occurs after food ingestion and is reported independent of body size effects, directly matching the stylized fact. Only one snippet raises an alternative mechanistic explanation without denying the metabolic rise, and several are unrelated to feeding. The preponderance of supportive evidence yields a strong evidence strength (3) and a clear consensus in favor of the fact (3)."
+          },
+          "n_references": 12,
+          "references": {
+            "W2064731167": {
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2092
+            },
+            "W2158591681": {
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2167
+            },
+            "W2053786475": {
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2244
+            },
+            "W2109871929": {
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2253
+            },
+            "W3126394692": {
+              "title": "High carbohydrate diet ingestion increases post-meal lipid synthesis and drives respiratory exchange ratios above 1",
+              "doi": "https://doi.org/10.1242/jeb.240010",
+              "year": "2021",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2325
+            },
+            "W2724818809": {
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2342
+            },
+            "W2921694183": {
+              "title": "Influence of food, body size, and fragmentation on metabolic rate in a sessile marine invertebrate",
+              "doi": "https://doi.org/10.1111/ivb.12241",
+              "year": "2019",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2371
+            },
+            "W2153761383": {
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2456
+            },
+            "W2147452171": {
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2457
+            },
+            "W2176521957": {
+              "title": "Diet-Induced Thermogenesis in Insects: A Developing Concept in Nutritional Ecology",
+              "doi": "https://doi.org/10.1603/0046-225x-32.1.1",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2466
+            },
+            "W4281628644": {
+              "title": "Effects of Temperature on the Bioenergetics of the Marine Protozoans Gyrodinium dominans and Oxyrrhis marina",
+              "doi": "https://doi.org/10.3389/fmars.2022.901096",
+              "year": "2022",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2472
+            },
+            "W4317886456": {
+              "title": "Metabolic responses to food and temperature in deep-sea isopods,<i>Bathynomus doederleini</i>",
+              "doi": "https://doi.org/10.1101/2023.01.23.525261",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2506
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2064731167",
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "distance": 0.2092,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Basal or standard metabolic rate (SMR) has been found to exhibit substantial intraspecific variation in a range of taxa, but the consequences of this variation are little understood. Here we explore how SMR is related to the energy cost of processing food, known as apparent specific dynamic action or the heat increment of feeding. Using juvenile Atlantic salmon Salmo salar , we show that fishes with a higher SMR had a higher peak and a greater total energy expenditure when digesting a given size of meal. However, the duration over which their metabolism was elevated after consuming the meal was shorter. The greater energy costs they incur for processing food may be related to their assimilat"
+            },
+            {
+              "document_id": "W2158591681",
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "distance": 0.2167,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "Specific dynamic action (SDA), the accumulated energy expended on all physiological processes associated with meal digestion, is strongly influenced by features of both the meal and the organism. We assessed the effects of meal size, meal type, body temperature, and body size on the postprandial metabolic response and calculated SDA of the marine toad, Bufo marinus. Peak postprandial rates of O(2) consumption (.V(O2)) and CO(2) production (.V(CO2)) and SDA increased with meal size (5%-20% of body mass). Postprandial metabolism was impacted by meal type; the digestion of hard-bodied superworms (Zophobas larva) and crickets was more costly than the digestion of soft-bodied earthworms and juven"
+            },
+            {
+              "document_id": "W2053786475",
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "The oxygen uptake of Python molurus increases enormously following feeding, and the elevated metabolism coincides with rapid growth of the gastrointestinal organs. There are opposing views regarding the energetic costs of the gastrointestinal hypertrophy, and this study concerns the metabolic response to feeding after fasting periods of different duration. Since mass and function of the gastrointestinal organs remain elevated for several days after feeding, the metabolic increment following a second meal given soon after the first can reveal whether the metabolic costs relate to the upregulation of gastrointestinal organs or merely the metabolic cost of processing a meal. Eight juvenile pyth"
+            },
+            {
+              "document_id": "W2109871929",
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "The increase in metabolism during digestion--the heat increment of feeding--is often regarded as an energetic waste product. However, it has been suggested that this energy could offset thermoregulatory costs in cold environments. We investigated this possibility by measuring the rate of oxygen consumption of four juvenile Steller sea lions (Eumetopias jubatus) before and after they ingested a meal in water temperatures of 2 degrees-8 degrees C. Rates of oxygen consumption of fasted and fed animals increased in parallel with decreasing water temperature, such that the apparent heat increment of feeding did not change with water temperature. These results suggest that Steller sea lions did no"
+            },
+            {
+              "document_id": "W3126394692",
+              "title": "High carbohydrate diet ingestion increases post-meal lipid synthesis and drives respiratory exchange ratios above 1",
+              "doi": "https://doi.org/10.1242/jeb.240010",
+              "year": "2021",
+              "distance": 0.2325,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "ABSTRACT Locusts have been reported to elevate metabolic rate in response to high carbohydrate diets; this conclusion was based on metabolic rates calculated from CO2 production, a common practice for insects. However, respiratory exchange ratio (RER, CO2 production divided by O2 consumption) can rise above 1 as a result of de novo lipid synthesis, providing an alternative possible explanation of the prior findings. We studied the relationship between macronutrient ingestion, RER and lipid synthesis using South American locusts (Schistocerca cancellata) reared on artificial diets varying in protein:carbohydrate (p:c) ratio. RER increased and rose above 1 as dietary p:c ratio decreased. Lipid"
+            },
+            {
+              "document_id": "W2724818809",
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "distance": 0.2342,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "The significance of diet-induced thermogenesis (DIT) for metabolic control is still debated. Although obesogenic diets recruit UCP1 and adrenergically inducible thermogenesis, and although the absence of UCP1 may promote the development of obesity, no actual UCP1-related thermogenesis identifiable as diet-induced thermogenesis has to date been unambiguously demonstrated. Examining mice living at thermoneutrality, we have identified a process of facultative (directly elicited by acute eating), adaptive (magnitude develops over weeks on an obesogenic diet), and fully UCP1-dependent thermogenesis. We found no evidence for UCP1-independent diet-induced thermogenesis. The thermogenesis was propor"
+            },
+            {
+              "document_id": "W2073473682",
+              "title": "Adaptation de l'ingestion alimentaire aux dépenses énergétiques",
+              "doi": "https://doi.org/10.1051/rnd:19870204",
+              "year": "1987",
+              "distance": 0.2348,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Body energy balance is regulated in adults. The accuracy of the phenomenon is particularly evident in laboratory animals under steady conditions. Moreover, it has been repeatedly demonstrated that this balance is maintained in spite of fluctuations in food intake or energy expenditure. When animals such as rats, dogs or rabbits are presented with a diluted or concentrated version of familiar food, they compensate rapidly by increasing or decreasing their ponderal intake. This is achieved first by a change in meal frequency, then meal size adapts to the new caloric content and meal frequency returns to the original pattern. This adaptation is based on the learning of post-ingestive cues. Hypo"
+            },
+            {
+              "document_id": "W2921694183",
+              "title": "Influence of food, body size, and fragmentation on metabolic rate in a sessile marine invertebrate",
+              "doi": "https://doi.org/10.1111/ivb.12241",
+              "year": "2019",
+              "distance": 0.2371,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Abstract Metabolic rates vary among individuals according to food availability and phenotype, most notably body size. Disentangling size from other factors (e.g., age, reproductive status) can be difficult in some groups, but modular organisms may provide an opportunity for manipulating size experimentally. While modular organisms are increasingly used to understand metabolic scaling, the potential of feeding to alter metabolic scaling has not been explored in this group. Here, we perform a series of experiments to examine the drivers of metabolic rate in a modular marine invertebrate, the bryozoan Bugula neritina . We manipulated size and examined metabolic rate in either fed or starved ind"
+            },
+            {
+              "document_id": "W2148400263",
+              "title": "Nonshivering thermogenesis and its adequate measurement in metabolic studies",
+              "doi": "https://doi.org/10.1242/jeb.050989",
+              "year": "2010",
+              "distance": 0.2389,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Summary Alterations in nonshivering thermogenesis are presently discussed as being both potentially causative of and able to counteract obesity. However, the necessity for mammals to defend their body temperature means that the ambient temperature profoundly affects the outcome and interpretation of metabolic experiments. An adequate understanding and assessment of nonshivering thermogenesis is therefore paramount for metabolic studies. Classical nonshivering thermogenesis is facultative, i.e. it is only activated when an animal acutely requires extra heat (switched on in minutes), and adaptive, i.e. it takes weeks for an increase in capacity to develop. Nonshivering thermogenesis is fully d"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2396,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2153761383",
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "distance": 0.2456,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "The past decade has witnessed a dramatic increase in studies of amphibian and reptile specific dynamic action (SDA). These studies have demonstrated that SDA, the summed energy expended on meal digestion and assimilation, is affected significantly by meal size, meal type, and body size and to some extent by body temperature. While much of this attention has been directed at anuran and reptile SDA, we investigated the effects of meal size, meal type, and body temperature on the postprandial metabolic responses and the SDA of the tiger salamander (Ambystoma tigrinum tigrinum). We also compared the SDA responses among six species of Ambystoma salamanders representing the breadth of Ambystoma ph"
+            },
+            {
+              "document_id": "W2147452171",
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "distance": 0.2457,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "Metabolic rate (MR) and digestive duration are thermally dependant, and energy usage changes as body temperature (Tb) changes. Increased Tb during digestion causes a rapid increase in VO2 and a shorter postprandial metabolic response known as specific dynamic action (SDA). SDA is the additional energy expended above standard metabolic rate (SMR) to carry out functions associated with meal digestion and assimilation. SDA is affected by prey size, prey type and body mass (Mb). Liquid meals require less energy to digest and assimilate than intact prey items resulting in a lower metabolic scope and reduced postprandial metabolic response. Digestive efficiency and metabolism are also affected by "
+            },
+            {
+              "document_id": "W2176521957",
+              "title": "Diet-Induced Thermogenesis in Insects: A Developing Concept in Nutritional Ecology",
+              "doi": "https://doi.org/10.1603/0046-225x-32.1.1",
+              "year": "2003",
+              "distance": 0.2466,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "Abstract Diet-induced thermogenesis (DIT) is a concept that has been well known in one form or another for more than a century in vertebrate nutrition and physiological ecology. Yet, it is practically unknown in the physiology and nutritional ecology of insects. We suggest that DIT is a ubiquitous mechanism occurring in most if not all organisms and functions to maintain nutritional homeostasis by metabolically oxidizing excess energy intake to maintain a metabolic pool of nutrients that is balanced in both energy and nutrients. There is sufficient evidence to suggest the phenomenon exits in insects and should be considered as a viable hypothesis to enrich the paradigms of insect nutritional"
+            },
+            {
+              "document_id": "W4281628644",
+              "title": "Effects of Temperature on the Bioenergetics of the Marine Protozoans Gyrodinium dominans and Oxyrrhis marina",
+              "doi": "https://doi.org/10.3389/fmars.2022.901096",
+              "year": "2022",
+              "distance": 0.2472,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "We exposed Gyrodinium dominans and two strains of Oxyrrhis marina to temperatures well above (25°C) and below (12°C) their maintenance temperature (18°C) to study the mechanisms controlling the overall physiological response to thermal stress. As variables, we measured growth, ingestion, and respiration rates (this latter with and without food). The growth rates of O. marina strains plotted as a function of temperature showed maximum values at the maintenance temperature, as expected in a typical unimodal functional response. However, G. dominans showed similar growth rates at 12 and 18°C, and even a marked decrease in growth rates at 25°C, happened to be not significant. G. dominans ingesti"
+            },
+            {
+              "document_id": "W2588513124",
+              "title": "The role of food chain balance and common nutritional environment in interspecific allometric scaling of unicellular organisms",
+              "doi": "",
+              "year": "2016",
+              "distance": 0.2488,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "One of the major characteristics of living organisms is metabolic rate - amount of energy produced per unit time. When the size of organisms increases, the metabolic rate increases slower than organisms' mass. This effect is called allometric scaling. It has important implications for the individual and population organismal development. Here, we study the causes of this phenomenon considering metabolic properties of unicellular organisms (Amoeba Proteus, fission yeast S. pombe, E. coli, B. subtilis, Staphylococcus). We found that the metabolic properties of unicellular organisms are defined by two primary factors. One is the need to acquire nutrients through the surface in a common nutritio"
+            },
+            {
+              "document_id": "W2616031531",
+              "title": "Body size shifts influence effects of increasing temperatures on ectotherm metabolism",
+              "doi": "https://doi.org/10.1101/139279",
+              "year": "2017",
+              "distance": 0.2499,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Aim: It is well-established that warmer temperatures directly cause metabolic rates of ectotherms to increase, but temperature additionally indirectly affects metabolic rates due to impacts on other aspects of ecological systems. Because higher temperatures result in smaller body sizes, which consequently decreases metabolic rates, it is unknown whether this indirect effect of temperature increase could mitigate the direct positive effect of temperature on metabolic rate. We assess the potential impact of temperature-induced shifts in body size on metabolic rate. Location: Global. Major taxa studied: Ectotherms. Methods: We compiled literature-derived data on average mass and temperature for"
+            },
+            {
+              "document_id": "W2167693259",
+              "title": "Adapting to a Hot Meal",
+              "doi": "https://doi.org/10.1126/scisignal.4173ec140",
+              "year": "2011",
+              "distance": 0.2502,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Mosquitoes that feed on warm-blooded animals exhibit a heat shock response in the gut that promotes digestion and fecundity."
+            },
+            {
+              "document_id": "W4317886456",
+              "title": "Metabolic responses to food and temperature in deep-sea isopods,<i>Bathynomus doederleini</i>",
+              "doi": "https://doi.org/10.1101/2023.01.23.525261",
+              "year": "2023",
+              "distance": 0.2506,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ABSTRACT Metabolic rate, the energy required per unit of time for an organism to sustain life, is influenced by both intrinsic and extrinsic factors. Despite the similarities among living organisms across the various domains of life, it has been observed that those adapted to deep-sea environments exhibit notable distinctions from those in shallower waters, even when accounting for size and temperature. However, as deep-sea organisms are infrequently kept in captivity for prolonged periods, investigations into their potential metabolic responses to food and temperature have yet to be conducted. In this study, we demonstrate the impact of food (specific dynamic action: SDA ) and temperature ("
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial number of snippets (1,2,13-16,18,23,24) directly report a post‑prandial rise in metabolic rate or specific dynamic action that is described as transient and not tied to body size, matching the heat increment of feeding concept. Only one snippet (3) explicitly argues against immediate respiratory changes after food intake, providing limited contradiction. The remaining excerpts are unrelated or only tangentially related. The preponderance of high‑relevance supporting evidence yields a strong overall evidential basis and a clear consensus that the stylized fact is corroborated."
+          },
+          "n_references": 10,
+          "references": {
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1658
+            },
+            "3064": {
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2231
+            },
+            "2993": {
+              "title": "Kooy88c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2239
+            },
+            "W2064731167": {
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2092
+            },
+            "W2158591681": {
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2167
+            },
+            "W2053786475": {
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2244
+            },
+            "W2109871929": {
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2253
+            },
+            "W2724818809": {
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2342
+            },
+            "W2153761383": {
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2456
+            },
+            "W2147452171": {
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2457
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1658,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87] R3 The use of dioxygen scales with body weight raised animals [11, 65, 71] to a power close to 0.75 [38] R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68] after ingesting food independent of their body mass - the heat increment of feeding Table 5.1: Stylized facts and empirical evidence on feeding, growth and respiration. Stylized Facts Empirical Evidence Stoichiometry S1 Well-fed organisms have a different body chemical animals [9, 14, 29, 56] composition than poorly-fed organisms yeasts [20] S2 Organisms growing with constant food density animals converge to a constant chemical compos"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2231,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "emical techniques. Body mass and all body nutrients declined sharply from the ﬁrst day onwards. By contrast, the CO2 produced and the O2 consumed increased steadily. Starving females showed the opposite trend, identifying foraging as the reason for the respiration increase of feeding females. Two complementary physiological processes explain the unexpected relationship between increasing metabolic rate and declining body weight. First, host hemolymph is a highly unbalanced food, and the excess nutrients (protein and carbohydrate) need to be voided, partially through excretion and partially through respiration. Second, a foraging young female produces eggs at an increasing rate during the ﬁrs"
+            },
+            {
+              "document_id": "2993",
+              "title": "Kooy88c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2239,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.7,
+              "text": "s. As all biological rate processes, the von Bertalanffy growth rate depends on temperature. The observed rates will be corrected for dif- ferences in temperature, in order to analyse the remaining variation in growth rates. 2. A MODEL FOR GROWTH 2.1 Stored energy Changes in food intake generally do not result in momentary changes in processes like respiration and growth. The rates of these processes seem to depend on an average of food intake over the recent past. This suggests that energy buffers govern rates. An obvious buffer is the food present in gut and stomach but, for most species, the time constant of this buffer is too short to explain the graded effect of a change in the (mean) f"
+            },
+            {
+              "document_id": "3668",
+              "title": "Stavrakidis-Zachou et al. - 2023 - A bioenergetics approach to modelling tolerance li.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2315,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "teau or may even decline (Pörtner et al., 2017; Leonard and Skov, 2022), which is due to a temporary cessation of energy-consuming processes such as growth and reproduction in an attempt by organisms to divert energy to conservation and self-maintenance processes. The observation that the standard metabolic rate continues to increase with temperature in a fashion resembling Equation 1 rather than Equation 4, is central to the approach presented here and is related to the energy needs SMR represents. That is, regardless of the organism’s ability to repair temperature-induced damage (such as DNA damage, protein denaturation, free radical formation), the induction of such damage increases expon"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2329,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3103",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.233,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "nutrients, wastes or heat flow (Figure 5). If the body surface of an organism is permeable to fluxes of resources and wastes, then its area relative to body volume may affect the rates at which resources are supplied to and wastes removed from metabolic processes. As a result, the scaling of SA [Page 41] Systems 2014, 2 491 with respect to body volume or mass may also affect the scaling of metabolic rate. Evidence for this modulating effect includes (1) a significantly positive correlation between the scaling exponents for SA and metabolic rate in soft-bodied pelagic invertebrates with permeable integuments; and (2) the lack of such a correlation in hard-bodied pelagic arthropods with exoske"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2333,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "mbryonic stage, and after birth, here deﬁned as the onset of feeding, it further increases during the juvenile and adult stages till the individual is fully grown, and then decreases somewhat at old age. Several factors are responsible for this increase in metabolic rate during ontogeny, increase in body size being one of them. Many papers since the 19th century have tried to explain why metabolic rate tends to in- crease with body mass to the power 3/4, and whether or not it is exactly this power law, or only approximately so; log–log plotting can easily give the misleading impression of accuracy. It is generally agreed that several processes contribute to metabolic rate, such as feeding an"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2341,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "t-eaten). During the energy intake procedure, animals encountering a food cell that has not updated its resource levels for that timestep update it based on the time since last eaten and the resource accumulation rates per timestep (r-growth-ts), up to the maximum resource level (max-resources). After updating resource values, animals consume resources from the cell, and the food level drops accordingly to the amount consumed. After both energetic costs and ingested energy are determined, the overall energy balance is updated (energy-allocation). It is then evaluated whether the animals can meet their current costs based solely on the ingested energy (energy-assimilated), or if they need to "
+            },
+            {
+              "document_id": "2691",
+              "title": "Jusup et al. - 2014 - Simple measurements reveal the feeding history, th.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "in ﬁsh (Kooijman et al., 2011), but physiological evidence suggests that increasingly efﬁcient energy assimilation and utilization are responsible, i.e. a type M acceleration of growth observed in many ﬁsh species (Lika et al., 2014). During the exponential growth, multiple physiological changes thought to improve food assimilation and ingestion have been observed. For example, the ﬁrst appearance of gastric glands and pyloric caeca, together with a sharp increase in the speciﬁc activity of trypsin-like and pepsin-like di- gestive enzymes, points to an improvement in food assimilation (Kaji, 2003). Simultaneously, the larvae undertake a number of anatomical transformations that represent an "
+            },
+            {
+              "document_id": "3268",
+              "title": "Predicting shifting sustainability trade‐offs in m.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2357,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "2010; Sar\u0001a et al., 2012). Central to the DEB the- ory is the concept that food and body temperature (BT) are the primary drivers of an individual’s metabolic machinery (Sar\u0001a, Palmeri, Montalto, Rinaldi, & Widdows, 2013). The amount of ingested energy available for biological processes is regulated within the DEB 2 | SAR\u0001A ET AL. [Page 3] theory by the Holling’s functional responses (Holling, 1959). Once food is ingested, the amount of energy that flows through the organism depends at some extent on physiological rates. As all physiological rates depend on body temperature, BT is an important driver, in particular for ectotherms, such as fish and shellfish, as their BT is close to that of t"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2438,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ntiﬁed using either heat production with calorimetry or CO2 production and O2 consumption with respirometry (Sibly et al., 2012). The simplest mechanistic explanations for metabolic scaling do however not apply to growth of individuals for many insect spe- cies (Maino and Kearney, 2014). For example, respiration rate increases while body mass decreases through time during the embryonic stage (see Kooijman, 1986; Kooijman, 2010). Another case is the pupal stage of holometabolous insects, which shows a U-shaped respiration curve through time while the body mass of the animal decreases (Maino and Kearney, 2014). Thus, the general rule of increased metabolic rate with increased body weight requi"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2441,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "and they found that the appendage beat rate Fig. 8.4 Ingestion rates of D. magna (3 mm body size) at increasing concen- trations of 32P-labelled food organisms of different size, a bacterium (Esch- erichia coli), a green alga (Chlorella vulgaris), a yeast (Saccharomyces cere- visiae), and a ciliate (Tetrahymena pyriformis). (modiﬁed from McMahon and Rigler 1965) [Page 167] 154 of was not dependent on the body size of D. magna. Counts of appendage beat rates and mandibular rates by Watts and Young (1980) at concentrations of Chlo- rella below the ILC were close to the results of McMa- hon and Rigler (1963). The rectilinear model produces a sharp inﬂec- tion at the ILC, which is not a very pro"
+            },
+            {
+              "document_id": "W2064731167",
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "distance": 0.2092,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Basal or standard metabolic rate (SMR) has been found to exhibit substantial intraspecific variation in a range of taxa, but the consequences of this variation are little understood. Here we explore how SMR is related to the energy cost of processing food, known as apparent specific dynamic action or the heat increment of feeding. Using juvenile Atlantic salmon Salmo salar , we show that fishes with a higher SMR had a higher peak and a greater total energy expenditure when digesting a given size of meal. However, the duration over which their metabolism was elevated after consuming the meal was shorter. The greater energy costs they incur for processing food may be related to their assimilat"
+            },
+            {
+              "document_id": "W2158591681",
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "distance": 0.2167,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "Specific dynamic action (SDA), the accumulated energy expended on all physiological processes associated with meal digestion, is strongly influenced by features of both the meal and the organism. We assessed the effects of meal size, meal type, body temperature, and body size on the postprandial metabolic response and calculated SDA of the marine toad, Bufo marinus. Peak postprandial rates of O(2) consumption (.V(O2)) and CO(2) production (.V(CO2)) and SDA increased with meal size (5%-20% of body mass). Postprandial metabolism was impacted by meal type; the digestion of hard-bodied superworms (Zophobas larva) and crickets was more costly than the digestion of soft-bodied earthworms and juven"
+            },
+            {
+              "document_id": "W2053786475",
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.88,
+              "text": "The oxygen uptake of Python molurus increases enormously following feeding, and the elevated metabolism coincides with rapid growth of the gastrointestinal organs. There are opposing views regarding the energetic costs of the gastrointestinal hypertrophy, and this study concerns the metabolic response to feeding after fasting periods of different duration. Since mass and function of the gastrointestinal organs remain elevated for several days after feeding, the metabolic increment following a second meal given soon after the first can reveal whether the metabolic costs relate to the upregulation of gastrointestinal organs or merely the metabolic cost of processing a meal. Eight juvenile pyth"
+            },
+            {
+              "document_id": "W2109871929",
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "The increase in metabolism during digestion--the heat increment of feeding--is often regarded as an energetic waste product. However, it has been suggested that this energy could offset thermoregulatory costs in cold environments. We investigated this possibility by measuring the rate of oxygen consumption of four juvenile Steller sea lions (Eumetopias jubatus) before and after they ingested a meal in water temperatures of 2 degrees-8 degrees C. Rates of oxygen consumption of fasted and fed animals increased in parallel with decreasing water temperature, such that the apparent heat increment of feeding did not change with water temperature. These results suggest that Steller sea lions did no"
+            },
+            {
+              "document_id": "W3126394692",
+              "title": "High carbohydrate diet ingestion increases post-meal lipid synthesis and drives respiratory exchange ratios above 1",
+              "doi": "https://doi.org/10.1242/jeb.240010",
+              "year": "2021",
+              "distance": 0.2325,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT Locusts have been reported to elevate metabolic rate in response to high carbohydrate diets; this conclusion was based on metabolic rates calculated from CO2 production, a common practice for insects. However, respiratory exchange ratio (RER, CO2 production divided by O2 consumption) can rise above 1 as a result of de novo lipid synthesis, providing an alternative possible explanation of the prior findings. We studied the relationship between macronutrient ingestion, RER and lipid synthesis using South American locusts (Schistocerca cancellata) reared on artificial diets varying in protein:carbohydrate (p:c) ratio. RER increased and rose above 1 as dietary p:c ratio decreased. Lipid"
+            },
+            {
+              "document_id": "W2724818809",
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "distance": 0.2342,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "The significance of diet-induced thermogenesis (DIT) for metabolic control is still debated. Although obesogenic diets recruit UCP1 and adrenergically inducible thermogenesis, and although the absence of UCP1 may promote the development of obesity, no actual UCP1-related thermogenesis identifiable as diet-induced thermogenesis has to date been unambiguously demonstrated. Examining mice living at thermoneutrality, we have identified a process of facultative (directly elicited by acute eating), adaptive (magnitude develops over weeks on an obesogenic diet), and fully UCP1-dependent thermogenesis. We found no evidence for UCP1-independent diet-induced thermogenesis. The thermogenesis was propor"
+            },
+            {
+              "document_id": "W2073473682",
+              "title": "Adaptation de l'ingestion alimentaire aux dépenses énergétiques",
+              "doi": "https://doi.org/10.1051/rnd:19870204",
+              "year": "1987",
+              "distance": 0.2348,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Body energy balance is regulated in adults. The accuracy of the phenomenon is particularly evident in laboratory animals under steady conditions. Moreover, it has been repeatedly demonstrated that this balance is maintained in spite of fluctuations in food intake or energy expenditure. When animals such as rats, dogs or rabbits are presented with a diluted or concentrated version of familiar food, they compensate rapidly by increasing or decreasing their ponderal intake. This is achieved first by a change in meal frequency, then meal size adapts to the new caloric content and meal frequency returns to the original pattern. This adaptation is based on the learning of post-ingestive cues. Hypo"
+            },
+            {
+              "document_id": "W2921694183",
+              "title": "Influence of food, body size, and fragmentation on metabolic rate in a sessile marine invertebrate",
+              "doi": "https://doi.org/10.1111/ivb.12241",
+              "year": "2019",
+              "distance": 0.2371,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "Abstract Metabolic rates vary among individuals according to food availability and phenotype, most notably body size. Disentangling size from other factors (e.g., age, reproductive status) can be difficult in some groups, but modular organisms may provide an opportunity for manipulating size experimentally. While modular organisms are increasingly used to understand metabolic scaling, the potential of feeding to alter metabolic scaling has not been explored in this group. Here, we perform a series of experiments to examine the drivers of metabolic rate in a modular marine invertebrate, the bryozoan Bugula neritina . We manipulated size and examined metabolic rate in either fed or starved ind"
+            },
+            {
+              "document_id": "W2148400263",
+              "title": "Nonshivering thermogenesis and its adequate measurement in metabolic studies",
+              "doi": "https://doi.org/10.1242/jeb.050989",
+              "year": "2010",
+              "distance": 0.2389,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary Alterations in nonshivering thermogenesis are presently discussed as being both potentially causative of and able to counteract obesity. However, the necessity for mammals to defend their body temperature means that the ambient temperature profoundly affects the outcome and interpretation of metabolic experiments. An adequate understanding and assessment of nonshivering thermogenesis is therefore paramount for metabolic studies. Classical nonshivering thermogenesis is facultative, i.e. it is only activated when an animal acutely requires extra heat (switched on in minutes), and adaptive, i.e. it takes weeks for an increase in capacity to develop. Nonshivering thermogenesis is fully d"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2396,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2153761383",
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "distance": 0.2456,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "The past decade has witnessed a dramatic increase in studies of amphibian and reptile specific dynamic action (SDA). These studies have demonstrated that SDA, the summed energy expended on meal digestion and assimilation, is affected significantly by meal size, meal type, and body size and to some extent by body temperature. While much of this attention has been directed at anuran and reptile SDA, we investigated the effects of meal size, meal type, and body temperature on the postprandial metabolic responses and the SDA of the tiger salamander (Ambystoma tigrinum tigrinum). We also compared the SDA responses among six species of Ambystoma salamanders representing the breadth of Ambystoma ph"
+            },
+            {
+              "document_id": "W2147452171",
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "distance": 0.2457,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "Metabolic rate (MR) and digestive duration are thermally dependant, and energy usage changes as body temperature (Tb) changes. Increased Tb during digestion causes a rapid increase in VO2 and a shorter postprandial metabolic response known as specific dynamic action (SDA). SDA is the additional energy expended above standard metabolic rate (SMR) to carry out functions associated with meal digestion and assimilation. SDA is affected by prey size, prey type and body mass (Mb). Liquid meals require less energy to digest and assimilate than intact prey items resulting in a lower metabolic scope and reduced postprandial metabolic response. Digestive efficiency and metabolism are also affected by "
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Two snippets ([1], [14]) explicitly state the stylized fact as an established empirical generalization in DEB stylized-fact tables, citing multiple supporting references, which corroborates the heat increment of feeding. Snippet [2] and [16] provide direct empirical evidence that feeding/foraging raises metabolic rate (respiration/CO2 increase) independent of declining body mass, consistent with the fact. The remaining snippets address related topics (metabolic scaling with body mass, temperature, ingestion, growth) but do not directly bear on the transient post-feeding metabolic increment. No snippet contradicts the fact. Overall the evidence is moderate (the strongest support comes from canonical stylized-fact listings rather than detailed primary measurements), and the direction is clearly corroborative with no conflict."
+          },
+          "n_references": 3,
+          "references": {
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1658
+            },
+            "3064": {
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2231
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2449
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1658,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87] R3 The use of dioxygen scales with body weight raised animals [11, 65, 71] to a power close to 0.75 [38] R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68] after ingesting food independent of their body mass - the heat increment of feeding Table 5.1: Stylized facts and empirical evidence on feeding, growth and respiration. Stylized Facts Empirical Evidence Stoichiometry S1 Well-fed organisms have a different body chemical animals [9, 14, 29, 56] composition than poorly-fed organisms yeasts [20] S2 Organisms growing with constant food density animals converge to a constant chemical compos"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2231,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "emical techniques. Body mass and all body nutrients declined sharply from the ﬁrst day onwards. By contrast, the CO2 produced and the O2 consumed increased steadily. Starving females showed the opposite trend, identifying foraging as the reason for the respiration increase of feeding females. Two complementary physiological processes explain the unexpected relationship between increasing metabolic rate and declining body weight. First, host hemolymph is a highly unbalanced food, and the excess nutrients (protein and carbohydrate) need to be voided, partially through excretion and partially through respiration. Second, a foraging young female produces eggs at an increasing rate during the ﬁrs"
+            },
+            {
+              "document_id": "2993",
+              "title": "Kooy88c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2239,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "s. As all biological rate processes, the von Bertalanffy growth rate depends on temperature. The observed rates will be corrected for dif- ferences in temperature, in order to analyse the remaining variation in growth rates. 2. A MODEL FOR GROWTH 2.1 Stored energy Changes in food intake generally do not result in momentary changes in processes like respiration and growth. The rates of these processes seem to depend on an average of food intake over the recent past. This suggests that energy buffers govern rates. An obvious buffer is the food present in gut and stomach but, for most species, the time constant of this buffer is too short to explain the graded effect of a change in the (mean) f"
+            },
+            {
+              "document_id": "3668",
+              "title": "Stavrakidis-Zachou et al. - 2023 - A bioenergetics approach to modelling tolerance li.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2315,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "teau or may even decline (Pörtner et al., 2017; Leonard and Skov, 2022), which is due to a temporary cessation of energy-consuming processes such as growth and reproduction in an attempt by organisms to divert energy to conservation and self-maintenance processes. The observation that the standard metabolic rate continues to increase with temperature in a fashion resembling Equation 1 rather than Equation 4, is central to the approach presented here and is related to the energy needs SMR represents. That is, regardless of the organism’s ability to repair temperature-induced damage (such as DNA damage, protein denaturation, free radical formation), the induction of such damage increases expon"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2329,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3103",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.233,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "nutrients, wastes or heat flow (Figure 5). If the body surface of an organism is permeable to fluxes of resources and wastes, then its area relative to body volume may affect the rates at which resources are supplied to and wastes removed from metabolic processes. As a result, the scaling of SA [Page 41] Systems 2014, 2 491 with respect to body volume or mass may also affect the scaling of metabolic rate. Evidence for this modulating effect includes (1) a significantly positive correlation between the scaling exponents for SA and metabolic rate in soft-bodied pelagic invertebrates with permeable integuments; and (2) the lack of such a correlation in hard-bodied pelagic arthropods with exoske"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2333,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "mbryonic stage, and after birth, here deﬁned as the onset of feeding, it further increases during the juvenile and adult stages till the individual is fully grown, and then decreases somewhat at old age. Several factors are responsible for this increase in metabolic rate during ontogeny, increase in body size being one of them. Many papers since the 19th century have tried to explain why metabolic rate tends to in- crease with body mass to the power 3/4, and whether or not it is exactly this power law, or only approximately so; log–log plotting can easily give the misleading impression of accuracy. It is generally agreed that several processes contribute to metabolic rate, such as feeding an"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2341,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "t-eaten). During the energy intake procedure, animals encountering a food cell that has not updated its resource levels for that timestep update it based on the time since last eaten and the resource accumulation rates per timestep (r-growth-ts), up to the maximum resource level (max-resources). After updating resource values, animals consume resources from the cell, and the food level drops accordingly to the amount consumed. After both energetic costs and ingested energy are determined, the overall energy balance is updated (energy-allocation). It is then evaluated whether the animals can meet their current costs based solely on the ingested energy (energy-assimilated), or if they need to "
+            },
+            {
+              "document_id": "2691",
+              "title": "Jusup et al. - 2014 - Simple measurements reveal the feeding history, th.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "in ﬁsh (Kooijman et al., 2011), but physiological evidence suggests that increasingly efﬁcient energy assimilation and utilization are responsible, i.e. a type M acceleration of growth observed in many ﬁsh species (Lika et al., 2014). During the exponential growth, multiple physiological changes thought to improve food assimilation and ingestion have been observed. For example, the ﬁrst appearance of gastric glands and pyloric caeca, together with a sharp increase in the speciﬁc activity of trypsin-like and pepsin-like di- gestive enzymes, points to an improvement in food assimilation (Kaji, 2003). Simultaneously, the larvae undertake a number of anatomical transformations that represent an "
+            },
+            {
+              "document_id": "3268",
+              "title": "Predicting shifting sustainability trade‐offs in m.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2357,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "2010; Sar\u0001a et al., 2012). Central to the DEB the- ory is the concept that food and body temperature (BT) are the primary drivers of an individual’s metabolic machinery (Sar\u0001a, Palmeri, Montalto, Rinaldi, & Widdows, 2013). The amount of ingested energy available for biological processes is regulated within the DEB 2 | SAR\u0001A ET AL. [Page 3] theory by the Holling’s functional responses (Holling, 1959). Once food is ingested, the amount of energy that flows through the organism depends at some extent on physiological rates. As all physiological rates depend on body temperature, BT is an important driver, in particular for ectotherms, such as fish and shellfish, as their BT is close to that of t"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2438,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ntiﬁed using either heat production with calorimetry or CO2 production and O2 consumption with respirometry (Sibly et al., 2012). The simplest mechanistic explanations for metabolic scaling do however not apply to growth of individuals for many insect spe- cies (Maino and Kearney, 2014). For example, respiration rate increases while body mass decreases through time during the embryonic stage (see Kooijman, 1986; Kooijman, 2010). Another case is the pupal stage of holometabolous insects, which shows a U-shaped respiration curve through time while the body mass of the animal decreases (Maino and Kearney, 2014). Thus, the general rule of increased metabolic rate with increased body weight requi"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2441,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "and they found that the appendage beat rate Fig. 8.4 Ingestion rates of D. magna (3 mm body size) at increasing concen- trations of 32P-labelled food organisms of different size, a bacterium (Esch- erichia coli), a green alga (Chlorella vulgaris), a yeast (Saccharomyces cere- visiae), and a ciliate (Tetrahymena pyriformis). (modiﬁed from McMahon and Rigler 1965) [Page 167] 154 of was not dependent on the body size of D. magna. Counts of appendage beat rates and mandibular rates by Watts and Young (1980) at concentrations of Chlo- rella below the ILC were close to the results of McMa- hon and Rigler (1963). The rectilinear model produces a sharp inﬂec- tion at the ILC, which is not a very pro"
+            },
+            {
+              "document_id": "2457",
+              "title": "Mauritsson - 2024 - Application of Metabolic Theory in Models for Grow.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2448,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ion and other activities (RA), costs for processing food (RF), overhead costs for growth of new biomass (RG), and costs for maintaining existing biomass (RM): = + + + A F G M R R R R R . (2) 3.2 Effects of body size and temperature on metabolic rate The metabolic rate of organisms vary with their body size, temperature and chemical composition in a way that appears to be quite regular [1]. A large organism usually consumes more energy than a smaller organism and chemical reactions are known to occur faster at higher temperatures. Consequently, the metabolic rate tend to increase with body mass and temperature. However, these relationships are not linear. Based on ob- servations within and ac"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2449,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 Dissipating heat for heterotrophic isomorphs under aerobic conditions is a weighted sum of three mass flows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typicall"
+            },
+            {
+              "document_id": "2731",
+              "title": "Maino og Kearney - 2017 - The universality of the von Bertalanffy growth cur.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2449,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "under constant conditions. However, in Maino and Kearney [9] it was demonstrated that insect biomass growth efﬁciency and energy density increase with development. In addition, the growth rate of insects was slower than exponential but faster than von Bertalanffy growth. Reasons for deviations from the standard DEB model (or von Bertalanffy growth) are diverse, with some studies suggesting acceleration may be caused by changes in body shape [15,16]. More commonly it is thought that phys- iological constraints on food assimilation may be important drivers. Jager et al. [17] found that food limitation in juvenile nematodes could explain deviations from the standard model and, more recently, fo"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2453,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.45,
+              "text": "tabolic rate contributions of the feeding and reproductive processes supplements the contribution of the structural mass and lead to the observed trend. We extend our explanations to other insect groups and discuss the potential for uniﬁcation using Dynamic Energy Budget theory. \u0002 2015 Elsevier Ltd. All rights reserved. 1. Introduction Metabolic rate has been studied across many organisms, during ontogeny within a species or over short periods of time related to behavioral activities of individuals (Nisbet et al., 2012; Maino and Kearney, 2014). Metabolic rate has been found to increase with body mass, a phenomenon named metabolic scaling that is wide- spread in nature (West et al., 1997; Eh"
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2469,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "wer than the case where ontogenetic effects were considered (full model). In insects, metabolic rate has been shown to scale with exponents higher than 2/3. Addol-Bediako et al. (2002) found insect respiration to scale with interspecific mass with an exponent of 0.77, while more recent and larger studies (∼400 insects) conducted independently by Chown et al. (2007) and Ehnes et al. (2011), found metabolic rate scaled with an exponent between 0.75 and 0.81. This range over- laps with the 95% confidence interval of our estimate for the interspecific scaling of assimilation rate and supports the expectation based on the energetic balancing of supply and demand in insects. As assimilated energy "
+            },
+            {
+              "document_id": "3771",
+              "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.247,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ive response to warming (Fryxell et al. 2020; Arendt 2015), our experimental findings suggest otherwise. Consequences of the TSR on energetic efficiency and ingestion rate Whether the functional response was fitted to the per capita or mass-specific ingestion rate, our findings indicate that the ingestion rate was higher for Daphnia tested at 26 °C than at 18 °C. The increase in ingestion rate at elevated temperatures has been commonly observed in previous studies (Englund et al. 2011; Sentis, Hemptinne, and Brodeur 2012), and is often attributed to increased metabolism and activity under warming. Our observations revealed that, when the functional response was fitted to the mass-specific in"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly document the postprandial increase in metabolic rate following ingestion, variously termed specific dynamic action (SDA), heat increment of feeding, or diet-induced thermogenesis. Snippets 2, 3, 4, 11, 12, and 18 explicitly describe transient elevations in oxygen consumption/metabolic rate after feeding across diverse taxa (toads, pythons, sea lions, salamanders, colubrid snakes, deep-sea isopods), and snippets 6 and 13 confirm diet-induced thermogenesis in mammals and insects. Several note that SDA is affected by body mass, meal size, and meal type, but the core transient postprandial metabolic increase is clearly and repeatedly corroborated. The 'independent of body mass' qualifier in the stylized fact is not directly contradicted; the phenomenon itself is robustly supported with no contradicting evidence in the snippets. Off-topic items concern allometric scaling, thermal physiology, or energy balance without bearing on the heat increment of feeding."
+          },
+          "n_references": 9,
+          "references": {
+            "W2064731167": {
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2092
+            },
+            "W2158591681": {
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2167
+            },
+            "W2053786475": {
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2244
+            },
+            "W2109871929": {
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2253
+            },
+            "W2724818809": {
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2342
+            },
+            "W2153761383": {
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2456
+            },
+            "W2147452171": {
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2457
+            },
+            "W2176521957": {
+              "title": "Diet-Induced Thermogenesis in Insects: A Developing Concept in Nutritional Ecology",
+              "doi": "https://doi.org/10.1603/0046-225x-32.1.1",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2466
+            },
+            "W4317886456": {
+              "title": "Metabolic responses to food and temperature in deep-sea isopods,<i>Bathynomus doederleini</i>",
+              "doi": "https://doi.org/10.1101/2023.01.23.525261",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2506
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2064731167",
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "distance": 0.2092,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Basal or standard metabolic rate (SMR) has been found to exhibit substantial intraspecific variation in a range of taxa, but the consequences of this variation are little understood. Here we explore how SMR is related to the energy cost of processing food, known as apparent specific dynamic action or the heat increment of feeding. Using juvenile Atlantic salmon Salmo salar , we show that fishes with a higher SMR had a higher peak and a greater total energy expenditure when digesting a given size of meal. However, the duration over which their metabolism was elevated after consuming the meal was shorter. The greater energy costs they incur for processing food may be related to their assimilat"
+            },
+            {
+              "document_id": "W2158591681",
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "distance": 0.2167,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Specific dynamic action (SDA), the accumulated energy expended on all physiological processes associated with meal digestion, is strongly influenced by features of both the meal and the organism. We assessed the effects of meal size, meal type, body temperature, and body size on the postprandial metabolic response and calculated SDA of the marine toad, Bufo marinus. Peak postprandial rates of O(2) consumption (.V(O2)) and CO(2) production (.V(CO2)) and SDA increased with meal size (5%-20% of body mass). Postprandial metabolism was impacted by meal type; the digestion of hard-bodied superworms (Zophobas larva) and crickets was more costly than the digestion of soft-bodied earthworms and juven"
+            },
+            {
+              "document_id": "W2053786475",
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "The oxygen uptake of Python molurus increases enormously following feeding, and the elevated metabolism coincides with rapid growth of the gastrointestinal organs. There are opposing views regarding the energetic costs of the gastrointestinal hypertrophy, and this study concerns the metabolic response to feeding after fasting periods of different duration. Since mass and function of the gastrointestinal organs remain elevated for several days after feeding, the metabolic increment following a second meal given soon after the first can reveal whether the metabolic costs relate to the upregulation of gastrointestinal organs or merely the metabolic cost of processing a meal. Eight juvenile pyth"
+            },
+            {
+              "document_id": "W2109871929",
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "The increase in metabolism during digestion--the heat increment of feeding--is often regarded as an energetic waste product. However, it has been suggested that this energy could offset thermoregulatory costs in cold environments. We investigated this possibility by measuring the rate of oxygen consumption of four juvenile Steller sea lions (Eumetopias jubatus) before and after they ingested a meal in water temperatures of 2 degrees-8 degrees C. Rates of oxygen consumption of fasted and fed animals increased in parallel with decreasing water temperature, such that the apparent heat increment of feeding did not change with water temperature. These results suggest that Steller sea lions did no"
+            },
+            {
+              "document_id": "W3126394692",
+              "title": "High carbohydrate diet ingestion increases post-meal lipid synthesis and drives respiratory exchange ratios above 1",
+              "doi": "https://doi.org/10.1242/jeb.240010",
+              "year": "2021",
+              "distance": 0.2325,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ABSTRACT Locusts have been reported to elevate metabolic rate in response to high carbohydrate diets; this conclusion was based on metabolic rates calculated from CO2 production, a common practice for insects. However, respiratory exchange ratio (RER, CO2 production divided by O2 consumption) can rise above 1 as a result of de novo lipid synthesis, providing an alternative possible explanation of the prior findings. We studied the relationship between macronutrient ingestion, RER and lipid synthesis using South American locusts (Schistocerca cancellata) reared on artificial diets varying in protein:carbohydrate (p:c) ratio. RER increased and rose above 1 as dietary p:c ratio decreased. Lipid"
+            },
+            {
+              "document_id": "W2724818809",
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "distance": 0.2342,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "The significance of diet-induced thermogenesis (DIT) for metabolic control is still debated. Although obesogenic diets recruit UCP1 and adrenergically inducible thermogenesis, and although the absence of UCP1 may promote the development of obesity, no actual UCP1-related thermogenesis identifiable as diet-induced thermogenesis has to date been unambiguously demonstrated. Examining mice living at thermoneutrality, we have identified a process of facultative (directly elicited by acute eating), adaptive (magnitude develops over weeks on an obesogenic diet), and fully UCP1-dependent thermogenesis. We found no evidence for UCP1-independent diet-induced thermogenesis. The thermogenesis was propor"
+            },
+            {
+              "document_id": "W2073473682",
+              "title": "Adaptation de l'ingestion alimentaire aux dépenses énergétiques",
+              "doi": "https://doi.org/10.1051/rnd:19870204",
+              "year": "1987",
+              "distance": 0.2348,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Body energy balance is regulated in adults. The accuracy of the phenomenon is particularly evident in laboratory animals under steady conditions. Moreover, it has been repeatedly demonstrated that this balance is maintained in spite of fluctuations in food intake or energy expenditure. When animals such as rats, dogs or rabbits are presented with a diluted or concentrated version of familiar food, they compensate rapidly by increasing or decreasing their ponderal intake. This is achieved first by a change in meal frequency, then meal size adapts to the new caloric content and meal frequency returns to the original pattern. This adaptation is based on the learning of post-ingestive cues. Hypo"
+            },
+            {
+              "document_id": "W2921694183",
+              "title": "Influence of food, body size, and fragmentation on metabolic rate in a sessile marine invertebrate",
+              "doi": "https://doi.org/10.1111/ivb.12241",
+              "year": "2019",
+              "distance": 0.2371,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Abstract Metabolic rates vary among individuals according to food availability and phenotype, most notably body size. Disentangling size from other factors (e.g., age, reproductive status) can be difficult in some groups, but modular organisms may provide an opportunity for manipulating size experimentally. While modular organisms are increasingly used to understand metabolic scaling, the potential of feeding to alter metabolic scaling has not been explored in this group. Here, we perform a series of experiments to examine the drivers of metabolic rate in a modular marine invertebrate, the bryozoan Bugula neritina . We manipulated size and examined metabolic rate in either fed or starved ind"
+            },
+            {
+              "document_id": "W2148400263",
+              "title": "Nonshivering thermogenesis and its adequate measurement in metabolic studies",
+              "doi": "https://doi.org/10.1242/jeb.050989",
+              "year": "2010",
+              "distance": 0.2389,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Summary Alterations in nonshivering thermogenesis are presently discussed as being both potentially causative of and able to counteract obesity. However, the necessity for mammals to defend their body temperature means that the ambient temperature profoundly affects the outcome and interpretation of metabolic experiments. An adequate understanding and assessment of nonshivering thermogenesis is therefore paramount for metabolic studies. Classical nonshivering thermogenesis is facultative, i.e. it is only activated when an animal acutely requires extra heat (switched on in minutes), and adaptive, i.e. it takes weeks for an increase in capacity to develop. Nonshivering thermogenesis is fully d"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2396,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2153761383",
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "distance": 0.2456,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "The past decade has witnessed a dramatic increase in studies of amphibian and reptile specific dynamic action (SDA). These studies have demonstrated that SDA, the summed energy expended on meal digestion and assimilation, is affected significantly by meal size, meal type, and body size and to some extent by body temperature. While much of this attention has been directed at anuran and reptile SDA, we investigated the effects of meal size, meal type, and body temperature on the postprandial metabolic responses and the SDA of the tiger salamander (Ambystoma tigrinum tigrinum). We also compared the SDA responses among six species of Ambystoma salamanders representing the breadth of Ambystoma ph"
+            },
+            {
+              "document_id": "W2147452171",
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "distance": 0.2457,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Metabolic rate (MR) and digestive duration are thermally dependant, and energy usage changes as body temperature (Tb) changes. Increased Tb during digestion causes a rapid increase in VO2 and a shorter postprandial metabolic response known as specific dynamic action (SDA). SDA is the additional energy expended above standard metabolic rate (SMR) to carry out functions associated with meal digestion and assimilation. SDA is affected by prey size, prey type and body mass (Mb). Liquid meals require less energy to digest and assimilate than intact prey items resulting in a lower metabolic scope and reduced postprandial metabolic response. Digestive efficiency and metabolism are also affected by "
+            },
+            {
+              "document_id": "W2176521957",
+              "title": "Diet-Induced Thermogenesis in Insects: A Developing Concept in Nutritional Ecology",
+              "doi": "https://doi.org/10.1603/0046-225x-32.1.1",
+              "year": "2003",
+              "distance": 0.2466,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Abstract Diet-induced thermogenesis (DIT) is a concept that has been well known in one form or another for more than a century in vertebrate nutrition and physiological ecology. Yet, it is practically unknown in the physiology and nutritional ecology of insects. We suggest that DIT is a ubiquitous mechanism occurring in most if not all organisms and functions to maintain nutritional homeostasis by metabolically oxidizing excess energy intake to maintain a metabolic pool of nutrients that is balanced in both energy and nutrients. There is sufficient evidence to suggest the phenomenon exits in insects and should be considered as a viable hypothesis to enrich the paradigms of insect nutritional"
+            },
+            {
+              "document_id": "W4281628644",
+              "title": "Effects of Temperature on the Bioenergetics of the Marine Protozoans Gyrodinium dominans and Oxyrrhis marina",
+              "doi": "https://doi.org/10.3389/fmars.2022.901096",
+              "year": "2022",
+              "distance": 0.2472,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "We exposed Gyrodinium dominans and two strains of Oxyrrhis marina to temperatures well above (25°C) and below (12°C) their maintenance temperature (18°C) to study the mechanisms controlling the overall physiological response to thermal stress. As variables, we measured growth, ingestion, and respiration rates (this latter with and without food). The growth rates of O. marina strains plotted as a function of temperature showed maximum values at the maintenance temperature, as expected in a typical unimodal functional response. However, G. dominans showed similar growth rates at 12 and 18°C, and even a marked decrease in growth rates at 25°C, happened to be not significant. G. dominans ingesti"
+            },
+            {
+              "document_id": "W2588513124",
+              "title": "The role of food chain balance and common nutritional environment in interspecific allometric scaling of unicellular organisms",
+              "doi": "",
+              "year": "2016",
+              "distance": 0.2488,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "One of the major characteristics of living organisms is metabolic rate - amount of energy produced per unit time. When the size of organisms increases, the metabolic rate increases slower than organisms' mass. This effect is called allometric scaling. It has important implications for the individual and population organismal development. Here, we study the causes of this phenomenon considering metabolic properties of unicellular organisms (Amoeba Proteus, fission yeast S. pombe, E. coli, B. subtilis, Staphylococcus). We found that the metabolic properties of unicellular organisms are defined by two primary factors. One is the need to acquire nutrients through the surface in a common nutritio"
+            },
+            {
+              "document_id": "W2616031531",
+              "title": "Body size shifts influence effects of increasing temperatures on ectotherm metabolism",
+              "doi": "https://doi.org/10.1101/139279",
+              "year": "2017",
+              "distance": 0.2499,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Aim: It is well-established that warmer temperatures directly cause metabolic rates of ectotherms to increase, but temperature additionally indirectly affects metabolic rates due to impacts on other aspects of ecological systems. Because higher temperatures result in smaller body sizes, which consequently decreases metabolic rates, it is unknown whether this indirect effect of temperature increase could mitigate the direct positive effect of temperature on metabolic rate. We assess the potential impact of temperature-induced shifts in body size on metabolic rate. Location: Global. Major taxa studied: Ectotherms. Methods: We compiled literature-derived data on average mass and temperature for"
+            },
+            {
+              "document_id": "W2167693259",
+              "title": "Adapting to a Hot Meal",
+              "doi": "https://doi.org/10.1126/scisignal.4173ec140",
+              "year": "2011",
+              "distance": 0.2502,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Mosquitoes that feed on warm-blooded animals exhibit a heat shock response in the gut that promotes digestion and fecundity."
+            },
+            {
+              "document_id": "W4317886456",
+              "title": "Metabolic responses to food and temperature in deep-sea isopods,<i>Bathynomus doederleini</i>",
+              "doi": "https://doi.org/10.1101/2023.01.23.525261",
+              "year": "2023",
+              "distance": 0.2506,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ABSTRACT Metabolic rate, the energy required per unit of time for an organism to sustain life, is influenced by both intrinsic and extrinsic factors. Despite the similarities among living organisms across the various domains of life, it has been observed that those adapted to deep-sea environments exhibit notable distinctions from those in shallower waters, even when accounting for size and temperature. However, as deep-sea organisms are infrequently kept in captivity for prolonged periods, investigations into their potential metabolic responses to food and temperature have yet to be conducted. In this study, we demonstrate the impact of food (specific dynamic action: SDA ) and temperature ("
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly affirm the stylized fact. Snippet 1 explicitly lists it as a DEB stylized fact with empirical citations. Several physiological studies (snippets 13, 14, 15, 16, 23, 24) document specific dynamic action / heat increment of feeding—the transient post-prandial rise in metabolic rate following meal ingestion across diverse taxa (salmon, toads, pythons, sea lions, salamanders, snakes), with one (16) explicitly naming the 'heat increment of feeding.' Snippet 18 demonstrates diet-induced thermogenesis. While some of these note that the magnitude of SDA scales with body/meal size, the existence of the transient increment itself is robustly corroborated, with no contradicting evidence. Many remaining snippets are off-topic (scaling of basal metabolism, feeding rates, growth), but the supporting evidence is strong and consistent."
+          },
+          "n_references": 10,
+          "references": {
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1658
+            },
+            "3064": {
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2231
+            },
+            "W2064731167": {
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2092
+            },
+            "W2158591681": {
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2167
+            },
+            "W2053786475": {
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2244
+            },
+            "W2109871929": {
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2253
+            },
+            "W3126394692": {
+              "title": "High carbohydrate diet ingestion increases post-meal lipid synthesis and drives respiratory exchange ratios above 1",
+              "doi": "https://doi.org/10.1242/jeb.240010",
+              "year": "2021",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2325
+            },
+            "W2724818809": {
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2342
+            },
+            "W2153761383": {
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2456
+            },
+            "W2147452171": {
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2457
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1658,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87] R3 The use of dioxygen scales with body weight raised animals [11, 65, 71] to a power close to 0.75 [38] R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68] after ingesting food independent of their body mass - the heat increment of feeding Table 5.1: Stylized facts and empirical evidence on feeding, growth and respiration. Stylized Facts Empirical Evidence Stoichiometry S1 Well-fed organisms have a different body chemical animals [9, 14, 29, 56] composition than poorly-fed organisms yeasts [20] S2 Organisms growing with constant food density animals converge to a constant chemical compos"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2231,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "emical techniques. Body mass and all body nutrients declined sharply from the ﬁrst day onwards. By contrast, the CO2 produced and the O2 consumed increased steadily. Starving females showed the opposite trend, identifying foraging as the reason for the respiration increase of feeding females. Two complementary physiological processes explain the unexpected relationship between increasing metabolic rate and declining body weight. First, host hemolymph is a highly unbalanced food, and the excess nutrients (protein and carbohydrate) need to be voided, partially through excretion and partially through respiration. Second, a foraging young female produces eggs at an increasing rate during the ﬁrs"
+            },
+            {
+              "document_id": "2993",
+              "title": "Kooy88c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2239,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "s. As all biological rate processes, the von Bertalanffy growth rate depends on temperature. The observed rates will be corrected for dif- ferences in temperature, in order to analyse the remaining variation in growth rates. 2. A MODEL FOR GROWTH 2.1 Stored energy Changes in food intake generally do not result in momentary changes in processes like respiration and growth. The rates of these processes seem to depend on an average of food intake over the recent past. This suggests that energy buffers govern rates. An obvious buffer is the food present in gut and stomach but, for most species, the time constant of this buffer is too short to explain the graded effect of a change in the (mean) f"
+            },
+            {
+              "document_id": "3668",
+              "title": "Stavrakidis-Zachou et al. - 2023 - A bioenergetics approach to modelling tolerance li.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2315,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "teau or may even decline (Pörtner et al., 2017; Leonard and Skov, 2022), which is due to a temporary cessation of energy-consuming processes such as growth and reproduction in an attempt by organisms to divert energy to conservation and self-maintenance processes. The observation that the standard metabolic rate continues to increase with temperature in a fashion resembling Equation 1 rather than Equation 4, is central to the approach presented here and is related to the energy needs SMR represents. That is, regardless of the organism’s ability to repair temperature-induced damage (such as DNA damage, protein denaturation, free radical formation), the induction of such damage increases expon"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2329,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3103",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.233,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "nutrients, wastes or heat flow (Figure 5). If the body surface of an organism is permeable to fluxes of resources and wastes, then its area relative to body volume may affect the rates at which resources are supplied to and wastes removed from metabolic processes. As a result, the scaling of SA [Page 41] Systems 2014, 2 491 with respect to body volume or mass may also affect the scaling of metabolic rate. Evidence for this modulating effect includes (1) a significantly positive correlation between the scaling exponents for SA and metabolic rate in soft-bodied pelagic invertebrates with permeable integuments; and (2) the lack of such a correlation in hard-bodied pelagic arthropods with exoske"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2333,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "mbryonic stage, and after birth, here deﬁned as the onset of feeding, it further increases during the juvenile and adult stages till the individual is fully grown, and then decreases somewhat at old age. Several factors are responsible for this increase in metabolic rate during ontogeny, increase in body size being one of them. Many papers since the 19th century have tried to explain why metabolic rate tends to in- crease with body mass to the power 3/4, and whether or not it is exactly this power law, or only approximately so; log–log plotting can easily give the misleading impression of accuracy. It is generally agreed that several processes contribute to metabolic rate, such as feeding an"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2341,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "t-eaten). During the energy intake procedure, animals encountering a food cell that has not updated its resource levels for that timestep update it based on the time since last eaten and the resource accumulation rates per timestep (r-growth-ts), up to the maximum resource level (max-resources). After updating resource values, animals consume resources from the cell, and the food level drops accordingly to the amount consumed. After both energetic costs and ingested energy are determined, the overall energy balance is updated (energy-allocation). It is then evaluated whether the animals can meet their current costs based solely on the ingested energy (energy-assimilated), or if they need to "
+            },
+            {
+              "document_id": "2691",
+              "title": "Jusup et al. - 2014 - Simple measurements reveal the feeding history, th.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "in ﬁsh (Kooijman et al., 2011), but physiological evidence suggests that increasingly efﬁcient energy assimilation and utilization are responsible, i.e. a type M acceleration of growth observed in many ﬁsh species (Lika et al., 2014). During the exponential growth, multiple physiological changes thought to improve food assimilation and ingestion have been observed. For example, the ﬁrst appearance of gastric glands and pyloric caeca, together with a sharp increase in the speciﬁc activity of trypsin-like and pepsin-like di- gestive enzymes, points to an improvement in food assimilation (Kaji, 2003). Simultaneously, the larvae undertake a number of anatomical transformations that represent an "
+            },
+            {
+              "document_id": "3268",
+              "title": "Predicting shifting sustainability trade‐offs in m.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2357,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "2010; Sar\u0001a et al., 2012). Central to the DEB the- ory is the concept that food and body temperature (BT) are the primary drivers of an individual’s metabolic machinery (Sar\u0001a, Palmeri, Montalto, Rinaldi, & Widdows, 2013). The amount of ingested energy available for biological processes is regulated within the DEB 2 | SAR\u0001A ET AL. [Page 3] theory by the Holling’s functional responses (Holling, 1959). Once food is ingested, the amount of energy that flows through the organism depends at some extent on physiological rates. As all physiological rates depend on body temperature, BT is an important driver, in particular for ectotherms, such as fish and shellfish, as their BT is close to that of t"
+            },
+            {
+              "document_id": "3064",
+              "title": "CasaBody2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2438,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ntiﬁed using either heat production with calorimetry or CO2 production and O2 consumption with respirometry (Sibly et al., 2012). The simplest mechanistic explanations for metabolic scaling do however not apply to growth of individuals for many insect spe- cies (Maino and Kearney, 2014). For example, respiration rate increases while body mass decreases through time during the embryonic stage (see Kooijman, 1986; Kooijman, 2010). Another case is the pupal stage of holometabolous insects, which shows a U-shaped respiration curve through time while the body mass of the animal decreases (Maino and Kearney, 2014). Thus, the general rule of increased metabolic rate with increased body weight requi"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2441,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "and they found that the appendage beat rate Fig. 8.4 Ingestion rates of D. magna (3 mm body size) at increasing concen- trations of 32P-labelled food organisms of different size, a bacterium (Esch- erichia coli), a green alga (Chlorella vulgaris), a yeast (Saccharomyces cere- visiae), and a ciliate (Tetrahymena pyriformis). (modiﬁed from McMahon and Rigler 1965) [Page 167] 154 of was not dependent on the body size of D. magna. Counts of appendage beat rates and mandibular rates by Watts and Young (1980) at concentrations of Chlo- rella below the ILC were close to the results of McMa- hon and Rigler (1963). The rectilinear model produces a sharp inﬂec- tion at the ILC, which is not a very pro"
+            },
+            {
+              "document_id": "W2064731167",
+              "title": "Juvenile salmon with high standard metabolic rates have higher energy costs but can process meals faster",
+              "doi": "https://doi.org/10.1098/rspb.2009.0080",
+              "year": "2009",
+              "distance": 0.2092,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Basal or standard metabolic rate (SMR) has been found to exhibit substantial intraspecific variation in a range of taxa, but the consequences of this variation are little understood. Here we explore how SMR is related to the energy cost of processing food, known as apparent specific dynamic action or the heat increment of feeding. Using juvenile Atlantic salmon Salmo salar , we show that fishes with a higher SMR had a higher peak and a greater total energy expenditure when digesting a given size of meal. However, the duration over which their metabolism was elevated after consuming the meal was shorter. The greater energy costs they incur for processing food may be related to their assimilat"
+            },
+            {
+              "document_id": "W2158591681",
+              "title": "Effects of Meal Size, Meal Type, Body Temperature, and Body Size on the Specific Dynamic Action of the Marine Toad,<i>Bufo marinus</i>",
+              "doi": "https://doi.org/10.1086/344493",
+              "year": "2002",
+              "distance": 0.2167,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "Specific dynamic action (SDA), the accumulated energy expended on all physiological processes associated with meal digestion, is strongly influenced by features of both the meal and the organism. We assessed the effects of meal size, meal type, body temperature, and body size on the postprandial metabolic response and calculated SDA of the marine toad, Bufo marinus. Peak postprandial rates of O(2) consumption (.V(O2)) and CO(2) production (.V(CO2)) and SDA increased with meal size (5%-20% of body mass). Postprandial metabolism was impacted by meal type; the digestion of hard-bodied superworms (Zophobas larva) and crickets was more costly than the digestion of soft-bodied earthworms and juven"
+            },
+            {
+              "document_id": "W2053786475",
+              "title": "The Effects of Fasting Duration on the Metabolic Response to Feeding in<i>Python molurus</i>: An Evaluation of the Energetic Costs Associated with Gastrointestinal Growth and Upregulation",
+              "doi": "https://doi.org/10.1086/342769",
+              "year": "2002",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "The oxygen uptake of Python molurus increases enormously following feeding, and the elevated metabolism coincides with rapid growth of the gastrointestinal organs. There are opposing views regarding the energetic costs of the gastrointestinal hypertrophy, and this study concerns the metabolic response to feeding after fasting periods of different duration. Since mass and function of the gastrointestinal organs remain elevated for several days after feeding, the metabolic increment following a second meal given soon after the first can reveal whether the metabolic costs relate to the upregulation of gastrointestinal organs or merely the metabolic cost of processing a meal. Eight juvenile pyth"
+            },
+            {
+              "document_id": "W2109871929",
+              "title": "No Evidence for Bioenergetic Interaction between Digestion and Thermoregulation in Steller Sea Lions<i>Eumetopias jubatus</i>",
+              "doi": "https://doi.org/10.1086/378140",
+              "year": "2003",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "The increase in metabolism during digestion--the heat increment of feeding--is often regarded as an energetic waste product. However, it has been suggested that this energy could offset thermoregulatory costs in cold environments. We investigated this possibility by measuring the rate of oxygen consumption of four juvenile Steller sea lions (Eumetopias jubatus) before and after they ingested a meal in water temperatures of 2 degrees-8 degrees C. Rates of oxygen consumption of fasted and fed animals increased in parallel with decreasing water temperature, such that the apparent heat increment of feeding did not change with water temperature. These results suggest that Steller sea lions did no"
+            },
+            {
+              "document_id": "W3126394692",
+              "title": "High carbohydrate diet ingestion increases post-meal lipid synthesis and drives respiratory exchange ratios above 1",
+              "doi": "https://doi.org/10.1242/jeb.240010",
+              "year": "2021",
+              "distance": 0.2325,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "ABSTRACT Locusts have been reported to elevate metabolic rate in response to high carbohydrate diets; this conclusion was based on metabolic rates calculated from CO2 production, a common practice for insects. However, respiratory exchange ratio (RER, CO2 production divided by O2 consumption) can rise above 1 as a result of de novo lipid synthesis, providing an alternative possible explanation of the prior findings. We studied the relationship between macronutrient ingestion, RER and lipid synthesis using South American locusts (Schistocerca cancellata) reared on artificial diets varying in protein:carbohydrate (p:c) ratio. RER increased and rose above 1 as dietary p:c ratio decreased. Lipid"
+            },
+            {
+              "document_id": "W2724818809",
+              "title": "Adaptive facultative diet-induced thermogenesis in wild-type but not in UCP1-ablated mice",
+              "doi": "https://doi.org/10.1152/ajpendo.00097.2017",
+              "year": "2017",
+              "distance": 0.2342,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "The significance of diet-induced thermogenesis (DIT) for metabolic control is still debated. Although obesogenic diets recruit UCP1 and adrenergically inducible thermogenesis, and although the absence of UCP1 may promote the development of obesity, no actual UCP1-related thermogenesis identifiable as diet-induced thermogenesis has to date been unambiguously demonstrated. Examining mice living at thermoneutrality, we have identified a process of facultative (directly elicited by acute eating), adaptive (magnitude develops over weeks on an obesogenic diet), and fully UCP1-dependent thermogenesis. We found no evidence for UCP1-independent diet-induced thermogenesis. The thermogenesis was propor"
+            },
+            {
+              "document_id": "W2073473682",
+              "title": "Adaptation de l'ingestion alimentaire aux dépenses énergétiques",
+              "doi": "https://doi.org/10.1051/rnd:19870204",
+              "year": "1987",
+              "distance": 0.2348,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Body energy balance is regulated in adults. The accuracy of the phenomenon is particularly evident in laboratory animals under steady conditions. Moreover, it has been repeatedly demonstrated that this balance is maintained in spite of fluctuations in food intake or energy expenditure. When animals such as rats, dogs or rabbits are presented with a diluted or concentrated version of familiar food, they compensate rapidly by increasing or decreasing their ponderal intake. This is achieved first by a change in meal frequency, then meal size adapts to the new caloric content and meal frequency returns to the original pattern. This adaptation is based on the learning of post-ingestive cues. Hypo"
+            },
+            {
+              "document_id": "W2921694183",
+              "title": "Influence of food, body size, and fragmentation on metabolic rate in a sessile marine invertebrate",
+              "doi": "https://doi.org/10.1111/ivb.12241",
+              "year": "2019",
+              "distance": 0.2371,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Abstract Metabolic rates vary among individuals according to food availability and phenotype, most notably body size. Disentangling size from other factors (e.g., age, reproductive status) can be difficult in some groups, but modular organisms may provide an opportunity for manipulating size experimentally. While modular organisms are increasingly used to understand metabolic scaling, the potential of feeding to alter metabolic scaling has not been explored in this group. Here, we perform a series of experiments to examine the drivers of metabolic rate in a modular marine invertebrate, the bryozoan Bugula neritina . We manipulated size and examined metabolic rate in either fed or starved ind"
+            },
+            {
+              "document_id": "W2148400263",
+              "title": "Nonshivering thermogenesis and its adequate measurement in metabolic studies",
+              "doi": "https://doi.org/10.1242/jeb.050989",
+              "year": "2010",
+              "distance": 0.2389,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Summary Alterations in nonshivering thermogenesis are presently discussed as being both potentially causative of and able to counteract obesity. However, the necessity for mammals to defend their body temperature means that the ambient temperature profoundly affects the outcome and interpretation of metabolic experiments. An adequate understanding and assessment of nonshivering thermogenesis is therefore paramount for metabolic studies. Classical nonshivering thermogenesis is facultative, i.e. it is only activated when an animal acutely requires extra heat (switched on in minutes), and adaptive, i.e. it takes weeks for an increase in capacity to develop. Nonshivering thermogenesis is fully d"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2396,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2153761383",
+              "title": "Specific Dynamic Action of Ambystomatid Salamanders and the Effects of Meal Size, Meal Type, and Body Temperature",
+              "doi": "https://doi.org/10.1086/505511",
+              "year": "2006",
+              "distance": 0.2456,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "The past decade has witnessed a dramatic increase in studies of amphibian and reptile specific dynamic action (SDA). These studies have demonstrated that SDA, the summed energy expended on meal digestion and assimilation, is affected significantly by meal size, meal type, and body size and to some extent by body temperature. While much of this attention has been directed at anuran and reptile SDA, we investigated the effects of meal size, meal type, and body temperature on the postprandial metabolic responses and the SDA of the tiger salamander (Ambystoma tigrinum tigrinum). We also compared the SDA responses among six species of Ambystoma salamanders representing the breadth of Ambystoma ph"
+            },
+            {
+              "document_id": "W2147452171",
+              "title": "Metabolic physiology of Colubrid dietary specialists, Dasypeltis scabra and Dasypeltis inornata.",
+              "doi": "",
+              "year": "2009",
+              "distance": 0.2457,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "Metabolic rate (MR) and digestive duration are thermally dependant, and energy usage changes as body temperature (Tb) changes. Increased Tb during digestion causes a rapid increase in VO2 and a shorter postprandial metabolic response known as specific dynamic action (SDA). SDA is the additional energy expended above standard metabolic rate (SMR) to carry out functions associated with meal digestion and assimilation. SDA is affected by prey size, prey type and body mass (Mb). Liquid meals require less energy to digest and assimilate than intact prey items resulting in a lower metabolic scope and reduced postprandial metabolic response. Digestive efficiency and metabolism are also affected by "
+            }
+          ]
+        }
+      }
+    }
+  }
+}

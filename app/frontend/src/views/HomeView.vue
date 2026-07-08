@@ -25,6 +25,11 @@
           <p>AI-powered knowledge assistant</p>
         </router-link>
 
+        <router-link to="/documentation" class="feature-card">
+          <h3>Documentation</h3>
+          <p>Role-aware guide to the app</p>
+        </router-link>
+
         <router-link to="/scenarios" class="feature-card">
           <h3>Scenarios</h3>
           <p>Create modeling scenarios</p>

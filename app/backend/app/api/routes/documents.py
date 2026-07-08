@@ -46,9 +46,9 @@ async def create_document_submission(
 @router.post("/upload", response_model=DocumentSubmission)
 async def upload_document_submission(
     file: UploadFile = File(...),
-    current_user: dict = Depends(get_current_user),
+    current_user: dict = Depends(require_curator),
 ):
-    """Submit a document file for curator review."""
+    """Upload a document file directly into the corpus. Curator/admin only."""
     svc = UserSubmissionService()
     return await svc.upload_document_submission(file, current_user["id"])
 

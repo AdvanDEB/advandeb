@@ -5,17 +5,50 @@
       <aside class="session-sidebar">
         <div class="sidebar-header">
           <span class="sidebar-title">Conversations</span>
-          <button class="new-session-btn" @click="startNewSession">+</button>
+          <button class="new-session-btn" title="New conversation" @click="startNewSession">+</button>
         </div>
+
+        <!-- Item 10: Session search -->
+        <div class="sidebar-search">
+          <input
+            v-model="store.sessionSearchQuery"
+            placeholder="Search…"
+            class="search-input"
+          />
+        </div>
+
         <ul class="session-list">
           <li
-            v-for="session in sessions"
+            v-for="session in store.filteredSessions"
             :key="session.id"
-            :class="['session-item', { active: session.id === currentSessionId }]"
-            @click="loadSession(session.id)"
+            :class="['session-item', { active: session.id === store.currentSessionId }]"
+            @click="handleLoadSession(session.id)"
+            @mouseenter="hoveredSessionId = session.id"
+            @mouseleave="hoveredSessionId = null"
           >
-            <span class="session-title">{{ session.title || 'Untitled' }}</span>
-            <span class="session-date">{{ formatDate(session.updated_at) }}</span>
+            <div class="session-item-body">
+              <!-- Item 6: Inline session rename on double-click -->
+              <input
+                v-if="renamingId === session.id"
+                ref="renameInput"
+                v-model="renameTitle"
+                class="rename-input"
+                @blur="commitRename(session.id)"
+                @keydown.enter.prevent="commitRename(session.id)"
+                @keydown.esc.prevent="renamingId = null"
+                @click.stop
+              />
+              <span v-else class="session-title" @dblclick.stop="startRename(session)">
+                {{ session.title || 'Untitled' }}
+              </span>
+              <span class="session-date">{{ formatDate(session.updated_at) }}</span>
+            </div>
+            <button
+              v-if="hoveredSessionId === session.id && renamingId !== session.id"
+              class="delete-session-btn"
+              title="Delete conversation"
+              @click.stop="confirmDeleteSession(session.id, session.title)"
+            >✕</button>
           </li>
         </ul>
       </aside>
@@ -24,7 +57,7 @@
       <div class="chat-main">
         <!-- Chat toolbar -->
         <div class="chat-toolbar">
-          <span class="session-title-display">{{ currentSessionTitle }}</span>
+          <span class="session-title-display">{{ store.currentSessionTitle }}</span>
           <div class="toolbar-actions">
             <button
               class="toolbar-btn"
@@ -32,33 +65,80 @@
               title="Choose which model answers"
               @click="showLLMConfig = !showLLMConfig"
             >
-              🔑 {{ llmConfigLabel }}
+              {{ llmConfigLabel }}
             </button>
-            <button class="toolbar-btn" title="Export conversation" @click="exportConversation">⬇ Export</button>
+            <!-- Item 12: System prompt toggle -->
+            <button
+              class="toolbar-btn"
+              :class="{ active: showSystemPrompt }"
+              title="Custom instructions for this session"
+              @click="showSystemPrompt = !showSystemPrompt"
+            >
+              Instructions
+            </button>
+            <button class="toolbar-btn" title="Export conversation" @click="exportConversation">Export</button>
           </div>
         </div>
 
         <LLMConfigPanel
           v-if="showLLMConfig"
-          :model-value="llmConfig"
+          :model-value="store.llmConfig"
           @update:model-value="onLLMConfigUpdate"
         />
 
-        <MessageList :messages="messages" @show-provenance="openProvenance" />
-
-        <!-- Suggested follow-up questions -->
-        <div v-if="suggestedQuestions.length > 0 && !responding" class="suggestions">
-          <button
-            v-for="q in suggestedQuestions"
-            :key="q"
-            class="suggestion-chip"
-            @click="handleSendMessage(q)"
-          >
-            {{ q }}
-          </button>
+        <!-- Item 12: System prompt panel -->
+        <div v-if="showSystemPrompt" class="system-prompt-panel">
+          <label class="sp-label">Custom instructions (applied to every reply in this session)</label>
+          <textarea
+            v-model="store.systemPrompt"
+            class="sp-textarea"
+            rows="3"
+            placeholder="E.g. Always answer in bullet points. Focus on marine organisms."
+            @blur="saveSystemPrompt"
+          ></textarea>
         </div>
 
-        <MessageInput :disabled="responding" @send="handleSendMessage" />
+        <!-- Item 9: Prompt library (positioned relative to input area) -->
+        <div class="messages-and-input">
+          <MessageList
+            :messages="store.messages"
+            @show-provenance="openProvenance"
+            @retry="handleRetry"
+            @feedback="handleFeedback"
+          />
+
+          <!-- Suggested follow-up questions -->
+          <div v-if="store.suggestedQuestions.length > 0 && !store.responding" class="suggestions">
+            <button
+              v-for="q in store.suggestedQuestions"
+              :key="q"
+              class="suggestion-chip"
+              @click="handleSendMessage(q)"
+            >
+              {{ q }}
+            </button>
+          </div>
+
+          <!-- Input wrapper holds prompt library popup -->
+          <div class="input-wrapper">
+            <PromptLibrary
+              v-if="showPromptLibrary"
+              @select="onPromptSelect"
+              @close="showPromptLibrary = false"
+            />
+            <div class="input-row">
+              <button
+                class="prompt-lib-btn"
+                :class="{ active: showPromptLibrary }"
+                title="Starter prompts"
+                @click="showPromptLibrary = !showPromptLibrary"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <MessageInput :disabled="store.responding" @send="handleSendMessage" />
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Right panel: Agent activity or Provenance -->
@@ -74,8 +154,8 @@
         />
         <AgentActivity
           v-else
-          :agents="activeAgents"
-          :workflow-trace="workflowTrace"
+          :agents="store.activeAgents"
+          :workflow-trace="store.workflowTrace"
         />
       </aside>
     </div>
@@ -83,129 +163,57 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import MessageList from './MessageList.vue'
 import MessageInput from './MessageInput.vue'
 import AgentActivity from './AgentActivity.vue'
 import LLMConfigPanel from './LLMConfigPanel.vue'
+import PromptLibrary from './PromptLibrary.vue'
 import ProvenanceTrail from '@/components/provenance/ProvenanceTrail.vue'
-import type { ChatMessage as Message, CitationRef as Citation } from '@/types/chat'
-import type { LLMKey, LLMSessionConfig } from '@/types/llm'
-import { listKeys } from '@/utils/llmKeysApi'
+import type { CitationRef as Citation } from '@/types/chat'
+import type { LLMSessionConfig } from '@/types/llm'
 import api from '@/utils/api'
 import { useAuthStore } from '@/stores/auth'
+import { useChatStore } from '@/stores/chat'
 
 const authStore = useAuthStore()
+const store = useChatStore()
 
-interface AgentStatus {
-  name: string
-  displayName: string
-  status: 'idle' | 'working' | 'completed' | 'error'
-  currentTask?: string
-  resultSummary?: string
-  startedAt?: number
-}
-
-interface WorkflowStep {
-  agent: string
-  action: string
-  timestamp: number
-}
-
-interface Session {
-  id: string
-  title: string
-  updated_at?: string
-}
-
-const messages = ref<Message[]>([])
-const activeAgents = ref<AgentStatus[]>([])
-const workflowTrace = ref<WorkflowStep[]>([])
-const sessions = ref<Session[]>([])
-const currentSessionId = ref<string>('new')
-const responding = ref(false)
+// UI state
+const showLLMConfig = ref(false)
+const showSystemPrompt = ref(false)
+const showPromptLibrary = ref(false)
 const rightPanel = ref<'activity' | 'provenance'>('activity')
 const activeProvenanceId = ref<string | null>(null)
-const suggestedQuestions = ref<string[]>([])
-// Map from server message_id → local message array index for reconnect catch-up
-const generatingMessageIds = ref<Set<string>>(new Set())
+
+// Inline rename state
+const renamingId = ref<string | null>(null)
+const renameTitle = ref('')
+const renameInput = ref<HTMLInputElement | null>(null)
+
+// Sidebar hover (for delete button visibility)
+const hoveredSessionId = ref<string | null>(null)
+
+// Item 13: pending message if session creation race
+const pendingMessage = ref<string | null>(null)
+
 let ws: WebSocket | null = null
 
-// Per-session LLM (BYOK) config. `pendingLLMConfig` holds a choice made before
-// a brand-new session exists; it is persisted once the session_id arrives.
-const showLLMConfig = ref(false)
-const llmConfig = ref<LLMSessionConfig | null>(null)
-const pendingLLMConfig = ref<LLMSessionConfig | null>(null)
-// The user's stored BYOK keys; when present, the most recent one becomes the
-// default model for chat, and reasoning defaults to multi-step.
-const userKeys = ref<LLMKey[]>([])
-
-function defaultLLMConfig(): LLMSessionConfig | null {
-  const key = userKeys.value[0] // listKeys() returns most-recent first
-  if (!key) return null
-  return {
-    provider: key.provider,
-    mode: 'react',
-    model: key.default_model || undefined,
-    key_id: key.id,
-  }
-}
-
 const PROVIDER_SHORT: Record<string, string> = {
+  default: 'Nemotron', nvidia: 'NVIDIA',
   ollama: 'Local', anthropic: 'Claude', openai: 'ChatGPT',
   gemini: 'Gemini', github_models: 'GitHub',
 }
 
-const currentSessionTitle = computed(() => {
-  const s = sessions.value.find((s) => s.id === currentSessionId.value)
-  return s?.title || 'New conversation'
-})
-
 const llmConfigLabel = computed(() =>
-  PROVIDER_SHORT[llmConfig.value?.provider || 'ollama'] || 'Local',
+  PROVIDER_SHORT[store.llmConfig?.provider || 'default'] || 'Nemotron',
 )
 
-async function onLLMConfigUpdate(cfg: LLMSessionConfig) {
-  llmConfig.value = cfg
-  if (currentSessionId.value && currentSessionId.value !== 'new') {
-    try {
-      await api.put(`/chat/sessions/${currentSessionId.value}/llm`, cfg)
-    } catch {
-      // interceptor surfaces the error
-    }
-  } else {
-    // No session yet — apply once one is created.
-    pendingLLMConfig.value = cfg
-  }
-}
-
-const AGENT_DISPLAY_NAMES: Record<string, string> = {
-  // Legacy names
-  planner: 'Query Planner',
-  retrieval: 'Retrieval Agent',
-  synthesis: 'Synthesis Agent',
-  validator: 'Validator',
-  // Actual names emitted by chatbot_agent ReAct loop
-  chatbot: 'Chatbot',
-  retrieval_agent: 'Retrieval Agent',
-  graph_explorer: 'Graph Explorer',
-  synthesis_agent: 'Synthesis Agent',
-  knowledge_agent: 'Knowledge Agent',
-}
-
 onMounted(async () => {
-  try {
-    userKeys.value = await listKeys()
-  } catch {
-    userKeys.value = []
-  }
-  // New conversation defaults to the user's own model + multi-step reasoning.
-  const def = defaultLLMConfig()
-  if (def) {
-    llmConfig.value = def
-    pendingLLMConfig.value = def
-  }
-  await fetchSessions()
+  store.resetConversation()
+  store.llmConfig = store.defaultLLMConfig()
+  store.pendingLLMConfig = store.defaultLLMConfig()
+  await store.fetchSessions()
   connectWebSocket()
 })
 
@@ -214,7 +222,7 @@ onUnmounted(() => {
 })
 
 function connectWebSocket() {
-  const sessionId = currentSessionId.value
+  const sessionId = store.currentSessionId
   const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
   const token = authStore.accessToken
   const tokenParam = token ? `?token=${encodeURIComponent(token)}` : ''
@@ -222,208 +230,175 @@ function connectWebSocket() {
   ws = new WebSocket(wsUrl)
 
   ws.onmessage = (event) => {
-    const data = JSON.parse(event.data)
-    handleServerEvent(data)
+    const data = JSON.parse(event.data) as Record<string, unknown>
+    const result = store.handleServerEvent(data)
+    if (result?.newSessionId && result.newSessionId !== store.currentSessionId) {
+      const newId = result.newSessionId
+      store.currentSessionId = newId
+
+      // Persist LLM config and system prompt made before session existed
+      if (store.pendingLLMConfig) {
+        api.put(`/chat/sessions/${newId}/llm`, store.pendingLLMConfig).catch(() => {})
+        store.pendingLLMConfig = null
+      }
+      if (store.systemPrompt) {
+        api.put(`/chat/sessions/${newId}/system-prompt`, {
+          system_prompt: store.systemPrompt,
+        }).catch(() => {})
+      }
+      store.fetchSessions()
+
+      // Item 13: flush a message that was queued WHILE session creation was in
+      // flight. The sentinel '' means "in-flight, nothing queued" — don't
+      // re-send in that case (that would duplicate the first message).
+      const queued = pendingMessage.value
+      pendingMessage.value = null
+      if (queued) {
+        nextTick(() => sendOverWs(queued))
+      }
+    }
   }
 
   ws.onclose = (ev) => {
-    // 4401 = invalid/expired token — don't reconnect, surface the error
     if (ev.code === 4401) {
-      messages.value.push({
+      store.messages.push({
         id: crypto.randomUUID(),
         role: 'assistant',
         content: 'Session expired. Please log in again.',
       })
       return
     }
-    // Attempt reconnect after 2s if session is active
     setTimeout(() => {
-      if (currentSessionId.value) connectWebSocket()
+      if (store.currentSessionId) connectWebSocket()
     }, 2000)
   }
 }
 
-function handleServerEvent(event: Record<string, unknown>) {
-  if (event.type === 'agent_activity') {
-    updateAgentStatus(event)
-    workflowTrace.value.push({
-      agent: (event.agent as string) || 'unknown',
-      action: (event.task as string) || (event.status as string) || '',
-      timestamp: Date.now(),
-    })
-  } else if (event.type === 'generating') {
-    // Reconnect catch-up: the server found an in-progress generation.
-    // Insert a spinner placeholder message so the user sees something while
-    // the ReAct loop finishes in the background.
-    const mid = event.message_id as string
-    if (mid && !generatingMessageIds.value.has(mid)) {
-      generatingMessageIds.value.add(mid)
-      messages.value.push({
-        id: mid,
-        role: 'assistant',
-        content: '',
-        generating: true,
-      })
-      responding.value = true
-    }
-  } else if (event.type === 'message') {
-    const citations = mapCitations((event.citations as Record<string, unknown>[]) || [])
-
-    const incomingId = event.message_id as string | undefined
-    const msg: Message = {
-      id: incomingId || crypto.randomUUID(),
-      role: event.role as 'user' | 'assistant',
-      content: event.content as string,
-      citations,
-      generating: false,
-      evidence_mode: event.evidence_mode as Message['evidence_mode'],
-    }
-
-    // Replace a spinner placeholder if one exists for this message_id
-    if (incomingId && generatingMessageIds.value.has(incomingId)) {
-      const idx = messages.value.findIndex((m) => m.id === incomingId)
-      if (idx !== -1) {
-        messages.value[idx] = msg
-      } else {
-        messages.value.push(msg)
-      }
-      generatingMessageIds.value.delete(incomingId)
-    } else {
-      messages.value.push(msg)
-    }
-
-    responding.value = false
-
-    if (event.session_id && event.session_id !== currentSessionId.value) {
-      const newId = event.session_id as string
-      currentSessionId.value = newId
-      // Persist any LLM choice made before this session existed.
-      if (pendingLLMConfig.value) {
-        api.put(`/chat/sessions/${newId}/llm`, pendingLLMConfig.value).catch(() => {})
-        pendingLLMConfig.value = null
-      }
-      fetchSessions()
-    }
-
-    // Reset agents to idle after response
-    activeAgents.value = activeAgents.value.map((a) => ({ ...a, status: 'idle' as const }))
-
-    // Extract suggested follow-up questions from event if provided
-    if (Array.isArray(event.suggested_questions)) {
-      suggestedQuestions.value = event.suggested_questions as string[]
-    }
-  } else if (event.type === 'error') {
-    messages.value.push({
-      id: crypto.randomUUID(),
-      role: 'assistant',
-      content: `Error: ${event.detail}`,
-    })
-    responding.value = false
-  }
-}
-
-function updateAgentStatus(event: Record<string, unknown>) {
-  const agentName = event.agent as string
-  const existing = activeAgents.value.find((a) => a.name === agentName)
-
-  // Map 'thinking' → 'working' so the spinner and elapsed timer show
-  const rawStatus = (event.status as string) || 'working'
-  const mappedStatus = rawStatus === 'thinking' ? 'working' : rawStatus
-
-  const updated: AgentStatus = {
-    name: agentName,
-    displayName: AGENT_DISPLAY_NAMES[agentName] || agentName,
-    status: mappedStatus as AgentStatus['status'],
-    currentTask: event.task as string | undefined,
-    resultSummary: event.result as string | undefined,
-    startedAt: existing?.startedAt ?? Date.now(),
-  }
-
-  if (existing) {
-    const idx = activeAgents.value.indexOf(existing)
-    activeAgents.value[idx] = updated
-  } else {
-    activeAgents.value.push(updated)
-  }
-}
-
-async function handleSendMessage(text: string) {
-  if (!text.trim() || responding.value) return
-
-  const userMsg: Message = {
-    id: crypto.randomUUID(),
-    role: 'user',
-    content: text,
-    timestamp: new Date().toISOString(),
-  }
-  messages.value.push(userMsg)
-  responding.value = true
-  workflowTrace.value = []
-  suggestedQuestions.value = []
-
+function sendOverWs(text: string) {
   if (ws?.readyState === WebSocket.OPEN) {
     ws.send(
       JSON.stringify({
         type: 'user_message',
         text,
-        // Inline config so a brand-new session uses the chosen model immediately.
-        llm_config: llmConfig.value || undefined,
-      })
+        llm_config: store.llmConfig || undefined,
+      }),
     )
   }
 }
 
+async function handleSendMessage(text: string) {
+  if (!text.trim() || store.responding) return
+
+  // Item 13: If session creation is already in flight (pendingMessage !== null),
+  // queue this message so it goes out on the correct session after the session
+  // is created. '' means "in-flight, nothing queued yet" (falsy → not re-sent).
+  if (store.currentSessionId === 'new' && pendingMessage.value !== null) {
+    pendingMessage.value = text
+    return
+  }
+
+  store.addUserMessage(text)
+  store.responding = true
+  store.workflowTrace = []
+  store.suggestedQuestions = []
+  showPromptLibrary.value = false
+
+  // Mark "session creation in flight" with an empty-string sentinel so that
+  // a concurrent second message gets queued, but the first message itself is
+  // NOT re-sent when the session_id arrives.
+  if (store.currentSessionId === 'new') {
+    pendingMessage.value = ''
+  }
+
+  sendOverWs(text)
+}
+
+async function handleRetry(messageId: string) {
+  // Find the last user message before this assistant message
+  const idx = store.messages.findIndex((m) => m.id === messageId)
+  if (idx <= 0) return
+  const precedingUser = [...store.messages].slice(0, idx).reverse().find((m) => m.role === 'user')
+  if (!precedingUser) return
+  // Remove the assistant message being retried
+  store.messages.splice(idx, 1)
+  // Re-send
+  handleSendMessage(precedingUser.content)
+}
+
+async function handleFeedback(messageId: string, rating: 1 | -1) {
+  await store.submitFeedback(messageId, rating)
+}
+
+function onPromptSelect(text: string) {
+  showPromptLibrary.value = false
+  handleSendMessage(text)
+}
+
+async function onLLMConfigUpdate(cfg: LLMSessionConfig) {
+  store.llmConfig = cfg
+  if (store.currentSessionId && store.currentSessionId !== 'new') {
+    try {
+      await api.put(`/chat/sessions/${store.currentSessionId}/llm`, cfg)
+    } catch {
+      // interceptor surfaces error
+    }
+  } else {
+    store.pendingLLMConfig = cfg
+  }
+}
+
+async function saveSystemPrompt() {
+  await store.persistSystemPrompt(store.currentSessionId)
+}
+
 function startNewSession() {
   ws?.close()
-  currentSessionId.value = 'new'
-  messages.value = []
-  activeAgents.value = []
-  workflowTrace.value = []
-  // Re-apply the BYOK default so a fresh conversation uses the user's model.
-  const def = defaultLLMConfig()
-  llmConfig.value = def
-  pendingLLMConfig.value = def
+  store.currentSessionId = 'new'
+  store.resetConversation()
+  store.llmConfig = store.defaultLLMConfig()
+  store.pendingLLMConfig = store.defaultLLMConfig()
+  pendingMessage.value = null
   connectWebSocket()
 }
 
-async function loadSession(sessionId: string) {
+async function handleLoadSession(sessionId: string) {
   ws?.close()
-  currentSessionId.value = sessionId
-
-  try {
-    const { data } = await api.get(`/chat/sessions/${sessionId}`)
-    // Use the session's saved config, else fall back to the BYOK default.
-    llmConfig.value = (data.llm_config as LLMSessionConfig) || defaultLLMConfig()
-    pendingLLMConfig.value = null
-    messages.value = (data.messages || []).map((m: Record<string, unknown>) => {
-      return {
-        id: (m.id as string) || crypto.randomUUID(),
-        role: m.role as 'user' | 'assistant',
-        content: m.content as string,
-        citations: mapCitations((m.citations as Record<string, unknown>[]) || []),
-        timestamp: m.timestamp as string | undefined,
-        evidence_mode: m.evidence_mode as Message['evidence_mode'],
-      }
-    })
-  } catch {
-    messages.value = []
-  }
-
+  store.currentSessionId = sessionId
+  pendingMessage.value = null
+  await store.loadSession(sessionId)
   connectWebSocket()
 }
 
-async function fetchSessions() {
-  try {
-    const { data } = await api.get('/chat/sessions')
-    sessions.value = data
-  } catch {
-    sessions.value = []
+async function confirmDeleteSession(sessionId: string, title: string) {
+  const label = title?.trim() || 'this conversation'
+  if (!window.confirm(`Delete "${label}"? This cannot be undone.`)) return
+  const wasActive = store.currentSessionId === sessionId
+  await store.deleteSession(sessionId)
+  if (wasActive) {
+    startNewSession()
   }
+}
+
+// Item 6: Inline rename
+async function startRename(session: { id: string; title: string }) {
+  renamingId.value = session.id
+  renameTitle.value = session.title || ''
+  await nextTick()
+  renameInput.value?.focus()
+  renameInput.value?.select()
+}
+
+async function commitRename(sessionId: string) {
+  const title = renameTitle.value.trim()
+  if (title) {
+    await store.renameSession(sessionId, title)
+  }
+  renamingId.value = null
 }
 
 function exportConversation() {
-  if (messages.value.length === 0) return
-  const payload = messages.value.map((m) => ({
+  if (store.messages.length === 0) return
+  const payload = store.messages.map((m) => ({
     role: m.role,
     content: m.content,
     citations: m.citations || [],
@@ -433,7 +408,7 @@ function exportConversation() {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `conversation-${currentSessionId.value}.json`
+  a.download = `conversation-${store.currentSessionId}.json`
   a.click()
   URL.revokeObjectURL(url)
 }
@@ -441,41 +416,6 @@ function exportConversation() {
 function openProvenance(citation: Citation) {
   activeProvenanceId.value = citation.citation_id
   rightPanel.value = 'provenance'
-}
-
-function mapCitations(rawCitations: Record<string, unknown>[]): Citation[] {
-  return rawCitations.map((citation) => mapCitation(citation))
-}
-
-function mapCitation(citation: Record<string, unknown>): Citation {
-  const legacyNumber = citation.number as number | undefined
-  const legacyMarker = typeof legacyNumber === 'number' ? String(legacyNumber) : ''
-  const citationId =
-    (citation.citation_id as string | undefined) ||
-    (citation.chunk_id as string | undefined) ||
-    (citation.document_id as string | undefined) ||
-    legacyMarker ||
-    crypto.randomUUID()
-
-  return {
-    citation_id: citationId,
-    marker: (citation.marker as string | undefined) || legacyMarker || '?',
-    source_type: (citation.source_type as Citation['source_type'] | undefined) || 'chunk',
-    document_id: citation.document_id as string | undefined,
-    chunk_id: citation.chunk_id as string | undefined,
-    fact_id: citation.fact_id as string | undefined,
-    stylized_fact_id: citation.stylized_fact_id as string | undefined,
-    evidence_text:
-      (citation.evidence_text as string | undefined) ||
-      (citation.text_snippet as string | undefined) ||
-      '',
-    title: citation.title as string | undefined,
-    authors: citation.authors as string[] | undefined,
-    year: citation.year as string | number | undefined,
-    journal: citation.journal as string | undefined,
-    doi: citation.doi as string | undefined,
-    url: citation.url as string | undefined,
-  }
 }
 
 function formatDate(iso?: string): string {
@@ -497,6 +437,7 @@ function formatDate(iso?: string): string {
   overflow: hidden;
 }
 
+/* Sidebar */
 .session-sidebar {
   width: 220px;
   border-right: 1px solid #e5e7eb;
@@ -510,11 +451,14 @@ function formatDate(iso?: string): string {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid #e5e7eb;
   font-weight: 600;
   font-size: 0.875rem;
+  flex-shrink: 0;
 }
+
+.sidebar-title { flex: 1; }
 
 .new-session-btn {
   background: #3b82f6;
@@ -526,28 +470,49 @@ function formatDate(iso?: string): string {
   cursor: pointer;
   font-size: 1rem;
   line-height: 1;
+  flex-shrink: 0;
 }
+
+.sidebar-search {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  box-sizing: border-box;
+}
+.search-input:focus { outline: none; border-color: #3b82f6; }
 
 .session-list {
   list-style: none;
   overflow-y: auto;
   flex: 1;
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
+  margin: 0;
 }
 
 .session-item {
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.45rem 0.5rem 0.45rem 0.75rem;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
   margin: 0 0.25rem;
 }
+.session-item:hover { background: #e5e7eb; }
+.session-item.active { background: #dbeafe; }
 
-.session-item:hover {
-  background: #e5e7eb;
-}
-
-.session-item.active {
-  background: #dbeafe;
+.session-item-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .session-title {
@@ -563,6 +528,34 @@ function formatDate(iso?: string): string {
   color: #9ca3af;
 }
 
+.delete-session-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.25rem;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+}
+.delete-session-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  opacity: 1;
+}
+
+.rename-input {
+  width: 100%;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.25rem;
+  border: 1px solid #3b82f6;
+  border-radius: 3px;
+  background: white;
+}
+
+/* Main area */
 .chat-main {
   flex: 1;
   display: flex;
@@ -577,6 +570,7 @@ function formatDate(iso?: string): string {
   padding: 0.4rem 1rem;
   border-bottom: 1px solid #f3f4f6;
   background: #fafafa;
+  flex-shrink: 0;
 }
 
 .session-title-display {
@@ -598,11 +592,47 @@ function formatDate(iso?: string): string {
   cursor: pointer;
   color: #374151;
 }
-
 .toolbar-btn:hover { background: #f3f4f6; }
 .toolbar-btn.active { background: #eff6ff; border-color: #bfdbfe; color: #2563eb; }
 
 .toolbar-actions { display: flex; gap: 0.4rem; align-items: center; }
+
+/* System prompt */
+.system-prompt-panel {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  background: #fffbeb;
+  flex-shrink: 0;
+}
+
+.sp-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #92400e;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.sp-textarea {
+  width: 100%;
+  font-size: 0.83rem;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #fcd34d;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+  background: white;
+  box-sizing: border-box;
+}
+.sp-textarea:focus { outline: none; border-color: #f59e0b; }
+
+/* Messages + input as a column that fills remaining space */
+.messages-and-input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
 .suggestions {
   padding: 0.5rem 1rem;
@@ -610,6 +640,7 @@ function formatDate(iso?: string): string {
   flex-wrap: wrap;
   gap: 0.4rem;
   border-top: 1px solid #f3f4f6;
+  flex-shrink: 0;
 }
 
 .suggestion-chip {
@@ -620,11 +651,39 @@ function formatDate(iso?: string): string {
   padding: 0.25rem 0.75rem;
   font-size: 0.78rem;
   cursor: pointer;
-  transition: background 0.15s;
 }
-
 .suggestion-chip:hover { background: #dbeafe; }
 
+/* Input wrapper + prompt library */
+.input-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  padding: 0 0.5rem 0.5rem;
+}
+
+.prompt-lib-btn {
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.35rem 0.4rem;
+  cursor: pointer;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 38px;
+}
+.prompt-lib-btn:hover { background: #f3f4f6; color: #374151; }
+.prompt-lib-btn.active { background: #eff6ff; border-color: #bfdbfe; color: #2563eb; }
+
+/* Right panel */
 .activity-panel {
   width: 300px;
   border-left: 1px solid #e5e7eb;
@@ -636,6 +695,7 @@ function formatDate(iso?: string): string {
 .panel-tab-bar {
   display: flex;
   border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
 }
 
 .tab {
@@ -648,10 +708,5 @@ function formatDate(iso?: string): string {
   color: #6b7280;
   border-bottom: 2px solid transparent;
 }
-
-.tab.active {
-  color: #3b82f6;
-  border-bottom-color: #3b82f6;
-  font-weight: 600;
-}
+.tab.active { color: #3b82f6; border-bottom-color: #3b82f6; font-weight: 600; }
 </style>

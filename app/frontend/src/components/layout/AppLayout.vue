@@ -75,6 +75,7 @@ const baseLinks = [
   { path: '/chat',       icon: '💬', label: 'Chat' },
   { path: '/documents',  icon: '📄', label: 'Documents' },
   { path: '/facts',      icon: '🔬', label: 'Facts' },
+  { path: '/documentation', icon: '?', label: 'Docs' },
   { path: '/scenarios',  icon: '⚗',  label: 'Scenarios' },
   { path: '/models',     icon: '📐', label: 'Models' },
   { path: '/settings/llm-keys', icon: '🔑', label: 'LLM Keys' },

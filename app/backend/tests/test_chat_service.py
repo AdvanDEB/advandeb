@@ -52,6 +52,9 @@ async def test_send_message_mcp_disabled_returns_message(chat_service):
 
     with patch("app.services.chat_service.settings") as mock_settings:
         mock_settings.MCP_SERVER_ENABLED = False
+        # Ensure neither the default-key nor BYOK path is taken so the test
+        # reaches the MCP-disabled guard.
+        mock_settings.DEFAULT_CHAT_API_KEY = None
         response = await svc.send_message(
             [{"role": "user", "content": "hi"}],
             session_id="",
@@ -80,6 +83,7 @@ async def test_send_message_calls_mcp_when_enabled(chat_service):
         "app.services.chat_service.MCPClient"
     ) as MockMCPClient:
         mock_settings.MCP_SERVER_ENABLED = True
+        mock_settings.DEFAULT_CHAT_API_KEY = None
 
         mock_instance = MockMCPClient.return_value
         mock_instance.call_tool = AsyncMock(
@@ -117,6 +121,7 @@ async def test_send_message_mcp_failure_returns_error_message(chat_service):
         "app.services.chat_service.MCPClient"
     ) as MockMCPClient:
         mock_settings.MCP_SERVER_ENABLED = True
+        mock_settings.DEFAULT_CHAT_API_KEY = None
 
         mock_instance = MockMCPClient.return_value
         mock_instance.call_tool = AsyncMock(side_effect=RuntimeError("boom"))

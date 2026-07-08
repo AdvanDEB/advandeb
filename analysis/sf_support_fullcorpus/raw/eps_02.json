@@ -1,0 +1,1539 @@
+{
+  "sf_id": "eps_02",
+  "category": "EPS Production",
+  "statement": "Cellular production rates of EPS and other extracellular carbohydrates increase with specific growth rate.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "Only two snippets (8 and 11) provide evidence that extracellular carbohydrate or DOM production scales positively with specific growth rate; the rest are unrelated to EPS or do not address the relationship. There is no direct contradictory evidence, but the support is limited and indirect, leading to a moderate evidence strength and a consensus that is suggestive rather than conclusive."
+          },
+          "n_references": 2,
+          "references": {
+            "3309": {
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2679
+            },
+            "2547": {
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2699
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2282,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "per minute increase in growth rate. Maximum CUE is achieved for positive responders growing on 165 glucose, while maximum growth rates occur at sub-optimal CUE. Inefficiencies of the microbial growth 166 machinery at high growth rates are explained in part by accelerated dilution of storage compounds 167 due to (volume) growth (Suppl. Info. Eq. 3, [15]), as well as decreasing structural biomass yield with 168 increasing protein synthesis rates (Suppl. Figure S4 C, [39]). At comparatively lower growth rates on 169 the other hand, for growth on organic acids, fatty acids, nucleotides and auxins, we found a positive 170 relationship between growth rate and CUE (F1,11=7.74, r2=0.41, p=0.02). Her"
+            },
+            {
+              "document_id": "3812",
+              "title": "MarsTang2023_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2336,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "−kEmE . (4) Specific growth rate 21 Reserve mobilization power is partitioned between growth, pG, maintenance pM, and extracellular enzyme production pX, i.e., pC = pG + pM + pX . (5) The specific growth rate is then obtained by combining (5) and (3) as r = pG µEyEV = kEmE −(pM + pX)/µE mE + yEV (6) where yEV is the efficiency of the growth machinery. 22 Extracellular enzyme production 23 We only consider free extracellular enzymes that are released into the microenvironment by the cell [40]. In the absence of regulation, extracellular enzymes are produced constitutively at a specific rate x proportional to the specific growth rate, i.e. x = pX µEyEX = zXpG µEyEX , (7) where zX scales the en"
+            },
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2526,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "metabolite- and isolate-specific characteristics. Differences in protein synthesis 157 efficiency (19%) and extracellular enzyme production (4%) explained a large amount of inter-species 158 variation in CUE. Taken together, CUE emerges as a complex physiological trait that can be modified by 159 metabolite chemistry, resulting in significantly higher CUE for positive responders for growth on amino 160 acids, organic acids, sugars, and auxins (p < 1e−3, Suppl. Figure S8). 161 We then tested for trade-offs between growth rate and CUE (Figure 3A). For metabolites that are 162 assimilated at high rate and yield (sugars, amino acids), a significant inverse relationship exists between 163 growth "
+            },
+            {
+              "document_id": "3297",
+              "title": "Glaz2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2605,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "metabolites) occur at cell surfaces. He reasoned that cell-surface area and thus metabolic rate should scale as M2/3 if growth is entirely due to cell enlargement, but as M1 if growth is entirely due to an increase in cell number. Intermediate scaling relations should apply if growth in- volves increases in both cell size and number. As evidence, Davison (1955, 1956) showed that the scaling of metabolic rate in crayﬁsh and anuran larvae matched closely the scaling of total cell-surface area in muscle tissue. However, Ellenby (1953) found no eﬀect of cell size on oxygen- consumption rate in diploid and triploid prepupae of the fruit ﬂy Drosophila melanogaster. Unfortunately, the range of appl"
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2607,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "hat it is proportional to the amount of the car- bohydrates produced. So, a portion (1\u0002e) of the total amount of carbohydrate, J˙CH,t, either has not been synthesized at all or it has been consumed in order to produce the equivalent amount of ATP necessary for the carbohydrate synthesis. For a cell growing under constant conditions, the energy cost for carbohydrate synthesis is constant and depends on the spe- cies. Therefore, the net carbohydrate production rate equals ˙J CH ¼ e ˙J CH;m \u0003 \u0004 K Ac \u0007 \u0005 1 þ k2 \u0006 4k1 I þ IK I þ X þ XK X \u0007 1 þ k1 X X þ XK I I þ IK 0 B B @ 1 C C A \u00024 \u000e\u00021 : ð8Þ 3. Analysis and testing of the model The oxygen production rate Eq. (2) and the NADPH production rate Eq."
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2621,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ohydrate synthesis. In this case, the carbohydrate net production rate quantifies as J˙ CH=(e /K) (J˙\u00021 CH,m+J˙ \u00021 C,p)\u00021, which after substituting Eq. (6), and in the absence of CO2-inhibition, becomes ˙J CH ¼ e ˙J CH;m f gAC K 1þk2 ð Þ X Xþ k2 1þk2XK. The carbohydrate pro- duction rate is hyperbolic function of the CO2 concentration, X, and proportional to the surface area of the cell, Ac. The properties of the equation for low CO2-acclimated cells and high CO2-acclimated cells are shown in Fig. 6A. The specific cost for carbohydrate synthesis, (1\u0002e), is high for low CO2- acclimated cells because the active transport of carbon dioxide requires extra ATP due to the activity of carbonic anhy"
+            },
+            {
+              "document_id": "2477",
+              "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2639,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "growth. 112 [Page 127] During the P replete phase, the increase in P availability results in a decrease in the production rate of semi-labile (DOCS) by PNF and to an increased production of labile DOC (DOCL). The main source of DOCL is PNF, through the passive diﬀusion mechanism of DOM release (Fig. 5.4). As discussed in Chapter 2, this excreted DOM consists of small-sized carbohydrates (<10 kDa) with a molecular composition similar to the cellular material, often with high mole percentages of glucose (Biersmith and Benner, 1998; Borchard and Engel, 2015). Additionally, the simulations of the present model show a slight decrease in the C:P ratio of DOML. This DOM is eﬃciently utilized by bac"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2679,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "speciﬁc growth rate (Myklestad et al., 1989; Underwood et al., 2004). Therefore, we assume that the growth ﬂux contributes to DOM production at a speciﬁc rate 10 jℓ,G = yℓ,V jV G (ℓ= DOC, DON, DOP) (17) where, yℓ,V stoichiometrically couples DOM production to the growth rate according to the relationship: yℓ,V = yE,V n∗,E − n∗,V (∗= C, N, P). Finally, inorganic carbon, ammonium and phosphorus are released as by-products from the maintenance processes according to the stoichiometric relationship ji,M = n∗,EjE,M + jM V (n∗,V −yE,V n∗,E) (18) 15 where i = IC, NH, P. Therefore, Eqs. (16) and (17) give the excretion ﬂuxes of DOM jℓ,E = jℓ,R + jℓ,G (ℓ= DOC, DON, DOP) and Eq. (15) and Eq. (18) give"
+            },
+            {
+              "document_id": "3384",
+              "title": "Thommen e.a. - 2019 - Body size-dependent energy storage causes Kleiber’.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2683,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ted cells (Bagun˜a`, 2012; Rink, 2018) and growth/degrowth therefore necessarily involve dynamic adjustments of the respective rate constants (see below). Pla- narian growth processes are therefore highly unusual as compared to other animals, both in terms of the bidirectionality of growth and the pivotal involvement of adult pluripotent stem cells. This makes the applicability of Kleiber’s law to planarian growth/degrowth actually remarkable and emphasizes its underlying reflection of a fundamental and still largely mysterious size dependence of animal metabolism. A priori, the 3/4 power scaling of metabolic rate with mass signifies a systematic change in the ratio between the two parameter"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2686,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "valent to 1 3 10213 sec]). Since protein synthesis rate to a large extent depends on the number of ribosomes rather than their efﬁciency (Nomura et al. 1984), a high growth rate should be closely related to the protein production rate and to the amount of rRNA in a cell. Since rRNA makes up approximately 75–80% of the total RNA in most cells (Brandhorst and McConkey 1974, Campana and Schwartz 1981), differences in cellular rRNA concentrations, and there- fore also in the number of ribosomes per cell and pro- tein synthesis capacity, should inﬂuence the total RNA concentration. Indeed, when data on growth rate are plotted as a function of total RNA per dry mass (DM) of organisms covering a wi"
+            },
+            {
+              "document_id": "2547",
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2699,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "as the most abundant monomer during the exponential, nutrient-replete phase of growth in the extracellular carbohydrates. A pronounced de- crease of glucose and increase of heteropolysacharides, containing various monomers, has been observed in the stationary phase (Underwood et al., 2004; Urbani et al., 2005). In addition, in N-replete cultures of T. pseudonana amino acids accounted for 70% of total DOC while carbohydrates accounted for the rest 30%. On the other hand, extracellular release of amino acids decreased markedly in the sta- tionary phase of N-limited cultures of the diatom Chaetoceros aﬃnis (Myklestad et al., 1989). Moreover, in P-limited cultures of Emiliania huxleyi at steady-"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2708,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "inﬂuences broad-scale processes such as global carbon cycles, the mechanistic basis for the variation in stoichiometry has not yet been fully explored. Empirical evidence shows that the speciﬁc growth rate is positively related to RNA concentration both between and within taxa in both unicellular and multicellular organisms. Since RNA is rich in P and constitutes a substantial part of the total P in organisms, a high growth rate is also connected with a high P content. We argue that the reason for this pattern is that the growth of all biota is closely linked with their protein synthesis rate, and thus with the concentration of ribosomal RNA. Dynamic energy budget theory supports the positiv"
+            },
+            {
+              "document_id": "3776",
+              "title": "Matyla and Lech - 2024 - Dynamic Energy Budget model for E. coli growth in .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2709,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "growth rates (Pramanik and Keasling 1997). The energy requirements also change along with growth rates (Pramanik and Keasling 1997). The higher the growth rates, the higher requirements for macromolecules synthesis, polymerization metabolites transport, and maintenance of transmembrane gradients (Pramanik and Keasling 1997). According to DEB theory, RNA belongs to reserves and DNA to structures. Therefore, the DEB theory seems to agree with empirical observation, as well as presented model. [Page 10] Applied Microbiology and Biotechnology (2024) 108:408 408 Page 10 of 12 A similar “compartment” approach which captures these observations was proposed by Williams (1967) in his model. The cells"
+            },
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2714,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Differences in the slope of 172 the scaling relationship between growth rate and CUE in the two growth regimes can be understood 173 by analyzing correlations between BP and BR in isolate metabolism (Figure 3B). In the low growth 174 rate regime, BP and BR scale isometrically (with slope β ∈[0.95, 1.05], t1332=0.06, p=0.95), indicating 175 that respiration is a major control on biomass production and CUE. Indeed, maintenance requirements, 176 4 was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint (which this version posted July 2, 2022. ; https://doi.org/10.1101/2022.06.29.498137 doi: bioRxiv "
+            },
+            {
+              "document_id": "2600",
+              "title": "KlanNisb2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2728,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "r exposures is slightly underestimated. Growth rate and energy density Predictably, maximum exponential growth rate (Figure 4, upper left panel, solid line) decreases with exposure, roughly following the bi-phasic pattern observed by Priester et al. (2009 [20]) (same panel, dotted line). Exposure increases the time at which growth rate (upper right panel) and energy reserve density (lower left panel) reach the maximum. Time to maximum growth rate increases with exposure slightly slower than lag time (dotted line, upper right panel). The distribution of growth rates as a function of exposure (lower right panel) shows slower changes in growth rate with increased exposure. Aging acceleration dy"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2736,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "et or dry wt), which is an informative endpoint but is not comparable to cellular energy allocation without knowing electron transport system activity. Because of between-study methodological differences in cellular energy allocation and growth measurements, we normalized cellular energy allocation and growth data relative to the within-study control group or reference site for ﬁeld-collected data. If no reference site was speciﬁed, we normalized data to the site with highest growth. We aggregated the data and examined whether cellular energy allocation was linked to growth using PROC CORR in SAS (Ver 9.4; see Supplemental Data for data). We found a positive correlation between cellular ener"
+            },
+            {
+              "document_id": "3661",
+              "title": "Capek et al. - 2023 - Revisiting soil microbial biomass Considering cha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2736,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "end on 𝐺. The higher the amount 292 of growth intermediates the cell has, the faster they can be mobilized (i.e. the higher the flux 293 𝐽, eq. 4) and be used to achieve a high specific growth rate (unless 𝑚 is extremely high for 294 Journal Pre-proof [Page 16] 15 any reason, eq. 9). If 𝑛𝐺 and 𝑛𝐵 are distinctly different, 𝑘𝑒𝑐 changes along the gradient of 295 specific growth rate similarly as the abundance of macromolecules shown on Fig. 1A. The 296 higher the difference between the 𝑛𝐺 and 𝑛𝐵, the higher the 𝑘𝑒𝑐 variability along the growth 297 rate gradient. If the 𝑛𝐺 is higher than 𝑛𝐵, 𝑘𝑒𝑐 increases with increasing specific growth rate 298 and vice versa. 299 𝑘𝑒𝑐 is experimentally estimate"
+            },
+            {
+              "document_id": "3305",
+              "title": "Grim2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2751,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "h, metabolism, and division rates decrease across (and often within) species as cell size increases [...] Explanations for these inverse relationships diﬀer among investigators, but considerations typically involve the size-dependent (scaling) relationships among cell surface area, volume, and dry mass (as measured by carbon or DNA content). The relationship between cell surface area and volume (and its eﬀect on cell growth rates and division rates) has received the most attention because of the dictum that growth requires energy and, regardless of the form of energy garnered by a cell (radiant energy in plants; chemical energy in fungi and animals), the ability to harvest energy is some fun"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the provided abstracts discuss extracellular polymeric substances (EPS) or the production of extracellular carbohydrates in relation to specific growth rate. The few mentions of carbohydrate metabolism (e.g., trehalose, glycogen, glycolysis) pertain to intracellular reserves or general metabolic flux and do not address EPS secretion. Consequently, there is no direct supporting evidence, nor any contradictory data, resulting in a weak overall evidence strength and a neutral consensus."
+          },
+          "n_references": 0,
+          "references": {},
+          "snippets": [
+            {
+              "document_id": "W2295834024",
+              "title": "Cooperative nutrient accumulation sustains growth of mammalian cells",
+              "doi": "https://doi.org/10.1038/srep17401",
+              "year": "2015",
+              "distance": 0.2471,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract The coordination of metabolic processes to allow increased nutrient uptake and utilization for macromolecular synthesis is central for cell growth. Although studies of bulk cell populations have revealed important metabolic and signaling requirements that impact cell growth on long time scales, whether the same regulation influences short-term cell growth remains an open question. Here we investigate cell growth by monitoring mass accumulation of mammalian cells while rapidly depleting particular nutrients. Within minutes following the depletion of glucose or glutamine, we observe a growth reduction that is larger than the mass accumulation rate of the nutrient. This indicates that "
+            },
+            {
+              "document_id": "W2026505524",
+              "title": "Hexose uptake and control of fibroblast proliferation",
+              "doi": "https://doi.org/10.1002/jcp.1040920221",
+              "year": "1977",
+              "distance": 0.2556,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract The role of glucose uptake in control of cell growth was studied by experimentally varying the rate of glucose uptake and examining the subsequent effect on initiation and cessation of cell proliferation. The rate of glucose uptake was varied by adjusting the concentration of glucose in the culture medium. This permitted analysis of two changes in rate of glucose uptake which are closely related to the regulation of cell growth: (1) the rapid increase in glucose uptake that can be detected within several minutes after mitogenic stimulation of quiescent fibroblasts and (2) the decrease in glucose uptake which accompanies growth to a quiescent state. Quiescent cultures of mouse 3T3, h"
+            },
+            {
+              "document_id": "W2017398902",
+              "title": "Trehalose and glycogen accumulation is related to the duration of the G<sub>1</sub>phase of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1111/j.1567-1364.2003.tb00168.x",
+              "year": "2003",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Several factors may control trehalose and glycogen synthesis, like the glucose flux, the growth rate, the intracellular glucose-6-phosphate level and the glucose concentration in the medium. Here, the possible relation of these putative inducers to reserve carbohydrate accumulation was studied under well-defined growth conditions in nitrogen-limited continuous cultures. We showed that the amounts of accumulated trehalose and glycogen were regulated by the growth rate imposed on the culture, whereas other implicated inducers did not exhibit a correlation with reserve carbohydrate accumulation. Trehalose accumulation was induced at a dilution rate (D)</=0.10 h(-1), whereas glycogen accumulatio"
+            },
+            {
+              "document_id": "W2972881178",
+              "title": "Estimation of maximal values of biomass growth yield based on the mass-energy balance of cell metabolism",
+              "doi": "https://doi.org/10.20537/2076-7633-2019-11-4-723-750",
+              "year": "2019",
+              "distance": 0.2594,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The biomass growth yield is the ratio of the newly synthesized substance of growing cells to the amount of the consumed substrate, the source of matter and energy for cell growth. The yield is a characteristic of the efficiency of substrate conversion to cell biomass. The conversion is carried out by the cell metabolism, which is a complete aggregate of biochemical reactions occurring in the cells. This work newly considers the problem of maximal cell growth yield prediction basing on balances of the whole living cell metabolism and its fragments called as partial metabolisms (PM). The following PMs are used for the present consideration. During growth on any substrate we consider i) the sta"
+            },
+            {
+              "document_id": "W1913077916",
+              "title": "Patterns of Glucose Metabolism in Normal and Virus-Transformed Chick Cells in Tissue Culture&lt;xref ref-type=\"fn\" rid=\"FN1\"&gt;2&lt;/xref&gt;",
+              "doi": "https://doi.org/10.1093/jnci/49.2.555",
+              "year": "1972",
+              "distance": 0.262,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The rate of glucose uptake and the formation of lactic acid and CO2 were studied in normal and Rous sarcoma virus-transformed chick-embryo fibroblasts cultured at low and high cell densities. In normal cells the ratio of lactic acid produced to CO2 evolved increased with increasing cell density. These changes were not due to variations in the pool sizes or breakdown of glycogen but indicated high cell-density cultures preferred use of the glycolytic pathway over aerobic pathways. The phosphogluconate pathway also became more prominent as cells became relatively dense. However, population density per se and not the growth rate appeared responsible for the changes in paHern of carbon flow. Tra"
+            },
+            {
+              "document_id": "W2115379272",
+              "title": "Glucose utilization, pH reduction and density dependent inhibition in cultures of chick embryo fibroblasts",
+              "doi": "https://doi.org/10.1002/jcp.1040850316",
+              "year": "1975",
+              "distance": 0.2622,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract The multiplication rate of sparse cultures of chick embryo cells is only slightly lower at pH 6.9 than at pH 7.4. There is, however, a marked reduction in the multiplication rate of the pH 6.9 cultures before they reach confluency. Cultures at pH 7.4 continue to multiply beyond confluency with only a slight decrease in the multiplication rate. Eighty to ninety percent of the glucose taken up by the cells growing at each pH is converted to lactic acid which is released into the medium. Metabolic reduction in pH of the medium is almost entirely accounted for by the amount of lactic acid produced by the cells. Neither the intracellular nor extracellular accumulation of lactic acid nor "
+            },
+            {
+              "document_id": "W3099327208",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1101/111161",
+              "year": "2017",
+              "distance": 0.2626,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core me"
+            },
+            {
+              "document_id": "W2011129353",
+              "title": "Fibroblasts as an Experimental Tool in Metabolic and Hormone Studies",
+              "doi": "https://doi.org/10.1111/j.1365-2362.1973.tb00337.x",
+              "year": "1973",
+              "distance": 0.2638,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract. .Before cell cultures can be used as a tool for metabolic and endocrine research, standardized conditions for stationary and growing cells must be established. Our results with chicken embryo fibroblasts and with WI‐38 human fibroblasts demonstrate that the metabolic behaviour of these cells differs depending on whether they are in a stationary phase (without serum) or in a growing phase (with serum). Energy during growth is derived almost exclusively from glycolysis. Two additional factors determine the rate of glucose consumption and lactate production: The glucose concentration in the medium and the density of the cells, i.e. the number of cells per surface area. Using a pulse o"
+            },
+            {
+              "document_id": "W2943160299",
+              "title": "Gene transcription as a limiting factor in protein production and cell growth",
+              "doi": "https://doi.org/10.1101/626242",
+              "year": "2019",
+              "distance": 0.264,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract Growth rate and cell size are principle characteristics of proliferating cells, whose values depend on cellular biosynthetic processes in a way poorly understood. Protein production is critical for growth, and we therefore examined for processes limiting this production. Burdening cells with an excess of inert protein changed endogenous gene expression similarly to transcription-perturbing mutants, was epistatic to these mutants, but did not deplete respective factors from gene promoters. Mathematical modeling, corroborated by experiments, attributed this signature to a feedback which proportionally increases all endogenous gene expression, but lags at fast initiating genes already "
+            },
+            {
+              "document_id": "W2614558012",
+              "title": "B-1 cells modulate the murine macrophage response to<i>Leishmania major</i>infection",
+              "doi": "https://doi.org/10.4331/wjbc.v8.i2.151",
+              "year": "2017",
+              "distance": 0.2643,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Our results show that elevated levels of PGE<sub>2</sub> and IL-10 produced by B-1 cells increase <i>L. major</i> growth, as indicated by the number of parasites in cell cultures."
+            },
+            {
+              "document_id": "W2792850985",
+              "title": "Time-course mRNA and protein levels during batch growth of budding yeast",
+              "doi": "https://doi.org/10.17632/wbbt7xp2x5.1",
+              "year": "2017",
+              "distance": 0.2653,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Fermenting glucose in the presence of enough oxygen to support respiration, known as aerobic glycolysis, is believed to maximize growth rate. We observed increasing aerobic glycolysis during exponential growth, suggesting additional physiological roles for aerobic glycolysis. We investigated such roles in yeast batch cultures by quantifying O2 consumption, CO2 production, amino acids, mRNAs, proteins, posttranslational modifications, and stress sensitivity in the course of nine doublings at constant rate. During this course, the cells support a constant biomass-production rate with decreasing rates of respiration and ATP production but also decrease their stress resistance. As the respiratio"
+            },
+            {
+              "document_id": "W2786627077",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1371/journal.pcbi.1006010",
+              "year": "2018",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core metabolism "
+            },
+            {
+              "document_id": "W2030640436",
+              "title": "Glucose metabolism and cell size in continuous cultures of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1016/s0378-1097(03)00815-2",
+              "year": "2003",
+              "distance": 0.2695,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A detailed analysis of the cell size, monitored as protein content, has been performed in glucose-limited continuous cultures, so as to obtain the values of the average protein content for various subpopulations at different cell cycle stages, as a function of the growth rate. Glucose metabolism appears to affect cell size, since there is an increase of the average protein content of the population when cells produce ethanol above the critical dilution rate. If the production of ethanol is forced at low growth rates by the addition of formate, the average protein content increases. These results indicate a link between glucose metabolism and cell size in budding yeast, as observed for mammal"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2711,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2054607651",
+              "title": "Dependence of Energy Metabolism on the Density of Cells in Culture.",
+              "doi": "https://doi.org/10.1247/csf.23.85",
+              "year": "1998",
+              "distance": 0.2715,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Metabolism in cultured cells strongly depends on cell density, thus cell density may be an important factor in biotechnological maintenance of cell cultures. Therefore the energy metabolism of three related cell types with different proliferation activity has been characterised: density controlled primary or secondary fibroblasts [pmf], immortalized, but still density controlled 3T3 cells, and SV40-transformed 3T3 lacking growth control. The investigations revealed the decrease of oxygen consumption, net lactate production, ATP-content, NAD-content and NAD-redox potential, and F-actin content with increasing culture density in pmfs, less distinct in 3T3 cells and in SV40-3T3 cells. The main "
+            },
+            {
+              "document_id": "W2160110708",
+              "title": "Correlation of gene expression and protein production rate - a system wide study",
+              "doi": "https://doi.org/10.1186/1471-2164-12-616",
+              "year": "2011",
+              "distance": 0.2718,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Based on these results it appears that in low growth rate protein production energy is very efficiently used primarly for protein production. Also, we propose that flux through early glycolysis or the TCA cycle is a more fundamental determining factor than growth rate for low growth rate protein production and we propose a novel eukaryotic response to this i.e. the lineage specific response (LSR)."
+            },
+            {
+              "document_id": "W2093893284",
+              "title": "Stimulation of Glucose Transport in Cultures of Density-Inhibited Chick Embryo Cells",
+              "doi": "https://doi.org/10.1073/pnas.68.12.3154",
+              "year": "1971",
+              "distance": 0.2727,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The rate of glucose transport in sparse, rapidly growing chick-embryo fibroblasts is much greater than that in density-inhibited cells. The addition of fresh chicken serum or trypsin to the medium of density-inhibited cells causes a large increase in the rate of glucose transport that is detectable 15 min after addition. The increase in glucose transport precedes the increase in DNA synthesis by 5-6 hr. Only small changes in rates of transport are seen with nucleosides or a nonmetabolizable amino acid. The increase in glucose transport requires protein synthesis but not RNA or DNA synthesis."
+            },
+            {
+              "document_id": "W2968526955",
+              "title": "Lactate dehydrogenase and glycerol-3-phosphate dehydrogenase cooperatively regulate growth and carbohydrate metabolism during <i>Drosophila melanogaster</i> larval development",
+              "doi": "https://doi.org/10.1242/dev.175315",
+              "year": "2019",
+              "distance": 0.2754,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The dramatic growth that occurs during Drosophila larval development requires rapid conversion of nutrients into biomass. Many larval tissues respond to these biosynthetic demands by increasing carbohydrate metabolism and lactate dehydrogenase (dLDH) activity. The resulting metabolic program is ideally suited to synthesize macromolecules and mimics the manner by which cancer cells rely on aerobic glycolysis. To explore the potential role of Drosophila dLDH in promoting biosynthesis, we examined how dLdh mutations influence larval development. Our studies unexpectantly found that dLdh mutants grow at a normal rate, indicating that dLDH is dispensable for larval biomass production. However, su"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "Only two snippets (8 and 11) directly link extracellular carbohydrate or DOM production to the specific growth rate, providing clear supportive evidence that EPS-like exudation rises with faster growth. The remaining excerpts either discuss unrelated metabolic processes, intracellular reserves, or lack any mention of extracellular polysaccharide production, resulting in a largely neutral background without contradictions. Consequently, the corpus offers moderate support for the stylized fact but not enough consistent data to claim strong consensus."
+          },
+          "n_references": 2,
+          "references": {
+            "3309": {
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2679
+            },
+            "2547": {
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2699
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2282,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "per minute increase in growth rate. Maximum CUE is achieved for positive responders growing on 165 glucose, while maximum growth rates occur at sub-optimal CUE. Inefficiencies of the microbial growth 166 machinery at high growth rates are explained in part by accelerated dilution of storage compounds 167 due to (volume) growth (Suppl. Info. Eq. 3, [15]), as well as decreasing structural biomass yield with 168 increasing protein synthesis rates (Suppl. Figure S4 C, [39]). At comparatively lower growth rates on 169 the other hand, for growth on organic acids, fatty acids, nucleotides and auxins, we found a positive 170 relationship between growth rate and CUE (F1,11=7.74, r2=0.41, p=0.02). Her"
+            },
+            {
+              "document_id": "3812",
+              "title": "MarsTang2023_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2336,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "−kEmE . (4) Specific growth rate 21 Reserve mobilization power is partitioned between growth, pG, maintenance pM, and extracellular enzyme production pX, i.e., pC = pG + pM + pX . (5) The specific growth rate is then obtained by combining (5) and (3) as r = pG µEyEV = kEmE −(pM + pX)/µE mE + yEV (6) where yEV is the efficiency of the growth machinery. 22 Extracellular enzyme production 23 We only consider free extracellular enzymes that are released into the microenvironment by the cell [40]. In the absence of regulation, extracellular enzymes are produced constitutively at a specific rate x proportional to the specific growth rate, i.e. x = pX µEyEX = zXpG µEyEX , (7) where zX scales the en"
+            },
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2526,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "metabolite- and isolate-specific characteristics. Differences in protein synthesis 157 efficiency (19%) and extracellular enzyme production (4%) explained a large amount of inter-species 158 variation in CUE. Taken together, CUE emerges as a complex physiological trait that can be modified by 159 metabolite chemistry, resulting in significantly higher CUE for positive responders for growth on amino 160 acids, organic acids, sugars, and auxins (p < 1e−3, Suppl. Figure S8). 161 We then tested for trade-offs between growth rate and CUE (Figure 3A). For metabolites that are 162 assimilated at high rate and yield (sugars, amino acids), a significant inverse relationship exists between 163 growth "
+            },
+            {
+              "document_id": "3297",
+              "title": "Glaz2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2605,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "metabolites) occur at cell surfaces. He reasoned that cell-surface area and thus metabolic rate should scale as M2/3 if growth is entirely due to cell enlargement, but as M1 if growth is entirely due to an increase in cell number. Intermediate scaling relations should apply if growth in- volves increases in both cell size and number. As evidence, Davison (1955, 1956) showed that the scaling of metabolic rate in crayﬁsh and anuran larvae matched closely the scaling of total cell-surface area in muscle tissue. However, Ellenby (1953) found no eﬀect of cell size on oxygen- consumption rate in diploid and triploid prepupae of the fruit ﬂy Drosophila melanogaster. Unfortunately, the range of appl"
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2607,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "hat it is proportional to the amount of the car- bohydrates produced. So, a portion (1\u0002e) of the total amount of carbohydrate, J˙CH,t, either has not been synthesized at all or it has been consumed in order to produce the equivalent amount of ATP necessary for the carbohydrate synthesis. For a cell growing under constant conditions, the energy cost for carbohydrate synthesis is constant and depends on the spe- cies. Therefore, the net carbohydrate production rate equals ˙J CH ¼ e ˙J CH;m \u0003 \u0004 K Ac \u0007 \u0005 1 þ k2 \u0006 4k1 I þ IK I þ X þ XK X \u0007 1 þ k1 X X þ XK I I þ IK 0 B B @ 1 C C A \u00024 \u000e\u00021 : ð8Þ 3. Analysis and testing of the model The oxygen production rate Eq. (2) and the NADPH production rate Eq."
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2621,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ohydrate synthesis. In this case, the carbohydrate net production rate quantifies as J˙ CH=(e /K) (J˙\u00021 CH,m+J˙ \u00021 C,p)\u00021, which after substituting Eq. (6), and in the absence of CO2-inhibition, becomes ˙J CH ¼ e ˙J CH;m f gAC K 1þk2 ð Þ X Xþ k2 1þk2XK. The carbohydrate pro- duction rate is hyperbolic function of the CO2 concentration, X, and proportional to the surface area of the cell, Ac. The properties of the equation for low CO2-acclimated cells and high CO2-acclimated cells are shown in Fig. 6A. The specific cost for carbohydrate synthesis, (1\u0002e), is high for low CO2- acclimated cells because the active transport of carbon dioxide requires extra ATP due to the activity of carbonic anhy"
+            },
+            {
+              "document_id": "2477",
+              "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2639,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "growth. 112 [Page 127] During the P replete phase, the increase in P availability results in a decrease in the production rate of semi-labile (DOCS) by PNF and to an increased production of labile DOC (DOCL). The main source of DOCL is PNF, through the passive diﬀusion mechanism of DOM release (Fig. 5.4). As discussed in Chapter 2, this excreted DOM consists of small-sized carbohydrates (<10 kDa) with a molecular composition similar to the cellular material, often with high mole percentages of glucose (Biersmith and Benner, 1998; Borchard and Engel, 2015). Additionally, the simulations of the present model show a slight decrease in the C:P ratio of DOML. This DOM is eﬃciently utilized by bac"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2679,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "speciﬁc growth rate (Myklestad et al., 1989; Underwood et al., 2004). Therefore, we assume that the growth ﬂux contributes to DOM production at a speciﬁc rate 10 jℓ,G = yℓ,V jV G (ℓ= DOC, DON, DOP) (17) where, yℓ,V stoichiometrically couples DOM production to the growth rate according to the relationship: yℓ,V = yE,V n∗,E − n∗,V (∗= C, N, P). Finally, inorganic carbon, ammonium and phosphorus are released as by-products from the maintenance processes according to the stoichiometric relationship ji,M = n∗,EjE,M + jM V (n∗,V −yE,V n∗,E) (18) 15 where i = IC, NH, P. Therefore, Eqs. (16) and (17) give the excretion ﬂuxes of DOM jℓ,E = jℓ,R + jℓ,G (ℓ= DOC, DON, DOP) and Eq. (15) and Eq. (18) give"
+            },
+            {
+              "document_id": "3384",
+              "title": "Thommen e.a. - 2019 - Body size-dependent energy storage causes Kleiber’.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2683,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ted cells (Bagun˜a`, 2012; Rink, 2018) and growth/degrowth therefore necessarily involve dynamic adjustments of the respective rate constants (see below). Pla- narian growth processes are therefore highly unusual as compared to other animals, both in terms of the bidirectionality of growth and the pivotal involvement of adult pluripotent stem cells. This makes the applicability of Kleiber’s law to planarian growth/degrowth actually remarkable and emphasizes its underlying reflection of a fundamental and still largely mysterious size dependence of animal metabolism. A priori, the 3/4 power scaling of metabolic rate with mass signifies a systematic change in the ratio between the two parameter"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2686,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "valent to 1 3 10213 sec]). Since protein synthesis rate to a large extent depends on the number of ribosomes rather than their efﬁciency (Nomura et al. 1984), a high growth rate should be closely related to the protein production rate and to the amount of rRNA in a cell. Since rRNA makes up approximately 75–80% of the total RNA in most cells (Brandhorst and McConkey 1974, Campana and Schwartz 1981), differences in cellular rRNA concentrations, and there- fore also in the number of ribosomes per cell and pro- tein synthesis capacity, should inﬂuence the total RNA concentration. Indeed, when data on growth rate are plotted as a function of total RNA per dry mass (DM) of organisms covering a wi"
+            },
+            {
+              "document_id": "2547",
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2699,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "as the most abundant monomer during the exponential, nutrient-replete phase of growth in the extracellular carbohydrates. A pronounced de- crease of glucose and increase of heteropolysacharides, containing various monomers, has been observed in the stationary phase (Underwood et al., 2004; Urbani et al., 2005). In addition, in N-replete cultures of T. pseudonana amino acids accounted for 70% of total DOC while carbohydrates accounted for the rest 30%. On the other hand, extracellular release of amino acids decreased markedly in the sta- tionary phase of N-limited cultures of the diatom Chaetoceros aﬃnis (Myklestad et al., 1989). Moreover, in P-limited cultures of Emiliania huxleyi at steady-"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2708,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "inﬂuences broad-scale processes such as global carbon cycles, the mechanistic basis for the variation in stoichiometry has not yet been fully explored. Empirical evidence shows that the speciﬁc growth rate is positively related to RNA concentration both between and within taxa in both unicellular and multicellular organisms. Since RNA is rich in P and constitutes a substantial part of the total P in organisms, a high growth rate is also connected with a high P content. We argue that the reason for this pattern is that the growth of all biota is closely linked with their protein synthesis rate, and thus with the concentration of ribosomal RNA. Dynamic energy budget theory supports the positiv"
+            },
+            {
+              "document_id": "W2295834024",
+              "title": "Cooperative nutrient accumulation sustains growth of mammalian cells",
+              "doi": "https://doi.org/10.1038/srep17401",
+              "year": "2015",
+              "distance": 0.2471,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The coordination of metabolic processes to allow increased nutrient uptake and utilization for macromolecular synthesis is central for cell growth. Although studies of bulk cell populations have revealed important metabolic and signaling requirements that impact cell growth on long time scales, whether the same regulation influences short-term cell growth remains an open question. Here we investigate cell growth by monitoring mass accumulation of mammalian cells while rapidly depleting particular nutrients. Within minutes following the depletion of glucose or glutamine, we observe a growth reduction that is larger than the mass accumulation rate of the nutrient. This indicates that "
+            },
+            {
+              "document_id": "W2026505524",
+              "title": "Hexose uptake and control of fibroblast proliferation",
+              "doi": "https://doi.org/10.1002/jcp.1040920221",
+              "year": "1977",
+              "distance": 0.2556,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The role of glucose uptake in control of cell growth was studied by experimentally varying the rate of glucose uptake and examining the subsequent effect on initiation and cessation of cell proliferation. The rate of glucose uptake was varied by adjusting the concentration of glucose in the culture medium. This permitted analysis of two changes in rate of glucose uptake which are closely related to the regulation of cell growth: (1) the rapid increase in glucose uptake that can be detected within several minutes after mitogenic stimulation of quiescent fibroblasts and (2) the decrease in glucose uptake which accompanies growth to a quiescent state. Quiescent cultures of mouse 3T3, h"
+            },
+            {
+              "document_id": "W2017398902",
+              "title": "Trehalose and glycogen accumulation is related to the duration of the G<sub>1</sub>phase of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1111/j.1567-1364.2003.tb00168.x",
+              "year": "2003",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Several factors may control trehalose and glycogen synthesis, like the glucose flux, the growth rate, the intracellular glucose-6-phosphate level and the glucose concentration in the medium. Here, the possible relation of these putative inducers to reserve carbohydrate accumulation was studied under well-defined growth conditions in nitrogen-limited continuous cultures. We showed that the amounts of accumulated trehalose and glycogen were regulated by the growth rate imposed on the culture, whereas other implicated inducers did not exhibit a correlation with reserve carbohydrate accumulation. Trehalose accumulation was induced at a dilution rate (D)</=0.10 h(-1), whereas glycogen accumulatio"
+            },
+            {
+              "document_id": "W2972881178",
+              "title": "Estimation of maximal values of biomass growth yield based on the mass-energy balance of cell metabolism",
+              "doi": "https://doi.org/10.20537/2076-7633-2019-11-4-723-750",
+              "year": "2019",
+              "distance": 0.2594,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The biomass growth yield is the ratio of the newly synthesized substance of growing cells to the amount of the consumed substrate, the source of matter and energy for cell growth. The yield is a characteristic of the efficiency of substrate conversion to cell biomass. The conversion is carried out by the cell metabolism, which is a complete aggregate of biochemical reactions occurring in the cells. This work newly considers the problem of maximal cell growth yield prediction basing on balances of the whole living cell metabolism and its fragments called as partial metabolisms (PM). The following PMs are used for the present consideration. During growth on any substrate we consider i) the sta"
+            },
+            {
+              "document_id": "W1913077916",
+              "title": "Patterns of Glucose Metabolism in Normal and Virus-Transformed Chick Cells in Tissue Culture&lt;xref ref-type=\"fn\" rid=\"FN1\"&gt;2&lt;/xref&gt;",
+              "doi": "https://doi.org/10.1093/jnci/49.2.555",
+              "year": "1972",
+              "distance": 0.262,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The rate of glucose uptake and the formation of lactic acid and CO2 were studied in normal and Rous sarcoma virus-transformed chick-embryo fibroblasts cultured at low and high cell densities. In normal cells the ratio of lactic acid produced to CO2 evolved increased with increasing cell density. These changes were not due to variations in the pool sizes or breakdown of glycogen but indicated high cell-density cultures preferred use of the glycolytic pathway over aerobic pathways. The phosphogluconate pathway also became more prominent as cells became relatively dense. However, population density per se and not the growth rate appeared responsible for the changes in paHern of carbon flow. Tra"
+            },
+            {
+              "document_id": "W2115379272",
+              "title": "Glucose utilization, pH reduction and density dependent inhibition in cultures of chick embryo fibroblasts",
+              "doi": "https://doi.org/10.1002/jcp.1040850316",
+              "year": "1975",
+              "distance": 0.2622,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The multiplication rate of sparse cultures of chick embryo cells is only slightly lower at pH 6.9 than at pH 7.4. There is, however, a marked reduction in the multiplication rate of the pH 6.9 cultures before they reach confluency. Cultures at pH 7.4 continue to multiply beyond confluency with only a slight decrease in the multiplication rate. Eighty to ninety percent of the glucose taken up by the cells growing at each pH is converted to lactic acid which is released into the medium. Metabolic reduction in pH of the medium is almost entirely accounted for by the amount of lactic acid produced by the cells. Neither the intracellular nor extracellular accumulation of lactic acid nor "
+            },
+            {
+              "document_id": "W3099327208",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1101/111161",
+              "year": "2017",
+              "distance": 0.2626,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core me"
+            },
+            {
+              "document_id": "W2011129353",
+              "title": "Fibroblasts as an Experimental Tool in Metabolic and Hormone Studies",
+              "doi": "https://doi.org/10.1111/j.1365-2362.1973.tb00337.x",
+              "year": "1973",
+              "distance": 0.2638,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract. .Before cell cultures can be used as a tool for metabolic and endocrine research, standardized conditions for stationary and growing cells must be established. Our results with chicken embryo fibroblasts and with WI‐38 human fibroblasts demonstrate that the metabolic behaviour of these cells differs depending on whether they are in a stationary phase (without serum) or in a growing phase (with serum). Energy during growth is derived almost exclusively from glycolysis. Two additional factors determine the rate of glucose consumption and lactate production: The glucose concentration in the medium and the density of the cells, i.e. the number of cells per surface area. Using a pulse o"
+            },
+            {
+              "document_id": "W2943160299",
+              "title": "Gene transcription as a limiting factor in protein production and cell growth",
+              "doi": "https://doi.org/10.1101/626242",
+              "year": "2019",
+              "distance": 0.264,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Growth rate and cell size are principle characteristics of proliferating cells, whose values depend on cellular biosynthetic processes in a way poorly understood. Protein production is critical for growth, and we therefore examined for processes limiting this production. Burdening cells with an excess of inert protein changed endogenous gene expression similarly to transcription-perturbing mutants, was epistatic to these mutants, but did not deplete respective factors from gene promoters. Mathematical modeling, corroborated by experiments, attributed this signature to a feedback which proportionally increases all endogenous gene expression, but lags at fast initiating genes already "
+            },
+            {
+              "document_id": "W2614558012",
+              "title": "B-1 cells modulate the murine macrophage response to<i>Leishmania major</i>infection",
+              "doi": "https://doi.org/10.4331/wjbc.v8.i2.151",
+              "year": "2017",
+              "distance": 0.2643,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Our results show that elevated levels of PGE<sub>2</sub> and IL-10 produced by B-1 cells increase <i>L. major</i> growth, as indicated by the number of parasites in cell cultures."
+            },
+            {
+              "document_id": "W2792850985",
+              "title": "Time-course mRNA and protein levels during batch growth of budding yeast",
+              "doi": "https://doi.org/10.17632/wbbt7xp2x5.1",
+              "year": "2017",
+              "distance": 0.2653,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Fermenting glucose in the presence of enough oxygen to support respiration, known as aerobic glycolysis, is believed to maximize growth rate. We observed increasing aerobic glycolysis during exponential growth, suggesting additional physiological roles for aerobic glycolysis. We investigated such roles in yeast batch cultures by quantifying O2 consumption, CO2 production, amino acids, mRNAs, proteins, posttranslational modifications, and stress sensitivity in the course of nine doublings at constant rate. During this course, the cells support a constant biomass-production rate with decreasing rates of respiration and ATP production but also decrease their stress resistance. As the respiratio"
+            },
+            {
+              "document_id": "W2786627077",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1371/journal.pcbi.1006010",
+              "year": "2018",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core metabolism "
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact concerns EPS/extracellular carbohydrate production scaling with specific growth rate. Snippet 8 provides the most direct DEB-based support: DOM (including DOC carbohydrate) production is explicitly coupled to growth flux at a specific rate, citing empirical work (Myklestad et al. 1989; Underwood et al. 2004) linking carbohydrate excretion to growth rate. Snippet 2 supports the general structure that extracellular product release scales proportionally with growth (framed for enzymes, but the same proportional-to-growth-flux mechanism). Snippet 11 reports empirical observations of extracellular carbohydrate dynamics, with high glucose excretion during exponential (high-growth) phase declining in stationary phase, consistent with growth-coupled production. Snippets 5–7 concern carbohydrate production in DEB phototroph models but tie production to surface area/light/CO2 rather than directly to growth rate, so they are topically relevant but not affirming. The remaining snippets concern CUE, RNA-growth relationships, metabolic scaling, or toxicology and do not bear on the fact. No snippet contradicts the pattern. Overall the corpus offers moderate, consistent support with no conflict, hence corroborated direction but only moderate strength given few directly affirming references."
+          },
+          "n_references": 3,
+          "references": {
+            "3812": {
+              "title": "MarsTang2023_SI.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2336
+            },
+            "3309": {
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2679
+            },
+            "2547": {
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2699
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2282,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "per minute increase in growth rate. Maximum CUE is achieved for positive responders growing on 165 glucose, while maximum growth rates occur at sub-optimal CUE. Inefficiencies of the microbial growth 166 machinery at high growth rates are explained in part by accelerated dilution of storage compounds 167 due to (volume) growth (Suppl. Info. Eq. 3, [15]), as well as decreasing structural biomass yield with 168 increasing protein synthesis rates (Suppl. Figure S4 C, [39]). At comparatively lower growth rates on 169 the other hand, for growth on organic acids, fatty acids, nucleotides and auxins, we found a positive 170 relationship between growth rate and CUE (F1,11=7.74, r2=0.41, p=0.02). Her"
+            },
+            {
+              "document_id": "3812",
+              "title": "MarsTang2023_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2336,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "−kEmE . (4) Specific growth rate 21 Reserve mobilization power is partitioned between growth, pG, maintenance pM, and extracellular enzyme production pX, i.e., pC = pG + pM + pX . (5) The specific growth rate is then obtained by combining (5) and (3) as r = pG µEyEV = kEmE −(pM + pX)/µE mE + yEV (6) where yEV is the efficiency of the growth machinery. 22 Extracellular enzyme production 23 We only consider free extracellular enzymes that are released into the microenvironment by the cell [40]. In the absence of regulation, extracellular enzymes are produced constitutively at a specific rate x proportional to the specific growth rate, i.e. x = pX µEyEX = zXpG µEyEX , (7) where zX scales the en"
+            },
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2526,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "metabolite- and isolate-specific characteristics. Differences in protein synthesis 157 efficiency (19%) and extracellular enzyme production (4%) explained a large amount of inter-species 158 variation in CUE. Taken together, CUE emerges as a complex physiological trait that can be modified by 159 metabolite chemistry, resulting in significantly higher CUE for positive responders for growth on amino 160 acids, organic acids, sugars, and auxins (p < 1e−3, Suppl. Figure S8). 161 We then tested for trade-offs between growth rate and CUE (Figure 3A). For metabolites that are 162 assimilated at high rate and yield (sugars, amino acids), a significant inverse relationship exists between 163 growth "
+            },
+            {
+              "document_id": "3297",
+              "title": "Glaz2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2605,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "metabolites) occur at cell surfaces. He reasoned that cell-surface area and thus metabolic rate should scale as M2/3 if growth is entirely due to cell enlargement, but as M1 if growth is entirely due to an increase in cell number. Intermediate scaling relations should apply if growth in- volves increases in both cell size and number. As evidence, Davison (1955, 1956) showed that the scaling of metabolic rate in crayﬁsh and anuran larvae matched closely the scaling of total cell-surface area in muscle tissue. However, Ellenby (1953) found no eﬀect of cell size on oxygen- consumption rate in diploid and triploid prepupae of the fruit ﬂy Drosophila melanogaster. Unfortunately, the range of appl"
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2607,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "hat it is proportional to the amount of the car- bohydrates produced. So, a portion (1\u0002e) of the total amount of carbohydrate, J˙CH,t, either has not been synthesized at all or it has been consumed in order to produce the equivalent amount of ATP necessary for the carbohydrate synthesis. For a cell growing under constant conditions, the energy cost for carbohydrate synthesis is constant and depends on the spe- cies. Therefore, the net carbohydrate production rate equals ˙J CH ¼ e ˙J CH;m \u0003 \u0004 K Ac \u0007 \u0005 1 þ k2 \u0006 4k1 I þ IK I þ X þ XK X \u0007 1 þ k1 X X þ XK I I þ IK 0 B B @ 1 C C A \u00024 \u000e\u00021 : ð8Þ 3. Analysis and testing of the model The oxygen production rate Eq. (2) and the NADPH production rate Eq."
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2621,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ohydrate synthesis. In this case, the carbohydrate net production rate quantifies as J˙ CH=(e /K) (J˙\u00021 CH,m+J˙ \u00021 C,p)\u00021, which after substituting Eq. (6), and in the absence of CO2-inhibition, becomes ˙J CH ¼ e ˙J CH;m f gAC K 1þk2 ð Þ X Xþ k2 1þk2XK. The carbohydrate pro- duction rate is hyperbolic function of the CO2 concentration, X, and proportional to the surface area of the cell, Ac. The properties of the equation for low CO2-acclimated cells and high CO2-acclimated cells are shown in Fig. 6A. The specific cost for carbohydrate synthesis, (1\u0002e), is high for low CO2- acclimated cells because the active transport of carbon dioxide requires extra ATP due to the activity of carbonic anhy"
+            },
+            {
+              "document_id": "2477",
+              "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2639,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "growth. 112 [Page 127] During the P replete phase, the increase in P availability results in a decrease in the production rate of semi-labile (DOCS) by PNF and to an increased production of labile DOC (DOCL). The main source of DOCL is PNF, through the passive diﬀusion mechanism of DOM release (Fig. 5.4). As discussed in Chapter 2, this excreted DOM consists of small-sized carbohydrates (<10 kDa) with a molecular composition similar to the cellular material, often with high mole percentages of glucose (Biersmith and Benner, 1998; Borchard and Engel, 2015). Additionally, the simulations of the present model show a slight decrease in the C:P ratio of DOML. This DOM is eﬃciently utilized by bac"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2679,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "speciﬁc growth rate (Myklestad et al., 1989; Underwood et al., 2004). Therefore, we assume that the growth ﬂux contributes to DOM production at a speciﬁc rate 10 jℓ,G = yℓ,V jV G (ℓ= DOC, DON, DOP) (17) where, yℓ,V stoichiometrically couples DOM production to the growth rate according to the relationship: yℓ,V = yE,V n∗,E − n∗,V (∗= C, N, P). Finally, inorganic carbon, ammonium and phosphorus are released as by-products from the maintenance processes according to the stoichiometric relationship ji,M = n∗,EjE,M + jM V (n∗,V −yE,V n∗,E) (18) 15 where i = IC, NH, P. Therefore, Eqs. (16) and (17) give the excretion ﬂuxes of DOM jℓ,E = jℓ,R + jℓ,G (ℓ= DOC, DON, DOP) and Eq. (15) and Eq. (18) give"
+            },
+            {
+              "document_id": "3384",
+              "title": "Thommen e.a. - 2019 - Body size-dependent energy storage causes Kleiber’.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2683,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "ted cells (Bagun˜a`, 2012; Rink, 2018) and growth/degrowth therefore necessarily involve dynamic adjustments of the respective rate constants (see below). Pla- narian growth processes are therefore highly unusual as compared to other animals, both in terms of the bidirectionality of growth and the pivotal involvement of adult pluripotent stem cells. This makes the applicability of Kleiber’s law to planarian growth/degrowth actually remarkable and emphasizes its underlying reflection of a fundamental and still largely mysterious size dependence of animal metabolism. A priori, the 3/4 power scaling of metabolic rate with mass signifies a systematic change in the ratio between the two parameter"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2686,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "valent to 1 3 10213 sec]). Since protein synthesis rate to a large extent depends on the number of ribosomes rather than their efﬁciency (Nomura et al. 1984), a high growth rate should be closely related to the protein production rate and to the amount of rRNA in a cell. Since rRNA makes up approximately 75–80% of the total RNA in most cells (Brandhorst and McConkey 1974, Campana and Schwartz 1981), differences in cellular rRNA concentrations, and there- fore also in the number of ribosomes per cell and pro- tein synthesis capacity, should inﬂuence the total RNA concentration. Indeed, when data on growth rate are plotted as a function of total RNA per dry mass (DM) of organisms covering a wi"
+            },
+            {
+              "document_id": "2547",
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2699,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "as the most abundant monomer during the exponential, nutrient-replete phase of growth in the extracellular carbohydrates. A pronounced de- crease of glucose and increase of heteropolysacharides, containing various monomers, has been observed in the stationary phase (Underwood et al., 2004; Urbani et al., 2005). In addition, in N-replete cultures of T. pseudonana amino acids accounted for 70% of total DOC while carbohydrates accounted for the rest 30%. On the other hand, extracellular release of amino acids decreased markedly in the sta- tionary phase of N-limited cultures of the diatom Chaetoceros aﬃnis (Myklestad et al., 1989). Moreover, in P-limited cultures of Emiliania huxleyi at steady-"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2708,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "inﬂuences broad-scale processes such as global carbon cycles, the mechanistic basis for the variation in stoichiometry has not yet been fully explored. Empirical evidence shows that the speciﬁc growth rate is positively related to RNA concentration both between and within taxa in both unicellular and multicellular organisms. Since RNA is rich in P and constitutes a substantial part of the total P in organisms, a high growth rate is also connected with a high P content. We argue that the reason for this pattern is that the growth of all biota is closely linked with their protein synthesis rate, and thus with the concentration of ribosomal RNA. Dynamic energy budget theory supports the positiv"
+            },
+            {
+              "document_id": "3776",
+              "title": "Matyla and Lech - 2024 - Dynamic Energy Budget model for E. coli growth in .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2709,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "growth rates (Pramanik and Keasling 1997). The energy requirements also change along with growth rates (Pramanik and Keasling 1997). The higher the growth rates, the higher requirements for macromolecules synthesis, polymerization metabolites transport, and maintenance of transmembrane gradients (Pramanik and Keasling 1997). According to DEB theory, RNA belongs to reserves and DNA to structures. Therefore, the DEB theory seems to agree with empirical observation, as well as presented model. [Page 10] Applied Microbiology and Biotechnology (2024) 108:408 408 Page 10 of 12 A similar “compartment” approach which captures these observations was proposed by Williams (1967) in his model. The cells"
+            },
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2714,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Differences in the slope of 172 the scaling relationship between growth rate and CUE in the two growth regimes can be understood 173 by analyzing correlations between BP and BR in isolate metabolism (Figure 3B). In the low growth 174 rate regime, BP and BR scale isometrically (with slope β ∈[0.95, 1.05], t1332=0.06, p=0.95), indicating 175 that respiration is a major control on biomass production and CUE. Indeed, maintenance requirements, 176 4 was not certified by peer review) is the author/funder. All rights reserved. No reuse allowed without permission. The copyright holder for this preprint (which this version posted July 2, 2022. ; https://doi.org/10.1101/2022.06.29.498137 doi: bioRxiv "
+            },
+            {
+              "document_id": "2600",
+              "title": "KlanNisb2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2728,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "r exposures is slightly underestimated. Growth rate and energy density Predictably, maximum exponential growth rate (Figure 4, upper left panel, solid line) decreases with exposure, roughly following the bi-phasic pattern observed by Priester et al. (2009 [20]) (same panel, dotted line). Exposure increases the time at which growth rate (upper right panel) and energy reserve density (lower left panel) reach the maximum. Time to maximum growth rate increases with exposure slightly slower than lag time (dotted line, upper right panel). The distribution of growth rates as a function of exposure (lower right panel) shows slower changes in growth rate with increased exposure. Aging acceleration dy"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2736,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "et or dry wt), which is an informative endpoint but is not comparable to cellular energy allocation without knowing electron transport system activity. Because of between-study methodological differences in cellular energy allocation and growth measurements, we normalized cellular energy allocation and growth data relative to the within-study control group or reference site for ﬁeld-collected data. If no reference site was speciﬁed, we normalized data to the site with highest growth. We aggregated the data and examined whether cellular energy allocation was linked to growth using PROC CORR in SAS (Ver 9.4; see Supplemental Data for data). We found a positive correlation between cellular ener"
+            },
+            {
+              "document_id": "3661",
+              "title": "Capek et al. - 2023 - Revisiting soil microbial biomass Considering cha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2736,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "end on 𝐺. The higher the amount 292 of growth intermediates the cell has, the faster they can be mobilized (i.e. the higher the flux 293 𝐽, eq. 4) and be used to achieve a high specific growth rate (unless 𝑚 is extremely high for 294 Journal Pre-proof [Page 16] 15 any reason, eq. 9). If 𝑛𝐺 and 𝑛𝐵 are distinctly different, 𝑘𝑒𝑐 changes along the gradient of 295 specific growth rate similarly as the abundance of macromolecules shown on Fig. 1A. The 296 higher the difference between the 𝑛𝐺 and 𝑛𝐵, the higher the 𝑘𝑒𝑐 variability along the growth 297 rate gradient. If the 𝑛𝐺 is higher than 𝑛𝐵, 𝑘𝑒𝑐 increases with increasing specific growth rate 298 and vice versa. 299 𝑘𝑒𝑐 is experimentally estimate"
+            },
+            {
+              "document_id": "3305",
+              "title": "Grim2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2751,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "h, metabolism, and division rates decrease across (and often within) species as cell size increases [...] Explanations for these inverse relationships diﬀer among investigators, but considerations typically involve the size-dependent (scaling) relationships among cell surface area, volume, and dry mass (as measured by carbon or DNA content). The relationship between cell surface area and volume (and its eﬀect on cell growth rates and division rates) has received the most attention because of the dictum that growth requires energy and, regardless of the form of energy garnered by a cell (radiant energy in plants; chemical energy in fungi and animals), the ability to harvest energy is some fun"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the snippets directly address extracellular polymeric substance (EPS) or extracellular carbohydrate production rates as a function of specific growth rate. The corpus is dominated by mammalian cell glucose metabolism, microbial growth rate/yield trade-offs, and protein production studies, which are off-topic. The only snippet touching carbohydrate accumulation versus growth rate (snippet 3) concerns intracellular reserve carbohydrates (trehalose, glycogen) and reports these accumulate preferentially at LOW dilution/growth rates, which is opposite in direction to the stylized fact—though it concerns intracellular reserves rather than secreted EPS, so its bearing is limited. Overall there is no real supporting evidence for the EPS stylized fact in this corpus; evidence is sparse and essentially insufficient to confirm or refute the claim."
+          },
+          "n_references": 1,
+          "references": {
+            "W2017398902": {
+              "title": "Trehalose and glycogen accumulation is related to the duration of the G<sub>1</sub>phase of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1111/j.1567-1364.2003.tb00168.x",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2587
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2295834024",
+              "title": "Cooperative nutrient accumulation sustains growth of mammalian cells",
+              "doi": "https://doi.org/10.1038/srep17401",
+              "year": "2015",
+              "distance": 0.2471,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract The coordination of metabolic processes to allow increased nutrient uptake and utilization for macromolecular synthesis is central for cell growth. Although studies of bulk cell populations have revealed important metabolic and signaling requirements that impact cell growth on long time scales, whether the same regulation influences short-term cell growth remains an open question. Here we investigate cell growth by monitoring mass accumulation of mammalian cells while rapidly depleting particular nutrients. Within minutes following the depletion of glucose or glutamine, we observe a growth reduction that is larger than the mass accumulation rate of the nutrient. This indicates that "
+            },
+            {
+              "document_id": "W2026505524",
+              "title": "Hexose uptake and control of fibroblast proliferation",
+              "doi": "https://doi.org/10.1002/jcp.1040920221",
+              "year": "1977",
+              "distance": 0.2556,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract The role of glucose uptake in control of cell growth was studied by experimentally varying the rate of glucose uptake and examining the subsequent effect on initiation and cessation of cell proliferation. The rate of glucose uptake was varied by adjusting the concentration of glucose in the culture medium. This permitted analysis of two changes in rate of glucose uptake which are closely related to the regulation of cell growth: (1) the rapid increase in glucose uptake that can be detected within several minutes after mitogenic stimulation of quiescent fibroblasts and (2) the decrease in glucose uptake which accompanies growth to a quiescent state. Quiescent cultures of mouse 3T3, h"
+            },
+            {
+              "document_id": "W2017398902",
+              "title": "Trehalose and glycogen accumulation is related to the duration of the G<sub>1</sub>phase of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1111/j.1567-1364.2003.tb00168.x",
+              "year": "2003",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "Several factors may control trehalose and glycogen synthesis, like the glucose flux, the growth rate, the intracellular glucose-6-phosphate level and the glucose concentration in the medium. Here, the possible relation of these putative inducers to reserve carbohydrate accumulation was studied under well-defined growth conditions in nitrogen-limited continuous cultures. We showed that the amounts of accumulated trehalose and glycogen were regulated by the growth rate imposed on the culture, whereas other implicated inducers did not exhibit a correlation with reserve carbohydrate accumulation. Trehalose accumulation was induced at a dilution rate (D)</=0.10 h(-1), whereas glycogen accumulatio"
+            },
+            {
+              "document_id": "W2972881178",
+              "title": "Estimation of maximal values of biomass growth yield based on the mass-energy balance of cell metabolism",
+              "doi": "https://doi.org/10.20537/2076-7633-2019-11-4-723-750",
+              "year": "2019",
+              "distance": 0.2594,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The biomass growth yield is the ratio of the newly synthesized substance of growing cells to the amount of the consumed substrate, the source of matter and energy for cell growth. The yield is a characteristic of the efficiency of substrate conversion to cell biomass. The conversion is carried out by the cell metabolism, which is a complete aggregate of biochemical reactions occurring in the cells. This work newly considers the problem of maximal cell growth yield prediction basing on balances of the whole living cell metabolism and its fragments called as partial metabolisms (PM). The following PMs are used for the present consideration. During growth on any substrate we consider i) the sta"
+            },
+            {
+              "document_id": "W1913077916",
+              "title": "Patterns of Glucose Metabolism in Normal and Virus-Transformed Chick Cells in Tissue Culture&lt;xref ref-type=\"fn\" rid=\"FN1\"&gt;2&lt;/xref&gt;",
+              "doi": "https://doi.org/10.1093/jnci/49.2.555",
+              "year": "1972",
+              "distance": 0.262,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The rate of glucose uptake and the formation of lactic acid and CO2 were studied in normal and Rous sarcoma virus-transformed chick-embryo fibroblasts cultured at low and high cell densities. In normal cells the ratio of lactic acid produced to CO2 evolved increased with increasing cell density. These changes were not due to variations in the pool sizes or breakdown of glycogen but indicated high cell-density cultures preferred use of the glycolytic pathway over aerobic pathways. The phosphogluconate pathway also became more prominent as cells became relatively dense. However, population density per se and not the growth rate appeared responsible for the changes in paHern of carbon flow. Tra"
+            },
+            {
+              "document_id": "W2115379272",
+              "title": "Glucose utilization, pH reduction and density dependent inhibition in cultures of chick embryo fibroblasts",
+              "doi": "https://doi.org/10.1002/jcp.1040850316",
+              "year": "1975",
+              "distance": 0.2622,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The multiplication rate of sparse cultures of chick embryo cells is only slightly lower at pH 6.9 than at pH 7.4. There is, however, a marked reduction in the multiplication rate of the pH 6.9 cultures before they reach confluency. Cultures at pH 7.4 continue to multiply beyond confluency with only a slight decrease in the multiplication rate. Eighty to ninety percent of the glucose taken up by the cells growing at each pH is converted to lactic acid which is released into the medium. Metabolic reduction in pH of the medium is almost entirely accounted for by the amount of lactic acid produced by the cells. Neither the intracellular nor extracellular accumulation of lactic acid nor "
+            },
+            {
+              "document_id": "W3099327208",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1101/111161",
+              "year": "2017",
+              "distance": 0.2626,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core me"
+            },
+            {
+              "document_id": "W2011129353",
+              "title": "Fibroblasts as an Experimental Tool in Metabolic and Hormone Studies",
+              "doi": "https://doi.org/10.1111/j.1365-2362.1973.tb00337.x",
+              "year": "1973",
+              "distance": 0.2638,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract. .Before cell cultures can be used as a tool for metabolic and endocrine research, standardized conditions for stationary and growing cells must be established. Our results with chicken embryo fibroblasts and with WI‐38 human fibroblasts demonstrate that the metabolic behaviour of these cells differs depending on whether they are in a stationary phase (without serum) or in a growing phase (with serum). Energy during growth is derived almost exclusively from glycolysis. Two additional factors determine the rate of glucose consumption and lactate production: The glucose concentration in the medium and the density of the cells, i.e. the number of cells per surface area. Using a pulse o"
+            },
+            {
+              "document_id": "W2943160299",
+              "title": "Gene transcription as a limiting factor in protein production and cell growth",
+              "doi": "https://doi.org/10.1101/626242",
+              "year": "2019",
+              "distance": 0.264,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract Growth rate and cell size are principle characteristics of proliferating cells, whose values depend on cellular biosynthetic processes in a way poorly understood. Protein production is critical for growth, and we therefore examined for processes limiting this production. Burdening cells with an excess of inert protein changed endogenous gene expression similarly to transcription-perturbing mutants, was epistatic to these mutants, but did not deplete respective factors from gene promoters. Mathematical modeling, corroborated by experiments, attributed this signature to a feedback which proportionally increases all endogenous gene expression, but lags at fast initiating genes already "
+            },
+            {
+              "document_id": "W2614558012",
+              "title": "B-1 cells modulate the murine macrophage response to<i>Leishmania major</i>infection",
+              "doi": "https://doi.org/10.4331/wjbc.v8.i2.151",
+              "year": "2017",
+              "distance": 0.2643,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Our results show that elevated levels of PGE<sub>2</sub> and IL-10 produced by B-1 cells increase <i>L. major</i> growth, as indicated by the number of parasites in cell cultures."
+            },
+            {
+              "document_id": "W2792850985",
+              "title": "Time-course mRNA and protein levels during batch growth of budding yeast",
+              "doi": "https://doi.org/10.17632/wbbt7xp2x5.1",
+              "year": "2017",
+              "distance": 0.2653,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Fermenting glucose in the presence of enough oxygen to support respiration, known as aerobic glycolysis, is believed to maximize growth rate. We observed increasing aerobic glycolysis during exponential growth, suggesting additional physiological roles for aerobic glycolysis. We investigated such roles in yeast batch cultures by quantifying O2 consumption, CO2 production, amino acids, mRNAs, proteins, posttranslational modifications, and stress sensitivity in the course of nine doublings at constant rate. During this course, the cells support a constant biomass-production rate with decreasing rates of respiration and ATP production but also decrease their stress resistance. As the respiratio"
+            },
+            {
+              "document_id": "W2786627077",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1371/journal.pcbi.1006010",
+              "year": "2018",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core metabolism "
+            },
+            {
+              "document_id": "W2030640436",
+              "title": "Glucose metabolism and cell size in continuous cultures of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1016/s0378-1097(03)00815-2",
+              "year": "2003",
+              "distance": 0.2695,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "A detailed analysis of the cell size, monitored as protein content, has been performed in glucose-limited continuous cultures, so as to obtain the values of the average protein content for various subpopulations at different cell cycle stages, as a function of the growth rate. Glucose metabolism appears to affect cell size, since there is an increase of the average protein content of the population when cells produce ethanol above the critical dilution rate. If the production of ethanol is forced at low growth rates by the addition of formate, the average protein content increases. These results indicate a link between glucose metabolism and cell size in budding yeast, as observed for mammal"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2711,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2054607651",
+              "title": "Dependence of Energy Metabolism on the Density of Cells in Culture.",
+              "doi": "https://doi.org/10.1247/csf.23.85",
+              "year": "1998",
+              "distance": 0.2715,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Metabolism in cultured cells strongly depends on cell density, thus cell density may be an important factor in biotechnological maintenance of cell cultures. Therefore the energy metabolism of three related cell types with different proliferation activity has been characterised: density controlled primary or secondary fibroblasts [pmf], immortalized, but still density controlled 3T3 cells, and SV40-transformed 3T3 lacking growth control. The investigations revealed the decrease of oxygen consumption, net lactate production, ATP-content, NAD-content and NAD-redox potential, and F-actin content with increasing culture density in pmfs, less distinct in 3T3 cells and in SV40-3T3 cells. The main "
+            },
+            {
+              "document_id": "W2160110708",
+              "title": "Correlation of gene expression and protein production rate - a system wide study",
+              "doi": "https://doi.org/10.1186/1471-2164-12-616",
+              "year": "2011",
+              "distance": 0.2718,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Based on these results it appears that in low growth rate protein production energy is very efficiently used primarly for protein production. Also, we propose that flux through early glycolysis or the TCA cycle is a more fundamental determining factor than growth rate for low growth rate protein production and we propose a novel eukaryotic response to this i.e. the lineage specific response (LSR)."
+            },
+            {
+              "document_id": "W2093893284",
+              "title": "Stimulation of Glucose Transport in Cultures of Density-Inhibited Chick Embryo Cells",
+              "doi": "https://doi.org/10.1073/pnas.68.12.3154",
+              "year": "1971",
+              "distance": 0.2727,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The rate of glucose transport in sparse, rapidly growing chick-embryo fibroblasts is much greater than that in density-inhibited cells. The addition of fresh chicken serum or trypsin to the medium of density-inhibited cells causes a large increase in the rate of glucose transport that is detectable 15 min after addition. The increase in glucose transport precedes the increase in DNA synthesis by 5-6 hr. Only small changes in rates of transport are seen with nucleosides or a nonmetabolizable amino acid. The increase in glucose transport requires protein synthesis but not RNA or DNA synthesis."
+            },
+            {
+              "document_id": "W2968526955",
+              "title": "Lactate dehydrogenase and glycerol-3-phosphate dehydrogenase cooperatively regulate growth and carbohydrate metabolism during <i>Drosophila melanogaster</i> larval development",
+              "doi": "https://doi.org/10.1242/dev.175315",
+              "year": "2019",
+              "distance": 0.2754,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The dramatic growth that occurs during Drosophila larval development requires rapid conversion of nutrients into biomass. Many larval tissues respond to these biosynthetic demands by increasing carbohydrate metabolism and lactate dehydrogenase (dLDH) activity. The resulting metabolic program is ideally suited to synthesize macromolecules and mimics the manner by which cancer cells rely on aerobic glycolysis. To explore the potential role of Drosophila dLDH in promoting biosynthesis, we examined how dLdh mutations influence larval development. Our studies unexpectantly found that dLdh mutants grow at a normal rate, indicating that dLDH is dispensable for larval biomass production. However, su"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "The strongest direct support comes from snippet [8] (LivaLaga2017), which explicitly models DOM/carbohydrate production as proportional to specific growth rate (jl,G = yl,V jVG), and from the DEB-framed enzyme production in [2] where extracellular production scales with growth rate. Snippet [5]/[6] support proportionality of carbohydrate production to cellular activity/surface area but tie net rates to CO2/light rather than growth rate per se. However, several snippets complicate the picture: [11] and [7] describe extracellular carbohydrate/DOM release patterns shifting in stationary or nutrient-limited phases (sometimes increasing when growth slows), and [15] shows reserve carbohydrate accumulation that can be inversely related to growth rate. Many remaining snippets concern glucose uptake, RNA, CUE, or unrelated topics and are neutral. Overall there is moderate, theory-consistent support (notably DEB-based modeling coupling carbohydrate/DOM production to growth flux) but mixed empirical evidence regarding extracellular carbohydrate excretion, so consensus is best scored as insufficient/neutral rather than firmly corroborated."
+          },
+          "n_references": 5,
+          "references": {
+            "3812": {
+              "title": "MarsTang2023_SI.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2336
+            },
+            "2477": {
+              "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2639
+            },
+            "3309": {
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2679
+            },
+            "2547": {
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2699
+            },
+            "W2017398902": {
+              "title": "Trehalose and glycogen accumulation is related to the duration of the G<sub>1</sub>phase of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1111/j.1567-1364.2003.tb00168.x",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2587
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2282,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "per minute increase in growth rate. Maximum CUE is achieved for positive responders growing on 165 glucose, while maximum growth rates occur at sub-optimal CUE. Inefficiencies of the microbial growth 166 machinery at high growth rates are explained in part by accelerated dilution of storage compounds 167 due to (volume) growth (Suppl. Info. Eq. 3, [15]), as well as decreasing structural biomass yield with 168 increasing protein synthesis rates (Suppl. Figure S4 C, [39]). At comparatively lower growth rates on 169 the other hand, for growth on organic acids, fatty acids, nucleotides and auxins, we found a positive 170 relationship between growth rate and CUE (F1,11=7.74, r2=0.41, p=0.02). Her"
+            },
+            {
+              "document_id": "3812",
+              "title": "MarsTang2023_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2336,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "−kEmE . (4) Specific growth rate 21 Reserve mobilization power is partitioned between growth, pG, maintenance pM, and extracellular enzyme production pX, i.e., pC = pG + pM + pX . (5) The specific growth rate is then obtained by combining (5) and (3) as r = pG µEyEV = kEmE −(pM + pX)/µE mE + yEV (6) where yEV is the efficiency of the growth machinery. 22 Extracellular enzyme production 23 We only consider free extracellular enzymes that are released into the microenvironment by the cell [40]. In the absence of regulation, extracellular enzymes are produced constitutively at a specific rate x proportional to the specific growth rate, i.e. x = pX µEyEX = zXpG µEyEX , (7) where zX scales the en"
+            },
+            {
+              "document_id": "3681",
+              "title": "Marschmann et al. - 2022 - Life history strategies and niches of soil bacteri.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2526,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "metabolite- and isolate-specific characteristics. Differences in protein synthesis 157 efficiency (19%) and extracellular enzyme production (4%) explained a large amount of inter-species 158 variation in CUE. Taken together, CUE emerges as a complex physiological trait that can be modified by 159 metabolite chemistry, resulting in significantly higher CUE for positive responders for growth on amino 160 acids, organic acids, sugars, and auxins (p < 1e−3, Suppl. Figure S8). 161 We then tested for trade-offs between growth rate and CUE (Figure 3A). For metabolites that are 162 assimilated at high rate and yield (sugars, amino acids), a significant inverse relationship exists between 163 growth "
+            },
+            {
+              "document_id": "3297",
+              "title": "Glaz2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2605,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "metabolites) occur at cell surfaces. He reasoned that cell-surface area and thus metabolic rate should scale as M2/3 if growth is entirely due to cell enlargement, but as M1 if growth is entirely due to an increase in cell number. Intermediate scaling relations should apply if growth in- volves increases in both cell size and number. As evidence, Davison (1955, 1956) showed that the scaling of metabolic rate in crayﬁsh and anuran larvae matched closely the scaling of total cell-surface area in muscle tissue. However, Ellenby (1953) found no eﬀect of cell size on oxygen- consumption rate in diploid and triploid prepupae of the fruit ﬂy Drosophila melanogaster. Unfortunately, the range of appl"
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2607,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "hat it is proportional to the amount of the car- bohydrates produced. So, a portion (1\u0002e) of the total amount of carbohydrate, J˙CH,t, either has not been synthesized at all or it has been consumed in order to produce the equivalent amount of ATP necessary for the carbohydrate synthesis. For a cell growing under constant conditions, the energy cost for carbohydrate synthesis is constant and depends on the spe- cies. Therefore, the net carbohydrate production rate equals ˙J CH ¼ e ˙J CH;m \u0003 \u0004 K Ac \u0007 \u0005 1 þ k2 \u0006 4k1 I þ IK I þ X þ XK X \u0007 1 þ k1 X X þ XK I I þ IK 0 B B @ 1 C C A \u00024 \u000e\u00021 : ð8Þ 3. Analysis and testing of the model The oxygen production rate Eq. (2) and the NADPH production rate Eq."
+            },
+            {
+              "document_id": "2700",
+              "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2621,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ohydrate synthesis. In this case, the carbohydrate net production rate quantifies as J˙ CH=(e /K) (J˙\u00021 CH,m+J˙ \u00021 C,p)\u00021, which after substituting Eq. (6), and in the absence of CO2-inhibition, becomes ˙J CH ¼ e ˙J CH;m f gAC K 1þk2 ð Þ X Xþ k2 1þk2XK. The carbohydrate pro- duction rate is hyperbolic function of the CO2 concentration, X, and proportional to the surface area of the cell, Ac. The properties of the equation for low CO2-acclimated cells and high CO2-acclimated cells are shown in Fig. 6A. The specific cost for carbohydrate synthesis, (1\u0002e), is high for low CO2- acclimated cells because the active transport of carbon dioxide requires extra ATP due to the activity of carbonic anhy"
+            },
+            {
+              "document_id": "2477",
+              "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2639,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "growth. 112 [Page 127] During the P replete phase, the increase in P availability results in a decrease in the production rate of semi-labile (DOCS) by PNF and to an increased production of labile DOC (DOCL). The main source of DOCL is PNF, through the passive diﬀusion mechanism of DOM release (Fig. 5.4). As discussed in Chapter 2, this excreted DOM consists of small-sized carbohydrates (<10 kDa) with a molecular composition similar to the cellular material, often with high mole percentages of glucose (Biersmith and Benner, 1998; Borchard and Engel, 2015). Additionally, the simulations of the present model show a slight decrease in the C:P ratio of DOML. This DOM is eﬃciently utilized by bac"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2679,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "speciﬁc growth rate (Myklestad et al., 1989; Underwood et al., 2004). Therefore, we assume that the growth ﬂux contributes to DOM production at a speciﬁc rate 10 jℓ,G = yℓ,V jV G (ℓ= DOC, DON, DOP) (17) where, yℓ,V stoichiometrically couples DOM production to the growth rate according to the relationship: yℓ,V = yE,V n∗,E − n∗,V (∗= C, N, P). Finally, inorganic carbon, ammonium and phosphorus are released as by-products from the maintenance processes according to the stoichiometric relationship ji,M = n∗,EjE,M + jM V (n∗,V −yE,V n∗,E) (18) 15 where i = IC, NH, P. Therefore, Eqs. (16) and (17) give the excretion ﬂuxes of DOM jℓ,E = jℓ,R + jℓ,G (ℓ= DOC, DON, DOP) and Eq. (15) and Eq. (18) give"
+            },
+            {
+              "document_id": "3384",
+              "title": "Thommen e.a. - 2019 - Body size-dependent energy storage causes Kleiber’.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2683,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "ted cells (Bagun˜a`, 2012; Rink, 2018) and growth/degrowth therefore necessarily involve dynamic adjustments of the respective rate constants (see below). Pla- narian growth processes are therefore highly unusual as compared to other animals, both in terms of the bidirectionality of growth and the pivotal involvement of adult pluripotent stem cells. This makes the applicability of Kleiber’s law to planarian growth/degrowth actually remarkable and emphasizes its underlying reflection of a fundamental and still largely mysterious size dependence of animal metabolism. A priori, the 3/4 power scaling of metabolic rate with mass signifies a systematic change in the ratio between the two parameter"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2686,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "valent to 1 3 10213 sec]). Since protein synthesis rate to a large extent depends on the number of ribosomes rather than their efﬁciency (Nomura et al. 1984), a high growth rate should be closely related to the protein production rate and to the amount of rRNA in a cell. Since rRNA makes up approximately 75–80% of the total RNA in most cells (Brandhorst and McConkey 1974, Campana and Schwartz 1981), differences in cellular rRNA concentrations, and there- fore also in the number of ribosomes per cell and pro- tein synthesis capacity, should inﬂuence the total RNA concentration. Indeed, when data on growth rate are plotted as a function of total RNA per dry mass (DM) of organisms covering a wi"
+            },
+            {
+              "document_id": "2547",
+              "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2699,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "as the most abundant monomer during the exponential, nutrient-replete phase of growth in the extracellular carbohydrates. A pronounced de- crease of glucose and increase of heteropolysacharides, containing various monomers, has been observed in the stationary phase (Underwood et al., 2004; Urbani et al., 2005). In addition, in N-replete cultures of T. pseudonana amino acids accounted for 70% of total DOC while carbohydrates accounted for the rest 30%. On the other hand, extracellular release of amino acids decreased markedly in the sta- tionary phase of N-limited cultures of the diatom Chaetoceros aﬃnis (Myklestad et al., 1989). Moreover, in P-limited cultures of Emiliania huxleyi at steady-"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2708,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "inﬂuences broad-scale processes such as global carbon cycles, the mechanistic basis for the variation in stoichiometry has not yet been fully explored. Empirical evidence shows that the speciﬁc growth rate is positively related to RNA concentration both between and within taxa in both unicellular and multicellular organisms. Since RNA is rich in P and constitutes a substantial part of the total P in organisms, a high growth rate is also connected with a high P content. We argue that the reason for this pattern is that the growth of all biota is closely linked with their protein synthesis rate, and thus with the concentration of ribosomal RNA. Dynamic energy budget theory supports the positiv"
+            },
+            {
+              "document_id": "W2295834024",
+              "title": "Cooperative nutrient accumulation sustains growth of mammalian cells",
+              "doi": "https://doi.org/10.1038/srep17401",
+              "year": "2015",
+              "distance": 0.2471,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract The coordination of metabolic processes to allow increased nutrient uptake and utilization for macromolecular synthesis is central for cell growth. Although studies of bulk cell populations have revealed important metabolic and signaling requirements that impact cell growth on long time scales, whether the same regulation influences short-term cell growth remains an open question. Here we investigate cell growth by monitoring mass accumulation of mammalian cells while rapidly depleting particular nutrients. Within minutes following the depletion of glucose or glutamine, we observe a growth reduction that is larger than the mass accumulation rate of the nutrient. This indicates that "
+            },
+            {
+              "document_id": "W2026505524",
+              "title": "Hexose uptake and control of fibroblast proliferation",
+              "doi": "https://doi.org/10.1002/jcp.1040920221",
+              "year": "1977",
+              "distance": 0.2556,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The role of glucose uptake in control of cell growth was studied by experimentally varying the rate of glucose uptake and examining the subsequent effect on initiation and cessation of cell proliferation. The rate of glucose uptake was varied by adjusting the concentration of glucose in the culture medium. This permitted analysis of two changes in rate of glucose uptake which are closely related to the regulation of cell growth: (1) the rapid increase in glucose uptake that can be detected within several minutes after mitogenic stimulation of quiescent fibroblasts and (2) the decrease in glucose uptake which accompanies growth to a quiescent state. Quiescent cultures of mouse 3T3, h"
+            },
+            {
+              "document_id": "W2017398902",
+              "title": "Trehalose and glycogen accumulation is related to the duration of the G<sub>1</sub>phase of<i>Saccharomyces cerevisiae</i>",
+              "doi": "https://doi.org/10.1111/j.1567-1364.2003.tb00168.x",
+              "year": "2003",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "Several factors may control trehalose and glycogen synthesis, like the glucose flux, the growth rate, the intracellular glucose-6-phosphate level and the glucose concentration in the medium. Here, the possible relation of these putative inducers to reserve carbohydrate accumulation was studied under well-defined growth conditions in nitrogen-limited continuous cultures. We showed that the amounts of accumulated trehalose and glycogen were regulated by the growth rate imposed on the culture, whereas other implicated inducers did not exhibit a correlation with reserve carbohydrate accumulation. Trehalose accumulation was induced at a dilution rate (D)</=0.10 h(-1), whereas glycogen accumulatio"
+            },
+            {
+              "document_id": "W2972881178",
+              "title": "Estimation of maximal values of biomass growth yield based on the mass-energy balance of cell metabolism",
+              "doi": "https://doi.org/10.20537/2076-7633-2019-11-4-723-750",
+              "year": "2019",
+              "distance": 0.2594,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The biomass growth yield is the ratio of the newly synthesized substance of growing cells to the amount of the consumed substrate, the source of matter and energy for cell growth. The yield is a characteristic of the efficiency of substrate conversion to cell biomass. The conversion is carried out by the cell metabolism, which is a complete aggregate of biochemical reactions occurring in the cells. This work newly considers the problem of maximal cell growth yield prediction basing on balances of the whole living cell metabolism and its fragments called as partial metabolisms (PM). The following PMs are used for the present consideration. During growth on any substrate we consider i) the sta"
+            },
+            {
+              "document_id": "W1913077916",
+              "title": "Patterns of Glucose Metabolism in Normal and Virus-Transformed Chick Cells in Tissue Culture&lt;xref ref-type=\"fn\" rid=\"FN1\"&gt;2&lt;/xref&gt;",
+              "doi": "https://doi.org/10.1093/jnci/49.2.555",
+              "year": "1972",
+              "distance": 0.262,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The rate of glucose uptake and the formation of lactic acid and CO2 were studied in normal and Rous sarcoma virus-transformed chick-embryo fibroblasts cultured at low and high cell densities. In normal cells the ratio of lactic acid produced to CO2 evolved increased with increasing cell density. These changes were not due to variations in the pool sizes or breakdown of glycogen but indicated high cell-density cultures preferred use of the glycolytic pathway over aerobic pathways. The phosphogluconate pathway also became more prominent as cells became relatively dense. However, population density per se and not the growth rate appeared responsible for the changes in paHern of carbon flow. Tra"
+            },
+            {
+              "document_id": "W2115379272",
+              "title": "Glucose utilization, pH reduction and density dependent inhibition in cultures of chick embryo fibroblasts",
+              "doi": "https://doi.org/10.1002/jcp.1040850316",
+              "year": "1975",
+              "distance": 0.2622,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The multiplication rate of sparse cultures of chick embryo cells is only slightly lower at pH 6.9 than at pH 7.4. There is, however, a marked reduction in the multiplication rate of the pH 6.9 cultures before they reach confluency. Cultures at pH 7.4 continue to multiply beyond confluency with only a slight decrease in the multiplication rate. Eighty to ninety percent of the glucose taken up by the cells growing at each pH is converted to lactic acid which is released into the medium. Metabolic reduction in pH of the medium is almost entirely accounted for by the amount of lactic acid produced by the cells. Neither the intracellular nor extracellular accumulation of lactic acid nor "
+            },
+            {
+              "document_id": "W3099327208",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1101/111161",
+              "year": "2017",
+              "distance": 0.2626,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core me"
+            },
+            {
+              "document_id": "W2011129353",
+              "title": "Fibroblasts as an Experimental Tool in Metabolic and Hormone Studies",
+              "doi": "https://doi.org/10.1111/j.1365-2362.1973.tb00337.x",
+              "year": "1973",
+              "distance": 0.2638,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract. .Before cell cultures can be used as a tool for metabolic and endocrine research, standardized conditions for stationary and growing cells must be established. Our results with chicken embryo fibroblasts and with WI‐38 human fibroblasts demonstrate that the metabolic behaviour of these cells differs depending on whether they are in a stationary phase (without serum) or in a growing phase (with serum). Energy during growth is derived almost exclusively from glycolysis. Two additional factors determine the rate of glucose consumption and lactate production: The glucose concentration in the medium and the density of the cells, i.e. the number of cells per surface area. Using a pulse o"
+            },
+            {
+              "document_id": "W2943160299",
+              "title": "Gene transcription as a limiting factor in protein production and cell growth",
+              "doi": "https://doi.org/10.1101/626242",
+              "year": "2019",
+              "distance": 0.264,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Growth rate and cell size are principle characteristics of proliferating cells, whose values depend on cellular biosynthetic processes in a way poorly understood. Protein production is critical for growth, and we therefore examined for processes limiting this production. Burdening cells with an excess of inert protein changed endogenous gene expression similarly to transcription-perturbing mutants, was epistatic to these mutants, but did not deplete respective factors from gene promoters. Mathematical modeling, corroborated by experiments, attributed this signature to a feedback which proportionally increases all endogenous gene expression, but lags at fast initiating genes already "
+            },
+            {
+              "document_id": "W2614558012",
+              "title": "B-1 cells modulate the murine macrophage response to<i>Leishmania major</i>infection",
+              "doi": "https://doi.org/10.4331/wjbc.v8.i2.151",
+              "year": "2017",
+              "distance": 0.2643,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Our results show that elevated levels of PGE<sub>2</sub> and IL-10 produced by B-1 cells increase <i>L. major</i> growth, as indicated by the number of parasites in cell cultures."
+            },
+            {
+              "document_id": "W2792850985",
+              "title": "Time-course mRNA and protein levels during batch growth of budding yeast",
+              "doi": "https://doi.org/10.17632/wbbt7xp2x5.1",
+              "year": "2017",
+              "distance": 0.2653,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Fermenting glucose in the presence of enough oxygen to support respiration, known as aerobic glycolysis, is believed to maximize growth rate. We observed increasing aerobic glycolysis during exponential growth, suggesting additional physiological roles for aerobic glycolysis. We investigated such roles in yeast batch cultures by quantifying O2 consumption, CO2 production, amino acids, mRNAs, proteins, posttranslational modifications, and stress sensitivity in the course of nine doublings at constant rate. During this course, the cells support a constant biomass-production rate with decreasing rates of respiration and ATP production but also decrease their stress resistance. As the respiratio"
+            },
+            {
+              "document_id": "W2786627077",
+              "title": "Metabolic enzyme cost explains variable trade-offs between microbial growth rate and yield",
+              "doi": "https://doi.org/10.1371/journal.pcbi.1006010",
+              "year": "2018",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Microbes may maximize the number of daughter cells per time or per amount of nutrients consumed. These two strategies correspond, respectively, to the use of enzyme-efficient or substrate-efficient metabolic pathways. In reality, fast growth is often associated with wasteful, yield-inefficient metabolism, and a general thermodynamic trade-off between growth rate and biomass yield has been proposed to explain this. We studied growth rate/yield trade-offs by using a novel modeling framework, Enzyme-Flux Cost Minimization (EFCM) and by assuming that the growth rate depends directly on the enzyme investment per rate of biomass production. In a comprehensive mathematical model of core metabolism "
+            }
+          ]
+        }
+      }
+    }
+  }
+}

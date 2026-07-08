@@ -87,6 +87,98 @@ class ChatService:
         # Resolve the LLM config: inline (works for brand-new sessions) wins,
         # else the session's stored config.
         config = llm_config or await self.get_session_llm_config(session_id, user_id)
+
+        # Default key path: no user BYOK configured → use operator default key.
+        # Uses streaming (answer_stream) so the browser sees tokens as they arrive.
+        if self._default_key_applies(config):
+            from app.services.byok_chat_service import ByokChatService, ByokSynthesisError
+            from app.services.default_chat_rate_limiter import default_rate_limiter
+
+            if not await default_rate_limiter.acquire():
+                yield {
+                    "type": "error",
+                    "detail": (
+                        "The shared AI service is temporarily rate-limited "
+                        "(40 req/min). Please wait a moment or add your own "
+                        "API key in Settings."
+                    ),
+                }
+                return
+
+            system_prompt = await self.get_session_system_prompt(session_id, user_id)
+            try:
+                async for chunk in ByokChatService().answer_stream(
+                    query=message,
+                    session_id=session_id,
+                    user_id=user_id,
+                    provider=settings.DEFAULT_CHAT_PROVIDER,
+                    model=settings.DEFAULT_CHAT_MODEL,
+                    direct_api_key=settings.DEFAULT_CHAT_API_KEY,
+                    system_prompt=system_prompt,
+                ):
+                    ctype = chunk.get("type")
+                    if ctype in ("status", "_done"):
+                        # status/internal events — not forwarded to the browser
+                        continue
+                    elif ctype == "agent_activity":
+                        yield chunk
+                    elif ctype == "token":
+                        yield chunk
+                    elif ctype == "result":
+                        graph_rebuild_queue.mark_dirty("chatbot")
+                        yield {
+                            "type": "message",
+                            "role": "assistant",
+                            "content": chunk["answer"],
+                            "citations": chunk.get("citations", []),
+                            "evidence_mode": chunk.get("evidence_mode", "local"),
+                            "suggested_questions": chunk.get("suggested_questions", []),
+                            "session_id": chunk["session_id"],
+                            "message_id": chunk.get("message_id", ""),
+                        }
+            except ByokSynthesisError as exc:
+                yield {"type": "error", "detail": str(exc)}
+            return
+
+        # User BYOK key in "final" mode — stream via ByokChatService (KAG pipeline).
+        # "react" mode still goes to the chatbot_agent for full ReAct loop support.
+        if self._byok_applies(config):
+            from app.services.byok_chat_service import ByokChatService, ByokSynthesisError
+
+            system_prompt = await self.get_session_system_prompt(session_id, user_id)
+            try:
+                async for chunk in ByokChatService().answer_stream(
+                    query=message,
+                    session_id=session_id,
+                    user_id=user_id,
+                    provider=config["provider"],
+                    key_id=config["key_id"],
+                    model=config.get("model"),
+                    system_prompt=system_prompt,
+                ):
+                    ctype = chunk.get("type")
+                    if ctype in ("status", "_done"):
+                        continue
+                    elif ctype == "agent_activity":
+                        yield chunk
+                    elif ctype == "token":
+                        yield chunk
+                    elif ctype == "result":
+                        graph_rebuild_queue.mark_dirty("chatbot")
+                        yield {
+                            "type": "message",
+                            "role": "assistant",
+                            "content": chunk["answer"],
+                            "citations": chunk.get("citations", []),
+                            "evidence_mode": chunk.get("evidence_mode", "local"),
+                            "suggested_questions": chunk.get("suggested_questions", []),
+                            "session_id": chunk["session_id"],
+                            "message_id": chunk.get("message_id", ""),
+                        }
+            except ByokSynthesisError as exc:
+                yield {"type": "error", "detail": str(exc)}
+            return
+
         arguments: Dict[str, Any] = {
             "query": message,
             "session_id": session_id,
@@ -172,8 +264,55 @@ class ChatService:
             "",
         )
 
-        # BYOK final-answer path: synthesize in-backend with the user's own key.
         byok_config = await self.get_session_llm_config(session_id, user_id)
+
+        # Default key path: no user BYOK → use operator default key.
+        if self._default_key_applies(byok_config):
+            from app.services.byok_chat_service import ByokChatService, ByokSynthesisError
+            from app.services.default_chat_rate_limiter import default_rate_limiter
+
+            if not await default_rate_limiter.acquire():
+                return {
+                    "message": {
+                        "role": "assistant",
+                        "content": (
+                            "The shared AI service is temporarily rate-limited "
+                            "(40 req/min). Please wait a moment or add your own "
+                            "API key in Settings."
+                        ),
+                    },
+                    "session_id": session_id,
+                    "suggested_questions": [],
+                }
+
+            try:
+                result = await ByokChatService().answer(
+                    query=last_user,
+                    session_id=session_id,
+                    user_id=user_id,
+                    provider=settings.DEFAULT_CHAT_PROVIDER,
+                    model=settings.DEFAULT_CHAT_MODEL,
+                    direct_api_key=settings.DEFAULT_CHAT_API_KEY,
+                )
+            except ByokSynthesisError as exc:
+                return {
+                    "message": {"role": "assistant", "content": f"Error: {exc}"},
+                    "session_id": session_id,
+                    "suggested_questions": [],
+                }
+            graph_rebuild_queue.mark_dirty("chatbot")
+            return {
+                "message": {
+                    "role": "assistant",
+                    "content": result["answer"],
+                    "citations": result["citations"],
+                    "evidence_mode": result["evidence_mode"],
+                },
+                "session_id": result["session_id"],
+                "suggested_questions": result.get("suggested_questions", []),
+            }
+
+        # BYOK final-answer path: synthesize in-backend with the user's own key.
         if self._byok_applies(byok_config):
             from app.services.byok_chat_service import (
                 ByokChatService,
@@ -322,6 +461,7 @@ class ChatService:
             "created_at": session.get("created_at"),
             "updated_at": session.get("updated_at"),
             "llm_config": session.get("llm_config"),
+            "system_prompt": session.get("system_prompt", ""),
             "messages": messages,
         }
 
@@ -344,6 +484,35 @@ class ChatService:
         )
         return (doc or {}).get("llm_config")
 
+    async def get_session_system_prompt(
+        self, session_id: str, user_id: str
+    ) -> Optional[str]:
+        """Return the custom system prompt for a session, or None."""
+        if not session_id or session_id in ("", "new"):
+            return None
+        try:
+            oid = ObjectId(session_id)
+        except Exception:
+            return None
+        doc = await self.sessions_collection.find_one(
+            {"_id": oid, "user_id": user_id}, {"system_prompt": 1}
+        )
+        return (doc or {}).get("system_prompt") or None
+
+    async def set_session_system_prompt(
+        self, session_id: str, user_id: str, system_prompt: str
+    ) -> bool:
+        """Persist a custom system prompt on the session."""
+        try:
+            oid = ObjectId(session_id)
+        except Exception:
+            return False
+        result = await self.sessions_collection.update_one(
+            {"_id": oid, "user_id": user_id},
+            {"$set": {"system_prompt": system_prompt, "updated_at": datetime.now(timezone.utc)}},
+        )
+        return result.matched_count > 0
+
     async def set_session_llm_config(
         self, session_id: str, user_id: str, config: Dict[str, Any]
     ) -> bool:
@@ -357,6 +526,22 @@ class ChatService:
             {"$set": {"llm_config": config, "updated_at": datetime.now(timezone.utc)}},
         )
         return result.matched_count > 0
+
+    @staticmethod
+    def _default_key_applies(config: Optional[Dict[str, Any]]) -> bool:
+        """True when the operator default API key should be used.
+
+        Triggered by:
+        - No session config yet (null) — new user, first message
+        - config.provider == "default" — user explicitly chose the default model
+        A user BYOK key_id always takes priority over the default.
+        Explicit Ollama selection is respected (falls through to the agent).
+        """
+        if not settings.DEFAULT_CHAT_API_KEY:
+            return False
+        if not config:
+            return True
+        return config.get("provider") == "default"
 
     @staticmethod
     def _byok_applies(config: Optional[Dict[str, Any]]) -> bool:

@@ -1,0 +1,1710 @@
+{
+  "sf_id": "hypoxia_08",
+  "category": "Hypoxia / DO",
+  "statement": "O2 consumption starts to diminish at a reduced PO2 below a critical saturation level; when an animal has an elevated O2 consumption (swimming, digesting, etc.), consumption starts to diminish at a greater PO2 than the critical saturation.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "A substantial portion of the excerpts (10 out of 18) provide direct or indirect evidence that oxygen consumption declines once dissolved O₂ falls below a species‑specific critical saturation, and several note that heightened metabolic demands (e.g., feeding, swimming, digestion) cause this decline to begin at higher DO levels. No snippet contradicts the stylized fact; the remaining passages are either unrelated or only tangentially related. The convergence of multiple independent observations yields moderate overall support for the pattern, leading to a consensus that the corpus corroborates the claim."
+          },
+          "n_references": 3,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 4,
+              "supports": 4,
+              "contradicts": 0,
+              "best_distance": 0.2056
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2291
+            },
+            "2397": {
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2419
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2056,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2251,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ion capacity down to 20–25% O2sat (Aguirre-Velarde et al., 2016). Such ability would allow A. purpuratus to maintain most of its physiological functions independent of ambient oxygen saturation. A lower critical point for feeding activity than respira- tion may indicate a decoupling of these physiological rates enabling food ﬁltering even under low oxygen saturations. 2. First phase of severe hypoxia (below 11.2% O2sat): drop in the clearance rate. Below this oxygen threshold, we can hypothesize that the aerobic energy production decreases considerably and the energy demand might then be supplied by reserves such as phos- phagens (Grieshaber et al., 1994) providing energy to maintain ciliary"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "stently high level of feeding rate until a critical point of 20% DO saturation. Conversely, the Pacific oyster and Atlantic cod exhibit a higher sensitivity to the oxygen saturation with a continuous decrease of their feeding rate (cf. Fig 1). These patterns of sensitivity could be linked to the species’ oxygen consumption regulation strategy. Indeed, a decrease in feeding rate may be viewed as an oxygen saving strategy, by the reduction in the rate of the non-essential and costly processes such as ingestion, digestion and absorption of food (i.e., specific dynamic action, SDA), which represent e.g. about 17% of the total energetic expenditure for the mussel Mytilus edulis (Widdows et al., 1"
+            },
+            {
+              "document_id": "3429",
+              "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "allower and more oxygenated waters, they might not be as exposed to reduced DO levels as older juveniles and adults can be. Chabot and Dutil (1999) brought evidence that almost all (97%) of the variability in growth observed between experimental treatments at diﬀerent levels of hypoxia was explained by an eﬀect of DO saturation on ingestion rate; we therefore modelled this process accordingly. The value of DO threshold, DOcrit = 31.7% sat., calculated by Thomas et al. (2018, this issue) in the DO correction factor equation agrees well with the fact that the risk of mortality becomes signiﬁcant at 28% sat. (Plante et al., 1998), although the lethal threshold (median lethal level after a 96 h "
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2372,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "g ad- vantage of the trophic resource available by maintaining high as- similation. 4. Third phase of severe hypoxia (beyond 3 h at ≈5% O2sat): gradual re-decrease of the ﬁltration activity. This behaviour has been documented in the hypoxia-tolerant bivalve Ruditapes decussatus that reduces, but not inhibits, its feeding and digestion activities to survive hypoxic or anoxic stress events (Sobral and Widdows, 1997). The maintenance of a consistent feeding activity might result in the accumulation of anaerobic endproducts and induce a change in the energetic strategy. A switch towards a metabolic depression (Wu, 2002), which is reﬂected by a gradual decrease in ﬁltration rates, might be an eﬃc"
+            },
+            {
+              "document_id": "2895",
+              "title": "SaraPalm2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2382,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "olume (see above), [p·M] is indirectly ob - tained and corresponds to the value of oxygen con- sumption before the dry weight of starved organisms declines significantly. Starvation experiments are useful to estimate pM because it is possible to link the use of oxygen with maintenance alone. Indeed, although several processes contribute to the value of 104 Time (wk) Som-DW (g) Fed ad libitum Starved Respiration rate [pM] = respiration rate (µmol O2 consumed per hour) when somatic DW becomes constant after cessation of feeding and before the shrinking phase Primary decline = cessation of feeding and start of reserves’ depletion (ANOVA post-hoc test: Som-DW fed > Som-DW starved; p < 0.05) Seco"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2384,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "ope in the digestive process (Jordan and Steffensen, 2007). A reduction in feeding rate thus reduces the energy demand and thereby decreases O2 requirements (Pichavant et al., 2000; Wu, 2002a). ACCEPTED MANUSCRIPT [Page 9] ACCEPTED MANUSCRIPT 8 Fig 1 Ingestion rate at various levels of dissolved O2 for various species. References are given in the text. Data are scaled according to the result simulated at O2 sat. = 100 %. Life-history stage is also considered an important determinant of the relative sensitivity of organisms to hypoxia. For example, several studies conducted on bivalves demonstrated the link between development stage and the effect of low oxygen level on feeding rate: sensitiv"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2386,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "warming or hypercapnia (i.e., increase in CO2 partial pressure), which will increase species’ sensitivity by acting on their tolerance ranges (Deutsch et al., 2015; Pörtner et al., 2005; Vaquer-Sunyer and Duarte, 2011; Verberk et al., 2016). Similarly, the presence of sulfide, which is produced from the anaerobic degradation of organic matter, decreases the ability of organisms to tolerate hypoxia (Vaquer-Sunyer and Duarte, 2010). Oxygen is a key element for efficient energy production and animals, including fishes and aquatic invertebrates, meet most of their energy requirements through aerobic processes. Thus, oxygen consumption is a good approximation of metabolic rate (Nelson, 2016), inc"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2388,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "changes in the gas phase over a water volume contain- ing the respiring animals after equilibration by diffu- sion of the oxygen that replaces the consumed oxygen in the water. At the same time CO2 diffusing into the gas phase must be removed by chemical absorption. Although attempts have been made to adopt the meth- od to D. magna (e.g. Goss and Bunting 1980), it is no longer in use due to cladoceran speciﬁc problems (e.g. attachment to the water surface in the shallow water volume). Depending on the methods used, oxygen con- sumption rates are reported in different units. In the older literature and in ecological work they are usually given as volume (µL) or mass (µg) O2 per time. The mode"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2419,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "yregulation, which maintains oxygen supply (Claireaux and Chabot, 2016). As oxygen levels drop further, however, a point is reached at which maximum metabolic rate (and therefore scope for activity) becomes limiting: beyond this, further lowering oxygen levels causes reductions in meta- bolic rate and ultimately growth (Brett, 1979; Claireaux and Chabot, 2016). The level at which oxygen becomes lim- iting is critically dependent on the extent of food limitation (Jobling, 1994). Fish growth: Patterns and modeling Chapter 4 67 [Page 4] Temperature Temperature can influence the processes underlying food intake (Fonds et al., 1992; Sims et al., 2006) but more effort has been devoted to understan"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2432,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "take with activity and other metabolic costs, and by adjusting their allocation of available energy to various physiological processes based on their body condition. When their energy intake is insufficient, animals use stored body tissues to cover the costs, and as storage levels decrease, they increasingly rely on protein catabolism, which reduces their metabolic rate. However, if body stores continue to decline, animals [Page 70] face an increasing risk of mortality. At low body condition, animals prioritize critical survival processes over non-essential ones, such as growth or reproduction, resulting in tradeoffs (Sibly et al., 2013) (see ODD Element 2.7.2 for more details). 2.4.5. Learn"
+            },
+            {
+              "document_id": "3771",
+              "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2434,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "lecules with the environment more rapidly due to their larger surface-to-volume ratio ((Leiva et al., 2019), pathway 3 in Figure 2). This mechanism contributes to the common pattern that smaller terrestrial ectotherms have a lower desiccation tolerance than larger ones (e.g. Tejeda et al., 2014). This may also lead to higher uptake of toxicants, explaining why a warming-induced BSR can increase sensitivity to pesticides (Verheyen & Stoks, 2019). The relative importance of pathways 2 (bioenergetics) and 3 (surface-to-volume- ratio) may determine the size-dependent pattern of tolerance to hypoxia, during which animals rely on anaerobic energy production. Smaller animals run out of energy store"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2435,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "n the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPT [Page 14] ACCEPTED MANUSCRIPT 13 (increase of O2 conductance: ventilation, heart- beat, O2 affinity for respiratory pigment etc.). These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce activity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaer"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2445,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "defines the threshold oxygen concentration considered to be ‘hypoxic,’ research has indicated that the specific dissolved oxygen concentration that alters organismal behavior or physiology varies widely among species (Vaquer-Sunyer and Duarte 2008). The threshold of 2.0 mg l-1 was established because it corresponded to the concentration at which point mass [Page 18] 3 mortality of fishes were observed (Renaud 1986). However, it may not necessarily reflect an accurate threshold for many marine organisms. For example, killifish, Fundulus heteroclitus, show physiological changes around 4.50 mg l-1 (Voyer and Hennekey 1972) whereas 0.43 mg l-1 denotes a physiological threshold for a species of j"
+            },
+            {
+              "document_id": "3596",
+              "title": "Jager et al. - 2022 - Testing a simple energy-budget model for yolk-feed.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2447,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "er content of the structural tissues (as also indicated for total density in Fig. 2). The stop of growth also implies a drop in oxygen use in the model, since the overhead costs for growth are an important contribution to respiration. However, the data do not show such a rapid reduction, but rather a plateau in respiration. The initial part of the respiration curve, up to point where yolk is expected to run out (around 10 dpf), is consistent with the model predictions. However, the rapid decrease after that is not shown in the data. It is possible that the growth costs are lower than assumed in the model, or that the animals increase their swimming activity at this point (e.g., attempting to"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2449,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "aus, perhaps due to limitations on oxygen transport, while main- tenance costs continue to rise (Brett, 1979; Fry, 1947). The mechanism by which growth becomes limited above the thermal maximum has been debated, but biological func- tions such as growth are likely suppressed before the point of tissue hypoxia (Harrison et al., 2018): fish may reduce food intake to protect scope for activity from the metabolic costs of food conversion (Jutfelt et al., 2021). Critically, the controlling effects of temperature on met- abolic expenditure will depend on limitations imposed by food and oxygen (Brett, 1979). Suboptimal rations and low dissolved oxygen levels place upper limits on maximum rates of m"
+            },
+            {
+              "document_id": "3425",
+              "title": "Jager et al. - 2018 - Simple energy-budget model for yolk-feeding stages.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2456,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "decreases as also the total amount of structure to be maintained decreases. This pattern is, in general, consistent with the data, although there is a considerable diﬀerence between the respiration data in light and dark conditions. The animals in the light clearly have a higher respiration rate after complete yolk absorption than predicted, which can be linked to an increased swimming activity (see Solberg and Tilseth, 1984). The role of swimming activity in the energy budget is discussed further in Section 3.3. The increase in standard length over time (Fig. 2a) is well matched by the model (note that animals cannot shrink in length, even though they do shrink in dry weight). However, grow"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several studies (halibut hypoxia thresholds, zebrafish Pcrit relationship, cod postprandial O2 consumption under hypoxia, and guppy activity decline at low DO) provide direct evidence that oxygen consumption drops once PO2 falls below a critical level and that elevated metabolic demands (maximal swimming, digestion, active foraging) cause the decline to begin at higher PO2 than at rest. No snippet presents contradictory data, though many abstracts are unrelated, yielding a moderate overall evidential weight but clear corroboration of the stylized fact."
+          },
+          "n_references": 4,
+          "references": {
+            "W2316948813": {
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2496
+            },
+            "W3009257656": {
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2519
+            },
+            "W2071154714": {
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2553
+            },
+            "W2087366163": {
+              "title": "Effects of Hypoxia and Surface Access on Growth, Mortality, and Behavior of Juvenile Guppies, <i>Poecilia reticulata</i>",
+              "doi": "https://doi.org/10.1139/f83-183",
+              "year": "1983",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2573
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W4382050338",
+              "title": "Responses of intraspecific metabolic scaling to temperature and activity differ between water- and air-breathing ectothermic vertebrates",
+              "doi": "https://doi.org/10.22541/au.168779978.80333505/v1",
+              "year": "2023",
+              "distance": 0.2466,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Metabolism underpins all life-sustaining processes and varies profoundly with body size, temperature, and locomotor activity. Explaining variation in metabolic rates is crucial in ecology. Current theory explains the variation in body mass-scaling exponent (b) through changes in metabolic level (L), depending on whether these changes mainly affect volume (V)- or surface-area (SA)-related processes. Another theory predicts that evolved avoidance of oxygen limitation in water-breathers experiencing warming will diminish the increased respiration at large sizes. We test these predictions using intraspecific metabolic scaling responses to temperature (523 regressions) and activity (281 regressio"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W73021606",
+              "title": "Metabolic Rate, Q<sub>10</sub>and Respiratory Quotient (RQ) in Crocodylus porosus, and Some Generalizations about Low RQ in Reptiles",
+              "doi": "https://doi.org/10.1086/physzool.51.4.30160960",
+              "year": "1978",
+              "distance": 0.2473,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "In juvenile Crocodylus porosus, the dependence of oxygen consumption on temperature can be described by the relationship log10 = 0.7221 + 0.0428T C. The Q10 was found to be 2.68 over the temperature range 20-33 C. No trend was observed between body weight and weight-specific oxygen consumption. At Ta (27-33 C) respiratory quotient (RQ) (measured gasometrically) was invariably low (0.32 - 0.74, mean 0.49, 0.13 SD) in animals from freshwater. The low values of gasometric RQ are attributed to incorporation of carbon dioxide in the urine, forming ammonium bicarbonate. Support for this hypothesis is afforded by the similarity of measured values (0.49) to values predicted by the hypothesis (0.51)."
+            },
+            {
+              "document_id": "W2316948813",
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "distance": 0.2496,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Greenland halibut (Reinhardtius hippoglossoides), especially juveniles, are frequently found in severely hypoxic areas (18%–25% saturation) of the St. Lawrence Estuary. We investigated the tolerance of this species to hypoxia and evaluated the consequences of low oxygen levels on metabolic capacity. At 5 °C, juveniles had a higher critical oxygen threshold than adults (15% versus 11% saturation), indicating that they were less tolerant to hypoxia. Severe hypoxia (19% saturation) did not affect the juveniles' standard metabolic rate but significantly reduced (by 55%) their maximum metabolic rate compared with normoxia. Consequently, the aerobic scope was reduced by 72% in hypoxia compared wit"
+            },
+            {
+              "document_id": "W2081914215",
+              "title": "Surface pauses in relation to dive duration in imperial cormorants; how much time for a breather?",
+              "doi": "https://doi.org/10.1242/jeb.00967",
+              "year": "2004",
+              "distance": 0.2502,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "SUMMARY Air-breathing animals diving to forage can optimize time underwater by diving with just enough oxygen for the projected performance underwater. By so doing they surface with minimal body oxygen levels, which leads to maximal rates of oxygen uptake. We examined whether imperial cormorants Phalacrocorax atriceps adhere to this by examining dive:pause ratios in birds diving for extended, continuous periods to constant depths, assuming that the oxygen used underwater was exactly replenished by the periods at the surface. Examination of the cumulative time spent in surface pauses relative to the cumulative time spent in diving showed that surface pauses increase according to a power curve"
+            },
+            {
+              "document_id": "W4407307147",
+              "title": "Ready to dive? Early constraints help juvenile southern elephant seals (<i>Mirounga leonina</i>) acclimatize to aquatic life",
+              "doi": "https://doi.org/10.1242/jeb.249813",
+              "year": "2025",
+              "distance": 0.2513,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT Breath-holding foraging implies different adaptations to limit oxygen (O2) depletion and maximize foraging time. Physiological adjustments can be mediated through O2 consumption, driven by muscle mitochondria, which can also produce reactive oxygen species during reoxygenation. Southern elephant seals spend months foraging at sea, diving for up to 1 h. Pups transition abruptly to aquatic life after a post-weaning period, during which they fast and progressively increase their activity, making this period critical for the development of an adaptive response to oxygen restriction and oxidative stress. We compared the functional capacity of a swimming muscle in 5 recently weaned and 6 "
+            },
+            {
+              "document_id": "W3009257656",
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "distance": 0.2519,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "Fish increase ventilation during hypoxia, a reflex termed the hypoxic ventilatory response (HVR). The HVR is an effective mechanism to increase O2 uptake, but at a high metabolic cost. Therefore, when hypoxia becomes severe enough, ventilation declines, as its benefit is diminished. The water oxygen partial pressure (PwO2) at which this decline occurs is expected to be near the critical PwO2 (Pcrit), the PwO2 at which O2 consumption begins to decline. Our results indicate that in zebrafish (Danio rerio), the relationship between peak HVR and Pcrit was dependent on developmental stage. Peak ventilation occurred at PwO2’s higher than Pcrit in larvae, but at a PwO2 significantly lower than Pcri"
+            },
+            {
+              "document_id": "W2168938705",
+              "title": "METHODS OF STUDYING THE RESPIRATORY EXCHANGE IN SMALL AQUATIC ORGANISMS, WITH PARTICULAR REFERENCE TO THE USE OF FLAGELLATES AS AN INDICATOR FOR OXYGEN CONSUMPTION",
+              "doi": "https://doi.org/10.1085/jgp.3.5.565",
+              "year": "1921",
+              "distance": 0.2528,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "1. Flagellates are positively chemotactic to a certain concentration of dissolved oxygen which is lower than that in water saturated with oxygen under atmospheric partial pressure. Consequently, when a small aquatic animal is held motionless between cover-slip and slide in a suspension of flagellates in water saturated with oxygen, the flagellates are attracted to those parts of the animal which are absorbing oxygen. The relative sizes of the flagellate aggregations then show the relative activities of the different surfaces of the animal in absorbing oxygen. 2. Applying this method to the red Chironomus larva it was found that the animal respires by the whole body surface except by the head"
+            },
+            {
+              "document_id": "W1999088433",
+              "title": "To What Extent Is the Foraging Behaviour of Aquatic Birds Constrained by Their Physiology?",
+              "doi": "https://doi.org/10.1086/432423",
+              "year": "2005",
+              "distance": 0.2534,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Aquatic birds have access to limited amounts of usable oxygen when they forage (dive) underwater, so the major physiological constraint to their behaviour is the need to periodically visit the water surface to replenish these stores and remove accumulated carbon dioxide. The size of the oxygen stores and the rate at which they are used (V dot o2) or carbon dioxide accumulates are the ultimate determinants of the duration that aquatic birds can remain feeding underwater. However, the assumption that the decision to terminate a dive is governed solely by the level of the respiratory stores is not always valid. Quantification of an optimal diving model for tufted ducks (Aythya fuligula) shows t"
+            },
+            {
+              "document_id": "W2105994018",
+              "title": "Combined effects of food shortage and oxygen deficiency on life history characteristics and filter screens of <i>Daphnia</i>",
+              "doi": "https://doi.org/10.1093/plankt/18.5.757",
+              "year": "1996",
+              "distance": 0.255,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Daphnia magna were reared in environments with different concentrations of food and dissolved oxygen, and their life history characteristics and filter-screen areas were analyzed. Both low food concentration and low oxygen concentration degraded Daphnia fitness (as measured by individual growth and reproduction), and synergism was detected statistically for the effects of the two factors together. Low food concentration induced the development of large filter screens in Daphnia, but this development was suppressed by low oxygen concentration, suggesting that low oxygen concentration reduces the filtering rate of Daphnia in a food-limited environment. Therefore, energy uptake by Daphnia seems"
+            },
+            {
+              "document_id": "W3026457376",
+              "title": "The OxymiR response to oxygen limitation: a comparative microRNA perspective",
+              "doi": "https://doi.org/10.1242/jeb.204594",
+              "year": "2020",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT From squid at the bottom of the ocean to humans at the top of mountains, animals have adapted to diverse oxygen-limited environments. Surviving these challenging conditions requires global metabolic reorganization that is orchestrated, in part, by microRNAs that can rapidly and reversibly target all biological functions. Herein, we review the involvement of microRNAs in natural models of anoxia and hypoxia tolerance, with a focus on the involvement of oxygen-responsive microRNAs (OxymiRs) in coordinating the metabolic rate depression that allows animals to tolerate reduced oxygen levels. We begin by discussing animals that experience acute or chronic periods of oxygen deprivation at"
+            },
+            {
+              "document_id": "W2071154714",
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Some Atlantic cod in the Bornholm Basin undertake vertical foraging migrations into severely hypoxic bottom water. Hypoxic conditions can reduce the postprandial increase in gastrointestinal blood flow (GBF). This could subsequently postpone or reduce the postprandial increase in oxygen consumption (MO(2)), i.e. the SDA, leading to a disturbed digestion. Additionally, a restricted oxygen uptake could result in an oxygen debt that needs to be compensated for upon return to normoxic waters and this may also affect the ability to process the food. Long-term cardio-respiratory measurements were made on fed G. morhua in order to understand how the cardio-respiratory system of feeding fish respond"
+            },
+            {
+              "document_id": "W2018054532",
+              "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+              "doi": "https://doi.org/10.1093/icb/28.1.137",
+              "year": "1988",
+              "distance": 0.2555,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "SYNOPSIS: In intertidal animals rates of oxygen consumption span an order of magnitude (even when standardised for body size and temperature). This may reflect different adaptations to this variable habitat. Temperatures range widely and potentially increase metabolic expenditure during the heat of the day, while periods of feeding may be restricted. The balance between intake and expenditure of energy may limit zonation, body size, and even mode of reproduction. One pattern is that species suffering shortage of food (\"conservers\") have low rates of oxygen consumption while those with abundant food (\"exploiters\") have high rates. Conservers appear to have several means of reducing metabolic "
+            },
+            {
+              "document_id": "W2743646195",
+              "title": "Oxygen- and capacity-limited thermal tolerance: bridging ecology and physiology",
+              "doi": "https://doi.org/10.1242/jeb.134585",
+              "year": "2017",
+              "distance": 0.2565,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT Observations of climate impacts on ecosystems highlight the need for an understanding of organismal thermal ranges and their implications at the ecosystem level. Where changes in aquatic animal populations have been observed, the integrative concept of oxygen- and capacity-limited thermal tolerance (OCLTT) has successfully characterised the onset of thermal limits to performance and field abundance. The OCLTT concept addresses the molecular to whole-animal mechanisms that define thermal constraints on the capacity for oxygen supply to the organism in relation to oxygen demand. The resulting ‘total excess aerobic power budget’ supports an animal's performance (e.g. comprising motor a"
+            },
+            {
+              "document_id": "W2087366163",
+              "title": "Effects of Hypoxia and Surface Access on Growth, Mortality, and Behavior of Juvenile Guppies, <i>Poecilia reticulata</i>",
+              "doi": "https://doi.org/10.1139/f83-183",
+              "year": "1983",
+              "distance": 0.2573,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Juvenile guppies (Poecilia reticulata) were fed ad libitum and maintained for 11 d at oxygen concentrations ranging from 0.5 to 8 mg/L (25–26 °C). With access to the surface, guppies showed high growth rates and low mortality at all concentrations. Without surface access, they exhibited a progressive reduction in growth rate below 2–3 mg/L and did not survive below 1 mg/L. Activity was influenced by oxygen concentration and surface access. Feeding rates declined sharply with oxygen concentration for fish without surface access and to a lesser extent for fish with access. Percent time in contact with the surface increased as oxygen decreased. Aquatic surface respiration is used even when this"
+            },
+            {
+              "document_id": "W3170904254",
+              "title": "Hypoxia Generated by Avian Embryo Growth Induces the HIF-α Response and Critical Vascularization",
+              "doi": "https://doi.org/10.3389/fevo.2021.675800",
+              "year": "2021",
+              "distance": 0.2578,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Cancer research has transformed our view on cellular mechanisms for oxygen sensing. It has been documented that these mechanisms are important for maintaining animal tissues and life in environments where oxygen (O 2 ) concentrations fluctuate. In adult animals, oxygen sensing is governed by the Hypoxia Inducible Factors (HIFs) that are stabilized at low oxygen concentrations (hypoxia). However, the importance of hypoxia itself during development and for the onset of HIF-driven oxygen sensing remains poorly explored. Cellular responses to hypoxia associates with cell immaturity (stemness) and proper tissue and organ development. During mammalian development, the initial uterine environment i"
+            },
+            {
+              "document_id": "W2603318072",
+              "title": "Behavioral responses of common juvenile estuarine fishes to diel-cycling hypoxia and corresponding pH fluctuations: a comparative approach",
+              "doi": "https://doi.org/10.58088/ffxg-k948",
+              "year": "2025",
+              "distance": 0.2582,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Diel-cycling hypoxia and co-varying pH fluctuations reduces the quality of shallow estuarine nursery habitat for juvenile fishes. Avoidance or compensatory behaviors allow fish to mitigate stress associated with low dissolved oxygen (DO). Aquatic surface respiration (ASR), respiring in the thin, air-saturated, surface layer, is widespread among teleosts and provides an advantage to fish routinely exposed to hypoxia. ASR begins when oxygen becomes physiologically limiting, and serves as an indicator for hypoxia tolerance in a species. 24-hour video observations were conducted under controlled laboratory conditions using computer-monitored recirculating aquarium systems. Behavioral responses o"
+            },
+            {
+              "document_id": "W4403515618",
+              "title": "The mayfly <i>Neocloeon triangulifer</i> senses decreasing oxygen availability (<i>P</i>O2) and responds by reducing ion uptake and altering gene expression",
+              "doi": "https://doi.org/10.1242/jeb.247916",
+              "year": "2024",
+              "distance": 0.2586,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT Oxygen availability is central to the energetic budget of aquatic animals and may vary naturally and/or in response to anthropogenic activities. Yet, we know little about how oxygen availability is linked to fundamental processes such as ion transport in aquatic insects. We hypothesized and observed that ion (22Na and 35SO4) uptake would be significantly decreased at O2 partial pressures below the mean critical level (Pcrit, 5.4 kPa) where metabolic rate (ṀO2) is compromised and ATP production is limited. However, we were surprised to observe marked reductions in ion uptake at oxygen partial pressures well above Pcrit, where ṀO2 was stable. For example, SO4 uptake decreased by 51% a"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "Several excerpts (e.g., 1, 11, 16, 19, 24) explicitly describe a decline in oxygen consumption once ambient PO₂ falls below a species‑specific critical level and note that this decline occurs at higher PO₂ when metabolic demand is elevated (e.g., during digestion or maximal activity). These provide moderate support for the stylized fact. A few studies (3, 6) report that certain activities persist to lower oxygen levels than respiration, which appears contradictory but reflects taxon‑specific strategies rather than a wholesale refutation. The majority of the remaining snippets are neutral or only tangentially related. Consequently, the corpus offers moderate overall support with mixed evidence, yielding an evidence strength of 2 and a consensus direction that is neither strongly corroborated nor contradicted."
+          },
+          "n_references": 6,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2056
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 0,
+              "contradicts": 2,
+              "best_distance": 0.2291
+            },
+            "2397": {
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2419
+            },
+            "W2316948813": {
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2496
+            },
+            "W3009257656": {
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2519
+            },
+            "W2071154714": {
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2553
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2056,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2251,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "ion capacity down to 20–25% O2sat (Aguirre-Velarde et al., 2016). Such ability would allow A. purpuratus to maintain most of its physiological functions independent of ambient oxygen saturation. A lower critical point for feeding activity than respira- tion may indicate a decoupling of these physiological rates enabling food ﬁltering even under low oxygen saturations. 2. First phase of severe hypoxia (below 11.2% O2sat): drop in the clearance rate. Below this oxygen threshold, we can hypothesize that the aerobic energy production decreases considerably and the energy demand might then be supplied by reserves such as phos- phagens (Grieshaber et al., 1994) providing energy to maintain ciliary"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "stently high level of feeding rate until a critical point of 20% DO saturation. Conversely, the Pacific oyster and Atlantic cod exhibit a higher sensitivity to the oxygen saturation with a continuous decrease of their feeding rate (cf. Fig 1). These patterns of sensitivity could be linked to the species’ oxygen consumption regulation strategy. Indeed, a decrease in feeding rate may be viewed as an oxygen saving strategy, by the reduction in the rate of the non-essential and costly processes such as ingestion, digestion and absorption of food (i.e., specific dynamic action, SDA), which represent e.g. about 17% of the total energetic expenditure for the mussel Mytilus edulis (Widdows et al., 1"
+            },
+            {
+              "document_id": "3429",
+              "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "allower and more oxygenated waters, they might not be as exposed to reduced DO levels as older juveniles and adults can be. Chabot and Dutil (1999) brought evidence that almost all (97%) of the variability in growth observed between experimental treatments at diﬀerent levels of hypoxia was explained by an eﬀect of DO saturation on ingestion rate; we therefore modelled this process accordingly. The value of DO threshold, DOcrit = 31.7% sat., calculated by Thomas et al. (2018, this issue) in the DO correction factor equation agrees well with the fact that the risk of mortality becomes signiﬁcant at 28% sat. (Plante et al., 1998), although the lethal threshold (median lethal level after a 96 h "
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2372,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "g ad- vantage of the trophic resource available by maintaining high as- similation. 4. Third phase of severe hypoxia (beyond 3 h at ≈5% O2sat): gradual re-decrease of the ﬁltration activity. This behaviour has been documented in the hypoxia-tolerant bivalve Ruditapes decussatus that reduces, but not inhibits, its feeding and digestion activities to survive hypoxic or anoxic stress events (Sobral and Widdows, 1997). The maintenance of a consistent feeding activity might result in the accumulation of anaerobic endproducts and induce a change in the energetic strategy. A switch towards a metabolic depression (Wu, 2002), which is reﬂected by a gradual decrease in ﬁltration rates, might be an eﬃc"
+            },
+            {
+              "document_id": "2895",
+              "title": "SaraPalm2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2382,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "olume (see above), [p·M] is indirectly ob - tained and corresponds to the value of oxygen con- sumption before the dry weight of starved organisms declines significantly. Starvation experiments are useful to estimate pM because it is possible to link the use of oxygen with maintenance alone. Indeed, although several processes contribute to the value of 104 Time (wk) Som-DW (g) Fed ad libitum Starved Respiration rate [pM] = respiration rate (µmol O2 consumed per hour) when somatic DW becomes constant after cessation of feeding and before the shrinking phase Primary decline = cessation of feeding and start of reserves’ depletion (ANOVA post-hoc test: Som-DW fed > Som-DW starved; p < 0.05) Seco"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2384,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ope in the digestive process (Jordan and Steffensen, 2007). A reduction in feeding rate thus reduces the energy demand and thereby decreases O2 requirements (Pichavant et al., 2000; Wu, 2002a). ACCEPTED MANUSCRIPT [Page 9] ACCEPTED MANUSCRIPT 8 Fig 1 Ingestion rate at various levels of dissolved O2 for various species. References are given in the text. Data are scaled according to the result simulated at O2 sat. = 100 %. Life-history stage is also considered an important determinant of the relative sensitivity of organisms to hypoxia. For example, several studies conducted on bivalves demonstrated the link between development stage and the effect of low oxygen level on feeding rate: sensitiv"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2386,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "warming or hypercapnia (i.e., increase in CO2 partial pressure), which will increase species’ sensitivity by acting on their tolerance ranges (Deutsch et al., 2015; Pörtner et al., 2005; Vaquer-Sunyer and Duarte, 2011; Verberk et al., 2016). Similarly, the presence of sulfide, which is produced from the anaerobic degradation of organic matter, decreases the ability of organisms to tolerate hypoxia (Vaquer-Sunyer and Duarte, 2010). Oxygen is a key element for efficient energy production and animals, including fishes and aquatic invertebrates, meet most of their energy requirements through aerobic processes. Thus, oxygen consumption is a good approximation of metabolic rate (Nelson, 2016), inc"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2388,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "changes in the gas phase over a water volume contain- ing the respiring animals after equilibration by diffu- sion of the oxygen that replaces the consumed oxygen in the water. At the same time CO2 diffusing into the gas phase must be removed by chemical absorption. Although attempts have been made to adopt the meth- od to D. magna (e.g. Goss and Bunting 1980), it is no longer in use due to cladoceran speciﬁc problems (e.g. attachment to the water surface in the shallow water volume). Depending on the methods used, oxygen con- sumption rates are reported in different units. In the older literature and in ecological work they are usually given as volume (µL) or mass (µg) O2 per time. The mode"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2419,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "yregulation, which maintains oxygen supply (Claireaux and Chabot, 2016). As oxygen levels drop further, however, a point is reached at which maximum metabolic rate (and therefore scope for activity) becomes limiting: beyond this, further lowering oxygen levels causes reductions in meta- bolic rate and ultimately growth (Brett, 1979; Claireaux and Chabot, 2016). The level at which oxygen becomes lim- iting is critically dependent on the extent of food limitation (Jobling, 1994). Fish growth: Patterns and modeling Chapter 4 67 [Page 4] Temperature Temperature can influence the processes underlying food intake (Fonds et al., 1992; Sims et al., 2006) but more effort has been devoted to understan"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2432,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "take with activity and other metabolic costs, and by adjusting their allocation of available energy to various physiological processes based on their body condition. When their energy intake is insufficient, animals use stored body tissues to cover the costs, and as storage levels decrease, they increasingly rely on protein catabolism, which reduces their metabolic rate. However, if body stores continue to decline, animals [Page 70] face an increasing risk of mortality. At low body condition, animals prioritize critical survival processes over non-essential ones, such as growth or reproduction, resulting in tradeoffs (Sibly et al., 2013) (see ODD Element 2.7.2 for more details). 2.4.5. Learn"
+            },
+            {
+              "document_id": "W4382050338",
+              "title": "Responses of intraspecific metabolic scaling to temperature and activity differ between water- and air-breathing ectothermic vertebrates",
+              "doi": "https://doi.org/10.22541/au.168779978.80333505/v1",
+              "year": "2023",
+              "distance": 0.2466,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Metabolism underpins all life-sustaining processes and varies profoundly with body size, temperature, and locomotor activity. Explaining variation in metabolic rates is crucial in ecology. Current theory explains the variation in body mass-scaling exponent (b) through changes in metabolic level (L), depending on whether these changes mainly affect volume (V)- or surface-area (SA)-related processes. Another theory predicts that evolved avoidance of oxygen limitation in water-breathers experiencing warming will diminish the increased respiration at large sizes. We test these predictions using intraspecific metabolic scaling responses to temperature (523 regressions) and activity (281 regressio"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W73021606",
+              "title": "Metabolic Rate, Q<sub>10</sub>and Respiratory Quotient (RQ) in Crocodylus porosus, and Some Generalizations about Low RQ in Reptiles",
+              "doi": "https://doi.org/10.1086/physzool.51.4.30160960",
+              "year": "1978",
+              "distance": 0.2473,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "In juvenile Crocodylus porosus, the dependence of oxygen consumption on temperature can be described by the relationship log10 = 0.7221 + 0.0428T C. The Q10 was found to be 2.68 over the temperature range 20-33 C. No trend was observed between body weight and weight-specific oxygen consumption. At Ta (27-33 C) respiratory quotient (RQ) (measured gasometrically) was invariably low (0.32 - 0.74, mean 0.49, 0.13 SD) in animals from freshwater. The low values of gasometric RQ are attributed to incorporation of carbon dioxide in the urine, forming ammonium bicarbonate. Support for this hypothesis is afforded by the similarity of measured values (0.49) to values predicted by the hypothesis (0.51)."
+            },
+            {
+              "document_id": "W2316948813",
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "distance": 0.2496,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "Greenland halibut (Reinhardtius hippoglossoides), especially juveniles, are frequently found in severely hypoxic areas (18%–25% saturation) of the St. Lawrence Estuary. We investigated the tolerance of this species to hypoxia and evaluated the consequences of low oxygen levels on metabolic capacity. At 5 °C, juveniles had a higher critical oxygen threshold than adults (15% versus 11% saturation), indicating that they were less tolerant to hypoxia. Severe hypoxia (19% saturation) did not affect the juveniles' standard metabolic rate but significantly reduced (by 55%) their maximum metabolic rate compared with normoxia. Consequently, the aerobic scope was reduced by 72% in hypoxia compared wit"
+            },
+            {
+              "document_id": "W2081914215",
+              "title": "Surface pauses in relation to dive duration in imperial cormorants; how much time for a breather?",
+              "doi": "https://doi.org/10.1242/jeb.00967",
+              "year": "2004",
+              "distance": 0.2502,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "SUMMARY Air-breathing animals diving to forage can optimize time underwater by diving with just enough oxygen for the projected performance underwater. By so doing they surface with minimal body oxygen levels, which leads to maximal rates of oxygen uptake. We examined whether imperial cormorants Phalacrocorax atriceps adhere to this by examining dive:pause ratios in birds diving for extended, continuous periods to constant depths, assuming that the oxygen used underwater was exactly replenished by the periods at the surface. Examination of the cumulative time spent in surface pauses relative to the cumulative time spent in diving showed that surface pauses increase according to a power curve"
+            },
+            {
+              "document_id": "W4407307147",
+              "title": "Ready to dive? Early constraints help juvenile southern elephant seals (<i>Mirounga leonina</i>) acclimatize to aquatic life",
+              "doi": "https://doi.org/10.1242/jeb.249813",
+              "year": "2025",
+              "distance": 0.2513,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT Breath-holding foraging implies different adaptations to limit oxygen (O2) depletion and maximize foraging time. Physiological adjustments can be mediated through O2 consumption, driven by muscle mitochondria, which can also produce reactive oxygen species during reoxygenation. Southern elephant seals spend months foraging at sea, diving for up to 1 h. Pups transition abruptly to aquatic life after a post-weaning period, during which they fast and progressively increase their activity, making this period critical for the development of an adaptive response to oxygen restriction and oxidative stress. We compared the functional capacity of a swimming muscle in 5 recently weaned and 6 "
+            },
+            {
+              "document_id": "W3009257656",
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "distance": 0.2519,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Fish increase ventilation during hypoxia, a reflex termed the hypoxic ventilatory response (HVR). The HVR is an effective mechanism to increase O2 uptake, but at a high metabolic cost. Therefore, when hypoxia becomes severe enough, ventilation declines, as its benefit is diminished. The water oxygen partial pressure (PwO2) at which this decline occurs is expected to be near the critical PwO2 (Pcrit), the PwO2 at which O2 consumption begins to decline. Our results indicate that in zebrafish (Danio rerio), the relationship between peak HVR and Pcrit was dependent on developmental stage. Peak ventilation occurred at PwO2’s higher than Pcrit in larvae, but at a PwO2 significantly lower than Pcri"
+            },
+            {
+              "document_id": "W2168938705",
+              "title": "METHODS OF STUDYING THE RESPIRATORY EXCHANGE IN SMALL AQUATIC ORGANISMS, WITH PARTICULAR REFERENCE TO THE USE OF FLAGELLATES AS AN INDICATOR FOR OXYGEN CONSUMPTION",
+              "doi": "https://doi.org/10.1085/jgp.3.5.565",
+              "year": "1921",
+              "distance": 0.2528,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "1. Flagellates are positively chemotactic to a certain concentration of dissolved oxygen which is lower than that in water saturated with oxygen under atmospheric partial pressure. Consequently, when a small aquatic animal is held motionless between cover-slip and slide in a suspension of flagellates in water saturated with oxygen, the flagellates are attracted to those parts of the animal which are absorbing oxygen. The relative sizes of the flagellate aggregations then show the relative activities of the different surfaces of the animal in absorbing oxygen. 2. Applying this method to the red Chironomus larva it was found that the animal respires by the whole body surface except by the head"
+            },
+            {
+              "document_id": "W1999088433",
+              "title": "To What Extent Is the Foraging Behaviour of Aquatic Birds Constrained by Their Physiology?",
+              "doi": "https://doi.org/10.1086/432423",
+              "year": "2005",
+              "distance": 0.2534,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Aquatic birds have access to limited amounts of usable oxygen when they forage (dive) underwater, so the major physiological constraint to their behaviour is the need to periodically visit the water surface to replenish these stores and remove accumulated carbon dioxide. The size of the oxygen stores and the rate at which they are used (V dot o2) or carbon dioxide accumulates are the ultimate determinants of the duration that aquatic birds can remain feeding underwater. However, the assumption that the decision to terminate a dive is governed solely by the level of the respiratory stores is not always valid. Quantification of an optimal diving model for tufted ducks (Aythya fuligula) shows t"
+            },
+            {
+              "document_id": "W2105994018",
+              "title": "Combined effects of food shortage and oxygen deficiency on life history characteristics and filter screens of <i>Daphnia</i>",
+              "doi": "https://doi.org/10.1093/plankt/18.5.757",
+              "year": "1996",
+              "distance": 0.255,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Daphnia magna were reared in environments with different concentrations of food and dissolved oxygen, and their life history characteristics and filter-screen areas were analyzed. Both low food concentration and low oxygen concentration degraded Daphnia fitness (as measured by individual growth and reproduction), and synergism was detected statistically for the effects of the two factors together. Low food concentration induced the development of large filter screens in Daphnia, but this development was suppressed by low oxygen concentration, suggesting that low oxygen concentration reduces the filtering rate of Daphnia in a food-limited environment. Therefore, energy uptake by Daphnia seems"
+            },
+            {
+              "document_id": "W3026457376",
+              "title": "The OxymiR response to oxygen limitation: a comparative microRNA perspective",
+              "doi": "https://doi.org/10.1242/jeb.204594",
+              "year": "2020",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT From squid at the bottom of the ocean to humans at the top of mountains, animals have adapted to diverse oxygen-limited environments. Surviving these challenging conditions requires global metabolic reorganization that is orchestrated, in part, by microRNAs that can rapidly and reversibly target all biological functions. Herein, we review the involvement of microRNAs in natural models of anoxia and hypoxia tolerance, with a focus on the involvement of oxygen-responsive microRNAs (OxymiRs) in coordinating the metabolic rate depression that allows animals to tolerate reduced oxygen levels. We begin by discussing animals that experience acute or chronic periods of oxygen deprivation at"
+            },
+            {
+              "document_id": "W2071154714",
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Some Atlantic cod in the Bornholm Basin undertake vertical foraging migrations into severely hypoxic bottom water. Hypoxic conditions can reduce the postprandial increase in gastrointestinal blood flow (GBF). This could subsequently postpone or reduce the postprandial increase in oxygen consumption (MO(2)), i.e. the SDA, leading to a disturbed digestion. Additionally, a restricted oxygen uptake could result in an oxygen debt that needs to be compensated for upon return to normoxic waters and this may also affect the ability to process the food. Long-term cardio-respiratory measurements were made on fed G. morhua in order to understand how the cardio-respiratory system of feeding fish respond"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact has two parts: (1) O2 consumption diminishes below a critical PO2 (the oxyregulator/oxyconformer distinction with a critical saturation point), and (2) elevated metabolic demand (activity, digestion) raises the PO2 at which consumption begins to be limited. Snippet 11 most directly supports both: it describes oxyregulation maintaining oxygen supply until a critical point beyond which metabolic rate falls, and explicitly states this limiting level depends on food limitation/metabolic demand. Snippets 2 and 17 support the critical-threshold concept and the dependence of limitation on food and oxygen. Snippets 3, 4, 8 and 14 support hypoxia-induced reductions in feeding/metabolic rate and show feeding (an elevated-demand process) is affected at thresholds, consistent with the demand-dependence idea, though they focus more on feeding than the precise critical-PO2 shift. No snippet contradicts the fact. Evidence is moderate: the core oxyregulator concept and demand-dependence of the critical point are corroborated (notably snippet 11), but explicit quantitative demonstration that elevated O2 consumption raises the critical PO2 is sparse, so strength is moderate rather than strong."
+          },
+          "n_references": 4,
+          "references": {
+            "2567": {
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2251
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2291
+            },
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2291
+            },
+            "2397": {
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2419
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2056,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2251,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "ion capacity down to 20–25% O2sat (Aguirre-Velarde et al., 2016). Such ability would allow A. purpuratus to maintain most of its physiological functions independent of ambient oxygen saturation. A lower critical point for feeding activity than respira- tion may indicate a decoupling of these physiological rates enabling food ﬁltering even under low oxygen saturations. 2. First phase of severe hypoxia (below 11.2% O2sat): drop in the clearance rate. Below this oxygen threshold, we can hypothesize that the aerobic energy production decreases considerably and the energy demand might then be supplied by reserves such as phos- phagens (Grieshaber et al., 1994) providing energy to maintain ciliary"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "stently high level of feeding rate until a critical point of 20% DO saturation. Conversely, the Pacific oyster and Atlantic cod exhibit a higher sensitivity to the oxygen saturation with a continuous decrease of their feeding rate (cf. Fig 1). These patterns of sensitivity could be linked to the species’ oxygen consumption regulation strategy. Indeed, a decrease in feeding rate may be viewed as an oxygen saving strategy, by the reduction in the rate of the non-essential and costly processes such as ingestion, digestion and absorption of food (i.e., specific dynamic action, SDA), which represent e.g. about 17% of the total energetic expenditure for the mussel Mytilus edulis (Widdows et al., 1"
+            },
+            {
+              "document_id": "3429",
+              "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "allower and more oxygenated waters, they might not be as exposed to reduced DO levels as older juveniles and adults can be. Chabot and Dutil (1999) brought evidence that almost all (97%) of the variability in growth observed between experimental treatments at diﬀerent levels of hypoxia was explained by an eﬀect of DO saturation on ingestion rate; we therefore modelled this process accordingly. The value of DO threshold, DOcrit = 31.7% sat., calculated by Thomas et al. (2018, this issue) in the DO correction factor equation agrees well with the fact that the risk of mortality becomes signiﬁcant at 28% sat. (Plante et al., 1998), although the lethal threshold (median lethal level after a 96 h "
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2372,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "g ad- vantage of the trophic resource available by maintaining high as- similation. 4. Third phase of severe hypoxia (beyond 3 h at ≈5% O2sat): gradual re-decrease of the ﬁltration activity. This behaviour has been documented in the hypoxia-tolerant bivalve Ruditapes decussatus that reduces, but not inhibits, its feeding and digestion activities to survive hypoxic or anoxic stress events (Sobral and Widdows, 1997). The maintenance of a consistent feeding activity might result in the accumulation of anaerobic endproducts and induce a change in the energetic strategy. A switch towards a metabolic depression (Wu, 2002), which is reﬂected by a gradual decrease in ﬁltration rates, might be an eﬃc"
+            },
+            {
+              "document_id": "2895",
+              "title": "SaraPalm2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2382,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "olume (see above), [p·M] is indirectly ob - tained and corresponds to the value of oxygen con- sumption before the dry weight of starved organisms declines significantly. Starvation experiments are useful to estimate pM because it is possible to link the use of oxygen with maintenance alone. Indeed, although several processes contribute to the value of 104 Time (wk) Som-DW (g) Fed ad libitum Starved Respiration rate [pM] = respiration rate (µmol O2 consumed per hour) when somatic DW becomes constant after cessation of feeding and before the shrinking phase Primary decline = cessation of feeding and start of reserves’ depletion (ANOVA post-hoc test: Som-DW fed > Som-DW starved; p < 0.05) Seco"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2384,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "ope in the digestive process (Jordan and Steffensen, 2007). A reduction in feeding rate thus reduces the energy demand and thereby decreases O2 requirements (Pichavant et al., 2000; Wu, 2002a). ACCEPTED MANUSCRIPT [Page 9] ACCEPTED MANUSCRIPT 8 Fig 1 Ingestion rate at various levels of dissolved O2 for various species. References are given in the text. Data are scaled according to the result simulated at O2 sat. = 100 %. Life-history stage is also considered an important determinant of the relative sensitivity of organisms to hypoxia. For example, several studies conducted on bivalves demonstrated the link between development stage and the effect of low oxygen level on feeding rate: sensitiv"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2386,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "warming or hypercapnia (i.e., increase in CO2 partial pressure), which will increase species’ sensitivity by acting on their tolerance ranges (Deutsch et al., 2015; Pörtner et al., 2005; Vaquer-Sunyer and Duarte, 2011; Verberk et al., 2016). Similarly, the presence of sulfide, which is produced from the anaerobic degradation of organic matter, decreases the ability of organisms to tolerate hypoxia (Vaquer-Sunyer and Duarte, 2010). Oxygen is a key element for efficient energy production and animals, including fishes and aquatic invertebrates, meet most of their energy requirements through aerobic processes. Thus, oxygen consumption is a good approximation of metabolic rate (Nelson, 2016), inc"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2388,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "changes in the gas phase over a water volume contain- ing the respiring animals after equilibration by diffu- sion of the oxygen that replaces the consumed oxygen in the water. At the same time CO2 diffusing into the gas phase must be removed by chemical absorption. Although attempts have been made to adopt the meth- od to D. magna (e.g. Goss and Bunting 1980), it is no longer in use due to cladoceran speciﬁc problems (e.g. attachment to the water surface in the shallow water volume). Depending on the methods used, oxygen con- sumption rates are reported in different units. In the older literature and in ecological work they are usually given as volume (µL) or mass (µg) O2 per time. The mode"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2419,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "yregulation, which maintains oxygen supply (Claireaux and Chabot, 2016). As oxygen levels drop further, however, a point is reached at which maximum metabolic rate (and therefore scope for activity) becomes limiting: beyond this, further lowering oxygen levels causes reductions in meta- bolic rate and ultimately growth (Brett, 1979; Claireaux and Chabot, 2016). The level at which oxygen becomes lim- iting is critically dependent on the extent of food limitation (Jobling, 1994). Fish growth: Patterns and modeling Chapter 4 67 [Page 4] Temperature Temperature can influence the processes underlying food intake (Fonds et al., 1992; Sims et al., 2006) but more effort has been devoted to understan"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2432,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "take with activity and other metabolic costs, and by adjusting their allocation of available energy to various physiological processes based on their body condition. When their energy intake is insufficient, animals use stored body tissues to cover the costs, and as storage levels decrease, they increasingly rely on protein catabolism, which reduces their metabolic rate. However, if body stores continue to decline, animals [Page 70] face an increasing risk of mortality. At low body condition, animals prioritize critical survival processes over non-essential ones, such as growth or reproduction, resulting in tradeoffs (Sibly et al., 2013) (see ODD Element 2.7.2 for more details). 2.4.5. Learn"
+            },
+            {
+              "document_id": "3771",
+              "title": "Bazin - 2024 - Conséquences écologiques des changements de taille.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2434,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "lecules with the environment more rapidly due to their larger surface-to-volume ratio ((Leiva et al., 2019), pathway 3 in Figure 2). This mechanism contributes to the common pattern that smaller terrestrial ectotherms have a lower desiccation tolerance than larger ones (e.g. Tejeda et al., 2014). This may also lead to higher uptake of toxicants, explaining why a warming-induced BSR can increase sensitivity to pesticides (Verheyen & Stoks, 2019). The relative importance of pathways 2 (bioenergetics) and 3 (surface-to-volume- ratio) may determine the size-dependent pattern of tolerance to hypoxia, during which animals rely on anaerobic energy production. Smaller animals run out of energy store"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2435,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "n the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPT [Page 14] ACCEPTED MANUSCRIPT 13 (increase of O2 conductance: ventilation, heart- beat, O2 affinity for respiratory pigment etc.). These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce activity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaer"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2445,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "defines the threshold oxygen concentration considered to be ‘hypoxic,’ research has indicated that the specific dissolved oxygen concentration that alters organismal behavior or physiology varies widely among species (Vaquer-Sunyer and Duarte 2008). The threshold of 2.0 mg l-1 was established because it corresponded to the concentration at which point mass [Page 18] 3 mortality of fishes were observed (Renaud 1986). However, it may not necessarily reflect an accurate threshold for many marine organisms. For example, killifish, Fundulus heteroclitus, show physiological changes around 4.50 mg l-1 (Voyer and Hennekey 1972) whereas 0.43 mg l-1 denotes a physiological threshold for a species of j"
+            },
+            {
+              "document_id": "3596",
+              "title": "Jager et al. - 2022 - Testing a simple energy-budget model for yolk-feed.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2447,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "er content of the structural tissues (as also indicated for total density in Fig. 2). The stop of growth also implies a drop in oxygen use in the model, since the overhead costs for growth are an important contribution to respiration. However, the data do not show such a rapid reduction, but rather a plateau in respiration. The initial part of the respiration curve, up to point where yolk is expected to run out (around 10 dpf), is consistent with the model predictions. However, the rapid decrease after that is not shown in the data. It is possible that the growth costs are lower than assumed in the model, or that the animals increase their swimming activity at this point (e.g., attempting to"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2449,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "aus, perhaps due to limitations on oxygen transport, while main- tenance costs continue to rise (Brett, 1979; Fry, 1947). The mechanism by which growth becomes limited above the thermal maximum has been debated, but biological func- tions such as growth are likely suppressed before the point of tissue hypoxia (Harrison et al., 2018): fish may reduce food intake to protect scope for activity from the metabolic costs of food conversion (Jutfelt et al., 2021). Critically, the controlling effects of temperature on met- abolic expenditure will depend on limitations imposed by food and oxygen (Brett, 1979). Suboptimal rations and low dissolved oxygen levels place upper limits on maximum rates of m"
+            },
+            {
+              "document_id": "3425",
+              "title": "Jager et al. - 2018 - Simple energy-budget model for yolk-feeding stages.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2456,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "decreases as also the total amount of structure to be maintained decreases. This pattern is, in general, consistent with the data, although there is a considerable diﬀerence between the respiration data in light and dark conditions. The animals in the light clearly have a higher respiration rate after complete yolk absorption than predicted, which can be linked to an increased swimming activity (see Solberg and Tilseth, 1984). The role of swimming activity in the energy budget is discussed further in Section 3.3. The increase in standard length over time (Fig. 2a) is well matched by the model (note that animals cannot shrink in length, even though they do shrink in dry weight). However, grow"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several snippets directly support the core of the stylized fact. Snippet 7 explicitly defines the critical PwO2 (Pcrit) as the oxygen partial pressure at which O2 consumption begins to decline, and discusses how peak ventilation (elevated demand) relative to Pcrit varies. Snippet 4 confirms a measurable critical oxygen threshold below which metabolic capacity is reduced, with differences linked to demand/age. Snippet 18 supports the existence of a Pcrit below which metabolic rate is compromised. Snippets 12 and 15 corroborate that elevated O2 demand (digestion/SDA, feeding) is impaired under hypoxia, consistent with the claim that elevated consumption raises the PO2 at which limitation begins. Snippet 14 (OCLTT) supports oxygen-demand/supply framing. No snippets contradict the fact. The evidence is moderate (clear conceptual support exists, especially the Pcrit definition) but spread across mostly tangential reproduction-corpus abstracts rather than dedicated, quantitative demonstrations of the elevated-demand shift; hence moderate strength but corroborated direction."
+          },
+          "n_references": 6,
+          "references": {
+            "W2316948813": {
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2496
+            },
+            "W3009257656": {
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2519
+            },
+            "W2071154714": {
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2553
+            },
+            "W2743646195": {
+              "title": "Oxygen- and capacity-limited thermal tolerance: bridging ecology and physiology",
+              "doi": "https://doi.org/10.1242/jeb.134585",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2565
+            },
+            "W2087366163": {
+              "title": "Effects of Hypoxia and Surface Access on Growth, Mortality, and Behavior of Juvenile Guppies, <i>Poecilia reticulata</i>",
+              "doi": "https://doi.org/10.1139/f83-183",
+              "year": "1983",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2573
+            },
+            "W4403515618": {
+              "title": "The mayfly <i>Neocloeon triangulifer</i> senses decreasing oxygen availability (<i>P</i>O2) and responds by reducing ion uptake and altering gene expression",
+              "doi": "https://doi.org/10.1242/jeb.247916",
+              "year": "2024",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2586
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W4382050338",
+              "title": "Responses of intraspecific metabolic scaling to temperature and activity differ between water- and air-breathing ectothermic vertebrates",
+              "doi": "https://doi.org/10.22541/au.168779978.80333505/v1",
+              "year": "2023",
+              "distance": 0.2466,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Metabolism underpins all life-sustaining processes and varies profoundly with body size, temperature, and locomotor activity. Explaining variation in metabolic rates is crucial in ecology. Current theory explains the variation in body mass-scaling exponent (b) through changes in metabolic level (L), depending on whether these changes mainly affect volume (V)- or surface-area (SA)-related processes. Another theory predicts that evolved avoidance of oxygen limitation in water-breathers experiencing warming will diminish the increased respiration at large sizes. We test these predictions using intraspecific metabolic scaling responses to temperature (523 regressions) and activity (281 regressio"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W73021606",
+              "title": "Metabolic Rate, Q<sub>10</sub>and Respiratory Quotient (RQ) in Crocodylus porosus, and Some Generalizations about Low RQ in Reptiles",
+              "doi": "https://doi.org/10.1086/physzool.51.4.30160960",
+              "year": "1978",
+              "distance": 0.2473,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "In juvenile Crocodylus porosus, the dependence of oxygen consumption on temperature can be described by the relationship log10 = 0.7221 + 0.0428T C. The Q10 was found to be 2.68 over the temperature range 20-33 C. No trend was observed between body weight and weight-specific oxygen consumption. At Ta (27-33 C) respiratory quotient (RQ) (measured gasometrically) was invariably low (0.32 - 0.74, mean 0.49, 0.13 SD) in animals from freshwater. The low values of gasometric RQ are attributed to incorporation of carbon dioxide in the urine, forming ammonium bicarbonate. Support for this hypothesis is afforded by the similarity of measured values (0.49) to values predicted by the hypothesis (0.51)."
+            },
+            {
+              "document_id": "W2316948813",
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "distance": 0.2496,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "Greenland halibut (Reinhardtius hippoglossoides), especially juveniles, are frequently found in severely hypoxic areas (18%–25% saturation) of the St. Lawrence Estuary. We investigated the tolerance of this species to hypoxia and evaluated the consequences of low oxygen levels on metabolic capacity. At 5 °C, juveniles had a higher critical oxygen threshold than adults (15% versus 11% saturation), indicating that they were less tolerant to hypoxia. Severe hypoxia (19% saturation) did not affect the juveniles' standard metabolic rate but significantly reduced (by 55%) their maximum metabolic rate compared with normoxia. Consequently, the aerobic scope was reduced by 72% in hypoxia compared wit"
+            },
+            {
+              "document_id": "W2081914215",
+              "title": "Surface pauses in relation to dive duration in imperial cormorants; how much time for a breather?",
+              "doi": "https://doi.org/10.1242/jeb.00967",
+              "year": "2004",
+              "distance": 0.2502,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "SUMMARY Air-breathing animals diving to forage can optimize time underwater by diving with just enough oxygen for the projected performance underwater. By so doing they surface with minimal body oxygen levels, which leads to maximal rates of oxygen uptake. We examined whether imperial cormorants Phalacrocorax atriceps adhere to this by examining dive:pause ratios in birds diving for extended, continuous periods to constant depths, assuming that the oxygen used underwater was exactly replenished by the periods at the surface. Examination of the cumulative time spent in surface pauses relative to the cumulative time spent in diving showed that surface pauses increase according to a power curve"
+            },
+            {
+              "document_id": "W4407307147",
+              "title": "Ready to dive? Early constraints help juvenile southern elephant seals (<i>Mirounga leonina</i>) acclimatize to aquatic life",
+              "doi": "https://doi.org/10.1242/jeb.249813",
+              "year": "2025",
+              "distance": 0.2513,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT Breath-holding foraging implies different adaptations to limit oxygen (O2) depletion and maximize foraging time. Physiological adjustments can be mediated through O2 consumption, driven by muscle mitochondria, which can also produce reactive oxygen species during reoxygenation. Southern elephant seals spend months foraging at sea, diving for up to 1 h. Pups transition abruptly to aquatic life after a post-weaning period, during which they fast and progressively increase their activity, making this period critical for the development of an adaptive response to oxygen restriction and oxidative stress. We compared the functional capacity of a swimming muscle in 5 recently weaned and 6 "
+            },
+            {
+              "document_id": "W3009257656",
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "distance": 0.2519,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Fish increase ventilation during hypoxia, a reflex termed the hypoxic ventilatory response (HVR). The HVR is an effective mechanism to increase O2 uptake, but at a high metabolic cost. Therefore, when hypoxia becomes severe enough, ventilation declines, as its benefit is diminished. The water oxygen partial pressure (PwO2) at which this decline occurs is expected to be near the critical PwO2 (Pcrit), the PwO2 at which O2 consumption begins to decline. Our results indicate that in zebrafish (Danio rerio), the relationship between peak HVR and Pcrit was dependent on developmental stage. Peak ventilation occurred at PwO2’s higher than Pcrit in larvae, but at a PwO2 significantly lower than Pcri"
+            },
+            {
+              "document_id": "W2168938705",
+              "title": "METHODS OF STUDYING THE RESPIRATORY EXCHANGE IN SMALL AQUATIC ORGANISMS, WITH PARTICULAR REFERENCE TO THE USE OF FLAGELLATES AS AN INDICATOR FOR OXYGEN CONSUMPTION",
+              "doi": "https://doi.org/10.1085/jgp.3.5.565",
+              "year": "1921",
+              "distance": 0.2528,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "1. Flagellates are positively chemotactic to a certain concentration of dissolved oxygen which is lower than that in water saturated with oxygen under atmospheric partial pressure. Consequently, when a small aquatic animal is held motionless between cover-slip and slide in a suspension of flagellates in water saturated with oxygen, the flagellates are attracted to those parts of the animal which are absorbing oxygen. The relative sizes of the flagellate aggregations then show the relative activities of the different surfaces of the animal in absorbing oxygen. 2. Applying this method to the red Chironomus larva it was found that the animal respires by the whole body surface except by the head"
+            },
+            {
+              "document_id": "W1999088433",
+              "title": "To What Extent Is the Foraging Behaviour of Aquatic Birds Constrained by Their Physiology?",
+              "doi": "https://doi.org/10.1086/432423",
+              "year": "2005",
+              "distance": 0.2534,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Aquatic birds have access to limited amounts of usable oxygen when they forage (dive) underwater, so the major physiological constraint to their behaviour is the need to periodically visit the water surface to replenish these stores and remove accumulated carbon dioxide. The size of the oxygen stores and the rate at which they are used (V dot o2) or carbon dioxide accumulates are the ultimate determinants of the duration that aquatic birds can remain feeding underwater. However, the assumption that the decision to terminate a dive is governed solely by the level of the respiratory stores is not always valid. Quantification of an optimal diving model for tufted ducks (Aythya fuligula) shows t"
+            },
+            {
+              "document_id": "W2105994018",
+              "title": "Combined effects of food shortage and oxygen deficiency on life history characteristics and filter screens of <i>Daphnia</i>",
+              "doi": "https://doi.org/10.1093/plankt/18.5.757",
+              "year": "1996",
+              "distance": 0.255,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Daphnia magna were reared in environments with different concentrations of food and dissolved oxygen, and their life history characteristics and filter-screen areas were analyzed. Both low food concentration and low oxygen concentration degraded Daphnia fitness (as measured by individual growth and reproduction), and synergism was detected statistically for the effects of the two factors together. Low food concentration induced the development of large filter screens in Daphnia, but this development was suppressed by low oxygen concentration, suggesting that low oxygen concentration reduces the filtering rate of Daphnia in a food-limited environment. Therefore, energy uptake by Daphnia seems"
+            },
+            {
+              "document_id": "W3026457376",
+              "title": "The OxymiR response to oxygen limitation: a comparative microRNA perspective",
+              "doi": "https://doi.org/10.1242/jeb.204594",
+              "year": "2020",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT From squid at the bottom of the ocean to humans at the top of mountains, animals have adapted to diverse oxygen-limited environments. Surviving these challenging conditions requires global metabolic reorganization that is orchestrated, in part, by microRNAs that can rapidly and reversibly target all biological functions. Herein, we review the involvement of microRNAs in natural models of anoxia and hypoxia tolerance, with a focus on the involvement of oxygen-responsive microRNAs (OxymiRs) in coordinating the metabolic rate depression that allows animals to tolerate reduced oxygen levels. We begin by discussing animals that experience acute or chronic periods of oxygen deprivation at"
+            },
+            {
+              "document_id": "W2071154714",
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Some Atlantic cod in the Bornholm Basin undertake vertical foraging migrations into severely hypoxic bottom water. Hypoxic conditions can reduce the postprandial increase in gastrointestinal blood flow (GBF). This could subsequently postpone or reduce the postprandial increase in oxygen consumption (MO(2)), i.e. the SDA, leading to a disturbed digestion. Additionally, a restricted oxygen uptake could result in an oxygen debt that needs to be compensated for upon return to normoxic waters and this may also affect the ability to process the food. Long-term cardio-respiratory measurements were made on fed G. morhua in order to understand how the cardio-respiratory system of feeding fish respond"
+            },
+            {
+              "document_id": "W2018054532",
+              "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+              "doi": "https://doi.org/10.1093/icb/28.1.137",
+              "year": "1988",
+              "distance": 0.2555,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "SYNOPSIS: In intertidal animals rates of oxygen consumption span an order of magnitude (even when standardised for body size and temperature). This may reflect different adaptations to this variable habitat. Temperatures range widely and potentially increase metabolic expenditure during the heat of the day, while periods of feeding may be restricted. The balance between intake and expenditure of energy may limit zonation, body size, and even mode of reproduction. One pattern is that species suffering shortage of food (\"conservers\") have low rates of oxygen consumption while those with abundant food (\"exploiters\") have high rates. Conservers appear to have several means of reducing metabolic "
+            },
+            {
+              "document_id": "W2743646195",
+              "title": "Oxygen- and capacity-limited thermal tolerance: bridging ecology and physiology",
+              "doi": "https://doi.org/10.1242/jeb.134585",
+              "year": "2017",
+              "distance": 0.2565,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "ABSTRACT Observations of climate impacts on ecosystems highlight the need for an understanding of organismal thermal ranges and their implications at the ecosystem level. Where changes in aquatic animal populations have been observed, the integrative concept of oxygen- and capacity-limited thermal tolerance (OCLTT) has successfully characterised the onset of thermal limits to performance and field abundance. The OCLTT concept addresses the molecular to whole-animal mechanisms that define thermal constraints on the capacity for oxygen supply to the organism in relation to oxygen demand. The resulting ‘total excess aerobic power budget’ supports an animal's performance (e.g. comprising motor a"
+            },
+            {
+              "document_id": "W2087366163",
+              "title": "Effects of Hypoxia and Surface Access on Growth, Mortality, and Behavior of Juvenile Guppies, <i>Poecilia reticulata</i>",
+              "doi": "https://doi.org/10.1139/f83-183",
+              "year": "1983",
+              "distance": 0.2573,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Juvenile guppies (Poecilia reticulata) were fed ad libitum and maintained for 11 d at oxygen concentrations ranging from 0.5 to 8 mg/L (25–26 °C). With access to the surface, guppies showed high growth rates and low mortality at all concentrations. Without surface access, they exhibited a progressive reduction in growth rate below 2–3 mg/L and did not survive below 1 mg/L. Activity was influenced by oxygen concentration and surface access. Feeding rates declined sharply with oxygen concentration for fish without surface access and to a lesser extent for fish with access. Percent time in contact with the surface increased as oxygen decreased. Aquatic surface respiration is used even when this"
+            },
+            {
+              "document_id": "W3170904254",
+              "title": "Hypoxia Generated by Avian Embryo Growth Induces the HIF-α Response and Critical Vascularization",
+              "doi": "https://doi.org/10.3389/fevo.2021.675800",
+              "year": "2021",
+              "distance": 0.2578,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Cancer research has transformed our view on cellular mechanisms for oxygen sensing. It has been documented that these mechanisms are important for maintaining animal tissues and life in environments where oxygen (O 2 ) concentrations fluctuate. In adult animals, oxygen sensing is governed by the Hypoxia Inducible Factors (HIFs) that are stabilized at low oxygen concentrations (hypoxia). However, the importance of hypoxia itself during development and for the onset of HIF-driven oxygen sensing remains poorly explored. Cellular responses to hypoxia associates with cell immaturity (stemness) and proper tissue and organ development. During mammalian development, the initial uterine environment i"
+            },
+            {
+              "document_id": "W2603318072",
+              "title": "Behavioral responses of common juvenile estuarine fishes to diel-cycling hypoxia and corresponding pH fluctuations: a comparative approach",
+              "doi": "https://doi.org/10.58088/ffxg-k948",
+              "year": "2025",
+              "distance": 0.2582,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Diel-cycling hypoxia and co-varying pH fluctuations reduces the quality of shallow estuarine nursery habitat for juvenile fishes. Avoidance or compensatory behaviors allow fish to mitigate stress associated with low dissolved oxygen (DO). Aquatic surface respiration (ASR), respiring in the thin, air-saturated, surface layer, is widespread among teleosts and provides an advantage to fish routinely exposed to hypoxia. ASR begins when oxygen becomes physiologically limiting, and serves as an indicator for hypoxia tolerance in a species. 24-hour video observations were conducted under controlled laboratory conditions using computer-monitored recirculating aquarium systems. Behavioral responses o"
+            },
+            {
+              "document_id": "W4403515618",
+              "title": "The mayfly <i>Neocloeon triangulifer</i> senses decreasing oxygen availability (<i>P</i>O2) and responds by reducing ion uptake and altering gene expression",
+              "doi": "https://doi.org/10.1242/jeb.247916",
+              "year": "2024",
+              "distance": 0.2586,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "ABSTRACT Oxygen availability is central to the energetic budget of aquatic animals and may vary naturally and/or in response to anthropogenic activities. Yet, we know little about how oxygen availability is linked to fundamental processes such as ion transport in aquatic insects. We hypothesized and observed that ion (22Na and 35SO4) uptake would be significantly decreased at O2 partial pressures below the mean critical level (Pcrit, 5.4 kPa) where metabolic rate (ṀO2) is compromised and ATP production is limited. However, we were surprised to observe marked reductions in ion uptake at oxygen partial pressures well above Pcrit, where ṀO2 was stable. For example, SO4 uptake decreased by 51% a"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several snippets directly support the stylized fact. Snippet 19 (zebrafish) explicitly describes Pcrit as the PwO2 at which O2 consumption begins to decline, the core concept of a critical saturation level. Snippet 11 describes oxyregulation maintaining oxygen supply until a critical point beyond which metabolic rate declines, and notes this critical level depends on food limitation, directly supporting that elevated metabolic demand raises the critical PO2. Snippet 16 documents species-specific critical oxygen thresholds and shows hypoxia limits maximum metabolic rate (aerobic scope). Snippets 2, 3, 4, 8, and 24 support related ideas: oxyregulation up to a threshold, lower critical points for different processes, and the link between elevated demand (feeding/SDA, digestion) and oxygen limitation. No snippets contradict the fact. Evidence is moderate—clear conceptual support but quantitative demonstration of the demand-dependent shift in critical PO2 is somewhat indirect—so strength is 2 with corroborating consensus."
+          },
+          "n_references": 7,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2056
+            },
+            "2567": {
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2251
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2291
+            },
+            "2397": {
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2419
+            },
+            "W2316948813": {
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2496
+            },
+            "W3009257656": {
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2519
+            },
+            "W2071154714": {
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2553
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2056,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2251,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ion capacity down to 20–25% O2sat (Aguirre-Velarde et al., 2016). Such ability would allow A. purpuratus to maintain most of its physiological functions independent of ambient oxygen saturation. A lower critical point for feeding activity than respira- tion may indicate a decoupling of these physiological rates enabling food ﬁltering even under low oxygen saturations. 2. First phase of severe hypoxia (below 11.2% O2sat): drop in the clearance rate. Below this oxygen threshold, we can hypothesize that the aerobic energy production decreases considerably and the energy demand might then be supplied by reserves such as phos- phagens (Grieshaber et al., 1994) providing energy to maintain ciliary"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2291,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "stently high level of feeding rate until a critical point of 20% DO saturation. Conversely, the Pacific oyster and Atlantic cod exhibit a higher sensitivity to the oxygen saturation with a continuous decrease of their feeding rate (cf. Fig 1). These patterns of sensitivity could be linked to the species’ oxygen consumption regulation strategy. Indeed, a decrease in feeding rate may be viewed as an oxygen saving strategy, by the reduction in the rate of the non-essential and costly processes such as ingestion, digestion and absorption of food (i.e., specific dynamic action, SDA), which represent e.g. about 17% of the total energetic expenditure for the mussel Mytilus edulis (Widdows et al., 1"
+            },
+            {
+              "document_id": "3429",
+              "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "allower and more oxygenated waters, they might not be as exposed to reduced DO levels as older juveniles and adults can be. Chabot and Dutil (1999) brought evidence that almost all (97%) of the variability in growth observed between experimental treatments at diﬀerent levels of hypoxia was explained by an eﬀect of DO saturation on ingestion rate; we therefore modelled this process accordingly. The value of DO threshold, DOcrit = 31.7% sat., calculated by Thomas et al. (2018, this issue) in the DO correction factor equation agrees well with the fact that the risk of mortality becomes signiﬁcant at 28% sat. (Plante et al., 1998), although the lethal threshold (median lethal level after a 96 h "
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2372,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "g ad- vantage of the trophic resource available by maintaining high as- similation. 4. Third phase of severe hypoxia (beyond 3 h at ≈5% O2sat): gradual re-decrease of the ﬁltration activity. This behaviour has been documented in the hypoxia-tolerant bivalve Ruditapes decussatus that reduces, but not inhibits, its feeding and digestion activities to survive hypoxic or anoxic stress events (Sobral and Widdows, 1997). The maintenance of a consistent feeding activity might result in the accumulation of anaerobic endproducts and induce a change in the energetic strategy. A switch towards a metabolic depression (Wu, 2002), which is reﬂected by a gradual decrease in ﬁltration rates, might be an eﬃc"
+            },
+            {
+              "document_id": "2895",
+              "title": "SaraPalm2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2382,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "olume (see above), [p·M] is indirectly ob - tained and corresponds to the value of oxygen con- sumption before the dry weight of starved organisms declines significantly. Starvation experiments are useful to estimate pM because it is possible to link the use of oxygen with maintenance alone. Indeed, although several processes contribute to the value of 104 Time (wk) Som-DW (g) Fed ad libitum Starved Respiration rate [pM] = respiration rate (µmol O2 consumed per hour) when somatic DW becomes constant after cessation of feeding and before the shrinking phase Primary decline = cessation of feeding and start of reserves’ depletion (ANOVA post-hoc test: Som-DW fed > Som-DW starved; p < 0.05) Seco"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2384,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "ope in the digestive process (Jordan and Steffensen, 2007). A reduction in feeding rate thus reduces the energy demand and thereby decreases O2 requirements (Pichavant et al., 2000; Wu, 2002a). ACCEPTED MANUSCRIPT [Page 9] ACCEPTED MANUSCRIPT 8 Fig 1 Ingestion rate at various levels of dissolved O2 for various species. References are given in the text. Data are scaled according to the result simulated at O2 sat. = 100 %. Life-history stage is also considered an important determinant of the relative sensitivity of organisms to hypoxia. For example, several studies conducted on bivalves demonstrated the link between development stage and the effect of low oxygen level on feeding rate: sensitiv"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2386,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "warming or hypercapnia (i.e., increase in CO2 partial pressure), which will increase species’ sensitivity by acting on their tolerance ranges (Deutsch et al., 2015; Pörtner et al., 2005; Vaquer-Sunyer and Duarte, 2011; Verberk et al., 2016). Similarly, the presence of sulfide, which is produced from the anaerobic degradation of organic matter, decreases the ability of organisms to tolerate hypoxia (Vaquer-Sunyer and Duarte, 2010). Oxygen is a key element for efficient energy production and animals, including fishes and aquatic invertebrates, meet most of their energy requirements through aerobic processes. Thus, oxygen consumption is a good approximation of metabolic rate (Nelson, 2016), inc"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2388,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "changes in the gas phase over a water volume contain- ing the respiring animals after equilibration by diffu- sion of the oxygen that replaces the consumed oxygen in the water. At the same time CO2 diffusing into the gas phase must be removed by chemical absorption. Although attempts have been made to adopt the meth- od to D. magna (e.g. Goss and Bunting 1980), it is no longer in use due to cladoceran speciﬁc problems (e.g. attachment to the water surface in the shallow water volume). Depending on the methods used, oxygen con- sumption rates are reported in different units. In the older literature and in ecological work they are usually given as volume (µL) or mass (µg) O2 per time. The mode"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2419,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "yregulation, which maintains oxygen supply (Claireaux and Chabot, 2016). As oxygen levels drop further, however, a point is reached at which maximum metabolic rate (and therefore scope for activity) becomes limiting: beyond this, further lowering oxygen levels causes reductions in meta- bolic rate and ultimately growth (Brett, 1979; Claireaux and Chabot, 2016). The level at which oxygen becomes lim- iting is critically dependent on the extent of food limitation (Jobling, 1994). Fish growth: Patterns and modeling Chapter 4 67 [Page 4] Temperature Temperature can influence the processes underlying food intake (Fonds et al., 1992; Sims et al., 2006) but more effort has been devoted to understan"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2432,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "take with activity and other metabolic costs, and by adjusting their allocation of available energy to various physiological processes based on their body condition. When their energy intake is insufficient, animals use stored body tissues to cover the costs, and as storage levels decrease, they increasingly rely on protein catabolism, which reduces their metabolic rate. However, if body stores continue to decline, animals [Page 70] face an increasing risk of mortality. At low body condition, animals prioritize critical survival processes over non-essential ones, such as growth or reproduction, resulting in tradeoffs (Sibly et al., 2013) (see ODD Element 2.7.2 for more details). 2.4.5. Learn"
+            },
+            {
+              "document_id": "W4382050338",
+              "title": "Responses of intraspecific metabolic scaling to temperature and activity differ between water- and air-breathing ectothermic vertebrates",
+              "doi": "https://doi.org/10.22541/au.168779978.80333505/v1",
+              "year": "2023",
+              "distance": 0.2466,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Metabolism underpins all life-sustaining processes and varies profoundly with body size, temperature, and locomotor activity. Explaining variation in metabolic rates is crucial in ecology. Current theory explains the variation in body mass-scaling exponent (b) through changes in metabolic level (L), depending on whether these changes mainly affect volume (V)- or surface-area (SA)-related processes. Another theory predicts that evolved avoidance of oxygen limitation in water-breathers experiencing warming will diminish the increased respiration at large sizes. We test these predictions using intraspecific metabolic scaling responses to temperature (523 regressions) and activity (281 regressio"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W73021606",
+              "title": "Metabolic Rate, Q<sub>10</sub>and Respiratory Quotient (RQ) in Crocodylus porosus, and Some Generalizations about Low RQ in Reptiles",
+              "doi": "https://doi.org/10.1086/physzool.51.4.30160960",
+              "year": "1978",
+              "distance": 0.2473,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "In juvenile Crocodylus porosus, the dependence of oxygen consumption on temperature can be described by the relationship log10 = 0.7221 + 0.0428T C. The Q10 was found to be 2.68 over the temperature range 20-33 C. No trend was observed between body weight and weight-specific oxygen consumption. At Ta (27-33 C) respiratory quotient (RQ) (measured gasometrically) was invariably low (0.32 - 0.74, mean 0.49, 0.13 SD) in animals from freshwater. The low values of gasometric RQ are attributed to incorporation of carbon dioxide in the urine, forming ammonium bicarbonate. Support for this hypothesis is afforded by the similarity of measured values (0.49) to values predicted by the hypothesis (0.51)."
+            },
+            {
+              "document_id": "W2316948813",
+              "title": "Impact of hypoxia on the metabolism of Greenland halibut (<i>Reinhardtius hippoglossoides</i>)",
+              "doi": "https://doi.org/10.1139/cjfas-2012-0327",
+              "year": "2013",
+              "distance": 0.2496,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Greenland halibut (Reinhardtius hippoglossoides), especially juveniles, are frequently found in severely hypoxic areas (18%–25% saturation) of the St. Lawrence Estuary. We investigated the tolerance of this species to hypoxia and evaluated the consequences of low oxygen levels on metabolic capacity. At 5 °C, juveniles had a higher critical oxygen threshold than adults (15% versus 11% saturation), indicating that they were less tolerant to hypoxia. Severe hypoxia (19% saturation) did not affect the juveniles' standard metabolic rate but significantly reduced (by 55%) their maximum metabolic rate compared with normoxia. Consequently, the aerobic scope was reduced by 72% in hypoxia compared wit"
+            },
+            {
+              "document_id": "W2081914215",
+              "title": "Surface pauses in relation to dive duration in imperial cormorants; how much time for a breather?",
+              "doi": "https://doi.org/10.1242/jeb.00967",
+              "year": "2004",
+              "distance": 0.2502,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "SUMMARY Air-breathing animals diving to forage can optimize time underwater by diving with just enough oxygen for the projected performance underwater. By so doing they surface with minimal body oxygen levels, which leads to maximal rates of oxygen uptake. We examined whether imperial cormorants Phalacrocorax atriceps adhere to this by examining dive:pause ratios in birds diving for extended, continuous periods to constant depths, assuming that the oxygen used underwater was exactly replenished by the periods at the surface. Examination of the cumulative time spent in surface pauses relative to the cumulative time spent in diving showed that surface pauses increase according to a power curve"
+            },
+            {
+              "document_id": "W4407307147",
+              "title": "Ready to dive? Early constraints help juvenile southern elephant seals (<i>Mirounga leonina</i>) acclimatize to aquatic life",
+              "doi": "https://doi.org/10.1242/jeb.249813",
+              "year": "2025",
+              "distance": 0.2513,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT Breath-holding foraging implies different adaptations to limit oxygen (O2) depletion and maximize foraging time. Physiological adjustments can be mediated through O2 consumption, driven by muscle mitochondria, which can also produce reactive oxygen species during reoxygenation. Southern elephant seals spend months foraging at sea, diving for up to 1 h. Pups transition abruptly to aquatic life after a post-weaning period, during which they fast and progressively increase their activity, making this period critical for the development of an adaptive response to oxygen restriction and oxidative stress. We compared the functional capacity of a swimming muscle in 5 recently weaned and 6 "
+            },
+            {
+              "document_id": "W3009257656",
+              "title": "Relationships between the peak hypoxic ventilatory response and critical O2 tension in larval and adult zebrafish (<i>Danio rerio</i>)",
+              "doi": "https://doi.org/10.1242/jeb.213942",
+              "year": "2020",
+              "distance": 0.2519,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Fish increase ventilation during hypoxia, a reflex termed the hypoxic ventilatory response (HVR). The HVR is an effective mechanism to increase O2 uptake, but at a high metabolic cost. Therefore, when hypoxia becomes severe enough, ventilation declines, as its benefit is diminished. The water oxygen partial pressure (PwO2) at which this decline occurs is expected to be near the critical PwO2 (Pcrit), the PwO2 at which O2 consumption begins to decline. Our results indicate that in zebrafish (Danio rerio), the relationship between peak HVR and Pcrit was dependent on developmental stage. Peak ventilation occurred at PwO2’s higher than Pcrit in larvae, but at a PwO2 significantly lower than Pcri"
+            },
+            {
+              "document_id": "W2168938705",
+              "title": "METHODS OF STUDYING THE RESPIRATORY EXCHANGE IN SMALL AQUATIC ORGANISMS, WITH PARTICULAR REFERENCE TO THE USE OF FLAGELLATES AS AN INDICATOR FOR OXYGEN CONSUMPTION",
+              "doi": "https://doi.org/10.1085/jgp.3.5.565",
+              "year": "1921",
+              "distance": 0.2528,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "1. Flagellates are positively chemotactic to a certain concentration of dissolved oxygen which is lower than that in water saturated with oxygen under atmospheric partial pressure. Consequently, when a small aquatic animal is held motionless between cover-slip and slide in a suspension of flagellates in water saturated with oxygen, the flagellates are attracted to those parts of the animal which are absorbing oxygen. The relative sizes of the flagellate aggregations then show the relative activities of the different surfaces of the animal in absorbing oxygen. 2. Applying this method to the red Chironomus larva it was found that the animal respires by the whole body surface except by the head"
+            },
+            {
+              "document_id": "W1999088433",
+              "title": "To What Extent Is the Foraging Behaviour of Aquatic Birds Constrained by Their Physiology?",
+              "doi": "https://doi.org/10.1086/432423",
+              "year": "2005",
+              "distance": 0.2534,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Aquatic birds have access to limited amounts of usable oxygen when they forage (dive) underwater, so the major physiological constraint to their behaviour is the need to periodically visit the water surface to replenish these stores and remove accumulated carbon dioxide. The size of the oxygen stores and the rate at which they are used (V dot o2) or carbon dioxide accumulates are the ultimate determinants of the duration that aquatic birds can remain feeding underwater. However, the assumption that the decision to terminate a dive is governed solely by the level of the respiratory stores is not always valid. Quantification of an optimal diving model for tufted ducks (Aythya fuligula) shows t"
+            },
+            {
+              "document_id": "W2105994018",
+              "title": "Combined effects of food shortage and oxygen deficiency on life history characteristics and filter screens of <i>Daphnia</i>",
+              "doi": "https://doi.org/10.1093/plankt/18.5.757",
+              "year": "1996",
+              "distance": 0.255,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Daphnia magna were reared in environments with different concentrations of food and dissolved oxygen, and their life history characteristics and filter-screen areas were analyzed. Both low food concentration and low oxygen concentration degraded Daphnia fitness (as measured by individual growth and reproduction), and synergism was detected statistically for the effects of the two factors together. Low food concentration induced the development of large filter screens in Daphnia, but this development was suppressed by low oxygen concentration, suggesting that low oxygen concentration reduces the filtering rate of Daphnia in a food-limited environment. Therefore, energy uptake by Daphnia seems"
+            },
+            {
+              "document_id": "W3026457376",
+              "title": "The OxymiR response to oxygen limitation: a comparative microRNA perspective",
+              "doi": "https://doi.org/10.1242/jeb.204594",
+              "year": "2020",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT From squid at the bottom of the ocean to humans at the top of mountains, animals have adapted to diverse oxygen-limited environments. Surviving these challenging conditions requires global metabolic reorganization that is orchestrated, in part, by microRNAs that can rapidly and reversibly target all biological functions. Herein, we review the involvement of microRNAs in natural models of anoxia and hypoxia tolerance, with a focus on the involvement of oxygen-responsive microRNAs (OxymiRs) in coordinating the metabolic rate depression that allows animals to tolerate reduced oxygen levels. We begin by discussing animals that experience acute or chronic periods of oxygen deprivation at"
+            },
+            {
+              "document_id": "W2071154714",
+              "title": "Effects of Hypoxic Exposure during Feeding on SDA and Postprandial Cardiovascular Physiology in the Atlantic Cod, Gadus morhua",
+              "doi": "https://doi.org/10.1371/journal.pone.0046227",
+              "year": "2012",
+              "distance": 0.2553,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Some Atlantic cod in the Bornholm Basin undertake vertical foraging migrations into severely hypoxic bottom water. Hypoxic conditions can reduce the postprandial increase in gastrointestinal blood flow (GBF). This could subsequently postpone or reduce the postprandial increase in oxygen consumption (MO(2)), i.e. the SDA, leading to a disturbed digestion. Additionally, a restricted oxygen uptake could result in an oxygen debt that needs to be compensated for upon return to normoxic waters and this may also affect the ability to process the food. Long-term cardio-respiratory measurements were made on fed G. morhua in order to understand how the cardio-respiratory system of feeding fish respond"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

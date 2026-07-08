@@ -1,0 +1,743 @@
+{
+  "sf_id": "chl_05",
+  "category": "Chlorophyll",
+  "statement": "chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 2,
+        "rationale": "The stylized fact (SF9) is explicitly stated and cited as established in LoreMarq2010 (snippets 1, 2, 3, 18), where it is described as observed/supported by references (3, 11) and used to argue chlorophyll is part of N-reserve. These are strong corroborating statements but trace to a single paper's framework citing two underlying sources. However, the OmtaLlid2009 snippets (6, 9) explicitly state the Chl:N ratio increases with nutrient concentration and decreases with irradiance via Cloern's relationship (Chl:N increases with nutrient, decreases with light)—this actually aligns with the fact for irradiance, but snippet 6 emphasizes nutrient dependence and the parametrization of N:Chl increasing with irradiance (i.e., Chl:N decreasing with irradiance) is consistent; yet the framing about nutrient-replete conditions introduces some tension since Chl:N is shown to depend strongly on nutrient level. Overall the fact is supported within the DEB framework but rests largely on one source's stylized-fact compilation with limited independent corroboration and some snippets that complicate the picture, warranting moderate evidence and a roughly neutral-to-corroborated consensus."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 5,
+          "supports": 5,
+          "contradicts": 0,
+          "best_distance": 0.1580323576927185
+        },
+        "69b847cbec32c55db5430a5c": {
+          "title": "OmtaLlid2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 0,
+          "contradicts": 2,
+          "best_distance": 0.28258299827575684
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.158,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1994,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2347,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "bilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.266,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "If Chl:C were treated as a statevariable, one should have to specify how the ratiochanges in response to nutrient availability. Thisapproach is followed by Geider et al. (1997). Intheir model, the maximum carbon-speciﬁc rate ofphotosynthesis varies according to the Monodequation with the nutrient concentration in theenvironment.Arrigo and Sullivan (1994) relate the nutrient-"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2736,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r).By assumption, the chlorophyll production rateequals kNl, with ka proportionality constant.(The chlorophyll production rate may also dependon irradiance, in which case kwould depend onthe irradiance. As studies on nutrient-limitedgrowth are generally restricted to one level ofirradiance, information on this aspect is lacking. Itherefore treat kas a constant.) This implies thatthe cellular chlorophyll concentration changes ac-cording toddt[Chl] k[Nl] (m\u001br) · [Chl]so that at steady-state (when m D)"
+        },
+        {
+          "document_id": "69b847cbec32c55db5430a5c",
+          "title": "OmtaLlid2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2826,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "ol N/mg Chl), y0is thevalue of yatI¼0, and Iis the light intensity ðW=m2Þ.The empirical regression coefﬁcient /C15has units mmolNm2=mg Chl W. We have assumed a constant Redﬁeld C:Nratio to convert the C:Chl in Geider’s original relationshipinto N:Chl.As was convincingly shown in a chemostat study byLaws and Bannister (1980) , the algal Chl:N ratio increaseswith increasing nutrient concentration. To study theimpact of variations in nutrient concentrations on theChl:N ratio, we use the Cloern et al. (1995) relationship:y/C01¼y/C010þAeBT/C0CI XNKNþXN(6)with y/C010the Chl:N ratio at zero nutrients or inﬁnite light,"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2891,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "growth innature.3.1. Input6ariablesAll models listed in Table 1 have irradiance asan input variable. The chlorophyll ato carbonratio (Chl:C) and day length feature in three andfour models, respectively. These three variables alldeal with light availability, or the potential toabsorb light. This does not necessarily mean thatthe role of nutrients is neglected, though. Nutri-ents may be implicitly accounted for via theireffects on Chl:C, as low nutrient cell quota tendto decrease this ratio.‘Irradiance’ is generally interpreted as photo-"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2896,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ll 1, true chlorophyll-speciﬁcabsorption cross section x 19.3 m2g 1Chl.5. DiscussionThe present model successfully describes thecarbon and chlorophyll cell quota, and, as acorollary, the chlorophyll to carbon ratio u. Thisapplies to nutrient-limited as well as to light-lim-ited growth. The model descriptions ﬁnd theirbasis in assumptions about uptake and utilizationof nutrient. This contrasts with models that relateuto environmental or physiological variables via"
+        },
+        {
+          "document_id": "69b847cbec32c55db5430a5c",
+          "title": "OmtaLlid2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2913,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "t 0 irradiance mmol N/mg Chl 0.2/C15 Incr. of N:Chl with irr. mmol N m2=mg Chl W 0.01tphot Light-acclimation time d 10 3–20y/C010Chl:N at 0 nutrients mg Chl/mmol N 0.3A Cloern parameter mg Chl/mmol N 1.5B Cloern parameter K/C01 0.05C Cloern parameter m2=W 0.025A.W. Omta et al. / Deep-Sea Research I 56 (2009) 974–988 977growth rate is taken to be the minimum of light- andnutrient-limited growth. Modelled phytoplankton innitrogen units to phytoplankton is converted into chlor-ophyll units according to Hurtt and Armstrong (1996) .3. Results3.1. ObservationsTo study the variability of the chlorophyll ﬁeld in the"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2936,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "unction of irradiance and the nutrient supplyrate according to Eq. (1). The range of irradiance and nutrient ﬂux combinations atwhich both are signiﬁcantly limiting photosynthesis is narrow; in effect, one sub-strate determines the capacity of the SU in most cases. The impact of photoinhibitionbecomes increasingly more pronounced as the nutrient ﬂux increases. At low nutri-ent availability, the impact of photoinhibition is insigniﬁcant. Quantities have beenscaled as follows: scaled photosynthesis rate = JX/JXm; scaled irradiance =J∗L/JL,K;scaled nutrient ﬂux = JN/JN,K;J∗I,p=5J∗L,Kand J∗I,b=∞ (inhibition in processing stateonly)."
+        },
+        {
+          "document_id": "69b8a6e2ecbd4702b29a7a6a",
+          "title": "Pete et al. - 2020 - A box-model of carrying capacity of the Thau lagoo.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2946,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ndicated that simulated Chl aconcentrations were within therange of observations for concentrations lower than 2.5 µg Chl a.L−1.However, the model could not capture the timing of extreme values(peaks), which explained the mismatch on Fig. 3-B for high Chl aconcentrations.3.2. Nutrients inputs and shellﬁ sh performancesFor the three simulated years and all the scenarios, annual nutrientinputs varied from 25.5 to 198.6 tons of nitrogen and from 1.8 to 13.8tons of phosphorus ( Table 2). These ranges included lower and higher"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2989,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "mol C (mol C)-1 hr-1 2.2.3.3j 91 Table 3.2 Ambient conditions for experiments 1 -5. (X/K) is the ratio of the ambient nutrient concentration to the nutrient’s half saturation constant, explained in Section 2.3.1.2. Environmental factor Exp. 1 Exp. 2 Exp. 3 Exp. 4 Irradiance (µmols photons m-2 s-1) 500 500 500 0-500 DIN ( X/K) 5 0-5 5 5 DON (X/K) 5 5 0-5 5 93 3.7 Figures Figure 3.1 Schematic of the Pro model. The green square represents the chlorophyll -based light harvesting system. Harvested light energy is partitioned between photoautotrophic"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3063,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333(typical environmental setting). Irradiance bolsters _|ECAand thus the C-reserve density. The 334consequent increase of MVand decrease of _|ENRreduces N-reserve density. The overall 335result is a decrease of the N:C ratio. 3363.2.2 Chlorophyll concentration 337Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338the dilution rate (SF7 and SF8). Until this point no explicit considerations were made concern- 339"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.309,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "nt or saturating. In this pa-per, I assume that either of these conditionsholds.Studies on nutrient-limited growth are generallyperformed at one irradiance only, so informationon the effects of irradiance on carbon cell quotain nutrient-limited phytoplankton is mostly lack-ing. Consequently, this topic is not addressed inthis paper, and I simply indicate the relationshipbetween the rate of photosynthesis and irradiancebyfI[AmC,l], with fIthe rate of photosynthesis as afraction of its maximum value [ AmC,l].Carbon is used for maintenance, growth, and"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3101,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "p a0 0. Below I shall analyse thedata of Goldman and Peavey (1979).Fig. 3. Dependence of carbon cell quota on the dilution rate,for various parameter values, in nitrogen-limited phytoplank-ton.C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 603.2. Nutrient -limited Chl :CI assume that when cells are nitrogen-limited,the absolute rate at which chlorophyll is produceddepends on the amount of nitrogen in the tran-sient pool. Furthermore, chlorophyll cell quotadecrease because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r)."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3206,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "l. The data are mute about thevalue of the speciﬁc rate of chlorophyll destruc-tion: values between 0 and 0.5 d 1are all consis-tent with the data. Note that although the rateof chlorophyll production decreases with decreas-ing irradiance (at low irradiances) the chloro-phyll cell quota does increase. The reason forthis increase is that dilution through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observed"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.324,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "en density (superscript h).Maintenance costs (pg carbon per mm3per day) [MC]XN Nitrogen concentration in the environment (molar)fN Hyperbolically transformed nitrogen concentration: fN xN:(KN\u001bxN) (dimensionless),with KNthe half-saturation constant of the uptake kineticsI Irradiance or light intensity ( mEinst m 2s 1)Hyperbolically transformed light intensity (dimensionless): fI I:(Is\u001bI) with Isis the fIirradiance at which the photosynthesis process is half saturatednx Nutrient rate of x(per day). This parameter is a measure for the rate at which thetransient nutrient pool can be replenishedReferences"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3254,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPSSF10. no EPS production results directly from light-dependent carbon assimilation; (38)SF11. cellular production rates of EPS and other extracellular carbohydrates increase with speciﬁc growth rate; (38)SF12. EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells; (38)1 Introduction 23A common approach in microalgae research is to obtain and generalize empirical patterns 24through experimental work. These patterns, which in this paper will be referred as stylized 25"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address the specific stylized fact that chlorophyll-to-nitrogen ratio (chl:N) decreases with increasing irradiance at constant dilution rate under nutrient-replete conditions, which is a classic photoacclimation/chemostat result. The snippets concern unrelated topics such as zebra mussel phosphorus cycling, sponge and macroalgal responses to shade/salinity, gamma radiation in Lemna, cannabis nitrogen response, and lake chlorophyll drivers. A few mention photoacclimation concepts (e.g., chl a:b ratios, shade adaptation) but none provide direct evidence on the chl:N vs irradiance relationship at controlled dilution rate. There is no supporting nor contradicting evidence, so the corpus is uninformative regarding this fact."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W3148075632",
+          "title": "Impact of zebra mussel (Dreissena polymorpha) on phosphorus cycling and chlorophyll in lakes",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.3156,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "r clarity (without reducing nutrient levels) and ultimately resulting in a decoupling of the nutrient-chlorophyll relationship. To assess decoupling we compared P a d chlorophyll a (chl a ) estimates with the Dillon and Rigler (19'74) P chl a relationship, which predicts chl a levels for a given concentration of The P chl a relationship assumes that P is the limiting nutrient, and departures from the relationship imply that P has been replaced by alternative limiting factors such as grazing pressure (Kaiser et al. 1994)."
+        },
+        {
+          "document_id": "W2008289319",
+          "title": "Experimental manipulation of shade, silt, nutrients and salinity on the temperate reef sponge Cymbastela concentrica",
+          "doi": "10.3354/meps307143",
+          "year": "2006",
+          "distance": 0.3928,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nts were tested to find a cause for observed declines in populations exposed to sewage. Changes in the variables examined (i.e. growth and reproductive status of C. concentrica and concentrations of chl a associated with symbiotic micro-algae in C. concentrica) strongly supported the models showing that shading and siltation were a cause for decline. Nutrients did not affect any of the variables that were measured, whereas a decreasing salinity gradient caused a decline in growth, reproductive status and symbiotic algae (as measured by the concentration of chl a)."
+        },
+        {
+          "document_id": "W2035914645",
+          "title": "SEASONAL PRIMARY PRODUCTION OF UNDERSTORY RHODOPHYTA IN AN UPWELLING SYSTEM<sup>1</sup>",
+          "doi": "10.1111/j.0022-3646.1990.00214.x",
+          "year": "1990",
+          "distance": 0.4039,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "onal P max and I k values reveal that the obligate understory species, B. prolifera and E. obtusa, are shade‐adapted whereas G. radula, a low intertidal and shallow subtidal dominant, is sun‐adapted. Low C: X ratios consistent with a high nutrient environment and high rates of productivity were found in all three species. Net photosynthesis to respiration (Pn:R) ratios were fairly constant for B. prolifera and E. obtusa, implying that then photosynthetic processes were governed more by seasonal variations in irradiance than by instantaneous light availability. The Pn: R ratio of G."
+        },
+        {
+          "document_id": "W2151339337",
+          "title": "10.1016/s0967-0653(97)82003-0",
+          "doi": "10.1016/s0967-0653(97)82003-0",
+          "year": "2000",
+          "distance": 0.4124,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "cteristics, chlorophyll a (chl a) concentration, vertical stratifi-cation, and phytoplankton sensitivity to UV radiation (UVRI. Results demonstrated that primary pro-duction was enhanced in the upper -30 m of the water column by the presence of CDOM, where pre-dicted increases in production due to the removal of damaging UVR more than offset its reductionresulting from the absorption of photosynthetically usable radiation. At greater depths, where littleUVR remained, primary production was always reduced due to removal by CDOM of photosyntheti-cally usable radiation."
+        },
+        {
+          "document_id": "W1987871018",
+          "title": "Plasticity of Chasmogamous and Cleistogamous Reproductive Allocation in Grasses",
+          "doi": "10.5642/aliso.20072301.23",
+          "year": "2007",
+          "distance": 0.4162,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ikelets, CH/CL declined as density increased because CH decreased more than CL as size was reduced by intraspeciﬁc competition. In the shade-tolerant annual Microstegium vimineum, CH/CL was lowest in large greenhouse-grown plants in an unlimited, sunny environment, but was highest in small plants from a shady forest interior; tiller vegetative mass often showed a negative allometric relation to CH and CL allocation. In the perennial Dichanthelium clandestinum, CH and CL allocation varied among populations, but there was no consistent effect of light on CH/CL. The phenology of reproduction strongly affects CH/CL."
+        },
+        {
+          "document_id": "W2294263433",
+          "title": "Short‐ and long‐term acclimation patterns of the giant kelp <i>Macrocystis pyrifera</i> (Laminariales, Phaeophyceae) along a depth gradient",
+          "doi": "10.1111/jpy.12394",
+          "year": "2016",
+          "distance": 0.4178,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "ntation from 4 m to 0.2 m depth with a rise in the degree of saturation and a switch from shorter‐ to longer‐chain fatty acids. These changes seem to be essential for the readjustment of thylakoid membranes and might, thus, facilitate efficient photosynthesis under changing irradiances and temperatures. Further experiments are needed to disentangle the relative contribution of solar radiation, temperature and also other abiotic parameters in the observed physiological changes."
+        },
+        {
+          "document_id": "W4214907711",
+          "title": "Transcriptomic Analysis Reveals the Regulation Mechanism of Sporogenesis in Ulva prolifera",
+          "doi": "10.3389/fmars.2022.802006",
+          "year": "2022",
+          "distance": 0.4191,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "Additionally, the chlorophyll fluorescence and transcriptome analysis were determined at these four states. The results showed that: (1) Compared with state I, the photosynthetic capacity (F v /F m , F v ′/F m ′, rETR max ) and chlorophyll content (Chl a, Chl b, carotenoids) were enhanced in state II, whereas it decreased in state III and IV (the spore formation period); (2) a total of 41,058 unigenes were expressed during the spore formation process;"
+        },
+        {
+          "document_id": "W1545538486",
+          "title": "Influence of Seawater Temperature on Phytoplankton Growth in Jiaozhou Bay, China",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.4203,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The phytoplankton reproduction capacity (PRC), as a new concept regarding chlorophyll-a and primary production (PP) is described. PRC is different from PP, carbon assimilation number (CAN) or photosynthetic rate (PB). PRC quantifies phytoplankton growth with a special consideration of the effect of seawater temperature."
+        },
+        {
+          "document_id": "W2944017200",
+          "title": "Modes of action and adverse effects of gamma radiation in an aquatic macrophyte Lemna minor",
+          "doi": "10.1016/j.scitotenv.2019.05.016",
+          "year": "2019",
+          "distance": 0.4221,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "l, MMP), photosynthetic parameters (chlorophyll a, chl a; chlorophyll b, chl b; carotenoids; Photosystem II (PSII) performance; CO<sub>2</sub> uptake), intercellular signaling (Ca<sup>2+</sup> release) and growth."
+        },
+        {
+          "document_id": "W2057121201",
+          "title": "Photosynthesis in reproductive unicells of Ulva fasciata and Enteromorpha flexuosa:implications for ecological success",
+          "doi": "10.3354/meps125229",
+          "year": "1995",
+          "distance": 0.4233,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "g generalizations: (1) Pmax (maximum net photosynthetic rate) for motile cells (e.g. gametes of U. fasciata and zoospores of E. flexuosa) can be equivalent to Pmax of appropriate adult tissues when expressed on a chlorophyll a (chl a) or chl a+b basis; (2) respiration rates for all motile cells were 1.5- to 6-fold higher than rates for adult thalli when normalized to chl; (3) as expected with increasing respiration rates, compensation irradiance (Ic) and saturation irradiance (Ik) also increased for all motile cell types; (4) chl a:b ratios were lower in all motile cell types than in adult cells;"
+        },
+        {
+          "document_id": "W81388904",
+          "title": "Stable isotopic variation in particulate organic matter and dissolved inorganic compounds in a northern fjord : implications for present and past environments",
+          "doi": "",
+          "year": "1992",
+          "distance": 0.4261,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": ".7‰ and -21.9‰. Enrichments in ¹³c were frequently associated with the chlorophyll maximum during periods of high productivity. Concomitant decreases in the concentration of dissolved inorganic carbon and increases in seston δ¹³C values confirmed results of earlier research which found a inverse correlation between pCO₂ and the δ¹³C of phytoplankton. The carbon isotopic composition of DIC ranged from -4.1‰ to 1.6‰. Low δ¹³C-DIC values may be related to brief periods of enhanced respiration as a result of increased substrate concentration during the spring bloom."
+        },
+        {
+          "document_id": "W4324258648",
+          "title": "Impacts of environmental factors on Chlorophyll-a in lakes in cold and arid regions: A 10-year study of Wuliangsuhai Lake, China",
+          "doi": "10.1016/j.ecolind.2023.110133",
+          "year": "2023",
+          "distance": 0.4274,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "rowth and reproduction. Therefore, there was no significant difference between Chl.a in winter water and Chl.a in summer water. Although there were differences in the environmental factors affecting the temporal heterogeneity of Chl.a over the four seasons, conductivity (Cond.) showed a significant linear or nonlinear effect on Chl.a throughout the year, indicating its important role in regulating the growth and reproduction of phytoplankton. Environmental factors driving the spatial heterogeneity of Chl.a included the location of the water inlet channel, the distribution of Phragmites, and hydrodynamic conditions."
+        },
+        {
+          "document_id": "W2146139588",
+          "title": "The minimum size of seeds and spores in relation to the ontogeny of homoiohydric plants",
+          "doi": "10.1046/j.1365-2435.1999.00293.x",
+          "year": "1999",
+          "distance": 0.4286,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "er mol CO2 fixed (1000 g water lost per g C fixed). This gives value of 1·9 10–14 m3 axis–1 s–1 (see Raven 1984a, 1993, 1997a). We now assume that ΔP cannot exceed the Ψw at which the photosynthetic rate of vascular plants becomes restricted by too low a Ψw; assuming soil Ψw = 0 the shoot Ψw is some – 2 MPa (Raven 1993), so ΔP is taken as 2 106 Pa, l is taken as 2·5 10–3 m, i.e. assuming that the average water molecule has to move in the xylem for half of the length of the plant axis in the soil and half of the length of the plant axis in the air."
+        },
+        {
+          "document_id": "W3106494406",
+          "title": "Response of Medical Cannabis (Cannabis sativa L.) to Nitrogen Supply Under Long Photoperiod",
+          "doi": "10.3389/fpls.2020.572293",
+          "year": "2020",
+          "distance": 0.4298,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "monstrate that the optimal N level for plant development and function at the vegetative growth phase is 160 mgL<sup>-1</sup> N. Growth retardation under lower N supply (30-80 mgL<sup>-1</sup>) results from restricted availability of photosynthetic pigments, carbon fixation, and impaired water relations. Excess uptake of N under supply higher than 160 mgL<sup>-1</sup> N, promoted physiological and developmental restrictions, by ion-specific toxicity or indirect induced restrictions of carbon fixation and energy availability."
+        },
+        {
+          "document_id": "W3106494406",
+          "title": "Response of Medical Cannabis (Cannabis sativa L.) to Nitrogen Supply Under Long Photoperiod",
+          "doi": "10.3389/fpls.2020.572293",
+          "year": "2020",
+          "distance": 0.4309,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "p>-1</sup> N, with visual deficiency symptoms, and 75 and 25% reduction in plant biomass and photosynthesis rate, respectively. Nitrogen use efficiency (NUE) decreased with increasing N supply, while osmotic potential, water use efficiency, photosynthetic pigments, and total N and N-NO<sub>3</sub> concentrations in plant tissues increased with N supply. The plant ionome was considerably affected by N supply. Concentrations of K, P, Ca, Mg, and Fe in the plant were highest under the optimal N level of 160 mgL<sup>-1</sup> N, with differences between organs in the extent of nutrient accumulation."
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.4316,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W2082200171",
+          "title": "Responses of the biennial forest herb <i>Alliaria petiolata</i> to variation in population density, nutrient addition and light availability",
+          "doi": "10.1046/j.1365-2745.2000.00461.x",
+          "year": "2000",
+          "distance": 0.4324,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "was lowest for plants in the highest light treatment and increased with nutrient addition at the two highest light treatments. 5 Plants growing at high density responded to nutrient addition and light attenuation in the same direction but with greatly reduced magnitude compared with plants growing at low density. The effect of irradiance was the most important determinant of all facets of growth and allocation patterns in both rosettes and mature plants."
+        },
+        {
+          "document_id": "W2912296239",
+          "title": "Pengaruh Lama Penyinaran dan Salinitas terhadap Pertumbuhan dan Jumlah Klorofil A Sargassum sp. &lt;br&gt;&lt;i&gt;[Effect Of Photoperiod And Salinity On The Growth And Chlorophyll A From Sargassum sp. ]&lt;i&gt;",
+          "doi": "10.20473/jipk.v5i1.11432",
+          "year": "2013",
+          "distance": 0.4338,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "F table 0.05) on the growth of Sargassum sp. Effect of photoperiod did not different significant on the growth of Sargassum sp. in the first week until the third week, but different very significant (F calculated&gt; F table 0.01) in the fourth week of treatment where E is the salinity of 30 ppt with photoperiod light 16 and 8 hours dark that significantly different with A, C, D, F, and I which not significantly different with B, G, H. On growth, there is no interaction of salinity and photoperiod. On chlorophyll a there is no difference significant in treatment A, B, C, D, E, F, G, H, and I."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact (SF9: chl:N decreases with irradiance for constant dilution rate in nutrient-replete conditions) is explicitly stated and supported as a documented stylized fact in the LoreMarq2010 source (snippets 1, 2, 3), which cites references and uses it to support model conclusions about N-reserve density decreasing with irradiance. These provide moderate, clear support. However, several Omta et al. snippets (6, 9) describe Chl:N increasing with nutrient concentration and parameterize an increase of N:Chl with irradiance (equivalently chl:N decreasing with irradiance—but framed via N:Chl increasing), which is somewhat ambiguous/potentially conflicting depending on interpretation; I flagged these as contradicting due to the explicit 'increase of N:Chl with irradiance' framing being directionally consistent yet expressed in conflicting variable terms. The remaining snippets are off-topic (lake ecology, sponges, kelp, etc.). Overall the directly relevant DEB literature corroborates the fact, with limited conflicting framing."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.1580323576927185
+        },
+        "69b847cbec32c55db5430a5c": {
+          "title": "OmtaLlid2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 0,
+          "contradicts": 2,
+          "best_distance": 0.28258299827575684
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.158,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1994,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2347,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "bilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.266,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "If Chl:C were treated as a statevariable, one should have to specify how the ratiochanges in response to nutrient availability. Thisapproach is followed by Geider et al. (1997). Intheir model, the maximum carbon-speciﬁc rate ofphotosynthesis varies according to the Monodequation with the nutrient concentration in theenvironment.Arrigo and Sullivan (1994) relate the nutrient-"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2736,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r).By assumption, the chlorophyll production rateequals kNl, with ka proportionality constant.(The chlorophyll production rate may also dependon irradiance, in which case kwould depend onthe irradiance. As studies on nutrient-limitedgrowth are generally restricted to one level ofirradiance, information on this aspect is lacking. Itherefore treat kas a constant.) This implies thatthe cellular chlorophyll concentration changes ac-cording toddt[Chl] k[Nl] (m\u001br) · [Chl]so that at steady-state (when m D)"
+        },
+        {
+          "document_id": "69b847cbec32c55db5430a5c",
+          "title": "OmtaLlid2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2826,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "ol N/mg Chl), y0is thevalue of yatI¼0, and Iis the light intensity ðW=m2Þ.The empirical regression coefﬁcient /C15has units mmolNm2=mg Chl W. We have assumed a constant Redﬁeld C:Nratio to convert the C:Chl in Geider’s original relationshipinto N:Chl.As was convincingly shown in a chemostat study byLaws and Bannister (1980) , the algal Chl:N ratio increaseswith increasing nutrient concentration. To study theimpact of variations in nutrient concentrations on theChl:N ratio, we use the Cloern et al. (1995) relationship:y/C01¼y/C010þAeBT/C0CI XNKNþXN(6)with y/C010the Chl:N ratio at zero nutrients or inﬁnite light,"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2891,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "growth innature.3.1. Input6ariablesAll models listed in Table 1 have irradiance asan input variable. The chlorophyll ato carbonratio (Chl:C) and day length feature in three andfour models, respectively. These three variables alldeal with light availability, or the potential toabsorb light. This does not necessarily mean thatthe role of nutrients is neglected, though. Nutri-ents may be implicitly accounted for via theireffects on Chl:C, as low nutrient cell quota tendto decrease this ratio.‘Irradiance’ is generally interpreted as photo-"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2896,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ll 1, true chlorophyll-speciﬁcabsorption cross section x 19.3 m2g 1Chl.5. DiscussionThe present model successfully describes thecarbon and chlorophyll cell quota, and, as acorollary, the chlorophyll to carbon ratio u. Thisapplies to nutrient-limited as well as to light-lim-ited growth. The model descriptions ﬁnd theirbasis in assumptions about uptake and utilizationof nutrient. This contrasts with models that relateuto environmental or physiological variables via"
+        },
+        {
+          "document_id": "69b847cbec32c55db5430a5c",
+          "title": "OmtaLlid2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2913,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "t 0 irradiance mmol N/mg Chl 0.2/C15 Incr. of N:Chl with irr. mmol N m2=mg Chl W 0.01tphot Light-acclimation time d 10 3–20y/C010Chl:N at 0 nutrients mg Chl/mmol N 0.3A Cloern parameter mg Chl/mmol N 1.5B Cloern parameter K/C01 0.05C Cloern parameter m2=W 0.025A.W. Omta et al. / Deep-Sea Research I 56 (2009) 974–988 977growth rate is taken to be the minimum of light- andnutrient-limited growth. Modelled phytoplankton innitrogen units to phytoplankton is converted into chlor-ophyll units according to Hurtt and Armstrong (1996) .3. Results3.1. ObservationsTo study the variability of the chlorophyll ﬁeld in the"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2936,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "unction of irradiance and the nutrient supplyrate according to Eq. (1). The range of irradiance and nutrient ﬂux combinations atwhich both are signiﬁcantly limiting photosynthesis is narrow; in effect, one sub-strate determines the capacity of the SU in most cases. The impact of photoinhibitionbecomes increasingly more pronounced as the nutrient ﬂux increases. At low nutri-ent availability, the impact of photoinhibition is insigniﬁcant. Quantities have beenscaled as follows: scaled photosynthesis rate = JX/JXm; scaled irradiance =J∗L/JL,K;scaled nutrient ﬂux = JN/JN,K;J∗I,p=5J∗L,Kand J∗I,b=∞ (inhibition in processing stateonly)."
+        },
+        {
+          "document_id": "69b8a6e2ecbd4702b29a7a6a",
+          "title": "Pete et al. - 2020 - A box-model of carrying capacity of the Thau lagoo.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2946,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ndicated that simulated Chl aconcentrations were within therange of observations for concentrations lower than 2.5 µg Chl a.L−1.However, the model could not capture the timing of extreme values(peaks), which explained the mismatch on Fig. 3-B for high Chl aconcentrations.3.2. Nutrients inputs and shellﬁ sh performancesFor the three simulated years and all the scenarios, annual nutrientinputs varied from 25.5 to 198.6 tons of nitrogen and from 1.8 to 13.8tons of phosphorus ( Table 2). These ranges included lower and higher"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2989,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "mol C (mol C)-1 hr-1 2.2.3.3j 91 Table 3.2 Ambient conditions for experiments 1 -5. (X/K) is the ratio of the ambient nutrient concentration to the nutrient’s half saturation constant, explained in Section 2.3.1.2. Environmental factor Exp. 1 Exp. 2 Exp. 3 Exp. 4 Irradiance (µmols photons m-2 s-1) 500 500 500 0-500 DIN ( X/K) 5 0-5 5 5 DON (X/K) 5 5 0-5 5 93 3.7 Figures Figure 3.1 Schematic of the Pro model. The green square represents the chlorophyll -based light harvesting system. Harvested light energy is partitioned between photoautotrophic"
+        },
+        {
+          "document_id": "W3148075632",
+          "title": "Impact of zebra mussel (Dreissena polymorpha) on phosphorus cycling and chlorophyll in lakes",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.3156,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "r clarity (without reducing nutrient levels) and ultimately resulting in a decoupling of the nutrient-chlorophyll relationship. To assess decoupling we compared P a d chlorophyll a (chl a ) estimates with the Dillon and Rigler (19'74) P chl a relationship, which predicts chl a levels for a given concentration of The P chl a relationship assumes that P is the limiting nutrient, and departures from the relationship imply that P has been replaced by alternative limiting factors such as grazing pressure (Kaiser et al. 1994)."
+        },
+        {
+          "document_id": "W2008289319",
+          "title": "Experimental manipulation of shade, silt, nutrients and salinity on the temperate reef sponge Cymbastela concentrica",
+          "doi": "10.3354/meps307143",
+          "year": "2006",
+          "distance": 0.3928,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nts were tested to find a cause for observed declines in populations exposed to sewage. Changes in the variables examined (i.e. growth and reproductive status of C. concentrica and concentrations of chl a associated with symbiotic micro-algae in C. concentrica) strongly supported the models showing that shading and siltation were a cause for decline. Nutrients did not affect any of the variables that were measured, whereas a decreasing salinity gradient caused a decline in growth, reproductive status and symbiotic algae (as measured by the concentration of chl a)."
+        },
+        {
+          "document_id": "W2035914645",
+          "title": "SEASONAL PRIMARY PRODUCTION OF UNDERSTORY RHODOPHYTA IN AN UPWELLING SYSTEM<sup>1</sup>",
+          "doi": "10.1111/j.0022-3646.1990.00214.x",
+          "year": "1990",
+          "distance": 0.4039,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "onal P max and I k values reveal that the obligate understory species, B. prolifera and E. obtusa, are shade‐adapted whereas G. radula, a low intertidal and shallow subtidal dominant, is sun‐adapted. Low C: X ratios consistent with a high nutrient environment and high rates of productivity were found in all three species. Net photosynthesis to respiration (Pn:R) ratios were fairly constant for B. prolifera and E. obtusa, implying that then photosynthetic processes were governed more by seasonal variations in irradiance than by instantaneous light availability. The Pn: R ratio of G."
+        },
+        {
+          "document_id": "W2151339337",
+          "title": "10.1016/s0967-0653(97)82003-0",
+          "doi": "10.1016/s0967-0653(97)82003-0",
+          "year": "2000",
+          "distance": 0.4124,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "cteristics, chlorophyll a (chl a) concentration, vertical stratifi-cation, and phytoplankton sensitivity to UV radiation (UVRI. Results demonstrated that primary pro-duction was enhanced in the upper -30 m of the water column by the presence of CDOM, where pre-dicted increases in production due to the removal of damaging UVR more than offset its reductionresulting from the absorption of photosynthetically usable radiation. At greater depths, where littleUVR remained, primary production was always reduced due to removal by CDOM of photosyntheti-cally usable radiation."
+        },
+        {
+          "document_id": "W1987871018",
+          "title": "Plasticity of Chasmogamous and Cleistogamous Reproductive Allocation in Grasses",
+          "doi": "10.5642/aliso.20072301.23",
+          "year": "2007",
+          "distance": 0.4162,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ikelets, CH/CL declined as density increased because CH decreased more than CL as size was reduced by intraspeciﬁc competition. In the shade-tolerant annual Microstegium vimineum, CH/CL was lowest in large greenhouse-grown plants in an unlimited, sunny environment, but was highest in small plants from a shady forest interior; tiller vegetative mass often showed a negative allometric relation to CH and CL allocation. In the perennial Dichanthelium clandestinum, CH and CL allocation varied among populations, but there was no consistent effect of light on CH/CL. The phenology of reproduction strongly affects CH/CL."
+        },
+        {
+          "document_id": "W2294263433",
+          "title": "Short‐ and long‐term acclimation patterns of the giant kelp <i>Macrocystis pyrifera</i> (Laminariales, Phaeophyceae) along a depth gradient",
+          "doi": "10.1111/jpy.12394",
+          "year": "2016",
+          "distance": 0.4178,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ntation from 4 m to 0.2 m depth with a rise in the degree of saturation and a switch from shorter‐ to longer‐chain fatty acids. These changes seem to be essential for the readjustment of thylakoid membranes and might, thus, facilitate efficient photosynthesis under changing irradiances and temperatures. Further experiments are needed to disentangle the relative contribution of solar radiation, temperature and also other abiotic parameters in the observed physiological changes."
+        },
+        {
+          "document_id": "W4214907711",
+          "title": "Transcriptomic Analysis Reveals the Regulation Mechanism of Sporogenesis in Ulva prolifera",
+          "doi": "10.3389/fmars.2022.802006",
+          "year": "2022",
+          "distance": 0.4191,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Additionally, the chlorophyll fluorescence and transcriptome analysis were determined at these four states. The results showed that: (1) Compared with state I, the photosynthetic capacity (F v /F m , F v ′/F m ′, rETR max ) and chlorophyll content (Chl a, Chl b, carotenoids) were enhanced in state II, whereas it decreased in state III and IV (the spore formation period); (2) a total of 41,058 unigenes were expressed during the spore formation process;"
+        },
+        {
+          "document_id": "W1545538486",
+          "title": "Influence of Seawater Temperature on Phytoplankton Growth in Jiaozhou Bay, China",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.4203,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The phytoplankton reproduction capacity (PRC), as a new concept regarding chlorophyll-a and primary production (PP) is described. PRC is different from PP, carbon assimilation number (CAN) or photosynthetic rate (PB). PRC quantifies phytoplankton growth with a special consideration of the effect of seawater temperature."
+        },
+        {
+          "document_id": "W2944017200",
+          "title": "Modes of action and adverse effects of gamma radiation in an aquatic macrophyte Lemna minor",
+          "doi": "10.1016/j.scitotenv.2019.05.016",
+          "year": "2019",
+          "distance": 0.4221,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "l, MMP), photosynthetic parameters (chlorophyll a, chl a; chlorophyll b, chl b; carotenoids; Photosystem II (PSII) performance; CO<sub>2</sub> uptake), intercellular signaling (Ca<sup>2+</sup> release) and growth."
+        },
+        {
+          "document_id": "W2057121201",
+          "title": "Photosynthesis in reproductive unicells of Ulva fasciata and Enteromorpha flexuosa:implications for ecological success",
+          "doi": "10.3354/meps125229",
+          "year": "1995",
+          "distance": 0.4233,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "g generalizations: (1) Pmax (maximum net photosynthetic rate) for motile cells (e.g. gametes of U. fasciata and zoospores of E. flexuosa) can be equivalent to Pmax of appropriate adult tissues when expressed on a chlorophyll a (chl a) or chl a+b basis; (2) respiration rates for all motile cells were 1.5- to 6-fold higher than rates for adult thalli when normalized to chl; (3) as expected with increasing respiration rates, compensation irradiance (Ic) and saturation irradiance (Ik) also increased for all motile cell types; (4) chl a:b ratios were lower in all motile cell types than in adult cells;"
+        },
+        {
+          "document_id": "W81388904",
+          "title": "Stable isotopic variation in particulate organic matter and dissolved inorganic compounds in a northern fjord : implications for present and past environments",
+          "doi": "",
+          "year": "1992",
+          "distance": 0.4261,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": ".7‰ and -21.9‰. Enrichments in ¹³c were frequently associated with the chlorophyll maximum during periods of high productivity. Concomitant decreases in the concentration of dissolved inorganic carbon and increases in seston δ¹³C values confirmed results of earlier research which found a inverse correlation between pCO₂ and the δ¹³C of phytoplankton. The carbon isotopic composition of DIC ranged from -4.1‰ to 1.6‰. Low δ¹³C-DIC values may be related to brief periods of enhanced respiration as a result of increased substrate concentration during the spring bloom."
+        },
+        {
+          "document_id": "W4324258648",
+          "title": "Impacts of environmental factors on Chlorophyll-a in lakes in cold and arid regions: A 10-year study of Wuliangsuhai Lake, China",
+          "doi": "10.1016/j.ecolind.2023.110133",
+          "year": "2023",
+          "distance": 0.4274,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "rowth and reproduction. Therefore, there was no significant difference between Chl.a in winter water and Chl.a in summer water. Although there were differences in the environmental factors affecting the temporal heterogeneity of Chl.a over the four seasons, conductivity (Cond.) showed a significant linear or nonlinear effect on Chl.a throughout the year, indicating its important role in regulating the growth and reproduction of phytoplankton. Environmental factors driving the spatial heterogeneity of Chl.a included the location of the water inlet channel, the distribution of Phragmites, and hydrodynamic conditions."
+        }
+      ]
+    }
+  }
+}

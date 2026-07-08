@@ -40,3 +40,29 @@ Scores: **Ev** = evidence strength (1 weak … 3 strong), **Cons** = consensus d
 | `genphys_06` | General Physiology | 2 | 3 | 2 | Simpler transport network morphologies (also passive transport systems) should have lower … |
 | `genphys_07` | General Physiology | 3 | 3 | 15 | Within a species or related group, individuals in colder climates tend to be larger, while… |
 | `genphys_08` | General Physiology | 2 | 3 | 7 | Scaling of maximal feeding rate with size should depend on transport network morphology. |
+| `hypoxia_01` | Hypoxia / DO | 3 | 3 | 6 | Organisms reduce their feeding rate with decreasing dissolved oxygen (DO) level. |
+| `hypoxia_02` | Hypoxia / DO | 3 | 3 | 6 | Food assimilation efficiency can be enhanced, unchanged or reduced under hypoxia, dependin… |
+| `hypoxia_03` | Hypoxia / DO | 1 | 2 | 1 | Growth decreases with decreasing DO level, due to reduction in energy uptake and/or increa… |
+| `hypoxia_04` | Hypoxia / DO | 2 | 3 | 8 | Energy allocation is reprioritized to first pay maintenance costs under hypoxic conditions. |
+| `hypoxia_05` | Hypoxia / DO | 2 | 3 | 3 | Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if … |
+| `hypoxia_06` | Hypoxia / DO | 2 | 3 | 1 | Decrease in DO may decrease the gonado-somatic index. |
+| `hypoxia_07` | Hypoxia / DO | 3 | 3 | 10 | Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete … |
+| `hypoxia_08` | Hypoxia / DO | 3 | 3 | 7 | O2 consumption starts to diminish at a reduced PO2 below a critical saturation level; when… |
+| `hypoxia_09` | Hypoxia / DO | 3 | 3 | 4 | Above the critical saturation, compensatory mechanisms compensate the O2 reduction to main… |
+| `hypoxia_10` | Hypoxia / DO | 3 | 3 | 8 | Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce acti… |
+| `hypoxia_11` | Hypoxia / DO | 3 | 3 | 7 | Anaerobiosis can start under the critical saturation threshold, with less efficient energy… |
+| `hypoxia_12` | Hypoxia / DO | 1 | 2 | 0 | Lethal DO level and time are different across taxa. |
+| `hypoxia_13` | Hypoxia / DO | 1 | 2 | 1 | Lethal DO level increases with increasing metabolic activity. |
+| `hypoxia_14` | Hypoxia / DO | 1 | 2 | 1 | Exponential increase of survival time under anaerobic glycolysis with body mass due to the… |
+| `nc_01` | N:C ratio | 2 | 3 | 1 | N:C increases with dilution rate in nutrient limiting conditions. |
+| `nc_02` | N:C ratio | 2 | 3 | 2 | N:C decreases with dilution rate in light limiting conditions. |
+| `nc_03` | N:C ratio | 3 | 3 | 2 | N:C decreases with temperature in nutrient or light limiting conditions. |
+| `nc_04` | N:C ratio | 3 | 3 | 2 | N:C decreases with irradiance in nutrient replete conditions. |
+| `chl_01` | Chlorophyll | 2 | 3 | 3 | chl:C increases with dilution rate in nutrient limiting conditions. |
+| `chl_02` | Chlorophyll | 2 | 3 | 3 | chl:C decreases with dilution rate in light limiting conditions. |
+| `chl_03` | Chlorophyll | 1 | 2 | 2 | Chlorophyll concentration increases with dilution rate in nutrient limiting conditions. |
+| `chl_04` | Chlorophyll | 2 | 3 | 5 | Chlorophyll concentration decreases with irradiance. |
+| `chl_05` | Chlorophyll | 2 | 3 | 2 | chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions. |
+| `eps_01` | EPS Production | 2 | 3 | 1 | No EPS production results directly from light-dependent carbon assimilation. |
+| `eps_02` | EPS Production | 2 | 3 | 6 | Cellular production rates of EPS and other extracellular carbohydrates increase with speci… |
+| `eps_03` | EPS Production | 2 | 3 | 2 | EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells. |

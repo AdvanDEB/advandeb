@@ -1,0 +1,1820 @@
+{
+  "sf_id": "hypoxia_09",
+  "category": "Hypoxia / DO",
+  "statement": "Above the critical saturation, compensatory mechanisms compensate the O2 reduction to maintain respiration and sustain the standard metabolic rate. These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility).",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial portion of the excerpts (especially 1, 2, 3, 10, 12, 16, and 17) explicitly describe compensatory physiological mechanisms—such as increased ventilation, heart rate, or metabolic activity—that act above a critical oxygen saturation to preserve standard metabolic rates, directly matching the stylized fact. These passages provide clear supportive evidence with high relevance. The remaining snippets either discuss unrelated aspects of DEB theory or mention oxygen dynamics without addressing compensatory increases, and none present contradictory data. Consequently, the corpus offers strong, consistent support for the stated pattern."
+          },
+          "n_references": 4,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1792
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1961
+            },
+            "3639": {
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2051
+            },
+            "2402": {
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2232
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1792,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "n the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPT [Page 14] ACCEPTED MANUSCRIPT 13 (increase of O2 conductance: ventilation, heart- beat, O2 affinity for respiratory pigment etc.). These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce activity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaer"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2051,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "The increased tolerance is owed to the fact that an oxyregulatory response allows for maintenance of [Page 45] 30 aerobic respiration during low-oxygen conditions. Thus, organisms that are able to maintain an oxyregulating response over a broader range of oxygen tensions (i.e., have a lower Pcrit value) are considered to be more tolerant than those that transition to an oxyconforming response at higher oxygen tensions (e.g., Mandic et al. 2013) owing to the greater energetic yield afforded by maintenance of aerobic pathways (Grieshaber et al. 1994). Although hypoxia is often defined by the threshold oxygen concentration of 2.0 mg/l, Pcrit can vary both inter- (Vaquer-Sunyer and Duarte 2008) "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2057,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ivery of oxygen through the circulatory system is not considered to limit metabolism. Instead, the biochemical pathways within the cells are supplied with energy and materials directly from the reserve buffer within or near the cells, and it is assumed that there is normally a sufﬁcient O2 supply for ATP formation to fuel the labor. The rate of mobilization of the reserve depends on reserve density— that is, the surface area/volume interface between reserve and structure. The reserve density, in turn, depends on the assimilation rate. The maximum rate of assimilation relative to the maximum reserve capacity, , is ˙ {p }/[E ] Am max referred to as the “energy conductance” (cm/t) and is ˙v the"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "igh below the ILC and then decreased at higher food concentrations [LM]. If abdominal rejec- tions were an important component of the energy costs, the respiration rate stayed low below the ILC, and then increased [RE]. However, if the respiration rate was mostly affected by biochemical processing (SDA) the respiration rate followed the assimilation rate [BP]. In reality, all three mechanisms may contribute to the ﬁnal functional response if none of them is particular domi- nant. Also, the decrease of the respiration rate due to lower ﬁltering rates above the ILC and the increase due Table 9.3 Mass speciﬁc respiration (oxygen consumption) rates (µmol O2 mg-1 h-1) of adult D. magna without fo"
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2152,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "led ‘reserve’ (a process called assimilation), and reserve is mobilized for metabolism (see [859] for a detailed dis- cussion) 2 a fraction κ of mobilized reserve is allocated to somatic maintenance and growth (the κ-rule) 3 somatic maintenance is proportional to the permanent metabolic pool, referred to as ‘structure’. So reserve does not require maintenance (see [762, 774] for a detailed discussion) This is all one needs to know, since respiration, defined as dioxygen flux, follows from the mass balance. If specific somatic maintenance increases, all else being equal, the ultimate body mass decreases and the weight-specific respiration increases since somatic maintenance dom- inates respir"
+            },
+            {
+              "document_id": "2688",
+              "title": "LikaAugu2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2168,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ility to handle starvation in terms of shrinking and rejuvenation, but they compensate that by a higher talent for ﬁnding the last food item (¼low half saturation constant), for which they need complex behaviour and good memory and sensors. The half saturation constant is in fact the ratio of the (speciﬁc) ingestion and searching rates, meaning that demand species have a large speciﬁc food searching rates. High peak metabolic activity, relative to the standard one, is part of the skills they need to capture (fast) prey and is connected to searching rate. Capillaries (in a closed circulatory system) make that an increase in heart beat is felt in all corners of the body (where muscles contract"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2171,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "zation of oxygen within their body, even if environmental concentrations are low (e.g., Sanders and Childress 1990). Many of these organisms also possess larger respiratory surfaces than their close phylogenetic relatives, allowing for greater oxygen diffusion into the body (e.g., Lamont and Gage [Page 25] 10 2000). Metabolic depression is a commonly observed response of hypoxia tolerant organisms to low oxygen availability, which can be manifested physiologically through reduced respiration rates (e.g., Taylor and Brand 1975) or reductions in heart rate (e.g., deFur and Mangum 1979). Other organisms can switch to anaerobic metabolic pathways upon exposure to hypoxic conditions, allowing for"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2197,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ach SU by increasing circulation rate (e.g. heart beat rate or amplitude), or an increase of the total number of SU by increasing e.g. the total number of respiratory pigments. 3.4.2 Priorities among demand metabolic processes The next set of questions concern the physiological processes that need to be maintained for survival and the remaining processes that can be temporarily reduced (in particular in order to provide energy for increasing the capacity to extract oxygen from water). DEB theory distinguishes demand and supply processes at the time scale of the life cycle of an organism in a standard DEB model. Indeed, movement for the search of food is included into somatic maintenance as i"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "rd DEB model. 3.2 Assumptions on fluxes modulation under hypoxia Within a standard DEB model, responses to hypoxia can be included by acting on various energy fluxes, in relation with the physiological disturbances previously demonstrated: 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ-rule and subsequent allocations to growth and reproduction; related to endocrine disruption (facts G2, R2, R3). 5. The reproductive efficiency; related t"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2207,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.221,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ion capacity down to 20–25% O2sat (Aguirre-Velarde et al., 2016). Such ability would allow A. purpuratus to maintain most of its physiological functions independent of ambient oxygen saturation. A lower critical point for feeding activity than respira- tion may indicate a decoupling of these physiological rates enabling food ﬁltering even under low oxygen saturations. 2. First phase of severe hypoxia (below 11.2% O2sat): drop in the clearance rate. Below this oxygen threshold, we can hypothesize that the aerobic energy production decreases considerably and the energy demand might then be supplied by reserves such as phos- phagens (Grieshaber et al., 1994) providing energy to maintain ciliary"
+            },
+            {
+              "document_id": "3731",
+              "title": "Herrando-Pérez et al. - 2023 - Novel physiological data needed for progress in gl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2216,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "that physiological oxygen- supply mechanisms (i.e., ventilation and cardiac output) are working at their maximum capacity when body temperature reaches CTmax, even at rest and in normoxia (atmospheric oxygen partial pressure PO2 = 21 kPa). According to OCLTT, at CTmax aerobic scope should be abolished, atmospheric PO2 should become the critical PO2 below which even resting oxygen demand cannot be supported (Claireaux & Chabot 2016; Rogers, Urbina, Reardon, McKenzie & Wilson 2016), and any additional decrease in PO2 should further reduce heat tolerance resulting in whole-organism physiological failure (Farrell 2016; Pörtner, Bock & Mark 2017). Within the OCLTT‟s conceptual framework, extincti"
+            },
+            {
+              "document_id": "3731",
+              "title": "Herrando-Pérez et al. - 2023 - Novel physiological data needed for progress in gl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2217,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "nger & Gruber 2010; Li, Huang, Ding, Liu, Yu et al. 2020; Rabalais et al. 2010; Schmidtko, Stramma & Visbeck 2017), thereby creating additional metabolic constraints to dispersal for marine organisms (Deutsch, Ferrel, Seibel, Pörtner & Huey 2015). As temperatures rise, oxygen demand could outpace the [Page 16] 15 physiological ability to supply oxygen to tissues in ectotherms, leading to reduced ‟aerobic scope‟ (Halsey, Killen, Clark & Norin 2018: the capacity to increase the aerobic metabolic rate above maintenance levels) for locomotion, growth and reproduction, and setting thresholds of heat tolerance (Fry & Hart 1948; Pörtner 2010; Fig. 3). Such postulate, under the so-called ‟oxygen- an"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2229,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "and Wijsman 1976). Among marine invertebrates, there are three general metabolic responses to declining oxygen tension. First, an oxyconforming response is characterized by the reduction in metabolic rate in tandem with declining oxygen tensions. Second, an oxyregulatory response is characterized by the maintenance of metabolic rate as dissolved oxygen concentrations decline (Prosser and Brown 1961). The third type of response, which is followed by many bivalves (deFur and Mangum 1979, Polhill and Dimock 1996), involves a combination of an oxyregulatory response at higher oxygen concentrations and an oxyconforming response below a critical oxygen concentration, known as Pcrit (Tang 1933, Fry"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2232,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "s most ef- fective in reducing the critical ambient oxygen tension where oxygen became limiting in the tissue (PO2 crit). In the absence of food increasing the appendage move- ment rate had almost no effect on PO2 crit. For food-rich conditions hyperventilation had only moderately im- proving effects on PO2 crit. However, as hyperventilation is in conﬂict with the regulation of food uptake, this cannot be a permanent solution, and it can only be ef- ﬁcient to compensate short-term oxygen ﬂuctuations. As it was clear that circulatory convection was important in the gas exchange of D. magna, it was nec- essary to quantify the role of hemoglobin as a carrier of oxygen. The observation that D. m"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2233,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "of the effects of hypoxia on metabolic functions based on empirical findings. Second, these rules are used to formulate assumptions regarding the effects of hypoxia on physiological functions within the DEB framework. These assumptions are then explored for their validity on several species. Finally, coupled experimental and modelling approaches are suggested for future research. 2 Physiological responses to hypoxia Animals may show different patterns of oxygen consumption in response to changes in ambient oxygen partial pressure (PO2) (Fry, 1971; Pörtner and Grieshaber, 1993). The concept of critical PO2, noted PcO2, characterizes the oxygen PO2 below which an organism is no longer able to "
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial portion of the excerpts (especially 1,5,7,8,9,14,18) describe physiological compensations—such as increased ventilation, heart output, or blood flow—that preserve metabolic rate when ambient oxygen falls but remains above a critical threshold. These provide clear supportive evidence for the stylized fact. Only one snippet (17) reports metabolic depression under hypoxia, and several are unrelated or only tangentially linked, so overall the corpus offers strong, consistent support with minimal contradictory data."
+          },
+          "n_references": 8,
+          "references": {
+            "W2743948761": {
+              "title": "Vagal activity and oxygen saturation response to hypoxia: Effects of aerobic fitness and rating of hypoxia tolerance",
+              "doi": "https://doi.org/10.5507/ag.2017.014",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2193
+            },
+            "W2948967936": {
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2262
+            },
+            "W2137476445": {
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.228
+            },
+            "W2032801058": {
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2293
+            },
+            "W2907031055": {
+              "title": "Supplementary material from \"Oxygen limitation is not the cause of death during lethal heat exposure in an insect\"",
+              "doi": "https://doi.org/10.6084/m9.figshare.c.4349786.v1",
+              "year": "2018",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2297
+            },
+            "W4382196235": {
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2343
+            },
+            "W3026457376": {
+              "title": "The OxymiR response to oxygen limitation: a comparative microRNA perspective",
+              "doi": "https://doi.org/10.1242/jeb.204594",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2381
+            },
+            "W1480188766": {
+              "title": "Regulation of Cellular Gas Exchange, Oxygen Sensing, and Metabolic Control",
+              "doi": "https://doi.org/10.1002/cphy.c120030",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2383
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2743948761",
+              "title": "Vagal activity and oxygen saturation response to hypoxia: Effects of aerobic fitness and rating of hypoxia tolerance",
+              "doi": "https://doi.org/10.5507/ag.2017.014",
+              "year": "2017",
+              "distance": 0.2193,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Background: A reduction in the inspired oxygen fraction (FiO<sub>2</sub>) induces a decline in arterial oxygen saturation (SpO<sub>2</sub>) and changes of heart rate variability (HRV). It has been shown that SpO<sub>2</sub> and HRV responses to similar levels of acute normobaric hypoxia are inter-individual variable. Variable response may be influenced by normoxia reached maximal oxygen uptake (VO<sub>2</sub>max) value. Objective: The primary aim was to assess HRV and the SpO<sub>2</sub> response to hypoxia, and examine the association with normoxic VO<sub>2</sub>max. Methods: Supine HRV and SpO<sub>2</sub> were monitored during normobaric hypoxia (FiO<sub>2</sub>&#8239;=&#8239;9.6%) for 10&"
+            },
+            {
+              "document_id": "W2049979157",
+              "title": "Oxygen-induced Hypercarbia in Obstructive Pulmonary Disease",
+              "doi": "https://doi.org/10.1164/ajrccm/144.3_pt_1.526",
+              "year": "1991",
+              "distance": 0.2199,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "We investigated the mechanisms responsible for oxygen-induced hypercarbia in ventilator-dependent patients with advanced chronic obstructive pulmonary disease (COPD). To quantitate the effects of oxygen (O2) on respiratory drive, we determined the CO2 recruitment threshold (PCO2 RT) in 10 mechanically ventilated patients under normoxic (PaO2 = 67 +/- 7 mm Hg) and hyperoxic (PaO2 = 370 +/- 67 mm Hg) conditions. PCO2 RT is a measure of the CO2 responsiveness of the mechanically unloaded respiratory system and, as such, is independent of mechanical impedance and respiratory muscle strength. After O2 supplementation, PCO2 RT increased from 42 +/- 6 to 45 +/- 6 mm Hg (p less than or equal to 0.05"
+            },
+            {
+              "document_id": "W3175236012",
+              "title": "DNA Damage Response Activates Respiration to Elevate dNTP Levels and Promote Cell Survival in Budding Yeast",
+              "doi": "https://doi.org/10.1096/fasebj.2019.33.1_supplement.457.14",
+              "year": "2019",
+              "distance": 0.2247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The DNA damage response (DDR), a highly conserved process, senses and repairs damaged DNA. It is widely believed that DDR downregulates respiration to protect DNA from endogenous reactive oxygen species (ROS). Our data go against this dogma and show that DDR activates respiration to increase ATP production and to elevate dNTP levels, which are required for efficient DNA repair and cell survival upon DNA damage. The underlying mechanism involves DNA damage‐induced downregulation of histone expression and altered chromatin structure, leading to increased transcription of genes encoding enzymes of tricarboxylic acid cycle, electron transport chain, and oxidative phosphorylation. This study reve"
+            },
+            {
+              "document_id": "W3120209798",
+              "title": "Prior oxygenation, but not chemoreflex responsiveness, determines breath‐hold duration during voluntary apnea",
+              "doi": "https://doi.org/10.14814/phy2.14664",
+              "year": "2021",
+              "distance": 0.2257,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Central and peripheral respiratory chemoreceptors are stimulated during voluntary breath holding due to chemostimuli (i.e., hypoxia and hypercapnia) accumulating at the metabolic rate. We hypothesized that voluntary breath-hold duration (BHD) would be (a) positively related to the initial pressure of inspired oxygen prior to breath holding, and (b) negatively correlated with respiratory chemoreflex responsiveness. In 16 healthy participants, voluntary breath holds were performed under three conditions: hyperoxia (following five normal tidal breaths of 100% O<sub>2</sub> ), normoxia (breathing room air), and hypoxia (following ~30-min of 13.5%-14% inspired O<sub>2</sub> ). In addition, the hy"
+            },
+            {
+              "document_id": "W2948967936",
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "distance": 0.2262,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "When PO2 and PCO2 are modified, various mechanisms are being established to maintaintissue oxygenation, such as ventilation and metabolism adaptations. In case of hypoxia orhypercapnia stimulation, we observed a ventilatory response, characterized by an increase in minuteventilation. Among the factors involved in the hypoxic response, Epo plays a key role. In addition toits role in erythropoiesis, Epo has other functions, especially in the central nervous system. Thisthesis presents the study of Epo involvement in the ventilatory responses to hypoxia (HVR) andhypercapnia (HcVR).We demonstrate the involvement of NO, glutamate and serotonin in the HVR and in acclimatizationto sustained hypoxia"
+            },
+            {
+              "document_id": "W2617783382",
+              "title": "Remodeling pathway control of mitochondrial respiratory capacity by temperature in mouse heart: electron flow through the Q-junction in permeabilized fibers",
+              "doi": "https://doi.org/10.1038/s41598-017-02789-8",
+              "year": "2017",
+              "distance": 0.2272,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Fuel substrate supply and oxidative phosphorylation are key determinants of muscle performance. Numerous studies of mammalian mitochondria are carried out (i) with substrate supply that limits electron flow, and (ii) far below physiological temperature. To analyze potentially implicated biases, we studied mitochondrial respiratory control in permeabilized mouse myocardial fibers using high-resolution respirometry. The capacity of oxidative phosphorylation at 37 °C was nearly two-fold higher when fueled by physiological substrate combinations reconstituting tricarboxylic acid cycle function, compared with electron flow measured separately through NADH to Complex I or succinate to Com"
+            },
+            {
+              "document_id": "W2137476445",
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "distance": 0.228,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "The amount of oxygen delivered to an organ depends on three factors: blood flow and its distribution; the oxygen-carrying capacity of the blood, i.e. haemoglobin concentration; and oxygen extraction. Non-haemodynamic and haemodynamic mechanisms operate to compensate for anaemia. Non-haemodynamic mechanisms include increased erythropoietin production to stimulate erythropoiesis, and increased oxygen extraction (displacement of the haemoglobin oxygen dissociation curve). This decreased affinity of oxygen for haemoglobin is mediated by increased 2,3-diphosphoglycerate concentrations. Increased cardiac output is the main haemodynamic factor, mediated by lower afterload, increased preload, and po"
+            },
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2293,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W2907031055",
+              "title": "Supplementary material from \"Oxygen limitation is not the cause of death during lethal heat exposure in an insect\"",
+              "doi": "https://doi.org/10.6084/m9.figshare.c.4349786.v1",
+              "year": "2018",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Oxygen- and capacity-limited thermal tolerance (OCLTT) is a controversial hypothesis claiming to explain variation in, and mechanistically determine, animal thermal limits. The lack of support from Insecta is typically argued to be a consequence of their high-performance respiratory systems. However, no studies have reported internal body oxygen levels during thermal ramping so it is unclear if changes in ambient gas are partially or fully offset by a compensatory respiratory system. Here we provide such an assessment by simultaneously recording haemolymph oxygen (pO<sub>2</sub>) levels—as an approximation of tissue oxygenation—while experimentally manipulating ambient oxygen and subjecting "
+            },
+            {
+              "document_id": "W2129304840",
+              "title": "Near-infrared spectroscopy technique to evaluate the effects of red blood cell transfusion on tissue oxygenation",
+              "doi": "https://doi.org/10.1186/cc8009",
+              "year": "2009",
+              "distance": 0.2301,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Muscle tissue oxygenation, oxygen consumption and microvascular reactivity are globally unaltered by RBC transfusion in critically ill patients. However, muscle oxygen consumption and microvascular reactivity can improve following transfusion in patients with alterations of these variables at baseline."
+            },
+            {
+              "document_id": "W4313857424",
+              "title": "Interaction of Factors Determining Critical Power",
+              "doi": "https://doi.org/10.1007/s40279-022-01805-w",
+              "year": "2023",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The physiological determinants of high-intensity exercise tolerance are important for both elite human performance and morbidity, mortality and disease in clinical settings. The asymptote of the hyperbolic relation between external power and time to task failure, critical power, represents the threshold intensity above which systemic and intramuscular metabolic homeostasis can no longer be maintained. After ~ 60 years of research into the phenomenon of critical power, a clear understanding of its physiological determinants has emerged. The purpose of the present review is to critically examine this contemporary evidence in order to explain the physiological underpinnings of critical"
+            },
+            {
+              "document_id": "W2083169469",
+              "title": "Crosstalk between Nitrite, Myoglobin and Reactive Oxygen Species to Regulate Vasodilation under Hypoxia",
+              "doi": "https://doi.org/10.1371/journal.pone.0105951",
+              "year": "2014",
+              "distance": 0.2324,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The systemic response to decreasing oxygen levels is hypoxic vasodilation. While this mechanism has been known for more than a century, the underlying cellular events have remained incompletely understood. Nitrite signaling is critically involved in vessel relaxation under hypoxia. This can be attributed to the presence of myoglobin in the vessel wall together with other potential nitrite reductases, which generate nitric oxide, one of the most potent vasodilatory signaling molecules. Questions remain relating to the precise concentration of nitrite and the exact dose-response relations between nitrite and myoglobin under hypoxia. It is furthermore unclear whether regulatory mechanisms exist"
+            },
+            {
+              "document_id": "W2070295938",
+              "title": "Central regulation of skeletal muscle recruitment explains the reduced maximal cardiac output during exercise in hypoxia",
+              "doi": "https://doi.org/10.1152/ajpregu.00608.2003",
+              "year": "2004",
+              "distance": 0.233,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "To unravel the mechanisms by which maximal oxygen uptake (V ˙O2 max) is reduced with severe acute hypoxia in humans, nine Danish lowlanders performed incremental cycle ergometer exercise to exhaustion, while breathing room air (normoxia) or 10.5% O 2 in N2 (hypoxia, ϳ5,300 m above sea level).With hypoxia, exercise PaO 2 dropped to 31-34 mmHg and arterial O2 content (CaO 2 ) was reduced by 35% (P Ͻ 0.001).Forty-one percent of the reduction in CaO 2 was explained by the lower inspired O2 pressure (PIO 2 ) in hypoxia, whereas the rest was due to the impairment of the pulmonary gas exchange, as reflected by the higher alveolar-arterial O 2 difference in hypoxia (P Ͻ 0.05).Hypoxia caused a 47% de"
+            },
+            {
+              "document_id": "W4382196235",
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "distance": 0.2343,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Reduced oxygen availability (hypoxia) can lead to cell and organ damage. Therefore, aerobic species depend on efficient mechanisms to counteract detrimental consequences of hypoxia. Hypoxia inducible factors (HIFs) and mitochondria are integral components of the cellular response to hypoxia and coordinate both distinct and highly intertwined adaptations. This leads to reduced dependence on oxygen, improved oxygen supply, maintained energy provision by metabolic remodeling and tapping into alternative pathways and increased resilience to hypoxic injuries. On one hand, many pathologies are associated with hypoxia and hypoxia can drive disease progression, for example in many cancer and neurolo"
+            },
+            {
+              "document_id": "W1989003791",
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "distance": 0.2366,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Many organisms exploit highly variable food supplies and, as an adaptation to such conditions, show elevated growth during recovery from starvation. In some species this response enables starved and re-fed individuals to outpace those growing continuously. The main engine of compensatory growth is a relative increase in food ingestion as a reaction to poor nutritional condition. We use a series of mathematical energy-budget models to investigate the interaction between the mechanisms that control such hyperphagia and those that control internal allocation, with the aim of identifying those strategies that permit overcompensation. We find that hyperphagia alone normally produces weak compensa"
+            },
+            {
+              "document_id": "W4250859894",
+              "title": "This Week in The Journal",
+              "doi": "https://doi.org/10.1523/jneurosci.twij.39.49.2019",
+              "year": "2019",
+              "distance": 0.237,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "George M.P.R. Souza, Ruth L. Stornetta, Daniel S. Stornetta, Stephen B.G. Abbott, and Patrice G. Guyenet (see pages [9725–9737][1]) Obstruction of breathing leads to a reduction in tissue oxygen levels (hypoxia) and an increase in CO2 levels (hypercapnia). These conditions are detected by"
+            },
+            {
+              "document_id": "W3026457376",
+              "title": "The OxymiR response to oxygen limitation: a comparative microRNA perspective",
+              "doi": "https://doi.org/10.1242/jeb.204594",
+              "year": "2020",
+              "distance": 0.2381,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "ABSTRACT From squid at the bottom of the ocean to humans at the top of mountains, animals have adapted to diverse oxygen-limited environments. Surviving these challenging conditions requires global metabolic reorganization that is orchestrated, in part, by microRNAs that can rapidly and reversibly target all biological functions. Herein, we review the involvement of microRNAs in natural models of anoxia and hypoxia tolerance, with a focus on the involvement of oxygen-responsive microRNAs (OxymiRs) in coordinating the metabolic rate depression that allows animals to tolerate reduced oxygen levels. We begin by discussing animals that experience acute or chronic periods of oxygen deprivation at"
+            },
+            {
+              "document_id": "W1480188766",
+              "title": "Regulation of Cellular Gas Exchange, Oxygen Sensing, and Metabolic Control",
+              "doi": "https://doi.org/10.1002/cphy.c120030",
+              "year": "2013",
+              "distance": 0.2383,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "Cells must continuously monitor and couple their metabolic requirements for ATP utilization with their ability to take up O2 for mitochondrial respiration. When O2 uptake and delivery move out of homeostasis, cells have elaborate and diverse sensing and response systems to compensate. In this review, we explore the biophysics of O2 and gas diffusion in the cell, how intracellular O2 is regulated, how intracellular O2 levels are sensed and how sensing systems impact mitochondrial respiration and shifts in metabolic pathways. Particular attention is paid to how O2 affects the redox state of the cell, as well as the NO, H2S, and CO concentrations. We also explore how these agents can affect var"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial portion of the excerpts (especially 1, 2, 3, 10, 12, 17, 19, 20, and 21) explicitly describe compensatory physiological responses—such as increased ventilation, heart rate, or circulatory adjustments—that maintain aerobic metabolism when ambient oxygen falls below but remains above a critical saturation. These statements directly affirm the stylized fact that organisms can boost O2 uptake mechanisms to sustain standard metabolic rates, providing multiple independent lines of support across taxa. The remaining snippets are either unrelated to hypoxia compensation or discuss other aspects (e.g., metabolic depression, DEB theory fundamentals) and thus do not detract from the overall pattern. Consequently, the corpus offers strong, corroborating evidence with little contradictory information."
+          },
+          "n_references": 7,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1792
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1961
+            },
+            "3639": {
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2051
+            },
+            "W2948967936": {
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2262
+            },
+            "W2137476445": {
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.228
+            },
+            "W2032801058": {
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2293
+            },
+            "W2907031055": {
+              "title": "Supplementary material from \"Oxygen limitation is not the cause of death during lethal heat exposure in an insect\"",
+              "doi": "https://doi.org/10.6084/m9.figshare.c.4349786.v1",
+              "year": "2018",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2297
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1792,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "n the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPT [Page 14] ACCEPTED MANUSCRIPT 13 (increase of O2 conductance: ventilation, heart- beat, O2 affinity for respiratory pigment etc.). These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce activity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaer"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2051,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "The increased tolerance is owed to the fact that an oxyregulatory response allows for maintenance of [Page 45] 30 aerobic respiration during low-oxygen conditions. Thus, organisms that are able to maintain an oxyregulating response over a broader range of oxygen tensions (i.e., have a lower Pcrit value) are considered to be more tolerant than those that transition to an oxyconforming response at higher oxygen tensions (e.g., Mandic et al. 2013) owing to the greater energetic yield afforded by maintenance of aerobic pathways (Grieshaber et al. 1994). Although hypoxia is often defined by the threshold oxygen concentration of 2.0 mg/l, Pcrit can vary both inter- (Vaquer-Sunyer and Duarte 2008) "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2057,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ivery of oxygen through the circulatory system is not considered to limit metabolism. Instead, the biochemical pathways within the cells are supplied with energy and materials directly from the reserve buffer within or near the cells, and it is assumed that there is normally a sufﬁcient O2 supply for ATP formation to fuel the labor. The rate of mobilization of the reserve depends on reserve density— that is, the surface area/volume interface between reserve and structure. The reserve density, in turn, depends on the assimilation rate. The maximum rate of assimilation relative to the maximum reserve capacity, , is ˙ {p }/[E ] Am max referred to as the “energy conductance” (cm/t) and is ˙v the"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "igh below the ILC and then decreased at higher food concentrations [LM]. If abdominal rejec- tions were an important component of the energy costs, the respiration rate stayed low below the ILC, and then increased [RE]. However, if the respiration rate was mostly affected by biochemical processing (SDA) the respiration rate followed the assimilation rate [BP]. In reality, all three mechanisms may contribute to the ﬁnal functional response if none of them is particular domi- nant. Also, the decrease of the respiration rate due to lower ﬁltering rates above the ILC and the increase due Table 9.3 Mass speciﬁc respiration (oxygen consumption) rates (µmol O2 mg-1 h-1) of adult D. magna without fo"
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2152,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "led ‘reserve’ (a process called assimilation), and reserve is mobilized for metabolism (see [859] for a detailed dis- cussion) 2 a fraction κ of mobilized reserve is allocated to somatic maintenance and growth (the κ-rule) 3 somatic maintenance is proportional to the permanent metabolic pool, referred to as ‘structure’. So reserve does not require maintenance (see [762, 774] for a detailed discussion) This is all one needs to know, since respiration, defined as dioxygen flux, follows from the mass balance. If specific somatic maintenance increases, all else being equal, the ultimate body mass decreases and the weight-specific respiration increases since somatic maintenance dom- inates respir"
+            },
+            {
+              "document_id": "2688",
+              "title": "LikaAugu2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2168,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ility to handle starvation in terms of shrinking and rejuvenation, but they compensate that by a higher talent for ﬁnding the last food item (¼low half saturation constant), for which they need complex behaviour and good memory and sensors. The half saturation constant is in fact the ratio of the (speciﬁc) ingestion and searching rates, meaning that demand species have a large speciﬁc food searching rates. High peak metabolic activity, relative to the standard one, is part of the skills they need to capture (fast) prey and is connected to searching rate. Capillaries (in a closed circulatory system) make that an increase in heart beat is felt in all corners of the body (where muscles contract"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2171,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "zation of oxygen within their body, even if environmental concentrations are low (e.g., Sanders and Childress 1990). Many of these organisms also possess larger respiratory surfaces than their close phylogenetic relatives, allowing for greater oxygen diffusion into the body (e.g., Lamont and Gage [Page 25] 10 2000). Metabolic depression is a commonly observed response of hypoxia tolerant organisms to low oxygen availability, which can be manifested physiologically through reduced respiration rates (e.g., Taylor and Brand 1975) or reductions in heart rate (e.g., deFur and Mangum 1979). Other organisms can switch to anaerobic metabolic pathways upon exposure to hypoxic conditions, allowing for"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2197,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ach SU by increasing circulation rate (e.g. heart beat rate or amplitude), or an increase of the total number of SU by increasing e.g. the total number of respiratory pigments. 3.4.2 Priorities among demand metabolic processes The next set of questions concern the physiological processes that need to be maintained for survival and the remaining processes that can be temporarily reduced (in particular in order to provide energy for increasing the capacity to extract oxygen from water). DEB theory distinguishes demand and supply processes at the time scale of the life cycle of an organism in a standard DEB model. Indeed, movement for the search of food is included into somatic maintenance as i"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "rd DEB model. 3.2 Assumptions on fluxes modulation under hypoxia Within a standard DEB model, responses to hypoxia can be included by acting on various energy fluxes, in relation with the physiological disturbances previously demonstrated: 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ-rule and subsequent allocations to growth and reproduction; related to endocrine disruption (facts G2, R2, R3). 5. The reproductive efficiency; related t"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2207,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "W2743948761",
+              "title": "Vagal activity and oxygen saturation response to hypoxia: Effects of aerobic fitness and rating of hypoxia tolerance",
+              "doi": "https://doi.org/10.5507/ag.2017.014",
+              "year": "2017",
+              "distance": 0.2193,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Background: A reduction in the inspired oxygen fraction (FiO<sub>2</sub>) induces a decline in arterial oxygen saturation (SpO<sub>2</sub>) and changes of heart rate variability (HRV). It has been shown that SpO<sub>2</sub> and HRV responses to similar levels of acute normobaric hypoxia are inter-individual variable. Variable response may be influenced by normoxia reached maximal oxygen uptake (VO<sub>2</sub>max) value. Objective: The primary aim was to assess HRV and the SpO<sub>2</sub> response to hypoxia, and examine the association with normoxic VO<sub>2</sub>max. Methods: Supine HRV and SpO<sub>2</sub> were monitored during normobaric hypoxia (FiO<sub>2</sub>&#8239;=&#8239;9.6%) for 10&"
+            },
+            {
+              "document_id": "W2049979157",
+              "title": "Oxygen-induced Hypercarbia in Obstructive Pulmonary Disease",
+              "doi": "https://doi.org/10.1164/ajrccm/144.3_pt_1.526",
+              "year": "1991",
+              "distance": 0.2199,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "We investigated the mechanisms responsible for oxygen-induced hypercarbia in ventilator-dependent patients with advanced chronic obstructive pulmonary disease (COPD). To quantitate the effects of oxygen (O2) on respiratory drive, we determined the CO2 recruitment threshold (PCO2 RT) in 10 mechanically ventilated patients under normoxic (PaO2 = 67 +/- 7 mm Hg) and hyperoxic (PaO2 = 370 +/- 67 mm Hg) conditions. PCO2 RT is a measure of the CO2 responsiveness of the mechanically unloaded respiratory system and, as such, is independent of mechanical impedance and respiratory muscle strength. After O2 supplementation, PCO2 RT increased from 42 +/- 6 to 45 +/- 6 mm Hg (p less than or equal to 0.05"
+            },
+            {
+              "document_id": "W3175236012",
+              "title": "DNA Damage Response Activates Respiration to Elevate dNTP Levels and Promote Cell Survival in Budding Yeast",
+              "doi": "https://doi.org/10.1096/fasebj.2019.33.1_supplement.457.14",
+              "year": "2019",
+              "distance": 0.2247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The DNA damage response (DDR), a highly conserved process, senses and repairs damaged DNA. It is widely believed that DDR downregulates respiration to protect DNA from endogenous reactive oxygen species (ROS). Our data go against this dogma and show that DDR activates respiration to increase ATP production and to elevate dNTP levels, which are required for efficient DNA repair and cell survival upon DNA damage. The underlying mechanism involves DNA damage‐induced downregulation of histone expression and altered chromatin structure, leading to increased transcription of genes encoding enzymes of tricarboxylic acid cycle, electron transport chain, and oxidative phosphorylation. This study reve"
+            },
+            {
+              "document_id": "W3120209798",
+              "title": "Prior oxygenation, but not chemoreflex responsiveness, determines breath‐hold duration during voluntary apnea",
+              "doi": "https://doi.org/10.14814/phy2.14664",
+              "year": "2021",
+              "distance": 0.2257,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Central and peripheral respiratory chemoreceptors are stimulated during voluntary breath holding due to chemostimuli (i.e., hypoxia and hypercapnia) accumulating at the metabolic rate. We hypothesized that voluntary breath-hold duration (BHD) would be (a) positively related to the initial pressure of inspired oxygen prior to breath holding, and (b) negatively correlated with respiratory chemoreflex responsiveness. In 16 healthy participants, voluntary breath holds were performed under three conditions: hyperoxia (following five normal tidal breaths of 100% O<sub>2</sub> ), normoxia (breathing room air), and hypoxia (following ~30-min of 13.5%-14% inspired O<sub>2</sub> ). In addition, the hy"
+            },
+            {
+              "document_id": "W2948967936",
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "distance": 0.2262,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "When PO2 and PCO2 are modified, various mechanisms are being established to maintaintissue oxygenation, such as ventilation and metabolism adaptations. In case of hypoxia orhypercapnia stimulation, we observed a ventilatory response, characterized by an increase in minuteventilation. Among the factors involved in the hypoxic response, Epo plays a key role. In addition toits role in erythropoiesis, Epo has other functions, especially in the central nervous system. Thisthesis presents the study of Epo involvement in the ventilatory responses to hypoxia (HVR) andhypercapnia (HcVR).We demonstrate the involvement of NO, glutamate and serotonin in the HVR and in acclimatizationto sustained hypoxia"
+            },
+            {
+              "document_id": "W2617783382",
+              "title": "Remodeling pathway control of mitochondrial respiratory capacity by temperature in mouse heart: electron flow through the Q-junction in permeabilized fibers",
+              "doi": "https://doi.org/10.1038/s41598-017-02789-8",
+              "year": "2017",
+              "distance": 0.2272,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Fuel substrate supply and oxidative phosphorylation are key determinants of muscle performance. Numerous studies of mammalian mitochondria are carried out (i) with substrate supply that limits electron flow, and (ii) far below physiological temperature. To analyze potentially implicated biases, we studied mitochondrial respiratory control in permeabilized mouse myocardial fibers using high-resolution respirometry. The capacity of oxidative phosphorylation at 37 °C was nearly two-fold higher when fueled by physiological substrate combinations reconstituting tricarboxylic acid cycle function, compared with electron flow measured separately through NADH to Complex I or succinate to Com"
+            },
+            {
+              "document_id": "W2137476445",
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "distance": 0.228,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "The amount of oxygen delivered to an organ depends on three factors: blood flow and its distribution; the oxygen-carrying capacity of the blood, i.e. haemoglobin concentration; and oxygen extraction. Non-haemodynamic and haemodynamic mechanisms operate to compensate for anaemia. Non-haemodynamic mechanisms include increased erythropoietin production to stimulate erythropoiesis, and increased oxygen extraction (displacement of the haemoglobin oxygen dissociation curve). This decreased affinity of oxygen for haemoglobin is mediated by increased 2,3-diphosphoglycerate concentrations. Increased cardiac output is the main haemodynamic factor, mediated by lower afterload, increased preload, and po"
+            },
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2293,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W2907031055",
+              "title": "Supplementary material from \"Oxygen limitation is not the cause of death during lethal heat exposure in an insect\"",
+              "doi": "https://doi.org/10.6084/m9.figshare.c.4349786.v1",
+              "year": "2018",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Oxygen- and capacity-limited thermal tolerance (OCLTT) is a controversial hypothesis claiming to explain variation in, and mechanistically determine, animal thermal limits. The lack of support from Insecta is typically argued to be a consequence of their high-performance respiratory systems. However, no studies have reported internal body oxygen levels during thermal ramping so it is unclear if changes in ambient gas are partially or fully offset by a compensatory respiratory system. Here we provide such an assessment by simultaneously recording haemolymph oxygen (pO<sub>2</sub>) levels—as an approximation of tissue oxygenation—while experimentally manipulating ambient oxygen and subjecting "
+            },
+            {
+              "document_id": "W2129304840",
+              "title": "Near-infrared spectroscopy technique to evaluate the effects of red blood cell transfusion on tissue oxygenation",
+              "doi": "https://doi.org/10.1186/cc8009",
+              "year": "2009",
+              "distance": 0.2301,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Muscle tissue oxygenation, oxygen consumption and microvascular reactivity are globally unaltered by RBC transfusion in critically ill patients. However, muscle oxygen consumption and microvascular reactivity can improve following transfusion in patients with alterations of these variables at baseline."
+            },
+            {
+              "document_id": "W4313857424",
+              "title": "Interaction of Factors Determining Critical Power",
+              "doi": "https://doi.org/10.1007/s40279-022-01805-w",
+              "year": "2023",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The physiological determinants of high-intensity exercise tolerance are important for both elite human performance and morbidity, mortality and disease in clinical settings. The asymptote of the hyperbolic relation between external power and time to task failure, critical power, represents the threshold intensity above which systemic and intramuscular metabolic homeostasis can no longer be maintained. After ~ 60 years of research into the phenomenon of critical power, a clear understanding of its physiological determinants has emerged. The purpose of the present review is to critically examine this contemporary evidence in order to explain the physiological underpinnings of critical"
+            },
+            {
+              "document_id": "W2083169469",
+              "title": "Crosstalk between Nitrite, Myoglobin and Reactive Oxygen Species to Regulate Vasodilation under Hypoxia",
+              "doi": "https://doi.org/10.1371/journal.pone.0105951",
+              "year": "2014",
+              "distance": 0.2324,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The systemic response to decreasing oxygen levels is hypoxic vasodilation. While this mechanism has been known for more than a century, the underlying cellular events have remained incompletely understood. Nitrite signaling is critically involved in vessel relaxation under hypoxia. This can be attributed to the presence of myoglobin in the vessel wall together with other potential nitrite reductases, which generate nitric oxide, one of the most potent vasodilatory signaling molecules. Questions remain relating to the precise concentration of nitrite and the exact dose-response relations between nitrite and myoglobin under hypoxia. It is furthermore unclear whether regulatory mechanisms exist"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly and clearly support the stylized fact. Snippet [1] is essentially a verbatim statement of the fact, listing increased O2 conductance via ventilation, heartbeat, and O2 affinity that can raise O2 consumption above critical saturation. Snippets [2], [10], [13], and [17] provide concrete physiological examples (increased ventilation, heart rhythm, hyperventilation, oxygen transport efficiency, oxyregulation capacity) that compensate for low O2 and maintain respiration. Snippets [3], [6], [12], and [16] describe oxyregulation as the maintenance of aerobic respiration above Pcrit, consistent with the compensatory framework. Snippet [9] mentions both larger respiratory surfaces and metabolic depression, and snippet [14]/[15] discuss ventilation and cardiac output as oxygen-supply mechanisms, all aligned with the fact. No snippet contradicts the claim; the few neutral ones are general DEB or off-topic. Overall the corpus offers strong, consistent corroboration."
+          },
+          "n_references": 6,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.1792
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1961
+            },
+            "3639": {
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 4,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2051
+            },
+            "2567": {
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2072
+            },
+            "3731": {
+              "title": "Herrando-Pérez et al. - 2023 - Novel physiological data needed for progress in gl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2216
+            },
+            "2402": {
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2232
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1792,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.98,
+              "text": "n the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPT [Page 14] ACCEPTED MANUSCRIPT 13 (increase of O2 conductance: ventilation, heart- beat, O2 affinity for respiratory pigment etc.). These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce activity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaer"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2051,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "The increased tolerance is owed to the fact that an oxyregulatory response allows for maintenance of [Page 45] 30 aerobic respiration during low-oxygen conditions. Thus, organisms that are able to maintain an oxyregulating response over a broader range of oxygen tensions (i.e., have a lower Pcrit value) are considered to be more tolerant than those that transition to an oxyconforming response at higher oxygen tensions (e.g., Mandic et al. 2013) owing to the greater energetic yield afforded by maintenance of aerobic pathways (Grieshaber et al. 1994). Although hypoxia is often defined by the threshold oxygen concentration of 2.0 mg/l, Pcrit can vary both inter- (Vaquer-Sunyer and Duarte 2008) "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2057,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ivery of oxygen through the circulatory system is not considered to limit metabolism. Instead, the biochemical pathways within the cells are supplied with energy and materials directly from the reserve buffer within or near the cells, and it is assumed that there is normally a sufﬁcient O2 supply for ATP formation to fuel the labor. The rate of mobilization of the reserve depends on reserve density— that is, the surface area/volume interface between reserve and structure. The reserve density, in turn, depends on the assimilation rate. The maximum rate of assimilation relative to the maximum reserve capacity, , is ˙ {p }/[E ] Am max referred to as the “energy conductance” (cm/t) and is ˙v the"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "igh below the ILC and then decreased at higher food concentrations [LM]. If abdominal rejec- tions were an important component of the energy costs, the respiration rate stayed low below the ILC, and then increased [RE]. However, if the respiration rate was mostly affected by biochemical processing (SDA) the respiration rate followed the assimilation rate [BP]. In reality, all three mechanisms may contribute to the ﬁnal functional response if none of them is particular domi- nant. Also, the decrease of the respiration rate due to lower ﬁltering rates above the ILC and the increase due Table 9.3 Mass speciﬁc respiration (oxygen consumption) rates (µmol O2 mg-1 h-1) of adult D. magna without fo"
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2152,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "led ‘reserve’ (a process called assimilation), and reserve is mobilized for metabolism (see [859] for a detailed dis- cussion) 2 a fraction κ of mobilized reserve is allocated to somatic maintenance and growth (the κ-rule) 3 somatic maintenance is proportional to the permanent metabolic pool, referred to as ‘structure’. So reserve does not require maintenance (see [762, 774] for a detailed discussion) This is all one needs to know, since respiration, defined as dioxygen flux, follows from the mass balance. If specific somatic maintenance increases, all else being equal, the ultimate body mass decreases and the weight-specific respiration increases since somatic maintenance dom- inates respir"
+            },
+            {
+              "document_id": "2688",
+              "title": "LikaAugu2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2168,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ility to handle starvation in terms of shrinking and rejuvenation, but they compensate that by a higher talent for ﬁnding the last food item (¼low half saturation constant), for which they need complex behaviour and good memory and sensors. The half saturation constant is in fact the ratio of the (speciﬁc) ingestion and searching rates, meaning that demand species have a large speciﬁc food searching rates. High peak metabolic activity, relative to the standard one, is part of the skills they need to capture (fast) prey and is connected to searching rate. Capillaries (in a closed circulatory system) make that an increase in heart beat is felt in all corners of the body (where muscles contract"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2171,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "zation of oxygen within their body, even if environmental concentrations are low (e.g., Sanders and Childress 1990). Many of these organisms also possess larger respiratory surfaces than their close phylogenetic relatives, allowing for greater oxygen diffusion into the body (e.g., Lamont and Gage [Page 25] 10 2000). Metabolic depression is a commonly observed response of hypoxia tolerant organisms to low oxygen availability, which can be manifested physiologically through reduced respiration rates (e.g., Taylor and Brand 1975) or reductions in heart rate (e.g., deFur and Mangum 1979). Other organisms can switch to anaerobic metabolic pathways upon exposure to hypoxic conditions, allowing for"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2197,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "ach SU by increasing circulation rate (e.g. heart beat rate or amplitude), or an increase of the total number of SU by increasing e.g. the total number of respiratory pigments. 3.4.2 Priorities among demand metabolic processes The next set of questions concern the physiological processes that need to be maintained for survival and the remaining processes that can be temporarily reduced (in particular in order to provide energy for increasing the capacity to extract oxygen from water). DEB theory distinguishes demand and supply processes at the time scale of the life cycle of an organism in a standard DEB model. Indeed, movement for the search of food is included into somatic maintenance as i"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "rd DEB model. 3.2 Assumptions on fluxes modulation under hypoxia Within a standard DEB model, responses to hypoxia can be included by acting on various energy fluxes, in relation with the physiological disturbances previously demonstrated: 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ-rule and subsequent allocations to growth and reproduction; related to endocrine disruption (facts G2, R2, R3). 5. The reproductive efficiency; related t"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2207,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.221,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "ion capacity down to 20–25% O2sat (Aguirre-Velarde et al., 2016). Such ability would allow A. purpuratus to maintain most of its physiological functions independent of ambient oxygen saturation. A lower critical point for feeding activity than respira- tion may indicate a decoupling of these physiological rates enabling food ﬁltering even under low oxygen saturations. 2. First phase of severe hypoxia (below 11.2% O2sat): drop in the clearance rate. Below this oxygen threshold, we can hypothesize that the aerobic energy production decreases considerably and the energy demand might then be supplied by reserves such as phos- phagens (Grieshaber et al., 1994) providing energy to maintain ciliary"
+            },
+            {
+              "document_id": "3731",
+              "title": "Herrando-Pérez et al. - 2023 - Novel physiological data needed for progress in gl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2216,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "that physiological oxygen- supply mechanisms (i.e., ventilation and cardiac output) are working at their maximum capacity when body temperature reaches CTmax, even at rest and in normoxia (atmospheric oxygen partial pressure PO2 = 21 kPa). According to OCLTT, at CTmax aerobic scope should be abolished, atmospheric PO2 should become the critical PO2 below which even resting oxygen demand cannot be supported (Claireaux & Chabot 2016; Rogers, Urbina, Reardon, McKenzie & Wilson 2016), and any additional decrease in PO2 should further reduce heat tolerance resulting in whole-organism physiological failure (Farrell 2016; Pörtner, Bock & Mark 2017). Within the OCLTT‟s conceptual framework, extincti"
+            },
+            {
+              "document_id": "3731",
+              "title": "Herrando-Pérez et al. - 2023 - Novel physiological data needed for progress in gl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2217,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "nger & Gruber 2010; Li, Huang, Ding, Liu, Yu et al. 2020; Rabalais et al. 2010; Schmidtko, Stramma & Visbeck 2017), thereby creating additional metabolic constraints to dispersal for marine organisms (Deutsch, Ferrel, Seibel, Pörtner & Huey 2015). As temperatures rise, oxygen demand could outpace the [Page 16] 15 physiological ability to supply oxygen to tissues in ectotherms, leading to reduced ‟aerobic scope‟ (Halsey, Killen, Clark & Norin 2018: the capacity to increase the aerobic metabolic rate above maintenance levels) for locomotion, growth and reproduction, and setting thresholds of heat tolerance (Fry & Hart 1948; Pörtner 2010; Fig. 3). Such postulate, under the so-called ‟oxygen- an"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2229,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "and Wijsman 1976). Among marine invertebrates, there are three general metabolic responses to declining oxygen tension. First, an oxyconforming response is characterized by the reduction in metabolic rate in tandem with declining oxygen tensions. Second, an oxyregulatory response is characterized by the maintenance of metabolic rate as dissolved oxygen concentrations decline (Prosser and Brown 1961). The third type of response, which is followed by many bivalves (deFur and Mangum 1979, Polhill and Dimock 1996), involves a combination of an oxyregulatory response at higher oxygen concentrations and an oxyconforming response below a critical oxygen concentration, known as Pcrit (Tang 1933, Fry"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2232,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "s most ef- fective in reducing the critical ambient oxygen tension where oxygen became limiting in the tissue (PO2 crit). In the absence of food increasing the appendage move- ment rate had almost no effect on PO2 crit. For food-rich conditions hyperventilation had only moderately im- proving effects on PO2 crit. However, as hyperventilation is in conﬂict with the regulation of food uptake, this cannot be a permanent solution, and it can only be ef- ﬁcient to compensate short-term oxygen ﬂuctuations. As it was clear that circulatory convection was important in the gas exchange of D. magna, it was nec- essary to quantify the role of hemoglobin as a carrier of oxygen. The observation that D. m"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2233,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "of the effects of hypoxia on metabolic functions based on empirical findings. Second, these rules are used to formulate assumptions regarding the effects of hypoxia on physiological functions within the DEB framework. These assumptions are then explored for their validity on several species. Finally, coupled experimental and modelling approaches are suggested for future research. 2 Physiological responses to hypoxia Animals may show different patterns of oxygen consumption in response to changes in ambient oxygen partial pressure (PO2) (Fry, 1971; Pörtner and Grieshaber, 1993). The concept of critical PO2, noted PcO2, characterizes the oxygen PO2 below which an organism is no longer able to "
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several snippets describe compensatory physiological mechanisms that maintain oxygen delivery and metabolic homeostasis under reduced O2, consistent with the stylized fact. Snippet 5 explicitly notes ventilatory increases (minute ventilation) in response to hypoxia to maintain tissue oxygenation; snippet 7 details haemodynamic and non-haemodynamic compensation (increased cardiac output, oxygen extraction); snippet 8 shows oxygen delivery/metabolism maintained during moderate hypoxia via blood flow compensation until severe hypoxia overwhelms it (consistent with a critical threshold); and snippets 14 and 18 describe cellular sensing/response systems compensating for reduced O2. These broadly corroborate compensatory responses sustaining respiration above a critical level, though most evidence is from mammalian/medical physiology rather than the DEB/ecological context, and few directly quantify increased O2 consumption (ventilation, heartbeat, mobility) as described. Overall support is moderate and directionally consistent, with no contradicting evidence."
+          },
+          "n_references": 7,
+          "references": {
+            "W2743948761": {
+              "title": "Vagal activity and oxygen saturation response to hypoxia: Effects of aerobic fitness and rating of hypoxia tolerance",
+              "doi": "https://doi.org/10.5507/ag.2017.014",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2193
+            },
+            "W2948967936": {
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2262
+            },
+            "W2137476445": {
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.228
+            },
+            "W2032801058": {
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2293
+            },
+            "W2083169469": {
+              "title": "Crosstalk between Nitrite, Myoglobin and Reactive Oxygen Species to Regulate Vasodilation under Hypoxia",
+              "doi": "https://doi.org/10.1371/journal.pone.0105951",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2324
+            },
+            "W4382196235": {
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2343
+            },
+            "W1480188766": {
+              "title": "Regulation of Cellular Gas Exchange, Oxygen Sensing, and Metabolic Control",
+              "doi": "https://doi.org/10.1002/cphy.c120030",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2383
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2743948761",
+              "title": "Vagal activity and oxygen saturation response to hypoxia: Effects of aerobic fitness and rating of hypoxia tolerance",
+              "doi": "https://doi.org/10.5507/ag.2017.014",
+              "year": "2017",
+              "distance": 0.2193,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "Background: A reduction in the inspired oxygen fraction (FiO<sub>2</sub>) induces a decline in arterial oxygen saturation (SpO<sub>2</sub>) and changes of heart rate variability (HRV). It has been shown that SpO<sub>2</sub> and HRV responses to similar levels of acute normobaric hypoxia are inter-individual variable. Variable response may be influenced by normoxia reached maximal oxygen uptake (VO<sub>2</sub>max) value. Objective: The primary aim was to assess HRV and the SpO<sub>2</sub> response to hypoxia, and examine the association with normoxic VO<sub>2</sub>max. Methods: Supine HRV and SpO<sub>2</sub> were monitored during normobaric hypoxia (FiO<sub>2</sub>&#8239;=&#8239;9.6%) for 10&"
+            },
+            {
+              "document_id": "W2049979157",
+              "title": "Oxygen-induced Hypercarbia in Obstructive Pulmonary Disease",
+              "doi": "https://doi.org/10.1164/ajrccm/144.3_pt_1.526",
+              "year": "1991",
+              "distance": 0.2199,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "We investigated the mechanisms responsible for oxygen-induced hypercarbia in ventilator-dependent patients with advanced chronic obstructive pulmonary disease (COPD). To quantitate the effects of oxygen (O2) on respiratory drive, we determined the CO2 recruitment threshold (PCO2 RT) in 10 mechanically ventilated patients under normoxic (PaO2 = 67 +/- 7 mm Hg) and hyperoxic (PaO2 = 370 +/- 67 mm Hg) conditions. PCO2 RT is a measure of the CO2 responsiveness of the mechanically unloaded respiratory system and, as such, is independent of mechanical impedance and respiratory muscle strength. After O2 supplementation, PCO2 RT increased from 42 +/- 6 to 45 +/- 6 mm Hg (p less than or equal to 0.05"
+            },
+            {
+              "document_id": "W3175236012",
+              "title": "DNA Damage Response Activates Respiration to Elevate dNTP Levels and Promote Cell Survival in Budding Yeast",
+              "doi": "https://doi.org/10.1096/fasebj.2019.33.1_supplement.457.14",
+              "year": "2019",
+              "distance": 0.2247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The DNA damage response (DDR), a highly conserved process, senses and repairs damaged DNA. It is widely believed that DDR downregulates respiration to protect DNA from endogenous reactive oxygen species (ROS). Our data go against this dogma and show that DDR activates respiration to increase ATP production and to elevate dNTP levels, which are required for efficient DNA repair and cell survival upon DNA damage. The underlying mechanism involves DNA damage‐induced downregulation of histone expression and altered chromatin structure, leading to increased transcription of genes encoding enzymes of tricarboxylic acid cycle, electron transport chain, and oxidative phosphorylation. This study reve"
+            },
+            {
+              "document_id": "W3120209798",
+              "title": "Prior oxygenation, but not chemoreflex responsiveness, determines breath‐hold duration during voluntary apnea",
+              "doi": "https://doi.org/10.14814/phy2.14664",
+              "year": "2021",
+              "distance": 0.2257,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Central and peripheral respiratory chemoreceptors are stimulated during voluntary breath holding due to chemostimuli (i.e., hypoxia and hypercapnia) accumulating at the metabolic rate. We hypothesized that voluntary breath-hold duration (BHD) would be (a) positively related to the initial pressure of inspired oxygen prior to breath holding, and (b) negatively correlated with respiratory chemoreflex responsiveness. In 16 healthy participants, voluntary breath holds were performed under three conditions: hyperoxia (following five normal tidal breaths of 100% O<sub>2</sub> ), normoxia (breathing room air), and hypoxia (following ~30-min of 13.5%-14% inspired O<sub>2</sub> ). In addition, the hy"
+            },
+            {
+              "document_id": "W2948967936",
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "distance": 0.2262,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "When PO2 and PCO2 are modified, various mechanisms are being established to maintaintissue oxygenation, such as ventilation and metabolism adaptations. In case of hypoxia orhypercapnia stimulation, we observed a ventilatory response, characterized by an increase in minuteventilation. Among the factors involved in the hypoxic response, Epo plays a key role. In addition toits role in erythropoiesis, Epo has other functions, especially in the central nervous system. Thisthesis presents the study of Epo involvement in the ventilatory responses to hypoxia (HVR) andhypercapnia (HcVR).We demonstrate the involvement of NO, glutamate and serotonin in the HVR and in acclimatizationto sustained hypoxia"
+            },
+            {
+              "document_id": "W2617783382",
+              "title": "Remodeling pathway control of mitochondrial respiratory capacity by temperature in mouse heart: electron flow through the Q-junction in permeabilized fibers",
+              "doi": "https://doi.org/10.1038/s41598-017-02789-8",
+              "year": "2017",
+              "distance": 0.2272,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Fuel substrate supply and oxidative phosphorylation are key determinants of muscle performance. Numerous studies of mammalian mitochondria are carried out (i) with substrate supply that limits electron flow, and (ii) far below physiological temperature. To analyze potentially implicated biases, we studied mitochondrial respiratory control in permeabilized mouse myocardial fibers using high-resolution respirometry. The capacity of oxidative phosphorylation at 37 °C was nearly two-fold higher when fueled by physiological substrate combinations reconstituting tricarboxylic acid cycle function, compared with electron flow measured separately through NADH to Complex I or succinate to Com"
+            },
+            {
+              "document_id": "W2137476445",
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "distance": 0.228,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "The amount of oxygen delivered to an organ depends on three factors: blood flow and its distribution; the oxygen-carrying capacity of the blood, i.e. haemoglobin concentration; and oxygen extraction. Non-haemodynamic and haemodynamic mechanisms operate to compensate for anaemia. Non-haemodynamic mechanisms include increased erythropoietin production to stimulate erythropoiesis, and increased oxygen extraction (displacement of the haemoglobin oxygen dissociation curve). This decreased affinity of oxygen for haemoglobin is mediated by increased 2,3-diphosphoglycerate concentrations. Increased cardiac output is the main haemodynamic factor, mediated by lower afterload, increased preload, and po"
+            },
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2293,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W2907031055",
+              "title": "Supplementary material from \"Oxygen limitation is not the cause of death during lethal heat exposure in an insect\"",
+              "doi": "https://doi.org/10.6084/m9.figshare.c.4349786.v1",
+              "year": "2018",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Oxygen- and capacity-limited thermal tolerance (OCLTT) is a controversial hypothesis claiming to explain variation in, and mechanistically determine, animal thermal limits. The lack of support from Insecta is typically argued to be a consequence of their high-performance respiratory systems. However, no studies have reported internal body oxygen levels during thermal ramping so it is unclear if changes in ambient gas are partially or fully offset by a compensatory respiratory system. Here we provide such an assessment by simultaneously recording haemolymph oxygen (pO<sub>2</sub>) levels—as an approximation of tissue oxygenation—while experimentally manipulating ambient oxygen and subjecting "
+            },
+            {
+              "document_id": "W2129304840",
+              "title": "Near-infrared spectroscopy technique to evaluate the effects of red blood cell transfusion on tissue oxygenation",
+              "doi": "https://doi.org/10.1186/cc8009",
+              "year": "2009",
+              "distance": 0.2301,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Muscle tissue oxygenation, oxygen consumption and microvascular reactivity are globally unaltered by RBC transfusion in critically ill patients. However, muscle oxygen consumption and microvascular reactivity can improve following transfusion in patients with alterations of these variables at baseline."
+            },
+            {
+              "document_id": "W4313857424",
+              "title": "Interaction of Factors Determining Critical Power",
+              "doi": "https://doi.org/10.1007/s40279-022-01805-w",
+              "year": "2023",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract The physiological determinants of high-intensity exercise tolerance are important for both elite human performance and morbidity, mortality and disease in clinical settings. The asymptote of the hyperbolic relation between external power and time to task failure, critical power, represents the threshold intensity above which systemic and intramuscular metabolic homeostasis can no longer be maintained. After ~ 60 years of research into the phenomenon of critical power, a clear understanding of its physiological determinants has emerged. The purpose of the present review is to critically examine this contemporary evidence in order to explain the physiological underpinnings of critical"
+            },
+            {
+              "document_id": "W2083169469",
+              "title": "Crosstalk between Nitrite, Myoglobin and Reactive Oxygen Species to Regulate Vasodilation under Hypoxia",
+              "doi": "https://doi.org/10.1371/journal.pone.0105951",
+              "year": "2014",
+              "distance": 0.2324,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "The systemic response to decreasing oxygen levels is hypoxic vasodilation. While this mechanism has been known for more than a century, the underlying cellular events have remained incompletely understood. Nitrite signaling is critically involved in vessel relaxation under hypoxia. This can be attributed to the presence of myoglobin in the vessel wall together with other potential nitrite reductases, which generate nitric oxide, one of the most potent vasodilatory signaling molecules. Questions remain relating to the precise concentration of nitrite and the exact dose-response relations between nitrite and myoglobin under hypoxia. It is furthermore unclear whether regulatory mechanisms exist"
+            },
+            {
+              "document_id": "W2070295938",
+              "title": "Central regulation of skeletal muscle recruitment explains the reduced maximal cardiac output during exercise in hypoxia",
+              "doi": "https://doi.org/10.1152/ajpregu.00608.2003",
+              "year": "2004",
+              "distance": 0.233,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "To unravel the mechanisms by which maximal oxygen uptake (V ˙O2 max) is reduced with severe acute hypoxia in humans, nine Danish lowlanders performed incremental cycle ergometer exercise to exhaustion, while breathing room air (normoxia) or 10.5% O 2 in N2 (hypoxia, ϳ5,300 m above sea level).With hypoxia, exercise PaO 2 dropped to 31-34 mmHg and arterial O2 content (CaO 2 ) was reduced by 35% (P Ͻ 0.001).Forty-one percent of the reduction in CaO 2 was explained by the lower inspired O2 pressure (PIO 2 ) in hypoxia, whereas the rest was due to the impairment of the pulmonary gas exchange, as reflected by the higher alveolar-arterial O 2 difference in hypoxia (P Ͻ 0.05).Hypoxia caused a 47% de"
+            },
+            {
+              "document_id": "W4382196235",
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "distance": 0.2343,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Reduced oxygen availability (hypoxia) can lead to cell and organ damage. Therefore, aerobic species depend on efficient mechanisms to counteract detrimental consequences of hypoxia. Hypoxia inducible factors (HIFs) and mitochondria are integral components of the cellular response to hypoxia and coordinate both distinct and highly intertwined adaptations. This leads to reduced dependence on oxygen, improved oxygen supply, maintained energy provision by metabolic remodeling and tapping into alternative pathways and increased resilience to hypoxic injuries. On one hand, many pathologies are associated with hypoxia and hypoxia can drive disease progression, for example in many cancer and neurolo"
+            },
+            {
+              "document_id": "W1989003791",
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "distance": 0.2366,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Many organisms exploit highly variable food supplies and, as an adaptation to such conditions, show elevated growth during recovery from starvation. In some species this response enables starved and re-fed individuals to outpace those growing continuously. The main engine of compensatory growth is a relative increase in food ingestion as a reaction to poor nutritional condition. We use a series of mathematical energy-budget models to investigate the interaction between the mechanisms that control such hyperphagia and those that control internal allocation, with the aim of identifying those strategies that permit overcompensation. We find that hyperphagia alone normally produces weak compensa"
+            },
+            {
+              "document_id": "W4250859894",
+              "title": "This Week in The Journal",
+              "doi": "https://doi.org/10.1523/jneurosci.twij.39.49.2019",
+              "year": "2019",
+              "distance": 0.237,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "George M.P.R. Souza, Ruth L. Stornetta, Daniel S. Stornetta, Stephen B.G. Abbott, and Patrice G. Guyenet (see pages [9725–9737][1]) Obstruction of breathing leads to a reduction in tissue oxygen levels (hypoxia) and an increase in CO2 levels (hypercapnia). These conditions are detected by"
+            },
+            {
+              "document_id": "W3026457376",
+              "title": "The OxymiR response to oxygen limitation: a comparative microRNA perspective",
+              "doi": "https://doi.org/10.1242/jeb.204594",
+              "year": "2020",
+              "distance": 0.2381,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT From squid at the bottom of the ocean to humans at the top of mountains, animals have adapted to diverse oxygen-limited environments. Surviving these challenging conditions requires global metabolic reorganization that is orchestrated, in part, by microRNAs that can rapidly and reversibly target all biological functions. Herein, we review the involvement of microRNAs in natural models of anoxia and hypoxia tolerance, with a focus on the involvement of oxygen-responsive microRNAs (OxymiRs) in coordinating the metabolic rate depression that allows animals to tolerate reduced oxygen levels. We begin by discussing animals that experience acute or chronic periods of oxygen deprivation at"
+            },
+            {
+              "document_id": "W1480188766",
+              "title": "Regulation of Cellular Gas Exchange, Oxygen Sensing, and Metabolic Control",
+              "doi": "https://doi.org/10.1002/cphy.c120030",
+              "year": "2013",
+              "distance": 0.2383,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "Cells must continuously monitor and couple their metabolic requirements for ATP utilization with their ability to take up O2 for mitochondrial respiration. When O2 uptake and delivery move out of homeostasis, cells have elaborate and diverse sensing and response systems to compensate. In this review, we explore the biophysics of O2 and gas diffusion in the cell, how intracellular O2 is regulated, how intracellular O2 levels are sensed and how sensing systems impact mitochondrial respiration and shifts in metabolic pathways. Particular attention is paid to how O2 affects the redox state of the cell, as well as the NO, H2S, and CO concentrations. We also explore how these agents can affect var"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly support the stylized fact. Snippet 1 (Thomas et al.) is nearly verbatim, explicitly stating compensatory mechanisms (increased O2 conductance via ventilation, heartbeat, O2 affinity) can lead to increased O2 consumption above critical saturation. Snippets 2, 3, 6, 10, 12 describe oxyregulation maintaining aerobic respiration above Pcrit via increased ventilation, heart rhythm, and oxygen transport efficiency. Physiology snippets (13, 17, 19, 20, 24) corroborate compensatory ventilatory/circulatory/vasodilatory responses to hypoxia from broader literature. Snippet 9 describes metabolic depression (reduced respiration/heart rate), which is a tolerance response below critical saturation rather than a contradiction of the above-critical compensatory claim, but is mildly counter-directional. Overall the evidence is strong and consistent with corroboration."
+          },
+          "n_references": 9,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1792
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1961
+            },
+            "3639": {
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 2,
+              "contradicts": 1,
+              "best_distance": 0.2051
+            },
+            "2567": {
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2072
+            },
+            "W2743948761": {
+              "title": "Vagal activity and oxygen saturation response to hypoxia: Effects of aerobic fitness and rating of hypoxia tolerance",
+              "doi": "https://doi.org/10.5507/ag.2017.014",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2193
+            },
+            "W2948967936": {
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2262
+            },
+            "W2137476445": {
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.228
+            },
+            "W2032801058": {
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2293
+            },
+            "W2083169469": {
+              "title": "Crosstalk between Nitrite, Myoglobin and Reactive Oxygen Species to Regulate Vasodilation under Hypoxia",
+              "doi": "https://doi.org/10.1371/journal.pone.0105951",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2324
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1792,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.98,
+              "text": "n the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPT [Page 14] ACCEPTED MANUSCRIPT 13 (increase of O2 conductance: ventilation, heart- beat, O2 affinity for respiratory pigment etc.). These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce activity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaer"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2051,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "The increased tolerance is owed to the fact that an oxyregulatory response allows for maintenance of [Page 45] 30 aerobic respiration during low-oxygen conditions. Thus, organisms that are able to maintain an oxyregulating response over a broader range of oxygen tensions (i.e., have a lower Pcrit value) are considered to be more tolerant than those that transition to an oxyconforming response at higher oxygen tensions (e.g., Mandic et al. 2013) owing to the greater energetic yield afforded by maintenance of aerobic pathways (Grieshaber et al. 1994). Although hypoxia is often defined by the threshold oxygen concentration of 2.0 mg/l, Pcrit can vary both inter- (Vaquer-Sunyer and Duarte 2008) "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2057,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ivery of oxygen through the circulatory system is not considered to limit metabolism. Instead, the biochemical pathways within the cells are supplied with energy and materials directly from the reserve buffer within or near the cells, and it is assumed that there is normally a sufﬁcient O2 supply for ATP formation to fuel the labor. The rate of mobilization of the reserve depends on reserve density— that is, the surface area/volume interface between reserve and structure. The reserve density, in turn, depends on the assimilation rate. The maximum rate of assimilation relative to the maximum reserve capacity, , is ˙ {p }/[E ] Am max referred to as the “energy conductance” (cm/t) and is ˙v the"
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "igh below the ILC and then decreased at higher food concentrations [LM]. If abdominal rejec- tions were an important component of the energy costs, the respiration rate stayed low below the ILC, and then increased [RE]. However, if the respiration rate was mostly affected by biochemical processing (SDA) the respiration rate followed the assimilation rate [BP]. In reality, all three mechanisms may contribute to the ﬁnal functional response if none of them is particular domi- nant. Also, the decrease of the respiration rate due to lower ﬁltering rates above the ILC and the increase due Table 9.3 Mass speciﬁc respiration (oxygen consumption) rates (µmol O2 mg-1 h-1) of adult D. magna without fo"
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2152,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "led ‘reserve’ (a process called assimilation), and reserve is mobilized for metabolism (see [859] for a detailed dis- cussion) 2 a fraction κ of mobilized reserve is allocated to somatic maintenance and growth (the κ-rule) 3 somatic maintenance is proportional to the permanent metabolic pool, referred to as ‘structure’. So reserve does not require maintenance (see [762, 774] for a detailed discussion) This is all one needs to know, since respiration, defined as dioxygen flux, follows from the mass balance. If specific somatic maintenance increases, all else being equal, the ultimate body mass decreases and the weight-specific respiration increases since somatic maintenance dom- inates respir"
+            },
+            {
+              "document_id": "2688",
+              "title": "LikaAugu2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2168,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ility to handle starvation in terms of shrinking and rejuvenation, but they compensate that by a higher talent for ﬁnding the last food item (¼low half saturation constant), for which they need complex behaviour and good memory and sensors. The half saturation constant is in fact the ratio of the (speciﬁc) ingestion and searching rates, meaning that demand species have a large speciﬁc food searching rates. High peak metabolic activity, relative to the standard one, is part of the skills they need to capture (fast) prey and is connected to searching rate. Capillaries (in a closed circulatory system) make that an increase in heart beat is felt in all corners of the body (where muscles contract"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2171,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "zation of oxygen within their body, even if environmental concentrations are low (e.g., Sanders and Childress 1990). Many of these organisms also possess larger respiratory surfaces than their close phylogenetic relatives, allowing for greater oxygen diffusion into the body (e.g., Lamont and Gage [Page 25] 10 2000). Metabolic depression is a commonly observed response of hypoxia tolerant organisms to low oxygen availability, which can be manifested physiologically through reduced respiration rates (e.g., Taylor and Brand 1975) or reductions in heart rate (e.g., deFur and Mangum 1979). Other organisms can switch to anaerobic metabolic pathways upon exposure to hypoxic conditions, allowing for"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2197,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ach SU by increasing circulation rate (e.g. heart beat rate or amplitude), or an increase of the total number of SU by increasing e.g. the total number of respiratory pigments. 3.4.2 Priorities among demand metabolic processes The next set of questions concern the physiological processes that need to be maintained for survival and the remaining processes that can be temporarily reduced (in particular in order to provide energy for increasing the capacity to extract oxygen from water). DEB theory distinguishes demand and supply processes at the time scale of the life cycle of an organism in a standard DEB model. Indeed, movement for the search of food is included into somatic maintenance as i"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "rd DEB model. 3.2 Assumptions on fluxes modulation under hypoxia Within a standard DEB model, responses to hypoxia can be included by acting on various energy fluxes, in relation with the physiological disturbances previously demonstrated: 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ-rule and subsequent allocations to growth and reproduction; related to endocrine disruption (facts G2, R2, R3). 5. The reproductive efficiency; related t"
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2207,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "W2743948761",
+              "title": "Vagal activity and oxygen saturation response to hypoxia: Effects of aerobic fitness and rating of hypoxia tolerance",
+              "doi": "https://doi.org/10.5507/ag.2017.014",
+              "year": "2017",
+              "distance": 0.2193,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Background: A reduction in the inspired oxygen fraction (FiO<sub>2</sub>) induces a decline in arterial oxygen saturation (SpO<sub>2</sub>) and changes of heart rate variability (HRV). It has been shown that SpO<sub>2</sub> and HRV responses to similar levels of acute normobaric hypoxia are inter-individual variable. Variable response may be influenced by normoxia reached maximal oxygen uptake (VO<sub>2</sub>max) value. Objective: The primary aim was to assess HRV and the SpO<sub>2</sub> response to hypoxia, and examine the association with normoxic VO<sub>2</sub>max. Methods: Supine HRV and SpO<sub>2</sub> were monitored during normobaric hypoxia (FiO<sub>2</sub>&#8239;=&#8239;9.6%) for 10&"
+            },
+            {
+              "document_id": "W2049979157",
+              "title": "Oxygen-induced Hypercarbia in Obstructive Pulmonary Disease",
+              "doi": "https://doi.org/10.1164/ajrccm/144.3_pt_1.526",
+              "year": "1991",
+              "distance": 0.2199,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "We investigated the mechanisms responsible for oxygen-induced hypercarbia in ventilator-dependent patients with advanced chronic obstructive pulmonary disease (COPD). To quantitate the effects of oxygen (O2) on respiratory drive, we determined the CO2 recruitment threshold (PCO2 RT) in 10 mechanically ventilated patients under normoxic (PaO2 = 67 +/- 7 mm Hg) and hyperoxic (PaO2 = 370 +/- 67 mm Hg) conditions. PCO2 RT is a measure of the CO2 responsiveness of the mechanically unloaded respiratory system and, as such, is independent of mechanical impedance and respiratory muscle strength. After O2 supplementation, PCO2 RT increased from 42 +/- 6 to 45 +/- 6 mm Hg (p less than or equal to 0.05"
+            },
+            {
+              "document_id": "W3175236012",
+              "title": "DNA Damage Response Activates Respiration to Elevate dNTP Levels and Promote Cell Survival in Budding Yeast",
+              "doi": "https://doi.org/10.1096/fasebj.2019.33.1_supplement.457.14",
+              "year": "2019",
+              "distance": 0.2247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The DNA damage response (DDR), a highly conserved process, senses and repairs damaged DNA. It is widely believed that DDR downregulates respiration to protect DNA from endogenous reactive oxygen species (ROS). Our data go against this dogma and show that DDR activates respiration to increase ATP production and to elevate dNTP levels, which are required for efficient DNA repair and cell survival upon DNA damage. The underlying mechanism involves DNA damage‐induced downregulation of histone expression and altered chromatin structure, leading to increased transcription of genes encoding enzymes of tricarboxylic acid cycle, electron transport chain, and oxidative phosphorylation. This study reve"
+            },
+            {
+              "document_id": "W3120209798",
+              "title": "Prior oxygenation, but not chemoreflex responsiveness, determines breath‐hold duration during voluntary apnea",
+              "doi": "https://doi.org/10.14814/phy2.14664",
+              "year": "2021",
+              "distance": 0.2257,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Central and peripheral respiratory chemoreceptors are stimulated during voluntary breath holding due to chemostimuli (i.e., hypoxia and hypercapnia) accumulating at the metabolic rate. We hypothesized that voluntary breath-hold duration (BHD) would be (a) positively related to the initial pressure of inspired oxygen prior to breath holding, and (b) negatively correlated with respiratory chemoreflex responsiveness. In 16 healthy participants, voluntary breath holds were performed under three conditions: hyperoxia (following five normal tidal breaths of 100% O<sub>2</sub> ), normoxia (breathing room air), and hypoxia (following ~30-min of 13.5%-14% inspired O<sub>2</sub> ). In addition, the hy"
+            },
+            {
+              "document_id": "W2948967936",
+              "title": "Etude du rôle de l’Erythropoïétine et des systèmes de neurotransmission dans la mise en place des réponses ventilatoires à l’hypoxie et à l’hypercapnie",
+              "doi": "",
+              "year": "2016",
+              "distance": 0.2262,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "When PO2 and PCO2 are modified, various mechanisms are being established to maintaintissue oxygenation, such as ventilation and metabolism adaptations. In case of hypoxia orhypercapnia stimulation, we observed a ventilatory response, characterized by an increase in minuteventilation. Among the factors involved in the hypoxic response, Epo plays a key role. In addition toits role in erythropoiesis, Epo has other functions, especially in the central nervous system. Thisthesis presents the study of Epo involvement in the ventilatory responses to hypoxia (HVR) andhypercapnia (HcVR).We demonstrate the involvement of NO, glutamate and serotonin in the HVR and in acclimatizationto sustained hypoxia"
+            },
+            {
+              "document_id": "W2617783382",
+              "title": "Remodeling pathway control of mitochondrial respiratory capacity by temperature in mouse heart: electron flow through the Q-junction in permeabilized fibers",
+              "doi": "https://doi.org/10.1038/s41598-017-02789-8",
+              "year": "2017",
+              "distance": 0.2272,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Fuel substrate supply and oxidative phosphorylation are key determinants of muscle performance. Numerous studies of mammalian mitochondria are carried out (i) with substrate supply that limits electron flow, and (ii) far below physiological temperature. To analyze potentially implicated biases, we studied mitochondrial respiratory control in permeabilized mouse myocardial fibers using high-resolution respirometry. The capacity of oxidative phosphorylation at 37 °C was nearly two-fold higher when fueled by physiological substrate combinations reconstituting tricarboxylic acid cycle function, compared with electron flow measured separately through NADH to Complex I or succinate to Com"
+            },
+            {
+              "document_id": "W2137476445",
+              "title": "Pathophysiology of anaemia: focus on the heart and blood vessels",
+              "doi": "https://doi.org/10.1093/oxfordjournals.ndt.a027970",
+              "year": "2000",
+              "distance": 0.228,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "The amount of oxygen delivered to an organ depends on three factors: blood flow and its distribution; the oxygen-carrying capacity of the blood, i.e. haemoglobin concentration; and oxygen extraction. Non-haemodynamic and haemodynamic mechanisms operate to compensate for anaemia. Non-haemodynamic mechanisms include increased erythropoietin production to stimulate erythropoiesis, and increased oxygen extraction (displacement of the haemoglobin oxygen dissociation curve). This decreased affinity of oxygen for haemoglobin is mediated by increased 2,3-diphosphoglycerate concentrations. Increased cardiac output is the main haemodynamic factor, mediated by lower afterload, increased preload, and po"
+            },
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2293,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W2907031055",
+              "title": "Supplementary material from \"Oxygen limitation is not the cause of death during lethal heat exposure in an insect\"",
+              "doi": "https://doi.org/10.6084/m9.figshare.c.4349786.v1",
+              "year": "2018",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Oxygen- and capacity-limited thermal tolerance (OCLTT) is a controversial hypothesis claiming to explain variation in, and mechanistically determine, animal thermal limits. The lack of support from Insecta is typically argued to be a consequence of their high-performance respiratory systems. However, no studies have reported internal body oxygen levels during thermal ramping so it is unclear if changes in ambient gas are partially or fully offset by a compensatory respiratory system. Here we provide such an assessment by simultaneously recording haemolymph oxygen (pO<sub>2</sub>) levels—as an approximation of tissue oxygenation—while experimentally manipulating ambient oxygen and subjecting "
+            },
+            {
+              "document_id": "W2129304840",
+              "title": "Near-infrared spectroscopy technique to evaluate the effects of red blood cell transfusion on tissue oxygenation",
+              "doi": "https://doi.org/10.1186/cc8009",
+              "year": "2009",
+              "distance": 0.2301,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Muscle tissue oxygenation, oxygen consumption and microvascular reactivity are globally unaltered by RBC transfusion in critically ill patients. However, muscle oxygen consumption and microvascular reactivity can improve following transfusion in patients with alterations of these variables at baseline."
+            },
+            {
+              "document_id": "W4313857424",
+              "title": "Interaction of Factors Determining Critical Power",
+              "doi": "https://doi.org/10.1007/s40279-022-01805-w",
+              "year": "2023",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract The physiological determinants of high-intensity exercise tolerance are important for both elite human performance and morbidity, mortality and disease in clinical settings. The asymptote of the hyperbolic relation between external power and time to task failure, critical power, represents the threshold intensity above which systemic and intramuscular metabolic homeostasis can no longer be maintained. After ~ 60 years of research into the phenomenon of critical power, a clear understanding of its physiological determinants has emerged. The purpose of the present review is to critically examine this contemporary evidence in order to explain the physiological underpinnings of critical"
+            },
+            {
+              "document_id": "W2083169469",
+              "title": "Crosstalk between Nitrite, Myoglobin and Reactive Oxygen Species to Regulate Vasodilation under Hypoxia",
+              "doi": "https://doi.org/10.1371/journal.pone.0105951",
+              "year": "2014",
+              "distance": 0.2324,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.45,
+              "text": "The systemic response to decreasing oxygen levels is hypoxic vasodilation. While this mechanism has been known for more than a century, the underlying cellular events have remained incompletely understood. Nitrite signaling is critically involved in vessel relaxation under hypoxia. This can be attributed to the presence of myoglobin in the vessel wall together with other potential nitrite reductases, which generate nitric oxide, one of the most potent vasodilatory signaling molecules. Questions remain relating to the precise concentration of nitrite and the exact dose-response relations between nitrite and myoglobin under hypoxia. It is furthermore unclear whether regulatory mechanisms exist"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

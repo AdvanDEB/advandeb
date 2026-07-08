@@ -23,6 +23,7 @@ of partial deltas in the OpenAI streaming shape:
 """
 from __future__ import annotations
 
+import json
 from abc import ABC, abstractmethod
 from typing import Any, ClassVar, Dict, List, Optional
 
@@ -64,6 +65,10 @@ class BaseLLMProvider(ABC):
     #: Curated short list of models exposed to the UI for this provider.
     available_models: ClassVar[List[str]] = []
 
+    #: True when the provider supports native tool / function calling.
+    #: Providers that set this must also implement ``chat_with_tools()``.
+    supports_tools: ClassVar[bool] = False
+
     @abstractmethod
     async def chat_completion(
         self,
@@ -89,6 +94,40 @@ class BaseLLMProvider(ABC):
         ``ProviderError`` on failure. Called by the key-storage layer at
         insert time so we never persist invalid keys.
         """
+
+    async def chat_with_tools(
+        self,
+        model: str,
+        messages: List[Dict[str, Any]],
+        tools: List[Dict[str, Any]],
+        *,
+        max_tokens: int = 8192,
+        temperature: float = 0.3,
+    ) -> Dict[str, Any]:
+        """Single step in a tool-calling conversation.
+
+        ``tools`` is a list of tool-definition dicts with keys:
+            name, description, input_schema (JSON Schema object).
+
+        ``messages`` may contain tool_call / tool-result turns in our unified
+        format::
+
+            # assistant turn that called tools
+            {"role": "assistant", "content": "...", "tool_calls": [
+                {"id": "tc1", "name": "search_kb", "input": {...}}
+            ]}
+            # tool result
+            {"role": "tool", "tool_call_id": "tc1", "content": "...result..."}
+
+        Returns a dict with:
+            finish_reason: "stop" | "tool_calls"
+            content:       text produced by the model (may be empty string)
+            tool_calls:    list of {id, name, input} (empty unless finish_reason == "tool_calls")
+        """
+        raise NotImplementedError(
+            f"{self.provider_name} does not implement tool calling; "
+            "set supports_tools=True and override chat_with_tools()."
+        )
 
     async def list_models(self) -> List[str]:
         """Return the chat model IDs this credential can actually use.

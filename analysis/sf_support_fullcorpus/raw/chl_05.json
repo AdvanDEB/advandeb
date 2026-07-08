@@ -1,0 +1,1458 @@
+{
+  "sf_id": "chl_05",
+  "category": "Chlorophyll",
+  "statement": "chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Two snippets (1 and 5) explicitly cite the stylized fact that chl:N decreases with increasing irradiance under constant dilution rate in nutrient‑replete conditions, providing direct affirmative evidence. The remaining excerpts either discuss unrelated ratios (N:C), chlorophyll concentration alone, or general model considerations without addressing the specific chl:N–irradiance relationship, and thus are marked neutral with low relevance. No snippet contradicts the fact, yielding a moderate level of supporting evidence and an overall consensus that the corpus corroborates the stylized fact."
+          },
+          "n_references": 1,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1662
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1662,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1887,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2091,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2125,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "e, contrary to the ˙ECA which is practically constant (since CO2 290 is non-limiting and light is forced constant). 291 SF2 - N:C ratio decreases with dilution rate when light limited (21) - is harder to simulate and 292 understand, mainly because of the deﬁnition of light limited. If a population is grown with 293 dilution rate ˙h in light limiting conditions there are only two possible outcomes: (i) irradiance is 294 enough to support ˙r > ˙h and, since ˙ph is constant per unit of MV (eq. 2), biomass will grow 295 14 [Page 15] and steady-state will only be attained when one mineral (carbon or nitrogen) limits growth; 296 (ii) irradiance is not enough to support ˙r > ˙h and the population"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2226,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "t. The alternative, not 298 contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299 unit of MV in a similar way that carbon and nitrogen sources decrease with increasing biomass. 300 We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301 growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302 curve in ﬁgure 4A. When dilution rate is increased, CO2 available to microalgae also increases, 303 which partially compensates the constant low-light conditions (eq. 3) thus increasing C-reserve 304 density. On the other hand, higher dilution rates (which in steady-st"
+            },
+            {
+              "document_id": "3315",
+              "title": "Lew2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.23,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "(Figure 3.16). The percentage of the total carbon flux used for maintenance continues to increase as irradiance declines further. The rate of excess carbon release, however, decreases significantly as irradiance declines (Figure 3.15c) and makes up 44 % of the total carbon flux at 1.8 µmol photons m-2 s-1 compared to 77 % in Pro-PA and 71 % in Pro-PH at saturating irradiance (Figure 3.16). The rate of excess carbon release continues to decrease further with decreasing irradiance. Photoheterotrophic light use reduces the rate of excess carbon release by up to 33.0 % in Pro-PH relative to Pro-PA, the biggest difference being at ~10 µmol photons m-2 s-1 (Figure 3.16). Both cell types assimilate"
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2316,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "s observed that the N:C ratio increases with dilution rate 274 when nutrient limited (3, 11, 21) and decreases when light limited (21). Furthermore, the N:C 275 ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276 stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277 the following equation 278 Ntotal Ctotal = nNV · MV + MEN MV + MEC = nNV + mEN 1 + mEC , (17) where nNV is the elemental coefﬁcient of nitrogen in structure and MEi stands for the to- 279 tal mass of reserve i . Equation 17 shows that to assess N:C ratio one should look to the 280 dependence of reserve densities on forcing variables. 281 The"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2374,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "with the fraction of UVb in the irradiance. However, this decline with either type of impact accelerates with an increas- ing UVb content in irradiance. This trend is general for all PAR and ambient nitrogen levels considered in this study (results not shown). Fig. 4. The ratio of the symbiont to host structural biomass in steady state is a function of irradiance and ambient nitrogen levels. Without effects of detrimen- tal radiation (A), this ratio decreases with irradiance, as the host receives more photosynthate at higher irradiance levels (see Fig. 2), and increases with ambient nitrogen levels, as the symbiont assimilates a relatively larger fraction of photosyn- thate at higher nitroge"
+            },
+            {
+              "document_id": "2620",
+              "title": "Mull2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2413,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "the range of substrate ﬂuxes at which both substrates have a signiﬁcant impact on the dynamics of the SU is relatively narrow (Kooijman, 1998; Muller et al., 2001). Usually, one Fig. 2. The rate of photosynthesis is a function of irradiance and the nutrient supply rate according to Eq. (1). The range of irradiance and nutrient ﬂux combinations at which both are signiﬁcantly limiting photosynthesis is narrow; in effect, one sub- strate determines the capacity of the SU in most cases. The impact of photoinhibition becomes increasingly more pronounced as the nutrient ﬂux increases. At low nutri- ent availability, the impact of photoinhibition is insigniﬁcant. Quantities have been scaled as foll"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2414,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "release rate increases (Fig. 7, dash-dot lines). The decrease in PP rate is due to the effects of nutrient limitation on the photosynthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase (Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash- dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10 than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of the jDOC,R ﬂux (Fig. 6, solid line) and it is indicative of"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2427,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "dilution rate. Then culture biomass density will increase. This increase is coupled with a decrease in light intensity everywhere in the ves- sel, caused by shading. Therefore, the specific growth rate decreases until it equals the applied dilution rate. An increase in the D value will lead to a lower steady state biomass density since the light intensity in the ves- sel must increase to make p equal to the new D. An increase in the Iin value will lead to a higher biomass density since the light intensity in the vessel must re- main the same to have no change in p. The reasonable fit to experimental data (Figs. 2 and 3) confirms the cor- rectness of the concept of shading as a regulating fac"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2444,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "V=nc[Cl]−[MC] [Cl]+[GC] . (9) Continuous culture studies on nutrient-limited growth are performed in chemostats, in which the steady-state growth rate equals the dilution rate. Therefore, the dilution rate (often somewhat mis- leadingly called the speciﬁc growth rate) is treated as the independent variable. Continuous culture studies on light-limited growth are often per- formed in turbidostats, in which the dilution rate is adjusted until a steady-state is achieved. In such studies, the incident light intensity is taken as the independent variable. An expression for the steady-state speciﬁc growth rate as dependent on the light intensity is obtained as follows. From Eq. (8) one has [C. l]=["
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2448,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "n be partly compensated by increasing the availability of nitrogen in the envi- ronment. Thus far we have explored the effect of detrimental irradi- ance, here conveniently identiﬁed with UVb, while keeping the ratio of UVb to PAR constant. To illustrate the inﬂuence of for instance, water depth, the density of UVb absorbing particles or the ﬁltering capacity of the ozone layer, we have also calculated the speciﬁc growth rate as function of the fraction of UVb in irradiance at constant ambient nitrogen (2 \u0002M) and irradiance lev- els (750 \u0002mol quanta m−2 s−1; see Fig. 6). Not surprisingly, with [Page 6] 1320 Y. Eynaud et al. / Ecological Modelling 222 (2011) 1315–1322 Fig. 3. The reserve dens"
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2452,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "symptotic maximum (see Fig. 5; note that in steady state the long-term speciﬁc growth rate of host and symbiont are necessarily equal). With either photoinhi- bition or photodamage occurring, this trend is still evident with increasing ambient nitrogen levels. However, because photoinhi- bition slows down the rate of photosynthesis and photodamage decreases the rate at which reserves are committed to symbiont growth, the speciﬁc growth rate is highest at intermediate irradi- ance levels. At higher irradiance levels, the increasingly stronger negative effects of photoinhibition or photodamage outweigh the stimulatory effects of PAR, as these stimulatory effects decelerate with increasing PAR."
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the retrieved abstracts provide direct measurements of chlorophyll‑to‑nitrogen ratio (chl:N) as a function of irradiance under constant dilution and nutrient‑replete conditions. The few passages that mention light intensity effects on chlorophyll content or nitrogen metabolism do not quantify chl:N trends, nor do they control for dilution rate. Consequently the corpus offers only weak, indirect, and largely unrelated information, yielding minimal support for the stylized fact and no contradictory evidence."
+          },
+          "n_references": 0,
+          "references": {},
+          "snippets": [
+            {
+              "document_id": "W4382196449",
+              "title": "SYNERGISTIC EFFECTS OF NITROGEN DEPRIVATION AND HIGH IRRADIANCE TO ENHANCE BIOMASS AND LIPID PRODUCTION IN NANNOCHLOROPSIS",
+              "doi": "https://doi.org/10.55251/jmbfs.3632",
+              "year": "2023",
+              "distance": 0.2698,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Nannochloropsis, due to its high lipid content, small size and growth rate, can be exploited for the production of biofuel and other value-added products. This study analyzed synergistic responses of high irradiance and nitrogen deprivation on Nannochloropsis cells to enhance biomass and lipid production. The growth of Nannochloropsis was first optimized under different irradiance 50, 100, 150, 200 and 250 μmol photons m-2 s-1. The maximum specific growth rate (0.25 day-1) and dry weight (0.67 g L-1) were obtained (p&lt;0.05) at photosynthetically active radiation (PAR) of 200 µmol photons m-2 s-1, further increase in light intensity decreased the growth rate and dry weight up to 0.2 day-1 a"
+            },
+            {
+              "document_id": "W4396558164",
+              "title": "Genotype-specific nonphotochemical quenching responses to nitrogen deficit are linked to chlorophyll a to b ratios",
+              "doi": "https://doi.org/10.1016/j.jplph.2024.154261",
+              "year": "2024",
+              "distance": 0.2741,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Non-photochemical quenching (NPQ) protects plants from photodamage caused by excess light energy. Substantial variation in NPQ has been reported among different genotypes of the same species. However, comparatively little is known about how environmental perturbations, including nutrient deficits, impact natural variation in NPQ kinetics. Here, we analyzed a natural variation in NPQ kinetics of a diversity panel of 225 maize (Zea mays L.) genotypes under nitrogen replete and nitrogen deficient field conditions. Individual maize genotypes from a diversity panel exhibited a range of changes in NPQ in response to low nitrogen. Replicated genotypes exhibited consistent responses across two field"
+            },
+            {
+              "document_id": "W3086759072",
+              "title": "Decision letter: Nutrient levels and trade-offs control diversity in a serial dilution ecosystem",
+              "doi": "https://doi.org/10.7554/elife.57790.sa1",
+              "year": "2020",
+              "distance": 0.2764,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Moreover, for a chemostat, the parameter δ~ which would be the rate all nutrients are continuously supplied per unit biomass, would need to equal the dilution rate of the chemostat, δ, to maintain steady state. A detailed analysis of the effects of larger bolus size, to second order in c0/K, can be found in Appendix 4. Effect of total nutrient bolus on coexistence In the chemostat limit, increasing the nutrient supply rate simply the steady-state population However, from this limit we find that the of the nutrient bolus can the steady-state of serial To understand this we first consider a simple case of two nutrients and two species as depicted in Figure The two species will coexist if each "
+            },
+            {
+              "document_id": "W2084366054",
+              "title": "THE CONTROL BY PHYTOCHROME OF NITRATE REDUCTASE IN THE CURD OF LIGHT‐GROWN CAULIFLOWER",
+              "doi": "https://doi.org/10.1111/j.1751-1097.1979.tb07185.x",
+              "year": "1979",
+              "distance": 0.2816,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract— The activity of nitrate reductase from the curd of light‐grown cauliflower ( Brassica oleracea (L) var botrytis (DC) ‘St. Hilary’) is modulated by nitrate and by light. Using broad‐band sources of equal photosynthetically active radiation but with different proportions of red and far‐red light, a linear relationship between nitrate reductase activity and ψ(Estimated phytochrome photoequilibrium) was obtained. This relationship, apparent after 8 h incubation, was maintained and little altered after 48 h incubation. The linearity was apparent between ψE 0.26 and ψE 0.69; ψE 0.26 being no more effective than a dark control. Far‐red reversibility confirmed the involvement of phytochrom"
+            },
+            {
+              "document_id": "W2160958124",
+              "title": "PHOTOINHIBITION: ALGAL RESPONSES TO BRIGHT LIGHT DURING DIEL STRATIFICATION AND MIXING IN A TROPICAL ALPINE LAKE<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1984.00201.x",
+              "year": "1984",
+              "distance": 0.284,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT Near surface thermoclines form each day in the limnetic waters of Lake Titicaca (Peru‐Bolivia) and thereby retain phytoplankton under extreme irradiances. This bright light exposure results in strongly depressed chlorophyll fluorescence and photosynthesis which both decay (bright light) and recover (dim light) by first order rate kinetics. During each afternoon the phytoplankton are redistributed by wind‐induced mixing, and full recovery is accomplished soon after nightfall. In vivo fluorescence was measured over this diet cycle both with (F b ) and without (F a 3‐(3,4‐dichlorophenyl)‐1,1‐dimethyl urea. Strongest bright light effects were on the parameter (F a – F a ), a crude measu"
+            },
+            {
+              "document_id": "W2315641240",
+              "title": "Within-canopy nitrogen and photosynthetic gradients are unaffected by soil fertility in field-grown Eucalyptus globulus",
+              "doi": "https://doi.org/10.1093/treephys/27.11.1607",
+              "year": "2007",
+              "distance": 0.2843,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "A significant and well-supported hypothesis is that increased growth following nitrogen (N) fertilization is a function of the relationships among photosynthesis, tissue N content and the light environment-specifically, the within-canopy allocation of N among leaves and the within-leaf allocation of N between Rubisco and chlorophyll. We tested this hypothesis in a field trial that included annual applications of N,P,K fertilizer (from planting) to a Eucalyptus globulus Labill. plantation growing on uniform leached sands. Growth of 4-year-old E. globulus increased significantly in response to fertilization. Leaf N and phosphorus concentrations were 0.1-0.5 g m(-2) and 0.4-0.5 g m(-2) higher i"
+            },
+            {
+              "document_id": "W2012048107",
+              "title": "Macromolecular labelling patterns and inorganic nutrient limitation of a North Atlantic spring bloom",
+              "doi": "https://doi.org/10.3354/meps092111",
+              "year": "1993",
+              "distance": 0.2857,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Synthesis rates of macromolecular classes (protein, polysaccharide, neutral lipid, glycolipid and phospholipid) were measured using 14C incorporation to assess the physiological condition of phytoplankton during a spring bloon~ in the northeastern Sargasso Sea.The relative allocation of labelled photosynthate to polysaccharide increased with incubation irradiance, and declined overnight; opposite trends were found in the protein fraction.The rate of protein synthesis at night was a small fraction (0 to 23 '%I) of the day-time rate.Incubation irradiance and overnight metabolism had relatively little effect on total or class-specific lipid synthesis.lnorganic nutrients decreased to below analy"
+            },
+            {
+              "document_id": "W2054311407",
+              "title": "ULTRAVIOLET‐B RADIATION EFFECTS ON INORGANIC NITROGEN UPTAKE BY NATURAL ASSEMBLAGES OF OCEANIC PLANKTON<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1995.00025.x",
+              "year": "1995",
+              "distance": 0.2861,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "ABSTRACT Ultraviolet‐B radiation (UVBR: 290‐320 nm) inhibited ammonium uptake (p NH4 ) and nitrate uptake (p NO3 ) in natural plankton assemblages collected during a transect from 37° N to 55° N in the Pacific Ocean. Comparison of responses in p NH4 to ambient solar‐ and lamp‐enhanced UVBR spectra allowed calculation of an action spectrum for p NH4 inhibition. The slope of the action spectrum for Pnh 4 is half as steep as action spectra for UVBR inhibition of photosynthetic carbon uptake. Consequently, WBR‐induced photoinhibition of p NH4 extends to greater depths than inhibition of carbon fixation due to the greater relative effect of longer UVBR wavelengths. Inhibition of p NH4 was depende"
+            },
+            {
+              "document_id": "W2107557999",
+              "title": "Seasonal Changes in Temperature Dependence of Photosynthetic Rate in Rice Under a Free-air CO2 Enrichment",
+              "doi": "https://doi.org/10.1093/aob/mcl001",
+              "year": "2006",
+              "distance": 0.2877,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "There was both an increase in the absolute value of the light-saturated photosynthetic rate at growth CO(2) (P(growth)) and an increase in T(opt) for P(growth) caused by elevated CO(2) in FACE conditions. Seasonal decrease in P(growth) was associated with a decrease in nitrogen content per unit leaf area (N(area)) and thus in the maximum rate of electron transport (J(max)) and the maximum rate of RuBP carboxylation (V(cmax)). At ambient CO(2), T(opt) increased with increasing growth temperature due mainly to increasing activation energy of V(cmax). At elevated CO(2), T(opt) did not show a clear seasonal trend. Temperature dependence of photosynthesis was changed by seasonal climate and plant"
+            },
+            {
+              "document_id": "W2131119068",
+              "title": "Interactive effects of elevated CO<sub>2</sub> and soil fertility on isoprene emissions from <i>Quercus robur</i>",
+              "doi": "https://doi.org/10.1111/j.1365-2486.2004.00845.x",
+              "year": "2004",
+              "distance": 0.288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract The effects of global change on the emission rates of isoprene from plants are not clear. A factor that can influence the response of isoprene emission to elevated CO 2 concentrations is the availability of nutrients. Isoprene emission rate under standard conditions (leaf temperature: 30°C, photosynthetically active radiation (PAR): 1000 μmol photons m −2 s −1 ), photosynthesis, photosynthetic capacity, and leaf nitrogen (N) content were measured in Quercus robur grown in well‐ventilated greenhouses at ambient and elevated CO 2 (ambient plus 300 ppm) and two different soil fertilities. The results show that elevated CO 2 enhanced photosynthesis but leaf respiration rates were not af"
+            },
+            {
+              "document_id": "W2001337441",
+              "title": "Regulation of Carbon Flow by Nitrogen and Light in the Red Alga, <i>Gelidium coulteri</i>",
+              "doi": "https://doi.org/10.1104/pp.82.1.136",
+              "year": "1986",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The red alga Gelidium coulteri Harv. photosynthetically fixed [(14)C] bicarbonate at high rates under defined conditions in unialgal laboratory culture. The fixation rate and flow of photosynthate into various end products were dependent on the nitrogen status of the tissue. Plants fed luxury levels of nitrogen (approximately 340 micromolar) showed fixation rates several-fold higher than those seen for plants starved for nitrogen. The addition of NO(3) (-) or NH(4) (+) to such starved plants further inhibited fixation over at least the first several hours after addition. The majority of (14)C after incubations of 30 minutes to 8 hours was found in the compounds floridoside, agar and floridea"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            },
+            {
+              "document_id": "W2789439366",
+              "title": "Linear Relationships between Photosynthetic Rate and Photochemical Energy Expressed by &amp;lt;i&amp;gt;PAR&amp;lt;/i&amp;gt; &amp;#215;&amp;lt;i&amp;gt;Fv/Fm&amp;lt;/i&amp;gt;",
+              "doi": "https://doi.org/10.4236/ajps.2018.92011",
+              "year": "2018",
+              "distance": 0.2909,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Photosynthetic rate (Pn) of plants is simultaneously affected by photosynthetically active radiation (PAR) and maximum yield of primary photochemistry (Fv/Fm). In order to explore the quantitative relationship between Pn, PAR and Fv/Fm, those parameters were simultaneously measured for different plant species (maize, sunflower, daylily and alfalfa), growth stages and irrigation treatments. Results indicated that the diurnal variation of Pn had no significant correlation with that of Fv/Fm. Mean diurnal values of Pn were linearly correlated with those of Fv/Fm among the different irrigation treatments of alfalfa (p Pn and Fv/Fm only at midday (12:00 and 14:00) (p Pn and PAR × Fv/Fm (p Pn is s"
+            },
+            {
+              "document_id": "W2024915669",
+              "title": "UV‐acclimation responses in natural populations of cyanobacteria ( <i>Calothrix</i> sp.)",
+              "doi": "https://doi.org/10.1046/j.1462-2920.2003.00435.x",
+              "year": "2003",
+              "distance": 0.2909,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Summary Phenotypic acclimation to changing conditions is typically thought to be beneficial to organisms in the environment. UV radiation is an important parameter affecting photosynthetic organisms in natural environments. We measured the response of photosynthetic carbon fixation in populations of cyanobacteria inhabiting a hot spring following acclimation to different UV treatments. These two very closely related populations of cyanobacteria, differing in their content of the extracellular UV‐screening pigment scytonemin, were acclimated in situ under natural solar irradiance modified by filters that excluded both UVA/B, only UVB or transmitted both UVA/B. Cells from each preacclimation t"
+            },
+            {
+              "document_id": "W2015970680",
+              "title": "Ammonia and Nitrate Uptake in the Lower Great Lakes",
+              "doi": "https://doi.org/10.1139/f80-175",
+              "year": "1980",
+              "distance": 0.2911,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Uptake of NH 4 + is consistent with Michaelis–Menten kinetics in the Lower Great Lakes only if one assumes that the indophenol method of measuring NH 4 + overestimates the in situ concentration. Short-term incubations were found necessary to avoid induction of nitrate uptake or changes in the rates of NH 4 + uptake that occurred in long-term incubations. Uptake rates of nitrate are slow most of the summer. Since the nitrate is also present in low concentrations, most of the summer regeneration of nitrate must be very slow. The slow turnover of particulate N, low nutrient concentrations, slow rate of uptake relative to their ability to take up nitrogen, and the high affinity for ammonia (low "
+            },
+            {
+              "document_id": "W2137142035",
+              "title": "Relative addition rate and external concentration; Driving variables used in plant nutrition research",
+              "doi": "https://doi.org/10.1111/1365-3040.ep11611714",
+              "year": "1982",
+              "distance": 0.2912,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract An increasing literature accounting for various types of experiments indicates that far lower external nutrient concentrations are required by plants than is usually thought to be the case. It is concluded that the ion uptake capacity of the roots, as described by the carrier concept, is high compared to that required for maintenance of the internal concentration. Serious errors in experimental conclusions are associated with insufficient and constant nutrient addition rates. The main errors are caused by non‐steady states of the plants both with regard to the internal nutrient concentrations and the relative growth rate. A dynamic concept has been proposed for direct use as the tre"
+            },
+            {
+              "document_id": "W4385708599",
+              "title": "Effect of Reducing Nitrogen Fertilization and Adding Organic Fertilizer on Net Photosynthetic Rate, Root Nodules and Yield in Peanut",
+              "doi": "https://doi.org/10.3390/plants12162902",
+              "year": "2023",
+              "distance": 0.2916,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Long-term excessive application of chemical fertilizers can cause many problems, such as soil degradation and environmental pollution. Therefore, we reduced conventional nitrogen fertilization and added organic fertilizers in some cases to investigate the response of photosynthetic characteristics, root nodules and yield on reduced nitrogen fertilization. Compared to conventional nitrogen fertilization, the 25% and 35% nitrogen reduction treatments reduced the leaf area index, net photosynthetic rate, 100-fruit weight, 100-kernel weight and the yield of peanut, but had no significant effect on the kernel rate. With constant N fertilizer, adding organic fertilization alone increased leaf area"
+            },
+            {
+              "document_id": "W2583034295",
+              "title": "(294) Radiation Cycle Affects Biomass Production and Carotenoid Accumulation in Kale",
+              "doi": "https://doi.org/10.21273/hortsci.40.4.1009a",
+              "year": "2005",
+              "distance": 0.2919,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Plant growing systems have consistently utilized the standard Earth day as the radiation cycle for plant growth. However, the radiation cycle can easily be controlled by using automated systems to regulate the exact amount of time plants are exposed to irradiation (and darkness). This experiment investigated the influence of different radiation cycles on plant growth, chlorophyll and carotenoid pigment accumulation in kale ( Brassica oleracea L. var. acephala D.C). Kale plants were grown in growth chambers in nutrient solution culture under radiation cycle treatments of 2, 12, 24, and 48 h, with 50% irradiance and 50% darkness during each time period. Total irradiation throughout the experim"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Two snippets (1 and 5) explicitly state the stylized fact that chl:N decreases with increasing irradiance under constant dilution rate in nutrient-replete conditions, providing direct supporting evidence. No snippet offers contradictory data; the remaining excerpts are unrelated or only tangentially discuss chlorophyll or nitrogen without addressing the specific ratio trend, so they are marked neutral with low relevance. The presence of multiple explicit supportive statements yields moderate overall support (evidence_strength=2) and a clear consensus in favor of the fact (consensus_direction=3)."
+          },
+          "n_references": 1,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1662
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1662,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1887,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2091,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2125,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "e, contrary to the ˙ECA which is practically constant (since CO2 290 is non-limiting and light is forced constant). 291 SF2 - N:C ratio decreases with dilution rate when light limited (21) - is harder to simulate and 292 understand, mainly because of the deﬁnition of light limited. If a population is grown with 293 dilution rate ˙h in light limiting conditions there are only two possible outcomes: (i) irradiance is 294 enough to support ˙r > ˙h and, since ˙ph is constant per unit of MV (eq. 2), biomass will grow 295 14 [Page 15] and steady-state will only be attained when one mineral (carbon or nitrogen) limits growth; 296 (ii) irradiance is not enough to support ˙r > ˙h and the population"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2226,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "t. The alternative, not 298 contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299 unit of MV in a similar way that carbon and nitrogen sources decrease with increasing biomass. 300 We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301 growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302 curve in ﬁgure 4A. When dilution rate is increased, CO2 available to microalgae also increases, 303 which partially compensates the constant low-light conditions (eq. 3) thus increasing C-reserve 304 density. On the other hand, higher dilution rates (which in steady-st"
+            },
+            {
+              "document_id": "3315",
+              "title": "Lew2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.23,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "(Figure 3.16). The percentage of the total carbon flux used for maintenance continues to increase as irradiance declines further. The rate of excess carbon release, however, decreases significantly as irradiance declines (Figure 3.15c) and makes up 44 % of the total carbon flux at 1.8 µmol photons m-2 s-1 compared to 77 % in Pro-PA and 71 % in Pro-PH at saturating irradiance (Figure 3.16). The rate of excess carbon release continues to decrease further with decreasing irradiance. Photoheterotrophic light use reduces the rate of excess carbon release by up to 33.0 % in Pro-PH relative to Pro-PA, the biggest difference being at ~10 µmol photons m-2 s-1 (Figure 3.16). Both cell types assimilate"
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2316,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "s observed that the N:C ratio increases with dilution rate 274 when nutrient limited (3, 11, 21) and decreases when light limited (21). Furthermore, the N:C 275 ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276 stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277 the following equation 278 Ntotal Ctotal = nNV · MV + MEN MV + MEC = nNV + mEN 1 + mEC , (17) where nNV is the elemental coefﬁcient of nitrogen in structure and MEi stands for the to- 279 tal mass of reserve i . Equation 17 shows that to assess N:C ratio one should look to the 280 dependence of reserve densities on forcing variables. 281 The"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2374,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "with the fraction of UVb in the irradiance. However, this decline with either type of impact accelerates with an increas- ing UVb content in irradiance. This trend is general for all PAR and ambient nitrogen levels considered in this study (results not shown). Fig. 4. The ratio of the symbiont to host structural biomass in steady state is a function of irradiance and ambient nitrogen levels. Without effects of detrimen- tal radiation (A), this ratio decreases with irradiance, as the host receives more photosynthate at higher irradiance levels (see Fig. 2), and increases with ambient nitrogen levels, as the symbiont assimilates a relatively larger fraction of photosyn- thate at higher nitroge"
+            },
+            {
+              "document_id": "W4382196449",
+              "title": "SYNERGISTIC EFFECTS OF NITROGEN DEPRIVATION AND HIGH IRRADIANCE TO ENHANCE BIOMASS AND LIPID PRODUCTION IN NANNOCHLOROPSIS",
+              "doi": "https://doi.org/10.55251/jmbfs.3632",
+              "year": "2023",
+              "distance": 0.2698,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Nannochloropsis, due to its high lipid content, small size and growth rate, can be exploited for the production of biofuel and other value-added products. This study analyzed synergistic responses of high irradiance and nitrogen deprivation on Nannochloropsis cells to enhance biomass and lipid production. The growth of Nannochloropsis was first optimized under different irradiance 50, 100, 150, 200 and 250 μmol photons m-2 s-1. The maximum specific growth rate (0.25 day-1) and dry weight (0.67 g L-1) were obtained (p&lt;0.05) at photosynthetically active radiation (PAR) of 200 µmol photons m-2 s-1, further increase in light intensity decreased the growth rate and dry weight up to 0.2 day-1 a"
+            },
+            {
+              "document_id": "W4396558164",
+              "title": "Genotype-specific nonphotochemical quenching responses to nitrogen deficit are linked to chlorophyll a to b ratios",
+              "doi": "https://doi.org/10.1016/j.jplph.2024.154261",
+              "year": "2024",
+              "distance": 0.2741,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Non-photochemical quenching (NPQ) protects plants from photodamage caused by excess light energy. Substantial variation in NPQ has been reported among different genotypes of the same species. However, comparatively little is known about how environmental perturbations, including nutrient deficits, impact natural variation in NPQ kinetics. Here, we analyzed a natural variation in NPQ kinetics of a diversity panel of 225 maize (Zea mays L.) genotypes under nitrogen replete and nitrogen deficient field conditions. Individual maize genotypes from a diversity panel exhibited a range of changes in NPQ in response to low nitrogen. Replicated genotypes exhibited consistent responses across two field"
+            },
+            {
+              "document_id": "W3086759072",
+              "title": "Decision letter: Nutrient levels and trade-offs control diversity in a serial dilution ecosystem",
+              "doi": "https://doi.org/10.7554/elife.57790.sa1",
+              "year": "2020",
+              "distance": 0.2764,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Moreover, for a chemostat, the parameter δ~ which would be the rate all nutrients are continuously supplied per unit biomass, would need to equal the dilution rate of the chemostat, δ, to maintain steady state. A detailed analysis of the effects of larger bolus size, to second order in c0/K, can be found in Appendix 4. Effect of total nutrient bolus on coexistence In the chemostat limit, increasing the nutrient supply rate simply the steady-state population However, from this limit we find that the of the nutrient bolus can the steady-state of serial To understand this we first consider a simple case of two nutrients and two species as depicted in Figure The two species will coexist if each "
+            },
+            {
+              "document_id": "W2084366054",
+              "title": "THE CONTROL BY PHYTOCHROME OF NITRATE REDUCTASE IN THE CURD OF LIGHT‐GROWN CAULIFLOWER",
+              "doi": "https://doi.org/10.1111/j.1751-1097.1979.tb07185.x",
+              "year": "1979",
+              "distance": 0.2816,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract— The activity of nitrate reductase from the curd of light‐grown cauliflower ( Brassica oleracea (L) var botrytis (DC) ‘St. Hilary’) is modulated by nitrate and by light. Using broad‐band sources of equal photosynthetically active radiation but with different proportions of red and far‐red light, a linear relationship between nitrate reductase activity and ψ(Estimated phytochrome photoequilibrium) was obtained. This relationship, apparent after 8 h incubation, was maintained and little altered after 48 h incubation. The linearity was apparent between ψE 0.26 and ψE 0.69; ψE 0.26 being no more effective than a dark control. Far‐red reversibility confirmed the involvement of phytochrom"
+            },
+            {
+              "document_id": "W2160958124",
+              "title": "PHOTOINHIBITION: ALGAL RESPONSES TO BRIGHT LIGHT DURING DIEL STRATIFICATION AND MIXING IN A TROPICAL ALPINE LAKE<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1984.00201.x",
+              "year": "1984",
+              "distance": 0.284,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ABSTRACT Near surface thermoclines form each day in the limnetic waters of Lake Titicaca (Peru‐Bolivia) and thereby retain phytoplankton under extreme irradiances. This bright light exposure results in strongly depressed chlorophyll fluorescence and photosynthesis which both decay (bright light) and recover (dim light) by first order rate kinetics. During each afternoon the phytoplankton are redistributed by wind‐induced mixing, and full recovery is accomplished soon after nightfall. In vivo fluorescence was measured over this diet cycle both with (F b ) and without (F a 3‐(3,4‐dichlorophenyl)‐1,1‐dimethyl urea. Strongest bright light effects were on the parameter (F a – F a ), a crude measu"
+            },
+            {
+              "document_id": "W2315641240",
+              "title": "Within-canopy nitrogen and photosynthetic gradients are unaffected by soil fertility in field-grown Eucalyptus globulus",
+              "doi": "https://doi.org/10.1093/treephys/27.11.1607",
+              "year": "2007",
+              "distance": 0.2843,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A significant and well-supported hypothesis is that increased growth following nitrogen (N) fertilization is a function of the relationships among photosynthesis, tissue N content and the light environment-specifically, the within-canopy allocation of N among leaves and the within-leaf allocation of N between Rubisco and chlorophyll. We tested this hypothesis in a field trial that included annual applications of N,P,K fertilizer (from planting) to a Eucalyptus globulus Labill. plantation growing on uniform leached sands. Growth of 4-year-old E. globulus increased significantly in response to fertilization. Leaf N and phosphorus concentrations were 0.1-0.5 g m(-2) and 0.4-0.5 g m(-2) higher i"
+            },
+            {
+              "document_id": "W2012048107",
+              "title": "Macromolecular labelling patterns and inorganic nutrient limitation of a North Atlantic spring bloom",
+              "doi": "https://doi.org/10.3354/meps092111",
+              "year": "1993",
+              "distance": 0.2857,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Synthesis rates of macromolecular classes (protein, polysaccharide, neutral lipid, glycolipid and phospholipid) were measured using 14C incorporation to assess the physiological condition of phytoplankton during a spring bloon~ in the northeastern Sargasso Sea.The relative allocation of labelled photosynthate to polysaccharide increased with incubation irradiance, and declined overnight; opposite trends were found in the protein fraction.The rate of protein synthesis at night was a small fraction (0 to 23 '%I) of the day-time rate.Incubation irradiance and overnight metabolism had relatively little effect on total or class-specific lipid synthesis.lnorganic nutrients decreased to below analy"
+            },
+            {
+              "document_id": "W2054311407",
+              "title": "ULTRAVIOLET‐B RADIATION EFFECTS ON INORGANIC NITROGEN UPTAKE BY NATURAL ASSEMBLAGES OF OCEANIC PLANKTON<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1995.00025.x",
+              "year": "1995",
+              "distance": 0.2861,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ABSTRACT Ultraviolet‐B radiation (UVBR: 290‐320 nm) inhibited ammonium uptake (p NH4 ) and nitrate uptake (p NO3 ) in natural plankton assemblages collected during a transect from 37° N to 55° N in the Pacific Ocean. Comparison of responses in p NH4 to ambient solar‐ and lamp‐enhanced UVBR spectra allowed calculation of an action spectrum for p NH4 inhibition. The slope of the action spectrum for Pnh 4 is half as steep as action spectra for UVBR inhibition of photosynthetic carbon uptake. Consequently, WBR‐induced photoinhibition of p NH4 extends to greater depths than inhibition of carbon fixation due to the greater relative effect of longer UVBR wavelengths. Inhibition of p NH4 was depende"
+            },
+            {
+              "document_id": "W2107557999",
+              "title": "Seasonal Changes in Temperature Dependence of Photosynthetic Rate in Rice Under a Free-air CO2 Enrichment",
+              "doi": "https://doi.org/10.1093/aob/mcl001",
+              "year": "2006",
+              "distance": 0.2877,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "There was both an increase in the absolute value of the light-saturated photosynthetic rate at growth CO(2) (P(growth)) and an increase in T(opt) for P(growth) caused by elevated CO(2) in FACE conditions. Seasonal decrease in P(growth) was associated with a decrease in nitrogen content per unit leaf area (N(area)) and thus in the maximum rate of electron transport (J(max)) and the maximum rate of RuBP carboxylation (V(cmax)). At ambient CO(2), T(opt) increased with increasing growth temperature due mainly to increasing activation energy of V(cmax). At elevated CO(2), T(opt) did not show a clear seasonal trend. Temperature dependence of photosynthesis was changed by seasonal climate and plant"
+            },
+            {
+              "document_id": "W2131119068",
+              "title": "Interactive effects of elevated CO<sub>2</sub> and soil fertility on isoprene emissions from <i>Quercus robur</i>",
+              "doi": "https://doi.org/10.1111/j.1365-2486.2004.00845.x",
+              "year": "2004",
+              "distance": 0.288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract The effects of global change on the emission rates of isoprene from plants are not clear. A factor that can influence the response of isoprene emission to elevated CO 2 concentrations is the availability of nutrients. Isoprene emission rate under standard conditions (leaf temperature: 30°C, photosynthetically active radiation (PAR): 1000 μmol photons m −2 s −1 ), photosynthesis, photosynthetic capacity, and leaf nitrogen (N) content were measured in Quercus robur grown in well‐ventilated greenhouses at ambient and elevated CO 2 (ambient plus 300 ppm) and two different soil fertilities. The results show that elevated CO 2 enhanced photosynthesis but leaf respiration rates were not af"
+            },
+            {
+              "document_id": "W2001337441",
+              "title": "Regulation of Carbon Flow by Nitrogen and Light in the Red Alga, <i>Gelidium coulteri</i>",
+              "doi": "https://doi.org/10.1104/pp.82.1.136",
+              "year": "1986",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The red alga Gelidium coulteri Harv. photosynthetically fixed [(14)C] bicarbonate at high rates under defined conditions in unialgal laboratory culture. The fixation rate and flow of photosynthate into various end products were dependent on the nitrogen status of the tissue. Plants fed luxury levels of nitrogen (approximately 340 micromolar) showed fixation rates several-fold higher than those seen for plants starved for nitrogen. The addition of NO(3) (-) or NH(4) (+) to such starved plants further inhibited fixation over at least the first several hours after addition. The majority of (14)C after incubations of 30 minutes to 8 hours was found in the compounds floridoside, agar and floridea"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact (SF9: chl:N decreases with irradiance at constant dilution rate in nutrient replete conditions) is explicitly stated and treated as an established empirical observation in the Lorena/Marques 2010 DEB paper. Snippet 1 lists SF9 verbatim as a stylized fact with citations (3, 11), and snippet 5 explicitly invokes SF9 as indirect support for the hypothesis that chlorophyll is part of the N-reserve, affirming the chl:N-decreases-with-irradiance pattern. No snippet contradicts the fact. Remaining snippets are topically related (N:C ratios, chlorophyll concentration, light-limited growth, photosynthesis units) but do not directly bear on the chl:N vs. irradiance relationship. Support is consistent but concentrated in a single source citing two references, hence moderate strength but corroborated direction."
+          },
+          "n_references": 1,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1662
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1662,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1887,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2091,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2125,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e, contrary to the ˙ECA which is practically constant (since CO2 290 is non-limiting and light is forced constant). 291 SF2 - N:C ratio decreases with dilution rate when light limited (21) - is harder to simulate and 292 understand, mainly because of the deﬁnition of light limited. If a population is grown with 293 dilution rate ˙h in light limiting conditions there are only two possible outcomes: (i) irradiance is 294 enough to support ˙r > ˙h and, since ˙ph is constant per unit of MV (eq. 2), biomass will grow 295 14 [Page 15] and steady-state will only be attained when one mineral (carbon or nitrogen) limits growth; 296 (ii) irradiance is not enough to support ˙r > ˙h and the population"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2226,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "t. The alternative, not 298 contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299 unit of MV in a similar way that carbon and nitrogen sources decrease with increasing biomass. 300 We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301 growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302 curve in ﬁgure 4A. When dilution rate is increased, CO2 available to microalgae also increases, 303 which partially compensates the constant low-light conditions (eq. 3) thus increasing C-reserve 304 density. On the other hand, higher dilution rates (which in steady-st"
+            },
+            {
+              "document_id": "3315",
+              "title": "Lew2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.23,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "(Figure 3.16). The percentage of the total carbon flux used for maintenance continues to increase as irradiance declines further. The rate of excess carbon release, however, decreases significantly as irradiance declines (Figure 3.15c) and makes up 44 % of the total carbon flux at 1.8 µmol photons m-2 s-1 compared to 77 % in Pro-PA and 71 % in Pro-PH at saturating irradiance (Figure 3.16). The rate of excess carbon release continues to decrease further with decreasing irradiance. Photoheterotrophic light use reduces the rate of excess carbon release by up to 33.0 % in Pro-PH relative to Pro-PA, the biggest difference being at ~10 µmol photons m-2 s-1 (Figure 3.16). Both cell types assimilate"
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2316,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "s observed that the N:C ratio increases with dilution rate 274 when nutrient limited (3, 11, 21) and decreases when light limited (21). Furthermore, the N:C 275 ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276 stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277 the following equation 278 Ntotal Ctotal = nNV · MV + MEN MV + MEC = nNV + mEN 1 + mEC , (17) where nNV is the elemental coefﬁcient of nitrogen in structure and MEi stands for the to- 279 tal mass of reserve i . Equation 17 shows that to assess N:C ratio one should look to the 280 dependence of reserve densities on forcing variables. 281 The"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2374,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "with the fraction of UVb in the irradiance. However, this decline with either type of impact accelerates with an increas- ing UVb content in irradiance. This trend is general for all PAR and ambient nitrogen levels considered in this study (results not shown). Fig. 4. The ratio of the symbiont to host structural biomass in steady state is a function of irradiance and ambient nitrogen levels. Without effects of detrimen- tal radiation (A), this ratio decreases with irradiance, as the host receives more photosynthate at higher irradiance levels (see Fig. 2), and increases with ambient nitrogen levels, as the symbiont assimilates a relatively larger fraction of photosyn- thate at higher nitroge"
+            },
+            {
+              "document_id": "2620",
+              "title": "Mull2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2413,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "the range of substrate ﬂuxes at which both substrates have a signiﬁcant impact on the dynamics of the SU is relatively narrow (Kooijman, 1998; Muller et al., 2001). Usually, one Fig. 2. The rate of photosynthesis is a function of irradiance and the nutrient supply rate according to Eq. (1). The range of irradiance and nutrient ﬂux combinations at which both are signiﬁcantly limiting photosynthesis is narrow; in effect, one sub- strate determines the capacity of the SU in most cases. The impact of photoinhibition becomes increasingly more pronounced as the nutrient ﬂux increases. At low nutri- ent availability, the impact of photoinhibition is insigniﬁcant. Quantities have been scaled as foll"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2414,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "release rate increases (Fig. 7, dash-dot lines). The decrease in PP rate is due to the effects of nutrient limitation on the photosynthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase (Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash- dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10 than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of the jDOC,R ﬂux (Fig. 6, solid line) and it is indicative of"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2427,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "dilution rate. Then culture biomass density will increase. This increase is coupled with a decrease in light intensity everywhere in the ves- sel, caused by shading. Therefore, the specific growth rate decreases until it equals the applied dilution rate. An increase in the D value will lead to a lower steady state biomass density since the light intensity in the ves- sel must increase to make p equal to the new D. An increase in the Iin value will lead to a higher biomass density since the light intensity in the vessel must re- main the same to have no change in p. The reasonable fit to experimental data (Figs. 2 and 3) confirms the cor- rectness of the concept of shading as a regulating fac"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2444,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "V=nc[Cl]−[MC] [Cl]+[GC] . (9) Continuous culture studies on nutrient-limited growth are performed in chemostats, in which the steady-state growth rate equals the dilution rate. Therefore, the dilution rate (often somewhat mis- leadingly called the speciﬁc growth rate) is treated as the independent variable. Continuous culture studies on light-limited growth are often per- formed in turbidostats, in which the dilution rate is adjusted until a steady-state is achieved. In such studies, the incident light intensity is taken as the independent variable. An expression for the steady-state speciﬁc growth rate as dependent on the light intensity is obtained as follows. From Eq. (8) one has [C. l]=["
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2448,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "n be partly compensated by increasing the availability of nitrogen in the envi- ronment. Thus far we have explored the effect of detrimental irradi- ance, here conveniently identiﬁed with UVb, while keeping the ratio of UVb to PAR constant. To illustrate the inﬂuence of for instance, water depth, the density of UVb absorbing particles or the ﬁltering capacity of the ozone layer, we have also calculated the speciﬁc growth rate as function of the fraction of UVb in irradiance at constant ambient nitrogen (2 \u0002M) and irradiance lev- els (750 \u0002mol quanta m−2 s−1; see Fig. 6). Not surprisingly, with [Page 6] 1320 Y. Eynaud et al. / Ecological Modelling 222 (2011) 1315–1322 Fig. 3. The reserve dens"
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2452,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "symptotic maximum (see Fig. 5; note that in steady state the long-term speciﬁc growth rate of host and symbiont are necessarily equal). With either photoinhi- bition or photodamage occurring, this trend is still evident with increasing ambient nitrogen levels. However, because photoinhi- bition slows down the rate of photosynthesis and photodamage decreases the rate at which reserves are committed to symbiont growth, the speciﬁc growth rate is highest at intermediate irradi- ance levels. At higher irradiance levels, the increasingly stronger negative effects of photoinhibition or photodamage outweigh the stimulatory effects of PAR, as these stimulatory effects decelerate with increasing PAR."
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the 18 snippets directly address the stylized fact that chlorophyll-to-nitrogen ratio decreases with irradiance at constant dilution rate under nutrient-replete chemostat conditions. The snippets touch on related themes—photoacclimation, nitrogen and light effects on pigments, chemostat dilution dynamics—but none report the specific chl:N versus irradiance relationship at fixed dilution rate. Snippet 12 shows nitrogen increases chlorophyll, and snippet 5/18 mention light effects on pigments, but neither establishes the quantitative chl:N decline with irradiance in the described experimental setup. Evidence is sparse and indirect; there is no clear support nor contradiction, leaving the fact neither corroborated nor refuted by this corpus."
+          },
+          "n_references": 0,
+          "references": {},
+          "snippets": [
+            {
+              "document_id": "W4382196449",
+              "title": "SYNERGISTIC EFFECTS OF NITROGEN DEPRIVATION AND HIGH IRRADIANCE TO ENHANCE BIOMASS AND LIPID PRODUCTION IN NANNOCHLOROPSIS",
+              "doi": "https://doi.org/10.55251/jmbfs.3632",
+              "year": "2023",
+              "distance": 0.2698,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Nannochloropsis, due to its high lipid content, small size and growth rate, can be exploited for the production of biofuel and other value-added products. This study analyzed synergistic responses of high irradiance and nitrogen deprivation on Nannochloropsis cells to enhance biomass and lipid production. The growth of Nannochloropsis was first optimized under different irradiance 50, 100, 150, 200 and 250 μmol photons m-2 s-1. The maximum specific growth rate (0.25 day-1) and dry weight (0.67 g L-1) were obtained (p&lt;0.05) at photosynthetically active radiation (PAR) of 200 µmol photons m-2 s-1, further increase in light intensity decreased the growth rate and dry weight up to 0.2 day-1 a"
+            },
+            {
+              "document_id": "W4396558164",
+              "title": "Genotype-specific nonphotochemical quenching responses to nitrogen deficit are linked to chlorophyll a to b ratios",
+              "doi": "https://doi.org/10.1016/j.jplph.2024.154261",
+              "year": "2024",
+              "distance": 0.2741,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Non-photochemical quenching (NPQ) protects plants from photodamage caused by excess light energy. Substantial variation in NPQ has been reported among different genotypes of the same species. However, comparatively little is known about how environmental perturbations, including nutrient deficits, impact natural variation in NPQ kinetics. Here, we analyzed a natural variation in NPQ kinetics of a diversity panel of 225 maize (Zea mays L.) genotypes under nitrogen replete and nitrogen deficient field conditions. Individual maize genotypes from a diversity panel exhibited a range of changes in NPQ in response to low nitrogen. Replicated genotypes exhibited consistent responses across two field"
+            },
+            {
+              "document_id": "W3086759072",
+              "title": "Decision letter: Nutrient levels and trade-offs control diversity in a serial dilution ecosystem",
+              "doi": "https://doi.org/10.7554/elife.57790.sa1",
+              "year": "2020",
+              "distance": 0.2764,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Moreover, for a chemostat, the parameter δ~ which would be the rate all nutrients are continuously supplied per unit biomass, would need to equal the dilution rate of the chemostat, δ, to maintain steady state. A detailed analysis of the effects of larger bolus size, to second order in c0/K, can be found in Appendix 4. Effect of total nutrient bolus on coexistence In the chemostat limit, increasing the nutrient supply rate simply the steady-state population However, from this limit we find that the of the nutrient bolus can the steady-state of serial To understand this we first consider a simple case of two nutrients and two species as depicted in Figure The two species will coexist if each "
+            },
+            {
+              "document_id": "W2084366054",
+              "title": "THE CONTROL BY PHYTOCHROME OF NITRATE REDUCTASE IN THE CURD OF LIGHT‐GROWN CAULIFLOWER",
+              "doi": "https://doi.org/10.1111/j.1751-1097.1979.tb07185.x",
+              "year": "1979",
+              "distance": 0.2816,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract— The activity of nitrate reductase from the curd of light‐grown cauliflower ( Brassica oleracea (L) var botrytis (DC) ‘St. Hilary’) is modulated by nitrate and by light. Using broad‐band sources of equal photosynthetically active radiation but with different proportions of red and far‐red light, a linear relationship between nitrate reductase activity and ψ(Estimated phytochrome photoequilibrium) was obtained. This relationship, apparent after 8 h incubation, was maintained and little altered after 48 h incubation. The linearity was apparent between ψE 0.26 and ψE 0.69; ψE 0.26 being no more effective than a dark control. Far‐red reversibility confirmed the involvement of phytochrom"
+            },
+            {
+              "document_id": "W2160958124",
+              "title": "PHOTOINHIBITION: ALGAL RESPONSES TO BRIGHT LIGHT DURING DIEL STRATIFICATION AND MIXING IN A TROPICAL ALPINE LAKE<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1984.00201.x",
+              "year": "1984",
+              "distance": 0.284,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT Near surface thermoclines form each day in the limnetic waters of Lake Titicaca (Peru‐Bolivia) and thereby retain phytoplankton under extreme irradiances. This bright light exposure results in strongly depressed chlorophyll fluorescence and photosynthesis which both decay (bright light) and recover (dim light) by first order rate kinetics. During each afternoon the phytoplankton are redistributed by wind‐induced mixing, and full recovery is accomplished soon after nightfall. In vivo fluorescence was measured over this diet cycle both with (F b ) and without (F a 3‐(3,4‐dichlorophenyl)‐1,1‐dimethyl urea. Strongest bright light effects were on the parameter (F a – F a ), a crude measu"
+            },
+            {
+              "document_id": "W2315641240",
+              "title": "Within-canopy nitrogen and photosynthetic gradients are unaffected by soil fertility in field-grown Eucalyptus globulus",
+              "doi": "https://doi.org/10.1093/treephys/27.11.1607",
+              "year": "2007",
+              "distance": 0.2843,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "A significant and well-supported hypothesis is that increased growth following nitrogen (N) fertilization is a function of the relationships among photosynthesis, tissue N content and the light environment-specifically, the within-canopy allocation of N among leaves and the within-leaf allocation of N between Rubisco and chlorophyll. We tested this hypothesis in a field trial that included annual applications of N,P,K fertilizer (from planting) to a Eucalyptus globulus Labill. plantation growing on uniform leached sands. Growth of 4-year-old E. globulus increased significantly in response to fertilization. Leaf N and phosphorus concentrations were 0.1-0.5 g m(-2) and 0.4-0.5 g m(-2) higher i"
+            },
+            {
+              "document_id": "W2012048107",
+              "title": "Macromolecular labelling patterns and inorganic nutrient limitation of a North Atlantic spring bloom",
+              "doi": "https://doi.org/10.3354/meps092111",
+              "year": "1993",
+              "distance": 0.2857,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Synthesis rates of macromolecular classes (protein, polysaccharide, neutral lipid, glycolipid and phospholipid) were measured using 14C incorporation to assess the physiological condition of phytoplankton during a spring bloon~ in the northeastern Sargasso Sea.The relative allocation of labelled photosynthate to polysaccharide increased with incubation irradiance, and declined overnight; opposite trends were found in the protein fraction.The rate of protein synthesis at night was a small fraction (0 to 23 '%I) of the day-time rate.Incubation irradiance and overnight metabolism had relatively little effect on total or class-specific lipid synthesis.lnorganic nutrients decreased to below analy"
+            },
+            {
+              "document_id": "W2054311407",
+              "title": "ULTRAVIOLET‐B RADIATION EFFECTS ON INORGANIC NITROGEN UPTAKE BY NATURAL ASSEMBLAGES OF OCEANIC PLANKTON<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1995.00025.x",
+              "year": "1995",
+              "distance": 0.2861,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT Ultraviolet‐B radiation (UVBR: 290‐320 nm) inhibited ammonium uptake (p NH4 ) and nitrate uptake (p NO3 ) in natural plankton assemblages collected during a transect from 37° N to 55° N in the Pacific Ocean. Comparison of responses in p NH4 to ambient solar‐ and lamp‐enhanced UVBR spectra allowed calculation of an action spectrum for p NH4 inhibition. The slope of the action spectrum for Pnh 4 is half as steep as action spectra for UVBR inhibition of photosynthetic carbon uptake. Consequently, WBR‐induced photoinhibition of p NH4 extends to greater depths than inhibition of carbon fixation due to the greater relative effect of longer UVBR wavelengths. Inhibition of p NH4 was depende"
+            },
+            {
+              "document_id": "W2107557999",
+              "title": "Seasonal Changes in Temperature Dependence of Photosynthetic Rate in Rice Under a Free-air CO2 Enrichment",
+              "doi": "https://doi.org/10.1093/aob/mcl001",
+              "year": "2006",
+              "distance": 0.2877,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "There was both an increase in the absolute value of the light-saturated photosynthetic rate at growth CO(2) (P(growth)) and an increase in T(opt) for P(growth) caused by elevated CO(2) in FACE conditions. Seasonal decrease in P(growth) was associated with a decrease in nitrogen content per unit leaf area (N(area)) and thus in the maximum rate of electron transport (J(max)) and the maximum rate of RuBP carboxylation (V(cmax)). At ambient CO(2), T(opt) increased with increasing growth temperature due mainly to increasing activation energy of V(cmax). At elevated CO(2), T(opt) did not show a clear seasonal trend. Temperature dependence of photosynthesis was changed by seasonal climate and plant"
+            },
+            {
+              "document_id": "W2131119068",
+              "title": "Interactive effects of elevated CO<sub>2</sub> and soil fertility on isoprene emissions from <i>Quercus robur</i>",
+              "doi": "https://doi.org/10.1111/j.1365-2486.2004.00845.x",
+              "year": "2004",
+              "distance": 0.288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract The effects of global change on the emission rates of isoprene from plants are not clear. A factor that can influence the response of isoprene emission to elevated CO 2 concentrations is the availability of nutrients. Isoprene emission rate under standard conditions (leaf temperature: 30°C, photosynthetically active radiation (PAR): 1000 μmol photons m −2 s −1 ), photosynthesis, photosynthetic capacity, and leaf nitrogen (N) content were measured in Quercus robur grown in well‐ventilated greenhouses at ambient and elevated CO 2 (ambient plus 300 ppm) and two different soil fertilities. The results show that elevated CO 2 enhanced photosynthesis but leaf respiration rates were not af"
+            },
+            {
+              "document_id": "W2001337441",
+              "title": "Regulation of Carbon Flow by Nitrogen and Light in the Red Alga, <i>Gelidium coulteri</i>",
+              "doi": "https://doi.org/10.1104/pp.82.1.136",
+              "year": "1986",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The red alga Gelidium coulteri Harv. photosynthetically fixed [(14)C] bicarbonate at high rates under defined conditions in unialgal laboratory culture. The fixation rate and flow of photosynthate into various end products were dependent on the nitrogen status of the tissue. Plants fed luxury levels of nitrogen (approximately 340 micromolar) showed fixation rates several-fold higher than those seen for plants starved for nitrogen. The addition of NO(3) (-) or NH(4) (+) to such starved plants further inhibited fixation over at least the first several hours after addition. The majority of (14)C after incubations of 30 minutes to 8 hours was found in the compounds floridoside, agar and floridea"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            },
+            {
+              "document_id": "W2789439366",
+              "title": "Linear Relationships between Photosynthetic Rate and Photochemical Energy Expressed by &amp;lt;i&amp;gt;PAR&amp;lt;/i&amp;gt; &amp;#215;&amp;lt;i&amp;gt;Fv/Fm&amp;lt;/i&amp;gt;",
+              "doi": "https://doi.org/10.4236/ajps.2018.92011",
+              "year": "2018",
+              "distance": 0.2909,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Photosynthetic rate (Pn) of plants is simultaneously affected by photosynthetically active radiation (PAR) and maximum yield of primary photochemistry (Fv/Fm). In order to explore the quantitative relationship between Pn, PAR and Fv/Fm, those parameters were simultaneously measured for different plant species (maize, sunflower, daylily and alfalfa), growth stages and irrigation treatments. Results indicated that the diurnal variation of Pn had no significant correlation with that of Fv/Fm. Mean diurnal values of Pn were linearly correlated with those of Fv/Fm among the different irrigation treatments of alfalfa (p Pn and Fv/Fm only at midday (12:00 and 14:00) (p Pn and PAR × Fv/Fm (p Pn is s"
+            },
+            {
+              "document_id": "W2024915669",
+              "title": "UV‐acclimation responses in natural populations of cyanobacteria ( <i>Calothrix</i> sp.)",
+              "doi": "https://doi.org/10.1046/j.1462-2920.2003.00435.x",
+              "year": "2003",
+              "distance": 0.2909,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary Phenotypic acclimation to changing conditions is typically thought to be beneficial to organisms in the environment. UV radiation is an important parameter affecting photosynthetic organisms in natural environments. We measured the response of photosynthetic carbon fixation in populations of cyanobacteria inhabiting a hot spring following acclimation to different UV treatments. These two very closely related populations of cyanobacteria, differing in their content of the extracellular UV‐screening pigment scytonemin, were acclimated in situ under natural solar irradiance modified by filters that excluded both UVA/B, only UVB or transmitted both UVA/B. Cells from each preacclimation t"
+            },
+            {
+              "document_id": "W2015970680",
+              "title": "Ammonia and Nitrate Uptake in the Lower Great Lakes",
+              "doi": "https://doi.org/10.1139/f80-175",
+              "year": "1980",
+              "distance": 0.2911,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Uptake of NH 4 + is consistent with Michaelis–Menten kinetics in the Lower Great Lakes only if one assumes that the indophenol method of measuring NH 4 + overestimates the in situ concentration. Short-term incubations were found necessary to avoid induction of nitrate uptake or changes in the rates of NH 4 + uptake that occurred in long-term incubations. Uptake rates of nitrate are slow most of the summer. Since the nitrate is also present in low concentrations, most of the summer regeneration of nitrate must be very slow. The slow turnover of particulate N, low nutrient concentrations, slow rate of uptake relative to their ability to take up nitrogen, and the high affinity for ammonia (low "
+            },
+            {
+              "document_id": "W2137142035",
+              "title": "Relative addition rate and external concentration; Driving variables used in plant nutrition research",
+              "doi": "https://doi.org/10.1111/1365-3040.ep11611714",
+              "year": "1982",
+              "distance": 0.2912,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract An increasing literature accounting for various types of experiments indicates that far lower external nutrient concentrations are required by plants than is usually thought to be the case. It is concluded that the ion uptake capacity of the roots, as described by the carrier concept, is high compared to that required for maintenance of the internal concentration. Serious errors in experimental conclusions are associated with insufficient and constant nutrient addition rates. The main errors are caused by non‐steady states of the plants both with regard to the internal nutrient concentrations and the relative growth rate. A dynamic concept has been proposed for direct use as the tre"
+            },
+            {
+              "document_id": "W4385708599",
+              "title": "Effect of Reducing Nitrogen Fertilization and Adding Organic Fertilizer on Net Photosynthetic Rate, Root Nodules and Yield in Peanut",
+              "doi": "https://doi.org/10.3390/plants12162902",
+              "year": "2023",
+              "distance": 0.2916,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Long-term excessive application of chemical fertilizers can cause many problems, such as soil degradation and environmental pollution. Therefore, we reduced conventional nitrogen fertilization and added organic fertilizers in some cases to investigate the response of photosynthetic characteristics, root nodules and yield on reduced nitrogen fertilization. Compared to conventional nitrogen fertilization, the 25% and 35% nitrogen reduction treatments reduced the leaf area index, net photosynthetic rate, 100-fruit weight, 100-kernel weight and the yield of peanut, but had no significant effect on the kernel rate. With constant N fertilizer, adding organic fertilization alone increased leaf area"
+            },
+            {
+              "document_id": "W2583034295",
+              "title": "(294) Radiation Cycle Affects Biomass Production and Carotenoid Accumulation in Kale",
+              "doi": "https://doi.org/10.21273/hortsci.40.4.1009a",
+              "year": "2005",
+              "distance": 0.2919,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Plant growing systems have consistently utilized the standard Earth day as the radiation cycle for plant growth. However, the radiation cycle can easily be controlled by using automated systems to regulate the exact amount of time plants are exposed to irradiation (and darkness). This experiment investigated the influence of different radiation cycles on plant growth, chlorophyll and carotenoid pigment accumulation in kale ( Brassica oleracea L. var. acephala D.C). Kale plants were grown in growth chambers in nutrient solution culture under radiation cycle treatments of 2, 12, 24, and 48 h, with 50% irradiance and 50% darkness during each time period. Total irradiation throughout the experim"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact (SF9: chl:N decreases with irradiance at constant dilution rate in nutrient-replete conditions) is directly stated and treated as an established observation in the LoreMarq2010 corpus (snippets 1, 5), where it is listed among the catalogued stylized facts and used to support the modeling hypothesis that chlorophyll resides partly in the N-reserve. Snippets 4 and 5 reinforce the related fact that chlorophyll concentration decreases with irradiance, consistent in direction. No snippet contradicts the fact. However, the support comes predominantly from a single source restating the fact rather than independent empirical datasets, so evidence strength is moderate rather than strong. The remaining snippets are off-topic (UV effects, terrestrial plant nitrogen, isoprene, photoinhibition) and bear little on the claim. Direction is corroborative with no conflict."
+          },
+          "n_references": 2,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.1662
+            },
+            "2939": {
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2053
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1662,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1887,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2091,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2125,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "e, contrary to the ˙ECA which is practically constant (since CO2 290 is non-limiting and light is forced constant). 291 SF2 - N:C ratio decreases with dilution rate when light limited (21) - is harder to simulate and 292 understand, mainly because of the deﬁnition of light limited. If a population is grown with 293 dilution rate ˙h in light limiting conditions there are only two possible outcomes: (i) irradiance is 294 enough to support ˙r > ˙h and, since ˙ph is constant per unit of MV (eq. 2), biomass will grow 295 14 [Page 15] and steady-state will only be attained when one mineral (carbon or nitrogen) limits growth; 296 (ii) irradiance is not enough to support ˙r > ˙h and the population"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2226,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "t. The alternative, not 298 contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299 unit of MV in a similar way that carbon and nitrogen sources decrease with increasing biomass. 300 We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301 growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302 curve in ﬁgure 4A. When dilution rate is increased, CO2 available to microalgae also increases, 303 which partially compensates the constant low-light conditions (eq. 3) thus increasing C-reserve 304 density. On the other hand, higher dilution rates (which in steady-st"
+            },
+            {
+              "document_id": "3315",
+              "title": "Lew2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.23,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "(Figure 3.16). The percentage of the total carbon flux used for maintenance continues to increase as irradiance declines further. The rate of excess carbon release, however, decreases significantly as irradiance declines (Figure 3.15c) and makes up 44 % of the total carbon flux at 1.8 µmol photons m-2 s-1 compared to 77 % in Pro-PA and 71 % in Pro-PH at saturating irradiance (Figure 3.16). The rate of excess carbon release continues to decrease further with decreasing irradiance. Photoheterotrophic light use reduces the rate of excess carbon release by up to 33.0 % in Pro-PH relative to Pro-PA, the biggest difference being at ~10 µmol photons m-2 s-1 (Figure 3.16). Both cell types assimilate"
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2316,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2335,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "s observed that the N:C ratio increases with dilution rate 274 when nutrient limited (3, 11, 21) and decreases when light limited (21). Furthermore, the N:C 275 ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276 stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277 the following equation 278 Ntotal Ctotal = nNV · MV + MEN MV + MEC = nNV + mEN 1 + mEC , (17) where nNV is the elemental coefﬁcient of nitrogen in structure and MEi stands for the to- 279 tal mass of reserve i . Equation 17 shows that to assess N:C ratio one should look to the 280 dependence of reserve densities on forcing variables. 281 The"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2374,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "3213",
+              "title": "EynaNisb2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "with the fraction of UVb in the irradiance. However, this decline with either type of impact accelerates with an increas- ing UVb content in irradiance. This trend is general for all PAR and ambient nitrogen levels considered in this study (results not shown). Fig. 4. The ratio of the symbiont to host structural biomass in steady state is a function of irradiance and ambient nitrogen levels. Without effects of detrimen- tal radiation (A), this ratio decreases with irradiance, as the host receives more photosynthate at higher irradiance levels (see Fig. 2), and increases with ambient nitrogen levels, as the symbiont assimilates a relatively larger fraction of photosyn- thate at higher nitroge"
+            },
+            {
+              "document_id": "W4382196449",
+              "title": "SYNERGISTIC EFFECTS OF NITROGEN DEPRIVATION AND HIGH IRRADIANCE TO ENHANCE BIOMASS AND LIPID PRODUCTION IN NANNOCHLOROPSIS",
+              "doi": "https://doi.org/10.55251/jmbfs.3632",
+              "year": "2023",
+              "distance": 0.2698,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Nannochloropsis, due to its high lipid content, small size and growth rate, can be exploited for the production of biofuel and other value-added products. This study analyzed synergistic responses of high irradiance and nitrogen deprivation on Nannochloropsis cells to enhance biomass and lipid production. The growth of Nannochloropsis was first optimized under different irradiance 50, 100, 150, 200 and 250 μmol photons m-2 s-1. The maximum specific growth rate (0.25 day-1) and dry weight (0.67 g L-1) were obtained (p&lt;0.05) at photosynthetically active radiation (PAR) of 200 µmol photons m-2 s-1, further increase in light intensity decreased the growth rate and dry weight up to 0.2 day-1 a"
+            },
+            {
+              "document_id": "W4396558164",
+              "title": "Genotype-specific nonphotochemical quenching responses to nitrogen deficit are linked to chlorophyll a to b ratios",
+              "doi": "https://doi.org/10.1016/j.jplph.2024.154261",
+              "year": "2024",
+              "distance": 0.2741,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Non-photochemical quenching (NPQ) protects plants from photodamage caused by excess light energy. Substantial variation in NPQ has been reported among different genotypes of the same species. However, comparatively little is known about how environmental perturbations, including nutrient deficits, impact natural variation in NPQ kinetics. Here, we analyzed a natural variation in NPQ kinetics of a diversity panel of 225 maize (Zea mays L.) genotypes under nitrogen replete and nitrogen deficient field conditions. Individual maize genotypes from a diversity panel exhibited a range of changes in NPQ in response to low nitrogen. Replicated genotypes exhibited consistent responses across two field"
+            },
+            {
+              "document_id": "W3086759072",
+              "title": "Decision letter: Nutrient levels and trade-offs control diversity in a serial dilution ecosystem",
+              "doi": "https://doi.org/10.7554/elife.57790.sa1",
+              "year": "2020",
+              "distance": 0.2764,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Moreover, for a chemostat, the parameter δ~ which would be the rate all nutrients are continuously supplied per unit biomass, would need to equal the dilution rate of the chemostat, δ, to maintain steady state. A detailed analysis of the effects of larger bolus size, to second order in c0/K, can be found in Appendix 4. Effect of total nutrient bolus on coexistence In the chemostat limit, increasing the nutrient supply rate simply the steady-state population However, from this limit we find that the of the nutrient bolus can the steady-state of serial To understand this we first consider a simple case of two nutrients and two species as depicted in Figure The two species will coexist if each "
+            },
+            {
+              "document_id": "W2084366054",
+              "title": "THE CONTROL BY PHYTOCHROME OF NITRATE REDUCTASE IN THE CURD OF LIGHT‐GROWN CAULIFLOWER",
+              "doi": "https://doi.org/10.1111/j.1751-1097.1979.tb07185.x",
+              "year": "1979",
+              "distance": 0.2816,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract— The activity of nitrate reductase from the curd of light‐grown cauliflower ( Brassica oleracea (L) var botrytis (DC) ‘St. Hilary’) is modulated by nitrate and by light. Using broad‐band sources of equal photosynthetically active radiation but with different proportions of red and far‐red light, a linear relationship between nitrate reductase activity and ψ(Estimated phytochrome photoequilibrium) was obtained. This relationship, apparent after 8 h incubation, was maintained and little altered after 48 h incubation. The linearity was apparent between ψE 0.26 and ψE 0.69; ψE 0.26 being no more effective than a dark control. Far‐red reversibility confirmed the involvement of phytochrom"
+            },
+            {
+              "document_id": "W2160958124",
+              "title": "PHOTOINHIBITION: ALGAL RESPONSES TO BRIGHT LIGHT DURING DIEL STRATIFICATION AND MIXING IN A TROPICAL ALPINE LAKE<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1984.00201.x",
+              "year": "1984",
+              "distance": 0.284,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "ABSTRACT Near surface thermoclines form each day in the limnetic waters of Lake Titicaca (Peru‐Bolivia) and thereby retain phytoplankton under extreme irradiances. This bright light exposure results in strongly depressed chlorophyll fluorescence and photosynthesis which both decay (bright light) and recover (dim light) by first order rate kinetics. During each afternoon the phytoplankton are redistributed by wind‐induced mixing, and full recovery is accomplished soon after nightfall. In vivo fluorescence was measured over this diet cycle both with (F b ) and without (F a 3‐(3,4‐dichlorophenyl)‐1,1‐dimethyl urea. Strongest bright light effects were on the parameter (F a – F a ), a crude measu"
+            },
+            {
+              "document_id": "W2315641240",
+              "title": "Within-canopy nitrogen and photosynthetic gradients are unaffected by soil fertility in field-grown Eucalyptus globulus",
+              "doi": "https://doi.org/10.1093/treephys/27.11.1607",
+              "year": "2007",
+              "distance": 0.2843,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A significant and well-supported hypothesis is that increased growth following nitrogen (N) fertilization is a function of the relationships among photosynthesis, tissue N content and the light environment-specifically, the within-canopy allocation of N among leaves and the within-leaf allocation of N between Rubisco and chlorophyll. We tested this hypothesis in a field trial that included annual applications of N,P,K fertilizer (from planting) to a Eucalyptus globulus Labill. plantation growing on uniform leached sands. Growth of 4-year-old E. globulus increased significantly in response to fertilization. Leaf N and phosphorus concentrations were 0.1-0.5 g m(-2) and 0.4-0.5 g m(-2) higher i"
+            },
+            {
+              "document_id": "W2012048107",
+              "title": "Macromolecular labelling patterns and inorganic nutrient limitation of a North Atlantic spring bloom",
+              "doi": "https://doi.org/10.3354/meps092111",
+              "year": "1993",
+              "distance": 0.2857,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Synthesis rates of macromolecular classes (protein, polysaccharide, neutral lipid, glycolipid and phospholipid) were measured using 14C incorporation to assess the physiological condition of phytoplankton during a spring bloon~ in the northeastern Sargasso Sea.The relative allocation of labelled photosynthate to polysaccharide increased with incubation irradiance, and declined overnight; opposite trends were found in the protein fraction.The rate of protein synthesis at night was a small fraction (0 to 23 '%I) of the day-time rate.Incubation irradiance and overnight metabolism had relatively little effect on total or class-specific lipid synthesis.lnorganic nutrients decreased to below analy"
+            },
+            {
+              "document_id": "W2054311407",
+              "title": "ULTRAVIOLET‐B RADIATION EFFECTS ON INORGANIC NITROGEN UPTAKE BY NATURAL ASSEMBLAGES OF OCEANIC PLANKTON<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1995.00025.x",
+              "year": "1995",
+              "distance": 0.2861,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ABSTRACT Ultraviolet‐B radiation (UVBR: 290‐320 nm) inhibited ammonium uptake (p NH4 ) and nitrate uptake (p NO3 ) in natural plankton assemblages collected during a transect from 37° N to 55° N in the Pacific Ocean. Comparison of responses in p NH4 to ambient solar‐ and lamp‐enhanced UVBR spectra allowed calculation of an action spectrum for p NH4 inhibition. The slope of the action spectrum for Pnh 4 is half as steep as action spectra for UVBR inhibition of photosynthetic carbon uptake. Consequently, WBR‐induced photoinhibition of p NH4 extends to greater depths than inhibition of carbon fixation due to the greater relative effect of longer UVBR wavelengths. Inhibition of p NH4 was depende"
+            },
+            {
+              "document_id": "W2107557999",
+              "title": "Seasonal Changes in Temperature Dependence of Photosynthetic Rate in Rice Under a Free-air CO2 Enrichment",
+              "doi": "https://doi.org/10.1093/aob/mcl001",
+              "year": "2006",
+              "distance": 0.2877,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "There was both an increase in the absolute value of the light-saturated photosynthetic rate at growth CO(2) (P(growth)) and an increase in T(opt) for P(growth) caused by elevated CO(2) in FACE conditions. Seasonal decrease in P(growth) was associated with a decrease in nitrogen content per unit leaf area (N(area)) and thus in the maximum rate of electron transport (J(max)) and the maximum rate of RuBP carboxylation (V(cmax)). At ambient CO(2), T(opt) increased with increasing growth temperature due mainly to increasing activation energy of V(cmax). At elevated CO(2), T(opt) did not show a clear seasonal trend. Temperature dependence of photosynthesis was changed by seasonal climate and plant"
+            },
+            {
+              "document_id": "W2131119068",
+              "title": "Interactive effects of elevated CO<sub>2</sub> and soil fertility on isoprene emissions from <i>Quercus robur</i>",
+              "doi": "https://doi.org/10.1111/j.1365-2486.2004.00845.x",
+              "year": "2004",
+              "distance": 0.288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract The effects of global change on the emission rates of isoprene from plants are not clear. A factor that can influence the response of isoprene emission to elevated CO 2 concentrations is the availability of nutrients. Isoprene emission rate under standard conditions (leaf temperature: 30°C, photosynthetically active radiation (PAR): 1000 μmol photons m −2 s −1 ), photosynthesis, photosynthetic capacity, and leaf nitrogen (N) content were measured in Quercus robur grown in well‐ventilated greenhouses at ambient and elevated CO 2 (ambient plus 300 ppm) and two different soil fertilities. The results show that elevated CO 2 enhanced photosynthesis but leaf respiration rates were not af"
+            },
+            {
+              "document_id": "W2001337441",
+              "title": "Regulation of Carbon Flow by Nitrogen and Light in the Red Alga, <i>Gelidium coulteri</i>",
+              "doi": "https://doi.org/10.1104/pp.82.1.136",
+              "year": "1986",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The red alga Gelidium coulteri Harv. photosynthetically fixed [(14)C] bicarbonate at high rates under defined conditions in unialgal laboratory culture. The fixation rate and flow of photosynthate into various end products were dependent on the nitrogen status of the tissue. Plants fed luxury levels of nitrogen (approximately 340 micromolar) showed fixation rates several-fold higher than those seen for plants starved for nitrogen. The addition of NO(3) (-) or NH(4) (+) to such starved plants further inhibited fixation over at least the first several hours after addition. The majority of (14)C after incubations of 30 minutes to 8 hours was found in the compounds floridoside, agar and floridea"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.289,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            }
+          ]
+        }
+      }
+    }
+  }
+}

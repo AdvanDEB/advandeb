@@ -1,0 +1,743 @@
+{
+  "sf_id": "eps_03",
+  "category": "EPS Production",
+  "statement": "EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact (SF12) is directly stated and affirmed in several snippets from LoreMarq2010.pdf. Snippet [4] lists it verbatim as a stylized fact attributed to Underwood et al. (38), and snippets [1], [2], and [3] explicitly describe EPS type 1 being produced under all conditions while EPS type 2 (linked to the rejection flux jECR) is produced under nutrient-limiting conditions. These provide clear, mutually consistent support, with no contradicting evidence. Snippet [16] offers indirect support via the mechanism of nutrient-limitation-driven release of distinct compounds. The remaining snippets (Livanou-series, Lew2015, Troo/Kooi) concern related DEB rejection-flux/DOC-release modeling or are off-topic and do not directly bear on the type-1/type-2 EPS distinction. Overall the corpus corroborates the fact, but the supporting evidence derives essentially from a single primary source chain (Lorena et al. 2010 citing Underwood et al. 38), so strength is moderate rather than strong."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.4067002534866333
+        },
+        "69b847bdec32c55db5430a29": {
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.547617495059967
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4067,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "roportional to the speciﬁc growth rate represented by _|G. The proportionality is given by yPG, 413which has to be positive. 414Finally, SF12 - a different type of EPS (i.e. different chemical composition) is produced under 415nutrient limiting conditions - identiﬁes a new type of EPS related to nutrient limiting conditions. 416Underwood et al. (38) differentiates this EPS as type 2, in opposition to the EPS type 1 which 417is produced under all conditions. From the several possibilities - growth, maintenance and 418rejection - only one is directly related to nutrient limiting conditions, and that is the rejection ﬂux 419_|ECR. 420"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4209,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "nce and 418rejection - only one is directly related to nutrient limiting conditions, and that is the rejection ﬂux 419_|ECR. 420Until this point, no relation between maintenance and EPS production was considered. The 421fact that EPS type 1 is produced under a wide range of conditions, even when growth is almost 422null, suggests that this type of EPS is also related to maintenance. Furthermore, Underwood 423et al. (38) suggests that EPS production is also related to motility in some diatoms, a process 424associated with maintenance in the context of DEB theory. 425"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4438,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "d Hsieh et al. (16), which was 439to be expected since microbial metabolism is more similar to the standard DEB model (which 440has a single reserve) which does not need to consider rejection ﬂuxes. For microalgae this 441term is necessary to ﬁt SF12 – EPS type 2 production increases in nutrient limiting conditions. 442Hsieh et al. (16) complies with this fact using an alternative approach to the decay term: this 443term is taken to be proportional to nutrient-limitation, i.e. when in nutrient limiting conditions 444the decay-related fraction of EPS production rate will increase. 4454 Conclusions 446"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5012,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPSSF10. no EPS production results directly from light-dependent carbon assimilation; (38)SF11. cellular production rates of EPS and other extracellular carbohydrates increase with speciﬁc growth rate; (38)SF12. EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells; (38)1 Introduction 23A common approach in microalgae research is to obtain and generalize empirical patterns 24through experimental work. These patterns, which in this paper will be referred as stylized 25"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5163,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "and higher speciﬁc PP rate (Fig. 4b) than N-limited cells during the intermediate and the early nutrient-limited phase. However,in the late nutrient-limited phase of the P-limited scenario, the low densities of nitrogen and phosphorus reserves (Fig. 5c,d, redasterisks), that coincide with the lowest speciﬁc PP and DOC release rates (Fig. 4b,c, red asterisks) observed overall, suggestthat cells are co-limited by both nutrients.Generally, in both scenarios, speciﬁc DOC release rate presents a maximum value in the intermediate phase and a minimum 15"
+        },
+        {
+          "document_id": "69b847bdec32c55db5430a29",
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5195,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "ease rate is analyzed into the contributing ﬂuxes that arepresented in Fig. 4a. DOC release has contributions from three ﬂuxes:jDOC ,R, the rejection ﬂux from the EC-reserves due to nutrient limitation,given in Eq. ( 10), jDOC ,G, which is proportional to growth rate, given inEq. ( 11), and the ﬂux=+jhm m˙( )DOC D EE , Cthat relates to the releaseof DOC due to cell death and subsequent lysis. Fig. 4a illustrates therelative contribution of the three ﬂuxes to DOC release. The ﬂuxjDOC ,G,has the highest contribution to DOC release during the N-replete phase(Fig. 4 a, solid line). With the onset of the N-limited phase the relative"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5213,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "synthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase(Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash-dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of thejDOC,R ﬂux (Fig. 6, solid line) and it is indicative of stoichiometrically unbalanced growth. In the nutrient-limited phase (both"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5289,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "g the N-replete phase DOC is almost entirelycomprised by DOC L(mean value throughout the N-replete phase: 99%, Fig. 2.4 b, solid31Figure 2.3: Structural mass-speciﬁc rates. (a) Net speciﬁc growth rate, (b) speciﬁc primaryproduction (PP) rate, (c) speciﬁc DOC release rate and (d) Percentage Extracellular Release(PER). Vertical dotted line marks the two phases of nutrient availability (N-replete, N-limited).line). As nutrient limitation progresses, the fraction of DOC H(Fig. 2.4 b, dashed line),progressively increases, as a result of the increased relative importance of the jDOC;Rﬂux"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5301,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "denote the nutrient-replete phase, dash-dot lines denote the intermediate phase and asterisks denote the nutrient-limited phase.29Biogeosciences Discuss., https://doi.org/10.5194/bg-2017-426Manuscript under review for journal BiogeosciencesDiscussion started: 23 October 2017c Author(s) 2017. CC BY 4.0 License.Figure 6. Analysis of the DOC release rate into the contributing ﬂuxes for the N-limited (left) and the P-limited (right) scenario ( jDOC,G :dashed line,jDOC,R : solid line,jDOC,D : dash-dot line). Vertical dotted lines denote the three phases of nutrient availability (nutrient-replete,intermediate, nutrient-limited)."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5313,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "of agreement between 385studies (e.g. Staats et al. (37) found that EPS production rate is null in the darkness while Smith 386and Underwood (35) state that it may even increase). Underwood et al. (38) made an effort 387to clarify the effect of environmental aspects in production rates, production pathways and 388chemical composition of EPS. Notwithstanding its merits, the work lacks an uniﬁed approach, 389presented by those such as Laspidou (20) for microbial EPS production. The formulation of 390an uniﬁed theory for microalgal EPS production is outside the scope of this work; our aim is 391"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.536,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "017-426Manuscript under review for journal BiogeosciencesDiscussion started: 23 October 2017c Author(s) 2017. CC BY 4.0 License.Figure 4. Structural mass-speciﬁc rates. (a) speciﬁc growth rate, (b) speciﬁc primary production (PP) rate, (c) speciﬁc DOC release rateand (d) Percentage Extracellular Release (PER) for the N-limited (blue line) and the P-limited scenario (red line). Solid lines denote thenutrient-replete phase, dash-dot lines denote the intermediate phase and asterisks denote the nutrient-limited phase.28Biogeosciences Discuss., https://doi.org/10.5194/bg-2017-426Manuscript under review for journal Biogeosciences"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5383,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "will be rejected by the SU 2at ratesjEi,R=jEi,C−yi,E/primejE/prime,C (i=CH,P )jEi,R=jEi,C−θCiyi,E/primejE/prime,C(i=NH,NO ) (14)ThesejEi,Rrejection ﬂuxes are further divided into two types of ﬂuxes: a ﬁxed fraction κEithat is fed back to the respective 25reserve and the rest (1−κEi)that is excreted in the environment (Kooijman, 2010; Marques et al., 2014). This rejection ﬂuxdirected outside the cell is linked to the active exudation of the non-limiting compounds into the environment (Myklestad,1995; Fogg, 1983). This ﬂux is dynamic and depends on the nutrient status of the cell. Based on experimental evidence about"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5424,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "This rejection ﬂux, directed outsidethe cell, is dynamic and depends on the nutrient status of the cell. The (1\u0000\u0014Ei)fraction ofthe rejection ﬂux from the EC-reserves,jDOC;R, is fed to the DOC pool, while the rejectionﬂux fromEN-reserves,jDON;R, is fed to the DON poolj`;R= (1\u0000\u0014Ei)jEi;R(`=DOC;DON )and (i=C;N ) (2.10)According to DEB theory product synthesis must be a weighted sum of the basic ﬂuxes:assimilation, maintenance and growth (Kooijman, 2010; Lorena et al., 2010). No directevidence exists for DOM excretion related either to assimilation or maintenance. However,"
+        },
+        {
+          "document_id": "69b847bdec32c55db5430a29",
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5448,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "e context of DEB theory, exudation of DOM by phytoplanktoncan be described when considering the two possible contributing ﬂuxes:rejection ﬂux and product synthesis ( Lorena et al., 2010 ). The catabolicﬂuxes from the ECand ENthat cannot be used for synthesis will berejected by the SU 2at rates=− =′′ jjy j i C N (,)ER EC iEEC ,, ,, ii (9)These jEi,Rrejection ﬂuxes are further divided into two types ofﬂuxes: a ﬁxed fraction κEithat is fed back to the respective reserve andthe rest (1 −κEi) that is excreted in the environment ( Kooijman, 2010;Marques et al., 2014). This rejection ﬂux, directed outside the cell, is"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5452,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "and so the half saturation constant defines the shape of the saturating curve and therefore the nature of the cells response to changing ambient conditions. Both Pro and SAR11 use the same high affinity ABC -cassette transporters (Kettler et al., 2007 , Sowell et al., 2008 ) and so may have a similar response to changing ambient nutrient conditions. The half saturation constants for DOC, DON and DIN are therefore considered to be the same for Pro and SAR11. For simplicity the maximum ambient concentrations for DOC, DON and DIN are 1 and each nutrient’s half saturation constant is 0.2, which produces a similar shaped curve to that"
+        },
+        {
+          "document_id": "69b847bdec32c55db5430a29",
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5476,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.45,
+          "text": "al., 2008 ). On the other hand, it was assumed that DOC pro-duced under N-limiting conditions, associated with the mechanism ofrejection of unprocessed substrates by the SU (DOC H), should have amore distinct composition from the cellular material. Furthermore, thereduction of DON release rate during the N-limited phase and thesubsequent increase in the C:N ratio of produced DOM, indicates thatDOCHproduced under N-limiting conditions should be mainly in theform of nitrogen-free compounds, such as carbohydrates.In accordance with our assumptions and model results, cell struc-"
+        },
+        {
+          "document_id": "69b87429ecbd4702b29a3b7a",
+          "title": "TrooKooi2005a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5479,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "up and evolve into specialists. The dashed line in Adenotes the critical mixing intensity above which the system is not viable,and in Bit denotes the critical nutrient content below which the system is not viable.an intrinsic advantage to specialize into autotrophic andheterotrophic strategies, while values smaller than 1 pro-vide a disadvantage to specialization. In the ﬁgure, it canbe seen that when only molecular diffusion takes care ofthe vertical transport ( m2day/H110021), the evo-/H110025Kp9.10Vlutionary equilibrium (SS) will be stable unless zbecomes"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5495,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "a nd may be important competitive traits at low nutrient concentrations, as in oligotrophic gyres. For small cells, the smaller nutrient fluxes through the membrane required to create a given fraction of the cell volume, increases the utility of low concentr ations of nutrients to smaller relative to larger cells (Raven, 1998 ). Resources can therefore be acquired and used for metabolism and growth more effectively in smaller cells (Raven, 1998 ). Pro are spherical to first order (Partensky et al., 1999 ). SAR11 are cylindrical and roughly one eighth of the volume of Pro (Rappé et al., 2002 )."
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address extracellular polymeric substance (EPS) production or the differential production of EPS type 1 versus type 2 under nutrient-limiting conditions. The snippets concern unrelated topics such as yeast mating-type loci, Paramecium food vacuole formation, T-helper cell subtypes, oocyte gene expression, and bacterial phase variation. Although some mention 'type I/II' cells and nutrient limitation, these are coincidental terminological overlaps with no bearing on the truth of the stylized fact about EPS production. There is no supporting or contradicting evidence, so evidence strength is weak and the corpus is uninformative regarding this fact."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W2526514754",
+          "title": "RADIOACTIVE PHOSPHORUS ACCUMULATION AND DISTRIBUTION IN TETRAHYMENA",
+          "doi": "10.2307/1539595",
+          "year": "1962",
+          "distance": 0.4545,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "type II as compared to mating type I. This appears to be correlated with the greater ion accumulation ability found in type II. Only about twice as much acidsoluble phosphorus was found in type II compared with type I, however."
+        },
+        {
+          "document_id": "W2083886791",
+          "title": "Hybrid T-Helper Cells: Stabilizing the Moderate Center in a Polarized System",
+          "doi": "10.1371/journal.pbio.1001632",
+          "year": "2013",
+          "distance": 0.4746,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "canonical subtypes, Th1 and Th2 cells, tell a different story, as revealed in three papers recently published in PLOS Biology. The intermediate state that co-expresses the two opposing master regulators of the Th1 and Th2 subtypes, T-bet and Gata3, is highly stable and is not necessarily an undecided precursor. Instead, the Th1/Th2 hybrid cell is a robust new type with properties of both Th1 and Th2 cells."
+        },
+        {
+          "document_id": "W1578818795",
+          "title": "Suppressor of deoxythmidine monophosphate uptake in Saccharomyces cerevisiae",
+          "doi": "10.1128/jb.138.2.638-641.1979",
+          "year": "1979",
+          "distance": 0.4895,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.03,
+          "text": "medium could support the incorporation of [3H]dTMP by a tup2 strain. Therefore, sot1 strains do not degrade dTMP in the medium. The sot1 mutation had no effect on the uptake of other nutrients essential for growth, including several amino acids, adenine, and uracil."
+        },
+        {
+          "document_id": "W1974905046",
+          "title": "Regulation of the Yeast HO Gene",
+          "doi": "10.1101/sqb.1985.050.01.078",
+          "year": "1985",
+          "distance": 0.5271,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "Saccharomyces cerevisiae has two haploid cell types (a and α) which can mate to form a third cell type: the a/α diploid. Cell type is primarily determined by the information encoded at the mating-type (MAT) locus. A haploid carries either the MATa or the MATα allele, and the diploid carries both. Master regulator genes, encoded by these two MAT alleles, affect the expression of many genes and thereby cause cell type-specific differentiation."
+        },
+        {
+          "document_id": "W588380548",
+          "title": "Mating Type, Vitamin E And Morphogenesis In Ustilago Violacea And Other Smut Fungi",
+          "doi": "",
+          "year": "1984",
+          "distance": 0.5283,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.03,
+          "text": "lleles, a(,1) and a(,2), develop into sexual phase precursor cells (SPP) on complete medium at temperatures below 20(DEGREES)C. The a(,1)/a(,2) diploid produces at least four different cell types, termed opaques, spontaneously at high frequencies (&gt; 3 x 10('-3)). These types are: (1) neutral strains (op-N) which do not mate and still initiate sporulation but under altered conditions. (2) Strains which mate as a(,1) types (op-a(,1)) and (3) cells which mate as a(,2) types (op-a(,2)). (4) Constitutively self mating (op-C) strains. Types 2 to 4 have lost the ability to develop into SPP cells."
+        },
+        {
+          "document_id": "W1873206202",
+          "title": "An RME1-independent pathway for sporulation control in Saccharomyces cerevisiae acts through IME1 transcript accumulation.",
+          "doi": "10.1093/genetics/126.4.823",
+          "year": "1990",
+          "distance": 0.5411,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "that lack the a1/alpha 2 repressor encoded by MAT. The RES1-1 mutation also supports sporulation in mat-insufficient diploids. This phenotype does not result from a failure to express RME1 and is not due to activation of the silent copies of mating type information. RES1-1 activates sporulation by allowing IME1 accumulation in all cell types, irrespective of the presence of the MAT products. IME1 is still responsive to RME1 in RES1-1 cells, since double mutants (rme1 RES1-1) that are deficient at MAT can sporulate better than either single mutant. RES1-1 is not an allele of IME1."
+        },
+        {
+          "document_id": "W1974905046",
+          "title": "Regulation of the Yeast HO Gene",
+          "doi": "10.1101/sqb.1985.050.01.078",
+          "year": "1985",
+          "distance": 0.5462,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "es, encoded by these two MAT alleles, affect the expression of many genes and thereby cause cell type-specific differentiation. Two genes from MATα (called α1 and β2) and one gene from MATa (a1) are involved in regulating cell-type-specific processes. The α1 gene product induces transcription of α-specific genes, while α2 turns off a-specific genes. In a cells, and indeed in cells lacking active MAT genes, a-specific genes are constitutively expressed. When the a/α diploid is formed, a1 and α2 both act to turn off α1 transcription, to repress haploid specific gene expression, and to induce diploid specific..."
+        },
+        {
+          "document_id": "W2093353236",
+          "title": "Single-cell quantitative RT-PCR analysis of &lt;i&gt;Cpt1b&lt;/i&gt; and &lt;i&gt;Cpt2&lt;/i&gt; gene expression in mouse antral oocytes and in preimplantation embryos",
+          "doi": "10.1159/000078191",
+          "year": "2004",
+          "distance": 0.5525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "1b&lt;/i&gt; transcripts are first and temporally detected at the 2-cell stage and reappear at the morula and blastocyst stage. &lt;i&gt;Cpt2&lt;/i&gt; transcripts decrease following fertilization to undetectable levels and are present again later at the morula stage. These results show that transcription of both &lt;i&gt;Cpt1b&lt;/i&gt; and &lt;i&gt;Cpt2&lt;/i&gt; is triggered at the morula stage, concomitantly with known increasing profiles of oxygen uptake and fatty acids oxidation."
+        },
+        {
+          "document_id": "W2060362296",
+          "title": "<i>Saccharomyces cerevisiae mat</i><b>a</b> mutant cells defective in pointed projection formation in response to α‐factor at high concentrations",
+          "doi": "10.1002/yea.320100503",
+          "year": "1994",
+          "distance": 0.553,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "sts defined three genes, PPF1 , PPF2 , and PPF3 (for pointed projection formation), necessary for pointed projection formation. Allelism tests with genes known to be needed for projection formation revealed that PPF1 is identical to SPA2 , while PPF2 and PPF3 are not allelic to SST2 , STE2 , SPA2 , BEM1 or SLK1 / SSP31 / BCK1 . The morphology of MAT a ppf mutants treated with high concentrations of α‐factor is similar to that of MAT a PPF cells treated with α‐factor at low concentrations. Quantitative mating tests showed that PPF2 and PPF3 are not essential for mating in either MAT a or MAT α background."
+        },
+        {
+          "document_id": "W1798150371",
+          "title": "A synthetic lethal screen identifies SLK1, a novel protein kinase homolog implicated in yeast cell morphogenesis and cell growth.",
+          "doi": "10.1128/mcb.12.3.1162",
+          "year": "1992",
+          "distance": 0.5553,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nbudded compared with wild-type cells, and under nutrient limiting conditions, slk1 cells exhibit defects in cell cycle arrest. The different slk1 mutant defects are partially rescued by an extra copy of the SSD1/SRK1 gene. SSD1/SRK1 has been independently isolated as a suppressor of mutations in genes involved in growth control, sit4, pde2, bcy1, and ins1 (A. Sutton, D. Immanuel, and K.T. Arnat, Mol. Cell. Biol. 11:2133-2148, 1991; R.B. Wilson, A.A. Brenner, T.B. White, M.J. Engler, J.P. Gaughran, and K. Tatchell, Mol. Cell. Biol. 11:3369-3373, 1991)."
+        },
+        {
+          "document_id": "W14086086",
+          "title": "Seasonal food insecurity and vulnerability in drought-affected regions of Burkina Faso",
+          "doi": "10.1128/jb.86.6.1173-1181.1963",
+          "year": "1989",
+          "distance": 0.5555,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "s was shown not to be a genetic exchange by mating, since cell-to-cell contact was not required for the formation of new types. New types arose when the two \"parental\" strains were not mixed; they were kept separate by means of a Millipore membrane filter. In mixed cultures on media selective for new cell types, these new types arose as a result of reversions in one strain, the apparent recipient, during residual growth promoted by materials excreted by the other strain, the apparent donor or \"feeder.\" Strains bearing one reverting and one nonreverting marker gave rise only to those types that could be accounted for by reversion."
+        },
+        {
+          "document_id": "W2045911190",
+          "title": "Structure and organization of transposable of transposable mating type cassettes in Saccharomyces yeasts.",
+          "doi": "10.1073/pnas.77.5.2839",
+          "year": "1980",
+          "distance": 0.5592,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "Cell type in Saccharomyces yeasts is regulated by two transposable blocks of DNA, the a and alpha cassettes. There are three loci where either cassette can exist. At the HML and HMR loci the cassettes are not expressed. The cassette at the MAT locus is expressed and controls the cell type. Changes of cell type involve transposition-substitution of cassettes from HML or HMR into MAT."
+        },
+        {
+          "document_id": "W85421892",
+          "title": "Food ingestion and egestion in mating reactive populations of Paramecium primaurelia.",
+          "doi": "",
+          "year": "1993",
+          "distance": 0.5612,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.03,
+          "text": "al conditions, the mating type II cells form and egest a higher number of food vacuoles when compared with mating type I cells. The higher rate of food vacuole formation shown by the mating type II cells is related to their faster growth rate."
+        },
+        {
+          "document_id": "W2119878857",
+          "title": "Identification of genes required for normal pheromone-induced cell polarization in Saccharomyces cerevisiae.",
+          "doi": "10.1093/genetics/136.4.1287",
+          "year": "1994",
+          "distance": 0.5623,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "ity during vegetative growth. The mutants were divided into classes based on their morphological responses to mating pheromone. One class is unable to localize cell-surface growth in response to mating factor and instead enlarges in a uniform manner. These mutants harbor special alleles of genes required for cell polarization during vegetative growth, BEM1 and CDC24. Another class of mutants forms bilobed, peanut-like shapes when treated with pheromone and defines two genes, PEA1 and PEA2. PEA1 is identical to SPA2. A third class forms normally shaped but tiny shmoos and defines the gene TNY1."
+        },
+        {
+          "document_id": "W2145330243",
+          "title": "Specification of sites for polarized growth in Saccharomyces cerevisiae and the influence of external factors on site selection.",
+          "doi": "10.1091/mbc.3.9.1025",
+          "year": "1992",
+          "distance": 0.5626,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.02,
+          "text": "Many eucaryotic cell types exhibit polarized cell growth and polarized cell division at nonrandom sites. The sites of polarized growth were investigated in G1 arrested haploid Saccharomyces cerevisiae cells. When yeast cells are arrested during G1 either by treatment with alpha-factor or by shifting temperature-sensitive cdc28-1 cells to the restrictive temperature, the cells form a projection."
+        },
+        {
+          "document_id": "W1973449784",
+          "title": "Food vacuole formation in the culture life of<i>Paramecium primaurelia</i>mating type I and mating type II lines",
+          "doi": "10.1080/11250009209386700",
+          "year": "1992",
+          "distance": 0.563,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.03,
+          "text": "whether the differences in vacuole formation are visible at the beginning of culture growth, or whether they occur only later. Data collected during various stages in the early life of a clone, before mating reactivity develops, show higher food vacuole numbers per cell in mating type II cells than in mating type I cells. The difference in numbers of the two mating types disappears, and then the values reverse with starvation of the culture."
+        },
+        {
+          "document_id": "W2110796584",
+          "title": "Signaling pathways for fission yeast sexual differentiation at a glance",
+          "doi": "10.1242/jcs.094771",
+          "year": "2012",
+          "distance": 0.5702,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.03,
+          "text": "2, one of the two TOR kinases identified in fission yeast, which is essential for vegetative growth (Weisman and Choder, 2001). Analysis of temperature-sensitive tor2 mutants has shown that they arrest at G1 phase of the cell cycle in nutrient medium if they are shifted to the restrictive temperature (Alvarez and Moreno, 2006; Uritani et al., 2006; Weisman et al., 2007; Matsuo et al., 2007)."
+        },
+        {
+          "document_id": "W1879322049",
+          "title": "Phase Variation in <i>Xenorhabdus nematophilus</i> and <i>Photorhabdus luminescens</i> : Differences in Respiratory Activity and Membrane Energization",
+          "doi": "10.1128/aem.60.1.120-125.1994",
+          "year": "1994",
+          "distance": 0.5713,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "addition of nutrients, compared with 14 h for phase I cells, indicating a more efficient nutrient uptake ability in the former. The levels of activity of major respiratory enzymes were 15 to 100% higher in phase II cells from stationary cultures in complex media than in phase I cells. Transmembrane proton motive force measurements were also higher by 20% in phase II under the same conditions. The increased membrane potentials reflect upon the ability of the phase II variant to respond to nutrients, both through growth and nutrient uptake."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact is directly stated and supported by several snippets from LoreMarq2010 (1, 2, 3, 4), which explicitly cite Underwood et al. (38) for the distinction between EPS type 1 (produced under all conditions, linked to maintenance) and EPS type 2 (produced under nutrient-limiting conditions, linked to the rejection flux). These provide clear, consistent corroboration, though they trace back to a single primary source. Snippet 12 (Livanou) supports the mechanistic basis via nutrient-status-dependent rejection/exudation fluxes. The remaining Livanou snippets are topically related to nutrient-limited DOC/EPS release but do not directly address the type 1/type 2 EPS distinction, and snippets 13-24 are entirely off-topic (yeast mating types, immune cells, etc.). No snippet contradicts the fact, so the direction is corroborated, but evidence breadth is moderate since support concentrates in one paper/primary reference."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.4067002534866333
+        },
+        "69b8484aec32c55db5430bc1": {
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5383495688438416
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4067,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "roportional to the speciﬁc growth rate represented by _|G. The proportionality is given by yPG, 413which has to be positive. 414Finally, SF12 - a different type of EPS (i.e. different chemical composition) is produced under 415nutrient limiting conditions - identiﬁes a new type of EPS related to nutrient limiting conditions. 416Underwood et al. (38) differentiates this EPS as type 2, in opposition to the EPS type 1 which 417is produced under all conditions. From the several possibilities - growth, maintenance and 418rejection - only one is directly related to nutrient limiting conditions, and that is the rejection ﬂux 419_|ECR. 420"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4209,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "nce and 418rejection - only one is directly related to nutrient limiting conditions, and that is the rejection ﬂux 419_|ECR. 420Until this point, no relation between maintenance and EPS production was considered. The 421fact that EPS type 1 is produced under a wide range of conditions, even when growth is almost 422null, suggests that this type of EPS is also related to maintenance. Furthermore, Underwood 423et al. (38) suggests that EPS production is also related to motility in some diatoms, a process 424associated with maintenance in the context of DEB theory. 425"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4438,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "d Hsieh et al. (16), which was 439to be expected since microbial metabolism is more similar to the standard DEB model (which 440has a single reserve) which does not need to consider rejection ﬂuxes. For microalgae this 441term is necessary to ﬁt SF12 – EPS type 2 production increases in nutrient limiting conditions. 442Hsieh et al. (16) complies with this fact using an alternative approach to the decay term: this 443term is taken to be proportional to nutrient-limitation, i.e. when in nutrient limiting conditions 444the decay-related fraction of EPS production rate will increase. 4454 Conclusions 446"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5012,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPSSF10. no EPS production results directly from light-dependent carbon assimilation; (38)SF11. cellular production rates of EPS and other extracellular carbohydrates increase with speciﬁc growth rate; (38)SF12. EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells; (38)1 Introduction 23A common approach in microalgae research is to obtain and generalize empirical patterns 24through experimental work. These patterns, which in this paper will be referred as stylized 25"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5163,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "and higher speciﬁc PP rate (Fig. 4b) than N-limited cells during the intermediate and the early nutrient-limited phase. However,in the late nutrient-limited phase of the P-limited scenario, the low densities of nitrogen and phosphorus reserves (Fig. 5c,d, redasterisks), that coincide with the lowest speciﬁc PP and DOC release rates (Fig. 4b,c, red asterisks) observed overall, suggestthat cells are co-limited by both nutrients.Generally, in both scenarios, speciﬁc DOC release rate presents a maximum value in the intermediate phase and a minimum 15"
+        },
+        {
+          "document_id": "69b847bdec32c55db5430a29",
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5195,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "ease rate is analyzed into the contributing ﬂuxes that arepresented in Fig. 4a. DOC release has contributions from three ﬂuxes:jDOC ,R, the rejection ﬂux from the EC-reserves due to nutrient limitation,given in Eq. ( 10), jDOC ,G, which is proportional to growth rate, given inEq. ( 11), and the ﬂux=+jhm m˙( )DOC D EE , Cthat relates to the releaseof DOC due to cell death and subsequent lysis. Fig. 4a illustrates therelative contribution of the three ﬂuxes to DOC release. The ﬂuxjDOC ,G,has the highest contribution to DOC release during the N-replete phase(Fig. 4 a, solid line). With the onset of the N-limited phase the relative"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5213,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "synthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase(Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash-dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of thejDOC,R ﬂux (Fig. 6, solid line) and it is indicative of stoichiometrically unbalanced growth. In the nutrient-limited phase (both"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5289,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "g the N-replete phase DOC is almost entirelycomprised by DOC L(mean value throughout the N-replete phase: 99%, Fig. 2.4 b, solid31Figure 2.3: Structural mass-speciﬁc rates. (a) Net speciﬁc growth rate, (b) speciﬁc primaryproduction (PP) rate, (c) speciﬁc DOC release rate and (d) Percentage Extracellular Release(PER). Vertical dotted line marks the two phases of nutrient availability (N-replete, N-limited).line). As nutrient limitation progresses, the fraction of DOC H(Fig. 2.4 b, dashed line),progressively increases, as a result of the increased relative importance of the jDOC;Rﬂux"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5301,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "denote the nutrient-replete phase, dash-dot lines denote the intermediate phase and asterisks denote the nutrient-limited phase.29Biogeosciences Discuss., https://doi.org/10.5194/bg-2017-426Manuscript under review for journal BiogeosciencesDiscussion started: 23 October 2017c Author(s) 2017. CC BY 4.0 License.Figure 6. Analysis of the DOC release rate into the contributing ﬂuxes for the N-limited (left) and the P-limited (right) scenario ( jDOC,G :dashed line,jDOC,R : solid line,jDOC,D : dash-dot line). Vertical dotted lines denote the three phases of nutrient availability (nutrient-replete,intermediate, nutrient-limited)."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5313,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "of agreement between 385studies (e.g. Staats et al. (37) found that EPS production rate is null in the darkness while Smith 386and Underwood (35) state that it may even increase). Underwood et al. (38) made an effort 387to clarify the effect of environmental aspects in production rates, production pathways and 388chemical composition of EPS. Notwithstanding its merits, the work lacks an uniﬁed approach, 389presented by those such as Laspidou (20) for microbial EPS production. The formulation of 390an uniﬁed theory for microalgal EPS production is outside the scope of this work; our aim is 391"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.536,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "017-426Manuscript under review for journal BiogeosciencesDiscussion started: 23 October 2017c Author(s) 2017. CC BY 4.0 License.Figure 4. Structural mass-speciﬁc rates. (a) speciﬁc growth rate, (b) speciﬁc primary production (PP) rate, (c) speciﬁc DOC release rateand (d) Percentage Extracellular Release (PER) for the N-limited (blue line) and the P-limited scenario (red line). Solid lines denote thenutrient-replete phase, dash-dot lines denote the intermediate phase and asterisks denote the nutrient-limited phase.28Biogeosciences Discuss., https://doi.org/10.5194/bg-2017-426Manuscript under review for journal Biogeosciences"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5383,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "will be rejected by the SU 2at ratesjEi,R=jEi,C−yi,E/primejE/prime,C (i=CH,P )jEi,R=jEi,C−θCiyi,E/primejE/prime,C(i=NH,NO ) (14)ThesejEi,Rrejection ﬂuxes are further divided into two types of ﬂuxes: a ﬁxed fraction κEithat is fed back to the respective 25reserve and the rest (1−κEi)that is excreted in the environment (Kooijman, 2010; Marques et al., 2014). This rejection ﬂuxdirected outside the cell is linked to the active exudation of the non-limiting compounds into the environment (Myklestad,1995; Fogg, 1983). This ﬂux is dynamic and depends on the nutrient status of the cell. Based on experimental evidence about"
+        },
+        {
+          "document_id": "W2526514754",
+          "title": "RADIOACTIVE PHOSPHORUS ACCUMULATION AND DISTRIBUTION IN TETRAHYMENA",
+          "doi": "10.2307/1539595",
+          "year": "1962",
+          "distance": 0.4545,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "type II as compared to mating type I. This appears to be correlated with the greater ion accumulation ability found in type II. Only about twice as much acidsoluble phosphorus was found in type II compared with type I, however."
+        },
+        {
+          "document_id": "W2083886791",
+          "title": "Hybrid T-Helper Cells: Stabilizing the Moderate Center in a Polarized System",
+          "doi": "10.1371/journal.pbio.1001632",
+          "year": "2013",
+          "distance": 0.4746,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "canonical subtypes, Th1 and Th2 cells, tell a different story, as revealed in three papers recently published in PLOS Biology. The intermediate state that co-expresses the two opposing master regulators of the Th1 and Th2 subtypes, T-bet and Gata3, is highly stable and is not necessarily an undecided precursor. Instead, the Th1/Th2 hybrid cell is a robust new type with properties of both Th1 and Th2 cells."
+        },
+        {
+          "document_id": "W1578818795",
+          "title": "Suppressor of deoxythmidine monophosphate uptake in Saccharomyces cerevisiae",
+          "doi": "10.1128/jb.138.2.638-641.1979",
+          "year": "1979",
+          "distance": 0.4895,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "medium could support the incorporation of [3H]dTMP by a tup2 strain. Therefore, sot1 strains do not degrade dTMP in the medium. The sot1 mutation had no effect on the uptake of other nutrients essential for growth, including several amino acids, adenine, and uracil."
+        },
+        {
+          "document_id": "W1974905046",
+          "title": "Regulation of the Yeast HO Gene",
+          "doi": "10.1101/sqb.1985.050.01.078",
+          "year": "1985",
+          "distance": 0.5271,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Saccharomyces cerevisiae has two haploid cell types (a and α) which can mate to form a third cell type: the a/α diploid. Cell type is primarily determined by the information encoded at the mating-type (MAT) locus. A haploid carries either the MATa or the MATα allele, and the diploid carries both. Master regulator genes, encoded by these two MAT alleles, affect the expression of many genes and thereby cause cell type-specific differentiation."
+        },
+        {
+          "document_id": "W588380548",
+          "title": "Mating Type, Vitamin E And Morphogenesis In Ustilago Violacea And Other Smut Fungi",
+          "doi": "",
+          "year": "1984",
+          "distance": 0.5283,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "lleles, a(,1) and a(,2), develop into sexual phase precursor cells (SPP) on complete medium at temperatures below 20(DEGREES)C. The a(,1)/a(,2) diploid produces at least four different cell types, termed opaques, spontaneously at high frequencies (&gt; 3 x 10('-3)). These types are: (1) neutral strains (op-N) which do not mate and still initiate sporulation but under altered conditions. (2) Strains which mate as a(,1) types (op-a(,1)) and (3) cells which mate as a(,2) types (op-a(,2)). (4) Constitutively self mating (op-C) strains. Types 2 to 4 have lost the ability to develop into SPP cells."
+        },
+        {
+          "document_id": "W1873206202",
+          "title": "An RME1-independent pathway for sporulation control in Saccharomyces cerevisiae acts through IME1 transcript accumulation.",
+          "doi": "10.1093/genetics/126.4.823",
+          "year": "1990",
+          "distance": 0.5411,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "that lack the a1/alpha 2 repressor encoded by MAT. The RES1-1 mutation also supports sporulation in mat-insufficient diploids. This phenotype does not result from a failure to express RME1 and is not due to activation of the silent copies of mating type information. RES1-1 activates sporulation by allowing IME1 accumulation in all cell types, irrespective of the presence of the MAT products. IME1 is still responsive to RME1 in RES1-1 cells, since double mutants (rme1 RES1-1) that are deficient at MAT can sporulate better than either single mutant. RES1-1 is not an allele of IME1."
+        },
+        {
+          "document_id": "W1974905046",
+          "title": "Regulation of the Yeast HO Gene",
+          "doi": "10.1101/sqb.1985.050.01.078",
+          "year": "1985",
+          "distance": 0.5462,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "es, encoded by these two MAT alleles, affect the expression of many genes and thereby cause cell type-specific differentiation. Two genes from MATα (called α1 and β2) and one gene from MATa (a1) are involved in regulating cell-type-specific processes. The α1 gene product induces transcription of α-specific genes, while α2 turns off a-specific genes. In a cells, and indeed in cells lacking active MAT genes, a-specific genes are constitutively expressed. When the a/α diploid is formed, a1 and α2 both act to turn off α1 transcription, to repress haploid specific gene expression, and to induce diploid specific..."
+        },
+        {
+          "document_id": "W2093353236",
+          "title": "Single-cell quantitative RT-PCR analysis of &lt;i&gt;Cpt1b&lt;/i&gt; and &lt;i&gt;Cpt2&lt;/i&gt; gene expression in mouse antral oocytes and in preimplantation embryos",
+          "doi": "10.1159/000078191",
+          "year": "2004",
+          "distance": 0.5525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "1b&lt;/i&gt; transcripts are first and temporally detected at the 2-cell stage and reappear at the morula and blastocyst stage. &lt;i&gt;Cpt2&lt;/i&gt; transcripts decrease following fertilization to undetectable levels and are present again later at the morula stage. These results show that transcription of both &lt;i&gt;Cpt1b&lt;/i&gt; and &lt;i&gt;Cpt2&lt;/i&gt; is triggered at the morula stage, concomitantly with known increasing profiles of oxygen uptake and fatty acids oxidation."
+        },
+        {
+          "document_id": "W2060362296",
+          "title": "<i>Saccharomyces cerevisiae mat</i><b>a</b> mutant cells defective in pointed projection formation in response to α‐factor at high concentrations",
+          "doi": "10.1002/yea.320100503",
+          "year": "1994",
+          "distance": 0.553,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "sts defined three genes, PPF1 , PPF2 , and PPF3 (for pointed projection formation), necessary for pointed projection formation. Allelism tests with genes known to be needed for projection formation revealed that PPF1 is identical to SPA2 , while PPF2 and PPF3 are not allelic to SST2 , STE2 , SPA2 , BEM1 or SLK1 / SSP31 / BCK1 . The morphology of MAT a ppf mutants treated with high concentrations of α‐factor is similar to that of MAT a PPF cells treated with α‐factor at low concentrations. Quantitative mating tests showed that PPF2 and PPF3 are not essential for mating in either MAT a or MAT α background."
+        },
+        {
+          "document_id": "W1798150371",
+          "title": "A synthetic lethal screen identifies SLK1, a novel protein kinase homolog implicated in yeast cell morphogenesis and cell growth.",
+          "doi": "10.1128/mcb.12.3.1162",
+          "year": "1992",
+          "distance": 0.5553,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "nbudded compared with wild-type cells, and under nutrient limiting conditions, slk1 cells exhibit defects in cell cycle arrest. The different slk1 mutant defects are partially rescued by an extra copy of the SSD1/SRK1 gene. SSD1/SRK1 has been independently isolated as a suppressor of mutations in genes involved in growth control, sit4, pde2, bcy1, and ins1 (A. Sutton, D. Immanuel, and K.T. Arnat, Mol. Cell. Biol. 11:2133-2148, 1991; R.B. Wilson, A.A. Brenner, T.B. White, M.J. Engler, J.P. Gaughran, and K. Tatchell, Mol. Cell. Biol. 11:3369-3373, 1991)."
+        },
+        {
+          "document_id": "W14086086",
+          "title": "Seasonal food insecurity and vulnerability in drought-affected regions of Burkina Faso",
+          "doi": "10.1128/jb.86.6.1173-1181.1963",
+          "year": "1989",
+          "distance": 0.5555,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "s was shown not to be a genetic exchange by mating, since cell-to-cell contact was not required for the formation of new types. New types arose when the two \"parental\" strains were not mixed; they were kept separate by means of a Millipore membrane filter. In mixed cultures on media selective for new cell types, these new types arose as a result of reversions in one strain, the apparent recipient, during residual growth promoted by materials excreted by the other strain, the apparent donor or \"feeder.\" Strains bearing one reverting and one nonreverting marker gave rise only to those types that could be accounted for by reversion."
+        },
+        {
+          "document_id": "W2045911190",
+          "title": "Structure and organization of transposable of transposable mating type cassettes in Saccharomyces yeasts.",
+          "doi": "10.1073/pnas.77.5.2839",
+          "year": "1980",
+          "distance": 0.5592,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Cell type in Saccharomyces yeasts is regulated by two transposable blocks of DNA, the a and alpha cassettes. There are three loci where either cassette can exist. At the HML and HMR loci the cassettes are not expressed. The cassette at the MAT locus is expressed and controls the cell type. Changes of cell type involve transposition-substitution of cassettes from HML or HMR into MAT."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,743 @@
+{
+  "sf_id": "nc_02",
+  "category": "N:C ratio",
+  "statement": "N:C decreases with dilution rate in light limiting conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The corpus is dominated by a single paper (LoreMarq2010), which explicitly states the stylized fact and supports it via model simulation: snippet [5] directly concludes 'the N:C ratio decreases with dilution rate in light or carbon limiting conditions,' while [1] and [6] provide the mechanistic rationale (decreasing N-reserve density and increasing C-reserve density with dilution rate). Snippet [12] lists the fact as SF2, and [3] reformulates it. The supporting evidence is consistent and internally coherent, but it derives largely from one source's model rather than independent empirical datasets, and the authors caveat that the simulated N:C values fall outside the typical range and that light can only co-limit in a chemostat. The OmtaBrug2009 snippets ([4],[9]) concern C:N vs. irradiance and are tangential rather than contradictory. No snippet contradicts the fact, so the direction is corroborated, but the limited independent confirmation keeps evidence strength moderate."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 6,
+          "supports": 5,
+          "contradicts": 0,
+          "best_distance": 0.3355944752693176
+        },
+        "69b89188ecbd4702b29a611f": {
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34030795097351074
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3356,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "s rationale is similar to 302curve in ﬁgure 4A. When dilution rate is increased, CO 2available to microalgae also increases, 303which partially compensates the constant low-light conditions (eq. 3) thus increasing C-reserve 304density. On the other hand, higher dilution rates (which in steady-state implies higher speciﬁc 305growth rates) reduce the rejection ﬂux corresponding to N-reserve and, since _|ENAis already 306at its maximum (nitrogen is non-limiting), the N-reserve density decreases with dilution rate. 307Due to the increase in C-reserve density and the decrease in N-reserve density, it is clear that 308"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3373,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "c rate cannot increase further. The light dependency is represented by the following equation (2.5): 𝜇=𝑚𝑖𝑛 (1,𝐿𝐿𝑆) (2.5) Where: • 𝐿 is the environmental light intensity (𝐸𝑚−2𝑑𝑎𝑦−1) at the individual’s depth • 𝐿𝑆 is the light saturation point, which is the maximum light intensity the organism can process. This function indicates that as light availability increases, the photosynthetic rate increases in a linear manner. However, when the light intensity exceeds the saturation point 𝐿𝑆 , the rate of photosynthesis levels off, as the organism’s capacity to process light"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3393,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "lation will only reach steady-state 297atMV= 0. This means that in a chemostat light can only co-limit. The alternative, not 298contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299unit ofMVin a similar way that carbon and nitrogen sources decrease with increasing biomass. 300We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302curve in ﬁgure 4A. When dilution rate is increased, CO 2available to microalgae also increases, 303"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3403,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "-saturation constant. In this regime of low irradiance, theuptake of DIC into the carbohydrate reserve increases with irradiance(Fig. 2 ), while all the other rates, such as DIN uptake, are unaffectedand hence, the C:N ratio strongly increases with increasing lightintensity. Furthermore, the C:N ratio increases with decreasing tem-perature in this low-irradiance regime, because at low lightintensities, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrate"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3462,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ases with dilution rate. 307Due to the increase in C-reserve density and the decrease in N-reserve density, it is clear that 308the N:C ratio decreases with dilution rate in light or carbon limiting conditions. However, it must 309be noted that the N:C values for this simulation are outside the typical range of values due 310to the excessive accumulation of nitrogen. This suggests that either the fraction of rejection 311ﬂux incorporated in N-reserve \u0014ENis too high or that there are other relevant processes not 312considered in the proposed model (e.g. energy costs for nitrogen assimilation). 313"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3594,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "XNr=1mM;XCr=1mM;T=298K;h= 0:4d\u00001).case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288carbon assimilation is constant. The same pattern is not observed in the N-reserve because 289_|ENAincreases with dilution rate, contrary to the _|ECAwhich is practically constant (since CO 2 290is non-limiting and light is forced constant). 291SF2 - N:C ratio decreases with dilution rate when light limited (21) - is harder to simulate and 292understand, mainly because of the deﬁnition of light limited. If a population is grown with 293"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.371,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3715,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": ") - is harder to simulate and 292understand, mainly because of the deﬁnition of light limited. If a population is grown with 293dilution rate _hin light limiting conditions there are only two possible outcomes: (i) irradiance is 294enough to support _r >_hand, since _|phis constant per unit of MV(eq. 2), biomass will grow 29514and steady-state will only be attained when one mineral (carbon or nitrogen) limits growth; 296(ii) irradiance is not enough to support _r > _hand the population will only reach steady-state 297atMV= 0. This means that in a chemostat light can only co-limit. The alternative, not 298"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3817,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "e−Eak1T−1Tref/C16/C171+e−Eak1T−1Tref/C16/C17:JL;FK:JL;F: ð13ÞIn the limit of low light intensities, expression (13) reduces to::JEC;A=XVjEC;Amref:JL;F:JL;FK: ð14ÞIn the limit of very high light intensities, it becomes::JEC;A=XVjEC;Amrefe−Eak1T−1Tref/C16/C17: ð15ÞThe uptake of DIC and DIN as a function of irradiance and DINconcentration respectively are shown for three different temperaturesinFig. 2 . At high light intensities, the DIC uptake rate strongly dependson temperature, whereas it becomes temperature-insensitive as thelight intensity approaches 0. However, the DIN uptake always depends"
+        },
+        {
+          "document_id": "69b88b59ecbd4702b29a59d8",
+          "title": "EynaNisb2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3865,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "balance between light and nitrogen limitation (see Fig. 4 ). When thespeciﬁc rate of photosynthesis is relatively low, i.e."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3904,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "nsities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282limiting (in this case nitrogen limiting) conditions, as predicted by SF1. This happens not only 283because of the increase of N-reserve density (which obviously is needed to support higher 284speciﬁc growth rates) but also because C-reserve density decreases. The ﬁrst point is simply 285due to the increase of nitrogen source concentration and the consequent increase of _|ENA. 286Furthermore, higher dilution rates reduce the rejected ﬂux for the non-limiting reserve – in this 287"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3985,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3998,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333(typical environmental setting). Irradiance bolsters _|ECAand thus the C-reserve density. The 334consequent increase of MVand decrease of _|ENRreduces N-reserve density. The overall 335result is a decrease of the N:C ratio. 3363.2.2 Chlorophyll concentration 337Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338the dilution rate (SF7 and SF8). Until this point no explicit considerations were made concern- 339"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4017,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ncreases with temperature due to 322the increase of _|ECAmand_|CO2and of the rejection ﬂux _|ECRuntil approximately T= 295K, 323after which C-reserve density steadily declines since _|ECAincreases less than other relevant 324rates, particularly _|ECC, since temperature does not affect photon uptake (see section 2.5). 325This is not in agreement with Berges et al. (2) statements, but does not contradict his experi- 326mental data, which had a more limited temperature range (approximately from 280 to 300 K). 327The N:C ratio that results from these dynamics has a minimum at T= 300 K. 328"
+        },
+        {
+          "document_id": "69b8474fec32c55db5430807",
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.404,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": ") h-I. A CASE STUDY The model was fitted to experimental data according to the least squares criterion using the N~~~~~-R~~~~~~ method. Dilution rate [ms. (9) and (1211 Or light intensity [Eq. (2)] was taken as the independent variable. Equa- tion (9) was solved for W, given D, with the Newton- 256 BIOTECHNOLOGY AND BIOENGINEERING, VOL. 38, JULY 1991 0.04 1 4 0.5 W/m2 0.03 4 - 2z 0.02 e 8 8 0.01 6 ‘a 0.00 -0.01 0.0 0.2 0.4 0.6 0.8 1.0 Specific light energy uptake rate q , h.’ Figure 3. Relationship between dilution rate and specific light energy uptake rate qe in light-limited chemostats (r = 0.35 dm) of"
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4135,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "hold at wh ich the community becomesextinct. An increase of the light level has a more complex eﬀect on biomass. It results in apeak for the consumers and the decomposers, and a dip for the prod ucers, while an increasebeyond the level at which light ceases to be limiting has no eﬀe ct at all. Assimilated light,in the lower panels of Figure 9.26, quantiﬁes ‘the rate of liv ing’. It is curious to note that‘the rate of living’ is decreasing for increasing nitrogen, as long as nitrogen is limiting.Ammonia is practically absent if nitrogen is strongly limiting , all nitrogen is then ﬁxed"
+        },
+        {
+          "document_id": "69b89b06ecbd4702b29a6c94",
+          "title": "Klein - 2018 - analysis and optimization of ecotoxicological mode.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4172,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ux ( JA) leading then to lower growth. Optimal lightconditions ( ˆfI=1) yield a maximum assimilation ﬂux of energy and hence thelight conditions do not decrease the growth of the population.Deﬁnition 5.2.3(Light Dependency Function) LetI:[0,tn]!R+be a lightfunction and ˆfI:R+![0,1]be a light response function. The light dependencyfunction is the composed function fI=ˆfI\u000eIlinking each time point t2[0,tn]toa scaled light response function value:fI:[0,tn]I!R+ˆfI![0,1].Instead of light intensity also other scaled functions are imaginable likenutrient concentrations in water."
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.419,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "h rate (Figure 3.14b). 𝛽𝑜𝑝𝑡 shifts from the 0.62 at saturating irradiance, to 0 at limiting irradiance (1.8 µ mol photons m-2 s-1 to darkness) (Figure 3.14b). The growth rate of Pro -PH is more sensitive to changes in light level than Pro -PA between saturating and limiting irradiance primarily because of the significant decline in the cells ON flux, decreasing by 37.2 % from 9.64 x 10-3 mol C (mol C)-1 hr-1 to 6.05 x 10-3 mol C (mol C)-1 hr-1 (Figure 3.14d). For the most part this is due to the decreasing solar energy investment in DON uptake as irradiance decreases (Figure 3.14b, d) and not"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address the relationship between N:C ratio and dilution rate under light limitation. The corpus is dominated by off-topic material (heavy-ion physics, photosynthetic acclimation, slime mold phototaxis, marine algae distribution). A couple of snippets touch on C/N ratios and nitrogen in plants/algae (8, 10), but neither examines dilution rate or chemostat-style light-limited growth, so they provide no bearing on the specific stylized fact. There is no supporting or contradicting evidence, so evidence strength is weak and the direction is best classified as insufficient/neutral."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4284,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "NN}}=$\\n6.4--19.6 GeV. The light-nuclei production is treated within the\\nthermodynamical approach on equal basis with hadrons. The only additional\\nparameter related to the light nuclei is the energy density of late freeze-out\\nthat imitates afterburner stage of the collision because the light nuclei do\\nnot participate in the UrQMD evolution. This parameter is fixed from the\\ncondition of the best reproduction of the proton transverse-momentum spectrum\\nafter the UrQMD afterburner by that at the late freeze-out."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4446,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "pparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium. Imperfect reproduction of the light-nuclei data leaves\\nroom for medium effects in produced light nuclei.\\n"
+        },
+        {
+          "document_id": "W4231468114",
+          "title": "Direct Fabrication of 3D Metallic Networks and Their Performance",
+          "doi": "10.1002/adma.201700219",
+          "year": "2017",
+          "distance": 0.4588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "solutions was C0 = 10−5 M.” The main conclusions are unaffected and the experiments will still work at the lower concentration. The authors apologize for any inconvenience caused."
+        },
+        {
+          "document_id": "W2322598911",
+          "title": "Vertical distribution pattern of<i>Sargassum horneri</i>and its relationship with environmental factors around Gouqi Island",
+          "doi": "10.5846/stxb201301030013",
+          "year": "2014",
+          "distance": 0.4615,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nder lower light intensity. We found that an light intensity of 248 μmol m<sup>-2</sup> s<sup>-1</sup> was favorable for <em>S. horneri</em> during their rapid growth, and higher light intensity did not result in the death of a higher number of germlings. These results show that <em>S. horneri</em> flourish in highly light intensity zones. We also found that lower wave exposure reduced the risk of dislodging <em>S. horneri</em> from the substrate."
+        },
+        {
+          "document_id": "W2955790251",
+          "title": "Biomimetic light dilution using side-emitting optical fiber for enhancing the productivity of microalgae reactors",
+          "doi": "10.1038/s41598-019-45955-w",
+          "year": "2019",
+          "distance": 0.4913,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "omimetic approach for light dilution which enables homogeneous illumination of large reactor volumes with high optical density. We show that the immersion of side-emitting optical fiber within the reactor can enhance the fraction of illuminated volume by more than two orders of magnitude already at cell densities as low as ~5 10 4 ml −1 . Using the green algae Haematococcus pluvialis as a model system, we demonstrate an increase in the rate of reproduction by up to 93%."
+        },
+        {
+          "document_id": "W1984823368",
+          "title": "Phototaxis in True Slime Mold Physarum polycephalum",
+          "doi": "10.1247/csf.1.269",
+          "year": "1976",
+          "distance": 0.4938,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "nsity regions, and ΔP values were independent of the intensity of light so far as the intensityexceeded the threshold value Ic. When the slime mold was illuminated withblue (500nm, 510nm) and far-red (720nm) light, isometric tension increasedwith the intensity of light (I>Ic) while for red light (650nm) isometric tensiondid not show an appreciable change on illumination."
+        },
+        {
+          "document_id": "W1963543113",
+          "title": "Fat oxidation at low oxygen pressure. i. kinetic studies on the rate of fat oxidation in emulsions",
+          "doi": "10.1007/bf02667120",
+          "year": "1968",
+          "distance": 0.494,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ons such as the reactivity of the substrate, the tem‐perature, and the pH value but which is not affected by light irradiation; b) the varying rate‐limiting effect of slow oxygen diffusion, depending on the ratio between the rate of oxidation and the rate of oxygen diffusion."
+        },
+        {
+          "document_id": "W1968810392",
+          "title": "NUTRITIONAL CONTROL OF SEXUALITY IN CHLAMYDOMONAS REINHARDI",
+          "doi": "10.1085/jgp.37.6.729",
+          "year": "1954",
+          "distance": 0.4943,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n at different nitrogen levels become gametic at widely different cell concentrations of nitrogen and carbon and C/N ratios. 6. It is postulated that the role of light in gametic differentiation is indirect, providing by photosynthesis, energy for the mating process and carbohydrates to tie up excess nitrogenous reserves; and that the concentration of some particular nitrogen fraction or compound determines whether or not gametic differentiation is initiated."
+        },
+        {
+          "document_id": "W4327728492",
+          "title": "Light-Nuclei Production in Heavy-Ion Collisions at sNN = 6.4 – 19.6 GeV in THESEUS Generator Based on Three-Fluid Dynamics",
+          "doi": "10.3390/particles6010024",
+          "year": "2023",
+          "distance": 0.4989,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ndence on the collision energy and light-nucleus mass. Various ratios, d/p, t/p, t/d, and N(t)×N(p)/N2(d), are also considered. Imperfect reproduction of the light-nuclei data leaves room for medium effects in produced light nuclei."
+        },
+        {
+          "document_id": "W2758522991",
+          "title": "The interrelation between growth and development of wheat as influenced by temperature, light and nitrogen",
+          "doi": "10.18174/178357",
+          "year": "1956",
+          "distance": 0.4989,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "r 16 h accelerated spike initiation. The relation root/top increased with intensity.Influence of N depended on light intensity. Low rate of N increased root/shoot ratio independently of light intensity. The relation C/N in the plant depended on N rate, photoperiod and night temperature. Early flowering usually accompanied a high C/N ratio. The relation of dry matter in heads to that in stems and leaves decreased with increasing N in both SD and LD. The absolute quantity of N in heads or stems, however, increased with high N and was mostly smaller in SD than LD."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4998,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "f the best reproduction of the proton transverse-momentum spectrum\\nafter the UrQMD afterburner by that at the late freeze-out. The updated THESEUS\\nresults in not perfect, but a reasonable reproduction of data on bulk\\nobservables of the light nuclei, especially their functional dependence on the\\ncollision energy and light-nucleus mass. Various ratios, $d/p$, $t/p$, $t/d$,\\nand $N(t)\\\\times N(p)/N^2(d)$, are also considered. The directed flow of light\\nnuclei turns out to be more involved. Apparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium."
+        },
+        {
+          "document_id": "W2065841409",
+          "title": "On the value of the ratio of the number of uncharged nuclei (<i>N<sub>0</sub></i>) to the number of charged nuclei of one sign (<i>N</i><sub>±</sub>) at Washington, D.C",
+          "doi": "10.1029/te039i001p00065",
+          "year": "1934",
+          "distance": 0.5029,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Whether the variation is real or is due to instrumental or observational difficulties must be found from future investigations. The highest value of the ratio occurs at the time of highest humidity and the suggestion is made that nuclei, laden with moisture, at such times are caught in the passages of the Aitken counter and values of N A then obtained are too small. If this occurs, it is of concern to the many users of Aitken counters."
+        },
+        {
+          "document_id": "W124213879",
+          "title": "Conception et fabrication par stéréolithographie d'un catalyseur monolithique en vue de l'intensification du procédé photocatalytique pour la dépollution de l'air",
+          "doi": "",
+          "year": "2006",
+          "distance": 0.5057,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ccount the light distribution, shows that the mass transfer is limiting when the diameter of the channels is smaller than 4 mm. On the other hand, when the diameter of the channels is bigger than 5 mm, the lack of efficiency is due to a reduction of the absorption of the incident light by the catalytic surface."
+        },
+        {
+          "document_id": "W1554554132",
+          "title": "Photosynthetic acclimation: State transitions and adjustment of photosystem stoichiometry – functional relationships between short‐term and long‐term light quality acclimation in plants",
+          "doi": "10.1111/j.1742-4658.2008.06264.x",
+          "year": "2008",
+          "distance": 0.509,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "In dense plant populations, individuals shade each other resulting in a low‐light habitat that is enriched in far‐red light. This light quality gradient decreases the efficiency of the photosynthetic light reaction as a result of imbalanced excitation of the two photosystems. Plants counteract such conditions by performing acclimation reactions."
+        },
+        {
+          "document_id": "W2096831779",
+          "title": "Phytochrome controls the number of endoreduplication cycles in the <i>Arabidopsis thaliana</i> hypocotyl",
+          "doi": "10.1046/j.1365-313x.1998.00030.x",
+          "year": "1998",
+          "distance": 0.5118,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "y light. Up to two cycles occur in light‐grown hypocotyls, whereas in the dark about 30% of the cells go through a third cycle. Is the inhibition of the third endocycle in the light an indirect result of the reduced cell size in the light‐grown hypocotyl, or is it under independent light control?"
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.5126,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W2154153810",
+          "title": "Photosynthetic performance, DNA damage and repair in gametes of the endemic Antarctic brown alga <i>Ascoseira mirabilis</i> exposed to ultraviolet radiation",
+          "doi": "10.1111/j.1442-9993.2007.01796.x",
+          "year": "2007",
+          "distance": 0.514,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ys of recovery in dim white light. Saturation irradiance ( I k ) in freshly released propagules was 52 μmol photons m −2 s −1 . Exposure for 1 h under 22 μmol photons m −2 s −1 of PAR significantly reduced the optimum quantum yield ( F v / F m ), suggesting that propagules are low light adapted. Furthermore, UVR significantly contributed to the photoinhibition of photosynthesis. Increasing dose as a function of exposure time additionally exacerbated the effects of different light treatments."
+        },
+        {
+          "document_id": "W1554554132",
+          "title": "Photosynthetic acclimation: State transitions and adjustment of photosystem stoichiometry – functional relationships between short‐term and long‐term light quality acclimation in plants",
+          "doi": "10.1111/j.1742-4658.2008.06264.x",
+          "year": "2008",
+          "distance": 0.5142,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "nce concerning plant survival and reproduction has been poorly investigated. Recent studies have shed more light on this topic. Here, we give an overview on the long‐term response, its physiological effects, possible mechanisms and its relationship to state transitions as well as to nonphotochemical quenching, another important short‐term mechanism that mediates high‐light acclimation. Special emphasis is given to the functional roles and potential interactions between the different light acclimation strategies."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets from LoreMarq2010 directly address the stylized fact, explicitly stating that the N:C ratio decreases with dilution rate in light or carbon limiting conditions, with a mechanistic rationale (increasing C-reserve density and decreasing N-reserve density). Snippets 1, 3, 5, and 6 give clear, consistent supporting evidence, and OmtaBrug2009 (snippets 4, 9) supports the complementary view that C:N increases with irradiance in low-light regimes (i.e., N:C decreases with light). The authors note a caveat that light can only co-limit in a chemostat and that simulated N:C values fell outside typical ranges, somewhat weakening confidence. The remaining snippets (heavy-ion physics, slime mold, optical fibers, etc.) are entirely off-topic. Overall the relevant DEB literature corroborates the fact, though support is concentrated in a single source with noted caveats."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 7,
+          "supports": 6,
+          "contradicts": 0,
+          "best_distance": 0.3355944752693176
+        },
+        "69b89188ecbd4702b29a611f": {
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.34030795097351074
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3356,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "s rationale is similar to 302curve in ﬁgure 4A. When dilution rate is increased, CO 2available to microalgae also increases, 303which partially compensates the constant low-light conditions (eq. 3) thus increasing C-reserve 304density. On the other hand, higher dilution rates (which in steady-state implies higher speciﬁc 305growth rates) reduce the rejection ﬂux corresponding to N-reserve and, since _|ENAis already 306at its maximum (nitrogen is non-limiting), the N-reserve density decreases with dilution rate. 307Due to the increase in C-reserve density and the decrease in N-reserve density, it is clear that 308"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3373,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "c rate cannot increase further. The light dependency is represented by the following equation (2.5): 𝜇=𝑚𝑖𝑛 (1,𝐿𝐿𝑆) (2.5) Where: • 𝐿 is the environmental light intensity (𝐸𝑚−2𝑑𝑎𝑦−1) at the individual’s depth • 𝐿𝑆 is the light saturation point, which is the maximum light intensity the organism can process. This function indicates that as light availability increases, the photosynthetic rate increases in a linear manner. However, when the light intensity exceeds the saturation point 𝐿𝑆 , the rate of photosynthesis levels off, as the organism’s capacity to process light"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3393,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "lation will only reach steady-state 297atMV= 0. This means that in a chemostat light can only co-limit. The alternative, not 298contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299unit ofMVin a similar way that carbon and nitrogen sources decrease with increasing biomass. 300We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302curve in ﬁgure 4A. When dilution rate is increased, CO 2available to microalgae also increases, 303"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3403,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "-saturation constant. In this regime of low irradiance, theuptake of DIC into the carbohydrate reserve increases with irradiance(Fig. 2 ), while all the other rates, such as DIN uptake, are unaffectedand hence, the C:N ratio strongly increases with increasing lightintensity. Furthermore, the C:N ratio increases with decreasing tem-perature in this low-irradiance regime, because at low lightintensities, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrate"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3462,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ases with dilution rate. 307Due to the increase in C-reserve density and the decrease in N-reserve density, it is clear that 308the N:C ratio decreases with dilution rate in light or carbon limiting conditions. However, it must 309be noted that the N:C values for this simulation are outside the typical range of values due 310to the excessive accumulation of nitrogen. This suggests that either the fraction of rejection 311ﬂux incorporated in N-reserve \u0014ENis too high or that there are other relevant processes not 312considered in the proposed model (e.g. energy costs for nitrogen assimilation). 313"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3594,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "XNr=1mM;XCr=1mM;T=298K;h= 0:4d\u00001).case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288carbon assimilation is constant. The same pattern is not observed in the N-reserve because 289_|ENAincreases with dilution rate, contrary to the _|ECAwhich is practically constant (since CO 2 290is non-limiting and light is forced constant). 291SF2 - N:C ratio decreases with dilution rate when light limited (21) - is harder to simulate and 292understand, mainly because of the deﬁnition of light limited. If a population is grown with 293"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.371,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3715,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": ") - is harder to simulate and 292understand, mainly because of the deﬁnition of light limited. If a population is grown with 293dilution rate _hin light limiting conditions there are only two possible outcomes: (i) irradiance is 294enough to support _r >_hand, since _|phis constant per unit of MV(eq. 2), biomass will grow 29514and steady-state will only be attained when one mineral (carbon or nitrogen) limits growth; 296(ii) irradiance is not enough to support _r > _hand the population will only reach steady-state 297atMV= 0. This means that in a chemostat light can only co-limit. The alternative, not 298"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3817,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "e−Eak1T−1Tref/C16/C171+e−Eak1T−1Tref/C16/C17:JL;FK:JL;F: ð13ÞIn the limit of low light intensities, expression (13) reduces to::JEC;A=XVjEC;Amref:JL;F:JL;FK: ð14ÞIn the limit of very high light intensities, it becomes::JEC;A=XVjEC;Amrefe−Eak1T−1Tref/C16/C17: ð15ÞThe uptake of DIC and DIN as a function of irradiance and DINconcentration respectively are shown for three different temperaturesinFig. 2 . At high light intensities, the DIC uptake rate strongly dependson temperature, whereas it becomes temperature-insensitive as thelight intensity approaches 0. However, the DIN uptake always depends"
+        },
+        {
+          "document_id": "69b88b59ecbd4702b29a59d8",
+          "title": "EynaNisb2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3865,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "balance between light and nitrogen limitation (see Fig. 4 ). When thespeciﬁc rate of photosynthesis is relatively low, i.e."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3904,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "nsities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282limiting (in this case nitrogen limiting) conditions, as predicted by SF1. This happens not only 283because of the increase of N-reserve density (which obviously is needed to support higher 284speciﬁc growth rates) but also because C-reserve density decreases. The ﬁrst point is simply 285due to the increase of nitrogen source concentration and the consequent increase of _|ENA. 286Furthermore, higher dilution rates reduce the rejected ﬂux for the non-limiting reserve – in this 287"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3985,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4284,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "NN}}=$\\n6.4--19.6 GeV. The light-nuclei production is treated within the\\nthermodynamical approach on equal basis with hadrons. The only additional\\nparameter related to the light nuclei is the energy density of late freeze-out\\nthat imitates afterburner stage of the collision because the light nuclei do\\nnot participate in the UrQMD evolution. This parameter is fixed from the\\ncondition of the best reproduction of the proton transverse-momentum spectrum\\nafter the UrQMD afterburner by that at the late freeze-out."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4446,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "pparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium. Imperfect reproduction of the light-nuclei data leaves\\nroom for medium effects in produced light nuclei.\\n"
+        },
+        {
+          "document_id": "W4231468114",
+          "title": "Direct Fabrication of 3D Metallic Networks and Their Performance",
+          "doi": "10.1002/adma.201700219",
+          "year": "2017",
+          "distance": 0.4588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "solutions was C0 = 10−5 M.” The main conclusions are unaffected and the experiments will still work at the lower concentration. The authors apologize for any inconvenience caused."
+        },
+        {
+          "document_id": "W2322598911",
+          "title": "Vertical distribution pattern of<i>Sargassum horneri</i>and its relationship with environmental factors around Gouqi Island",
+          "doi": "10.5846/stxb201301030013",
+          "year": "2014",
+          "distance": 0.4615,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "nder lower light intensity. We found that an light intensity of 248 μmol m<sup>-2</sup> s<sup>-1</sup> was favorable for <em>S. horneri</em> during their rapid growth, and higher light intensity did not result in the death of a higher number of germlings. These results show that <em>S. horneri</em> flourish in highly light intensity zones. We also found that lower wave exposure reduced the risk of dislodging <em>S. horneri</em> from the substrate."
+        },
+        {
+          "document_id": "W2955790251",
+          "title": "Biomimetic light dilution using side-emitting optical fiber for enhancing the productivity of microalgae reactors",
+          "doi": "10.1038/s41598-019-45955-w",
+          "year": "2019",
+          "distance": 0.4913,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "omimetic approach for light dilution which enables homogeneous illumination of large reactor volumes with high optical density. We show that the immersion of side-emitting optical fiber within the reactor can enhance the fraction of illuminated volume by more than two orders of magnitude already at cell densities as low as ~5 10 4 ml −1 . Using the green algae Haematococcus pluvialis as a model system, we demonstrate an increase in the rate of reproduction by up to 93%."
+        },
+        {
+          "document_id": "W1984823368",
+          "title": "Phototaxis in True Slime Mold Physarum polycephalum",
+          "doi": "10.1247/csf.1.269",
+          "year": "1976",
+          "distance": 0.4938,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "nsity regions, and ΔP values were independent of the intensity of light so far as the intensityexceeded the threshold value Ic. When the slime mold was illuminated withblue (500nm, 510nm) and far-red (720nm) light, isometric tension increasedwith the intensity of light (I>Ic) while for red light (650nm) isometric tensiondid not show an appreciable change on illumination."
+        },
+        {
+          "document_id": "W1963543113",
+          "title": "Fat oxidation at low oxygen pressure. i. kinetic studies on the rate of fat oxidation in emulsions",
+          "doi": "10.1007/bf02667120",
+          "year": "1968",
+          "distance": 0.494,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ons such as the reactivity of the substrate, the tem‐perature, and the pH value but which is not affected by light irradiation; b) the varying rate‐limiting effect of slow oxygen diffusion, depending on the ratio between the rate of oxidation and the rate of oxygen diffusion."
+        },
+        {
+          "document_id": "W1968810392",
+          "title": "NUTRITIONAL CONTROL OF SEXUALITY IN CHLAMYDOMONAS REINHARDI",
+          "doi": "10.1085/jgp.37.6.729",
+          "year": "1954",
+          "distance": 0.4943,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "n at different nitrogen levels become gametic at widely different cell concentrations of nitrogen and carbon and C/N ratios. 6. It is postulated that the role of light in gametic differentiation is indirect, providing by photosynthesis, energy for the mating process and carbohydrates to tie up excess nitrogenous reserves; and that the concentration of some particular nitrogen fraction or compound determines whether or not gametic differentiation is initiated."
+        },
+        {
+          "document_id": "W4327728492",
+          "title": "Light-Nuclei Production in Heavy-Ion Collisions at sNN = 6.4 – 19.6 GeV in THESEUS Generator Based on Three-Fluid Dynamics",
+          "doi": "10.3390/particles6010024",
+          "year": "2023",
+          "distance": 0.4989,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ndence on the collision energy and light-nucleus mass. Various ratios, d/p, t/p, t/d, and N(t)×N(p)/N2(d), are also considered. Imperfect reproduction of the light-nuclei data leaves room for medium effects in produced light nuclei."
+        },
+        {
+          "document_id": "W2758522991",
+          "title": "The interrelation between growth and development of wheat as influenced by temperature, light and nitrogen",
+          "doi": "10.18174/178357",
+          "year": "1956",
+          "distance": 0.4989,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "r 16 h accelerated spike initiation. The relation root/top increased with intensity.Influence of N depended on light intensity. Low rate of N increased root/shoot ratio independently of light intensity. The relation C/N in the plant depended on N rate, photoperiod and night temperature. Early flowering usually accompanied a high C/N ratio. The relation of dry matter in heads to that in stems and leaves decreased with increasing N in both SD and LD. The absolute quantity of N in heads or stems, however, increased with high N and was mostly smaller in SD than LD."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4998,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "f the best reproduction of the proton transverse-momentum spectrum\\nafter the UrQMD afterburner by that at the late freeze-out. The updated THESEUS\\nresults in not perfect, but a reasonable reproduction of data on bulk\\nobservables of the light nuclei, especially their functional dependence on the\\ncollision energy and light-nucleus mass. Various ratios, $d/p$, $t/p$, $t/d$,\\nand $N(t)\\\\times N(p)/N^2(d)$, are also considered. The directed flow of light\\nnuclei turns out to be more involved. Apparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium."
+        },
+        {
+          "document_id": "W2065841409",
+          "title": "On the value of the ratio of the number of uncharged nuclei (<i>N<sub>0</sub></i>) to the number of charged nuclei of one sign (<i>N</i><sub>±</sub>) at Washington, D.C",
+          "doi": "10.1029/te039i001p00065",
+          "year": "1934",
+          "distance": 0.5029,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Whether the variation is real or is due to instrumental or observational difficulties must be found from future investigations. The highest value of the ratio occurs at the time of highest humidity and the suggestion is made that nuclei, laden with moisture, at such times are caught in the passages of the Aitken counter and values of N A then obtained are too small. If this occurs, it is of concern to the many users of Aitken counters."
+        }
+      ]
+    }
+  }
+}

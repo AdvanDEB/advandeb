@@ -3,8 +3,8 @@
     <header class="page-header">
       <h1>LLM API Keys</h1>
       <p class="subtitle">
-        Bring your own keys for Claude, ChatGPT, Gemini, or GitHub Models. Your key is
-        used only to power chat reasoning over the AdvanDEB knowledge base, and is
+        Bring your own keys for Claude, ChatGPT, Gemini, NVIDIA NIM, or GitHub Models.
+        Your key is used only to power chat reasoning over the knowledge base and is
         encrypted at rest. We store and display only the last four characters.
       </p>
     </header>
@@ -28,7 +28,11 @@
         </div>
 
         <div class="field grow">
-          <label for="apikey">API key {{ form.provider === 'github_models' ? '(GitHub PAT)' : '' }}</label>
+          <label for="apikey">
+            API key
+            <span v-if="form.provider === 'github_models'">(GitHub PAT)</span>
+            <span v-else-if="form.provider === 'nvidia'">(nvapi-…)</span>
+          </label>
           <input
             id="apikey"
             v-model="form.api_key"
@@ -156,6 +160,7 @@ const PROVIDER_LABELS: Record<string, string> = {
   openai: 'OpenAI (ChatGPT)',
   gemini: 'Google Gemini',
   github_models: 'GitHub Models',
+  nvidia: 'NVIDIA NIM',
   ollama: 'Ollama (local)',
 }
 

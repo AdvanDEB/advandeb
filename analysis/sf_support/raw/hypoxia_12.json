@@ -1,0 +1,712 @@
+{
+  "sf_id": "hypoxia_12",
+  "category": "Hypoxia / DO",
+  "statement": "Lethal DO level and time are different across taxa.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the snippets directly address hypoxia or dissolved oxygen (DO) lethality across taxa. The corpus is dominated by DEBtox survival modeling for chemical toxicity (NEC, killing rate, LC50/time-dependence). Snippet [16] comes closest by noting that the pattern of toxic effects in time differs between chemicals and that a single standardized exposure time cannot be applied across organisms, which is loosely analogous to the idea that lethal level and time vary—but it concerns chemicals, not DO, and taxa-specific standardized exposure times reflect organism differences only tangentially. No snippet provides specific evidence about DO lethal thresholds or times differing across taxa, and none contradicts the fact. Evidence is therefore weak and essentially insufficient to confirm the hypoxia-specific stylized fact."
+      },
+      "n_references": 1,
+      "references": {
+        "69b86777ecbd4702b29a2c55": {
+          "title": "BaasJage2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5345295071601868
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b89229ecbd4702b29a61be",
+          "title": "Baas2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4781,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "t least for compounds with a log octanol/0water partition coe ﬃcient less than 5 (Ja ger and Kooi jman, 2009). This is caused bythe fact that the inci pient LC50C is a metric that does not change in time anymore and 0thus can be compare d between c hemica ls. 3.2 Sub-lethal endpointsFor su b-lethal endpoints t heEC50C does not necessarily decrease in time. The0ECx-time course is less straightforward than for eﬀects on survival. In contrast to the quantalform for lethal eﬀects, for sublethal eﬀects one does not report the fraction of the test organisms that respond, but rather the degree of the response (body size or"
+        },
+        {
+          "document_id": "69b8669becbd4702b29a2b29",
+          "title": "KooyBeda98.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4875,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "according toRekker(1977).killing rateisproportional toatolerance concen tration, asisobvious fromthedimensionsofthekilling rate.Asymmetry argumen tfortherateatwhichthechemical movesfromonematrix (wa-ter)intoanother (organism), directly results intheexpectation thattheuptak erateisproportional topPowandtheelimination rateisproportional to1=pPow.Thelogiciseas-ilyseenwhen werealize thattheBCFequals theratiooftheuptak eandtheeliminationrate,while itisproportional withPow.Thestrength ofthese simple relationships becomes obvious ifwehavetheresults ofabioassa ywithatestchemical withaPowofP1available andwonder aboutthetoxicity"
+        },
+        {
+          "document_id": "69b89d36ecbd4702b29a6e97",
+          "title": "Martin - 2013 - .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5037,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "uch as DEB, which use the information over time, to quantify time-independent effects (Baas et al. 2010; Heckmann et al. 2010). Often as in the Daphnia 21 day reproduction test, the data over time is collected but not reported. Thus reporting the data over time can already vastly improve our understanding of sub-lethal effects without additional time or effort. We have shown a simple example where generic theory allows extrapolation of information on toxic effects from the individual level to the population level. However this represents only one species and one physiological mode of action."
+        },
+        {
+          "document_id": "69b876d1ecbd4702b29a3edb",
+          "title": "Kooy97.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5134,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "threshold value(i.e.,theupperboundary ofthetolerance range). Theproportionalit yfactor, called thekilling rate,isameasure forthetoxicityofthecompound thatisindependen tfromtheexposure time. In(acute) toxicityteststhatarestarted withanimals fromacontrolculture, thiscause ofmortalit yresultsinasurviv alprobabilit ythatequals theexponentof(minus)aconstan ttimes squaredtimeiftheexposure timeisshort withrespecttotheinverseelimination rate. When theanimals reachsteady state, sothatthetissue-concen tration doesnotincrease anylonger,thesurviv alprobabilit yequals theexponentof(minus)aconstan ttimes time. Since the"
+        },
+        {
+          "document_id": "69b89229ecbd4702b29a61be",
+          "title": "Baas2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5135,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "s shown by Cedergreen et al. (2007). For sub-lethal endpoints, there are very few studies that follow endpoints in time. An ex -ample is t he stu dy by Van Geste l and Hens bergen (1997). T hese aut hors did not usemechanistic mo dels to ana lyze their data, but sim ply treate d the data at eac h time step as a new data set. Also here it was shown that the a pparent mixture interactionschanged over endpoints and over time.The DEB approach takes the organism as a starting point instead of the concen -trations, which allows to interpret e ﬀects on growth, reproduction and survival in"
+        },
+        {
+          "document_id": "69b84749ec32c55db54307d4",
+          "title": "BaasJage2010a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.515,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "as was shown by Cedergreen et al. (2007) . For sub-lethalendpoints, there are very few studies that follow endpoints in time. Anexample is the study by Van Gestel and Hensbergen (1997) .T h e s eauthors did not use mechanistic models to analyze their data, but simplytreated the data at each time step as a new data set. Also here it wasshown that the apparent mixture interactions changed over endpointsand over time.The DEB approach takes the organism as a starting point instead ofthe concentrations, which allows to interpret effects on growth,reproduction and survival in a single framework, using the same"
+        },
+        {
+          "document_id": "69b88e87ecbd4702b29a5dd4",
+          "title": "KooyBeda96.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5228,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "his phenomenon by choos-ing a time-dependent function for the gradient param-eter, because we then run into the problem that forcertain (low or high) concentrations the survival prob-ability will increase in time, which is obviously not pos-sible. The only way to incorporate such phenomena isto go back to a process-oriented description for survival.log conc. surv. prob.00.51illegal\u001a\u001a\u001a=intersection\u0000\u0000 exp. time 1\u0000\u0000 exp. time 2•Sublethal eﬀects show that the reasoning behind the descrip tion of lethal eﬀectsis simply wrong. No big variations in the physiological cond itions of standard-"
+        },
+        {
+          "document_id": "69b8a7acecbd4702b29a7b96",
+          "title": "JageKooy2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5233,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "h onlythree parameters: elimination rate, no-effect concentration,and killing rate. Apparently, the pattern of mortality in timefor OP pesticides is not essentially different from that ofchemicals with a less specific mode of action. Therefore, thesurvival pattern itself will not necessarily reveal a mode ofaction that differs from simple reversible interactions.Legierse et al. ( 12) state that the pattern of LC50's versus"
+        },
+        {
+          "document_id": "69b84749ec32c55db54307d4",
+          "title": "BaasJage2010a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5235,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "or energy budgets; at best we have the time course ofeffects. Therefore, the physiological modes of action generally have to beinferred from the time course of toxicity alone ( Alda Alvarez et al., 2006 ).However, the different modes of action have distinct consequences for thegrowth and reproduction effects in time ( Kooijman and Bedaux, 1996;Jager et al., 2004; Alda Alvarez et al., 2006 ). An example of how thedifferent modes of action lead to different growth trajectories is shown inFig. 2 (more examples can be found in the paper on effects in time by Baaset al. elsewhere in this special issue)."
+        },
+        {
+          "document_id": "69b88e49ecbd4702b29a5d93",
+          "title": "Leeu2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5264,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "imentalcarcinogenicit ystudies. IfurtherassumethattypeAtumorsareimmediately lethal.Consequen tly,thevariablesyu=`timetodeathfromtumor'andT=`timetotumor'areidentical.AscanbeseenfromFigureIII.6,theprobabilit ythatananimaldevelopsatumorbeforetimettendstoonewhentbecomeslarge.Thatis,likeanystandard failure-time model,theGamma distribution presumes that,inabsence ofacompetingcauseofdeath,anyindividual willeventuallyfail(developatumor). Because theanimalsareexposedforalongperiod,however,naturaldeathstakeplaceduetotheagingprocess.Toaccountfor"
+        },
+        {
+          "document_id": "69b86cbaecbd4702b29a318c",
+          "title": "Hesketh et al. - 2016 - Extending standard testing period in honeybees to .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5285,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "lationship between survival and toxicokinetics; uptake of the chemical to a level above the NEC is required for effects on sur -vival above background mortality to occur. The NEC provides a threshold for toxicity independent of exposure time, so is an ideal parameter through which to compare chemical potency as it avoids issues related to the time dependency of classical parameters like LCx/ECx values24,39,40; outputs from the DEBtox model give mechanistic"
+        },
+        {
+          "document_id": "69b897a1ecbd4702b29a67d7",
+          "title": "JageKooy2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5288,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "between thevarious mechanisms of toxicity. As such, this provides anexcellent opportunity to classify chemicals, or to test cur-rent mode of action classiﬁcations. Deviations from thisstrict inverse proportionality between NEC and killing ratemay occur in practise, due to experimental error and bio-logical variation, but also because the mechanism of effectsmay be more complicated than assumed (e.g., include non-linear biotransformation steps). Additionally, compoundsmay deviate from strict proportionality because they do notactually have the same mechanism of action (misclassiﬁ-"
+        },
+        {
+          "document_id": "69b883f0ecbd4702b29a5080",
+          "title": "BaasJage2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5292,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "ob-ability of dying in a small time increment dtgiven that theorganism is alive at time t. If the hazard rate is constant, whichis the standard assumption for the death rate in the control,the relationship between the survival probability and the haz-ard rate reduces to S(t,c)=e x p {−ht}. Generally, the hazard rateincreases with time and can depend on ageing and toxicity.The hazard rate can also decrease in time if, for instance, theconcentration of a toxic compound decreases in time. A moreelaborate description of the model can be found in ( Bedauxand Kooijman, 1994 ).If all individuals have the same NEC, the model needs three"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5307,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "leration of ageing, by adding the in uxto that of ros. The hazard rate is the target parameter for lethal e ects; this constructis similar to the ageing module. The hazard rate is thus proportional to the internalconcentration minus the internal nec; the proportionality factor is called the killing rate(again after conversion to environmental concentrations). Other parameters are targetsfor sublethal e ects, and the deb structure speci es the sometimes complex interactionsbetween traits. For instance, if the maximum speci c assimilation rate is a ected, then"
+        },
+        {
+          "document_id": "69b84868ec32c55db5430c51",
+          "title": "BonnDubo2002.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5328,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "tionswith intermediate lethality, i.e., between 10 and 90%, for atleast four duration times for each concentration arenecessary.Survival models also consider raw experimental data astime to death versus concentration. They can remove this de-pendency dif®culty and have an intrinsically greaterstatisticalpower. But any biological interpretation is limited.Chew and Hamilton [11] used the ®rst-order kinetic modelwith times to death to predict the time required to cause 50%lethality. This approach is statistically more adapted to thiskind of data but requires more experimental efforts becausecontinuous observations of deaths are needed."
+        },
+        {
+          "document_id": "69b86777ecbd4702b29a2c55",
+          "title": "BaasJage2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5345,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "oint (typicallymortality, growth, or reproduction) at a standardized exposure time,which depends on the organism (see Table 1 ).Exposure time is chosen irrespective of the properties of thechemical under scrutiny. At ﬁrst glance, it seems to make sense tostandardize test duration as it allows a comparison between differentchemicals. However the pattern of toxic effects in time differsbetween chemicals. Already in 1969, Sprague recognized that a singleexposure time for all chemicals cannot be given and advised tocontinue acute tests until mortality ceases ( Sprague, 1969 ). A"
+        },
+        {
+          "document_id": "69b883f0ecbd4702b29a5080",
+          "title": "BaasJage2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5347,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ta with a small number of test organisms ( Andersenet al., 2000 ).So far all the different approaches implicitly assume that allindividual organisms in a cohort have the same toxicologicalthreshold and consequently there is a sharp transition whengoing from no effect to an effect (see Fig. 1 a) (see also Pireset al., 2002 ). But when parameter values scatter among indi-viduals and each individual has its own NEC value, as mightbe expected in real life, the transition from effect to no effectbecomes smooth for a cohort of organisms (see Fig. 1 b). This"
+        },
+        {
+          "document_id": "69b866abecbd4702b29a2b52",
+          "title": "BaasJage2009a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5365,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "at (in practice) all three parameters areindependent of time.These parameters, with an extra parameter to describe the mortalityin the control, give the hazard rate for any point in time, which is inte-grated to obtain the survival probability. As the model describes the developmentof the toxic effects over the entire time course, measurements at intermediatetime points are necessary to estimate parameters from the experimentaldata.It should be stressed that the NEC is a concept very different from"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address hypoxia or dissolved oxygen lethality, nor do they provide evidence that lethal DO levels and exposure times differ across taxa. The snippets concern unrelated topics such as taxonomy, genetics, parasitism, pesticide toxicity, transplantation, and life-history traits. The closest tangential references (snippet 11 on zones of lethality and thermal lethal limits, snippets 13/18 on acute lethality test durations) discuss lethality or test methods generally but say nothing about dissolved oxygen or interspecific differences in DO tolerance. Therefore the corpus offers no real support or contradiction, and evidence is sparse/insufficient."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W1593244502",
+          "title": "Current taxonomy and diversity of crownruminants above the species level",
+          "doi": "10.5282/ubm/epub.17110",
+          "year": "2013",
+          "distance": 0.5294,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "se taxa are the result of evolution; Hennig demonstrated that, if they are to mean anything, all taxa must represent monophyla. He also proposed that, to bring objectivity into the system, each taxonomic rank should be characterised by a particular time depth, but this is not easy to bring about: genera such as Drosophila and Eucalyptus have a time-depth comparable to whole orders among mammals!"
+        },
+        {
+          "document_id": "W2006160892",
+          "title": "Complementation reactions of a lethal mouse<i>t</i>-haplotype believed to include a deletion",
+          "doi": "10.1017/s0016672300018280",
+          "year": "1979",
+          "distance": 0.5691,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "e, the t h 20 deletion probably does not overlap the presumed deletion in T h p , nor extend to the locus of the t w 18 lethal. The significance of the weak complementation of t w 5 , t w 32 and t w 1 is discussed."
+        },
+        {
+          "document_id": "W997082621",
+          "title": "The ecology of coral larvae: settlement patterns, habitat selection and the length of the larval phase",
+          "doi": "10.5962/p.361519",
+          "year": "2004",
+          "distance": 0.5708,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "er this time, variation in the growth rates of individuals and thickening of the skeleton obscure differences between the taxa."
+        },
+        {
+          "document_id": "W1494545141",
+          "title": "Etude et modélisation des effets écotoxiques d'un micropolluant organique sur \"Daphnia magna\" et \"Pseudokirchneriella subcapitata\"",
+          "doi": "10.5075/epfl-thesis-2117",
+          "year": "2000",
+          "distance": 0.5772,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "fects measured as functions of time and concentration. In the third part, a model is adjusted to the survival data of daphnids. The model chosen is a simple logistic model with three interpretable parameters. It enables a global evaluation of dinoseb toxicity on survival. The model points out the effects on life-cycle time and on population for high and low concentrations. Its application permits us to define effects values (ECx, LCx), and especially a statistical no effect value which is more sensible then the NOEC (No Observed Effect Concentration)."
+        },
+        {
+          "document_id": "W2067705052",
+          "title": "Empirical Support for Optimal Virulence in a Castrating Parasite",
+          "doi": "10.1371/journal.pbio.0040197",
+          "year": "2006",
+          "distance": 0.583,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "omparing survival curves of daphniids infected with parasite spores obtained from early killing versus late killing infections. Hosts infected with early killer spores had a significantly higher death rate as compared to those infected with late killers, indicating that variation in time to death was at least in part caused by genetic differences among parasites. We speculate that the clear peak in lifetime reproductive success at intermediate killing times may be caused by the exceptionally strong physiological trade-off between host and parasite reproduction."
+        },
+        {
+          "document_id": "W2327936432",
+          "title": "Cohort and Death Assemblage Estimates of Survival Rates and Causes of Mortality in Brachys ovatus (Weber) (Coleoptera: Buprestidae)",
+          "doi": "10.2307/2425895",
+          "year": "1988",
+          "distance": 0.5842,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "are underrepresented in the death assemblage this procedure tends to overesti- mate the true mean longevity of the population. Mortality attributed to early leaf ab- scission tends to mask the more proximal sources of mortality, parasitism and preda- tion. Individuals dying at a small size (first-third instar larvae) are more likely to be parasitized while individuals dying at a large size (4th instar larvae-pupae) are more likely to be preyed upon. This is because parasitoids attack B. ovatus in earlier life stages than do its visually searching avian predators."
+        },
+        {
+          "document_id": "W2038934211",
+          "title": "Assortative mating and patterns of inheritance indicate that the three crossbill taxa in Scotland are species",
+          "doi": "10.1111/j.2007.0908-8857.03798.x",
+          "year": "2007",
+          "distance": 0.5884,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "taxaarefullyreproductivelyisolatedspeciesbutdivergedonlyrecently,suchthatinsufficienttimehaspassedforneutralDNAtodifferentiatebygeneticdrift."
+        },
+        {
+          "document_id": "W2151065396",
+          "title": "On the distribution of recessive embryonic lethals in a natural population of<i>Coelopa frigida</i>(Fab.)",
+          "doi": "10.1017/s0016672300000732",
+          "year": "1961",
+          "distance": 0.5886,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ethals were isolated. Cross tests for allelism showed that certain lethals were repeated within samples taken in the same year. The gross frequency of embryonic lethals is shown to be independent of seasonal changes in population density. Estimates of gene frequency are made for certain individual lethals and these are shown to be greater than expected on the basis of the census size of the population. Possible causes of this discrepancy are examined."
+        },
+        {
+          "document_id": "W2134518576",
+          "title": "Metabolic rate affects adult life span independently of developmental rate in parasitoid wasps",
+          "doi": "10.1111/j.1095-8312.2011.01637.x",
+          "year": "2011",
+          "distance": 0.5889,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Developmental time and body size correlate with lifespan in a wide range of taxa, although not in insect parasitoids. When the rate of development is independent of adult metabolic rate, adult lifespan is free to adapt to the adult environment."
+        },
+        {
+          "document_id": "W2135215435",
+          "title": "Single Center Experience with Deceased Donor Kidney Transplantation in Patients Aged 70 and Older: A Matched-Pair Cohort Study",
+          "doi": "10.4172/2161-0991.1000135",
+          "year": "2014",
+          "distance": 0.5901,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "rversus94%younger,p=0.15)andkidneygraftsurvival([KGS]64%olderversus67%younger)rateswerecomparable.Two-yearpatient(97%olderversus94%younger)andKGS(91%olderversus82%younger)ratesrevealedfewearlydeathsorgraftlossesintheoldergroup.Death-censoredKGS(81%olderversus69%younger)ratesdemonstratedthattheoldergrouphadmoredeathswithfunctioninggrafts(DWFG,21%versus3%,p=0.05).Meanlengthofinitialhospitalstay,renalfunction,andratesofdelayedgraftfunction,acuterejection,majorinfection,re-operationsandreadmissionswerecomparable.In13patientsaged75yearsandolder,theincidenceofDWFGwas31%inpatientscomparedto15%inpatientsaged70-74(p=0.33comparedtothose>75),"
+        },
+        {
+          "document_id": "W2106055507",
+          "title": "Fiddler Crabs: Ecosystems-Organisms-Molecules",
+          "doi": "10.1093/icb/24.2.293",
+          "year": "1984",
+          "distance": 0.5908,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "o a given set of environmental factors may be grouped into two general categories: zone of lethality and zone of compatibility. The dividing line between these two zones is not always easy to char? acterize, but it can be defined as the envi? ronmental complex which enables 50% of a population sample to survive indefinitely at a prolonged exposure; this definition is a slight modification of Fry's (1964) defi? nition of thermal lethal limits."
+        },
+        {
+          "document_id": "W2884133656",
+          "title": "Life-history and behavioral trait covariation across 3 years in Temnothorax ants",
+          "doi": "10.1093/beheco/ary101",
+          "year": "2018",
+          "distance": 0.5987,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Consistent among-individual differences in behavior have been described in numerous taxa. More recently, the hypothesis that such behavioral variation may also correlate to life-history traits, such as investment in current or future reproduction, has been proposed as a potential explanation for why variation is maintained among and within populations."
+        },
+        {
+          "document_id": "W1939895288",
+          "title": "REPRODUCTION TESTS: THE TOXICITY FOR<i>ARTEMIA</i>OF DERIVATIVES FROM NON-PERSISTENT PESTICIDES",
+          "doi": "10.2307/1540044",
+          "year": "1973",
+          "distance": 0.5988,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "(1)Thispaperreports(a)thedifferentialextinctionandpersistenceof3-litermasspopulationsfollowingtheadditionof10ppmof6derivativesofbiodegradablecarbamateandorganophosphoruspesticides,(b)thereproductiveperformanceofArtemiapairsremovedfromthe6treatedpopulationsafter24hours,and(c)reproductiontestsofpairsfromthepopulationssurvivinganoverwinteringevaporationcycle.(2)Lifespanwasdecreasedtosomedegreeforadultstreatedwithanyofthe6testedderivativesof\"degradable\"pesticide."
+        },
+        {
+          "document_id": "W1991390612",
+          "title": "Flight Performance and Feather Quality: Paying the Price of Overlapping Moult and Breeding in a Tropical Highland Bird",
+          "doi": "10.1371/journal.pone.0061106",
+          "year": "2013",
+          "distance": 0.5991,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "sk. Our data document costs to undergoing two life history stages simultaneously, which likely arise from energetic trade-offs. Impairments in individual quality and performance may represent important factors that select for temporal separation of life history stages in other species."
+        },
+        {
+          "document_id": "W2901707317",
+          "title": "Integrating vital rates explains optimal worker size for resource return by bumblebee workers",
+          "doi": "10.1111/1365-2435.13251",
+          "year": "2018",
+          "distance": 0.5999,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ween costs and performance changed our conclusions about optimal body size from being large to being near the observed average. Similar approaches of integrating multiple vital rates may resolve apparently suboptimal life histories in other taxa. A plain language summary is available for this article."
+        },
+        {
+          "document_id": "W2388719590",
+          "title": "Mating Behavior of Tetrancychus vienensis Zacher",
+          "doi": "",
+          "year": "2011",
+          "distance": 0.6002,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ifferenttimes.Theresultsshowedthatmalemitesassistedinfemalesmoltingandthentheymated.Thefirstmatingtimewasthelongestandsucceedingmatingtimewasobviouslyshort.Withtheincreaseofthematingtimes,thefecundityandthehatchabilityhadincreased,butfemalelongevitywassignificantlyshortened.TetranychusviennensisZachercanmateseveraltimesin24hours.Themaleisdominantinlookingforthefemaletomate.Morethanthreetimesofmatingisinvalidbecausethecapacityoffemalespermathecaislimited.Thedescendantsofparthenogenesisareallfemale,andthetimesofmatingaffectsexratioofoffspring."
+        },
+        {
+          "document_id": "W2078470807",
+          "title": "Herd-Level Methods for Age Adjustment of Milk Yields",
+          "doi": "10.3168/jds.s0022-0302(73)85284-1",
+          "year": "1973",
+          "distance": 0.601,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ds(4)indicatedaseasonaldifferenceinyield-agerelationshipsforfirstlactations,andsuchdifferenceshavebeenreportedsubsequentlyinU.S.data.Weundertookaseriesofanalysestodeterminewhethertheherd-levelmethodprovidesamoregeneralyield-agestandardthandopresentmethodsandtodiscoverwhyyield-agerelationshipsdifferunderdifferentclassifications.Althoughageadjustmentofmilkyieldrecordshasbeenrecognizedformanyyears,nostandardmethodhasevolvedandnewinformationindicatesneedforreassessinggeneticimplicationsoftheapproachesonsireevaluation.Existingreports,Searle(14)andSearleandHenderson(16,17),shownoadvantageoftheherd-levelmethodinU.S."
+        },
+        {
+          "document_id": "W2150949447",
+          "title": "Development and validation of a<i>Daphnia magna</i>four-day survival and growth test method",
+          "doi": "10.1897/08-296.1",
+          "year": "2008",
+          "distance": 0.6017,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "involve acute lethality test methods ranging from 24 to 96 h in duration and chronic test methods with durations of 21 to 28 d. Whereas the current acute and chronic test methods are useful, a need exists for a shorter-duration test method that will provide a chronic or subchronic endpoint with this species. In the present study, a 4-d, static-renewal survival and growth test was developed for use with D. magna. The test results were compared to performance criteria and results from 7-d survival and reproduction tests with Ceriodaphnia dubia to determine the level of comparability between the two methods. Results from the 4-d D."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the retrieved snippets directly address lethal dissolved oxygen levels or time-to-death due to hypoxia across taxa. The DEB/DEBtox snippets concern chemical toxicity (killing rate, NEC, LC50, time-dependent toxic effects) which is conceptually adjacent to dose/time-dependent mortality but does not bear on hypoxia or DO lethality, and does not compare taxa on this dimension. The remaining snippets are off-topic (taxonomy, genetics, parasitism, transplantation, insects). Snippet 23 mentions lethal limits and 50% survival definitions but in a thermal/environmental general context, not DO. There is no evidence either supporting or contradicting the specific claim that lethal DO level and time differ across taxa, so the corpus provides essentially no relevant support."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "69b89229ecbd4702b29a61be",
+          "title": "Baas2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4781,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "t least for compounds with a log octanol/0water partition coe ﬃcient less than 5 (Ja ger and Kooi jman, 2009). This is caused bythe fact that the inci pient LC50C is a metric that does not change in time anymore and 0thus can be compare d between c hemica ls. 3.2 Sub-lethal endpointsFor su b-lethal endpoints t heEC50C does not necessarily decrease in time. The0ECx-time course is less straightforward than for eﬀects on survival. In contrast to the quantalform for lethal eﬀects, for sublethal eﬀects one does not report the fraction of the test organisms that respond, but rather the degree of the response (body size or"
+        },
+        {
+          "document_id": "69b8669becbd4702b29a2b29",
+          "title": "KooyBeda98.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4875,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "according toRekker(1977).killing rateisproportional toatolerance concen tration, asisobvious fromthedimensionsofthekilling rate.Asymmetry argumen tfortherateatwhichthechemical movesfromonematrix (wa-ter)intoanother (organism), directly results intheexpectation thattheuptak erateisproportional topPowandtheelimination rateisproportional to1=pPow.Thelogiciseas-ilyseenwhen werealize thattheBCFequals theratiooftheuptak eandtheeliminationrate,while itisproportional withPow.Thestrength ofthese simple relationships becomes obvious ifwehavetheresults ofabioassa ywithatestchemical withaPowofP1available andwonder aboutthetoxicity"
+        },
+        {
+          "document_id": "69b89d36ecbd4702b29a6e97",
+          "title": "Martin - 2013 - .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5037,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "uch as DEB, which use the information over time, to quantify time-independent effects (Baas et al. 2010; Heckmann et al. 2010). Often as in the Daphnia 21 day reproduction test, the data over time is collected but not reported. Thus reporting the data over time can already vastly improve our understanding of sub-lethal effects without additional time or effort. We have shown a simple example where generic theory allows extrapolation of information on toxic effects from the individual level to the population level. However this represents only one species and one physiological mode of action."
+        },
+        {
+          "document_id": "69b876d1ecbd4702b29a3edb",
+          "title": "Kooy97.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5134,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "threshold value(i.e.,theupperboundary ofthetolerance range). Theproportionalit yfactor, called thekilling rate,isameasure forthetoxicityofthecompound thatisindependen tfromtheexposure time. In(acute) toxicityteststhatarestarted withanimals fromacontrolculture, thiscause ofmortalit yresultsinasurviv alprobabilit ythatequals theexponentof(minus)aconstan ttimes squaredtimeiftheexposure timeisshort withrespecttotheinverseelimination rate. When theanimals reachsteady state, sothatthetissue-concen tration doesnotincrease anylonger,thesurviv alprobabilit yequals theexponentof(minus)aconstan ttimes time. Since the"
+        },
+        {
+          "document_id": "69b89229ecbd4702b29a61be",
+          "title": "Baas2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5135,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "s shown by Cedergreen et al. (2007). For sub-lethal endpoints, there are very few studies that follow endpoints in time. An ex -ample is t he stu dy by Van Geste l and Hens bergen (1997). T hese aut hors did not usemechanistic mo dels to ana lyze their data, but sim ply treate d the data at eac h time step as a new data set. Also here it was shown that the a pparent mixture interactionschanged over endpoints and over time.The DEB approach takes the organism as a starting point instead of the concen -trations, which allows to interpret e ﬀects on growth, reproduction and survival in"
+        },
+        {
+          "document_id": "69b84749ec32c55db54307d4",
+          "title": "BaasJage2010a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.515,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "as was shown by Cedergreen et al. (2007) . For sub-lethalendpoints, there are very few studies that follow endpoints in time. Anexample is the study by Van Gestel and Hensbergen (1997) .T h e s eauthors did not use mechanistic models to analyze their data, but simplytreated the data at each time step as a new data set. Also here it wasshown that the apparent mixture interactions changed over endpointsand over time.The DEB approach takes the organism as a starting point instead ofthe concentrations, which allows to interpret effects on growth,reproduction and survival in a single framework, using the same"
+        },
+        {
+          "document_id": "69b88e87ecbd4702b29a5dd4",
+          "title": "KooyBeda96.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5228,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "his phenomenon by choos-ing a time-dependent function for the gradient param-eter, because we then run into the problem that forcertain (low or high) concentrations the survival prob-ability will increase in time, which is obviously not pos-sible. The only way to incorporate such phenomena isto go back to a process-oriented description for survival.log conc. surv. prob.00.51illegal\u001a\u001a\u001a=intersection\u0000\u0000 exp. time 1\u0000\u0000 exp. time 2•Sublethal eﬀects show that the reasoning behind the descrip tion of lethal eﬀectsis simply wrong. No big variations in the physiological cond itions of standard-"
+        },
+        {
+          "document_id": "69b8a7acecbd4702b29a7b96",
+          "title": "JageKooy2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5233,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "h onlythree parameters: elimination rate, no-effect concentration,and killing rate. Apparently, the pattern of mortality in timefor OP pesticides is not essentially different from that ofchemicals with a less specific mode of action. Therefore, thesurvival pattern itself will not necessarily reveal a mode ofaction that differs from simple reversible interactions.Legierse et al. ( 12) state that the pattern of LC50's versus"
+        },
+        {
+          "document_id": "69b84749ec32c55db54307d4",
+          "title": "BaasJage2010a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5235,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "or energy budgets; at best we have the time course ofeffects. Therefore, the physiological modes of action generally have to beinferred from the time course of toxicity alone ( Alda Alvarez et al., 2006 ).However, the different modes of action have distinct consequences for thegrowth and reproduction effects in time ( Kooijman and Bedaux, 1996;Jager et al., 2004; Alda Alvarez et al., 2006 ). An example of how thedifferent modes of action lead to different growth trajectories is shown inFig. 2 (more examples can be found in the paper on effects in time by Baaset al. elsewhere in this special issue)."
+        },
+        {
+          "document_id": "69b88e49ecbd4702b29a5d93",
+          "title": "Leeu2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5264,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "imentalcarcinogenicit ystudies. IfurtherassumethattypeAtumorsareimmediately lethal.Consequen tly,thevariablesyu=`timetodeathfromtumor'andT=`timetotumor'areidentical.AscanbeseenfromFigureIII.6,theprobabilit ythatananimaldevelopsatumorbeforetimettendstoonewhentbecomeslarge.Thatis,likeanystandard failure-time model,theGamma distribution presumes that,inabsence ofacompetingcauseofdeath,anyindividual willeventuallyfail(developatumor). Because theanimalsareexposedforalongperiod,however,naturaldeathstakeplaceduetotheagingprocess.Toaccountfor"
+        },
+        {
+          "document_id": "69b86cbaecbd4702b29a318c",
+          "title": "Hesketh et al. - 2016 - Extending standard testing period in honeybees to .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5285,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "lationship between survival and toxicokinetics; uptake of the chemical to a level above the NEC is required for effects on sur -vival above background mortality to occur. The NEC provides a threshold for toxicity independent of exposure time, so is an ideal parameter through which to compare chemical potency as it avoids issues related to the time dependency of classical parameters like LCx/ECx values24,39,40; outputs from the DEBtox model give mechanistic"
+        },
+        {
+          "document_id": "69b897a1ecbd4702b29a67d7",
+          "title": "JageKooy2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.5288,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "between thevarious mechanisms of toxicity. As such, this provides anexcellent opportunity to classify chemicals, or to test cur-rent mode of action classiﬁcations. Deviations from thisstrict inverse proportionality between NEC and killing ratemay occur in practise, due to experimental error and bio-logical variation, but also because the mechanism of effectsmay be more complicated than assumed (e.g., include non-linear biotransformation steps). Additionally, compoundsmay deviate from strict proportionality because they do notactually have the same mechanism of action (misclassiﬁ-"
+        },
+        {
+          "document_id": "W1593244502",
+          "title": "Current taxonomy and diversity of crownruminants above the species level",
+          "doi": "10.5282/ubm/epub.17110",
+          "year": "2013",
+          "distance": 0.5294,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "se taxa are the result of evolution; Hennig demonstrated that, if they are to mean anything, all taxa must represent monophyla. He also proposed that, to bring objectivity into the system, each taxonomic rank should be characterised by a particular time depth, but this is not easy to bring about: genera such as Drosophila and Eucalyptus have a time-depth comparable to whole orders among mammals!"
+        },
+        {
+          "document_id": "W2006160892",
+          "title": "Complementation reactions of a lethal mouse<i>t</i>-haplotype believed to include a deletion",
+          "doi": "10.1017/s0016672300018280",
+          "year": "1979",
+          "distance": 0.5691,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "e, the t h 20 deletion probably does not overlap the presumed deletion in T h p , nor extend to the locus of the t w 18 lethal. The significance of the weak complementation of t w 5 , t w 32 and t w 1 is discussed."
+        },
+        {
+          "document_id": "W997082621",
+          "title": "The ecology of coral larvae: settlement patterns, habitat selection and the length of the larval phase",
+          "doi": "10.5962/p.361519",
+          "year": "2004",
+          "distance": 0.5708,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "er this time, variation in the growth rates of individuals and thickening of the skeleton obscure differences between the taxa."
+        },
+        {
+          "document_id": "W1494545141",
+          "title": "Etude et modélisation des effets écotoxiques d'un micropolluant organique sur \"Daphnia magna\" et \"Pseudokirchneriella subcapitata\"",
+          "doi": "10.5075/epfl-thesis-2117",
+          "year": "2000",
+          "distance": 0.5772,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "fects measured as functions of time and concentration. In the third part, a model is adjusted to the survival data of daphnids. The model chosen is a simple logistic model with three interpretable parameters. It enables a global evaluation of dinoseb toxicity on survival. The model points out the effects on life-cycle time and on population for high and low concentrations. Its application permits us to define effects values (ECx, LCx), and especially a statistical no effect value which is more sensible then the NOEC (No Observed Effect Concentration)."
+        },
+        {
+          "document_id": "W2067705052",
+          "title": "Empirical Support for Optimal Virulence in a Castrating Parasite",
+          "doi": "10.1371/journal.pbio.0040197",
+          "year": "2006",
+          "distance": 0.583,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "omparing survival curves of daphniids infected with parasite spores obtained from early killing versus late killing infections. Hosts infected with early killer spores had a significantly higher death rate as compared to those infected with late killers, indicating that variation in time to death was at least in part caused by genetic differences among parasites. We speculate that the clear peak in lifetime reproductive success at intermediate killing times may be caused by the exceptionally strong physiological trade-off between host and parasite reproduction."
+        },
+        {
+          "document_id": "W2327936432",
+          "title": "Cohort and Death Assemblage Estimates of Survival Rates and Causes of Mortality in Brachys ovatus (Weber) (Coleoptera: Buprestidae)",
+          "doi": "10.2307/2425895",
+          "year": "1988",
+          "distance": 0.5842,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "are underrepresented in the death assemblage this procedure tends to overesti- mate the true mean longevity of the population. Mortality attributed to early leaf ab- scission tends to mask the more proximal sources of mortality, parasitism and preda- tion. Individuals dying at a small size (first-third instar larvae) are more likely to be parasitized while individuals dying at a large size (4th instar larvae-pupae) are more likely to be preyed upon. This is because parasitoids attack B. ovatus in earlier life stages than do its visually searching avian predators."
+        },
+        {
+          "document_id": "W2038934211",
+          "title": "Assortative mating and patterns of inheritance indicate that the three crossbill taxa in Scotland are species",
+          "doi": "10.1111/j.2007.0908-8857.03798.x",
+          "year": "2007",
+          "distance": 0.5884,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "taxaarefullyreproductivelyisolatedspeciesbutdivergedonlyrecently,suchthatinsufficienttimehaspassedforneutralDNAtodifferentiatebygeneticdrift."
+        },
+        {
+          "document_id": "W2151065396",
+          "title": "On the distribution of recessive embryonic lethals in a natural population of<i>Coelopa frigida</i>(Fab.)",
+          "doi": "10.1017/s0016672300000732",
+          "year": "1961",
+          "distance": 0.5886,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ethals were isolated. Cross tests for allelism showed that certain lethals were repeated within samples taken in the same year. The gross frequency of embryonic lethals is shown to be independent of seasonal changes in population density. Estimates of gene frequency are made for certain individual lethals and these are shown to be greater than expected on the basis of the census size of the population. Possible causes of this discrepancy are examined."
+        },
+        {
+          "document_id": "W2134518576",
+          "title": "Metabolic rate affects adult life span independently of developmental rate in parasitoid wasps",
+          "doi": "10.1111/j.1095-8312.2011.01637.x",
+          "year": "2011",
+          "distance": 0.5889,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Developmental time and body size correlate with lifespan in a wide range of taxa, although not in insect parasitoids. When the rate of development is independent of adult metabolic rate, adult lifespan is free to adapt to the adult environment."
+        },
+        {
+          "document_id": "W2135215435",
+          "title": "Single Center Experience with Deceased Donor Kidney Transplantation in Patients Aged 70 and Older: A Matched-Pair Cohort Study",
+          "doi": "10.4172/2161-0991.1000135",
+          "year": "2014",
+          "distance": 0.5901,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "rversus94%younger,p=0.15)andkidneygraftsurvival([KGS]64%olderversus67%younger)rateswerecomparable.Two-yearpatient(97%olderversus94%younger)andKGS(91%olderversus82%younger)ratesrevealedfewearlydeathsorgraftlossesintheoldergroup.Death-censoredKGS(81%olderversus69%younger)ratesdemonstratedthattheoldergrouphadmoredeathswithfunctioninggrafts(DWFG,21%versus3%,p=0.05).Meanlengthofinitialhospitalstay,renalfunction,andratesofdelayedgraftfunction,acuterejection,majorinfection,re-operationsandreadmissionswerecomparable.In13patientsaged75yearsandolder,theincidenceofDWFGwas31%inpatientscomparedto15%inpatientsaged70-74(p=0.33comparedtothose>75),"
+        },
+        {
+          "document_id": "W2106055507",
+          "title": "Fiddler Crabs: Ecosystems-Organisms-Molecules",
+          "doi": "10.1093/icb/24.2.293",
+          "year": "1984",
+          "distance": 0.5908,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "o a given set of environmental factors may be grouped into two general categories: zone of lethality and zone of compatibility. The dividing line between these two zones is not always easy to char? acterize, but it can be defined as the envi? ronmental complex which enables 50% of a population sample to survive indefinitely at a prolonged exposure; this definition is a slight modification of Fry's (1964) defi? nition of thermal lethal limits."
+        },
+        {
+          "document_id": "W2884133656",
+          "title": "Life-history and behavioral trait covariation across 3 years in Temnothorax ants",
+          "doi": "10.1093/beheco/ary101",
+          "year": "2018",
+          "distance": 0.5987,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Consistent among-individual differences in behavior have been described in numerous taxa. More recently, the hypothesis that such behavioral variation may also correlate to life-history traits, such as investment in current or future reproduction, has been proposed as a potential explanation for why variation is maintained among and within populations."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,763 @@
+{
+  "sf_id": "chl_02",
+  "category": "Chlorophyll",
+  "statement": "chl:C decreases with dilution rate in light limiting conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact (SF6) is explicitly stated and catalogued in LoreMarq2010 [1], and supported by the DEB modeling discussion in [11]. The Zonneveld snippets [8] are the clearest physiological support: during light-limited growth the chlorophyll cell quota behaves oppositely to nutrient-limited growth, with chlorophyll production being light-dependent, consistent with chl:C decreasing as dilution/growth rate increases under light limitation. Snippets [4] and [6] corroborate the inverse chlorophyll-light relationship. One snippet [9] notes that the chlorophyll cell quota can still increase at low irradiance because growth dilution becomes less important — this nuances but does not clearly contradict the chl:C-vs-dilution-rate relationship, so it is the only mild counterpoint. Several other Zonneveld/Lorena snippets are topically related (about Chl:C usage, photoacclimation, or other stylized facts like SF8) but do not directly bear on this specific relationship. Overall there is moderate, multi-source support with little genuine conflict, hence corroborated."
+      },
+      "n_references": 3,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2917211055755615
+        },
+        "69b87866ecbd4702b29a4073": {
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 2,
+          "contradicts": 1,
+          "best_distance": 0.3188823461532593
+        },
+        "69b8474fec32c55db5430807": {
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3274235725402832
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2917,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3029,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "odel. Forinstance, light-saturated rates of photosynthesisper unit chlorophyll strongly depend on the stateof photoacclimation. The primary reason for thisdependence is that while photoacclimation affectsthe amounts of chlorophyll per cell, the amountof RUBISCO (the enzyme limiting the light-satu-rated rate of photosynthesis) per cell is oftenunaffected. So the relevance of chlorophyll (andconsequently of Chl:C) for light-saturated rates ofphotosynthesis can be questioned."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3153,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ected. So the relevance of chlorophyll (andconsequently of Chl:C) for light-saturated rates ofphotosynthesis can be questioned. Another disad-vantage of Chl:C is that the use of the ratio oftwo cellular quantities, both subject to regulation,hinders a better understanding of the regulationof both quantities separately."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3189,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "in increased chlorophyllcell quota when cell are kept under low lightFig. 7. (A) Chlorophyll: Carbon ratio; (B) Carbon: Chloro-phyll ratio, both as dependent on irradiance; and (C) Chloro-phyll: Carbon ratio as dependent on the speciﬁc growth rate.C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 66conditions. However, the maximum rate of photo-"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3266,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "c rate cannot increase further. The light dependency is represented by the following equation (2.5): 𝜇=𝑚𝑖𝑛 (1,𝐿𝐿𝑆) (2.5) Where: • 𝐿 is the environmental light intensity (𝐸𝑚−2𝑑𝑎𝑦−1) at the individual’s depth • 𝐿𝑆 is the light saturation point, which is the maximum light intensity the organism can process. This function indicates that as light availability increases, the photosynthetic rate increases in a linear manner. However, when the light intensity exceeds the saturation point 𝐿𝑆 , the rate of photosynthesis levels off, as the organism’s capacity to process light"
+        },
+        {
+          "document_id": "69b8474fec32c55db5430807",
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3274,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "ce the parameters may be influenced by light intensity. This was not done because the purpose was to present a model for light- limited growth which is as simple as possible. Several investigators have reported that the chlorophyll content of cells is inversely proportional to the light intensity. An increase in chlorophyll content means an increase in size or number of photosynthetic units? In the model this would mean that [a] becomes a decreasing function of light intensity I. Specific growth rate would thus in- crease at low and decrease at high light intensities, which improves the agreement with experimental data"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3483,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ver, that theydo not specify the conditions under which lightlimitation applies.Nutrients may limit the growth rate by restrict-ing the synthesis of chlorophyll, thus affectingChl:C. For this reason, the role of nutrients canbe thought of as being implicitly accounted for inthe static energy budget models of Bannister(1979), Kiefer and Mitchell (1983), and Sakshauget al. (1989), which all feature Chl:C as an inputvariable. The static energy budgets then apply toboth light and nutrient-limited growth. This is aremarkable achievement, but at high cost: theapproach only works if Chl:C is treated as aninput variable."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3559,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ady-state carbon cell quota are given byQC [GC6]\u001b[Clm]IIs\u001bI.4.1. Light -limited Chl :CWhereas during nutrient-limited growth thechlorophyll cell quota increases with the growthrate, the opposite is true for light-limited growth.But even if growth is light-saturated, the chloro-phyll cell quota decrease with further increasinglight intensity. This suggests that chlorophyll pro-duction rates in light-limited phytoplankton maybe light-dependent. I am not aware of detailedquantitative studies on this topic, so I follow asomewhat provisional approach here. I assumethat chlorophyll production is a function of lightintensity, say p(I)."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3779,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "l. The data are mute about thevalue of the speciﬁc rate of chlorophyll destruc-tion: values between 0 and 0.5 d 1are all consis-tent with the data. Note that although the rateof chlorophyll production decreases with decreas-ing irradiance (at low irradiances) the chloro-phyll cell quota does increase. The reason forthis increase is that dilution through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observed"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.382,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "lation will only reach steady-state 297atMV= 0. This means that in a chemostat light can only co-limit. The alternative, not 298contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299unit ofMVin a similar way that carbon and nitrogen sources decrease with increasing biomass. 300We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302curve in ﬁgure 4A. When dilution rate is increased, CO 2available to microalgae also increases, 303"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3858,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3859,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "w irradiance, and two parameters charac-terising the PI-curve.4.2. PhotoacclimationThe present descriptions of carbon cell quotaand the speciﬁc growth rate do not make use of u.This variable is one of the best documented char-acteristics of photoacclimation, so one is led towonder why the model works while this aspect isneglected.The present model is formulated at the level ofthe individual cell. To see why this matters, let usfocus on light-saturated rates of photosynthesis.Photoacclimation results in increased chlorophyllcell quota when cell are kept under low lightFig. 7. (A) Chlorophyll: Carbon ratio; (B) Carbon: Chloro-"
+        },
+        {
+          "document_id": "69b8474fec32c55db5430807",
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3897,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "h rate would thus in- crease at low and decrease at high light intensities, which improves the agreement with experimental data (Figs. 2-4). Chlorophyll-specific photosynthetic rate can also depend on light or shade adaptati~n.~ According to the model of Gons and Mur,\"s6 the fol- lowing relationship holds: D = qeY, = qeym - pe (14) where Y, is growth yield corrected for maintenance (g/J) and pe is the specific maintenance rate constant (h-I). The models of Gons and Mur6 and Iehana8 ne- cessitate measuring the amount of light that is absorbed by the whole culture, which depends on irradiated light"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.394,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ce to motivate the general use ofChl:C.The importance attached to Chl:C might havemore mundane reasons, too. Chlorophyll ais themost readily measured indicator of phytoplank-ton abundance. As a result, many physiologicalcharacteristics, including the rate of photosynthe-sis, are expressed on a per unit chlorophyll basis.The rate of photosynthesis (expressed as carbon,C, ﬁxed per unit time) is then given as:dCdt PChl· Chl,with PChlthe rate of photosynthesis per unit"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3971,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ﬁgure 5 for a simulation in 344which the effect of increasing irradiance is tested. After day 20 the irradiance is forced to 345be twice the previous value. The expected effect in C-reserve is conﬁrmed - it increases 346until reaching a new steady-state. Structural mass follows the same behaviour since it is 347also supported by a greater C-reserve. Finally, N-reserve density does not get bolstered by 348increased irradiance but needs to support a larger structure, thus stabilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3987,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "le, Chl:C, and those of the othermodels, are not easily indicated in this table.Chlorophyll ais part of the light-harvesting ap-paratus, while total cell carbon is the sum of thecarbon in all model variables. Hence Chl:C corre-sponds to the ratio between the light-harvestingapparatus and total cell carbon.The various models in Table 2 diverge espe-"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4018,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "-saturation constant. In this regime of low irradiance, theuptake of DIC into the carbohydrate reserve increases with irradiance(Fig. 2 ), while all the other rates, such as DIN uptake, are unaffectedand hence, the C:N ratio strongly increases with increasing lightintensity. Furthermore, the C:N ratio increases with decreasing tem-perature in this low-irradiance regime, because at low lightintensities, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrate"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4021,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "thephotosynthetic capacity of the cell. A cell-basedmodel circumvents this pitfall.Due to the so-called package effect the efﬁ-ciency of light capture of chlorophyll decreaseswhen chlorophyll cell quota increase. The in-creased amount of chlorophyll of cells grown inlow light is packed in the same or (generally) asmaller volume, in comparison with cells grown inhigh light conditions. Self-shading of chlorophyllprohibits a proportional increase in light captureefﬁciency of the cell with the concentration ofchlorophyll. As a result, light absorption is notproportional to u. The remainder of this section"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the snippets address the specific relationship between chlorophyll-to-carbon ratio (chl:C) and dilution (growth) rate under light-limiting conditions in chemostat/continuous culture. The stylized fact concerns photoacclimation dynamics where slower-growing (lower dilution rate) light-limited cells typically increase chl:C, whereas faster dilution decreases it. Several snippets touch on photosynthesis, chlorophyll content, and light acclimation (e.g., 1, 5, 7, 14, 17), but none report chl:C as a function of dilution/growth rate, and snippet 17 relates leaf chlorophyll to light availability rather than to dilution rate. No snippet provides direct supporting or contradicting evidence, so the corpus is essentially off-topic and offers insufficient evidence to evaluate the claim."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W4298403212",
+          "title": "The Regulation of Photosynthetic Structure and Function during Nitrogen Deprivation in Chlamydomonas reinhardtii",
+          "doi": "10.17615/3v8s-ma76",
+          "year": "2020",
+          "distance": 0.4285,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "t Chl levels fell because of a rapid cessation in synthesis and dilution by cellular growth rather than because of degradation. Photosynthetically driven oxygen production and the efficiency of photosystem II as well as P700+ reduction and electrochromic shift kinetics all decreased over the time course, without evidence of substantial energy overflow. The results also indicate that linear electron flow fell approximately 15% more than cyclic flow over the first 24 h."
+        },
+        {
+          "document_id": "W1987871018",
+          "title": "Plasticity of Chasmogamous and Cleistogamous Reproductive Allocation in Grasses",
+          "doi": "10.5642/aliso.20072301.23",
+          "year": "2007",
+          "distance": 0.4582,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ikelets, CH/CL declined as density increased because CH decreased more than CL as size was reduced by intraspeciﬁc competition. In the shade-tolerant annual Microstegium vimineum, CH/CL was lowest in large greenhouse-grown plants in an unlimited, sunny environment, but was highest in small plants from a shady forest interior; tiller vegetative mass often showed a negative allometric relation to CH and CL allocation. In the perennial Dichanthelium clandestinum, CH and CL allocation varied among populations, but there was no consistent effect of light on CH/CL. The phenology of reproduction strongly affects CH/CL."
+        },
+        {
+          "document_id": "W4385230918",
+          "title": "Compartment‐specific Ca<sup>2+</sup> imaging in the green alga <i>Chlamydomonas reinhardtii</i> reveals high light‐induced chloroplast Ca<sup>2+</sup> signatures",
+          "doi": "10.1111/nph.19142",
+          "year": "2023",
+          "distance": 0.465,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ed the light‐dependent chloroplast Ca 2+ response, while the absence of the blue photoreceptor PHOT had no significant effects. A correlation between high light‐induced chloroplast H 2 O 2 gradients and Ca 2+ transients was drawn, supported by H 2 O 2 ‐induced chloroplast Ca 2+ transients in the dark. In conclusion, different triggers are involved in the light‐induced chloroplast Ca 2+ signaling as saturation of the photosynthetic electron transport, H 2 O 2 formation, and aCRY‐dependent light perception."
+        },
+        {
+          "document_id": "W1554554132",
+          "title": "Photosynthetic acclimation: State transitions and adjustment of photosystem stoichiometry – functional relationships between short‐term and long‐term light quality acclimation in plants",
+          "doi": "10.1111/j.1742-4658.2008.06264.x",
+          "year": "2008",
+          "distance": 0.469,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "In dense plant populations, individuals shade each other resulting in a low‐light habitat that is enriched in far‐red light. This light quality gradient decreases the efficiency of the photosynthetic light reaction as a result of imbalanced excitation of the two photosystems. Plants counteract such conditions by performing acclimation reactions."
+        },
+        {
+          "document_id": "W4309211087",
+          "title": "Effect of Different Colored LED Lighting on the Growth and Pigment Content of Isochrysis zhanjiangensis under Laboratory Conditions",
+          "doi": "10.3390/jmse10111752",
+          "year": "2022",
+          "distance": 0.4767,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "the highest levels of chlorophylls (Chl-a, 1.473 ± 0.037 mg L−1; Chl-b, 1.504 ± 0.001 mg L−1; total Chl, 2.827 ± 0.083 mg L−1). The highest protein content was observed under the white light (524.1935 ± 6.5846 mg L−1), whereas the carbohydrate content was remarkably high under the blue light (24.4697 ± 0.0206 mg L−1). This study is important in terms of the selection of light at the appropriate color (wavelength) to increase the content of organic compounds desired to be obtained indoors with the potential for commercially produced cultures."
+        },
+        {
+          "document_id": "W1554554132",
+          "title": "Photosynthetic acclimation: State transitions and adjustment of photosystem stoichiometry – functional relationships between short‐term and long‐term light quality acclimation in plants",
+          "doi": "10.1111/j.1742-4658.2008.06264.x",
+          "year": "2008",
+          "distance": 0.4775,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "pecial emphasis is given to the functional roles and potential interactions between the different light acclimation strategies. A working model displays the various responses as an integrated molecular system that helps plants to acclimate to the changing light environment."
+        },
+        {
+          "document_id": "W2141351497",
+          "title": "Quantifying the dynamics of light tolerance in<scp><i>A</i></scp><i>rabidopsis</i>plants during ontogenesis",
+          "doi": "10.1111/pce.12574",
+          "year": "2015",
+          "distance": 0.4818,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "8 weeks, the tolerated light intensity started to gradually decline, becoming only 332 μ mol m −2 s −1 for 13‐week‐old plants. The dependency of light tolerance on plant age was well‐related to the amplitude of protective NPQ (p NPQ ) and the electron transport rates ( ETR s). Light tolerance did not, however, show a similar trend to chlorophyll a / b ratios and content of anthocyanins. Our data suggest that p NPQ is crucial in defining the capability of high light tolerance by A rabidopsis plants during ontogenesis."
+        },
+        {
+          "document_id": "W2096831779",
+          "title": "Phytochrome controls the number of endoreduplication cycles in the <i>Arabidopsis thaliana</i> hypocotyl",
+          "doi": "10.1046/j.1365-313x.1998.00030.x",
+          "year": "1998",
+          "distance": 0.4829,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "y light. Up to two cycles occur in light‐grown hypocotyls, whereas in the dark about 30% of the cells go through a third cycle. Is the inhibition of the third endocycle in the light an indirect result of the reduced cell size in the light‐grown hypocotyl, or is it under independent light control?"
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.4845,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4882,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "pparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium. Imperfect reproduction of the light-nuclei data leaves\\nroom for medium effects in produced light nuclei.\\n"
+        },
+        {
+          "document_id": "W1981170756",
+          "title": "Solar spectral conversion for improving the photosynthetic activity in algae reactors",
+          "doi": "10.1038/ncomms3047",
+          "year": "2013",
+          "distance": 0.4883,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "es efficient conversion of the green part of the incoming spectrum into red light to better match the Qy peak of chlorophyll b. Integration of a Ca0.59Sr0.40Eu0.01S backlight converter into a flat panel algae reactor filled with Haematococcus pluvialis as a model species results in significantly increased photosynthetic activity and algae reproduction rate."
+        },
+        {
+          "document_id": "W2540907652",
+          "title": "Water-induced stress influences the relative investment in cleistogamous and chasmogamous flowers of an invasive grass, <i>Microstegium vimineum</i> (Poaceae)",
+          "doi": "10.1080/17550874.2016.1244574",
+          "year": "2016",
+          "distance": 0.4944,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": ". We predicted that plants would respond to increased water-induced stress through a relative reduction in investment in CL vs. CH reproduction (i.e., a decrease in the CL:CH ratio).Methods: Under greenhouse conditions, we measured fecundity (number of inflorescences and florets per plant) as well as relative investment in CL vs."
+        },
+        {
+          "document_id": "W2154153810",
+          "title": "Photosynthetic performance, DNA damage and repair in gametes of the endemic Antarctic brown alga <i>Ascoseira mirabilis</i> exposed to ultraviolet radiation",
+          "doi": "10.1111/j.1442-9993.2007.01796.x",
+          "year": "2007",
+          "distance": 0.4946,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ys of recovery in dim white light. Saturation irradiance ( I k ) in freshly released propagules was 52 μmol photons m −2 s −1 . Exposure for 1 h under 22 μmol photons m −2 s −1 of PAR significantly reduced the optimum quantum yield ( F v / F m ), suggesting that propagules are low light adapted. Furthermore, UVR significantly contributed to the photoinhibition of photosynthesis. Increasing dose as a function of exposure time additionally exacerbated the effects of different light treatments."
+        },
+        {
+          "document_id": "W2912296239",
+          "title": "Pengaruh Lama Penyinaran dan Salinitas terhadap Pertumbuhan dan Jumlah Klorofil A Sargassum sp. &lt;br&gt;&lt;i&gt;[Effect Of Photoperiod And Salinity On The Growth And Chlorophyll A From Sargassum sp. ]&lt;i&gt;",
+          "doi": "10.20473/jipk.v5i1.11432",
+          "year": "2013",
+          "distance": 0.4955,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "F table 0.05) on the growth of Sargassum sp. Effect of photoperiod did not different significant on the growth of Sargassum sp. in the first week until the third week, but different very significant (F calculated&gt; F table 0.01) in the fourth week of treatment where E is the salinity of 30 ppt with photoperiod light 16 and 8 hours dark that significantly different with A, C, D, F, and I which not significantly different with B, G, H. On growth, there is no interaction of salinity and photoperiod. On chlorophyll a there is no difference significant in treatment A, B, C, D, E, F, G, H, and I."
+        },
+        {
+          "document_id": "W2955790251",
+          "title": "Biomimetic light dilution using side-emitting optical fiber for enhancing the productivity of microalgae reactors",
+          "doi": "10.1038/s41598-019-45955-w",
+          "year": "2019",
+          "distance": 0.4958,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "omimetic approach for light dilution which enables homogeneous illumination of large reactor volumes with high optical density. We show that the immersion of side-emitting optical fiber within the reactor can enhance the fraction of illuminated volume by more than two orders of magnitude already at cell densities as low as ~5 10 4 ml −1 . Using the green algae Haematococcus pluvialis as a model system, we demonstrate an increase in the rate of reproduction by up to 93%."
+        },
+        {
+          "document_id": "W1554554132",
+          "title": "Photosynthetic acclimation: State transitions and adjustment of photosystem stoichiometry – functional relationships between short‐term and long‐term light quality acclimation in plants",
+          "doi": "10.1111/j.1742-4658.2008.06264.x",
+          "year": "2008",
+          "distance": 0.4958,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nce concerning plant survival and reproduction has been poorly investigated. Recent studies have shed more light on this topic. Here, we give an overview on the long‐term response, its physiological effects, possible mechanisms and its relationship to state transitions as well as to nonphotochemical quenching, another important short‐term mechanism that mediates high‐light acclimation. Special emphasis is given to the functional roles and potential interactions between the different light acclimation strategies."
+        },
+        {
+          "document_id": "W2082200171",
+          "title": "Responses of the biennial forest herb <i>Alliaria petiolata</i> to variation in population density, nutrient addition and light availability",
+          "doi": "10.1046/j.1365-2745.2000.00461.x",
+          "year": "2000",
+          "distance": 0.4978,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n with significantly greater total dry weight biomass at low plant density, high light availability and with nutrient addition. Low density and high light availability resulted in significantly higher seed production. Plants in the lowest light treatment allocated significantly more biomass to shoot production and less to root production. Leaf chlorophyll content was lowest for plants in the highest light treatment and increased with nutrient addition at the two highest light treatments."
+        },
+        {
+          "document_id": "W4231468114",
+          "title": "Direct Fabrication of 3D Metallic Networks and Their Performance",
+          "doi": "10.1002/adma.201700219",
+          "year": "2017",
+          "distance": 0.4988,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "solutions was C0 = 10−5 M.” The main conclusions are unaffected and the experiments will still work at the lower concentration. The authors apologize for any inconvenience caused."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact is explicitly listed as SF6 in LoreMarq2010 (snippet 1) and discussed/supported in snippet 11, which links chl:C behavior to N:C dynamics under light limitation. Zonneveld's work (snippets 8, 9, 4, 12) directly addresses light-limited Chl:C, stating that during light-limited growth chlorophyll cell quota decrease with increasing light intensity and that under light limitation chlorophyll behavior contrasts with nutrient-limited growth, consistent with chl:C decreasing with dilution/growth rate in light-limiting conditions. Snippet 6 also corroborates the inverse relationship between chlorophyll content and light. No snippets contradict the fact. However, several relevant snippets are nuanced (discussing per-cell quota vs. ratios and provisional modeling), and many retrieved snippets are off-topic (plant reproductive allocation, physics, LED culture studies), so support is moderate rather than overwhelming but clearly directionally corroborative."
+      },
+      "n_references": 3,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2917211055755615
+        },
+        "69b87866ecbd4702b29a4073": {
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.3188823461532593
+        },
+        "69b8474fec32c55db5430807": {
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3274235725402832
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2917,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3029,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "odel. Forinstance, light-saturated rates of photosynthesisper unit chlorophyll strongly depend on the stateof photoacclimation. The primary reason for thisdependence is that while photoacclimation affectsthe amounts of chlorophyll per cell, the amountof RUBISCO (the enzyme limiting the light-satu-rated rate of photosynthesis) per cell is oftenunaffected. So the relevance of chlorophyll (andconsequently of Chl:C) for light-saturated rates ofphotosynthesis can be questioned."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3153,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "ected. So the relevance of chlorophyll (andconsequently of Chl:C) for light-saturated rates ofphotosynthesis can be questioned. Another disad-vantage of Chl:C is that the use of the ratio oftwo cellular quantities, both subject to regulation,hinders a better understanding of the regulationof both quantities separately."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3189,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "in increased chlorophyllcell quota when cell are kept under low lightFig. 7. (A) Chlorophyll: Carbon ratio; (B) Carbon: Chloro-phyll ratio, both as dependent on irradiance; and (C) Chloro-phyll: Carbon ratio as dependent on the speciﬁc growth rate.C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 66conditions. However, the maximum rate of photo-"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3266,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "c rate cannot increase further. The light dependency is represented by the following equation (2.5): 𝜇=𝑚𝑖𝑛 (1,𝐿𝐿𝑆) (2.5) Where: • 𝐿 is the environmental light intensity (𝐸𝑚−2𝑑𝑎𝑦−1) at the individual’s depth • 𝐿𝑆 is the light saturation point, which is the maximum light intensity the organism can process. This function indicates that as light availability increases, the photosynthetic rate increases in a linear manner. However, when the light intensity exceeds the saturation point 𝐿𝑆 , the rate of photosynthesis levels off, as the organism’s capacity to process light"
+        },
+        {
+          "document_id": "69b8474fec32c55db5430807",
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3274,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "ce the parameters may be influenced by light intensity. This was not done because the purpose was to present a model for light- limited growth which is as simple as possible. Several investigators have reported that the chlorophyll content of cells is inversely proportional to the light intensity. An increase in chlorophyll content means an increase in size or number of photosynthetic units? In the model this would mean that [a] becomes a decreasing function of light intensity I. Specific growth rate would thus in- crease at low and decrease at high light intensities, which improves the agreement with experimental data"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3483,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "ver, that theydo not specify the conditions under which lightlimitation applies.Nutrients may limit the growth rate by restrict-ing the synthesis of chlorophyll, thus affectingChl:C. For this reason, the role of nutrients canbe thought of as being implicitly accounted for inthe static energy budget models of Bannister(1979), Kiefer and Mitchell (1983), and Sakshauget al. (1989), which all feature Chl:C as an inputvariable. The static energy budgets then apply toboth light and nutrient-limited growth. This is aremarkable achievement, but at high cost: theapproach only works if Chl:C is treated as aninput variable."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3559,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ady-state carbon cell quota are given byQC [GC6]\u001b[Clm]IIs\u001bI.4.1. Light -limited Chl :CWhereas during nutrient-limited growth thechlorophyll cell quota increases with the growthrate, the opposite is true for light-limited growth.But even if growth is light-saturated, the chloro-phyll cell quota decrease with further increasinglight intensity. This suggests that chlorophyll pro-duction rates in light-limited phytoplankton maybe light-dependent. I am not aware of detailedquantitative studies on this topic, so I follow asomewhat provisional approach here. I assumethat chlorophyll production is a function of lightintensity, say p(I)."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3779,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "l. The data are mute about thevalue of the speciﬁc rate of chlorophyll destruc-tion: values between 0 and 0.5 d 1are all consis-tent with the data. Note that although the rateof chlorophyll production decreases with decreas-ing irradiance (at low irradiances) the chloro-phyll cell quota does increase. The reason forthis increase is that dilution through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observed"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.382,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "lation will only reach steady-state 297atMV= 0. This means that in a chemostat light can only co-limit. The alternative, not 298contemplated in the proposed model, is that cell-shading effects can decrease irradiance per 299unit ofMVin a similar way that carbon and nitrogen sources decrease with increasing biomass. 300We reformulated the stylized fact so that it includes carbon limitation - N:C ratio decreases with 301growth when light or carbon limited. In this case, it can be shown that its rationale is similar to 302curve in ﬁgure 4A. When dilution rate is increased, CO 2available to microalgae also increases, 303"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3858,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3859,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "w irradiance, and two parameters charac-terising the PI-curve.4.2. PhotoacclimationThe present descriptions of carbon cell quotaand the speciﬁc growth rate do not make use of u.This variable is one of the best documented char-acteristics of photoacclimation, so one is led towonder why the model works while this aspect isneglected.The present model is formulated at the level ofthe individual cell. To see why this matters, let usfocus on light-saturated rates of photosynthesis.Photoacclimation results in increased chlorophyllcell quota when cell are kept under low lightFig. 7. (A) Chlorophyll: Carbon ratio; (B) Carbon: Chloro-"
+        },
+        {
+          "document_id": "W4298403212",
+          "title": "The Regulation of Photosynthetic Structure and Function during Nitrogen Deprivation in Chlamydomonas reinhardtii",
+          "doi": "10.17615/3v8s-ma76",
+          "year": "2020",
+          "distance": 0.4285,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "t Chl levels fell because of a rapid cessation in synthesis and dilution by cellular growth rather than because of degradation. Photosynthetically driven oxygen production and the efficiency of photosystem II as well as P700+ reduction and electrochromic shift kinetics all decreased over the time course, without evidence of substantial energy overflow. The results also indicate that linear electron flow fell approximately 15% more than cyclic flow over the first 24 h."
+        },
+        {
+          "document_id": "W1987871018",
+          "title": "Plasticity of Chasmogamous and Cleistogamous Reproductive Allocation in Grasses",
+          "doi": "10.5642/aliso.20072301.23",
+          "year": "2007",
+          "distance": 0.4582,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ikelets, CH/CL declined as density increased because CH decreased more than CL as size was reduced by intraspeciﬁc competition. In the shade-tolerant annual Microstegium vimineum, CH/CL was lowest in large greenhouse-grown plants in an unlimited, sunny environment, but was highest in small plants from a shady forest interior; tiller vegetative mass often showed a negative allometric relation to CH and CL allocation. In the perennial Dichanthelium clandestinum, CH and CL allocation varied among populations, but there was no consistent effect of light on CH/CL. The phenology of reproduction strongly affects CH/CL."
+        },
+        {
+          "document_id": "W4385230918",
+          "title": "Compartment‐specific Ca<sup>2+</sup> imaging in the green alga <i>Chlamydomonas reinhardtii</i> reveals high light‐induced chloroplast Ca<sup>2+</sup> signatures",
+          "doi": "10.1111/nph.19142",
+          "year": "2023",
+          "distance": 0.465,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ed the light‐dependent chloroplast Ca 2+ response, while the absence of the blue photoreceptor PHOT had no significant effects. A correlation between high light‐induced chloroplast H 2 O 2 gradients and Ca 2+ transients was drawn, supported by H 2 O 2 ‐induced chloroplast Ca 2+ transients in the dark. In conclusion, different triggers are involved in the light‐induced chloroplast Ca 2+ signaling as saturation of the photosynthetic electron transport, H 2 O 2 formation, and aCRY‐dependent light perception."
+        },
+        {
+          "document_id": "W1554554132",
+          "title": "Photosynthetic acclimation: State transitions and adjustment of photosystem stoichiometry – functional relationships between short‐term and long‐term light quality acclimation in plants",
+          "doi": "10.1111/j.1742-4658.2008.06264.x",
+          "year": "2008",
+          "distance": 0.469,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "In dense plant populations, individuals shade each other resulting in a low‐light habitat that is enriched in far‐red light. This light quality gradient decreases the efficiency of the photosynthetic light reaction as a result of imbalanced excitation of the two photosystems. Plants counteract such conditions by performing acclimation reactions."
+        },
+        {
+          "document_id": "W4309211087",
+          "title": "Effect of Different Colored LED Lighting on the Growth and Pigment Content of Isochrysis zhanjiangensis under Laboratory Conditions",
+          "doi": "10.3390/jmse10111752",
+          "year": "2022",
+          "distance": 0.4767,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "the highest levels of chlorophylls (Chl-a, 1.473 ± 0.037 mg L−1; Chl-b, 1.504 ± 0.001 mg L−1; total Chl, 2.827 ± 0.083 mg L−1). The highest protein content was observed under the white light (524.1935 ± 6.5846 mg L−1), whereas the carbohydrate content was remarkably high under the blue light (24.4697 ± 0.0206 mg L−1). This study is important in terms of the selection of light at the appropriate color (wavelength) to increase the content of organic compounds desired to be obtained indoors with the potential for commercially produced cultures."
+        },
+        {
+          "document_id": "W1554554132",
+          "title": "Photosynthetic acclimation: State transitions and adjustment of photosystem stoichiometry – functional relationships between short‐term and long‐term light quality acclimation in plants",
+          "doi": "10.1111/j.1742-4658.2008.06264.x",
+          "year": "2008",
+          "distance": 0.4775,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "pecial emphasis is given to the functional roles and potential interactions between the different light acclimation strategies. A working model displays the various responses as an integrated molecular system that helps plants to acclimate to the changing light environment."
+        },
+        {
+          "document_id": "W2141351497",
+          "title": "Quantifying the dynamics of light tolerance in<scp><i>A</i></scp><i>rabidopsis</i>plants during ontogenesis",
+          "doi": "10.1111/pce.12574",
+          "year": "2015",
+          "distance": 0.4818,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "8 weeks, the tolerated light intensity started to gradually decline, becoming only 332 μ mol m −2 s −1 for 13‐week‐old plants. The dependency of light tolerance on plant age was well‐related to the amplitude of protective NPQ (p NPQ ) and the electron transport rates ( ETR s). Light tolerance did not, however, show a similar trend to chlorophyll a / b ratios and content of anthocyanins. Our data suggest that p NPQ is crucial in defining the capability of high light tolerance by A rabidopsis plants during ontogenesis."
+        },
+        {
+          "document_id": "W2096831779",
+          "title": "Phytochrome controls the number of endoreduplication cycles in the <i>Arabidopsis thaliana</i> hypocotyl",
+          "doi": "10.1046/j.1365-313x.1998.00030.x",
+          "year": "1998",
+          "distance": 0.4829,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "y light. Up to two cycles occur in light‐grown hypocotyls, whereas in the dark about 30% of the cells go through a third cycle. Is the inhibition of the third endocycle in the light an indirect result of the reduced cell size in the light‐grown hypocotyl, or is it under independent light control?"
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.4845,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4882,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "pparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium. Imperfect reproduction of the light-nuclei data leaves\\nroom for medium effects in produced light nuclei.\\n"
+        },
+        {
+          "document_id": "W1981170756",
+          "title": "Solar spectral conversion for improving the photosynthetic activity in algae reactors",
+          "doi": "10.1038/ncomms3047",
+          "year": "2013",
+          "distance": 0.4883,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "es efficient conversion of the green part of the incoming spectrum into red light to better match the Qy peak of chlorophyll b. Integration of a Ca0.59Sr0.40Eu0.01S backlight converter into a flat panel algae reactor filled with Haematococcus pluvialis as a model species results in significantly increased photosynthetic activity and algae reproduction rate."
+        },
+        {
+          "document_id": "W2540907652",
+          "title": "Water-induced stress influences the relative investment in cleistogamous and chasmogamous flowers of an invasive grass, <i>Microstegium vimineum</i> (Poaceae)",
+          "doi": "10.1080/17550874.2016.1244574",
+          "year": "2016",
+          "distance": 0.4944,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": ". We predicted that plants would respond to increased water-induced stress through a relative reduction in investment in CL vs. CH reproduction (i.e., a decrease in the CL:CH ratio).Methods: Under greenhouse conditions, we measured fecundity (number of inflorescences and florets per plant) as well as relative investment in CL vs."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1700 @@
+{
+  "sf_id": "growth_07",
+  "category": "Growth",
+  "statement": "Foetuses increase in weight exponentially.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "Several DEB papers (e.g., snippets 1, 3, 13, 14) explicitly assume or model fetal weight as increasing exponentially during gestation, providing clear supporting evidence. However, a comparable number of sources (snippets 2, 5, 6, 8, 12) present alternative cubic‑time growth formulations and even state that fetal weight does not follow exponential doubling, which contradicts the stylized fact. The remaining snippets are unrelated or only tangentially mention fetal development without addressing growth form. Consequently, while there is moderate support, the mixed presence of contradictory models yields an overall moderate evidence strength and a neutral consensus direction."
+          },
+          "n_references": 7,
+          "references": {
+            "3532": {
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2531
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2772
+            },
+            "3743": {
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2794
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 0,
+              "contradicts": 2,
+              "best_distance": 0.284
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2863
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2886
+            },
+            "2503": {
+              "title": "Moretti - 2019 - ESTIMATING THE EFFECT OF MID-FREQUENCY ACTIVE SONA.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2973
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2531,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "governed by dietary uptake, elimination, growth dilution and vertical transfer. Moreover, the PCB concentration increases in foetuses due to vertical transfer, which affect the PCB concentration in new-born pups at the start of the next year. Body Growth Since the toxicokinetics involve feeding and growth dilution, linked to body size and its change, a model for body growth is acquired. Foetuses are assumed to growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as: 𝑊0(𝜏̂) = 𝑊00𝑒𝑔0(𝜏̂−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏̂ ≤1 (18) Here, 𝑊00 is the initial foetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2772,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "the mother, continuously sup- plied to the foetus via the placenta, are considered very large, i.e., e = ∞then foetal growth is given by dL dt = ˙v 3. (5.55) Proof: Eq. 5.55 is obtained dividing the numerator and the denominator of the right hand side of Eq. 5.47 by e and then replacing it with ∞. ■ According with Eq. 5.55 the structural volume of the foetus is proportional to cubed time: V (t) = \u0012 ˙vt 3 \u00133 . (5.56) The structural volume can be converted to weight using the following auxiliary proposi- tion. Proposition 5.3.14 (Volume to weight) The relationship between weight, w, and struc- tural volume, V , is w = \u0012[E] µE + dV \u0013 V = \u0012[Em] µE e + dV \u0013 V, (5.57) where dV is the density of th"
+            },
+            {
+              "document_id": "3743",
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2794,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "late growth dilution rates and keep track of body weights (affecting rates of feeding, vertical transfer and PCB elimination), a sub model for body growth was established (Fig. 4). Fetuses are assumed to growth exponentially during the gestation period (Peters 1983). Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏) = 𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏≤1 yr (1) Here, 𝑊00 is the initial fetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant. At the end of the gestation period, the fetus has reached the birth weight 𝑊𝑏𝑖𝑟𝑡ℎ. Hence, the initial fetal weight 𝑊00 is calculated as: 𝑊00 = 𝑊𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (2) For simplicity it is assumed "
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2797,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "asing proportionately faster than diameter (body thinning) over ontogeny and 2904 𝑏஽௅> 1 the reverse (body thickening). Thus, both E.fetida and T.tubifex show 2905 decreased scaling of body thickness relative to length over ontogeny in this study, 2906 which may be due to decreasing proportion of lipid reserves, or other low-metabolising 2907 mass such as water, over ontogeny. The scaling exponent of biosynthesis (𝐴), 2908 however, captures both somatic (metabolising) and low- or non- metabolising tissue 2909 (e.g. lipids), and hence 𝐴 can mismatch with the scaling of metabolism (𝑏ோ) if changes 2910 in body composition (or proportion of metabolising structure) occur over ontogeny. 2911 The a"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.284,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "es of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The special case e →∞makes that d dτ l = g/3, or l(τ) = gτ/3. The foetal structural volume thus behaves as d dtV = ˙vV 2/3 so V (t) = (˙vt/3)3 (2.47) This growth curve was proposed by Huggett and Widdas [535] in 1951. Payne and Wheeler [873] explained it by assuming that the growth rate is determined by the rate at which nutrie"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2863,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "etus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.18) to d dtV = ˙vV 2/3 so (3.25) V (t) = (˙vt/3)3 (3.26) This growth curve was proposed by Huggett and Widdas [434] in 1951. Payne and Wheeler [694] explained it by assuming that the growth rate is determined by the rate at which nutrients are supplied to the foetus across a surface that remains in proportion to the total surface area of the foetus itself. This is consistent with the deb model, which gives "
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.288,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "L3 b([MV ]µV + [Em])κR/E0, where E0/κR is the investment into a single offspring and L3 b[MV ]µV is fixed in structure at birth and L3 b[Em] in reserve, both at abundant food. The embryo overheads include somatic and maturity maintenance, growth overheads and maturation. If the step from food is included, the total efficiency should be multiplied by the digestion efficiency κX (typical range 0.1-0.8), which obviously depends on the type of food. Total foetal weight is about twice the actual foetal weight in mammals, where fluids that surround the foetus, the placenta, the increased uterus and milk accumulation (in the later stages of the pregnancy) contribute to the extra weight. Most of the"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2886,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "n [E] = ∞for the foetus can be made for the whole gestation period and the dynamics of the reserve density (3.19) no longer applies, because the foetus lives on the reserves of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at an unrestricted rate till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.12) to d dtV = ˙vV 2/3 so (3.20) V (t) = (˙vt/3)3 (3.21) This growth curve was proposed by Huggett and Widdas [341] in 1951. Payn"
+            },
+            {
+              "document_id": "3419",
+              "title": "Horri e.a. - 2018 - Fish life-history traits are affected after chroni.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2914,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "can cause changes in fat mass and subsequent obesity as it has been observed in ﬁsh (Berg et al., 2011; Lyche et al., 2010, 2011; Nourizadeh-Lillabadi et al., 2009), humans (Dirinck et al., 2011; Grün and Blumberg, 2009) and rats (Grün and Blumberg, 2009), the present study shows indeed no difference in condition between MIX and SOLV ﬁsh. Still, the present results do not allow rejecting the possibility that these compounds could cause simultaneous but independent changes in body growth and the reproductive function. Another question is the net effect of these changes in growth and re- production on individuals' reproductive output throughout the whole life-cycle, and thus their ﬁtness. Give"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.295,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "associated with standing or moving. These parameters dictate the relative metabolic costs that animals incur based on their body size. Although the debate on the existence of universal scaling exponents is very much ongoing, at least in regard to maintenance costs, here and in many cases data may exist for the study species and closely related species to parameterize these parameters directly. The parameter emb-growth-c, which represents the fetal growth constant, was found to have a strong impact on various model outputs, including the neonate body mass, age at first birth, and the number of litters per year. Since this parameter determines the maximum rate of fetal growth and thus the cost"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "stment in the slowly developing foetus amounts to u0F E = ˙vU0F E gL3m = l3 b f+g g \u0010 1 + 3 4 lb f \u0011 , which can be compared with u0F E = ub E +l3 b + 3 4 l4 b g that was found for fast foetal development, (2.51). For eb = f, we have ub E = fl3 b/g and the latter expression can be written as u0F E = l3 b(1+ f g + 3 4 lb g ). This is slightly smaller than for slow development, due to less cumulative maintenance; the difference in u0F E is 3 4gl4 b. Section 7.7 of the comments discusses up-regulation of mothers’ intake during pregnancy and lactation dynamically. 2.6.2 Foetal costs The foetal costs in (2.51) can be re-written in terms of scaled age at birth, τb = ab ˙kM as follows. Table 2.1 le"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2973,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "of the foetus itself. This is consistent with the deb model, which gives the energy interpretation of the single parameter. The graph of foetal weight against age resembles an exponential growth curve, but in fact it is less steep; the model has the property that subsequent weight doubling times increase by a factor 21/3 = 1.26, while there is no increase in the case of exponential growth. The fit is again excellent; see Figure 2.15. It is representative for the data collected in Table 2.3 taken from [1295]. A time lag for the start of foetal growth has to be incorpo- rated, and this diapause may be related to the development of the placenta, which possibly [Page 79] 62 Standard DEB model in"
+            },
+            {
+              "document_id": "2503",
+              "title": "Moretti - 2019 - ESTIMATING THE EFFECT OF MID-FREQUENCY ACTIVE SONA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2973,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "674 4/20/1998 North Atlantic New Jersey Female 361 545 481 Figure 4.6 Daily cost of structural growth in MJ from birth to maximum life expectancy. [Page 139] 122 Growth in foetal length is assumed to be linear so that the foetus grows at a constant rate from length 0 cm at conception to L0 at the end of the gestation period (Tp = 365 days). The structural mass of the foetus is estimated using the same mass-length relationship as that was used for females. As a result, the structural mass of the foetus increases exponentially over the course of pregnancy. The daily cost of growth is calculated as the difference in structural mass between consecutive days multiplied by the energy cost per unit"
+            },
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3021,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "n foetus and mother, 𝑊0 and 𝑊𝑖 are body weights of foetus and mother, whereas 𝑘𝑃,𝑖 is the placental transfer rate constant for a female of age class 𝑖. The toxicokinetic equation (Eq. (52)) can be rewritten as: d𝑐0,𝑖 𝑔 d𝜏+ 𝑘𝐺,0𝑐0,𝑖 𝑔= 𝑘𝑃,𝑖𝜔0,𝑖𝑐𝑖,𝑖 𝑔 , 𝑖= 2, … , 46 (53) The foetus grows exponentially according to Eq. (18). Hence, the growth dilution rate 𝑘𝐺,0, defined in similarity with Eq. (37), equals the exponential growth rate: 𝑘𝐺,0 = 1 𝑊0 d𝑊0 d𝜏= 𝑔0 (54) The body weight ratio between female and foetus (𝜔0,𝑖) is approximated as a mean value (𝜔̅0,𝑖) over the gestation period: 𝜔0,𝑖= 𝑊𝑖/𝑊0 ≈𝜔̅0,𝑖= 𝑊̅𝑖 𝑔/𝑊̅0 , 𝑖= 2, … , 46 (55) The PCB concentration in the mother (𝑐𝑖,𝑖 𝑔) during the gestation"
+            },
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3043,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Body weight as a function of age according to model for body growth (Eq. (182)). Pups increase their weight exponentially during lactation and keep it constant during the remainder of the year. Sub-adults follow von Bertalanffy growth function until maturation. Mature females lose weight exponentially during lactation, regain it linearly during the delay period and grow according to von Bertalanffy during gestation. The same yearly pattern for mature females is then repeated. [Page 33] 27 a weight proportional to the structural body volume, the prey consumption rate 𝑊̇ 𝐷 for an individual of weight 𝑊 is then obtained as: 𝑊̇ 𝐷= 𝜅𝑊2/3 (30) Mature females lactate and hence they lose and regain "
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "me cannibalistic, they grow into giants [1086]. The conversion efficiency from fish to fish is higher than from zooplank- ton to fish. An increase in food availability means an increase in growth rate. Such a cause can be detected by comparing different diets and food availability levels. If the amount of up- curving of length-at-age is sensitive to such changes, this indicates for a type X acceleration. When fed with abundant food of high quality, length, or the cubic root of weight, increases linearly for neonates and incubation times are be well-predicted by the standard DEB model. So acceleration disappears in such situations. Although actual intake is increased, intake capacity is not. "
+            },
+            {
+              "document_id": "2852",
+              "title": "RinkHuls2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3059,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "nto reproductive tissue: A\u0003M\u0004dW dt \u0004dR dt (1) Here, the somatic growth rate describes the change in body weight (W) and the term dR/dt describes the change in accumulated carbon in gonads (R) over time. A fixed fraction (k, see Fig. 1) of assimilate is allocated in growth and maintenance and the remaining assimilate (1\u0005k) is directed towards reproduction or maturation if the indivi- dual is juvenile, respectively. Thus, the change in an individual’s body weight over time becomes dW dt \u0003kA\u0005M and, accordingly, the change in gonad mass is given by dW dt \u0003(1\u0005k)A: Carbon is assimilated from the ingested food with efficiency EA that depends on food concentration. The ingestion rate scales with squ"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3068,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Standard DEB model in time, length & energy Expressed in scaled time and length, we have d dτ lF = g 3 eF −lF eF +g , which reduces for lF ≪eF to d dτ lF = g/3 1+g/eF and for eF = f, scaled length as function of scaled time is lF(τ) = gτ/3 1+g/f . Scaled age at birth amounts to τb = 3lb f+g fg . The subsection on foetal development suggests that foetuses development is speeded up by assuming that eF ≫g, here called fast development. The motivation was that foetal development then resembles egg development closely with the only difference that egg development eventually slows down, due to depletion of reserve (and/or yolk), while foetal development remains fast till birth. In that case the sp"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 1,
+            "rationale": "None of the retrieved abstracts provide direct evidence that fetal weight follows an exponential trajectory; most merely discuss factors influencing absolute birth weight or describe clinical outcomes. Only one study (snippet 17) explicitly reports a lack of weight increase in the final two weeks before term, which contradicts the notion of continuous exponential growth. Consequently, the corpus offers weak support and leans toward contradicting the stylized fact."
+          },
+          "n_references": 1,
+          "references": {
+            "W1994799072": {
+              "title": "Mathematical modeling of fetal growth: V. Fetal weight changes at term",
+              "doi": "https://doi.org/10.1002/jcu.1870160103",
+              "year": "1988",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.248
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2768843102",
+              "title": "Association of Maternal Obesity With Longitudinal Ultrasonographic Measures of Fetal Growth",
+              "doi": "https://doi.org/10.1001/jamapediatrics.2017.3785",
+              "year": "2017",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "As early as 32 weeks' gestation, fetuses of obese women had higher weights than fetuses of nonobese women. The mechanisms and long-term health implications of these findings are not yet established."
+            },
+            {
+              "document_id": "W1718269376",
+              "title": "The implications and consequences of maternal obesity on fetal intrauterine growth restriction.",
+              "doi": "",
+              "year": "2013",
+              "distance": 0.2258,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Complications grow both in number and severity with increasing obesity. Diagnosis of the fetuses with IUGR is important for the monitoring and management of the pregnancy associated with obesity and it involves a close collaboration between obstetrician, family physician and neonatologist."
+            },
+            {
+              "document_id": "W1682161401",
+              "title": "Patterns of gestational weight gain related to fetal growth among women with overweight and obesity",
+              "doi": "https://doi.org/10.1002/oby.21006",
+              "year": "2015",
+              "distance": 0.226,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The pattern of weight gain during pregnancy may be an important contributor to or marker of abnormal fetal growth among women with overweight or obesity."
+            },
+            {
+              "document_id": "W2067232392",
+              "title": "Effect of maternal weight gain on infant birth weight",
+              "doi": "https://doi.org/10.1515/jpm.2000.056",
+              "year": "2000",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Objective: To ascertain whether increased weight gain during pregnancy resulted in higher birth weight infants."
+            },
+            {
+              "document_id": "W4238737476",
+              "title": "Effects of Gestational Weight Gain in Morbidly Obese Women: II: Fetal Morbidity",
+              "doi": "https://doi.org/10.1055/s-2007-999507",
+              "year": "1990",
+              "distance": 0.2286,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Recommended gestational weight gain is based on supplying adequate nutrition to the conceptus, ensuring normal growth and development. Since morbidly obese women have an overabundance of nutrients for fetal transfer, we examined the effects of weight gain on fetal outcome in women greater than 160% of ideal body weight. Gestational weight gains varied from -18 to +64 pounds, allowing analysis of fetal outcome based on maternal weight gain. No correlation between maternal weight gain and ketonuria, birthweight or length, placental weight, or Apgar scores was noted. Gestational age at delivery was inversely related to weight gain. When grouped by maternal weight gain, fetal outcome was no diff"
+            },
+            {
+              "document_id": "W2165501611",
+              "title": "Adverse Birth Outcomes in Relation to Prenatal Sonographic Measurements of Fetal Size",
+              "doi": "https://doi.org/10.7863/jum.2003.22.4.347",
+              "year": "2003",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Morbidity and mortality are significantly increased among fetuses with an estimated fetal weight in the 5th percentile or less for gestational age."
+            },
+            {
+              "document_id": "W2792498978",
+              "title": "Maternal obesity is not associated with increased crown-rump length in first-trimester ultrasounds of singleton gestations",
+              "doi": "https://doi.org/10.1080/14767058.2018.1438396",
+              "year": "2018",
+              "distance": 0.2333,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Maternal obesity does not significantly alter the fetal CRL. However, maternal obesity appears to be associated with increased fetal growth as early as the second trimester."
+            },
+            {
+              "document_id": "W2116637397",
+              "title": "The impact of maternal obesity on satisfactory detailed anatomic ultrasound image acquisition",
+              "doi": "https://doi.org/10.1080/14767050802524586",
+              "year": "2008",
+              "distance": 0.2343,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Suboptimal fetal anatomic visualisation is increased with maternal obesity, but declines with advancing gestational age in both normal weight and obese populations."
+            },
+            {
+              "document_id": "W1576613738",
+              "title": "Maternal weight gain: a determinant for fetal abdominal circumference in the second trimester",
+              "doi": "https://doi.org/10.1111/j.1600-0412.2011.01129.x",
+              "year": "2011",
+              "distance": 0.2384,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Maternal weight gain in pregnancy is related to and may determine fetal abdominal circumference in gestational weeks 15-25, particularly in those women with a slow weight gain."
+            },
+            {
+              "document_id": "W4411622970",
+              "title": "[Relationship between maternal pre-pregnancy obesity and infant development: the Taicang and Wuqiang mother-child cohort study in China].",
+              "doi": "https://doi.org/10.19813/j.cnki.weishengyanjiu.2025.03.009",
+              "year": "2025",
+              "distance": 0.2419,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Maternal pre-pregnancy obesity increases BAZ, WLZ and WAZ of the offspring in infancy."
+            },
+            {
+              "document_id": "W2157382661",
+              "title": "Association of placenta organotin concentrations with growth and ponderal index in 110 newborn boys from Finland during the first 18 months of life: a cohort study",
+              "doi": "https://doi.org/10.1186/1476-069x-13-45",
+              "year": "2014",
+              "distance": 0.2421,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "We observed a trend towards higher weight gain from birth to 3 months of age with increasing placenta TBT concentration. These results should be interpreted with caution because obesogenic effects in animal experiments were seen after in-utero TBT exposures to doses that were orders of magnitude higher. Also the number of study subjects included in this study was limited."
+            },
+            {
+              "document_id": "W4417088362",
+              "title": "Association of maternal weight gain with offspring birth size",
+              "doi": "https://doi.org/10.12692/ijb/17.3.141-147",
+              "year": "2020",
+              "distance": 0.2452,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Gestational weight gain (GWG) is influenced by numerous causes in prenatal health which are of great public health concerns. GWG during the 2nd and 3rd trimesters is an essential determinant of fetal development. However, this study was aimed to scrutinize the association between GWG and birth size of baby. In this regard, birth weight of the offspring was considered as the determinant of birth size. This was a cross sectional observational study, was carried out among 100 pregnant women admitted in the Department of Obstetrics and Gynecology, Rangpur Medical College and Hospital, Rangpur, Bangladesh and during the period of June 2017 to June 2018. All of the data were collected using a pre-"
+            },
+            {
+              "document_id": "W38077771",
+              "title": "[Impacts of gestational weight gain on offspring weight and obesity: a 2-year follow up study].",
+              "doi": "",
+              "year": "2011",
+              "distance": 0.2459,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Excessive gestational weight gain may affect offspring weight and increase the risk of obesity in children from birth to 12 months of age. During their second year of life, this effect will temporarily disappear."
+            },
+            {
+              "document_id": "W2084527711",
+              "title": "Influence of maternal anthropometric status and birth weight on the risk of cesarean delivery",
+              "doi": "https://doi.org/10.1016/0029-7844(95)00082-3",
+              "year": "1995",
+              "distance": 0.247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The risk of cesarean delivery increases linearly with pregnancy weight gain, independent of birth weight. No specific threshold of weight gain can be determined above which the cesarean risk climbs more rapidly."
+            },
+            {
+              "document_id": "W2412157196",
+              "title": "[Pre-pregnancy body mass, gestational weight gain and birth weight].",
+              "doi": "",
+              "year": "1998",
+              "distance": 0.2474,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Both maternal prepregnancy weight and weight gain during gestation are important factors affecting fetal growth and birth weight. Increasing maternal weight before pregnancy diminishes the influence of weight gain on birthweight. As pregravid weight and prenatal weight gain increase, the incidence of LGA also increase, whereas the frequency of SGA decreases."
+            },
+            {
+              "document_id": "W2409137905",
+              "title": "[Influence of prepregnancy weight and maternal weight gain on pregnancy outcome].",
+              "doi": "",
+              "year": "1998",
+              "distance": 0.2476,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Prepregnancy weight and weight gain during pregnancy have direct impact on birth weight of the baby and maternal complications."
+            },
+            {
+              "document_id": "W1994799072",
+              "title": "Mathematical modeling of fetal growth: V. Fetal weight changes at term",
+              "doi": "https://doi.org/10.1002/jcu.1870160103",
+              "year": "1988",
+              "distance": 0.248,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "Abstract Fetal growth after 37 weeks menstrual age was investigated by comparing ultrasound estimates of fetal weight with corresponding weights of newborns. Using a weight estimation equation with minimal systematic error, evidence was found that fetuses delivered at term do not increase in weight the last two weeks before delivery. This change in fetal growth is regarded as a biological process that is needed to prepare the fetus for its life after birth. Only one of three subsets, that of estimated weights below 3000 g, showed significant weight increase after 37 weeks. This subset had, however, on average the longest scan‐delivery interval. We conclude that conventional birthweight stand"
+            },
+            {
+              "document_id": "W4379508324",
+              "title": "Maternal obesity: Perinatal implications",
+              "doi": "https://doi.org/10.1177/20503121231176128",
+              "year": "2023",
+              "distance": 0.2489,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Over the previous three decades, the prevalence and growth of overweight and obese status has risen relentlessly in both the general population and pregnant women. This rise is seen in both higher pre-pregnancy body mass index measurements along with excessive weight gain during pregnancy. Maternal obesity has been shown to exacerbate co-morbidities such as insulin resistance, pregnancy induced hypertension, and infectious states in parturient mothers. These changes have been shown to subsequently increase rates of fetal anomalies and affect fetal growth, as well as various aspects of the delivery such as rates of instrumented vaginal deliveries and an increase in delivery by cesarean sectio"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 1,
+            "rationale": "A few DEB‐based studies (snippets 1 and 3) explicitly assume exponential fetal weight increase, providing direct support for the stylized fact. However, several other modeling papers (snippets 2,5,6,8,12) describe cubic or surface‑limited growth that yields slower-than‑exponential weight gain, directly contradicting the claim. The majority of remaining references are unrelated to fetal growth dynamics. Consequently, the corpus offers moderate overall evidence but leans toward contradiction, yielding a moderate evidence strength and a consensus direction indicating predominant disagreement."
+          },
+          "n_references": 6,
+          "references": {
+            "3532": {
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2531
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2772
+            },
+            "3743": {
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2794
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 0,
+              "contradicts": 2,
+              "best_distance": 0.284
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2863
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2886
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2531,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "governed by dietary uptake, elimination, growth dilution and vertical transfer. Moreover, the PCB concentration increases in foetuses due to vertical transfer, which affect the PCB concentration in new-born pups at the start of the next year. Body Growth Since the toxicokinetics involve feeding and growth dilution, linked to body size and its change, a model for body growth is acquired. Foetuses are assumed to growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as: 𝑊0(𝜏̂) = 𝑊00𝑒𝑔0(𝜏̂−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏̂ ≤1 (18) Here, 𝑊00 is the initial foetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2772,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "the mother, continuously sup- plied to the foetus via the placenta, are considered very large, i.e., e = ∞then foetal growth is given by dL dt = ˙v 3. (5.55) Proof: Eq. 5.55 is obtained dividing the numerator and the denominator of the right hand side of Eq. 5.47 by e and then replacing it with ∞. ■ According with Eq. 5.55 the structural volume of the foetus is proportional to cubed time: V (t) = \u0012 ˙vt 3 \u00133 . (5.56) The structural volume can be converted to weight using the following auxiliary proposi- tion. Proposition 5.3.14 (Volume to weight) The relationship between weight, w, and struc- tural volume, V , is w = \u0012[E] µE + dV \u0013 V = \u0012[Em] µE e + dV \u0013 V, (5.57) where dV is the density of th"
+            },
+            {
+              "document_id": "3743",
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2794,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "late growth dilution rates and keep track of body weights (affecting rates of feeding, vertical transfer and PCB elimination), a sub model for body growth was established (Fig. 4). Fetuses are assumed to growth exponentially during the gestation period (Peters 1983). Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏) = 𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏≤1 yr (1) Here, 𝑊00 is the initial fetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant. At the end of the gestation period, the fetus has reached the birth weight 𝑊𝑏𝑖𝑟𝑡ℎ. Hence, the initial fetal weight 𝑊00 is calculated as: 𝑊00 = 𝑊𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (2) For simplicity it is assumed "
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2797,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "asing proportionately faster than diameter (body thinning) over ontogeny and 2904 𝑏஽௅> 1 the reverse (body thickening). Thus, both E.fetida and T.tubifex show 2905 decreased scaling of body thickness relative to length over ontogeny in this study, 2906 which may be due to decreasing proportion of lipid reserves, or other low-metabolising 2907 mass such as water, over ontogeny. The scaling exponent of biosynthesis (𝐴), 2908 however, captures both somatic (metabolising) and low- or non- metabolising tissue 2909 (e.g. lipids), and hence 𝐴 can mismatch with the scaling of metabolism (𝑏ோ) if changes 2910 in body composition (or proportion of metabolising structure) occur over ontogeny. 2911 The a"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.284,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.85,
+              "text": "es of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The special case e →∞makes that d dτ l = g/3, or l(τ) = gτ/3. The foetal structural volume thus behaves as d dtV = ˙vV 2/3 so V (t) = (˙vt/3)3 (2.47) This growth curve was proposed by Huggett and Widdas [535] in 1951. Payne and Wheeler [873] explained it by assuming that the growth rate is determined by the rate at which nutrie"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2863,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.85,
+              "text": "etus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.18) to d dtV = ˙vV 2/3 so (3.25) V (t) = (˙vt/3)3 (3.26) This growth curve was proposed by Huggett and Widdas [434] in 1951. Payne and Wheeler [694] explained it by assuming that the growth rate is determined by the rate at which nutrients are supplied to the foetus across a surface that remains in proportion to the total surface area of the foetus itself. This is consistent with the deb model, which gives "
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.288,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "L3 b([MV ]µV + [Em])κR/E0, where E0/κR is the investment into a single offspring and L3 b[MV ]µV is fixed in structure at birth and L3 b[Em] in reserve, both at abundant food. The embryo overheads include somatic and maturity maintenance, growth overheads and maturation. If the step from food is included, the total efficiency should be multiplied by the digestion efficiency κX (typical range 0.1-0.8), which obviously depends on the type of food. Total foetal weight is about twice the actual foetal weight in mammals, where fluids that surround the foetus, the placenta, the increased uterus and milk accumulation (in the later stages of the pregnancy) contribute to the extra weight. Most of the"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2886,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "n [E] = ∞for the foetus can be made for the whole gestation period and the dynamics of the reserve density (3.19) no longer applies, because the foetus lives on the reserves of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at an unrestricted rate till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.12) to d dtV = ˙vV 2/3 so (3.20) V (t) = (˙vt/3)3 (3.21) This growth curve was proposed by Huggett and Widdas [341] in 1951. Payn"
+            },
+            {
+              "document_id": "3419",
+              "title": "Horri e.a. - 2018 - Fish life-history traits are affected after chroni.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2914,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "can cause changes in fat mass and subsequent obesity as it has been observed in ﬁsh (Berg et al., 2011; Lyche et al., 2010, 2011; Nourizadeh-Lillabadi et al., 2009), humans (Dirinck et al., 2011; Grün and Blumberg, 2009) and rats (Grün and Blumberg, 2009), the present study shows indeed no difference in condition between MIX and SOLV ﬁsh. Still, the present results do not allow rejecting the possibility that these compounds could cause simultaneous but independent changes in body growth and the reproductive function. Another question is the net effect of these changes in growth and re- production on individuals' reproductive output throughout the whole life-cycle, and thus their ﬁtness. Give"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.295,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "associated with standing or moving. These parameters dictate the relative metabolic costs that animals incur based on their body size. Although the debate on the existence of universal scaling exponents is very much ongoing, at least in regard to maintenance costs, here and in many cases data may exist for the study species and closely related species to parameterize these parameters directly. The parameter emb-growth-c, which represents the fetal growth constant, was found to have a strong impact on various model outputs, including the neonate body mass, age at first birth, and the number of litters per year. Since this parameter determines the maximum rate of fetal growth and thus the cost"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "stment in the slowly developing foetus amounts to u0F E = ˙vU0F E gL3m = l3 b f+g g \u0010 1 + 3 4 lb f \u0011 , which can be compared with u0F E = ub E +l3 b + 3 4 l4 b g that was found for fast foetal development, (2.51). For eb = f, we have ub E = fl3 b/g and the latter expression can be written as u0F E = l3 b(1+ f g + 3 4 lb g ). This is slightly smaller than for slow development, due to less cumulative maintenance; the difference in u0F E is 3 4gl4 b. Section 7.7 of the comments discusses up-regulation of mothers’ intake during pregnancy and lactation dynamically. 2.6.2 Foetal costs The foetal costs in (2.51) can be re-written in terms of scaled age at birth, τb = ab ˙kM as follows. Table 2.1 le"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2973,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.95,
+              "text": "of the foetus itself. This is consistent with the deb model, which gives the energy interpretation of the single parameter. The graph of foetal weight against age resembles an exponential growth curve, but in fact it is less steep; the model has the property that subsequent weight doubling times increase by a factor 21/3 = 1.26, while there is no increase in the case of exponential growth. The fit is again excellent; see Figure 2.15. It is representative for the data collected in Table 2.3 taken from [1295]. A time lag for the start of foetal growth has to be incorpo- rated, and this diapause may be related to the development of the placenta, which possibly [Page 79] 62 Standard DEB model in"
+            },
+            {
+              "document_id": "W2768843102",
+              "title": "Association of Maternal Obesity With Longitudinal Ultrasonographic Measures of Fetal Growth",
+              "doi": "https://doi.org/10.1001/jamapediatrics.2017.3785",
+              "year": "2017",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "As early as 32 weeks' gestation, fetuses of obese women had higher weights than fetuses of nonobese women. The mechanisms and long-term health implications of these findings are not yet established."
+            },
+            {
+              "document_id": "W1718269376",
+              "title": "The implications and consequences of maternal obesity on fetal intrauterine growth restriction.",
+              "doi": "",
+              "year": "2013",
+              "distance": 0.2258,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Complications grow both in number and severity with increasing obesity. Diagnosis of the fetuses with IUGR is important for the monitoring and management of the pregnancy associated with obesity and it involves a close collaboration between obstetrician, family physician and neonatologist."
+            },
+            {
+              "document_id": "W1682161401",
+              "title": "Patterns of gestational weight gain related to fetal growth among women with overweight and obesity",
+              "doi": "https://doi.org/10.1002/oby.21006",
+              "year": "2015",
+              "distance": 0.226,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.07,
+              "text": "The pattern of weight gain during pregnancy may be an important contributor to or marker of abnormal fetal growth among women with overweight or obesity."
+            },
+            {
+              "document_id": "W2067232392",
+              "title": "Effect of maternal weight gain on infant birth weight",
+              "doi": "https://doi.org/10.1515/jpm.2000.056",
+              "year": "2000",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.08,
+              "text": "Objective: To ascertain whether increased weight gain during pregnancy resulted in higher birth weight infants."
+            },
+            {
+              "document_id": "W4238737476",
+              "title": "Effects of Gestational Weight Gain in Morbidly Obese Women: II: Fetal Morbidity",
+              "doi": "https://doi.org/10.1055/s-2007-999507",
+              "year": "1990",
+              "distance": 0.2286,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.06,
+              "text": "Recommended gestational weight gain is based on supplying adequate nutrition to the conceptus, ensuring normal growth and development. Since morbidly obese women have an overabundance of nutrients for fetal transfer, we examined the effects of weight gain on fetal outcome in women greater than 160% of ideal body weight. Gestational weight gains varied from -18 to +64 pounds, allowing analysis of fetal outcome based on maternal weight gain. No correlation between maternal weight gain and ketonuria, birthweight or length, placental weight, or Apgar scores was noted. Gestational age at delivery was inversely related to weight gain. When grouped by maternal weight gain, fetal outcome was no diff"
+            },
+            {
+              "document_id": "W2165501611",
+              "title": "Adverse Birth Outcomes in Relation to Prenatal Sonographic Measurements of Fetal Size",
+              "doi": "https://doi.org/10.7863/jum.2003.22.4.347",
+              "year": "2003",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Morbidity and mortality are significantly increased among fetuses with an estimated fetal weight in the 5th percentile or less for gestational age."
+            },
+            {
+              "document_id": "W2792498978",
+              "title": "Maternal obesity is not associated with increased crown-rump length in first-trimester ultrasounds of singleton gestations",
+              "doi": "https://doi.org/10.1080/14767058.2018.1438396",
+              "year": "2018",
+              "distance": 0.2333,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.07,
+              "text": "Maternal obesity does not significantly alter the fetal CRL. However, maternal obesity appears to be associated with increased fetal growth as early as the second trimester."
+            },
+            {
+              "document_id": "W2116637397",
+              "title": "The impact of maternal obesity on satisfactory detailed anatomic ultrasound image acquisition",
+              "doi": "https://doi.org/10.1080/14767050802524586",
+              "year": "2008",
+              "distance": 0.2343,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.04,
+              "text": "Suboptimal fetal anatomic visualisation is increased with maternal obesity, but declines with advancing gestational age in both normal weight and obese populations."
+            },
+            {
+              "document_id": "W1576613738",
+              "title": "Maternal weight gain: a determinant for fetal abdominal circumference in the second trimester",
+              "doi": "https://doi.org/10.1111/j.1600-0412.2011.01129.x",
+              "year": "2011",
+              "distance": 0.2384,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.06,
+              "text": "Maternal weight gain in pregnancy is related to and may determine fetal abdominal circumference in gestational weeks 15-25, particularly in those women with a slow weight gain."
+            },
+            {
+              "document_id": "W4411622970",
+              "title": "[Relationship between maternal pre-pregnancy obesity and infant development: the Taicang and Wuqiang mother-child cohort study in China].",
+              "doi": "https://doi.org/10.19813/j.cnki.weishengyanjiu.2025.03.009",
+              "year": "2025",
+              "distance": 0.2419,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Maternal pre-pregnancy obesity increases BAZ, WLZ and WAZ of the offspring in infancy."
+            },
+            {
+              "document_id": "W2157382661",
+              "title": "Association of placenta organotin concentrations with growth and ponderal index in 110 newborn boys from Finland during the first 18 months of life: a cohort study",
+              "doi": "https://doi.org/10.1186/1476-069x-13-45",
+              "year": "2014",
+              "distance": 0.2421,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.07,
+              "text": "We observed a trend towards higher weight gain from birth to 3 months of age with increasing placenta TBT concentration. These results should be interpreted with caution because obesogenic effects in animal experiments were seen after in-utero TBT exposures to doses that were orders of magnitude higher. Also the number of study subjects included in this study was limited."
+            },
+            {
+              "document_id": "W4417088362",
+              "title": "Association of maternal weight gain with offspring birth size",
+              "doi": "https://doi.org/10.12692/ijb/17.3.141-147",
+              "year": "2020",
+              "distance": 0.2452,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.08,
+              "text": "Gestational weight gain (GWG) is influenced by numerous causes in prenatal health which are of great public health concerns. GWG during the 2nd and 3rd trimesters is an essential determinant of fetal development. However, this study was aimed to scrutinize the association between GWG and birth size of baby. In this regard, birth weight of the offspring was considered as the determinant of birth size. This was a cross sectional observational study, was carried out among 100 pregnant women admitted in the Department of Obstetrics and Gynecology, Rangpur Medical College and Hospital, Rangpur, Bangladesh and during the period of June 2017 to June 2018. All of the data were collected using a pre-"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 1,
+            "rationale": "The corpus is genuinely split. Several applied modelling papers (snippets 1, 3, 13, 14) explicitly assume or state that foetuses grow exponentially in weight, with snippet 1 and 3 even citing this as a working assumption. However, the core DEB theory sources (Kooijman's books and original papers, snippets 2, 5, 6, 8, 12, 18) consistently derive that foetal structural volume grows as V(t)=(vt/3)^3, i.e. cubic in time, not exponential. Snippet 12 is the most pointed: it states the foetal weight curve 'resembles an exponential growth curve, but in fact it is less steep,' with weight-doubling times increasing by a factor 2^(1/3), explicitly distinguishing it from true exponential growth. Thus the foundational DEB model contradicts the strict exponential claim, treating it only as an approximation, while downstream applications adopt exponential growth as a simplification. Given the clear conflict with the canonical theory, the consensus leans against the literal stylized fact."
+          },
+          "n_references": 8,
+          "references": {
+            "3532": {
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2531
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2772
+            },
+            "3743": {
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2794
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 0,
+              "contradicts": 2,
+              "best_distance": 0.284
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2863
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2886
+            },
+            "2503": {
+              "title": "Moretti - 2019 - ESTIMATING THE EFFECT OF MID-FREQUENCY ACTIVE SONA.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2973
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.3068
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2531,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "governed by dietary uptake, elimination, growth dilution and vertical transfer. Moreover, the PCB concentration increases in foetuses due to vertical transfer, which affect the PCB concentration in new-born pups at the start of the next year. Body Growth Since the toxicokinetics involve feeding and growth dilution, linked to body size and its change, a model for body growth is acquired. Foetuses are assumed to growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as: 𝑊0(𝜏̂) = 𝑊00𝑒𝑔0(𝜏̂−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏̂ ≤1 (18) Here, 𝑊00 is the initial foetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2772,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.85,
+              "text": "the mother, continuously sup- plied to the foetus via the placenta, are considered very large, i.e., e = ∞then foetal growth is given by dL dt = ˙v 3. (5.55) Proof: Eq. 5.55 is obtained dividing the numerator and the denominator of the right hand side of Eq. 5.47 by e and then replacing it with ∞. ■ According with Eq. 5.55 the structural volume of the foetus is proportional to cubed time: V (t) = \u0012 ˙vt 3 \u00133 . (5.56) The structural volume can be converted to weight using the following auxiliary proposi- tion. Proposition 5.3.14 (Volume to weight) The relationship between weight, w, and struc- tural volume, V , is w = \u0012[E] µE + dV \u0013 V = \u0012[Em] µE e + dV \u0013 V, (5.57) where dV is the density of th"
+            },
+            {
+              "document_id": "3743",
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2794,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "late growth dilution rates and keep track of body weights (affecting rates of feeding, vertical transfer and PCB elimination), a sub model for body growth was established (Fig. 4). Fetuses are assumed to growth exponentially during the gestation period (Peters 1983). Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏) = 𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏≤1 yr (1) Here, 𝑊00 is the initial fetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant. At the end of the gestation period, the fetus has reached the birth weight 𝑊𝑏𝑖𝑟𝑡ℎ. Hence, the initial fetal weight 𝑊00 is calculated as: 𝑊00 = 𝑊𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (2) For simplicity it is assumed "
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2797,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "asing proportionately faster than diameter (body thinning) over ontogeny and 2904 𝑏஽௅> 1 the reverse (body thickening). Thus, both E.fetida and T.tubifex show 2905 decreased scaling of body thickness relative to length over ontogeny in this study, 2906 which may be due to decreasing proportion of lipid reserves, or other low-metabolising 2907 mass such as water, over ontogeny. The scaling exponent of biosynthesis (𝐴), 2908 however, captures both somatic (metabolising) and low- or non- metabolising tissue 2909 (e.g. lipids), and hence 𝐴 can mismatch with the scaling of metabolism (𝑏ோ) if changes 2910 in body composition (or proportion of metabolising structure) occur over ontogeny. 2911 The a"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.284,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.85,
+              "text": "es of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The special case e →∞makes that d dτ l = g/3, or l(τ) = gτ/3. The foetal structural volume thus behaves as d dtV = ˙vV 2/3 so V (t) = (˙vt/3)3 (2.47) This growth curve was proposed by Huggett and Widdas [535] in 1951. Payne and Wheeler [873] explained it by assuming that the growth rate is determined by the rate at which nutrie"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2863,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.85,
+              "text": "etus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.18) to d dtV = ˙vV 2/3 so (3.25) V (t) = (˙vt/3)3 (3.26) This growth curve was proposed by Huggett and Widdas [434] in 1951. Payne and Wheeler [694] explained it by assuming that the growth rate is determined by the rate at which nutrients are supplied to the foetus across a surface that remains in proportion to the total surface area of the foetus itself. This is consistent with the deb model, which gives "
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.288,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "L3 b([MV ]µV + [Em])κR/E0, where E0/κR is the investment into a single offspring and L3 b[MV ]µV is fixed in structure at birth and L3 b[Em] in reserve, both at abundant food. The embryo overheads include somatic and maturity maintenance, growth overheads and maturation. If the step from food is included, the total efficiency should be multiplied by the digestion efficiency κX (typical range 0.1-0.8), which obviously depends on the type of food. Total foetal weight is about twice the actual foetal weight in mammals, where fluids that surround the foetus, the placenta, the increased uterus and milk accumulation (in the later stages of the pregnancy) contribute to the extra weight. Most of the"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2886,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.85,
+              "text": "n [E] = ∞for the foetus can be made for the whole gestation period and the dynamics of the reserve density (3.19) no longer applies, because the foetus lives on the reserves of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at an unrestricted rate till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.12) to d dtV = ˙vV 2/3 so (3.20) V (t) = (˙vt/3)3 (3.21) This growth curve was proposed by Huggett and Widdas [341] in 1951. Payn"
+            },
+            {
+              "document_id": "3419",
+              "title": "Horri e.a. - 2018 - Fish life-history traits are affected after chroni.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2914,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "can cause changes in fat mass and subsequent obesity as it has been observed in ﬁsh (Berg et al., 2011; Lyche et al., 2010, 2011; Nourizadeh-Lillabadi et al., 2009), humans (Dirinck et al., 2011; Grün and Blumberg, 2009) and rats (Grün and Blumberg, 2009), the present study shows indeed no difference in condition between MIX and SOLV ﬁsh. Still, the present results do not allow rejecting the possibility that these compounds could cause simultaneous but independent changes in body growth and the reproductive function. Another question is the net effect of these changes in growth and re- production on individuals' reproductive output throughout the whole life-cycle, and thus their ﬁtness. Give"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.295,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "associated with standing or moving. These parameters dictate the relative metabolic costs that animals incur based on their body size. Although the debate on the existence of universal scaling exponents is very much ongoing, at least in regard to maintenance costs, here and in many cases data may exist for the study species and closely related species to parameterize these parameters directly. The parameter emb-growth-c, which represents the fetal growth constant, was found to have a strong impact on various model outputs, including the neonate body mass, age at first birth, and the number of litters per year. Since this parameter determines the maximum rate of fetal growth and thus the cost"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "stment in the slowly developing foetus amounts to u0F E = ˙vU0F E gL3m = l3 b f+g g \u0010 1 + 3 4 lb f \u0011 , which can be compared with u0F E = ub E +l3 b + 3 4 l4 b g that was found for fast foetal development, (2.51). For eb = f, we have ub E = fl3 b/g and the latter expression can be written as u0F E = l3 b(1+ f g + 3 4 lb g ). This is slightly smaller than for slow development, due to less cumulative maintenance; the difference in u0F E is 3 4gl4 b. Section 7.7 of the comments discusses up-regulation of mothers’ intake during pregnancy and lactation dynamically. 2.6.2 Foetal costs The foetal costs in (2.51) can be re-written in terms of scaled age at birth, τb = ab ˙kM as follows. Table 2.1 le"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2973,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.95,
+              "text": "of the foetus itself. This is consistent with the deb model, which gives the energy interpretation of the single parameter. The graph of foetal weight against age resembles an exponential growth curve, but in fact it is less steep; the model has the property that subsequent weight doubling times increase by a factor 21/3 = 1.26, while there is no increase in the case of exponential growth. The fit is again excellent; see Figure 2.15. It is representative for the data collected in Table 2.3 taken from [1295]. A time lag for the start of foetal growth has to be incorpo- rated, and this diapause may be related to the development of the placenta, which possibly [Page 79] 62 Standard DEB model in"
+            },
+            {
+              "document_id": "2503",
+              "title": "Moretti - 2019 - ESTIMATING THE EFFECT OF MID-FREQUENCY ACTIVE SONA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2973,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "674 4/20/1998 North Atlantic New Jersey Female 361 545 481 Figure 4.6 Daily cost of structural growth in MJ from birth to maximum life expectancy. [Page 139] 122 Growth in foetal length is assumed to be linear so that the foetus grows at a constant rate from length 0 cm at conception to L0 at the end of the gestation period (Tp = 365 days). The structural mass of the foetus is estimated using the same mass-length relationship as that was used for females. As a result, the structural mass of the foetus increases exponentially over the course of pregnancy. The daily cost of growth is calculated as the difference in structural mass between consecutive days multiplied by the energy cost per unit"
+            },
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3021,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "n foetus and mother, 𝑊0 and 𝑊𝑖 are body weights of foetus and mother, whereas 𝑘𝑃,𝑖 is the placental transfer rate constant for a female of age class 𝑖. The toxicokinetic equation (Eq. (52)) can be rewritten as: d𝑐0,𝑖 𝑔 d𝜏+ 𝑘𝐺,0𝑐0,𝑖 𝑔= 𝑘𝑃,𝑖𝜔0,𝑖𝑐𝑖,𝑖 𝑔 , 𝑖= 2, … , 46 (53) The foetus grows exponentially according to Eq. (18). Hence, the growth dilution rate 𝑘𝐺,0, defined in similarity with Eq. (37), equals the exponential growth rate: 𝑘𝐺,0 = 1 𝑊0 d𝑊0 d𝜏= 𝑔0 (54) The body weight ratio between female and foetus (𝜔0,𝑖) is approximated as a mean value (𝜔̅0,𝑖) over the gestation period: 𝜔0,𝑖= 𝑊𝑖/𝑊0 ≈𝜔̅0,𝑖= 𝑊̅𝑖 𝑔/𝑊̅0 , 𝑖= 2, … , 46 (55) The PCB concentration in the mother (𝑐𝑖,𝑖 𝑔) during the gestation"
+            },
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3043,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Body weight as a function of age according to model for body growth (Eq. (182)). Pups increase their weight exponentially during lactation and keep it constant during the remainder of the year. Sub-adults follow von Bertalanffy growth function until maturation. Mature females lose weight exponentially during lactation, regain it linearly during the delay period and grow according to von Bertalanffy during gestation. The same yearly pattern for mature females is then repeated. [Page 33] 27 a weight proportional to the structural body volume, the prey consumption rate 𝑊̇ 𝐷 for an individual of weight 𝑊 is then obtained as: 𝑊̇ 𝐷= 𝜅𝑊2/3 (30) Mature females lactate and hence they lose and regain "
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "me cannibalistic, they grow into giants [1086]. The conversion efficiency from fish to fish is higher than from zooplank- ton to fish. An increase in food availability means an increase in growth rate. Such a cause can be detected by comparing different diets and food availability levels. If the amount of up- curving of length-at-age is sensitive to such changes, this indicates for a type X acceleration. When fed with abundant food of high quality, length, or the cubic root of weight, increases linearly for neonates and incubation times are be well-predicted by the standard DEB model. So acceleration disappears in such situations. Although actual intake is increased, intake capacity is not. "
+            },
+            {
+              "document_id": "2852",
+              "title": "RinkHuls2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3059,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "nto reproductive tissue: A\u0003M\u0004dW dt \u0004dR dt (1) Here, the somatic growth rate describes the change in body weight (W) and the term dR/dt describes the change in accumulated carbon in gonads (R) over time. A fixed fraction (k, see Fig. 1) of assimilate is allocated in growth and maintenance and the remaining assimilate (1\u0005k) is directed towards reproduction or maturation if the indivi- dual is juvenile, respectively. Thus, the change in an individual’s body weight over time becomes dW dt \u0003kA\u0005M and, accordingly, the change in gonad mass is given by dW dt \u0003(1\u0005k)A: Carbon is assimilated from the ingested food with efficiency EA that depends on food concentration. The ingestion rate scales with squ"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.3068,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "Standard DEB model in time, length & energy Expressed in scaled time and length, we have d dτ lF = g 3 eF −lF eF +g , which reduces for lF ≪eF to d dτ lF = g/3 1+g/eF and for eF = f, scaled length as function of scaled time is lF(τ) = gτ/3 1+g/f . Scaled age at birth amounts to τb = 3lb f+g fg . The subsection on foetal development suggests that foetuses development is speeded up by assuming that eF ≫g, here called fast development. The motivation was that foetal development then resembles egg development closely with the only difference that egg development eventually slows down, due to depletion of reserve (and/or yolk), while foetal development remains fast till birth. In that case the sp"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the snippets directly examine the temporal shape of foetal weight gain in a way that affirms exponential growth. The vast majority concern maternal obesity, gestational weight gain, and birth outcomes, which are topically related to foetal growth but bear no evidence on whether foetal weight increases exponentially. The only snippet that explicitly addresses the growth trajectory is [17], which reports that foetal weight does NOT increase in the final two weeks before term delivery, mildly contradicting a strictly exponential model (though this concerns late-term plateauing rather than the general growth pattern). Overall the corpus provides essentially no supporting evidence for the stylized fact, and the limited relevant evidence is weak and slightly against; thus evidence strength is low and direction is best characterized as insufficient."
+          },
+          "n_references": 1,
+          "references": {
+            "W1994799072": {
+              "title": "Mathematical modeling of fetal growth: V. Fetal weight changes at term",
+              "doi": "https://doi.org/10.1002/jcu.1870160103",
+              "year": "1988",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.248
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2768843102",
+              "title": "Association of Maternal Obesity With Longitudinal Ultrasonographic Measures of Fetal Growth",
+              "doi": "https://doi.org/10.1001/jamapediatrics.2017.3785",
+              "year": "2017",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "As early as 32 weeks' gestation, fetuses of obese women had higher weights than fetuses of nonobese women. The mechanisms and long-term health implications of these findings are not yet established."
+            },
+            {
+              "document_id": "W1718269376",
+              "title": "The implications and consequences of maternal obesity on fetal intrauterine growth restriction.",
+              "doi": "",
+              "year": "2013",
+              "distance": 0.2258,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Complications grow both in number and severity with increasing obesity. Diagnosis of the fetuses with IUGR is important for the monitoring and management of the pregnancy associated with obesity and it involves a close collaboration between obstetrician, family physician and neonatologist."
+            },
+            {
+              "document_id": "W1682161401",
+              "title": "Patterns of gestational weight gain related to fetal growth among women with overweight and obesity",
+              "doi": "https://doi.org/10.1002/oby.21006",
+              "year": "2015",
+              "distance": 0.226,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The pattern of weight gain during pregnancy may be an important contributor to or marker of abnormal fetal growth among women with overweight or obesity."
+            },
+            {
+              "document_id": "W2067232392",
+              "title": "Effect of maternal weight gain on infant birth weight",
+              "doi": "https://doi.org/10.1515/jpm.2000.056",
+              "year": "2000",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Objective: To ascertain whether increased weight gain during pregnancy resulted in higher birth weight infants."
+            },
+            {
+              "document_id": "W4238737476",
+              "title": "Effects of Gestational Weight Gain in Morbidly Obese Women: II: Fetal Morbidity",
+              "doi": "https://doi.org/10.1055/s-2007-999507",
+              "year": "1990",
+              "distance": 0.2286,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Recommended gestational weight gain is based on supplying adequate nutrition to the conceptus, ensuring normal growth and development. Since morbidly obese women have an overabundance of nutrients for fetal transfer, we examined the effects of weight gain on fetal outcome in women greater than 160% of ideal body weight. Gestational weight gains varied from -18 to +64 pounds, allowing analysis of fetal outcome based on maternal weight gain. No correlation between maternal weight gain and ketonuria, birthweight or length, placental weight, or Apgar scores was noted. Gestational age at delivery was inversely related to weight gain. When grouped by maternal weight gain, fetal outcome was no diff"
+            },
+            {
+              "document_id": "W2165501611",
+              "title": "Adverse Birth Outcomes in Relation to Prenatal Sonographic Measurements of Fetal Size",
+              "doi": "https://doi.org/10.7863/jum.2003.22.4.347",
+              "year": "2003",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Morbidity and mortality are significantly increased among fetuses with an estimated fetal weight in the 5th percentile or less for gestational age."
+            },
+            {
+              "document_id": "W2792498978",
+              "title": "Maternal obesity is not associated with increased crown-rump length in first-trimester ultrasounds of singleton gestations",
+              "doi": "https://doi.org/10.1080/14767058.2018.1438396",
+              "year": "2018",
+              "distance": 0.2333,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Maternal obesity does not significantly alter the fetal CRL. However, maternal obesity appears to be associated with increased fetal growth as early as the second trimester."
+            },
+            {
+              "document_id": "W2116637397",
+              "title": "The impact of maternal obesity on satisfactory detailed anatomic ultrasound image acquisition",
+              "doi": "https://doi.org/10.1080/14767050802524586",
+              "year": "2008",
+              "distance": 0.2343,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Suboptimal fetal anatomic visualisation is increased with maternal obesity, but declines with advancing gestational age in both normal weight and obese populations."
+            },
+            {
+              "document_id": "W1576613738",
+              "title": "Maternal weight gain: a determinant for fetal abdominal circumference in the second trimester",
+              "doi": "https://doi.org/10.1111/j.1600-0412.2011.01129.x",
+              "year": "2011",
+              "distance": 0.2384,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Maternal weight gain in pregnancy is related to and may determine fetal abdominal circumference in gestational weeks 15-25, particularly in those women with a slow weight gain."
+            },
+            {
+              "document_id": "W4411622970",
+              "title": "[Relationship between maternal pre-pregnancy obesity and infant development: the Taicang and Wuqiang mother-child cohort study in China].",
+              "doi": "https://doi.org/10.19813/j.cnki.weishengyanjiu.2025.03.009",
+              "year": "2025",
+              "distance": 0.2419,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Maternal pre-pregnancy obesity increases BAZ, WLZ and WAZ of the offspring in infancy."
+            },
+            {
+              "document_id": "W2157382661",
+              "title": "Association of placenta organotin concentrations with growth and ponderal index in 110 newborn boys from Finland during the first 18 months of life: a cohort study",
+              "doi": "https://doi.org/10.1186/1476-069x-13-45",
+              "year": "2014",
+              "distance": 0.2421,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "We observed a trend towards higher weight gain from birth to 3 months of age with increasing placenta TBT concentration. These results should be interpreted with caution because obesogenic effects in animal experiments were seen after in-utero TBT exposures to doses that were orders of magnitude higher. Also the number of study subjects included in this study was limited."
+            },
+            {
+              "document_id": "W4417088362",
+              "title": "Association of maternal weight gain with offspring birth size",
+              "doi": "https://doi.org/10.12692/ijb/17.3.141-147",
+              "year": "2020",
+              "distance": 0.2452,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Gestational weight gain (GWG) is influenced by numerous causes in prenatal health which are of great public health concerns. GWG during the 2nd and 3rd trimesters is an essential determinant of fetal development. However, this study was aimed to scrutinize the association between GWG and birth size of baby. In this regard, birth weight of the offspring was considered as the determinant of birth size. This was a cross sectional observational study, was carried out among 100 pregnant women admitted in the Department of Obstetrics and Gynecology, Rangpur Medical College and Hospital, Rangpur, Bangladesh and during the period of June 2017 to June 2018. All of the data were collected using a pre-"
+            },
+            {
+              "document_id": "W38077771",
+              "title": "[Impacts of gestational weight gain on offspring weight and obesity: a 2-year follow up study].",
+              "doi": "",
+              "year": "2011",
+              "distance": 0.2459,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Excessive gestational weight gain may affect offspring weight and increase the risk of obesity in children from birth to 12 months of age. During their second year of life, this effect will temporarily disappear."
+            },
+            {
+              "document_id": "W2084527711",
+              "title": "Influence of maternal anthropometric status and birth weight on the risk of cesarean delivery",
+              "doi": "https://doi.org/10.1016/0029-7844(95)00082-3",
+              "year": "1995",
+              "distance": 0.247,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The risk of cesarean delivery increases linearly with pregnancy weight gain, independent of birth weight. No specific threshold of weight gain can be determined above which the cesarean risk climbs more rapidly."
+            },
+            {
+              "document_id": "W2412157196",
+              "title": "[Pre-pregnancy body mass, gestational weight gain and birth weight].",
+              "doi": "",
+              "year": "1998",
+              "distance": 0.2474,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Both maternal prepregnancy weight and weight gain during gestation are important factors affecting fetal growth and birth weight. Increasing maternal weight before pregnancy diminishes the influence of weight gain on birthweight. As pregravid weight and prenatal weight gain increase, the incidence of LGA also increase, whereas the frequency of SGA decreases."
+            },
+            {
+              "document_id": "W2409137905",
+              "title": "[Influence of prepregnancy weight and maternal weight gain on pregnancy outcome].",
+              "doi": "",
+              "year": "1998",
+              "distance": 0.2476,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Prepregnancy weight and weight gain during pregnancy have direct impact on birth weight of the baby and maternal complications."
+            },
+            {
+              "document_id": "W1994799072",
+              "title": "Mathematical modeling of fetal growth: V. Fetal weight changes at term",
+              "doi": "https://doi.org/10.1002/jcu.1870160103",
+              "year": "1988",
+              "distance": 0.248,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "Abstract Fetal growth after 37 weeks menstrual age was investigated by comparing ultrasound estimates of fetal weight with corresponding weights of newborns. Using a weight estimation equation with minimal systematic error, evidence was found that fetuses delivered at term do not increase in weight the last two weeks before delivery. This change in fetal growth is regarded as a biological process that is needed to prepare the fetus for its life after birth. Only one of three subsets, that of estimated weights below 3000 g, showed significant weight increase after 37 weeks. This subset had, however, on average the longest scan‐delivery interval. We conclude that conventional birthweight stand"
+            },
+            {
+              "document_id": "W4379508324",
+              "title": "Maternal obesity: Perinatal implications",
+              "doi": "https://doi.org/10.1177/20503121231176128",
+              "year": "2023",
+              "distance": 0.2489,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Over the previous three decades, the prevalence and growth of overweight and obese status has risen relentlessly in both the general population and pregnant women. This rise is seen in both higher pre-pregnancy body mass index measurements along with excessive weight gain during pregnancy. Maternal obesity has been shown to exacerbate co-morbidities such as insulin resistance, pregnancy induced hypertension, and infectious states in parturient mothers. These changes have been shown to subsequently increase rates of fetal anomalies and affect fetal growth, as well as various aspects of the delivery such as rates of instrumented vaginal deliveries and an increase in delivery by cesarean sectio"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 1,
+            "rationale": "The corpus is genuinely split. Several applied modeling papers (snippets 1, 3) explicitly assume foetuses grow exponentially during gestation, citing Peters (1983), and snippet 10 references a 'fetal growth constant' consistent with exponential-style growth. However, the core DEB-theory sources (Kooijman texts: snippets 5, 6, 8, and especially 12, plus Sous2007 snippet 2) directly contradict pure exponential growth: under DEB, the foetal structural volume follows V(t) = (v·t/3)^3, i.e., a cubic-time growth where weight doubling times increase by 21/3, explicitly noted as 'less steep' than an exponential curve even though it superficially resembles one. Thus the foundational DEB position is that foetal growth approximates but is not truly exponential. The many maternal-obesity/birth-weight clinical snippets (13-24) are off-topic to the functional form of growth. Because the most authoritative theoretical sources contradict strict exponentiality while applied uses adopt it as an approximation, the consensus leans against the literal claim."
+          },
+          "n_references": 6,
+          "references": {
+            "3532": {
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2531
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2772
+            },
+            "3743": {
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2794
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 0,
+              "contradicts": 2,
+              "best_distance": 0.284
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2863
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2886
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2531,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "governed by dietary uptake, elimination, growth dilution and vertical transfer. Moreover, the PCB concentration increases in foetuses due to vertical transfer, which affect the PCB concentration in new-born pups at the start of the next year. Body Growth Since the toxicokinetics involve feeding and growth dilution, linked to body size and its change, a model for body growth is acquired. Foetuses are assumed to growth exponentially during the gestation period. Hence, the body weight of a foetus at time 𝜏̂ during a year is obtained as: 𝑊0(𝜏̂) = 𝑊00𝑒𝑔0(𝜏̂−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏̂ ≤1 (18) Here, 𝑊00 is the initial foetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2772,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.85,
+              "text": "the mother, continuously sup- plied to the foetus via the placenta, are considered very large, i.e., e = ∞then foetal growth is given by dL dt = ˙v 3. (5.55) Proof: Eq. 5.55 is obtained dividing the numerator and the denominator of the right hand side of Eq. 5.47 by e and then replacing it with ∞. ■ According with Eq. 5.55 the structural volume of the foetus is proportional to cubed time: V (t) = \u0012 ˙vt 3 \u00133 . (5.56) The structural volume can be converted to weight using the following auxiliary proposi- tion. Proposition 5.3.14 (Volume to weight) The relationship between weight, w, and struc- tural volume, V , is w = \u0012[E] µE + dV \u0013 V = \u0012[Em] µE e + dV \u0013 V, (5.57) where dV is the density of th"
+            },
+            {
+              "document_id": "3743",
+              "title": "MaurDesf2022_SI.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2794,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "late growth dilution rates and keep track of body weights (affecting rates of feeding, vertical transfer and PCB elimination), a sub model for body growth was established (Fig. 4). Fetuses are assumed to growth exponentially during the gestation period (Peters 1983). Hence, the body weight of a fetus at time 𝜏 during a year is obtained as: 𝑊0(𝜏) = 𝑊00𝑒𝑔0(𝜏−(∆𝜏𝑙+∆𝜏𝑑)) , ∆𝜏𝑙+ ∆𝜏𝑑≤𝜏≤1 yr (1) Here, 𝑊00 is the initial fetal weight (the weight of a fertilized egg) and 𝑔0 is an exponential growth rate constant. At the end of the gestation period, the fetus has reached the birth weight 𝑊𝑏𝑖𝑟𝑡ℎ. Hence, the initial fetal weight 𝑊00 is calculated as: 𝑊00 = 𝑊𝑏𝑖𝑟𝑡ℎ𝑒−𝑔0∆𝜏𝑔 (2) For simplicity it is assumed "
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2797,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "asing proportionately faster than diameter (body thinning) over ontogeny and 2904 𝑏஽௅> 1 the reverse (body thickening). Thus, both E.fetida and T.tubifex show 2905 decreased scaling of body thickness relative to length over ontogeny in this study, 2906 which may be due to decreasing proportion of lipid reserves, or other low-metabolising 2907 mass such as water, over ontogeny. The scaling exponent of biosynthesis (𝐴), 2908 however, captures both somatic (metabolising) and low- or non- metabolising tissue 2909 (e.g. lipids), and hence 𝐴 can mismatch with the scaling of metabolism (𝑏ோ) if changes 2910 in body composition (or proportion of metabolising structure) occur over ontogeny. 2911 The a"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.284,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "es of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The special case e →∞makes that d dτ l = g/3, or l(τ) = gτ/3. The foetal structural volume thus behaves as d dtV = ˙vV 2/3 so V (t) = (˙vt/3)3 (2.47) This growth curve was proposed by Huggett and Widdas [535] in 1951. Payne and Wheeler [873] explained it by assuming that the growth rate is determined by the rate at which nutrie"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2863,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "etus develop in the same way, but the foetus keeps developing at a rate not restricted by the amount of reserves till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.18) to d dtV = ˙vV 2/3 so (3.25) V (t) = (˙vt/3)3 (3.26) This growth curve was proposed by Huggett and Widdas [434] in 1951. Payne and Wheeler [694] explained it by assuming that the growth rate is determined by the rate at which nutrients are supplied to the foetus across a surface that remains in proportion to the total surface area of the foetus itself. This is consistent with the deb model, which gives "
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.288,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "L3 b([MV ]µV + [Em])κR/E0, where E0/κR is the investment into a single offspring and L3 b[MV ]µV is fixed in structure at birth and L3 b[Em] in reserve, both at abundant food. The embryo overheads include somatic and maturity maintenance, growth overheads and maturation. If the step from food is included, the total efficiency should be multiplied by the digestion efficiency κX (typical range 0.1-0.8), which obviously depends on the type of food. Total foetal weight is about twice the actual foetal weight in mammals, where fluids that surround the foetus, the placenta, the increased uterus and milk accumulation (in the later stages of the pregnancy) contribute to the extra weight. Most of the"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2886,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "n [E] = ∞for the foetus can be made for the whole gestation period and the dynamics of the reserve density (3.19) no longer applies, because the foetus lives on the reserves of the mother. In other words: unlike eggs, the development of foetuses is not restricted by energy reserves. Initially the egg and foetus develop in the same way, but the foetus keeps developing at an unrestricted rate till the end of the gestation time, while the development of the egg becomes retarded, due to depletion of the reserves. The approximation [E] = ∞reduces the growth equation (3.12) to d dtV = ˙vV 2/3 so (3.20) V (t) = (˙vt/3)3 (3.21) This growth curve was proposed by Huggett and Widdas [341] in 1951. Payn"
+            },
+            {
+              "document_id": "3419",
+              "title": "Horri e.a. - 2018 - Fish life-history traits are affected after chroni.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2914,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "can cause changes in fat mass and subsequent obesity as it has been observed in ﬁsh (Berg et al., 2011; Lyche et al., 2010, 2011; Nourizadeh-Lillabadi et al., 2009), humans (Dirinck et al., 2011; Grün and Blumberg, 2009) and rats (Grün and Blumberg, 2009), the present study shows indeed no difference in condition between MIX and SOLV ﬁsh. Still, the present results do not allow rejecting the possibility that these compounds could cause simultaneous but independent changes in body growth and the reproductive function. Another question is the net effect of these changes in growth and re- production on individuals' reproductive output throughout the whole life-cycle, and thus their ﬁtness. Give"
+            },
+            {
+              "document_id": "2420",
+              "title": "Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.295,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "associated with standing or moving. These parameters dictate the relative metabolic costs that animals incur based on their body size. Although the debate on the existence of universal scaling exponents is very much ongoing, at least in regard to maintenance costs, here and in many cases data may exist for the study species and closely related species to parameterize these parameters directly. The parameter emb-growth-c, which represents the fetal growth constant, was found to have a strong impact on various model outputs, including the neonate body mass, age at first birth, and the number of litters per year. Since this parameter determines the maximum rate of fetal growth and thus the cost"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "stment in the slowly developing foetus amounts to u0F E = ˙vU0F E gL3m = l3 b f+g g \u0010 1 + 3 4 lb f \u0011 , which can be compared with u0F E = ub E +l3 b + 3 4 l4 b g that was found for fast foetal development, (2.51). For eb = f, we have ub E = fl3 b/g and the latter expression can be written as u0F E = l3 b(1+ f g + 3 4 lb g ). This is slightly smaller than for slow development, due to less cumulative maintenance; the difference in u0F E is 3 4gl4 b. Section 7.7 of the comments discusses up-regulation of mothers’ intake during pregnancy and lactation dynamically. 2.6.2 Foetal costs The foetal costs in (2.51) can be re-written in terms of scaled age at birth, τb = ab ˙kM as follows. Table 2.1 le"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2973,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.95,
+              "text": "of the foetus itself. This is consistent with the deb model, which gives the energy interpretation of the single parameter. The graph of foetal weight against age resembles an exponential growth curve, but in fact it is less steep; the model has the property that subsequent weight doubling times increase by a factor 21/3 = 1.26, while there is no increase in the case of exponential growth. The fit is again excellent; see Figure 2.15. It is representative for the data collected in Table 2.3 taken from [1295]. A time lag for the start of foetal growth has to be incorpo- rated, and this diapause may be related to the development of the placenta, which possibly [Page 79] 62 Standard DEB model in"
+            },
+            {
+              "document_id": "W2768843102",
+              "title": "Association of Maternal Obesity With Longitudinal Ultrasonographic Measures of Fetal Growth",
+              "doi": "https://doi.org/10.1001/jamapediatrics.2017.3785",
+              "year": "2017",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "As early as 32 weeks' gestation, fetuses of obese women had higher weights than fetuses of nonobese women. The mechanisms and long-term health implications of these findings are not yet established."
+            },
+            {
+              "document_id": "W1718269376",
+              "title": "The implications and consequences of maternal obesity on fetal intrauterine growth restriction.",
+              "doi": "",
+              "year": "2013",
+              "distance": 0.2258,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Complications grow both in number and severity with increasing obesity. Diagnosis of the fetuses with IUGR is important for the monitoring and management of the pregnancy associated with obesity and it involves a close collaboration between obstetrician, family physician and neonatologist."
+            },
+            {
+              "document_id": "W1682161401",
+              "title": "Patterns of gestational weight gain related to fetal growth among women with overweight and obesity",
+              "doi": "https://doi.org/10.1002/oby.21006",
+              "year": "2015",
+              "distance": 0.226,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The pattern of weight gain during pregnancy may be an important contributor to or marker of abnormal fetal growth among women with overweight or obesity."
+            },
+            {
+              "document_id": "W2067232392",
+              "title": "Effect of maternal weight gain on infant birth weight",
+              "doi": "https://doi.org/10.1515/jpm.2000.056",
+              "year": "2000",
+              "distance": 0.2281,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Objective: To ascertain whether increased weight gain during pregnancy resulted in higher birth weight infants."
+            },
+            {
+              "document_id": "W4238737476",
+              "title": "Effects of Gestational Weight Gain in Morbidly Obese Women: II: Fetal Morbidity",
+              "doi": "https://doi.org/10.1055/s-2007-999507",
+              "year": "1990",
+              "distance": 0.2286,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Recommended gestational weight gain is based on supplying adequate nutrition to the conceptus, ensuring normal growth and development. Since morbidly obese women have an overabundance of nutrients for fetal transfer, we examined the effects of weight gain on fetal outcome in women greater than 160% of ideal body weight. Gestational weight gains varied from -18 to +64 pounds, allowing analysis of fetal outcome based on maternal weight gain. No correlation between maternal weight gain and ketonuria, birthweight or length, placental weight, or Apgar scores was noted. Gestational age at delivery was inversely related to weight gain. When grouped by maternal weight gain, fetal outcome was no diff"
+            },
+            {
+              "document_id": "W2165501611",
+              "title": "Adverse Birth Outcomes in Relation to Prenatal Sonographic Measurements of Fetal Size",
+              "doi": "https://doi.org/10.7863/jum.2003.22.4.347",
+              "year": "2003",
+              "distance": 0.2321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Morbidity and mortality are significantly increased among fetuses with an estimated fetal weight in the 5th percentile or less for gestational age."
+            },
+            {
+              "document_id": "W2792498978",
+              "title": "Maternal obesity is not associated with increased crown-rump length in first-trimester ultrasounds of singleton gestations",
+              "doi": "https://doi.org/10.1080/14767058.2018.1438396",
+              "year": "2018",
+              "distance": 0.2333,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Maternal obesity does not significantly alter the fetal CRL. However, maternal obesity appears to be associated with increased fetal growth as early as the second trimester."
+            },
+            {
+              "document_id": "W2116637397",
+              "title": "The impact of maternal obesity on satisfactory detailed anatomic ultrasound image acquisition",
+              "doi": "https://doi.org/10.1080/14767050802524586",
+              "year": "2008",
+              "distance": 0.2343,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Suboptimal fetal anatomic visualisation is increased with maternal obesity, but declines with advancing gestational age in both normal weight and obese populations."
+            },
+            {
+              "document_id": "W1576613738",
+              "title": "Maternal weight gain: a determinant for fetal abdominal circumference in the second trimester",
+              "doi": "https://doi.org/10.1111/j.1600-0412.2011.01129.x",
+              "year": "2011",
+              "distance": 0.2384,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Maternal weight gain in pregnancy is related to and may determine fetal abdominal circumference in gestational weeks 15-25, particularly in those women with a slow weight gain."
+            },
+            {
+              "document_id": "W4411622970",
+              "title": "[Relationship between maternal pre-pregnancy obesity and infant development: the Taicang and Wuqiang mother-child cohort study in China].",
+              "doi": "https://doi.org/10.19813/j.cnki.weishengyanjiu.2025.03.009",
+              "year": "2025",
+              "distance": 0.2419,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Maternal pre-pregnancy obesity increases BAZ, WLZ and WAZ of the offspring in infancy."
+            },
+            {
+              "document_id": "W2157382661",
+              "title": "Association of placenta organotin concentrations with growth and ponderal index in 110 newborn boys from Finland during the first 18 months of life: a cohort study",
+              "doi": "https://doi.org/10.1186/1476-069x-13-45",
+              "year": "2014",
+              "distance": 0.2421,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "We observed a trend towards higher weight gain from birth to 3 months of age with increasing placenta TBT concentration. These results should be interpreted with caution because obesogenic effects in animal experiments were seen after in-utero TBT exposures to doses that were orders of magnitude higher. Also the number of study subjects included in this study was limited."
+            },
+            {
+              "document_id": "W4417088362",
+              "title": "Association of maternal weight gain with offspring birth size",
+              "doi": "https://doi.org/10.12692/ijb/17.3.141-147",
+              "year": "2020",
+              "distance": 0.2452,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Gestational weight gain (GWG) is influenced by numerous causes in prenatal health which are of great public health concerns. GWG during the 2nd and 3rd trimesters is an essential determinant of fetal development. However, this study was aimed to scrutinize the association between GWG and birth size of baby. In this regard, birth weight of the offspring was considered as the determinant of birth size. This was a cross sectional observational study, was carried out among 100 pregnant women admitted in the Department of Obstetrics and Gynecology, Rangpur Medical College and Hospital, Rangpur, Bangladesh and during the period of June 2017 to June 2018. All of the data were collected using a pre-"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,733 @@
+{
+  "sf_id": "hypoxia_06",
+  "category": "Hypoxia / DO",
+  "statement": "Decrease in DO may decrease the gonado-somatic index.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Two snippets directly bear on the stylized fact. Snippet [9] explicitly states 'Decrease in DO may decrease the gonado-somatic index' citing multiple studies (Cheung et al. 2008a; Landry et al. 2007; Long et al. 2013a; Thomas et al. 2006; Wu et al. 2003), and snippet [17] independently affirms that 'hypoxia can reduce gonadosomatic index and gonad development in fish' citing several of the same sources. No snippet contradicts the fact. The remaining snippets merely discuss GSI in non-hypoxia contexts (reproduction modeling, byssus allocation, DEB parameterization) and are topically related but do not bear on the DO–GSI relationship. The two supporting snippets cite a consistent body of primary literature, giving moderate, internally consistent support with no conflict, hence corroborated direction but only moderate strength since the evidence within this corpus stems largely from review-style restatements of the same underlying references."
+      },
+      "n_references": 2,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4411168694496155
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.46375012397766113
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86bfdecbd4702b29a30e4",
+          "title": "Roberts et al. - 2021 - Resource allocation to a structural biomaterial i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3788,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ant effect of byssus severing frequency on gonad index for either season (p = 0.7 to 0.9; Figure 2, Table 1 ), probably because gonad tissue was a small proportion. Condition index did not differ significantly among treatments (p = 0.2 to 0.7; Figure 2, Table 1 ). Since none of the treatments resulted in mass loss, the relationship of shell to tissue did not change radically. There was a significant negative relationship between thread production and tissue growth across all treatment groups in both autumn and spring (p = 0.02 and p = 0.3, respectively;"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4025,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "du Halage) and 1.04 (Port Couvreux) (Poulin 1996 ). The average ratio of 0.99 was chosen in the model. By approximation, it was considered that only females undergo physiological changes during the reproduction process, males being only used as a component of the total population. To this date, few monitoring studies have been performed on A. cordatus reproduction. Magniez (1983) is the only one who studied the Gonado Somatic Index (GSI), that is the proportion of ash -free gonads dry weight over the ash -free body dry weight, therefore directly linked to the"
+        },
+        {
+          "document_id": "69b894aaecbd4702b29a6555",
+          "title": "Shah Nawaz Chowdhury et al. - 2018 - DEB parameter estimation for Saccostrea cucullata .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.42,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "d sacrificed to monitor Gonado Somatic Index (GSI) by separating gonad mass from somatic mass under a microscope. Ash -free dry mass (AFDM) of somatic m ass and gonad were determined to the nearest 0.01 mg. The Gonado Somatic Index (GSI) was expressed as the AFDM of the gonad divided by total tissue weight (AFDM). 2.2.1 Physiological experiments for univariate data sets ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPTPhysiological experiments were conducted to create six sets of univariate data (Data -01 to Data -06, see table 2), required for the DEB parameter estimation (Saraiva et al., 2011a). Food uptake"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4288,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ll stay set at 0. Once the reproduction period starts, the birth timer is what allows to verify if the individual is undergoing reproduction and to adapt its state v ariables accordingly: at birth_time 8, 7 and 6, females are reproducing (i.e. conceiving offspring by decreasing the energy in their reproduction buffer, see below); at birth_time 3, 2 and 1, females release offspring (i.e. a number of new juveniles propor tional to the number of females having reproduced is initiated into the model, see below). Reproduction Only females are considered in the reproduction processes. The value of the Gonado -somatic index (GSI ="
+        },
+        {
+          "document_id": "69b89848ecbd4702b29a68aa",
+          "title": "Arnould-Pétré et al. - 2020 - Individual-based model of population dynamics in a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4303,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "of 0.99 was chosen in the model. By approximation, it was considered that only females undergo physiological changes during the reproduction process, males being only used as a component of the total population. To this date, few monitoring studies have been performed on A. cordatus reproduction. Magniez (1983) is the only one who studied the Gonado Somatic Index (GSI), that is the proportion of ash-free go-nads dry weight over the ash-free body dry weight, therefore directly linked to the accumulation of energy into the reproduction buffer. Ac-cording to Magniez (1983) , reproduction can occur if the GSI reaches at"
+        },
+        {
+          "document_id": "69b8a5bcecbd4702b29a78c6",
+          "title": "Arnould-Petre - 2019 - MODEL OF A SEA URCHIN ENDEMIC TO THE KERGUELEN PLA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4345,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "rganism if necessary. If the individual is an adult, it can undergo the processes linked to reproduction. 2.3.4.2. Reproduction Gonado-somatic index (GSI) is used in parallel to calculations of U_R, to follow the reproductive cycle, directly linked to accumulation of gonadal material. 26 The evolution of gonadal indexes established by Magniez 1983, with an accumulation of gonadal material from the end of the reproduction period to the onset of the next one, was used in the model to define a threshold fo r reproduction: at the onset of the reproduction period, the"
+        },
+        {
+          "document_id": "69b86bfdecbd4702b29a30e4",
+          "title": "Roberts et al. - 2021 - Resource allocation to a structural biomaterial i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4386,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "pectively; Figure 2, Table 1 ). Byssus severing frequency significantly decreased buoyant weight growth in the autumn, but this effect was only marginal in the spring (p = 0.002 and p = 0.11, respectively; Figure 2, Table 1 ). Byssus severing frequency significantly decreased tissue growth by 70% in autumn and 45% in the spring (p < 0.001 and p = 0.01, respectively; Figure 2, Table 1 ). GSI was overall 30% greater in the spring compared to the autumn, but there was no significant effect of byssus severing frequency on gonad index for either season (p = 0.7 to 0.9; Figure 2, Table 1 ), probably because"
+        },
+        {
+          "document_id": "69b847d1ec32c55db5430a83",
+          "title": "PouvBour2006.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4409,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "process known as gameticdegeneration, resorption or atresia. The process ofresorption in C. gigas has often been reported (e.g.Steele and Mulcahy, 1999; Enriquez-Diaz, 2004 ); it isconsidered to be a ‘self-cleaning ’stage that preparesthe gonads for a new sexual cycle and is accompaniedby a progressive autumnal reduction in gonad mass.The formulation used in our model to take into accountthe resorption process is presumably too simple andprobably requires further refinements.In conclusion, by demonstrating its rather good"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4411,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "rioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may co ntinue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. Decrease in DO may decrease the gonado -somatic index . (Cheung et al., 2008a; Landry et al., 2007; Long et al., 2013a; Thomas et al., 2006; Wu et al., 2003) R3. Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al.,"
+        },
+        {
+          "document_id": "69b847cfec32c55db5430a71",
+          "title": "MartHein2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4414,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "pro-ductive rate per unit lean mass increaseswith body size intraspeciﬁcally. (b) Pre-dicted vs. observed interspeciﬁc variationin annualized gonadosomatic index(aGSI). The predicted values show therange and mean of aGSI for sizes varyingfrom the length at maturity (minimum) tothe asymptotic length (maximum). Thesolid black line is the expected relation-ship between observed and predicted aGSIassuming the energy density of gonads is5/C11k Jg/C01(mean value of the 10 specieswe found ovary energy density data for),and the shaded grey region represents therange of expected relationships based on"
+        },
+        {
+          "document_id": "69b89aa2ecbd4702b29a6bde",
+          "title": "FilgGuyo2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4421,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "the seston as well as be affected by intraspeci ﬁc differencesin feeding-organ morphology ( Ward and Shumway, 2004 ). Regardingmaximum storage density, [ Em], the best dataset available to indirectlycalculate its value does not distinguish between somatic and gonadmass. Although the data were carefully pre-analyzed in order to mini-mize the effect of gonad mass by removing speci ﬁc points from the anal-ysis, there may be a residual effect on [ Em] estimation. Nevertheless, allthe parameters estimated for C. virginica in this study are in the range of"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4443,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "e below). Reproduction Only females are considered in the reproduction processes. The value of the Gonado -somatic index (GSI = 100 * ((ash -free gonads dry weight) / (ash -free body dry weight)) is increasing monthly until the reproduction period, when the amount of energy accumulated will be checked by the model to allow, or not, the female to participate to reproduction. Whenever the level of GSI reaches at least 0.07%, the fem ale can reproduce, if not, she will continue updating the energy into the reproduction buffer until the next reproduction period."
+        },
+        {
+          "document_id": "69b86bfdecbd4702b29a30e4",
+          "title": "Roberts et al. - 2021 - Resource allocation to a structural biomaterial i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4454,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": ") by shell length cubed (mm3; Crosby and Gale 1990). Gonadal-somatic index (GSI) was calculated by dividing gonad weight (g DW) by total tissue weight (g DW; Carrington 2002). Mortality during the month-long experiment was 17% in the spring and 4% in the autumn. As a result of mortality, sample sizes ranged from 11 - 15 per treatment. Two mussels in the autumn died just prior to the end of the experiment and final length was estimated from the growth rate, and tissue weight was estimated from the Accepted Article"
+        },
+        {
+          "document_id": "69b87535ecbd4702b29a3cb8",
+          "title": "LopePont2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4473,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "shold; Escobar et al. 2014 ; Espigares et al. 2015 ;P a w s o nand Pickett 1996 ). Males attain sexual maturity at inferior sizeand age than females (see Sect. 3.3).The annual pattern of gonad development has been as-sessed in Asturiano et al. ( 2000 ) and Rodríguez et al. ( 2005 )for males and in Mayer et al. ( 1990 ,1988 ) and Asturiano et al.(2000 ) for females. In the wild, ripe gonads in males and fe-males represent resp. 1.75–7% and 5–12% of ﬁsh total mass,while resting gonads represent ∼0.3 and∼0.7% of ﬁsh totalmass for each sex (Barnabé 1976 ; Kennedy and Fitzmaurice"
+        },
+        {
+          "document_id": "69b87ee5ecbd4702b29a4a1c",
+          "title": "Bars2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4515,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ions and using similar test endpoints. This ensures both quantitative and qualitative reliability of effect comparisons through the avoidance of experimental confounding factors, which often occur when data from different studies are compared. To date , these comparative studies have dealt only with gonochoric species, in which toxic effects can be assessed through direct monitoring of the morphological changes in the sexual apparatus. Furthermore, impacts on endocrinology and especially on sexual stero ids are more easily understood in species that exhibit separated genders, in which the male and female"
+        },
+        {
+          "document_id": "69b87d68ecbd4702b29a47ac",
+          "title": "He et al. - 2025 - Application of a dynamic energy budget model to th.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4569,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ssue weight (0.73±0.12 g), and dry tissue weight (0.13±0.02 g). Sampling commenced on July 25, 2022. Throughout the experiment, 25–30T. granosa specimens were randomly collected each month to measure shell dimensions (length, width, and height), wet tissue weight, and dry tissue weight.The model used shell length and dry tissue weight as forcing vari-ables. To monitor gonadal development in T. granosa , the gonad dry weight was measured every 15 days. The gonadosomatic index (GSI), defined as the ratio of gonad dry weight to total dry tissue weight, expressed as a percentage, was then calculated. In addition, monthly"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4638,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "best fitting model overestimated time to hatching at 7.7 mg L\u00001 DO and overestimated survival at age for the 2.7 and 4.2 mg L\u00001 treatments, which suggests there either may be a different nonlinear correction factor function that better fits the relationship between DO and the DEBkiss parameters or that there were additional factors contributing to these differences that the model does not account for. For example, hypoxia can reduce gonadosomatic index and gonad devel -opment in fish (Wu et al., 2003 ; Thomas et al., 2006 ; Landry et al., 2007 ), but we do not have data on gonad development or reproductive"
+        },
+        {
+          "document_id": "69b88925ecbd4702b29a56f4",
+          "title": "Aguera et al. - 2021 - Bioenergetics of the common seastar Asterias ruben.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.465,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "zero-variate data on age and size at birth and metamorphosis (Table 2).The model provided a good prediction of the gonad cycle observed by Oudejans and van der Sluis (1979a, b) with a MRE of 0.179 when simulating the gonad index. However, when predicting the changes in the pyloric index for the same population the fit was worse (MRE = 0.333) failing to Marine Biology (2021) 168:48 1 3 48 Page 8 of 14fully describe sudden changes in the pyloric index during the year (Fig. 5). Both gonad and pyloric indices observa-tions exhibited large variability (Fig. 5) probably due to dif-"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address dissolved oxygen (DO) or hypoxia in relation to the gonado-somatic index (GSI). While most snippets discuss GSI in various species, they relate to seasonal cycles, hormonal treatments, sex differences, and energy allocation during reproduction—none manipulate or observe the effect of oxygen levels on GSI. There is no evidence either supporting or contradicting the stylized fact that decreased DO may decrease the gonado-somatic index. Evidence is essentially absent, so the corpus provides insufficient basis to judge the claim."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W2157483307",
+          "title": "Stimulation of Molting and Ovarian Maturation by Methyl Farnesoate in the Pacific White Shrimp Litopenaeus vannamei (Boone, 1931)",
+          "doi": "10.5657/fas.2014.0115",
+          "year": "2014",
+          "distance": 0.3568,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "the effects of ESA and MF treatments on gonadal maturation, the gonad somatic index (GSI) was calculated after the experiment. All treated groups (ESA and MF) had higher GSI values than the control group, but the ESA and <TEX>$1.0{\\mu}g$</TEX> MF groups were not significantly different. Using histological ovary analysis, we determined that all treated groups showed indications of the previtellogenic stage, unlike the control group (immature stage). These results suggest that the high-MF-concentration treatment produced effects similar to those of ESA with respect to molting number, growth, and ovarian maturation."
+        },
+        {
+          "document_id": "W1600144487",
+          "title": "Growth and reproduction of the dolphinfish (Coryphaena equiselis and Coryphaena hippurus) in the Canary Islands, Central-East Atlantic (preliminary results)",
+          "doi": "10.3989/scimar.1999.63n3-4327",
+          "year": "1999",
+          "distance": 0.3818,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "July). All the individuals obtained showed developing gonads, but females showed a higher gonadosomatic index (GSI) than males. The highest GSI values were obtained in June (x- =3.10±1.73), and decreased progressively towards the end of the season (September), when the average of this index was x- = 1.86±0.87. Similarly, the condition index decreased significantly from June to September. The proportion of females was always significantly higher than males, except in July 1996 when it was 1:1. There was a high correspondence between growth rates determined by annuli scale interpretation and modal progression analysis."
+        },
+        {
+          "document_id": "W1969309429",
+          "title": "Hormonal correlates of 'masculinization' in female spotted hyaenas (Crocuta crocuta). 1. Infancy to sexual maturity",
+          "doi": "10.1530/jrf.0.0950451",
+          "year": "1992",
+          "distance": 0.3883,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "and to changes in the size and elasticity of the urogenital meatus, permitting copulation and parturition through the clitoris. Gonadectomy (two males and four females) at 4-7 months resulted in nondetectable concentrations of testosterone and oestrogen and a marked attenuation in androstenedione (to approximately 0.39 ng ml-1), indicating that the gonads are the major source of these three steroids. Gonadectomy also eliminated sex differences in weight, nipple development and elasticity of the urogenital meatus."
+        },
+        {
+          "document_id": "W2287253793",
+          "title": "Preliminary notes on the reproductive biology of the lizardfish, Synodus saurus (Actynopterygii: Synodontidae) in the Azores",
+          "doi": "10.26028/cybium/2003-271-006",
+          "year": "2021",
+          "distance": 0.3959,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "06 females (155 mm to 460 mm TL) and 101 males (269 mm to 290 mm TL), were captured. Sex ratio was 2:1 with more males in June. Gonados-somatic Index (GSI) for females and males, attained its maximum values during Spring and Summer, showing that these are the most intensive reproduction periods. Hepato-somatic Index (HSI) suggests that this species may well recur on body reserves for energy metabolization in gonad development. Nevertheless, more studies are necessary in order to confirm this assumption. Ovarian histology, presenting different oocytarian phases, indicates that this species has an asynchronous posture."
+        },
+        {
+          "document_id": "W2364039255",
+          "title": "Body composition of javelin goby Synechogobius hasta prior to reproduction",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.4022,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": ");gonadosomaticindex(GSI)increased(P0.05);nosignificantdifferenceswereobservedinproteinandlipidcontentsofthewholebody(P0.05),butsignificantincreasewasfoundinmuscleandgonadproteincontents(P0.05).Therewerenosignificantdifferencesinlipidcontentsinmusclesandgonads;"
+        },
+        {
+          "document_id": "W4246454929",
+          "title": "The costs of reproduction to males and females of a paternal mouthbrooding cardinalfish Apogon notatus",
+          "doi": "10.1006/jfbi.2000.1487",
+          "year": "2001",
+          "distance": 0.4063,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d in males. Condition factor, hepatosomatic index and fat body-somatic index declined in both sexes during the breeding season. The deterioration of somatic condition was more severe in females, suggesting that the overall energetic costs were larger for females which produced more than twice as many clutches as males brooded in a season. Selective mortality of females could be due primarily to the depletion of their energy reserves. The increased mortality in females is a possible mechanism for the male-biased operational sex ratio which may provide the potential for sexual selection on males."
+        },
+        {
+          "document_id": "W4298234284",
+          "title": "https://openalex.org/W4298234284",
+          "doi": "10.31031/eimbo.2.1",
+          "year": "2018",
+          "distance": 0.4147,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Gonado-somatic index (GSI) also determines the state of maturity and onset of spawning season used to follow the"
+        },
+        {
+          "document_id": "W2167891880",
+          "title": "The costs of reproduction to males and females of a paternal mouthbrooding cardinalfish <i>Apogon notatus</i>",
+          "doi": "10.1111/j.1095-8649.2001.tb00530.x",
+          "year": "2001",
+          "distance": 0.4213,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d in males. Condition factor, hepatosomatic index and fat body‐somatic index declined in both sexes during the breeding season. The deterioration of somatic condition was more severe in females, suggesting that the overall energetic costs were larger for females which produced more than twice as many clutches as males brooded in a season. Selective mortality of females could be due primarily to the depletion of their energy reserves. The increased mortality in females is a possible mechanism for the male‐biased operational sex ratio which may provide the potential for sexual selection on males."
+        },
+        {
+          "document_id": "W2470966836",
+          "title": "[Contraception with steroids in the male. Clinical possibilities].",
+          "doi": "",
+          "year": "1987",
+          "distance": 0.4221,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "a can be achieved by suppression of gonadotropins, whereby, however, a severe decrease in androgen production would also occur. Since testosterone is required for normal male sexual function, maintenance of secondary sex characteristics, bone and protein metabolism as well as for gender identity, androgens must be an integral part of any male contraceptive method acting via suppression of gonadotropins."
+        },
+        {
+          "document_id": "W2288982194",
+          "title": "Reproductive biology of the southern thorny skate <i>Amblyraja doellojuradoi</i> (Chondrichthyes, Rajidae)",
+          "doi": "10.1111/jfb.12917",
+          "year": "2016",
+          "distance": 0.4271,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "at which 50% of individuals were sexually mature; males matured at 448 mm and females at 411 mm, c. 80 and 82% of maximum L T . The hepato‐somatic index was similar among sexes, but significantly different between maturity stages, being lower in mature than immature specimens. Males had no seasonal difference in the hepato‐somatic index and females had the lowest index in autumn. The gonado‐somatic index was lower in males than in females and significantly higher in mature than immature specimens of both sexes. Males had the highest index in autumn and females had no seasonal difference."
+        },
+        {
+          "document_id": "W2413345303",
+          "title": "[Reproductive cycle and index of condition used for Melongena corona (Mollusca: Gastropoda)].",
+          "doi": "",
+          "year": "2000",
+          "distance": 0.4308,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "d December, and a post-copulation peak in June. Female peaks are in March and May, plus oviposition peaks in April and January. Males and females differ in the mean gonadosom ic index (F=13.79, p<0.05) but not in the dry tissue/shell weight (F=0.0902, p<0.05), dry tissue and total weight (F=0.2466, p<0.05) and dry tissue weight/internal shell volume (F=1.0565, p<0.05)."
+        },
+        {
+          "document_id": "W2071962470",
+          "title": "Studies on reproduction of the mullet<i>Mugil platanus</i>Günther, 1880 (Actinopterygii, Mugilidae) from the Mar Chiquita coastal lagoon, Argentina: Similarities and differences with related species",
+          "doi": "10.1080/11250003.2010.549154",
+          "year": "2011",
+          "distance": 0.4315,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "r males, showing a late sexual maturity for both sexes. Seasonal changes in gonadosomatic index (GSI) of females were observed. The mean GSI was ≤1 during six months of the year (January, June-October). Two modes in the ovarian maturation were observed, the most important in April-May and a secondary one in November-December. Both modes, correlated with the CPUE values, are indicative of the mullet migration from the coastal lagoon towards the sea for spawning."
+        },
+        {
+          "document_id": "W2759186518",
+          "title": "Variation in female somatic condition and its relationship to reproduction in the sailfin molly, poecilia latipinna (pisces: poeciliidae)",
+          "doi": "",
+          "year": "1988",
+          "distance": 0.4328,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ites, somatic condition continued to increase after the mid-summer minimum and a second reproductive peak occurred in the fall. The relationship between subsequent reproductive declines in the winter and the prevailing somatic condition of females was uncl~ar. Measures of female somatic condition and reproductive activity also differed between the two sites. In January through March, dry weight and lipid index values were higher at TDTCH relative to BDGST. This may explain the earlier onset of reproduction, greater percentage of adult females gravid, and higher size-adjusted fecundity at TDTCH."
+        },
+        {
+          "document_id": "W2464290852",
+          "title": "Studies of seasonal gonadal cycles and hormonal control of reproduction in winter flounder, Pseudopleuronectes americanus (Walbaum)",
+          "doi": "",
+          "year": "1990",
+          "distance": 0.4339,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "testosterone were elevated following GnRH-A administration and the hormone levels were sustained for prolonged periods of time. The effects of GnRH-A treatment on the reproductive cycle were also observed by noting increases in gonadosomatic index and oocyte diameter in fish during the period of gonadal recrudescence. During the prespawning stage, ovulation and spermiation could be achieved following releasing hormone treatment. In contrast, the low gonadosomatic index remained unchanged by GnRH-A treatment during the regressed period."
+        },
+        {
+          "document_id": "W4405262311",
+          "title": "Optimisation of controlled reproduction protocol in broadhead catfish (Clarias macrocephalus Günther, 1864) using Ovopel™: Effect of different hormonal treatment methods on reproductive traits",
+          "doi": "10.1016/j.aqrep.2024.102551",
+          "year": "2024",
+          "distance": 0.434,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "s the shortest time in treatment OI-1.5 (7:19 ± 1:04, hours: minutes) and IP-1.5 (7:58 ± 1:01, hours: minutes). The values viz. pseudo-gonadosomatic index (PGSI, %), fertilisation rate (FR, %), hatching rate (HR, %), and survival rate (SR, %) showed considerable individual changes among treatments; nevertheless, there was no statistically significant difference between these average parameters of treated batches (P > 0.05)."
+        },
+        {
+          "document_id": "W2923083858",
+          "title": "Changing sex: it's a fishy thing",
+          "doi": "10.1111/jfb.13925",
+          "year": "2019",
+          "distance": 0.4346,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "st, FSH may be more important than LH in the regulation of sex-reversal, the latter more important in maintaining male gametes. Whilst the involvement of the hypothalamus-pituitary-gonadal (HPG) axis in sex-change is beyond doubt, the precise details may be species or, as the current study suggests, context-dependent. As Mark Lokman (University of Otago, New Zealand), who works on sex-change in wrasse (but was not involved in the current study) comments, “The ability to change sexual phenotype is not uncommon in fishes..”. However, since the work of Chen et al. in groupers, and Kuwamura et al."
+        },
+        {
+          "document_id": "W2150662692",
+          "title": "Reproductive and nutritional periodicities in the starfish,<i>Marthasterias glacialis</i>, from Plymouth Sound",
+          "doi": "10.1017/s0025315400030125",
+          "year": "1984",
+          "distance": 0.4369,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "between gonadial and pyloric indices, and also by the apparent utilisation of somatic material during the build-up of gametes. The sequence of events at the cytological level during gonadial build-up is described."
+        },
+        {
+          "document_id": "W2547983025",
+          "title": "Contribución a la biología de Chiton stockesii (Polyplacophora: Chitonidae) de Punta Pochote, Puntarenas, Costa Rica",
+          "doi": "",
+          "year": "1984",
+          "distance": 0.4378,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "oral zones, respectively. The calculated correlation coefficients among all the measured variables were significant (P ≤ 0.01). It was not possible to determine sexual dimorphism (P ≤ 0.01) with respect to total length, height and weight. The lowest values for the coefficient of variation corresponded to the first two of these three variables (13.99% and 12.49%, respectively). The ratio of males to females was 1.54: 1, there was no evidence of hermaphroditism. The correlation between gonadal index and gonadal stage showed a similar seasonal variation (P ≤ 0.05)."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Only one snippet (9) directly addresses the stylized fact, but it does so explicitly and authoritatively, stating verbatim that 'Decrease in DO may decrease the gonado-somatic index' and citing five supporting studies (Cheung et al. 2008a; Landry et al. 2007; Long et al. 2013a; Thomas et al. 2006; Wu et al. 2003). All other snippets merely mention GSI in unrelated reproductive, growth, or modeling contexts without any link to dissolved oxygen or hypoxia, and thus are neutral. There is no contradicting evidence. The single relevant snippet clearly supports the fact and aggregates multiple references, yielding a moderate evidence strength (limited number of distinct on-topic snippets within this corpus) but a clearly corroborated consensus direction with no conflict."
+      },
+      "n_references": 1,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4411168694496155
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b86bfdecbd4702b29a30e4",
+          "title": "Roberts et al. - 2021 - Resource allocation to a structural biomaterial i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3788,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ant effect of byssus severing frequency on gonad index for either season (p = 0.7 to 0.9; Figure 2, Table 1 ), probably because gonad tissue was a small proportion. Condition index did not differ significantly among treatments (p = 0.2 to 0.7; Figure 2, Table 1 ). Since none of the treatments resulted in mass loss, the relationship of shell to tissue did not change radically. There was a significant negative relationship between thread production and tissue growth across all treatment groups in both autumn and spring (p = 0.02 and p = 0.3, respectively;"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4025,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "du Halage) and 1.04 (Port Couvreux) (Poulin 1996 ). The average ratio of 0.99 was chosen in the model. By approximation, it was considered that only females undergo physiological changes during the reproduction process, males being only used as a component of the total population. To this date, few monitoring studies have been performed on A. cordatus reproduction. Magniez (1983) is the only one who studied the Gonado Somatic Index (GSI), that is the proportion of ash -free gonads dry weight over the ash -free body dry weight, therefore directly linked to the"
+        },
+        {
+          "document_id": "69b894aaecbd4702b29a6555",
+          "title": "Shah Nawaz Chowdhury et al. - 2018 - DEB parameter estimation for Saccostrea cucullata .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.42,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "d sacrificed to monitor Gonado Somatic Index (GSI) by separating gonad mass from somatic mass under a microscope. Ash -free dry mass (AFDM) of somatic m ass and gonad were determined to the nearest 0.01 mg. The Gonado Somatic Index (GSI) was expressed as the AFDM of the gonad divided by total tissue weight (AFDM). 2.2.1 Physiological experiments for univariate data sets ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPTPhysiological experiments were conducted to create six sets of univariate data (Data -01 to Data -06, see table 2), required for the DEB parameter estimation (Saraiva et al., 2011a). Food uptake"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4288,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ll stay set at 0. Once the reproduction period starts, the birth timer is what allows to verify if the individual is undergoing reproduction and to adapt its state v ariables accordingly: at birth_time 8, 7 and 6, females are reproducing (i.e. conceiving offspring by decreasing the energy in their reproduction buffer, see below); at birth_time 3, 2 and 1, females release offspring (i.e. a number of new juveniles propor tional to the number of females having reproduced is initiated into the model, see below). Reproduction Only females are considered in the reproduction processes. The value of the Gonado -somatic index (GSI ="
+        },
+        {
+          "document_id": "69b89848ecbd4702b29a68aa",
+          "title": "Arnould-Pétré et al. - 2020 - Individual-based model of population dynamics in a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4303,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "of 0.99 was chosen in the model. By approximation, it was considered that only females undergo physiological changes during the reproduction process, males being only used as a component of the total population. To this date, few monitoring studies have been performed on A. cordatus reproduction. Magniez (1983) is the only one who studied the Gonado Somatic Index (GSI), that is the proportion of ash-free go-nads dry weight over the ash-free body dry weight, therefore directly linked to the accumulation of energy into the reproduction buffer. Ac-cording to Magniez (1983) , reproduction can occur if the GSI reaches at"
+        },
+        {
+          "document_id": "69b8a5bcecbd4702b29a78c6",
+          "title": "Arnould-Petre - 2019 - MODEL OF A SEA URCHIN ENDEMIC TO THE KERGUELEN PLA.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4345,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "rganism if necessary. If the individual is an adult, it can undergo the processes linked to reproduction. 2.3.4.2. Reproduction Gonado-somatic index (GSI) is used in parallel to calculations of U_R, to follow the reproductive cycle, directly linked to accumulation of gonadal material. 26 The evolution of gonadal indexes established by Magniez 1983, with an accumulation of gonadal material from the end of the reproduction period to the onset of the next one, was used in the model to define a threshold fo r reproduction: at the onset of the reproduction period, the"
+        },
+        {
+          "document_id": "69b86bfdecbd4702b29a30e4",
+          "title": "Roberts et al. - 2021 - Resource allocation to a structural biomaterial i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4386,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "pectively; Figure 2, Table 1 ). Byssus severing frequency significantly decreased buoyant weight growth in the autumn, but this effect was only marginal in the spring (p = 0.002 and p = 0.11, respectively; Figure 2, Table 1 ). Byssus severing frequency significantly decreased tissue growth by 70% in autumn and 45% in the spring (p < 0.001 and p = 0.01, respectively; Figure 2, Table 1 ). GSI was overall 30% greater in the spring compared to the autumn, but there was no significant effect of byssus severing frequency on gonad index for either season (p = 0.7 to 0.9; Figure 2, Table 1 ), probably because"
+        },
+        {
+          "document_id": "69b847d1ec32c55db5430a83",
+          "title": "PouvBour2006.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4409,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "process known as gameticdegeneration, resorption or atresia. The process ofresorption in C. gigas has often been reported (e.g.Steele and Mulcahy, 1999; Enriquez-Diaz, 2004 ); it isconsidered to be a ‘self-cleaning ’stage that preparesthe gonads for a new sexual cycle and is accompaniedby a progressive autumnal reduction in gonad mass.The formulation used in our model to take into accountthe resorption process is presumably too simple andprobably requires further refinements.In conclusion, by demonstrating its rather good"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4411,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "rioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may co ntinue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. Decrease in DO may decrease the gonado -somatic index . (Cheung et al., 2008a; Landry et al., 2007; Long et al., 2013a; Thomas et al., 2006; Wu et al., 2003) R3. Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al.,"
+        },
+        {
+          "document_id": "69b847cfec32c55db5430a71",
+          "title": "MartHein2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4414,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "pro-ductive rate per unit lean mass increaseswith body size intraspeciﬁcally. (b) Pre-dicted vs. observed interspeciﬁc variationin annualized gonadosomatic index(aGSI). The predicted values show therange and mean of aGSI for sizes varyingfrom the length at maturity (minimum) tothe asymptotic length (maximum). Thesolid black line is the expected relation-ship between observed and predicted aGSIassuming the energy density of gonads is5/C11k Jg/C01(mean value of the 10 specieswe found ovary energy density data for),and the shaded grey region represents therange of expected relationships based on"
+        },
+        {
+          "document_id": "69b89aa2ecbd4702b29a6bde",
+          "title": "FilgGuyo2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4421,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "the seston as well as be affected by intraspeci ﬁc differencesin feeding-organ morphology ( Ward and Shumway, 2004 ). Regardingmaximum storage density, [ Em], the best dataset available to indirectlycalculate its value does not distinguish between somatic and gonadmass. Although the data were carefully pre-analyzed in order to mini-mize the effect of gonad mass by removing speci ﬁc points from the anal-ysis, there may be a residual effect on [ Em] estimation. Nevertheless, allthe parameters estimated for C. virginica in this study are in the range of"
+        },
+        {
+          "document_id": "69b86960ecbd4702b29a2deb",
+          "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4443,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "e below). Reproduction Only females are considered in the reproduction processes. The value of the Gonado -somatic index (GSI = 100 * ((ash -free gonads dry weight) / (ash -free body dry weight)) is increasing monthly until the reproduction period, when the amount of energy accumulated will be checked by the model to allow, or not, the female to participate to reproduction. Whenever the level of GSI reaches at least 0.07%, the fem ale can reproduce, if not, she will continue updating the energy into the reproduction buffer until the next reproduction period."
+        },
+        {
+          "document_id": "W2157483307",
+          "title": "Stimulation of Molting and Ovarian Maturation by Methyl Farnesoate in the Pacific White Shrimp Litopenaeus vannamei (Boone, 1931)",
+          "doi": "10.5657/fas.2014.0115",
+          "year": "2014",
+          "distance": 0.3568,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "the effects of ESA and MF treatments on gonadal maturation, the gonad somatic index (GSI) was calculated after the experiment. All treated groups (ESA and MF) had higher GSI values than the control group, but the ESA and <TEX>$1.0{\\mu}g$</TEX> MF groups were not significantly different. Using histological ovary analysis, we determined that all treated groups showed indications of the previtellogenic stage, unlike the control group (immature stage). These results suggest that the high-MF-concentration treatment produced effects similar to those of ESA with respect to molting number, growth, and ovarian maturation."
+        },
+        {
+          "document_id": "W1600144487",
+          "title": "Growth and reproduction of the dolphinfish (Coryphaena equiselis and Coryphaena hippurus) in the Canary Islands, Central-East Atlantic (preliminary results)",
+          "doi": "10.3989/scimar.1999.63n3-4327",
+          "year": "1999",
+          "distance": 0.3818,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "July). All the individuals obtained showed developing gonads, but females showed a higher gonadosomatic index (GSI) than males. The highest GSI values were obtained in June (x- =3.10±1.73), and decreased progressively towards the end of the season (September), when the average of this index was x- = 1.86±0.87. Similarly, the condition index decreased significantly from June to September. The proportion of females was always significantly higher than males, except in July 1996 when it was 1:1. There was a high correspondence between growth rates determined by annuli scale interpretation and modal progression analysis."
+        },
+        {
+          "document_id": "W1969309429",
+          "title": "Hormonal correlates of 'masculinization' in female spotted hyaenas (Crocuta crocuta). 1. Infancy to sexual maturity",
+          "doi": "10.1530/jrf.0.0950451",
+          "year": "1992",
+          "distance": 0.3883,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "and to changes in the size and elasticity of the urogenital meatus, permitting copulation and parturition through the clitoris. Gonadectomy (two males and four females) at 4-7 months resulted in nondetectable concentrations of testosterone and oestrogen and a marked attenuation in androstenedione (to approximately 0.39 ng ml-1), indicating that the gonads are the major source of these three steroids. Gonadectomy also eliminated sex differences in weight, nipple development and elasticity of the urogenital meatus."
+        },
+        {
+          "document_id": "W2287253793",
+          "title": "Preliminary notes on the reproductive biology of the lizardfish, Synodus saurus (Actynopterygii: Synodontidae) in the Azores",
+          "doi": "10.26028/cybium/2003-271-006",
+          "year": "2021",
+          "distance": 0.3959,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "06 females (155 mm to 460 mm TL) and 101 males (269 mm to 290 mm TL), were captured. Sex ratio was 2:1 with more males in June. Gonados-somatic Index (GSI) for females and males, attained its maximum values during Spring and Summer, showing that these are the most intensive reproduction periods. Hepato-somatic Index (HSI) suggests that this species may well recur on body reserves for energy metabolization in gonad development. Nevertheless, more studies are necessary in order to confirm this assumption. Ovarian histology, presenting different oocytarian phases, indicates that this species has an asynchronous posture."
+        },
+        {
+          "document_id": "W2364039255",
+          "title": "Body composition of javelin goby Synechogobius hasta prior to reproduction",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.4022,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": ");gonadosomaticindex(GSI)increased(P0.05);nosignificantdifferenceswereobservedinproteinandlipidcontentsofthewholebody(P0.05),butsignificantincreasewasfoundinmuscleandgonadproteincontents(P0.05).Therewerenosignificantdifferencesinlipidcontentsinmusclesandgonads;"
+        },
+        {
+          "document_id": "W4246454929",
+          "title": "The costs of reproduction to males and females of a paternal mouthbrooding cardinalfish Apogon notatus",
+          "doi": "10.1006/jfbi.2000.1487",
+          "year": "2001",
+          "distance": 0.4063,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "d in males. Condition factor, hepatosomatic index and fat body-somatic index declined in both sexes during the breeding season. The deterioration of somatic condition was more severe in females, suggesting that the overall energetic costs were larger for females which produced more than twice as many clutches as males brooded in a season. Selective mortality of females could be due primarily to the depletion of their energy reserves. The increased mortality in females is a possible mechanism for the male-biased operational sex ratio which may provide the potential for sexual selection on males."
+        },
+        {
+          "document_id": "W4298234284",
+          "title": "https://openalex.org/W4298234284",
+          "doi": "10.31031/eimbo.2.1",
+          "year": "2018",
+          "distance": 0.4147,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Gonado-somatic index (GSI) also determines the state of maturity and onset of spawning season used to follow the"
+        },
+        {
+          "document_id": "W2167891880",
+          "title": "The costs of reproduction to males and females of a paternal mouthbrooding cardinalfish <i>Apogon notatus</i>",
+          "doi": "10.1111/j.1095-8649.2001.tb00530.x",
+          "year": "2001",
+          "distance": 0.4213,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "d in males. Condition factor, hepatosomatic index and fat body‐somatic index declined in both sexes during the breeding season. The deterioration of somatic condition was more severe in females, suggesting that the overall energetic costs were larger for females which produced more than twice as many clutches as males brooded in a season. Selective mortality of females could be due primarily to the depletion of their energy reserves. The increased mortality in females is a possible mechanism for the male‐biased operational sex ratio which may provide the potential for sexual selection on males."
+        },
+        {
+          "document_id": "W2470966836",
+          "title": "[Contraception with steroids in the male. Clinical possibilities].",
+          "doi": "",
+          "year": "1987",
+          "distance": 0.4221,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "a can be achieved by suppression of gonadotropins, whereby, however, a severe decrease in androgen production would also occur. Since testosterone is required for normal male sexual function, maintenance of secondary sex characteristics, bone and protein metabolism as well as for gender identity, androgens must be an integral part of any male contraceptive method acting via suppression of gonadotropins."
+        },
+        {
+          "document_id": "W2288982194",
+          "title": "Reproductive biology of the southern thorny skate <i>Amblyraja doellojuradoi</i> (Chondrichthyes, Rajidae)",
+          "doi": "10.1111/jfb.12917",
+          "year": "2016",
+          "distance": 0.4271,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "at which 50% of individuals were sexually mature; males matured at 448 mm and females at 411 mm, c. 80 and 82% of maximum L T . The hepato‐somatic index was similar among sexes, but significantly different between maturity stages, being lower in mature than immature specimens. Males had no seasonal difference in the hepato‐somatic index and females had the lowest index in autumn. The gonado‐somatic index was lower in males than in females and significantly higher in mature than immature specimens of both sexes. Males had the highest index in autumn and females had no seasonal difference."
+        },
+        {
+          "document_id": "W2413345303",
+          "title": "[Reproductive cycle and index of condition used for Melongena corona (Mollusca: Gastropoda)].",
+          "doi": "",
+          "year": "2000",
+          "distance": 0.4308,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "d December, and a post-copulation peak in June. Female peaks are in March and May, plus oviposition peaks in April and January. Males and females differ in the mean gonadosom ic index (F=13.79, p<0.05) but not in the dry tissue/shell weight (F=0.0902, p<0.05), dry tissue and total weight (F=0.2466, p<0.05) and dry tissue weight/internal shell volume (F=1.0565, p<0.05)."
+        },
+        {
+          "document_id": "W2071962470",
+          "title": "Studies on reproduction of the mullet<i>Mugil platanus</i>Günther, 1880 (Actinopterygii, Mugilidae) from the Mar Chiquita coastal lagoon, Argentina: Similarities and differences with related species",
+          "doi": "10.1080/11250003.2010.549154",
+          "year": "2011",
+          "distance": 0.4315,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "r males, showing a late sexual maturity for both sexes. Seasonal changes in gonadosomatic index (GSI) of females were observed. The mean GSI was ≤1 during six months of the year (January, June-October). Two modes in the ovarian maturation were observed, the most important in April-May and a secondary one in November-December. Both modes, correlated with the CPUE values, are indicative of the mullet migration from the coastal lagoon towards the sea for spawning."
+        }
+      ]
+    }
+  }
+}

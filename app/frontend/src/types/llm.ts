@@ -7,11 +7,13 @@
  */
 
 export type LLMProvider =
+  | 'default'
   | 'ollama'
   | 'anthropic'
   | 'openai'
   | 'gemini'
   | 'github_models'
+  | 'nvidia'
 
 export type LLMMode = 'final' | 'react'
 
@@ -79,4 +81,11 @@ export interface LLMSessionConfig {
   mode: LLMMode
   model?: string
   key_id?: string
+}
+
+export interface DefaultModelInfo {
+  available: boolean
+  provider: string
+  model: string
+  rpm: number
 }
