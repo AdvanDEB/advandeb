@@ -1,0 +1,1730 @@
+{
+  "sf_id": "reproduction_02",
+  "category": "Reproduction",
+  "statement": "Reproduction increases with size intra-specifically but decreases with size inter-specifically.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Two high‑relevance excerpts (1 and 5) explicitly state that within a species larger individuals have higher reproductive rates while across species the trend is opposite, directly supporting the stylized fact. A third excerpt (3) reports an opposite intra‑specific pattern under food restriction, providing a conditional contradiction but with lower relevance to the general claim. The remaining passages either discuss related mechanisms without addressing inter‑ versus intra‑specific scaling or focus on stress effects, and thus are neutral. Overall the corpus offers moderate to strong supportive evidence, outweighing the limited contradictory note, leading to a consensus that the pattern is corroborated."
+          },
+          "n_references": 3,
+          "references": {
+            "2650": {
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1739
+            },
+            "3274": {
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.1851
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1876
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1739,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "increase the coherence of 11 intra- versus inter-specific scaling (Kooijman 2010, Sousa et al. 2010). Zeuthen (1947) was the 12 first to point to the fundamental difference between these scaling relationships, an important 13 warning that went almost lost in recent discussions. Reproductive rate, for example, increases 14 with mass intra-specifically but decreases inter-specifically; the reason being that the cost per 15 neonate is expected to be constant within species, but varying between species. Under food 16 restriction, adult reserve can decrease intra-specifically, so the amount of resources available 17 for reproduction decreases, and reproductive rate declines with size. This reduct"
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1773,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": ", I consider the effect of the growth variance on optimal cessation of structural growth due to a ﬁnite target size, and at ﬁnal structural masses potentially far from the asymptotic value. As discussed above, the signs of these two different effects may in fact be opposite. I. Filin / Journal of Theoretical Biology 264 (2010) 510–516 513 [Page 5] ARTICLE IN PRESS When I incorporate reproduction into the optimization objec- tive, the results vary depending on whether reproduction is semelparous or iteroparous (Fig. 1b). Semelparous reproduction always causes earlier cessation of structural growth and smaller ﬁnal structural masses, compared to the case with no reproduc- tion (when survival i"
+            },
+            {
+              "document_id": "3274",
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1851,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "d to be constant within species, but varying between species. Under food restriction, adult reserve can decrease intraspeciﬁcally, so the amount of resources available for reproduction decreases, and reproductive rate declines with size. This reduction in adult reserve also occurs for interspeciﬁc size decreases (see Fig. 1), but is accompanied by a greater decrease in offspring size (see Table 3), which has the net effect of increasing reproduc- tive rate. This distinction also leads to different expectations of the scaling of uptake rates. Table 3 shows that assimila- tion is expected to scale interspeciﬁcally with mass3/4 at the inﬁnite limit of mass (higher exponents for ﬁnite masses). D"
+            },
+            {
+              "document_id": "3344",
+              "title": "Accolla e.a. - 2019 - Similar individual-level responses to stressors ha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1872,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "ensity in the system as in the previous scenario. A stressor that increases the costs of growth does not affect asymptotic size, but does reduce the rate at which organisms reach their asymptotic size (Jager and Zimmer, 2012). This can be seen in Fig. 2, in which there is a decreasing impact on length as a function of time. BT has the largest percentage decrease in both length and egg production (Table 2). At the population level, the only effect is that BT population size increases less than that of GCT. Therefore, a signiﬁcant difference among individual-level outputs does not nec- essarily translate into remarkable differences at the population level. Once again, a reduction in body size "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1876,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "a beautiful example showing that the size relationships within a species work out differently from those between species. Intra-species comparisons show that large individuals reproduce at a higher rate than small ones, while the reverse holds for inter-species comparisons. Like most of the other scaling relationships mentioned in this chapter, this only reflects tendencies that allow substantial deviations. The trade-off between a small number of large young and a large number of small young is obvious. The allocation fraction κ does not depend on body size; thus, a small species spends the same fraction of energy that it utilises from its reserves on reproduction as a large species. (That "
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1881,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "y3, the amount of reserves retained by the individual after a reproduction event. As Fig. 1b demonstrates, at very small target sizes (but nonetheless larger than y3) the switching size is the initial size and there is no structural growth at all throughout the entire lifetime of the individual (the region right of the iteroparity switching curve in Fig. 1b). At larger target sizes, cessation of structural growth is delayed, compared to either semelparous reproduction or no reproduction, causing larger ﬁnal structural mass for a given initial condition (see growth trajectory examples in Fig. 1b). Finally, at even larger target sizes the switching curve for iteroparous reproduction falls belo"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1935,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "reproduction per kJ lean mass per year) as a function of length: To maintain a constant storage density with increas- ing body size after maturity, individuals must continue to allocate a portion of the 1 \u0001 j ﬂux to storage after maturity. The fraction of the 1 \u0001 j ﬂux needed to maintain storage density is dependent on a ﬁsh’s growth rate. Due to the differential scaling of assimilation and maintenance with body size, as ﬁsh approach their asymptotic size, their growth rate slows and thus the fraction of the 1 \u0001 j ﬂux needed to maintain storage density declines. Consequently, the model predicts that speciﬁc reproduction rate increases intraspeciﬁcally with body size and reaches its maximum a"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1937,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "s a function of scaled length (l = L/L∞and lM = LM/L∞) is given by: RðlÞ¼Rmax lM 6þ3lM þ2l2 M \u00013lð2þlMÞ \u0006 \u0007 þ6ðl\u00011Þln 1 1\u0001lM \u0001 \u0003 2ll3 M eqn 10 which, assuming the Charnov’s invariant lM = 0\u000365 reduces to: RðlÞ ¼ Rmax 2\u000306 \u0001 1\u000306 l \u0006 \u0007 Eqn (9) and (10) make predictions about how reproductive output scales intra- and interspeciﬁcally. Within a species, R should increase with body size (eqn 10; Fig. 6a). Among species, reproductive output is dependent primarily on j and K, the von Bertalanffy growth rate (eqn 9; Fig. 6b). In theory, DEBlipid’s predictions for reproductive investment can be applied to males or females, however, here we focus on females as their reproductive investment is more re"
+            },
+            {
+              "document_id": "2777",
+              "title": "KooyBaas2009.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ays birth (if an embryo is exposed) and puberty (in the case of juveniles), but also 532 reduces the size at birth. A reduction of growth indirectly reduces reproduction, because 533 food uptake is linked to size. Since it also reduces size at birth, the overall eﬀect can be 534 a hormesis eﬀect on reproduction (in terms of number of oﬀspring per time) [52]. Indirect 535 eﬀects on reproduction diﬀer from direct eﬀects by not only reducing, but also delaying 536 reproduction. This has important population dynamical consequences. 537 5.3 Co-variation of parameter values 538 A very powerful property of the standard DEB model and the one-compartment model 539 is that they imply rules for how par"
+            },
+            {
+              "document_id": "2510",
+              "title": "Muller et al. - 2019 - Regulation of reproductive processes with Dynamic .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1965,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "size of the reproductive buffer. This contrasts with the dynamic alloca- tion of reserves in dDEB, in which the allocation is under the control of the size of the reproductive buffer relative to that of the animal. Consequently, this allocation can vary a great deal over a repro- ductive cycle (see Supporting Information Figure S1). Concurrently, growth follows an opposite trend. In a constant environment, dDEB predicts that most of the growth of a species with a seasonal reproduction pattern occurs before the gonads start developing substantially, whereas growth in stdDEB+ is of the von Bertalanffy type. Consequently, size data could discriminate between the two models. Unfortunately, the t"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1988,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "es the reproduction rate (when comparing indi- viduals of the same size, and expressed as a mass or energy ﬂux). This pattern of effects is well known for some parasitic infections, although reproduction is generally fully halted as the parasite uses this energy for its own purposes (Hall et al. 2007). A decrease in j will have an opposite effect: less growth, an earlier start of reproduction at a smaller size, and enhanced reproduction (for its size). This pattern of effect is for example seen in Daphnia when exposed to chemicals released by their ﬁsh predators (kairomones, e.g., Stibor 1992). Note that when j is decreased too much, the repro- duction rate will become lower than the control"
+            },
+            {
+              "document_id": "2781",
+              "title": "AldaJage2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2001,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "re), the outcome of this trade-off may be different, and less sperm production may maximize ﬁtness. Thus, the threshold size in N2 is probably being reduced by a decrease in sperm production, triggering an earlier switch to oocyte production. CB individuals, however, already start reproduction at a small size in control con- ditions, with reduced sperm production in comparison to non-mated N2 individuals, and earlier maturation of oocytes. In CB individuals, the presence of male sperm allows hermaphroditic sperm production to stop early. This happens both in control conditions and in the different concentrations, giving way to similar sizes of reproduction onset. A further reduction in size "
+            },
+            {
+              "document_id": "2645",
+              "title": "Marn2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2005,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "to the size of structure in DEB terms (via equation 4.2), and is expected not to decrease unless under the conditions of prolonged starvation [109]. Weight has contribution from both structure and reserve ([109], also see eq. 4.3), and can oscillate depending on the food availability, reproduction cycle, etc [109, 94]. The relatively small size of females in the reproduction program has two possible explanations: (i) The fe- males experienced low food availability before they reached ultimate length, resulting in [Page 97] §4.3 Results 85 the small asymptotic (i.e. ultimate) length (Li = f L∞). (ii) Their ultimate length is the result of the smaller genetically determined growth potential, i"
+            },
+            {
+              "document_id": "3597",
+              "title": "Kooijman and Augustine - 2022 - The comparative energetics of the cephalopods  th.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2005,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e of growth (Collins et al., 1995). DEB theory explicitly uses energy and mass balances, but allocation to growth and reproduction only compete indirectly, via the kappa-rule. The gradual decline of growth after the end of acceleration follows in DEB theory from assimilation being proportional to squared length and somatic maintenance to cubed length: the increasing allocation to so­ matic maintenance is reducing growth. This is consistent with the finding of Moltschaniwskyj and Semmens (2000), who suggested that allocation to reproduction is not directly at the expense of that to growth. We did not find a clear pattern in gender-related differences. While the male of Octopus tehuelchus is l"
+            },
+            {
+              "document_id": "3433",
+              "title": "Martin - 2013 - .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2012,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "reduction, is rarely measured. This leads to a problem, as illustrated by Fig. 1, in identifying the PMoA, because most PMoAs will lead to an effect on reproduction, and thus additional data on body size is required to differentiate between possible PMoAs. For example, in addition to direct effects on reproduction, stressors can affect reproduction indirectly through via a decrease in feeding rate, an increase in maintenance costs, and/or an increase in costs for growth. If body size is not measured over time, differentiating between these [Page 84] 80 PMoAs is impossible as each of these modes of action can lead to the same ECx for reproduction at a given point in time. Simultaneously measu"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2013,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "rrelet Synthliboramphus antiqua. This is to be expected on physical grounds, of course. The speciﬁc density of an egg can be used to determine the length of time it has been incubated. This process of water loss implies that the water content of the reserves changes during incubation, but its range is rather restricted. The [Page 307] 8.2. Body size scaling relationships 289 functional and physical aspects of water loss from eggs thus coincide beautifully. Maximum reproductive rate The maximum reproductive rate, as given in (3.52), is ˙RmV = ˙Rm1(Vm1/V)1/3 for the diﬀerent species. This is a beautiful example showing that the size relationships within a species work out diﬀerently from those"
+            },
+            {
+              "document_id": "3344",
+              "title": "Accolla e.a. - 2019 - Similar individual-level responses to stressors ha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2013,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "ted than BT: the individual ﬁnal length decreases up to 40% at the highest stress factor for RT and GCT, whereas egg number is reduced by almost 70% at s = 70% (see Fig. 1 in Appendix A.1). 3.1.3. Increase in overhead costs of growth When the costs of growth are increased, individual length of BT declines by about 10% and the number of eggs decreases by a max- imum of 20% (s = 70%). GCT shows a similar trend for both length and egg number, but is slightly less affected. For both species, indi- vidual length is impacted more during the ﬁrst two years of the life cycle (see Fig. 2 in Appendix A.1). For RT, the effects on length and egg number are negligible. 3.1.4. Increase in reproduction cos"
+            },
+            {
+              "document_id": "3158",
+              "title": "Kear2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2019,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "roductive output were only strongly apparent once local variation in body size had been accounted for, both in the previous analyses (Grant & Porter 1992; Adolph & Porter 1993) and in the present study (Figs 2d and 3b, Table 2b). This is because body size dominates total reproductive output. Although body size adjustments by Grant & Porter (1992) and by Adolph & Por- ter (1993) were made based on the average adult size, adjust- ments in the present study were made through the ‘zoom factor’ z, which affects size at birth, maturity and the asymp- totic maximum through inﬂuences on the ‘extensive’ parame- ters Eb H, Ep H and { _pAm}, respectively (see Kooijman 2010, p. 300). The DEB theory thus"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The corpus contains several intra‑specific studies showing that larger individuals have higher fecundity or reproductive output (snippets 5,7,15,16,18), which aligns with the first half of the stylized fact. However, only one abstract (snippet 2) directly addresses inter‑specific patterns and reports that fecundity also increases with body size across species, contradicting the second half of the claim. No snippet provides clear evidence for a decrease in reproduction with increasing body size among different species. Consequently, overall support for the combined pattern is weak, and the corpus does not reach a consensus; it leans toward neutrality due to mixed signals."
+          },
+          "n_references": 6,
+          "references": {
+            "W2994920843": {
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.1941
+            },
+            "W2017094586": {
+              "title": "Intra- and Trans-Generational Costs of Reduced Female Body Size Caused by Food Limitation Early in Life in Mites",
+              "doi": "https://doi.org/10.1371/journal.pone.0079089",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2046
+            },
+            "W2324709263": {
+              "title": "Variation in Fecundity and Its Relationship to Body Size in a Population of the Least Killifish, Heterandria formosa (Pisces: Poeciliidae)",
+              "doi": "https://doi.org/10.2307/1445155",
+              "year": "1984",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2049
+            },
+            "W2731180235": {
+              "title": "The affect of female body width on copulation duration in Centrobolus inscriptus (Attems)",
+              "doi": "https://doi.org/10.22271/j.ento.2017.v5.i1j.10",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2132
+            },
+            "W2168234898": {
+              "title": "The evolution of sexual size dimorphism in fish*",
+              "doi": "https://doi.org/10.1111/j.1095-8649.1992.tb03864.x",
+              "year": "1992",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2133
+            },
+            "W2051108295": {
+              "title": "Size and the Not‐So‐Single Sex: Disentangling the Effects of Size and Budget on Sex Allocation in Hermaphrodites",
+              "doi": "https://doi.org/10.1086/425624",
+              "year": "2004",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2146
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2952352854",
+              "title": "Xenopus Hybrids Provide Insight Into Cell and Organism Size Control",
+              "doi": "https://doi.org/10.3389/fphys.2018.01758",
+              "year": "2018",
+              "distance": 0.1896,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular, and subcellular levels. The <i>Xenopus</i> species, <i>X. laevis</i> and <i>X. tropicalis</i> differ in size at all three of these levels. Despite these differences, fertilization of <i>X. laevis</i> eggs with <i>X. tropicalis</i> sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and <i>X. laevis</i> embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observe"
+            },
+            {
+              "document_id": "W2994920843",
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.9,
+              "text": "The variation in the pattern of growth and reproduction is described for each major taxon of the Crustacea. The various ways in which reproduction restricts the rate of growth, through competition for resources and other constraints, are discussed. At the same time, inter- and intra-specific increases of fecundity with body size ate demonstrated. Finally, the success of different patterns of growth and reproduction is considered, emphasizing the importance of mortality rates in determining which patterns are most suited to a particular species or population."
+            },
+            {
+              "document_id": "W2543301042",
+              "title": "Sexual size dimorphism in musteloids: An anomalous allometric pattern is explained by feeding ecology",
+              "doi": "https://doi.org/10.1002/ece3.2480",
+              "year": "2016",
+              "distance": 0.202,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Rensch's rule states that sexual size dimorphism ( SSD ) increases with body size in taxa where males are larger, and decreases when females are larger. The dominant explanation for the trend is currently that competitive advantage for males is greater in larger individuals, whereas female size is constrained by the energetics of rearing offspring. This rule holds for a variety of vertebrate taxa, and opposing trends are rare. We examine the allometry of SSD within the Musteloidea and demonstrate a hypo‐allometry contrary to Rensch's rule, with lower SSD associated with larger body size. We provide evidence that feeding ecology is involved. Where diet promotes group‐living, the opti"
+            },
+            {
+              "document_id": "W1980117820",
+              "title": "The Evolution of Offspring Size across Life-History Stages",
+              "doi": "https://doi.org/10.1086/678248",
+              "year": "2014",
+              "distance": 0.2021,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Females vary in the size of offspring that they produce, often in a manner that depends on maternal age or stage. This is puzzling, given that offspring size is predicted to evolve to a single optimal value where the gain in fitness from being larger exactly offsets the fitness lost to the mother by producing fewer offspring. We used a stage-structured life-history model to determine the optimal offspring size for females in different stages. We found that optimal offspring size does not vary with maternal stage when offspring fitness depends only on its size and not on the stage of the mother. This negative result holds even with density dependence, when larger offspring compete better. How"
+            },
+            {
+              "document_id": "W2017094586",
+              "title": "Intra- and Trans-Generational Costs of Reduced Female Body Size Caused by Food Limitation Early in Life in Mites",
+              "doi": "https://doi.org/10.1371/journal.pone.0079089",
+              "year": "2013",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Small female body size apparently intensified the well-known costs of sexual activity because mortality of small but not standard-sized females mainly occurred shortly after mating. The disadvantages of small females in mating and egg production may be generally explained by size-associated morphological and physiological constraints. Additionally, size-assortative mate preferences of standard-sized mates may have rendered small females disproportionally unattractive mating partners. We argue that the sex-specific trans-generational effects were due to sexual size dimorphism - females are the larger sex and thus more strongly affected by maternal stress than the smaller males - and to sexual"
+            },
+            {
+              "document_id": "W2105338878",
+              "title": "Effective population size when fertility is inherited",
+              "doi": "https://doi.org/10.1017/s0016672300010119",
+              "year": "1966",
+              "distance": 0.2047,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A formula for effective population size when fertility is inherited is worked out. It is shown that the effective size decreases as the heritability of fertility or progeny number increases."
+            },
+            {
+              "document_id": "W2324709263",
+              "title": "Variation in Fecundity and Its Relationship to Body Size in a Population of the Least Killifish, Heterandria formosa (Pisces: Poeciliidae)",
+              "doi": "https://doi.org/10.2307/1445155",
+              "year": "1984",
+              "distance": 0.2049,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "A positive size-fecundity relationship in female Heterandria formosa is the result of an increase, with increasing size of female, in number of young per brood, not of a decrease in interbrood intervals. The lack of shorter interbrood intervals in smaller females is not consistent with one of the hypotheses on the evolution of superfetation. Larger females produce heavier individual offspring. After maintenance in the laboratory with excess food, both the size-fecundity relationship and the correlation between female size and average offspring weight disappeared. We suggest that Heterandria is food limited in natural populations and that larger females are better able to compete for food and"
+            },
+            {
+              "document_id": "W2044043165",
+              "title": "Disparate maturation adaptations to size-dependent mortality",
+              "doi": "https://doi.org/10.1098/rspb.2006.3562",
+              "year": "2006",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Body size is an important determinant of resource use, fecundity and mortality risk. Evolution of maturation size in response to size-dependent selection is thus a fundamental part of life-history theory. Increased mortality among small individuals has previously been predicted to cause larger maturation size, whereas increased mortality among large individuals is expected to have the opposite effect. Here we use a continuously size-structured model to demonstrate that, contrary to these widespread expectations, increased mortality among small individuals can have three alternative effects: maturation size may increase, decrease or become evolutionarily bistable. We show that such complex re"
+            },
+            {
+              "document_id": "W3157131407",
+              "title": "The eco-evolutionary dynamics of maternal provisioning",
+              "doi": "https://doi.org/10.26180/5dd256b6531b8",
+              "year": "2019",
+              "distance": 0.2078,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Offspring sizes vary at all scales of organisation, but the reasons remain unclear. This thesis tested several classic theories regarding offspring-size using a marine invertebrate system. Results from this thesis provide several, previously anticipated, mechanisms for the maintenance of offspring-size variation. Life history theory should now be revised to incorporate these effects."
+            },
+            {
+              "document_id": "W2233288857",
+              "title": "Incorporating an ontogenetic perspective into evolutionary theory of sexual size dimorphism",
+              "doi": "https://doi.org/10.1111/evo.12857",
+              "year": "2016",
+              "distance": 0.2087,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Sexual size dimorphism (SSD) describes divergent body sizes of adult males and females. While SSD has traditionally been explained by sexual and fecundity selection, recent advances in physiology and developmental biology emphasize that SSD would occur proximately because of sexual differences in ontogenetic growth trajectories (i.e., growth rate and duration). Notably, these ontogenetic traits are subject to energetic or time constraints and thus traded off with fitness components (e.g., survival and reproduction). To elucidate the importance of such ontogenetic trade-offs in the evolution of SSD, we developed a new theoretical framework by extending quantitative genetic models for the evol"
+            },
+            {
+              "document_id": "W2886448855",
+              "title": "<i>Xenopus</i> hybrids provide insight into cell and organism size control",
+              "doi": "https://doi.org/10.1101/395814",
+              "year": "2018",
+              "distance": 0.2101,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular and subcellular levels. The Xenopus species, X. laevis and X. tropicalis differ in size at all three of these levels. Despite these differences, fertilization of X. laevis eggs with X. tropicalis sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and X. laevis embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observed shortly after zygotic genome act"
+            },
+            {
+              "document_id": "W2622312100",
+              "title": "Time‐limited environments affect the evolution of egg–body size allometry",
+              "doi": "https://doi.org/10.1111/evo.13286",
+              "year": "2017",
+              "distance": 0.2102,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Initial offspring size is a fundamental component of absolute growth rate, where large offspring will reach a given adult body size faster than smaller offspring. Yet, our knowledge regarding the coevolution between offspring and adult size is limited. In time-constrained environments, organisms need to reproduce at a high rate and reach a reproductive size quickly. To rapidly attain a large adult body size, we hypothesize that, in seasonal habitats, large species are bound to having a large initial size, and consequently, the evolution of egg size will be tightly matched to that of body size, compared to less time-limited systems. We tested this hypothesis in killifishes, and found a signif"
+            },
+            {
+              "document_id": "W3120902220",
+              "title": "Cancer risk and sexual conflict as constraints to body size evolution",
+              "doi": "https://doi.org/10.1101/2021.01.09.425980",
+              "year": "2021",
+              "distance": 0.211,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Selection often favours large bodies, visible as Cope’s rule over macroevolutionary time — but size increases are not inevitable. One understudied cost of large bodies is the high number of cell divisions and the associated risk of oncogenic mutations. Our elasticity analysis shows that selection against a proportional increase in size becomes ever more intense with increasing body size if cancer is the sole selective agent. Thus cancer potentially halts body size increases even if no other constraint does so. We then provide multicellular realism with potentially sexually dimorphic body sizes and traits that control cell populations from zygote to maturity and beyond (ontogenetic m"
+            },
+            {
+              "document_id": "W1482365006",
+              "title": "Social group size, potential sperm competition and reproductive investment in a hermaphroditic leech, <i>Helobdella papillornata</i> (Euhirudinea: Glossiphoniidae)",
+              "doi": "https://doi.org/10.1111/j.1420-9101.2004.00692.x",
+              "year": "2004",
+              "distance": 0.2126,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Social group size may affect the potential for sperm competition, and this in turn may favour ontogenetic adjustments in testicular mass according to the likely requirements for sperm and spermatophore production. In a number of comparative analyses of testis mass among vertebrate species that differ in mating system or social organization, increasing potential for sperm competition is associated with larger testis size. Intraspecific phenotypic plasticity should be able to produce the same pattern if social group size is heterogenous and reflects differing degrees of average sperm competition, but this intraspecific effect is less well studied. We tested the effect of social groups"
+            },
+            {
+              "document_id": "W2731180235",
+              "title": "The affect of female body width on copulation duration in Centrobolus inscriptus (Attems)",
+              "doi": "https://doi.org/10.22271/j.ento.2017.v5.i1j.10",
+              "year": "2017",
+              "distance": 0.2132,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Body size is a known correlate of copulation duration in Centrobolus inscriptus. I tested for the presence of a relationship between female body width and copulation duration in C. inscriptus by performing mating experiments. Females differed significantly from males in body mass, body length, and dorsal tergite width. Female width was positively related to copulation duration. Larger females are expected to be more fecund."
+            },
+            {
+              "document_id": "W2168234898",
+              "title": "The evolution of sexual size dimorphism in fish*",
+              "doi": "https://doi.org/10.1111/j.1095-8649.1992.tb03864.x",
+              "year": "1992",
+              "distance": 0.2133,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Life history strategy models in which female size depends on fecundity and male size on male‐male competition, are used to predict male and female size. Sperm competition alone—without any form of contest competition—cannot readily generate size ratios (male weight/female weight) greater than 1·0, and if sperm competition is very weak, small or even dwarf males are predicted. Increasing sperm competition increases male size, but only with high numbers of competing males can male size approach that of females. Size dimorphism is also affected by the ratio: growth rate/mortality rate in each sex. If this is higher in one sex, its size increases. Two trade‐offs in fish could affect this ratio b"
+            },
+            {
+              "document_id": "W1882219559",
+              "title": "THE CONTEXT-DEPENDENT EFFECT OF MULTIPLE PATERNITY ON EFFECTIVE POPULATION SIZE",
+              "doi": "https://doi.org/10.1111/j.1558-5646.2011.01249.x",
+              "year": "2011",
+              "distance": 0.2146,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Effective population size (N(e)) is important because it describes how evolutionary forces will affect a population. The effect of multiple sires per female on N(e) has been the subject of some debate, at the crux of which is the effects of monandry and multiple-paternity (MP) on male variance in reproductive success. In both mating systems, females mate with several males over their lifetimes, but sire offspring with one male at a time in the former and have several sires per clutch in the latter. First, I theoretically show that whether the annual male variance in reproductive success in an MP population is greater or less than that of a monandrous population depends on the distributions o"
+            },
+            {
+              "document_id": "W2051108295",
+              "title": "Size and the Not‐So‐Single Sex: Disentangling the Effects of Size and Budget on Sex Allocation in Hermaphrodites",
+              "doi": "https://doi.org/10.1086/425624",
+              "year": "2004",
+              "distance": 0.2146,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Sex allocation theory explains how size-related variations in male and female fitness may favor the evolution of size-dependent sex allocation in hermaphrodites. Although empirical studies show that sex allocation changes gradually with size in many species, theoretical studies tend to predict an abrupt sex reversal from one sex to the other, that is, single-sexed sequential hermaphrodites. We show that this discrepancy between data and theory collapses if one takes into account that size affects male and female fitness through distinct routes. Using the classification of budget (larger individuals spend a greater budget on reproduction) and direct (e.g., larger plants are taller and may dis"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "The corpus contains two clear supporting statements (snippets 1 and 5) that directly affirm the stylized fact, while three snippets (3, 11, 14) provide evidence contrary to it. The remaining excerpts are either unrelated or address only one side of the pattern without covering both intra‑ and inter‑specific scaling, yielding low relevance. Consequently, the overall body of evidence is moderate in strength but does not converge on a single direction, leading to a neutral consensus."
+          },
+          "n_references": 5,
+          "references": {
+            "2650": {
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1739
+            },
+            "3274": {
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.1851
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1876
+            },
+            "3170": {
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.1988
+            },
+            "W2994920843": {
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.1941
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1739,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "increase the coherence of 11 intra- versus inter-specific scaling (Kooijman 2010, Sousa et al. 2010). Zeuthen (1947) was the 12 first to point to the fundamental difference between these scaling relationships, an important 13 warning that went almost lost in recent discussions. Reproductive rate, for example, increases 14 with mass intra-specifically but decreases inter-specifically; the reason being that the cost per 15 neonate is expected to be constant within species, but varying between species. Under food 16 restriction, adult reserve can decrease intra-specifically, so the amount of resources available 17 for reproduction decreases, and reproductive rate declines with size. This reduct"
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1773,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": ", I consider the effect of the growth variance on optimal cessation of structural growth due to a ﬁnite target size, and at ﬁnal structural masses potentially far from the asymptotic value. As discussed above, the signs of these two different effects may in fact be opposite. I. Filin / Journal of Theoretical Biology 264 (2010) 510–516 513 [Page 5] ARTICLE IN PRESS When I incorporate reproduction into the optimization objec- tive, the results vary depending on whether reproduction is semelparous or iteroparous (Fig. 1b). Semelparous reproduction always causes earlier cessation of structural growth and smaller ﬁnal structural masses, compared to the case with no reproduc- tion (when survival i"
+            },
+            {
+              "document_id": "3274",
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1851,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "d to be constant within species, but varying between species. Under food restriction, adult reserve can decrease intraspeciﬁcally, so the amount of resources available for reproduction decreases, and reproductive rate declines with size. This reduction in adult reserve also occurs for interspeciﬁc size decreases (see Fig. 1), but is accompanied by a greater decrease in offspring size (see Table 3), which has the net effect of increasing reproduc- tive rate. This distinction also leads to different expectations of the scaling of uptake rates. Table 3 shows that assimila- tion is expected to scale interspeciﬁcally with mass3/4 at the inﬁnite limit of mass (higher exponents for ﬁnite masses). D"
+            },
+            {
+              "document_id": "3344",
+              "title": "Accolla e.a. - 2019 - Similar individual-level responses to stressors ha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1872,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ensity in the system as in the previous scenario. A stressor that increases the costs of growth does not affect asymptotic size, but does reduce the rate at which organisms reach their asymptotic size (Jager and Zimmer, 2012). This can be seen in Fig. 2, in which there is a decreasing impact on length as a function of time. BT has the largest percentage decrease in both length and egg production (Table 2). At the population level, the only effect is that BT population size increases less than that of GCT. Therefore, a signiﬁcant difference among individual-level outputs does not nec- essarily translate into remarkable differences at the population level. Once again, a reduction in body size "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1876,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "a beautiful example showing that the size relationships within a species work out differently from those between species. Intra-species comparisons show that large individuals reproduce at a higher rate than small ones, while the reverse holds for inter-species comparisons. Like most of the other scaling relationships mentioned in this chapter, this only reflects tendencies that allow substantial deviations. The trade-off between a small number of large young and a large number of small young is obvious. The allocation fraction κ does not depend on body size; thus, a small species spends the same fraction of energy that it utilises from its reserves on reproduction as a large species. (That "
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1881,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "y3, the amount of reserves retained by the individual after a reproduction event. As Fig. 1b demonstrates, at very small target sizes (but nonetheless larger than y3) the switching size is the initial size and there is no structural growth at all throughout the entire lifetime of the individual (the region right of the iteroparity switching curve in Fig. 1b). At larger target sizes, cessation of structural growth is delayed, compared to either semelparous reproduction or no reproduction, causing larger ﬁnal structural mass for a given initial condition (see growth trajectory examples in Fig. 1b). Finally, at even larger target sizes the switching curve for iteroparous reproduction falls belo"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1935,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "reproduction per kJ lean mass per year) as a function of length: To maintain a constant storage density with increas- ing body size after maturity, individuals must continue to allocate a portion of the 1 \u0001 j ﬂux to storage after maturity. The fraction of the 1 \u0001 j ﬂux needed to maintain storage density is dependent on a ﬁsh’s growth rate. Due to the differential scaling of assimilation and maintenance with body size, as ﬁsh approach their asymptotic size, their growth rate slows and thus the fraction of the 1 \u0001 j ﬂux needed to maintain storage density declines. Consequently, the model predicts that speciﬁc reproduction rate increases intraspeciﬁcally with body size and reaches its maximum a"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1937,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "s a function of scaled length (l = L/L∞and lM = LM/L∞) is given by: RðlÞ¼Rmax lM 6þ3lM þ2l2 M \u00013lð2þlMÞ \u0006 \u0007 þ6ðl\u00011Þln 1 1\u0001lM \u0001 \u0003 2ll3 M eqn 10 which, assuming the Charnov’s invariant lM = 0\u000365 reduces to: RðlÞ ¼ Rmax 2\u000306 \u0001 1\u000306 l \u0006 \u0007 Eqn (9) and (10) make predictions about how reproductive output scales intra- and interspeciﬁcally. Within a species, R should increase with body size (eqn 10; Fig. 6a). Among species, reproductive output is dependent primarily on j and K, the von Bertalanffy growth rate (eqn 9; Fig. 6b). In theory, DEBlipid’s predictions for reproductive investment can be applied to males or females, however, here we focus on females as their reproductive investment is more re"
+            },
+            {
+              "document_id": "2777",
+              "title": "KooyBaas2009.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ays birth (if an embryo is exposed) and puberty (in the case of juveniles), but also 532 reduces the size at birth. A reduction of growth indirectly reduces reproduction, because 533 food uptake is linked to size. Since it also reduces size at birth, the overall eﬀect can be 534 a hormesis eﬀect on reproduction (in terms of number of oﬀspring per time) [52]. Indirect 535 eﬀects on reproduction diﬀer from direct eﬀects by not only reducing, but also delaying 536 reproduction. This has important population dynamical consequences. 537 5.3 Co-variation of parameter values 538 A very powerful property of the standard DEB model and the one-compartment model 539 is that they imply rules for how par"
+            },
+            {
+              "document_id": "2510",
+              "title": "Muller et al. - 2019 - Regulation of reproductive processes with Dynamic .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1965,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "size of the reproductive buffer. This contrasts with the dynamic alloca- tion of reserves in dDEB, in which the allocation is under the control of the size of the reproductive buffer relative to that of the animal. Consequently, this allocation can vary a great deal over a repro- ductive cycle (see Supporting Information Figure S1). Concurrently, growth follows an opposite trend. In a constant environment, dDEB predicts that most of the growth of a species with a seasonal reproduction pattern occurs before the gonads start developing substantially, whereas growth in stdDEB+ is of the von Bertalanffy type. Consequently, size data could discriminate between the two models. Unfortunately, the t"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1988,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.4,
+              "text": "es the reproduction rate (when comparing indi- viduals of the same size, and expressed as a mass or energy ﬂux). This pattern of effects is well known for some parasitic infections, although reproduction is generally fully halted as the parasite uses this energy for its own purposes (Hall et al. 2007). A decrease in j will have an opposite effect: less growth, an earlier start of reproduction at a smaller size, and enhanced reproduction (for its size). This pattern of effect is for example seen in Daphnia when exposed to chemicals released by their ﬁsh predators (kairomones, e.g., Stibor 1992). Note that when j is decreased too much, the repro- duction rate will become lower than the control"
+            },
+            {
+              "document_id": "2781",
+              "title": "AldaJage2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2001,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "re), the outcome of this trade-off may be different, and less sperm production may maximize ﬁtness. Thus, the threshold size in N2 is probably being reduced by a decrease in sperm production, triggering an earlier switch to oocyte production. CB individuals, however, already start reproduction at a small size in control con- ditions, with reduced sperm production in comparison to non-mated N2 individuals, and earlier maturation of oocytes. In CB individuals, the presence of male sperm allows hermaphroditic sperm production to stop early. This happens both in control conditions and in the different concentrations, giving way to similar sizes of reproduction onset. A further reduction in size "
+            },
+            {
+              "document_id": "W2952352854",
+              "title": "Xenopus Hybrids Provide Insight Into Cell and Organism Size Control",
+              "doi": "https://doi.org/10.3389/fphys.2018.01758",
+              "year": "2018",
+              "distance": 0.1896,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular, and subcellular levels. The <i>Xenopus</i> species, <i>X. laevis</i> and <i>X. tropicalis</i> differ in size at all three of these levels. Despite these differences, fertilization of <i>X. laevis</i> eggs with <i>X. tropicalis</i> sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and <i>X. laevis</i> embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observe"
+            },
+            {
+              "document_id": "W2994920843",
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "The variation in the pattern of growth and reproduction is described for each major taxon of the Crustacea. The various ways in which reproduction restricts the rate of growth, through competition for resources and other constraints, are discussed. At the same time, inter- and intra-specific increases of fecundity with body size ate demonstrated. Finally, the success of different patterns of growth and reproduction is considered, emphasizing the importance of mortality rates in determining which patterns are most suited to a particular species or population."
+            },
+            {
+              "document_id": "W2543301042",
+              "title": "Sexual size dimorphism in musteloids: An anomalous allometric pattern is explained by feeding ecology",
+              "doi": "https://doi.org/10.1002/ece3.2480",
+              "year": "2016",
+              "distance": 0.202,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Rensch's rule states that sexual size dimorphism ( SSD ) increases with body size in taxa where males are larger, and decreases when females are larger. The dominant explanation for the trend is currently that competitive advantage for males is greater in larger individuals, whereas female size is constrained by the energetics of rearing offspring. This rule holds for a variety of vertebrate taxa, and opposing trends are rare. We examine the allometry of SSD within the Musteloidea and demonstrate a hypo‐allometry contrary to Rensch's rule, with lower SSD associated with larger body size. We provide evidence that feeding ecology is involved. Where diet promotes group‐living, the opti"
+            },
+            {
+              "document_id": "W1980117820",
+              "title": "The Evolution of Offspring Size across Life-History Stages",
+              "doi": "https://doi.org/10.1086/678248",
+              "year": "2014",
+              "distance": 0.2021,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Females vary in the size of offspring that they produce, often in a manner that depends on maternal age or stage. This is puzzling, given that offspring size is predicted to evolve to a single optimal value where the gain in fitness from being larger exactly offsets the fitness lost to the mother by producing fewer offspring. We used a stage-structured life-history model to determine the optimal offspring size for females in different stages. We found that optimal offspring size does not vary with maternal stage when offspring fitness depends only on its size and not on the stage of the mother. This negative result holds even with density dependence, when larger offspring compete better. How"
+            },
+            {
+              "document_id": "W2017094586",
+              "title": "Intra- and Trans-Generational Costs of Reduced Female Body Size Caused by Food Limitation Early in Life in Mites",
+              "doi": "https://doi.org/10.1371/journal.pone.0079089",
+              "year": "2013",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Small female body size apparently intensified the well-known costs of sexual activity because mortality of small but not standard-sized females mainly occurred shortly after mating. The disadvantages of small females in mating and egg production may be generally explained by size-associated morphological and physiological constraints. Additionally, size-assortative mate preferences of standard-sized mates may have rendered small females disproportionally unattractive mating partners. We argue that the sex-specific trans-generational effects were due to sexual size dimorphism - females are the larger sex and thus more strongly affected by maternal stress than the smaller males - and to sexual"
+            },
+            {
+              "document_id": "W2105338878",
+              "title": "Effective population size when fertility is inherited",
+              "doi": "https://doi.org/10.1017/s0016672300010119",
+              "year": "1966",
+              "distance": 0.2047,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A formula for effective population size when fertility is inherited is worked out. It is shown that the effective size decreases as the heritability of fertility or progeny number increases."
+            },
+            {
+              "document_id": "W2324709263",
+              "title": "Variation in Fecundity and Its Relationship to Body Size in a Population of the Least Killifish, Heterandria formosa (Pisces: Poeciliidae)",
+              "doi": "https://doi.org/10.2307/1445155",
+              "year": "1984",
+              "distance": 0.2049,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "A positive size-fecundity relationship in female Heterandria formosa is the result of an increase, with increasing size of female, in number of young per brood, not of a decrease in interbrood intervals. The lack of shorter interbrood intervals in smaller females is not consistent with one of the hypotheses on the evolution of superfetation. Larger females produce heavier individual offspring. After maintenance in the laboratory with excess food, both the size-fecundity relationship and the correlation between female size and average offspring weight disappeared. We suggest that Heterandria is food limited in natural populations and that larger females are better able to compete for food and"
+            },
+            {
+              "document_id": "W2044043165",
+              "title": "Disparate maturation adaptations to size-dependent mortality",
+              "doi": "https://doi.org/10.1098/rspb.2006.3562",
+              "year": "2006",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Body size is an important determinant of resource use, fecundity and mortality risk. Evolution of maturation size in response to size-dependent selection is thus a fundamental part of life-history theory. Increased mortality among small individuals has previously been predicted to cause larger maturation size, whereas increased mortality among large individuals is expected to have the opposite effect. Here we use a continuously size-structured model to demonstrate that, contrary to these widespread expectations, increased mortality among small individuals can have three alternative effects: maturation size may increase, decrease or become evolutionarily bistable. We show that such complex re"
+            },
+            {
+              "document_id": "W3157131407",
+              "title": "The eco-evolutionary dynamics of maternal provisioning",
+              "doi": "https://doi.org/10.26180/5dd256b6531b8",
+              "year": "2019",
+              "distance": 0.2078,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Offspring sizes vary at all scales of organisation, but the reasons remain unclear. This thesis tested several classic theories regarding offspring-size using a marine invertebrate system. Results from this thesis provide several, previously anticipated, mechanisms for the maintenance of offspring-size variation. Life history theory should now be revised to incorporate these effects."
+            },
+            {
+              "document_id": "W2233288857",
+              "title": "Incorporating an ontogenetic perspective into evolutionary theory of sexual size dimorphism",
+              "doi": "https://doi.org/10.1111/evo.12857",
+              "year": "2016",
+              "distance": 0.2087,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Sexual size dimorphism (SSD) describes divergent body sizes of adult males and females. While SSD has traditionally been explained by sexual and fecundity selection, recent advances in physiology and developmental biology emphasize that SSD would occur proximately because of sexual differences in ontogenetic growth trajectories (i.e., growth rate and duration). Notably, these ontogenetic traits are subject to energetic or time constraints and thus traded off with fitness components (e.g., survival and reproduction). To elucidate the importance of such ontogenetic trade-offs in the evolution of SSD, we developed a new theoretical framework by extending quantitative genetic models for the evol"
+            },
+            {
+              "document_id": "W2886448855",
+              "title": "<i>Xenopus</i> hybrids provide insight into cell and organism size control",
+              "doi": "https://doi.org/10.1101/395814",
+              "year": "2018",
+              "distance": 0.2101,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular and subcellular levels. The Xenopus species, X. laevis and X. tropicalis differ in size at all three of these levels. Despite these differences, fertilization of X. laevis eggs with X. tropicalis sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and X. laevis embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observed shortly after zygotic genome act"
+            },
+            {
+              "document_id": "W2622312100",
+              "title": "Time‐limited environments affect the evolution of egg–body size allometry",
+              "doi": "https://doi.org/10.1111/evo.13286",
+              "year": "2017",
+              "distance": 0.2102,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Initial offspring size is a fundamental component of absolute growth rate, where large offspring will reach a given adult body size faster than smaller offspring. Yet, our knowledge regarding the coevolution between offspring and adult size is limited. In time-constrained environments, organisms need to reproduce at a high rate and reach a reproductive size quickly. To rapidly attain a large adult body size, we hypothesize that, in seasonal habitats, large species are bound to having a large initial size, and consequently, the evolution of egg size will be tightly matched to that of body size, compared to less time-limited systems. We tested this hypothesis in killifishes, and found a signif"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly and explicitly affirm the stylized fact. Snippets 1, 3, and 5/16 (Kooijman) state plainly that reproductive rate increases with size intra-specifically but decreases inter-specifically, with the mechanistic DEB explanation (constant offspring cost within species, varying between species; the Rm ∝ V^-? scaling). Snippets 7 and 8 (Martin & Heino) provide model-derived predictions that specific reproduction increases intraspecifically with body size while differing interspecifically, directly corroborating both directions. Snippet 18 supports that body size dominates reproductive output intra-specifically. No snippet contradicts the fact; the remaining snippets concern stressor effects, growth cessation, or buffer regulation and are topically related but neutral. The evidence is strong, consistent, and conflict-free."
+          },
+          "n_references": 6,
+          "references": {
+            "2650": {
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1739
+            },
+            "3274": {
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1851
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1876
+            },
+            "3047": {
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1935
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2013
+            },
+            "3158": {
+              "title": "Kear2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2019
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1739,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "increase the coherence of 11 intra- versus inter-specific scaling (Kooijman 2010, Sousa et al. 2010). Zeuthen (1947) was the 12 first to point to the fundamental difference between these scaling relationships, an important 13 warning that went almost lost in recent discussions. Reproductive rate, for example, increases 14 with mass intra-specifically but decreases inter-specifically; the reason being that the cost per 15 neonate is expected to be constant within species, but varying between species. Under food 16 restriction, adult reserve can decrease intra-specifically, so the amount of resources available 17 for reproduction decreases, and reproductive rate declines with size. This reduct"
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1773,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": ", I consider the effect of the growth variance on optimal cessation of structural growth due to a ﬁnite target size, and at ﬁnal structural masses potentially far from the asymptotic value. As discussed above, the signs of these two different effects may in fact be opposite. I. Filin / Journal of Theoretical Biology 264 (2010) 510–516 513 [Page 5] ARTICLE IN PRESS When I incorporate reproduction into the optimization objec- tive, the results vary depending on whether reproduction is semelparous or iteroparous (Fig. 1b). Semelparous reproduction always causes earlier cessation of structural growth and smaller ﬁnal structural masses, compared to the case with no reproduc- tion (when survival i"
+            },
+            {
+              "document_id": "3274",
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1851,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "d to be constant within species, but varying between species. Under food restriction, adult reserve can decrease intraspeciﬁcally, so the amount of resources available for reproduction decreases, and reproductive rate declines with size. This reduction in adult reserve also occurs for interspeciﬁc size decreases (see Fig. 1), but is accompanied by a greater decrease in offspring size (see Table 3), which has the net effect of increasing reproduc- tive rate. This distinction also leads to different expectations of the scaling of uptake rates. Table 3 shows that assimila- tion is expected to scale interspeciﬁcally with mass3/4 at the inﬁnite limit of mass (higher exponents for ﬁnite masses). D"
+            },
+            {
+              "document_id": "3344",
+              "title": "Accolla e.a. - 2019 - Similar individual-level responses to stressors ha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1872,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ensity in the system as in the previous scenario. A stressor that increases the costs of growth does not affect asymptotic size, but does reduce the rate at which organisms reach their asymptotic size (Jager and Zimmer, 2012). This can be seen in Fig. 2, in which there is a decreasing impact on length as a function of time. BT has the largest percentage decrease in both length and egg production (Table 2). At the population level, the only effect is that BT population size increases less than that of GCT. Therefore, a signiﬁcant difference among individual-level outputs does not nec- essarily translate into remarkable differences at the population level. Once again, a reduction in body size "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1876,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "a beautiful example showing that the size relationships within a species work out differently from those between species. Intra-species comparisons show that large individuals reproduce at a higher rate than small ones, while the reverse holds for inter-species comparisons. Like most of the other scaling relationships mentioned in this chapter, this only reflects tendencies that allow substantial deviations. The trade-off between a small number of large young and a large number of small young is obvious. The allocation fraction κ does not depend on body size; thus, a small species spends the same fraction of energy that it utilises from its reserves on reproduction as a large species. (That "
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1881,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "y3, the amount of reserves retained by the individual after a reproduction event. As Fig. 1b demonstrates, at very small target sizes (but nonetheless larger than y3) the switching size is the initial size and there is no structural growth at all throughout the entire lifetime of the individual (the region right of the iteroparity switching curve in Fig. 1b). At larger target sizes, cessation of structural growth is delayed, compared to either semelparous reproduction or no reproduction, causing larger ﬁnal structural mass for a given initial condition (see growth trajectory examples in Fig. 1b). Finally, at even larger target sizes the switching curve for iteroparous reproduction falls belo"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1935,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "reproduction per kJ lean mass per year) as a function of length: To maintain a constant storage density with increas- ing body size after maturity, individuals must continue to allocate a portion of the 1 \u0001 j ﬂux to storage after maturity. The fraction of the 1 \u0001 j ﬂux needed to maintain storage density is dependent on a ﬁsh’s growth rate. Due to the differential scaling of assimilation and maintenance with body size, as ﬁsh approach their asymptotic size, their growth rate slows and thus the fraction of the 1 \u0001 j ﬂux needed to maintain storage density declines. Consequently, the model predicts that speciﬁc reproduction rate increases intraspeciﬁcally with body size and reaches its maximum a"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1937,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "s a function of scaled length (l = L/L∞and lM = LM/L∞) is given by: RðlÞ¼Rmax lM 6þ3lM þ2l2 M \u00013lð2þlMÞ \u0006 \u0007 þ6ðl\u00011Þln 1 1\u0001lM \u0001 \u0003 2ll3 M eqn 10 which, assuming the Charnov’s invariant lM = 0\u000365 reduces to: RðlÞ ¼ Rmax 2\u000306 \u0001 1\u000306 l \u0006 \u0007 Eqn (9) and (10) make predictions about how reproductive output scales intra- and interspeciﬁcally. Within a species, R should increase with body size (eqn 10; Fig. 6a). Among species, reproductive output is dependent primarily on j and K, the von Bertalanffy growth rate (eqn 9; Fig. 6b). In theory, DEBlipid’s predictions for reproductive investment can be applied to males or females, however, here we focus on females as their reproductive investment is more re"
+            },
+            {
+              "document_id": "2777",
+              "title": "KooyBaas2009.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ays birth (if an embryo is exposed) and puberty (in the case of juveniles), but also 532 reduces the size at birth. A reduction of growth indirectly reduces reproduction, because 533 food uptake is linked to size. Since it also reduces size at birth, the overall eﬀect can be 534 a hormesis eﬀect on reproduction (in terms of number of oﬀspring per time) [52]. Indirect 535 eﬀects on reproduction diﬀer from direct eﬀects by not only reducing, but also delaying 536 reproduction. This has important population dynamical consequences. 537 5.3 Co-variation of parameter values 538 A very powerful property of the standard DEB model and the one-compartment model 539 is that they imply rules for how par"
+            },
+            {
+              "document_id": "2510",
+              "title": "Muller et al. - 2019 - Regulation of reproductive processes with Dynamic .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1965,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "size of the reproductive buffer. This contrasts with the dynamic alloca- tion of reserves in dDEB, in which the allocation is under the control of the size of the reproductive buffer relative to that of the animal. Consequently, this allocation can vary a great deal over a repro- ductive cycle (see Supporting Information Figure S1). Concurrently, growth follows an opposite trend. In a constant environment, dDEB predicts that most of the growth of a species with a seasonal reproduction pattern occurs before the gonads start developing substantially, whereas growth in stdDEB+ is of the von Bertalanffy type. Consequently, size data could discriminate between the two models. Unfortunately, the t"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1988,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "es the reproduction rate (when comparing indi- viduals of the same size, and expressed as a mass or energy ﬂux). This pattern of effects is well known for some parasitic infections, although reproduction is generally fully halted as the parasite uses this energy for its own purposes (Hall et al. 2007). A decrease in j will have an opposite effect: less growth, an earlier start of reproduction at a smaller size, and enhanced reproduction (for its size). This pattern of effect is for example seen in Daphnia when exposed to chemicals released by their ﬁsh predators (kairomones, e.g., Stibor 1992). Note that when j is decreased too much, the repro- duction rate will become lower than the control"
+            },
+            {
+              "document_id": "2781",
+              "title": "AldaJage2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2001,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "re), the outcome of this trade-off may be different, and less sperm production may maximize ﬁtness. Thus, the threshold size in N2 is probably being reduced by a decrease in sperm production, triggering an earlier switch to oocyte production. CB individuals, however, already start reproduction at a small size in control con- ditions, with reduced sperm production in comparison to non-mated N2 individuals, and earlier maturation of oocytes. In CB individuals, the presence of male sperm allows hermaphroditic sperm production to stop early. This happens both in control conditions and in the different concentrations, giving way to similar sizes of reproduction onset. A further reduction in size "
+            },
+            {
+              "document_id": "2645",
+              "title": "Marn2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2005,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "to the size of structure in DEB terms (via equation 4.2), and is expected not to decrease unless under the conditions of prolonged starvation [109]. Weight has contribution from both structure and reserve ([109], also see eq. 4.3), and can oscillate depending on the food availability, reproduction cycle, etc [109, 94]. The relatively small size of females in the reproduction program has two possible explanations: (i) The fe- males experienced low food availability before they reached ultimate length, resulting in [Page 97] §4.3 Results 85 the small asymptotic (i.e. ultimate) length (Li = f L∞). (ii) Their ultimate length is the result of the smaller genetically determined growth potential, i"
+            },
+            {
+              "document_id": "3597",
+              "title": "Kooijman and Augustine - 2022 - The comparative energetics of the cephalopods  th.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2005,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e of growth (Collins et al., 1995). DEB theory explicitly uses energy and mass balances, but allocation to growth and reproduction only compete indirectly, via the kappa-rule. The gradual decline of growth after the end of acceleration follows in DEB theory from assimilation being proportional to squared length and somatic maintenance to cubed length: the increasing allocation to so­ matic maintenance is reducing growth. This is consistent with the finding of Moltschaniwskyj and Semmens (2000), who suggested that allocation to reproduction is not directly at the expense of that to growth. We did not find a clear pattern in gender-related differences. While the male of Octopus tehuelchus is l"
+            },
+            {
+              "document_id": "3433",
+              "title": "Martin - 2013 - .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2012,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "reduction, is rarely measured. This leads to a problem, as illustrated by Fig. 1, in identifying the PMoA, because most PMoAs will lead to an effect on reproduction, and thus additional data on body size is required to differentiate between possible PMoAs. For example, in addition to direct effects on reproduction, stressors can affect reproduction indirectly through via a decrease in feeding rate, an increase in maintenance costs, and/or an increase in costs for growth. If body size is not measured over time, differentiating between these [Page 84] 80 PMoAs is impossible as each of these modes of action can lead to the same ECx for reproduction at a given point in time. Simultaneously measu"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2013,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "rrelet Synthliboramphus antiqua. This is to be expected on physical grounds, of course. The speciﬁc density of an egg can be used to determine the length of time it has been incubated. This process of water loss implies that the water content of the reserves changes during incubation, but its range is rather restricted. The [Page 307] 8.2. Body size scaling relationships 289 functional and physical aspects of water loss from eggs thus coincide beautifully. Maximum reproductive rate The maximum reproductive rate, as given in (3.52), is ˙RmV = ˙Rm1(Vm1/V)1/3 for the diﬀerent species. This is a beautiful example showing that the size relationships within a species work out diﬀerently from those"
+            },
+            {
+              "document_id": "3344",
+              "title": "Accolla e.a. - 2019 - Similar individual-level responses to stressors ha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2013,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ted than BT: the individual ﬁnal length decreases up to 40% at the highest stress factor for RT and GCT, whereas egg number is reduced by almost 70% at s = 70% (see Fig. 1 in Appendix A.1). 3.1.3. Increase in overhead costs of growth When the costs of growth are increased, individual length of BT declines by about 10% and the number of eggs decreases by a max- imum of 20% (s = 70%). GCT shows a similar trend for both length and egg number, but is slightly less affected. For both species, indi- vidual length is impacted more during the ﬁrst two years of the life cycle (see Fig. 2 in Appendix A.1). For RT, the effects on length and egg number are negligible. 3.1.4. Increase in reproduction cos"
+            },
+            {
+              "document_id": "3158",
+              "title": "Kear2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2019,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "roductive output were only strongly apparent once local variation in body size had been accounted for, both in the previous analyses (Grant & Porter 1992; Adolph & Porter 1993) and in the present study (Figs 2d and 3b, Table 2b). This is because body size dominates total reproductive output. Although body size adjustments by Grant & Porter (1992) and by Adolph & Por- ter (1993) were made based on the average adult size, adjust- ments in the present study were made through the ‘zoom factor’ z, which affects size at birth, maturity and the asymp- totic maximum through inﬂuences on the ‘extensive’ parame- ters Eb H, Ep H and { _pAm}, respectively (see Kooijman 2010, p. 300). The DEB theory thus"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact has two parts: fecundity/reproduction increases with body size intra-specifically, and decreases with size inter-specifically. Snippet 2 directly affirms the intra-specific part and explicitly mentions both inter- and intra-specific increases of fecundity with body size, partially supporting the intra-specific claim but conflicting somewhat with the inter-specific decrease (it states increases inter-specifically too, yet remains the most on-point reference). Snippets 7, 15, 5, and 14 provide solid intra-specific support that larger individuals are more fecund or invest more in reproduction. No snippet clearly supports the inter-specific decrease claim, and none clearly contradicts the overall fact. Thus the corpus offers moderate support for the intra-specific component but little direct evidence on the inter-specific component, yielding moderate evidence strength with broadly corroborating direction and little outright conflict."
+          },
+          "n_references": 6,
+          "references": {
+            "W2994920843": {
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1941
+            },
+            "W2017094586": {
+              "title": "Intra- and Trans-Generational Costs of Reduced Female Body Size Caused by Food Limitation Early in Life in Mites",
+              "doi": "https://doi.org/10.1371/journal.pone.0079089",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2046
+            },
+            "W2324709263": {
+              "title": "Variation in Fecundity and Its Relationship to Body Size in a Population of the Least Killifish, Heterandria formosa (Pisces: Poeciliidae)",
+              "doi": "https://doi.org/10.2307/1445155",
+              "year": "1984",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2049
+            },
+            "W1482365006": {
+              "title": "Social group size, potential sperm competition and reproductive investment in a hermaphroditic leech, <i>Helobdella papillornata</i> (Euhirudinea: Glossiphoniidae)",
+              "doi": "https://doi.org/10.1111/j.1420-9101.2004.00692.x",
+              "year": "2004",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2126
+            },
+            "W2731180235": {
+              "title": "The affect of female body width on copulation duration in Centrobolus inscriptus (Attems)",
+              "doi": "https://doi.org/10.22271/j.ento.2017.v5.i1j.10",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2132
+            },
+            "W2051108295": {
+              "title": "Size and the Not‐So‐Single Sex: Disentangling the Effects of Size and Budget on Sex Allocation in Hermaphrodites",
+              "doi": "https://doi.org/10.1086/425624",
+              "year": "2004",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2146
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2952352854",
+              "title": "Xenopus Hybrids Provide Insight Into Cell and Organism Size Control",
+              "doi": "https://doi.org/10.3389/fphys.2018.01758",
+              "year": "2018",
+              "distance": 0.1896,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular, and subcellular levels. The <i>Xenopus</i> species, <i>X. laevis</i> and <i>X. tropicalis</i> differ in size at all three of these levels. Despite these differences, fertilization of <i>X. laevis</i> eggs with <i>X. tropicalis</i> sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and <i>X. laevis</i> embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observe"
+            },
+            {
+              "document_id": "W2994920843",
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "The variation in the pattern of growth and reproduction is described for each major taxon of the Crustacea. The various ways in which reproduction restricts the rate of growth, through competition for resources and other constraints, are discussed. At the same time, inter- and intra-specific increases of fecundity with body size ate demonstrated. Finally, the success of different patterns of growth and reproduction is considered, emphasizing the importance of mortality rates in determining which patterns are most suited to a particular species or population."
+            },
+            {
+              "document_id": "W2543301042",
+              "title": "Sexual size dimorphism in musteloids: An anomalous allometric pattern is explained by feeding ecology",
+              "doi": "https://doi.org/10.1002/ece3.2480",
+              "year": "2016",
+              "distance": 0.202,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Rensch's rule states that sexual size dimorphism ( SSD ) increases with body size in taxa where males are larger, and decreases when females are larger. The dominant explanation for the trend is currently that competitive advantage for males is greater in larger individuals, whereas female size is constrained by the energetics of rearing offspring. This rule holds for a variety of vertebrate taxa, and opposing trends are rare. We examine the allometry of SSD within the Musteloidea and demonstrate a hypo‐allometry contrary to Rensch's rule, with lower SSD associated with larger body size. We provide evidence that feeding ecology is involved. Where diet promotes group‐living, the opti"
+            },
+            {
+              "document_id": "W1980117820",
+              "title": "The Evolution of Offspring Size across Life-History Stages",
+              "doi": "https://doi.org/10.1086/678248",
+              "year": "2014",
+              "distance": 0.2021,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Females vary in the size of offspring that they produce, often in a manner that depends on maternal age or stage. This is puzzling, given that offspring size is predicted to evolve to a single optimal value where the gain in fitness from being larger exactly offsets the fitness lost to the mother by producing fewer offspring. We used a stage-structured life-history model to determine the optimal offspring size for females in different stages. We found that optimal offspring size does not vary with maternal stage when offspring fitness depends only on its size and not on the stage of the mother. This negative result holds even with density dependence, when larger offspring compete better. How"
+            },
+            {
+              "document_id": "W2017094586",
+              "title": "Intra- and Trans-Generational Costs of Reduced Female Body Size Caused by Food Limitation Early in Life in Mites",
+              "doi": "https://doi.org/10.1371/journal.pone.0079089",
+              "year": "2013",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Small female body size apparently intensified the well-known costs of sexual activity because mortality of small but not standard-sized females mainly occurred shortly after mating. The disadvantages of small females in mating and egg production may be generally explained by size-associated morphological and physiological constraints. Additionally, size-assortative mate preferences of standard-sized mates may have rendered small females disproportionally unattractive mating partners. We argue that the sex-specific trans-generational effects were due to sexual size dimorphism - females are the larger sex and thus more strongly affected by maternal stress than the smaller males - and to sexual"
+            },
+            {
+              "document_id": "W2105338878",
+              "title": "Effective population size when fertility is inherited",
+              "doi": "https://doi.org/10.1017/s0016672300010119",
+              "year": "1966",
+              "distance": 0.2047,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A formula for effective population size when fertility is inherited is worked out. It is shown that the effective size decreases as the heritability of fertility or progeny number increases."
+            },
+            {
+              "document_id": "W2324709263",
+              "title": "Variation in Fecundity and Its Relationship to Body Size in a Population of the Least Killifish, Heterandria formosa (Pisces: Poeciliidae)",
+              "doi": "https://doi.org/10.2307/1445155",
+              "year": "1984",
+              "distance": 0.2049,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "A positive size-fecundity relationship in female Heterandria formosa is the result of an increase, with increasing size of female, in number of young per brood, not of a decrease in interbrood intervals. The lack of shorter interbrood intervals in smaller females is not consistent with one of the hypotheses on the evolution of superfetation. Larger females produce heavier individual offspring. After maintenance in the laboratory with excess food, both the size-fecundity relationship and the correlation between female size and average offspring weight disappeared. We suggest that Heterandria is food limited in natural populations and that larger females are better able to compete for food and"
+            },
+            {
+              "document_id": "W2044043165",
+              "title": "Disparate maturation adaptations to size-dependent mortality",
+              "doi": "https://doi.org/10.1098/rspb.2006.3562",
+              "year": "2006",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Body size is an important determinant of resource use, fecundity and mortality risk. Evolution of maturation size in response to size-dependent selection is thus a fundamental part of life-history theory. Increased mortality among small individuals has previously been predicted to cause larger maturation size, whereas increased mortality among large individuals is expected to have the opposite effect. Here we use a continuously size-structured model to demonstrate that, contrary to these widespread expectations, increased mortality among small individuals can have three alternative effects: maturation size may increase, decrease or become evolutionarily bistable. We show that such complex re"
+            },
+            {
+              "document_id": "W3157131407",
+              "title": "The eco-evolutionary dynamics of maternal provisioning",
+              "doi": "https://doi.org/10.26180/5dd256b6531b8",
+              "year": "2019",
+              "distance": 0.2078,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Offspring sizes vary at all scales of organisation, but the reasons remain unclear. This thesis tested several classic theories regarding offspring-size using a marine invertebrate system. Results from this thesis provide several, previously anticipated, mechanisms for the maintenance of offspring-size variation. Life history theory should now be revised to incorporate these effects."
+            },
+            {
+              "document_id": "W2233288857",
+              "title": "Incorporating an ontogenetic perspective into evolutionary theory of sexual size dimorphism",
+              "doi": "https://doi.org/10.1111/evo.12857",
+              "year": "2016",
+              "distance": 0.2087,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Sexual size dimorphism (SSD) describes divergent body sizes of adult males and females. While SSD has traditionally been explained by sexual and fecundity selection, recent advances in physiology and developmental biology emphasize that SSD would occur proximately because of sexual differences in ontogenetic growth trajectories (i.e., growth rate and duration). Notably, these ontogenetic traits are subject to energetic or time constraints and thus traded off with fitness components (e.g., survival and reproduction). To elucidate the importance of such ontogenetic trade-offs in the evolution of SSD, we developed a new theoretical framework by extending quantitative genetic models for the evol"
+            },
+            {
+              "document_id": "W2886448855",
+              "title": "<i>Xenopus</i> hybrids provide insight into cell and organism size control",
+              "doi": "https://doi.org/10.1101/395814",
+              "year": "2018",
+              "distance": 0.2101,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular and subcellular levels. The Xenopus species, X. laevis and X. tropicalis differ in size at all three of these levels. Despite these differences, fertilization of X. laevis eggs with X. tropicalis sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and X. laevis embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observed shortly after zygotic genome act"
+            },
+            {
+              "document_id": "W2622312100",
+              "title": "Time‐limited environments affect the evolution of egg–body size allometry",
+              "doi": "https://doi.org/10.1111/evo.13286",
+              "year": "2017",
+              "distance": 0.2102,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Initial offspring size is a fundamental component of absolute growth rate, where large offspring will reach a given adult body size faster than smaller offspring. Yet, our knowledge regarding the coevolution between offspring and adult size is limited. In time-constrained environments, organisms need to reproduce at a high rate and reach a reproductive size quickly. To rapidly attain a large adult body size, we hypothesize that, in seasonal habitats, large species are bound to having a large initial size, and consequently, the evolution of egg size will be tightly matched to that of body size, compared to less time-limited systems. We tested this hypothesis in killifishes, and found a signif"
+            },
+            {
+              "document_id": "W3120902220",
+              "title": "Cancer risk and sexual conflict as constraints to body size evolution",
+              "doi": "https://doi.org/10.1101/2021.01.09.425980",
+              "year": "2021",
+              "distance": 0.211,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Selection often favours large bodies, visible as Cope’s rule over macroevolutionary time — but size increases are not inevitable. One understudied cost of large bodies is the high number of cell divisions and the associated risk of oncogenic mutations. Our elasticity analysis shows that selection against a proportional increase in size becomes ever more intense with increasing body size if cancer is the sole selective agent. Thus cancer potentially halts body size increases even if no other constraint does so. We then provide multicellular realism with potentially sexually dimorphic body sizes and traits that control cell populations from zygote to maturity and beyond (ontogenetic m"
+            },
+            {
+              "document_id": "W1482365006",
+              "title": "Social group size, potential sperm competition and reproductive investment in a hermaphroditic leech, <i>Helobdella papillornata</i> (Euhirudinea: Glossiphoniidae)",
+              "doi": "https://doi.org/10.1111/j.1420-9101.2004.00692.x",
+              "year": "2004",
+              "distance": 0.2126,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.35,
+              "text": "Abstract Social group size may affect the potential for sperm competition, and this in turn may favour ontogenetic adjustments in testicular mass according to the likely requirements for sperm and spermatophore production. In a number of comparative analyses of testis mass among vertebrate species that differ in mating system or social organization, increasing potential for sperm competition is associated with larger testis size. Intraspecific phenotypic plasticity should be able to produce the same pattern if social group size is heterogenous and reflects differing degrees of average sperm competition, but this intraspecific effect is less well studied. We tested the effect of social groups"
+            },
+            {
+              "document_id": "W2731180235",
+              "title": "The affect of female body width on copulation duration in Centrobolus inscriptus (Attems)",
+              "doi": "https://doi.org/10.22271/j.ento.2017.v5.i1j.10",
+              "year": "2017",
+              "distance": 0.2132,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Body size is a known correlate of copulation duration in Centrobolus inscriptus. I tested for the presence of a relationship between female body width and copulation duration in C. inscriptus by performing mating experiments. Females differed significantly from males in body mass, body length, and dorsal tergite width. Female width was positively related to copulation duration. Larger females are expected to be more fecund."
+            },
+            {
+              "document_id": "W2168234898",
+              "title": "The evolution of sexual size dimorphism in fish*",
+              "doi": "https://doi.org/10.1111/j.1095-8649.1992.tb03864.x",
+              "year": "1992",
+              "distance": 0.2133,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "Life history strategy models in which female size depends on fecundity and male size on male‐male competition, are used to predict male and female size. Sperm competition alone—without any form of contest competition—cannot readily generate size ratios (male weight/female weight) greater than 1·0, and if sperm competition is very weak, small or even dwarf males are predicted. Increasing sperm competition increases male size, but only with high numbers of competing males can male size approach that of females. Size dimorphism is also affected by the ratio: growth rate/mortality rate in each sex. If this is higher in one sex, its size increases. Two trade‐offs in fish could affect this ratio b"
+            },
+            {
+              "document_id": "W1882219559",
+              "title": "THE CONTEXT-DEPENDENT EFFECT OF MULTIPLE PATERNITY ON EFFECTIVE POPULATION SIZE",
+              "doi": "https://doi.org/10.1111/j.1558-5646.2011.01249.x",
+              "year": "2011",
+              "distance": 0.2146,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Effective population size (N(e)) is important because it describes how evolutionary forces will affect a population. The effect of multiple sires per female on N(e) has been the subject of some debate, at the crux of which is the effects of monandry and multiple-paternity (MP) on male variance in reproductive success. In both mating systems, females mate with several males over their lifetimes, but sire offspring with one male at a time in the former and have several sires per clutch in the latter. First, I theoretically show that whether the annual male variance in reproductive success in an MP population is greater or less than that of a monandrous population depends on the distributions o"
+            },
+            {
+              "document_id": "W2051108295",
+              "title": "Size and the Not‐So‐Single Sex: Disentangling the Effects of Size and Budget on Sex Allocation in Hermaphrodites",
+              "doi": "https://doi.org/10.1086/425624",
+              "year": "2004",
+              "distance": 0.2146,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.3,
+              "text": "Sex allocation theory explains how size-related variations in male and female fitness may favor the evolution of size-dependent sex allocation in hermaphrodites. Although empirical studies show that sex allocation changes gradually with size in many species, theoretical studies tend to predict an abrupt sex reversal from one sex to the other, that is, single-sexed sequential hermaphrodites. We show that this discrepancy between data and theory collapses if one takes into account that size affects male and female fitness through distinct routes. Using the classification of budget (larger individuals spend a greater budget on reproduction) and direct (e.g., larger plants are taller and may dis"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly and explicitly affirm the stylized fact. Snippets 1, 3, and 5 state verbatim that reproductive rate increases with size intra-specifically but decreases inter-specifically, with the DEB-theoretical reasoning (constant cost per neonate within species, varying offspring size between species). Snippets 7 and 8 (MartHein2017) provide model predictions consistent with intra-specific increase and distinct inter-specific scaling. Snippet 14 empirically demonstrates inter- and intra-specific fecundity patterns in Crustacea, and snippet 19 corroborates a positive intra-specific size-fecundity relationship in fish. No snippet contradicts the fact; the remaining snippets are off-topic (offspring size, sexual size dimorphism, cell-size control) or only tangentially related. The evidence is strong and consistent."
+          },
+          "n_references": 6,
+          "references": {
+            "2650": {
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1739
+            },
+            "3274": {
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1851
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1876
+            },
+            "3047": {
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1935
+            },
+            "W2994920843": {
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1941
+            },
+            "W2324709263": {
+              "title": "Variation in Fecundity and Its Relationship to Body Size in a Population of the Least Killifish, Heterandria formosa (Pisces: Poeciliidae)",
+              "doi": "https://doi.org/10.2307/1445155",
+              "year": "1984",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2049
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1739,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "increase the coherence of 11 intra- versus inter-specific scaling (Kooijman 2010, Sousa et al. 2010). Zeuthen (1947) was the 12 first to point to the fundamental difference between these scaling relationships, an important 13 warning that went almost lost in recent discussions. Reproductive rate, for example, increases 14 with mass intra-specifically but decreases inter-specifically; the reason being that the cost per 15 neonate is expected to be constant within species, but varying between species. Under food 16 restriction, adult reserve can decrease intra-specifically, so the amount of resources available 17 for reproduction decreases, and reproductive rate declines with size. This reduct"
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1773,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": ", I consider the effect of the growth variance on optimal cessation of structural growth due to a ﬁnite target size, and at ﬁnal structural masses potentially far from the asymptotic value. As discussed above, the signs of these two different effects may in fact be opposite. I. Filin / Journal of Theoretical Biology 264 (2010) 510–516 513 [Page 5] ARTICLE IN PRESS When I incorporate reproduction into the optimization objec- tive, the results vary depending on whether reproduction is semelparous or iteroparous (Fig. 1b). Semelparous reproduction always causes earlier cessation of structural growth and smaller ﬁnal structural masses, compared to the case with no reproduc- tion (when survival i"
+            },
+            {
+              "document_id": "3274",
+              "title": "Maino e.a. - 2014 - Reconciling theories for metabolic scaling..pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1851,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "d to be constant within species, but varying between species. Under food restriction, adult reserve can decrease intraspeciﬁcally, so the amount of resources available for reproduction decreases, and reproductive rate declines with size. This reduction in adult reserve also occurs for interspeciﬁc size decreases (see Fig. 1), but is accompanied by a greater decrease in offspring size (see Table 3), which has the net effect of increasing reproduc- tive rate. This distinction also leads to different expectations of the scaling of uptake rates. Table 3 shows that assimila- tion is expected to scale interspeciﬁcally with mass3/4 at the inﬁnite limit of mass (higher exponents for ﬁnite masses). D"
+            },
+            {
+              "document_id": "3344",
+              "title": "Accolla e.a. - 2019 - Similar individual-level responses to stressors ha.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1872,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ensity in the system as in the previous scenario. A stressor that increases the costs of growth does not affect asymptotic size, but does reduce the rate at which organisms reach their asymptotic size (Jager and Zimmer, 2012). This can be seen in Fig. 2, in which there is a decreasing impact on length as a function of time. BT has the largest percentage decrease in both length and egg production (Table 2). At the population level, the only effect is that BT population size increases less than that of GCT. Therefore, a signiﬁcant difference among individual-level outputs does not nec- essarily translate into remarkable differences at the population level. Once again, a reduction in body size "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1876,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "a beautiful example showing that the size relationships within a species work out differently from those between species. Intra-species comparisons show that large individuals reproduce at a higher rate than small ones, while the reverse holds for inter-species comparisons. Like most of the other scaling relationships mentioned in this chapter, this only reflects tendencies that allow substantial deviations. The trade-off between a small number of large young and a large number of small young is obvious. The allocation fraction κ does not depend on body size; thus, a small species spends the same fraction of energy that it utilises from its reserves on reproduction as a large species. (That "
+            },
+            {
+              "document_id": "3209",
+              "title": "Fili2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1881,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "y3, the amount of reserves retained by the individual after a reproduction event. As Fig. 1b demonstrates, at very small target sizes (but nonetheless larger than y3) the switching size is the initial size and there is no structural growth at all throughout the entire lifetime of the individual (the region right of the iteroparity switching curve in Fig. 1b). At larger target sizes, cessation of structural growth is delayed, compared to either semelparous reproduction or no reproduction, causing larger ﬁnal structural mass for a given initial condition (see growth trajectory examples in Fig. 1b). Finally, at even larger target sizes the switching curve for iteroparous reproduction falls belo"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1935,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "reproduction per kJ lean mass per year) as a function of length: To maintain a constant storage density with increas- ing body size after maturity, individuals must continue to allocate a portion of the 1 \u0001 j ﬂux to storage after maturity. The fraction of the 1 \u0001 j ﬂux needed to maintain storage density is dependent on a ﬁsh’s growth rate. Due to the differential scaling of assimilation and maintenance with body size, as ﬁsh approach their asymptotic size, their growth rate slows and thus the fraction of the 1 \u0001 j ﬂux needed to maintain storage density declines. Consequently, the model predicts that speciﬁc reproduction rate increases intraspeciﬁcally with body size and reaches its maximum a"
+            },
+            {
+              "document_id": "3047",
+              "title": "MartHein2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1937,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "s a function of scaled length (l = L/L∞and lM = LM/L∞) is given by: RðlÞ¼Rmax lM 6þ3lM þ2l2 M \u00013lð2þlMÞ \u0006 \u0007 þ6ðl\u00011Þln 1 1\u0001lM \u0001 \u0003 2ll3 M eqn 10 which, assuming the Charnov’s invariant lM = 0\u000365 reduces to: RðlÞ ¼ Rmax 2\u000306 \u0001 1\u000306 l \u0006 \u0007 Eqn (9) and (10) make predictions about how reproductive output scales intra- and interspeciﬁcally. Within a species, R should increase with body size (eqn 10; Fig. 6a). Among species, reproductive output is dependent primarily on j and K, the von Bertalanffy growth rate (eqn 9; Fig. 6b). In theory, DEBlipid’s predictions for reproductive investment can be applied to males or females, however, here we focus on females as their reproductive investment is more re"
+            },
+            {
+              "document_id": "2777",
+              "title": "KooyBaas2009.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1961,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ays birth (if an embryo is exposed) and puberty (in the case of juveniles), but also 532 reduces the size at birth. A reduction of growth indirectly reduces reproduction, because 533 food uptake is linked to size. Since it also reduces size at birth, the overall eﬀect can be 534 a hormesis eﬀect on reproduction (in terms of number of oﬀspring per time) [52]. Indirect 535 eﬀects on reproduction diﬀer from direct eﬀects by not only reducing, but also delaying 536 reproduction. This has important population dynamical consequences. 537 5.3 Co-variation of parameter values 538 A very powerful property of the standard DEB model and the one-compartment model 539 is that they imply rules for how par"
+            },
+            {
+              "document_id": "2510",
+              "title": "Muller et al. - 2019 - Regulation of reproductive processes with Dynamic .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1965,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "size of the reproductive buffer. This contrasts with the dynamic alloca- tion of reserves in dDEB, in which the allocation is under the control of the size of the reproductive buffer relative to that of the animal. Consequently, this allocation can vary a great deal over a repro- ductive cycle (see Supporting Information Figure S1). Concurrently, growth follows an opposite trend. In a constant environment, dDEB predicts that most of the growth of a species with a seasonal reproduction pattern occurs before the gonads start developing substantially, whereas growth in stdDEB+ is of the von Bertalanffy type. Consequently, size data could discriminate between the two models. Unfortunately, the t"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1988,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "es the reproduction rate (when comparing indi- viduals of the same size, and expressed as a mass or energy ﬂux). This pattern of effects is well known for some parasitic infections, although reproduction is generally fully halted as the parasite uses this energy for its own purposes (Hall et al. 2007). A decrease in j will have an opposite effect: less growth, an earlier start of reproduction at a smaller size, and enhanced reproduction (for its size). This pattern of effect is for example seen in Daphnia when exposed to chemicals released by their ﬁsh predators (kairomones, e.g., Stibor 1992). Note that when j is decreased too much, the repro- duction rate will become lower than the control"
+            },
+            {
+              "document_id": "2781",
+              "title": "AldaJage2005.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2001,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "re), the outcome of this trade-off may be different, and less sperm production may maximize ﬁtness. Thus, the threshold size in N2 is probably being reduced by a decrease in sperm production, triggering an earlier switch to oocyte production. CB individuals, however, already start reproduction at a small size in control con- ditions, with reduced sperm production in comparison to non-mated N2 individuals, and earlier maturation of oocytes. In CB individuals, the presence of male sperm allows hermaphroditic sperm production to stop early. This happens both in control conditions and in the different concentrations, giving way to similar sizes of reproduction onset. A further reduction in size "
+            },
+            {
+              "document_id": "W2952352854",
+              "title": "Xenopus Hybrids Provide Insight Into Cell and Organism Size Control",
+              "doi": "https://doi.org/10.3389/fphys.2018.01758",
+              "year": "2018",
+              "distance": 0.1896,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular, and subcellular levels. The <i>Xenopus</i> species, <i>X. laevis</i> and <i>X. tropicalis</i> differ in size at all three of these levels. Despite these differences, fertilization of <i>X. laevis</i> eggs with <i>X. tropicalis</i> sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and <i>X. laevis</i> embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observe"
+            },
+            {
+              "document_id": "W2994920843",
+              "title": "Growth, Sexual Maturity and Reproductive Output",
+              "doi": "https://doi.org/10.1201/9781315140681-7",
+              "year": "2017",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "The variation in the pattern of growth and reproduction is described for each major taxon of the Crustacea. The various ways in which reproduction restricts the rate of growth, through competition for resources and other constraints, are discussed. At the same time, inter- and intra-specific increases of fecundity with body size ate demonstrated. Finally, the success of different patterns of growth and reproduction is considered, emphasizing the importance of mortality rates in determining which patterns are most suited to a particular species or population."
+            },
+            {
+              "document_id": "W2543301042",
+              "title": "Sexual size dimorphism in musteloids: An anomalous allometric pattern is explained by feeding ecology",
+              "doi": "https://doi.org/10.1002/ece3.2480",
+              "year": "2016",
+              "distance": 0.202,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Rensch's rule states that sexual size dimorphism ( SSD ) increases with body size in taxa where males are larger, and decreases when females are larger. The dominant explanation for the trend is currently that competitive advantage for males is greater in larger individuals, whereas female size is constrained by the energetics of rearing offspring. This rule holds for a variety of vertebrate taxa, and opposing trends are rare. We examine the allometry of SSD within the Musteloidea and demonstrate a hypo‐allometry contrary to Rensch's rule, with lower SSD associated with larger body size. We provide evidence that feeding ecology is involved. Where diet promotes group‐living, the opti"
+            },
+            {
+              "document_id": "W1980117820",
+              "title": "The Evolution of Offspring Size across Life-History Stages",
+              "doi": "https://doi.org/10.1086/678248",
+              "year": "2014",
+              "distance": 0.2021,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Females vary in the size of offspring that they produce, often in a manner that depends on maternal age or stage. This is puzzling, given that offspring size is predicted to evolve to a single optimal value where the gain in fitness from being larger exactly offsets the fitness lost to the mother by producing fewer offspring. We used a stage-structured life-history model to determine the optimal offspring size for females in different stages. We found that optimal offspring size does not vary with maternal stage when offspring fitness depends only on its size and not on the stage of the mother. This negative result holds even with density dependence, when larger offspring compete better. How"
+            },
+            {
+              "document_id": "W2017094586",
+              "title": "Intra- and Trans-Generational Costs of Reduced Female Body Size Caused by Food Limitation Early in Life in Mites",
+              "doi": "https://doi.org/10.1371/journal.pone.0079089",
+              "year": "2013",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Small female body size apparently intensified the well-known costs of sexual activity because mortality of small but not standard-sized females mainly occurred shortly after mating. The disadvantages of small females in mating and egg production may be generally explained by size-associated morphological and physiological constraints. Additionally, size-assortative mate preferences of standard-sized mates may have rendered small females disproportionally unattractive mating partners. We argue that the sex-specific trans-generational effects were due to sexual size dimorphism - females are the larger sex and thus more strongly affected by maternal stress than the smaller males - and to sexual"
+            },
+            {
+              "document_id": "W2105338878",
+              "title": "Effective population size when fertility is inherited",
+              "doi": "https://doi.org/10.1017/s0016672300010119",
+              "year": "1966",
+              "distance": 0.2047,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "A formula for effective population size when fertility is inherited is worked out. It is shown that the effective size decreases as the heritability of fertility or progeny number increases."
+            },
+            {
+              "document_id": "W2324709263",
+              "title": "Variation in Fecundity and Its Relationship to Body Size in a Population of the Least Killifish, Heterandria formosa (Pisces: Poeciliidae)",
+              "doi": "https://doi.org/10.2307/1445155",
+              "year": "1984",
+              "distance": 0.2049,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "A positive size-fecundity relationship in female Heterandria formosa is the result of an increase, with increasing size of female, in number of young per brood, not of a decrease in interbrood intervals. The lack of shorter interbrood intervals in smaller females is not consistent with one of the hypotheses on the evolution of superfetation. Larger females produce heavier individual offspring. After maintenance in the laboratory with excess food, both the size-fecundity relationship and the correlation between female size and average offspring weight disappeared. We suggest that Heterandria is food limited in natural populations and that larger females are better able to compete for food and"
+            },
+            {
+              "document_id": "W2044043165",
+              "title": "Disparate maturation adaptations to size-dependent mortality",
+              "doi": "https://doi.org/10.1098/rspb.2006.3562",
+              "year": "2006",
+              "distance": 0.2062,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Body size is an important determinant of resource use, fecundity and mortality risk. Evolution of maturation size in response to size-dependent selection is thus a fundamental part of life-history theory. Increased mortality among small individuals has previously been predicted to cause larger maturation size, whereas increased mortality among large individuals is expected to have the opposite effect. Here we use a continuously size-structured model to demonstrate that, contrary to these widespread expectations, increased mortality among small individuals can have three alternative effects: maturation size may increase, decrease or become evolutionarily bistable. We show that such complex re"
+            },
+            {
+              "document_id": "W3157131407",
+              "title": "The eco-evolutionary dynamics of maternal provisioning",
+              "doi": "https://doi.org/10.26180/5dd256b6531b8",
+              "year": "2019",
+              "distance": 0.2078,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "Offspring sizes vary at all scales of organisation, but the reasons remain unclear. This thesis tested several classic theories regarding offspring-size using a marine invertebrate system. Results from this thesis provide several, previously anticipated, mechanisms for the maintenance of offspring-size variation. Life history theory should now be revised to incorporate these effects."
+            },
+            {
+              "document_id": "W2233288857",
+              "title": "Incorporating an ontogenetic perspective into evolutionary theory of sexual size dimorphism",
+              "doi": "https://doi.org/10.1111/evo.12857",
+              "year": "2016",
+              "distance": 0.2087,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Sexual size dimorphism (SSD) describes divergent body sizes of adult males and females. While SSD has traditionally been explained by sexual and fecundity selection, recent advances in physiology and developmental biology emphasize that SSD would occur proximately because of sexual differences in ontogenetic growth trajectories (i.e., growth rate and duration). Notably, these ontogenetic traits are subject to energetic or time constraints and thus traded off with fitness components (e.g., survival and reproduction). To elucidate the importance of such ontogenetic trade-offs in the evolution of SSD, we developed a new theoretical framework by extending quantitative genetic models for the evol"
+            },
+            {
+              "document_id": "W2886448855",
+              "title": "<i>Xenopus</i> hybrids provide insight into cell and organism size control",
+              "doi": "https://doi.org/10.1101/395814",
+              "year": "2018",
+              "distance": 0.2101,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Determining how size is controlled is a fundamental question in biology that is poorly understood at the organismal, cellular and subcellular levels. The Xenopus species, X. laevis and X. tropicalis differ in size at all three of these levels. Despite these differences, fertilization of X. laevis eggs with X. tropicalis sperm gives rise to viable hybrid animals that are intermediate in size. We observed that although hybrid and X. laevis embryogenesis initiates from the same sized zygote and proceeds synchronously through development, hybrid animals were smaller by the tailbud stage, and a change in the ratio of nuclear size to cell size was observed shortly after zygotic genome act"
+            },
+            {
+              "document_id": "W2622312100",
+              "title": "Time‐limited environments affect the evolution of egg–body size allometry",
+              "doi": "https://doi.org/10.1111/evo.13286",
+              "year": "2017",
+              "distance": 0.2102,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Initial offspring size is a fundamental component of absolute growth rate, where large offspring will reach a given adult body size faster than smaller offspring. Yet, our knowledge regarding the coevolution between offspring and adult size is limited. In time-constrained environments, organisms need to reproduce at a high rate and reach a reproductive size quickly. To rapidly attain a large adult body size, we hypothesize that, in seasonal habitats, large species are bound to having a large initial size, and consequently, the evolution of egg size will be tightly matched to that of body size, compared to less time-limited systems. We tested this hypothesis in killifishes, and found a signif"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

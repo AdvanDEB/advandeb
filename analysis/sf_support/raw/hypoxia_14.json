@@ -1,0 +1,723 @@
+{
+  "sf_id": "hypoxia_14",
+  "category": "Hypoxia / DO",
+  "statement": "Exponential increase of survival time under anaerobic glycolysis with body mass due to the decrease of mass-specific metabolic rate.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Two snippets bear directly on the stylized fact. Snippet 1 explicitly states the fact (L3) and cites supporting references (Nilsson and Östlund-Nilsson 2008; Roze et al. 2013; Valverde et al. 2012). Snippet 13 provides the mechanistic reasoning consistent with the fact: small individuals deplete glycogen / accumulate lethal anaerobic end products faster due to higher mass-specific metabolic rate, so larger individuals survive longer under hypoxia. No snippets contradict the claim. The remaining snippets concern general metabolic scaling, glycolysis modeling in L. lactis, tumor/aging models, or DEB framework citations and are off-topic or only tangentially related. Support is consistent but rests on a small number of directly relevant snippets, hence moderate evidence strength with corroborating consensus direction."
+      },
+      "n_references": 1,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.33616065979003906
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3362,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "g -lasting (several hours) imprint on metabolism (oxygen debt) . (Bayne and Livingstone, 1977; Bridges and Brand, 1980; Nilsson and Östlund -Nilsson, 2008; Nonnotte et al., 1993) Survival L1. Lethal DO level and time are different across taxa. (Vaquer -Sunyer and Duarte, 2011, 2008) L2. Lethal DO level increase with increasing metabolic activity. (Valverde et al., 2012) L3. Exponential increase of survival time under anaerobic glycolysis with body mass due to the decrease of mass -specific metabolic rate. (Nilsson and Östlund -Nilsson, 2008; Roze et al., 2013; Valverde et al., 2012) 3 Hypoxia within the DEB theory framework"
+        },
+        {
+          "document_id": "69b847c3ec32c55db5430a3b",
+          "title": "LeeuZonn2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.383,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ALM (2000) Dynamic Energy and Mass Budgets in biologicalsystems. Theory and applications . Cambridge: Cambridge University PressKooijman SALM (2001) Quantitative aspects of metabolic organization; adiscussion of concepts. Philos Trans R Soc London 356: 331 – 349Laird, AK (1964) Dynamics of tumor growth. Br J Cancer 18:490 – 502Lazo PA (1985) Tumour – host metabolic interaction and cachexia. FEESLett 187: 189 – 192Van Leeuwen IMM, Kelpin FDL, Kooijman SALM (2002) A mathematicalmodel that accounts for the effects of caloric restriction on body weightand longevity. Biogerontol 3:373 – 381"
+        },
+        {
+          "document_id": "69b8a04becbd4702b29a71a8",
+          "title": "KearWhit2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3997,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ass, B0pataxon-speciﬁc constant reﬂecting resting metabolic rate andheat from digestion (speciﬁc dynamic action; J/mass3/4), andBm(J/g) is the mass-speciﬁc maintenance rate. Adult mass, where Bcis the maintenance44Mp(B/B)p(Bm /B)0m 0 cccost in vivo per cell and mcis the mass per cell (sensuWest et al. 2001). Note that the interpretation of B0istherefore as a supply rate (to cells/tissues) rather than amaintenance rate (van der Meer 2006). It is argued thatall the parameters are in principle directly calculable fromfundamental cellular parameters (West et al. 2001) andtherefore that this is a ﬁrst-principles mechanistic model"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4033,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "is not active anaerobically or, atleast, has a negligible contribution. In fact, there are three known routes for glucose uptakeinL. lactis and they are all active under anaerobiosis [6]. Our results suggest that two ofthese routes have the same kinetic properties and can be lumped in the model.We also observe that the population has an adaptation period in the aerobic case, whichis negligible in the two anaerobic situations. The DEB theory has no explanation for this,and it might be related to the pre-treatment of the population.We include this process using an ad hoc formulation where inhibition of substrate uptake"
+        },
+        {
+          "document_id": "69b879e7ecbd4702b29a42c6",
+          "title": "BurgRyan2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4066,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ic respiration. The contribution of anaerobicpathways to metabolic ﬂux is likely to vary amongtaxa, but is expected to be small.The relationship between organismal metabolicrate and organism body mass has long beendescribed by the power function Y=aMb(Krogh1916; Kleiber 1932). The exponent bdeﬁnes the scal-ing of metabolic rate ( Y) with mass ( M), and ais ascaling coefﬁcient. When metabolic rate varies indirect proportion to body mass, b=1 and metabolicrate scales isometrically; when b6¼1, the relationship"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4105,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "oxidativemetabolism scale as M0.79–0.94, which is similar to the scalingof maximal metabolic rate during exercise ( M0.81–0.92).Muscle enzymes functioning in anaerobic metabolism scaleeven more steeply ( bo1), but they catalyze glycogen catab-olism mainly during brief episodes of ‘burst’ locomotion,and thus contribute little to the fueling of sustained muscularwork (see also Childress & Somero, 1990; Withers, 1992).Thus, a fourth problem with the model of Darveau et al.(2002) is that it assumes that the scaling of enzyme activitiesis a cause rather than a result of whole-body metabolic"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4106,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ay rate of (aerobic) inhibition, y\u00031;\u00032theyield of\u00031on\u00032(which might be di erent under aerobic and anaerobic conditions), _k\u0003thedecay rate of internal metabolite \u0003,_kEthe speci c conductance, gthe energy investmentratio,ld=_kMg=_kEwhere _kMis the maintenance rate coe\u000ecient, dVthe speci c densityof structural biomass, !dthe proportionality constant for the contribution of the scaledreserve density to dry weight.We tted all 16 curves of the 3 experiments simultaneously because the parameters ofanaerobic glucose uptake occur in all experiments, and the anaerobic yields of product occur"
+        },
+        {
+          "document_id": "69b87950ecbd4702b29a4222",
+          "title": "KooyBaas2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4232,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "on Mod Assess 2:7–12 704[9] Sousa T, Domingos T, Kooijman SALM (2008) From empirical patterns to t heory: A formal metabolic 705theory of life. Phil Trans R Soc B, to appear 706[10] Kooijman SALM, Troost TA (2007) Quantitative steps in the evoluti on of metabolic organisation as 707speciﬁed by the dynamic energy budget theory. Biol Rev 82:1–30 708[11] Leeuwen IMM van, Kelpin FDL, Kooijman SALM (2002) A mathematical model t hat accounts for 709the eﬀects of caloric restriction on body weight and longevity. Biogeronto l 3:373–381 710[12] Leeuwen IMM van, Zonneveld C, Kooijman SALM (2003) The embedded tumor: host ph ysiology is 711"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4295,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "s to cells. Overall, this model is capable of describing the experimentaldata accurately.4.1.2 Growth under anaerobic conditionsWhen modelling the growth experiment using the BST approach, some alterations mustbe made in the equations due to limitations of data availability. In the previous no-growth11Table 1: The BST estimated parameter values of model (9) for the glucose metabolism (Figure 1).The corresponding simulations are represented in Figure 2.Parameter Aerobic Anaerobic Unitk 0.0530251 0.124738 min\u00001 0.0419958 0.134194 min\u0000 2.68092 2.6674 - 1 7.20321 5.86735 min\u00001h11 0.997546 1.25193 -h12 -1.48643 -1.06961 -"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4299,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ully given in [19].4.1 BST formulationThis section presents models for glycolysis in L. lactis using Biochemical Systems Theory.The systems of di erential equations comply with the mathematical formalism of power-laws described and the choice of the state variables was made according to the availabilityof experimental data. This translates into a simpli ed model for glycolysis where somereactions are grouped together.4.1.1 No-growth under aerobic and anaerobic conditionsDeparting from the topology of the glycolytic pathway described above and represented in"
+        },
+        {
+          "document_id": "69b87c6decbd4702b29a464b",
+          "title": "Farrell et al. - Induced sterility illuminates the effects of repro.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4305,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "© The Author(s) or their Institution(s)Can. J. Fish. Aquat. Sci. Downloaded from cdnsciencepub.com by 195.240.221.45 on 01/16/25 This Just-IN manuscript is the accepted manuscript prior to copy editing and page composition. It may differ from the final official version of record. 229 𝑘=𝑘𝐶3(8)230 𝑓=[𝑘𝑁][𝑘𝑁]+[𝑘𝑀](9)231 where f is the scaled functional response, {𝑘𝑎𝑚} is maximum specific nutrient concentration for 232 anabolism rate, [𝑘𝐶] is the specific catabolic rate, [𝑘𝑁] is the specific nutrient diffusion 233 coefficient, and [𝑘𝑀] is the specific basal metabolic rate (or standard metabolic rate; Chabot et"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.431,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "h under aerobic and anaerobic conditionsDeparting from the topology of the glycolytic pathway described above and represented inFigure 1, the BST speci cation collects the terms involved in each reaction using power-laws.The tted BST model relates the concentrations of glucose G, glucose-6-phosphateG6P, fructose-1,6-bisphosphate FPB, common pool of 3-phosphoglycerate PGA and phos-phoenolpyruvate PEP, pyruvate Pand lactacte L. In these experiments, the measuredextracellular metabolites are GandL, and the intracellular metabolites are G6P, FPB,PGA, PEP and P."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4396,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "individuals have a clear advantage over smaller ones, because small individuals will run ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 12 out of glycogen or reach lethal levels of anaerobic end products (lactate and H+) much faster due to their higher mass -specific metabolic rate . These general conclusions imply that within species, body size typically has little impact on hypoxia tolerance, but la rge individuals may survive longer below the critical hypoxia level than small ones . 2.6 Stylized biological facts for modelling assumptions Following the stylized empirical patterns essential for a theoretical description of"
+        },
+        {
+          "document_id": "69b89a28ecbd4702b29a6b28",
+          "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4399,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "portional to metabolic rate (MR). In other words, carrying capacity (K) should scale at an exponent of MR−1 (Damuth 1981, 1987; Brown et al. 2004). Similarly, because metabolism powers the biological work of production and time to first reproduction, organisms with higher mass-specific metabolic rates should be able to replicate themselves faster. Accordingly, theory predicts that the rate at which populations grow should be proportional to mass-specific metabolic rate—that is, the intrinsic rate of increase (r) of populations should scale at an exponent of MR1 (Gillooly et al. 2002;"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4419,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "depending on the stressor) assimilation of food and/or capacity for aerobic metabolism are impaired ( C) leading to a decline inaerobic scope. Energy storage is absent or reduced under these conditions. During extreme stress in the pessimum range, theprogressive increase in ATP demand for maintenance and/or the progressive impairment of aerobic metabolism overrides ATP supplyvia aerobic metabolism ( D). Aerobic scope disappears, and metabolism switches to partial anaerobiosis that fuels the essential main-"
+        },
+        {
+          "document_id": "69b84744ec32c55db54307b0",
+          "title": "CasaBody2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.442,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "theory./C2112015 Elsevier Ltd. All rights reserved.1. IntroductionMetabolic rate has been studied across many organisms, duringontogeny within a species or over short periods of time related tobehavioral activities of individuals ( Nisbet et al., 2012; Maino andKearney, 2014 ). Metabolic rate has been found to increase withbody mass, a phenomenon named metabolic scaling that is wide-spread in nature ( West et al., 1997; Ehnes et al., 2011 ). Metabolicrate is deﬁned as the energy turnover of an organism and is usually"
+        },
+        {
+          "document_id": "69b8a686ecbd4702b29a79f0",
+          "title": "Kozlowski et al. - 2020 - Coevolution of body size and metabolic rate in ver.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4427,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "EYMSFIELD ,S .B . (2001). The reconstruction ofKleiber ’s law at the organ-tissue level. Journal of Nutrition 131,2 9 6 7 –2970.WARD,P .&KIRSCHVINK ,J .(2015). A New History of Life . New York, NY: BloomsburyPress.WEIBEL,E .R . &HOPPELER ,H . (2005). Exercise-induced maximal metabolic ratescales with muscle aerobic capacity. Journal of Experimental Biology 208,1635 –1644.WEIBEL,E .R . ,BACIGALUPE ,L .D . ,SCHMITT ,B .&HOPPELER ,H . (2004). Allometricscaling of maximal metabolic rate in mammals: muscle aerobic capacity asdeterminant factor. Respiratory Physiology & Neurobiology 140, 115 –132.W"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4433,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "anaerobic (brown) metabolism shown on the right-hand side on each scale. In the optimum range ( A), the aerobic scope is maximaland aerobic ATP supply is sufficiently high to cover the basal metabolic costs (BMR) and to invest in activity, growth, reproduction, and"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address the stylized fact that survival time under anaerobic glycolysis increases exponentially with body mass due to decreasing mass-specific metabolic rate. The snippets cover unrelated biochemistry of glycolysis (cancer, yeast oscillations, sperm metabolism, islets), cell reprogramming, and a few touch on metabolic rate scaling (snippet 4 mentions mass scaling coefficient, snippet 18 links metabolic ceilings to survival), but none provide evidence on the relationship between body mass, anaerobic survival time, and mass-specific metabolic rate. Evidence is sparse and provides no real support either for or against the fact, hence weak evidence strength and an insufficient/neutral consensus direction."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W3197432774",
+          "title": "c-MYC Triggers Lipid Remodelling During Early Somatic Cell Reprogramming to Pluripotency",
+          "doi": "10.1007/s12015-021-10239-2",
+          "year": "2021",
+          "distance": 0.4198,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "early in cell reprogramming. A high rate of aerobic glycolysis is crucial to provide intermediaries for biosynthetic pathways. To ensure the availability of nucleotides, amino acids and lipids for cell proliferation, cells must provide with a constant flux of the elemental building blocks for macromolecule assembly and fulfil the anabolic demands to reach the critical cellular mass levels to satisfactorily undergo cell division."
+        },
+        {
+          "document_id": "W426234807",
+          "title": "Functional biochemistry in health and disease",
+          "doi": "",
+          "year": "2009",
+          "distance": 0.4418,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ytosis and exocytosis. Physiological importance of some transport systems. III ESSENTIAL METABOLISM. 6 Carbohydrate Metabolism. Glycolysis. The biochemical and physiological importance of anaerobicglycolysis. Regulation of the flux through glycolysis. Glycogen synthesis. Synthesis of Fructose and lactose. The pentose phosphate pathway. Gluconeogenesis: glucose formation from non-carbohydratesources. Role of the liver in the regulation of the blood glucoseconcentration. Hormones and control of gluconeogenesis. Regulation of glycolysis and gluconeogenesis by ATP/ADPconcentration ratio in the liver. Hypoglycaemia. Hyperglycaemia."
+        },
+        {
+          "document_id": "W2794131655",
+          "title": "Comparative metabolomics and glycolysis enzyme profiling of embryogenic and nonembryogenic grape cells",
+          "doi": "10.1002/2211-5463.12415",
+          "year": "2018",
+          "distance": 0.4452,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "lular metabolites, and glycolytic enzyme activities provided evidence for the marked metabolic differences between EC and NEC . The EC were characterized by a moderate and organized cell proliferation, coupled with a low flux through glycolysis, high capacity of phosphoenolpyruvate carboxylase and glucokinase, and high oxygen consumption. The NEC displayed strong anarchic growth, and their high rate of glycolysis due to the low energetic efficiency of the fermentative metabolism is confirmed by increased enolase capacity and low oxygen consumption."
+        },
+        {
+          "document_id": "W1993240601",
+          "title": "Effects of Starvation and Molting on the Metabolic Rate of the Bed Bug (<i>Cimex lectularius</i>L.)",
+          "doi": "10.1086/679499",
+          "year": "2014",
+          "distance": 0.4488,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "A standard curve was developed to depict the generalized pattern of metabolic decline observed in all life stages that molted. Individual metabolic comparisons among life stages that molted revealed some differences in metabolic rate between unmated males and females. In addition, the mass scaling coefficient was found to decline with starvation time (postmolting time) for all life stages that molted. In most life stages, the ratio of V(CO2) to V(O2) (respiratory exchange ratio) declined over time, indicating a change in metabolic substrate with starvation."
+        },
+        {
+          "document_id": "W2028908433",
+          "title": "Bistability in Glycolysis Pathway as a Physiological Switch in Energy Metabolism",
+          "doi": "10.1371/journal.pone.0098756",
+          "year": "2014",
+          "distance": 0.4494,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "The flux of glycolysis is tightly controlled by feed-back and feed-forward allosteric regulations to maintain the body's glucose homeostasis and to respond to cell's growth and energetic needs. Using a mathematical model based on reported mechanisms for the allosteric regulations of the enzymes, we demonstrate that glycolysis exhibits multiple steady state behavior segregating glucose metabolism into high flux and low flux states."
+        },
+        {
+          "document_id": "W2091975411",
+          "title": "LACTIC DEHYDROGENASE AND OTHER ENZYMES IN THE MOUSE UTERUS DURING THE PERIIMPLANTATION PERIOD OF PREGNANCY",
+          "doi": "10.1530/jrf.0.0340079",
+          "year": "1973",
+          "distance": 0.4502,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nied in the same cells by increased phosphorylase, reappearance of strong AMPase, increased SDH, and by deposition of glycogen. The patterns of the rise and fall of glycogen in the decidua and of the accompanying changes in enzyme activities on these days support the concept of a metabolically active tissue with a high rate of glycogen turnover."
+        },
+        {
+          "document_id": "W2028908433",
+          "title": "Bistability in Glycolysis Pathway as a Physiological Switch in Energy Metabolism",
+          "doi": "10.1371/journal.pone.0098756",
+          "year": "2014",
+          "distance": 0.4515,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "olysis flux does not move between the states easily without an external stimulus such as hormonal, signaling or oncogenic cues. Distinct combination of isozymes in glycolysis gives different cell types the versatility in their response to different biosynthetic and energetic needs. Insights from the switch behavior of glycolysis may reveal new means of metabolic intervention in the treatment of cancer and other metabolic disorders through suppression of glycolysis."
+        },
+        {
+          "document_id": "W3197432774",
+          "title": "c-MYC Triggers Lipid Remodelling During Early Somatic Cell Reprogramming to Pluripotency",
+          "doi": "10.1007/s12015-021-10239-2",
+          "year": "2021",
+          "distance": 0.4553,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "le assembly and fulfil the anabolic demands to reach the critical cellular mass levels to satisfactorily undergo cell division. A high rate of aerobic glycolysis is induced by c-MYC, increasing the amounts of intracellular Glucose-6-phosphate (G6P), fructose-6-phosphate (F6P), and glyceraldehyde-3-phosphate (GA3P), which can all enter pentose phosphate pathway (PPP) to produce Ribose-5-Phosphate (R5P) and NADPH, which are necessary for the biosynthesis of biomolecules such as proteins, nucleic acids, or lipids."
+        },
+        {
+          "document_id": "W2083189752",
+          "title": "STUDIES OF THE STIMULATING EFFECT OF BICARBONATE ON THE METABOLISM OF RAM SPERMATOZOA",
+          "doi": "10.1530/jrf.0.0250231",
+          "year": "1971",
+          "distance": 0.4591,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "glycolysis and it greatly stimulated the rate of glucose breakdown to lactic acid under both aerobic and anaerobic conditions. Low concentrations of potassium (5 mm) enhanced the stimulating effect of bicarbonate on glycolysis but, in its absence, bicarbonate greatly depressed O2 uptake. Bicarbonate failed to stimulate the conversion of glucose to 6-phospho-glucose when sonicated spermatozoa were incubated in the presence of ATP and sodium fluoride, or the conversion of pyruvate to lactate in intact spermatozoa."
+        },
+        {
+          "document_id": "W2116723029",
+          "title": "PHYSIOLOGICAL ONTOGENY",
+          "doi": "10.1085/jgp.9.1.1",
+          "year": "1925",
+          "distance": 0.4616,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "exist. It will be seen in our later communications that the changes with age of metabolic rate and growth rate do not coincide. The amount of catabolism under certain circumstances does not accelerate growth or anabolism, but seems rather to be a limiting factor. It is as if when the absorbed energy were constant an increase of catabolism would make inroads upon the amount of energy which otherwise would remain for storage (growth)."
+        },
+        {
+          "document_id": "W1973358565",
+          "title": "Measurements of the Enzymatic Activities Required for ATP Formation by Glycolysis in the Pancreatic Islets of Hyperglycemic Mice (NZO)",
+          "doi": "10.2337/diab.16.1.21",
+          "year": "1967",
+          "distance": 0.4679,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "es are required for the glycolytic formation of ATP. The activities are obviously high and significantly highest in the islets. The enzymes linked to the conversion between NAD and NADH show much lower activities. In accordance with the general conception of the pacemakers in the anaerobic breakdown of glucose, glyceraldehyde-3-phosphate dehydrogenase may be assumed io be rate limiting for the glycolytic formation of ATP. This possibility is discussed with reference to the low activity of phosphofructokinase found in the islets."
+        },
+        {
+          "document_id": "W2027366124",
+          "title": "Glycolytic Synchronization in Yeast Cells via ATP and Other Metabolites: Mathematical Analyses by Two-Dimensional Reaction-Diffusion Models",
+          "doi": "10.4236/ns.2014.610072",
+          "year": "2014",
+          "distance": 0.4681,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Possibilities of synchronized oscillations in glycolysis mediated by various extracellular metabolites are investigated theoretically using two-dimensional reaction-diffusion systems, which originate from the existing seven-variable model. Our simulation results indicate the existence of alternative mediators such as ATP and 1,3-bisphosphoglycerate, in addition to already known acetaldehyde or pyruvate."
+        },
+        {
+          "document_id": "W2147442242",
+          "title": "Response of enzyme activities and metabolic intermediate concentrations to a long burst of exercise and following resting in muscle and the hepatopancreas of carp",
+          "doi": "10.1046/j.1444-2906.2001.00340.x",
+          "year": "2001",
+          "distance": 0.4683,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "uctose-1, 6-bis-phosphatase activities, and glucose and lactate concentrations in the serum, and it decreased glycogen content. Even at 3 h resting after the burst of exercise, the fish had not completely restored many parameters. These results suggest that although the fish tried to enhance in vivo muscular glycolysis through the activation of PFK by changes in metabolic intermediate concentrations, glycolysis seemed to decrease markedly through the inhibition of PFK as a result of the lowered pH."
+        },
+        {
+          "document_id": "W2290223847",
+          "title": "Genes differentially expressed at 1 day, 6 weeks, and 6 months of age in aortas of spontaneously atherosclerotic White Carneau pigeons",
+          "doi": "",
+          "year": "2011",
+          "distance": 0.4775,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "upregulated at 6 weeks reflected increases in protein synthesis, loss of cellular integrity, and changes in muscle contraction. By 6 months, increases in lipid metabolism and changes in energy metabolism from oxidative phosphorylation to glycolysis were apparent."
+        },
+        {
+          "document_id": "W2914257527",
+          "title": "Review of Mathematical Models for the Anaerobic Digestion Process",
+          "doi": "10.5772/intechopen.80815",
+          "year": "2019",
+          "distance": 0.4799,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "To describe anaerobic fermentation, many mathematical models have been suggested. A commonly accepted hypothesis in microbial growth is the speed of cellular reproduction, which is proportional to the concentration of cells at that instant. The constant of proportionality between the speed of growth and cell concentration is called cell growth rate, μ. In many occasions, the cell growth rate is considered constant."
+        },
+        {
+          "document_id": "W4405819140",
+          "title": "The Role of Mitochondrial Solute Carriers SLC25 in Cancer Metabolic Reprogramming: Current Insights and Future Perspectives",
+          "doi": "10.3390/ijms26010092",
+          "year": "2024",
+          "distance": 0.4821,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Cancer cells undergo remarkable metabolic changes to meet their high energetic and biosynthetic demands. The Warburg effect is the most well-characterized metabolic alteration, driving cancer cells to catabolize glucose through aerobic glycolysis to promote proliferation."
+        },
+        {
+          "document_id": "W3049221567",
+          "title": "Do female frogs have higher resting metabolic rates than males? A case study with <i>Xenopus allofraseri</i>",
+          "doi": "10.1111/jzo.12820",
+          "year": "2020",
+          "distance": 0.4863,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "Abstract The energetic costs of body maintenance can have a profound influence on the energy that an individual can allocate to other functions such as growth, locomotion, or reproduction. Therefore, resting metabolism can ultimately affect an individual's survival or reproductive success, especially when food is limited. Although males and females often differ in their body composition (e.g."
+        },
+        {
+          "document_id": "W2132145999",
+          "title": "Why marathon migrants get away with high metabolic ceilings: towards an ecology of physiological restraint",
+          "doi": "10.1242/jeb.046748",
+          "year": "2010",
+          "distance": 0.4864,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "te are exceptional performers in terms of the ‘relative expenditure’ on ‘duration of a particular activity’ curve nevertheless. Here I argue that metabolic ceilings in all situations (energy balanced or not) have their origin in the fitness costs of high performance levels due to subsequently reduced survival, which then precludes the possibility of future reproduction. The limits to performance should therefore be studied relative to ecological context (which includes aspects such as pathogen pressure and risk of overheating), which determines the severity of the survival punishment of over-exertion."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "Only snippet [1] directly addresses the stylized fact, and it does so by essentially restating it verbatim (the source list is the same hypoxia review that the fact is drawn from, citing Nilsson and Östlund-Nilsson 2008, Roze et al. 2013, Valverde et al. 2012). It affirms the claim but is not independent corroborating evidence with data. The remaining snippets concern anaerobic glycolysis biochemistry, metabolic-rate scaling, or unrelated cell biology, and none provide empirical evidence on survival time scaling with body mass under anaerobiosis. No snippet contradicts the fact. Overall the corpus offers weak, essentially circular support, with no conflicting evidence."
+      },
+      "n_references": 1,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33616065979003906
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3362,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "g -lasting (several hours) imprint on metabolism (oxygen debt) . (Bayne and Livingstone, 1977; Bridges and Brand, 1980; Nilsson and Östlund -Nilsson, 2008; Nonnotte et al., 1993) Survival L1. Lethal DO level and time are different across taxa. (Vaquer -Sunyer and Duarte, 2011, 2008) L2. Lethal DO level increase with increasing metabolic activity. (Valverde et al., 2012) L3. Exponential increase of survival time under anaerobic glycolysis with body mass due to the decrease of mass -specific metabolic rate. (Nilsson and Östlund -Nilsson, 2008; Roze et al., 2013; Valverde et al., 2012) 3 Hypoxia within the DEB theory framework"
+        },
+        {
+          "document_id": "69b847c3ec32c55db5430a3b",
+          "title": "LeeuZonn2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.383,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ALM (2000) Dynamic Energy and Mass Budgets in biologicalsystems. Theory and applications . Cambridge: Cambridge University PressKooijman SALM (2001) Quantitative aspects of metabolic organization; adiscussion of concepts. Philos Trans R Soc London 356: 331 – 349Laird, AK (1964) Dynamics of tumor growth. Br J Cancer 18:490 – 502Lazo PA (1985) Tumour – host metabolic interaction and cachexia. FEESLett 187: 189 – 192Van Leeuwen IMM, Kelpin FDL, Kooijman SALM (2002) A mathematicalmodel that accounts for the effects of caloric restriction on body weightand longevity. Biogerontol 3:373 – 381"
+        },
+        {
+          "document_id": "69b8a04becbd4702b29a71a8",
+          "title": "KearWhit2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3997,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ass, B0pataxon-speciﬁc constant reﬂecting resting metabolic rate andheat from digestion (speciﬁc dynamic action; J/mass3/4), andBm(J/g) is the mass-speciﬁc maintenance rate. Adult mass, where Bcis the maintenance44Mp(B/B)p(Bm /B)0m 0 cccost in vivo per cell and mcis the mass per cell (sensuWest et al. 2001). Note that the interpretation of B0istherefore as a supply rate (to cells/tissues) rather than amaintenance rate (van der Meer 2006). It is argued thatall the parameters are in principle directly calculable fromfundamental cellular parameters (West et al. 2001) andtherefore that this is a ﬁrst-principles mechanistic model"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4033,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "is not active anaerobically or, atleast, has a negligible contribution. In fact, there are three known routes for glucose uptakeinL. lactis and they are all active under anaerobiosis [6]. Our results suggest that two ofthese routes have the same kinetic properties and can be lumped in the model.We also observe that the population has an adaptation period in the aerobic case, whichis negligible in the two anaerobic situations. The DEB theory has no explanation for this,and it might be related to the pre-treatment of the population.We include this process using an ad hoc formulation where inhibition of substrate uptake"
+        },
+        {
+          "document_id": "69b879e7ecbd4702b29a42c6",
+          "title": "BurgRyan2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4066,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ic respiration. The contribution of anaerobicpathways to metabolic ﬂux is likely to vary amongtaxa, but is expected to be small.The relationship between organismal metabolicrate and organism body mass has long beendescribed by the power function Y=aMb(Krogh1916; Kleiber 1932). The exponent bdeﬁnes the scal-ing of metabolic rate ( Y) with mass ( M), and ais ascaling coefﬁcient. When metabolic rate varies indirect proportion to body mass, b=1 and metabolicrate scales isometrically; when b6¼1, the relationship"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4105,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "oxidativemetabolism scale as M0.79–0.94, which is similar to the scalingof maximal metabolic rate during exercise ( M0.81–0.92).Muscle enzymes functioning in anaerobic metabolism scaleeven more steeply ( bo1), but they catalyze glycogen catab-olism mainly during brief episodes of ‘burst’ locomotion,and thus contribute little to the fueling of sustained muscularwork (see also Childress & Somero, 1990; Withers, 1992).Thus, a fourth problem with the model of Darveau et al.(2002) is that it assumes that the scaling of enzyme activitiesis a cause rather than a result of whole-body metabolic"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4106,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ay rate of (aerobic) inhibition, y\u00031;\u00032theyield of\u00031on\u00032(which might be di erent under aerobic and anaerobic conditions), _k\u0003thedecay rate of internal metabolite \u0003,_kEthe speci c conductance, gthe energy investmentratio,ld=_kMg=_kEwhere _kMis the maintenance rate coe\u000ecient, dVthe speci c densityof structural biomass, !dthe proportionality constant for the contribution of the scaledreserve density to dry weight.We tted all 16 curves of the 3 experiments simultaneously because the parameters ofanaerobic glucose uptake occur in all experiments, and the anaerobic yields of product occur"
+        },
+        {
+          "document_id": "69b87950ecbd4702b29a4222",
+          "title": "KooyBaas2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4232,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "on Mod Assess 2:7–12 704[9] Sousa T, Domingos T, Kooijman SALM (2008) From empirical patterns to t heory: A formal metabolic 705theory of life. Phil Trans R Soc B, to appear 706[10] Kooijman SALM, Troost TA (2007) Quantitative steps in the evoluti on of metabolic organisation as 707speciﬁed by the dynamic energy budget theory. Biol Rev 82:1–30 708[11] Leeuwen IMM van, Kelpin FDL, Kooijman SALM (2002) A mathematical model t hat accounts for 709the eﬀects of caloric restriction on body weight and longevity. Biogeronto l 3:373–381 710[12] Leeuwen IMM van, Zonneveld C, Kooijman SALM (2003) The embedded tumor: host ph ysiology is 711"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4295,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "s to cells. Overall, this model is capable of describing the experimentaldata accurately.4.1.2 Growth under anaerobic conditionsWhen modelling the growth experiment using the BST approach, some alterations mustbe made in the equations due to limitations of data availability. In the previous no-growth11Table 1: The BST estimated parameter values of model (9) for the glucose metabolism (Figure 1).The corresponding simulations are represented in Figure 2.Parameter Aerobic Anaerobic Unitk 0.0530251 0.124738 min\u00001 0.0419958 0.134194 min\u0000 2.68092 2.6674 - 1 7.20321 5.86735 min\u00001h11 0.997546 1.25193 -h12 -1.48643 -1.06961 -"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4299,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ully given in [19].4.1 BST formulationThis section presents models for glycolysis in L. lactis using Biochemical Systems Theory.The systems of di erential equations comply with the mathematical formalism of power-laws described and the choice of the state variables was made according to the availabilityof experimental data. This translates into a simpli ed model for glycolysis where somereactions are grouped together.4.1.1 No-growth under aerobic and anaerobic conditionsDeparting from the topology of the glycolytic pathway described above and represented in"
+        },
+        {
+          "document_id": "69b87c6decbd4702b29a464b",
+          "title": "Farrell et al. - Induced sterility illuminates the effects of repro.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4305,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "© The Author(s) or their Institution(s)Can. J. Fish. Aquat. Sci. Downloaded from cdnsciencepub.com by 195.240.221.45 on 01/16/25 This Just-IN manuscript is the accepted manuscript prior to copy editing and page composition. It may differ from the final official version of record. 229 𝑘=𝑘𝐶3(8)230 𝑓=[𝑘𝑁][𝑘𝑁]+[𝑘𝑀](9)231 where f is the scaled functional response, {𝑘𝑎𝑚} is maximum specific nutrient concentration for 232 anabolism rate, [𝑘𝐶] is the specific catabolic rate, [𝑘𝑁] is the specific nutrient diffusion 233 coefficient, and [𝑘𝑀] is the specific basal metabolic rate (or standard metabolic rate; Chabot et"
+        },
+        {
+          "document_id": "69b84849ec32c55db5430bb5",
+          "title": "VingNeve2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.431,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "h under aerobic and anaerobic conditionsDeparting from the topology of the glycolytic pathway described above and represented inFigure 1, the BST speci cation collects the terms involved in each reaction using power-laws.The tted BST model relates the concentrations of glucose G, glucose-6-phosphateG6P, fructose-1,6-bisphosphate FPB, common pool of 3-phosphoglycerate PGA and phos-phoenolpyruvate PEP, pyruvate Pand lactacte L. In these experiments, the measuredextracellular metabolites are GandL, and the intracellular metabolites are G6P, FPB,PGA, PEP and P."
+        },
+        {
+          "document_id": "W3197432774",
+          "title": "c-MYC Triggers Lipid Remodelling During Early Somatic Cell Reprogramming to Pluripotency",
+          "doi": "10.1007/s12015-021-10239-2",
+          "year": "2021",
+          "distance": 0.4198,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "early in cell reprogramming. A high rate of aerobic glycolysis is crucial to provide intermediaries for biosynthetic pathways. To ensure the availability of nucleotides, amino acids and lipids for cell proliferation, cells must provide with a constant flux of the elemental building blocks for macromolecule assembly and fulfil the anabolic demands to reach the critical cellular mass levels to satisfactorily undergo cell division."
+        },
+        {
+          "document_id": "W426234807",
+          "title": "Functional biochemistry in health and disease",
+          "doi": "",
+          "year": "2009",
+          "distance": 0.4418,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "ytosis and exocytosis. Physiological importance of some transport systems. III ESSENTIAL METABOLISM. 6 Carbohydrate Metabolism. Glycolysis. The biochemical and physiological importance of anaerobicglycolysis. Regulation of the flux through glycolysis. Glycogen synthesis. Synthesis of Fructose and lactose. The pentose phosphate pathway. Gluconeogenesis: glucose formation from non-carbohydratesources. Role of the liver in the regulation of the blood glucoseconcentration. Hormones and control of gluconeogenesis. Regulation of glycolysis and gluconeogenesis by ATP/ADPconcentration ratio in the liver. Hypoglycaemia. Hyperglycaemia."
+        },
+        {
+          "document_id": "W2794131655",
+          "title": "Comparative metabolomics and glycolysis enzyme profiling of embryogenic and nonembryogenic grape cells",
+          "doi": "10.1002/2211-5463.12415",
+          "year": "2018",
+          "distance": 0.4452,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "lular metabolites, and glycolytic enzyme activities provided evidence for the marked metabolic differences between EC and NEC . The EC were characterized by a moderate and organized cell proliferation, coupled with a low flux through glycolysis, high capacity of phosphoenolpyruvate carboxylase and glucokinase, and high oxygen consumption. The NEC displayed strong anarchic growth, and their high rate of glycolysis due to the low energetic efficiency of the fermentative metabolism is confirmed by increased enolase capacity and low oxygen consumption."
+        },
+        {
+          "document_id": "W1993240601",
+          "title": "Effects of Starvation and Molting on the Metabolic Rate of the Bed Bug (<i>Cimex lectularius</i>L.)",
+          "doi": "10.1086/679499",
+          "year": "2014",
+          "distance": 0.4488,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "A standard curve was developed to depict the generalized pattern of metabolic decline observed in all life stages that molted. Individual metabolic comparisons among life stages that molted revealed some differences in metabolic rate between unmated males and females. In addition, the mass scaling coefficient was found to decline with starvation time (postmolting time) for all life stages that molted. In most life stages, the ratio of V(CO2) to V(O2) (respiratory exchange ratio) declined over time, indicating a change in metabolic substrate with starvation."
+        },
+        {
+          "document_id": "W2028908433",
+          "title": "Bistability in Glycolysis Pathway as a Physiological Switch in Energy Metabolism",
+          "doi": "10.1371/journal.pone.0098756",
+          "year": "2014",
+          "distance": 0.4494,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "The flux of glycolysis is tightly controlled by feed-back and feed-forward allosteric regulations to maintain the body's glucose homeostasis and to respond to cell's growth and energetic needs. Using a mathematical model based on reported mechanisms for the allosteric regulations of the enzymes, we demonstrate that glycolysis exhibits multiple steady state behavior segregating glucose metabolism into high flux and low flux states."
+        },
+        {
+          "document_id": "W2091975411",
+          "title": "LACTIC DEHYDROGENASE AND OTHER ENZYMES IN THE MOUSE UTERUS DURING THE PERIIMPLANTATION PERIOD OF PREGNANCY",
+          "doi": "10.1530/jrf.0.0340079",
+          "year": "1973",
+          "distance": 0.4502,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nied in the same cells by increased phosphorylase, reappearance of strong AMPase, increased SDH, and by deposition of glycogen. The patterns of the rise and fall of glycogen in the decidua and of the accompanying changes in enzyme activities on these days support the concept of a metabolically active tissue with a high rate of glycogen turnover."
+        },
+        {
+          "document_id": "W2028908433",
+          "title": "Bistability in Glycolysis Pathway as a Physiological Switch in Energy Metabolism",
+          "doi": "10.1371/journal.pone.0098756",
+          "year": "2014",
+          "distance": 0.4515,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "olysis flux does not move between the states easily without an external stimulus such as hormonal, signaling or oncogenic cues. Distinct combination of isozymes in glycolysis gives different cell types the versatility in their response to different biosynthetic and energetic needs. Insights from the switch behavior of glycolysis may reveal new means of metabolic intervention in the treatment of cancer and other metabolic disorders through suppression of glycolysis."
+        },
+        {
+          "document_id": "W3197432774",
+          "title": "c-MYC Triggers Lipid Remodelling During Early Somatic Cell Reprogramming to Pluripotency",
+          "doi": "10.1007/s12015-021-10239-2",
+          "year": "2021",
+          "distance": 0.4553,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "le assembly and fulfil the anabolic demands to reach the critical cellular mass levels to satisfactorily undergo cell division. A high rate of aerobic glycolysis is induced by c-MYC, increasing the amounts of intracellular Glucose-6-phosphate (G6P), fructose-6-phosphate (F6P), and glyceraldehyde-3-phosphate (GA3P), which can all enter pentose phosphate pathway (PPP) to produce Ribose-5-Phosphate (R5P) and NADPH, which are necessary for the biosynthesis of biomolecules such as proteins, nucleic acids, or lipids."
+        },
+        {
+          "document_id": "W2083189752",
+          "title": "STUDIES OF THE STIMULATING EFFECT OF BICARBONATE ON THE METABOLISM OF RAM SPERMATOZOA",
+          "doi": "10.1530/jrf.0.0250231",
+          "year": "1971",
+          "distance": 0.4591,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "glycolysis and it greatly stimulated the rate of glucose breakdown to lactic acid under both aerobic and anaerobic conditions. Low concentrations of potassium (5 mm) enhanced the stimulating effect of bicarbonate on glycolysis but, in its absence, bicarbonate greatly depressed O2 uptake. Bicarbonate failed to stimulate the conversion of glucose to 6-phospho-glucose when sonicated spermatozoa were incubated in the presence of ATP and sodium fluoride, or the conversion of pyruvate to lactate in intact spermatozoa."
+        },
+        {
+          "document_id": "W2116723029",
+          "title": "PHYSIOLOGICAL ONTOGENY",
+          "doi": "10.1085/jgp.9.1.1",
+          "year": "1925",
+          "distance": 0.4616,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "exist. It will be seen in our later communications that the changes with age of metabolic rate and growth rate do not coincide. The amount of catabolism under certain circumstances does not accelerate growth or anabolism, but seems rather to be a limiting factor. It is as if when the absorbed energy were constant an increase of catabolism would make inroads upon the amount of energy which otherwise would remain for storage (growth)."
+        },
+        {
+          "document_id": "W1973358565",
+          "title": "Measurements of the Enzymatic Activities Required for ATP Formation by Glycolysis in the Pancreatic Islets of Hyperglycemic Mice (NZO)",
+          "doi": "10.2337/diab.16.1.21",
+          "year": "1967",
+          "distance": 0.4679,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "es are required for the glycolytic formation of ATP. The activities are obviously high and significantly highest in the islets. The enzymes linked to the conversion between NAD and NADH show much lower activities. In accordance with the general conception of the pacemakers in the anaerobic breakdown of glucose, glyceraldehyde-3-phosphate dehydrogenase may be assumed io be rate limiting for the glycolytic formation of ATP. This possibility is discussed with reference to the low activity of phosphofructokinase found in the islets."
+        },
+        {
+          "document_id": "W2027366124",
+          "title": "Glycolytic Synchronization in Yeast Cells via ATP and Other Metabolites: Mathematical Analyses by Two-Dimensional Reaction-Diffusion Models",
+          "doi": "10.4236/ns.2014.610072",
+          "year": "2014",
+          "distance": 0.4681,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Possibilities of synchronized oscillations in glycolysis mediated by various extracellular metabolites are investigated theoretically using two-dimensional reaction-diffusion systems, which originate from the existing seven-variable model. Our simulation results indicate the existence of alternative mediators such as ATP and 1,3-bisphosphoglycerate, in addition to already known acetaldehyde or pyruvate."
+        }
+      ]
+    }
+  }
+}

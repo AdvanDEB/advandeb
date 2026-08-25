@@ -89,6 +89,9 @@ class ChatPipelineService:
         Optional async callback for streaming events.
     conversation_history:
         Prior turns as [{role, content}] for prompt context.
+    answer_model:
+        Ollama model used to synthesize the final answer. Defaults to
+        ``CHAT_ANSWER_MODEL`` when not given (lets the chat UI pick a local model).
     """
 
     def __init__(
@@ -96,13 +99,14 @@ class ChatPipelineService:
         tool_dispatch: dict[str, Callable[..., Coroutine]],
         on_event: Optional[Callable[[dict], Coroutine]] = None,
         conversation_history: Optional[list[dict]] = None,
+        answer_model: Optional[str] = None,
     ) -> None:
         self._tools = tool_dispatch
         self._on_event = on_event or _noop_event
         self._history = conversation_history or []
         self._verifier = ReferenceVerifierService()
         self._ollama_url = settings.OLLAMA_BASE_URL
-        self._answer_model = settings.CHAT_ANSWER_MODEL
+        self._answer_model = answer_model or settings.CHAT_ANSWER_MODEL
         self._answer_num_ctx = settings.CHAT_ANSWER_NUM_CTX
 
     # ------------------------------------------------------------------
@@ -409,7 +413,7 @@ class ChatPipelineService:
                         "messages": messages,
                         "stream": True,
                         "options": {
-                            "num_predict": 1200,
+                            "num_predict": settings.CHAT_ANSWER_MAX_TOKENS,
                             "temperature": 0.3,
                             "num_ctx": self._answer_num_ctx,
                         },

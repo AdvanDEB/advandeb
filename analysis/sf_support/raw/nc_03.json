@@ -1,0 +1,764 @@
+{
+  "sf_id": "nc_03",
+  "category": "N:C ratio",
+  "statement": "N:C decreases with temperature in nutrient or light limiting conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact states N:C decreases with temperature under nutrient/light limitation, equivalent to C:N increasing with decreasing temperature. Multiple snippets directly affirm this. Snippet 1 explicitly lists it as a simulated stylized fact ('the N:C ratio decreases with temperature when nutrient or light limited'), and snippets 4, 8, and 11 from the same paper provide the mechanistic model output. Snippets 2, 3, 6, and 15 from OmtaBrug2009 corroborate it from a different model, explaining that under low-irradiance limitation the C:N ratio increases with decreasing temperature because photosynthesis is relatively temperature-insensitive while N-assimilation/growth rates rise with temperature. Snippet 4 notes a minimum N:C at ~300 K but does not contradict the limiting-condition pattern. The remaining snippets are topical (light/temperature coupling, model setups) but neutral. Overall there is strong, multi-source corroboration with no contradicting evidence."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.277424693107605
+        },
+        "69b89188ecbd4702b29a611f": {
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.2871232032775879
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2774,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2871,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "-saturation constant. In this regime of low irradiance, theuptake of DIC into the carbohydrate reserve increases with irradiance(Fig. 2 ), while all the other rates, such as DIN uptake, are unaffectedand hence, the C:N ratio strongly increases with increasing lightintensity. Furthermore, the C:N ratio increases with decreasing tem-perature in this low-irradiance regime, because at low lightintensities, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrate"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3226,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "es, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrateassimilation and growth increase with increasing temperature. Thismeans again that the ratio of the carbon uptake to the nitrate uptakeincreases with decreasing temperature and therefore the damming upof carbohydrate reserves is larger at lower temperatures. Now, thewater temperature decreases with latitude, leading to an increase ofthe C:N ratio with latitude, while the irradiance also decreases withlatitude which leads to a decrease of the C:N ratio. Apparently, the"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3438,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "ncreases with temperature due to 322the increase of _|ECAmand_|CO2and of the rejection ﬂux _|ECRuntil approximately T= 295K, 323after which C-reserve density steadily declines since _|ECAincreases less than other relevant 324rates, particularly _|ECC, since temperature does not affect photon uptake (see section 2.5). 325This is not in agreement with Berges et al. (2) statements, but does not contradict his experi- 326mental data, which had a more limited temperature range (approximately from 280 to 300 K). 327The N:C ratio that results from these dynamics has a minimum at T= 300 K. 328"
+        },
+        {
+          "document_id": "69b88f6decbd4702b29a5ecf",
+          "title": "GrimMair2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3478,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "hen light is limiting, thecoupling between light and temperature becomesloose.4.3 The interplay between nutrientsand temperaturePhytoplankton growth in the oceans is often limited bynitrogen (N) or phosphorus (P). When limiting, thesenutrients strongly impact the thermal growth curve(Pomeroy and Wiebe 2001 ; Thomas 2013 ; Thomasand Litchman 2016 ). Trace nutrients such as trace01 02 0 3 00.5100.510Temperature (°C)Growth factor1 100Irradiance (µE/m2/s)γTγI(A) (B)Fig. 8 a Eppley curve normalized at 30/C14C.bPhotosynthesis asrepresented in Eq. 38. The ﬁgure is redrawn after Follows et al."
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3523,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "tudies often reported a decrease of the C:N ratio with de-creasing temperature. However, the investigators studied the effect oftemperature on the physiology of organisms and excluded the effectsof light and nutrient limitations by either imposing a constant nutrientandlight supply in a chemostat or by studying batch cultures in theexponential growth phase when the population growth is not (yet)limited by light or nutrients. This is unfortunate, because our modelpredicts that the effect of temperature on algal stoichiometry is de-pendent on the light intensity and, in fact, marine phytoplankton"
+        },
+        {
+          "document_id": "69b8732aecbd4702b29a3a0a",
+          "title": "Pfab et al. - 2024 - Heat stress and bleaching in corals a bioenergeti.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3532,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "imilar picture: Photosynthesis first increases with temperature up to a certain threshold. After this threshold, photosynthesis decreases and the nutrient cycling is altered. The system becomes more carbon than nitrogen-limited. This increases the symbiont to host ratio and slightly decreases the net growth rates of the symbiont and the host, S�∕S and H�∕H.The model predictions at moderately increased temperatures are in accordance with experimental observations. Decreased photosynthesis is commonly observed through measures such as FV∕FM and O2 evolution (Warner et al 1999; Gardner et al 2017b). Higher nutrient"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3558,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "rature range (approximately from 280 to 300 K). 327The N:C ratio that results from these dynamics has a minimum at T= 300 K. 328Finally, SF4 - N:C ratio decreases with irradiance in nutrient replete conditions - is represented 329in ﬁgure 4D. The rationale is similar to the one for curve 4B. The microalgal population will grow 330if irradiance is such that _r > _h. If such condition is fulﬁlled then the population will grow until 33115another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3568,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "anisms ’ metabolic processes adjust throughout the year, storing or using carbon and nitrogen based on what is available in the environme nt. The high C :N ratio in late summer suggests that, by this time, the plant has maximized its carbon reserves in response to reduced nitrogen and high light availability , reflecting a strategy to manage nutrient scarcity. This internal adjustment process emphasizes the crucial link between external nutrient availability and the internal biochemical balance of the organism. Figure 4.6. Individual model output. Whole plant molar C:N ratio for the entire"
+        },
+        {
+          "document_id": "69b88b59ecbd4702b29a59d8",
+          "title": "EynaNisb2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3589,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "balance between light and nitrogen limitation (see Fig. 4 ). When thespeciﬁc rate of photosynthesis is relatively low, i.e."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3595,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "perature (ºC)12 17 22 27 32Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited ( XNr=10\u0016M;XCr=1mM;T=298K;I= 250\u0016Em\u00002s\u00001); (B) for a range of dilution rates when light or carbon limited(XNr=1mM;XCr=1mM;T=298K;I= 25\u0016Em\u00002s\u00001); (C) for a range of temperature values whennutrient limited ( XNr=10\u0016M;XCr=1mM;I= 250\u0016Em\u00002s\u00001;h= 0:4d\u00001); (D) and for a range ofirradiance values in nutrient limiting conditions ( XNr=1mM;XCr=1mM;T=298K;h= 0:4d\u00001).case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288"
+        },
+        {
+          "document_id": "69b88f6decbd4702b29a5ecf",
+          "title": "GrimMair2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3624,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "TÞþ I=IoptðTÞ/C0/C12ð39Þwhere lmðTÞis the maximum speciﬁc growth rate at agiven temperature T,Ioptis the optimal irradiance at agiven temperature Tandb1is the shape factor forlimiting irradiance. lmðTÞand IoptðTÞare rationalfunctions (see Dermoun et al. 1992 ). It is worth notingthat the tight coupling between light and temperaturein this model leads to identiﬁability problems partiallydue to large number of parameters (9 parameters in themodel). Furthermore, when light is limiting, thecoupling between light and temperature becomesloose.4.3 The interplay between nutrientsand temperature"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3654,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "to the amount of dissipating heat. Thenon-changed amounts are 1000 units for carbon, 500 units for nitrogen and 4 for light. Theamounts of carbon and nitrogen are plotted cumulatively, from bottom to top, for the minerals(carbon dioxide, C(very small, not labelled), or ammonia, N), detritus (very small, not labelled),consumers C(structure and reserve), producers P(structure, C- and N,C-reserves, grey shaded),decomposers D(structure and reserve). The producers have three carbon components, and twofor nitrogen, because one reserve lacks nitrogen. An increase of light above 4 units has no effect"
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3691,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "en in the C anonical Communitywhile increasing the total amount of carbon (upper left), ni trogen (upper right) or light (middlepanels), using the debmodel for V1-morphs. The lower panels present the amounts of a ssimilatedlight (by the producers), which is proportional to the amoun t of dissipating heat. The non-changed amounts are 1000 units for carbon, 500 units for nitr ogen, and 1000 for light. Theamounts of carbon and nitrogen are plotted cumulatively, fr om bottom to top, for the minerals(carbon dioxide, C(very small, not labelled), or ammonia, N), detritus (very small, not labelled),"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3695,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ensity and temperature on photosynthetic rates, but the qualitativepicture remains the same with what emerged from the classicalliterature: at low light intensities, the photosynthetic rate is quiteinsensitive to temperature, whereas at high light intensities, photo-synthesis increases with temperature. As the C:N ratio is largely de-termined by the ratio of the photosynthetic rate to other rates, thetrends in the C:N ratio with latitude will probably diminish as a resultof acclimation, but they will not disappear.In the current study, we have been considering transient situations."
+        },
+        {
+          "document_id": "69b8476bec32c55db543095d",
+          "title": "Grim2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3695,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "nder, 2010] and adapting membrane ﬂuidity accordingly.Thethermalgrowthcurveisalsoinﬂuencedbyseveralotherfactors. Inspeciﬁccondi-tions, light and temperature can have coupled eﬀects. For example, at l ow temperature,the enzymatic-dependent part of photosynthesis is lowered by tem perature whereas thenon-enzymatic dependent part is not, resulting in an energy imbalanc es participatingin photoinhibition [Ras et al., 2013]. Similarly, nutrient starvation Thom as [2013] andsalinity changes can temporarily modify the cardinal temperatures.1.2.2 Phytoplankton in a changing climate"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3696,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "used to c onstrain the model. Nutrient conditions are kept constant (Table 4.2). The parameter representing how light energy is allocated, β, can vary between 0 and 1. As β tends to zero, more light energy is invested in DOC uptake at the expense of DON. As β tends to one, more light energy is invested in DON uptake instead of DOC. Experiment 2: The second experiment is used to analyse how ambient DIN conditions influences photoheterotrophy by comparing the dynamics of SAR11 -PH and SAR11 -H at multiple of ambient DIN (X/K) from 0 to 5. All other ambient nutrient conditions and irradiance"
+        },
+        {
+          "document_id": "69b88f6decbd4702b29a5ecf",
+          "title": "GrimMair2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3706,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ðTÞdescribed in Sect. 2.1forbalanced growth has been used as such when temper-ature is time-varying, assuming that the effect oftemperature is instantaneous [see for example Baranyiand Roberts ( 1995 ); Baranyi et al. ( 1995 )]. Thisapproximation is valid in particular for slow variations0 5 10 15 20 25 30 35 4000.10.20.30.40.50.65 1 01 52 02 53 03 54 04 55 000.511.522.533.54Temperature (°C)Temperature (°C)Growth rate µ (h-1)Growth rate µ (h-1)NN(A)(B)Fig. 9 Growth rate as a function of nutrient and temperaturelðT;NÞ. The black lines correspond to different nutrient values,"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "The stylized fact states that N:C decreases with temperature under nutrient/light limitation (equivalently C:N increases). Most snippets are off-topic, dealing with soil nitrogen, plant nutrition, freezing, or physics, and bear little on the claim. Only a couple are relevant: snippet 12 reports that warming decreased body C:N (i.e., increased N:C) driven by loss of C-rich fat/sugar, which actually runs counter to the directional claim of decreasing N:C with warming, though it is from animal energy-storage stoichiometry rather than nutrient/light-limited primary producers. Snippet 11 shows C:N ratios decreasing under warming scenarios during litter decomposition, which would imply N:C increasing—again not clearly aligned with the fact. Snippet 2 describes seasonal C:N changes with temperature but in a confounded field context. Overall, direct, clearly supporting evidence for the specific limitation-dependent direction is absent or sparse, with the most relevant snippet (12) pointing the opposite way, so evidence strength is weak and the consensus is best characterized as insufficient/mixed."
+      },
+      "n_references": 2,
+      "references": {
+        "W4322619124": {
+          "title": "Stoichiometry of litter decomposition under the effects of global change: A meta-analysis.",
+          "doi": "10.21203/rs.3.rs-2579152/v1",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.45374202728271484
+        },
+        "W2342358843": {
+          "title": "Energy storage and fecundity explain deviations from ecological stoichiometry predictions under global warming and size‐selective predation",
+          "doi": "10.1111/1365-2656.12531",
+          "year": "2016",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4547564387321472
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.3914,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W2123099997",
+          "title": "Biomass Turnover, Respiration, and Interpopulation Variation in the Stream Limpet Ferrissia rivularis (Say)",
+          "doi": "10.2307/1942367",
+          "year": "1971",
+          "distance": 0.4125,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "carbon during late summer and early fall; an increase in the C:N ratio (to 4.8) indicates an accumulation of storage compounds. During the winter (lower temperature, solar input, and primary productivity) the C:N ratio decreases, and during spring breeding there is a more marked loss of carbon associated with egg laying. In field—acclimated BC animals, respiration is lowest during the winter; during the spring, respiratory rate is closely correlated with temperature and egg—laying intensity."
+        },
+        {
+          "document_id": "W2170603163",
+          "title": "GROWTH AND N AND C METABOLITES OF TOMATO IN RESPONSE TO ROOTS WARM DURING THE DAY AND COLD AT NIGHT, OR VICE VERSA",
+          "doi": "10.21273/hortsci.31.6.914c",
+          "year": "1996",
+          "distance": 0.4214,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "How are C and N metabolites affected by a root-zone temperature (RZT) in phase or out of phase with the photoperiod? Tomato ( Lycopersicon esculentum Mill.) was grown with an air temperature of 20C, and RZT that was in phase with a 12-h photoperiod, 28C in the light and 12C in the dark, or out of phase, 12C in the light and 28C in the dark. Seedlings were grown in flowing solution containing 200 μ m NO 3 and excess amount of other mineral elements. The flow rate increased with plant size."
+        },
+        {
+          "document_id": "W1968810392",
+          "title": "NUTRITIONAL CONTROL OF SEXUALITY IN CHLAMYDOMONAS REINHARDI",
+          "doi": "10.1085/jgp.37.6.729",
+          "year": "1954",
+          "distance": 0.4268,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "n at different nitrogen levels become gametic at widely different cell concentrations of nitrogen and carbon and C/N ratios. 6. It is postulated that the role of light in gametic differentiation is indirect, providing by photosynthesis, energy for the mating process and carbohydrates to tie up excess nitrogenous reserves; and that the concentration of some particular nitrogen fraction or compound determines whether or not gametic differentiation is initiated."
+        },
+        {
+          "document_id": "W2115242872",
+          "title": "Cryobiology of Rat Embryos II: A Theoretical Model for the Development of Interrupted Slow Freezing Procedures1",
+          "doi": "10.1095/biolreprod63.5.1303",
+          "year": "2000",
+          "distance": 0.4357,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "2.5 degrees C/min cooling rates) that would allow the intracellular solute concentration to exceed the critical concentration. The optimal combination was then determined from this range based on minimizing the duration of slow cooling."
+        },
+        {
+          "document_id": "W2170603163",
+          "title": "GROWTH AND N AND C METABOLITES OF TOMATO IN RESPONSE TO ROOTS WARM DURING THE DAY AND COLD AT NIGHT, OR VICE VERSA",
+          "doi": "10.21273/hortsci.31.6.914c",
+          "year": "1996",
+          "distance": 0.446,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ffected N accumulation and partitioning of C and N metabolites. Cool roots contained more NO 3 and free sugars than warm roots. Leaves had less NO 3 in the light than in the dark, and NO 3 in leaves of plants with an out-of-phase RZT was depleted in the light. Concentration of free amino acids and protein was greater and the amount of starch was less in leaves of plants with in-phase RZT."
+        },
+        {
+          "document_id": "W2030825066",
+          "title": "Regulatory Mechanisms of Reproductive Effort in Plants 1. Plasticity in Reproductive Energy Allocation and Propagule Output of <i>Helianthus annuus</i> L. (Compositae) Cultivated at Varying Densities and Nitrogen Levels",
+          "doi": "10.1111/j.1442-1984.1986.tb00010.x",
+          "year": "1986",
+          "distance": 0.4461,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "decreasing soil nitrogen levels. However, differences due to different N‐levels were not as great as those to changing density. One of the most significant findings was that seed production under limited resource availability, i.e., lack of ample solar radiation and soil nutrients, due to strong interference at higher density plots, is exceedingly costlty , This was most clearly demonstrated by a very sharp increase in relative energy partitioning to a single propagule in response to the increased density and decreasing nitrogen levels, the relative energy cost to a single achcne (R A ) increasing from one to twenty‐fourfold."
+        },
+        {
+          "document_id": "W2136669876",
+          "title": "Biological stoichiometry from genes to ecosystems",
+          "doi": "10.1046/j.1461-0248.2000.00185.x",
+          "year": "2000",
+          "distance": 0.4493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n the rDNA to provide the raw material for selection and to generate ecologically significant variation in C:N:P stoichiometry. This leads us to hypothesize that the continuous generation of such variation may also play a role in how species interactions develop in ecosystems under different conditions of energy input and nutrient supply."
+        },
+        {
+          "document_id": "W2557622099",
+          "title": "Effect of Soil Respiration on Light Fraction-C and N Availability in Soil Applied with Organic Matter",
+          "doi": "10.7745/kjssf.2016.49.5.510",
+          "year": "2016",
+          "distance": 0.4512,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "related to soil respiration. Light-C in rye application more decreased than that in rice straw compost with temperature levels. These results indicate that temperature sensitivity of soil respiration could affect soil organic mater content and N availability in soil due to carbon availability. Also, light fraction would be useful indicator to evaluate decomposition rate of organic matter in soil under a short-term test."
+        },
+        {
+          "document_id": "W1038858580",
+          "title": "Phenotypic plasticity in thermal tolerance : life history strategy of an invasive freshwater fish",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.4515,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Background:\\nTemperature has a fundamental effect on organisms because it alters the speed of biochemical reactions and thus metabolism. This influence scales up to have ecosystem wide effects as the life history strategies of individual species differ in response to temperature. With the prospect of increasing global temperatures ecosystem functions could be interrupted."
+        },
+        {
+          "document_id": "W4322619124",
+          "title": "Stoichiometry of litter decomposition under the effects of global change: A meta-analysis.",
+          "doi": "10.21203/rs.3.rs-2579152/v1",
+          "year": "2023",
+          "distance": 0.4537,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "n, prominent in grassland and coniferous forests of continental climates, and with a potential feedback loop to climate change. (ii) C:P and overall C:N ratios generally decreased in most of the scenarios of global change analyzed at short- and long-term during litter decomposition, while the N:P ratios are more resilient to change. (iii) P limitation might be exacerbated in in warming continental climates; arid environments experiencing droughts; temperate environments with increasing water availability; and temperate broadleaved forest experiencing N and P enrichment."
+        },
+        {
+          "document_id": "W2342358843",
+          "title": "Energy storage and fecundity explain deviations from ecological stoichiometry predictions under global warming and size‐selective predation",
+          "doi": "10.1111/1365-2656.12531",
+          "year": "2016",
+          "distance": 0.4548,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "arbohydrates increase and N‐rich proteins decrease, and as a result, C : N and C : P increase under warming and predation risk. Unexpectedly, warming decreased body C : N, which was driven by reductions in C‐rich fat and sugar contents while the protein content did not change. This reflected a trade‐off where the accelerated intrinsic growth rate under warming occurred at the cost of a reduced energy storage. Warming reduced C : N less and only increased C : P and N : P in the fish‐period Daphnia ."
+        },
+        {
+          "document_id": "W2324388523",
+          "title": "Seasonal Acclimatization and Latitudinal Compensation in Metabolism: Do They Exist?",
+          "doi": "10.2307/2389880",
+          "year": "1993",
+          "distance": 0.4602,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ion and food availability), a great deal of attention has been directed at understanding the effects of changes in temperature. This is partly because environmental temperature is a simple parameter to measure and record (see Vogel 1981), but also because the effects of temperature on the physiology of organisms appear to be simple and straightforward: everybody knows that a lower temperature slows things down. Studies of metabolic rate in relation to temperature have played a significant role in shaping current ideas of how organisms adapt to a seasonal environment and to latitude."
+        },
+        {
+          "document_id": "W2482045212",
+          "title": "Physiological Mechanisms of Nitrogen Absorption and Assimilation in Plants under Stressful Conditions",
+          "doi": "10.1201/b16675-29",
+          "year": "2014",
+          "distance": 0.4609,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nstituent of nucleic acids that serve as genetic material and regulate vital processes like growth, reproduction, and heredity. Being a principal macronutrient, N has a special place in plant nutrition, and plants require it in large amounts. Though N is the most abundant element in our atmosphere, majority of the plants cannot utilize it directly in the elemental form. An adequate supply of N in the soil is essential to maintain proper growth and yield of crops."
+        },
+        {
+          "document_id": "W2053947688",
+          "title": "A Low Temperature Limit for Life on Earth",
+          "doi": "10.1371/journal.pone.0066207",
+          "year": "2013",
+          "distance": 0.461,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "n cells can continue to metabolise, albeit slowly, to temperatures below the vitrification temperature of free-living microbes. Evidence suggests that these cells do also eventually vitrify, but at lower temperatures that may be below -50°C."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.4618,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "pparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium. Imperfect reproduction of the light-nuclei data leaves\\nroom for medium effects in produced light nuclei.\\n"
+        },
+        {
+          "document_id": "W1975821468",
+          "title": "INDUCTION OF CONJUGATION AND SPORE FORMATION IN SPECIES OF SPIROGYRA (CHLOROPHYCEAE, ZYGNEMATALES)",
+          "doi": "10.1111/j.1438-8677.1984.tb01823.x",
+          "year": "1984",
+          "distance": 0.4625,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "sallii the combined effects of light intensity and temperature were studied with the aid of a temperature/light gradient plate. Ripened spores were formed under a broad range of temperature and light conditions. The role of N-depletion and its ecological implications are discussed."
+        },
+        {
+          "document_id": "W4285677734",
+          "title": "Kinetics of nitrogen in sodic soil of Kumulur village, Trichy District, Tamil Nadu under different organic and inorganic amendments",
+          "doi": "10.31018/jans.v14isi.3572",
+          "year": "2022",
+          "distance": 0.465,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "d along with amendments, a significant (CD-0.05%) buildup in available N contents was observed over the application of N alone. Available nitrogen (325 kg ha-1), nitrate nitrogen (102 kg ha-1) and ammonical nitrogen (205 kg ha-1) were significantly increased due to the addition of amendments. However, the decline in available N with incubation period was only marginal when nitrogen was applied along with amendments. An increase in NH4-N at 30 DAI might be due to the release of nutrients."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple DEB-relevant snippets directly support the stylized fact. Loreau/Marques (LoreMarq2010) explicitly lists this as a stylized fact (SF) and simulates that N:C ratio decreases with temperature under nutrient or light limitation, with model output showing an N:C minimum near T=300K (snippets 1, 4, 8, 11). Omta/Brughmans (OmtaBrug2009) corroborates with the inverse framing—C:N increases with decreasing temperature under low-irradiance/limited conditions, equivalent to N:C decreasing with temperature (snippets 2, 3, 6), and notes that the temperature effect on stoichiometry is conditional on light/nutrient status. The remaining snippets are off-topic or tangential (corals, soil, fish, plants) and do not bear directly on the fact, but none contradict it within the relevant nutrient/light-limited DEB context. The supporting evidence is clear and consistent across the core modeling references, hence strong support and corroborated consensus."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.277424693107605
+        },
+        "69b89188ecbd4702b29a611f": {
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2871232032775879
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2774,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2871,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "-saturation constant. In this regime of low irradiance, theuptake of DIC into the carbohydrate reserve increases with irradiance(Fig. 2 ), while all the other rates, such as DIN uptake, are unaffectedand hence, the C:N ratio strongly increases with increasing lightintensity. Furthermore, the C:N ratio increases with decreasing tem-perature in this low-irradiance regime, because at low lightintensities, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrate"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3226,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "es, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrateassimilation and growth increase with increasing temperature. Thismeans again that the ratio of the carbon uptake to the nitrate uptakeincreases with decreasing temperature and therefore the damming upof carbohydrate reserves is larger at lower temperatures. Now, thewater temperature decreases with latitude, leading to an increase ofthe C:N ratio with latitude, while the irradiance also decreases withlatitude which leads to a decrease of the C:N ratio. Apparently, the"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3438,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ncreases with temperature due to 322the increase of _|ECAmand_|CO2and of the rejection ﬂux _|ECRuntil approximately T= 295K, 323after which C-reserve density steadily declines since _|ECAincreases less than other relevant 324rates, particularly _|ECC, since temperature does not affect photon uptake (see section 2.5). 325This is not in agreement with Berges et al. (2) statements, but does not contradict his experi- 326mental data, which had a more limited temperature range (approximately from 280 to 300 K). 327The N:C ratio that results from these dynamics has a minimum at T= 300 K. 328"
+        },
+        {
+          "document_id": "69b88f6decbd4702b29a5ecf",
+          "title": "GrimMair2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3478,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "hen light is limiting, thecoupling between light and temperature becomesloose.4.3 The interplay between nutrientsand temperaturePhytoplankton growth in the oceans is often limited bynitrogen (N) or phosphorus (P). When limiting, thesenutrients strongly impact the thermal growth curve(Pomeroy and Wiebe 2001 ; Thomas 2013 ; Thomasand Litchman 2016 ). Trace nutrients such as trace01 02 0 3 00.5100.510Temperature (°C)Growth factor1 100Irradiance (µE/m2/s)γTγI(A) (B)Fig. 8 a Eppley curve normalized at 30/C14C.bPhotosynthesis asrepresented in Eq. 38. The ﬁgure is redrawn after Follows et al."
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3523,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "tudies often reported a decrease of the C:N ratio with de-creasing temperature. However, the investigators studied the effect oftemperature on the physiology of organisms and excluded the effectsof light and nutrient limitations by either imposing a constant nutrientandlight supply in a chemostat or by studying batch cultures in theexponential growth phase when the population growth is not (yet)limited by light or nutrients. This is unfortunate, because our modelpredicts that the effect of temperature on algal stoichiometry is de-pendent on the light intensity and, in fact, marine phytoplankton"
+        },
+        {
+          "document_id": "69b8732aecbd4702b29a3a0a",
+          "title": "Pfab et al. - 2024 - Heat stress and bleaching in corals a bioenergeti.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3532,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "imilar picture: Photosynthesis first increases with temperature up to a certain threshold. After this threshold, photosynthesis decreases and the nutrient cycling is altered. The system becomes more carbon than nitrogen-limited. This increases the symbiont to host ratio and slightly decreases the net growth rates of the symbiont and the host, S�∕S and H�∕H.The model predictions at moderately increased temperatures are in accordance with experimental observations. Decreased photosynthesis is commonly observed through measures such as FV∕FM and O2 evolution (Warner et al 1999; Gardner et al 2017b). Higher nutrient"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3558,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "rature range (approximately from 280 to 300 K). 327The N:C ratio that results from these dynamics has a minimum at T= 300 K. 328Finally, SF4 - N:C ratio decreases with irradiance in nutrient replete conditions - is represented 329in ﬁgure 4D. The rationale is similar to the one for curve 4B. The microalgal population will grow 330if irradiance is such that _r > _h. If such condition is fulﬁlled then the population will grow until 33115another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3568,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.45,
+          "text": "anisms ’ metabolic processes adjust throughout the year, storing or using carbon and nitrogen based on what is available in the environme nt. The high C :N ratio in late summer suggests that, by this time, the plant has maximized its carbon reserves in response to reduced nitrogen and high light availability , reflecting a strategy to manage nutrient scarcity. This internal adjustment process emphasizes the crucial link between external nutrient availability and the internal biochemical balance of the organism. Figure 4.6. Individual model output. Whole plant molar C:N ratio for the entire"
+        },
+        {
+          "document_id": "69b88b59ecbd4702b29a59d8",
+          "title": "EynaNisb2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3589,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "balance between light and nitrogen limitation (see Fig. 4 ). When thespeciﬁc rate of photosynthesis is relatively low, i.e."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3595,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "perature (ºC)12 17 22 27 32Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited ( XNr=10\u0016M;XCr=1mM;T=298K;I= 250\u0016Em\u00002s\u00001); (B) for a range of dilution rates when light or carbon limited(XNr=1mM;XCr=1mM;T=298K;I= 25\u0016Em\u00002s\u00001); (C) for a range of temperature values whennutrient limited ( XNr=10\u0016M;XCr=1mM;I= 250\u0016Em\u00002s\u00001;h= 0:4d\u00001); (D) and for a range ofirradiance values in nutrient limiting conditions ( XNr=1mM;XCr=1mM;T=298K;h= 0:4d\u00001).case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288"
+        },
+        {
+          "document_id": "69b88f6decbd4702b29a5ecf",
+          "title": "GrimMair2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3624,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "TÞþ I=IoptðTÞ/C0/C12ð39Þwhere lmðTÞis the maximum speciﬁc growth rate at agiven temperature T,Ioptis the optimal irradiance at agiven temperature Tandb1is the shape factor forlimiting irradiance. lmðTÞand IoptðTÞare rationalfunctions (see Dermoun et al. 1992 ). It is worth notingthat the tight coupling between light and temperaturein this model leads to identiﬁability problems partiallydue to large number of parameters (9 parameters in themodel). Furthermore, when light is limiting, thecoupling between light and temperature becomesloose.4.3 The interplay between nutrientsand temperature"
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.3914,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W2123099997",
+          "title": "Biomass Turnover, Respiration, and Interpopulation Variation in the Stream Limpet Ferrissia rivularis (Say)",
+          "doi": "10.2307/1942367",
+          "year": "1971",
+          "distance": 0.4125,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "carbon during late summer and early fall; an increase in the C:N ratio (to 4.8) indicates an accumulation of storage compounds. During the winter (lower temperature, solar input, and primary productivity) the C:N ratio decreases, and during spring breeding there is a more marked loss of carbon associated with egg laying. In field—acclimated BC animals, respiration is lowest during the winter; during the spring, respiratory rate is closely correlated with temperature and egg—laying intensity."
+        },
+        {
+          "document_id": "W2170603163",
+          "title": "GROWTH AND N AND C METABOLITES OF TOMATO IN RESPONSE TO ROOTS WARM DURING THE DAY AND COLD AT NIGHT, OR VICE VERSA",
+          "doi": "10.21273/hortsci.31.6.914c",
+          "year": "1996",
+          "distance": 0.4214,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "How are C and N metabolites affected by a root-zone temperature (RZT) in phase or out of phase with the photoperiod? Tomato ( Lycopersicon esculentum Mill.) was grown with an air temperature of 20C, and RZT that was in phase with a 12-h photoperiod, 28C in the light and 12C in the dark, or out of phase, 12C in the light and 28C in the dark. Seedlings were grown in flowing solution containing 200 μ m NO 3 and excess amount of other mineral elements. The flow rate increased with plant size."
+        },
+        {
+          "document_id": "W1968810392",
+          "title": "NUTRITIONAL CONTROL OF SEXUALITY IN CHLAMYDOMONAS REINHARDI",
+          "doi": "10.1085/jgp.37.6.729",
+          "year": "1954",
+          "distance": 0.4268,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n at different nitrogen levels become gametic at widely different cell concentrations of nitrogen and carbon and C/N ratios. 6. It is postulated that the role of light in gametic differentiation is indirect, providing by photosynthesis, energy for the mating process and carbohydrates to tie up excess nitrogenous reserves; and that the concentration of some particular nitrogen fraction or compound determines whether or not gametic differentiation is initiated."
+        },
+        {
+          "document_id": "W2115242872",
+          "title": "Cryobiology of Rat Embryos II: A Theoretical Model for the Development of Interrupted Slow Freezing Procedures1",
+          "doi": "10.1095/biolreprod63.5.1303",
+          "year": "2000",
+          "distance": 0.4357,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "2.5 degrees C/min cooling rates) that would allow the intracellular solute concentration to exceed the critical concentration. The optimal combination was then determined from this range based on minimizing the duration of slow cooling."
+        },
+        {
+          "document_id": "W2170603163",
+          "title": "GROWTH AND N AND C METABOLITES OF TOMATO IN RESPONSE TO ROOTS WARM DURING THE DAY AND COLD AT NIGHT, OR VICE VERSA",
+          "doi": "10.21273/hortsci.31.6.914c",
+          "year": "1996",
+          "distance": 0.446,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ffected N accumulation and partitioning of C and N metabolites. Cool roots contained more NO 3 and free sugars than warm roots. Leaves had less NO 3 in the light than in the dark, and NO 3 in leaves of plants with an out-of-phase RZT was depleted in the light. Concentration of free amino acids and protein was greater and the amount of starch was less in leaves of plants with in-phase RZT."
+        },
+        {
+          "document_id": "W2030825066",
+          "title": "Regulatory Mechanisms of Reproductive Effort in Plants 1. Plasticity in Reproductive Energy Allocation and Propagule Output of <i>Helianthus annuus</i> L. (Compositae) Cultivated at Varying Densities and Nitrogen Levels",
+          "doi": "10.1111/j.1442-1984.1986.tb00010.x",
+          "year": "1986",
+          "distance": 0.4461,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "decreasing soil nitrogen levels. However, differences due to different N‐levels were not as great as those to changing density. One of the most significant findings was that seed production under limited resource availability, i.e., lack of ample solar radiation and soil nutrients, due to strong interference at higher density plots, is exceedingly costlty , This was most clearly demonstrated by a very sharp increase in relative energy partitioning to a single propagule in response to the increased density and decreasing nitrogen levels, the relative energy cost to a single achcne (R A ) increasing from one to twenty‐fourfold."
+        },
+        {
+          "document_id": "W2136669876",
+          "title": "Biological stoichiometry from genes to ecosystems",
+          "doi": "10.1046/j.1461-0248.2000.00185.x",
+          "year": "2000",
+          "distance": 0.4493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "n the rDNA to provide the raw material for selection and to generate ecologically significant variation in C:N:P stoichiometry. This leads us to hypothesize that the continuous generation of such variation may also play a role in how species interactions develop in ecosystems under different conditions of energy input and nutrient supply."
+        },
+        {
+          "document_id": "W2557622099",
+          "title": "Effect of Soil Respiration on Light Fraction-C and N Availability in Soil Applied with Organic Matter",
+          "doi": "10.7745/kjssf.2016.49.5.510",
+          "year": "2016",
+          "distance": 0.4512,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "related to soil respiration. Light-C in rye application more decreased than that in rice straw compost with temperature levels. These results indicate that temperature sensitivity of soil respiration could affect soil organic mater content and N availability in soil due to carbon availability. Also, light fraction would be useful indicator to evaluate decomposition rate of organic matter in soil under a short-term test."
+        },
+        {
+          "document_id": "W1038858580",
+          "title": "Phenotypic plasticity in thermal tolerance : life history strategy of an invasive freshwater fish",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.4515,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Background:\\nTemperature has a fundamental effect on organisms because it alters the speed of biochemical reactions and thus metabolism. This influence scales up to have ecosystem wide effects as the life history strategies of individual species differ in response to temperature. With the prospect of increasing global temperatures ecosystem functions could be interrupted."
+        },
+        {
+          "document_id": "W4322619124",
+          "title": "Stoichiometry of litter decomposition under the effects of global change: A meta-analysis.",
+          "doi": "10.21203/rs.3.rs-2579152/v1",
+          "year": "2023",
+          "distance": 0.4537,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "n, prominent in grassland and coniferous forests of continental climates, and with a potential feedback loop to climate change. (ii) C:P and overall C:N ratios generally decreased in most of the scenarios of global change analyzed at short- and long-term during litter decomposition, while the N:P ratios are more resilient to change. (iii) P limitation might be exacerbated in in warming continental climates; arid environments experiencing droughts; temperate environments with increasing water availability; and temperate broadleaved forest experiencing N and P enrichment."
+        },
+        {
+          "document_id": "W2342358843",
+          "title": "Energy storage and fecundity explain deviations from ecological stoichiometry predictions under global warming and size‐selective predation",
+          "doi": "10.1111/1365-2656.12531",
+          "year": "2016",
+          "distance": 0.4548,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "arbohydrates increase and N‐rich proteins decrease, and as a result, C : N and C : P increase under warming and predation risk. Unexpectedly, warming decreased body C : N, which was driven by reductions in C‐rich fat and sugar contents while the protein content did not change. This reflected a trade‐off where the accelerated intrinsic growth rate under warming occurred at the cost of a reduced energy storage. Warming reduced C : N less and only increased C : P and N : P in the fish‐period Daphnia ."
+        }
+      ]
+    }
+  }
+}

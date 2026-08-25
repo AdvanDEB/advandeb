@@ -1,0 +1,1760 @@
+{
+  "sf_id": "respiration_02",
+  "category": "Respiration",
+  "statement": "Dioxygen use increases with decreasing mass in embryos and increases with mass in juveniles and adults.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial number of snippets (1,2,4,7,9,12,13) explicitly state the stylized fact that dioxygen use rises as embryo mass decreases and rises with increasing mass in later life stages, providing strong direct support. Only one snippet (8) suggests the opposite trend for embryos, but its relevance is moderate and it does not outweigh the many consistent statements. The remaining excerpts are either unrelated or only tangentially mention respiration without addressing the specific mass‑dependence, so they are treated as neutral. Overall the corpus offers strong, corroborating evidence for the pattern."
+          },
+          "n_references": 8,
+          "references": {
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.169
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2065
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2104
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.217
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.22
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2212
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2314
+            },
+            "3525": {
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2349
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.169,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "duction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78] but decreases with size inter-speciﬁcally Respiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113] The use of dioxygen increases with decreasing mass in animals embryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113] The use of dioxygen scales approximately with body weight raised animals [10, 84, 91] to a power close to 0.75 [45] Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88] after ingesting food (heat increment of feeding) Ageing Lifespan increases with size for endotherms, animals [19, 85] but is indep"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2083,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 Dissipating heat for heterotrophic isomorphs under aerobic conditions is a weighted sum of three mass flows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typicall"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2104,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2138,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2144,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ly (or different constant food levels) and inter-specifically for large body sizes G3 Foetuses increase in weight approximately proportional to cubed time Reproduction R1 Many species (almost all animals and plants) have a juvenile stage that does not reproduce R2 Reproduction increases with size intra-specifically, but decreases with size inter-specifically R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use d"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.217,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.22,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2212,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "a supply-demand spectrum. See Subsection 10.5.5. R4 At constant food, reproduction increases with length, see Section 2.7. Growth is compet- ing with somatic maintenance, reproduction with maturity maintenance; both are parallel processes, due to the κ-rule for allocation, see Section 2.4. [Page 283] 282 11. Evaluation Table 11.4: Table 11.3 continued. O1 Since only structure requires somatic maintenance and the embryo starts at zero structure, it initially hardly use dioxygen, see Section 2.6.2. O2 The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass (namely reserve) during development, while its structure is growing, see Section 2.6.2. Respiration incre"
+            },
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2287,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "2909",
+              "title": "Teix2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2299,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "m dioxygen consumption). Method RMR (W kg-1) FMR (W kg-1) Reference WIR 3.99 - Shaffer et al. (2001b) ML 3.21 - Shaffer et al. (2001b) VǚO2 2.86 - Brown and Adams (1984) VǚO2 2.50 - Brown and Adams (1984) DLW - VǚCO2 1.96 - Shaffer et al. (2001b) HR - VǚO2 1.70 - Weimerskirch et al. (2002) DLW - VǚCO2 - 4.90 Shaffer et al. (2001a) DLW - VǚCO2 - 4.59 Adams et al. (1986) DLW - VǚCO2 - 3.94 Arnould et al. (1996) Average 2.70 4.48 - This study 2.87 4.29 - [Page 229] 229 Table 31 – Comparison between the scaled functional response (f) expected values, obtained through the estimated function after applying DEB theory and fitting observed body mass variation, and the ratio between the amount of foo"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2314,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "availabilities cor- rected for a common body temperature decreases linearly with ultimate length The logarithm of the von Bertalanﬀy growth rate of diﬀerent species corrected for a common body temperature decreases almost linearly with the logarithm of the species maximum size Respiration Freshly laid eggs do not use oxygen in signiﬁcant amounts The use of dioxygen increases with decreasing mass in embryos, but increases with mass in juveniles and adults The use of dioxygen scales with body mass raised to a power close to 0.75 Stoichiometry Well-fed animals have a diﬀerent body chemical composition than poorly-fed organisms Animals growing with constant food density con- verge to a constant "
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2349,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "h size intra-speciﬁcally, but decreases with size inter-speciﬁcally R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after inges"
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.237,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "0, pp. 276–282) yeasts (Kooijman 2000, pp. 276–282) animals (Kooijman 2000, pp. 276–282) G5 the logarithm of the von Bertalanffy growth rate for organisms of the same species at different food availabilities decreases line- arly with ultimate length animals (Galluci & Quinn 1979; Kooijman 2000, pp. 96) G6 egg size covaries with the nutritional status of the mother animals (Rossiter 1991a,b; Glazier 1992; Bertram & Strathmann 1998; Heath et al. 1999; McIntyre & Gooding 2000; Yoshinaga et al. 2001; Loman 2002; Nager et al. 2006) respiration R1 freshly laid eggs do not use dioxygen in signiﬁcant amounts animals (Romijn & Lokhorst 1951; Pettit 1982; Bucher 1983; Whitehead 1987) R2 the use of dio"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2414,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ing function of age; at constant food density, no substantial shrinking occurs independent of ageing G2 The inverse generalised von Bertalanﬀy growth rate (see Appendix) increases linearly with ultimate length both intra-speciﬁcally (or diﬀerent constant food levels) and inter-speciﬁcally for large body sizes G3 Foetuses increase in weight approximately proportional to cubed time Reproduction R1 Many species (almost all animals and plants) have a juvenile stage that does not reproduce R2 Reproduction increases with size intra-speciﬁcally, but decreases with size inter- speciﬁcally R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth ca"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.242,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "of carbon dioxide production and dioxygen consumption does not vary too much, it can be understood within the context of the DEB Theory (Kooijman, 2010) that heat production is indeed about proportional to dioxygen consumption. This requirement has to be checked and the proportionality constant calibrated for each case (Walsberg and Hoffman, 2005), or indirect calorimetry should be used. In summary, metabolic rate is in practice quantiﬁed as the use of dioxygen for aerobic organisms, but this quantiﬁcation has its limitations that we can under- stand on the basis of the DEB Theory, as explained in more detail in the study of Kooijman (2013a). Metabolic rate increases over the life cycle of a"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.242,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "sumption about the use of dioxygen and obtains it by closing the mass balance for chemical elements (carbon, hydrogen, oxygen and nitrogen). The implication is that the use of dioxygen can only be evaluated in combination with the production ﬂux of water, carbon- dioxide and nitrogen-waste (e.g. ammonia). Appendix A presents a brief description of the metabolic trajectory in absence of acceleration. This paper is about different types of metabolic acceleration, here deﬁned as a deviation from the expected trajectory of metabolic rate during the life cycle of an individual by the standard DEB model. Although many species match predictions for metabolic rates by the standard DEB model, particu"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2426,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "the reserve flux that is allocated to growth and actually fixed into new tissue. The relationship simplifies if the nitrogenous waste contains no carbon (nCN = 0). For embryos and juveniles we have ˙pG + ˙pD = ˙pC, but adults fix carbon in embryonic reserves. This change at puberty results in a stepwise decrease in carbon dioxide production as illustrated in Figure 4.15. Table 2.5 gives the required powers: for adults we have the growth power ˙pG = Vm[ ˙pM]l2 e−l−lT 1+e/g and, for k = 1, [Page 161] 144 Univariate DEB models Figure 4.20: The water stick insect Rana- tra linearis deposits its eggs in floating decay- ing plant material, where dioxygen availability is usually poor. The eggs are "
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "Only one abstract (snippet 3) provides quantitative information linking oxygen consumption to body size in post‑natal infants, indicating that dioxygen use rises with increasing mass, which aligns with the juvenile/adult portion of the stylized fact. No snippet addresses the inverse relationship (higher O2 use per unit mass in smaller embryos). The remaining abstracts either discuss oxidative stress, toxicology, or general oxygen effects without data on scaling, yielding overall weak support and insufficient consensus."
+          },
+          "n_references": 1,
+          "references": {
+            "W2249648514": {
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2506
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2050162155",
+              "title": "Oxidative Stress in Mouse Sperm Impairs Embryo Development, Fetal Growth and Alters Adiposity and Glucose Regulation in Female Offspring",
+              "doi": "https://doi.org/10.1371/journal.pone.0100832",
+              "year": "2014",
+              "distance": 0.2406,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Paternal health cues are able to program the health of the next generation however the mechanism for this transmission is unknown. Reactive oxygen species (ROS) are increased in many paternal pathologies, some of which program offspring health, and are known to induce DNA damage and alter the methylation pattern of chromatin. We therefore investigated whether a chemically induced increase of ROS in sperm impairs embryo, pregnancy and offspring health. Mouse sperm was exposed to 1500 µM of hydrogen peroxide (H2O2), which induced oxidative damage, however did not affect sperm motility or the ability to bind and fertilize an oocyte. Sperm treated with H2O2 delayed on-time development of subsequ"
+            },
+            {
+              "document_id": "W2060335833",
+              "title": "Demographic and Lifestyle Factors Associated with Dioxin-like Activity (CALUX−TEQ) in Human Breast Milk in Hong Kong",
+              "doi": "https://doi.org/10.1021/es052164r",
+              "year": "2006",
+              "distance": 0.241,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Maternal exposure to dioxins and related compounds before conception may affect the health of the fetus. To identify factors affecting dioxin body load in Hong Kong, in 2002, total dioxin-like activity was estimated in 250 individual milk samples at 2-6 weeks postpartum, from a representative group of primiparous mothers, aged 18-42 years (mean 29 +/- 5 years), by a chemically activated luciferase expression (CALUX) bioassay. Associations between the CALUX-TEQ and 20 socio-demographic and dietary variables were examined separately in mothers younger than 30 years (n = 114) and 30 years or older (n = 119), by multiple linear regression analysis. CALUX-TEQ (mean 14.5 +/- 5.8 pg/g fat) signific"
+            },
+            {
+              "document_id": "W2249648514",
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "distance": 0.2506,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "Oxygen consumption of babies born after various lengths of gestation, measured between 2 to 10 days of post-natal life under resting, thermoneutral conditions, has been used as an index of intrauterine growth in \"active tissue mass.\" A curve was constructed describing the median increase in oxygen consumption with increasing gestational age in babies who had experienced usual rates of growth in utero. Babies who have grown normally in utero exhibit, with increasing birth weight and with increasing gestational age, an increase in oxygen consumption per kilogram birth weight. This phenomenon is proposed to result from changes in fetal body composition with increasing maturity whereby the cell "
+            },
+            {
+              "document_id": "W2142678812",
+              "title": "Using Zebrafish as a Model System for Studying the Transgenerational Effects of Dioxin",
+              "doi": "https://doi.org/10.1093/toxsci/kfu006",
+              "year": "2014",
+              "distance": 0.2522,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "2,3,7,8 Tetrachlorodibenzo-p-dioxin (TCDD) has been associated with many disease states in humans. A rising concern is that exposure early in life can lead to adult toxicity and toxicity in subsequent generations. Juvenile zebrafish exposed to TCDD (50 pg/ml in water; 1 h exposure) at 3 and 7 weeks post fertilization showed toxicity only later in adulthood. We have maintained the offspring of these exposed F₀ fish to determine whether we could find adverse affects in the next two generations of F₁ and F₂ offspring. TCDD exposure produced a significantly higher female:male ratio in all three generations. Scoliosis-like axial skeleton abnormalities, not normally observed in controls, were pres"
+            },
+            {
+              "document_id": "W3042918462",
+              "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+              "doi": "https://doi.org/10.1002/bies.202000025",
+              "year": "2020",
+              "distance": 0.2536,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Oxygen is a key regulator of both development and homeostasis and a promising candidate to bridge the influence of the environment and the evolution of new traits. To clarify the various ways in which oxygen may modulate embryogenesis, its effects are reviewed at distinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed. Then, the effects of microenvironmental oxygen on metabolism, stemness, and differentiation throughout embryogenesis are discussed. Last, the interplay between ecology and development are reexamined with a focus on the evolution of tetrapods, including during the emergence of a novel mechanism tha"
+            },
+            {
+              "document_id": "W2149160427",
+              "title": "Toxic effects of oxygen on human embryo development",
+              "doi": "https://doi.org/10.1093/humrep/15.suppl_2.199",
+              "year": "2000",
+              "distance": 0.2543,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The toxic effects of oxygen on the embryos of various animal species are reviewed. Methodologies for assessing embryonic damage are discussed and possible ways of preventing the damage are explored. Three methods of potentially minimizing oxidative damage to human embryos were tested using gametes, zygotes, and embryos from a clinical IVF programme: (i) decreasing the oxygen tension in the gas phase used for culture during insemination, fertilization, and embryo growth; (ii) changing the formulation of culture media to include some components designed to protect against oxidative damage; and (iii) reducing the duration of insemination to minimize the effect of oxidative damage caused by sper"
+            },
+            {
+              "document_id": "W2416237148",
+              "title": "[Effects of endocrine disruptors on preimplantation embryo development].",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2567,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Endocrine disruptors such as dioxins and bisphenol A(BPA) were detected in the human follicular fluids indicating that the reproductive organs have been exposed to these substances. To study possible effects of these chemicals on the germ cells and early embryos, we employed mouse preimplantation embryo development models. Dioxin(TCDD) and BPA both have positive and negative effects on embryo development in mice. The developmental rates were significantly decreased by exposure to concentrations of TCDD between 1 and 5 pM as compared with the control group. On the other hand, stimulatory effects of BPA were observed in the blastocyst formation rate at concentrations of 1 nM and 3 nM. The pres"
+            },
+            {
+              "document_id": "W2010839071",
+              "title": "Adverse effects in adulthood resulting from low-level dioxin exposure in juvenile zebrafish",
+              "doi": "https://doi.org/10.4161/endo.28309",
+              "year": "2014",
+              "distance": 0.2571,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "There is strong evidence indicating that disease in adult humans stems from a combination of genetic and environmental factors. A problem in identifying environmental factors is that subacute exposures during early life are often unnoticed, or exposures are variable among a diverse population. This leads to a confusing pattern in adulthood. An additional problem in following exposure effects in humans is the length of time needed to study outcomes spanning a human generation. We have recently developed a zebrafish model for studying the effects of sublethal juvenile exposure to 2,3,7,8-tetrachlorodibenzo-<i>p</i>-dioxin (TCDD, dioxin). Although the initial exposure produces no effect at the "
+            },
+            {
+              "document_id": "W2043897964",
+              "title": "Impact of Perinatal Dioxin Exposure on Infant Growth: A Cross-Sectional and Longitudinal Studies in Dioxin-Contaminated Areas in Vietnam",
+              "doi": "https://doi.org/10.1371/journal.pone.0040273",
+              "year": "2012",
+              "distance": 0.2578,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Dioxin exposure levels remain elevated in residents living around former US Air Force bases in Vietnam, indicating potential adverse impacts on infant growth. In this study, 210 mother-infant pairs in dioxin-contaminated areas in Vietnam were recruited at the infants' birth and followed up for 4 months. Perinatal dioxin exposure levels were estimated by measurement of polychlorinated dibenzo-p-dioxins/furans toxic equivalent (PCDDs/Fs-TEQ) in breast milk. The infants' size was measured at birth and 1 and 4 months after birth, and neurodevelopment was evaluated using the Bayley Scales III at 4 months of age. Among 4 dioxin groups (<25, 25-50, 50-75, ≥75 percentile of PCDDs/Fs-TEQ), cross-sect"
+            },
+            {
+              "document_id": "W3005411359",
+              "title": "Maternal exposure to 2,3,7,8-tetrachlorodibenzo<i>-p</i>-dioxin suppresses male reproductive functions in their adulthood",
+              "doi": "https://doi.org/10.1177/0960327120903489",
+              "year": "2020",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "2,3,7,8-Tetrachlorodibenzo- p-dioxin (TCDD) is a ubiquitous environmental contaminant in the environment. The developmental period is more sensitive to TCDD and there is a possibility that maternal exposure to TCDD may affect in adulthood. Adult female Wistar rats were exposed to 0.5, 1.0, and 2.0 µg/kg TCDD during the critical stage of organogenesis, that is, on GD15. The results revealed a significant decrease in indices of reproductive organ weight in adult male rats exposed to prenatal TCDD, and dose-dependent reduction in epididymal sperm reserves, percent motile, and viable sperm with an increase in percent morphological abnormal sperm. Polymerase chain reaction analysis revealed downr"
+            },
+            {
+              "document_id": "W1976811181",
+              "title": "The effect of carbon monoxide on glucose metabolism and growth of rat embryos",
+              "doi": "https://doi.org/10.1002/tera.1420180308",
+              "year": "1978",
+              "distance": 0.2598,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Rat embryos at days 11–12 of gestation cultured for 18 hours in vitro respond to reduced oxygen or to elevated levels of CO. Glucose consumption and lactate production increase while the growth rate decreases. The ratio of lactate produced to glucose consumed increases to values characteristic of earlier, more anaerobic, embryos. It is suggested that most of the energy consumed by the embryo goes to support growth and that the change in glucose metabolism results in a decrease in available energy which decreases the growth rate. The response to reduced oxygen levels is more marked than the response to elevated levels of carbon monoxide and we interpret the result to imply that oxyge"
+            },
+            {
+              "document_id": "W2006087145",
+              "title": "174. ATMOSPHERIC OXYGEN ALTERS THE EMBRYONIC METABOLOME AS QUANTIFIED BY CARBOHYDRATE UPTAKE AND AMINO ACID UTILISATION",
+              "doi": "https://doi.org/10.1071/srb10abs174",
+              "year": "2010",
+              "distance": 0.2602,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Oxygen regulates embryo development at both the cleavage and post compaction stages. In this study we investigated the effects of atmospheric oxygen during the preimplantation stages, on the post-compaction embryonic metabolome through quantification of glucose consumption and amino acid utilization. Zygotes obtained from F1 hybrid mice (C57BLxCBA) were randomly allocated to either 5 or 20% oxygen. In the first experiment, following the first 48 h of culture, embryos were cultured individually in 1 μL drops of modified G2 medium (0.5 mM glucose) and moved to fresh drops of medium every 24 h. The glucose concentration in the spent media samples, including controls containing no embryo, was de"
+            },
+            {
+              "document_id": "W2404431279",
+              "title": "Modulation of growth and metabolism of the chick embryo by a brief (72-hr) change in oxygen availability.",
+              "doi": "",
+              "year": "1987",
+              "distance": 0.2606,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Growth of the chick embryo is accelerated by brief (72-hr) exposure to 60% O2 beginning on day 16 of incubation, and acute (2-3 hr) hyperoxia stimulates oxygen consumption (VO2). However, the increment in VO2 that accompanies acute exposure to 60% O2 is only about half that required to account for the degree of growth acceleration observed during 72 hr of hyperoxia. We tested the hypothesis that the magnitude of the oxygen-induced change in embryonic metabolism depends on the length of exposure by making daily measurements of embryonic VO2 during brief (72-hr) exposure to 60% or 15% O2. White leghorn eggs were incubated in 21% O2 for 15 days. On day 16 the experimental eggs were switched to "
+            },
+            {
+              "document_id": "W2022760925",
+              "title": "Exposure of Mouse Preimplantation Embryos to 2,3,7,8-Tetrachlorodibenzo-p-dioxin (TCDD) Alters the Methylation Status of Imprinted Genes H19 and Igf21",
+              "doi": "https://doi.org/10.1095/biolreprod.103.025387",
+              "year": "2004",
+              "distance": 0.2607,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "2,3,7,8-Tetrachlorodibenzo-p-dioxin (TCDD) is an extremely toxic, persistent environmental contaminant that disrupts normal development in laboratory animals. In our earlier study, we found that exposure of preimplantation embryos to TCDD markedly induced cytochrome P4501A1 mRNA at the blastocyst stage. In the present study, to determine whether exposure of preimplantation embryos to TCDD affects fetal growth, we exposed preimplantation embryos to TCDD from the 1-cell stage to the blastocyst stage and then transferred them to unexposed recipient mice. On Embryonic Day 14, the fetuses exposed to TCDD during the preimplantation stage weighed less than the fetuses in the unexposed control group"
+            },
+            {
+              "document_id": "W3135164920",
+              "title": "Overweight and obesity significantly reduce pregnancy, implantation, and live birth rates in women undergoing In Vitro Fertilization procedures",
+              "doi": "https://doi.org/10.5935/1518-0557.20200105",
+              "year": "2021",
+              "distance": 0.2624,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Our data shows that an increased BMI affects embryo development and significantly reduces the pregnancy, implantation and live birth rates."
+            },
+            {
+              "document_id": "W2118477575",
+              "title": "Sensitivity to Dioxin Decreases as Zebrafish Mature",
+              "doi": "https://doi.org/10.1093/toxsci/kfs103",
+              "year": "2012",
+              "distance": 0.2624,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The embryos of teleost fish are exquisitely sensitive to the toxic effects of exposure to 2,3,7,8-tetrachlorodibenzo-p-dioxin (TCDD). However, several lines of evidence suggest that adults are less sensitive to TCDD. To better understand and characterize this difference between early life stage and adults, we exposed zebrafish (Danio rerio) to graded TCDD concentrations at different ages. The LD(50) for embryos exposed at 1 day post-fertilization (dpf) was more than an order of magnitude lower than it was for juveniles exposed at 30 dpf. The latency between exposure and response also increased with age. Embryo toxicity was characterized by marked cardiovascular collapse and heart malformatio"
+            },
+            {
+              "document_id": "W2898427760",
+              "title": "Exogenous glutathione improves intracellular glutathione synthesis via the γ‐glutamyl cycle in bovine zygotes and cleavage embryos",
+              "doi": "https://doi.org/10.1002/jcp.27497",
+              "year": "2018",
+              "distance": 0.2625,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Excess reactive oxygen species (ROS) generated in embryos during in vitro culture damage cellular macromolecules and embryo development. Glutathione (GSH) scavenges ROS and optimizes the culture system. However, how exogenous GSH influences intracellular GSH and improves the embryo developmental rate is poorly understood. In this study, GSH or GSX (a stable GSH isotope) was added to the culture media of bovine in vitro fertilization embryos for 7 days. The cleavage rate, blastocyst rate, and total cell number of blastocysts were calculated. Similarly to GSH, GSX increased the in vitro development rate and embryo quality. We measured intracellular ROS, GSX, and GSH for 0–32‐hr postin"
+            },
+            {
+              "document_id": "W2103559991",
+              "title": "Spatial and Temporal Ontogenies of Glutathione Peroxidase and Glutathione Disulfide Reductase During Development of the Prenatal Rat",
+              "doi": "https://doi.org/10.1002/jbt.17",
+              "year": "2001",
+              "distance": 0.2636,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Spatial and temporal expression and regulation of the antioxidant enzymes, glutathione peroxidase (GSH‐Px), glutathione disulfide reductase (GSSG‐Rd) may be important in determining cell‐specific susceptibility to embryotoxicants. Creation of tissue‐specific ontogenies for antioxidant enzyme activities during development is an important first step in understanding regulatory relationships. Early organogenesis‐stage embryos were grouped according to the somite number (GD 9–13), and fetuses were evaluated by gestational day (GD 14–21). GSH‐Px activities in the visceral yolk sac (VYS) increased on consecutive days from GD 9 to GD 13, representing a 5.7‐fold increase during this period "
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial number of high‑relevance excerpts (1,2,4,7,9,12) explicitly state the DEB stylized fact that oxygen use rises as embryo mass decreases and rises with increasing mass in later life stages, providing strong direct support. Only a few lower‑relevance passages contradict or are unrelated, so the overall corpus offers robust, corroborating evidence for the pattern."
+          },
+          "n_references": 8,
+          "references": {
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.169
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2065
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2104
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.217
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.22
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2212
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2314
+            },
+            "W2249648514": {
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2506
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.169,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "duction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78] but decreases with size inter-speciﬁcally Respiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113] The use of dioxygen increases with decreasing mass in animals embryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113] The use of dioxygen scales approximately with body weight raised animals [10, 84, 91] to a power close to 0.75 [45] Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88] after ingesting food (heat increment of feeding) Ageing Lifespan increases with size for endotherms, animals [19, 85] but is indep"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2083,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 Dissipating heat for heterotrophic isomorphs under aerobic conditions is a weighted sum of three mass flows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typicall"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2104,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2138,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2144,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ly (or different constant food levels) and inter-specifically for large body sizes G3 Foetuses increase in weight approximately proportional to cubed time Reproduction R1 Many species (almost all animals and plants) have a juvenile stage that does not reproduce R2 Reproduction increases with size intra-specifically, but decreases with size inter-specifically R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use d"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.217,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.22,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2212,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "a supply-demand spectrum. See Subsection 10.5.5. R4 At constant food, reproduction increases with length, see Section 2.7. Growth is compet- ing with somatic maintenance, reproduction with maturity maintenance; both are parallel processes, due to the κ-rule for allocation, see Section 2.4. [Page 283] 282 11. Evaluation Table 11.4: Table 11.3 continued. O1 Since only structure requires somatic maintenance and the embryo starts at zero structure, it initially hardly use dioxygen, see Section 2.6.2. O2 The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass (namely reserve) during development, while its structure is growing, see Section 2.6.2. Respiration incre"
+            },
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2287,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "2909",
+              "title": "Teix2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2299,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "m dioxygen consumption). Method RMR (W kg-1) FMR (W kg-1) Reference WIR 3.99 - Shaffer et al. (2001b) ML 3.21 - Shaffer et al. (2001b) VǚO2 2.86 - Brown and Adams (1984) VǚO2 2.50 - Brown and Adams (1984) DLW - VǚCO2 1.96 - Shaffer et al. (2001b) HR - VǚO2 1.70 - Weimerskirch et al. (2002) DLW - VǚCO2 - 4.90 Shaffer et al. (2001a) DLW - VǚCO2 - 4.59 Adams et al. (1986) DLW - VǚCO2 - 3.94 Arnould et al. (1996) Average 2.70 4.48 - This study 2.87 4.29 - [Page 229] 229 Table 31 – Comparison between the scaled functional response (f) expected values, obtained through the estimated function after applying DEB theory and fitting observed body mass variation, and the ratio between the amount of foo"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2314,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "availabilities cor- rected for a common body temperature decreases linearly with ultimate length The logarithm of the von Bertalanﬀy growth rate of diﬀerent species corrected for a common body temperature decreases almost linearly with the logarithm of the species maximum size Respiration Freshly laid eggs do not use oxygen in signiﬁcant amounts The use of dioxygen increases with decreasing mass in embryos, but increases with mass in juveniles and adults The use of dioxygen scales with body mass raised to a power close to 0.75 Stoichiometry Well-fed animals have a diﬀerent body chemical composition than poorly-fed organisms Animals growing with constant food density con- verge to a constant "
+            },
+            {
+              "document_id": "W2050162155",
+              "title": "Oxidative Stress in Mouse Sperm Impairs Embryo Development, Fetal Growth and Alters Adiposity and Glucose Regulation in Female Offspring",
+              "doi": "https://doi.org/10.1371/journal.pone.0100832",
+              "year": "2014",
+              "distance": 0.2406,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Paternal health cues are able to program the health of the next generation however the mechanism for this transmission is unknown. Reactive oxygen species (ROS) are increased in many paternal pathologies, some of which program offspring health, and are known to induce DNA damage and alter the methylation pattern of chromatin. We therefore investigated whether a chemically induced increase of ROS in sperm impairs embryo, pregnancy and offspring health. Mouse sperm was exposed to 1500 µM of hydrogen peroxide (H2O2), which induced oxidative damage, however did not affect sperm motility or the ability to bind and fertilize an oocyte. Sperm treated with H2O2 delayed on-time development of subsequ"
+            },
+            {
+              "document_id": "W2060335833",
+              "title": "Demographic and Lifestyle Factors Associated with Dioxin-like Activity (CALUX−TEQ) in Human Breast Milk in Hong Kong",
+              "doi": "https://doi.org/10.1021/es052164r",
+              "year": "2006",
+              "distance": 0.241,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Maternal exposure to dioxins and related compounds before conception may affect the health of the fetus. To identify factors affecting dioxin body load in Hong Kong, in 2002, total dioxin-like activity was estimated in 250 individual milk samples at 2-6 weeks postpartum, from a representative group of primiparous mothers, aged 18-42 years (mean 29 +/- 5 years), by a chemically activated luciferase expression (CALUX) bioassay. Associations between the CALUX-TEQ and 20 socio-demographic and dietary variables were examined separately in mothers younger than 30 years (n = 114) and 30 years or older (n = 119), by multiple linear regression analysis. CALUX-TEQ (mean 14.5 +/- 5.8 pg/g fat) signific"
+            },
+            {
+              "document_id": "W2249648514",
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "distance": 0.2506,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "Oxygen consumption of babies born after various lengths of gestation, measured between 2 to 10 days of post-natal life under resting, thermoneutral conditions, has been used as an index of intrauterine growth in \"active tissue mass.\" A curve was constructed describing the median increase in oxygen consumption with increasing gestational age in babies who had experienced usual rates of growth in utero. Babies who have grown normally in utero exhibit, with increasing birth weight and with increasing gestational age, an increase in oxygen consumption per kilogram birth weight. This phenomenon is proposed to result from changes in fetal body composition with increasing maturity whereby the cell "
+            },
+            {
+              "document_id": "W2142678812",
+              "title": "Using Zebrafish as a Model System for Studying the Transgenerational Effects of Dioxin",
+              "doi": "https://doi.org/10.1093/toxsci/kfu006",
+              "year": "2014",
+              "distance": 0.2522,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "2,3,7,8 Tetrachlorodibenzo-p-dioxin (TCDD) has been associated with many disease states in humans. A rising concern is that exposure early in life can lead to adult toxicity and toxicity in subsequent generations. Juvenile zebrafish exposed to TCDD (50 pg/ml in water; 1 h exposure) at 3 and 7 weeks post fertilization showed toxicity only later in adulthood. We have maintained the offspring of these exposed F₀ fish to determine whether we could find adverse affects in the next two generations of F₁ and F₂ offspring. TCDD exposure produced a significantly higher female:male ratio in all three generations. Scoliosis-like axial skeleton abnormalities, not normally observed in controls, were pres"
+            },
+            {
+              "document_id": "W3042918462",
+              "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+              "doi": "https://doi.org/10.1002/bies.202000025",
+              "year": "2020",
+              "distance": 0.2536,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Oxygen is a key regulator of both development and homeostasis and a promising candidate to bridge the influence of the environment and the evolution of new traits. To clarify the various ways in which oxygen may modulate embryogenesis, its effects are reviewed at distinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed. Then, the effects of microenvironmental oxygen on metabolism, stemness, and differentiation throughout embryogenesis are discussed. Last, the interplay between ecology and development are reexamined with a focus on the evolution of tetrapods, including during the emergence of a novel mechanism tha"
+            },
+            {
+              "document_id": "W2149160427",
+              "title": "Toxic effects of oxygen on human embryo development",
+              "doi": "https://doi.org/10.1093/humrep/15.suppl_2.199",
+              "year": "2000",
+              "distance": 0.2543,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The toxic effects of oxygen on the embryos of various animal species are reviewed. Methodologies for assessing embryonic damage are discussed and possible ways of preventing the damage are explored. Three methods of potentially minimizing oxidative damage to human embryos were tested using gametes, zygotes, and embryos from a clinical IVF programme: (i) decreasing the oxygen tension in the gas phase used for culture during insemination, fertilization, and embryo growth; (ii) changing the formulation of culture media to include some components designed to protect against oxidative damage; and (iii) reducing the duration of insemination to minimize the effect of oxidative damage caused by sper"
+            },
+            {
+              "document_id": "W2416237148",
+              "title": "[Effects of endocrine disruptors on preimplantation embryo development].",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2567,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Endocrine disruptors such as dioxins and bisphenol A(BPA) were detected in the human follicular fluids indicating that the reproductive organs have been exposed to these substances. To study possible effects of these chemicals on the germ cells and early embryos, we employed mouse preimplantation embryo development models. Dioxin(TCDD) and BPA both have positive and negative effects on embryo development in mice. The developmental rates were significantly decreased by exposure to concentrations of TCDD between 1 and 5 pM as compared with the control group. On the other hand, stimulatory effects of BPA were observed in the blastocyst formation rate at concentrations of 1 nM and 3 nM. The pres"
+            },
+            {
+              "document_id": "W2010839071",
+              "title": "Adverse effects in adulthood resulting from low-level dioxin exposure in juvenile zebrafish",
+              "doi": "https://doi.org/10.4161/endo.28309",
+              "year": "2014",
+              "distance": 0.2571,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "There is strong evidence indicating that disease in adult humans stems from a combination of genetic and environmental factors. A problem in identifying environmental factors is that subacute exposures during early life are often unnoticed, or exposures are variable among a diverse population. This leads to a confusing pattern in adulthood. An additional problem in following exposure effects in humans is the length of time needed to study outcomes spanning a human generation. We have recently developed a zebrafish model for studying the effects of sublethal juvenile exposure to 2,3,7,8-tetrachlorodibenzo-<i>p</i>-dioxin (TCDD, dioxin). Although the initial exposure produces no effect at the "
+            },
+            {
+              "document_id": "W2043897964",
+              "title": "Impact of Perinatal Dioxin Exposure on Infant Growth: A Cross-Sectional and Longitudinal Studies in Dioxin-Contaminated Areas in Vietnam",
+              "doi": "https://doi.org/10.1371/journal.pone.0040273",
+              "year": "2012",
+              "distance": 0.2578,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Dioxin exposure levels remain elevated in residents living around former US Air Force bases in Vietnam, indicating potential adverse impacts on infant growth. In this study, 210 mother-infant pairs in dioxin-contaminated areas in Vietnam were recruited at the infants' birth and followed up for 4 months. Perinatal dioxin exposure levels were estimated by measurement of polychlorinated dibenzo-p-dioxins/furans toxic equivalent (PCDDs/Fs-TEQ) in breast milk. The infants' size was measured at birth and 1 and 4 months after birth, and neurodevelopment was evaluated using the Bayley Scales III at 4 months of age. Among 4 dioxin groups (<25, 25-50, 50-75, ≥75 percentile of PCDDs/Fs-TEQ), cross-sect"
+            },
+            {
+              "document_id": "W3005411359",
+              "title": "Maternal exposure to 2,3,7,8-tetrachlorodibenzo<i>-p</i>-dioxin suppresses male reproductive functions in their adulthood",
+              "doi": "https://doi.org/10.1177/0960327120903489",
+              "year": "2020",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "2,3,7,8-Tetrachlorodibenzo- p-dioxin (TCDD) is a ubiquitous environmental contaminant in the environment. The developmental period is more sensitive to TCDD and there is a possibility that maternal exposure to TCDD may affect in adulthood. Adult female Wistar rats were exposed to 0.5, 1.0, and 2.0 µg/kg TCDD during the critical stage of organogenesis, that is, on GD15. The results revealed a significant decrease in indices of reproductive organ weight in adult male rats exposed to prenatal TCDD, and dose-dependent reduction in epididymal sperm reserves, percent motile, and viable sperm with an increase in percent morphological abnormal sperm. Polymerase chain reaction analysis revealed downr"
+            },
+            {
+              "document_id": "W1976811181",
+              "title": "The effect of carbon monoxide on glucose metabolism and growth of rat embryos",
+              "doi": "https://doi.org/10.1002/tera.1420180308",
+              "year": "1978",
+              "distance": 0.2598,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Rat embryos at days 11–12 of gestation cultured for 18 hours in vitro respond to reduced oxygen or to elevated levels of CO. Glucose consumption and lactate production increase while the growth rate decreases. The ratio of lactate produced to glucose consumed increases to values characteristic of earlier, more anaerobic, embryos. It is suggested that most of the energy consumed by the embryo goes to support growth and that the change in glucose metabolism results in a decrease in available energy which decreases the growth rate. The response to reduced oxygen levels is more marked than the response to elevated levels of carbon monoxide and we interpret the result to imply that oxyge"
+            },
+            {
+              "document_id": "W2006087145",
+              "title": "174. ATMOSPHERIC OXYGEN ALTERS THE EMBRYONIC METABOLOME AS QUANTIFIED BY CARBOHYDRATE UPTAKE AND AMINO ACID UTILISATION",
+              "doi": "https://doi.org/10.1071/srb10abs174",
+              "year": "2010",
+              "distance": 0.2602,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Oxygen regulates embryo development at both the cleavage and post compaction stages. In this study we investigated the effects of atmospheric oxygen during the preimplantation stages, on the post-compaction embryonic metabolome through quantification of glucose consumption and amino acid utilization. Zygotes obtained from F1 hybrid mice (C57BLxCBA) were randomly allocated to either 5 or 20% oxygen. In the first experiment, following the first 48 h of culture, embryos were cultured individually in 1 μL drops of modified G2 medium (0.5 mM glucose) and moved to fresh drops of medium every 24 h. The glucose concentration in the spent media samples, including controls containing no embryo, was de"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple independent DEB sources state the stylized fact essentially verbatim (snippets 1,2,4,12,13) and several with empirical citations (2,7,14) or mechanistic explanation (8,9: embryos lose reserve mass while structure grows, hence dioxygen use rises as mass falls; juveniles/adults grow so dioxygen use rises with mass). No snippet contradicts the fact. The remaining snippets are topically related (respiration, dioxygen, metabolic rate) but neutral. The corpus strongly and consistently corroborates the stylized fact."
+          },
+          "n_references": 9,
+          "references": {
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.169
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2065
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2083
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2104
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.217
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.22
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2314
+            },
+            "3525": {
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2349
+            },
+            "2760": {
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.237
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.169,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "duction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78] but decreases with size inter-speciﬁcally Respiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113] The use of dioxygen increases with decreasing mass in animals embryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113] The use of dioxygen scales approximately with body weight raised animals [10, 84, 91] to a power close to 0.75 [45] Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88] after ingesting food (heat increment of feeding) Ageing Lifespan increases with size for endotherms, animals [19, 85] but is indep"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2083,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 Dissipating heat for heterotrophic isomorphs under aerobic conditions is a weighted sum of three mass flows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typicall"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2104,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2138,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2144,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "ly (or different constant food levels) and inter-specifically for large body sizes G3 Foetuses increase in weight approximately proportional to cubed time Reproduction R1 Many species (almost all animals and plants) have a juvenile stage that does not reproduce R2 Reproduction increases with size intra-specifically, but decreases with size inter-specifically R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use d"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.217,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.22,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2212,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "a supply-demand spectrum. See Subsection 10.5.5. R4 At constant food, reproduction increases with length, see Section 2.7. Growth is compet- ing with somatic maintenance, reproduction with maturity maintenance; both are parallel processes, due to the κ-rule for allocation, see Section 2.4. [Page 283] 282 11. Evaluation Table 11.4: Table 11.3 continued. O1 Since only structure requires somatic maintenance and the embryo starts at zero structure, it initially hardly use dioxygen, see Section 2.6.2. O2 The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass (namely reserve) during development, while its structure is growing, see Section 2.6.2. Respiration incre"
+            },
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2287,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "2909",
+              "title": "Teix2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2299,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "m dioxygen consumption). Method RMR (W kg-1) FMR (W kg-1) Reference WIR 3.99 - Shaffer et al. (2001b) ML 3.21 - Shaffer et al. (2001b) VǚO2 2.86 - Brown and Adams (1984) VǚO2 2.50 - Brown and Adams (1984) DLW - VǚCO2 1.96 - Shaffer et al. (2001b) HR - VǚO2 1.70 - Weimerskirch et al. (2002) DLW - VǚCO2 - 4.90 Shaffer et al. (2001a) DLW - VǚCO2 - 4.59 Adams et al. (1986) DLW - VǚCO2 - 3.94 Arnould et al. (1996) Average 2.70 4.48 - This study 2.87 4.29 - [Page 229] 229 Table 31 – Comparison between the scaled functional response (f) expected values, obtained through the estimated function after applying DEB theory and fitting observed body mass variation, and the ratio between the amount of foo"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2314,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "availabilities cor- rected for a common body temperature decreases linearly with ultimate length The logarithm of the von Bertalanﬀy growth rate of diﬀerent species corrected for a common body temperature decreases almost linearly with the logarithm of the species maximum size Respiration Freshly laid eggs do not use oxygen in signiﬁcant amounts The use of dioxygen increases with decreasing mass in embryos, but increases with mass in juveniles and adults The use of dioxygen scales with body mass raised to a power close to 0.75 Stoichiometry Well-fed animals have a diﬀerent body chemical composition than poorly-fed organisms Animals growing with constant food density con- verge to a constant "
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2349,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "h size intra-speciﬁcally, but decreases with size inter-speciﬁcally R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after inges"
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.237,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "0, pp. 276–282) yeasts (Kooijman 2000, pp. 276–282) animals (Kooijman 2000, pp. 276–282) G5 the logarithm of the von Bertalanffy growth rate for organisms of the same species at different food availabilities decreases line- arly with ultimate length animals (Galluci & Quinn 1979; Kooijman 2000, pp. 96) G6 egg size covaries with the nutritional status of the mother animals (Rossiter 1991a,b; Glazier 1992; Bertram & Strathmann 1998; Heath et al. 1999; McIntyre & Gooding 2000; Yoshinaga et al. 2001; Loman 2002; Nager et al. 2006) respiration R1 freshly laid eggs do not use dioxygen in signiﬁcant amounts animals (Romijn & Lokhorst 1951; Pettit 1982; Bucher 1983; Whitehead 1987) R2 the use of dio"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2414,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ing function of age; at constant food density, no substantial shrinking occurs independent of ageing G2 The inverse generalised von Bertalanﬀy growth rate (see Appendix) increases linearly with ultimate length both intra-speciﬁcally (or diﬀerent constant food levels) and inter-speciﬁcally for large body sizes G3 Foetuses increase in weight approximately proportional to cubed time Reproduction R1 Many species (almost all animals and plants) have a juvenile stage that does not reproduce R2 Reproduction increases with size intra-speciﬁcally, but decreases with size inter- speciﬁcally R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth ca"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.242,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "of carbon dioxide production and dioxygen consumption does not vary too much, it can be understood within the context of the DEB Theory (Kooijman, 2010) that heat production is indeed about proportional to dioxygen consumption. This requirement has to be checked and the proportionality constant calibrated for each case (Walsberg and Hoffman, 2005), or indirect calorimetry should be used. In summary, metabolic rate is in practice quantiﬁed as the use of dioxygen for aerobic organisms, but this quantiﬁcation has its limitations that we can under- stand on the basis of the DEB Theory, as explained in more detail in the study of Kooijman (2013a). Metabolic rate increases over the life cycle of a"
+            },
+            {
+              "document_id": "2676",
+              "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.242,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "sumption about the use of dioxygen and obtains it by closing the mass balance for chemical elements (carbon, hydrogen, oxygen and nitrogen). The implication is that the use of dioxygen can only be evaluated in combination with the production ﬂux of water, carbon- dioxide and nitrogen-waste (e.g. ammonia). Appendix A presents a brief description of the metabolic trajectory in absence of acceleration. This paper is about different types of metabolic acceleration, here deﬁned as a deviation from the expected trajectory of metabolic rate during the life cycle of an individual by the standard DEB model. Although many species match predictions for metabolic rates by the standard DEB model, particu"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2426,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "the reserve flux that is allocated to growth and actually fixed into new tissue. The relationship simplifies if the nitrogenous waste contains no carbon (nCN = 0). For embryos and juveniles we have ˙pG + ˙pD = ˙pC, but adults fix carbon in embryonic reserves. This change at puberty results in a stepwise decrease in carbon dioxide production as illustrated in Figure 4.15. Table 2.5 gives the required powers: for adults we have the growth power ˙pG = Vm[ ˙pM]l2 e−l−lT 1+e/g and, for k = 1, [Page 161] 144 Univariate DEB models Figure 4.20: The water stick insect Rana- tra linearis deposits its eggs in floating decay- ing plant material, where dioxygen availability is usually poor. The eggs are "
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The corpus is dominated by dioxin/oxidative-stress toxicology and IVF embryo-development studies that are off-topic with respect to the mass-scaling of oxygen consumption. Only snippet [3] bears meaningfully on the stylized fact, reporting that in post-natal babies oxygen consumption per kilogram increases with increasing birth weight and gestational age (consistent with the juvenile/adult portion: O2 use increasing with mass). However, no snippet addresses the embryonic portion (O2 use increasing with decreasing mass), and snippets [11] and [13] only describe oxygen-availability manipulations of embryonic metabolism rather than the mass-specific scaling pattern. Evidence is therefore weak and sparse, with one partially supporting reference and no contradicting evidence, leaving the direction insufficiently established."
+          },
+          "n_references": 1,
+          "references": {
+            "W2249648514": {
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2506
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2050162155",
+              "title": "Oxidative Stress in Mouse Sperm Impairs Embryo Development, Fetal Growth and Alters Adiposity and Glucose Regulation in Female Offspring",
+              "doi": "https://doi.org/10.1371/journal.pone.0100832",
+              "year": "2014",
+              "distance": 0.2406,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Paternal health cues are able to program the health of the next generation however the mechanism for this transmission is unknown. Reactive oxygen species (ROS) are increased in many paternal pathologies, some of which program offspring health, and are known to induce DNA damage and alter the methylation pattern of chromatin. We therefore investigated whether a chemically induced increase of ROS in sperm impairs embryo, pregnancy and offspring health. Mouse sperm was exposed to 1500 µM of hydrogen peroxide (H2O2), which induced oxidative damage, however did not affect sperm motility or the ability to bind and fertilize an oocyte. Sperm treated with H2O2 delayed on-time development of subsequ"
+            },
+            {
+              "document_id": "W2060335833",
+              "title": "Demographic and Lifestyle Factors Associated with Dioxin-like Activity (CALUX−TEQ) in Human Breast Milk in Hong Kong",
+              "doi": "https://doi.org/10.1021/es052164r",
+              "year": "2006",
+              "distance": 0.241,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Maternal exposure to dioxins and related compounds before conception may affect the health of the fetus. To identify factors affecting dioxin body load in Hong Kong, in 2002, total dioxin-like activity was estimated in 250 individual milk samples at 2-6 weeks postpartum, from a representative group of primiparous mothers, aged 18-42 years (mean 29 +/- 5 years), by a chemically activated luciferase expression (CALUX) bioassay. Associations between the CALUX-TEQ and 20 socio-demographic and dietary variables were examined separately in mothers younger than 30 years (n = 114) and 30 years or older (n = 119), by multiple linear regression analysis. CALUX-TEQ (mean 14.5 +/- 5.8 pg/g fat) signific"
+            },
+            {
+              "document_id": "W2249648514",
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "distance": 0.2506,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Oxygen consumption of babies born after various lengths of gestation, measured between 2 to 10 days of post-natal life under resting, thermoneutral conditions, has been used as an index of intrauterine growth in \"active tissue mass.\" A curve was constructed describing the median increase in oxygen consumption with increasing gestational age in babies who had experienced usual rates of growth in utero. Babies who have grown normally in utero exhibit, with increasing birth weight and with increasing gestational age, an increase in oxygen consumption per kilogram birth weight. This phenomenon is proposed to result from changes in fetal body composition with increasing maturity whereby the cell "
+            },
+            {
+              "document_id": "W2142678812",
+              "title": "Using Zebrafish as a Model System for Studying the Transgenerational Effects of Dioxin",
+              "doi": "https://doi.org/10.1093/toxsci/kfu006",
+              "year": "2014",
+              "distance": 0.2522,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "2,3,7,8 Tetrachlorodibenzo-p-dioxin (TCDD) has been associated with many disease states in humans. A rising concern is that exposure early in life can lead to adult toxicity and toxicity in subsequent generations. Juvenile zebrafish exposed to TCDD (50 pg/ml in water; 1 h exposure) at 3 and 7 weeks post fertilization showed toxicity only later in adulthood. We have maintained the offspring of these exposed F₀ fish to determine whether we could find adverse affects in the next two generations of F₁ and F₂ offspring. TCDD exposure produced a significantly higher female:male ratio in all three generations. Scoliosis-like axial skeleton abnormalities, not normally observed in controls, were pres"
+            },
+            {
+              "document_id": "W3042918462",
+              "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+              "doi": "https://doi.org/10.1002/bies.202000025",
+              "year": "2020",
+              "distance": 0.2536,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Oxygen is a key regulator of both development and homeostasis and a promising candidate to bridge the influence of the environment and the evolution of new traits. To clarify the various ways in which oxygen may modulate embryogenesis, its effects are reviewed at distinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed. Then, the effects of microenvironmental oxygen on metabolism, stemness, and differentiation throughout embryogenesis are discussed. Last, the interplay between ecology and development are reexamined with a focus on the evolution of tetrapods, including during the emergence of a novel mechanism tha"
+            },
+            {
+              "document_id": "W2149160427",
+              "title": "Toxic effects of oxygen on human embryo development",
+              "doi": "https://doi.org/10.1093/humrep/15.suppl_2.199",
+              "year": "2000",
+              "distance": 0.2543,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The toxic effects of oxygen on the embryos of various animal species are reviewed. Methodologies for assessing embryonic damage are discussed and possible ways of preventing the damage are explored. Three methods of potentially minimizing oxidative damage to human embryos were tested using gametes, zygotes, and embryos from a clinical IVF programme: (i) decreasing the oxygen tension in the gas phase used for culture during insemination, fertilization, and embryo growth; (ii) changing the formulation of culture media to include some components designed to protect against oxidative damage; and (iii) reducing the duration of insemination to minimize the effect of oxidative damage caused by sper"
+            },
+            {
+              "document_id": "W2416237148",
+              "title": "[Effects of endocrine disruptors on preimplantation embryo development].",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2567,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Endocrine disruptors such as dioxins and bisphenol A(BPA) were detected in the human follicular fluids indicating that the reproductive organs have been exposed to these substances. To study possible effects of these chemicals on the germ cells and early embryos, we employed mouse preimplantation embryo development models. Dioxin(TCDD) and BPA both have positive and negative effects on embryo development in mice. The developmental rates were significantly decreased by exposure to concentrations of TCDD between 1 and 5 pM as compared with the control group. On the other hand, stimulatory effects of BPA were observed in the blastocyst formation rate at concentrations of 1 nM and 3 nM. The pres"
+            },
+            {
+              "document_id": "W2010839071",
+              "title": "Adverse effects in adulthood resulting from low-level dioxin exposure in juvenile zebrafish",
+              "doi": "https://doi.org/10.4161/endo.28309",
+              "year": "2014",
+              "distance": 0.2571,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "There is strong evidence indicating that disease in adult humans stems from a combination of genetic and environmental factors. A problem in identifying environmental factors is that subacute exposures during early life are often unnoticed, or exposures are variable among a diverse population. This leads to a confusing pattern in adulthood. An additional problem in following exposure effects in humans is the length of time needed to study outcomes spanning a human generation. We have recently developed a zebrafish model for studying the effects of sublethal juvenile exposure to 2,3,7,8-tetrachlorodibenzo-<i>p</i>-dioxin (TCDD, dioxin). Although the initial exposure produces no effect at the "
+            },
+            {
+              "document_id": "W2043897964",
+              "title": "Impact of Perinatal Dioxin Exposure on Infant Growth: A Cross-Sectional and Longitudinal Studies in Dioxin-Contaminated Areas in Vietnam",
+              "doi": "https://doi.org/10.1371/journal.pone.0040273",
+              "year": "2012",
+              "distance": 0.2578,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Dioxin exposure levels remain elevated in residents living around former US Air Force bases in Vietnam, indicating potential adverse impacts on infant growth. In this study, 210 mother-infant pairs in dioxin-contaminated areas in Vietnam were recruited at the infants' birth and followed up for 4 months. Perinatal dioxin exposure levels were estimated by measurement of polychlorinated dibenzo-p-dioxins/furans toxic equivalent (PCDDs/Fs-TEQ) in breast milk. The infants' size was measured at birth and 1 and 4 months after birth, and neurodevelopment was evaluated using the Bayley Scales III at 4 months of age. Among 4 dioxin groups (<25, 25-50, 50-75, ≥75 percentile of PCDDs/Fs-TEQ), cross-sect"
+            },
+            {
+              "document_id": "W3005411359",
+              "title": "Maternal exposure to 2,3,7,8-tetrachlorodibenzo<i>-p</i>-dioxin suppresses male reproductive functions in their adulthood",
+              "doi": "https://doi.org/10.1177/0960327120903489",
+              "year": "2020",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "2,3,7,8-Tetrachlorodibenzo- p-dioxin (TCDD) is a ubiquitous environmental contaminant in the environment. The developmental period is more sensitive to TCDD and there is a possibility that maternal exposure to TCDD may affect in adulthood. Adult female Wistar rats were exposed to 0.5, 1.0, and 2.0 µg/kg TCDD during the critical stage of organogenesis, that is, on GD15. The results revealed a significant decrease in indices of reproductive organ weight in adult male rats exposed to prenatal TCDD, and dose-dependent reduction in epididymal sperm reserves, percent motile, and viable sperm with an increase in percent morphological abnormal sperm. Polymerase chain reaction analysis revealed downr"
+            },
+            {
+              "document_id": "W1976811181",
+              "title": "The effect of carbon monoxide on glucose metabolism and growth of rat embryos",
+              "doi": "https://doi.org/10.1002/tera.1420180308",
+              "year": "1978",
+              "distance": 0.2598,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Rat embryos at days 11–12 of gestation cultured for 18 hours in vitro respond to reduced oxygen or to elevated levels of CO. Glucose consumption and lactate production increase while the growth rate decreases. The ratio of lactate produced to glucose consumed increases to values characteristic of earlier, more anaerobic, embryos. It is suggested that most of the energy consumed by the embryo goes to support growth and that the change in glucose metabolism results in a decrease in available energy which decreases the growth rate. The response to reduced oxygen levels is more marked than the response to elevated levels of carbon monoxide and we interpret the result to imply that oxyge"
+            },
+            {
+              "document_id": "W2006087145",
+              "title": "174. ATMOSPHERIC OXYGEN ALTERS THE EMBRYONIC METABOLOME AS QUANTIFIED BY CARBOHYDRATE UPTAKE AND AMINO ACID UTILISATION",
+              "doi": "https://doi.org/10.1071/srb10abs174",
+              "year": "2010",
+              "distance": 0.2602,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Oxygen regulates embryo development at both the cleavage and post compaction stages. In this study we investigated the effects of atmospheric oxygen during the preimplantation stages, on the post-compaction embryonic metabolome through quantification of glucose consumption and amino acid utilization. Zygotes obtained from F1 hybrid mice (C57BLxCBA) were randomly allocated to either 5 or 20% oxygen. In the first experiment, following the first 48 h of culture, embryos were cultured individually in 1 μL drops of modified G2 medium (0.5 mM glucose) and moved to fresh drops of medium every 24 h. The glucose concentration in the spent media samples, including controls containing no embryo, was de"
+            },
+            {
+              "document_id": "W2404431279",
+              "title": "Modulation of growth and metabolism of the chick embryo by a brief (72-hr) change in oxygen availability.",
+              "doi": "",
+              "year": "1987",
+              "distance": 0.2606,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Growth of the chick embryo is accelerated by brief (72-hr) exposure to 60% O2 beginning on day 16 of incubation, and acute (2-3 hr) hyperoxia stimulates oxygen consumption (VO2). However, the increment in VO2 that accompanies acute exposure to 60% O2 is only about half that required to account for the degree of growth acceleration observed during 72 hr of hyperoxia. We tested the hypothesis that the magnitude of the oxygen-induced change in embryonic metabolism depends on the length of exposure by making daily measurements of embryonic VO2 during brief (72-hr) exposure to 60% or 15% O2. White leghorn eggs were incubated in 21% O2 for 15 days. On day 16 the experimental eggs were switched to "
+            },
+            {
+              "document_id": "W2022760925",
+              "title": "Exposure of Mouse Preimplantation Embryos to 2,3,7,8-Tetrachlorodibenzo-p-dioxin (TCDD) Alters the Methylation Status of Imprinted Genes H19 and Igf21",
+              "doi": "https://doi.org/10.1095/biolreprod.103.025387",
+              "year": "2004",
+              "distance": 0.2607,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "2,3,7,8-Tetrachlorodibenzo-p-dioxin (TCDD) is an extremely toxic, persistent environmental contaminant that disrupts normal development in laboratory animals. In our earlier study, we found that exposure of preimplantation embryos to TCDD markedly induced cytochrome P4501A1 mRNA at the blastocyst stage. In the present study, to determine whether exposure of preimplantation embryos to TCDD affects fetal growth, we exposed preimplantation embryos to TCDD from the 1-cell stage to the blastocyst stage and then transferred them to unexposed recipient mice. On Embryonic Day 14, the fetuses exposed to TCDD during the preimplantation stage weighed less than the fetuses in the unexposed control group"
+            },
+            {
+              "document_id": "W3135164920",
+              "title": "Overweight and obesity significantly reduce pregnancy, implantation, and live birth rates in women undergoing In Vitro Fertilization procedures",
+              "doi": "https://doi.org/10.5935/1518-0557.20200105",
+              "year": "2021",
+              "distance": 0.2624,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Our data shows that an increased BMI affects embryo development and significantly reduces the pregnancy, implantation and live birth rates."
+            },
+            {
+              "document_id": "W2118477575",
+              "title": "Sensitivity to Dioxin Decreases as Zebrafish Mature",
+              "doi": "https://doi.org/10.1093/toxsci/kfs103",
+              "year": "2012",
+              "distance": 0.2624,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The embryos of teleost fish are exquisitely sensitive to the toxic effects of exposure to 2,3,7,8-tetrachlorodibenzo-p-dioxin (TCDD). However, several lines of evidence suggest that adults are less sensitive to TCDD. To better understand and characterize this difference between early life stage and adults, we exposed zebrafish (Danio rerio) to graded TCDD concentrations at different ages. The LD(50) for embryos exposed at 1 day post-fertilization (dpf) was more than an order of magnitude lower than it was for juveniles exposed at 30 dpf. The latency between exposure and response also increased with age. Embryo toxicity was characterized by marked cardiovascular collapse and heart malformatio"
+            },
+            {
+              "document_id": "W2898427760",
+              "title": "Exogenous glutathione improves intracellular glutathione synthesis via the γ‐glutamyl cycle in bovine zygotes and cleavage embryos",
+              "doi": "https://doi.org/10.1002/jcp.27497",
+              "year": "2018",
+              "distance": 0.2625,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract Excess reactive oxygen species (ROS) generated in embryos during in vitro culture damage cellular macromolecules and embryo development. Glutathione (GSH) scavenges ROS and optimizes the culture system. However, how exogenous GSH influences intracellular GSH and improves the embryo developmental rate is poorly understood. In this study, GSH or GSX (a stable GSH isotope) was added to the culture media of bovine in vitro fertilization embryos for 7 days. The cleavage rate, blastocyst rate, and total cell number of blastocysts were calculated. Similarly to GSH, GSX increased the in vitro development rate and embryo quality. We measured intracellular ROS, GSX, and GSH for 0–32‐hr postin"
+            },
+            {
+              "document_id": "W2103559991",
+              "title": "Spatial and Temporal Ontogenies of Glutathione Peroxidase and Glutathione Disulfide Reductase During Development of the Prenatal Rat",
+              "doi": "https://doi.org/10.1002/jbt.17",
+              "year": "2001",
+              "distance": 0.2636,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Spatial and temporal expression and regulation of the antioxidant enzymes, glutathione peroxidase (GSH‐Px), glutathione disulfide reductase (GSSG‐Rd) may be important in determining cell‐specific susceptibility to embryotoxicants. Creation of tissue‐specific ontogenies for antioxidant enzyme activities during development is an important first step in understanding regulatory relationships. Early organogenesis‐stage embryos were grouped according to the somite number (GD 9–13), and fetuses were evaluated by gestational day (GD 14–21). GSH‐Px activities in the visceral yolk sac (VYS) increased on consecutive days from GD 9 to GD 13, representing a 5.7‐fold increase during this period "
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple DEB-theory sources (snippets 1, 2, 4, 7, 9, 12) state the stylized fact verbatim as a recognized empirical generalization, and several provide mechanistic justification (snippet 9: embryos lose reserve mass while structure grows, so O2 use rises as mass falls; snippet 8: eggs initially hardly use dioxygen, then consumption rapidly increases). Snippet 15 offers independent empirical corroboration for the juvenile/postnatal pattern (oxygen consumption increases with increasing birth weight/gestational age). No snippet contradicts the fact. The numerous dioxin/toxicology snippets (13-14, 16-22) are off-topic, matching only on keyword. Overall the corpus strongly and consistently corroborates the stylized fact."
+          },
+          "n_references": 8,
+          "references": {
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.169
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2065
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2083
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2104
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.217
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.22
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2314
+            },
+            "W2249648514": {
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2506
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.169,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2065,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "duction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78] but decreases with size inter-speciﬁcally Respiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113] The use of dioxygen increases with decreasing mass in animals embryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113] The use of dioxygen scales approximately with body weight raised animals [10, 84, 91] to a power close to 0.75 [45] Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88] after ingesting food (heat increment of feeding) Ageing Lifespan increases with size for endotherms, animals [19, 85] but is indep"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2083,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 Dissipating heat for heterotrophic isomorphs under aerobic conditions is a weighted sum of three mass flows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typicall"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2104,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3033",
+              "title": "AuguRosa2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2138,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "slope of the gray line (B) corresponds to the 40 eggs/d observed in the study. The predicted dioxygen consumption is then represented in three more ways according to diﬀerent ways real empirical data are presented: dioxygen consumption against length (D), dioxygen consumption against wet mass (E) and ﬁnally mass speciﬁc dioxygen consumption (F). The link between the “data” and underlying processes as deﬁned by the DEB model decreases from (D) to (F). 5.2. Investment into growth and reproduction We found low f values for the three individuals in the laboratory growth experiment by Larson (1987a) (ﬁg. 5): 0.46, 0.42, 0.45 for individual A, B and C respectively from that study. Such low f value"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2144,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "ly (or different constant food levels) and inter-specifically for large body sizes G3 Foetuses increase in weight approximately proportional to cubed time Reproduction R1 Many species (almost all animals and plants) have a juvenile stage that does not reproduce R2 Reproduction increases with size intra-specifically, but decreases with size inter-specifically R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use d"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.217,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "etabolic facts are supported by the fact that freshly laid eggs do not use dioxygen in signiﬁcant amounts and that the use of dioxygen increases with decreasing mass in the embryo and with increasing mass in the juvenile and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because trans- port occurs across surfaces (P3). In the organism (1) food is transformed into reserve and (2) reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This [Page 135] A Formal Metabolic Theory of Life 123 internal organization is suggested by the empirical evidence on the heat increment of feed- ing (R4) and by the fact that starving organisms s"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.22,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "g, eggs typically need a lot of dioxygen, see Figure 2.12. Figure 4.21: The respiration rate of Daphnia pulex with few eggs at 20 ◦C as a function of length. Data from Richman [960]. The deb-based curve 0.0336 L2 + 0.01845 L3 as well as the standard allo- metric curve 0.0516 L2.437 are plotted on top of each other, but they are so simi- lar that this is hardly visible. If you look hard, you will notice that the line width varies a little. length, mm O2 consumption, µl/h the dissipating power ˙pD = Vm[ ˙pM] l3 + (1 κ −1)l3 p + l2lT + (1 −κR)(1 κ −1) l2e −l + lTe/g 1 + e/g + l3 −l3 p !! (4.50) Initially, eggs hardly use dioxygen, but dioxygen consumption rapidly increases during development; s"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2212,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "a supply-demand spectrum. See Subsection 10.5.5. R4 At constant food, reproduction increases with length, see Section 2.7. Growth is compet- ing with somatic maintenance, reproduction with maturity maintenance; both are parallel processes, due to the κ-rule for allocation, see Section 2.4. [Page 283] 282 11. Evaluation Table 11.4: Table 11.3 continued. O1 Since only structure requires somatic maintenance and the embryo starts at zero structure, it initially hardly use dioxygen, see Section 2.6.2. O2 The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass (namely reserve) during development, while its structure is growing, see Section 2.6.2. Respiration incre"
+            },
+            {
+              "document_id": "2839",
+              "title": "Kooy2015_en.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2287,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "st to cease growing, and that cartilage is replaced it improve bone structure. The second example concerns the diﬀusion of dioxygen through the egg shell, which is generally seen as a rate-limiting factor in the development of bird eggs. This idea rests on the observation of a strongly negative correlation between maximum dioxygen consumption and diﬀusion resistance of the egg [Page 37] Theoretical Biology, a specialisation in integration 35 shell. Models show, however, that energy use, that corresponds with the use of dioxygen of the embryo, develops similar to that of the neonate. This suggests that the limiting factor for development has a very diﬀerent nature and the diﬀusion resistance "
+            },
+            {
+              "document_id": "2909",
+              "title": "Teix2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2299,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "m dioxygen consumption). Method RMR (W kg-1) FMR (W kg-1) Reference WIR 3.99 - Shaffer et al. (2001b) ML 3.21 - Shaffer et al. (2001b) VǚO2 2.86 - Brown and Adams (1984) VǚO2 2.50 - Brown and Adams (1984) DLW - VǚCO2 1.96 - Shaffer et al. (2001b) HR - VǚO2 1.70 - Weimerskirch et al. (2002) DLW - VǚCO2 - 4.90 Shaffer et al. (2001a) DLW - VǚCO2 - 4.59 Adams et al. (1986) DLW - VǚCO2 - 3.94 Arnould et al. (1996) Average 2.70 4.48 - This study 2.87 4.29 - [Page 229] 229 Table 31 – Comparison between the scaled functional response (f) expected values, obtained through the estimated function after applying DEB theory and fitting observed body mass variation, and the ratio between the amount of foo"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2314,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "availabilities cor- rected for a common body temperature decreases linearly with ultimate length The logarithm of the von Bertalanﬀy growth rate of diﬀerent species corrected for a common body temperature decreases almost linearly with the logarithm of the species maximum size Respiration Freshly laid eggs do not use oxygen in signiﬁcant amounts The use of dioxygen increases with decreasing mass in embryos, but increases with mass in juveniles and adults The use of dioxygen scales with body mass raised to a power close to 0.75 Stoichiometry Well-fed animals have a diﬀerent body chemical composition than poorly-fed organisms Animals growing with constant food density con- verge to a constant "
+            },
+            {
+              "document_id": "W2050162155",
+              "title": "Oxidative Stress in Mouse Sperm Impairs Embryo Development, Fetal Growth and Alters Adiposity and Glucose Regulation in Female Offspring",
+              "doi": "https://doi.org/10.1371/journal.pone.0100832",
+              "year": "2014",
+              "distance": 0.2406,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Paternal health cues are able to program the health of the next generation however the mechanism for this transmission is unknown. Reactive oxygen species (ROS) are increased in many paternal pathologies, some of which program offspring health, and are known to induce DNA damage and alter the methylation pattern of chromatin. We therefore investigated whether a chemically induced increase of ROS in sperm impairs embryo, pregnancy and offspring health. Mouse sperm was exposed to 1500 µM of hydrogen peroxide (H2O2), which induced oxidative damage, however did not affect sperm motility or the ability to bind and fertilize an oocyte. Sperm treated with H2O2 delayed on-time development of subsequ"
+            },
+            {
+              "document_id": "W2060335833",
+              "title": "Demographic and Lifestyle Factors Associated with Dioxin-like Activity (CALUX−TEQ) in Human Breast Milk in Hong Kong",
+              "doi": "https://doi.org/10.1021/es052164r",
+              "year": "2006",
+              "distance": 0.241,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Maternal exposure to dioxins and related compounds before conception may affect the health of the fetus. To identify factors affecting dioxin body load in Hong Kong, in 2002, total dioxin-like activity was estimated in 250 individual milk samples at 2-6 weeks postpartum, from a representative group of primiparous mothers, aged 18-42 years (mean 29 +/- 5 years), by a chemically activated luciferase expression (CALUX) bioassay. Associations between the CALUX-TEQ and 20 socio-demographic and dietary variables were examined separately in mothers younger than 30 years (n = 114) and 30 years or older (n = 119), by multiple linear regression analysis. CALUX-TEQ (mean 14.5 +/- 5.8 pg/g fat) signific"
+            },
+            {
+              "document_id": "W2249648514",
+              "title": "INTRAUTERINE GROWTH IN ACTIVE TISSUE MASS OF THE HUMAN FETUS, WITH PARTICULAR REFERENCE TO THE UNDERGROWN BABY",
+              "doi": "https://doi.org/10.1542/peds.38.1.48",
+              "year": "1966",
+              "distance": 0.2506,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Oxygen consumption of babies born after various lengths of gestation, measured between 2 to 10 days of post-natal life under resting, thermoneutral conditions, has been used as an index of intrauterine growth in \"active tissue mass.\" A curve was constructed describing the median increase in oxygen consumption with increasing gestational age in babies who had experienced usual rates of growth in utero. Babies who have grown normally in utero exhibit, with increasing birth weight and with increasing gestational age, an increase in oxygen consumption per kilogram birth weight. This phenomenon is proposed to result from changes in fetal body composition with increasing maturity whereby the cell "
+            },
+            {
+              "document_id": "W2142678812",
+              "title": "Using Zebrafish as a Model System for Studying the Transgenerational Effects of Dioxin",
+              "doi": "https://doi.org/10.1093/toxsci/kfu006",
+              "year": "2014",
+              "distance": 0.2522,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "2,3,7,8 Tetrachlorodibenzo-p-dioxin (TCDD) has been associated with many disease states in humans. A rising concern is that exposure early in life can lead to adult toxicity and toxicity in subsequent generations. Juvenile zebrafish exposed to TCDD (50 pg/ml in water; 1 h exposure) at 3 and 7 weeks post fertilization showed toxicity only later in adulthood. We have maintained the offspring of these exposed F₀ fish to determine whether we could find adverse affects in the next two generations of F₁ and F₂ offspring. TCDD exposure produced a significantly higher female:male ratio in all three generations. Scoliosis-like axial skeleton abnormalities, not normally observed in controls, were pres"
+            },
+            {
+              "document_id": "W3042918462",
+              "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+              "doi": "https://doi.org/10.1002/bies.202000025",
+              "year": "2020",
+              "distance": 0.2536,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Oxygen is a key regulator of both development and homeostasis and a promising candidate to bridge the influence of the environment and the evolution of new traits. To clarify the various ways in which oxygen may modulate embryogenesis, its effects are reviewed at distinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed. Then, the effects of microenvironmental oxygen on metabolism, stemness, and differentiation throughout embryogenesis are discussed. Last, the interplay between ecology and development are reexamined with a focus on the evolution of tetrapods, including during the emergence of a novel mechanism tha"
+            },
+            {
+              "document_id": "W2149160427",
+              "title": "Toxic effects of oxygen on human embryo development",
+              "doi": "https://doi.org/10.1093/humrep/15.suppl_2.199",
+              "year": "2000",
+              "distance": 0.2543,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The toxic effects of oxygen on the embryos of various animal species are reviewed. Methodologies for assessing embryonic damage are discussed and possible ways of preventing the damage are explored. Three methods of potentially minimizing oxidative damage to human embryos were tested using gametes, zygotes, and embryos from a clinical IVF programme: (i) decreasing the oxygen tension in the gas phase used for culture during insemination, fertilization, and embryo growth; (ii) changing the formulation of culture media to include some components designed to protect against oxidative damage; and (iii) reducing the duration of insemination to minimize the effect of oxidative damage caused by sper"
+            },
+            {
+              "document_id": "W2416237148",
+              "title": "[Effects of endocrine disruptors on preimplantation embryo development].",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2567,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Endocrine disruptors such as dioxins and bisphenol A(BPA) were detected in the human follicular fluids indicating that the reproductive organs have been exposed to these substances. To study possible effects of these chemicals on the germ cells and early embryos, we employed mouse preimplantation embryo development models. Dioxin(TCDD) and BPA both have positive and negative effects on embryo development in mice. The developmental rates were significantly decreased by exposure to concentrations of TCDD between 1 and 5 pM as compared with the control group. On the other hand, stimulatory effects of BPA were observed in the blastocyst formation rate at concentrations of 1 nM and 3 nM. The pres"
+            },
+            {
+              "document_id": "W2010839071",
+              "title": "Adverse effects in adulthood resulting from low-level dioxin exposure in juvenile zebrafish",
+              "doi": "https://doi.org/10.4161/endo.28309",
+              "year": "2014",
+              "distance": 0.2571,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "There is strong evidence indicating that disease in adult humans stems from a combination of genetic and environmental factors. A problem in identifying environmental factors is that subacute exposures during early life are often unnoticed, or exposures are variable among a diverse population. This leads to a confusing pattern in adulthood. An additional problem in following exposure effects in humans is the length of time needed to study outcomes spanning a human generation. We have recently developed a zebrafish model for studying the effects of sublethal juvenile exposure to 2,3,7,8-tetrachlorodibenzo-<i>p</i>-dioxin (TCDD, dioxin). Although the initial exposure produces no effect at the "
+            },
+            {
+              "document_id": "W2043897964",
+              "title": "Impact of Perinatal Dioxin Exposure on Infant Growth: A Cross-Sectional and Longitudinal Studies in Dioxin-Contaminated Areas in Vietnam",
+              "doi": "https://doi.org/10.1371/journal.pone.0040273",
+              "year": "2012",
+              "distance": 0.2578,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Dioxin exposure levels remain elevated in residents living around former US Air Force bases in Vietnam, indicating potential adverse impacts on infant growth. In this study, 210 mother-infant pairs in dioxin-contaminated areas in Vietnam were recruited at the infants' birth and followed up for 4 months. Perinatal dioxin exposure levels were estimated by measurement of polychlorinated dibenzo-p-dioxins/furans toxic equivalent (PCDDs/Fs-TEQ) in breast milk. The infants' size was measured at birth and 1 and 4 months after birth, and neurodevelopment was evaluated using the Bayley Scales III at 4 months of age. Among 4 dioxin groups (<25, 25-50, 50-75, ≥75 percentile of PCDDs/Fs-TEQ), cross-sect"
+            },
+            {
+              "document_id": "W3005411359",
+              "title": "Maternal exposure to 2,3,7,8-tetrachlorodibenzo<i>-p</i>-dioxin suppresses male reproductive functions in their adulthood",
+              "doi": "https://doi.org/10.1177/0960327120903489",
+              "year": "2020",
+              "distance": 0.2587,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "2,3,7,8-Tetrachlorodibenzo- p-dioxin (TCDD) is a ubiquitous environmental contaminant in the environment. The developmental period is more sensitive to TCDD and there is a possibility that maternal exposure to TCDD may affect in adulthood. Adult female Wistar rats were exposed to 0.5, 1.0, and 2.0 µg/kg TCDD during the critical stage of organogenesis, that is, on GD15. The results revealed a significant decrease in indices of reproductive organ weight in adult male rats exposed to prenatal TCDD, and dose-dependent reduction in epididymal sperm reserves, percent motile, and viable sperm with an increase in percent morphological abnormal sperm. Polymerase chain reaction analysis revealed downr"
+            },
+            {
+              "document_id": "W1976811181",
+              "title": "The effect of carbon monoxide on glucose metabolism and growth of rat embryos",
+              "doi": "https://doi.org/10.1002/tera.1420180308",
+              "year": "1978",
+              "distance": 0.2598,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Rat embryos at days 11–12 of gestation cultured for 18 hours in vitro respond to reduced oxygen or to elevated levels of CO. Glucose consumption and lactate production increase while the growth rate decreases. The ratio of lactate produced to glucose consumed increases to values characteristic of earlier, more anaerobic, embryos. It is suggested that most of the energy consumed by the embryo goes to support growth and that the change in glucose metabolism results in a decrease in available energy which decreases the growth rate. The response to reduced oxygen levels is more marked than the response to elevated levels of carbon monoxide and we interpret the result to imply that oxyge"
+            },
+            {
+              "document_id": "W2006087145",
+              "title": "174. ATMOSPHERIC OXYGEN ALTERS THE EMBRYONIC METABOLOME AS QUANTIFIED BY CARBOHYDRATE UPTAKE AND AMINO ACID UTILISATION",
+              "doi": "https://doi.org/10.1071/srb10abs174",
+              "year": "2010",
+              "distance": 0.2602,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Oxygen regulates embryo development at both the cleavage and post compaction stages. In this study we investigated the effects of atmospheric oxygen during the preimplantation stages, on the post-compaction embryonic metabolome through quantification of glucose consumption and amino acid utilization. Zygotes obtained from F1 hybrid mice (C57BLxCBA) were randomly allocated to either 5 or 20% oxygen. In the first experiment, following the first 48 h of culture, embryos were cultured individually in 1 μL drops of modified G2 medium (0.5 mM glucose) and moved to fresh drops of medium every 24 h. The glucose concentration in the spent media samples, including controls containing no embryo, was de"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

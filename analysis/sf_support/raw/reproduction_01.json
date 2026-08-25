@@ -1,0 +1,1084 @@
+{
+  "sf_id": "reproduction_01",
+  "category": "Reproduction",
+  "statement": "Many species have a juvenile stage that does not reproduce.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The corpus provides strong, multiple corroborating references for the existence of a non-reproducing juvenile stage. Snippet [15] is the explicit statement of the stylized fact ('Many species (almost all animals and plants) have a juvenile stage that does not reproduce'), and snippets [14] and [16] clearly define the juvenile stage in DEB theory as one where food is taken but resources are not yet allocated to reproduction. Snippets [10], [4], [5], [11], and [17] reinforce the embryo-juvenile-adult sequence with reproduction beginning only after a maturity/size/age threshold. Snippet [2] appears to contradict by allowing 'juveniles' to reproduce, but this is a simplified abstract model where the term lumps juvenile/adult together rather than genuine counter-evidence. Snippet [1] notes exceptions (precocious stoat maturity, unicellulars treated as juveniles), but these are framed as edge cases consistent with the qualifier 'many species.' Overall the evidence is clear and the consensus strongly corroborates the fact."
+      },
+      "n_references": 10,
+      "references": {
+        "69b8877aecbd4702b29a5532": {
+          "title": "Scot2016.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3871685862541199
+        },
+        "69b8991aecbd4702b29a69ae": {
+          "title": "McCaNisb1996.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3940105438232422
+        },
+        "69b876d4ecbd4702b29a3edc": {
+          "title": "van der Meer - 2016 - A paradox in individual-based models of population.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3944246768951416
+        },
+        "69b84835ec32c55db5430b94": {
+          "title": "Roos - 2020 - The impact of population structure on population a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.39616793394088745
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.40446609258651733
+        },
+        "69b84763ec32c55db5430951": {
+          "title": "Beaudouin - 2019 - Modélisation du lien organisme – population en app.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.41101622581481934
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4137771725654602
+        },
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4153430461883545
+        },
+        "69b882a3ecbd4702b29a4ed1": {
+          "title": "Zimmer et al. - 2014 - Metabolic acceleration in the pond snail Lymnaea s.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4176703691482544
+        },
+        "69b87af2ecbd4702b29a4487": {
+          "title": "Zimm2013.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.41807180643081665
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3817,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "n the first instance, see {180}, and notdirectly to a stage in energetic development, such as embryo and juvenile. This can bestbe illustrated by the stoat Mustela erminea . Although blind for some 35–45 days, thefemale offspring reaches sexual maturity when only 42–56 days of age, before they areweaned. Copulation occurs whilst they are still in the nest [596, 1051].Asexually propagating unicellular organisms take food from their environment, thoughthey do not reproduce in a way comparable to the production of eggs or young by mostmulticellular organisms. For this reason, I treat them as juveniles in this energy-based"
+        },
+        {
+          "document_id": "69b8877aecbd4702b29a5532",
+          "title": "Scot2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3872,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "Juvenile organisms can reproduce Larvaedependent on the energy they have reserved for reproduction reaching a speciﬁc threshold.For this simple model the term Juvenile encompasses the Juvenile/Adult life stage. Organismsin both life stages can die based on a simple death rate. The initial population is two Larvaeand three Juveniles.4.3.1Model conﬁgurationTo describe this system two Populations are deﬁned: Larva and Juvenile. These Populationshold speciﬁc life stage Organisms. The Organisms describe the DEB physiology of an Organismunder a speciﬁc life stage by internal species components. The Populations also have external"
+        },
+        {
+          "document_id": "69b8a0afecbd4702b29a7222",
+          "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3935,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "r a wide variety ofreproductive behaviors and strategies (Gross, 1984). Most ﬁsh are indeterminate growers; they grow throughouttheir whole life with highly variable rates. Environmental factors and chance have a large impact on growth.The age of maturity is very plastic (Kooijman, 2000; Summerfelt and Hall, 1987; Weatherley and Gill, 1987a;Smith, 1992; Mommsen, 2001).7In many species male growth slows dramatically at sexual maturation (Basolo, 2004). The growth curvenearly plateaus at advanced ages as maintenance costs and the allocation to reproduction increase.8Undergo molting and grow in bursts."
+        },
+        {
+          "document_id": "69b8991aecbd4702b29a69ae",
+          "title": "McCaNisb1996.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.394,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "d was constructed using a methodology that has been described in detail else­where (Gurney et a!. 1983, 1986, Nisbet and Gurney 1983). We recognize three stages in the herbivore pop­ulation: juveniles (f), immature adults (Y), and repro­ductively mature adults (A). Juveniles are defined to be individuals who commit, or who have the capacity to commit, all excess assimilate not required for main-tenance, to growth. The young adult stage covers the period, roughly two molts in duration, that elapses be­tween achieving capacity for commitment of assimilate to reproduction to the release of the first brood of ne­"
+        },
+        {
+          "document_id": "69b876d4ecbd4702b29a3edc",
+          "title": "van der Meer - 2016 - A paradox in individual-based models of population.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3944,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "Once the animal has become adult, it has reached its maximal maturity 2 Conservation Physiology • Volume 4 2016Research articleDownloaded from https://academic.oup.com/conphys/article-abstract/4/1/cow023/2951363/A-paradox-in-individual-based-models-ofby Vrije Universiteit - Library useron 06 September 2017and starts to reproduce. In this study, I assume that the adult builds up a reproduction buffer, which is emptied at the end of each reproductive period. The sum of maturity and reproduc -tion buffer are considered here as a single state variable.A list of assumptions give rise to a set of coupled ordinary"
+        },
+        {
+          "document_id": "69b84723ec32c55db5430702",
+          "title": "LikaKooy2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3961,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "sduring the juvenile stage, while the onset of reproduction hardlyseems to affect growth. We cannot include maturity maintenanceinto somatic maintenance at the expense of allocation to growth be-cause in such a case we should expect to see some reproduction atlow food levels, while the general empirical pattern is that no repro-duction occurs at very low food densities; emergency reproduction,including suicide reproduction, in response to reducing food avail-ability is a variation sported by a few taxa only. Notice that if κwould decrease with length, reproduction more rapidly decreaseswith decreasing food."
+        },
+        {
+          "document_id": "69b84835ec32c55db5430b94",
+          "title": "Roos - 2020 - The impact of population structure on population a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3962,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ntime.Furthermore,asaresultofthese reproduction pulses the (juvenile) populationbecomes dominated by a single cohort of individ-uals that is born within a short period of time.Alternatively,whensmall,juvenileindividualshavehigher maintenance requirements per unit biomassthan adults, population cycles also emerge as aconsequence of juvenile-adult asymmetry. In thiscase, adults reproduce continuously, but juvenilegrowth slows down when adult density becomestoo high (see Figure 5.1, right panel). High adultdensities hence slow down the juvenile maturationrate, leading to a decrease in adult density and in"
+        },
+        {
+          "document_id": "69b84835ec32c55db5430b94",
+          "title": "Roos - 2020 - The impact of population structure on population a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4003,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "mmetry leads to cycles in populationdensity with reproduction only occurring whenjuvenile biomass is low and stopping as soon asthe increasing density of juveniles suppresses foodOUPCORRECTED PROOF – FINAL, 8/4/2020, SPiTHE IMPACT OF POPULATION STRUCTURE 61availability to too low levels (see Figure 5.1, leftpanel). The intraspecific interactions among differ-ently sized consumers thus cause the reproductiontobecomepulsedintime.Furthermore,asaresultofthese reproduction pulses the (juvenile) populationbecomes dominated by a single cohort of individ-"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4014,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "during the juvenile stage, while theonset of reproduction hardly seem to affect growth. We can’t include maturity maintenance33into somatic maintenance at the expense of allocation to growth because in such a casewe should expect to see some reproduction at low food levels, while the general empiricalpattern is that no reproduction occurs at very low food densities; emergency reproduction,including suicide reproduction, in response to reducing food availability is a variationsported by a few taxa only. Notice that if κwould decrease with length, reproductionmore rapidly decreases with decreasing food."
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4045,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "organisms t ypically start as embryo that doesnot feed and reproduce as adults. Whenever EpH> EbHthe three life stages are: theembryonic or foetal, the juvenile and the adult.The logical reasoning behind this assumption is the followi ng. An organism that de-velops and produces offspring increases its complexity (or maturity) from the embryo tothe adult stage. Among organisms of the same species the leve l of maturity at the onsetof feeding behaviour is the same. Also, initiation of alloca tion to reproduction, amongorganisms of the same species, occurs when they reach the sam e level (usually higher)"
+        },
+        {
+          "document_id": "69b84763ec32c55db5430951",
+          "title": "Beaudouin - 2019 - Modélisation du lien organisme – population en app.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.411,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "males. Thus, males which do not have enough energy to accomplish one reproduction process would not acquir e their reproductive behavior ( i.e get a territory, build a n est, harvest and take care of the eggs). Furthermore, males in the field need to be at least 1 or 2 years old to start the reproduction processes (Baker, 1994 ; Dufresne et al., 1990 ). This was consistent with the absence of sexual dimorphism observed in our mesocosm between young adult female and male sticklebacks ( i.e. adults born in mesocosm) due to the absence of reproductive behavior during the first year in young males. In our modeling of"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4113,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "the next step in the sequence embryo,juvenile, adult, and then tie it to energy investment in development just as has been donefor the transitions to the juvenile and adult stages. This is not an option in the context ofdebtheory, since at sufficiently low food densities the adult state is never entered, even ifthe animal survives for nutritional reasons. This means that it would live for ever, as far asageing is concerned. Although species exist with very long life spans (excluding externalcauses of death [350]), this does not seem acceptable.Not all species age in the way most animals do; ageing seems to be restricted to species"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4133,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "to reproduction as adults. This oncemore illustrates that we should not think in terms of life stages, but in terms of metabolicswitching. Some fish species have an isomorphic embryo, a V1-morphic early juvenilestage, which switches back to isomorphy at metamorphisis, see subsection 7.8.2. A lot ofstages can be delineated in the development, see Tables 7.3 and 7.4 of the comments, eachcorresponding with a certain (constant) maturity level.Not only the paradoxal frog Pseudis paradoxa and the midwife toad Alytes obstetricanshave larvae that are bigger than the adult, but also the deep-sea spiny eels Notacanthi-"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4138,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": ".) As in eggs, a number of species of mammal have adevelopmental delay just after fertilisation, called diapause [1051].JuvenileThe second stage in life history is the juvenile one, in which food is taken but resources arenot yet allocated to the reproductive process. In some species, the developing juvenile takesa sequence of types of food or sizes of food particles. Most herbivores, for instance, initiallyrequire protein-rich diets that provide nitrogen for growth, see {180}. Some species, such asOikopleura , seem to skip the juvenile stage. It does not feed as a larva, a condition known"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4153,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "oportional to cubed timeReproductionR1Many species (almost all animals and plants) have a juvenile stage that does not reproduceR2Reproduction increases with size intra-speci cally, but decreases with size inter-speci callyR3A range of constant low food levels exists at which an individual can survive, but not reproduceR4Growth can be simultaneous with reproduction, but growth can also cease long before reproductionis initiatedR5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygen"
+        },
+        {
+          "document_id": "69b882a3ecbd4702b29a4ed1",
+          "title": "Zimmer et al. - 2014 - Metabolic acceleration in the pond snail Lymnaea s.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4177,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "not, but is able to fuel metabolism. Maturity has no massor energy, and represents the developmental stage of the organism: theamount of energy invested into maturation determines the switch fromone life stage to another. Thus, the same DEB model can be used tomodel the whole life cycle of an organism, whereby small differencesbetween life stages exist. During the embryonic development, organ-isms do not feed p/C15X¼0/C0/C1or reproduce (see Fig. 1 ). When reachingthe maturity threshold for birth ( EHb), organisms start feeding andare considered as juveniles. After reaching the maturity threshold for"
+        },
+        {
+          "document_id": "69b87af2ecbd4702b29a4487",
+          "title": "Zimm2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4181,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "the juveniles are assumed to be fed with let-tuce, and thus food limited, the same degree of eﬀect on the target parameter leadsto stronger eﬀects on growth. In addition to the eﬀects on growth observed in thesimulations, the juvenile phase is prolonged by all hypothetical toxicants (Fig. 2.3d,e, f). In organisms that start reproducing at a given size (e.g., the pond snail),a decrease in juvenile growth would imply a delay in the start of reproduction,which can have a substantial impact on the population growth rate (Kammengaet al., 1996). Moreover, even for organisms that start reproducing at a given age,"
+        },
+        {
+          "document_id": "69b8a0afecbd4702b29a7222",
+          "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4197,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "evity in higher organisms. This may helpto verify the “universality” of determinate growth in mammals or whether the determinategrowth stops at, or soon after, the age of maturity in all species.386 http://www.demographic-research.orgDemographic Research : V olume 15, Article 127 AcknowledgementsThe author thanks J.W. Vaupel, J. Beise, A. Baudisch, D. Thomson, N. Minois, J. Careyand A. Scheuerlein for valuable discussions, comments on the manuscript and help inresearching resources, D. Roach and an anonymous reviewer for reviews and valuablecomments and suggestions on the manuscript and S. Backer for language editing. The"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets explicitly affirm the existence of a non-reproductive juvenile stage. Snippet 10 directly states most animals develop from juveniles that cannot reproduce to sexually mature adults, and snippet 9 explicitly distinguishes juveniles 'not yet capable of reproduction' that can only allocate to future reproduction. Others (2, 4, 5, 8, 11, 13, 14, 15, 17) reference juvenile stages, sexual maturity transitions, and delayed reproduction, consistent with the fact though more peripherally. No snippet contradicts the stylized fact. While the support is clear and uncontested, only a couple of snippets bear strongly and directly on the claim, so evidence strength is moderate; the consensus direction is clearly corroborating."
+      },
+      "n_references": 11,
+      "references": {
+        "W2099324716": {
+          "title": "Offspring size at weaning affects survival to recruitment and reproductive performance of primiparous gray seals",
+          "doi": "10.1002/ece3.1450",
+          "year": "2015",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36545681953430176
+        },
+        "W2031566265": {
+          "title": "Experimental evidence of a link between breeding conditions and the decision to breed or to help in a colonial cooperative bird",
+          "doi": "10.1098/rspb.2003.2652",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3754783272743225
+        },
+        "W2084225857": {
+          "title": "The contrariwise life of a parasitic, pedomorphic copepod with a non-feeding adult: ontogenesis, ecology, and evolution",
+          "doi": "10.1111/j.1744-7410.2008.00164.x",
+          "year": "2024",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3784739375114441
+        },
+        "W2006233305": {
+          "title": "Resting stage in benthic foraminiferal propagules: a key feature for dispersal? Evidence from two shallow-water species",
+          "doi": "10.1144/jm.21.1.95",
+          "year": "2002",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.382840096950531
+        },
+        "W2586999663": {
+          "title": "Exercise training reveals trade-offs among endurance performance and immune function, but not growth, in juvenile lizards",
+          "doi": "10.1242/jeb.153767",
+          "year": "2017",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.38985955715179443
+        },
+        "W2987195430": {
+          "title": "Decision letter: The Makorin lep-2 and the lncRNA lep-5 regulate lin-28 to schedule sexual maturation of the C. elegans nervous system",
+          "doi": "10.7554/elife.43660.021",
+          "year": "2019",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3915436267852783
+        },
+        "W2004240767": {
+          "title": "Morphology and histology of the female reproductive system of the mangrove land crab, Ucides cordatus (Linnaeus, 1763) (Brachyura: Ocypodidae)",
+          "doi": "10.1590/s0104-64972011000200006",
+          "year": "2011",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3930593729019165
+        },
+        "W2216490349": {
+          "title": "Interpopulational Variation in Litter Size of the Skink Mabuya agilis in Southeastern Brazil",
+          "doi": "10.1643/0045-8511(2002)002[0857:ivilso]2.0.co;2",
+          "year": "2002",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3943835496902466
+        },
+        "W3123801111": {
+          "title": "Faster juvenile growth promotes earlier sex change in a protandrous hermaphrodite (barramundi Lates calcarifer)",
+          "doi": "10.1038/s41598-021-81727-1",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.39525306224823
+        },
+        "W3033625898": {
+          "title": "Nutritional developmental history and its consequences for reproductive success in <i>Drosophila suzukii</i> (Diptera: Drosophilidae)",
+          "doi": "10.4039/tce.2020.33",
+          "year": "2020",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.39582765102386475
+        },
+        "W3203159354": {
+          "title": "Emerging Roles of Epigenetics in the Control of Reproductive Function: Focus on Central Neuroendocrine Mechanisms",
+          "doi": "10.1210/jendso/bvab152",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3976230025291443
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2403846895",
+          "title": "ON THE FOOD OF NUDIBRANCHS",
+          "doi": "10.2307/1538855",
+          "year": "1959",
+          "distance": 0.3369,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "the animals does not follow reproduction and spawning, but results when the animals lack a suitable supply of food materials.4. Large colonies of certain species may disappear as a result of migration after spawning to places where more favourable conditions of food, etc., prevail for the adults."
+        },
+        {
+          "document_id": "W2099324716",
+          "title": "Offspring size at weaning affects survival to recruitment and reproductive performance of primiparous gray seals",
+          "doi": "10.1002/ece3.1450",
+          "year": "2015",
+          "distance": 0.3655,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "Abstract Offspring size affects survival and subsequent reproduction in many organisms. However, studies of offspring size in large mammals are often limited to effects on juveniles because of the difficulty of following individuals to maturity."
+        },
+        {
+          "document_id": "W2979083793",
+          "title": "Joint estimation of survival and breeding probability in female dolphins and calves with uncertainty in state assignment",
+          "doi": "10.1002/ece3.5693",
+          "year": "2019",
+          "distance": 0.3676,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract While the population growth rate in long‐lived species is highly sensitive to adult survival, reproduction can also significantly drive population dynamics. Reproductive parameters can be challenging to estimate as breeders and nonbreeders may vary in resighting probability and reproductive status may be difficult to assess."
+        },
+        {
+          "document_id": "W2031566265",
+          "title": "Experimental evidence of a link between breeding conditions and the decision to breed or to help in a colonial cooperative bird",
+          "doi": "10.1098/rspb.2003.2652",
+          "year": "2004",
+          "distance": 0.3755,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "In many species mature individuals delay independent reproduction and may help others to reproduce. This behaviour is often explained through ecological constraints, although recently attention has also been paid to the variation in habitat quality. If the quality of vacant habitat influences the fitness trade-off between delaying reproduction and breeding independently, individuals should delay reproduction when conditions for breeding are poor."
+        },
+        {
+          "document_id": "W2084225857",
+          "title": "The contrariwise life of a parasitic, pedomorphic copepod with a non-feeding adult: ontogenesis, ecology, and evolution",
+          "doi": "10.1111/j.1744-7410.2008.00164.x",
+          "year": "2024",
+          "distance": 0.3785,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "ex life cycle, and that non-feeding adults of both sexes are never found in taxa that have small larvae and delayed maturation. They occur only when there is a large larva that can provide the adult stage with sufficient nutrient reserves for reproduction."
+        },
+        {
+          "document_id": "W2009641598",
+          "title": "Effects of plant abundance on reproductive success in the biennial <i>Sabatia angularis</i> (Gentianaceae): spatial scale matters",
+          "doi": "10.1111/j.1365-2745.2007.01335.x",
+          "year": "2007",
+          "distance": 0.3812,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Summary Small and low‐density populations often suffer significant reductions in reproduction, as exemplified by studies on rare and threatened species. While this phenomenon is less studied in common species, if general, it should not be restricted to those in peril."
+        },
+        {
+          "document_id": "W1558102580",
+          "title": "Vegetative reproduction and clonal diversity in pleurocarpous mosses (Bryophytina) of mesic habitats",
+          "doi": "10.17169/refubium-16943",
+          "year": "2010",
+          "distance": 0.3819,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "t small populations are more influenced by sexual reproduction than predicted, although sexual reproduction is relatively rare. All three species showed abilities to reproduce vegetatively, so that maintenance and expansion of patches and small populations by asexual means is possible. Never the less the investigated populations indicate that sporadic sexual reproduction events play a major role in long term establishment of the three species."
+        },
+        {
+          "document_id": "W2006233305",
+          "title": "Resting stage in benthic foraminiferal propagules: a key feature for dispersal? Evidence from two shallow-water species",
+          "doi": "10.1144/jm.21.1.95",
+          "year": "2002",
+          "distance": 0.3828,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "esent note, we suggest a mechanism which is more efficient and probably more widespread than most of those previously proposed. We hypothesize that many species produce ‘propagules’ (small juveniles, perhaps just the proloculus) released in large numbers following reproduction that may enter a resting stage. Propagules can be widely dispersed by normal physical processes (currents, sediment transport) and ultimately settle over a range of habitats and conditions. Growth and reproduction commence only in those individuals and species that reach a suitable environment."
+        },
+        {
+          "document_id": "W2586999663",
+          "title": "Exercise training reveals trade-offs among endurance performance and immune function, but not growth, in juvenile lizards",
+          "doi": "10.1242/jeb.153767",
+          "year": "2017",
+          "distance": 0.3899,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "Acquired energetic resources allocated to a particular trait cannot then be re-allocated to a different trait. This often results in a trade-off between survival and reproduction for the adults of many species, but such a trade-off may be manifested differently in juveniles not yet capable of reproduction. Whereas adults may allocate resources to current and/or future reproduction, juveniles can only allocate to future reproduction."
+        },
+        {
+          "document_id": "W2987195430",
+          "title": "Decision letter: The Makorin lep-2 and the lncRNA lep-5 regulate lin-28 to schedule sexual maturation of the C. elegans nervous system",
+          "doi": "10.7554/elife.43660.021",
+          "year": "2019",
+          "distance": 0.3915,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "rg/10.7554/eLife.43660.001 eLife digest Most animals develop from juveniles, which cannot reproduce, to sexually mature adults. The most obvious signs of this transition are changes in body shape and size. However, changes also take place in the brain that enable the animals to adapt their behavior to the demands of adulthood. For example, fully fed adult male roundworms will leave a food source to search for mates, whereas juvenile males will continue feeding. The transition to sexual maturity needs to be carefully timed. Too early, and the animal risks compromising key stages of development."
+        },
+        {
+          "document_id": "W2004240767",
+          "title": "Morphology and histology of the female reproductive system of the mangrove land crab, Ucides cordatus (Linnaeus, 1763) (Brachyura: Ocypodidae)",
+          "doi": "10.1590/s0104-64972011000200006",
+          "year": "2011",
+          "distance": 0.3931,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ix stages of development: I. immature; II. at maturity; III. mature; IV. partly spawned; V. fully spawned; and VI. in recovery. Reproduction was observed in summer, and the results suggesting that this species showed multiple spawnings."
+        },
+        {
+          "document_id": "W2511254006",
+          "title": "Preface",
+          "doi": "10.1017/cbo9780511762192.001",
+          "year": "2010",
+          "distance": 0.3943,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "Sexually reproducing animals are faced with various challenges in order to find, approach and copulate with a mate in reproduction, achieve fertilisation and finally ensure that the offspring survive and in turn reproduce. In social species, this whole process includes additional dimensions involving sometimes intricate relationships of competition and cooperation; further contributing to the overall complexity. Reproduction is central to the survival of the lineage, its suppression leads to extinction."
+        },
+        {
+          "document_id": "W2216490349",
+          "title": "Interpopulational Variation in Litter Size of the Skink Mabuya agilis in Southeastern Brazil",
+          "doi": "10.1643/0045-8511(2002)002[0857:ivilso]2.0.co;2",
+          "year": "2002",
+          "distance": 0.3944,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "ugh their minimum size at sexual maturity and minimum adult size are just slightly greater than those from lowland populations. We interpret such intraspecific variation relative to possible effects of the physical environment and of genetic factors on reproduction."
+        },
+        {
+          "document_id": "W3123801111",
+          "title": "Faster juvenile growth promotes earlier sex change in a protandrous hermaphrodite (barramundi Lates calcarifer)",
+          "doi": "10.1038/s41598-021-81727-1",
+          "year": "2021",
+          "distance": 0.3953,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "dicate that individual-level variation in maturation schedules is not reflective of trade-offs between growth and reproduction. Rather, we suggest that conditions experienced during the juvenile phase are likely to be a key determinant of post-maturation fitness. These findings highlight the vulnerability of sex-changing species to future environmental change and harvest."
+        },
+        {
+          "document_id": "W3033625898",
+          "title": "Nutritional developmental history and its consequences for reproductive success in <i>Drosophila suzukii</i> (Diptera: Drosophilidae)",
+          "doi": "10.4039/tce.2020.33",
+          "year": "2020",
+          "distance": 0.3958,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "Abstract The characteristics of the juvenile developmental environment of an individual can have many important consequences for their adult reproductive success as it may shape the development and expression of phenotypes that are relevant to the later operation of sexual selection."
+        },
+        {
+          "document_id": "W2133721846",
+          "title": "Lessons from biodiversity—the value of nontraditional species to advance reproductive science, conservation, and human health",
+          "doi": "10.1002/mrd.21137",
+          "year": "2009",
+          "distance": 0.3972,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Reproduction is quintessential to species survival. But what is underappreciated for this discipline is the wondrous array of reproductive mechanisms among species— variations as diverse as the morphology of the species themselves (more than 55,000 vertebrate and 1.1 million invertebrate types). We have investigated only a tiny fraction of these species in reproductive science."
+        },
+        {
+          "document_id": "W3203159354",
+          "title": "Emerging Roles of Epigenetics in the Control of Reproductive Function: Focus on Central Neuroendocrine Mechanisms",
+          "doi": "10.1210/jendso/bvab152",
+          "year": "2021",
+          "distance": 0.3976,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "Abstract Reproduction is an essential function for perpetuation of the species. As such, it is controlled by sophisticated regulatory mechanisms that allow a perfect match between environmental conditions and internal cues to ensure adequate pubertal maturation and achievement of reproductive capacity."
+        },
+        {
+          "document_id": "W2003362121",
+          "title": "Complex Life Cycles: Why Refrain from Growth before Reproduction in the Adult Niche?",
+          "doi": "10.1086/668592",
+          "year": "2012",
+          "distance": 0.3981,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Organisms with complex life cycles occupy distinct niches as larvae and adults. One presumed advantage of this is the ability to exploit different resources successively throughout ontogeny. Various taxa, however, have evolved nonfeeding, nongrowing adult stages. We show theoretically that this counterintuitive no-growth strategy is favored when the optimal larval size is greater than or equal to the optimal adult size for reproduction."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact that many species have a non-reproducing juvenile stage is strongly and repeatedly corroborated across the corpus. DEB-theoretic sources explicitly distinguish embryo, juvenile, and adult life stages with reproduction beginning only upon reaching a maturity threshold (Sous2007, Kooy2010, LikaKooy2011, van der Meer 2016), and several empirical/biological sources affirm that juveniles cannot or do not reproduce (snippet 21 on juvenile lizards, snippet 22 on C. elegans, snippet 11 on sticklebacks needing 1-2 years to mature). Snippet 2 appears to allow 'juvenile organisms can reproduce' but this is a modeling simplification merging juvenile/adult stages rather than a biological contradiction, and even it presupposes a maturity threshold. The few near-contradictory examples (e.g., the stoat reaching maturity before weaning in snippet 1) are explicitly framed as unusual variations, reinforcing the general rule. Overall the evidence is multiple, clear, and consistent with little genuine conflict."
+      },
+      "n_references": 17,
+      "references": {
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.381716787815094
+        },
+        "69b8877aecbd4702b29a5532": {
+          "title": "Scot2016.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3871685862541199
+        },
+        "69b8a0afecbd4702b29a7222": {
+          "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3934857249259949
+        },
+        "69b8991aecbd4702b29a69ae": {
+          "title": "McCaNisb1996.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3940105438232422
+        },
+        "69b876d4ecbd4702b29a3edc": {
+          "title": "van der Meer - 2016 - A paradox in individual-based models of population.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3944246768951416
+        },
+        "69b84723ec32c55db5430702": {
+          "title": "LikaKooy2011.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3961360454559326
+        },
+        "69b84835ec32c55db5430b94": {
+          "title": "Roos - 2020 - The impact of population structure on population a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.39616793394088745
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4014214277267456
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.40446609258651733
+        },
+        "69b84763ec32c55db5430951": {
+          "title": "Beaudouin - 2019 - Modélisation du lien organisme – population en app.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.41101622581481934
+        },
+        "W2099324716": {
+          "title": "Offspring size at weaning affects survival to recruitment and reproductive performance of primiparous gray seals",
+          "doi": "10.1002/ece3.1450",
+          "year": "2015",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36545681953430176
+        },
+        "W2031566265": {
+          "title": "Experimental evidence of a link between breeding conditions and the decision to breed or to help in a colonial cooperative bird",
+          "doi": "10.1098/rspb.2003.2652",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3754783272743225
+        },
+        "W2084225857": {
+          "title": "The contrariwise life of a parasitic, pedomorphic copepod with a non-feeding adult: ontogenesis, ecology, and evolution",
+          "doi": "10.1111/j.1744-7410.2008.00164.x",
+          "year": "2024",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3784739375114441
+        },
+        "W2006233305": {
+          "title": "Resting stage in benthic foraminiferal propagules: a key feature for dispersal? Evidence from two shallow-water species",
+          "doi": "10.1144/jm.21.1.95",
+          "year": "2002",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.382840096950531
+        },
+        "W2586999663": {
+          "title": "Exercise training reveals trade-offs among endurance performance and immune function, but not growth, in juvenile lizards",
+          "doi": "10.1242/jeb.153767",
+          "year": "2017",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.38985955715179443
+        },
+        "W2987195430": {
+          "title": "Decision letter: The Makorin lep-2 and the lncRNA lep-5 regulate lin-28 to schedule sexual maturation of the C. elegans nervous system",
+          "doi": "10.7554/elife.43660.021",
+          "year": "2019",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3915436267852783
+        },
+        "W2004240767": {
+          "title": "Morphology and histology of the female reproductive system of the mangrove land crab, Ucides cordatus (Linnaeus, 1763) (Brachyura: Ocypodidae)",
+          "doi": "10.1590/s0104-64972011000200006",
+          "year": "2011",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3930593729019165
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3817,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "n the first instance, see {180}, and notdirectly to a stage in energetic development, such as embryo and juvenile. This can bestbe illustrated by the stoat Mustela erminea . Although blind for some 35–45 days, thefemale offspring reaches sexual maturity when only 42–56 days of age, before they areweaned. Copulation occurs whilst they are still in the nest [596, 1051].Asexually propagating unicellular organisms take food from their environment, thoughthey do not reproduce in a way comparable to the production of eggs or young by mostmulticellular organisms. For this reason, I treat them as juveniles in this energy-based"
+        },
+        {
+          "document_id": "69b8877aecbd4702b29a5532",
+          "title": "Scot2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3872,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "Juvenile organisms can reproduce Larvaedependent on the energy they have reserved for reproduction reaching a speciﬁc threshold.For this simple model the term Juvenile encompasses the Juvenile/Adult life stage. Organismsin both life stages can die based on a simple death rate. The initial population is two Larvaeand three Juveniles.4.3.1Model conﬁgurationTo describe this system two Populations are deﬁned: Larva and Juvenile. These Populationshold speciﬁc life stage Organisms. The Organisms describe the DEB physiology of an Organismunder a speciﬁc life stage by internal species components. The Populations also have external"
+        },
+        {
+          "document_id": "69b8a0afecbd4702b29a7222",
+          "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3935,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "r a wide variety ofreproductive behaviors and strategies (Gross, 1984). Most ﬁsh are indeterminate growers; they grow throughouttheir whole life with highly variable rates. Environmental factors and chance have a large impact on growth.The age of maturity is very plastic (Kooijman, 2000; Summerfelt and Hall, 1987; Weatherley and Gill, 1987a;Smith, 1992; Mommsen, 2001).7In many species male growth slows dramatically at sexual maturation (Basolo, 2004). The growth curvenearly plateaus at advanced ages as maintenance costs and the allocation to reproduction increase.8Undergo molting and grow in bursts."
+        },
+        {
+          "document_id": "69b8991aecbd4702b29a69ae",
+          "title": "McCaNisb1996.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.394,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "d was constructed using a methodology that has been described in detail else­where (Gurney et a!. 1983, 1986, Nisbet and Gurney 1983). We recognize three stages in the herbivore pop­ulation: juveniles (f), immature adults (Y), and repro­ductively mature adults (A). Juveniles are defined to be individuals who commit, or who have the capacity to commit, all excess assimilate not required for main-tenance, to growth. The young adult stage covers the period, roughly two molts in duration, that elapses be­tween achieving capacity for commitment of assimilate to reproduction to the release of the first brood of ne­"
+        },
+        {
+          "document_id": "69b876d4ecbd4702b29a3edc",
+          "title": "van der Meer - 2016 - A paradox in individual-based models of population.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3944,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "Once the animal has become adult, it has reached its maximal maturity 2 Conservation Physiology • Volume 4 2016Research articleDownloaded from https://academic.oup.com/conphys/article-abstract/4/1/cow023/2951363/A-paradox-in-individual-based-models-ofby Vrije Universiteit - Library useron 06 September 2017and starts to reproduce. In this study, I assume that the adult builds up a reproduction buffer, which is emptied at the end of each reproductive period. The sum of maturity and reproduc -tion buffer are considered here as a single state variable.A list of assumptions give rise to a set of coupled ordinary"
+        },
+        {
+          "document_id": "69b84723ec32c55db5430702",
+          "title": "LikaKooy2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3961,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "sduring the juvenile stage, while the onset of reproduction hardlyseems to affect growth. We cannot include maturity maintenanceinto somatic maintenance at the expense of allocation to growth be-cause in such a case we should expect to see some reproduction atlow food levels, while the general empirical pattern is that no repro-duction occurs at very low food densities; emergency reproduction,including suicide reproduction, in response to reducing food avail-ability is a variation sported by a few taxa only. Notice that if κwould decrease with length, reproduction more rapidly decreaseswith decreasing food."
+        },
+        {
+          "document_id": "69b84835ec32c55db5430b94",
+          "title": "Roos - 2020 - The impact of population structure on population a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3962,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "ntime.Furthermore,asaresultofthese reproduction pulses the (juvenile) populationbecomes dominated by a single cohort of individ-uals that is born within a short period of time.Alternatively,whensmall,juvenileindividualshavehigher maintenance requirements per unit biomassthan adults, population cycles also emerge as aconsequence of juvenile-adult asymmetry. In thiscase, adults reproduce continuously, but juvenilegrowth slows down when adult density becomestoo high (see Figure 5.1, right panel). High adultdensities hence slow down the juvenile maturationrate, leading to a decrease in adult density and in"
+        },
+        {
+          "document_id": "69b84835ec32c55db5430b94",
+          "title": "Roos - 2020 - The impact of population structure on population a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4003,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "mmetry leads to cycles in populationdensity with reproduction only occurring whenjuvenile biomass is low and stopping as soon asthe increasing density of juveniles suppresses foodOUPCORRECTED PROOF – FINAL, 8/4/2020, SPiTHE IMPACT OF POPULATION STRUCTURE 61availability to too low levels (see Figure 5.1, leftpanel). The intraspecific interactions among differ-ently sized consumers thus cause the reproductiontobecomepulsedintime.Furthermore,asaresultofthese reproduction pulses the (juvenile) populationbecomes dominated by a single cohort of individ-"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4014,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "during the juvenile stage, while theonset of reproduction hardly seem to affect growth. We can’t include maturity maintenance33into somatic maintenance at the expense of allocation to growth because in such a casewe should expect to see some reproduction at low food levels, while the general empiricalpattern is that no reproduction occurs at very low food densities; emergency reproduction,including suicide reproduction, in response to reducing food availability is a variationsported by a few taxa only. Notice that if κwould decrease with length, reproductionmore rapidly decreases with decreasing food."
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4045,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "organisms t ypically start as embryo that doesnot feed and reproduce as adults. Whenever EpH> EbHthe three life stages are: theembryonic or foetal, the juvenile and the adult.The logical reasoning behind this assumption is the followi ng. An organism that de-velops and produces offspring increases its complexity (or maturity) from the embryo tothe adult stage. Among organisms of the same species the leve l of maturity at the onsetof feeding behaviour is the same. Also, initiation of alloca tion to reproduction, amongorganisms of the same species, occurs when they reach the sam e level (usually higher)"
+        },
+        {
+          "document_id": "69b84763ec32c55db5430951",
+          "title": "Beaudouin - 2019 - Modélisation du lien organisme – population en app.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.411,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "males. Thus, males which do not have enough energy to accomplish one reproduction process would not acquir e their reproductive behavior ( i.e get a territory, build a n est, harvest and take care of the eggs). Furthermore, males in the field need to be at least 1 or 2 years old to start the reproduction processes (Baker, 1994 ; Dufresne et al., 1990 ). This was consistent with the absence of sexual dimorphism observed in our mesocosm between young adult female and male sticklebacks ( i.e. adults born in mesocosm) due to the absence of reproductive behavior during the first year in young males. In our modeling of"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4113,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "the next step in the sequence embryo,juvenile, adult, and then tie it to energy investment in development just as has been donefor the transitions to the juvenile and adult stages. This is not an option in the context ofdebtheory, since at sufficiently low food densities the adult state is never entered, even ifthe animal survives for nutritional reasons. This means that it would live for ever, as far asageing is concerned. Although species exist with very long life spans (excluding externalcauses of death [350]), this does not seem acceptable.Not all species age in the way most animals do; ageing seems to be restricted to species"
+        },
+        {
+          "document_id": "W2403846895",
+          "title": "ON THE FOOD OF NUDIBRANCHS",
+          "doi": "10.2307/1538855",
+          "year": "1959",
+          "distance": 0.3369,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "the animals does not follow reproduction and spawning, but results when the animals lack a suitable supply of food materials.4. Large colonies of certain species may disappear as a result of migration after spawning to places where more favourable conditions of food, etc., prevail for the adults."
+        },
+        {
+          "document_id": "W2099324716",
+          "title": "Offspring size at weaning affects survival to recruitment and reproductive performance of primiparous gray seals",
+          "doi": "10.1002/ece3.1450",
+          "year": "2015",
+          "distance": 0.3655,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "Abstract Offspring size affects survival and subsequent reproduction in many organisms. However, studies of offspring size in large mammals are often limited to effects on juveniles because of the difficulty of following individuals to maturity."
+        },
+        {
+          "document_id": "W2979083793",
+          "title": "Joint estimation of survival and breeding probability in female dolphins and calves with uncertainty in state assignment",
+          "doi": "10.1002/ece3.5693",
+          "year": "2019",
+          "distance": 0.3676,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Abstract While the population growth rate in long‐lived species is highly sensitive to adult survival, reproduction can also significantly drive population dynamics. Reproductive parameters can be challenging to estimate as breeders and nonbreeders may vary in resighting probability and reproductive status may be difficult to assess."
+        },
+        {
+          "document_id": "W2031566265",
+          "title": "Experimental evidence of a link between breeding conditions and the decision to breed or to help in a colonial cooperative bird",
+          "doi": "10.1098/rspb.2003.2652",
+          "year": "2004",
+          "distance": 0.3755,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "In many species mature individuals delay independent reproduction and may help others to reproduce. This behaviour is often explained through ecological constraints, although recently attention has also been paid to the variation in habitat quality. If the quality of vacant habitat influences the fitness trade-off between delaying reproduction and breeding independently, individuals should delay reproduction when conditions for breeding are poor."
+        },
+        {
+          "document_id": "W2084225857",
+          "title": "The contrariwise life of a parasitic, pedomorphic copepod with a non-feeding adult: ontogenesis, ecology, and evolution",
+          "doi": "10.1111/j.1744-7410.2008.00164.x",
+          "year": "2024",
+          "distance": 0.3785,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ex life cycle, and that non-feeding adults of both sexes are never found in taxa that have small larvae and delayed maturation. They occur only when there is a large larva that can provide the adult stage with sufficient nutrient reserves for reproduction."
+        },
+        {
+          "document_id": "W2009641598",
+          "title": "Effects of plant abundance on reproductive success in the biennial <i>Sabatia angularis</i> (Gentianaceae): spatial scale matters",
+          "doi": "10.1111/j.1365-2745.2007.01335.x",
+          "year": "2007",
+          "distance": 0.3812,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Summary Small and low‐density populations often suffer significant reductions in reproduction, as exemplified by studies on rare and threatened species. While this phenomenon is less studied in common species, if general, it should not be restricted to those in peril."
+        },
+        {
+          "document_id": "W1558102580",
+          "title": "Vegetative reproduction and clonal diversity in pleurocarpous mosses (Bryophytina) of mesic habitats",
+          "doi": "10.17169/refubium-16943",
+          "year": "2010",
+          "distance": 0.3819,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "t small populations are more influenced by sexual reproduction than predicted, although sexual reproduction is relatively rare. All three species showed abilities to reproduce vegetatively, so that maintenance and expansion of patches and small populations by asexual means is possible. Never the less the investigated populations indicate that sporadic sexual reproduction events play a major role in long term establishment of the three species."
+        },
+        {
+          "document_id": "W2006233305",
+          "title": "Resting stage in benthic foraminiferal propagules: a key feature for dispersal? Evidence from two shallow-water species",
+          "doi": "10.1144/jm.21.1.95",
+          "year": "2002",
+          "distance": 0.3828,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "esent note, we suggest a mechanism which is more efficient and probably more widespread than most of those previously proposed. We hypothesize that many species produce ‘propagules’ (small juveniles, perhaps just the proloculus) released in large numbers following reproduction that may enter a resting stage. Propagules can be widely dispersed by normal physical processes (currents, sediment transport) and ultimately settle over a range of habitats and conditions. Growth and reproduction commence only in those individuals and species that reach a suitable environment."
+        },
+        {
+          "document_id": "W2586999663",
+          "title": "Exercise training reveals trade-offs among endurance performance and immune function, but not growth, in juvenile lizards",
+          "doi": "10.1242/jeb.153767",
+          "year": "2017",
+          "distance": 0.3899,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "Acquired energetic resources allocated to a particular trait cannot then be re-allocated to a different trait. This often results in a trade-off between survival and reproduction for the adults of many species, but such a trade-off may be manifested differently in juveniles not yet capable of reproduction. Whereas adults may allocate resources to current and/or future reproduction, juveniles can only allocate to future reproduction."
+        },
+        {
+          "document_id": "W2987195430",
+          "title": "Decision letter: The Makorin lep-2 and the lncRNA lep-5 regulate lin-28 to schedule sexual maturation of the C. elegans nervous system",
+          "doi": "10.7554/elife.43660.021",
+          "year": "2019",
+          "distance": 0.3915,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "rg/10.7554/eLife.43660.001 eLife digest Most animals develop from juveniles, which cannot reproduce, to sexually mature adults. The most obvious signs of this transition are changes in body shape and size. However, changes also take place in the brain that enable the animals to adapt their behavior to the demands of adulthood. For example, fully fed adult male roundworms will leave a food source to search for mates, whereas juvenile males will continue feeding. The transition to sexual maturity needs to be carefully timed. Too early, and the animal risks compromising key stages of development."
+        },
+        {
+          "document_id": "W2004240767",
+          "title": "Morphology and histology of the female reproductive system of the mangrove land crab, Ucides cordatus (Linnaeus, 1763) (Brachyura: Ocypodidae)",
+          "doi": "10.1590/s0104-64972011000200006",
+          "year": "2011",
+          "distance": 0.3931,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "ix stages of development: I. immature; II. at maturity; III. mature; IV. partly spawned; V. fully spawned; and VI. in recovery. Reproduction was observed in summer, and the results suggesting that this species showed multiple spawnings."
+        },
+        {
+          "document_id": "W2511254006",
+          "title": "Preface",
+          "doi": "10.1017/cbo9780511762192.001",
+          "year": "2010",
+          "distance": 0.3943,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Sexually reproducing animals are faced with various challenges in order to find, approach and copulate with a mate in reproduction, achieve fertilisation and finally ensure that the offspring survive and in turn reproduce. In social species, this whole process includes additional dimensions involving sometimes intricate relationships of competition and cooperation; further contributing to the overall complexity. Reproduction is central to the survival of the lineage, its suppression leads to extinction."
+        }
+      ]
+    }
+  }
+}

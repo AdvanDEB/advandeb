@@ -1,6 +1,8 @@
 """
 User service - business logic for user management.
 """
+import secrets
+import string
 from datetime import datetime, timezone
 from typing import List, Optional
 
@@ -19,6 +21,22 @@ _DUMMY_BCRYPT_HASH = bcrypt.hashpw(b"dummy", bcrypt.gensalt()).decode()
 
 # Roles accepted by assign_role / remove_role.
 VALID_ROLES = frozenset({"administrator", "knowledge_curator", "knowledge_explorator"})
+
+# Statuses accepted by set_status.
+VALID_STATUSES = frozenset({"active", "suspended"})
+
+# Excludes visually ambiguous characters (0/O, 1/l/I).
+_PASSWORD_ALPHABET = (
+    string.ascii_uppercase.replace("O", "").replace("I", "")
+    + string.ascii_lowercase.replace("l", "").replace("o", "")
+    + string.digits.replace("0", "").replace("1", "")
+    + "!@#%*+-="
+)
+
+
+def generate_password(length: int = 14) -> str:
+    """Generate a strong random password for account creation/reset."""
+    return "".join(secrets.choice(_PASSWORD_ALPHABET) for _ in range(length))
 
 
 class UserService:
@@ -155,14 +173,105 @@ class UserService:
 
         return await self.get_user_by_id(user_id)
 
-    async def list_users(self, skip: int = 0, limit: int = 100) -> List[User]:
-        """List all users."""
-        cursor = self.collection.find().skip(skip).limit(limit)
+    @staticmethod
+    def _build_filter(
+        q: Optional[str] = None,
+        role: Optional[str] = None,
+        status_filter: Optional[str] = None,
+    ) -> dict:
+        """Build a Mongo filter for list_users / count_users."""
+        filt: dict = {}
+        if q:
+            filt["$or"] = [
+                {"email": {"$regex": q, "$options": "i"}},
+                {"full_name": {"$regex": q, "$options": "i"}},
+            ]
+        if role:
+            filt["roles"] = role
+        if status_filter:
+            filt["status"] = status_filter
+        return filt
+
+    async def list_users(
+        self,
+        skip: int = 0,
+        limit: int = 100,
+        q: Optional[str] = None,
+        role: Optional[str] = None,
+        status_filter: Optional[str] = None,
+    ) -> List[User]:
+        """List users, optionally filtered by email/name search, role, or status."""
+        filt = self._build_filter(q, role, status_filter)
+        cursor = self.collection.find(filt).skip(skip).limit(limit)
         users = []
         async for doc in cursor:
             doc["_id"] = str(doc["_id"])
             users.append(User(**doc))
         return users
+
+    async def count_users(
+        self,
+        q: Optional[str] = None,
+        role: Optional[str] = None,
+        status_filter: Optional[str] = None,
+    ) -> int:
+        """Count users matching the same filter as list_users."""
+        filt = self._build_filter(q, role, status_filter)
+        return await self.collection.count_documents(filt)
+
+    async def set_status(self, user_id: str, new_status: str) -> Optional[User]:
+        """Change a user's account status (active/suspended). Admin only."""
+        if new_status not in VALID_STATUSES:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Unknown status: {new_status!r}",
+            )
+        result = await self.collection.update_one(
+            {"_id": ObjectId(user_id)},
+            {"$set": {"status": new_status, "updated_at": datetime.now(timezone.utc)}}
+        )
+        if result.matched_count == 0:
+            return None
+        return await self.get_user_by_id(user_id)
+
+    async def delete_user(self, user_id: str) -> bool:
+        """Permanently delete a user and their private data. Admin only.
+
+        Cascades to everything that is *the user's own*: encrypted provider
+        keys, chat sessions and their messages, in-flight OAuth state, and the
+        staff-access log describing reads of their chats. Knowledge
+        contributions (document/fact/SF submissions, ingestion jobs) are
+        deliberately preserved — they are attributed research output, and the
+        graph would lose provenance if a departing curator's facts vanished.
+
+        Returns True if a user was removed.
+        """
+        result = await self.collection.delete_one({"_id": ObjectId(user_id)})
+        if result.deleted_count == 0:
+            return False
+
+        # Chat messages are keyed by session_id only, so the session ids have
+        # to be collected before the sessions themselves are removed.
+        session_ids = [
+            str(doc["_id"])
+            async for doc in self.db.chat_sessions.find({"user_id": user_id}, {"_id": 1})
+        ]
+        if session_ids:
+            await self.db.chat_messages.delete_many({"session_id": {"$in": session_ids}})
+        await self.db.chat_sessions.delete_many({"user_id": user_id})
+        await self.db.user_llm_keys.delete_many({"user_id": user_id})
+        await self.db.user_oauth_flows.delete_many({"user_id": user_id})
+        await self.db.chat_access_log.delete_many({"target_user_id": user_id})
+        return True
+
+    async def admin_reset_password(self, user_id: str) -> Optional[str]:
+        """Generate and store a new password for a user. Returns the plaintext once."""
+        existing = await self.get_user_by_id(user_id)
+        if not existing:
+            return None
+        new_password = generate_password()
+        await self.set_password(user_id, new_password)
+        return new_password
 
     async def assign_role(self, user_id: str, role: str) -> User:
         """Assign role to user."""

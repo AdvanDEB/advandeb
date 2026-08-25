@@ -1,0 +1,1930 @@
+{
+  "sf_id": "stoichiometry_02",
+  "category": "Stoichiometry",
+  "statement": "Organisms at constant food density converge to a constant chemical composition (weak homeostasis).",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial portion of the retrieved excerpts explicitly describe weak homeostasis as the convergence to a constant chemical composition when food density remains unchanged, providing direct empirical or theoretical support for the stylized fact. These supportive statements are frequent and highly relevant (relevance ≥0.8). The remaining snippets either discuss homeostasis in broader terms or note nuances without contradicting the core claim, yielding only low‑to‑moderate relevance. Consequently, the corpus offers strong overall evidence and a clear consensus that organisms under constant food density tend toward a stable composition."
+          },
+          "n_references": 10,
+          "references": {
+            "3565": {
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1767
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1829
+            },
+            "2760": {
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1844
+            },
+            "3774": {
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1905
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1928
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1986
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.199
+            },
+            "2460": {
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2024
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2067
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2104
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1767,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ed compounds) that have constant chemical composition and constant thermodynamic properties; this is referred to in DEB as strong homeostasis. Occam’s razor urges us to minimize the number of generalized compounds that we consider while evidence supporting variability in stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achie"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1829,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "have constant thermodynamic properties, such as mass-energy couplers (chemical potentials) and mass-entropy couplers (speciﬁc entropies). Strong homeostasis imposes constant conversion coefﬁcients on all aggregated chemical reactions occurring in the organism including assimilation, dissipation and growth, which comes with stoichio- metric constraints. The combination of stoichiometric constraints and variations in the com- position of biomass (reserve/structure ratio) leads to rather complex patterns at the various levels of organisation. Weak homeostasis: the individual as a whole does not change in composition during growth in environments with constant food availability (possibly after a"
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1844,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "G5). The weak homeostasis assumption imposes that organisms tend to a constant chemical composition in an environment with constant food availability; this is supported by the empirical evidence on a constant stoichiometry under certain conditions (S2) and motivated by evolutionary theory (P5). The propositions obtained explain the following empirical ﬁndings: (i) the method of indirect calorimetry (I1), (ii) von Bertalanffy growth curves (G1), (iii) the variation of von Bertalanffy growth rates within (G5) and across species (G4), (iv) Kleiber’s law on metabolic rate (R3) and (v) the pattern of foetal growth (G3). In physics, it is easy to enforce simplicity in experiments bringing observat"
+            },
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1878,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "heory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis interchangeably. Thus, the organism’s generalized compounds have constant chemical and thermodynamic properties regardless of (ﬂuctuations in) available food. When food is constant, the biomass as a whole also has constant chemical and thermodynamic properties. 2.4. Thermal homeostasis in DEB organisms Endotherms are organisms that are able to maintain a constant body temperature (e.g., birds and mammals). The thermal homeostasis allows these species more independence from the environment because all metabolic rates depe"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1905,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achieve a “perfect” homeostatic regulation, i.e., constant stoichiometry. This constancy is in DEB theory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis int"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1914,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "the complexity of continuous physiological adaptations to a changing environment would be overwhelming, the evolutionary selection favored reg- ulated internal conditions such that environmental changes are effectively ﬁltered out and control of the metabolism is maintained. During evolution, therefore, organisms were able to develop several forms of maintaining the constant internal conditions commonly referred to as homeostasis [11]. 2.3. Strong and weak homeostasis in DEB organisms Metabolic systems are often found in a steady state with constant metabolite concentrations [6]. Even if the sys- tem is growing, the homeostatic regulation strives to maintain these concentrations constant [47"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1928,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "chemical composition of organisms depends on the nutritional status (starved vs well-fed) • The chemical composition of organisms at constant food density becomes constant during growth Energy • Dissipating heat is a weighted sum of three mass ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing • Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms 2 [Page 3] to capture what organisms do in terms of mass uptake and use. Mass aspects work out somewhat diﬀerent for the various taxa. Animals, i.e. organisms that feed on other organ- isms, acquire the various compounds they need in approximately ﬁxed "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1986,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "amount of structural material, the chemical composition of the whole body can change. That is, it can change in a particular way. This is a consequence of choosing energy as a state variable rather than the complete catalogue of all compounds. [Page 27] 10 Basic concepts 1.2.2 Weak homeostasis: restrictions on dynamics deb theory also uses another homeostasis assumption: weak homeostasis. Its definition is that if food density does not change reserve density, i.e. the ratio between the amounts of reserve and structure, becomes constant even when growth continues; reserve and struc- ture grow in harmony and biomass no longer changes in composition. This makes sense only if reserve and structu"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.199,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "due to the assumption of weak homeostasis, see Subsection 1.2.2, and their increasing structure requires maintenance. O3 The weight-specific use of dioxygen decreases during the life cycle because investment in growth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully grown adults of different species have a reserve density that increases with maximum length, see Section 8.2.2, while only structure requires maintenance. O4 The conversion cost from food to reserve is paid from food, see Subsection 4.4.2 and Sub- section 2.5.1 of the comments. S1 The chemical composition of reserve and structure can differ, and reserve density depends on the nutritional status, "
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "observations that pertain to energy (weak) homeostasis. In comparison with the many works so far, wherein the concept of energy homeostasis is presented as an assumption of DEB theory, here the same concept arises as a consequence of a more fundamental set of assumptions. Critical for the existence of energy homeostasis is the incompatibility of the term (L∞−L)L3 ˙F3(L) in Eq. (28) with the assumption that ∂˙pC ∂f = 0. By contrast, function ˙H = ˙H ([E]) ﬁrst appearing in Eq. (29) could have any form whatsoever, and energy homeostasis would still hold. The ultimate reason for the linearity of ˙H ([E]) is traceable to strong homeostasis. Furthermore, we see that at maximum food availability ("
+            },
+            {
+              "document_id": "2460",
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2024,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ls that do not change in chemical composition, a concept that we call strong homeostasis. The concept of weak homeostasis builds on strong homeostasis: In a system with two metabolic pools (reserve and structure, see next subsection), the mass of reserve does (eventually) not change relative to that of structure during growth under constant food conditions. This implies that the contribution of reserve to weight is a fixed fraction, and weight becomes proportional to cubed length for isomorphs (if Ecological Modelling 497 (2024) 110869 7 [Page 8] S.A.L.M. Kooijman et al. the reproduction buffer does not contribute). Hundreds of AmP entries support this finding empirically. It took 25 years t"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2055,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "predictions. The various forms of home- ostasis are linked to the principle (criterion 1 - table I) that organisms have increased their control over metabolism during evolution allowing for some adaptation to environmental changes in short periods. Strong homeostasis: metabolic pools do not change in composition and can be conceived as generalized compounds, i.e. mixtures of a large number of compounds of constant chemical composition and thermodynamic properties. The individual feeds on substrate (food, X) and produces products (faeces, water, carbon dioxide, ammonia, etc), biomass (reserve E and structure V ) and gametes (reserve allocated to reproduction). The standard DEB model (but not "
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2067,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "ng struc- tural mass and reserves) from birth to death if food density does not change and reserves are at equilibrium. This is called the weak homeostasis assumption. Weak homeostasis is basically diﬀerent from strong homeostasis. Strong homeostasis has nothing to do with re- serve dynamics, while weak homeostasis partly speciﬁes the reserve dynamics. The reserve dynamics will be underpinned mechanistically on the basis of the structural homeosta- sis assumption, see {246}. Structural homeostasis also provides an explanation for weak homeostasis. Contrary to strong homeostasis, weak homeostasis only applies at steady state. The composition of a whole organism changes during transient states"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2082,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "c species and hydrophilic compounds, it is usually deﬁned as the ratio of the concentration in the organism to that in the water, which are both taken to be constant. For terrestrial species and/or lipophilic compounds, it is usually deﬁned as the ratio of the concentration in the organism to that in the food. Applying the BC concept is a bit complicated in the present context, because the concentration in the organism does not become stationary, because of growth and reproduction, even if the concentration in the environment is constant, i.e. in water, food and at constant food density. If the growth rate is low in comparison to the exchange rates, the compound can be in pseudo-equilibrium,"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2104,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "per unit of structural volume is proportional to a reserve density gradient and to the energy conductance ˙v. Also, [ ˙pC], is constant for a full grown organism at constant food level because dV/dt = 0 and [E] = [E]∗(see Assumption 5.3.6). This means that, at constant food level, an organism that behaves accordingly to Assumption 5.3.6 and Proposition 5.3.6 has a higher degree of control over its metabolism (P6). Proposition 5.3.7 (Reserve density at weak homeostasis) The reserve density under weak homeostasis is a function of resource density only: [E∗] = f(X)[Em]. (5.39) Proof: At weak homeostasis d[E] dt = 0 and Eq. 5.28 simpliﬁes to: [ ˙p∗ C] = [E∗] \u0012 ˙vV −1/3 f(X∗) [E∗]/[Em] −1 V dV dt"
+            },
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2118,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ted transition of the system to a new metabolic state. Without such a regulation, living organisms faced with the environmental variability would have to constantly adapt their physiology. Because the complexity of continuous physiological adaptations to a changing environment would be overwhelming, the evolutionary selection favored reg- ulated internal conditions such that environmental changes are effectively ﬁltered out and control of the metabolism is maintained. During evolution, therefore, organisms were able to develop several forms of maintaining the constant internal conditions commonly referred to as homeostasis [11]. 2.3. Strong and weak homeostasis in DEB organisms Metabolic sys"
+            },
+            {
+              "document_id": "2970",
+              "title": "KooySous2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.212,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "chemical composition is constant and known, but this rarely occurs in practice. There does not exist a A Practical guide to the use of DEB theory 535 Biological Reviews 83 (2008) 533–552 \u0001 2008 The Authors Journal compilation \u0001 2008 Cambridge Philosophical Society [Page 4] single most useful quantity for energetics. We need length because the feeding rate is linked to surface area. We need mass, however, to deal with mass conservation and energy to deal with energy conservation. DEB theory uses all of this. With weak homeostasis we can assess the composition of both reserve and structure by comparing the body com- position at different food densities, without being able to separate them phys"
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2147,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "h size intra-speciﬁcally, but decreases with size inter-speciﬁcally R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after inges"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "A handful of studies (snippets 1, 10, 12, 15) report that organisms maintain relatively constant elemental or macromolecular ratios when environmental conditions such as food availability are stable, indicating weak stoichiometric homeostasis. No snippet provides clear evidence that a constant food density leads to compositional change, and none directly contradicts the stylized fact. The overall pattern is modestly supportive, yielding moderate evidence strength and a consensus that leans toward corroboration of the fact."
+          },
+          "n_references": 4,
+          "references": {
+            "W2071638062": {
+              "title": "Homeostasis of cell composition during prolonged darkness",
+              "doi": "https://doi.org/10.1111/j.1365-3040.2006.01593.x",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.222
+            },
+            "W1505770057": {
+              "title": "Growth rate affects the responses of the green alga <scp><i>T</i></scp><i>etraselmis suecica</i> to external perturbations",
+              "doi": "https://doi.org/10.1111/pce.12176",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.277
+            },
+            "W2112719989": {
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2789
+            },
+            "W2083329047": {
+              "title": "The Feeding of <i>Amoeba proteus</i> on <i>Paramecium aurelia</i>*",
+              "doi": "https://doi.org/10.1111/j.1550-7408.1968.tb02122.x",
+              "year": "1968",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2812
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2071638062",
+              "title": "Homeostasis of cell composition during prolonged darkness",
+              "doi": "https://doi.org/10.1111/j.1365-3040.2006.01593.x",
+              "year": "2006",
+              "distance": 0.222,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ABSTRACT The chemical composition of organisms in relation to their environmental resource availability is an area of intense research activity. We studied the changes in cell composition of the cyanobacterium Phormidium autumnale in response to prolonged darkness. Cells allocated their internal resources in a homeostatic manner, oxidizing all the three major cellular constituents in a proportional way. This resulted in constant C/N and carbohydrates, lipids and proteins ratios that remained unaltered throughout the whole incubation period. We propose the maintenance of balanced cell composition (homeostasis) as an evolutionary strategy related to environmental transitory changes."
+            },
+            {
+              "document_id": "W2093086157",
+              "title": "Shifting Sugars and Shifting Paradigms",
+              "doi": "https://doi.org/10.1371/journal.pbio.1002068",
+              "year": "2015",
+              "distance": 0.2629,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "No organism lives in a constant environment. Based on classical studies in molecular biology, many have viewed microbes as following strict rules for shifting their metabolic activities when prevailing conditions change. For example, students learn that the bacterium Escherichia coli makes proteins for digesting lactose only when lactose is available and glucose, a better sugar, is not. However, recent studies, including three PLOS Biology papers examining sugar utilization in the budding yeast Saccharomyces cerevisiae, show that considerable heterogeneity in response to complex environments exists within and between populations. These results join similar recent results in other organisms t"
+            },
+            {
+              "document_id": "W2469729788",
+              "title": "V. THE GENETICS OF HOMEOSTASIS REVISITED",
+              "doi": "",
+              "year": "1985",
+              "distance": 0.2669,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The notion of homeostasis, an organism's ability to maintain a constant expression of a phenotypic character despite environmental change, is central to many arguments in biology. Most workers have presumed that homeostasis is beneficial and therefore the object of selection in natural populations. For example, Lewontin (1957, p. 402) asserts that may arise with very wide adaptive norms, so wide in fact, that genetic polymorphism can add little to the adaptation of the population of which they are a part. Should such homeostatic genotypes alise, intrapopulational selection will favor them since they must, in a world of fluctuating environment, leave more offspring than their more specialized"
+            },
+            {
+              "document_id": "W2027536087",
+              "title": "Laboratory studies of ingestion and food utilization in lobate and tentaculate ctenophores 1",
+              "doi": "https://doi.org/10.4319/lo.1978.23.4.0740",
+              "year": "1978",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Ctenophore ingestion rates are linearly related to food density up to concentrations much higher than those usually assumed to be representative of the natural environment. Daily rations in excess of 1,000% of their body weights at high prey densities are matched by growth rates characteristic of phytoplankton (daily doublings). Digestive efficiencies &gt;70% were recorded at moderate prey densities. Growth efficiencies rarely exceed 10% because the bulk of assimilated food (up to 80% of that ingested) is required for the energy metabolism of these organically dilute (carbon 2% of dry wt) creatures. Ctenophores may be at a competitive disadvantage at low food densities compared to predators "
+            },
+            {
+              "document_id": "W3183381254",
+              "title": "A competitive advantage through fast dead matter elimination in confined cellular aggregates",
+              "doi": "https://doi.org/10.1101/2021.07.22.453340",
+              "year": "2021",
+              "distance": 0.2726,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Competition of different species or cell types for limited space is relevant in a variety of biological processes such as biofilm development, tissue morphogenesis and tumor growth. Predicting the outcome for non-adversarial competition of such growing active matter is non-trivial, as it depends on how processes like growth, proliferation and the degradation of cellular matter are regulated in confinement; regulation that happens even in the absence of competition to achieve the dynamic steady state known as homeostasis. Here, we show that passive by-products of the processes maintaining homeostasis can significantly alter fitness. Even for purely pressure-regulated growth and exclu"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.273,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            },
+            {
+              "document_id": "W2052751674",
+              "title": "Food quality and food threshold: implications of food stoichiometry to competitive ability of herbivore plankton",
+              "doi": "https://doi.org/10.1890/es12-00098.1",
+              "year": "2012",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Exploitative competition for food resources is considered to be an important factor determining the dominant species in communities. In such a competition, a threshold food concentration (TFC), where the growth rate becomes zero, is crucial in determination of competitive outcomes. In addition, recent studies on ecological stoichiometry have suggested that the TFC of a species would differ due to changes in food elements that limit growth. If the magnitude of change in TFC differs between species, competitive superiority among species may also change. The experiments showed that the rank order of the species in TFC changed according to the P content of food, suggesting that competitively sup"
+            },
+            {
+              "document_id": "W31512359",
+              "title": "Une histoire du XIXe siècle : la biographie de Victor Duruy (1811-1894)",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2003",
+              "distance": 0.276,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Anthropogenic activities have reshaped the relative supply rates of essential elements to organisms. Recent studies suggested that consumer performance is strongly reduced by food that is either very high or very low in relative phosphorus content. However, the generality of such 'stoichiometric knife-edge' and its underlying mechanisms are poorly understood. We studied the response of a planktonic rotifer to a 10-fold food carbon : phosphorus (C : P) gradient and confirmed the existence of the stoichiometric knife-edge. Interestingly, we observed a complete homeostatic breakdown associated with strong growth reductions at high food C : P. In contrast, at low food C : P, animals maintained h"
+            },
+            {
+              "document_id": "W4377029948",
+              "title": "Physiological ecology",
+              "doi": "https://doi.org/10.1093/oso/9780192863249.003.0004",
+              "year": "2023",
+              "distance": 0.2765,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Physiological ecology deals with how processes at cellular and molecular levels relate to ecological challenges. Carnivorans occupy the widest range of habitat and trophic niches of any mammalian order, variously specializing on vertebrate flesh, insects, fruits, and plant leaves. Carnivorous carnivorans eat less frequently than herbivores, retain food in their guts for briefer periods, and lack the genes that code for proteins that regulate appetite in response to gut contents. Carnivorans, even those with high-cellulose diets, lack special gut structures to hold microbial fermenters. As a result, they only absorb cell contents and pass cell walls undigested, making them inefficien"
+            },
+            {
+              "document_id": "W1505770057",
+              "title": "Growth rate affects the responses of the green alga <scp><i>T</i></scp><i>etraselmis suecica</i> to external perturbations",
+              "doi": "https://doi.org/10.1111/pce.12176",
+              "year": "2013",
+              "distance": 0.277,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "We hypothesized that the duration of the perturbation relative to the reproduction rate influences the response mode to external perturbations and the degree of (organic) compositional homeostasis. Our findings are consistent with this hypothesis. When different growth rates were imposed to cells of the same species, the degree of compositional homeostasis following an external perturbation was significantly higher in the cells with slower growth rate. The ability to maintain a constant composition was however vinculated by the availability of sufficient energy."
+            },
+            {
+              "document_id": "W2192578330",
+              "title": "No Evidence for Activity Adjustment in Response to Increased Density in Daphnia magna",
+              "doi": "https://doi.org/10.1371/journal.pone.0144759",
+              "year": "2015",
+              "distance": 0.2772,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Increased population density may lead to a decrease in energy available for growth and reproduction via effects on the activity level of individuals. Whilst this may be of particular importance for organisms that compete for defendable resources and/or have a high frequency of social interactions, it is less obvious how individual activity should covary with population density when food resources are not defendable or direct interactions among individuals are negligible. Based on observations that there is a general negative relationship between population density and metabolism it has been suggested that organisms actively reduce activity under increased density to accommodate an expected d"
+            },
+            {
+              "document_id": "W2112719989",
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "distance": 0.2789,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "1 Organisms facing variation in food quality maintain elemental composition within limited bounds. Such stoichiometric homeostasis has often been considered a species-specific parameter, but stoichiometry can also vary intraspecifically across life stages, sexes and sizes. In colonial organisms with overlapping generations, stoichiometric variation among stages could lead to flexibility in colony-level elemental composition due to changes in internal demography. 2 We examine how the balance of energy (sucrose) and nutrients (prey) affects growth rate and carbon : nitrogen : phosphorus (C : N : P) homeostasis in a eusocial insect, the pavement ant Tetramorium caespitum. 3 Colony growth depend"
+            },
+            {
+              "document_id": "W2069533811",
+              "title": "Amoeboid organism solves complex nutritional challenges",
+              "doi": "https://doi.org/10.1073/pnas.0912198107",
+              "year": "2010",
+              "distance": 0.2789,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A fundamental question in nutritional biology is how distributed systems maintain an optimal supply of multiple nutrients essential for life and reproduction. In the case of animals, the nutritional requirements of the cells within the body are coordinated by the brain in neural and chemical dialogue with sensory systems and peripheral organs. At the level of an insect society, the requirements for the entire colony are met by the foraging efforts of a minority of workers responding to cues emanating from the brood. Both examples involve components specialized to deal with nutrient supply and demand (brains and peripheral organs, foragers and brood). However, some of the most species-rich, l"
+            },
+            {
+              "document_id": "W2972518090",
+              "title": "Herbivore consumers face different challenges along opposite sides of the stoichiometric knife‐edge",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2019",
+              "distance": 0.2807,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Anthropogenic activities have reshaped the relative supply rates of essential elements to organisms. Recent studies suggested that consumer performance is strongly reduced by food that is either very high or very low in relative phosphorus content. However, the generality of such ‘stoichiometric knife‐edge’ and its underlying mechanisms are poorly understood. We studied the response of a planktonic rotifer to a 10‐fold food carbon : phosphorus (C : P) gradient and confirmed the existence of the stoichiometric knife‐edge. Interestingly, we observed a complete homeostatic breakdown associated with strong growth reductions at high food C : P. In contrast, at low food C : P, animals mai"
+            },
+            {
+              "document_id": "W2083329047",
+              "title": "The Feeding of <i>Amoeba proteus</i> on <i>Paramecium aurelia</i>*",
+              "doi": "https://doi.org/10.1111/j.1550-7408.1968.tb02122.x",
+              "year": "1968",
+              "distance": 0.2812,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "SYNOPSIS. Density of prey ( Paramecium aurelia ) and predator ( Amoeba proteus ) were varied while volume of inorganic medium was kept constant. Variations in density of prey had little effect on the rates of feeding and reproduction of the amoebae; but with increasing predator density the amoebae captured the paramecia less rapidly and ingested fewer before dividing, altho division size did not change appreciably. Therefore, amoebae of a low density population with a constant food supply carry more nutritional reserves from generation to generation than do those in a denser population."
+            },
+            {
+              "document_id": "W2139402893",
+              "title": "Conditioning of the membrane fatty acid profile of Escherichia coli during periodic temperature cycling",
+              "doi": "https://doi.org/10.1099/mic.0.029637-0",
+              "year": "2009",
+              "distance": 0.2816,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The membrane fatty acid composition of Escherichia coli becomes conditioned during periodic temperature cycling between 37 and 8 °C. After several cycles of temperature change, the bacteria become locked into a low-temperature physiology. Even after a prolonged incubation at high temperature the membrane fatty acid composition of conditioned cells was similar to that of cold-stressed cells."
+            },
+            {
+              "document_id": "W1975073465",
+              "title": "Some effects of patchy food environments on copepods1",
+              "doi": "https://doi.org/10.4319/lo.1977.22.1.0099",
+              "year": "1977",
+              "distance": 0.282,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Laboratory determinations of the time taken for copepods to starve to death and of the effects of discontinuous food availability on egg production are used to demonstrate that different species are adapted to different scales of patchiness in their food environment. Acartia tonsa and Centropages typicus depend on constant food availability and are therefore sensitive to small scales of patchiness whereas Pseudocalanus minutus and Calanus finmarchicus can physiologically remove themselves from such small‐scale variability. The success of these organisms in the natural environment may be related to the length of time that layers of food exist in the water column."
+            },
+            {
+              "document_id": "W3138531274",
+              "title": "Nutrient complexity triggers transitions between solitary and colonial growth in bacterial populations",
+              "doi": "https://doi.org/10.1038/s41396-021-00953-7",
+              "year": "2021",
+              "distance": 0.2826,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Microbial populations often experience fluctuations in nutrient complexity in their natural environment such as between high molecular weight polysaccharides and simple monosaccharides. However, it is unclear if cells can adopt growth behaviors that allow individuals to optimally respond to differences in nutrient complexity. Here, we directly control nutrient complexity and use quantitative single-cell analysis to study the growth dynamics of individuals within populations of the aquatic bacterium Caulobacter crescentus. We show that cells form clonal microcolonies when growing on the polysaccharide xylan, which is abundant in nature and degraded using extracellular cell-linked enz"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The majority of the retrieved excerpts (especially 1‑5, 7‑9, 11, and 24) explicitly describe weak or strong homeostasis in DEB theory, stating that under constant food density organisms converge to a fixed chemical composition. These statements are directly aligned with the stylized fact and have high relevance scores. Only a few snippets discuss homeostasis in broader or unrelated contexts, providing neutral evidence. No clear contradictions were found. Consequently, the corpus offers strong, consistent support for the claim that organisms at constant food density tend toward a constant stoichiometry."
+          },
+          "n_references": 9,
+          "references": {
+            "3565": {
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1767
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1829
+            },
+            "2760": {
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1844
+            },
+            "3774": {
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1905
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1928
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1986
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.199
+            },
+            "2460": {
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2024
+            },
+            "W2112719989": {
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2789
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1767,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ed compounds) that have constant chemical composition and constant thermodynamic properties; this is referred to in DEB as strong homeostasis. Occam’s razor urges us to minimize the number of generalized compounds that we consider while evidence supporting variability in stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achie"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1829,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "have constant thermodynamic properties, such as mass-energy couplers (chemical potentials) and mass-entropy couplers (speciﬁc entropies). Strong homeostasis imposes constant conversion coefﬁcients on all aggregated chemical reactions occurring in the organism including assimilation, dissipation and growth, which comes with stoichio- metric constraints. The combination of stoichiometric constraints and variations in the com- position of biomass (reserve/structure ratio) leads to rather complex patterns at the various levels of organisation. Weak homeostasis: the individual as a whole does not change in composition during growth in environments with constant food availability (possibly after a"
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1844,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "G5). The weak homeostasis assumption imposes that organisms tend to a constant chemical composition in an environment with constant food availability; this is supported by the empirical evidence on a constant stoichiometry under certain conditions (S2) and motivated by evolutionary theory (P5). The propositions obtained explain the following empirical ﬁndings: (i) the method of indirect calorimetry (I1), (ii) von Bertalanffy growth curves (G1), (iii) the variation of von Bertalanffy growth rates within (G5) and across species (G4), (iv) Kleiber’s law on metabolic rate (R3) and (v) the pattern of foetal growth (G3). In physics, it is easy to enforce simplicity in experiments bringing observat"
+            },
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1878,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "heory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis interchangeably. Thus, the organism’s generalized compounds have constant chemical and thermodynamic properties regardless of (ﬂuctuations in) available food. When food is constant, the biomass as a whole also has constant chemical and thermodynamic properties. 2.4. Thermal homeostasis in DEB organisms Endotherms are organisms that are able to maintain a constant body temperature (e.g., birds and mammals). The thermal homeostasis allows these species more independence from the environment because all metabolic rates depe"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1905,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achieve a “perfect” homeostatic regulation, i.e., constant stoichiometry. This constancy is in DEB theory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis int"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1914,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "the complexity of continuous physiological adaptations to a changing environment would be overwhelming, the evolutionary selection favored reg- ulated internal conditions such that environmental changes are effectively ﬁltered out and control of the metabolism is maintained. During evolution, therefore, organisms were able to develop several forms of maintaining the constant internal conditions commonly referred to as homeostasis [11]. 2.3. Strong and weak homeostasis in DEB organisms Metabolic systems are often found in a steady state with constant metabolite concentrations [6]. Even if the sys- tem is growing, the homeostatic regulation strives to maintain these concentrations constant [47"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1928,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "chemical composition of organisms depends on the nutritional status (starved vs well-fed) • The chemical composition of organisms at constant food density becomes constant during growth Energy • Dissipating heat is a weighted sum of three mass ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing • Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms 2 [Page 3] to capture what organisms do in terms of mass uptake and use. Mass aspects work out somewhat diﬀerent for the various taxa. Animals, i.e. organisms that feed on other organ- isms, acquire the various compounds they need in approximately ﬁxed "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1986,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "amount of structural material, the chemical composition of the whole body can change. That is, it can change in a particular way. This is a consequence of choosing energy as a state variable rather than the complete catalogue of all compounds. [Page 27] 10 Basic concepts 1.2.2 Weak homeostasis: restrictions on dynamics deb theory also uses another homeostasis assumption: weak homeostasis. Its definition is that if food density does not change reserve density, i.e. the ratio between the amounts of reserve and structure, becomes constant even when growth continues; reserve and struc- ture grow in harmony and biomass no longer changes in composition. This makes sense only if reserve and structu"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.199,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "due to the assumption of weak homeostasis, see Subsection 1.2.2, and their increasing structure requires maintenance. O3 The weight-specific use of dioxygen decreases during the life cycle because investment in growth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully grown adults of different species have a reserve density that increases with maximum length, see Section 8.2.2, while only structure requires maintenance. O4 The conversion cost from food to reserve is paid from food, see Subsection 4.4.2 and Sub- section 2.5.1 of the comments. S1 The chemical composition of reserve and structure can differ, and reserve density depends on the nutritional status, "
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "observations that pertain to energy (weak) homeostasis. In comparison with the many works so far, wherein the concept of energy homeostasis is presented as an assumption of DEB theory, here the same concept arises as a consequence of a more fundamental set of assumptions. Critical for the existence of energy homeostasis is the incompatibility of the term (L∞−L)L3 ˙F3(L) in Eq. (28) with the assumption that ∂˙pC ∂f = 0. By contrast, function ˙H = ˙H ([E]) ﬁrst appearing in Eq. (29) could have any form whatsoever, and energy homeostasis would still hold. The ultimate reason for the linearity of ˙H ([E]) is traceable to strong homeostasis. Furthermore, we see that at maximum food availability ("
+            },
+            {
+              "document_id": "2460",
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2024,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ls that do not change in chemical composition, a concept that we call strong homeostasis. The concept of weak homeostasis builds on strong homeostasis: In a system with two metabolic pools (reserve and structure, see next subsection), the mass of reserve does (eventually) not change relative to that of structure during growth under constant food conditions. This implies that the contribution of reserve to weight is a fixed fraction, and weight becomes proportional to cubed length for isomorphs (if Ecological Modelling 497 (2024) 110869 7 [Page 8] S.A.L.M. Kooijman et al. the reproduction buffer does not contribute). Hundreds of AmP entries support this finding empirically. It took 25 years t"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2055,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "predictions. The various forms of home- ostasis are linked to the principle (criterion 1 - table I) that organisms have increased their control over metabolism during evolution allowing for some adaptation to environmental changes in short periods. Strong homeostasis: metabolic pools do not change in composition and can be conceived as generalized compounds, i.e. mixtures of a large number of compounds of constant chemical composition and thermodynamic properties. The individual feeds on substrate (food, X) and produces products (faeces, water, carbon dioxide, ammonia, etc), biomass (reserve E and structure V ) and gametes (reserve allocated to reproduction). The standard DEB model (but not "
+            },
+            {
+              "document_id": "W2071638062",
+              "title": "Homeostasis of cell composition during prolonged darkness",
+              "doi": "https://doi.org/10.1111/j.1365-3040.2006.01593.x",
+              "year": "2006",
+              "distance": 0.222,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT The chemical composition of organisms in relation to their environmental resource availability is an area of intense research activity. We studied the changes in cell composition of the cyanobacterium Phormidium autumnale in response to prolonged darkness. Cells allocated their internal resources in a homeostatic manner, oxidizing all the three major cellular constituents in a proportional way. This resulted in constant C/N and carbohydrates, lipids and proteins ratios that remained unaltered throughout the whole incubation period. We propose the maintenance of balanced cell composition (homeostasis) as an evolutionary strategy related to environmental transitory changes."
+            },
+            {
+              "document_id": "W2093086157",
+              "title": "Shifting Sugars and Shifting Paradigms",
+              "doi": "https://doi.org/10.1371/journal.pbio.1002068",
+              "year": "2015",
+              "distance": 0.2629,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "No organism lives in a constant environment. Based on classical studies in molecular biology, many have viewed microbes as following strict rules for shifting their metabolic activities when prevailing conditions change. For example, students learn that the bacterium Escherichia coli makes proteins for digesting lactose only when lactose is available and glucose, a better sugar, is not. However, recent studies, including three PLOS Biology papers examining sugar utilization in the budding yeast Saccharomyces cerevisiae, show that considerable heterogeneity in response to complex environments exists within and between populations. These results join similar recent results in other organisms t"
+            },
+            {
+              "document_id": "W2469729788",
+              "title": "V. THE GENETICS OF HOMEOSTASIS REVISITED",
+              "doi": "",
+              "year": "1985",
+              "distance": 0.2669,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The notion of homeostasis, an organism's ability to maintain a constant expression of a phenotypic character despite environmental change, is central to many arguments in biology. Most workers have presumed that homeostasis is beneficial and therefore the object of selection in natural populations. For example, Lewontin (1957, p. 402) asserts that may arise with very wide adaptive norms, so wide in fact, that genetic polymorphism can add little to the adaptation of the population of which they are a part. Should such homeostatic genotypes alise, intrapopulational selection will favor them since they must, in a world of fluctuating environment, leave more offspring than their more specialized"
+            },
+            {
+              "document_id": "W2027536087",
+              "title": "Laboratory studies of ingestion and food utilization in lobate and tentaculate ctenophores 1",
+              "doi": "https://doi.org/10.4319/lo.1978.23.4.0740",
+              "year": "1978",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Ctenophore ingestion rates are linearly related to food density up to concentrations much higher than those usually assumed to be representative of the natural environment. Daily rations in excess of 1,000% of their body weights at high prey densities are matched by growth rates characteristic of phytoplankton (daily doublings). Digestive efficiencies &gt;70% were recorded at moderate prey densities. Growth efficiencies rarely exceed 10% because the bulk of assimilated food (up to 80% of that ingested) is required for the energy metabolism of these organically dilute (carbon 2% of dry wt) creatures. Ctenophores may be at a competitive disadvantage at low food densities compared to predators "
+            },
+            {
+              "document_id": "W3183381254",
+              "title": "A competitive advantage through fast dead matter elimination in confined cellular aggregates",
+              "doi": "https://doi.org/10.1101/2021.07.22.453340",
+              "year": "2021",
+              "distance": 0.2726,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract Competition of different species or cell types for limited space is relevant in a variety of biological processes such as biofilm development, tissue morphogenesis and tumor growth. Predicting the outcome for non-adversarial competition of such growing active matter is non-trivial, as it depends on how processes like growth, proliferation and the degradation of cellular matter are regulated in confinement; regulation that happens even in the absence of competition to achieve the dynamic steady state known as homeostasis. Here, we show that passive by-products of the processes maintaining homeostasis can significantly alter fitness. Even for purely pressure-regulated growth and exclu"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.273,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            },
+            {
+              "document_id": "W2052751674",
+              "title": "Food quality and food threshold: implications of food stoichiometry to competitive ability of herbivore plankton",
+              "doi": "https://doi.org/10.1890/es12-00098.1",
+              "year": "2012",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Exploitative competition for food resources is considered to be an important factor determining the dominant species in communities. In such a competition, a threshold food concentration (TFC), where the growth rate becomes zero, is crucial in determination of competitive outcomes. In addition, recent studies on ecological stoichiometry have suggested that the TFC of a species would differ due to changes in food elements that limit growth. If the magnitude of change in TFC differs between species, competitive superiority among species may also change. The experiments showed that the rank order of the species in TFC changed according to the P content of food, suggesting that competitively sup"
+            },
+            {
+              "document_id": "W31512359",
+              "title": "Une histoire du XIXe siècle : la biographie de Victor Duruy (1811-1894)",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2003",
+              "distance": 0.276,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Anthropogenic activities have reshaped the relative supply rates of essential elements to organisms. Recent studies suggested that consumer performance is strongly reduced by food that is either very high or very low in relative phosphorus content. However, the generality of such 'stoichiometric knife-edge' and its underlying mechanisms are poorly understood. We studied the response of a planktonic rotifer to a 10-fold food carbon : phosphorus (C : P) gradient and confirmed the existence of the stoichiometric knife-edge. Interestingly, we observed a complete homeostatic breakdown associated with strong growth reductions at high food C : P. In contrast, at low food C : P, animals maintained h"
+            },
+            {
+              "document_id": "W4377029948",
+              "title": "Physiological ecology",
+              "doi": "https://doi.org/10.1093/oso/9780192863249.003.0004",
+              "year": "2023",
+              "distance": 0.2765,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract Physiological ecology deals with how processes at cellular and molecular levels relate to ecological challenges. Carnivorans occupy the widest range of habitat and trophic niches of any mammalian order, variously specializing on vertebrate flesh, insects, fruits, and plant leaves. Carnivorous carnivorans eat less frequently than herbivores, retain food in their guts for briefer periods, and lack the genes that code for proteins that regulate appetite in response to gut contents. Carnivorans, even those with high-cellulose diets, lack special gut structures to hold microbial fermenters. As a result, they only absorb cell contents and pass cell walls undigested, making them inefficien"
+            },
+            {
+              "document_id": "W1505770057",
+              "title": "Growth rate affects the responses of the green alga <scp><i>T</i></scp><i>etraselmis suecica</i> to external perturbations",
+              "doi": "https://doi.org/10.1111/pce.12176",
+              "year": "2013",
+              "distance": 0.277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "We hypothesized that the duration of the perturbation relative to the reproduction rate influences the response mode to external perturbations and the degree of (organic) compositional homeostasis. Our findings are consistent with this hypothesis. When different growth rates were imposed to cells of the same species, the degree of compositional homeostasis following an external perturbation was significantly higher in the cells with slower growth rate. The ability to maintain a constant composition was however vinculated by the availability of sufficient energy."
+            },
+            {
+              "document_id": "W2192578330",
+              "title": "No Evidence for Activity Adjustment in Response to Increased Density in Daphnia magna",
+              "doi": "https://doi.org/10.1371/journal.pone.0144759",
+              "year": "2015",
+              "distance": 0.2772,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Increased population density may lead to a decrease in energy available for growth and reproduction via effects on the activity level of individuals. Whilst this may be of particular importance for organisms that compete for defendable resources and/or have a high frequency of social interactions, it is less obvious how individual activity should covary with population density when food resources are not defendable or direct interactions among individuals are negligible. Based on observations that there is a general negative relationship between population density and metabolism it has been suggested that organisms actively reduce activity under increased density to accommodate an expected d"
+            },
+            {
+              "document_id": "W2112719989",
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "distance": 0.2789,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "1 Organisms facing variation in food quality maintain elemental composition within limited bounds. Such stoichiometric homeostasis has often been considered a species-specific parameter, but stoichiometry can also vary intraspecifically across life stages, sexes and sizes. In colonial organisms with overlapping generations, stoichiometric variation among stages could lead to flexibility in colony-level elemental composition due to changes in internal demography. 2 We examine how the balance of energy (sucrose) and nutrients (prey) affects growth rate and carbon : nitrogen : phosphorus (C : N : P) homeostasis in a eusocial insect, the pavement ant Tetramorium caespitum. 3 Colony growth depend"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The corpus provides strong and consistent support for the stylized fact. Multiple independent sources (Jusup et al. 2017, Sousa/Domingos 2008 & 2010, Kooijman 2000/2010/2024) explicitly define weak homeostasis as organisms tending to a constant chemical composition under constant food density, and several note empirical backing: Sousa & Domingos (2008) cite empirical evidence on constant stoichiometry under certain conditions; Jusup et al. (2017) note 'perfect' homeostatic regulation under abundant/constant food; Kooijman et al. (2024) state hundreds of AmP entries support the implied weight-length proportionality; Kooijman (2012) lists it as an empirical pattern. A few snippets are neutral (focusing on strong homeostasis, bioconcentration, or unrelated respiration/reproduction facts), and none contradict the claim. Note that most references describe weak homeostasis as a theoretical assumption, but several explicitly tie it to empirical evidence, yielding clear corroboration with no conflict."
+          },
+          "n_references": 11,
+          "references": {
+            "3565": {
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1767
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1829
+            },
+            "2760": {
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1844
+            },
+            "3774": {
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.1905
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1928
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1986
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.199
+            },
+            "2460": {
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2024
+            },
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2067
+            },
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2104
+            },
+            "2970": {
+              "title": "KooySous2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.212
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1767,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "ed compounds) that have constant chemical composition and constant thermodynamic properties; this is referred to in DEB as strong homeostasis. Occam’s razor urges us to minimize the number of generalized compounds that we consider while evidence supporting variability in stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achie"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1829,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "have constant thermodynamic properties, such as mass-energy couplers (chemical potentials) and mass-entropy couplers (speciﬁc entropies). Strong homeostasis imposes constant conversion coefﬁcients on all aggregated chemical reactions occurring in the organism including assimilation, dissipation and growth, which comes with stoichio- metric constraints. The combination of stoichiometric constraints and variations in the com- position of biomass (reserve/structure ratio) leads to rather complex patterns at the various levels of organisation. Weak homeostasis: the individual as a whole does not change in composition during growth in environments with constant food availability (possibly after a"
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1844,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "G5). The weak homeostasis assumption imposes that organisms tend to a constant chemical composition in an environment with constant food availability; this is supported by the empirical evidence on a constant stoichiometry under certain conditions (S2) and motivated by evolutionary theory (P5). The propositions obtained explain the following empirical ﬁndings: (i) the method of indirect calorimetry (I1), (ii) von Bertalanffy growth curves (G1), (iii) the variation of von Bertalanffy growth rates within (G5) and across species (G4), (iv) Kleiber’s law on metabolic rate (R3) and (v) the pattern of foetal growth (G3). In physics, it is easy to enforce simplicity in experiments bringing observat"
+            },
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1878,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "heory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis interchangeably. Thus, the organism’s generalized compounds have constant chemical and thermodynamic properties regardless of (ﬂuctuations in) available food. When food is constant, the biomass as a whole also has constant chemical and thermodynamic properties. 2.4. Thermal homeostasis in DEB organisms Endotherms are organisms that are able to maintain a constant body temperature (e.g., birds and mammals). The thermal homeostasis allows these species more independence from the environment because all metabolic rates depe"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1905,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achieve a “perfect” homeostatic regulation, i.e., constant stoichiometry. This constancy is in DEB theory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis int"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1914,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "the complexity of continuous physiological adaptations to a changing environment would be overwhelming, the evolutionary selection favored reg- ulated internal conditions such that environmental changes are effectively ﬁltered out and control of the metabolism is maintained. During evolution, therefore, organisms were able to develop several forms of maintaining the constant internal conditions commonly referred to as homeostasis [11]. 2.3. Strong and weak homeostasis in DEB organisms Metabolic systems are often found in a steady state with constant metabolite concentrations [6]. Even if the sys- tem is growing, the homeostatic regulation strives to maintain these concentrations constant [47"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1928,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "chemical composition of organisms depends on the nutritional status (starved vs well-fed) • The chemical composition of organisms at constant food density becomes constant during growth Energy • Dissipating heat is a weighted sum of three mass ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing • Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms 2 [Page 3] to capture what organisms do in terms of mass uptake and use. Mass aspects work out somewhat diﬀerent for the various taxa. Animals, i.e. organisms that feed on other organ- isms, acquire the various compounds they need in approximately ﬁxed "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1986,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "amount of structural material, the chemical composition of the whole body can change. That is, it can change in a particular way. This is a consequence of choosing energy as a state variable rather than the complete catalogue of all compounds. [Page 27] 10 Basic concepts 1.2.2 Weak homeostasis: restrictions on dynamics deb theory also uses another homeostasis assumption: weak homeostasis. Its definition is that if food density does not change reserve density, i.e. the ratio between the amounts of reserve and structure, becomes constant even when growth continues; reserve and struc- ture grow in harmony and biomass no longer changes in composition. This makes sense only if reserve and structu"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.199,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "due to the assumption of weak homeostasis, see Subsection 1.2.2, and their increasing structure requires maintenance. O3 The weight-specific use of dioxygen decreases during the life cycle because investment in growth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully grown adults of different species have a reserve density that increases with maximum length, see Section 8.2.2, while only structure requires maintenance. O4 The conversion cost from food to reserve is paid from food, see Subsection 4.4.2 and Sub- section 2.5.1 of the comments. S1 The chemical composition of reserve and structure can differ, and reserve density depends on the nutritional status, "
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "observations that pertain to energy (weak) homeostasis. In comparison with the many works so far, wherein the concept of energy homeostasis is presented as an assumption of DEB theory, here the same concept arises as a consequence of a more fundamental set of assumptions. Critical for the existence of energy homeostasis is the incompatibility of the term (L∞−L)L3 ˙F3(L) in Eq. (28) with the assumption that ∂˙pC ∂f = 0. By contrast, function ˙H = ˙H ([E]) ﬁrst appearing in Eq. (29) could have any form whatsoever, and energy homeostasis would still hold. The ultimate reason for the linearity of ˙H ([E]) is traceable to strong homeostasis. Furthermore, we see that at maximum food availability ("
+            },
+            {
+              "document_id": "2460",
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2024,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ls that do not change in chemical composition, a concept that we call strong homeostasis. The concept of weak homeostasis builds on strong homeostasis: In a system with two metabolic pools (reserve and structure, see next subsection), the mass of reserve does (eventually) not change relative to that of structure during growth under constant food conditions. This implies that the contribution of reserve to weight is a fixed fraction, and weight becomes proportional to cubed length for isomorphs (if Ecological Modelling 497 (2024) 110869 7 [Page 8] S.A.L.M. Kooijman et al. the reproduction buffer does not contribute). Hundreds of AmP entries support this finding empirically. It took 25 years t"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2055,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "predictions. The various forms of home- ostasis are linked to the principle (criterion 1 - table I) that organisms have increased their control over metabolism during evolution allowing for some adaptation to environmental changes in short periods. Strong homeostasis: metabolic pools do not change in composition and can be conceived as generalized compounds, i.e. mixtures of a large number of compounds of constant chemical composition and thermodynamic properties. The individual feeds on substrate (food, X) and produces products (faeces, water, carbon dioxide, ammonia, etc), biomass (reserve E and structure V ) and gametes (reserve allocated to reproduction). The standard DEB model (but not "
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2067,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ng struc- tural mass and reserves) from birth to death if food density does not change and reserves are at equilibrium. This is called the weak homeostasis assumption. Weak homeostasis is basically diﬀerent from strong homeostasis. Strong homeostasis has nothing to do with re- serve dynamics, while weak homeostasis partly speciﬁes the reserve dynamics. The reserve dynamics will be underpinned mechanistically on the basis of the structural homeosta- sis assumption, see {246}. Structural homeostasis also provides an explanation for weak homeostasis. Contrary to strong homeostasis, weak homeostasis only applies at steady state. The composition of a whole organism changes during transient states"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2082,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "c species and hydrophilic compounds, it is usually deﬁned as the ratio of the concentration in the organism to that in the water, which are both taken to be constant. For terrestrial species and/or lipophilic compounds, it is usually deﬁned as the ratio of the concentration in the organism to that in the food. Applying the BC concept is a bit complicated in the present context, because the concentration in the organism does not become stationary, because of growth and reproduction, even if the concentration in the environment is constant, i.e. in water, food and at constant food density. If the growth rate is low in comparison to the exchange rates, the compound can be in pseudo-equilibrium,"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2104,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "per unit of structural volume is proportional to a reserve density gradient and to the energy conductance ˙v. Also, [ ˙pC], is constant for a full grown organism at constant food level because dV/dt = 0 and [E] = [E]∗(see Assumption 5.3.6). This means that, at constant food level, an organism that behaves accordingly to Assumption 5.3.6 and Proposition 5.3.6 has a higher degree of control over its metabolism (P6). Proposition 5.3.7 (Reserve density at weak homeostasis) The reserve density under weak homeostasis is a function of resource density only: [E∗] = f(X)[Em]. (5.39) Proof: At weak homeostasis d[E] dt = 0 and Eq. 5.28 simpliﬁes to: [ ˙p∗ C] = [E∗] \u0012 ˙vV −1/3 f(X∗) [E∗]/[Em] −1 V dV dt"
+            },
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2118,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ted transition of the system to a new metabolic state. Without such a regulation, living organisms faced with the environmental variability would have to constantly adapt their physiology. Because the complexity of continuous physiological adaptations to a changing environment would be overwhelming, the evolutionary selection favored reg- ulated internal conditions such that environmental changes are effectively ﬁltered out and control of the metabolism is maintained. During evolution, therefore, organisms were able to develop several forms of maintaining the constant internal conditions commonly referred to as homeostasis [11]. 2.3. Strong and weak homeostasis in DEB organisms Metabolic sys"
+            },
+            {
+              "document_id": "2970",
+              "title": "KooySous2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.212,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "chemical composition is constant and known, but this rarely occurs in practice. There does not exist a A Practical guide to the use of DEB theory 535 Biological Reviews 83 (2008) 533–552 \u0001 2008 The Authors Journal compilation \u0001 2008 Cambridge Philosophical Society [Page 4] single most useful quantity for energetics. We need length because the feeding rate is linked to surface area. We need mass, however, to deal with mass conservation and energy to deal with energy conservation. DEB theory uses all of this. With weak homeostasis we can assess the composition of both reserve and structure by comparing the body com- position at different food densities, without being able to separate them phys"
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2147,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "h size intra-speciﬁcally, but decreases with size inter-speciﬁcally R3 A range of constant low food levels exists at which an individual can survive, but not reproduce R4 Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated R5 Allocation to reproduction can continue during starvation Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after inges"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "Several snippets bear on stoichiometric/compositional homeostasis. Snippets 1, 10, 12 and 15 support the idea that organisms maintain constant chemical composition (homeostasis), with [10] notably linking the degree of homeostasis to growth rate and energy availability, broadly consistent with weak homeostasis under stable conditions. However, the stylized fact specifically concerns convergence to constant composition at CONSTANT food density, whereas most supporting snippets address responses to perturbations, darkness, or quality variation rather than steady-state constant-food regimes. Snippets 8 and 14 explicitly document a 'homeostatic breakdown' under extreme food stoichiometry, providing contrary evidence (though under non-constant/extreme conditions, somewhat outside the strict scope). Many remaining snippets are off-topic (bacterial sugar utilization, copepod patchiness, ctenophore feeding). Overall the corpus offers moderate but indirect support with some conflicting evidence, leaving the direction insufficiently corroborated to claim strong consensus."
+          },
+          "n_references": 6,
+          "references": {
+            "W2071638062": {
+              "title": "Homeostasis of cell composition during prolonged darkness",
+              "doi": "https://doi.org/10.1111/j.1365-3040.2006.01593.x",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.222
+            },
+            "W31512359": {
+              "title": "Une histoire du XIXe siècle : la biographie de Victor Duruy (1811-1894)",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.276
+            },
+            "W1505770057": {
+              "title": "Growth rate affects the responses of the green alga <scp><i>T</i></scp><i>etraselmis suecica</i> to external perturbations",
+              "doi": "https://doi.org/10.1111/pce.12176",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.277
+            },
+            "W2112719989": {
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2789
+            },
+            "W2972518090": {
+              "title": "Herbivore consumers face different challenges along opposite sides of the stoichiometric knife‐edge",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2019",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2807
+            },
+            "W2083329047": {
+              "title": "The Feeding of <i>Amoeba proteus</i> on <i>Paramecium aurelia</i>*",
+              "doi": "https://doi.org/10.1111/j.1550-7408.1968.tb02122.x",
+              "year": "1968",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2812
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2071638062",
+              "title": "Homeostasis of cell composition during prolonged darkness",
+              "doi": "https://doi.org/10.1111/j.1365-3040.2006.01593.x",
+              "year": "2006",
+              "distance": 0.222,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ABSTRACT The chemical composition of organisms in relation to their environmental resource availability is an area of intense research activity. We studied the changes in cell composition of the cyanobacterium Phormidium autumnale in response to prolonged darkness. Cells allocated their internal resources in a homeostatic manner, oxidizing all the three major cellular constituents in a proportional way. This resulted in constant C/N and carbohydrates, lipids and proteins ratios that remained unaltered throughout the whole incubation period. We propose the maintenance of balanced cell composition (homeostasis) as an evolutionary strategy related to environmental transitory changes."
+            },
+            {
+              "document_id": "W2093086157",
+              "title": "Shifting Sugars and Shifting Paradigms",
+              "doi": "https://doi.org/10.1371/journal.pbio.1002068",
+              "year": "2015",
+              "distance": 0.2629,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "No organism lives in a constant environment. Based on classical studies in molecular biology, many have viewed microbes as following strict rules for shifting their metabolic activities when prevailing conditions change. For example, students learn that the bacterium Escherichia coli makes proteins for digesting lactose only when lactose is available and glucose, a better sugar, is not. However, recent studies, including three PLOS Biology papers examining sugar utilization in the budding yeast Saccharomyces cerevisiae, show that considerable heterogeneity in response to complex environments exists within and between populations. These results join similar recent results in other organisms t"
+            },
+            {
+              "document_id": "W2469729788",
+              "title": "V. THE GENETICS OF HOMEOSTASIS REVISITED",
+              "doi": "",
+              "year": "1985",
+              "distance": 0.2669,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The notion of homeostasis, an organism's ability to maintain a constant expression of a phenotypic character despite environmental change, is central to many arguments in biology. Most workers have presumed that homeostasis is beneficial and therefore the object of selection in natural populations. For example, Lewontin (1957, p. 402) asserts that may arise with very wide adaptive norms, so wide in fact, that genetic polymorphism can add little to the adaptation of the population of which they are a part. Should such homeostatic genotypes alise, intrapopulational selection will favor them since they must, in a world of fluctuating environment, leave more offspring than their more specialized"
+            },
+            {
+              "document_id": "W2027536087",
+              "title": "Laboratory studies of ingestion and food utilization in lobate and tentaculate ctenophores 1",
+              "doi": "https://doi.org/10.4319/lo.1978.23.4.0740",
+              "year": "1978",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "Ctenophore ingestion rates are linearly related to food density up to concentrations much higher than those usually assumed to be representative of the natural environment. Daily rations in excess of 1,000% of their body weights at high prey densities are matched by growth rates characteristic of phytoplankton (daily doublings). Digestive efficiencies &gt;70% were recorded at moderate prey densities. Growth efficiencies rarely exceed 10% because the bulk of assimilated food (up to 80% of that ingested) is required for the energy metabolism of these organically dilute (carbon 2% of dry wt) creatures. Ctenophores may be at a competitive disadvantage at low food densities compared to predators "
+            },
+            {
+              "document_id": "W3183381254",
+              "title": "A competitive advantage through fast dead matter elimination in confined cellular aggregates",
+              "doi": "https://doi.org/10.1101/2021.07.22.453340",
+              "year": "2021",
+              "distance": 0.2726,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Competition of different species or cell types for limited space is relevant in a variety of biological processes such as biofilm development, tissue morphogenesis and tumor growth. Predicting the outcome for non-adversarial competition of such growing active matter is non-trivial, as it depends on how processes like growth, proliferation and the degradation of cellular matter are regulated in confinement; regulation that happens even in the absence of competition to achieve the dynamic steady state known as homeostasis. Here, we show that passive by-products of the processes maintaining homeostasis can significantly alter fitness. Even for purely pressure-regulated growth and exclu"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.273,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            },
+            {
+              "document_id": "W2052751674",
+              "title": "Food quality and food threshold: implications of food stoichiometry to competitive ability of herbivore plankton",
+              "doi": "https://doi.org/10.1890/es12-00098.1",
+              "year": "2012",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Exploitative competition for food resources is considered to be an important factor determining the dominant species in communities. In such a competition, a threshold food concentration (TFC), where the growth rate becomes zero, is crucial in determination of competitive outcomes. In addition, recent studies on ecological stoichiometry have suggested that the TFC of a species would differ due to changes in food elements that limit growth. If the magnitude of change in TFC differs between species, competitive superiority among species may also change. The experiments showed that the rank order of the species in TFC changed according to the P content of food, suggesting that competitively sup"
+            },
+            {
+              "document_id": "W31512359",
+              "title": "Une histoire du XIXe siècle : la biographie de Victor Duruy (1811-1894)",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2003",
+              "distance": 0.276,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "Anthropogenic activities have reshaped the relative supply rates of essential elements to organisms. Recent studies suggested that consumer performance is strongly reduced by food that is either very high or very low in relative phosphorus content. However, the generality of such 'stoichiometric knife-edge' and its underlying mechanisms are poorly understood. We studied the response of a planktonic rotifer to a 10-fold food carbon : phosphorus (C : P) gradient and confirmed the existence of the stoichiometric knife-edge. Interestingly, we observed a complete homeostatic breakdown associated with strong growth reductions at high food C : P. In contrast, at low food C : P, animals maintained h"
+            },
+            {
+              "document_id": "W4377029948",
+              "title": "Physiological ecology",
+              "doi": "https://doi.org/10.1093/oso/9780192863249.003.0004",
+              "year": "2023",
+              "distance": 0.2765,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Physiological ecology deals with how processes at cellular and molecular levels relate to ecological challenges. Carnivorans occupy the widest range of habitat and trophic niches of any mammalian order, variously specializing on vertebrate flesh, insects, fruits, and plant leaves. Carnivorous carnivorans eat less frequently than herbivores, retain food in their guts for briefer periods, and lack the genes that code for proteins that regulate appetite in response to gut contents. Carnivorans, even those with high-cellulose diets, lack special gut structures to hold microbial fermenters. As a result, they only absorb cell contents and pass cell walls undigested, making them inefficien"
+            },
+            {
+              "document_id": "W1505770057",
+              "title": "Growth rate affects the responses of the green alga <scp><i>T</i></scp><i>etraselmis suecica</i> to external perturbations",
+              "doi": "https://doi.org/10.1111/pce.12176",
+              "year": "2013",
+              "distance": 0.277,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "We hypothesized that the duration of the perturbation relative to the reproduction rate influences the response mode to external perturbations and the degree of (organic) compositional homeostasis. Our findings are consistent with this hypothesis. When different growth rates were imposed to cells of the same species, the degree of compositional homeostasis following an external perturbation was significantly higher in the cells with slower growth rate. The ability to maintain a constant composition was however vinculated by the availability of sufficient energy."
+            },
+            {
+              "document_id": "W2192578330",
+              "title": "No Evidence for Activity Adjustment in Response to Increased Density in Daphnia magna",
+              "doi": "https://doi.org/10.1371/journal.pone.0144759",
+              "year": "2015",
+              "distance": 0.2772,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Increased population density may lead to a decrease in energy available for growth and reproduction via effects on the activity level of individuals. Whilst this may be of particular importance for organisms that compete for defendable resources and/or have a high frequency of social interactions, it is less obvious how individual activity should covary with population density when food resources are not defendable or direct interactions among individuals are negligible. Based on observations that there is a general negative relationship between population density and metabolism it has been suggested that organisms actively reduce activity under increased density to accommodate an expected d"
+            },
+            {
+              "document_id": "W2112719989",
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "distance": 0.2789,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "1 Organisms facing variation in food quality maintain elemental composition within limited bounds. Such stoichiometric homeostasis has often been considered a species-specific parameter, but stoichiometry can also vary intraspecifically across life stages, sexes and sizes. In colonial organisms with overlapping generations, stoichiometric variation among stages could lead to flexibility in colony-level elemental composition due to changes in internal demography. 2 We examine how the balance of energy (sucrose) and nutrients (prey) affects growth rate and carbon : nitrogen : phosphorus (C : N : P) homeostasis in a eusocial insect, the pavement ant Tetramorium caespitum. 3 Colony growth depend"
+            },
+            {
+              "document_id": "W2069533811",
+              "title": "Amoeboid organism solves complex nutritional challenges",
+              "doi": "https://doi.org/10.1073/pnas.0912198107",
+              "year": "2010",
+              "distance": 0.2789,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "A fundamental question in nutritional biology is how distributed systems maintain an optimal supply of multiple nutrients essential for life and reproduction. In the case of animals, the nutritional requirements of the cells within the body are coordinated by the brain in neural and chemical dialogue with sensory systems and peripheral organs. At the level of an insect society, the requirements for the entire colony are met by the foraging efforts of a minority of workers responding to cues emanating from the brood. Both examples involve components specialized to deal with nutrient supply and demand (brains and peripheral organs, foragers and brood). However, some of the most species-rich, l"
+            },
+            {
+              "document_id": "W2972518090",
+              "title": "Herbivore consumers face different challenges along opposite sides of the stoichiometric knife‐edge",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2019",
+              "distance": 0.2807,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "Abstract Anthropogenic activities have reshaped the relative supply rates of essential elements to organisms. Recent studies suggested that consumer performance is strongly reduced by food that is either very high or very low in relative phosphorus content. However, the generality of such ‘stoichiometric knife‐edge’ and its underlying mechanisms are poorly understood. We studied the response of a planktonic rotifer to a 10‐fold food carbon : phosphorus (C : P) gradient and confirmed the existence of the stoichiometric knife‐edge. Interestingly, we observed a complete homeostatic breakdown associated with strong growth reductions at high food C : P. In contrast, at low food C : P, animals mai"
+            },
+            {
+              "document_id": "W2083329047",
+              "title": "The Feeding of <i>Amoeba proteus</i> on <i>Paramecium aurelia</i>*",
+              "doi": "https://doi.org/10.1111/j.1550-7408.1968.tb02122.x",
+              "year": "1968",
+              "distance": 0.2812,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "SYNOPSIS. Density of prey ( Paramecium aurelia ) and predator ( Amoeba proteus ) were varied while volume of inorganic medium was kept constant. Variations in density of prey had little effect on the rates of feeding and reproduction of the amoebae; but with increasing predator density the amoebae captured the paramecia less rapidly and ingested fewer before dividing, altho division size did not change appreciably. Therefore, amoebae of a low density population with a constant food supply carry more nutritional reserves from generation to generation than do those in a denser population."
+            },
+            {
+              "document_id": "W2139402893",
+              "title": "Conditioning of the membrane fatty acid profile of Escherichia coli during periodic temperature cycling",
+              "doi": "https://doi.org/10.1099/mic.0.029637-0",
+              "year": "2009",
+              "distance": 0.2816,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The membrane fatty acid composition of Escherichia coli becomes conditioned during periodic temperature cycling between 37 and 8 °C. After several cycles of temperature change, the bacteria become locked into a low-temperature physiology. Even after a prolonged incubation at high temperature the membrane fatty acid composition of conditioned cells was similar to that of cold-stressed cells."
+            },
+            {
+              "document_id": "W1975073465",
+              "title": "Some effects of patchy food environments on copepods1",
+              "doi": "https://doi.org/10.4319/lo.1977.22.1.0099",
+              "year": "1977",
+              "distance": 0.282,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "Laboratory determinations of the time taken for copepods to starve to death and of the effects of discontinuous food availability on egg production are used to demonstrate that different species are adapted to different scales of patchiness in their food environment. Acartia tonsa and Centropages typicus depend on constant food availability and are therefore sensitive to small scales of patchiness whereas Pseudocalanus minutus and Calanus finmarchicus can physiologically remove themselves from such small‐scale variability. The success of these organisms in the natural environment may be related to the length of time that layers of food exist in the water column."
+            },
+            {
+              "document_id": "W3138531274",
+              "title": "Nutrient complexity triggers transitions between solitary and colonial growth in bacterial populations",
+              "doi": "https://doi.org/10.1038/s41396-021-00953-7",
+              "year": "2021",
+              "distance": 0.2826,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Microbial populations often experience fluctuations in nutrient complexity in their natural environment such as between high molecular weight polysaccharides and simple monosaccharides. However, it is unclear if cells can adopt growth behaviors that allow individuals to optimally respond to differences in nutrient complexity. Here, we directly control nutrient complexity and use quantitative single-cell analysis to study the growth dynamics of individuals within populations of the aquatic bacterium Caulobacter crescentus. We show that cells form clonal microcolonies when growing on the polysaccharide xylan, which is abundant in nature and degraded using extracellular cell-linked enz"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple DEB-theoretic sources (snippets 1-12) explicitly define weak homeostasis and state that organisms at constant food density converge to constant chemical composition, with snippets 7, 8, and 11 noting empirical support (e.g., hundreds of AmP entries). Independent empirical studies corroborate compositional homeostasis: a cyanobacterium maintaining constant C/N and macromolecular ratios (13), an alga maintaining composition contingent on energy (22), and ant colony-level elemental homeostasis (24). The few contrary signals (snippet 20, a 'homeostatic breakdown' at extreme food C:P) concern extreme food-quality conditions rather than the constant-density convergence claim, and DEB texts themselves note homeostatic regulation is conditional on food abundance. Overall the corpus strongly and consistently corroborates the stylized fact."
+          },
+          "n_references": 12,
+          "references": {
+            "3565": {
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1767
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1829
+            },
+            "2760": {
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1844
+            },
+            "3774": {
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1905
+            },
+            "2986": {
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1928
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1986
+            },
+            "2367": {
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.199
+            },
+            "2460": {
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2024
+            },
+            "W2071638062": {
+              "title": "Homeostasis of cell composition during prolonged darkness",
+              "doi": "https://doi.org/10.1111/j.1365-3040.2006.01593.x",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.222
+            },
+            "W31512359": {
+              "title": "Une histoire du XIXe siècle : la biographie de Victor Duruy (1811-1894)",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.276
+            },
+            "W1505770057": {
+              "title": "Growth rate affects the responses of the green alga <scp><i>T</i></scp><i>etraselmis suecica</i> to external perturbations",
+              "doi": "https://doi.org/10.1111/pce.12176",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.277
+            },
+            "W2112719989": {
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2789
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1767,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "ed compounds) that have constant chemical composition and constant thermodynamic properties; this is referred to in DEB as strong homeostasis. Occam’s razor urges us to minimize the number of generalized compounds that we consider while evidence supporting variability in stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achie"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1829,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "have constant thermodynamic properties, such as mass-energy couplers (chemical potentials) and mass-entropy couplers (speciﬁc entropies). Strong homeostasis imposes constant conversion coefﬁcients on all aggregated chemical reactions occurring in the organism including assimilation, dissipation and growth, which comes with stoichio- metric constraints. The combination of stoichiometric constraints and variations in the com- position of biomass (reserve/structure ratio) leads to rather complex patterns at the various levels of organisation. Weak homeostasis: the individual as a whole does not change in composition during growth in environments with constant food availability (possibly after a"
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1844,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "G5). The weak homeostasis assumption imposes that organisms tend to a constant chemical composition in an environment with constant food availability; this is supported by the empirical evidence on a constant stoichiometry under certain conditions (S2) and motivated by evolutionary theory (P5). The propositions obtained explain the following empirical ﬁndings: (i) the method of indirect calorimetry (I1), (ii) von Bertalanffy growth curves (G1), (iii) the variation of von Bertalanffy growth rates within (G5) and across species (G4), (iv) Kleiber’s law on metabolic rate (R3) and (v) the pattern of foetal growth (G3). In physics, it is easy to enforce simplicity in experiments bringing observat"
+            },
+            {
+              "document_id": "3565",
+              "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1878,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "heory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis interchangeably. Thus, the organism’s generalized compounds have constant chemical and thermodynamic properties regardless of (ﬂuctuations in) available food. When food is constant, the biomass as a whole also has constant chemical and thermodynamic properties. 2.4. Thermal homeostasis in DEB organisms Endotherms are organisms that are able to maintain a constant body temperature (e.g., birds and mammals). The thermal homeostasis allows these species more independence from the environment because all metabolic rates depe"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1905,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "stoichiom- etry suggests that one generalized compound is not enough. Typically, two generalized compounds are enough to describe stoichiometric variability in heterotrophs, while three or more are needed for autotrophs. Empirical evidence suggests that the degree of homeostatic regulation in organismal stoichiometry is related to food conditions [50]. Under abundant food or constant food density, organisms are able to achieve a “perfect” homeostatic regulation, i.e., constant stoichiometry. This constancy is in DEB theory referred to as weak homeostasis. Because weak homeostasis is equivalent to a form of energy homeostasis (see Section 6.4), we use the terms energy and weak homeostasis int"
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1914,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "the complexity of continuous physiological adaptations to a changing environment would be overwhelming, the evolutionary selection favored reg- ulated internal conditions such that environmental changes are effectively ﬁltered out and control of the metabolism is maintained. During evolution, therefore, organisms were able to develop several forms of maintaining the constant internal conditions commonly referred to as homeostasis [11]. 2.3. Strong and weak homeostasis in DEB organisms Metabolic systems are often found in a steady state with constant metabolite concentrations [6]. Even if the sys- tem is growing, the homeostatic regulation strives to maintain these concentrations constant [47"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1928,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "chemical composition of organisms depends on the nutritional status (starved vs well-fed) • The chemical composition of organisms at constant food density becomes constant during growth Energy • Dissipating heat is a weighted sum of three mass ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing • Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms 2 [Page 3] to capture what organisms do in terms of mass uptake and use. Mass aspects work out somewhat diﬀerent for the various taxa. Animals, i.e. organisms that feed on other organ- isms, acquire the various compounds they need in approximately ﬁxed "
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1986,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "amount of structural material, the chemical composition of the whole body can change. That is, it can change in a particular way. This is a consequence of choosing energy as a state variable rather than the complete catalogue of all compounds. [Page 27] 10 Basic concepts 1.2.2 Weak homeostasis: restrictions on dynamics deb theory also uses another homeostasis assumption: weak homeostasis. Its definition is that if food density does not change reserve density, i.e. the ratio between the amounts of reserve and structure, becomes constant even when growth continues; reserve and struc- ture grow in harmony and biomass no longer changes in composition. This makes sense only if reserve and structu"
+            },
+            {
+              "document_id": "2367",
+              "title": "Kooy2010_c.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.199,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "due to the assumption of weak homeostasis, see Subsection 1.2.2, and their increasing structure requires maintenance. O3 The weight-specific use of dioxygen decreases during the life cycle because investment in growth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully grown adults of different species have a reserve density that increases with maximum length, see Section 8.2.2, while only structure requires maintenance. O4 The conversion cost from food to reserve is paid from food, see Subsection 4.4.2 and Sub- section 2.5.1 of the comments. S1 The chemical composition of reserve and structure can differ, and reserve density depends on the nutritional status, "
+            },
+            {
+              "document_id": "3774",
+              "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "observations that pertain to energy (weak) homeostasis. In comparison with the many works so far, wherein the concept of energy homeostasis is presented as an assumption of DEB theory, here the same concept arises as a consequence of a more fundamental set of assumptions. Critical for the existence of energy homeostasis is the incompatibility of the term (L∞−L)L3 ˙F3(L) in Eq. (28) with the assumption that ∂˙pC ∂f = 0. By contrast, function ˙H = ˙H ([E]) ﬁrst appearing in Eq. (29) could have any form whatsoever, and energy homeostasis would still hold. The ultimate reason for the linearity of ˙H ([E]) is traceable to strong homeostasis. Furthermore, we see that at maximum food availability ("
+            },
+            {
+              "document_id": "2460",
+              "title": "Kooijman et al. - 2024 - From formulae, via models to theories Dynamic Ene.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2024,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ls that do not change in chemical composition, a concept that we call strong homeostasis. The concept of weak homeostasis builds on strong homeostasis: In a system with two metabolic pools (reserve and structure, see next subsection), the mass of reserve does (eventually) not change relative to that of structure during growth under constant food conditions. This implies that the contribution of reserve to weight is a fixed fraction, and weight becomes proportional to cubed length for isomorphs (if Ecological Modelling 497 (2024) 110869 7 [Page 8] S.A.L.M. Kooijman et al. the reproduction buffer does not contribute). Hundreds of AmP entries support this finding empirically. It took 25 years t"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2055,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "predictions. The various forms of home- ostasis are linked to the principle (criterion 1 - table I) that organisms have increased their control over metabolism during evolution allowing for some adaptation to environmental changes in short periods. Strong homeostasis: metabolic pools do not change in composition and can be conceived as generalized compounds, i.e. mixtures of a large number of compounds of constant chemical composition and thermodynamic properties. The individual feeds on substrate (food, X) and produces products (faeces, water, carbon dioxide, ammonia, etc), biomass (reserve E and structure V ) and gametes (reserve allocated to reproduction). The standard DEB model (but not "
+            },
+            {
+              "document_id": "W2071638062",
+              "title": "Homeostasis of cell composition during prolonged darkness",
+              "doi": "https://doi.org/10.1111/j.1365-3040.2006.01593.x",
+              "year": "2006",
+              "distance": 0.222,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "ABSTRACT The chemical composition of organisms in relation to their environmental resource availability is an area of intense research activity. We studied the changes in cell composition of the cyanobacterium Phormidium autumnale in response to prolonged darkness. Cells allocated their internal resources in a homeostatic manner, oxidizing all the three major cellular constituents in a proportional way. This resulted in constant C/N and carbohydrates, lipids and proteins ratios that remained unaltered throughout the whole incubation period. We propose the maintenance of balanced cell composition (homeostasis) as an evolutionary strategy related to environmental transitory changes."
+            },
+            {
+              "document_id": "W2093086157",
+              "title": "Shifting Sugars and Shifting Paradigms",
+              "doi": "https://doi.org/10.1371/journal.pbio.1002068",
+              "year": "2015",
+              "distance": 0.2629,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "No organism lives in a constant environment. Based on classical studies in molecular biology, many have viewed microbes as following strict rules for shifting their metabolic activities when prevailing conditions change. For example, students learn that the bacterium Escherichia coli makes proteins for digesting lactose only when lactose is available and glucose, a better sugar, is not. However, recent studies, including three PLOS Biology papers examining sugar utilization in the budding yeast Saccharomyces cerevisiae, show that considerable heterogeneity in response to complex environments exists within and between populations. These results join similar recent results in other organisms t"
+            },
+            {
+              "document_id": "W2469729788",
+              "title": "V. THE GENETICS OF HOMEOSTASIS REVISITED",
+              "doi": "",
+              "year": "1985",
+              "distance": 0.2669,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The notion of homeostasis, an organism's ability to maintain a constant expression of a phenotypic character despite environmental change, is central to many arguments in biology. Most workers have presumed that homeostasis is beneficial and therefore the object of selection in natural populations. For example, Lewontin (1957, p. 402) asserts that may arise with very wide adaptive norms, so wide in fact, that genetic polymorphism can add little to the adaptation of the population of which they are a part. Should such homeostatic genotypes alise, intrapopulational selection will favor them since they must, in a world of fluctuating environment, leave more offspring than their more specialized"
+            },
+            {
+              "document_id": "W2027536087",
+              "title": "Laboratory studies of ingestion and food utilization in lobate and tentaculate ctenophores 1",
+              "doi": "https://doi.org/10.4319/lo.1978.23.4.0740",
+              "year": "1978",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Ctenophore ingestion rates are linearly related to food density up to concentrations much higher than those usually assumed to be representative of the natural environment. Daily rations in excess of 1,000% of their body weights at high prey densities are matched by growth rates characteristic of phytoplankton (daily doublings). Digestive efficiencies &gt;70% were recorded at moderate prey densities. Growth efficiencies rarely exceed 10% because the bulk of assimilated food (up to 80% of that ingested) is required for the energy metabolism of these organically dilute (carbon 2% of dry wt) creatures. Ctenophores may be at a competitive disadvantage at low food densities compared to predators "
+            },
+            {
+              "document_id": "W3183381254",
+              "title": "A competitive advantage through fast dead matter elimination in confined cellular aggregates",
+              "doi": "https://doi.org/10.1101/2021.07.22.453340",
+              "year": "2021",
+              "distance": 0.2726,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Competition of different species or cell types for limited space is relevant in a variety of biological processes such as biofilm development, tissue morphogenesis and tumor growth. Predicting the outcome for non-adversarial competition of such growing active matter is non-trivial, as it depends on how processes like growth, proliferation and the degradation of cellular matter are regulated in confinement; regulation that happens even in the absence of competition to achieve the dynamic steady state known as homeostasis. Here, we show that passive by-products of the processes maintaining homeostasis can significantly alter fitness. Even for purely pressure-regulated growth and exclu"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.273,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            },
+            {
+              "document_id": "W2052751674",
+              "title": "Food quality and food threshold: implications of food stoichiometry to competitive ability of herbivore plankton",
+              "doi": "https://doi.org/10.1890/es12-00098.1",
+              "year": "2012",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Exploitative competition for food resources is considered to be an important factor determining the dominant species in communities. In such a competition, a threshold food concentration (TFC), where the growth rate becomes zero, is crucial in determination of competitive outcomes. In addition, recent studies on ecological stoichiometry have suggested that the TFC of a species would differ due to changes in food elements that limit growth. If the magnitude of change in TFC differs between species, competitive superiority among species may also change. The experiments showed that the rank order of the species in TFC changed according to the P content of food, suggesting that competitively sup"
+            },
+            {
+              "document_id": "W31512359",
+              "title": "Une histoire du XIXe siècle : la biographie de Victor Duruy (1811-1894)",
+              "doi": "https://doi.org/10.1111/ele.13386",
+              "year": "2003",
+              "distance": 0.276,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "Anthropogenic activities have reshaped the relative supply rates of essential elements to organisms. Recent studies suggested that consumer performance is strongly reduced by food that is either very high or very low in relative phosphorus content. However, the generality of such 'stoichiometric knife-edge' and its underlying mechanisms are poorly understood. We studied the response of a planktonic rotifer to a 10-fold food carbon : phosphorus (C : P) gradient and confirmed the existence of the stoichiometric knife-edge. Interestingly, we observed a complete homeostatic breakdown associated with strong growth reductions at high food C : P. In contrast, at low food C : P, animals maintained h"
+            },
+            {
+              "document_id": "W4377029948",
+              "title": "Physiological ecology",
+              "doi": "https://doi.org/10.1093/oso/9780192863249.003.0004",
+              "year": "2023",
+              "distance": 0.2765,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Physiological ecology deals with how processes at cellular and molecular levels relate to ecological challenges. Carnivorans occupy the widest range of habitat and trophic niches of any mammalian order, variously specializing on vertebrate flesh, insects, fruits, and plant leaves. Carnivorous carnivorans eat less frequently than herbivores, retain food in their guts for briefer periods, and lack the genes that code for proteins that regulate appetite in response to gut contents. Carnivorans, even those with high-cellulose diets, lack special gut structures to hold microbial fermenters. As a result, they only absorb cell contents and pass cell walls undigested, making them inefficien"
+            },
+            {
+              "document_id": "W1505770057",
+              "title": "Growth rate affects the responses of the green alga <scp><i>T</i></scp><i>etraselmis suecica</i> to external perturbations",
+              "doi": "https://doi.org/10.1111/pce.12176",
+              "year": "2013",
+              "distance": 0.277,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "We hypothesized that the duration of the perturbation relative to the reproduction rate influences the response mode to external perturbations and the degree of (organic) compositional homeostasis. Our findings are consistent with this hypothesis. When different growth rates were imposed to cells of the same species, the degree of compositional homeostasis following an external perturbation was significantly higher in the cells with slower growth rate. The ability to maintain a constant composition was however vinculated by the availability of sufficient energy."
+            },
+            {
+              "document_id": "W2192578330",
+              "title": "No Evidence for Activity Adjustment in Response to Increased Density in Daphnia magna",
+              "doi": "https://doi.org/10.1371/journal.pone.0144759",
+              "year": "2015",
+              "distance": 0.2772,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Increased population density may lead to a decrease in energy available for growth and reproduction via effects on the activity level of individuals. Whilst this may be of particular importance for organisms that compete for defendable resources and/or have a high frequency of social interactions, it is less obvious how individual activity should covary with population density when food resources are not defendable or direct interactions among individuals are negligible. Based on observations that there is a general negative relationship between population density and metabolism it has been suggested that organisms actively reduce activity under increased density to accommodate an expected d"
+            },
+            {
+              "document_id": "W2112719989",
+              "title": "Ant stoichiometry: elemental homeostasis in stage‐structured colonies",
+              "doi": "https://doi.org/10.1111/j.1365-2435.2006.01187.x",
+              "year": "2006",
+              "distance": 0.2789,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "1 Organisms facing variation in food quality maintain elemental composition within limited bounds. Such stoichiometric homeostasis has often been considered a species-specific parameter, but stoichiometry can also vary intraspecifically across life stages, sexes and sizes. In colonial organisms with overlapping generations, stoichiometric variation among stages could lead to flexibility in colony-level elemental composition due to changes in internal demography. 2 We examine how the balance of energy (sucrose) and nutrients (prey) affects growth rate and carbon : nitrogen : phosphorus (C : N : P) homeostasis in a eusocial insect, the pavement ant Tetramorium caespitum. 3 Colony growth depend"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

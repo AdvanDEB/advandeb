@@ -1,0 +1,904 @@
+{
+  "sf_id": "hypoxia_04",
+  "category": "Hypoxia / DO",
+  "statement": "Energy allocation is reprioritized to first pay maintenance costs under hypoxic conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly affirm the stylized fact: snippet [1] explicitly states 'Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions' citing several empirical studies, and snippets [8], [10], and [16] articulate the DEB priority rule that maintenance costs are fulfilled first, with growth/reproduction compromised under hypoxia. The general DEB framework snippets ([3], [11], [12], [17]) support the underlying principle that maintenance has allocation priority. However, the support is partly conceptual/theoretical rather than uniformly empirical, and there is genuine conflict: snippets [6] and [14] from Schwemmer et al. report that increasing maintenance costs did not improve model fit for early-life fish and that maintenance may temporarily drop (rather than be prioritized) under hypoxia due to reduced aerobic capacity. Overall the corpus leans clearly toward corroboration with moderate strength, tempered by some early-life-stage exceptions."
+      },
+      "n_references": 8,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.3163716197013855
+        },
+        "69b8478eec32c55db54309a5": {
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3906193971633911
+        },
+        "69b88155ecbd4702b29a4d0c": {
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.40860944986343384
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 0,
+          "contradicts": 2,
+          "best_distance": 0.4115883708000183
+        },
+        "69b847b8ec32c55db5430a11": {
+          "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4373146891593933
+        },
+        "69b889e0ecbd4702b29a582c": {
+          "title": "Marn et al. - 2022 - Energetic basis for bird ontogeny and egg-laying a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.43867814540863037
+        },
+        "69b8784becbd4702b29a4041": {
+          "title": "Troo2006.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.44062280654907227
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4496530294418335
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3164,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ws, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level , due to reduction in energy uptake and/or increase in energy expenditure (dissipation) . (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001)"
+        },
+        {
+          "document_id": "69b8485fec32c55db5430c0f",
+          "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3588,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "atransient comatose state during post-hypoxic recovery, ceasinglocomotion and maintaining low body temperature (Pamenter et al.,2019). Therefore, the ecological cost –benefit analysis of the role ofMRD in organismal energy budget must take into account theduration, timing and recovery costs of MRD relative to importantlife cycle events and stages.Energy metabolism as an integrator of multiple stressimpactsThe energy dependence of life processes and the inevitable constraint"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3906,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "rather than obligatorymaintenance. Most maintenance costs are obligatory,however. The next step is to pay the maintenance costsfrom reserves that are used for energy generation to fuelanabolic work and thus to become less dependent on thelocal presence of chemo-autotrophic substrates. Althoughextreme starvation, causing exhaustion of reserves, can stillaffect the ability to meet maintenance costs (see AppendixA.3), such problems will occur much less frequently.Maintenance requirements were increased further andbecame less facultative in a number of steps, which we willdiscuss briefly.(a)Carriers and regulation"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4086,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ethat the aerobic energy production decreases considerably and theenergy demand might then be supplied by reserves such as phos-phagens ( Grieshaber et al., 1994) providing energy to maintainciliary activity necessary for ﬁltration. However, these energeticreserves are limited and are quickly consumed under severe hypoxicconditions (Ellington, 1989; Grieshaber et al., 1994) . This, com-bined with the relatively fast decrease in oxygen saturation couldexplain the fast drop of clearance rate below 11.2% O2sat.3. Second phase of severe hypoxia ( ﬁrst 3.30 h at ≈5% O 2sat): recovery"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4088,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "aturation with the energy conductance parameter ( v̇) thatcontrols the reserve mobilization rate, using a rule that re ﬂects theorganism oxyregulation capacity such as the one used in Aguirre-Velarde et al. (2016) . Low oxygen conditions might also a ﬀect assim-ilation since it is an oxygen-demanding activity, and a common strategyunder hypoxia is to reduce food intake ( Wu, 2002). However, our ob-servations suggest a decoupling strategy between food intake and as-similation that might limit the e ﬀect of hypoxia on energy intake.The inclusion of those e ﬀects of hypoxia in dynamic energy budget"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4116,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "ences in maintenance costs and links them explic -itly to survival may better capture the mechanism of high mortality in larvae.Adding a correction factor to the volume-specific maintenance rate in addition to yVA, μemb, and μlar did not substantially improve the fit according to AICc, suggesting that increasing maintenance costs is not an important bioenergetic mechanism underlying hypoxia response in early life stages. This is consistent with laboratory measurements showing no effect of these hypoxia levels on embryonic or larval metabolic rates (Schwemmer et al., 2020 ), but as noted earlier inter-"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4126,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "entilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008) . Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activit y and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009) . These behaviours can change energy expenditure for activity in opposite ways and then act on dissipation rate accordingly : more energy expenditure with increased activity (e. g. escape) or less energy expenditure with reduced activity ."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4139,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "enance as it is necessary for survival, developmen t, growth and reproduction. However, movement when an organism faces hypoxic conditions is likely to be a temporary non -essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could b e examined: somatic maintenance is split into a n essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O 2 inflow. The n on-essential part of"
+        },
+        {
+          "document_id": "69b847b8ec32c55db5430a11",
+          "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4373,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "n to nones-sential processes due to elevated maintenance costs and/orreduced metabolic scope; and “pessimum” (Latin for “worst”)describes individuals that allocate all available energy tomaintenance costs (Frederich and P €ortner 2000; Clark et al.2013; Farrell 2016). Although these demarcations simplify thecomplex physiological responses involved in energy homeosta-sis, they are helpful for describing the severity of energyhomeostasis disruption caused by environmental stressors andthe conceptual model for linking energetic burden to whole-organism performance (Sokolova et al. 2012)."
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4386,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "eserve mobilization (ṗc) because ATP production yield isreduced in those conditions (Shick et al., 1986; de Zwaan et al., 1991)(Fig. 6 b). Under the assumption that the reserve mobilization ﬂux isaﬀected, energy available for growth and reproduction might be com-promised considering that the costs of maintenance are ful ﬁlled inpriority ( Kooijman, 2010 ). Nevertheless, we observed comparableweight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fedtreatments. This result suggests that physiological/metabolic mechan-isms allowing the regulation of oxygen consumption e.g. increased"
+        },
+        {
+          "document_id": "69b889e0ecbd4702b29a582c",
+          "title": "Marn et al. - 2022 - Energetic basis for bird ontogeny and egg-laying a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4387,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "eanwhile, sug-gested that a fully grown adult can assimilate 18700 J/day,but needs 17500 J/day to cover maintenance costs (15800J/day +1700 J/day), leaving a bit over 1000 J/day for otherprocesses.The difference between the assimilated energy andthat required for maintenance is a good indicator not only oftheenergyavailableformaturationandreproduction(Fig. 1),but also of the individual’s potential to have excess energyand store it for later, which would be helpful in times offood shortages. If not enough energy can be mobilized fromreserve to cover the cost(s) of maintenance, the structure can"
+        },
+        {
+          "document_id": "69b8784becbd4702b29a4041",
+          "title": "Troo2006.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4406,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "density /CTof the mother (i.e., on the volume-speciﬁcamount of energy /CJ /BX ℄divided by the maximum energy content /CJ /BXmax℄) and onthe speciﬁc energy conductance /CZE. At equilibrium, the scaled energy density /CTof an adult equals its scaled functional response /CU, so that the amount of mobil-ized energy equals /CZE/CU. From the mobilized energy, the costs of maintenancehave to be paid, calculated by multiplying the maintenance r ate coefﬁcient/CZM(ratio of costs for maintenance per unit of time to costs for g rowth) withthe energy investment ratio /CV(the proportion of the total amount of available"
+        },
+        {
+          "document_id": "69b84728ec32c55db5430720",
+          "title": "Romić en Nakajima - Ecosystem engineering as an energy transfer proces.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4408,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "s cannot acquireresources and need to use energy in the reserves to payfor the maintenance costs (Eq. 1). Maintenance is paid aslong as there is energy left in the reserves. The reservesare considered exhausted when the energy amount inenergy reservoir Ersreaches energy reserves minimumEminvalue (Table 1). In that case, agent is assumedterminated.Regrowth The maximum amount of energy available in theecosystem in some time period tdepends on the total numberof cells Cn, the percentage of the cells that grow resources Cpand their regrowth rate Cr:Etmax¼∑CnCp100/C18/C19TmaxCr/C18/C19ð6Þ"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4446,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.55,
+          "text": "2019 ), but at the embryo stage very little activity is possible. Some studies on fish responses to hypoxia suggest maintenance may drop temporarily due to the reduced capacity for aerobic meta-bolism at low DO levels, then subsequently be temporarily elevated after oxygen is restored because of recovery demands such as paying oxygen debt and removing or repairing damage from anaerobic byproducts (Heath and Pritchard, 1965 ; Claireaux and Chabot, 2016 ; Thomas et al., 2019 ). Such fluctuations in maintenance were not discernible in the time scale of our model, but future work should attempt to model the"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4461,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "PTED MANUSCRIPTACCEPTED MANUSCRIPT 6 aspects of the energetic budget, from energy acquisition to allocat ion for growth and/or reproduction and dissipation for maintenance costs. Here, we discuss how empirical evidence of sub-lethal physiological responses to hypoxia, measured at the individual scale in marine organisms, might be summarized into simple rules in the framework of DEB theory , giving a broad generalization of the effects of hypoxia on metabolic functions based on empirical findings . Second, these rules are used to formulate assumptions regarding the effects of hypoxia on physiological functions"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4488,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "-regulated by more than an order of magnitude, and metabolic rate reduced e.g. by 5-20 fold during hypoxia , from 7 to 1 mgO 2 l-1 (Wu et al., 2003) . In that case, most of the energy derived from food is required for maintenance when food ingestion is very limited , even stopped, and the animal mostly lives on energy reserves : there is a reduced aerobic scope , so the cost for processing food ( SDA) is not overcast . Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008) ."
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4497,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "enance. Most maintenance costs are obligatory,however. The next step is to pay the maintenance costs from reserves that are usedfor energy generation to fuel anabolic work and thus to become less dependent on thelocal presence of chemo-autotrophic substrates. Although extreme starvation, causingexhaustion of reserves, can still affect the ability to meet maintenance costs, such problemswill occur much less frequently.Maintenance requirements were increased further and became less facultative in a num-ber of steps, which we will discuss briefly.Enhanced uptake and adaptation"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4555,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.45,
+          "text": "ant temporalresolution is necessary to improve the predictions.The rule used for the restriction of metabolic ﬂuxes allowed eva-luation of the global energetic consequences on the organism, but notthe contribution of anaerobic metabolism below the regulation capa-city. More or less e ﬃcient anaerobic metabolic pathways could have animpact on the organism's ability to cope with oxygen limitation(Hochachka and Buck, 1996 ), while the metabolism of anaerobic end-products accumulated during hypoxia events could change the main-tenance costs (e.g. oxygen debt), thus a ﬀecting the energy budget."
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "A few snippets bear directly on the stylized fact. Snippet 4 explicitly shows that a fish predator prioritizes among metabolic demands as oxygen declines, directly supporting reprioritization of energy under hypoxia. Snippet 7 shows cellular energy allocation shifts and impaired recovery under hypoxia, consistent with maintenance being prioritized over other functions. Snippets 10 and 16 support the more general DEB principle that maintenance is paid first and growth/reproduction are sacrificed under stress, though not hypoxia-specific. Most remaining snippets are off-topic (hibernation, mouse metabolism, hospital energy use, healthcare ethics) and contribute no evidence. No snippet contradicts the fact. Overall the corpus provides moderate, consistent support with no conflicting evidence, hence corroborated direction but only moderate strength due to sparse directly-relevant hypoxia references."
+      },
+      "n_references": 4,
+      "references": {
+        "W4385272707": {
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4981932044029236
+        },
+        "W4388752706": {
+          "title": "Spawning acts as a metabolic stressor enhanced by hypoxia and independent of sex in a broadcast marine spawner",
+          "doi": "10.1016/j.scitotenv.2023.168419",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5064824819564819
+        },
+        "W2068667664": {
+          "title": "Changes in cellular energy budget as a measure of whole effluent toxicity in zebrafish (<i>Danio rerio</i>)",
+          "doi": "10.1002/etc.5620220429",
+          "year": "2003",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5138640403747559
+        },
+        "W4382933665": {
+          "title": "Physical performance during energy deficiency in humans: An evolutionary perspective",
+          "doi": "10.1016/j.cbpa.2023.111473",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5190762281417847
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2085467491",
+          "title": "The Role of Energy Availability in Mammalian Hibernation: A Cost‐Benefit Approach",
+          "doi": "10.1086/367950",
+          "year": "2003",
+          "distance": 0.4636,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ogical studies indicate these costs may include oxidative stress, reduced immunocompetence, and perhaps neuronal tissue damage. Using an optimality approach, we suggest that trade-offs between the benefits of energy conservation and the physiological costs of metabolic depression can explain both why hibernators periodically arouse from torpor and why they should use available energy to minimize the depth and duration of their torpor bouts. On the basis of these trade-offs, we derive a series of testable predictions concerning the relationship between energy availability and torpor expression."
+        },
+        {
+          "document_id": "W2904506070",
+          "title": "Flexibility, variability and constraint in energy management patterns across vertebrate taxa revealed by long‐term heart rate measurements",
+          "doi": "10.1111/1365-2435.13264",
+          "year": "2018",
+          "distance": 0.4699,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract Animals are expected to be judicious in the use of the energy they gain due to the costs and limits associated with its intake. The management of energy expenditure ( EE ) exhibited by animals has previously been considered in terms of three patterns: the constrained, independent and performance patterns of energy management. These patterns can be interpreted by regressing daily EE against maintenance EE measured over extended periods."
+        },
+        {
+          "document_id": "W4400297156",
+          "title": "O-174 Marginal gains: can small actions in the ART lab improve the environmental impact of medically assisted reproduction?",
+          "doi": "10.1093/humrep/deae108.203",
+          "year": "2024",
+          "distance": 0.493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "energy efficiency, renewable energy, preventive maintenance and consider plug load of non-essential equipment for cost savings. Consider widening operating ranges for temperature and humidity, air circulation changes and HVAC design where possible for energy savings of 15–30% Correct waste management can result in &amp;gt; 30% reduction in clinical waste alongside €11,600 annual savings, with focus on prevention of unnecessary consumables (dishes, media), reducing use of plastics and other single-use items to the extent that is possible and safe, and reusing where appropriate (e.g., training vitrification straws)."
+        },
+        {
+          "document_id": "W4385272707",
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "distance": 0.4982,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "in addition to low food availability and changing habitat use – are all important drivers of the community response to hypoxia. Meta-analysis results also provide evidence that the dominant predator in the study system prioritizes among metabolic demands, and that these priorities may change as oxygen declines. Going forward, experiments and models should explore how differences in priorities within and among communities drive responses to environmental degradation. This will help management efforts to tailor recovery programs to the physiological needs of species within a given system."
+        },
+        {
+          "document_id": "W2085467491",
+          "title": "The Role of Energy Availability in Mammalian Hibernation: A Cost‐Benefit Approach",
+          "doi": "10.1086/367950",
+          "year": "2003",
+          "distance": 0.501,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Hibernation is widely regarded as an adaptation to seasonal energy shortage, but the actual influence of energy availability on hibernation patterns is rarely considered. Here we review literature on the costs and benefits of torpor expression to examine the influence that energy may have on hibernation patterns."
+        },
+        {
+          "document_id": "W2103377348",
+          "title": "Hypoxia, Nitrogen, and Fisheries: Integrating Effects Across Local and Global Landscapes",
+          "doi": "10.1146/annurev.marine.010908.163754",
+          "year": "2008",
+          "distance": 0.5016,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": ". A number of compensatory mechanisms limit the translation of local-scale effects of hypoxia to the scale of the whole system. Hypoxia is, however, a serious environmental challenge that should be considered in fisheries management strategies and be a direct target of environmental restoration."
+        },
+        {
+          "document_id": "W4388752706",
+          "title": "Spawning acts as a metabolic stressor enhanced by hypoxia and independent of sex in a broadcast marine spawner",
+          "doi": "10.1016/j.scitotenv.2023.168419",
+          "year": "2023",
+          "distance": 0.5065,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "breakdown. Additionally, cellular energy allocation dropped 3 h post-spawning, indicating a shift in energy demand and supply. Normoxic conditions allowed recovery in 72 h, but hypoxia hindered recuperation. These findings underscore spawning's bioenergetic challenge for broadcast spawners like M. edulis, potentially elevating post-spawning mortality risk, especially in hypoxic coastal habitats."
+        },
+        {
+          "document_id": "W2009300437",
+          "title": "Metabolic recovery in the Desert Iguana (<i>Dipsosaurus dorsalis</i>) following activities of varied intensity and duration",
+          "doi": "10.1046/j.0269-8463.2001.00607.x",
+          "year": "2002",
+          "distance": 0.507,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "tensity of 50% MAS. These recovery costs constitute amounts of energy large enough to have an impact on energy budget analyses. The metabolic cost of an individual bout of activity and subsequent recovery was as high as 5% of the predicted daily energy expenditure, an increase of 5–8 × estimates that do not incorporate recovery. To compare the relative economy of different activity regimens, the cost of activity ( C act ; ml O 2 g −1 km −1 ), was calculated as total costs, including EPOC, per unit distance travelled. C act was independent of activity intensity over these ranges, but was inversely related to activity duration."
+        },
+        {
+          "document_id": "W2990391024",
+          "title": "Resting and Maximal Metabolic Rates in Wild White-Footed Mice (Peromyscus leucopus)",
+          "doi": "10.20381/ruor-24096",
+          "year": "2019",
+          "distance": 0.5113,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "5% confidence intervals: 0.04, 0.34). Such a positive residual correlation could be result of correlated phenotypic plasticity. By contrast, RMR and MMR were significantly and negatively correlated at the among-individual level (rind=-0.87, 95% confidence intervals: -0.99, -0.28). The negative among-individual correlation suggests there are trade-offs between the maintenance and active components of the energy budget (allocation model). Future research should investigate the relationship between RMR and other energetically expensive behaviours and activities to understand how energy is allocated among individuals."
+        },
+        {
+          "document_id": "W2068667664",
+          "title": "Changes in cellular energy budget as a measure of whole effluent toxicity in zebrafish (<i>Danio rerio</i>)",
+          "doi": "10.1002/etc.5620220429",
+          "year": "2003",
+          "distance": 0.5139,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "Abstract Organisms exposed to suboptimal conditions face an a priori cost of combating stress in terms of metabolic resources. The energy available for maintenance, growth, and reproduction, based on the biochemical analysis of the energy budget rather than on the direct measurement of those endpoints, may therefore provide a sensitive measure of stress in an organism."
+        },
+        {
+          "document_id": "W2159918911",
+          "title": "Effects of dietary polychlorinated biphenyl exposure on energetics of white-footed mouse, <i>Peromyscus leucopus</i>",
+          "doi": "10.1002/etc.5620191121",
+          "year": "2000",
+          "distance": 0.5143,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Abstract Energy budgets have provided physiological ecologists with a vital link between environmental variables and individual performance and should also prove useful to ecotoxicologists in understanding the effects of sublethal exposure in the field. Exposure to toxic compounds is likely to be metabolically expensive and may result in a trade-off between energy spent to detoxify and excrete contaminants and energy allocated to growth or reproduction."
+        },
+        {
+          "document_id": "W4235585680",
+          "title": "The Basic Dynamic Energy Budget Model and Some Implications",
+          "doi": "10.30707/lib1.2ledder",
+          "year": "2014",
+          "distance": 0.5168,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Dynamic energy budget models are the most ambitious of resource allocation models in biology, with many practitioners claiming that they apply to all organisms with only a few changes in parameters. Because of this generality, they make very broad predictions about how organisms function. There is extensive literature on the topic, but some of the broad implications nevertheless remain largely unexplored."
+        },
+        {
+          "document_id": "W331347189",
+          "title": "Effect of Season of Lambing on Postpartum Ovulation, Conception and Follicular Development of Four Fat-Tailed Iranian Breeds of Sheep",
+          "doi": "10.2527/jas1977.452305x",
+          "year": "1977",
+          "distance": 0.5173,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "This work presents a day-ahead demand response (DR) scheduling framework that quantifies the flexibility in non-residential buildings by using thermodynamic modeling, and assesses the benefits of DR in terms of three separate optimization variants: net payment minimization, energy self-sufficiency, and peak power reduction. We test the framework in a case study of a medical research facility located in a business park with local solar power generation."
+        },
+        {
+          "document_id": "W2079127323",
+          "title": "Energetic strategies of shrews: ecological constraints and evolutionary implications",
+          "doi": "10.1111/j.1365-2907.1988.tb00083.x",
+          "year": "1988",
+          "distance": 0.5181,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "hrews: the maintenance of homeostasis (rate of metabolism and temperature regulation), the balancing of the energy budget (e.g. the influence of body mass, activity rate, various energy saving mechanisms and home range size), and the allocation of energy towards reproduction (e.g. the influence of litter size). Two major contradictory energetic designs may be recognized: one rather expensive design that is observed in cold and temperate climates with relatively predictable fluctuations in resource availability (e.g."
+        },
+        {
+          "document_id": "W3034928622",
+          "title": "Energy Consumption in Hospitals",
+          "doi": "10.1109/iceit48248.2020.9113177",
+          "year": "2020",
+          "distance": 0.5189,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "lting in significant costs. The objective is to define the relevant factors, which significantly impact the energy performance. In this paper a methodology on understanding energy uses and evaluation of energy performance levels is developed for achievement of desired economic performance while preserving or even improve the comfort of patients and medical staff, the continuity of service and the of hygiene and safety level."
+        },
+        {
+          "document_id": "W4382933665",
+          "title": "Physical performance during energy deficiency in humans: An evolutionary perspective",
+          "doi": "10.1016/j.cbpa.2023.111473",
+          "year": "2023",
+          "distance": 0.5191,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ential for survival (e.g. locomotion) while minimising energy allocation to traits that are not (e.g. growth and reproduction). The current perspective provides a model of energy allocation during energy scarcity supported by observation of physiological and metabolic responses that are congruent with this paradigm."
+        },
+        {
+          "document_id": "W2594649023",
+          "title": "Energy Intake, Basal Metabolic Rate, and Within-Individual Trade-Offs in Men and Women Training for a Half Marathon: A Reanalysis",
+          "doi": "10.1086/691338",
+          "year": "2017",
+          "distance": 0.5219,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "gesting the presence of compensation mechanisms between BMR and other energy-demanding activities occurring within individuals. Thus, the principles governing energy budget were different at the among- and within-individual levels. To the extent that this situation is applicable to wild animals experiencing different levels of DEE throughout their annual cycle, the results presented here could explain why the relationships between BMR and other components of the energy budget (e.g., activity, growth, reproduction) are often context dependent."
+        },
+        {
+          "document_id": "W3128140478",
+          "title": "Respect for persons and the allocation of lifesaving healthcare resources",
+          "doi": "10.1111/bioe.12857",
+          "year": "2021",
+          "distance": 0.5223,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "instead requires that we give individual consideration to the claims that persons in need make on the resources in our control. The principles that we use to govern our allocation of resources, furthermore, should be principles that are acceptable to all reasonable agents. Building on this insight, the final section of this paper considers how a principle of need can be used as a means to make decisions about the allocation of lifesaving resources."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly support the stylized fact that energy allocation is reprioritized to pay maintenance costs first under hypoxia. Snippet 1 explicitly states the fact with primary citations (Cheung, Wei, Zhou). Snippet 10 (DEB framework applied to scallops) reaffirms that maintenance costs are fulfilled in priority per Kooijman 2010, with growth/reproduction compromised. Snippet 8 proposes a refined priority scheme splitting maintenance into essential (first priority) and non-essential fractions, and snippet 9 describes the 'pessimum' state where all energy goes to maintenance—both consistent. Snippets 3, 11, 12 from DEB theory restate the kappa-rule principle that maintenance is paid first. Snippet 16 provides empirical evidence of metabolic prioritization among demands as oxygen declines. The main partial dissent is snippet 6, which found that increasing maintenance costs was not the key bioenergetic mechanism in early-life-stage fish hypoxia responses—though this addresses elevated maintenance magnitude rather than the prioritization ordering itself. Overall the evidence is moderately strong and clearly corroborative of the prioritization principle, with only minor conflict."
+      },
+      "n_references": 8,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3163716197013855
+        },
+        "69b8478eec32c55db54309a5": {
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3906193971633911
+        },
+        "69b88155ecbd4702b29a4d0c": {
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.40860944986343384
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.4115883708000183
+        },
+        "69b847b8ec32c55db5430a11": {
+          "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4373146891593933
+        },
+        "69b889e0ecbd4702b29a582c": {
+          "title": "Marn et al. - 2022 - Energetic basis for bird ontogeny and egg-laying a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.43867814540863037
+        },
+        "69b8784becbd4702b29a4041": {
+          "title": "Troo2006.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.44062280654907227
+        },
+        "W4385272707": {
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4981932044029236
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3164,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ws, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level , due to reduction in energy uptake and/or increase in energy expenditure (dissipation) . (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001)"
+        },
+        {
+          "document_id": "69b8485fec32c55db5430c0f",
+          "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3588,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "atransient comatose state during post-hypoxic recovery, ceasinglocomotion and maintaining low body temperature (Pamenter et al.,2019). Therefore, the ecological cost –benefit analysis of the role ofMRD in organismal energy budget must take into account theduration, timing and recovery costs of MRD relative to importantlife cycle events and stages.Energy metabolism as an integrator of multiple stressimpactsThe energy dependence of life processes and the inevitable constraint"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3906,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "rather than obligatorymaintenance. Most maintenance costs are obligatory,however. The next step is to pay the maintenance costsfrom reserves that are used for energy generation to fuelanabolic work and thus to become less dependent on thelocal presence of chemo-autotrophic substrates. Althoughextreme starvation, causing exhaustion of reserves, can stillaffect the ability to meet maintenance costs (see AppendixA.3), such problems will occur much less frequently.Maintenance requirements were increased further andbecame less facultative in a number of steps, which we willdiscuss briefly.(a)Carriers and regulation"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4086,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "ethat the aerobic energy production decreases considerably and theenergy demand might then be supplied by reserves such as phos-phagens ( Grieshaber et al., 1994) providing energy to maintainciliary activity necessary for ﬁltration. However, these energeticreserves are limited and are quickly consumed under severe hypoxicconditions (Ellington, 1989; Grieshaber et al., 1994) . This, com-bined with the relatively fast decrease in oxygen saturation couldexplain the fast drop of clearance rate below 11.2% O2sat.3. Second phase of severe hypoxia ( ﬁrst 3.30 h at ≈5% O 2sat): recovery"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4088,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "aturation with the energy conductance parameter ( v̇) thatcontrols the reserve mobilization rate, using a rule that re ﬂects theorganism oxyregulation capacity such as the one used in Aguirre-Velarde et al. (2016) . Low oxygen conditions might also a ﬀect assim-ilation since it is an oxygen-demanding activity, and a common strategyunder hypoxia is to reduce food intake ( Wu, 2002). However, our ob-servations suggest a decoupling strategy between food intake and as-similation that might limit the e ﬀect of hypoxia on energy intake.The inclusion of those e ﬀects of hypoxia in dynamic energy budget"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4116,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "ences in maintenance costs and links them explic -itly to survival may better capture the mechanism of high mortality in larvae.Adding a correction factor to the volume-specific maintenance rate in addition to yVA, μemb, and μlar did not substantially improve the fit according to AICc, suggesting that increasing maintenance costs is not an important bioenergetic mechanism underlying hypoxia response in early life stages. This is consistent with laboratory measurements showing no effect of these hypoxia levels on embryonic or larval metabolic rates (Schwemmer et al., 2020 ), but as noted earlier inter-"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4126,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "entilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008) . Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activit y and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009) . These behaviours can change energy expenditure for activity in opposite ways and then act on dissipation rate accordingly : more energy expenditure with increased activity (e. g. escape) or less energy expenditure with reduced activity ."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4139,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "enance as it is necessary for survival, developmen t, growth and reproduction. However, movement when an organism faces hypoxic conditions is likely to be a temporary non -essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could b e examined: somatic maintenance is split into a n essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O 2 inflow. The n on-essential part of"
+        },
+        {
+          "document_id": "69b847b8ec32c55db5430a11",
+          "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4373,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "n to nones-sential processes due to elevated maintenance costs and/orreduced metabolic scope; and “pessimum” (Latin for “worst”)describes individuals that allocate all available energy tomaintenance costs (Frederich and P €ortner 2000; Clark et al.2013; Farrell 2016). Although these demarcations simplify thecomplex physiological responses involved in energy homeosta-sis, they are helpful for describing the severity of energyhomeostasis disruption caused by environmental stressors andthe conceptual model for linking energetic burden to whole-organism performance (Sokolova et al. 2012)."
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4386,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "eserve mobilization (ṗc) because ATP production yield isreduced in those conditions (Shick et al., 1986; de Zwaan et al., 1991)(Fig. 6 b). Under the assumption that the reserve mobilization ﬂux isaﬀected, energy available for growth and reproduction might be com-promised considering that the costs of maintenance are ful ﬁlled inpriority ( Kooijman, 2010 ). Nevertheless, we observed comparableweight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fedtreatments. This result suggests that physiological/metabolic mechan-isms allowing the regulation of oxygen consumption e.g. increased"
+        },
+        {
+          "document_id": "69b889e0ecbd4702b29a582c",
+          "title": "Marn et al. - 2022 - Energetic basis for bird ontogeny and egg-laying a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4387,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "eanwhile, sug-gested that a fully grown adult can assimilate 18700 J/day,but needs 17500 J/day to cover maintenance costs (15800J/day +1700 J/day), leaving a bit over 1000 J/day for otherprocesses.The difference between the assimilated energy andthat required for maintenance is a good indicator not only oftheenergyavailableformaturationandreproduction(Fig. 1),but also of the individual’s potential to have excess energyand store it for later, which would be helpful in times offood shortages. If not enough energy can be mobilized fromreserve to cover the cost(s) of maintenance, the structure can"
+        },
+        {
+          "document_id": "69b8784becbd4702b29a4041",
+          "title": "Troo2006.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4406,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "density /CTof the mother (i.e., on the volume-speciﬁcamount of energy /CJ /BX ℄divided by the maximum energy content /CJ /BXmax℄) and onthe speciﬁc energy conductance /CZE. At equilibrium, the scaled energy density /CTof an adult equals its scaled functional response /CU, so that the amount of mobil-ized energy equals /CZE/CU. From the mobilized energy, the costs of maintenancehave to be paid, calculated by multiplying the maintenance r ate coefﬁcient/CZM(ratio of costs for maintenance per unit of time to costs for g rowth) withthe energy investment ratio /CV(the proportion of the total amount of available"
+        },
+        {
+          "document_id": "W2085467491",
+          "title": "The Role of Energy Availability in Mammalian Hibernation: A Cost‐Benefit Approach",
+          "doi": "10.1086/367950",
+          "year": "2003",
+          "distance": 0.4636,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ogical studies indicate these costs may include oxidative stress, reduced immunocompetence, and perhaps neuronal tissue damage. Using an optimality approach, we suggest that trade-offs between the benefits of energy conservation and the physiological costs of metabolic depression can explain both why hibernators periodically arouse from torpor and why they should use available energy to minimize the depth and duration of their torpor bouts. On the basis of these trade-offs, we derive a series of testable predictions concerning the relationship between energy availability and torpor expression."
+        },
+        {
+          "document_id": "W2904506070",
+          "title": "Flexibility, variability and constraint in energy management patterns across vertebrate taxa revealed by long‐term heart rate measurements",
+          "doi": "10.1111/1365-2435.13264",
+          "year": "2018",
+          "distance": 0.4699,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract Animals are expected to be judicious in the use of the energy they gain due to the costs and limits associated with its intake. The management of energy expenditure ( EE ) exhibited by animals has previously been considered in terms of three patterns: the constrained, independent and performance patterns of energy management. These patterns can be interpreted by regressing daily EE against maintenance EE measured over extended periods."
+        },
+        {
+          "document_id": "W4400297156",
+          "title": "O-174 Marginal gains: can small actions in the ART lab improve the environmental impact of medically assisted reproduction?",
+          "doi": "10.1093/humrep/deae108.203",
+          "year": "2024",
+          "distance": 0.493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "energy efficiency, renewable energy, preventive maintenance and consider plug load of non-essential equipment for cost savings. Consider widening operating ranges for temperature and humidity, air circulation changes and HVAC design where possible for energy savings of 15–30% Correct waste management can result in &amp;gt; 30% reduction in clinical waste alongside €11,600 annual savings, with focus on prevention of unnecessary consumables (dishes, media), reducing use of plastics and other single-use items to the extent that is possible and safe, and reusing where appropriate (e.g., training vitrification straws)."
+        },
+        {
+          "document_id": "W4385272707",
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "distance": 0.4982,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "in addition to low food availability and changing habitat use – are all important drivers of the community response to hypoxia. Meta-analysis results also provide evidence that the dominant predator in the study system prioritizes among metabolic demands, and that these priorities may change as oxygen declines. Going forward, experiments and models should explore how differences in priorities within and among communities drive responses to environmental degradation. This will help management efforts to tailor recovery programs to the physiological needs of species within a given system."
+        },
+        {
+          "document_id": "W2085467491",
+          "title": "The Role of Energy Availability in Mammalian Hibernation: A Cost‐Benefit Approach",
+          "doi": "10.1086/367950",
+          "year": "2003",
+          "distance": 0.501,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Hibernation is widely regarded as an adaptation to seasonal energy shortage, but the actual influence of energy availability on hibernation patterns is rarely considered. Here we review literature on the costs and benefits of torpor expression to examine the influence that energy may have on hibernation patterns."
+        },
+        {
+          "document_id": "W2103377348",
+          "title": "Hypoxia, Nitrogen, and Fisheries: Integrating Effects Across Local and Global Landscapes",
+          "doi": "10.1146/annurev.marine.010908.163754",
+          "year": "2008",
+          "distance": 0.5016,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": ". A number of compensatory mechanisms limit the translation of local-scale effects of hypoxia to the scale of the whole system. Hypoxia is, however, a serious environmental challenge that should be considered in fisheries management strategies and be a direct target of environmental restoration."
+        },
+        {
+          "document_id": "W4388752706",
+          "title": "Spawning acts as a metabolic stressor enhanced by hypoxia and independent of sex in a broadcast marine spawner",
+          "doi": "10.1016/j.scitotenv.2023.168419",
+          "year": "2023",
+          "distance": 0.5065,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "breakdown. Additionally, cellular energy allocation dropped 3 h post-spawning, indicating a shift in energy demand and supply. Normoxic conditions allowed recovery in 72 h, but hypoxia hindered recuperation. These findings underscore spawning's bioenergetic challenge for broadcast spawners like M. edulis, potentially elevating post-spawning mortality risk, especially in hypoxic coastal habitats."
+        },
+        {
+          "document_id": "W2009300437",
+          "title": "Metabolic recovery in the Desert Iguana (<i>Dipsosaurus dorsalis</i>) following activities of varied intensity and duration",
+          "doi": "10.1046/j.0269-8463.2001.00607.x",
+          "year": "2002",
+          "distance": 0.507,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "tensity of 50% MAS. These recovery costs constitute amounts of energy large enough to have an impact on energy budget analyses. The metabolic cost of an individual bout of activity and subsequent recovery was as high as 5% of the predicted daily energy expenditure, an increase of 5–8 × estimates that do not incorporate recovery. To compare the relative economy of different activity regimens, the cost of activity ( C act ; ml O 2 g −1 km −1 ), was calculated as total costs, including EPOC, per unit distance travelled. C act was independent of activity intensity over these ranges, but was inversely related to activity duration."
+        },
+        {
+          "document_id": "W2990391024",
+          "title": "Resting and Maximal Metabolic Rates in Wild White-Footed Mice (Peromyscus leucopus)",
+          "doi": "10.20381/ruor-24096",
+          "year": "2019",
+          "distance": 0.5113,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "5% confidence intervals: 0.04, 0.34). Such a positive residual correlation could be result of correlated phenotypic plasticity. By contrast, RMR and MMR were significantly and negatively correlated at the among-individual level (rind=-0.87, 95% confidence intervals: -0.99, -0.28). The negative among-individual correlation suggests there are trade-offs between the maintenance and active components of the energy budget (allocation model). Future research should investigate the relationship between RMR and other energetically expensive behaviours and activities to understand how energy is allocated among individuals."
+        },
+        {
+          "document_id": "W2068667664",
+          "title": "Changes in cellular energy budget as a measure of whole effluent toxicity in zebrafish (<i>Danio rerio</i>)",
+          "doi": "10.1002/etc.5620220429",
+          "year": "2003",
+          "distance": 0.5139,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Abstract Organisms exposed to suboptimal conditions face an a priori cost of combating stress in terms of metabolic resources. The energy available for maintenance, growth, and reproduction, based on the biochemical analysis of the energy budget rather than on the direct measurement of those endpoints, may therefore provide a sensitive measure of stress in an organism."
+        },
+        {
+          "document_id": "W2159918911",
+          "title": "Effects of dietary polychlorinated biphenyl exposure on energetics of white-footed mouse, <i>Peromyscus leucopus</i>",
+          "doi": "10.1002/etc.5620191121",
+          "year": "2000",
+          "distance": 0.5143,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract Energy budgets have provided physiological ecologists with a vital link between environmental variables and individual performance and should also prove useful to ecotoxicologists in understanding the effects of sublethal exposure in the field. Exposure to toxic compounds is likely to be metabolically expensive and may result in a trade-off between energy spent to detoxify and excrete contaminants and energy allocated to growth or reproduction."
+        },
+        {
+          "document_id": "W4235585680",
+          "title": "The Basic Dynamic Energy Budget Model and Some Implications",
+          "doi": "10.30707/lib1.2ledder",
+          "year": "2014",
+          "distance": 0.5168,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Dynamic energy budget models are the most ambitious of resource allocation models in biology, with many practitioners claiming that they apply to all organisms with only a few changes in parameters. Because of this generality, they make very broad predictions about how organisms function. There is extensive literature on the topic, but some of the broad implications nevertheless remain largely unexplored."
+        }
+      ]
+    }
+  }
+}

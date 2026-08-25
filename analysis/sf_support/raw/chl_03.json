@@ -1,0 +1,743 @@
+{
+  "sf_id": "chl_03",
+  "category": "Chlorophyll",
+  "statement": "Chlorophyll concentration increases with dilution rate in nutrient limiting conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact (chlorophyll concentration increases with dilution rate in nutrient-limiting conditions) is explicitly listed as SF7 with a literature reference in snippet [1] from LoreMarq2010, confirming it is an established empirical pattern. Snippets [5] and [17] from Zonnefeld (1998) provide mechanistic and observational support: during nutrient-limited growth, chlorophyll cell quota increase with growth rate (dilution rate at steady state), driven by nutrient pool dynamics. Snippet [6] indirectly supports it via related chl:C behavior. No snippet contradicts the fact—snippets discussing decreases relate to light-limited conditions or irradiance (different stylized facts). Several snippets are off-topic (oyster farming, salps, corals). Overall the corpus consistently corroborates the fact, though direct quantitative supporting evidence is moderate rather than abundant."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.16211354732513428
+        },
+        "69b87866ecbd4702b29a4073": {
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.24769914150238037
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1621,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2382,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "p a0 0. Below I shall analyse thedata of Goldman and Peavey (1979).Fig. 3. Dependence of carbon cell quota on the dilution rate,for various parameter values, in nitrogen-limited phytoplank-ton.C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 603.2. Nutrient -limited Chl :CI assume that when cells are nitrogen-limited,the absolute rate at which chlorophyll is produceddepends on the amount of nitrogen in the tran-sient pool. Furthermore, chlorophyll cell quotadecrease because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r)."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2409,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "bilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2414,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ll 1, true chlorophyll-speciﬁcabsorption cross section x 19.3 m2g 1Chl.5. DiscussionThe present model successfully describes thecarbon and chlorophyll cell quota, and, as acorollary, the chlorophyll to carbon ratio u. Thisapplies to nutrient-limited as well as to light-lim-ited growth. The model descriptions ﬁnd theirbasis in assumptions about uptake and utilizationof nutrient. This contrasts with models that relateuto environmental or physiological variables via"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2477,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r).By assumption, the chlorophyll production rateequals kNl, with ka proportionality constant.(The chlorophyll production rate may also dependon irradiance, in which case kwould depend onthe irradiance. As studies on nutrient-limitedgrowth are generally restricted to one level ofirradiance, information on this aspect is lacking. Itherefore treat kas a constant.) This implies thatthe cellular chlorophyll concentration changes ac-cording toddt[Chl] k[Nl] (m\u001br) · [Chl]so that at steady-state (when m D)"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2525,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2694,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "rowth; Model; Nutrient-limited growth; Photoacclimation; Phytoplankton1. IntroductionThe ratio of the amount of chlorophyll apercell and the amount of carbon per cell, Chl:C,features as a key variable in many microalgalgrowth models (Bannister, 1979; Sakshaug et al.,1989; Cullen et al., 1993; Kiefer, 1993; Baumert,1996; Geider et al., 1996). The widespread use ofChl:C as a model variable is basically rooted inthe ease with which chlorophyll aconcentrationsare experimentally determined. Chlorophyll ais"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2814,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "l. The data are mute about thevalue of the speciﬁc rate of chlorophyll destruc-tion: values between 0 and 0.5 d 1are all consis-tent with the data. Note that although the rateof chlorophyll production decreases with decreas-ing irradiance (at low irradiances) the chloro-phyll cell quota does increase. The reason forthis increase is that dilution through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observed"
+        },
+        {
+          "document_id": "69b847d2ec32c55db5430a89",
+          "title": "Sun et al. - 2025 - Intensive oyster farming enhances carbon storage i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.282,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "e v eo rh a v ea high degree of uncertainty, based onexisting information. Nevertheless, t he chlorophyll concentration used tof o r c et h em o d e lw a st h eo b s e r v e dv a l u e sf o rt h ef a r m i n ga r e a ,w h i c hminimizes the impact of not including these variables as local chlorophyllincorporates the effect of all the other variables delivering food to thebivalves. Moreover, the model re ﬂected the main dynamics and variation inbiodeposition ﬂux at the ecosystem level, capturing the variations in OCdeposition at each farming stage. Dec reased chlorophyll concentrations"
+        },
+        {
+          "document_id": "69b89b47ecbd4702b29a6d06",
+          "title": "LarsFilg2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2912,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "is constant maximum between about 1 and 6 μg chl aL−1,w h e r ethe upper limit corresponds to saturation above which growth de-creases sharply even though the ingestion rate remains nearly constant(Riisgård et al., 2013b ). According to this, the application of BEG to tro-phic conditions in which chlorophyll is higher than about 6 μgL−1would require adding a further modi ﬁcation to include this limit of in-cipient saturation and reduced growth. However, these high chlorophyllvalues rarely prevail in nature over extended periods of time. The meanchlaconcentration measured by different authors in various marine"
+        },
+        {
+          "document_id": "69b86aa6ecbd4702b29a2f43",
+          "title": "Ianniello et al. - 2025 - A review of the current knowledge of the flow of carbon  and energy in scleractinian corals.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2958,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": ", chloro-phyll density, and photosynthetic capacity (Dubinsky et al. 1990; Titlyanov et al. 2000, 2001; Houlbrèque et al. 2003, 2004), all of which can increase photosynthetic output (i.e., available energy) in a healthy system. The interplay between increased heterotrophic nutrients and increased photosyn-thetic capacity cannot be understated; for example, research on S. pistillata fed with either Artemia or fresh zooplankton increased chlorophyll a concentrations 4-7x (Houlbrèque et al. 2003), chlorophyll C2 concentrations 3-4x (Houlbrèque et al. 2004), and photosynthetic rates 2 or 10x (Houlbrèque"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2962,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "menon that can be easily accounted for especially in cell-based models. © 1998 Elsevier Science B.V. All rightsreserved.Keywords:Chl:C; Light-limited growth; Model; Nutrient-limited growth; Photoacclimation; Phytoplankton1. IntroductionThe ratio of the amount of chlorophyll aper"
+        },
+        {
+          "document_id": "69b847ecec32c55db5430aef",
+          "title": "von Thenen et al. - 2020 - Applying a combined geospatial and farm scale mode.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.299,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "e scenario “higher chl-a”, we assumed that fish farm wastecould increase chlorophyll levels by around 3.5 μg l−1at a distance of50–65 m from the fish farm (Dalsgaard and Krause-Jensen, 2006). Webased the increase of chlorophyll resulting from fish farms on a Medi-terranean study where conditions are different and therefore the3.5μg l−1is only a roughestimate. Nevertheless,the scenario“elevatedChl-a” clearly shows a stimulation of mussel growth. The total biomassis 4 to 7 fold higher than in the baseline scenario. Correspondingly, thepotential nutrient removal also reaches higher levels."
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430add",
+          "title": "Aloi2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3075,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "occurred at the depthof the deep chlorophyll maximum (DCM) – where growthconditions can be assumed to have been more favourablethan in the overlying and underlying water masses – whereascoccospheres above and below the DCM were signiﬁcantlysmaller. This is consistent with the laboratory observations(Sect. 4) that environmental conditions which result in largegrowth rates (and thus lead to large populations in the ﬁeld)are also those that give rise to large cells (phosphate concen-trations in the Benguela upwelling system were much largerthan those which induce an increase in cell size in cultureexperiments)."
+        },
+        {
+          "document_id": "69b89ca8ecbd4702b29a6def",
+          "title": "Pietzsch et al. - 2023 - The impact of salps (Salpa thompsoni) on the Antar.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3089,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ing the simu -lation experiments, snapshots of the cells’ chlorophyll-a content were extracted to display the effect of growing salp densities throughout 2 weeks of a simulation run on the available food (Fig. 2). It can be seen that increasing salp densities led to a higher chlorophyll-a reduction and extended areas depleted of chlorophyll-a. Blooms with 20,000 individuals per 1000 m3 reduced chlorophyll-a concentration in large areas of the modeled domain by more than 60%. Lower densities still locally reduced chlo -rophyll-a by up to 40% and up to 20% in broader areas.Time series of krill and salp population dynamics"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3098,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": ":C ratio, chloro- 21phyll, extracellular polymeric substances 22\u0003corresponding author; e-mail address: antonio.lorena@ist.utl.pt1Table 1: List of stylized facts (SF) collected from the literature concerning nitrogen to carbon (N:C) andchlorophyll to carbon (chl:C) ratios and extracellular polymeric substances (EPS) production.N:C ratio Ref.SF1. N:C increases with dilution rate in nutrient limiting conditions; (3, 11, 21)SF2. N:C decreases with dilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3108,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ady-state carbon cell quota are given byQC [GC6]\u001b[Clm]IIs\u001bI.4.1. Light -limited Chl :CWhereas during nutrient-limited growth thechlorophyll cell quota increases with the growthrate, the opposite is true for light-limited growth.But even if growth is light-saturated, the chloro-phyll cell quota decrease with further increasinglight intensity. This suggests that chlorophyll pro-duction rates in light-limited phytoplankton maybe light-dependent. I am not aware of detailedquantitative studies on this topic, so I follow asomewhat provisional approach here. I assumethat chlorophyll production is a function of lightintensity, say p(I)."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3123,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "hyll production rate. Steady-state chloro-phyll cell quota are then given byC.Zonne6eld:Ecological Modelling 113 (1998) 55–70 64Fig. 6. (A) Speciﬁc growth rate; (B) carbon cell quota; (C) chlorophyll per cell and (D) inferred chlorophyll production rates in lightlimited Isochrysis galbana . The chlorophyll cell quota are described by two curves, the solid one representing no destruction ofchlorophyll ( r 0), the dashed one representing r 0.5 d 1. Production rates are deduced from amount of chlorophyll per cell, the"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the retrieved snippets directly address the relationship between chlorophyll concentration and dilution rate in nutrient-limited (e.g., chemostat/continuous culture) conditions. The corpus is largely off-topic, covering chlorophyll in lakes, sponges, terrestrial plants, bacterioplankton ratios, and isotopic studies. A few snippets touch on nutrient effects on chlorophyll (e.g., [2] high N/P increases chl a, [11] nutrient addition increases leaf chlorophyll), but none manipulate or measure dilution rate (growth rate in continuous culture) under nutrient limitation, which is the core of the stylized fact. There is no direct supporting or contradicting evidence, so the corpus is insufficient to evaluate the claim."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W3148075632",
+          "title": "Impact of zebra mussel (Dreissena polymorpha) on phosphorus cycling and chlorophyll in lakes",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.257,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "r clarity (without reducing nutrient levels) and ultimately resulting in a decoupling of the nutrient-chlorophyll relationship. To assess decoupling we compared P a d chlorophyll a (chl a ) estimates with the Dillon and Rigler (19'74) P chl a relationship, which predicts chl a levels for a given concentration of The P chl a relationship assumes that P is the limiting nutrient, and departures from the relationship imply that P has been replaced by alternative limiting factors such as grazing pressure (Kaiser et al. 1994)."
+        },
+        {
+          "document_id": "W2414916378",
+          "title": "[Growth of Platymonas helgolandica var. tsingtaoensis, Cylindrotheca closterium and Karenia mikimotoi and their survival strategies under different N/P ratios].",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.3452,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "measured every 24 h for one week. The results showed that N/P ratio significantly affected the growth of three kinds of algae. Cylindrotheca closterium grew fastest under 160:1 N/P ratio, while Platymonas helgolandica var. tsingtaoensis and Karenia mikimotoi grew fastest under 4:1 and 80:1 N/P ratio, respectively. The maximum cell density of the phytoplankton was mainly influenced by cell size and specific growth rate, the synthesis of chlorophyll a was mainly affected by nitrogen, and high N/P ratio benefited the increase of chlorophyll a content."
+        },
+        {
+          "document_id": "W81388904",
+          "title": "Stable isotopic variation in particulate organic matter and dissolved inorganic compounds in a northern fjord : implications for present and past environments",
+          "doi": "",
+          "year": "1992",
+          "distance": 0.3517,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": ".7‰ and -21.9‰. Enrichments in ¹³c were frequently associated with the chlorophyll maximum during periods of high productivity. Concomitant decreases in the concentration of dissolved inorganic carbon and increases in seston δ¹³C values confirmed results of earlier research which found a inverse correlation between pCO₂ and the δ¹³C of phytoplankton. The carbon isotopic composition of DIC ranged from -4.1‰ to 1.6‰. Low δ¹³C-DIC values may be related to brief periods of enhanced respiration as a result of increased substrate concentration during the spring bloom."
+        },
+        {
+          "document_id": "W1545538486",
+          "title": "Influence of Seawater Temperature on Phytoplankton Growth in Jiaozhou Bay, China",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.3541,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The phytoplankton reproduction capacity (PRC), as a new concept regarding chlorophyll-a and primary production (PP) is described. PRC is different from PP, carbon assimilation number (CAN) or photosynthetic rate (PB). PRC quantifies phytoplankton growth with a special consideration of the effect of seawater temperature."
+        },
+        {
+          "document_id": "W2009137716",
+          "title": "Bacterioplankton growth responses to temperature and chlorophyll variations in estuaries measured by thymidine:leucine incorporation ratio",
+          "doi": "10.3354/ame013151",
+          "year": "1997",
+          "distance": 0.3704,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "experiments, the Leu:TdR ratio was negatively correlated with chlorophyll a concentrations and bacterial specific growth rates. We propose that changes toward less favorable environmental conditions (e.g. reductions in temperature or substrate supply in temperate estuaries) might reduce bacterial protein and DNA synthesis rates simultaneously. However, the former process may be favored to maximize survival and this might lead to a higher Leu:TdR ratio."
+        },
+        {
+          "document_id": "W4324258648",
+          "title": "Impacts of environmental factors on Chlorophyll-a in lakes in cold and arid regions: A 10-year study of Wuliangsuhai Lake, China",
+          "doi": "10.1016/j.ecolind.2023.110133",
+          "year": "2023",
+          "distance": 0.3755,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "The study of seasonal variations in Chlorophyll-a (Chl.a) concentration and its influencing factors is particularly important for lake management. The study showed that there was a strong non-linear relationship between Chl.a and environmental factors in spring and autumn, whereas there was a strong linear relationship in summer and winter. Chl.a was redistributed during the ice period, and its concentration in water generally exceeded that in the ice sheet."
+        },
+        {
+          "document_id": "W2182291527",
+          "title": "ROLE OF ORGANIC FERTILIZERS ON CHLOROPHYLL CONTENT IN RICE (ORYZA SATIVA L.)",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.3859,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "anic fertilizers. The treatments of organic fertilizers CM, PM, CMR, PMR, and CPMR were used alone at 4t/ha in five treatments. Half dose of CPMR was used with half dose of RDF (N-50, P-25, K-25 kg/ha) at one level and RDF (N=100, P=50, K=50 kg/ha) alone at one level. The plants without treatments considered as control. Chlorophyll content and Grain yield were significantly increased in all the treatments over control. The maximum grain yield (4776.52 kg/ha) was noted in plants treated with CPMR 2t +½ RDF which had more chlorophyll content."
+        },
+        {
+          "document_id": "W2008289319",
+          "title": "Experimental manipulation of shade, silt, nutrients and salinity on the temperate reef sponge Cymbastela concentrica",
+          "doi": "10.3354/meps307143",
+          "year": "2006",
+          "distance": 0.3864,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "nts were tested to find a cause for observed declines in populations exposed to sewage. Changes in the variables examined (i.e. growth and reproductive status of C. concentrica and concentrations of chl a associated with symbiotic micro-algae in C. concentrica) strongly supported the models showing that shading and siltation were a cause for decline. Nutrients did not affect any of the variables that were measured, whereas a decreasing salinity gradient caused a decline in growth, reproductive status and symbiotic algae (as measured by the concentration of chl a)."
+        },
+        {
+          "document_id": "W2182291527",
+          "title": "ROLE OF ORGANIC FERTILIZERS ON CHLOROPHYLL CONTENT IN RICE (ORYZA SATIVA L.)",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.3865,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ol. The maximum grain yield (4776.52 kg/ha) was noted in plants treated with CPMR 2t +½ RDF which had more chlorophyll content. An increase in the grain yield at the abovementioned treatments was may be due to the increase of chlorophyll content which provides the energy necessary for plant growth and reproduction."
+        },
+        {
+          "document_id": "W1906598187",
+          "title": "Inorganic nitrogen addition in a semi-intensive turbot larval aquaculture system: effects on phytoplankton and zooplankton composition",
+          "doi": "10.1111/are.12842",
+          "year": "2015",
+          "distance": 0.3877,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "three doses over time and a full dose where all nitrogen, equal to the total of the pulse dose treatment, was added initially. In the control, chlorophyll a averaged 3.3 ± 1.5 μg L <sup>−1</sup> and phytoplankton was dominated by diatoms, while the pulsed and full dose treatments showed chlorophyll a at 28.6 ± 9.9 and 47.7 ± 10.0 μg L <sup>−1</sup>, respectively, with dinoflagellates as the main phytoplankton group. Due to photosynthesis, pH increased &gt;9 in both the nitrogen treatments compared to the control (8.5)."
+        },
+        {
+          "document_id": "W2082200171",
+          "title": "Responses of the biennial forest herb <i>Alliaria petiolata</i> to variation in population density, nutrient addition and light availability",
+          "doi": "10.1046/j.1365-2745.2000.00461.x",
+          "year": "2000",
+          "distance": 0.392,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n with significantly greater total dry weight biomass at low plant density, high light availability and with nutrient addition. Low density and high light availability resulted in significantly higher seed production. Plants in the lowest light treatment allocated significantly more biomass to shoot production and less to root production. Leaf chlorophyll content was lowest for plants in the highest light treatment and increased with nutrient addition at the two highest light treatments."
+        },
+        {
+          "document_id": "W2009137716",
+          "title": "Bacterioplankton growth responses to temperature and chlorophyll variations in estuaries measured by thymidine:leucine incorporation ratio",
+          "doi": "10.3354/ame013151",
+          "year": "1997",
+          "distance": 0.3941,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "sm experiments were performed to examine the effects of temperature and substrate supply on the ratio of Leu:TdR, respectively. The molar ratio of Leu to TdR varied about 5-fold (5.6 to 29.5) in the field and the values of the ratio were lower and more constant during high temperature (>25 degrees C) and high chlorophyll a (>8.0 mu g l(-1)) periods. In the temperature manipulation experiments, the Leu:TdR ratio decreased as temperature increased. In the mesocosm experiments, the Leu:TdR ratio was negatively correlated with chlorophyll a concentrations and bacterial specific growth rates."
+        },
+        {
+          "document_id": "W4214907711",
+          "title": "Transcriptomic Analysis Reveals the Regulation Mechanism of Sporogenesis in Ulva prolifera",
+          "doi": "10.3389/fmars.2022.802006",
+          "year": "2022",
+          "distance": 0.3946,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Additionally, the chlorophyll fluorescence and transcriptome analysis were determined at these four states. The results showed that: (1) Compared with state I, the photosynthetic capacity (F v /F m , F v ′/F m ′, rETR max ) and chlorophyll content (Chl a, Chl b, carotenoids) were enhanced in state II, whereas it decreased in state III and IV (the spore formation period); (2) a total of 41,058 unigenes were expressed during the spore formation process;"
+        },
+        {
+          "document_id": "W4240006164",
+          "title": "Growth and Reproduction Capacities of Two Bipolar Phleum alpinum Populations from Norway and South Georgia",
+          "doi": "10.2307/1552218",
+          "year": "2001",
+          "distance": 0.395,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "was LD-stimulation of individual and total leaf area which more than compensated for reduced photosynthesis per unit leaf area. Relative growth rate, photosynthetic capacity, and chlorophyll content were less in South Georgia than Rondane plants, while specific leaf area and shoot/root ratio were higher in the former. Chlorophyll alb ratios were always higher in South Georgia than Rondane plants while they increased markedly with decreasing temperature, and were always higher under SD than LD conditions in both population. Possible consequences for photosystem acclimation are discussed."
+        },
+        {
+          "document_id": "W81388904",
+          "title": "Stable isotopic variation in particulate organic matter and dissolved inorganic compounds in a northern fjord : implications for present and past environments",
+          "doi": "",
+          "year": "1992",
+          "distance": 0.3993,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ep waters and as a measurable flux from sediments confirms that this substrate is not completely consumed during nitrification. -- The δ¹⁵N of suspended POM varied from 5.2‰ to 20.2‰, with the highest values occurring in the spring at the base of the euphotic zone. High δ¹⁵N values may be a consequence of fractionation during peptide bond cleavage or deamination of proteins during partial degradation. Suspended POM δ¹³C values were narrower in range than δ¹⁵N and were between -26.7‰ and -21.9‰. Enrichments in ¹³c were frequently associated with the chlorophyll maximum during periods of high productivity."
+        },
+        {
+          "document_id": "W4312069827",
+          "title": "The role of chlorophyll in determining the resistance of soybean plants to prolonged soil flooding",
+          "doi": "10.30766/2072-9081.2022.23.6.788-795",
+          "year": "2022",
+          "distance": 0.3993,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "noted by the breeders yet there were revealed wavy fluctuations in chlorophyll a/b ratio during the first 10 days of flooding. The fluctuations were caused by changes in the content of chlorophyll b, the concentration of which increased first and then decreased. This fluctuation is most clearly seen in the graph of the change in the ratio between chlorophyll a and b, that may serve as a marker for determination of resistance of soybean varieties to prolonged soil flooding."
+        },
+        {
+          "document_id": "W4309211087",
+          "title": "Effect of Different Colored LED Lighting on the Growth and Pigment Content of Isochrysis zhanjiangensis under Laboratory Conditions",
+          "doi": "10.3390/jmse10111752",
+          "year": "2022",
+          "distance": 0.4004,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "the highest levels of chlorophylls (Chl-a, 1.473 ± 0.037 mg L−1; Chl-b, 1.504 ± 0.001 mg L−1; total Chl, 2.827 ± 0.083 mg L−1). The highest protein content was observed under the white light (524.1935 ± 6.5846 mg L−1), whereas the carbohydrate content was remarkably high under the blue light (24.4697 ± 0.0206 mg L−1). This study is important in terms of the selection of light at the appropriate color (wavelength) to increase the content of organic compounds desired to be obtained indoors with the potential for commercially produced cultures."
+        },
+        {
+          "document_id": "W26910968",
+          "title": "Regulation of chlorophyll synthesis in Chlamydomonas reinhardtii: the role of FLP and GUN4",
+          "doi": "10.13097/archive-ouverte/unige:5077",
+          "year": "2009",
+          "distance": 0.402,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ion de cette protéine est régulée par un signal chloroplastique dépendant de l'accumulation des précurseurs de la chlorophylle. Nous avons montré que l'absence de GUN4 limite l'accumulation de la chlorophylle dans la cellule et qu'un niveau réduit de FLP provoque l'accumulation de niveaux élevés de différents précurseurs de la chlorophylle. Nous avons également identifié deux régulateurs putatifs de l'épissage alternatif de FLP."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "The stylized fact is explicitly listed as SF7 in snippet [1] (chlorophyll concentration increases with dilution rate in nutrient limiting conditions), which directly states the fact and cites supporting literature, and snippet [5] from Zonneveld provides a mechanistic model basis (chlorophyll production proportional to nitrogen pool with dilution at steady state) consistent with the pattern. However, no snippet provides independent empirical measurements clearly demonstrating the increase across dilution rates; the support is largely a restatement of the fact and related modeling discussion. The remaining snippets are off-topic (plant fertilizers, bacterioplankton, oyster farming, isotopes) or concern related but distinct ratios (chl:C, chl:N) and irradiance effects. No snippet contradicts the fact. Overall the evidence is sparse but not conflicting."
+      },
+      "n_references": 2,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.16211354732513428
+        },
+        "69b87866ecbd4702b29a4073": {
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.24769914150238037
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1621,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2382,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "p a0 0. Below I shall analyse thedata of Goldman and Peavey (1979).Fig. 3. Dependence of carbon cell quota on the dilution rate,for various parameter values, in nitrogen-limited phytoplank-ton.C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 603.2. Nutrient -limited Chl :CI assume that when cells are nitrogen-limited,the absolute rate at which chlorophyll is produceddepends on the amount of nitrogen in the tran-sient pool. Furthermore, chlorophyll cell quotadecrease because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r)."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2409,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "bilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2414,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ll 1, true chlorophyll-speciﬁcabsorption cross section x 19.3 m2g 1Chl.5. DiscussionThe present model successfully describes thecarbon and chlorophyll cell quota, and, as acorollary, the chlorophyll to carbon ratio u. Thisapplies to nutrient-limited as well as to light-lim-ited growth. The model descriptions ﬁnd theirbasis in assumptions about uptake and utilizationof nutrient. This contrasts with models that relateuto environmental or physiological variables via"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2477,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r).By assumption, the chlorophyll production rateequals kNl, with ka proportionality constant.(The chlorophyll production rate may also dependon irradiance, in which case kwould depend onthe irradiance. As studies on nutrient-limitedgrowth are generally restricted to one level ofirradiance, information on this aspect is lacking. Itherefore treat kas a constant.) This implies thatthe cellular chlorophyll concentration changes ac-cording toddt[Chl] k[Nl] (m\u001br) · [Chl]so that at steady-state (when m D)"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2525,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2694,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "rowth; Model; Nutrient-limited growth; Photoacclimation; Phytoplankton1. IntroductionThe ratio of the amount of chlorophyll apercell and the amount of carbon per cell, Chl:C,features as a key variable in many microalgalgrowth models (Bannister, 1979; Sakshaug et al.,1989; Cullen et al., 1993; Kiefer, 1993; Baumert,1996; Geider et al., 1996). The widespread use ofChl:C as a model variable is basically rooted inthe ease with which chlorophyll aconcentrationsare experimentally determined. Chlorophyll ais"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2814,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "l. The data are mute about thevalue of the speciﬁc rate of chlorophyll destruc-tion: values between 0 and 0.5 d 1are all consis-tent with the data. Note that although the rateof chlorophyll production decreases with decreas-ing irradiance (at low irradiances) the chloro-phyll cell quota does increase. The reason forthis increase is that dilution through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observed"
+        },
+        {
+          "document_id": "69b847d2ec32c55db5430a89",
+          "title": "Sun et al. - 2025 - Intensive oyster farming enhances carbon storage i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.282,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "e v eo rh a v ea high degree of uncertainty, based onexisting information. Nevertheless, t he chlorophyll concentration used tof o r c et h em o d e lw a st h eo b s e r v e dv a l u e sf o rt h ef a r m i n ga r e a ,w h i c hminimizes the impact of not including these variables as local chlorophyllincorporates the effect of all the other variables delivering food to thebivalves. Moreover, the model re ﬂected the main dynamics and variation inbiodeposition ﬂux at the ecosystem level, capturing the variations in OCdeposition at each farming stage. Dec reased chlorophyll concentrations"
+        },
+        {
+          "document_id": "69b89b47ecbd4702b29a6d06",
+          "title": "LarsFilg2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2912,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "is constant maximum between about 1 and 6 μg chl aL−1,w h e r ethe upper limit corresponds to saturation above which growth de-creases sharply even though the ingestion rate remains nearly constant(Riisgård et al., 2013b ). According to this, the application of BEG to tro-phic conditions in which chlorophyll is higher than about 6 μgL−1would require adding a further modi ﬁcation to include this limit of in-cipient saturation and reduced growth. However, these high chlorophyllvalues rarely prevail in nature over extended periods of time. The meanchlaconcentration measured by different authors in various marine"
+        },
+        {
+          "document_id": "69b86aa6ecbd4702b29a2f43",
+          "title": "Ianniello et al. - 2025 - A review of the current knowledge of the flow of carbon  and energy in scleractinian corals.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2958,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": ", chloro-phyll density, and photosynthetic capacity (Dubinsky et al. 1990; Titlyanov et al. 2000, 2001; Houlbrèque et al. 2003, 2004), all of which can increase photosynthetic output (i.e., available energy) in a healthy system. The interplay between increased heterotrophic nutrients and increased photosyn-thetic capacity cannot be understated; for example, research on S. pistillata fed with either Artemia or fresh zooplankton increased chlorophyll a concentrations 4-7x (Houlbrèque et al. 2003), chlorophyll C2 concentrations 3-4x (Houlbrèque et al. 2004), and photosynthetic rates 2 or 10x (Houlbrèque"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2962,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "menon that can be easily accounted for especially in cell-based models. © 1998 Elsevier Science B.V. All rightsreserved.Keywords:Chl:C; Light-limited growth; Model; Nutrient-limited growth; Photoacclimation; Phytoplankton1. IntroductionThe ratio of the amount of chlorophyll aper"
+        },
+        {
+          "document_id": "W3148075632",
+          "title": "Impact of zebra mussel (Dreissena polymorpha) on phosphorus cycling and chlorophyll in lakes",
+          "doi": "",
+          "year": "2007",
+          "distance": 0.257,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "r clarity (without reducing nutrient levels) and ultimately resulting in a decoupling of the nutrient-chlorophyll relationship. To assess decoupling we compared P a d chlorophyll a (chl a ) estimates with the Dillon and Rigler (19'74) P chl a relationship, which predicts chl a levels for a given concentration of The P chl a relationship assumes that P is the limiting nutrient, and departures from the relationship imply that P has been replaced by alternative limiting factors such as grazing pressure (Kaiser et al. 1994)."
+        },
+        {
+          "document_id": "W2414916378",
+          "title": "[Growth of Platymonas helgolandica var. tsingtaoensis, Cylindrotheca closterium and Karenia mikimotoi and their survival strategies under different N/P ratios].",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.3452,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "measured every 24 h for one week. The results showed that N/P ratio significantly affected the growth of three kinds of algae. Cylindrotheca closterium grew fastest under 160:1 N/P ratio, while Platymonas helgolandica var. tsingtaoensis and Karenia mikimotoi grew fastest under 4:1 and 80:1 N/P ratio, respectively. The maximum cell density of the phytoplankton was mainly influenced by cell size and specific growth rate, the synthesis of chlorophyll a was mainly affected by nitrogen, and high N/P ratio benefited the increase of chlorophyll a content."
+        },
+        {
+          "document_id": "W81388904",
+          "title": "Stable isotopic variation in particulate organic matter and dissolved inorganic compounds in a northern fjord : implications for present and past environments",
+          "doi": "",
+          "year": "1992",
+          "distance": 0.3517,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": ".7‰ and -21.9‰. Enrichments in ¹³c were frequently associated with the chlorophyll maximum during periods of high productivity. Concomitant decreases in the concentration of dissolved inorganic carbon and increases in seston δ¹³C values confirmed results of earlier research which found a inverse correlation between pCO₂ and the δ¹³C of phytoplankton. The carbon isotopic composition of DIC ranged from -4.1‰ to 1.6‰. Low δ¹³C-DIC values may be related to brief periods of enhanced respiration as a result of increased substrate concentration during the spring bloom."
+        },
+        {
+          "document_id": "W1545538486",
+          "title": "Influence of Seawater Temperature on Phytoplankton Growth in Jiaozhou Bay, China",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.3541,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The phytoplankton reproduction capacity (PRC), as a new concept regarding chlorophyll-a and primary production (PP) is described. PRC is different from PP, carbon assimilation number (CAN) or photosynthetic rate (PB). PRC quantifies phytoplankton growth with a special consideration of the effect of seawater temperature."
+        },
+        {
+          "document_id": "W2009137716",
+          "title": "Bacterioplankton growth responses to temperature and chlorophyll variations in estuaries measured by thymidine:leucine incorporation ratio",
+          "doi": "10.3354/ame013151",
+          "year": "1997",
+          "distance": 0.3704,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "experiments, the Leu:TdR ratio was negatively correlated with chlorophyll a concentrations and bacterial specific growth rates. We propose that changes toward less favorable environmental conditions (e.g. reductions in temperature or substrate supply in temperate estuaries) might reduce bacterial protein and DNA synthesis rates simultaneously. However, the former process may be favored to maximize survival and this might lead to a higher Leu:TdR ratio."
+        },
+        {
+          "document_id": "W4324258648",
+          "title": "Impacts of environmental factors on Chlorophyll-a in lakes in cold and arid regions: A 10-year study of Wuliangsuhai Lake, China",
+          "doi": "10.1016/j.ecolind.2023.110133",
+          "year": "2023",
+          "distance": 0.3755,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The study of seasonal variations in Chlorophyll-a (Chl.a) concentration and its influencing factors is particularly important for lake management. The study showed that there was a strong non-linear relationship between Chl.a and environmental factors in spring and autumn, whereas there was a strong linear relationship in summer and winter. Chl.a was redistributed during the ice period, and its concentration in water generally exceeded that in the ice sheet."
+        },
+        {
+          "document_id": "W2182291527",
+          "title": "ROLE OF ORGANIC FERTILIZERS ON CHLOROPHYLL CONTENT IN RICE (ORYZA SATIVA L.)",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.3859,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "anic fertilizers. The treatments of organic fertilizers CM, PM, CMR, PMR, and CPMR were used alone at 4t/ha in five treatments. Half dose of CPMR was used with half dose of RDF (N-50, P-25, K-25 kg/ha) at one level and RDF (N=100, P=50, K=50 kg/ha) alone at one level. The plants without treatments considered as control. Chlorophyll content and Grain yield were significantly increased in all the treatments over control. The maximum grain yield (4776.52 kg/ha) was noted in plants treated with CPMR 2t +½ RDF which had more chlorophyll content."
+        },
+        {
+          "document_id": "W2008289319",
+          "title": "Experimental manipulation of shade, silt, nutrients and salinity on the temperate reef sponge Cymbastela concentrica",
+          "doi": "10.3354/meps307143",
+          "year": "2006",
+          "distance": 0.3864,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nts were tested to find a cause for observed declines in populations exposed to sewage. Changes in the variables examined (i.e. growth and reproductive status of C. concentrica and concentrations of chl a associated with symbiotic micro-algae in C. concentrica) strongly supported the models showing that shading and siltation were a cause for decline. Nutrients did not affect any of the variables that were measured, whereas a decreasing salinity gradient caused a decline in growth, reproductive status and symbiotic algae (as measured by the concentration of chl a)."
+        },
+        {
+          "document_id": "W2182291527",
+          "title": "ROLE OF ORGANIC FERTILIZERS ON CHLOROPHYLL CONTENT IN RICE (ORYZA SATIVA L.)",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.3865,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ol. The maximum grain yield (4776.52 kg/ha) was noted in plants treated with CPMR 2t +½ RDF which had more chlorophyll content. An increase in the grain yield at the abovementioned treatments was may be due to the increase of chlorophyll content which provides the energy necessary for plant growth and reproduction."
+        },
+        {
+          "document_id": "W1906598187",
+          "title": "Inorganic nitrogen addition in a semi-intensive turbot larval aquaculture system: effects on phytoplankton and zooplankton composition",
+          "doi": "10.1111/are.12842",
+          "year": "2015",
+          "distance": 0.3877,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "three doses over time and a full dose where all nitrogen, equal to the total of the pulse dose treatment, was added initially. In the control, chlorophyll a averaged 3.3 ± 1.5 μg L <sup>−1</sup> and phytoplankton was dominated by diatoms, while the pulsed and full dose treatments showed chlorophyll a at 28.6 ± 9.9 and 47.7 ± 10.0 μg L <sup>−1</sup>, respectively, with dinoflagellates as the main phytoplankton group. Due to photosynthesis, pH increased &gt;9 in both the nitrogen treatments compared to the control (8.5)."
+        },
+        {
+          "document_id": "W2082200171",
+          "title": "Responses of the biennial forest herb <i>Alliaria petiolata</i> to variation in population density, nutrient addition and light availability",
+          "doi": "10.1046/j.1365-2745.2000.00461.x",
+          "year": "2000",
+          "distance": 0.392,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "n with significantly greater total dry weight biomass at low plant density, high light availability and with nutrient addition. Low density and high light availability resulted in significantly higher seed production. Plants in the lowest light treatment allocated significantly more biomass to shoot production and less to root production. Leaf chlorophyll content was lowest for plants in the highest light treatment and increased with nutrient addition at the two highest light treatments."
+        },
+        {
+          "document_id": "W2009137716",
+          "title": "Bacterioplankton growth responses to temperature and chlorophyll variations in estuaries measured by thymidine:leucine incorporation ratio",
+          "doi": "10.3354/ame013151",
+          "year": "1997",
+          "distance": 0.3941,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "sm experiments were performed to examine the effects of temperature and substrate supply on the ratio of Leu:TdR, respectively. The molar ratio of Leu to TdR varied about 5-fold (5.6 to 29.5) in the field and the values of the ratio were lower and more constant during high temperature (>25 degrees C) and high chlorophyll a (>8.0 mu g l(-1)) periods. In the temperature manipulation experiments, the Leu:TdR ratio decreased as temperature increased. In the mesocosm experiments, the Leu:TdR ratio was negatively correlated with chlorophyll a concentrations and bacterial specific growth rates."
+        }
+      ]
+    }
+  }
+}

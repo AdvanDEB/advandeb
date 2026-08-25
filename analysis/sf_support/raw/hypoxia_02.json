@@ -1,0 +1,834 @@
+{
+  "sf_id": "hypoxia_02",
+  "category": "Hypoxia / DO",
+  "statement": "Food assimilation efficiency can be enhanced, unchanged or reduced under hypoxia, depending on species.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The corpus strongly supports the stylized fact. Snippets [1], [2], and [3] explicitly state the exact claim—that food assimilation efficiency can be enhanced (Sobral and Widdows 1997), unchanged (Cheung et al. 2008a), or reduced (Chabot 2001; Wang et al. 2011; Wei et al. 2009; Zhou et al. 2001) under hypoxia depending on species—with specific supporting references. Snippet [12] independently corroborates that 'the direction of that effect is species-dependent,' citing the same review. Additional snippets [6], [9], [15], and [16] describe mechanisms and reductions in assimilation efficiency under hypoxia, while [10] and [16] describe a decoupling strategy limiting effects (consistent with the 'unchanged/enhanced' possibility). No snippet contradicts the fact; remaining items are off-topic modeling or methodological context. Evidence is clear, multiply documented, and internally consistent."
+      },
+      "n_references": 6,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 7,
+          "supports": 7,
+          "contradicts": 0,
+          "best_distance": 0.19857823848724365
+        },
+        "69b8982cecbd4702b29a6862": {
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2630641460418701
+        },
+        "69b86876ecbd4702b29a2cf4": {
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 0,
+          "best_distance": 0.2834744453430176
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2896496653556824
+        },
+        "69b88155ecbd4702b29a4d0c": {
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3057035207748413
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3357357978820801
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1986,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "even enhanced by hypoxic conditions from 34.6% at 11 kPa to 69.3% at 1.2 kPa (Sobral and Widdows, 1997) . The effect of hypoxic conditions on food assimilation efficiency seems thus to be very species -dependent. 2.2 Hypoxia and growt h Two hypothes es explain the decrease in growth when organisms are exposed to hypoxia: (1) a decrease in energy uptake; as previously highlighted, a reduction in food ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 9 consumption seems to be the major cause of growth limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.231,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "s are related to the metabolic processes common to all the organisms: Feeding, growth, reproduction, respiration, and survival. Table 1. Stylized biological facts giving a summa ry of the metabolic responses of marine organisms to hypoxia . Stylized fact s Empirical evidences Feeding F1. Organisms reduce their feeding rate with decreasing DO level . (Brandt et al., 2009; Chabot and Dutil, 1999; Desai and Prakash, 2009; Le Moullac et al., 2007; Siikavuopio et al., 2007; Sobral and Widdows, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia,"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2335,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "ws, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level , due to reduction in energy uptake and/or increase in energy expenditure (dissipation) . (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001)"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2424,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ed for these two species (see 3.3.1 ).  In their study, Aguirre -Velarde et al. (this issue) also considered an effect on food assimilation by modifying assimilation rate ( 𝑝̇𝐴). Based on the observation that expos ure to hypoxia tended to induce an accumulation of reserves , Aguirre -Velarde et al. (2018) also assumed an effe ct on reserve mobiliz ation rate ( 𝑝̇𝑐). The same oxygen correction function was applied on both fluxes for simplicity’s sake. The simultaneous reduction in the assimilation and mobilization fluxes restrict both reserve entry and output (see 3.3.2 ). These two applications are presented below."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2516,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "Assumptions on fluxes modulation under hypoxia Within a standard DEB model , responses to hypoxia can be included by acting on various energy fluxes , in relation with the physiological disturbances previously demonstrated : 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ -rule and subsequent allocations to growth and reproduction; related to"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.253,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "d the effect of low oxygen level on feeding rate : sensitivity to hypoxia increase d with increasing size in developing larvae, and conversely, decrease d with increasing size in post-settlement (e.g., juvenile) for oyster and mussel (Baker and Mann, 1994; Wang and Widdows, 1991; Widdows et al., 1989) . The assimilation efficiency (AE) is defined as the proportion of ingested energy entering into the reserves through assimilation, the remainder being evacuated with the faeces . Many studies have shown that AE is reduced by decreasing DO (e.g. green"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2631,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "wed by Thomas et al. (2018, this issue) , the feeding processis commonly impaired by oxygen limitation ( Wu, 2002), probably dueto the high oxygen demand of digestive/assimilation processes (seeKramer, 1987 ;Willows, 1992 ). We thus assumed that the assimilationrate (ṗA) was a ﬀected by low oxygen saturations according to Aguirre-Velarde et al. (2018) . Under hypoxic conditions, energy productionthrough aerobic metabolic pathways is impaired and less e ﬃcientanaerobic pathways are activated. As hypothesized in Aguirre-Velardeet al. (2018) , we assumed that an organism under hypoxic conditions is"
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2835,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "man, 2010 ), or a correction of the conversion e ﬃciencyof food to assimilated energy κX. All these e ﬀects are obviously inter-related and factors that in ﬂuence the amount of food eaten are likely toaﬀect the assimilation e ﬃciency and any factor that in ﬂuences the rateof the digestive processes and assimilation is likely to have an inﬂ uenceupon the amount of food ingested ( Wang et al., 2009). While laboratoryexperiments have already demonstrated a reduction of growth in codexposed to hypoxia ( Chabot and Dutil, 1999 ), no study on cod has yetdemonstrated a negative e ﬀect of hypoxia on reproductive output, al-"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2896,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "posure to low oxygen reduces filtration and ingestion rates in filter -feeding bivalves, reducing the influx of energy into the organism (Sobral and Widdows 1997, Hicks and McMahon 2002, C lark 2014). The assimilation of ingested energy into utilized energy can also be reduced under low oxygen exposure due to reductions in the activity of enzymes necessary for energy assimilation (Wang et al. 2011). Of the energy assimilated, hypoxia can hin der the ability of organisms to mobilize energy reserves because facultative anaerobiosis – undertaken by organisms under hypoxic stress – results in reduced energetic outputs"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3057,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "g, digestion and assimilation are considered as costly func-tions, easily digestible food would be the key to successful adapta-tion of organisms in the oxygen minimum zones (Rosenberg et al.,1983; Mullins et al., 1985; Forbes and Lopez, 1990; Levin et al.,1991; Diaz and Rosenberg, 1995) . Under such conditions it wouldbe possible and perhaps energetically interesting for Argopectenpurpuratus to continue feeding, at least for the ﬁrst hours after theinstallation of severe hypoxia, to maintain its metabolic require-ments. On the other hand, a decoupling between ﬁltration (all-day)"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3357,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "Applying the hypoxia effects to reduce the conversion efficiency of assimilates to structure accounted for some of the hypoxia- related changes in all three state variables. However, the best fit was achieved by simultaneously reducing the conversion efficiency and increasing both mortality parameters. In contrast, changing the parameter for main -tenance rate with hypoxia provided little to no improvement of fit to the data. Reduced conversion efficiency under hypoxia would suggest that less of the energy invested by parents and consumed through predation is"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3405,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "survival. Through this model we have found evidence that the mechanism largely responsible for the observed hypoxia impacts on growth, hatch timing, and survival is the efficiency with which assimi -lated food or egg yolk is converted into structure. The limitations of this inference are discussed later.Changes to assimilation in response to hypoxia have been recorded in other species, but the direction of that effect is species-dependent (reviewed in Thomas et al., 2019 ). In M. menidia , however, reducing assimilation with hypoxia rather than conversion efficiency yielded a"
+        },
+        {
+          "document_id": "69b8a821ecbd4702b29a7c0f",
+          "title": "AnanMcCa2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3415,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "itive to afew model parameters. At low food, fecundity issusceptible to changes in all processes and almost allmodel parameters.The effect of food-supply parameters on all endpointsother than fecundity is minimal at high food whensupply is sufﬁcient and feeding rate largely saturates dueto the type 2 functional response. At low food, foodsupply and the functional response both have strongeffects; providing more food more regularly improvesfecundity and to a lesser extent increases the ﬁnal lengthof individuals. Assimilation efﬁciency affects mainly"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.351,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "xpanded the model’s use to understand effects of environmental stressors on organismal population dynamics, including toxicants (Galic et al. 2017), low salinity (Lavaud et al. 2017) and low dissolved oxygen (Aguirre -Velarde et al. 2019a, Lavaud et al. 2019). Given oxygen’s importance for energy production in aerobically respiring organisms, hypoxia has the ability to affect many aspect s of an organism’s energy budget 136 (reviewed by Thomas et al. 2019). Exposure to low oxygen reduces filtration and ingestion rates in filter -feeding bivalves, reducing the influx of energy into the"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3513,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "-regulated by more than an order of magnitude, and metabolic rate reduced e.g. by 5-20 fold during hypoxia , from 7 to 1 mgO 2 l-1 (Wu et al., 2003) . In that case, most of the energy derived from food is required for maintenance when food ingestion is very limited , even stopped, and the animal mostly lives on energy reserves : there is a reduced aerobic scope , so the cost for processing food ( SDA) is not overcast . Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008) ."
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3519,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "aturation with the energy conductance parameter ( v̇) thatcontrols the reserve mobilization rate, using a rule that re ﬂects theorganism oxyregulation capacity such as the one used in Aguirre-Velarde et al. (2016) . Low oxygen conditions might also a ﬀect assim-ilation since it is an oxygen-demanding activity, and a common strategyunder hypoxia is to reduce food intake ( Wu, 2002). However, our ob-servations suggest a decoupling strategy between food intake and as-similation that might limit the e ﬀect of hypoxia on energy intake.The inclusion of those e ﬀects of hypoxia in dynamic energy budget"
+        },
+        {
+          "document_id": "69b880e4ecbd4702b29a4c3b",
+          "title": "Haberle et al. - 2020 - Dynamic energy budget of endemic and critically en.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3543,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Peharda et al. (2012). Observed data taken from: (a),(c) and (d) Richardson et al. (1999); (b) Šiletić and Peharda (2003); (e) Trigos et al. (2018); (f) Kožul et al. (2012). I. Haberle, et al. Ecological Modelling 434 (2020) 1092076slow metabolism during the larval stage allows for more dispersal time (Kooijman, 2014). In contrast, higher assimilation rate after settlement optimizes organisms’ ability to retain available food, a very important trait for a sessile filter feeder. The metabolic acceleration increases both assimilation and mobilisation, keeping the maximum energy density"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3563,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "entilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008) . Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activit y and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009) . These behaviours can change energy expenditure for activity in opposite ways and then act on dissipation rate accordingly : more energy expenditure with increased activity (e. g. escape) or less energy expenditure with reduced activity ."
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "The corpus contains almost no direct evidence on the stylized fact that assimilation efficiency under hypoxia varies (enhanced, unchanged, or reduced) across species. The only snippets that touch on assimilation efficiency under hypoxia are [5] and [9], both from the same modeling study, which suggest that declines in assimilation efficiency are a driver of community response to hypoxia and that different species may prioritize differently—offering modest, indirect support for species-dependent variation. However, these are modeling inferences rather than measured species-specific assimilation efficiency data, and they emphasize reductions rather than the full range (enhanced/unchanged/reduced). Other snippets discussing assimilation efficiency ([7], [12], [13]) do so in non-hypoxia contexts, while the remaining hypoxia snippets are broad ecosystem-level or off-topic. Overall, evidence is weak and sparse, with no contradicting evidence, so the direction is best characterized as insufficient/neutral leaning slightly toward support."
+      },
+      "n_references": 1,
+      "references": {
+        "W4385272707": {
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3955756425857544
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2103377348",
+          "title": "Hypoxia, Nitrogen, and Fisheries: Integrating Effects Across Local and Global Landscapes",
+          "doi": "10.1146/annurev.marine.010908.163754",
+          "year": "2008",
+          "distance": 0.3356,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": ". A number of compensatory mechanisms limit the translation of local-scale effects of hypoxia to the scale of the whole system. Hypoxia is, however, a serious environmental challenge that should be considered in fisheries management strategies and be a direct target of environmental restoration."
+        },
+        {
+          "document_id": "W2146203182",
+          "title": "Natural and human-induced hypoxia and consequences for coastal areas: synthesis and future development",
+          "doi": "10.5194/bg-7-1443-2010",
+          "year": "2010",
+          "distance": 0.3587,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "xia. Coastal systems also vary in their relative susceptibility to hypoxia depending on their physical and geographic settings. It is understood that coastal hypoxia has a profound impact on the sustainability of ecosystems, which can be seen, for example, by the change in the food-web structure and system function; other influences include compression and loss of habitat, as well as changes in organism life cycles and reproduction. In most cases, the ecosystem responds to the low dissolved oxygen in non-linear ways with pronounced feedbacks to other compartments of the Earth System, including those that affect human society."
+        },
+        {
+          "document_id": "W4244026942",
+          "title": "Effects of environmental factors on the paternal brood pouch and sound production in two sympatric pipefish species from the Chincoteague Bay, Virginia",
+          "doi": "10.33915/etd.2403",
+          "year": "2006",
+          "distance": 0.3641,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "t positively correlated with food intake. Under hypoxia, reduced feeding activity corresponded with decreased sound production. Overall, these projects compare species responses to environmental stressors to determine how reproductive and feeding behavior relates to species sensitivity."
+        },
+        {
+          "document_id": "W2133762778",
+          "title": "Climate change effects on fishes and fisheries: towards a cause‐and‐effect understanding",
+          "doi": "10.1111/j.1095-8649.2010.02783.x",
+          "year": "2010",
+          "distance": 0.3846,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nd frequency of hypoxia events, through ongoing ocean acidification trends or through shifts in hydrodynamics and in sea level. In some cases, climate interactions with a species will also, or mostly, be indirect and mediated through direct effects on key prey species which change the composition and dynamic coupling of food webs."
+        },
+        {
+          "document_id": "W4385272707",
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "distance": 0.3956,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "in addition to low food availability and changing habitat use – are all important drivers of the community response to hypoxia. Meta-analysis results also provide evidence that the dominant predator in the study system prioritizes among metabolic demands, and that these priorities may change as oxygen declines. Going forward, experiments and models should explore how differences in priorities within and among communities drive responses to environmental degradation. This will help management efforts to tailor recovery programs to the physiological needs of species within a given system."
+        },
+        {
+          "document_id": "W44427431",
+          "title": "Nutritional ecology of fruit-eating and flower-visiting birds and bats",
+          "doi": "10.1017/cbo9780511661716.009",
+          "year": "1994",
+          "distance": 0.398,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "energy and nutrient intake and thus determine rates of growth and reproduction (Kenward and Sibly, 1977; Karasov et al, 1986). In addition, nutrient assimilation is one of the factors that mediates the interaction of animals with their environment (Martinez del Rio and Restrepo, 1992)."
+        },
+        {
+          "document_id": "W2325812105",
+          "title": "Winter Starvation in Captive Common Barn-Owls: Bioenergetics during Refeeding",
+          "doi": "10.2307/4088411",
+          "year": "1993",
+          "distance": 0.3991,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "rease in gross energy intake and daily metabolized energy, respectively, of 370 3;2;± 42 and 275 3;2;± 31 kJ Id during Feeding. In contrast to the clear increase in food assimilation efficiency observed in other species during refeeding, the high rate of energy intake and body mass restoration in the Common Barn-Owl was associated with only a slight increase in assimilation efficiencies: 52.0 3;2;± 2.2% versus 49.1 3;2;± 1.0% during Feeding for dry mass; and 75.5 3;2;± 1.1% versus 74.1 3;2;± 0.6% for energy. This slight increase could only be attributed to a reduction of the energy lost in pellet production (i.e."
+        },
+        {
+          "document_id": "W2979847121",
+          "title": "Sensitivities to global change drivers may correlate positively or negatively in a foundational marine macroalga",
+          "doi": "10.1038/s41598-019-51099-8",
+          "year": "2019",
+          "distance": 0.4033,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ot suffer from the two other shifts, and vice versa and (ii) families benefitting from OAW will more easily succumb to hypoxia. Our results may imply that selection under either OA, OW or eutrophication would enhance performance under the other two drivers but simultaneously render the population more susceptible to hypoxia. We conclude that intraspecific response correlations have a high potential to boost or hinder adaptation to multifactorial global change scenarios."
+        },
+        {
+          "document_id": "W4385272707",
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "distance": 0.4084,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "explore evidence in favor of metabolic prioritization in a community of commercially important fish species in the Baltic Sea. Modeling results suggest that metabolic prioritization is an important component of the individual response to hypoxia, that it interacts with other components to produce realistic community dynamics, and that different species may prioritize differently. It is thus suggested that declines in feeding activity, assimilation efficiency, and successful reproduction – in addition to low food availability and changing habitat use – are all important drivers of the community response to hypoxia."
+        },
+        {
+          "document_id": "W4252371198",
+          "title": "Natural and human-induced hypoxia and consequences for coastal areas: synthesis and future development",
+          "doi": "10.5194/bgd-6-11035-2009",
+          "year": "2009",
+          "distance": 0.4147,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "under the combination of external forcings, depends also on the nature of the ecosystem, e.g. physical and geographic settings. It is understood that coastal hypoxia has a profound impact on the sustainability of ecosystems, which can be seen, for example, by the change in the food-web structure and system function; other influences can be compression and loss of habitat, as well as change in life cycle and reproduction. In most cases, the ecosystem responds to the low dissolved oxygen in a non-linear way and has pronounced feedbacks to other compartments of the Earth System, hence affecting human society."
+        },
+        {
+          "document_id": "W4311875468",
+          "title": "Divergent Carry-Over Effects of Hypoxia during the Early Development of Abalone",
+          "doi": "10.1021/acs.est.2c04975",
+          "year": "2022",
+          "distance": 0.419,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "After being exposed to environmental stimuli during early developmental stages, some organisms may gain or weaken physiological regulating abilities, which would have long-lasting effects on their performance. Environmental hypoxia events can have significant effects on marine organisms, but for breeding programs and other practical applications, it is important to further explore the long-term physiological effects of early hypoxia exposure in economically significant species."
+        },
+        {
+          "document_id": "W2006405178",
+          "title": "Growth Model of <i>Daphnia</i>",
+          "doi": "10.1139/f82-084",
+          "year": "1982",
+          "distance": 0.4244,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "quent experimental results. Contrary to many higher organisms, the assimilation efficiency increases with increasing body size. This may be, at least in part, the reason why larger body-sized zooplankton tend to dominate in aquatic ecosystems when not controlled by predators. The uptake rate per body weight as a function of cell concentration can be described by Michaelis–Menten type equations, but not the assimilation rate."
+        },
+        {
+          "document_id": "W4244886951",
+          "title": "10.1007/BF00341086",
+          "doi": "10.1007/bf00341086",
+          "year": "2004",
+          "distance": 0.4245,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": ".75% N diet had slightly lower consumption rates, higher net growth efficiency (ECD), and higher gross growth efficiency (ECI). Larvae previously reared on 3.75% N diet tended to have lower food assimilation efficiency (AD) and lower nitrogen assimilation efficiency (AD(N)). Although both previous and current diet nitrogen concentration strongly affected larval growth and food utilization, the interaction term between these was not significant for any response variables except ECD and ECI."
+        },
+        {
+          "document_id": "W2979847121",
+          "title": "Sensitivities to global change drivers may correlate positively or negatively in a foundational marine macroalga",
+          "doi": "10.1038/s41598-019-51099-8",
+          "year": "2019",
+          "distance": 0.4249,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "d CO 2 (ocean acidification, OA), ocean warming (OW), combined OA and warming (OAW), nutrient enrichment and hypoxic upwelling. Among families, performance responses to OA and OW as well as to OAW and nutrient enrichment correlated positively whereas performance responses to OAW and hypoxia anti-correlated. This indicates (i) that families robust to one of the three drivers (OA, OW, nutrients) will also not suffer from the two other shifts, and vice versa and (ii) families benefitting from OAW will more easily succumb to hypoxia."
+        },
+        {
+          "document_id": "W1994771992",
+          "title": "The behavioral ecology of air breathing by aquatic animals",
+          "doi": "10.1139/z88-012",
+          "year": "1988",
+          "distance": 0.4301,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "laboratory studies provide some support for these predictions in a variety of mammals, birds, reptiles, amphibians, and fishes. A \"theory of optimal breathing\" is relevant to physiology because it uncovers interesting and unexpected subtleties in the regulation of respiration, because it provides a holistic framework in which to order empirical findings, because it pinpoints potentially confounding variables in experimental studies, and because it illustrates the value of a hypothetico-deductive approach to adaptation."
+        },
+        {
+          "document_id": "W1999081505",
+          "title": "Hypoxia in the changing marine environment",
+          "doi": "10.1088/1748-9326/8/1/015025",
+          "year": "2013",
+          "distance": 0.4344,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "utcomes as well as perceived or real impacts on seafood quality (STAP 2011 (Washington, DC: Global Environment Facility) p 88). Moreover, low oxygen concentration in marine waters can have considerable feedbacks to other compartments of the Earth system, like the emission of greenhouse gases to the atmosphere, and can affect the global biogeochemical cycles of nutrients and trace elements. It is of critical importance to prediction and adaptation strategies that the key processes of hypoxia in marine environments be precisely determined and understood (cf Zhang et al 2010 Biogeosciences 7 1–24)."
+        },
+        {
+          "document_id": "W1984601497",
+          "title": "PHYSIOLOGICAL VARIATION IN ANIMALS",
+          "doi": "10.1111/j.1469-185x.1955.tb01208.x",
+          "year": "1955",
+          "distance": 0.4364,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "level, tolerance of products of anaerobiosis, auxiliary breathing mechanisms and stimulation of pigment development by hypoxia. Correlations of these functions with history of oxygen availability are cited, but data are inadequate to establish genetic races. Selection of specific food plants depends on secondary products, not primary food; many subspecies and races are known by food plant selection, especially among bugs, gall flies and butterflies."
+        },
+        {
+          "document_id": "W4214910435",
+          "title": "Western Baltic cod in distress: decline in energy reserves since 1977",
+          "doi": "10.1093/icesjms/fsac042",
+          "year": "2022",
+          "distance": 0.4391,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "t decreased by 50% and 10% in the last 10 years, respectively, suggesting severely decreasing energy reserves and productivity. The changes in energy reserves were associated with changes in environmental conditions (increase in bottom water temperature, expansion of hypoxic areas during late summer/autumn), and changes in diet composition (less herring). A key bottleneck is the warming and longer-lasting summer period when WBC, trapped between warmed shallow waters and hypoxic deeper waters, have to mobilize energy reserves to account for reduced feeding opportunities and thermal stress."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly affirm the stylized fact. Snippets 2 and 3 are the explicit statement of the fact (F2) with cited references showing assimilation efficiency can be enhanced (Sobral and Widdows 1997), unchanged (Cheung et al. 2008a), or reduced (Chabot 2001; Wang et al. 2011; Wei et al. 2009; Zhou et al. 2001). Snippet 1 provides the specific enhancement example, and snippet 6 documents reduction cases. Snippet 12 explicitly states the direction of the assimilation effect is species-dependent, reinforcing the fact. Snippets 9, 7, 11, 17, and 21 corroborate hypoxia-driven assimilation reductions in particular species. Many remaining snippets are off-topic (coastal hypoxia ecosystem effects, birds/bats, macroalgae, Daphnia) and were marked neutral. Overall the corpus strongly and consistently supports the species-dependent variability of assimilation efficiency under hypoxia, with no contradicting evidence."
+      },
+      "n_references": 6,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 5,
+          "supports": 5,
+          "contradicts": 0,
+          "best_distance": 0.19857823848724365
+        },
+        "69b8982cecbd4702b29a6862": {
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2630641460418701
+        },
+        "69b86876ecbd4702b29a2cf4": {
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 0,
+          "best_distance": 0.2834744453430176
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2896496653556824
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3357357978820801
+        },
+        "W4385272707": {
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3955756425857544
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1986,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "even enhanced by hypoxic conditions from 34.6% at 11 kPa to 69.3% at 1.2 kPa (Sobral and Widdows, 1997) . The effect of hypoxic conditions on food assimilation efficiency seems thus to be very species -dependent. 2.2 Hypoxia and growt h Two hypothes es explain the decrease in growth when organisms are exposed to hypoxia: (1) a decrease in energy uptake; as previously highlighted, a reduction in food ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 9 consumption seems to be the major cause of growth limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.231,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "s are related to the metabolic processes common to all the organisms: Feeding, growth, reproduction, respiration, and survival. Table 1. Stylized biological facts giving a summa ry of the metabolic responses of marine organisms to hypoxia . Stylized fact s Empirical evidences Feeding F1. Organisms reduce their feeding rate with decreasing DO level . (Brandt et al., 2009; Chabot and Dutil, 1999; Desai and Prakash, 2009; Le Moullac et al., 2007; Siikavuopio et al., 2007; Sobral and Widdows, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia,"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2335,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "ws, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level , due to reduction in energy uptake and/or increase in energy expenditure (dissipation) . (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001)"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2424,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ed for these two species (see 3.3.1 ).  In their study, Aguirre -Velarde et al. (this issue) also considered an effect on food assimilation by modifying assimilation rate ( 𝑝̇𝐴). Based on the observation that expos ure to hypoxia tended to induce an accumulation of reserves , Aguirre -Velarde et al. (2018) also assumed an effe ct on reserve mobiliz ation rate ( 𝑝̇𝑐). The same oxygen correction function was applied on both fluxes for simplicity’s sake. The simultaneous reduction in the assimilation and mobilization fluxes restrict both reserve entry and output (see 3.3.2 ). These two applications are presented below."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2516,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "Assumptions on fluxes modulation under hypoxia Within a standard DEB model , responses to hypoxia can be included by acting on various energy fluxes , in relation with the physiological disturbances previously demonstrated : 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ -rule and subsequent allocations to growth and reproduction; related to"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.253,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "d the effect of low oxygen level on feeding rate : sensitivity to hypoxia increase d with increasing size in developing larvae, and conversely, decrease d with increasing size in post-settlement (e.g., juvenile) for oyster and mussel (Baker and Mann, 1994; Wang and Widdows, 1991; Widdows et al., 1989) . The assimilation efficiency (AE) is defined as the proportion of ingested energy entering into the reserves through assimilation, the remainder being evacuated with the faeces . Many studies have shown that AE is reduced by decreasing DO (e.g. green"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2631,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "wed by Thomas et al. (2018, this issue) , the feeding processis commonly impaired by oxygen limitation ( Wu, 2002), probably dueto the high oxygen demand of digestive/assimilation processes (seeKramer, 1987 ;Willows, 1992 ). We thus assumed that the assimilationrate (ṗA) was a ﬀected by low oxygen saturations according to Aguirre-Velarde et al. (2018) . Under hypoxic conditions, energy productionthrough aerobic metabolic pathways is impaired and less e ﬃcientanaerobic pathways are activated. As hypothesized in Aguirre-Velardeet al. (2018) , we assumed that an organism under hypoxic conditions is"
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2835,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "man, 2010 ), or a correction of the conversion e ﬃciencyof food to assimilated energy κX. All these e ﬀects are obviously inter-related and factors that in ﬂuence the amount of food eaten are likely toaﬀect the assimilation e ﬃciency and any factor that in ﬂuences the rateof the digestive processes and assimilation is likely to have an inﬂ uenceupon the amount of food ingested ( Wang et al., 2009). While laboratoryexperiments have already demonstrated a reduction of growth in codexposed to hypoxia ( Chabot and Dutil, 1999 ), no study on cod has yetdemonstrated a negative e ﬀect of hypoxia on reproductive output, al-"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2896,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "posure to low oxygen reduces filtration and ingestion rates in filter -feeding bivalves, reducing the influx of energy into the organism (Sobral and Widdows 1997, Hicks and McMahon 2002, C lark 2014). The assimilation of ingested energy into utilized energy can also be reduced under low oxygen exposure due to reductions in the activity of enzymes necessary for energy assimilation (Wang et al. 2011). Of the energy assimilated, hypoxia can hin der the ability of organisms to mobilize energy reserves because facultative anaerobiosis – undertaken by organisms under hypoxic stress – results in reduced energetic outputs"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3057,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "g, digestion and assimilation are considered as costly func-tions, easily digestible food would be the key to successful adapta-tion of organisms in the oxygen minimum zones (Rosenberg et al.,1983; Mullins et al., 1985; Forbes and Lopez, 1990; Levin et al.,1991; Diaz and Rosenberg, 1995) . Under such conditions it wouldbe possible and perhaps energetically interesting for Argopectenpurpuratus to continue feeding, at least for the ﬁrst hours after theinstallation of severe hypoxia, to maintain its metabolic require-ments. On the other hand, a decoupling between ﬁltration (all-day)"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3357,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "Applying the hypoxia effects to reduce the conversion efficiency of assimilates to structure accounted for some of the hypoxia- related changes in all three state variables. However, the best fit was achieved by simultaneously reducing the conversion efficiency and increasing both mortality parameters. In contrast, changing the parameter for main -tenance rate with hypoxia provided little to no improvement of fit to the data. Reduced conversion efficiency under hypoxia would suggest that less of the energy invested by parents and consumed through predation is"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3405,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "survival. Through this model we have found evidence that the mechanism largely responsible for the observed hypoxia impacts on growth, hatch timing, and survival is the efficiency with which assimi -lated food or egg yolk is converted into structure. The limitations of this inference are discussed later.Changes to assimilation in response to hypoxia have been recorded in other species, but the direction of that effect is species-dependent (reviewed in Thomas et al., 2019 ). In M. menidia , however, reducing assimilation with hypoxia rather than conversion efficiency yielded a"
+        },
+        {
+          "document_id": "W2103377348",
+          "title": "Hypoxia, Nitrogen, and Fisheries: Integrating Effects Across Local and Global Landscapes",
+          "doi": "10.1146/annurev.marine.010908.163754",
+          "year": "2008",
+          "distance": 0.3356,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": ". A number of compensatory mechanisms limit the translation of local-scale effects of hypoxia to the scale of the whole system. Hypoxia is, however, a serious environmental challenge that should be considered in fisheries management strategies and be a direct target of environmental restoration."
+        },
+        {
+          "document_id": "W2146203182",
+          "title": "Natural and human-induced hypoxia and consequences for coastal areas: synthesis and future development",
+          "doi": "10.5194/bg-7-1443-2010",
+          "year": "2010",
+          "distance": 0.3587,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "xia. Coastal systems also vary in their relative susceptibility to hypoxia depending on their physical and geographic settings. It is understood that coastal hypoxia has a profound impact on the sustainability of ecosystems, which can be seen, for example, by the change in the food-web structure and system function; other influences include compression and loss of habitat, as well as changes in organism life cycles and reproduction. In most cases, the ecosystem responds to the low dissolved oxygen in non-linear ways with pronounced feedbacks to other compartments of the Earth System, including those that affect human society."
+        },
+        {
+          "document_id": "W4244026942",
+          "title": "Effects of environmental factors on the paternal brood pouch and sound production in two sympatric pipefish species from the Chincoteague Bay, Virginia",
+          "doi": "10.33915/etd.2403",
+          "year": "2006",
+          "distance": 0.3641,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "t positively correlated with food intake. Under hypoxia, reduced feeding activity corresponded with decreased sound production. Overall, these projects compare species responses to environmental stressors to determine how reproductive and feeding behavior relates to species sensitivity."
+        },
+        {
+          "document_id": "W2133762778",
+          "title": "Climate change effects on fishes and fisheries: towards a cause‐and‐effect understanding",
+          "doi": "10.1111/j.1095-8649.2010.02783.x",
+          "year": "2010",
+          "distance": 0.3846,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nd frequency of hypoxia events, through ongoing ocean acidification trends or through shifts in hydrodynamics and in sea level. In some cases, climate interactions with a species will also, or mostly, be indirect and mediated through direct effects on key prey species which change the composition and dynamic coupling of food webs."
+        },
+        {
+          "document_id": "W4385272707",
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "distance": 0.3956,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "in addition to low food availability and changing habitat use – are all important drivers of the community response to hypoxia. Meta-analysis results also provide evidence that the dominant predator in the study system prioritizes among metabolic demands, and that these priorities may change as oxygen declines. Going forward, experiments and models should explore how differences in priorities within and among communities drive responses to environmental degradation. This will help management efforts to tailor recovery programs to the physiological needs of species within a given system."
+        },
+        {
+          "document_id": "W44427431",
+          "title": "Nutritional ecology of fruit-eating and flower-visiting birds and bats",
+          "doi": "10.1017/cbo9780511661716.009",
+          "year": "1994",
+          "distance": 0.398,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "energy and nutrient intake and thus determine rates of growth and reproduction (Kenward and Sibly, 1977; Karasov et al, 1986). In addition, nutrient assimilation is one of the factors that mediates the interaction of animals with their environment (Martinez del Rio and Restrepo, 1992)."
+        },
+        {
+          "document_id": "W2325812105",
+          "title": "Winter Starvation in Captive Common Barn-Owls: Bioenergetics during Refeeding",
+          "doi": "10.2307/4088411",
+          "year": "1993",
+          "distance": 0.3991,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "rease in gross energy intake and daily metabolized energy, respectively, of 370 3;2;± 42 and 275 3;2;± 31 kJ Id during Feeding. In contrast to the clear increase in food assimilation efficiency observed in other species during refeeding, the high rate of energy intake and body mass restoration in the Common Barn-Owl was associated with only a slight increase in assimilation efficiencies: 52.0 3;2;± 2.2% versus 49.1 3;2;± 1.0% during Feeding for dry mass; and 75.5 3;2;± 1.1% versus 74.1 3;2;± 0.6% for energy. This slight increase could only be attributed to a reduction of the energy lost in pellet production (i.e."
+        },
+        {
+          "document_id": "W2979847121",
+          "title": "Sensitivities to global change drivers may correlate positively or negatively in a foundational marine macroalga",
+          "doi": "10.1038/s41598-019-51099-8",
+          "year": "2019",
+          "distance": 0.4033,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ot suffer from the two other shifts, and vice versa and (ii) families benefitting from OAW will more easily succumb to hypoxia. Our results may imply that selection under either OA, OW or eutrophication would enhance performance under the other two drivers but simultaneously render the population more susceptible to hypoxia. We conclude that intraspecific response correlations have a high potential to boost or hinder adaptation to multifactorial global change scenarios."
+        },
+        {
+          "document_id": "W4385272707",
+          "title": "Metabolic prioritization of fish in hypoxic waters: an integrative modeling approach",
+          "doi": "10.3389/fmars.2023.1206506",
+          "year": "2023",
+          "distance": 0.4084,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "explore evidence in favor of metabolic prioritization in a community of commercially important fish species in the Baltic Sea. Modeling results suggest that metabolic prioritization is an important component of the individual response to hypoxia, that it interacts with other components to produce realistic community dynamics, and that different species may prioritize differently. It is thus suggested that declines in feeding activity, assimilation efficiency, and successful reproduction – in addition to low food availability and changing habitat use – are all important drivers of the community response to hypoxia."
+        },
+        {
+          "document_id": "W4252371198",
+          "title": "Natural and human-induced hypoxia and consequences for coastal areas: synthesis and future development",
+          "doi": "10.5194/bgd-6-11035-2009",
+          "year": "2009",
+          "distance": 0.4147,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "under the combination of external forcings, depends also on the nature of the ecosystem, e.g. physical and geographic settings. It is understood that coastal hypoxia has a profound impact on the sustainability of ecosystems, which can be seen, for example, by the change in the food-web structure and system function; other influences can be compression and loss of habitat, as well as change in life cycle and reproduction. In most cases, the ecosystem responds to the low dissolved oxygen in a non-linear way and has pronounced feedbacks to other compartments of the Earth System, hence affecting human society."
+        },
+        {
+          "document_id": "W4311875468",
+          "title": "Divergent Carry-Over Effects of Hypoxia during the Early Development of Abalone",
+          "doi": "10.1021/acs.est.2c04975",
+          "year": "2022",
+          "distance": 0.419,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "After being exposed to environmental stimuli during early developmental stages, some organisms may gain or weaken physiological regulating abilities, which would have long-lasting effects on their performance. Environmental hypoxia events can have significant effects on marine organisms, but for breeding programs and other practical applications, it is important to further explore the long-term physiological effects of early hypoxia exposure in economically significant species."
+        },
+        {
+          "document_id": "W2006405178",
+          "title": "Growth Model of <i>Daphnia</i>",
+          "doi": "10.1139/f82-084",
+          "year": "1982",
+          "distance": 0.4244,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "quent experimental results. Contrary to many higher organisms, the assimilation efficiency increases with increasing body size. This may be, at least in part, the reason why larger body-sized zooplankton tend to dominate in aquatic ecosystems when not controlled by predators. The uptake rate per body weight as a function of cell concentration can be described by Michaelis–Menten type equations, but not the assimilation rate."
+        }
+      ]
+    }
+  }
+}

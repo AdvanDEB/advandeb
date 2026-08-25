@@ -1,0 +1,834 @@
+{
+  "sf_id": "hypoxia_01",
+  "category": "Hypoxia / DO",
+  "statement": "Organisms reduce their feeding rate with decreasing dissolved oxygen (DO) level.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets provide clear, direct support for the stylized fact that organisms reduce feeding rate with decreasing DO. Snippet 1 states the fact explicitly with seven supporting citations, snippet 7 names it as fact F1 within a DEB modeling framework, and snippets 5 and 6 affirm that low oxygen reduces filtration and ingestion in filter-feeding bivalves. Snippets 4, 10, and 14 further corroborate impaired feeding/ingestion under hypoxia, including species-specific dose-response patterns and a plausible mechanism (oxygen-saving by reducing SDA). No snippet contradicts the fact; the remaining snippets are off-topic (general metabolism, respiration, food thresholds) or only tangentially related. The corpus therefore offers strong, consistent corroboration."
+      },
+      "n_references": 3,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 5,
+          "supports": 5,
+          "contradicts": 0,
+          "best_distance": 0.24781584739685059
+        },
+        "69b8982cecbd4702b29a6862": {
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3577089309692383
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3587923049926758
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2478,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "s are related to the metabolic processes common to all the organisms: Feeding, growth, reproduction, respiration, and survival. Table 1. Stylized biological facts giving a summa ry of the metabolic responses of marine organisms to hypoxia . Stylized fact s Empirical evidences Feeding F1. Organisms reduce their feeding rate with decreasing DO level . (Brandt et al., 2009; Chabot and Dutil, 1999; Desai and Prakash, 2009; Le Moullac et al., 2007; Siikavuopio et al., 2007; Sobral and Widdows, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia,"
+        },
+        {
+          "document_id": "69b89313ecbd4702b29a62f4",
+          "title": "SebeSara2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3491,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "suspension feeders are also mostly metabolicconformers, meaning that they respire at a greater rate when there is more oxygen inthe ambient water adjacent to their tissues. An expanded cnidarian, for example, hasa higher metabolic rate than a contracted one in part because expansion brings moresurface area into contact with oxygen-rich water. The water inside a contracted bodyis usually quite depleted of oxygen. Anything that causes the animal to be moreactive (pumping), produce more feeding materials, or come into contact with moreoxygen molecules (water ﬂow, photosynthesis) increases the metabolic rate. Active"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3514,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "d the effect of low oxygen level on feeding rate : sensitivity to hypoxia increase d with increasing size in developing larvae, and conversely, decrease d with increasing size in post-settlement (e.g., juvenile) for oyster and mussel (Baker and Mann, 1994; Wang and Widdows, 1991; Widdows et al., 1989) . The assimilation efficiency (AE) is defined as the proportion of ingested energy entering into the reserves through assimilation, the remainder being evacuated with the faeces . Many studies have shown that AE is reduced by decreasing DO (e.g. green"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3577,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "wed by Thomas et al. (2018, this issue) , the feeding processis commonly impaired by oxygen limitation ( Wu, 2002), probably dueto the high oxygen demand of digestive/assimilation processes (seeKramer, 1987 ;Willows, 1992 ). We thus assumed that the assimilationrate (ṗA) was a ﬀected by low oxygen saturations according to Aguirre-Velarde et al. (2018) . Under hypoxic conditions, energy productionthrough aerobic metabolic pathways is impaired and less e ﬃcientanaerobic pathways are activated. As hypothesized in Aguirre-Velardeet al. (2018) , we assumed that an organism under hypoxic conditions is"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3588,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "posure to low oxygen reduces filtration and ingestion rates in filter -feeding bivalves, reducing the influx of energy into the organism (Sobral and Widdows 1997, Hicks and McMahon 2002, C lark 2014). The assimilation of ingested energy into utilized energy can also be reduced under low oxygen exposure due to reductions in the activity of enzymes necessary for energy assimilation (Wang et al. 2011). Of the energy assimilated, hypoxia can hin der the ability of organisms to mobilize energy reserves because facultative anaerobiosis – undertaken by organisms under hypoxic stress – results in reduced energetic outputs"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3621,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "xpanded the model’s use to understand effects of environmental stressors on organismal population dynamics, including toxicants (Galic et al. 2017), low salinity (Lavaud et al. 2017) and low dissolved oxygen (Aguirre -Velarde et al. 2019a, Lavaud et al. 2019). Given oxygen’s importance for energy production in aerobically respiring organisms, hypoxia has the ability to affect many aspect s of an organism’s energy budget 136 (reviewed by Thomas et al. 2019). Exposure to low oxygen reduces filtration and ingestion rates in filter -feeding bivalves, reducing the influx of energy into the"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3707,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "Assumptions on fluxes modulation under hypoxia Within a standard DEB model , responses to hypoxia can be included by acting on various energy fluxes , in relation with the physiological disturbances previously demonstrated : 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ -rule and subsequent allocations to growth and reproduction; related to"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3715,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ulture media, ani -mal densities, prehistories of the experimental animals, food species, and lacking information, mass-speciﬁc respiration rates are rather similar (except a single out -lier). The majority of these studies used only fasting (unfed) Daphnia or they compared respiration rates in ﬁltered water with those at one or two food concentra -tions. This is not sufﬁcient to draw conclusions on the causes of higher respiration rates of feeding specimens. Only few attempts were made to describe the function -al response of the respiration rate. Source No food High food[1] 0.27 -[2]* 0.17 -[3] 0.21 -[4] 0.18 -[5]* 0.27 0.33"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.373,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "closely linked to metabolic activity (Bay ne 1971) and has been shown to vary in response to environmental variables, including temperature, salinity, and dissolved oxygen concentration (Feng 1965, deFur and Mangum 1979). With respect to dissolved oxygen, there are three general heart rate respons es to declining oxygen tension among marine invertebrates. Strict oxyconformers reduce their heart rate in tandem with declining oxygen tension, while strict oxyregulators maintain a constant or, in some cases, slightly increasing heart rate as dissolved o xygen concentration declines (Prosser and Brown 1961). The third"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3749,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "RIPTACCEPTED MANUSCRIPT 8 Fig 1 Ingestion rate at various levels of dissolved O 2 for various species. References are given in the text. Data are scaled according to the result simulated at O 2 sat. = 100 %. Life-history stage is also considered an important determinant of the relative sensitivity of organisms to hypoxia. For example, s evera l studies conducted on bivalves demonstrated the link between development stage and the effect of low oxygen level on feeding rate : sensitivity to hypoxia increase d with increasing size in developing larvae,"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3762,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "onditions, allowing for the maintenance of metabolic activity, albeit with lower energetic output (de Zwaan and Wijsman 1976). Among marine invertebrates , there are three general metabolic responses to declining oxygen tension. First, an oxyconforming response is characterized by the reduction in metabolic rate in tandem with declining oxygen tensions. Second, an oxyregulatory response is characterized by the mai ntenance of metabolic rate as dissolved oxygen concentrations decline (Prosser and Brown 1961). The third type of response, which is followed by many bivalves (deFur and Mangum 1979, Polhill and Dimock 1996),"
+        },
+        {
+          "document_id": "69b8a265ecbd4702b29a74df",
+          "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3796,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "a rate ˙JEA, these simple considerations imply a food ingestion rate of ˙JX=yXE˙JEA, and a feces egestion rate of ˙JP=yPE˙JEA. In addition, food assimilation accounts for a (variable) fraction of the organism’s oxygen consumption by contributing amount c11˙JEAto the respiration rate (˙JO).The process of assimilation also partly accounts for the e xcretion of carbon dioxide, water, and ammonia. While assimilated, food as a group of organic compounds with one aggregate chemical structure is being converted into reserve with another aggregate chemical structure. Due to the difference in the chemical structures of food and re-serv"
+        },
+        {
+          "document_id": "69b8485bec32c55db5430c00",
+          "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3798,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "reased ration and a lowerasymptote. The quality of the prey can have numerousandcomplexinfluences,acting ongrowthratethroughboththe rate of food intake and/or metabolic expenditure. Forexample, some prey may be of poor quality because theytake a long time for the consumer to digest, thus limitingthe consumer’s rate of food intake and growth (a postcon-sumptive constraint). Meanwhile, the energetic costs asso-ciated with consuming ( Grimmond et al., 1994 ) ordigesting ( Goodrich et al., 2022 ) other prey types mayrender them poor quality.OxygenLike food, oxygen is a critical resource for aerobic metab-"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3843,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": ", the Pacific oyster and Atlantic cod exhibit a higher sensitivity to the oxygen saturation with a continuous decrease of their feeding rate (cf. Fig 1). These patterns of sensitivity could be linked to the species’ oxygen consumption regulation strategy . Indeed, a decrease in feeding rate may be viewed as an oxygen saving strategy, by the reduction in the rate of the non -essential and costly processes such as ingestion, digestion and absorption of food (i.e., specific dynamic action, SDA) , which represent e.g. about 17% of the total energetic expenditure for the"
+        },
+        {
+          "document_id": "69b84782ec32c55db5430984",
+          "title": "Kiffney - 2025 - Modeling Growth of Cultured Shellfish in Maine Wit.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3851,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ed oxygen consumption rates under heat and desiccation stress (George et al., 2023), similar feeding rates (Haure et al., 2021; Kesarcodi-Watson et al., 2001a; Kesarcodi-Watson et al., 2001b; Mizuta et al., 2021), higher feeding rates (Bodenstein et al., 2023; Hawkins et al., 2000), a reduced capacity to osmoconform at low salinities or acclimate to increasing temperature (Casas et al., 2024; Li et al., 2022), and similar physiological responses to hypoxia and anoxia (Coxe et al., 2023)."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3864,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "the effects of hypoxia on post -settlement ingestion rates. Journal of Experimental Mari ne Biology and Ecology 181, 239 –253. Bayne, B., 1973. The responses of three species of bivalve mollusc to declining oxygen tension at reduced salinity. Comparative Biochemistry and Physiology Part A: Physiology 45, 793 –806. https://doi.org/10.1016/0300 -9629(73)90082 -0 Bayne, B.L., 1971a. Oxygen consumption by three species of lamellibranch mollusc in declining ambient oxygen tension. Comparative Biochemistry and Physiology Part A: Physiology 40, 955 –970. https://doi.org/10.1016/0300 -9629(71)90284 -2"
+        },
+        {
+          "document_id": "69b88001ecbd4702b29a4b03",
+          "title": "Vano2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3904,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "fter which molting stopsand weight stabilizes. Threshold food concentrations decrease394 ecological modelling 216 (2008) 385–401Fig. 3 – Food thresholds for maintenance in relation toanimal length.with length, especially for juveniles (<2 mm). Fig. 4 B and Dshows the weight loss over time of starved animals (1.2 mmand 3.7 mm in length) and animals fed below the thresh-old food concentration (0.004 /H9262gCm l−1). The sharp decline inweight between days 1 and 2 for juveniles and days 4 and 5for adults represents the weight loss of molting. Fig. 4 A and C"
+        },
+        {
+          "document_id": "69b86fe0ecbd4702b29a3542",
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3906,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "when (3.15), (3.35) or (3.39) issubstituted for t(V) into (3.52), for isomorphs, ﬁlaments or rods, respectively.3.11 RespirationRespiration, i.e. the use of oxygen or the production of carbon dioxide, can be taken torepresent the total metabolic rate in an organism. Initially, eggs hardly use oxygen, butoxygen consumption rapidly increases during development; see ﬁgure 3.21. In juveniles andadults, oxygen consumption is usually measured in individuals t hat have been starved forsome time, to avoid interpretation problems related to digest ion. (For micro-organisms this"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The strongest evidence comes from snippet [2], which directly reports a ten-fold decline in mussel filtration (feeding) rate as oxygen dropped from 5 to 1.5 ppm, providing clear quantitative support. Snippets [3], [4], and [7] offer corroborating but more general statements that low DO constrains feeding/metabolism and energy budgets, and snippet [4] explicitly links oxygen to feeding activity. Most remaining snippets are off-topic (concerning food-driven oxygen consumption in limpets, phosphorus release, larval mortality, or general DO-ecosystem effects) and do not directly address feeding rate as a function of DO. No snippet contradicts the fact. Overall, the evidence is moderate—one direct strong reference plus several supportive general statements—and consistently points in the direction of the stylized fact, with no conflict."
+      },
+      "n_references": 4,
+      "references": {
+        "W17898008": {
+          "title": "The nutritional biology of Perna canaliculus with special reference to intensive mariculture systems",
+          "doi": "10.26021/6303",
+          "year": "1989",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.380990207195282
+        },
+        "W2556118226": {
+          "title": "Fisheries, low oxygen and climate change: how much do we really know?",
+          "doi": "10.1111/jfb.13203",
+          "year": "2016",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.38306254148483276
+        },
+        "W4407574550": {
+          "title": "The Influence of Hypoxic Conditions on Mating Behavior in a Bimodal Breather, the Great Pond Snail (<i>Lymnaea stagnalis</i>)",
+          "doi": "10.1086/735420",
+          "year": "2025",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.38610512018203735
+        },
+        "W4387997330": {
+          "title": "Hypoxia-induced physiological responses in fish: From organism to tissue to molecular levels",
+          "doi": "10.1016/j.ecoenv.2023.115609",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3982884883880615
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2018054532",
+          "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+          "doi": "10.1093/icb/28.1.137",
+          "year": "1988",
+          "distance": 0.3548,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "restricted. The balance between intake and expenditure of energy may limit zonation, body size, and even mode of reproduction. One pattern is that species suffering shortage of food (\"conservers\") have low rates of oxygen consumption while those with abundant food (\"exploiters\") have high rates. Conservers appear to have several means of reducing metabolic costs, but exploiters maintain high (seemingly wasteful) rates of oxygen consumption. Oxygen consumption cannot, however, be considered separately, since it reflects turnover,including growth rate and reproductive output."
+        },
+        {
+          "document_id": "W17898008",
+          "title": "The nutritional biology of Perna canaliculus with special reference to intensive mariculture systems",
+          "doi": "10.26021/6303",
+          "year": "1989",
+          "distance": 0.381,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "udies were designed to test a range of factors (below) that may affect feeding in the field, or perturb feeding in experiments. Presence of gametes caused an 81% decline in feeding. However, mussels filtered normally after spawning and in the absence of gametes. Filtration ceased for 4 hours after salinity was reduced from 34 to 25ppt, then recovered to rates similar to those recorded at 34ppt. Filtration rate also declined ten-fold as oxygen concentration declined from 5 to 1.5ppm. However, current speeds of 5-28 cm s-¹ did not affect filtration. After deprivation of food, feeding behaviour depended on food concentration."
+        },
+        {
+          "document_id": "W2556118226",
+          "title": "Fisheries, low oxygen and climate change: how much do we really know?",
+          "doi": "10.1111/jfb.13203",
+          "year": "2016",
+          "distance": 0.3831,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "As a result of long‐term climate change, regions of the ocean with low oxygen concentrations are predicted to occur more frequently and persist for longer periods of time in the future. When low levels of oxygen are present, this places additional pressure on marine organisms to meet their metabolic requirements, with implications for growth, feeding and reproduction."
+        },
+        {
+          "document_id": "W4407574550",
+          "title": "The Influence of Hypoxic Conditions on Mating Behavior in a Bimodal Breather, the Great Pond Snail (<i>Lymnaea stagnalis</i>)",
+          "doi": "10.1086/735420",
+          "year": "2025",
+          "distance": 0.3861,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "AbstractReduced oxygen availability can become an environmental stressor that imposes constraints on the energy and/or time budget of aquatic animals. This also seems to be the case for bimodal breathers, since it was previously reported that the amount of oxygen in the water interacts with feeding and egg-laying activities."
+        },
+        {
+          "document_id": "W141701027",
+          "title": "Parental and environmental effects on the early life history of a tropical reef fish, Amphiprion melanopus",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.3924,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Embryos on the clutch periphery had 63 % lower rates of oxygen consumption. Changes in oxygen consumption throughout development were related to developmental changes within the embryo.&#13;\\nGiven that the study species, like many demersal spawning fishes, has parental care of the eggs, we explored whether parental tending modified the oxygen microenvironment of the embryos, and subsequently, whether tending was modified according to ambient dissolved oxygen (DO), increasing metabolic demands of developing embryos and water temperature."
+        },
+        {
+          "document_id": "W4292356884",
+          "title": "Assessing the toxicity of polystyrene beads and silica particles on the microconsumer Brachionus calyciflorus at different timescales",
+          "doi": "10.3389/fenvs.2022.955425",
+          "year": "2022",
+          "distance": 0.3926,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "xperiments, we found a reduced reproduction when the animals were fed with 3 µm spheres together with similar-sized food algae. We conclude that the fitness reduction is mainly driven by the dilution of food by the nonfood particles rather than by a direct toxic effect."
+        },
+        {
+          "document_id": "W4387997330",
+          "title": "Hypoxia-induced physiological responses in fish: From organism to tissue to molecular levels",
+          "doi": "10.1016/j.ecoenv.2023.115609",
+          "year": "2023",
+          "distance": 0.3983,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "Dissolved oxygen (DO) in water bodies is a prerequisite for fish survival and plays a crucial role in fish growth, development, and physiological processes. However, with increasing eutrophication, greenhouse effects, and extreme weather conditions, DO levels in aquatic environments often become lower than normal. This leads to stress in fish, causing them to exhibit escape behavior, inhibits their growth and development, and causes tissue damage."
+        },
+        {
+          "document_id": "W2127528125",
+          "title": "Impacts of hypoxia on the structure and processes in pelagic communities (zooplankton, macro-invertebrates and fish)",
+          "doi": "10.5194/bg-7-1669-2010",
+          "year": "2010",
+          "distance": 0.4011,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "impacted growth, development and behaviour, other organisms such as euphausiids may survive DO levels as low as 0.1 mL O2 L−1. A change in the average or the range of DO may have significant impacts on the survival of certain species and hence on the species composition in the ecosystem with consequent changes in trophic pathways and productivity. Evidence for the deleterious effects of oxygen depletion on pelagic species is scarce, particularly in terms of the effect of low oxygen on development, recruitment and patterns of migration and distribution."
+        },
+        {
+          "document_id": "W4285405233",
+          "title": "Effects of dissolved oxygen concentration on freshwater fish: A review",
+          "doi": "10.22271/fish.2022.v10.i4b.2693",
+          "year": "2022",
+          "distance": 0.4051,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Dissolved Oxygen (DO) is one of the most important factors for aquatic animals as especially for those who derive dissolved oxygen from the water. DO levels indicate the quality of water. Many biotic and abiotic factors may influence DO concentration like mixing of different water bodies, upwelling, atmospheric exchange, respiration, photosynthesis, ice cover, pollution and some physical factors like salinity and temperature. The fluctuations in DO levels in water affect fish physiology."
+        },
+        {
+          "document_id": "W2018054532",
+          "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+          "doi": "10.1093/icb/28.1.137",
+          "year": "1988",
+          "distance": 0.4072,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "onsumption cannot, however, be considered separately, since it reflects turnover,including growth rate and reproductive output. There is also the question whether differences between species are genetically controlled, or simply phenotypic responses to food availability. Comparisons of populations with different amounts of food suggest that exploiters substantially reduce oxygen consumption when food is scarce, but conservers are relatively fixed in their pattern of slow growth and low reproductive output, even if food is experimentally increased."
+        },
+        {
+          "document_id": "W3158491608",
+          "title": "Tree line advance reduces mixing and oxygen concentrations in arctic–alpine lakes through wind sheltering and organic carbon supply",
+          "doi": "10.1111/gcb.15660",
+          "year": "2021",
+          "distance": 0.4092,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract Oxygen depletion in lake bottom waters has adverse impacts on ecosystem health including decreased water quality from release of nutrients and reduced substances from sediments, and the reduction of fish growth and reproduction. Depletion occurs when oxygen is consumed during decomposition of organic matter, and oxygen replenishment is limited by water column stratification."
+        },
+        {
+          "document_id": "W2267358853",
+          "title": "Seasonal and Experimental Variations of the Oxygen Consumption of the Limpet<i>Ancylus Fluviatilis</i>(O. F. Müller)",
+          "doi": "10.1242/jeb.35.1.43",
+          "year": "1958",
+          "distance": 0.4101,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "lection, then, in consequence of partial starvation, a distinct decrease of the oxygen consumption follows, and finally, 50 hr. after collection, a slighter decrease. During partial starvation the decrease of the oxygen consumption is greater at high than at low temperatures. When the partial starvation is severe the decrease of the oxygen consumption commences earlier than under somewhat better food conditions. The oxygen consumption of limpets which had the opportunity of taking food from alga-covered stones in an aquarium decreased after 3 days, but the decrease seems to be less than in the case of partial starvation."
+        },
+        {
+          "document_id": "W2556118226",
+          "title": "Fisheries, low oxygen and climate change: how much do we really know?",
+          "doi": "10.1111/jfb.13203",
+          "year": "2016",
+          "distance": 0.4114,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "rn to acceptable levels, while others take advantage of a reduced start response in prey fishes and remain in the area to feed. Sessile or less mobile species such as shellfishes are unable to move out of depleted oxygen zones. Some species can tolerate low oxygen levels for only short periods of time, while others are able to acclimatize. To advance the knowledge‐base further, a number of promising technological and modelling‐based developments and the role of physiological data within these, are proposed."
+        },
+        {
+          "document_id": "W2342619368",
+          "title": "[Causes of jellyfish blooms and their influence on marine environment].",
+          "doi": "",
+          "year": "2014",
+          "distance": 0.412,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ome acidic and hypoxic. The pH decreased by 1.3, while the mean dissolved oxygen demand reached 32.8 micromol x kg(-1) x h(-1). Jellyfish blooms also influenced the marine organism community, which might reduce the biomass of some fish and zooplankton, increase the amount of bacterioplankton, indirectly .increase the quantity of phytoplankton and lead to abnormal primary production."
+        },
+        {
+          "document_id": "W1994771992",
+          "title": "The behavioral ecology of air breathing by aquatic animals",
+          "doi": "10.1139/z88-012",
+          "year": "1988",
+          "distance": 0.4125,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n, respectively. Here, I consider the relevance of these principles to the uptake of oxygen by air-breathing aquatic organisms. The behavior of bumblebees foraging for foxglove nectar illustrates the principle of optimal exploitation of aggregated resources. When applied to the acquisition of oxygen at the water surface by diving animals, this principle predicts that with increasing distance to feeding sites or other areas of resource gain, the bout lengths of surface time and dive time will increase, as will percent time at the surface; swimming speed may increase or decrease depending on the costs of acceleration."
+        },
+        {
+          "document_id": "W2355276783",
+          "title": "The effect of food from a eutrophic lake on the growth and reproduction of Daphnia hyalina",
+          "doi": "",
+          "year": "2006",
+          "distance": 0.4131,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "er dilution, the zooplankton has a body length at maturity of 1.46 mm, longer than that under natural sestons without dilution. The highest intrinsic rate of increase was 0.42 at the natural sestons filtered with 110μm mesh without dilution. Food concentration, rather than food size, appeared to influence more importantly the growth and reproduction of Daphnia hyalina. The experiment revealed that the food from the eutrophic lake in the winter did not inhibit the growth and reproduction of Daphnia hyalina."
+        },
+        {
+          "document_id": "W2152012495",
+          "title": "Estimating release rates of phosphorus from zooplankton: Model and experimental verification1",
+          "doi": "10.4319/lo.1985.30.4.0844",
+          "year": "1985",
+          "distance": 0.4135,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "food concentration. The model is used to analyze short term incubaton experiments with Daphnia pulex feeding on Scenedesmus sp. and Daphnia longispina feeding on Rhodomonas lacustris in dim light. When food organisms were saturated with P, total rele ase rates were in the range 1.1–1.5 µ g P (mg dry wt) −1 h −1 in accordance with a maximalexcretion rate of 0.8 µ g P (mg dry wt) −1 h −1 predicted by the model of Peters. Phosphorus‐starved phytoplankton, containing less P, gave much lower release rates, about 0.05 µ g P (mg dry wt) −1 h −1 , only 10% of the excretion rate predicted by the model of Peters."
+        },
+        {
+          "document_id": "W107604134",
+          "title": "Life And Death in the Plankton: Larval Mortality and Adaptation",
+          "doi": "10.1201/9780138758950-9",
+          "year": "2020",
+          "distance": 0.4143,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ally and release free-swimming larvae. Starvation also stresses larvae and may decrease survival or increase development times. Adaptation to constant physical factors, such as gravity, should be least problematic and contribute least to larval mortality. High mortality resulting from \"chaotic\" planktonic processes implies that larval and adult stages are decoupled."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly and clearly support the stylized fact that organisms reduce feeding rate with decreasing DO. Snippet [1] explicitly states the fact (F1) with several supporting references, and [7] reaffirms it within a DEB modeling framework. Snippets [5] and [6] state that low oxygen reduces filtration and ingestion rates in filter-feeding bivalves; [3] and [10] document feeding/ingestion declines under hypoxia with life-stage dependence; [4] notes feeding is commonly impaired by oxygen limitation; and [14] provides direct quantitative evidence (filtration declined ten-fold as oxygen dropped from 5 to 1.5 ppm). No snippets contradict the fact. Remaining snippets are off-topic (focused on respiration, heart rate, oxyconforming/regulating metabolism, or unrelated stressors) and are neutral. The evidence is strong and consistently corroborating."
+      },
+      "n_references": 6,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.24781584739685059
+        },
+        "69b8982cecbd4702b29a6862": {
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3577089309692383
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3587923049926758
+        },
+        "W17898008": {
+          "title": "The nutritional biology of Perna canaliculus with special reference to intensive mariculture systems",
+          "doi": "10.26021/6303",
+          "year": "1989",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.380990207195282
+        },
+        "W4407574550": {
+          "title": "The Influence of Hypoxic Conditions on Mating Behavior in a Bimodal Breather, the Great Pond Snail (<i>Lymnaea stagnalis</i>)",
+          "doi": "10.1086/735420",
+          "year": "2025",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.38610512018203735
+        },
+        "W4387997330": {
+          "title": "Hypoxia-induced physiological responses in fish: From organism to tissue to molecular levels",
+          "doi": "10.1016/j.ecoenv.2023.115609",
+          "year": "2023",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3982884883880615
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2478,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "s are related to the metabolic processes common to all the organisms: Feeding, growth, reproduction, respiration, and survival. Table 1. Stylized biological facts giving a summa ry of the metabolic responses of marine organisms to hypoxia . Stylized fact s Empirical evidences Feeding F1. Organisms reduce their feeding rate with decreasing DO level . (Brandt et al., 2009; Chabot and Dutil, 1999; Desai and Prakash, 2009; Le Moullac et al., 2007; Siikavuopio et al., 2007; Sobral and Widdows, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia,"
+        },
+        {
+          "document_id": "69b89313ecbd4702b29a62f4",
+          "title": "SebeSara2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3491,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "suspension feeders are also mostly metabolicconformers, meaning that they respire at a greater rate when there is more oxygen inthe ambient water adjacent to their tissues. An expanded cnidarian, for example, hasa higher metabolic rate than a contracted one in part because expansion brings moresurface area into contact with oxygen-rich water. The water inside a contracted bodyis usually quite depleted of oxygen. Anything that causes the animal to be moreactive (pumping), produce more feeding materials, or come into contact with moreoxygen molecules (water ﬂow, photosynthesis) increases the metabolic rate. Active"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3514,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "d the effect of low oxygen level on feeding rate : sensitivity to hypoxia increase d with increasing size in developing larvae, and conversely, decrease d with increasing size in post-settlement (e.g., juvenile) for oyster and mussel (Baker and Mann, 1994; Wang and Widdows, 1991; Widdows et al., 1989) . The assimilation efficiency (AE) is defined as the proportion of ingested energy entering into the reserves through assimilation, the remainder being evacuated with the faeces . Many studies have shown that AE is reduced by decreasing DO (e.g. green"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3577,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "wed by Thomas et al. (2018, this issue) , the feeding processis commonly impaired by oxygen limitation ( Wu, 2002), probably dueto the high oxygen demand of digestive/assimilation processes (seeKramer, 1987 ;Willows, 1992 ). We thus assumed that the assimilationrate (ṗA) was a ﬀected by low oxygen saturations according to Aguirre-Velarde et al. (2018) . Under hypoxic conditions, energy productionthrough aerobic metabolic pathways is impaired and less e ﬃcientanaerobic pathways are activated. As hypothesized in Aguirre-Velardeet al. (2018) , we assumed that an organism under hypoxic conditions is"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3588,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "posure to low oxygen reduces filtration and ingestion rates in filter -feeding bivalves, reducing the influx of energy into the organism (Sobral and Widdows 1997, Hicks and McMahon 2002, C lark 2014). The assimilation of ingested energy into utilized energy can also be reduced under low oxygen exposure due to reductions in the activity of enzymes necessary for energy assimilation (Wang et al. 2011). Of the energy assimilated, hypoxia can hin der the ability of organisms to mobilize energy reserves because facultative anaerobiosis – undertaken by organisms under hypoxic stress – results in reduced energetic outputs"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3621,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "xpanded the model’s use to understand effects of environmental stressors on organismal population dynamics, including toxicants (Galic et al. 2017), low salinity (Lavaud et al. 2017) and low dissolved oxygen (Aguirre -Velarde et al. 2019a, Lavaud et al. 2019). Given oxygen’s importance for energy production in aerobically respiring organisms, hypoxia has the ability to affect many aspect s of an organism’s energy budget 136 (reviewed by Thomas et al. 2019). Exposure to low oxygen reduces filtration and ingestion rates in filter -feeding bivalves, reducing the influx of energy into the"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3707,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "Assumptions on fluxes modulation under hypoxia Within a standard DEB model , responses to hypoxia can be included by acting on various energy fluxes , in relation with the physiological disturbances previously demonstrated : 1. The ingestion rate; organisms reduce their feeding rate with reducing DO (fact F1). 2. The assimilation rate; related to the variation in assimilation efficiency and digestive processes (fact F2). 3. The reserve mobilization rate; related to a lower efficiency of anaerobic metabolism (fact B3) 4. The κ -rule and subsequent allocations to growth and reproduction; related to"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3715,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ulture media, ani -mal densities, prehistories of the experimental animals, food species, and lacking information, mass-speciﬁc respiration rates are rather similar (except a single out -lier). The majority of these studies used only fasting (unfed) Daphnia or they compared respiration rates in ﬁltered water with those at one or two food concentra -tions. This is not sufﬁcient to draw conclusions on the causes of higher respiration rates of feeding specimens. Only few attempts were made to describe the function -al response of the respiration rate. Source No food High food[1] 0.27 -[2]* 0.17 -[3] 0.21 -[4] 0.18 -[5]* 0.27 0.33"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.373,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "closely linked to metabolic activity (Bay ne 1971) and has been shown to vary in response to environmental variables, including temperature, salinity, and dissolved oxygen concentration (Feng 1965, deFur and Mangum 1979). With respect to dissolved oxygen, there are three general heart rate respons es to declining oxygen tension among marine invertebrates. Strict oxyconformers reduce their heart rate in tandem with declining oxygen tension, while strict oxyregulators maintain a constant or, in some cases, slightly increasing heart rate as dissolved o xygen concentration declines (Prosser and Brown 1961). The third"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3749,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "RIPTACCEPTED MANUSCRIPT 8 Fig 1 Ingestion rate at various levels of dissolved O 2 for various species. References are given in the text. Data are scaled according to the result simulated at O 2 sat. = 100 %. Life-history stage is also considered an important determinant of the relative sensitivity of organisms to hypoxia. For example, s evera l studies conducted on bivalves demonstrated the link between development stage and the effect of low oxygen level on feeding rate : sensitivity to hypoxia increase d with increasing size in developing larvae,"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3762,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "onditions, allowing for the maintenance of metabolic activity, albeit with lower energetic output (de Zwaan and Wijsman 1976). Among marine invertebrates , there are three general metabolic responses to declining oxygen tension. First, an oxyconforming response is characterized by the reduction in metabolic rate in tandem with declining oxygen tensions. Second, an oxyregulatory response is characterized by the mai ntenance of metabolic rate as dissolved oxygen concentrations decline (Prosser and Brown 1961). The third type of response, which is followed by many bivalves (deFur and Mangum 1979, Polhill and Dimock 1996),"
+        },
+        {
+          "document_id": "69b8a265ecbd4702b29a74df",
+          "title": "Jusup et al. - 2017 - Physics of metabolic organization.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3796,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "a rate ˙JEA, these simple considerations imply a food ingestion rate of ˙JX=yXE˙JEA, and a feces egestion rate of ˙JP=yPE˙JEA. In addition, food assimilation accounts for a (variable) fraction of the organism’s oxygen consumption by contributing amount c11˙JEAto the respiration rate (˙JO).The process of assimilation also partly accounts for the e xcretion of carbon dioxide, water, and ammonia. While assimilated, food as a group of organic compounds with one aggregate chemical structure is being converted into reserve with another aggregate chemical structure. Due to the difference in the chemical structures of food and re-serv"
+        },
+        {
+          "document_id": "W2018054532",
+          "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+          "doi": "10.1093/icb/28.1.137",
+          "year": "1988",
+          "distance": 0.3548,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "restricted. The balance between intake and expenditure of energy may limit zonation, body size, and even mode of reproduction. One pattern is that species suffering shortage of food (\"conservers\") have low rates of oxygen consumption while those with abundant food (\"exploiters\") have high rates. Conservers appear to have several means of reducing metabolic costs, but exploiters maintain high (seemingly wasteful) rates of oxygen consumption. Oxygen consumption cannot, however, be considered separately, since it reflects turnover,including growth rate and reproductive output."
+        },
+        {
+          "document_id": "W17898008",
+          "title": "The nutritional biology of Perna canaliculus with special reference to intensive mariculture systems",
+          "doi": "10.26021/6303",
+          "year": "1989",
+          "distance": 0.381,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "udies were designed to test a range of factors (below) that may affect feeding in the field, or perturb feeding in experiments. Presence of gametes caused an 81% decline in feeding. However, mussels filtered normally after spawning and in the absence of gametes. Filtration ceased for 4 hours after salinity was reduced from 34 to 25ppt, then recovered to rates similar to those recorded at 34ppt. Filtration rate also declined ten-fold as oxygen concentration declined from 5 to 1.5ppm. However, current speeds of 5-28 cm s-¹ did not affect filtration. After deprivation of food, feeding behaviour depended on food concentration."
+        },
+        {
+          "document_id": "W2556118226",
+          "title": "Fisheries, low oxygen and climate change: how much do we really know?",
+          "doi": "10.1111/jfb.13203",
+          "year": "2016",
+          "distance": 0.3831,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "As a result of long‐term climate change, regions of the ocean with low oxygen concentrations are predicted to occur more frequently and persist for longer periods of time in the future. When low levels of oxygen are present, this places additional pressure on marine organisms to meet their metabolic requirements, with implications for growth, feeding and reproduction."
+        },
+        {
+          "document_id": "W4407574550",
+          "title": "The Influence of Hypoxic Conditions on Mating Behavior in a Bimodal Breather, the Great Pond Snail (<i>Lymnaea stagnalis</i>)",
+          "doi": "10.1086/735420",
+          "year": "2025",
+          "distance": 0.3861,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "AbstractReduced oxygen availability can become an environmental stressor that imposes constraints on the energy and/or time budget of aquatic animals. This also seems to be the case for bimodal breathers, since it was previously reported that the amount of oxygen in the water interacts with feeding and egg-laying activities."
+        },
+        {
+          "document_id": "W141701027",
+          "title": "Parental and environmental effects on the early life history of a tropical reef fish, Amphiprion melanopus",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.3924,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Embryos on the clutch periphery had 63 % lower rates of oxygen consumption. Changes in oxygen consumption throughout development were related to developmental changes within the embryo.&#13;\\nGiven that the study species, like many demersal spawning fishes, has parental care of the eggs, we explored whether parental tending modified the oxygen microenvironment of the embryos, and subsequently, whether tending was modified according to ambient dissolved oxygen (DO), increasing metabolic demands of developing embryos and water temperature."
+        },
+        {
+          "document_id": "W4292356884",
+          "title": "Assessing the toxicity of polystyrene beads and silica particles on the microconsumer Brachionus calyciflorus at different timescales",
+          "doi": "10.3389/fenvs.2022.955425",
+          "year": "2022",
+          "distance": 0.3926,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "xperiments, we found a reduced reproduction when the animals were fed with 3 µm spheres together with similar-sized food algae. We conclude that the fitness reduction is mainly driven by the dilution of food by the nonfood particles rather than by a direct toxic effect."
+        },
+        {
+          "document_id": "W4387997330",
+          "title": "Hypoxia-induced physiological responses in fish: From organism to tissue to molecular levels",
+          "doi": "10.1016/j.ecoenv.2023.115609",
+          "year": "2023",
+          "distance": 0.3983,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "Dissolved oxygen (DO) in water bodies is a prerequisite for fish survival and plays a crucial role in fish growth, development, and physiological processes. However, with increasing eutrophication, greenhouse effects, and extreme weather conditions, DO levels in aquatic environments often become lower than normal. This leads to stress in fish, causing them to exhibit escape behavior, inhibits their growth and development, and causes tissue damage."
+        },
+        {
+          "document_id": "W2127528125",
+          "title": "Impacts of hypoxia on the structure and processes in pelagic communities (zooplankton, macro-invertebrates and fish)",
+          "doi": "10.5194/bg-7-1669-2010",
+          "year": "2010",
+          "distance": 0.4011,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "impacted growth, development and behaviour, other organisms such as euphausiids may survive DO levels as low as 0.1 mL O2 L−1. A change in the average or the range of DO may have significant impacts on the survival of certain species and hence on the species composition in the ecosystem with consequent changes in trophic pathways and productivity. Evidence for the deleterious effects of oxygen depletion on pelagic species is scarce, particularly in terms of the effect of low oxygen on development, recruitment and patterns of migration and distribution."
+        },
+        {
+          "document_id": "W4285405233",
+          "title": "Effects of dissolved oxygen concentration on freshwater fish: A review",
+          "doi": "10.22271/fish.2022.v10.i4b.2693",
+          "year": "2022",
+          "distance": 0.4051,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Dissolved Oxygen (DO) is one of the most important factors for aquatic animals as especially for those who derive dissolved oxygen from the water. DO levels indicate the quality of water. Many biotic and abiotic factors may influence DO concentration like mixing of different water bodies, upwelling, atmospheric exchange, respiration, photosynthesis, ice cover, pollution and some physical factors like salinity and temperature. The fluctuations in DO levels in water affect fish physiology."
+        },
+        {
+          "document_id": "W2018054532",
+          "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+          "doi": "10.1093/icb/28.1.137",
+          "year": "1988",
+          "distance": 0.4072,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "onsumption cannot, however, be considered separately, since it reflects turnover,including growth rate and reproductive output. There is also the question whether differences between species are genetically controlled, or simply phenotypic responses to food availability. Comparisons of populations with different amounts of food suggest that exploiters substantially reduce oxygen consumption when food is scarce, but conservers are relatively fixed in their pattern of slow growth and low reproductive output, even if food is experimentally increased."
+        },
+        {
+          "document_id": "W3158491608",
+          "title": "Tree line advance reduces mixing and oxygen concentrations in arctic–alpine lakes through wind sheltering and organic carbon supply",
+          "doi": "10.1111/gcb.15660",
+          "year": "2021",
+          "distance": 0.4092,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Oxygen depletion in lake bottom waters has adverse impacts on ecosystem health including decreased water quality from release of nutrients and reduced substances from sediments, and the reduction of fish growth and reproduction. Depletion occurs when oxygen is consumed during decomposition of organic matter, and oxygen replenishment is limited by water column stratification."
+        },
+        {
+          "document_id": "W2267358853",
+          "title": "Seasonal and Experimental Variations of the Oxygen Consumption of the Limpet<i>Ancylus Fluviatilis</i>(O. F. Müller)",
+          "doi": "10.1242/jeb.35.1.43",
+          "year": "1958",
+          "distance": 0.4101,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "lection, then, in consequence of partial starvation, a distinct decrease of the oxygen consumption follows, and finally, 50 hr. after collection, a slighter decrease. During partial starvation the decrease of the oxygen consumption is greater at high than at low temperatures. When the partial starvation is severe the decrease of the oxygen consumption commences earlier than under somewhat better food conditions. The oxygen consumption of limpets which had the opportunity of taking food from alga-covered stones in an aquarium decreased after 3 days, but the decrease seems to be less than in the case of partial starvation."
+        }
+      ]
+    }
+  }
+}

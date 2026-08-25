@@ -1,0 +1,864 @@
+{
+  "sf_id": "hypoxia_11",
+  "category": "Hypoxia / DO",
+  "statement": "Anaerobiosis can start under the critical saturation threshold, with less efficient energy production and toxic end-product formation (e.g. lactate, acidosis), leading to a long-lasting (several hours) imprint on metabolism (oxygen debt).",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The corpus provides strong, multiple corroborating references for the stylized fact. Snippet [1] essentially restates the fact verbatim with supporting citations. Snippets [13] and [4] explicitly describe anaerobic metabolism beginning under the critical oxygen threshold, with low ATP yield (~15-fold less efficient) and toxic by-product formation, plus consequences for metabolism and death. Snippet [9] documents lactate production and anaerobiosis-induced acidosis, while [12] and [16] detail anaerobic by-products (lactate, alanine, succinate, propionate). Snippets [2], [5], [6], [7] support the switch to partial anaerobiosis under severe stress with disrupted energy balance and survival costs. Snippet [8] notes anaerobic metabolism can occur even above Pcrit, which is consistent rather than contradictory regarding onset. Only [15] and [18] are off-topic. The one nuance—that anaerobiosis can begin above rather than only below the critical threshold ([8],[11])—refines but does not contradict the core claim. Overall the evidence is clearly corroborating with little conflict."
+      },
+      "n_references": 7,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.23311316967010498
+        },
+        "69b87fd5ecbd4702b29a4ad1": {
+          "title": "Zhang et al. - 2022 - Comparative transcriptomic analysis unveils a netw.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.33235591650009155
+        },
+        "69b8a5cdecbd4702b29a78f5": {
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.3872627019882202
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.408777117729187
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.4142613410949707
+        },
+        "69b88155ecbd4702b29a4d0c": {
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4234302043914795
+        },
+        "69b84824ec32c55db5430b7f": {
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.44648241996765137
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2331,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": ", heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decrease d O2 consumption (e.g. reduce act ivity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaerobiosis can start under the PcO 2 threshold, with less efficient energy production and toxic end -products formation (e.g. lactate, acidosis), leading to long -lasting (several hours) imprint on metabolism (oxygen debt) . (Bayne and Livingstone, 1977; Bridges and Brand, 1980; Nilsson"
+        },
+        {
+          "document_id": "69b87fd5ecbd4702b29a4ad1",
+          "title": "Zhang et al. - 2022 - Comparative transcriptomic analysis unveils a netw.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3324,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "proteins and antioxidants) at the expense of other pro-cesses such as growth and reproduction. During extreme stress situations (pessimum range), partial anaerobiosis is activated to compensate for the insufficient aerobic energy supply, and metabolic rate is repressed to ensure an energy balance at the expense of shutting down of many ATP-demanding functions (eg. protein synthesis) to ensure the imme -diate survival. In the lethal range, the balance of ATP supply and de-mand is disrupted resulting in the ultimate death of an organism (Sokolova et al., 2012 ). High economical values and excellent characteristics for breeding"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3556,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "r efficiency of anaerobic metabolism (fact B3) 4. The κ -rule and subsequent allocations to growth and reproduction; related to endocrine disruption (facts G2, R2, R3). 5. The reproductive efficiency ; related to the end ocrine disruption involved in gametes maturation (fact R3). 6. The somatic maintenance rate; related to a modulation of the maintenance costs (e.g., increased ventilation and/or heartbeat , mobility) (facts D1, D2) , and to the lower transformation efficiency for ATP production and by -products elimination under anaerobiosis ( fact R3)."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3731,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "D2) , and to the lower transformation efficiency for ATP production and by -products elimination under anaerobiosis ( fact R3). 7. Death ; reduction in energy uptake (facts F1, F2) and increase in metabolic demand (fact B2) can lead to a low level of energy availabi lity, and then to a death threshold when maintenance processes are no longer fuelled . Accumulation of toxic by -products under anaerobiosis ( fact B4) can also cause death (fact L3). Asphyxiation can occur after a period of time under the critical O 2 threshold (PcO 2) (fact L1). ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 15 3.3 Dose effect response to hypoxia"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3873,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "depending on the stressor) assimilation of food and/or capacity for aerobic metabolism are impaired ( C) leading to a decline inaerobic scope. Energy storage is absent or reduced under these conditions. During extreme stress in the pessimum range, theprogressive increase in ATP demand for maintenance and/or the progressive impairment of aerobic metabolism overrides ATP supplyvia aerobic metabolism ( D). Aerobic scope disappears, and metabolism switches to partial anaerobiosis that fuels the essential main-"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3971,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "erobic metabolism ( D). Aerobic scope disappears, and metabolism switches to partial anaerobiosis that fuels the essential main-tenance costs and supports the time-limited survival of the organism. In some species, survival in the pessimum range can be enhancedby a metabolic rate depression ( E) that reduces rates of energy turnover at the expense of shutting down the ATP-demanding functionsthat are not essential for immediate survival. It is worth noting that energy balance is temporarily disrupted during transitions between"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3986,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "of anaerobiosis (Guppy andWithers 1999; Sokolova et al. 2011). However, be-cause metabolic rate depression involves suppressionproduction, and consumption of ATP, there is nonet increase in aerobic scope, and the organism’sactivity decreases while its growth and reproductioncease (Storey and Storey 1990; Sokolova et al. 2000;Sokolova and Po ¨rtner 2001; Marshall et al. 2011).Therefore, an onset of metabolic rate depressioncan serve as a marker of a transition into the pessi-mum range that incurs long-term fitness costs and isincompatible with the indefinite survival of the pop-ulation (Table 1)."
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4088,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "; Muller et al., 2019 ). The experimental DO levels are greater than the critical oxygen levels for oxygen-independent routine metabolism (Pcrit) of 2.04 mg L\u00001 and 1.56 mg L\u00001 for embryos and 5dph larvae, respectively (Schwemmer, 2023 ). Pcrit has been assumed by some to be the oxygen level at which anaerobic metabolism is triggered, but there is abundant evidence that some level of anaerobic metabolism can occur well above Pcrit (Nonnotte et al., 1993 ; Maxime et al., 2000 ; Wood et al., 2018 ). Additional activity such as swimming bursts can drive up the need for anaerobiosis (Di Santo et al., 2017 ). Our evidence that"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4143,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "to pathways that produce lactate (Larade and Storey 2002). Anaerobiosis is also facilitated in oysters by the storage of large quantities of glycogen in their tissues, which can easily be mobilized for use as a fermentable fuel (de Zwaan 1983). Finally, oysters can buffer against anaerobiosis -induc ed acidosis by mobilizing bicarbonate from their shells (Cameron 1990). As a result of these physiological adaptations, oysters are highly tolerant to low oxygen availability and are able to persist for more than a month in hypoxic conditions (Stickle et a l. 1989)."
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4234,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": ", but not inhibits, its feeding and digestion activities tosurvive hypoxic or anoxic stress events ( Sobral and Widdows, 1997 ).The maintenance of a consistent feeding activity might result in theaccumulation of anaerobic endproducts and induce a change in theenergetic strategy. A switch towards a metabolic depression ( Wu,2002 ), which is re ﬂected by a gradual decrease in ﬁltration rates,might be an e ﬃcient mechanism to survive to long-lasting severehypoxic crisis. However, other explanation is that the highestoxygen demand for digestion/assimilation processes would decrease"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4235,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "Additional activity such as swimming bursts can drive up the need for anaerobiosis (Di Santo et al., 2017 ). Our evidence that conversion efficiency is reduced by hypoxia-induced damage suggests that anaerobic metabolism may be a mechanism of hypoxia effects in M. menidia early life stages even at oxygen levels above Pcrit.While yVA is the best parameter to explain the hypoxia effects ac-cording to our model and AICc, it is nonetheless possible that JaAm is responsible for an unknown portion of the hypoxia effects. Because of near collinearity between JaAm and yVA, our model does not allow us to"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4411,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "(Hochachka et al. 1996) – to min imize energy expenditure (Storey and Storey 1990). Additionally, oysters are highly successful facultative anaerobes, with the ability to efficiently transition from aerobic to 27 anaerobic respiration when oxygen availability is low (Grieshaber at al. 1994). Oysters also produce alternative metabolic byproducts during anaerobiosis, namely alanine, succinate, and propionate (Eberlee et al. 1983), which allow for greater ATP yield during anaerobic respiration compared to pathways that produce lactate (Larade and Storey 2002). Anaerobiosis is also facilitated in oysters by the storage of large"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4439,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "PcO 2), species may develop anaerobi c processes to sustain their energetic demand. Under these circumstances, reserves (e.g., carbohydrates) are metaboli zed anaerobically to produce energy (i.e., adenosine triphosphate, ATP) to maintain all or a part of the organism’s total energetic expenditure , but with low ATP yield (15 -fold less efficiency) and production of toxic metabolic by -products . Alternatively, organisms have bee n shown to decrease metabolic rate in stressful environments (i.e. metabolic suppression, Hochachka, 1986) , presumably to"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4465,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "c conditions in the gradient. Despite the ability to behaviorally avoid an -oxia, D. magna in its natural habitat may occasion -ally be exposed to oxygen tensions below the critical value limiting aerobic respiration. While an efﬁcient circulatory system can compensate effect of hypoxia (cf. 9.1.2), the complete absence of oxygen during an -oxia renders oxygen transport systems useless after the oxygen stored in the hemoglobin has been consumed. Hence, survival under anoxia requires a switch to an -oxibiosis (lactate production). Although earlier stud -ies denied the existence of anaerobic metabolism in"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4466,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "iteroparous ones doso in late summer. Death after first reproduction, like many other causes of death, doesnot relate to ageing.The residence time of compounds in the reserve, E/˙pC, increases with the size of anisomorph. Some reserve compounds, such as proteins, can lose their metabolic activity.This implies that the fraction of inactive reserve compounds increases with size. This canbe an important mechanism behind the gradual changes of metabolism during the lifecycle.On approaching the end of the life span, the organism usually becomes very vulnerable,"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4476,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "availability is reduced ( Grieshaber at al. 1994 ). Their efficiency with facultative anaerobiosis is further supported through the production of alternative metabolic by -products – specifically alanine, succinate, and propionate (Eberlee et a l. 1983) – which affords them greater ATP production than other glycolytic pathways that produce lactate ( Larade and Storey 2002 ). The 17 large quantity of glycogen stored in their tissues also allows for their efficiency with anaerobiosis as it provides an e asily mobilizable fermentable fuel ( de Zwaan 1983 )."
+        },
+        {
+          "document_id": "69b87fd5ecbd4702b29a4ad1",
+          "title": "Zhang et al. - 2022 - Comparative transcriptomic analysis unveils a netw.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4502,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": ", partial anaerobiosis is activated and many ATP-demanding functions (eg. protein synthesis) are shut down to ensure energy bal-ance for immediate survival during the latter stage (Kooijman, 2000 ). However, the states of energy demand of three tissues were different under heat stress. In detail, gill and hepatopancreas were in a low energy demand state, where both energy generation and utilization were at low levels. However, the situation is completely opposite in muscle that both energy generation and utilization processes were accelerated, suggest -ing that muscle was at a high energy demand state. It is reasonable to"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4503,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "n of a fermenting, facultative anaero-bic H 2- and CO 2-producing eubacterium into an autotrophic, obligatory anaerobic H 2- andCO2-consuming methanogenic archaean [747], the host possibly returning organic metabo-lites. Once the H 2production and consumption had been cut out of the metabolism,aerobic environments became available, where the respiratory chain of the symbiont keptthe dioxygen concentration in the hosts cytoplasm at very low levels. The internalisationof (pro)mitochondria might be a response to counter the toxic effects of dioxygen. This"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "The corpus is largely off-topic for this DEB stylized fact, dominated by reproduction, symbiosis, dormancy, and anhydrobiosis abstracts that merely mention anaerobiosis or metabolism in passing. Only two snippets bear meaningfully on the fact: [14] supports the idea that anaerobic respiration is less sufficient than aerobic respiration over long periods, consistent with inefficient energy production, and [15] discusses exercise-induced anaerobiosis and acid-base (alkalosis/acidosis) dynamics with overnight recovery, partially echoing the oxygen-debt concept though it actually reports alkalosis rather than acidosis. No snippet explicitly addresses a critical saturation threshold, lactate accumulation, or a multi-hour oxygen debt imprint in the precise terms of the stylized fact, and nothing directly contradicts it. Overall the evidence is weak and sparse, with no clear conflict, so support is essentially insufficient."
+      },
+      "n_references": 2,
+      "references": {
+        "W2004878069": {
+          "title": "Mitochondria and human preimplantation embryo development",
+          "doi": "10.1530/rep-08-0444",
+          "year": "2009",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5183555483818054
+        },
+        "W2128183928": {
+          "title": "Metabolic Status and Respiratory Physiology of<i>Gecarcoidea natalis</i>, the Christmas Island Red Crab, During the Annual Breeding Migration",
+          "doi": "10.2307/1543513",
+          "year": "2001",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.5212582349777222
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2426194307",
+          "title": "Evolution of Microbial Quorum Sensing to Human Global Quorum Sensing: An Insight into How Gap Junctional Intercellular Communication Might Be Linked to the Global Metabolic Disease Crisis",
+          "doi": "10.3390/biology5020029",
+          "year": "2016",
+          "distance": 0.4312,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "The first anaerobic organism extracted energy for survival and reproduction from its source of nutrients, with the genetic means to ensure protection of its individual genome but also its species survival."
+        },
+        {
+          "document_id": "W2078829960",
+          "title": "Seasonality of dihydropyridine receptor binding in the heart of an anoxia-tolerant vertebrate, the crucian carp (<i>Carassius carassius</i>L.)",
+          "doi": "10.1152/ajpregu.00317.2004",
+          "year": "2004",
+          "distance": 0.4477,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Prolonged anoxia tolerance of facultative anaerobes is based on metabolic depression and thus on controlled reduction of energy-utilizing processes. One proposed survival mechanism is the closing of ion channels to decrease energetic cost of ion pumping (Hochachka PW. Science 231: 234–241, 1986)."
+        },
+        {
+          "document_id": "W4386344138",
+          "title": "Invertebrates as a study model of anaerobic infections",
+          "doi": "10.14720/abs.60.1.15667",
+          "year": "2017",
+          "distance": 0.4649,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ition, short life-time, can be easily maintained, infected without anesthesia and with a smaller extent of ethical limitations. From a microbiological viewpoint, importance of anaerobic bacteria asagents for various diseases remains an interesting field for research. The study of the interaction between invertebrate model host and anaerobic bacteria therefore provides insights into the mechanisms underlying pathogen virulence and host immunity andcomplements or even compensates the use of mammalian model in assay for infectious disease."
+        },
+        {
+          "document_id": "W2942401560",
+          "title": "Staying young and fit? Ontogenetic and phylogenetic consequences of animal anhydrobiosis",
+          "doi": "10.1111/jzo.12677",
+          "year": "2019",
+          "distance": 0.4671,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Abstract Although gradual deterioration of life functions with age is not a fundamental rule, it is pervasive among living organisms, regardless of their mode of reproduction and the number of constituent cells. However, deterioration can be temporarily arrested or slowed down due to the process of anhydrobiosis. Two modes of anhydrobiosis can be distinguished for the developmental and adult stages of animals."
+        },
+        {
+          "document_id": "W3041194123",
+          "title": "Atribacteria reproducing over millions of years in the Atlantic abyssal subseafloor",
+          "doi": "10.1101/2020.07.10.198200",
+          "year": "2020",
+          "distance": 0.4785,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "anabolic functions necessary for cellular reproduction, even under energy limitation in millions of years old anoxic sediments. Importance The deep subseafloor sedimentary biosphere is one of the largest ecosystems on Earth, where microbes subsist under energy-limited conditions over long timescales. It remains poorly understood how mechanisms of microbial metabolism promote increased fitness in these settings."
+        },
+        {
+          "document_id": "W1979277594",
+          "title": "Survival analyses of symbionts isolated from Endocarpon pusillum Hedwig to desiccation and starvation stress",
+          "doi": "10.1007/s11427-011-4164-z",
+          "year": "2011",
+          "distance": 0.4894,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "arvation stress, and under starvation stress alone as well. The phycobiont of the symbionts was under desiccation stress alone. The experiments were detected by means of the biomass size, weight and cell density, deformity of the hyphae and cells, and metabolic activity through SEM (scanning electron microscopy), TEM (transmission electron microscopy), FM (fluorescence microscopy), spectrophotometry, and FCM (flow cytometry). The results show that the mycobiont can survive for seven months under desiccation stress in combination with starvation stress, and for eight months under starvation stress alone."
+        },
+        {
+          "document_id": "W2810580811",
+          "title": "Activating the Anaphase Promoting Complex to Enhance Genomic Stability and Prolong Lifespan",
+          "doi": "10.3390/ijms19071888",
+          "year": "2018",
+          "distance": 0.5,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "rplay between the stress and nutrient response networks, and the regulation of homeostasis and genomic stability, is discussed. Mechanisms that link these two networks are predicted to be key lifespan determinants. The Anaphase Promoting Complex (APC), a large evolutionarily conserved ubiquitin ligase, can potentially serve this need. Recent work demonstrates that the APC maintains genomic stability, mounts a stress response, and increases longevity in yeast. Furthermore, inhibition of APC activity by glucose and nutrient response factors indicates a tight link between the APC and the stress/nutrient response networks."
+        },
+        {
+          "document_id": "W2397672878",
+          "title": "Experimental models of small closed systems with spatially separated unicellular organism-based components.",
+          "doi": "",
+          "year": "1999",
+          "distance": 0.5031,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ph-heterotroph\" (chlorella-yeast) system doubled the lifetime of the system (as opposed to individually cultivated components). Higher complexity of the heterotroph component consisting of two yeast species also increased the lifetime of the system through more complete utilization of the substrate by competing yeast species. The lifetime of gas and substrate closed \"producer-consumer\" trophic chain (chlorella-paramecia) increased to 7 months. In 60 days the components' numbers reached their steady state followed by more than 40 cycles of the medium."
+        },
+        {
+          "document_id": "W2178713387",
+          "title": "The Evolution of Life Histories in Holo-anhydrobiotic Animals: A First Approach",
+          "doi": "10.1093/icb/45.5.764",
+          "year": "2005",
+          "distance": 0.5101,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "The life histories of holo-anhydrobiotic animals differ from those of all other organisms by a regular or irregular entrance into an ametabolic state induced by desiccation. Such ametabolic periods will arrest growth and reproduction completely and thus affect primary life history parameters dramatically. The selective forces and the genetic and physiological trade-offs acting on anhydrobiotic animals are to a large extent unknown."
+        },
+        {
+          "document_id": "W4387058824",
+          "title": "Immunometabolic regulation during the presence of microorganisms and parasitoids in insects",
+          "doi": "10.3389/fimmu.2023.905467",
+          "year": "2023",
+          "distance": 0.5126,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Multicellular organisms live in environments containing diverse nutrients and a wide variety of microbial communities. On the one hand, the immune response of organisms can protect from the intrusion of exogenous microorganisms. On the other hand, the dynamic coordination of anabolism and catabolism of organisms is a necessary factor for growth and reproduction."
+        },
+        {
+          "document_id": "W4412347412",
+          "title": "The cost of being tough: anhydrobiosis effects on mate choice and reproduction in a tardigrade",
+          "doi": "10.1093/biolinnean/blaf036",
+          "year": "2025",
+          "distance": 0.5148,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Abstract Organisms face physiological stress from environmental conditions, impacting survival, maintenance, and reproductive strategies. Cryptobiosis, a reversible state of metabolic inactivity that enables organisms to survive extreme conditions such as desiccation (anhydrobiosis), is known to have physiological costs, but its effects on mate choice and reproductive success remain unclear."
+        },
+        {
+          "document_id": "W2944759428",
+          "title": "Mitochondria and lipid metabolism in mammalian oocytes and early embryos",
+          "doi": "10.1387/ijdb.180355ks",
+          "year": "2019",
+          "distance": 0.5153,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "a require a balance of pyruvate and fatty acid oxidation in order to maintain a low level of otherwise damaging ROS production. This balance is disrupted in conditions of excess or insufficient substrate."
+        },
+        {
+          "document_id": "W1984601497",
+          "title": "PHYSIOLOGICAL VARIATION IN ANIMALS",
+          "doi": "10.1111/j.1469-185x.1955.tb01208.x",
+          "year": "1955",
+          "distance": 0.5179,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "level, tolerance of products of anaerobiosis, auxiliary breathing mechanisms and stimulation of pigment development by hypoxia. Correlations of these functions with history of oxygen availability are cited, but data are inadequate to establish genetic races. Selection of specific food plants depends on secondary products, not primary food; many subspecies and races are known by food plant selection, especially among bugs, gall flies and butterflies."
+        },
+        {
+          "document_id": "W2004878069",
+          "title": "Mitochondria and human preimplantation embryo development",
+          "doi": "10.1530/rep-08-0444",
+          "year": "2009",
+          "distance": 0.5184,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "A second pathway, anaerobic respiration, is also active and the two pathways work in synchrony to supply all the ATP necessary. We discuss the differences in the two forms of energy production and suggest that, although anaerobic respiration can supplement deficiencies in the energy supply in the short term, this is not sufficient to substitute for aerobic respiration over long periods. Therefore, we suggest that deficiencies in the levels of aerobic respiration can explain variability in the implantation potential of apparently equivalent embryos."
+        },
+        {
+          "document_id": "W2128183928",
+          "title": "Metabolic Status and Respiratory Physiology of<i>Gecarcoidea natalis</i>, the Christmas Island Red Crab, During the Annual Breeding Migration",
+          "doi": "10.2307/1543513",
+          "year": "2001",
+          "distance": 0.5213,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "+/- 0.5 m x min(-1)) exceeded those that promoted anaerobiosis in non-migrating crabs and in crabs exercised in the laboratory. In contrast to all previous studies, at the end of each day of migrating, red crabs experienced an alkalosis (up to 0.1 pH units) rather than any acidosis. This alkalosis was removed overnight when the crabs were inactive. Although there were seasonal fluctuations in the glycogen, glucose, and triglyceride stores, crabs engaging in the migration did not draw on these stores and must have fed along the way."
+        },
+        {
+          "document_id": "W2122400907",
+          "title": "Effect of Host Genotype on Symbiont Titer in the Aphid—Buchnera Symbiosis",
+          "doi": "10.3390/insects2030423",
+          "year": "2011",
+          "distance": 0.525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Obligate nutritional symbioses require balance between the energetic needs of the host and the symbiont. The resident symbiont population size within a host may have major impacts on host fitness, as both host and symbiont consume and supply metabolites in a shared metabolite pool. Given the massive genome degradation that is a hallmark of bacterial endosymbionts of insects, it is unclear at what level these populations are regulated, and how regulation varies among hosts within natural populations."
+        },
+        {
+          "document_id": "W3212640417",
+          "title": "Phage-encoded sigma factors alter bacterial dormancy",
+          "doi": "10.1101/2021.11.12.468384",
+          "year": "2021",
+          "distance": 0.5288,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ABSTRACT By entering a reversible state of reduced metabolic activity, dormant microorganisms are able to tolerate suboptimal conditions that would otherwise reduce their fitness. Dormancy may also benefit bacteria by serving as a refuge from parasitic infections. Here we focus on dormancy in the Firmicutes , where endospore development is transcriptionally regulated by the expression of sigma factors."
+        },
+        {
+          "document_id": "W4251276174",
+          "title": "Mating precedes selective immune priming which is maintained throughout bumblebee queen diapause",
+          "doi": "10.21203/rs.2.15453/v2",
+          "year": "2019",
+          "distance": 0.5302,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Abstract Background: Understanding the mechanisms by which organisms adapt to unfavourable conditions is a fundamental question in ecology and evolutionary biology. One such mechanism is diapause, a period of dormancy typically found in nematodes, fish, crustaceans and insects. This state is a key life-history event characterised by arrested development, suppressed metabolism and increased stress tolerance and allows an organism to avoid prolonged periods of harsh and inhospitable environmental conditions."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple directly relevant snippets corroborate the stylized fact. Snippet 1 nearly verbatim states the fact with citations. Snippets 2, 5, 6, 7 (Sokolova) describe the switch to partial anaerobiosis under stress to fuel essential maintenance with metabolic depression and disrupted energy balance. Snippets 9, 12 (Davis) describe anaerobiosis, toxic end-products (lactate, alanine, succinate, propionate), acidosis buffering, and the lower-efficiency anaerobic ATP yield in oysters. Snippets 8, 11 (Schwemmer) explicitly note anaerobic metabolism can occur above Pcrit and reduced conversion efficiency, broadly consistent with less efficient energy production. Snippets 3, 4 tie these to DEB facts and the formation/accumulation of toxic by-products under anaerobiosis. The 'critical threshold' nuance (snippet 8 noting anaerobiosis above Pcrit) does not contradict the fact, which states anaerobiosis 'can start under' the critical threshold. The remaining snippets (13-24) are off-topic (microbial QS, anhydrobiosis, infections, longevity, oocyte metabolism) and contribute no bearing. Overall strong, multi-source support with no contradiction."
+      },
+      "n_references": 7,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.23311316967010498
+        },
+        "69b87fd5ecbd4702b29a4ad1": {
+          "title": "Zhang et al. - 2022 - Comparative transcriptomic analysis unveils a netw.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33235591650009155
+        },
+        "69b8a5cdecbd4702b29a78f5": {
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.3872627019882202
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.408777117729187
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.4142613410949707
+        },
+        "69b88155ecbd4702b29a4d0c": {
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4234302043914795
+        },
+        "W2078829960": {
+          "title": "Seasonality of dihydropyridine receptor binding in the heart of an anoxia-tolerant vertebrate, the crucian carp (<i>Carassius carassius</i>L.)",
+          "doi": "10.1152/ajpregu.00317.2004",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.44767189025878906
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2331,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": ", heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to decrease d O2 consumption (e.g. reduce act ivity, reduce feeding) some species may also enter in hypometabolic state for surviving. (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009; Wu, 2002a) B4. Anaerobiosis can start under the PcO 2 threshold, with less efficient energy production and toxic end -products formation (e.g. lactate, acidosis), leading to long -lasting (several hours) imprint on metabolism (oxygen debt) . (Bayne and Livingstone, 1977; Bridges and Brand, 1980; Nilsson"
+        },
+        {
+          "document_id": "69b87fd5ecbd4702b29a4ad1",
+          "title": "Zhang et al. - 2022 - Comparative transcriptomic analysis unveils a netw.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3324,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "proteins and antioxidants) at the expense of other pro-cesses such as growth and reproduction. During extreme stress situations (pessimum range), partial anaerobiosis is activated to compensate for the insufficient aerobic energy supply, and metabolic rate is repressed to ensure an energy balance at the expense of shutting down of many ATP-demanding functions (eg. protein synthesis) to ensure the imme -diate survival. In the lethal range, the balance of ATP supply and de-mand is disrupted resulting in the ultimate death of an organism (Sokolova et al., 2012 ). High economical values and excellent characteristics for breeding"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3556,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "r efficiency of anaerobic metabolism (fact B3) 4. The κ -rule and subsequent allocations to growth and reproduction; related to endocrine disruption (facts G2, R2, R3). 5. The reproductive efficiency ; related to the end ocrine disruption involved in gametes maturation (fact R3). 6. The somatic maintenance rate; related to a modulation of the maintenance costs (e.g., increased ventilation and/or heartbeat , mobility) (facts D1, D2) , and to the lower transformation efficiency for ATP production and by -products elimination under anaerobiosis ( fact R3)."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3731,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "D2) , and to the lower transformation efficiency for ATP production and by -products elimination under anaerobiosis ( fact R3). 7. Death ; reduction in energy uptake (facts F1, F2) and increase in metabolic demand (fact B2) can lead to a low level of energy availabi lity, and then to a death threshold when maintenance processes are no longer fuelled . Accumulation of toxic by -products under anaerobiosis ( fact B4) can also cause death (fact L3). Asphyxiation can occur after a period of time under the critical O 2 threshold (PcO 2) (fact L1). ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 15 3.3 Dose effect response to hypoxia"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3873,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "depending on the stressor) assimilation of food and/or capacity for aerobic metabolism are impaired ( C) leading to a decline inaerobic scope. Energy storage is absent or reduced under these conditions. During extreme stress in the pessimum range, theprogressive increase in ATP demand for maintenance and/or the progressive impairment of aerobic metabolism overrides ATP supplyvia aerobic metabolism ( D). Aerobic scope disappears, and metabolism switches to partial anaerobiosis that fuels the essential main-"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3971,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "erobic metabolism ( D). Aerobic scope disappears, and metabolism switches to partial anaerobiosis that fuels the essential main-tenance costs and supports the time-limited survival of the organism. In some species, survival in the pessimum range can be enhancedby a metabolic rate depression ( E) that reduces rates of energy turnover at the expense of shutting down the ATP-demanding functionsthat are not essential for immediate survival. It is worth noting that energy balance is temporarily disrupted during transitions between"
+        },
+        {
+          "document_id": "69b8a5cdecbd4702b29a78f5",
+          "title": "Sokolova - 2013 - Energy-Limited Tolerance to Stress as a Conceptual.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3986,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "of anaerobiosis (Guppy andWithers 1999; Sokolova et al. 2011). However, be-cause metabolic rate depression involves suppressionproduction, and consumption of ATP, there is nonet increase in aerobic scope, and the organism’sactivity decreases while its growth and reproductioncease (Storey and Storey 1990; Sokolova et al. 2000;Sokolova and Po ¨rtner 2001; Marshall et al. 2011).Therefore, an onset of metabolic rate depressioncan serve as a marker of a transition into the pessi-mum range that incurs long-term fitness costs and isincompatible with the indefinite survival of the pop-ulation (Table 1)."
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4088,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "; Muller et al., 2019 ). The experimental DO levels are greater than the critical oxygen levels for oxygen-independent routine metabolism (Pcrit) of 2.04 mg L\u00001 and 1.56 mg L\u00001 for embryos and 5dph larvae, respectively (Schwemmer, 2023 ). Pcrit has been assumed by some to be the oxygen level at which anaerobic metabolism is triggered, but there is abundant evidence that some level of anaerobic metabolism can occur well above Pcrit (Nonnotte et al., 1993 ; Maxime et al., 2000 ; Wood et al., 2018 ). Additional activity such as swimming bursts can drive up the need for anaerobiosis (Di Santo et al., 2017 ). Our evidence that"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4143,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "to pathways that produce lactate (Larade and Storey 2002). Anaerobiosis is also facilitated in oysters by the storage of large quantities of glycogen in their tissues, which can easily be mobilized for use as a fermentable fuel (de Zwaan 1983). Finally, oysters can buffer against anaerobiosis -induc ed acidosis by mobilizing bicarbonate from their shells (Cameron 1990). As a result of these physiological adaptations, oysters are highly tolerant to low oxygen availability and are able to persist for more than a month in hypoxic conditions (Stickle et a l. 1989)."
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4234,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": ", but not inhibits, its feeding and digestion activities tosurvive hypoxic or anoxic stress events ( Sobral and Widdows, 1997 ).The maintenance of a consistent feeding activity might result in theaccumulation of anaerobic endproducts and induce a change in theenergetic strategy. A switch towards a metabolic depression ( Wu,2002 ), which is re ﬂected by a gradual decrease in ﬁltration rates,might be an e ﬃcient mechanism to survive to long-lasting severehypoxic crisis. However, other explanation is that the highestoxygen demand for digestion/assimilation processes would decrease"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4235,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "Additional activity such as swimming bursts can drive up the need for anaerobiosis (Di Santo et al., 2017 ). Our evidence that conversion efficiency is reduced by hypoxia-induced damage suggests that anaerobic metabolism may be a mechanism of hypoxia effects in M. menidia early life stages even at oxygen levels above Pcrit.While yVA is the best parameter to explain the hypoxia effects ac-cording to our model and AICc, it is nonetheless possible that JaAm is responsible for an unknown portion of the hypoxia effects. Because of near collinearity between JaAm and yVA, our model does not allow us to"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4411,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "(Hochachka et al. 1996) – to min imize energy expenditure (Storey and Storey 1990). Additionally, oysters are highly successful facultative anaerobes, with the ability to efficiently transition from aerobic to 27 anaerobic respiration when oxygen availability is low (Grieshaber at al. 1994). Oysters also produce alternative metabolic byproducts during anaerobiosis, namely alanine, succinate, and propionate (Eberlee et al. 1983), which allow for greater ATP yield during anaerobic respiration compared to pathways that produce lactate (Larade and Storey 2002). Anaerobiosis is also facilitated in oysters by the storage of large"
+        },
+        {
+          "document_id": "W2426194307",
+          "title": "Evolution of Microbial Quorum Sensing to Human Global Quorum Sensing: An Insight into How Gap Junctional Intercellular Communication Might Be Linked to the Global Metabolic Disease Crisis",
+          "doi": "10.3390/biology5020029",
+          "year": "2016",
+          "distance": 0.4312,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The first anaerobic organism extracted energy for survival and reproduction from its source of nutrients, with the genetic means to ensure protection of its individual genome but also its species survival."
+        },
+        {
+          "document_id": "W2078829960",
+          "title": "Seasonality of dihydropyridine receptor binding in the heart of an anoxia-tolerant vertebrate, the crucian carp (<i>Carassius carassius</i>L.)",
+          "doi": "10.1152/ajpregu.00317.2004",
+          "year": "2004",
+          "distance": 0.4477,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "Prolonged anoxia tolerance of facultative anaerobes is based on metabolic depression and thus on controlled reduction of energy-utilizing processes. One proposed survival mechanism is the closing of ion channels to decrease energetic cost of ion pumping (Hochachka PW. Science 231: 234–241, 1986)."
+        },
+        {
+          "document_id": "W4386344138",
+          "title": "Invertebrates as a study model of anaerobic infections",
+          "doi": "10.14720/abs.60.1.15667",
+          "year": "2017",
+          "distance": 0.4649,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ition, short life-time, can be easily maintained, infected without anesthesia and with a smaller extent of ethical limitations. From a microbiological viewpoint, importance of anaerobic bacteria asagents for various diseases remains an interesting field for research. The study of the interaction between invertebrate model host and anaerobic bacteria therefore provides insights into the mechanisms underlying pathogen virulence and host immunity andcomplements or even compensates the use of mammalian model in assay for infectious disease."
+        },
+        {
+          "document_id": "W2942401560",
+          "title": "Staying young and fit? Ontogenetic and phylogenetic consequences of animal anhydrobiosis",
+          "doi": "10.1111/jzo.12677",
+          "year": "2019",
+          "distance": 0.4671,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Abstract Although gradual deterioration of life functions with age is not a fundamental rule, it is pervasive among living organisms, regardless of their mode of reproduction and the number of constituent cells. However, deterioration can be temporarily arrested or slowed down due to the process of anhydrobiosis. Two modes of anhydrobiosis can be distinguished for the developmental and adult stages of animals."
+        },
+        {
+          "document_id": "W3041194123",
+          "title": "Atribacteria reproducing over millions of years in the Atlantic abyssal subseafloor",
+          "doi": "10.1101/2020.07.10.198200",
+          "year": "2020",
+          "distance": 0.4785,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "anabolic functions necessary for cellular reproduction, even under energy limitation in millions of years old anoxic sediments. Importance The deep subseafloor sedimentary biosphere is one of the largest ecosystems on Earth, where microbes subsist under energy-limited conditions over long timescales. It remains poorly understood how mechanisms of microbial metabolism promote increased fitness in these settings."
+        },
+        {
+          "document_id": "W1979277594",
+          "title": "Survival analyses of symbionts isolated from Endocarpon pusillum Hedwig to desiccation and starvation stress",
+          "doi": "10.1007/s11427-011-4164-z",
+          "year": "2011",
+          "distance": 0.4894,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "arvation stress, and under starvation stress alone as well. The phycobiont of the symbionts was under desiccation stress alone. The experiments were detected by means of the biomass size, weight and cell density, deformity of the hyphae and cells, and metabolic activity through SEM (scanning electron microscopy), TEM (transmission electron microscopy), FM (fluorescence microscopy), spectrophotometry, and FCM (flow cytometry). The results show that the mycobiont can survive for seven months under desiccation stress in combination with starvation stress, and for eight months under starvation stress alone."
+        },
+        {
+          "document_id": "W2810580811",
+          "title": "Activating the Anaphase Promoting Complex to Enhance Genomic Stability and Prolong Lifespan",
+          "doi": "10.3390/ijms19071888",
+          "year": "2018",
+          "distance": 0.5,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "rplay between the stress and nutrient response networks, and the regulation of homeostasis and genomic stability, is discussed. Mechanisms that link these two networks are predicted to be key lifespan determinants. The Anaphase Promoting Complex (APC), a large evolutionarily conserved ubiquitin ligase, can potentially serve this need. Recent work demonstrates that the APC maintains genomic stability, mounts a stress response, and increases longevity in yeast. Furthermore, inhibition of APC activity by glucose and nutrient response factors indicates a tight link between the APC and the stress/nutrient response networks."
+        },
+        {
+          "document_id": "W2397672878",
+          "title": "Experimental models of small closed systems with spatially separated unicellular organism-based components.",
+          "doi": "",
+          "year": "1999",
+          "distance": 0.5031,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "ph-heterotroph\" (chlorella-yeast) system doubled the lifetime of the system (as opposed to individually cultivated components). Higher complexity of the heterotroph component consisting of two yeast species also increased the lifetime of the system through more complete utilization of the substrate by competing yeast species. The lifetime of gas and substrate closed \"producer-consumer\" trophic chain (chlorella-paramecia) increased to 7 months. In 60 days the components' numbers reached their steady state followed by more than 40 cycles of the medium."
+        },
+        {
+          "document_id": "W2178713387",
+          "title": "The Evolution of Life Histories in Holo-anhydrobiotic Animals: A First Approach",
+          "doi": "10.1093/icb/45.5.764",
+          "year": "2005",
+          "distance": 0.5101,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "The life histories of holo-anhydrobiotic animals differ from those of all other organisms by a regular or irregular entrance into an ametabolic state induced by desiccation. Such ametabolic periods will arrest growth and reproduction completely and thus affect primary life history parameters dramatically. The selective forces and the genetic and physiological trade-offs acting on anhydrobiotic animals are to a large extent unknown."
+        },
+        {
+          "document_id": "W4387058824",
+          "title": "Immunometabolic regulation during the presence of microorganisms and parasitoids in insects",
+          "doi": "10.3389/fimmu.2023.905467",
+          "year": "2023",
+          "distance": 0.5126,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Multicellular organisms live in environments containing diverse nutrients and a wide variety of microbial communities. On the one hand, the immune response of organisms can protect from the intrusion of exogenous microorganisms. On the other hand, the dynamic coordination of anabolism and catabolism of organisms is a necessary factor for growth and reproduction."
+        },
+        {
+          "document_id": "W4412347412",
+          "title": "The cost of being tough: anhydrobiosis effects on mate choice and reproduction in a tardigrade",
+          "doi": "10.1093/biolinnean/blaf036",
+          "year": "2025",
+          "distance": 0.5148,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Abstract Organisms face physiological stress from environmental conditions, impacting survival, maintenance, and reproductive strategies. Cryptobiosis, a reversible state of metabolic inactivity that enables organisms to survive extreme conditions such as desiccation (anhydrobiosis), is known to have physiological costs, but its effects on mate choice and reproductive success remain unclear."
+        },
+        {
+          "document_id": "W2944759428",
+          "title": "Mitochondria and lipid metabolism in mammalian oocytes and early embryos",
+          "doi": "10.1387/ijdb.180355ks",
+          "year": "2019",
+          "distance": 0.5153,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "a require a balance of pyruvate and fatty acid oxidation in order to maintain a low level of otherwise damaging ROS production. This balance is disrupted in conditions of excess or insufficient substrate."
+        }
+      ]
+    }
+  }
+}

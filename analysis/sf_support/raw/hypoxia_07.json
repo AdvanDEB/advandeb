@@ -1,0 +1,944 @@
+{
+  "sf_id": "hypoxia_07",
+  "category": "Hypoxia / DO",
+  "statement": "Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly and explicitly support the stylized fact. Snippets [1], [2], and [3] essentially restate the fact verbatim and cite primary sources (Wu et al. 2003; Landry et al. 2007; Thomas et al. 2006), with [3] providing detailed mechanistic evidence (altered testosterone, 17β-estradiol, and thyroid hormone levels disrupting gametogenesis, sexual maturity, gamete quality, and fecundity). Snippets [4], [12], and [18] cite the foundational Wu et al. (2003) work establishing hypoxia as an endocrine disruptor impairing fish reproduction, while [9] applies this directly to oysters. Snippet [6] adds evidence of reduced gonad growth, and [8] and [14] corroborate hypoxia's effects on endocrine functions and reproductive output. No snippets contradict the fact; [14] merely notes the effect was not yet demonstrated specifically in cod while affirming it in other species. The remaining snippets are off-topic (molecular HIF responses, Daphnia hemoglobin/growth). Overall the corpus provides strong, consistent corroboration with no conflicting evidence."
+      },
+      "n_references": 5,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.15939879417419434
+        },
+        "69b86876ecbd4702b29a2cf4": {
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.39032429456710815
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.43722015619277954
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4465214014053345
+        },
+        "69b87d19ecbd4702b29a4730": {
+          "title": "Davis et al. - 2024 - Predicting the effects of hypoxia on oyster (Cr.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.46391892433166504
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1594,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "is still poorly understood in most species . Hypoxia can also impair reproduction by acting as a specific cue regulating gamete production and quality (Siikavuopio et al., 2007) . Indeed, hypoxia is known to disrupt endocrine functions, which in turn affect gametogenesis, sexual maturity, gamete quality and fecundity (Wu et al., 2003) . Thomas et al., (2006) demonstrated ovarian dysfunction in the Atlantic croaker ( Micropogonias undulatus ), leading to a decrease in the production of fully grown oocytes and a reduction in viable gametes. These dysfunctions were related"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2328,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "rioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may co ntinue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. Decrease in DO may decrease the gonado -somatic index . (Cheung et al., 2008a; Landry et al., 2007; Long et al., 2013a; Thomas et al., 2006; Wu et al., 2003) R3. Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al.,"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3115,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "MANUSCRIPTACCEPTED MANUSCRIPT 10 (Fundulus grandis ) (Landry et al., 2007) or the common carp ( Cyprinus carpio ) (Wu et al., 2003) . For the latter, hypoxia reduce d overall reproductive success by disturbing endocrine functions (decrease of testosterone and increase of 17β -estradiol in male fish and decrease in 17β -estradiol and triiodothyronine in female fish) , which in turn reduced gametogenesis (i.e., inhibiting sperm production, stop oocyte maturation), sexual maturity (i.e., reduce GSI), gamete quality (i.e., reduce sperm motility and yolk in each egg), and"
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3903,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "nses. Mar. Pollut.Bull. 45 (1), 35 –45.Wu, R.S.S., Zhou, B.S., Randall, D.J., Woo, N.Y.S., Lam, P.K.S., 2003. Aquatic hypoxia isan endocrine disruptor and impairs ﬁsh reproduction. Environ. Sci. Technol. 37 (6),1137 –1141 .Zhang, J., Gilbert, D., Gooday, A.J., Levin, L., Naqvi, S.W.A., Middelburg, J.J., Scranton,M., Ekau, W., Peña, A., Dewitte, B., Oguz, T., Monteiro, P.M.S., Urban, E., Rabalais,N.N., Ittekkot, V., Kemp, W.M., Ulloa, O., Elmgren, R., Escobar-Briones, E., van derPlas, A.K., 2010. Natural and human-induced hypoxia and consequences for coastal"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3957,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "organisms, oxygen is a necessary element for their metabolic processes ( Grieshaber et al. 1994). Therefore, reduced dissolved oxygen negatively impacts basic metabolic functioning as well as organismal functioning, with implications at the molecular to ecological level. For many species, hypoxia exposure is known to lead to a distinct molecular response intended to preserve homeostatic cellular functioning (Semenza 2009). At an individual level, organisms will alter their behavior, physiology, or even anatomy in order to maintain proper cellular functioning when faced with low oxygen (Grieshaber et al. 1994). In"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4151,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": ", by 75% between 5.6 and 1.7 mg O 2 L-1 for the Atlantic croaker (Micropogonias undulatus ) (Thomas et al., 2006) , and by 30% between 9.5 and 4 mg O 2 L-1 for the sea urchin ( Strongylocentrotus droebachiensis ) (Siikavuopio et al., 2007) . The reduction in gonad growth was correlated with the decrease in food uptake and thus the energy supply in sea urchin (Siikavuopio et al., 2007) . However, the link between hypoxia and reproduction impairment is still poorly understood in most species . Hypoxia can also impair reproduction by acting as a specific cue regulating gamete"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4198,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ed the performance of females cultured under normoxic conditions or under hypoxia (2.1 - 3.9 kPa). No transgenerational effects of hypoxia were observed. Characteristics of D. magna acclimated to normoxia or hypoxia are listed in Table 9.1. The most pronounced differences were related to hemoglobin. Hypoxia-acclimated females contained 266 % more Hb than normoxia-acclimated females and this Hb increased in oxygen afﬁnity (lowered in vivo P50) by 32 %. Several indicators of oxygen-deﬁciency tolerance show signiﬁcantly lower critical partial pres -sures in hypoxia-acclimated females. On the systemic level, the mass-speciﬁc rates of"
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4349,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ns in di ﬀerent systems vary across a wide range of temporaland spatial scales. Five broad categories of hypoxia can be de ﬁned,depending on their duration: permanent, persistent seasonal, bothstratiﬁed and vertically mixed, episodic, and diel ( Kemp et al., 2009 ).Consequences of hypoxia on marine organisms can be observeddirectly at the individual level. Reduction of DO levels modi ﬁes beha-vior and physiological processes such as feeding, ventilation or endo-crine functions, leading to reduced growth, reproductive success, re-sistance to diseases, and increased mortality (see e.g. Wu, 2002;"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4372,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "plausible that hypoxia exposure could impose additional energetic stress on oys ter’s reproductive activities. Hypoxia has been shown to be an endocrine disruptor in fish, limiting gametogenesis and reducing the quality of gametes (Wu et al. 2003). Without observed measurements of gonad mass for oysters from sites experiencing differi ng oxygen availability, it is unknown whether additional constraints could be imposed on reproduction in C. virgin ica. Further parameterization of the reproductive aspect of the C. virginica DEB model with empirical data would provide more certainty in the model’s reproductive outputs."
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4441,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "following candidate DEBkiss parameters to which to apply the hypoxia-based correction factor: maximum assimilation rate (JaAm), conversion efficiency of assimilates into structure (growth, yVA), maximum somatic maintenance rate (JvM, mg mm\u00003 d\u00001), embryo mor-tality rate (µemb), and post-hatch mortality rate (µlar). Hypoxia effects on growth and hatching time can occur either through inhibition of assimilation or through damage that reduces the conversion efficiency of assimilates to growth. Hypoxia may impact survival directly through damage or by inhibition of damage repair processes. Hypoxia ’s impact"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4444,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "onse (Semenza 2001). Increased expression of HIF under low oxygen conditions has been shown in C. virginica (Piontkivska et al. 2011), C. gigas (Kawabe and Tokoyama 2012), and other bivalve species, such as mussels (Giannetto et al. 2015). In the present study, hypoxia -inducible factor 1 -𝛼 (HIF 1 -𝛼) was significantly upregulated after four days of low oxygen exposure. Previous studies of HIF 1 -𝛼 expression in other bivalves have shown upregulation of HIF 1 -𝛼 after one to two days of exposure to hypoxia, followed at subsequent timepoints by a decrease in expression to levels equivalent to normoxic exposure"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4465,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": ". https://doi.org/10.1242/jeb.163717 .Wu, R.S.S., Zhou, B.S., Randall, D.J., Woo, N.Y.S., Lam, P.K.S., 2003. Aquatic hypoxia is an endocrine disruptor and impairs fish reproduction. Environ. Sci. Technol. 37 (6), 1137 –1141. https://doi.org/10.1021/es0258327 .Zambonino-Infante, J.L., Mazurais, D., Dubuc, A., Qu˘eau, P., Vanderplancke, G., Servili, A., Cahu, C., Le Bayon, N., Huelvan, C., Claireaux, G., 2017. An early life hypoxia event has a long-term impact on protein digestion and growth in juvenile European sea bass. J. Exp. Biol. 220 (10), 1846 –1851. https://doi.org/10.1242/ jeb.154922 ."
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.454,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ivate important genes for hypoxia response as well as oxidize proteins and DNA, leading to cellular damage (Guzy and Schumacker 2006). Thus, the upregulation of Keap1 likely represents a response o f oysters to reducing the effects of oxidative stress associated with hypoxia. A key aspect of hypoxia response in both vertebrates and invertebrates is the activation of the hypoxia inducible transcription factor (HIF), which is a regulator of genes impo rtant to hypoxia stress response (Semenza 2001). Increased expression of HIF under low oxygen conditions has been shown in C. virginica (Piontkivska et al."
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4545,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "hypoxia ( Chabot and Dutil, 1999 ), no study on cod has yetdemonstrated a negative e ﬀect of hypoxia on reproductive output, al-though this has been demonstrated for other species (e.g. Wu et al.,2003 ;Landry et al., 2007 ;Thomas et al., 2007 ). More data from bothﬁeld monitoring and controlled experiments is warranted to answer thisquestion.4.4. ConclusionsThis work constitutes a ﬁrst step in the development and applicationof a full life cycle DEB model for Atlantic cod. The integration of theeﬀect of hypoxia as a third environmental variable is an important"
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.457,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": ".8 years at 40 cm, puberty reached at 4.1 years). As young cod(< 3 years) do not experience hypoxia in the shallower water depththey occupy ( Swain and Kramer, 1995), the impact of hypoxia on ju-venile development seems to be limited. This is not to say that hypoxiadoes not have an e ﬀect on younger stages, but only that given thebiology of this species and the fact that larvae and juveniles tend to livein shallower and more oxygenated waters, they might not be as exposedto reduced DO levels as older juveniles and adults can be.Chabot and Dutil (1999) brought evidence that almost all (97%) of"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4571,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "fects of parent hy -poxia exposure early in the development of the F1 gen -eration. They measured the effect of hypoxia (4 kPa) during the ﬁrst 6 days of development (juvenile phase) on growth, reproduction, and respiration rate of parents and their offspring (F1 generation) from the ﬁrst three broods. Parental D. magna exposed to hypoxia during days 0 to 6 grew slower during days 9 to 15 than con -trols, but the body mass (without eggs) reached a pla -teau in both exposed and control females at the same level. This growth curves (in terms of mass) showing linear growth after maturation and no further mass gain"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4571,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "lated recovery may thus take several hours, depending on species and hypoxia duratio n and severity (Bridges and Brand, 1980) . Ontogenic and long -term effect s of hypoxia ; most of the studies we presented were conducted on adult s (i.e. 80%; Figure ). However, coastal habitats, which are increasingly subjected to hypoxic episodes, often serve as nursery grounds for juvenile and larval life -history stages . If we consider the crucial impor tance of these early stages in population dynamics, understanding the consequences of hypoxia on their physiology appears to be ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT"
+        },
+        {
+          "document_id": "69b87d19ecbd4702b29a4730",
+          "title": "Davis et al. - 2024 - Predicting the effects of hypoxia on oyster (Cr.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4639,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "enthatthereproductive outputasmeasured bynumberofspawned eggsmatchedwhatwouldbeexpected basedonoystersize(discussed above),gonadmasseslikelyreflectaccurate valuesofreproductive outputs. However,itisplausible thathypoxia exposure couldimposeadditional energeticstressonoyster ’sreproductive activities. Hypoxia hasbeenshowntobeanendocrine disruptor infish,limiting gametogenesis andreducing thequalityofgametes (Wuetal.2003).Without observed measurements ofgonadmassforoystersfromsitesexperiencing differing oxygenavail-ability,itisunknown whether additional constraints couldbeimposed"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly and clearly support the stylized fact. Snippets 3, 11, 12, 13, and 17 provide strong fish-specific evidence that hypoxia disrupts endocrine function (sex steroids, steroidogenic enzymes/genes, progestin receptors), impairing gamete maturation, fertilization, fecundity and reproductive success. Snippets 2, 4, 7, 14, 15, 5, and 10 corroborate disrupted reproductive hormone secretion and impaired gametogenesis/sperm quality under hypoxia in mammals. Snippets 1 and 8 show hypoxia effects on female gametes and embryonic mortality. A few snippets (6, 9, 18) are topically adjacent (pollution, oxidative stress, toxicology) but do not bear directly on the hypoxia-endocrine-reproduction link. No snippet contradicts the fact, yielding strong, consistent corroboration."
+      },
+      "n_references": 9,
+      "references": {
+        "W1527845353": {
+          "title": "Влияние острой гипобарической гипоксии на репродуктивную функцию лабораторных крыс и мышей Сообщение 2: Исследование последствий острой гипобарической гипоксии на женские репродуктивные клетки крыс и мышей",
+          "doi": "",
+          "year": "2014",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2897059917449951
+        },
+        "W3199420342": {
+          "title": "Effects of Environmental and Pathological Hypoxia on Male Fertility",
+          "doi": "10.3389/fcell.2021.725933",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2992638349533081
+        },
+        "W1964965329": {
+          "title": "Chronic Hypoxia Impairs Gamete Maturation in Atlantic Croaker Induced by Progestins through Nongenomic Mechanisms Resulting in Reduced Reproductive Success",
+          "doi": "10.1021/es9000399",
+          "year": "2009",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3157947063446045
+        },
+        "W3176773943": {
+          "title": "Paternal hypoxia exposure impairs fertilization process and preimplantation embryo development",
+          "doi": "10.1017/s0967199421000216",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3204877972602844
+        },
+        "W4393931373": {
+          "title": "Consequences of Exposure to Hypobaric Hypoxia Associated with High Altitude on Spermatogenesis and Seminal Parameters: A Literature Review",
+          "doi": "10.3390/cells13070592",
+          "year": "2024",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.32744503021240234
+        },
+        "W2322688310": {
+          "title": "Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia",
+          "doi": "10.3389/conf.fendo.2011.04.00061",
+          "year": "2011",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35743242502212524
+        },
+        "W2023364983": {
+          "title": "Diel hypoxia in marsh creeks impairs the reproductive capacity of estuarine fish populations",
+          "doi": "10.3354/meps08182",
+          "year": "2009",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3590000867843628
+        },
+        "W2105881605": {
+          "title": "Effects of hypoxia on epididymal sperm parameters and protective role of ibuprofen and melatonin",
+          "doi": "10.4067/s0716-97602011000200008",
+          "year": "2011",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36179083585739136
+        },
+        "W2123416420": {
+          "title": "Leptin-Mediated Modulation of Steroidogenic Gene Expression in Hypoxic Zebrafish Embryos: Implications for the Disruption of Sex Steroids",
+          "doi": "10.1021/es301758c",
+          "year": "2012",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36505746841430664
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W1527845353",
+          "title": "Влияние острой гипобарической гипоксии на репродуктивную функцию лабораторных крыс и мышей Сообщение 2: Исследование последствий острой гипобарической гипоксии на женские репродуктивные клетки крыс и мышей",
+          "doi": "",
+          "year": "2014",
+          "distance": 0.2897,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "Work is devoted to research of consequences of influence of acute hypobaric hypoxia on female gametes of rats and mice. In experiment the rats of the strain HY/Y low-steady against a hypoxia removed and supported in SCBMT and a mouse strain C57BL/6Y, supported also in our Center were used. Virgin females of rats and mice for 9-16 days of the post-hypoxemic period coupled to intact males to reveal consequences of influence of the general hypobaric hypoxia on female gametes."
+        },
+        {
+          "document_id": "W3199420342",
+          "title": "Effects of Environmental and Pathological Hypoxia on Male Fertility",
+          "doi": "10.3389/fcell.2021.725933",
+          "year": "2021",
+          "distance": 0.2993,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "g at the effects of hypoxia on male infertility have linked both types of hypoxia to poor sperm quality and pregnancy outcomes. Hypoxia damages testicular seminiferous tubule directly, leading to the disorder of seminiferous epithelium and shedding of spermatogenic cells. Hypoxia can also disrupt the balance between oxidative phosphorylation and glycolysis of spermatogenic cells, resulting in impaired self-renewal and differentiation of spermatogonia, and failure of meiosis. In addition, hypoxia disrupts the secretion of reproductive hormones, causing spermatogenic arrest and erectile dysfunction."
+        },
+        {
+          "document_id": "W1964965329",
+          "title": "Chronic Hypoxia Impairs Gamete Maturation in Atlantic Croaker Induced by Progestins through Nongenomic Mechanisms Resulting in Reduced Reproductive Success",
+          "doi": "10.1021/es9000399",
+          "year": "2009",
+          "distance": 0.3158,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "Recent studies have shown that chronic hypoxia exposure impairs reproduction in fish by interfering with endocrine function, although the mechanisms of endocrine disruption remain unclear. The effects of chronic exposure (4 or 10 weeks) to hypoxia (dissolved oxygen, DO: 1.7 mg L(-1)) on gamete maturation and its endocrine control, as well as the consequences for reproductive success, were investigated in Atlantic croaker (Micropogonias undulatus)."
+        },
+        {
+          "document_id": "W3199420342",
+          "title": "Effects of Environmental and Pathological Hypoxia on Male Fertility",
+          "doi": "10.3389/fcell.2021.725933",
+          "year": "2021",
+          "distance": 0.3166,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "s. In addition, hypoxia disrupts the secretion of reproductive hormones, causing spermatogenic arrest and erectile dysfunction. The possible mechanisms involved in hypoxia on male reproductive toxicity mainly include excessive ROS mediated oxidative stress, HIF-1α mediated germ cell apoptosis and proliferation inhibition, systematic inflammation and epigenetic changes. In this review, we discuss the correlations between hypoxia and male infertility based on epidemiological, clinical and animal studies and enumerate the hypoxic factors causing male infertility in detail."
+        },
+        {
+          "document_id": "W3176773943",
+          "title": "Paternal hypoxia exposure impairs fertilization process and preimplantation embryo development",
+          "doi": "10.1017/s0967199421000216",
+          "year": "2021",
+          "distance": 0.3205,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "Summary Environmental hypoxia exposure causes fertility problems in human and animals. Compelling evidence suggests that chronic hypoxia impairs spermatogenesis and reduces sperm motility. However, it is unclear whether paternal hypoxic exposure affects fertilization and early embryo development. In the present study, we exposed male mice to high altitude (3200 m above sea level) for 7 or 60 days to evaluate the effects of hypoxia on sperm quality, zygotic DNA methylation and blastocyst formation."
+        },
+        {
+          "document_id": "W4412849132",
+          "title": "Association of Environmental Pollution and Infertility – A Mini-Review",
+          "doi": "10.25259/fsr_15_2025",
+          "year": "2025",
+          "distance": 0.3261,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "gy behind this includes oxidative stress, endocrine disruption, and direct damage to gametes, affecting both males and females. Exposure to pollutants such as carbon monoxide, sulphur dioxide, nitrogen oxides, heavy metals like mercury and cadmium, and endocrine-disrupting chemicals like bisphenol A and phthalates can disrupt the hypothalamic-pituitary-gonadal axis, leading to impaired gametogenesis and fertility. Furthermore, pollution contributes to long-term chronic health issues, including low-grade inflammation and hormonal imbalances."
+        },
+        {
+          "document_id": "W4393931373",
+          "title": "Consequences of Exposure to Hypobaric Hypoxia Associated with High Altitude on Spermatogenesis and Seminal Parameters: A Literature Review",
+          "doi": "10.3390/cells13070592",
+          "year": "2024",
+          "distance": 0.3274,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "Preclinical research has provided compelling evidence indicating that exposure to hypobaric hypoxia (HH) results in a deterioration of spermatogenesis. This adverse effect extends to the underlying molecular mechanisms, progressively leading to impairments in the seminiferous epithelium and germ cells and alterations in semen parameters."
+        },
+        {
+          "document_id": "W1527845353",
+          "title": "Влияние острой гипобарической гипоксии на репродуктивную функцию лабораторных крыс и мышей Сообщение 2: Исследование последствий острой гипобарической гипоксии на женские репродуктивные клетки крыс и мышей",
+          "doi": "",
+          "year": "2014",
+          "distance": 0.3287,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ypoxemic period coupled to intact males to reveal consequences of influence of the general hypobaric hypoxia on female gametes. The accounting of embryonic mortality in the uterine period of development carried out, opening females for 19-20 days of pregnancy. As a result of the conducted research the following is established. At the general mortality of embryos in the post-implantation period of development in 39,1% at females of rats and - 38,73% at females of mice, the share of mortality of the embryos, caused by influence of a sharp hypoxia, made at them 32,89% and 31,76%, respectively."
+        },
+        {
+          "document_id": "W4289996079",
+          "title": "OXIDATIVE STRESS AND REPRODUCTIVE FUNCTION: The impact of oxidative stress on reproduction: a focus on gametogenesis and fertilization",
+          "doi": "10.1530/rep-22-0126",
+          "year": "2022",
+          "distance": 0.3368,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "so reviewed taking examples from both the male and female reproductive system, with a focus on gametogenesis and fertilization. The important role of external factors in exacerbating oxidative stress and impairing reproductive competence is also examined in terms of their ability to disrupt the physiological redox regulation of reproductive processes."
+        },
+        {
+          "document_id": "W3176773943",
+          "title": "Paternal hypoxia exposure impairs fertilization process and preimplantation embryo development",
+          "doi": "10.1017/s0967199421000216",
+          "year": "2021",
+          "distance": 0.3434,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "level) for 7 or 60 days to evaluate the effects of hypoxia on sperm quality, zygotic DNA methylation and blastocyst formation. Compared with age-matched controls, hypoxia-treated males exhibited reduced fertility after mating with normoxic females as a result of defects in sperm motility and function. Results of in vitro fertilization (IVF) experiments revealed that 60 days’ exposure significantly reduced cleavage and blastocyst rates by 30% and 70%, respectively."
+        },
+        {
+          "document_id": "W1964965329",
+          "title": "Chronic Hypoxia Impairs Gamete Maturation in Atlantic Croaker Induced by Progestins through Nongenomic Mechanisms Resulting in Reduced Reproductive Success",
+          "doi": "10.1021/es9000399",
+          "year": "2009",
+          "distance": 0.3453,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "both sexes chronically exposed to hypoxia and were associated with impairment of oocyte meiotic maturation and sperm motility. Interestingly, expression of the novel membrane receptor mediating these nongenomic 20beta-S actions, membrane progestin receptor alpha (mPRalpha), was significantly decreased on oocyte and sperm plasma membranes of hypoxia-exposed fish. Hypoxia-induced impairment of gamete maturation was accompanied with a dramatic decline in the percent fertilized eggs in a spawning trial. Moreover, the fertilized eggs from hypoxia-exposed donors displayed decreased hatching success and larval survival."
+        },
+        {
+          "document_id": "W2322688310",
+          "title": "Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia",
+          "doi": "10.3389/conf.fendo.2011.04.00061",
+          "year": "2011",
+          "distance": 0.3574,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "- 16 Jul, 2011. Presentation Type: Invited Symposium Topic: Environmental endocrinology Citation: Thomas P and Rahman M (2011). Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia. Front. Endocrinol. Conference Abstract: NASCE 2011: The inaugural meeting of the North American Society for Comparative Endocrinology. doi: 10.3389/conf.fendo.2011.04.00061 Copyright: The abstracts in this collection have not been subject to any Frontiers peer review or checks, and are not endorsed by Frontiers."
+        },
+        {
+          "document_id": "W2023364983",
+          "title": "Diel hypoxia in marsh creeks impairs the reproductive capacity of estuarine fish populations",
+          "doi": "10.3354/meps08182",
+          "year": "2009",
+          "distance": 0.359,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "der moderate hypoxia, while both testosterone (T) and 11KT concentrations were significantly reduced under severe diel hypoxia. In females, T concentrations were similar regardless of the occurrence or severity of hypoxia, but estradiol-17β (E2) concentrations were lower under severe diel hypoxia. Since T is unchanged, but its products 11KT and E2 are significantly reduced, hypoxia may affect reproduction by inhibiting specific steroidogenic enzymes in the gonad. The association between diel hypoxia and lower reproductive capacity was consistent across estuaries."
+        },
+        {
+          "document_id": "W3199420342",
+          "title": "Effects of Environmental and Pathological Hypoxia on Male Fertility",
+          "doi": "10.3389/fcell.2021.725933",
+          "year": "2021",
+          "distance": 0.3592,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "Male infertility is a widespread health problem affecting approximately 6%–8% of the male population, and hypoxia may be a causative factor. In mammals, two types of hypoxia are known, including environmental and pathological hypoxia. Studies looking at the effects of hypoxia on male infertility have linked both types of hypoxia to poor sperm quality and pregnancy outcomes."
+        },
+        {
+          "document_id": "W2105881605",
+          "title": "Effects of hypoxia on epididymal sperm parameters and protective role of ibuprofen and melatonin",
+          "doi": "10.4067/s0716-97602011000200008",
+          "year": "2011",
+          "distance": 0.3618,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "Hypobaric hypoxia is of interest due to an increase of human populations working at high altitude. Testicular damage is related to the physiological response (neoangiogenesis) to increased intrascrotal blood flow as temperature rises. Hypoxia is a stress factor with overproduction of reactive oxygen species (ROS). The effect of hypoxia in mice reproductive parameters is analyzed."
+        },
+        {
+          "document_id": "W2322688310",
+          "title": "Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia",
+          "doi": "10.3389/conf.fendo.2011.04.00061",
+          "year": "2011",
+          "distance": 0.365,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Event Abstract Back to Event Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia Peter Thomas1* and Md."
+        },
+        {
+          "document_id": "W2123416420",
+          "title": "Leptin-Mediated Modulation of Steroidogenic Gene Expression in Hypoxic Zebrafish Embryos: Implications for the Disruption of Sex Steroids",
+          "doi": "10.1021/es301758c",
+          "year": "2012",
+          "distance": 0.3651,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "Hypoxia can impair reproduction of fishes through the disruption of sex steroids. Here, using zebrafish (Danio rerio) embryos, we investigated (i) whether hypoxia can directly affect steroidogenesis independent of pituitary regulation via modulation of steroidogenic gene expression, and (ii) the role of leptin in hypoxia-induced disruption of steroidogenesis."
+        },
+        {
+          "document_id": "W623579914",
+          "title": "Reproductive and Developmental Toxicology",
+          "doi": "10.1201/9781420002898",
+          "year": "1998",
+          "distance": 0.3664,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Pregastrulation Developmental Toxicology, Joe C. Rutledge and Walderico M. Generoso Developmental Effects of Dioxins, Linda S. Birnbaum Transgenic and Knockout Mice: Genetic Models for Environmental Stress, Robert S. Tebbs, Jack B. Bishop, and Roger A. Pedersen Genes and Reproductive Behavior Resulting from Normal or Abnormal Development, Sonoko Ogawa and Donald W. Pfaff Reproductive Neuroendocrine Regulation in the Female: Toward a Neurochemical Mechanism for the Preovulatory Luteinizing Hormone Surge, William R. Crowley The Hypothalamus and Pituitary as Targets for Reproductive Toxicants, Ralph L. Cooper, Jerome M."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The corpus provides strong, multiple, and direct support for the stylized fact. Several snippets explicitly state that hypoxia acts as an endocrine disruptor impairing reproduction, including detailed mechanistic evidence in Atlantic croaker (decreased oocyte maturation, sperm motility, reduced GSI, altered sex steroids; snippets 1, 3, 6, 15, 23, 24) and common carp (snippet 3). The foundational Wu et al. 2003 reference is repeatedly cited (snippets 4, 9, 12). Additional mammalian and clinical studies corroborate hypoxia's disruption of reproductive hormones, gametogenesis, and gamete quality (snippets 14, 16, 17, 19, 22, 13, 20). No snippet contradicts the fact; the few neutral snippets concern unrelated molecular responses or general pollution. Consensus is clearly corroborative."
+      },
+      "n_references": 10,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.15939879417419434
+        },
+        "69b86876ecbd4702b29a2cf4": {
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.39032429456710815
+        },
+        "69b8a57fecbd4702b29a7879": {
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.43722015619277954
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4465214014053345
+        },
+        "W1527845353": {
+          "title": "Влияние острой гипобарической гипоксии на репродуктивную функцию лабораторных крыс и мышей Сообщение 2: Исследование последствий острой гипобарической гипоксии на женские репродуктивные клетки крыс и мышей",
+          "doi": "",
+          "year": "2014",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2897059917449951
+        },
+        "W3199420342": {
+          "title": "Effects of Environmental and Pathological Hypoxia on Male Fertility",
+          "doi": "10.3389/fcell.2021.725933",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2992638349533081
+        },
+        "W1964965329": {
+          "title": "Chronic Hypoxia Impairs Gamete Maturation in Atlantic Croaker Induced by Progestins through Nongenomic Mechanisms Resulting in Reduced Reproductive Success",
+          "doi": "10.1021/es9000399",
+          "year": "2009",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3157947063446045
+        },
+        "W3176773943": {
+          "title": "Paternal hypoxia exposure impairs fertilization process and preimplantation embryo development",
+          "doi": "10.1017/s0967199421000216",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3204877972602844
+        },
+        "W4393931373": {
+          "title": "Consequences of Exposure to Hypobaric Hypoxia Associated with High Altitude on Spermatogenesis and Seminal Parameters: A Literature Review",
+          "doi": "10.3390/cells13070592",
+          "year": "2024",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.32744503021240234
+        },
+        "W2322688310": {
+          "title": "Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia",
+          "doi": "10.3389/conf.fendo.2011.04.00061",
+          "year": "2011",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35743242502212524
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1594,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "is still poorly understood in most species . Hypoxia can also impair reproduction by acting as a specific cue regulating gamete production and quality (Siikavuopio et al., 2007) . Indeed, hypoxia is known to disrupt endocrine functions, which in turn affect gametogenesis, sexual maturity, gamete quality and fecundity (Wu et al., 2003) . Thomas et al., (2006) demonstrated ovarian dysfunction in the Atlantic croaker ( Micropogonias undulatus ), leading to a decrease in the production of fully grown oocytes and a reduction in viable gametes. These dysfunctions were related"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2328,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "rioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may co ntinue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. Decrease in DO may decrease the gonado -somatic index . (Cheung et al., 2008a; Landry et al., 2007; Long et al., 2013a; Thomas et al., 2006; Wu et al., 2003) R3. Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al.,"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3115,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "MANUSCRIPTACCEPTED MANUSCRIPT 10 (Fundulus grandis ) (Landry et al., 2007) or the common carp ( Cyprinus carpio ) (Wu et al., 2003) . For the latter, hypoxia reduce d overall reproductive success by disturbing endocrine functions (decrease of testosterone and increase of 17β -estradiol in male fish and decrease in 17β -estradiol and triiodothyronine in female fish) , which in turn reduced gametogenesis (i.e., inhibiting sperm production, stop oocyte maturation), sexual maturity (i.e., reduce GSI), gamete quality (i.e., reduce sperm motility and yolk in each egg), and"
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3903,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "nses. Mar. Pollut.Bull. 45 (1), 35 –45.Wu, R.S.S., Zhou, B.S., Randall, D.J., Woo, N.Y.S., Lam, P.K.S., 2003. Aquatic hypoxia isan endocrine disruptor and impairs ﬁsh reproduction. Environ. Sci. Technol. 37 (6),1137 –1141 .Zhang, J., Gilbert, D., Gooday, A.J., Levin, L., Naqvi, S.W.A., Middelburg, J.J., Scranton,M., Ekau, W., Peña, A., Dewitte, B., Oguz, T., Monteiro, P.M.S., Urban, E., Rabalais,N.N., Ittekkot, V., Kemp, W.M., Ulloa, O., Elmgren, R., Escobar-Briones, E., van derPlas, A.K., 2010. Natural and human-induced hypoxia and consequences for coastal"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3957,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "organisms, oxygen is a necessary element for their metabolic processes ( Grieshaber et al. 1994). Therefore, reduced dissolved oxygen negatively impacts basic metabolic functioning as well as organismal functioning, with implications at the molecular to ecological level. For many species, hypoxia exposure is known to lead to a distinct molecular response intended to preserve homeostatic cellular functioning (Semenza 2009). At an individual level, organisms will alter their behavior, physiology, or even anatomy in order to maintain proper cellular functioning when faced with low oxygen (Grieshaber et al. 1994). In"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4151,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": ", by 75% between 5.6 and 1.7 mg O 2 L-1 for the Atlantic croaker (Micropogonias undulatus ) (Thomas et al., 2006) , and by 30% between 9.5 and 4 mg O 2 L-1 for the sea urchin ( Strongylocentrotus droebachiensis ) (Siikavuopio et al., 2007) . The reduction in gonad growth was correlated with the decrease in food uptake and thus the energy supply in sea urchin (Siikavuopio et al., 2007) . However, the link between hypoxia and reproduction impairment is still poorly understood in most species . Hypoxia can also impair reproduction by acting as a specific cue regulating gamete"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4198,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ed the performance of females cultured under normoxic conditions or under hypoxia (2.1 - 3.9 kPa). No transgenerational effects of hypoxia were observed. Characteristics of D. magna acclimated to normoxia or hypoxia are listed in Table 9.1. The most pronounced differences were related to hemoglobin. Hypoxia-acclimated females contained 266 % more Hb than normoxia-acclimated females and this Hb increased in oxygen afﬁnity (lowered in vivo P50) by 32 %. Several indicators of oxygen-deﬁciency tolerance show signiﬁcantly lower critical partial pres -sures in hypoxia-acclimated females. On the systemic level, the mass-speciﬁc rates of"
+        },
+        {
+          "document_id": "69b86876ecbd4702b29a2cf4",
+          "title": "Lavaud et al. - 2018 - Modeling the impact of hypoxia on the energy budge.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4349,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ns in di ﬀerent systems vary across a wide range of temporaland spatial scales. Five broad categories of hypoxia can be de ﬁned,depending on their duration: permanent, persistent seasonal, bothstratiﬁed and vertically mixed, episodic, and diel ( Kemp et al., 2009 ).Consequences of hypoxia on marine organisms can be observeddirectly at the individual level. Reduction of DO levels modi ﬁes beha-vior and physiological processes such as feeding, ventilation or endo-crine functions, leading to reduced growth, reproductive success, re-sistance to diseases, and increased mortality (see e.g. Wu, 2002;"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4372,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "plausible that hypoxia exposure could impose additional energetic stress on oys ter’s reproductive activities. Hypoxia has been shown to be an endocrine disruptor in fish, limiting gametogenesis and reducing the quality of gametes (Wu et al. 2003). Without observed measurements of gonad mass for oysters from sites experiencing differi ng oxygen availability, it is unknown whether additional constraints could be imposed on reproduction in C. virgin ica. Further parameterization of the reproductive aspect of the C. virginica DEB model with empirical data would provide more certainty in the model’s reproductive outputs."
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4441,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "following candidate DEBkiss parameters to which to apply the hypoxia-based correction factor: maximum assimilation rate (JaAm), conversion efficiency of assimilates into structure (growth, yVA), maximum somatic maintenance rate (JvM, mg mm\u00003 d\u00001), embryo mor-tality rate (µemb), and post-hatch mortality rate (µlar). Hypoxia effects on growth and hatching time can occur either through inhibition of assimilation or through damage that reduces the conversion efficiency of assimilates to growth. Hypoxia may impact survival directly through damage or by inhibition of damage repair processes. Hypoxia ’s impact"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4444,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "onse (Semenza 2001). Increased expression of HIF under low oxygen conditions has been shown in C. virginica (Piontkivska et al. 2011), C. gigas (Kawabe and Tokoyama 2012), and other bivalve species, such as mussels (Giannetto et al. 2015). In the present study, hypoxia -inducible factor 1 -𝛼 (HIF 1 -𝛼) was significantly upregulated after four days of low oxygen exposure. Previous studies of HIF 1 -𝛼 expression in other bivalves have shown upregulation of HIF 1 -𝛼 after one to two days of exposure to hypoxia, followed at subsequent timepoints by a decrease in expression to levels equivalent to normoxic exposure"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4465,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": ". https://doi.org/10.1242/jeb.163717 .Wu, R.S.S., Zhou, B.S., Randall, D.J., Woo, N.Y.S., Lam, P.K.S., 2003. Aquatic hypoxia is an endocrine disruptor and impairs fish reproduction. Environ. Sci. Technol. 37 (6), 1137 –1141. https://doi.org/10.1021/es0258327 .Zambonino-Infante, J.L., Mazurais, D., Dubuc, A., Qu˘eau, P., Vanderplancke, G., Servili, A., Cahu, C., Le Bayon, N., Huelvan, C., Claireaux, G., 2017. An early life hypoxia event has a long-term impact on protein digestion and growth in juvenile European sea bass. J. Exp. Biol. 220 (10), 1846 –1851. https://doi.org/10.1242/ jeb.154922 ."
+        },
+        {
+          "document_id": "W1527845353",
+          "title": "Влияние острой гипобарической гипоксии на репродуктивную функцию лабораторных крыс и мышей Сообщение 2: Исследование последствий острой гипобарической гипоксии на женские репродуктивные клетки крыс и мышей",
+          "doi": "",
+          "year": "2014",
+          "distance": 0.2897,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "Work is devoted to research of consequences of influence of acute hypobaric hypoxia on female gametes of rats and mice. In experiment the rats of the strain HY/Y low-steady against a hypoxia removed and supported in SCBMT and a mouse strain C57BL/6Y, supported also in our Center were used. Virgin females of rats and mice for 9-16 days of the post-hypoxemic period coupled to intact males to reveal consequences of influence of the general hypobaric hypoxia on female gametes."
+        },
+        {
+          "document_id": "W3199420342",
+          "title": "Effects of Environmental and Pathological Hypoxia on Male Fertility",
+          "doi": "10.3389/fcell.2021.725933",
+          "year": "2021",
+          "distance": 0.2993,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "g at the effects of hypoxia on male infertility have linked both types of hypoxia to poor sperm quality and pregnancy outcomes. Hypoxia damages testicular seminiferous tubule directly, leading to the disorder of seminiferous epithelium and shedding of spermatogenic cells. Hypoxia can also disrupt the balance between oxidative phosphorylation and glycolysis of spermatogenic cells, resulting in impaired self-renewal and differentiation of spermatogonia, and failure of meiosis. In addition, hypoxia disrupts the secretion of reproductive hormones, causing spermatogenic arrest and erectile dysfunction."
+        },
+        {
+          "document_id": "W1964965329",
+          "title": "Chronic Hypoxia Impairs Gamete Maturation in Atlantic Croaker Induced by Progestins through Nongenomic Mechanisms Resulting in Reduced Reproductive Success",
+          "doi": "10.1021/es9000399",
+          "year": "2009",
+          "distance": 0.3158,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "Recent studies have shown that chronic hypoxia exposure impairs reproduction in fish by interfering with endocrine function, although the mechanisms of endocrine disruption remain unclear. The effects of chronic exposure (4 or 10 weeks) to hypoxia (dissolved oxygen, DO: 1.7 mg L(-1)) on gamete maturation and its endocrine control, as well as the consequences for reproductive success, were investigated in Atlantic croaker (Micropogonias undulatus)."
+        },
+        {
+          "document_id": "W3199420342",
+          "title": "Effects of Environmental and Pathological Hypoxia on Male Fertility",
+          "doi": "10.3389/fcell.2021.725933",
+          "year": "2021",
+          "distance": 0.3166,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "s. In addition, hypoxia disrupts the secretion of reproductive hormones, causing spermatogenic arrest and erectile dysfunction. The possible mechanisms involved in hypoxia on male reproductive toxicity mainly include excessive ROS mediated oxidative stress, HIF-1α mediated germ cell apoptosis and proliferation inhibition, systematic inflammation and epigenetic changes. In this review, we discuss the correlations between hypoxia and male infertility based on epidemiological, clinical and animal studies and enumerate the hypoxic factors causing male infertility in detail."
+        },
+        {
+          "document_id": "W3176773943",
+          "title": "Paternal hypoxia exposure impairs fertilization process and preimplantation embryo development",
+          "doi": "10.1017/s0967199421000216",
+          "year": "2021",
+          "distance": 0.3205,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "Summary Environmental hypoxia exposure causes fertility problems in human and animals. Compelling evidence suggests that chronic hypoxia impairs spermatogenesis and reduces sperm motility. However, it is unclear whether paternal hypoxic exposure affects fertilization and early embryo development. In the present study, we exposed male mice to high altitude (3200 m above sea level) for 7 or 60 days to evaluate the effects of hypoxia on sperm quality, zygotic DNA methylation and blastocyst formation."
+        },
+        {
+          "document_id": "W4412849132",
+          "title": "Association of Environmental Pollution and Infertility – A Mini-Review",
+          "doi": "10.25259/fsr_15_2025",
+          "year": "2025",
+          "distance": 0.3261,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "gy behind this includes oxidative stress, endocrine disruption, and direct damage to gametes, affecting both males and females. Exposure to pollutants such as carbon monoxide, sulphur dioxide, nitrogen oxides, heavy metals like mercury and cadmium, and endocrine-disrupting chemicals like bisphenol A and phthalates can disrupt the hypothalamic-pituitary-gonadal axis, leading to impaired gametogenesis and fertility. Furthermore, pollution contributes to long-term chronic health issues, including low-grade inflammation and hormonal imbalances."
+        },
+        {
+          "document_id": "W4393931373",
+          "title": "Consequences of Exposure to Hypobaric Hypoxia Associated with High Altitude on Spermatogenesis and Seminal Parameters: A Literature Review",
+          "doi": "10.3390/cells13070592",
+          "year": "2024",
+          "distance": 0.3274,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "Preclinical research has provided compelling evidence indicating that exposure to hypobaric hypoxia (HH) results in a deterioration of spermatogenesis. This adverse effect extends to the underlying molecular mechanisms, progressively leading to impairments in the seminiferous epithelium and germ cells and alterations in semen parameters."
+        },
+        {
+          "document_id": "W1527845353",
+          "title": "Влияние острой гипобарической гипоксии на репродуктивную функцию лабораторных крыс и мышей Сообщение 2: Исследование последствий острой гипобарической гипоксии на женские репродуктивные клетки крыс и мышей",
+          "doi": "",
+          "year": "2014",
+          "distance": 0.3287,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "ypoxemic period coupled to intact males to reveal consequences of influence of the general hypobaric hypoxia on female gametes. The accounting of embryonic mortality in the uterine period of development carried out, opening females for 19-20 days of pregnancy. As a result of the conducted research the following is established. At the general mortality of embryos in the post-implantation period of development in 39,1% at females of rats and - 38,73% at females of mice, the share of mortality of the embryos, caused by influence of a sharp hypoxia, made at them 32,89% and 31,76%, respectively."
+        },
+        {
+          "document_id": "W4289996079",
+          "title": "OXIDATIVE STRESS AND REPRODUCTIVE FUNCTION: The impact of oxidative stress on reproduction: a focus on gametogenesis and fertilization",
+          "doi": "10.1530/rep-22-0126",
+          "year": "2022",
+          "distance": 0.3368,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "so reviewed taking examples from both the male and female reproductive system, with a focus on gametogenesis and fertilization. The important role of external factors in exacerbating oxidative stress and impairing reproductive competence is also examined in terms of their ability to disrupt the physiological redox regulation of reproductive processes."
+        },
+        {
+          "document_id": "W3176773943",
+          "title": "Paternal hypoxia exposure impairs fertilization process and preimplantation embryo development",
+          "doi": "10.1017/s0967199421000216",
+          "year": "2021",
+          "distance": 0.3434,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "level) for 7 or 60 days to evaluate the effects of hypoxia on sperm quality, zygotic DNA methylation and blastocyst formation. Compared with age-matched controls, hypoxia-treated males exhibited reduced fertility after mating with normoxic females as a result of defects in sperm motility and function. Results of in vitro fertilization (IVF) experiments revealed that 60 days’ exposure significantly reduced cleavage and blastocyst rates by 30% and 70%, respectively."
+        },
+        {
+          "document_id": "W1964965329",
+          "title": "Chronic Hypoxia Impairs Gamete Maturation in Atlantic Croaker Induced by Progestins through Nongenomic Mechanisms Resulting in Reduced Reproductive Success",
+          "doi": "10.1021/es9000399",
+          "year": "2009",
+          "distance": 0.3453,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "both sexes chronically exposed to hypoxia and were associated with impairment of oocyte meiotic maturation and sperm motility. Interestingly, expression of the novel membrane receptor mediating these nongenomic 20beta-S actions, membrane progestin receptor alpha (mPRalpha), was significantly decreased on oocyte and sperm plasma membranes of hypoxia-exposed fish. Hypoxia-induced impairment of gamete maturation was accompanied with a dramatic decline in the percent fertilized eggs in a spawning trial. Moreover, the fertilized eggs from hypoxia-exposed donors displayed decreased hatching success and larval survival."
+        },
+        {
+          "document_id": "W2322688310",
+          "title": "Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia",
+          "doi": "10.3389/conf.fendo.2011.04.00061",
+          "year": "2011",
+          "distance": 0.3574,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "- 16 Jul, 2011. Presentation Type: Invited Symposium Topic: Environmental endocrinology Citation: Thomas P and Rahman M (2011). Widespread reproductive disruption, masculinization and endocrine imbalance in croaker exposed to environmental hypoxia. Front. Endocrinol. Conference Abstract: NASCE 2011: The inaugural meeting of the North American Society for Comparative Endocrinology. doi: 10.3389/conf.fendo.2011.04.00061 Copyright: The abstracts in this collection have not been subject to any Frontiers peer review or checks, and are not endorsed by Frontiers."
+        }
+      ]
+    }
+  }
+}

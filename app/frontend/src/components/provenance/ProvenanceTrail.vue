@@ -104,6 +104,10 @@
               View source →
             </a>
           </div>
+          <div class="cite-actions">
+            <button class="cite-btn" title="Copy BibTeX" @click="copyBibtex(doc)">BibTeX</button>
+            <button class="cite-btn" title="Copy APA citation" @click="copyApa(doc)">APA</button>
+          </div>
         </div>
       </div>
     </div>
@@ -200,6 +204,28 @@ function truncate(text: string, max: number): string {
   if (!text) return ''
   return text.length > max ? text.slice(0, max) + '…' : text
 }
+
+function slugify(text: string): string {
+  return (text || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').slice(0, 20)
+}
+
+function copyBibtex(doc: Document) {
+  const firstAuthor = (doc.authors || '').split(/[,;]/)[0].trim().split(' ').pop() || 'unknown'
+  const key = `${slugify(firstAuthor)}${doc.year || '0000'}`
+  const authorsField = doc.authors ? `  author    = {${doc.authors}},\n` : ''
+  const yearField = doc.year ? `  year      = {${doc.year}},\n` : ''
+  const urlField = doc.url ? `  url       = {${doc.url}},\n` : ''
+  const text = `@article{${key},\n  title     = {${doc.title || 'Unknown title'}},\n${authorsField}${yearField}${urlField}}\n`
+  navigator.clipboard.writeText(text).catch(() => {})
+}
+
+function copyApa(doc: Document) {
+  const authorsPart = doc.authors || 'Unknown'
+  const yearPart = doc.year ? `(${doc.year}).` : '(n.d.).'
+  const titlePart = doc.title ? `${doc.title}.` : 'Untitled.'
+  const urlPart = doc.url ? ` ${doc.url}` : ''
+  navigator.clipboard.writeText(`${authorsPart} ${yearPart} ${titlePart}${urlPart}`).catch(() => {})
+}
 </script>
 
 <style scoped>
@@ -218,6 +244,23 @@ function truncate(text: string, max: number): string {
   border-bottom: 1px solid #e5e7eb;
   font-weight: 600;
 }
+
+.cite-actions {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.cite-btn {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cite-btn:hover { background: #e5e7eb; }
 
 .close-btn {
   background: none;

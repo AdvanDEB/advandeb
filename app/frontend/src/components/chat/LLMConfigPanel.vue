@@ -3,7 +3,7 @@
     <div class="row">
       <label>Model source</label>
       <select v-model="selectedSource" @change="emitConfig">
-        <option value="ollama">Ollama (local default)</option>
+        <option value="default">Nemotron (default)</option>
         <option v-for="k in keys" :key="k.id" :value="k.id">
           {{ providerLabel(k.provider) }}{{ k.label ? ` · ${k.label}` : '' }} ••••{{ k.key_last_4 }}
         </option>
@@ -17,43 +17,34 @@
       </select>
     </div>
 
-    <div class="row">
-      <label>Reasoning</label>
-      <select v-model="selectedMode" @change="emitConfig">
-        <option value="final">Final answer (fast)</option>
-        <option value="react">ReAct (multi-step)</option>
-      </select>
-    </div>
-
-    <p v-if="selectedSource !== 'ollama'" class="hint">
+    <p v-if="selectedSource === 'default'" class="hint">
+      Using <strong>{{ defaultModelInfo?.model || 'Nemotron' }}</strong> via NVIDIA NIM —
+      shared across all users, rate-limited at {{ defaultModelInfo?.rpm ?? 40 }} req/min.
+      <router-link to="/settings/llm-keys">Add your own key</router-link> for higher throughput.
+    </p>
+    <p v-else class="hint">
       Your {{ providerLabel(selectedProviderName) }} model will run the full
       multi-step agent (retrieval → reasoning → cited answer) over the knowledge base.
-    </p>
-    <p v-else-if="keys.length === 0" class="hint">
-      No personal keys yet —
-      <router-link to="/settings/llm-keys">add one</router-link>
-      to use Claude, ChatGPT, Gemini, or GitHub Models.
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { fetchKeyModels, listKeys, listProviders } from '@/utils/llmKeysApi'
-import type { LLMKey, LLMMode, LLMSessionConfig, Provider } from '@/types/llm'
+import { fetchDefaultModel, fetchKeyModels, listKeys, listProviders } from '@/utils/llmKeysApi'
+import type { DefaultModelInfo, LLMKey, LLMProvider, LLMSessionConfig, Provider } from '@/types/llm'
 
 const props = defineProps<{ modelValue?: LLMSessionConfig | null }>()
 const emit = defineEmits<{ (e: 'update:modelValue', cfg: LLMSessionConfig): void }>()
 
 const keys = ref<LLMKey[]>([])
 const providers = ref<Provider[]>([])
+const defaultModelInfo = ref<DefaultModelInfo | null>(null)
 
-// selectedSource is either "ollama" or a stored key id.
-const selectedSource = ref<string>('ollama')
+// selectedSource: "default" | <key-id>
+const selectedSource = ref<string>('default')
 const selectedModel = ref<string>('')
-const selectedMode = ref<LLMMode>('react')
 
-// Live model catalog per stored key id, fetched on demand and cached.
 const modelsByKey = ref<Record<string, string[]>>({})
 const loadingModels = ref(false)
 
@@ -62,40 +53,41 @@ const PROVIDER_LABELS: Record<string, string> = {
   openai: 'ChatGPT',
   gemini: 'Gemini',
   github_models: 'GitHub Models',
-  ollama: 'Ollama',
+  nvidia: 'NVIDIA',
+  default: 'Nemotron (default)',
 }
 function providerLabel(name: string): string {
   return PROVIDER_LABELS[name] || name
 }
 
-const selectedKey = computed<LLMKey | null>(() =>
-  selectedSource.value === 'ollama'
-    ? null
-    : keys.value.find((k) => k.id === selectedSource.value) ?? null,
-)
+const selectedKey = computed<LLMKey | null>(() => {
+  if (selectedSource.value === 'default') return null
+  return keys.value.find((k) => k.id === selectedSource.value) ?? null
+})
 
-const selectedProviderName = computed(() => selectedKey.value?.provider ?? 'ollama')
+const selectedProviderName = computed<string>(() =>
+  selectedKey.value?.provider ?? 'default',
+)
 
 const modelOptions = computed(() => {
   const key = selectedKey.value
-  // Prefer the live catalog for the selected key; fall back to curated list
-  // (e.g. while the catalog is still loading, or for Ollama).
-  if (key && modelsByKey.value[key.id]) return modelsByKey.value[key.id]
+  if (!key) return []
+  if (modelsByKey.value[key.id]) return modelsByKey.value[key.id]
   const p = providers.value.find((x) => x.name === selectedProviderName.value)
   return p?.available_models ?? []
 })
 
 function emitConfig() {
+  const key = selectedKey.value
   const cfg: LLMSessionConfig = {
-    provider: selectedProviderName.value,
-    mode: selectedMode.value,
-    model: selectedModel.value || undefined,
-    key_id: selectedKey.value?.id,
+    provider: (selectedSource.value === 'default' ? 'default' : selectedProviderName.value) as LLMProvider,
+    mode: 'react',
+    model: key ? (selectedModel.value || undefined) : undefined,
+    key_id: key?.id,
   }
   emit('update:modelValue', cfg)
 }
 
-/** Pick the best model from a list, preferring an already-chosen valid one. */
 function chooseModel(models: string[], ...preferred: (string | null | undefined)[]): string {
   for (const p of preferred) {
     if (p && models.includes(p)) return p
@@ -103,15 +95,14 @@ function chooseModel(models: string[], ...preferred: (string | null | undefined)
   return models[0] ?? ''
 }
 
-/**
- * Load (and cache) the live model catalog for the selected source, then pick a
- * sensible model. Ollama has no per-key catalog, so it uses the curated list.
- */
 async function loadModelsForSource() {
+  if (selectedSource.value === 'default') {
+    emitConfig()
+    return
+  }
+
   const key = selectedKey.value
   if (!key) {
-    // Ollama: keep the server default (empty = backend decides).
-    selectedModel.value = ''
     emitConfig()
     return
   }
@@ -123,7 +114,6 @@ async function loadModelsForSource() {
     return
   }
 
-  // Show a provisional pick from the curated list while the catalog loads.
   selectedModel.value = chooseModel(modelOptions.value, selectedModel.value, key.default_model)
   emitConfig()
 
@@ -132,16 +122,11 @@ async function loadModelsForSource() {
     const res = await fetchKeyModels(key.id)
     if (res.models.length) {
       modelsByKey.value[key.id] = res.models
-      selectedModel.value = chooseModel(
-        res.models,
-        selectedModel.value,
-        key.default_model,
-        res.default_model,
-      )
+      selectedModel.value = chooseModel(res.models, selectedModel.value, key.default_model, res.default_model)
       emitConfig()
     }
   } catch {
-    // interceptor toasts; the curated fallback remains usable
+    // curated fallback stays
   } finally {
     loadingModels.value = false
   }
@@ -154,19 +139,24 @@ onMounted(async () => {
   try {
     ;[keys.value, providers.value] = await Promise.all([listKeys(), listProviders()])
   } catch {
-    // interceptor toasts; panel still works with the Ollama default
+    // interceptor toasts
   }
-  // Hydrate from an existing session config if provided, else default to the
-  // user's most recent key (so a key holder gets their own model by default).
+  try {
+    defaultModelInfo.value = await fetchDefaultModel()
+  } catch {
+    // leave null; option stays visible
+  }
+
   if (props.modelValue) {
-    selectedMode.value = props.modelValue.mode
-    if (props.modelValue.key_id) selectedSource.value = props.modelValue.key_id
+    if (props.modelValue.provider === 'default' || props.modelValue.provider === 'ollama') {
+      // ollama sessions from before this change are reassigned to default
+      selectedSource.value = 'default'
+    } else if (props.modelValue.key_id) {
+      selectedSource.value = props.modelValue.key_id
+    }
     if (props.modelValue.model) selectedModel.value = props.modelValue.model
-  } else if (keys.value.length > 0) {
-    selectedSource.value = keys.value[0].id // listKeys() returns most-recent first
   }
-  // If selectedSource changed above, the watcher already loads the catalog;
-  // otherwise (still Ollama) emit the initial config ourselves.
+
   if (selectedSource.value === initialSource) {
     await loadModelsForSource()
   }
@@ -200,6 +190,5 @@ onMounted(async () => {
 }
 .loading-dot { color: #3b82f6; font-weight: 700; }
 .hint { font-size: 0.78rem; color: #6b7280; margin: 0; }
-.hint.warn { color: #b45309; }
 .hint a { color: #3b82f6; }
 </style>

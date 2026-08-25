@@ -1,0 +1,723 @@
+{
+  "sf_id": "eps_01",
+  "category": "EPS Production",
+  "statement": "No EPS production results directly from light-dependent carbon assimilation.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Only snippet [1] directly addresses the stylized fact (SF10), explicitly modeling EPS production and concluding that because no correlation with light-dependent carbon assimilation exists, the coupling coefficient yPECA must be null, while photosynthesis affects EPS only indirectly through reserve dynamics. Snippet [6] lists SF10 verbatim as a stylized fact, providing weaker corroborating context. The remaining snippets concern carbon assimilation, photosynthesis SU formulations, photoheterotrophy, or calcification, and bear little to no direct relation to whether EPS is produced directly from light-dependent carbon assimilation. The supporting evidence is concentrated in a single clear source with no contradicting evidence, so the direction is corroborated but the overall strength is only moderate due to sparse independent support."
+      },
+      "n_references": 1,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3026912212371826
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3027,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "CM_|ECM+yPG_|G; (19)whereyP\u0003couples EPS production to the ﬂux represented by \u0003, i.e. assimilation, maintenance 402or growth. 40318We use equation 18 and 19 to discuss SF10, SF11 and SF12. SF10 - no EPS production 404results directly from light-dependent carbon assimilation - clearly relates the EPS production 405rate_|EPS to the carbon assimilation rate _|ECA. The lack of correlation immediately forces the 406coefﬁcientyPECAto be null. However, photosynthesis indirectly affects _|EPS through reserve 407dynamics - if _|ECAis low or null (e.g. dark conditions) then C-reserve density will decrease 408"
+        },
+        {
+          "document_id": "69b89493ecbd4702b29a6541",
+          "title": "Grossowicz et al. - 2017 - A dynamic energy budget (DEB) model to describe po.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4055,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ambient light (/H9262mol Q m−2s−1). The effects of CO2concentrationand irradiance are combined through SUs for complementary andparallel substrates (Kooijman, 2010 ), that is substrates that haveto be used together but can be bound independently. The resultingspeciﬁc carbon assimilation ﬂux jECAis given byjECA=/parenleftbigg1jECAm+1jCO2A+1jL−1jCO2A+ jL/parenrightbigg−1(A3)where jECAmis the maximum speciﬁc assimilation rate of carbon.(A4) Reserve dynamicsThe speciﬁc mobilization ﬂux jEiC(with i = C, N, P) represents themobilized reserve per unit of structural mass. From several assump-"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4094,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ioxide assimilation.However, the excited PSU can also be further excited, at a rate proportional to light intensity ( I), to aninhibited state. The inhibited PSU returns to the ground state at a constant rate ( \u000e).and irradiance using Synthesizing Units (SU) theory for complementary and parallel substrates 118(31). The resulting speciﬁc carbon assimilation ﬂux _|ECAis given by 119_|ECA=\u00121_|ECAm+1_|CO2+1_|ph\u00001_|ph+ _|CO2\u0013\u00001; (3)where _|ECAmis the maximum speciﬁc carbon assimilation rate. The carbon assimilation ﬂux 120is more often called photosynthesis rate, and we will also use this denomination. Finally, the 121"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4266,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "es not significantly influence the rate of AA production either (and therefore DIN assimilation), decreasing by only 0.3 % from 6.73 x 10-3 mol C (mol C)-1 hr-1 in Pro -PA to 6.71 x 10-3 mol C (mol C)-1 hr-1 in Pro -PH. The solar energy trade -off, therefore, does not significantly affect carbon availability for AA synthesis. The OC flux is not changed significantly as the rates of CHO and AA synthesis aren’t affected by photoheterotrophic light use, decreasing by 0.9 % from 6.83 x 10-2 mol C (mol C)-1 hr-1 in Pro -PA to 6.77 x 10-2 mol C (mol C)-1 hr-1 in Pro -PH (Figure 3.2). Photoheterotrophy facilitates a"
+        },
+        {
+          "document_id": "69b886c7ecbd4702b29a5423",
+          "title": "Tac et al. - 2025 - Estimation of Growth and Carrying Capacity of Porp.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.431,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "nconstant for nitrate ( µM), and CT(T) is the temperature correction factor.Carbon uptake (CO 2-limited):JCO2=jmCO2·CT(T)·[CO 2]Kc+[CO 2](2)where JmCO2is the maximum CO 2uptake rate (mol C m−2h−1) and Kc is the CO 2half-saturation constant ( µM).Photosynthetic carbon assimilation:JEC= (1JCO2+1Jlight+1JPSU)−1(3)where Jlightis the light-limited carbon flux, and JPSUreflects limitations due to the densityof photosynthetic units (PSUs), which may saturate under high-light conditions.Specific growth rate:r=k·pc−pMEG+ (k·pcMV)(4)where pcis the reserve mobilization flux (J mol−1),pMis the somatic maintenance cost"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4397,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPSSF10. no EPS production results directly from light-dependent carbon assimilation; (38)SF11. cellular production rates of EPS and other extracellular carbohydrates increase with speciﬁc growth rate; (38)SF12. EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells; (38)1 Introduction 23A common approach in microalgae research is to obtain and generalize empirical patterns 24through experimental work. These patterns, which in this paper will be referred as stylized 25"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4413,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "ltzmann factore−Eak1T−1Tref/C16/C17. The carbon assimilation rate J·EC,Athen becomes::JEC;A=XVjEC;Amrefe−Eak1T−1Tref/C16/C171+KCXC+e−Eak1T−1Tref/C16/C17:JL;FK:JL;F−XCKC+:JL;Fe−Eak1T−1Tref:JL;FK/C18/C190B@1CA−1ð12Þin which XVdenotes the (structural) biomass concentration, XCtheexternal CO 2concentration, KCthe CO 2half-saturation concentration,J̇L,Fthe external light intensity, and J̇L,FKthe half-saturation light in-tensity. Because XC≫KCin our simulations, Eq. (12) effectivelybecomes::JEC;A=XVjEC;Amrefe−Eak1T−1Tref/C16/C171+e−Eak1T−1Tref/C16/C17:JL;FK:JL;F: ð13ÞIn the limit of low light intensities, expression (13) reduces to::"
+        },
+        {
+          "document_id": "69b8a967ecbd4702b29a7dc9",
+          "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4418,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": ". Fax: +30 2810 394408.E-mail address: giapis@biology.uoc.gr (I.A. Papadakis).Biochimica et Biophysica Acta 1708 (2005) 250– 261http://www.elsevier.com/locate/bbarelated to light intensity [9,11,12] . Other models recognizethe CO 2dependence but ignore it in the model [10] orassume that carbon fixation is proportional to the lightintensity and the available carbon [14]. As the main novelty,in the present contribution, we directly model both light andcarbon-fixation reactions and consider both light intensityand carbon dioxide concentration for the following reasons.First, dissolved inorganic carbon is a required compound for"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4436,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "s half of the maximum ﬂux. 100However, for an assimilation of carbon to exist one needs both a carbon source (CO 2) and pho- 101tons. Therefore, we used the concepts of complementary assimilation of multiple substrates to 102build a photosynthesis model. The photosynthetic radiation is caught by Photosynthetic Units 103(PSUs) by excitation of electrons that fuel the production of NADPH+and ATP, the fuel batter- 104ies that supply energy to the Calvin-Benson cycle. We model these reactions as a single-step 1054Carbon assimilation SUStructureCarbon ReserveGrowthSUNitrogen assimilation SUNitrogen Reserve JE M C . JE C C . JE G C . J"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4448,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "fore DIN assimilation) and growth rate are only sensitive to the efficiency of AA synthesis (therefore DIN species) at very low irradiances where Pro grows on DIN as the only nitrogen source and light and therefore carbon is limiting. In all other ambient conditions ample carbon is available and in excess (Figure 3.3, 3.9c, 3.12c). Variability in DIN species used by Pro may not influence the conclusions drawn here but may be im portant for understanding Pro growth in the deep euphotic zone where it is abundant (Giovannoni and Vergin, 2012 ) and light and therefore carbon is limiting (Figure 3.16). 3.4.4 The uptake of DON"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4463,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "duction in Pro by up to ~20 % at low irradiance when light energy is directed to photoheterotrophic DON upta ke. As Pro plays a significant role in open ocean carbon fixation (Goericke and W elschmeyer, 1993 , Zubkov, 2014 ) photoheterotrophic light use may be important for our understanding of oceanic metabolic balance and its capacity to respond to anthropogenic carbon dioxide release. However, the quantitative value of this result is limited. The harvesting of solar energy in both the Pro and SAR11 models is described using a simple functional response (Section 2.2.1.1) and"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4485,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "C (mol C)-1 hr-1, just 0.03 % the rate at 𝛽𝑜𝑝𝑡 (Figure 3.6e). Because of the significantly reduced rate of total carbon uptake (Figure 3.7), 70 % of the total carbon flux is used to satisfy the fixed maintenance requirements, compared to only 3 % at 𝛽𝑜𝑝𝑡 (Figure 3.7). The different dynamics of exce ss carbon release and maintenance largely offset each other resulting in a similar percentage of assimilated carbon at β = 1 and 𝛽𝑜𝑝𝑡. 3.3.2 Experiment 2: The effect of ambient DIN 3.3.2.1 Growth rate and the uptake of carbon and nitrogen Photoheterotrophic light u se can not only enhance growth rate during non -limiting conditions"
+        },
+        {
+          "document_id": "69b8486eec32c55db5430c6f",
+          "title": "Cabanillas - 2024 - From fronds to forests Applying dynamic energy bu.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4536,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ogen reserves), the availability of the elements in the environment, and the extent to which their acquisition and assimilation can be regulated (Giordano and Raven, 2014) . Additionally, reserve nitrogen transport follows similar pathways to reserve carbon (Davison and St ewart, 1983). Carbon assimilation represents the organism’s photosynthetic ability, and hence it is completely dependent on light availability. Following these premise s, I present the assimilation pathways for nitrogen and carbon in my model, their interac tion with other elements is shown in Figure 2.3."
+        },
+        {
+          "document_id": "69b84864ec32c55db5430c30",
+          "title": "KuijKooi2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4541,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "n the curves (Fig. 1,left panel) might suggest a switch in survivability, lightdependency is continuous. When light intensity isincreased further, the total producer biomass increases,although the structural biomass is seemingly unaffectedby light enhancement. Increased light intensity facil-itates carbohydrate assimilation through higher photo-synthesis rates. However, excess carbohydrate reservescannot be used for production when nitrogen is scarce,so that they will effectively dam up.Carbon dependency is shown in the center diagramsofFig. 1 . Carbon limitation occurs at supplies roughly"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.455,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "th (Partensky et al., 1999 , Chisholm et al., 1988 ), contributing significantly to open ocean primary production (Goericke and Welschmeyer, 1993 , Liu et al., 1997 , Zubkov, 2014 , Hartmann et al., 2014 , Liu et al., 1999 , Liu et al., 1998 ). It is therefore critical that we understand how photoheterotrophic light use may 86 influence carbon reduction in Pro. The result from the model demonstrate that a t low irradiance intensities, the use of light energy for photoheterotrophy, trading -off CHO synthesis for DON uptake (where available), may result in a decrease in CHO synthesis and therefore"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.457,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "led in the context of the deb theory bytreating carbon dioxide and bicarbonate as substitutable substrates, with light as a sup-plementary ‘substrate’, for the synthesis of lipids as reserve, while calcium carbonate isformed as a product in this assimilation process. This implementation ties calcification tophotosynthesis.As long as calcium is not rate limiting, and the environment is homogeneous, thecarbohydrate production amounts tojCH=\u0012˙k−1C+ (j′C+j′C−)−1+j′L−1−\u0010j′C+j′C−+j′L\u0011−1\u0013−1(5.11)where j′C=ρCjCandj′C−=ρC−jC−/2 are the effective arrival rates of carbon dioxideand bicarbonate; and the factor 0.5 in j′"
+        },
+        {
+          "document_id": "69b8484bec32c55db5430bca",
+          "title": "van der Meer et al. - 2022 - A simple DEB-based ecosystem model.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4595,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "wo non-substitutable sub-strates gives the assimilation rate˙JE1P,A1P=MVPjE1P,A1P,mfP1, (23)wherefP1=/parenleftbigg1+1xL1+1xC1−1xL1+xC1/parenrightbigg−1,where xL1=˙JL/˙JK,L1andxC1=MC/KC1. The assimilationrate of the other reserve type depends upon light,the carbon-compoundandammoniumandis(usingaSUwiththreenon-substitutable substrates) given by˙JE2P,A2P=MVPjE2P,A2P,mfP2, (24)wherefP2=/parenleftbigg1+1xL2+1xC2+1xN2−1xL2+xC2−1xL2+xN2−1xC2+xN2+1xL2+xC2+xN2/parenrightbigg−1,where xL2=˙JL/˙JK,L2,xC2=MC/KC2andxN2=MN/KN2.From each of the two reserves, a mobilized flux, whichequals˙JEiP,CP=−mEiP(˙kEiP−˙rVP,GP)MVP"
+        },
+        {
+          "document_id": "69b8784becbd4702b29a4041",
+          "title": "Troo2006.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4615,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "at no limitation exists to the total assimilation ﬂux (see section 4.4.2).The total assimilation ﬂux then becomes:/CY/CE /BN /BT/BP /CY/CE /BN /BT/BT/B7 /CY/CE /BN /BT/C0/BM (4.18)The functional responses /CU/BTand /CU/C0are modeled with use of SynthesizingUnits (SUs) cf. Kooijman [26, 27], which provide a simple and realistic methodfor calculating production ﬂuxes at simultaneous nutrient and light limitations.Planktonic protists have a photosynthetic system that cons ists of two photosys-tems, with which they stepwise convert carbon dioxide, nitr ogen and light into"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets directly address EPS (extracellular polymeric substance) production or whether it results from light-dependent carbon assimilation. Most snippets concern carbon assimilation, photosynthesis, reproductive effort in plants, or wholly unrelated physics/chemistry topics. Snippet 13 (sugar kelp DEB model) is the most topically relevant since it discusses light-dependent carbon assimilation within a DEB framework, but it does not mention EPS production or its independence from light-dependent assimilation. Consequently, there is no evidence that either supports or contradicts the stylized fact; the corpus is uninformative regarding this specific claim about EPS production."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W2117212644",
+          "title": "Reproductive effort and floral photosynthesis in <i>Spiranthes cernua</i> (Orchidaceae)",
+          "doi": "10.2307/2445813",
+          "year": "1997",
+          "distance": 0.4525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "change, the contribution of leaves and reproductive structures to seasonal carbon assimilation was 91.6 and 8.4%, respectively. The role of the inflorescence as a source and sink for carbon assimilation may lower the cost of reproduction and support frequent inflorescence production."
+        },
+        {
+          "document_id": "W2005418056",
+          "title": "Lack of fructose 2,6‐bisphosphate compromises photosynthesis and growth in Arabidopsis in fluctuating environments",
+          "doi": "10.1111/tpj.12765",
+          "year": "2015",
+          "distance": 0.5169,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Summary The balance between carbon assimilation, storage and utilisation during photosynthesis is dependent on partitioning of photoassimilate between starch and sucrose, and varies in response to changes in the environment. However, the extent to which the capacity to modulate carbon partitioning rapidly through short‐term allosteric regulation may contribute to plant performance is unknown."
+        },
+        {
+          "document_id": "W1968381094",
+          "title": "Cloud cover limits net CO <sub>2</sub> uptake and growth of a rainforest tree during tropical rainy seasons",
+          "doi": "10.1073/pnas.0133045100",
+          "year": "2003",
+          "distance": 0.5349,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Recent global-scale analyses indicate that climate variability affects net carbon storage but regard temperature and precipitation to be the main contributors. Seasonal and interannual variation in light availability may also limit CO 2 uptake."
+        },
+        {
+          "document_id": "W2588259133",
+          "title": "EFFICIENCY OF THE USE OF YERBA MATE SOLAR RADIATION IN INTERCROPPING OR MONOCROPPING FOR THE ACCUMULATION OF CARBON",
+          "doi": "10.1590/0100-67622016000600003",
+          "year": "2016",
+          "distance": 0.5354,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "AR in accumulated carbon was calculated based on the ratio between the accumulated carbon and the PARi involved in the process. Our results demonstrate that the higher conversion efficiency (eb) of photosynthetically active solar radiation intercepted in carbon in yerba mate sprouts was obtained in the intercropping scenario."
+        },
+        {
+          "document_id": "W2081070946",
+          "title": "Ecophysiological Shade Adaptation in the Basal Angiosperm,<i>Austrobaileya scandens</i>(Austrobaileyaceae)",
+          "doi": "10.1086/346167",
+          "year": "2003",
+          "distance": 0.5366,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ive reproduction for recruitment. Also in line with many but not all shade‐tolerant species, the photosynthetic apparatus of A. scandens expressed little physiological ability to upregulate CO2 assimilation rate to increased light availability under greenhouse conditions. Broadly, these features appear to contribute to increasing the collection of light for photosynthesis under light‐limiting conditions and the establishment and persistence in forest understory habitats. The ecology and physiology of A."
+        },
+        {
+          "document_id": "W2107216336",
+          "title": "Timing of Canopy Closure Influences Carbon Translocation and Seed Production of an Understorey Herb, Trillium apetalon (Trilliaceae)",
+          "doi": "10.1093/aob/mcm296",
+          "year": "2007",
+          "distance": 0.5398,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Carbon translocation to the storage organ had priority over seed production under high-irradiance conditions. A shortened bright period due to early canopy closure effectively restricts carbon assimilation, which greatly reduces subsequent reproductive output owing to low photosynthetic products for fruit development and small carbon storage for future reproduction."
+        },
+        {
+          "document_id": "W3127099057",
+          "title": "The potential of resilient carbon dynamics for stabilizing crop reproductive development and productivity during heat stress",
+          "doi": "10.1111/pce.14015",
+          "year": "2021",
+          "distance": 0.543,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "that has been reported thus far and an evaluation of purported associations are needed to guide and stimulate future research. To this end, we review recent studies relating to source–sink dynamics, non‐foliar photosynthesis and net carbon gain as pivotal in understanding how to improve reproductive development and crop productivity during heat stress."
+        },
+        {
+          "document_id": "W2463176881",
+          "title": "Genotypic Differences in the Effect of Temperature on CO2 Assimilation and Water Use Efficiency in Blueberry",
+          "doi": "10.21273/jashs.112.1.170",
+          "year": "1987",
+          "distance": 0.5437,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "notype (US239 and US245). All genotypes responded parabolically to increasing temperature at vapor pressure deficits &lt;1 kPa. Maximum CO 2 assimilation of US75 (15 µmol·s –1 ·m –2 ) was 30% to 40% higher than either parent. Carbon dioxide assimilation of US75 and Florida 4B was optimum at 30°C and that of ‘Bluecrop’ at 20°. The optimum for US239 was similar to ‘Bluecrop’, and that of US245 to Florida 4B. Florida 4B had higher WUEs than ‘Bluecrop’ at both 20° (5.64 µmol CO 2 /mmol H 2 O to 4.01) and 30° (3.73 to 2.53). US239 and US245 had significantly ( P &lt; 0.05) higher WUEs at 30° than did ‘Bluecrop’."
+        },
+        {
+          "document_id": "W3119625561",
+          "title": "A New Method for Simulating Photoprocesses in Astrochemical Models",
+          "doi": "10.3847/1538-4357/abd778",
+          "year": "2021",
+          "distance": 0.5467,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "e tested using well-constrained experiments rather than poorly constrained gas-phase abundances in interstellar medium regions. Our results indicate that inclusion of nonthermal reactions and suprathermal species allows for reproduction of low-temperature solid-phase photoprocessing that simulates interstellar ices within cold (∼10 K) dense cores such as TMC-1."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.5474,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "pparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium. Imperfect reproduction of the light-nuclei data leaves\\nroom for medium effects in produced light nuclei.\\n"
+        },
+        {
+          "document_id": "W2117212644",
+          "title": "Reproductive effort and floral photosynthesis in <i>Spiranthes cernua</i> (Orchidaceae)",
+          "doi": "10.2307/2445813",
+          "year": "1997",
+          "distance": 0.5483,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "measured in the field. Low but positive rates of net photosynthesis were documented at all stages of inflorescence development. The average rates of photosynthesis for each stage were: leaves, 9.2 μmol CO 2 ·m −−2· s −−1 ; inflorescence in bud, 3.7 μmol CO 2 ·m −−2· s −−1 ; inflorescence in flower, 2.5 μmol CO 2 ·m −−2 ·s −−1 and infructescence, 0.2 μmol CO 2 ·m −−2 ·s −−1 . Based on diurnal gas exchange, the contribution of leaves and reproductive structures to seasonal carbon assimilation was 91.6 and 8.4%, respectively."
+        },
+        {
+          "document_id": "W2007359434",
+          "title": "Water deficit affects photosynthetic induction in Bauhinia forficata Link (Fabaceae) and Esenbeckia leiocarpa Engl. (Rutaceae) growing in understorey and gap conditions",
+          "doi": "10.1590/s1677-04202006000400007",
+          "year": "2006",
+          "distance": 0.5521,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "In tropical forests, light is considered the most limiting resource for plant growth and reproduction. Besides light, water deficit leads invariably to a decrease in photosynthesis. Thus, despite of the unquestionable role of light in CO2 assimilation (A), it is expected that water deficit affects and limits the light utilization by plants."
+        },
+        {
+          "document_id": "W3029508167",
+          "title": "Modeling the Growth of Sugar Kelp (Saccharina latissima) in Aquaculture Systems using Dynamic Energy Budget Theory",
+          "doi": "10.1016/j.ecolmodel.2020.109151",
+          "year": "2020",
+          "distance": 0.5555,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ration. The modeled estimates for field S. latissima blade length were accurate despite underestimation of early season growth. In some simulations, winter growth was limited by the rate at which the light-dependent reaction of photosynthesis, the first step of carbon assimilation, was performed. Nitrogen (N) reserves were also an important limiting factor especially later in the spring season as irradiance increased, although the low resolution of N forcing concentrations might restrict the model accuracy. Since this model is focused on S."
+        },
+        {
+          "document_id": "W2907861418",
+          "title": "Global photosynthetic capacity is optimized to the environment",
+          "doi": "10.1111/ele.13210",
+          "year": "2019",
+          "distance": 0.5559,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Earth system models (ESMs) use photosynthetic capacity, indexed by the maximum Rubisco carboxylation rate (V<sub>cmax</sub> ), to simulate carbon assimilation and typically rely on empirical estimates, including an assumed dependence on leaf nitrogen determined from soil fertility."
+        },
+        {
+          "document_id": "W3210630112",
+          "title": "Transcriptional regulation of photoprotection in dark-to-light transition - more than just a matter of excess light energy",
+          "doi": "10.1101/2021.10.23.463292",
+          "year": "2021",
+          "distance": 0.5563,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "n transport and CO 2 on induction of the ‘photoprotective’ genes ( LHCSR1 , LHCSR3 and PSBS ) during dark-to-light transitions. Induction (mRNA accumulation) occurred at very low light intensity, was independently modulated by blue and UV-B radiation through specific photoreceptors, and only LHCSR3 was strongly controlled by CO 2 levels through a putative enhancer function of CIA5, a transcription factor that controls genes of the carbon concentrating mechanism."
+        },
+        {
+          "document_id": "W1979017704",
+          "title": "The response of heterotrophic CO <sub>2</sub> flux to soil warming",
+          "doi": "10.1111/j.1365-2486.2004.00878.x",
+          "year": "2004",
+          "distance": 0.5579,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract In a forest ecosystem at steady state, net carbon (C) assimilation by plants and C loss through soil and litter decomposition by heterotrophic organisms are balanced. However, a perturbation to the system, such as increased mean soil temperature, will lead to faster decay, enhancing CO 2 release from decomposers, and thus upsetting the balance."
+        },
+        {
+          "document_id": "W2765306463",
+          "title": "Photosynthetic Entrainment of the Circadian Clock Facilitates Plant Growth under Environmental Fluctuations: Perspectives from an Integrated Model of Phase Oscillator and Phloem Transportation",
+          "doi": "10.3389/fpls.2017.01859",
+          "year": "2017",
+          "distance": 0.5621,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "r has been shown, under fluctuating light conditions, to be unable to adjust starch turnover and to realize carbon homeostasis. Whereas, the effects of light entrainment on growth and survival of higher plants are well studied, the impact of phase regulation by sugar remains unknown. Here we show that endogenous sugar entrainment facilitates plant growth. We integrated two mathematical models, one describing the dynamics of carbon metabolism in <i>A. thaliana</i> source leaves and the other growth of sink tissues dependent on sucrose translocation from the source."
+        },
+        {
+          "document_id": "W2792210831",
+          "title": "Correction: Towards efficient dual-emissive carbon dots through sulfur and nitrogen co-doped",
+          "doi": "10.1039/c8tc90049c",
+          "year": "2018",
+          "distance": 0.5654,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Correction for ‘Towards efficient dual-emissive carbon dots through sulfur and nitrogen co-doped’ by Wan Zhou <italic>et al.</italic>, <italic>J. Mater. Chem. C</italic>, 2017, <bold>5</bold>, 8014–8021."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Two snippets directly address the stylized fact (SF10). Snippet 1 explicitly discusses SF10, stating that the lack of correlation between EPS production and carbon assimilation forces the coupling coefficient yPECA to be null, while noting photosynthesis only indirectly affects EPS through reserve dynamics - this directly supports the fact. Snippet 6 lists SF10 verbatim as a stylized fact in the model framework. The remaining snippets are either about carbon assimilation/photosynthesis modeling without bearing on EPS coupling (snippets 2-12), or are entirely off-topic (plant ecophysiology, astrochemistry, nuclear physics in snippets 13-24). No snippet contradicts the fact. Support is clear but limited to essentially one source corpus, hence moderate evidence strength with corroborated direction."
+      },
+      "n_references": 1,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3026912212371826
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3027,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "CM_|ECM+yPG_|G; (19)whereyP\u0003couples EPS production to the ﬂux represented by \u0003, i.e. assimilation, maintenance 402or growth. 40318We use equation 18 and 19 to discuss SF10, SF11 and SF12. SF10 - no EPS production 404results directly from light-dependent carbon assimilation - clearly relates the EPS production 405rate_|EPS to the carbon assimilation rate _|ECA. The lack of correlation immediately forces the 406coefﬁcientyPECAto be null. However, photosynthesis indirectly affects _|EPS through reserve 407dynamics - if _|ECAis low or null (e.g. dark conditions) then C-reserve density will decrease 408"
+        },
+        {
+          "document_id": "69b89493ecbd4702b29a6541",
+          "title": "Grossowicz et al. - 2017 - A dynamic energy budget (DEB) model to describe po.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4055,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ambient light (/H9262mol Q m−2s−1). The effects of CO2concentrationand irradiance are combined through SUs for complementary andparallel substrates (Kooijman, 2010 ), that is substrates that haveto be used together but can be bound independently. The resultingspeciﬁc carbon assimilation ﬂux jECAis given byjECA=/parenleftbigg1jECAm+1jCO2A+1jL−1jCO2A+ jL/parenrightbigg−1(A3)where jECAmis the maximum speciﬁc assimilation rate of carbon.(A4) Reserve dynamicsThe speciﬁc mobilization ﬂux jEiC(with i = C, N, P) represents themobilized reserve per unit of structural mass. From several assump-"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4094,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.45,
+          "text": "ioxide assimilation.However, the excited PSU can also be further excited, at a rate proportional to light intensity ( I), to aninhibited state. The inhibited PSU returns to the ground state at a constant rate ( \u000e).and irradiance using Synthesizing Units (SU) theory for complementary and parallel substrates 118(31). The resulting speciﬁc carbon assimilation ﬂux _|ECAis given by 119_|ECA=\u00121_|ECAm+1_|CO2+1_|ph\u00001_|ph+ _|CO2\u0013\u00001; (3)where _|ECAmis the maximum speciﬁc carbon assimilation rate. The carbon assimilation ﬂux 120is more often called photosynthesis rate, and we will also use this denomination. Finally, the 121"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4266,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "es not significantly influence the rate of AA production either (and therefore DIN assimilation), decreasing by only 0.3 % from 6.73 x 10-3 mol C (mol C)-1 hr-1 in Pro -PA to 6.71 x 10-3 mol C (mol C)-1 hr-1 in Pro -PH. The solar energy trade -off, therefore, does not significantly affect carbon availability for AA synthesis. The OC flux is not changed significantly as the rates of CHO and AA synthesis aren’t affected by photoheterotrophic light use, decreasing by 0.9 % from 6.83 x 10-2 mol C (mol C)-1 hr-1 in Pro -PA to 6.77 x 10-2 mol C (mol C)-1 hr-1 in Pro -PH (Figure 3.2). Photoheterotrophy facilitates a"
+        },
+        {
+          "document_id": "69b886c7ecbd4702b29a5423",
+          "title": "Tac et al. - 2025 - Estimation of Growth and Carrying Capacity of Porp.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.431,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "nconstant for nitrate ( µM), and CT(T) is the temperature correction factor.Carbon uptake (CO 2-limited):JCO2=jmCO2·CT(T)·[CO 2]Kc+[CO 2](2)where JmCO2is the maximum CO 2uptake rate (mol C m−2h−1) and Kc is the CO 2half-saturation constant ( µM).Photosynthetic carbon assimilation:JEC= (1JCO2+1Jlight+1JPSU)−1(3)where Jlightis the light-limited carbon flux, and JPSUreflects limitations due to the densityof photosynthetic units (PSUs), which may saturate under high-light conditions.Specific growth rate:r=k·pc−pMEG+ (k·pcMV)(4)where pcis the reserve mobilization flux (J mol−1),pMis the somatic maintenance cost"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4397,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPSSF10. no EPS production results directly from light-dependent carbon assimilation; (38)SF11. cellular production rates of EPS and other extracellular carbohydrates increase with speciﬁc growth rate; (38)SF12. EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells; (38)1 Introduction 23A common approach in microalgae research is to obtain and generalize empirical patterns 24through experimental work. These patterns, which in this paper will be referred as stylized 25"
+        },
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4413,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ltzmann factore−Eak1T−1Tref/C16/C17. The carbon assimilation rate J·EC,Athen becomes::JEC;A=XVjEC;Amrefe−Eak1T−1Tref/C16/C171+KCXC+e−Eak1T−1Tref/C16/C17:JL;FK:JL;F−XCKC+:JL;Fe−Eak1T−1Tref:JL;FK/C18/C190B@1CA−1ð12Þin which XVdenotes the (structural) biomass concentration, XCtheexternal CO 2concentration, KCthe CO 2half-saturation concentration,J̇L,Fthe external light intensity, and J̇L,FKthe half-saturation light in-tensity. Because XC≫KCin our simulations, Eq. (12) effectivelybecomes::JEC;A=XVjEC;Amrefe−Eak1T−1Tref/C16/C171+e−Eak1T−1Tref/C16/C17:JL;FK:JL;F: ð13ÞIn the limit of low light intensities, expression (13) reduces to::"
+        },
+        {
+          "document_id": "69b8a967ecbd4702b29a7dc9",
+          "title": "Papadakis et al. - 2005 - A cell-based model for the photoacclimation and CO.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4418,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": ". Fax: +30 2810 394408.E-mail address: giapis@biology.uoc.gr (I.A. Papadakis).Biochimica et Biophysica Acta 1708 (2005) 250– 261http://www.elsevier.com/locate/bbarelated to light intensity [9,11,12] . Other models recognizethe CO 2dependence but ignore it in the model [10] orassume that carbon fixation is proportional to the lightintensity and the available carbon [14]. As the main novelty,in the present contribution, we directly model both light andcarbon-fixation reactions and consider both light intensityand carbon dioxide concentration for the following reasons.First, dissolved inorganic carbon is a required compound for"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4436,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "s half of the maximum ﬂux. 100However, for an assimilation of carbon to exist one needs both a carbon source (CO 2) and pho- 101tons. Therefore, we used the concepts of complementary assimilation of multiple substrates to 102build a photosynthesis model. The photosynthetic radiation is caught by Photosynthetic Units 103(PSUs) by excitation of electrons that fuel the production of NADPH+and ATP, the fuel batter- 104ies that supply energy to the Calvin-Benson cycle. We model these reactions as a single-step 1054Carbon assimilation SUStructureCarbon ReserveGrowthSUNitrogen assimilation SUNitrogen Reserve JE M C . JE C C . JE G C . J"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4448,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "fore DIN assimilation) and growth rate are only sensitive to the efficiency of AA synthesis (therefore DIN species) at very low irradiances where Pro grows on DIN as the only nitrogen source and light and therefore carbon is limiting. In all other ambient conditions ample carbon is available and in excess (Figure 3.3, 3.9c, 3.12c). Variability in DIN species used by Pro may not influence the conclusions drawn here but may be im portant for understanding Pro growth in the deep euphotic zone where it is abundant (Giovannoni and Vergin, 2012 ) and light and therefore carbon is limiting (Figure 3.16). 3.4.4 The uptake of DON"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4463,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "duction in Pro by up to ~20 % at low irradiance when light energy is directed to photoheterotrophic DON upta ke. As Pro plays a significant role in open ocean carbon fixation (Goericke and W elschmeyer, 1993 , Zubkov, 2014 ) photoheterotrophic light use may be important for our understanding of oceanic metabolic balance and its capacity to respond to anthropogenic carbon dioxide release. However, the quantitative value of this result is limited. The harvesting of solar energy in both the Pro and SAR11 models is described using a simple functional response (Section 2.2.1.1) and"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4485,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "C (mol C)-1 hr-1, just 0.03 % the rate at 𝛽𝑜𝑝𝑡 (Figure 3.6e). Because of the significantly reduced rate of total carbon uptake (Figure 3.7), 70 % of the total carbon flux is used to satisfy the fixed maintenance requirements, compared to only 3 % at 𝛽𝑜𝑝𝑡 (Figure 3.7). The different dynamics of exce ss carbon release and maintenance largely offset each other resulting in a similar percentage of assimilated carbon at β = 1 and 𝛽𝑜𝑝𝑡. 3.3.2 Experiment 2: The effect of ambient DIN 3.3.2.1 Growth rate and the uptake of carbon and nitrogen Photoheterotrophic light u se can not only enhance growth rate during non -limiting conditions"
+        },
+        {
+          "document_id": "W2117212644",
+          "title": "Reproductive effort and floral photosynthesis in <i>Spiranthes cernua</i> (Orchidaceae)",
+          "doi": "10.2307/2445813",
+          "year": "1997",
+          "distance": 0.4525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "change, the contribution of leaves and reproductive structures to seasonal carbon assimilation was 91.6 and 8.4%, respectively. The role of the inflorescence as a source and sink for carbon assimilation may lower the cost of reproduction and support frequent inflorescence production."
+        },
+        {
+          "document_id": "W2005418056",
+          "title": "Lack of fructose 2,6‐bisphosphate compromises photosynthesis and growth in Arabidopsis in fluctuating environments",
+          "doi": "10.1111/tpj.12765",
+          "year": "2015",
+          "distance": 0.5169,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Summary The balance between carbon assimilation, storage and utilisation during photosynthesis is dependent on partitioning of photoassimilate between starch and sucrose, and varies in response to changes in the environment. However, the extent to which the capacity to modulate carbon partitioning rapidly through short‐term allosteric regulation may contribute to plant performance is unknown."
+        },
+        {
+          "document_id": "W1968381094",
+          "title": "Cloud cover limits net CO <sub>2</sub> uptake and growth of a rainforest tree during tropical rainy seasons",
+          "doi": "10.1073/pnas.0133045100",
+          "year": "2003",
+          "distance": 0.5349,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Recent global-scale analyses indicate that climate variability affects net carbon storage but regard temperature and precipitation to be the main contributors. Seasonal and interannual variation in light availability may also limit CO 2 uptake."
+        },
+        {
+          "document_id": "W2588259133",
+          "title": "EFFICIENCY OF THE USE OF YERBA MATE SOLAR RADIATION IN INTERCROPPING OR MONOCROPPING FOR THE ACCUMULATION OF CARBON",
+          "doi": "10.1590/0100-67622016000600003",
+          "year": "2016",
+          "distance": 0.5354,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "AR in accumulated carbon was calculated based on the ratio between the accumulated carbon and the PARi involved in the process. Our results demonstrate that the higher conversion efficiency (eb) of photosynthetically active solar radiation intercepted in carbon in yerba mate sprouts was obtained in the intercropping scenario."
+        },
+        {
+          "document_id": "W2081070946",
+          "title": "Ecophysiological Shade Adaptation in the Basal Angiosperm,<i>Austrobaileya scandens</i>(Austrobaileyaceae)",
+          "doi": "10.1086/346167",
+          "year": "2003",
+          "distance": 0.5366,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ive reproduction for recruitment. Also in line with many but not all shade‐tolerant species, the photosynthetic apparatus of A. scandens expressed little physiological ability to upregulate CO2 assimilation rate to increased light availability under greenhouse conditions. Broadly, these features appear to contribute to increasing the collection of light for photosynthesis under light‐limiting conditions and the establishment and persistence in forest understory habitats. The ecology and physiology of A."
+        },
+        {
+          "document_id": "W2107216336",
+          "title": "Timing of Canopy Closure Influences Carbon Translocation and Seed Production of an Understorey Herb, Trillium apetalon (Trilliaceae)",
+          "doi": "10.1093/aob/mcm296",
+          "year": "2007",
+          "distance": 0.5398,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Carbon translocation to the storage organ had priority over seed production under high-irradiance conditions. A shortened bright period due to early canopy closure effectively restricts carbon assimilation, which greatly reduces subsequent reproductive output owing to low photosynthetic products for fruit development and small carbon storage for future reproduction."
+        },
+        {
+          "document_id": "W3127099057",
+          "title": "The potential of resilient carbon dynamics for stabilizing crop reproductive development and productivity during heat stress",
+          "doi": "10.1111/pce.14015",
+          "year": "2021",
+          "distance": 0.543,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "that has been reported thus far and an evaluation of purported associations are needed to guide and stimulate future research. To this end, we review recent studies relating to source–sink dynamics, non‐foliar photosynthesis and net carbon gain as pivotal in understanding how to improve reproductive development and crop productivity during heat stress."
+        },
+        {
+          "document_id": "W2463176881",
+          "title": "Genotypic Differences in the Effect of Temperature on CO2 Assimilation and Water Use Efficiency in Blueberry",
+          "doi": "10.21273/jashs.112.1.170",
+          "year": "1987",
+          "distance": 0.5437,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "notype (US239 and US245). All genotypes responded parabolically to increasing temperature at vapor pressure deficits &lt;1 kPa. Maximum CO 2 assimilation of US75 (15 µmol·s –1 ·m –2 ) was 30% to 40% higher than either parent. Carbon dioxide assimilation of US75 and Florida 4B was optimum at 30°C and that of ‘Bluecrop’ at 20°. The optimum for US239 was similar to ‘Bluecrop’, and that of US245 to Florida 4B. Florida 4B had higher WUEs than ‘Bluecrop’ at both 20° (5.64 µmol CO 2 /mmol H 2 O to 4.01) and 30° (3.73 to 2.53). US239 and US245 had significantly ( P &lt; 0.05) higher WUEs at 30° than did ‘Bluecrop’."
+        },
+        {
+          "document_id": "W3119625561",
+          "title": "A New Method for Simulating Photoprocesses in Astrochemical Models",
+          "doi": "10.3847/1538-4357/abd778",
+          "year": "2021",
+          "distance": 0.5467,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "e tested using well-constrained experiments rather than poorly constrained gas-phase abundances in interstellar medium regions. Our results indicate that inclusion of nonthermal reactions and suprathermal species allows for reproduction of low-temperature solid-phase photoprocessing that simulates interstellar ices within cold (∼10 K) dense cores such as TMC-1."
+        },
+        {
+          "document_id": "W4319073321",
+          "title": "Light-nuclei production in heavy-ion collisions within a thermodynamical approach",
+          "doi": "10.1103/physrevc.107.024903",
+          "year": "2023",
+          "distance": 0.5474,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "pparently, it requires explicit\\ntreatment of the afterburner evolution of light nuclei that violates the\\nkinetic equilibrium. Imperfect reproduction of the light-nuclei data leaves\\nroom for medium effects in produced light nuclei.\\n"
+        },
+        {
+          "document_id": "W2117212644",
+          "title": "Reproductive effort and floral photosynthesis in <i>Spiranthes cernua</i> (Orchidaceae)",
+          "doi": "10.2307/2445813",
+          "year": "1997",
+          "distance": 0.5483,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "measured in the field. Low but positive rates of net photosynthesis were documented at all stages of inflorescence development. The average rates of photosynthesis for each stage were: leaves, 9.2 μmol CO 2 ·m −−2· s −−1 ; inflorescence in bud, 3.7 μmol CO 2 ·m −−2· s −−1 ; inflorescence in flower, 2.5 μmol CO 2 ·m −−2 ·s −−1 and infructescence, 0.2 μmol CO 2 ·m −−2 ·s −−1 . Based on diurnal gas exchange, the contribution of leaves and reproductive structures to seasonal carbon assimilation was 91.6 and 8.4%, respectively."
+        },
+        {
+          "document_id": "W2007359434",
+          "title": "Water deficit affects photosynthetic induction in Bauhinia forficata Link (Fabaceae) and Esenbeckia leiocarpa Engl. (Rutaceae) growing in understorey and gap conditions",
+          "doi": "10.1590/s1677-04202006000400007",
+          "year": "2006",
+          "distance": 0.5521,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "In tropical forests, light is considered the most limiting resource for plant growth and reproduction. Besides light, water deficit leads invariably to a decrease in photosynthesis. Thus, despite of the unquestionable role of light in CO2 assimilation (A), it is expected that water deficit affects and limits the light utilization by plants."
+        }
+      ]
+    }
+  }
+}

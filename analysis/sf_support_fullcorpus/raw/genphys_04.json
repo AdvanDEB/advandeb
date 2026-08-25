@@ -1,0 +1,1680 @@
+{
+  "sf_id": "genphys_04",
+  "category": "General Physiology",
+  "statement": "Survivor curves for life span terminated by ageing are typically well described by the Weibull and Gompertz models.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial number of the excerpts explicitly cite Weibull and Gompertz survival models as standard, well‑fitted descriptions of ageing mortality curves (e.g., snippets 1,4,7,8,9,14,15,16). These passages report empirical fits, theoretical justification, or parameter interpretations that align with the stylized fact. No snippet provides evidence contradicting the adequacy of Weibull or Gompertz for survivor curves; the remaining excerpts are unrelated or only tangentially mention mortality modelling without addressing these specific distributions. Consequently the corpus offers strong, consistent support for the claim."
+          },
+          "n_references": 6,
+          "references": {
+            "2825": {
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1944
+            },
+            "2659": {
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2347
+            },
+            "2660": {
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2391
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2394
+            },
+            "3838": {
+              "title": "Barhdadi et al. - Environment-dependent population dynamics emerging.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2477
+            },
+            "3468": {
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2492
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2825",
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1944,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "ature Since the nature of ageing processes is still not under- stood, adequate modelling of quantitative aspects of the process is impossible. Because ageing is essential in population dynamics, we have to rely on descriptive models for the time being. The data of MacArthur & Baillie (1929) given in Fig. Al suggest that the Weibull survivorship curve might provide a more-or-less 'natu- ral' and parameter-sparse model for Daphnia. The model is given by Pr(a, - ab>a) = exp(- [a/an]g), where a, is age at death and ab is age at hatching. Besides goodness of fit, an argument in favour of the Weibull model is that temperature has an effect on the time parameter, am, only, and sex only on the shape"
+            },
+            {
+              "document_id": "2545",
+              "title": "Hin e.a. - 2019 - Bio-energetic modeling of medium-sized cetaceans s.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2223,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "as fitted to data of Bloch et al. (1993) and provides an equal fit compared to an equation that describes the three forms of age- dependent mortality as three separate terms, but requir- ing an additional parameter. Starvation-induced mortal- ity is only applied when the body condition of an individual falls below the starvation threshold (qs = 0.15). Starvation mortality increases with declining body condition according to a hyperbolic function, with the speed of increase controlled by parameter ls (Appendix S1: Fig. S1g; De Roos et al. 2009). Depending on the purpose of the simulation, life expectancy is either fixed or determined randomly. A fixed life expectancy is used when illustrating"
+            },
+            {
+              "document_id": "3343",
+              "title": "CoheIsak2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2285,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "es are non-linear but decline monotonically. This panel shows the relationship between fertility and expected age at death for actual curves of PTVs for the values of W as used in our models across PTV from -10 (bottom right) to +10 (top left). Background shading indicates the expected lifetime reproductive success (LRS) based on the fertility and age at death. Selection is expected to adjust each PTV along its curve to the “reddest” point (highest fitness). Not all clines pass through equally high maximum fitness points. As a result, lower values of W are generally favoured by selection (see Results). https://doi.org/10.1371/journal.pone.0189124.g001 Impacts of multiple trade-off currencies"
+            },
+            {
+              "document_id": "2659",
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2347,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "[Page 2] general deﬁnition of hazard rate: _hyðtÞ ¼ lim Dt!0 Pft , ay \u0003 t þ Dtjay . tg Dt ¼ \u00021 SyðtÞ dSyðtÞ dt ; which yields SyðtÞ ¼ e\u0002Ð t 0 _hyðuÞdu for t \u0004 0; ð1:3Þ with a† the random variable age at the time of death (i.e. S†(t) ¼ Pfa† . tg). Besides the Gompertz law, there is another classic, widely used survival distribution (Ricklefs & Scheuerlein 2002): the Weibull model, which has the form: d_hy dt ¼ nðn \u0002 1Þ_h n Wtn\u00022 with initial condition _hyð0Þ ¼ 0; ð1:4Þ that is, h˙†(t) ¼ nh˙W n tn21. The symbols h˙W and n rep- resent the Weibull ageing rate and shape parameter, respectively (Weibull 1951). Since Gompertz’s and Weibull’s efforts, several research groups have used mathematical m"
+            },
+            {
+              "document_id": "3191",
+              "title": "GurnMidd1996.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2362,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "re strongly age and size dependent, with the nature of that dependence often bearing a marked relationship to the individual's energetic status. However, since we have neither tested models nor general principles to guide the formulation of a strategic model of such dependency, we choose instead to consider three rather simple models. The simplest possible mortality model is a constant per capita mortality independent of both age and weight. There are no circumstances in which such a model is wholly justified, not least because it implies no finite limit to the age to which individuals can live. However, it is a very common modelling assumption where hard information is lacking. Because such"
+            },
+            {
+              "document_id": "2485",
+              "title": "Augustine et al. - 2020 - Comparing loss functions and interval estimates fo.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2389,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "orrespond to probability of surviving beyond that point < 0.1) to avoid division by zero. The ﬁgures show that the shapes of the proﬁles are very similar again, despite the fact that the formulas for the loss function look rather diﬀerent, and that the resulting intervals are also very similar. Notice that the conﬁdence intervals for the aging acceleration h¨a are reduced Fig. 2. The survivor functions (i.e. the fraction that exceeds the value of the argument) for the relative error of the aging acceleration h¨a (left) and the Gompertz stress coeﬃcient sG (right) for the AmP’s symmetric bounded loss function (red) and the Maximum Likelihood criterion (blue). The Monte Carlo study involved 50"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2391,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "ndruch’s general observations, a hypothesis for aging should also explain some more speciﬁc features of mortality kinetics. Gavrilov and Gavrilova (2001), for instance, argued that it should explain the exponential increase in mortality rates with age observed in many adult species (Gompertz law) and the occurrence of late-life mortality deceleration. With regard to the former, in the previous section we showed that, for adult non-growing animals, our model reduces to the Gompertz equation. Mortality deceleration at older ages can be described in the context of our model as the consequence of the selection of a special subpopulation. Late-life plateaus thus occur because animals that reach a"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ility Figure IV.7: Comparison with the Gompertz model. Broken lines: Gompertz curves. Solid lines: same curves as in Figure IV.6. Data from Weindruch et al. (1986). As the Gompertz model (equation IV.12) does not account for food consumption, three diﬀerent values for the exponential mortality-rate coeﬃcient η have been estimated. In contrast, our aging model (equation IV.6) naturally accounts for food consumption and the three data sets have, thus, been ﬁtted simultaneously. Details on the ﬁtting procedure and on the estimated parameter values are provided in Appendix B. [Page 121] IV.4. RESULTS AND DISCUSSION 109 Many biogerontologists have argued that aging is a multicausal process. The m"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2394,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "aintenance rate constant, ˙m = 0.073 d−1 and the aging acceleration ¨pa = 2.563 × 10−6 d−2. The Weibull curve with shape parameter 3.1 is plotted on top of the deb model to show that both curves are hard to distinguish in practice. ments. Death strikes if all critical elements cease functioning. The curvature of the survival probability then relates to the number of critical elements, which Witten [779] found to be somewhere between 5 and 15. Their nature still remains unknown. A property of this model is that the hazard rate does not approach zero for neonates (or embryos), which does not seem to be consistent with data [664]. Finch [219] favours the empirical description of aging rates giv"
+            },
+            {
+              "document_id": "2831",
+              "title": "KooyMetz84.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2423,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "68), Roughgarden (1979), Charlesworth ( 1980), or, in a stochastic context, in Jagers (1975). For animals that die randomly, the survivor function has the form 3(a) = exp{ -a/ T}, where T is the mean age at death. We expect such a survivor function, e.g., in a population under heavy predation pressure. At low predation pressure, the effect of aging will be much more pronounced, and the survivor function resembles the block survivor function 3(a) = ~(a d T), where x denotes the indicator function, which takes the value one for true, and the value zero for false; i.e., the animal reaches age T, and dies immediately after. Most actual survivor functions are somewhere in between these two extrem"
+            },
+            {
+              "document_id": "3468",
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2443,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ulation structure and average characteristics. A background mortality rate and a mortality caused by above normal temperatures are forced into the model, and the same reproductive output is imposed to all females that are able to reproduce. ADAPTATION Agents do not have an adaptive behavior. Individual traits vary among individuals in a population, but each individual carry the same traits along their entire lifespan and do not change nor learn from the events they experience or from each other. Consequently, the design concepts “objectives”, “learning”, “prediction”, and “sensing” do not apply. INTERACTION Individuals do not have any direct interaction. They only affect each other indirectl"
+            },
+            {
+              "document_id": "2685",
+              "title": "LikaKooy2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2451,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "at aging is a major cause of death under ﬁeld conditions. Nevertheless, more complex formulation should be used if research is geared towards answering questions concerning the evolutionary ecology of aging and longevity. Leeuwen et al. (2002) have developed a mathematical model based on the DEB theory, to describe the aging process that accounts for the effects of caloric restriction. This model is more complex and less tested, so far, against experimental data than the present model. Our aim in this paper is to illustrate the application of DEB models to life history theory. This approach allows us to study questions concerning the evolution of lifetime reproductive allocation, optimal age"
+            },
+            {
+              "document_id": "2661",
+              "title": "LeddLoga2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2451,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "age. (In fact, it is not actually reasonable for the allocation parameter α to be constant in a net production model, as will be shown in the analysis below). DEB models must incorporate assumptions about the probability of survival for an individual organism. The survival probability is sometimes modeled simply as an exponential decay function [7]. In other cases, the survival probability is based on a physiological hazard rate [4,9]. The exponential model is simple and therefore good for investigations in which the mechanisms of mortality are not of interest, but such studies cannot yield information regarding the effect of ecological niche on life history. The physiological hazard rate is"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2471,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "rameters. Finally, we conclude by summarizing the most salient features of the model presented in this Chapter: (1) we developed a physiologically-based model for aging that is rather simple from a mathematical point of view. This is illustrated by the possibility to estimate the required parameter val- ues from growth and survival data only; (2) the model is able to predict diﬀerences in survival on the basis of diﬀerences in food consumption. As can be seen from Figure IV.6, the model not only predicts CR-animals to live longer, but also provides CR-survival curves that are consistent with the experimental observations; (3) we obtained an interpretation of the Gompertz-parameters in terms "
+            },
+            {
+              "document_id": "3838",
+              "title": "Barhdadi et al. - Environment-dependent population dynamics emerging.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2477,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "history events included in the model, i.e. reproduction and death. DEB-induced death is traditionally modelled through age­ ing and starvation processes. We model death by ageing as a process of damage accumulation, using the ageing submodel of Martin et al. (2012). These equations are also described in the ODD together with the standard DEB model equations. The primary output of these equations is the ageing hazard rate h. Death by ageing is accounted for after each energy budget update by sampling from a uniform distribution on [0, 1] and verifying whether the sampled number is smaller than the individual prime’s probability to die, h∆t (Table 1). Although the ageing submodel is also gener"
+            },
+            {
+              "document_id": "3468",
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2492,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "d mortality rate ḣ, which is a function of the damage accumulated in the body. Damage inducing compounds are diluted via growth 𝑟̇, and additionally ageing is calculated with two other parameters, the Weibull ageing acceleration ḧa and the Gompertz stress coefficient sG. In other words, the hazard mortality rate is the simulation of the vulnerability of the individual towards damage, such as the risk of dying from an illness increasing as the individual ages. Additionally, in our model, the ageing submodel relies on a stochastic element, where the individual has a 50% chance of looking into its death probability rate ḣ. Update individuals The calculated changes are applied to each state vari"
+            },
+            {
+              "document_id": "3343",
+              "title": "CoheIsak2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2496,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": ". (TIF) S12 Fig. A model extending to 10,000 generations instead of 500. Note that convergence of life history traits is reached relatively early, suggesting that our 500-generation models are largely sufficient. Also note that physiological trait values are not stable in models with multi- ple currencies and can vary without much impact on life-history traits. (TIF) S13 Fig. Sensitivity analyses of the standard deviation of baseline PTVs. We ran 100 simula- tions in which this standard deviation was fixed at one of the values along the x-axis. For each of the four models in each simulation, we present the average trait value at the 500th (final) generation on the y-axis. b0 was fixed at 0.0"
+            },
+            {
+              "document_id": "2629",
+              "title": "MaurFaug2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2502,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "mortality 496 O. Maury et al. / Progress in Oceanography 74 (2007) 479–499 [Page 19] is estimated assuming that the life span corresponds to the age at which only 10% of a cohort remains (Table 3). The parameters M and t are estimated by ﬁtting the modeled mortality curve to the estimated mortality curve (Table 3). References Andersen, N.G., Riis-Vestergaard, J., 2003. The eﬀects of food consumption rate, body size and temperature on net food conversion eﬃciency in saithe and whiting. Journal of Fish Biology 62, 395–412. Arino, O., Shin, Y.-J., Mullon, C., 2004. A mathematical derivation of size spectra in ﬁsh populations. Comptes Rendus de l’Acade´mie des Sciences. Section Biologies 327, 24"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Two snippets (3 and 15) explicitly mention Gompertz‑type models as good approximations to life‑table survivorship or mortality curves, providing direct support for the claim that Weibull/Gompertz models describe ageing survivor curves. No snippet presents evidence contradicting this view; the remaining abstracts are either unrelated or discuss survival in generic terms without naming these models. Consequently the corpus offers moderate overall support (evidence_strength = 2) and a consensus that leans toward corroboration of the stylized fact (consensus_direction = 3)."
+          },
+          "n_references": 2,
+          "references": {
+            "W40316541": {
+              "title": "A re-estimation of fertility rates in Nigeria: an application of the Gompertz relational model.",
+              "doi": "",
+              "year": "1986",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2316
+            },
+            "W3113107509": {
+              "title": "Mortality: A physics perspective",
+              "doi": "https://doi.org/10.1016/j.physa.2020.125660",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2511
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2091564020",
+              "title": "Trends in scale and shape of survival curves",
+              "doi": "https://doi.org/10.1038/srep00504",
+              "year": "2012",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The ageing of the population is an issue in wealthy countries worldwide because of increasing costs for health care and welfare. Survival curves taken from demographic life tables may help shed light on the hypotheses that humans are living longer and that human populations are growing older. We describe a methodology that enables us to obtain separate measurements of scale and shape variances in survival curves. Specifically, 'living longer' is associated with the scale variance of survival curves, whereas 'growing older' is associated with the shape variance. We show how the scale and shape of survival curves have changed over time during recent decades, based on period and cohort female l"
+            },
+            {
+              "document_id": "W1942356834",
+              "title": "Toward Reconciling Inferences Concerning Genetic Variation in Senescence in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1093/genetics/152.2.553",
+              "year": "1999",
+              "distance": 0.2288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Standard models for senescence predict an increase in the additive genetic variance for log mortality rate late in the life cycle. Variance component analysis of age-specific mortality rates of related cohorts is problematic. The actual mortality rates are not observable and can be estimated only crudely at early ages when few individuals are dying and at late ages when most are dead. Therefore, standard quantitative genetic analysis techniques cannot be applied with confidence. We present a novel and rigorous analysis that treats the mortality rates as missing data following two different parametric senescence models. Two recent studies of Drosophila melanogaster, the original anal"
+            },
+            {
+              "document_id": "W40316541",
+              "title": "A re-estimation of fertility rates in Nigeria: an application of the Gompertz relational model.",
+              "doi": "",
+              "year": "1986",
+              "distance": 0.2316,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "This study is based on a mathematical model for the life table survivorship function developed by the author, \"the form of which has been logically arrived at in a manner such that the simple but the well known constraints of the life table functions can be met by the model. There are basically three parameters in the model which can be estimated by the method of least squares after the variables are subjected to appropriate transformations. The characteristics of these parameters have been investigated in this paper which [makes] it readily apparent that the model can provide good approximations to a wide variety of life tables.\" (summary in FRE, ITA)"
+            },
+            {
+              "document_id": "W4323670220",
+              "title": "Demography, Including Paleodemography",
+              "doi": "https://doi.org/10.1002/9781119828075.ch14",
+              "year": "2023",
+              "distance": 0.2327,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Demography is the study of a group's age and sex structure. This chapter focuses on the life table and its continuous form, known as a hazard or survivorship model. For an extant group it may be possible to obtain information on ages-at-death, although generally it is more common to have census information on the living. Single census life table estimates for anthropological samples are made additionally difficult because growth rates may be unknown. A hazard model generalizes the life table so that age is a continuous variable. Differences in mortality profiles derived from archaeological skeletons that accumulated over time, often several centuries or more, are commonly interpreted as main"
+            },
+            {
+              "document_id": "W2138845720",
+              "title": "Ageing and typical survivorship curves result from optimal resource allocation",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2349,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Ageing is a general feature of higher organisms. Evolutionary theories of ageing rest on a gradual decline of fitness sensitivity to changes in survival and fecundity with age, so traits expressed late in life are less favoured by natural selection than those expressed early in life. From the life-history perspective, ageing may result from a scheme of optimal resource allocation in which investment in repair is lower than that required for removing all experienced damage. Here, we report the results of a dynamic programming model based on the disposable soma theory of ageing, which optimizes resource allocation to growth, reproduction and repair. The optimal allocation strategy responds to "
+            },
+            {
+              "document_id": "W3212953007",
+              "title": "Life tables: construction and interpretation",
+              "doi": "https://doi.org/10.1093/oso/9780198838609.003.0008",
+              "year": "2021",
+              "distance": 0.2383,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Life tables, which describe how the risk of death (and sometimes fertility) changes with age, are a fundamental tool for describing and exploring the diversity of life histories. Numerous important life history metrics can be derived from them. This chapter provides a broad coverage of life table construction and use and use with a particular focus on nonhuman animals. The calculation of life tables can be divided into approaches: cohort-based, where the data are obtained from individuals born at (approximately) the same time that are followed until death; and period-based, where the data are obtained from a population of mixed ages followed for a particular time-frame (e.g. a year)"
+            },
+            {
+              "document_id": "W1587775399",
+              "title": "A semi‐Markov model to assess reliably survival patterns from birth to death in free‐ranging populations",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00088.x",
+              "year": "2011",
+              "distance": 0.2423,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Summary 1. Semi‐Markov models explicitly define the distribution of waiting time duration and have been used as a convenient framework for modelling the time spent in one physiological state in previous biological studies. 2. Here, we focus on the modelling of the time spent within a life‐cycle stage (e.g. juvenile, adult and old) by individuals over their lifetime from Capture–Mark–Recapture data, which are commonly used to estimate demographic parameters in free‐ranging populations. 3. We propose a parametric model (1) with a semi‐Markov state, (2) associated to a hazard function and (3) accounting for imperfect detection to assess reliably survival patterns from birth to death. 4. These m"
+            },
+            {
+              "document_id": "W4243671740",
+              "title": "An Empirical Study of Mortality Models in Taiwan",
+              "doi": "https://doi.org/10.2202/2153-3792.1033",
+              "year": "2008",
+              "distance": 0.2434,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "There has been a significant increase in the life expectancies of the Taiwanese population after the end of Second World War. Like in many developed countries, due to the prolonging life expectancy and lower fertility rates, the aging population has now become a major policy concern in Taiwan. The search for feasible methods for modeling the future mortality changes has become a popular issue in Taiwan. The Lee-Carter (LC) model, the reduction factor (RF) model and the age-period-cohort (APC) model are three frequently used methods for modeling future mortality dynamics. In this paper, we introduce these three models and discuss their respective pros and cons. We carry out an empirical study"
+            },
+            {
+              "document_id": "W2121553368",
+              "title": "A measure for describing and comparing postreproductive life span as a population trait",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00095.x",
+              "year": "2011",
+              "distance": 0.2438,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary 1. While classical life‐history theory does not predict postreproductive life span (PRLS), it has been detected in a great number of taxa, leading to the view that it is a broadly conserved trait and attempts to reconcile theory with these observations. We suggest an alternative: the apparently wide distribution of significant PRLS is an artefact of insufficient methods. 2. PRLS is traditionally measured in units of time between each individual’s last parturition and death, after excluding those individuals for whom this interval is short. A mean of this measure is then calculated as a population value. We show this traditional population measure (which we denote PrT) to be inconsist"
+            },
+            {
+              "document_id": "W4249341460",
+              "title": "Death Spirals",
+              "doi": "https://doi.org/10.1093/acprof:oso/9780199754229.003.0009",
+              "year": "2011",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Unlike mortality, there are no general purpose models to describe age-specific fecundity patterns. This chapter shows that using very basic conclusions about the effects of natural selection on fecundity and a newly-discovered physiological phenomenon called the death spiral results in highly accurate descriptions of female fecundity in Drosophila."
+            },
+            {
+              "document_id": "W2043833924",
+              "title": "The Statistical Demography of Whooping Cranes",
+              "doi": "https://doi.org/10.2307/1939224",
+              "year": "1987",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "We fit models for the survivorship of Whooping Cranes to the record of population censuses. We consider two classes of models: those that posit age dependence without time dependence, and those that posit time dependence without age dependence. For the model of Binkley and Miller (1980), which falls in the former category, we develop a correct, stochastic model for the inherent demographic variability. Our re—estimates of the model's parameters support the hypothesis of a temporal and trend in survivorship. We then consider time—dependent models that permit simultaneous inferences about separate temporal patterns of survivorships of juveniles and adults. We find that the evidence is consiste"
+            },
+            {
+              "document_id": "W3153887150",
+              "title": "Healthy longevity from incidence-based models: More kinds of health than stars in the sky",
+              "doi": "https://doi.org/10.1101/2021.04.16.21255628",
+              "year": "2021",
+              "distance": 0.2482,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Background Healthy longevity (HL) is an important measure of the prospects for quality of life in ageing societies. Incidence-based (cf. prevalence-based) models describe transitions among age classes and health stages. Despite the probabilistic nature of those transitions, analyses of healthy longevity have focused persistently on means (“health expectancy”), neglecting variances and higher moments. Objectives Our goal is a comprehensive methodology to analyse HL in terms of any combination of health stages and age classes, or of transitions among health stages, or of values (e.g., quality of life) associated with health stages or transitions. Methods We construct multistate Markov"
+            },
+            {
+              "document_id": "W4236661620",
+              "title": "Healthy longevity from incidence-based models: More kinds of health than stars in the sky",
+              "doi": "https://doi.org/10.4054/demres.2021.45.13",
+              "year": "2021",
+              "distance": 0.2489,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "BACKGROUND Healthy longevity (HL) is an important measure of the prospects for quality of life in ageing societies. Incidence-based (cf. prevalence-based) models describe transitions among age classes and health stages. Despite the probabilistic nature of those transitions, analyses of healthy longevity have focused persistently on means (“health expectancy”), neglecting variances and higher moments. OBJECTIVE Our goal is a comprehensive methodology to analyse HL in terms of any combination of health stages and age classes, or of transitions among health stages, or of values (e.g., quality of life) associated with health stages or transitions. METHODS We construct multistate Markov chains fo"
+            },
+            {
+              "document_id": "W2113833532",
+              "title": "Stage‐classified matrix models and age estimates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2002.960106.x",
+              "year": "2002",
+              "distance": 0.25,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "When the size of individuals is a better indicator of their chances to survive, grow, and reproduce than their age, the suitable matrix population model is stage‐classified. Cochran and Ellner developed a method to assess age‐based parameters from such models. We present here, for these age estimates, simplified formulas that are valid whenever there is neither retrogression nor fission: individuals may only die, survive in the same stage, or survive and recruit to the next stage. Our formulas enable one to understand better why, and under which hypotheses, it is possible to compute age estimates from a stage‐classified model, and point out some limitations of the method. These limitations i"
+            },
+            {
+              "document_id": "W3113107509",
+              "title": "Mortality: A physics perspective",
+              "doi": "https://doi.org/10.1016/j.physa.2020.125660",
+              "year": "2020",
+              "distance": 0.2511,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "One of the many interests of the late Dietrich Stauffer was the modelling of mortality. Here we review the features of mortality data for various biological species. Age specific mortality (death rate) leads to a discussion of possible models of the death rate, including that of Gompertz, raising the interesting question: is our lifetime finite or could we contemplate living for ever? The answer judging from many different data sources is that without radical changes in our biology it seems death above age 120 is extremely unlikely. We then show how a toy model, linking mortality to the immune system, can predict the general variation of the death rate with time, spanning both infant and adu"
+            },
+            {
+              "document_id": "W2171270625",
+              "title": "What Fecundity Patterns Indicate About Aging and Longevity: Insights From Drosophila Studies",
+              "doi": "https://doi.org/10.1093/gerona/58.6.b484",
+              "year": "2003",
+              "distance": 0.2533,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The age pattern of fecundity is represented as a result of a superposition of two processes: the genetic fecundity program encoded in the organism's reproductive machinery and senescence of the reproductive system. Accumulation of oxidative damage produces the energy decline, which could potentially be used in reproduction. As a result, the age-declining process arises in the reproductive machinery at a critical age. We show that this mechanism is common for different species. It establishes a connection between the decline of organism vitality and reproductive senescence. We suggest a parametric description of a fecundity pattern that allows for prediction of reproductive longevity. We appl"
+            },
+            {
+              "document_id": "W4244029085",
+              "title": "Paleodemography: Expectancy and false hope",
+              "doi": "https://doi.org/10.1002/(sici)1096-8644(199604)99:4<571::aid-ajpa4>3.3.co;2-m",
+              "year": "1996",
+              "distance": 0.2546,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "From parent populations (N = 50,000) statistically generated, representing different levels of correlation (r) between the age at death and a hypothetical biological indicator (r = 0.8-0.98), reference samples and target demographic samples are randomly drawn. Two iterative techniques, proportional fitting procedure and Bayesian, are used to estimate from the reference samples the age distribution of the targets. Due to the random fluctuations of the pattern of aging, both in the reference and target samples, these techniques converge only in expectation toward the true value of a distribution, but not in practice for any particular realization. Nevertheless, these techniques allow the estim"
+            },
+            {
+              "document_id": "W2077680281",
+              "title": "A stochastic computer model for simulating population growth",
+              "doi": "https://doi.org/10.1007/bf02510937",
+              "year": "1977",
+              "distance": 0.2546,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Summary A model is described for investigating the interactions of age‐specific birth and death rates, age distribution and density‐governing factors determining the growth form of single‐species populations. It employs Monte Carlo techniques to simulate the births and deaths of individuals while density‐governing factors are represented by simple algebraic equations relating survival and fecundity to population density. In all respects the model's behavior agrees with the results of more conventional mathematical approaches, including the logistic model and Lotka's Law, which predicts a relationship betwen age‐specific rates, rate of increase and age distribution. Situations involving expon"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Several excerpts explicitly cite the Weibull and Gompertz distributions as natural or classic models that fit ageing‑related survivorship data (e.g., Kooy et al. 1989, Leeuwen & Van der Hoeven 2010, Gavrilov & Gavrilova 2001, Kooy 1993). These passages provide direct empirical support for the claim that survivor curves terminated by ageing are well described by these two models. No snippet presents evidence contradicting this view; the remaining texts are unrelated or only tangentially mention mortality without referencing Weibull or Gompertz. The concentration of multiple, independent citations yields a strong evidential base and a clear consensus in favor of the stylized fact."
+          },
+          "n_references": 5,
+          "references": {
+            "2825": {
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1944
+            },
+            "2659": {
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2347
+            },
+            "2660": {
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2391
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2394
+            },
+            "W40316541": {
+              "title": "A re-estimation of fertility rates in Nigeria: an application of the Gompertz relational model.",
+              "doi": "",
+              "year": "1986",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2316
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2825",
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1944,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ature Since the nature of ageing processes is still not under- stood, adequate modelling of quantitative aspects of the process is impossible. Because ageing is essential in population dynamics, we have to rely on descriptive models for the time being. The data of MacArthur & Baillie (1929) given in Fig. Al suggest that the Weibull survivorship curve might provide a more-or-less 'natu- ral' and parameter-sparse model for Daphnia. The model is given by Pr(a, - ab>a) = exp(- [a/an]g), where a, is age at death and ab is age at hatching. Besides goodness of fit, an argument in favour of the Weibull model is that temperature has an effect on the time parameter, am, only, and sex only on the shape"
+            },
+            {
+              "document_id": "2545",
+              "title": "Hin e.a. - 2019 - Bio-energetic modeling of medium-sized cetaceans s.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2223,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "as fitted to data of Bloch et al. (1993) and provides an equal fit compared to an equation that describes the three forms of age- dependent mortality as three separate terms, but requir- ing an additional parameter. Starvation-induced mortal- ity is only applied when the body condition of an individual falls below the starvation threshold (qs = 0.15). Starvation mortality increases with declining body condition according to a hyperbolic function, with the speed of increase controlled by parameter ls (Appendix S1: Fig. S1g; De Roos et al. 2009). Depending on the purpose of the simulation, life expectancy is either fixed or determined randomly. A fixed life expectancy is used when illustrating"
+            },
+            {
+              "document_id": "3343",
+              "title": "CoheIsak2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2285,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "es are non-linear but decline monotonically. This panel shows the relationship between fertility and expected age at death for actual curves of PTVs for the values of W as used in our models across PTV from -10 (bottom right) to +10 (top left). Background shading indicates the expected lifetime reproductive success (LRS) based on the fertility and age at death. Selection is expected to adjust each PTV along its curve to the “reddest” point (highest fitness). Not all clines pass through equally high maximum fitness points. As a result, lower values of W are generally favoured by selection (see Results). https://doi.org/10.1371/journal.pone.0189124.g001 Impacts of multiple trade-off currencies"
+            },
+            {
+              "document_id": "2659",
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2347,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "[Page 2] general deﬁnition of hazard rate: _hyðtÞ ¼ lim Dt!0 Pft , ay \u0003 t þ Dtjay . tg Dt ¼ \u00021 SyðtÞ dSyðtÞ dt ; which yields SyðtÞ ¼ e\u0002Ð t 0 _hyðuÞdu for t \u0004 0; ð1:3Þ with a† the random variable age at the time of death (i.e. S†(t) ¼ Pfa† . tg). Besides the Gompertz law, there is another classic, widely used survival distribution (Ricklefs & Scheuerlein 2002): the Weibull model, which has the form: d_hy dt ¼ nðn \u0002 1Þ_h n Wtn\u00022 with initial condition _hyð0Þ ¼ 0; ð1:4Þ that is, h˙†(t) ¼ nh˙W n tn21. The symbols h˙W and n rep- resent the Weibull ageing rate and shape parameter, respectively (Weibull 1951). Since Gompertz’s and Weibull’s efforts, several research groups have used mathematical m"
+            },
+            {
+              "document_id": "3191",
+              "title": "GurnMidd1996.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2362,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "re strongly age and size dependent, with the nature of that dependence often bearing a marked relationship to the individual's energetic status. However, since we have neither tested models nor general principles to guide the formulation of a strategic model of such dependency, we choose instead to consider three rather simple models. The simplest possible mortality model is a constant per capita mortality independent of both age and weight. There are no circumstances in which such a model is wholly justified, not least because it implies no finite limit to the age to which individuals can live. However, it is a very common modelling assumption where hard information is lacking. Because such"
+            },
+            {
+              "document_id": "2485",
+              "title": "Augustine et al. - 2020 - Comparing loss functions and interval estimates fo.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2389,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "orrespond to probability of surviving beyond that point < 0.1) to avoid division by zero. The ﬁgures show that the shapes of the proﬁles are very similar again, despite the fact that the formulas for the loss function look rather diﬀerent, and that the resulting intervals are also very similar. Notice that the conﬁdence intervals for the aging acceleration h¨a are reduced Fig. 2. The survivor functions (i.e. the fraction that exceeds the value of the argument) for the relative error of the aging acceleration h¨a (left) and the Gompertz stress coeﬃcient sG (right) for the AmP’s symmetric bounded loss function (red) and the Maximum Likelihood criterion (blue). The Monte Carlo study involved 50"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2391,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ndruch’s general observations, a hypothesis for aging should also explain some more speciﬁc features of mortality kinetics. Gavrilov and Gavrilova (2001), for instance, argued that it should explain the exponential increase in mortality rates with age observed in many adult species (Gompertz law) and the occurrence of late-life mortality deceleration. With regard to the former, in the previous section we showed that, for adult non-growing animals, our model reduces to the Gompertz equation. Mortality deceleration at older ages can be described in the context of our model as the consequence of the selection of a special subpopulation. Late-life plateaus thus occur because animals that reach a"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "ility Figure IV.7: Comparison with the Gompertz model. Broken lines: Gompertz curves. Solid lines: same curves as in Figure IV.6. Data from Weindruch et al. (1986). As the Gompertz model (equation IV.12) does not account for food consumption, three diﬀerent values for the exponential mortality-rate coeﬃcient η have been estimated. In contrast, our aging model (equation IV.6) naturally accounts for food consumption and the three data sets have, thus, been ﬁtted simultaneously. Details on the ﬁtting procedure and on the estimated parameter values are provided in Appendix B. [Page 121] IV.4. RESULTS AND DISCUSSION 109 Many biogerontologists have argued that aging is a multicausal process. The m"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2394,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "aintenance rate constant, ˙m = 0.073 d−1 and the aging acceleration ¨pa = 2.563 × 10−6 d−2. The Weibull curve with shape parameter 3.1 is plotted on top of the deb model to show that both curves are hard to distinguish in practice. ments. Death strikes if all critical elements cease functioning. The curvature of the survival probability then relates to the number of critical elements, which Witten [779] found to be somewhere between 5 and 15. Their nature still remains unknown. A property of this model is that the hazard rate does not approach zero for neonates (or embryos), which does not seem to be consistent with data [664]. Finch [219] favours the empirical description of aging rates giv"
+            },
+            {
+              "document_id": "2831",
+              "title": "KooyMetz84.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2423,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "68), Roughgarden (1979), Charlesworth ( 1980), or, in a stochastic context, in Jagers (1975). For animals that die randomly, the survivor function has the form 3(a) = exp{ -a/ T}, where T is the mean age at death. We expect such a survivor function, e.g., in a population under heavy predation pressure. At low predation pressure, the effect of aging will be much more pronounced, and the survivor function resembles the block survivor function 3(a) = ~(a d T), where x denotes the indicator function, which takes the value one for true, and the value zero for false; i.e., the animal reaches age T, and dies immediately after. Most actual survivor functions are somewhere in between these two extrem"
+            },
+            {
+              "document_id": "3468",
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2443,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ulation structure and average characteristics. A background mortality rate and a mortality caused by above normal temperatures are forced into the model, and the same reproductive output is imposed to all females that are able to reproduce. ADAPTATION Agents do not have an adaptive behavior. Individual traits vary among individuals in a population, but each individual carry the same traits along their entire lifespan and do not change nor learn from the events they experience or from each other. Consequently, the design concepts “objectives”, “learning”, “prediction”, and “sensing” do not apply. INTERACTION Individuals do not have any direct interaction. They only affect each other indirectl"
+            },
+            {
+              "document_id": "2685",
+              "title": "LikaKooy2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2451,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "at aging is a major cause of death under ﬁeld conditions. Nevertheless, more complex formulation should be used if research is geared towards answering questions concerning the evolutionary ecology of aging and longevity. Leeuwen et al. (2002) have developed a mathematical model based on the DEB theory, to describe the aging process that accounts for the effects of caloric restriction. This model is more complex and less tested, so far, against experimental data than the present model. Our aim in this paper is to illustrate the application of DEB models to life history theory. This approach allows us to study questions concerning the evolution of lifetime reproductive allocation, optimal age"
+            },
+            {
+              "document_id": "W2091564020",
+              "title": "Trends in scale and shape of survival curves",
+              "doi": "https://doi.org/10.1038/srep00504",
+              "year": "2012",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The ageing of the population is an issue in wealthy countries worldwide because of increasing costs for health care and welfare. Survival curves taken from demographic life tables may help shed light on the hypotheses that humans are living longer and that human populations are growing older. We describe a methodology that enables us to obtain separate measurements of scale and shape variances in survival curves. Specifically, 'living longer' is associated with the scale variance of survival curves, whereas 'growing older' is associated with the shape variance. We show how the scale and shape of survival curves have changed over time during recent decades, based on period and cohort female l"
+            },
+            {
+              "document_id": "W1942356834",
+              "title": "Toward Reconciling Inferences Concerning Genetic Variation in Senescence in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1093/genetics/152.2.553",
+              "year": "1999",
+              "distance": 0.2288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Standard models for senescence predict an increase in the additive genetic variance for log mortality rate late in the life cycle. Variance component analysis of age-specific mortality rates of related cohorts is problematic. The actual mortality rates are not observable and can be estimated only crudely at early ages when few individuals are dying and at late ages when most are dead. Therefore, standard quantitative genetic analysis techniques cannot be applied with confidence. We present a novel and rigorous analysis that treats the mortality rates as missing data following two different parametric senescence models. Two recent studies of Drosophila melanogaster, the original anal"
+            },
+            {
+              "document_id": "W40316541",
+              "title": "A re-estimation of fertility rates in Nigeria: an application of the Gompertz relational model.",
+              "doi": "",
+              "year": "1986",
+              "distance": 0.2316,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "This study is based on a mathematical model for the life table survivorship function developed by the author, \"the form of which has been logically arrived at in a manner such that the simple but the well known constraints of the life table functions can be met by the model. There are basically three parameters in the model which can be estimated by the method of least squares after the variables are subjected to appropriate transformations. The characteristics of these parameters have been investigated in this paper which [makes] it readily apparent that the model can provide good approximations to a wide variety of life tables.\" (summary in FRE, ITA)"
+            },
+            {
+              "document_id": "W4323670220",
+              "title": "Demography, Including Paleodemography",
+              "doi": "https://doi.org/10.1002/9781119828075.ch14",
+              "year": "2023",
+              "distance": 0.2327,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Demography is the study of a group's age and sex structure. This chapter focuses on the life table and its continuous form, known as a hazard or survivorship model. For an extant group it may be possible to obtain information on ages-at-death, although generally it is more common to have census information on the living. Single census life table estimates for anthropological samples are made additionally difficult because growth rates may be unknown. A hazard model generalizes the life table so that age is a continuous variable. Differences in mortality profiles derived from archaeological skeletons that accumulated over time, often several centuries or more, are commonly interpreted as main"
+            },
+            {
+              "document_id": "W2138845720",
+              "title": "Ageing and typical survivorship curves result from optimal resource allocation",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2349,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Ageing is a general feature of higher organisms. Evolutionary theories of ageing rest on a gradual decline of fitness sensitivity to changes in survival and fecundity with age, so traits expressed late in life are less favoured by natural selection than those expressed early in life. From the life-history perspective, ageing may result from a scheme of optimal resource allocation in which investment in repair is lower than that required for removing all experienced damage. Here, we report the results of a dynamic programming model based on the disposable soma theory of ageing, which optimizes resource allocation to growth, reproduction and repair. The optimal allocation strategy responds to "
+            },
+            {
+              "document_id": "W3212953007",
+              "title": "Life tables: construction and interpretation",
+              "doi": "https://doi.org/10.1093/oso/9780198838609.003.0008",
+              "year": "2021",
+              "distance": 0.2383,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Life tables, which describe how the risk of death (and sometimes fertility) changes with age, are a fundamental tool for describing and exploring the diversity of life histories. Numerous important life history metrics can be derived from them. This chapter provides a broad coverage of life table construction and use and use with a particular focus on nonhuman animals. The calculation of life tables can be divided into approaches: cohort-based, where the data are obtained from individuals born at (approximately) the same time that are followed until death; and period-based, where the data are obtained from a population of mixed ages followed for a particular time-frame (e.g. a year)"
+            },
+            {
+              "document_id": "W1587775399",
+              "title": "A semi‐Markov model to assess reliably survival patterns from birth to death in free‐ranging populations",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00088.x",
+              "year": "2011",
+              "distance": 0.2423,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary 1. Semi‐Markov models explicitly define the distribution of waiting time duration and have been used as a convenient framework for modelling the time spent in one physiological state in previous biological studies. 2. Here, we focus on the modelling of the time spent within a life‐cycle stage (e.g. juvenile, adult and old) by individuals over their lifetime from Capture–Mark–Recapture data, which are commonly used to estimate demographic parameters in free‐ranging populations. 3. We propose a parametric model (1) with a semi‐Markov state, (2) associated to a hazard function and (3) accounting for imperfect detection to assess reliably survival patterns from birth to death. 4. These m"
+            },
+            {
+              "document_id": "W4243671740",
+              "title": "An Empirical Study of Mortality Models in Taiwan",
+              "doi": "https://doi.org/10.2202/2153-3792.1033",
+              "year": "2008",
+              "distance": 0.2434,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "There has been a significant increase in the life expectancies of the Taiwanese population after the end of Second World War. Like in many developed countries, due to the prolonging life expectancy and lower fertility rates, the aging population has now become a major policy concern in Taiwan. The search for feasible methods for modeling the future mortality changes has become a popular issue in Taiwan. The Lee-Carter (LC) model, the reduction factor (RF) model and the age-period-cohort (APC) model are three frequently used methods for modeling future mortality dynamics. In this paper, we introduce these three models and discuss their respective pros and cons. We carry out an empirical study"
+            },
+            {
+              "document_id": "W2121553368",
+              "title": "A measure for describing and comparing postreproductive life span as a population trait",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00095.x",
+              "year": "2011",
+              "distance": 0.2438,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Summary 1. While classical life‐history theory does not predict postreproductive life span (PRLS), it has been detected in a great number of taxa, leading to the view that it is a broadly conserved trait and attempts to reconcile theory with these observations. We suggest an alternative: the apparently wide distribution of significant PRLS is an artefact of insufficient methods. 2. PRLS is traditionally measured in units of time between each individual’s last parturition and death, after excluding those individuals for whom this interval is short. A mean of this measure is then calculated as a population value. We show this traditional population measure (which we denote PrT) to be inconsist"
+            },
+            {
+              "document_id": "W4249341460",
+              "title": "Death Spirals",
+              "doi": "https://doi.org/10.1093/acprof:oso/9780199754229.003.0009",
+              "year": "2011",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Unlike mortality, there are no general purpose models to describe age-specific fecundity patterns. This chapter shows that using very basic conclusions about the effects of natural selection on fecundity and a newly-discovered physiological phenomenon called the death spiral results in highly accurate descriptions of female fecundity in Drosophila."
+            },
+            {
+              "document_id": "W2043833924",
+              "title": "The Statistical Demography of Whooping Cranes",
+              "doi": "https://doi.org/10.2307/1939224",
+              "year": "1987",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "We fit models for the survivorship of Whooping Cranes to the record of population censuses. We consider two classes of models: those that posit age dependence without time dependence, and those that posit time dependence without age dependence. For the model of Binkley and Miller (1980), which falls in the former category, we develop a correct, stochastic model for the inherent demographic variability. Our re—estimates of the model's parameters support the hypothesis of a temporal and trend in survivorship. We then consider time—dependent models that permit simultaneous inferences about separate temporal patterns of survivorships of juveniles and adults. We find that the evidence is consiste"
+            },
+            {
+              "document_id": "W3153887150",
+              "title": "Healthy longevity from incidence-based models: More kinds of health than stars in the sky",
+              "doi": "https://doi.org/10.1101/2021.04.16.21255628",
+              "year": "2021",
+              "distance": 0.2482,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract Background Healthy longevity (HL) is an important measure of the prospects for quality of life in ageing societies. Incidence-based (cf. prevalence-based) models describe transitions among age classes and health stages. Despite the probabilistic nature of those transitions, analyses of healthy longevity have focused persistently on means (“health expectancy”), neglecting variances and higher moments. Objectives Our goal is a comprehensive methodology to analyse HL in terms of any combination of health stages and age classes, or of transitions among health stages, or of values (e.g., quality of life) associated with health stages or transitions. Methods We construct multistate Markov"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly support the stylized fact. Snippet 1 explicitly proposes the Weibull survivorship curve as a natural, parameter-sparse description for Daphnia ageing-related death. Snippet 4 formally introduces both the Gompertz law and Weibull model as the two classic, widely used survival distributions. Snippet 9 shows the DEB ageing model and Weibull curve are practically indistinguishable, and snippets 7, 8, and 14 demonstrate the Gompertz law emerging from / being interpreted in DEB ageing models. Snippet 16 references the Weibull ageing acceleration and Gompertz stress coefficient as standard DEB ageing parameters. No snippet contradicts the fact; the remaining snippets are off-topic or only mention mortality modeling generically. The evidence is strong and consistently corroborating."
+          },
+          "n_references": 6,
+          "references": {
+            "2825": {
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1944
+            },
+            "2659": {
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2347
+            },
+            "2660": {
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2391
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2394
+            },
+            "2831": {
+              "title": "KooyMetz84.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2423
+            },
+            "3468": {
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2492
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2825",
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1944,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ature Since the nature of ageing processes is still not under- stood, adequate modelling of quantitative aspects of the process is impossible. Because ageing is essential in population dynamics, we have to rely on descriptive models for the time being. The data of MacArthur & Baillie (1929) given in Fig. Al suggest that the Weibull survivorship curve might provide a more-or-less 'natu- ral' and parameter-sparse model for Daphnia. The model is given by Pr(a, - ab>a) = exp(- [a/an]g), where a, is age at death and ab is age at hatching. Besides goodness of fit, an argument in favour of the Weibull model is that temperature has an effect on the time parameter, am, only, and sex only on the shape"
+            },
+            {
+              "document_id": "2545",
+              "title": "Hin e.a. - 2019 - Bio-energetic modeling of medium-sized cetaceans s.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2223,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "as fitted to data of Bloch et al. (1993) and provides an equal fit compared to an equation that describes the three forms of age- dependent mortality as three separate terms, but requir- ing an additional parameter. Starvation-induced mortal- ity is only applied when the body condition of an individual falls below the starvation threshold (qs = 0.15). Starvation mortality increases with declining body condition according to a hyperbolic function, with the speed of increase controlled by parameter ls (Appendix S1: Fig. S1g; De Roos et al. 2009). Depending on the purpose of the simulation, life expectancy is either fixed or determined randomly. A fixed life expectancy is used when illustrating"
+            },
+            {
+              "document_id": "3343",
+              "title": "CoheIsak2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2285,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "es are non-linear but decline monotonically. This panel shows the relationship between fertility and expected age at death for actual curves of PTVs for the values of W as used in our models across PTV from -10 (bottom right) to +10 (top left). Background shading indicates the expected lifetime reproductive success (LRS) based on the fertility and age at death. Selection is expected to adjust each PTV along its curve to the “reddest” point (highest fitness). Not all clines pass through equally high maximum fitness points. As a result, lower values of W are generally favoured by selection (see Results). https://doi.org/10.1371/journal.pone.0189124.g001 Impacts of multiple trade-off currencies"
+            },
+            {
+              "document_id": "2659",
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2347,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "[Page 2] general deﬁnition of hazard rate: _hyðtÞ ¼ lim Dt!0 Pft , ay \u0003 t þ Dtjay . tg Dt ¼ \u00021 SyðtÞ dSyðtÞ dt ; which yields SyðtÞ ¼ e\u0002Ð t 0 _hyðuÞdu for t \u0004 0; ð1:3Þ with a† the random variable age at the time of death (i.e. S†(t) ¼ Pfa† . tg). Besides the Gompertz law, there is another classic, widely used survival distribution (Ricklefs & Scheuerlein 2002): the Weibull model, which has the form: d_hy dt ¼ nðn \u0002 1Þ_h n Wtn\u00022 with initial condition _hyð0Þ ¼ 0; ð1:4Þ that is, h˙†(t) ¼ nh˙W n tn21. The symbols h˙W and n rep- resent the Weibull ageing rate and shape parameter, respectively (Weibull 1951). Since Gompertz’s and Weibull’s efforts, several research groups have used mathematical m"
+            },
+            {
+              "document_id": "3191",
+              "title": "GurnMidd1996.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2362,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "re strongly age and size dependent, with the nature of that dependence often bearing a marked relationship to the individual's energetic status. However, since we have neither tested models nor general principles to guide the formulation of a strategic model of such dependency, we choose instead to consider three rather simple models. The simplest possible mortality model is a constant per capita mortality independent of both age and weight. There are no circumstances in which such a model is wholly justified, not least because it implies no finite limit to the age to which individuals can live. However, it is a very common modelling assumption where hard information is lacking. Because such"
+            },
+            {
+              "document_id": "2485",
+              "title": "Augustine et al. - 2020 - Comparing loss functions and interval estimates fo.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2389,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "orrespond to probability of surviving beyond that point < 0.1) to avoid division by zero. The ﬁgures show that the shapes of the proﬁles are very similar again, despite the fact that the formulas for the loss function look rather diﬀerent, and that the resulting intervals are also very similar. Notice that the conﬁdence intervals for the aging acceleration h¨a are reduced Fig. 2. The survivor functions (i.e. the fraction that exceeds the value of the argument) for the relative error of the aging acceleration h¨a (left) and the Gompertz stress coeﬃcient sG (right) for the AmP’s symmetric bounded loss function (red) and the Maximum Likelihood criterion (blue). The Monte Carlo study involved 50"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2391,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "ndruch’s general observations, a hypothesis for aging should also explain some more speciﬁc features of mortality kinetics. Gavrilov and Gavrilova (2001), for instance, argued that it should explain the exponential increase in mortality rates with age observed in many adult species (Gompertz law) and the occurrence of late-life mortality deceleration. With regard to the former, in the previous section we showed that, for adult non-growing animals, our model reduces to the Gompertz equation. Mortality deceleration at older ages can be described in the context of our model as the consequence of the selection of a special subpopulation. Late-life plateaus thus occur because animals that reach a"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ility Figure IV.7: Comparison with the Gompertz model. Broken lines: Gompertz curves. Solid lines: same curves as in Figure IV.6. Data from Weindruch et al. (1986). As the Gompertz model (equation IV.12) does not account for food consumption, three diﬀerent values for the exponential mortality-rate coeﬃcient η have been estimated. In contrast, our aging model (equation IV.6) naturally accounts for food consumption and the three data sets have, thus, been ﬁtted simultaneously. Details on the ﬁtting procedure and on the estimated parameter values are provided in Appendix B. [Page 121] IV.4. RESULTS AND DISCUSSION 109 Many biogerontologists have argued that aging is a multicausal process. The m"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2394,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "aintenance rate constant, ˙m = 0.073 d−1 and the aging acceleration ¨pa = 2.563 × 10−6 d−2. The Weibull curve with shape parameter 3.1 is plotted on top of the deb model to show that both curves are hard to distinguish in practice. ments. Death strikes if all critical elements cease functioning. The curvature of the survival probability then relates to the number of critical elements, which Witten [779] found to be somewhere between 5 and 15. Their nature still remains unknown. A property of this model is that the hazard rate does not approach zero for neonates (or embryos), which does not seem to be consistent with data [664]. Finch [219] favours the empirical description of aging rates giv"
+            },
+            {
+              "document_id": "2831",
+              "title": "KooyMetz84.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2423,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "68), Roughgarden (1979), Charlesworth ( 1980), or, in a stochastic context, in Jagers (1975). For animals that die randomly, the survivor function has the form 3(a) = exp{ -a/ T}, where T is the mean age at death. We expect such a survivor function, e.g., in a population under heavy predation pressure. At low predation pressure, the effect of aging will be much more pronounced, and the survivor function resembles the block survivor function 3(a) = ~(a d T), where x denotes the indicator function, which takes the value one for true, and the value zero for false; i.e., the animal reaches age T, and dies immediately after. Most actual survivor functions are somewhere in between these two extrem"
+            },
+            {
+              "document_id": "3468",
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2443,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ulation structure and average characteristics. A background mortality rate and a mortality caused by above normal temperatures are forced into the model, and the same reproductive output is imposed to all females that are able to reproduce. ADAPTATION Agents do not have an adaptive behavior. Individual traits vary among individuals in a population, but each individual carry the same traits along their entire lifespan and do not change nor learn from the events they experience or from each other. Consequently, the design concepts “objectives”, “learning”, “prediction”, and “sensing” do not apply. INTERACTION Individuals do not have any direct interaction. They only affect each other indirectl"
+            },
+            {
+              "document_id": "2685",
+              "title": "LikaKooy2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2451,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "at aging is a major cause of death under ﬁeld conditions. Nevertheless, more complex formulation should be used if research is geared towards answering questions concerning the evolutionary ecology of aging and longevity. Leeuwen et al. (2002) have developed a mathematical model based on the DEB theory, to describe the aging process that accounts for the effects of caloric restriction. This model is more complex and less tested, so far, against experimental data than the present model. Our aim in this paper is to illustrate the application of DEB models to life history theory. This approach allows us to study questions concerning the evolution of lifetime reproductive allocation, optimal age"
+            },
+            {
+              "document_id": "2661",
+              "title": "LeddLoga2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2451,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "age. (In fact, it is not actually reasonable for the allocation parameter α to be constant in a net production model, as will be shown in the analysis below). DEB models must incorporate assumptions about the probability of survival for an individual organism. The survival probability is sometimes modeled simply as an exponential decay function [7]. In other cases, the survival probability is based on a physiological hazard rate [4,9]. The exponential model is simple and therefore good for investigations in which the mechanisms of mortality are not of interest, but such studies cannot yield information regarding the effect of ecological niche on life history. The physiological hazard rate is"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2471,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "rameters. Finally, we conclude by summarizing the most salient features of the model presented in this Chapter: (1) we developed a physiologically-based model for aging that is rather simple from a mathematical point of view. This is illustrated by the possibility to estimate the required parameter val- ues from growth and survival data only; (2) the model is able to predict diﬀerences in survival on the basis of diﬀerences in food consumption. As can be seen from Figure IV.6, the model not only predicts CR-animals to live longer, but also provides CR-survival curves that are consistent with the experimental observations; (3) we obtained an interpretation of the Gompertz-parameters in terms "
+            },
+            {
+              "document_id": "3838",
+              "title": "Barhdadi et al. - Environment-dependent population dynamics emerging.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2477,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "history events included in the model, i.e. reproduction and death. DEB-induced death is traditionally modelled through age­ ing and starvation processes. We model death by ageing as a process of damage accumulation, using the ageing submodel of Martin et al. (2012). These equations are also described in the ODD together with the standard DEB model equations. The primary output of these equations is the ageing hazard rate h. Death by ageing is accounted for after each energy budget update by sampling from a uniform distribution on [0, 1] and verifying whether the sampled number is smaller than the individual prime’s probability to die, h∆t (Table 1). Although the ageing submodel is also gener"
+            },
+            {
+              "document_id": "3468",
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2492,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "d mortality rate ḣ, which is a function of the damage accumulated in the body. Damage inducing compounds are diluted via growth 𝑟̇, and additionally ageing is calculated with two other parameters, the Weibull ageing acceleration ḧa and the Gompertz stress coefficient sG. In other words, the hazard mortality rate is the simulation of the vulnerability of the individual towards damage, such as the risk of dying from an illness increasing as the individual ages. Additionally, in our model, the ageing submodel relies on a stochastic element, where the individual has a 50% chance of looking into its death probability rate ḣ. Update individuals The calculated changes are applied to each state vari"
+            },
+            {
+              "document_id": "3343",
+              "title": "CoheIsak2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2496,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": ". (TIF) S12 Fig. A model extending to 10,000 generations instead of 500. Note that convergence of life history traits is reached relatively early, suggesting that our 500-generation models are largely sufficient. Also note that physiological trait values are not stable in models with multi- ple currencies and can vary without much impact on life-history traits. (TIF) S13 Fig. Sensitivity analyses of the standard deviation of baseline PTVs. We ran 100 simula- tions in which this standard deviation was fixed at one of the values along the x-axis. For each of the four models in each simulation, we present the average trait value at the 500th (final) generation on the y-axis. b0 was fixed at 0.0"
+            },
+            {
+              "document_id": "2629",
+              "title": "MaurFaug2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2502,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "mortality 496 O. Maury et al. / Progress in Oceanography 74 (2007) 479–499 [Page 19] is estimated assuming that the life span corresponds to the age at which only 10% of a cohort remains (Table 3). The parameters M and t are estimated by ﬁtting the modeled mortality curve to the estimated mortality curve (Table 3). References Andersen, N.G., Riis-Vestergaard, J., 2003. The eﬀects of food consumption rate, body size and temperature on net food conversion eﬃciency in saithe and whiting. Journal of Fish Biology 62, 395–412. Arino, O., Shin, Y.-J., Mullon, C., 2004. A mathematical derivation of size spectra in ﬁsh populations. Comptes Rendus de l’Acade´mie des Sciences. Section Biologies 327, 24"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The snippets are largely about demography, life tables, mortality modeling, and senescence, but few directly address whether ageing-terminated survivor curves are well described by Weibull and Gompertz models. Snippet 15 explicitly discusses Gompertz mortality models and their fit to biological mortality data, lending modest support. Snippet 3 concerns the Gompertz relational model for life tables (though more demographic/fertility-oriented), and snippet 5 ties typical survivorship curves to ageing mechanisms. However, none of the snippets specifically affirm that both Weibull and Gompertz models are the typical, well-fitting descriptions of ageing-driven survivor curves, and the vast majority are only topically related (human demography, paleodemography, matrix models, fecundity). There is no contradicting evidence, but the supporting evidence is sparse and indirect, so the corpus provides weak overall support with a generally neutral-to-mildly-corroborating direction."
+          },
+          "n_references": 3,
+          "references": {
+            "W40316541": {
+              "title": "A re-estimation of fertility rates in Nigeria: an application of the Gompertz relational model.",
+              "doi": "",
+              "year": "1986",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2316
+            },
+            "W2138845720": {
+              "title": "Ageing and typical survivorship curves result from optimal resource allocation",
+              "doi": "",
+              "year": "2000",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2349
+            },
+            "W3113107509": {
+              "title": "Mortality: A physics perspective",
+              "doi": "https://doi.org/10.1016/j.physa.2020.125660",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2511
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2091564020",
+              "title": "Trends in scale and shape of survival curves",
+              "doi": "https://doi.org/10.1038/srep00504",
+              "year": "2012",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The ageing of the population is an issue in wealthy countries worldwide because of increasing costs for health care and welfare. Survival curves taken from demographic life tables may help shed light on the hypotheses that humans are living longer and that human populations are growing older. We describe a methodology that enables us to obtain separate measurements of scale and shape variances in survival curves. Specifically, 'living longer' is associated with the scale variance of survival curves, whereas 'growing older' is associated with the shape variance. We show how the scale and shape of survival curves have changed over time during recent decades, based on period and cohort female l"
+            },
+            {
+              "document_id": "W1942356834",
+              "title": "Toward Reconciling Inferences Concerning Genetic Variation in Senescence in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1093/genetics/152.2.553",
+              "year": "1999",
+              "distance": 0.2288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Abstract Standard models for senescence predict an increase in the additive genetic variance for log mortality rate late in the life cycle. Variance component analysis of age-specific mortality rates of related cohorts is problematic. The actual mortality rates are not observable and can be estimated only crudely at early ages when few individuals are dying and at late ages when most are dead. Therefore, standard quantitative genetic analysis techniques cannot be applied with confidence. We present a novel and rigorous analysis that treats the mortality rates as missing data following two different parametric senescence models. Two recent studies of Drosophila melanogaster, the original anal"
+            },
+            {
+              "document_id": "W40316541",
+              "title": "A re-estimation of fertility rates in Nigeria: an application of the Gompertz relational model.",
+              "doi": "",
+              "year": "1986",
+              "distance": 0.2316,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "This study is based on a mathematical model for the life table survivorship function developed by the author, \"the form of which has been logically arrived at in a manner such that the simple but the well known constraints of the life table functions can be met by the model. There are basically three parameters in the model which can be estimated by the method of least squares after the variables are subjected to appropriate transformations. The characteristics of these parameters have been investigated in this paper which [makes] it readily apparent that the model can provide good approximations to a wide variety of life tables.\" (summary in FRE, ITA)"
+            },
+            {
+              "document_id": "W4323670220",
+              "title": "Demography, Including Paleodemography",
+              "doi": "https://doi.org/10.1002/9781119828075.ch14",
+              "year": "2023",
+              "distance": 0.2327,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Demography is the study of a group's age and sex structure. This chapter focuses on the life table and its continuous form, known as a hazard or survivorship model. For an extant group it may be possible to obtain information on ages-at-death, although generally it is more common to have census information on the living. Single census life table estimates for anthropological samples are made additionally difficult because growth rates may be unknown. A hazard model generalizes the life table so that age is a continuous variable. Differences in mortality profiles derived from archaeological skeletons that accumulated over time, often several centuries or more, are commonly interpreted as main"
+            },
+            {
+              "document_id": "W2138845720",
+              "title": "Ageing and typical survivorship curves result from optimal resource allocation",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2349,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Ageing is a general feature of higher organisms. Evolutionary theories of ageing rest on a gradual decline of fitness sensitivity to changes in survival and fecundity with age, so traits expressed late in life are less favoured by natural selection than those expressed early in life. From the life-history perspective, ageing may result from a scheme of optimal resource allocation in which investment in repair is lower than that required for removing all experienced damage. Here, we report the results of a dynamic programming model based on the disposable soma theory of ageing, which optimizes resource allocation to growth, reproduction and repair. The optimal allocation strategy responds to "
+            },
+            {
+              "document_id": "W3212953007",
+              "title": "Life tables: construction and interpretation",
+              "doi": "https://doi.org/10.1093/oso/9780198838609.003.0008",
+              "year": "2021",
+              "distance": 0.2383,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Life tables, which describe how the risk of death (and sometimes fertility) changes with age, are a fundamental tool for describing and exploring the diversity of life histories. Numerous important life history metrics can be derived from them. This chapter provides a broad coverage of life table construction and use and use with a particular focus on nonhuman animals. The calculation of life tables can be divided into approaches: cohort-based, where the data are obtained from individuals born at (approximately) the same time that are followed until death; and period-based, where the data are obtained from a population of mixed ages followed for a particular time-frame (e.g. a year)"
+            },
+            {
+              "document_id": "W1587775399",
+              "title": "A semi‐Markov model to assess reliably survival patterns from birth to death in free‐ranging populations",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00088.x",
+              "year": "2011",
+              "distance": 0.2423,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Summary 1. Semi‐Markov models explicitly define the distribution of waiting time duration and have been used as a convenient framework for modelling the time spent in one physiological state in previous biological studies. 2. Here, we focus on the modelling of the time spent within a life‐cycle stage (e.g. juvenile, adult and old) by individuals over their lifetime from Capture–Mark–Recapture data, which are commonly used to estimate demographic parameters in free‐ranging populations. 3. We propose a parametric model (1) with a semi‐Markov state, (2) associated to a hazard function and (3) accounting for imperfect detection to assess reliably survival patterns from birth to death. 4. These m"
+            },
+            {
+              "document_id": "W4243671740",
+              "title": "An Empirical Study of Mortality Models in Taiwan",
+              "doi": "https://doi.org/10.2202/2153-3792.1033",
+              "year": "2008",
+              "distance": 0.2434,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "There has been a significant increase in the life expectancies of the Taiwanese population after the end of Second World War. Like in many developed countries, due to the prolonging life expectancy and lower fertility rates, the aging population has now become a major policy concern in Taiwan. The search for feasible methods for modeling the future mortality changes has become a popular issue in Taiwan. The Lee-Carter (LC) model, the reduction factor (RF) model and the age-period-cohort (APC) model are three frequently used methods for modeling future mortality dynamics. In this paper, we introduce these three models and discuss their respective pros and cons. We carry out an empirical study"
+            },
+            {
+              "document_id": "W2121553368",
+              "title": "A measure for describing and comparing postreproductive life span as a population trait",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00095.x",
+              "year": "2011",
+              "distance": 0.2438,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Summary 1. While classical life‐history theory does not predict postreproductive life span (PRLS), it has been detected in a great number of taxa, leading to the view that it is a broadly conserved trait and attempts to reconcile theory with these observations. We suggest an alternative: the apparently wide distribution of significant PRLS is an artefact of insufficient methods. 2. PRLS is traditionally measured in units of time between each individual’s last parturition and death, after excluding those individuals for whom this interval is short. A mean of this measure is then calculated as a population value. We show this traditional population measure (which we denote PrT) to be inconsist"
+            },
+            {
+              "document_id": "W4249341460",
+              "title": "Death Spirals",
+              "doi": "https://doi.org/10.1093/acprof:oso/9780199754229.003.0009",
+              "year": "2011",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Unlike mortality, there are no general purpose models to describe age-specific fecundity patterns. This chapter shows that using very basic conclusions about the effects of natural selection on fecundity and a newly-discovered physiological phenomenon called the death spiral results in highly accurate descriptions of female fecundity in Drosophila."
+            },
+            {
+              "document_id": "W2043833924",
+              "title": "The Statistical Demography of Whooping Cranes",
+              "doi": "https://doi.org/10.2307/1939224",
+              "year": "1987",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "We fit models for the survivorship of Whooping Cranes to the record of population censuses. We consider two classes of models: those that posit age dependence without time dependence, and those that posit time dependence without age dependence. For the model of Binkley and Miller (1980), which falls in the former category, we develop a correct, stochastic model for the inherent demographic variability. Our re—estimates of the model's parameters support the hypothesis of a temporal and trend in survivorship. We then consider time—dependent models that permit simultaneous inferences about separate temporal patterns of survivorships of juveniles and adults. We find that the evidence is consiste"
+            },
+            {
+              "document_id": "W3153887150",
+              "title": "Healthy longevity from incidence-based models: More kinds of health than stars in the sky",
+              "doi": "https://doi.org/10.1101/2021.04.16.21255628",
+              "year": "2021",
+              "distance": 0.2482,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Background Healthy longevity (HL) is an important measure of the prospects for quality of life in ageing societies. Incidence-based (cf. prevalence-based) models describe transitions among age classes and health stages. Despite the probabilistic nature of those transitions, analyses of healthy longevity have focused persistently on means (“health expectancy”), neglecting variances and higher moments. Objectives Our goal is a comprehensive methodology to analyse HL in terms of any combination of health stages and age classes, or of transitions among health stages, or of values (e.g., quality of life) associated with health stages or transitions. Methods We construct multistate Markov"
+            },
+            {
+              "document_id": "W4236661620",
+              "title": "Healthy longevity from incidence-based models: More kinds of health than stars in the sky",
+              "doi": "https://doi.org/10.4054/demres.2021.45.13",
+              "year": "2021",
+              "distance": 0.2489,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "BACKGROUND Healthy longevity (HL) is an important measure of the prospects for quality of life in ageing societies. Incidence-based (cf. prevalence-based) models describe transitions among age classes and health stages. Despite the probabilistic nature of those transitions, analyses of healthy longevity have focused persistently on means (“health expectancy”), neglecting variances and higher moments. OBJECTIVE Our goal is a comprehensive methodology to analyse HL in terms of any combination of health stages and age classes, or of transitions among health stages, or of values (e.g., quality of life) associated with health stages or transitions. METHODS We construct multistate Markov chains fo"
+            },
+            {
+              "document_id": "W2113833532",
+              "title": "Stage‐classified matrix models and age estimates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2002.960106.x",
+              "year": "2002",
+              "distance": 0.25,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "When the size of individuals is a better indicator of their chances to survive, grow, and reproduce than their age, the suitable matrix population model is stage‐classified. Cochran and Ellner developed a method to assess age‐based parameters from such models. We present here, for these age estimates, simplified formulas that are valid whenever there is neither retrogression nor fission: individuals may only die, survive in the same stage, or survive and recruit to the next stage. Our formulas enable one to understand better why, and under which hypotheses, it is possible to compute age estimates from a stage‐classified model, and point out some limitations of the method. These limitations i"
+            },
+            {
+              "document_id": "W3113107509",
+              "title": "Mortality: A physics perspective",
+              "doi": "https://doi.org/10.1016/j.physa.2020.125660",
+              "year": "2020",
+              "distance": 0.2511,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "One of the many interests of the late Dietrich Stauffer was the modelling of mortality. Here we review the features of mortality data for various biological species. Age specific mortality (death rate) leads to a discussion of possible models of the death rate, including that of Gompertz, raising the interesting question: is our lifetime finite or could we contemplate living for ever? The answer judging from many different data sources is that without radical changes in our biology it seems death above age 120 is extremely unlikely. We then show how a toy model, linking mortality to the immune system, can predict the general variation of the death rate with time, spanning both infant and adu"
+            },
+            {
+              "document_id": "W2171270625",
+              "title": "What Fecundity Patterns Indicate About Aging and Longevity: Insights From Drosophila Studies",
+              "doi": "https://doi.org/10.1093/gerona/58.6.b484",
+              "year": "2003",
+              "distance": 0.2533,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The age pattern of fecundity is represented as a result of a superposition of two processes: the genetic fecundity program encoded in the organism's reproductive machinery and senescence of the reproductive system. Accumulation of oxidative damage produces the energy decline, which could potentially be used in reproduction. As a result, the age-declining process arises in the reproductive machinery at a critical age. We show that this mechanism is common for different species. It establishes a connection between the decline of organism vitality and reproductive senescence. We suggest a parametric description of a fecundity pattern that allows for prediction of reproductive longevity. We appl"
+            },
+            {
+              "document_id": "W4244029085",
+              "title": "Paleodemography: Expectancy and false hope",
+              "doi": "https://doi.org/10.1002/(sici)1096-8644(199604)99:4<571::aid-ajpa4>3.3.co;2-m",
+              "year": "1996",
+              "distance": 0.2546,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "From parent populations (N = 50,000) statistically generated, representing different levels of correlation (r) between the age at death and a hypothetical biological indicator (r = 0.8-0.98), reference samples and target demographic samples are randomly drawn. Two iterative techniques, proportional fitting procedure and Bayesian, are used to estimate from the reference samples the age distribution of the targets. Due to the random fluctuations of the pattern of aging, both in the reference and target samples, these techniques converge only in expectation toward the true value of a distribution, but not in practice for any particular realization. Nevertheless, these techniques allow the estim"
+            },
+            {
+              "document_id": "W2077680281",
+              "title": "A stochastic computer model for simulating population growth",
+              "doi": "https://doi.org/10.1007/bf02510937",
+              "year": "1977",
+              "distance": 0.2546,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Summary A model is described for investigating the interactions of age‐specific birth and death rates, age distribution and density‐governing factors determining the growth form of single‐species populations. It employs Monte Carlo techniques to simulate the births and deaths of individuals while density‐governing factors are represented by simple algebraic equations relating survival and fecundity to population density. In all respects the model's behavior agrees with the results of more conventional mathematical approaches, including the logistic model and Lotka's Law, which predicts a relationship betwen age‐specific rates, rate of increase and age distribution. Situations involving expon"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly corroborate the stylized fact. Snippet 1 explicitly proposes the Weibull survivorship curve as a natural, parameter-sparse model for ageing-terminated lifespan (Daphnia). Snippet 4 describes both Gompertz and Weibull as classic, widely-used survival distributions for ageing. Snippet 9 shows the DEB ageing model is nearly indistinguishable from a Weibull curve. Snippets 7 and 8 corroborate the Gompertz law for adult mortality and explicit comparison with the Gompertz model. Snippet 10 discusses survivor functions between random death and ageing-dominated extremes. No snippet contradicts the fact; the remainder are off-topic demographic/mortality-modelling references. Overall the corpus strongly and consistently supports the stylized fact."
+          },
+          "n_references": 5,
+          "references": {
+            "2825": {
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1944
+            },
+            "2659": {
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2347
+            },
+            "2660": {
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2391
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2394
+            },
+            "2831": {
+              "title": "KooyMetz84.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2423
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2825",
+              "title": "KooyHoev89.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1944,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ature Since the nature of ageing processes is still not under- stood, adequate modelling of quantitative aspects of the process is impossible. Because ageing is essential in population dynamics, we have to rely on descriptive models for the time being. The data of MacArthur & Baillie (1929) given in Fig. Al suggest that the Weibull survivorship curve might provide a more-or-less 'natu- ral' and parameter-sparse model for Daphnia. The model is given by Pr(a, - ab>a) = exp(- [a/an]g), where a, is age at death and ab is age at hatching. Besides goodness of fit, an argument in favour of the Weibull model is that temperature has an effect on the time parameter, am, only, and sex only on the shape"
+            },
+            {
+              "document_id": "2545",
+              "title": "Hin e.a. - 2019 - Bio-energetic modeling of medium-sized cetaceans s.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2223,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "as fitted to data of Bloch et al. (1993) and provides an equal fit compared to an equation that describes the three forms of age- dependent mortality as three separate terms, but requir- ing an additional parameter. Starvation-induced mortal- ity is only applied when the body condition of an individual falls below the starvation threshold (qs = 0.15). Starvation mortality increases with declining body condition according to a hyperbolic function, with the speed of increase controlled by parameter ls (Appendix S1: Fig. S1g; De Roos et al. 2009). Depending on the purpose of the simulation, life expectancy is either fixed or determined randomly. A fixed life expectancy is used when illustrating"
+            },
+            {
+              "document_id": "3343",
+              "title": "CoheIsak2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2285,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "es are non-linear but decline monotonically. This panel shows the relationship between fertility and expected age at death for actual curves of PTVs for the values of W as used in our models across PTV from -10 (bottom right) to +10 (top left). Background shading indicates the expected lifetime reproductive success (LRS) based on the fertility and age at death. Selection is expected to adjust each PTV along its curve to the “reddest” point (highest fitness). Not all clines pass through equally high maximum fitness points. As a result, lower values of W are generally favoured by selection (see Results). https://doi.org/10.1371/journal.pone.0189124.g001 Impacts of multiple trade-off currencies"
+            },
+            {
+              "document_id": "2659",
+              "title": "LeeuVera2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2347,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "[Page 2] general deﬁnition of hazard rate: _hyðtÞ ¼ lim Dt!0 Pft , ay \u0003 t þ Dtjay . tg Dt ¼ \u00021 SyðtÞ dSyðtÞ dt ; which yields SyðtÞ ¼ e\u0002Ð t 0 _hyðuÞdu for t \u0004 0; ð1:3Þ with a† the random variable age at the time of death (i.e. S†(t) ¼ Pfa† . tg). Besides the Gompertz law, there is another classic, widely used survival distribution (Ricklefs & Scheuerlein 2002): the Weibull model, which has the form: d_hy dt ¼ nðn \u0002 1Þ_h n Wtn\u00022 with initial condition _hyð0Þ ¼ 0; ð1:4Þ that is, h˙†(t) ¼ nh˙W n tn21. The symbols h˙W and n rep- resent the Weibull ageing rate and shape parameter, respectively (Weibull 1951). Since Gompertz’s and Weibull’s efforts, several research groups have used mathematical m"
+            },
+            {
+              "document_id": "3191",
+              "title": "GurnMidd1996.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2362,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "re strongly age and size dependent, with the nature of that dependence often bearing a marked relationship to the individual's energetic status. However, since we have neither tested models nor general principles to guide the formulation of a strategic model of such dependency, we choose instead to consider three rather simple models. The simplest possible mortality model is a constant per capita mortality independent of both age and weight. There are no circumstances in which such a model is wholly justified, not least because it implies no finite limit to the age to which individuals can live. However, it is a very common modelling assumption where hard information is lacking. Because such"
+            },
+            {
+              "document_id": "2485",
+              "title": "Augustine et al. - 2020 - Comparing loss functions and interval estimates fo.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2389,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "orrespond to probability of surviving beyond that point < 0.1) to avoid division by zero. The ﬁgures show that the shapes of the proﬁles are very similar again, despite the fact that the formulas for the loss function look rather diﬀerent, and that the resulting intervals are also very similar. Notice that the conﬁdence intervals for the aging acceleration h¨a are reduced Fig. 2. The survivor functions (i.e. the fraction that exceeds the value of the argument) for the relative error of the aging acceleration h¨a (left) and the Gompertz stress coeﬃcient sG (right) for the AmP’s symmetric bounded loss function (red) and the Maximum Likelihood criterion (blue). The Monte Carlo study involved 50"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2391,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ndruch’s general observations, a hypothesis for aging should also explain some more speciﬁc features of mortality kinetics. Gavrilov and Gavrilova (2001), for instance, argued that it should explain the exponential increase in mortality rates with age observed in many adult species (Gompertz law) and the occurrence of late-life mortality deceleration. With regard to the former, in the previous section we showed that, for adult non-growing animals, our model reduces to the Gompertz equation. Mortality deceleration at older ages can be described in the context of our model as the consequence of the selection of a special subpopulation. Late-life plateaus thus occur because animals that reach a"
+            },
+            {
+              "document_id": "2660",
+              "title": "Leeu2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2393,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "ility Figure IV.7: Comparison with the Gompertz model. Broken lines: Gompertz curves. Solid lines: same curves as in Figure IV.6. Data from Weindruch et al. (1986). As the Gompertz model (equation IV.12) does not account for food consumption, three diﬀerent values for the exponential mortality-rate coeﬃcient η have been estimated. In contrast, our aging model (equation IV.6) naturally accounts for food consumption and the three data sets have, thus, been ﬁtted simultaneously. Details on the ﬁtting procedure and on the estimated parameter values are provided in Appendix B. [Page 121] IV.4. RESULTS AND DISCUSSION 109 Many biogerontologists have argued that aging is a multicausal process. The m"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2394,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "aintenance rate constant, ˙m = 0.073 d−1 and the aging acceleration ¨pa = 2.563 × 10−6 d−2. The Weibull curve with shape parameter 3.1 is plotted on top of the deb model to show that both curves are hard to distinguish in practice. ments. Death strikes if all critical elements cease functioning. The curvature of the survival probability then relates to the number of critical elements, which Witten [779] found to be somewhere between 5 and 15. Their nature still remains unknown. A property of this model is that the hazard rate does not approach zero for neonates (or embryos), which does not seem to be consistent with data [664]. Finch [219] favours the empirical description of aging rates giv"
+            },
+            {
+              "document_id": "2831",
+              "title": "KooyMetz84.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2423,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "68), Roughgarden (1979), Charlesworth ( 1980), or, in a stochastic context, in Jagers (1975). For animals that die randomly, the survivor function has the form 3(a) = exp{ -a/ T}, where T is the mean age at death. We expect such a survivor function, e.g., in a population under heavy predation pressure. At low predation pressure, the effect of aging will be much more pronounced, and the survivor function resembles the block survivor function 3(a) = ~(a d T), where x denotes the indicator function, which takes the value one for true, and the value zero for false; i.e., the animal reaches age T, and dies immediately after. Most actual survivor functions are somewhere in between these two extrem"
+            },
+            {
+              "document_id": "3468",
+              "title": "Guillaumot - 2021 - Modelling the response of Antarctic marine species.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2443,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ulation structure and average characteristics. A background mortality rate and a mortality caused by above normal temperatures are forced into the model, and the same reproductive output is imposed to all females that are able to reproduce. ADAPTATION Agents do not have an adaptive behavior. Individual traits vary among individuals in a population, but each individual carry the same traits along their entire lifespan and do not change nor learn from the events they experience or from each other. Consequently, the design concepts “objectives”, “learning”, “prediction”, and “sensing” do not apply. INTERACTION Individuals do not have any direct interaction. They only affect each other indirectl"
+            },
+            {
+              "document_id": "2685",
+              "title": "LikaKooy2003.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2451,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "at aging is a major cause of death under ﬁeld conditions. Nevertheless, more complex formulation should be used if research is geared towards answering questions concerning the evolutionary ecology of aging and longevity. Leeuwen et al. (2002) have developed a mathematical model based on the DEB theory, to describe the aging process that accounts for the effects of caloric restriction. This model is more complex and less tested, so far, against experimental data than the present model. Our aim in this paper is to illustrate the application of DEB models to life history theory. This approach allows us to study questions concerning the evolution of lifetime reproductive allocation, optimal age"
+            },
+            {
+              "document_id": "W2091564020",
+              "title": "Trends in scale and shape of survival curves",
+              "doi": "https://doi.org/10.1038/srep00504",
+              "year": "2012",
+              "distance": 0.1941,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The ageing of the population is an issue in wealthy countries worldwide because of increasing costs for health care and welfare. Survival curves taken from demographic life tables may help shed light on the hypotheses that humans are living longer and that human populations are growing older. We describe a methodology that enables us to obtain separate measurements of scale and shape variances in survival curves. Specifically, 'living longer' is associated with the scale variance of survival curves, whereas 'growing older' is associated with the shape variance. We show how the scale and shape of survival curves have changed over time during recent decades, based on period and cohort female l"
+            },
+            {
+              "document_id": "W1942356834",
+              "title": "Toward Reconciling Inferences Concerning Genetic Variation in Senescence in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1093/genetics/152.2.553",
+              "year": "1999",
+              "distance": 0.2288,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Standard models for senescence predict an increase in the additive genetic variance for log mortality rate late in the life cycle. Variance component analysis of age-specific mortality rates of related cohorts is problematic. The actual mortality rates are not observable and can be estimated only crudely at early ages when few individuals are dying and at late ages when most are dead. Therefore, standard quantitative genetic analysis techniques cannot be applied with confidence. We present a novel and rigorous analysis that treats the mortality rates as missing data following two different parametric senescence models. Two recent studies of Drosophila melanogaster, the original anal"
+            },
+            {
+              "document_id": "W40316541",
+              "title": "A re-estimation of fertility rates in Nigeria: an application of the Gompertz relational model.",
+              "doi": "",
+              "year": "1986",
+              "distance": 0.2316,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "This study is based on a mathematical model for the life table survivorship function developed by the author, \"the form of which has been logically arrived at in a manner such that the simple but the well known constraints of the life table functions can be met by the model. There are basically three parameters in the model which can be estimated by the method of least squares after the variables are subjected to appropriate transformations. The characteristics of these parameters have been investigated in this paper which [makes] it readily apparent that the model can provide good approximations to a wide variety of life tables.\" (summary in FRE, ITA)"
+            },
+            {
+              "document_id": "W4323670220",
+              "title": "Demography, Including Paleodemography",
+              "doi": "https://doi.org/10.1002/9781119828075.ch14",
+              "year": "2023",
+              "distance": 0.2327,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Demography is the study of a group's age and sex structure. This chapter focuses on the life table and its continuous form, known as a hazard or survivorship model. For an extant group it may be possible to obtain information on ages-at-death, although generally it is more common to have census information on the living. Single census life table estimates for anthropological samples are made additionally difficult because growth rates may be unknown. A hazard model generalizes the life table so that age is a continuous variable. Differences in mortality profiles derived from archaeological skeletons that accumulated over time, often several centuries or more, are commonly interpreted as main"
+            },
+            {
+              "document_id": "W2138845720",
+              "title": "Ageing and typical survivorship curves result from optimal resource allocation",
+              "doi": "",
+              "year": "2000",
+              "distance": 0.2349,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Ageing is a general feature of higher organisms. Evolutionary theories of ageing rest on a gradual decline of fitness sensitivity to changes in survival and fecundity with age, so traits expressed late in life are less favoured by natural selection than those expressed early in life. From the life-history perspective, ageing may result from a scheme of optimal resource allocation in which investment in repair is lower than that required for removing all experienced damage. Here, we report the results of a dynamic programming model based on the disposable soma theory of ageing, which optimizes resource allocation to growth, reproduction and repair. The optimal allocation strategy responds to "
+            },
+            {
+              "document_id": "W3212953007",
+              "title": "Life tables: construction and interpretation",
+              "doi": "https://doi.org/10.1093/oso/9780198838609.003.0008",
+              "year": "2021",
+              "distance": 0.2383,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Life tables, which describe how the risk of death (and sometimes fertility) changes with age, are a fundamental tool for describing and exploring the diversity of life histories. Numerous important life history metrics can be derived from them. This chapter provides a broad coverage of life table construction and use and use with a particular focus on nonhuman animals. The calculation of life tables can be divided into approaches: cohort-based, where the data are obtained from individuals born at (approximately) the same time that are followed until death; and period-based, where the data are obtained from a population of mixed ages followed for a particular time-frame (e.g. a year)"
+            },
+            {
+              "document_id": "W1587775399",
+              "title": "A semi‐Markov model to assess reliably survival patterns from birth to death in free‐ranging populations",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00088.x",
+              "year": "2011",
+              "distance": 0.2423,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Summary 1. Semi‐Markov models explicitly define the distribution of waiting time duration and have been used as a convenient framework for modelling the time spent in one physiological state in previous biological studies. 2. Here, we focus on the modelling of the time spent within a life‐cycle stage (e.g. juvenile, adult and old) by individuals over their lifetime from Capture–Mark–Recapture data, which are commonly used to estimate demographic parameters in free‐ranging populations. 3. We propose a parametric model (1) with a semi‐Markov state, (2) associated to a hazard function and (3) accounting for imperfect detection to assess reliably survival patterns from birth to death. 4. These m"
+            },
+            {
+              "document_id": "W4243671740",
+              "title": "An Empirical Study of Mortality Models in Taiwan",
+              "doi": "https://doi.org/10.2202/2153-3792.1033",
+              "year": "2008",
+              "distance": 0.2434,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "There has been a significant increase in the life expectancies of the Taiwanese population after the end of Second World War. Like in many developed countries, due to the prolonging life expectancy and lower fertility rates, the aging population has now become a major policy concern in Taiwan. The search for feasible methods for modeling the future mortality changes has become a popular issue in Taiwan. The Lee-Carter (LC) model, the reduction factor (RF) model and the age-period-cohort (APC) model are three frequently used methods for modeling future mortality dynamics. In this paper, we introduce these three models and discuss their respective pros and cons. We carry out an empirical study"
+            },
+            {
+              "document_id": "W2121553368",
+              "title": "A measure for describing and comparing postreproductive life span as a population trait",
+              "doi": "https://doi.org/10.1111/j.2041-210x.2011.00095.x",
+              "year": "2011",
+              "distance": 0.2438,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary 1. While classical life‐history theory does not predict postreproductive life span (PRLS), it has been detected in a great number of taxa, leading to the view that it is a broadly conserved trait and attempts to reconcile theory with these observations. We suggest an alternative: the apparently wide distribution of significant PRLS is an artefact of insufficient methods. 2. PRLS is traditionally measured in units of time between each individual’s last parturition and death, after excluding those individuals for whom this interval is short. A mean of this measure is then calculated as a population value. We show this traditional population measure (which we denote PrT) to be inconsist"
+            },
+            {
+              "document_id": "W4249341460",
+              "title": "Death Spirals",
+              "doi": "https://doi.org/10.1093/acprof:oso/9780199754229.003.0009",
+              "year": "2011",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Unlike mortality, there are no general purpose models to describe age-specific fecundity patterns. This chapter shows that using very basic conclusions about the effects of natural selection on fecundity and a newly-discovered physiological phenomenon called the death spiral results in highly accurate descriptions of female fecundity in Drosophila."
+            },
+            {
+              "document_id": "W2043833924",
+              "title": "The Statistical Demography of Whooping Cranes",
+              "doi": "https://doi.org/10.2307/1939224",
+              "year": "1987",
+              "distance": 0.2481,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "We fit models for the survivorship of Whooping Cranes to the record of population censuses. We consider two classes of models: those that posit age dependence without time dependence, and those that posit time dependence without age dependence. For the model of Binkley and Miller (1980), which falls in the former category, we develop a correct, stochastic model for the inherent demographic variability. Our re—estimates of the model's parameters support the hypothesis of a temporal and trend in survivorship. We then consider time—dependent models that permit simultaneous inferences about separate temporal patterns of survivorships of juveniles and adults. We find that the evidence is consiste"
+            },
+            {
+              "document_id": "W3153887150",
+              "title": "Healthy longevity from incidence-based models: More kinds of health than stars in the sky",
+              "doi": "https://doi.org/10.1101/2021.04.16.21255628",
+              "year": "2021",
+              "distance": 0.2482,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Background Healthy longevity (HL) is an important measure of the prospects for quality of life in ageing societies. Incidence-based (cf. prevalence-based) models describe transitions among age classes and health stages. Despite the probabilistic nature of those transitions, analyses of healthy longevity have focused persistently on means (“health expectancy”), neglecting variances and higher moments. Objectives Our goal is a comprehensive methodology to analyse HL in terms of any combination of health stages and age classes, or of transitions among health stages, or of values (e.g., quality of life) associated with health stages or transitions. Methods We construct multistate Markov"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

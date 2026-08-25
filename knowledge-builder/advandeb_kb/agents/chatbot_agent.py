@@ -257,11 +257,12 @@ class ChatbotAgent(BaseAgent):
         tool_dispatch = self._build_tool_dispatch(top_k)
 
         # 5b. Resolve a BYOK provider (None → local Ollama model).
+        # For the local path, honour an explicitly selected Ollama model.
         provider = await self._build_byok_provider(llm_provider, llm_key_id, user_id)
         model = (
             (llm_model or getattr(provider, "default_model", self._model))
             if provider is not None
-            else self._model
+            else (llm_model or self._model)
         )
 
         # 6. Run the ReAct loop (driven by the BYOK provider when present)
@@ -273,6 +274,8 @@ class ChatbotAgent(BaseAgent):
             conversation_history=history,
             num_ctx=settings.CHAT_ANSWER_NUM_CTX,
             provider=provider,
+            answer_max_tokens=settings.CHAT_ANSWER_MAX_TOKENS,
+            max_steps=settings.CHAT_MAX_STEPS,
         )
 
         final_status = "done"
@@ -398,34 +401,44 @@ class ChatbotAgent(BaseAgent):
                 sid, role="assistant", content="", status="generating"
             )
 
-            # ── Step 1: LLM warm-up probe ──────────────────────────────────
-            # Check if Ollama already has the model loaded by hitting /api/tags.
-            # Emit a clear "loading model" event so the user knows what is slow.
-            await emit({"type": "status", "agent": "chatbot",
-                        "status": "working",
-                        "task": f"Checking LLM ({self._model})…"})
-            model_ready = await self._probe_ollama_model()
-            if not model_ready:
-                await emit({"type": "status", "agent": "chatbot",
-                            "status": "working",
-                            "task": f"Loading model {self._model} into GPU — this may take 1–2 min on first use…"})
-            else:
-                await emit({"type": "status", "agent": "chatbot",
-                            "status": "working",
-                            "task": f"Model {self._model} ready"})
-
-            # ── Step 2: Run pipeline or ReAct ─────────────────────────────
+            # ── Step 1: Resolve the LLM (BYOK provider or local Ollama) ────
+            # Resolve a BYOK provider first. When the user brings their own model
+            # we always run the multi-step ReAct loop on it (the deterministic
+            # pipeline delegates synthesis to the Ollama-only synthesis_agent).
             tool_dispatch = self._build_tool_dispatch(top_k)
 
-            # Resolve a BYOK provider. When the user brings their own model we
-            # always run the multi-step ReAct loop on it (the deterministic
-            # pipeline delegates synthesis to the Ollama-only synthesis_agent).
+            is_local = llm_provider in (None, "", "ollama")
+            local_model = llm_model if (is_local and llm_model) else self._model
             provider = await self._build_byok_provider(llm_provider, llm_key_id, user_id)
             byok_model = (
                 (llm_model or getattr(provider, "default_model", self._model))
                 if provider is not None
-                else self._model
+                else local_model
             )
+
+            # ── Step 2: Report the LLM being used (warm-up only on the local path) ──
+            if provider is not None:
+                # BYOK answer comes from the user's own provider — there is no
+                # Ollama model to load, so don't show the (misleading) local
+                # warm-up. Report what's actually being used.
+                await emit({"type": "status", "agent": "chatbot",
+                            "status": "working",
+                            "task": f"Using your {llm_provider} model ({byok_model})…"})
+            else:
+                # Local Ollama path — probe and report warm-up so the user knows
+                # why the first request may be slow.
+                await emit({"type": "status", "agent": "chatbot",
+                            "status": "working",
+                            "task": f"Checking LLM ({local_model})…"})
+                model_ready = await self._probe_ollama_model(local_model)
+                if not model_ready:
+                    await emit({"type": "status", "agent": "chatbot",
+                                "status": "working",
+                                "task": f"Loading model {local_model} into GPU — this may take 1–2 min on first use…"})
+                else:
+                    await emit({"type": "status", "agent": "chatbot",
+                                "status": "working",
+                                "task": f"Model {local_model} ready"})
 
             use_pipeline = settings.CHAT_MODE != "react" and provider is None
             final_status = "done"
@@ -437,6 +450,7 @@ class ChatbotAgent(BaseAgent):
                     tool_dispatch=tool_dispatch,
                     on_event=on_event,
                     conversation_history=history,
+                    answer_model=byok_model,
                 )
                 engine_result = {}
                 engine_exc = None
@@ -475,6 +489,8 @@ class ChatbotAgent(BaseAgent):
                     conversation_history=history,
                     num_ctx=settings.CHAT_ANSWER_NUM_CTX,
                     provider=provider,
+                    answer_max_tokens=settings.CHAT_ANSWER_MAX_TOKENS,
+                    max_steps=settings.CHAT_MAX_STEPS,
                 )
 
                 engine_result = {}
@@ -598,6 +614,7 @@ class ChatbotAgent(BaseAgent):
             if not args.get("query"):
                 return {"error": "hybrid_search requires a 'query' argument", "chunks": []}
             args.setdefault("top_k", top_k)
+            args.setdefault("use_reranking", settings.CHAT_USE_RERANKING)
             return await self._retrieval_client.call_tool("hybrid_search", args)
 
         async def expand_context(args: dict) -> dict:
@@ -616,6 +633,16 @@ class ChatbotAgent(BaseAgent):
         async def find_taxa_for_document(args: dict) -> dict:
             return await self._graph_client.call_tool("find_taxa_for_document", args)
 
+        async def search_stylized_facts(args: dict) -> dict:
+            args.setdefault("limit", 10)
+            return await self._graph_client.call_tool("search_stylized_facts", args)
+
+        async def claim_consensus(args: dict) -> dict:
+            return await self._graph_client.call_tool("claim_consensus", args)
+
+        async def find_by_taxon(args: dict) -> dict:
+            return await self._graph_client.call_tool("find_by_taxon", args)
+
         async def synthesize_answer(args: dict) -> dict:
             return await self._synthesis_client.call_tool("synthesize_answer", args)
 
@@ -625,6 +652,9 @@ class ChatbotAgent(BaseAgent):
             "get_citation_chain": get_citation_chain,
             "find_related_facts": find_related_facts,
             "find_taxa_for_document": find_taxa_for_document,
+            "search_stylized_facts": search_stylized_facts,
+            "claim_consensus": claim_consensus,
+            "find_by_taxon": find_by_taxon,
             "synthesize_answer": synthesize_answer,
         }
 
@@ -632,19 +662,20 @@ class ChatbotAgent(BaseAgent):
     # Ollama helpers
     # ------------------------------------------------------------------
 
-    async def _probe_ollama_model(self) -> bool:
+    async def _probe_ollama_model(self, model: Optional[str] = None) -> bool:
         """Return True if the model is currently loaded (warm) in Ollama.
 
         Uses GET /api/ps which lists models that are actively loaded in GPU/RAM.
         Falls back to True on error so we never block the chat with a false alarm.
         """
+        target = model or self._model
         try:
             async with httpx.AsyncClient(timeout=5.0) as client:
                 resp = await client.get(f"{self._ollama_url}/api/ps")
                 resp.raise_for_status()
                 data = resp.json()
                 loaded = [m.get("name", "") for m in data.get("models", [])]
-                return any(self._model in m for m in loaded)
+                return any(target in m for m in loaded)
         except Exception:
             return True  # Can't tell — assume ready, don't alarm user
 

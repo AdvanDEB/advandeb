@@ -1,0 +1,853 @@
+{
+  "sf_id": "respiration_02",
+  "category": "Respiration",
+  "statement": "Dioxygen use increases with decreasing mass in embryos and increases with mass in juveniles and adults.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The corpus contains numerous direct restatements of the stylized fact as a recognized DEB respiration pattern (snippets 1-7, 9-12, 14-15, 17-18), several of which provide explicit mechanistic explanations (reserve being converted to structure in embryos causing increasing O2 use with decreasing mass, while growing structure requires maintenance in juveniles/adults) and empirical citations (e.g. Romijn & Lokhorst 1951, Richman 1958, Pettit 1982, Whitehead 1987, Clarke & Johnston 1999). No snippet contradicts the fact; the few neutral snippets (8, 13, 16) are topically about respiration/oxygen but do not directly bear on the specific embryo-vs-juvenile mass relationship. Support is strong, consistent, and corroborated across multiple independent sources."
+      },
+      "n_references": 8,
+      "references": {
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 4,
+          "contradicts": 0,
+          "best_distance": 0.15081149339675903
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.25587207078933716
+        },
+        "69b89d63ecbd4702b29a6eb3": {
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2766224145889282
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.28896093368530273
+        },
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3147042393684387
+        },
+        "69b86b37ecbd4702b29a303e": {
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3572893738746643
+        },
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3610028624534607
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3852388262748718
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1508,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2559,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2692,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2766,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "embryos, but increases with mass in juvenilesand adultsThe use of dioxygen scales with body mass raisedto a power close to 0.75Stoichiometry Well-fed animals have a di erent body chemicalcomposition than poorly-fed organismsAnimals growing with constant food density con-verge to a constant chemical compositionReproduction Reproduction increases with size intra-speci cally,but decreases with size inter-speci cally2 DEB, DEVELOPMENT AND CRITICISMS 6Table 2: The basic assumptions of the standard DEB model. After Kooij-man [9]1. An organism is characterized by a structural body, reserves, and matu-"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.289,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113]The use of dioxygen scales approximately with body weight raised animals [10, 84, 91]to a power close to 0.75 [45]Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88]after ingesting food (heat increment of feeding)Ageing Lifespan increases with size for endotherms, animals [19, 85]but is independent of size in ectotherms"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3147,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "9 ;Kooijman 2000,pp. 96 )G6 egg size covaries with the nutritional status ofthe motheranimals ( Rossiter 1991 a,b;Glazier 1992 ;Bertram & Strathmann 1998 ;Heath et al.1999 ;McIntyre & Gooding 2000 ;Yoshinagaet al. 2001 ;Loman 2002 ;Nager et al. 2006 )respiration R1 freshly laid eggs do not use dioxygen insigniﬁcant amountsanimals ( Romijn & Lokhorst 1951 ;Pettit 1982 ;Bucher 1983 ;Whitehead 1987 )R2 the use of dioxygen increases with decreasingmass in embryos and increases with mass injuveniles and adultsanimals ( Romijn & Lokhorst 1951 ;Richman1958 ;Pettit 1982 ;Bucher 1983 ;Whitehead1987 ;Clarke & Johnston 1999 ;Savage et al."
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3223,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ases almost linearly with the maximumbody length\u000fFetuses increase in weight approximately proportional to cubed timeReproduction\u000fMany species (almost all animals and plants) have a juvenile stage that does not reproduce\u000fReproduction increases with size intra-speci cally, but decreases with size inter-speci cally\u000fA range of constant low food levels exists at which an individual can survive, but not reproduceRespiration\u000fAnimal eggs and plant seeds initially hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults"
+        },
+        {
+          "document_id": "69b847d4ec32c55db5430a9e",
+          "title": "Kooy2015_en.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3339,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": ".This strongly suggests that other reasons must exist to cease growing, andthat cartilage is replaced it improve bone structure.The second example concerns the di usion of dioxygen through the eggshell, which is generally seen as a rate-limiting factor in the development ofbird eggs. This idea rests on the observation of a strongly negative correlationbetween maximum dioxygen consumption and di usion resistance of the eggTheoretical Biology, a specialisation in integration 35shell. Models show, however, that energy use, that corresponds with the use ofdioxygen of the embryo, develops similar to that of the neonate. This suggests"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3447,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "e stage that does not reproduceR2Reproduction increases with size intra-specifically, but decreases with size inter-specificallyR3A range of constant low food levels exists at which an individual can survive, but not reproduceR4Growth can be simultaneous with reproduction, but growth can also cease long before reproductionis initiatedR5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults"
+        },
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3573,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ile stage that does notreproduceR2Reproduction increases with size intra-speci ﬁcally, but decreases with size inter-speciﬁcallyR3A range of constant low food levels exists at which an individual can survive, butnot reproduceR4Growth can be simultaneous with reproduction, but growth can also cease longbefore reproduction is initiatedRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increaseswith mass in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.361,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3751,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ight approximately proportional to cubed time [34] animals [34, 115]The von Bertalanffy growth rate of bacteria [48, pp.276-282]different species corrected for a common body yeasts [48, pp.276-282]temperature decreases almost proportional to animals [48, pp.276-282]maximum body lengthReproduction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78]but decreases with size inter-speciﬁcallyRespiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "69b84824ec32c55db5430b7f",
+          "title": "Lampert - 2025 - Daphnia magna.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3753,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "fects of parent hy -poxia exposure early in the development of the F1 gen -eration. They measured the effect of hypoxia (4 kPa) during the ﬁrst 6 days of development (juvenile phase) on growth, reproduction, and respiration rate of parents and their offspring (F1 generation) from the ﬁrst three broods. Parental D. magna exposed to hypoxia during days 0 to 6 grew slower during days 9 to 15 than con -trols, but the body mass (without eggs) reached a pla -teau in both exposed and control females at the same level. This growth curves (in terms of mass) showing linear growth after maturation and no further mass gain"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.378,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "t proportional to cubedtimeThe inverse of the von Bertalan y growth rate ofthe same species at di erent food availabilities cor-rected for a common body temperature decreaseslinearly with ultimate lengthThe logarithm of the von Bertalan y growth rateof di erent species corrected for a common bodytemperature decreases almost linearly with thelogarithm of the species maximum sizeRespiration Freshly laid eggs do not use oxygen in signi cantamountsThe use of dioxygen increases with decreasing massin embryos, but increases with mass in juvenilesand adultsThe use of dioxygen scales with body mass raisedto a power close to 0.75"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3852,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "do not use dioxygen in signiﬁcant animals [6, 62, 67, 87]amountsR2 The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [6, 11, 62, 65, 67, 71, 87]R3 The use of dioxygen scales with body weight raised animals [11, 65, 71]to a power close to 0.75 [38]R4 Organisms show a transient increase in metabolic rate animals [7, 27, 34, 59, 68]after ingesting food independent of their body mass -the heat increment of feedingTable 5.1: Stylized facts and empirical evidence on feeding, growth an d respiration.Stylized Facts Empirical Evidence"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3882,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "t do take up dioxygen. The spores ofendobacteria can be seen as an embryonic stage for prokaryotes. Adults differ from juvenilesby allocation to reproduction, rather than further increasing the state of maturity. Unlikedividing juveniles, adults do not reset their state (i.e. the amount of structure, reserveand the state of maturity). Animals, notably vertebrates, and embryophytes, notably theflowering plants, provide the embryo fully with reserve material. Egg size, relative to adultsize, has proved highly adaptable in evolutionary history, see {296}.10.5.3 Further increase in maintenance costs"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.405,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": ", which is supported by theempirical evidence that organisms can have a variablestoichiometry (S1). The reserve does not requiremaintenance because it is continuously used andreplenished, while the structure requires maintenancebecause it is continuously degraded and reconstructed.This is supported by the fact that freshly laid eggs(composed only of reserve) do not use dioxygen insigniﬁcant amounts and that the use of dioxygenincreases with decreasing mass in the embryo as thereserves are transformed into structure and withincreasing structure in the juvenile and adult (R1, R2).Feeding is considered to be proportional to surface"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4144,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "emand spectrum. See Subsection 10.5.5.R4At constant food, reproduction increases with length, see Section 2.7. Growth is compet-ing with somatic maintenance, reproduction with maturity maintenance; both are parallelprocesses, due to the κ-rule for allocation, see Section 2.4.282 11. EvaluationTable 11.4: Table 11.3 continued.O1Since only structure requires somatic maintenance and the embryo starts at zero structure,it initially hardly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address the relationship between dioxygen use (respiration rate) and body mass across embryonic versus juvenile/adult life stages, which is the core claim of the stylized fact. The snippets overwhelmingly concern the effects of oxygen concentration on in vitro embryo culture (IVF), embryonic genome activation, mitochondrial function, and metabolomics, with a few on fish embryo development under hypoxia. While some mention embryo metabolism and oxygen uptake (e.g., snippet 9 reports lower oxygen consumption in air-reared embryos with no mass difference), none quantify the mass-scaling of respiration or distinguish embryos from juveniles/adults in a way that bears on the fact. Evidence is therefore sparse and provides no clear support or contradiction; the corpus is essentially neutral/insufficient relative to the stated pattern."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W2187109492",
+          "title": "Fish embryo and juvenile size under hypoxia in the mouth-brooding African cichlid Pseudocrenilabrus multicolor",
+          "doi": "10.1093/czoolo/58.3.401",
+          "year": "2012",
+          "distance": 0.3783,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "environment. However, juveniles diverged in size after leaving mother’s mouth, exhibiting smaller size when grown under low DO. Size differences in embryo size across field populations and divergence in embryo size after release from the mother’s mouth support predictions for smaller body size under hypoxia. There was no evidence for negative effects on survival of juveniles after 3 months. Brooding period was 16% shorter in females reared under low DO suggesting that hypoxia may accelerate embryo de velopment."
+        },
+        {
+          "document_id": "W4410404782",
+          "title": "Oxygen levels regulating embryonic genome activation",
+          "doi": "10.69622/28731794",
+          "year": "2025",
+          "distance": 0.3933,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "is knowledge to understand the impact that oxygen levels have on in vitro embryo development, especially on EGA and metabolism. We found that the highest blastocyst formation rate happened in hypoxic culture conditions that induced timely EGA and energy metabolism genes. On the contrary, normoxia slowed down maternal transcript degradation, which is necessary for the embryo to achieve totipotency and reprogramming."
+        },
+        {
+          "document_id": "W4410404782",
+          "title": "Oxygen levels regulating embryonic genome activation",
+          "doi": "10.69622/28731794",
+          "year": "2025",
+          "distance": 0.3976,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "rmoxia slowed down maternal transcript degradation, which is necessary for the embryo to achieve totipotency and reprogramming. In addition, these embryos had several key metabolic pathways downregulated, making them less likely to be able to respond to the environment, and this might potentially be the reason why the embryos grown in normoxia have a lower success rate in IVF."
+        },
+        {
+          "document_id": "W4403625483",
+          "title": "Oxygen level alters energy metabolism in bovine preimplantation embryos",
+          "doi": "10.1101/2024.10.20.619258",
+          "year": "2024",
+          "distance": 0.3979,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nimal model instead of human embryos. Due to this, the direct translation of the results to human should be taken with caution. WIDER IMPLICATIONS OF THE FINDINGS This study supports previous literature on hypoxic culture conditions being the most suitable for in vitro embryo culture. In addition, we provide new insights on why embryos grown in normoxia do not have the same success rate as embryos grown in hypoxia. We did not observe any benefits of lowering the oxygen levels to 2%, calling for caution of switching to this culture system."
+        },
+        {
+          "document_id": "W3141161820",
+          "title": "The tolerance to hypoxia is defined by a time-sensitive response of the gene regulatory network in sea urchin embryos",
+          "doi": "10.1242/dev.195859",
+          "year": "2021",
+          "distance": 0.3993,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ABSTRACT Deoxygenation, the reduction of oxygen level in the oceans induced by global warming and anthropogenic disturbances, is a major threat to marine life. This change in oxygen level could be especially harmful to marine embryos that use endogenous hypoxia and redox gradients as morphogens during normal development."
+        },
+        {
+          "document_id": "W4394753911",
+          "title": "Culture of Human Embryos at High and Low Oxygen Levels",
+          "doi": "10.3390/jcm13082222",
+          "year": "2024",
+          "distance": 0.4,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "n the effect of the oxygen concentration on human embryos have been conducted so far with diverse methodologies and objectives. Data from these have been included in three meta-analyses. All meta-analyses indicate the potential benefit in favor of a low oxygen concentration, though data are considered to be of a low methodological quality and further studies are considered necessary. However, based on the existing evidence, it is suggested that a low oxygen concentration should be adopted in the routine of the IVF laboratory, especially in the case of blastocyst culture."
+        },
+        {
+          "document_id": "W4394753911",
+          "title": "Culture of Human Embryos at High and Low Oxygen Levels",
+          "doi": "10.3390/jcm13082222",
+          "year": "2024",
+          "distance": 0.4012,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "One of the parameters potentially affecting the in vitro growth of preimplantation embryos is the oxygen concentration in the culture environment. An increased oxygen concentration causes the generation of ROS which in turn can cause damage to the cells and seriously disrupt the embryonic development."
+        },
+        {
+          "document_id": "W2174370725",
+          "title": "The Metabolomic Profile of Spent Culture Media from Day-3 Human Embryos Cultured under Low Oxygen Tension",
+          "doi": "10.1371/journal.pone.0142724",
+          "year": "2015",
+          "distance": 0.4013,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "patients in the 6% oxygen concentration group, and 16 embryos from 9 patients were used in the 20% oxygen concentration group. The multivariate statistics we used in our analysis showed that human cleavage-stage embryos grown under both types of oxygen concentration left a similar metabolic fingerprint. We failed to observe any change in the net depletion or release of relevant analytes, such as glucose and especially fatty acids, by human cleavage-stage embryos under either type of culture condition."
+        },
+        {
+          "document_id": "W2175255471",
+          "title": "Fish embryos on land: terrestrial embryo deposition lowers oxygen uptake without altering growth or survival in the amphibious fish<i>Kryptolebias marmoratus</i>",
+          "doi": "10.1242/jeb.127399",
+          "year": "2015",
+          "distance": 0.4032,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "embryos consumed 44% less oxygen and possessed larger yolk reserves, but attained the same mass, length and chorion thickness. Water-reared embryos moved their opercula ∼2.5 more times per minute compared with air-reared embryos at 7 days post-release, which probably contributed to the higher rates of oxygen uptake and yolk utilization we observed. Genetically identical air- and water-reared embryos from the same parent were raised to maturity, but the embryonic environment did not affect growth, reproduction or emersion ability in adults."
+        },
+        {
+          "document_id": "W2922070852",
+          "title": "Oxygen concentration alters mitochondrial structure and function in <i>in vitro</i> fertilized preimplantation mouse embryos",
+          "doi": "10.1093/humrep/dez011",
+          "year": "2019",
+          "distance": 0.4046,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ich oxygen tension affects preimplantation development remain unclear, but mitochondria are believed to play an important role. The aim of this study was to evaluate how mitochondrial ultrastructure and function in IVF embryos were affected by culture under physiologic (5%) or atmospheric (20%) oxygen concentrations. STUDY DESIGN, SIZE, DURATION Zygotes, 2-cell, 4-cell, morula and blastocyst were flushed out of the uterus after natural fertilization and used as controls."
+        },
+        {
+          "document_id": "W4319341222",
+          "title": "Toxicity of the Mycotoxin Deoxynivalenol on Early Cleavage of Mouse Embryos by Fluorescence Intensity Analysis",
+          "doi": "10.1093/micmic/ozad005",
+          "year": "2023",
+          "distance": 0.4065,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ammals, including oocyte quality. However, the effects of deoxynivalenol on early embryonic development have not been reported. In this study, fluorescence intensity analysis was used to show that deoxynivalenol disrupted the first cleavage of the zygote. The high deoxynivalenol dose disturbed the movement of the pronucleus after fertilization, while the low deoxynivalenol dose caused aberrant spindle morphology during the metaphase of the first cleavage. Further analysis showed that the reactive oxygen species level increased in the deoxynivalenol-exposed two-cell embryos, indicating oxidative stress."
+        },
+        {
+          "document_id": "W2922070852",
+          "title": "Oxygen concentration alters mitochondrial structure and function in <i>in vitro</i> fertilized preimplantation mouse embryos",
+          "doi": "10.1093/humrep/dez011",
+          "year": "2019",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract STUDY QUESTION Does the oxygen concentration in the culture medium [either physiologic (5%) or atmospheric (20%)] affect mitochondrial ultrastructure and function in preimplantation mouse embryos generated by IVF? SUMMARY ANSWER Embryos cultured in 20% oxygen show increased mitochondrial abnormalities compared to embryos cultured in 5% oxygen. WHAT IS KNOWN ALREADY ART are widely used and have resulted in the birth of more than 8 million children."
+        },
+        {
+          "document_id": "W2145676352",
+          "title": "Metabolic regulation of in-vitro-produced bovine embryos. I. Effects of metabolic regulators at different glucose concentrations with embryos produced by semen from different bulls",
+          "doi": "10.1071/rd05063",
+          "year": "2006",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "than embryos cultured at lower doses. Embryos cultured in 30 µm DNP had a higher blastocyst rate (48.3%) than controls (34.9%). In the last experiment using G1.2/G2.2 media, DNP (30 µm) resulted in a marked decrease in embryonic development when embryos were exposed at the zygote to 8- to 16-cell stages but had little effect when morulae were exposed for 2 days. The dose–response information for these metabolic regulators is crucial for designing future experiments."
+        },
+        {
+          "document_id": "W3042918462",
+          "title": "Environmental Oxygen is a Key Modulator of Development and Evolution: From Molecules to Ecology",
+          "doi": "10.1002/bies.202000025",
+          "year": "2020",
+          "distance": 0.4098,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Oxygen is a key regulator of both development and homeostasis and a promising candidate to bridge the influence of the environment and the evolution of new traits. To clarify the various ways in which oxygen may modulate embryogenesis, its effects are reviewed at distinct organizational levels. First, the role of pathways that sense dioxygen levels and reactive oxygen species are reviewed."
+        },
+        {
+          "document_id": "W2125726311",
+          "title": "REDOX regulation of early embryo development",
+          "doi": "10.1530/rep.0.1230479",
+          "year": "2002",
+          "distance": 0.4148,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "on. Such a shift in metabolic pathway preference is desirable as the embryo faces an increasingly hypoxic environment in utero. We hypothesize that this shift in metabolic preference is associated with a change in the reduction-oxidation (REDOX) state within the embryo, affecting not only the energy production required for development, but also the activity of REDOX-sensitive transcription factors, which may alter gene expression patterns."
+        },
+        {
+          "document_id": "W2006087145",
+          "title": "174. ATMOSPHERIC OXYGEN ALTERS THE EMBRYONIC METABOLOME AS QUANTIFIED BY CARBOHYDRATE UPTAKE AND AMINO ACID UTILISATION",
+          "doi": "10.1071/srb10abs174",
+          "year": "2010",
+          "distance": 0.4166,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ino acid utilisation by embryos cultured in 5% oxygen was significantly less than embryos cultured in 20% oxygen (P &lt; 0.05). The data generated will help to determine the aetiology of oxygen toxicity to the preimplantation embryo. Higher glucose utilisation by embryos in 5% oxygen is consistent with their improved development. Conversely, the increased utilisation of amino acids by blastocysts in 20% oxygen may reflect an adaptation to increased oxidative stress as a result of culture in a non-physiological oxygen concentration."
+        },
+        {
+          "document_id": "W3048288008",
+          "title": "The influence of oxygen concentration during embryo culture on obstetric and neonatal outcomes: a secondary analysis of a randomized controlled trial",
+          "doi": "10.1093/humrep/deaa152",
+          "year": "2020",
+          "distance": 0.42,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d be the absence of trophectoderm cells at cleavage stage, which may make Day 3 embryos less susceptible to hypoxic conditions. WIDER IMPLICATIONS OF THE FINDINGS Nowadays many IVF laboratories use a more physiological oxygen concentration for embryo culture. However, the benefits of using low oxygen concentration on both laboratory and clinical outcomes during embryo culture are still under debate. Furthermore, long-term studies investigating the effect of using atmospheric O2 are also needed. Gathering these type of clinical data is indeed, quite relevant from the safety perspective."
+        },
+        {
+          "document_id": "W4403625483",
+          "title": "Oxygen level alters energy metabolism in bovine preimplantation embryos",
+          "doi": "10.1101/2024.10.20.619258",
+          "year": "2024",
+          "distance": 0.4216,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ays of culture before implantation. Embryo culture takes place inside the incubator, where different oxygen levels can be used. In this study, we compared 3 different oxygen concentrations for embryo culture: atmospheric or normoxia (20%), physiologic or hypoxia (6%) and combined low and ultra-low concentration with initial culture at 6% oxygen until day 3 followed by 2% (ultrahypoxia) until day 5 of culture."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple DEB-theory sources (Kooijman's books and papers, Sousa & Domingos, van der Meer) state the stylized fact verbatim and provide a mechanistic explanation (embryos lose reserve mass while structure grows; juveniles/adults increase respiration with structural maintenance). Several snippets also cite empirical literature supporting the embryo and juvenile/adult patterns. There is no contradicting evidence. The remaining snippets concern oxygen levels in IVF/embryo culture and hypoxia studies that are topically about embryonic oxygen but do not bear on the specific mass-scaling relationship, hence neutral. Overall the corpus strongly and consistently corroborates the stylized fact."
+      },
+      "n_references": 7,
+      "references": {
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.15081149339675903
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.25587207078933716
+        },
+        "69b89d63ecbd4702b29a6eb3": {
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2766224145889282
+        },
+        "69b84804ec32c55db5430b55": {
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.28896093368530273
+        },
+        "69b86a0fecbd4702b29a2ec6": {
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3147042393684387
+        },
+        "69b86b37ecbd4702b29a303e": {
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3572893738746643
+        },
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3610028624534607
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.1508,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2559,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2692,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2766,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "embryos, but increases with mass in juvenilesand adultsThe use of dioxygen scales with body mass raisedto a power close to 0.75Stoichiometry Well-fed animals have a di erent body chemicalcomposition than poorly-fed organismsAnimals growing with constant food density con-verge to a constant chemical compositionReproduction Reproduction increases with size intra-speci cally,but decreases with size inter-speci cally2 DEB, DEVELOPMENT AND CRITICISMS 6Table 2: The basic assumptions of the standard DEB model. After Kooij-man [9]1. An organism is characterized by a structural body, reserves, and matu-"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.289,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113]The use of dioxygen scales approximately with body weight raised animals [10, 84, 91]to a power close to 0.75 [45]Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88]after ingesting food (heat increment of feeding)Ageing Lifespan increases with size for endotherms, animals [19, 85]but is independent of size in ectotherms"
+        },
+        {
+          "document_id": "69b86a0fecbd4702b29a2ec6",
+          "title": "SousDomi2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3147,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "9 ;Kooijman 2000,pp. 96 )G6 egg size covaries with the nutritional status ofthe motheranimals ( Rossiter 1991 a,b;Glazier 1992 ;Bertram & Strathmann 1998 ;Heath et al.1999 ;McIntyre & Gooding 2000 ;Yoshinagaet al. 2001 ;Loman 2002 ;Nager et al. 2006 )respiration R1 freshly laid eggs do not use dioxygen insigniﬁcant amountsanimals ( Romijn & Lokhorst 1951 ;Pettit 1982 ;Bucher 1983 ;Whitehead 1987 )R2 the use of dioxygen increases with decreasingmass in embryos and increases with mass injuveniles and adultsanimals ( Romijn & Lokhorst 1951 ;Richman1958 ;Pettit 1982 ;Bucher 1983 ;Whitehead1987 ;Clarke & Johnston 1999 ;Savage et al."
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3223,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "ases almost linearly with the maximumbody length\u000fFetuses increase in weight approximately proportional to cubed timeReproduction\u000fMany species (almost all animals and plants) have a juvenile stage that does not reproduce\u000fReproduction increases with size intra-speci cally, but decreases with size inter-speci cally\u000fA range of constant low food levels exists at which an individual can survive, but not reproduceRespiration\u000fAnimal eggs and plant seeds initially hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults"
+        },
+        {
+          "document_id": "69b847d4ec32c55db5430a9e",
+          "title": "Kooy2015_en.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3339,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": ".This strongly suggests that other reasons must exist to cease growing, andthat cartilage is replaced it improve bone structure.The second example concerns the di usion of dioxygen through the eggshell, which is generally seen as a rate-limiting factor in the development ofbird eggs. This idea rests on the observation of a strongly negative correlationbetween maximum dioxygen consumption and di usion resistance of the eggTheoretical Biology, a specialisation in integration 35shell. Models show, however, that energy use, that corresponds with the use ofdioxygen of the embryo, develops similar to that of the neonate. This suggests"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3447,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "e stage that does not reproduceR2Reproduction increases with size intra-specifically, but decreases with size inter-specificallyR3A range of constant low food levels exists at which an individual can survive, but not reproduceR4Growth can be simultaneous with reproduction, but growth can also cease long before reproductionis initiatedR5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults"
+        },
+        {
+          "document_id": "69b86b37ecbd4702b29a303e",
+          "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3573,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "ile stage that does notreproduceR2Reproduction increases with size intra-speci ﬁcally, but decreases with size inter-speciﬁcallyR3A range of constant low food levels exists at which an individual can survive, butnot reproduceR4Growth can be simultaneous with reproduction, but growth can also cease longbefore reproduction is initiatedRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increaseswith mass in juveniles and adultsO3The use of dioxygen by isomorphs scales approximately with body weight raisedto a power close to 0.75"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.361,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "5Allocation to reproduction can continue during starvationRespirationO1Animal eggs and plant seeds initially hardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3751,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ight approximately proportional to cubed time [34] animals [34, 115]The von Bertalanffy growth rate of bacteria [48, pp.276-282]different species corrected for a common body yeasts [48, pp.276-282]temperature decreases almost proportional to animals [48, pp.276-282]maximum body lengthReproduction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78]but decreases with size inter-speciﬁcallyRespiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animals"
+        },
+        {
+          "document_id": "W2187109492",
+          "title": "Fish embryo and juvenile size under hypoxia in the mouth-brooding African cichlid Pseudocrenilabrus multicolor",
+          "doi": "10.1093/czoolo/58.3.401",
+          "year": "2012",
+          "distance": 0.3783,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "environment. However, juveniles diverged in size after leaving mother’s mouth, exhibiting smaller size when grown under low DO. Size differences in embryo size across field populations and divergence in embryo size after release from the mother’s mouth support predictions for smaller body size under hypoxia. There was no evidence for negative effects on survival of juveniles after 3 months. Brooding period was 16% shorter in females reared under low DO suggesting that hypoxia may accelerate embryo de velopment."
+        },
+        {
+          "document_id": "W4410404782",
+          "title": "Oxygen levels regulating embryonic genome activation",
+          "doi": "10.69622/28731794",
+          "year": "2025",
+          "distance": 0.3933,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "is knowledge to understand the impact that oxygen levels have on in vitro embryo development, especially on EGA and metabolism. We found that the highest blastocyst formation rate happened in hypoxic culture conditions that induced timely EGA and energy metabolism genes. On the contrary, normoxia slowed down maternal transcript degradation, which is necessary for the embryo to achieve totipotency and reprogramming."
+        },
+        {
+          "document_id": "W4410404782",
+          "title": "Oxygen levels regulating embryonic genome activation",
+          "doi": "10.69622/28731794",
+          "year": "2025",
+          "distance": 0.3976,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "rmoxia slowed down maternal transcript degradation, which is necessary for the embryo to achieve totipotency and reprogramming. In addition, these embryos had several key metabolic pathways downregulated, making them less likely to be able to respond to the environment, and this might potentially be the reason why the embryos grown in normoxia have a lower success rate in IVF."
+        },
+        {
+          "document_id": "W4403625483",
+          "title": "Oxygen level alters energy metabolism in bovine preimplantation embryos",
+          "doi": "10.1101/2024.10.20.619258",
+          "year": "2024",
+          "distance": 0.3979,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nimal model instead of human embryos. Due to this, the direct translation of the results to human should be taken with caution. WIDER IMPLICATIONS OF THE FINDINGS This study supports previous literature on hypoxic culture conditions being the most suitable for in vitro embryo culture. In addition, we provide new insights on why embryos grown in normoxia do not have the same success rate as embryos grown in hypoxia. We did not observe any benefits of lowering the oxygen levels to 2%, calling for caution of switching to this culture system."
+        },
+        {
+          "document_id": "W3141161820",
+          "title": "The tolerance to hypoxia is defined by a time-sensitive response of the gene regulatory network in sea urchin embryos",
+          "doi": "10.1242/dev.195859",
+          "year": "2021",
+          "distance": 0.3993,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ABSTRACT Deoxygenation, the reduction of oxygen level in the oceans induced by global warming and anthropogenic disturbances, is a major threat to marine life. This change in oxygen level could be especially harmful to marine embryos that use endogenous hypoxia and redox gradients as morphogens during normal development."
+        },
+        {
+          "document_id": "W4394753911",
+          "title": "Culture of Human Embryos at High and Low Oxygen Levels",
+          "doi": "10.3390/jcm13082222",
+          "year": "2024",
+          "distance": 0.4,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "n the effect of the oxygen concentration on human embryos have been conducted so far with diverse methodologies and objectives. Data from these have been included in three meta-analyses. All meta-analyses indicate the potential benefit in favor of a low oxygen concentration, though data are considered to be of a low methodological quality and further studies are considered necessary. However, based on the existing evidence, it is suggested that a low oxygen concentration should be adopted in the routine of the IVF laboratory, especially in the case of blastocyst culture."
+        },
+        {
+          "document_id": "W4394753911",
+          "title": "Culture of Human Embryos at High and Low Oxygen Levels",
+          "doi": "10.3390/jcm13082222",
+          "year": "2024",
+          "distance": 0.4012,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "One of the parameters potentially affecting the in vitro growth of preimplantation embryos is the oxygen concentration in the culture environment. An increased oxygen concentration causes the generation of ROS which in turn can cause damage to the cells and seriously disrupt the embryonic development."
+        },
+        {
+          "document_id": "W2174370725",
+          "title": "The Metabolomic Profile of Spent Culture Media from Day-3 Human Embryos Cultured under Low Oxygen Tension",
+          "doi": "10.1371/journal.pone.0142724",
+          "year": "2015",
+          "distance": 0.4013,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "patients in the 6% oxygen concentration group, and 16 embryos from 9 patients were used in the 20% oxygen concentration group. The multivariate statistics we used in our analysis showed that human cleavage-stage embryos grown under both types of oxygen concentration left a similar metabolic fingerprint. We failed to observe any change in the net depletion or release of relevant analytes, such as glucose and especially fatty acids, by human cleavage-stage embryos under either type of culture condition."
+        },
+        {
+          "document_id": "W2175255471",
+          "title": "Fish embryos on land: terrestrial embryo deposition lowers oxygen uptake without altering growth or survival in the amphibious fish<i>Kryptolebias marmoratus</i>",
+          "doi": "10.1242/jeb.127399",
+          "year": "2015",
+          "distance": 0.4032,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "embryos consumed 44% less oxygen and possessed larger yolk reserves, but attained the same mass, length and chorion thickness. Water-reared embryos moved their opercula ∼2.5 more times per minute compared with air-reared embryos at 7 days post-release, which probably contributed to the higher rates of oxygen uptake and yolk utilization we observed. Genetically identical air- and water-reared embryos from the same parent were raised to maturity, but the embryonic environment did not affect growth, reproduction or emersion ability in adults."
+        },
+        {
+          "document_id": "W2922070852",
+          "title": "Oxygen concentration alters mitochondrial structure and function in <i>in vitro</i> fertilized preimplantation mouse embryos",
+          "doi": "10.1093/humrep/dez011",
+          "year": "2019",
+          "distance": 0.4046,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ich oxygen tension affects preimplantation development remain unclear, but mitochondria are believed to play an important role. The aim of this study was to evaluate how mitochondrial ultrastructure and function in IVF embryos were affected by culture under physiologic (5%) or atmospheric (20%) oxygen concentrations. STUDY DESIGN, SIZE, DURATION Zygotes, 2-cell, 4-cell, morula and blastocyst were flushed out of the uterus after natural fertilization and used as controls."
+        },
+        {
+          "document_id": "W4319341222",
+          "title": "Toxicity of the Mycotoxin Deoxynivalenol on Early Cleavage of Mouse Embryos by Fluorescence Intensity Analysis",
+          "doi": "10.1093/micmic/ozad005",
+          "year": "2023",
+          "distance": 0.4065,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ammals, including oocyte quality. However, the effects of deoxynivalenol on early embryonic development have not been reported. In this study, fluorescence intensity analysis was used to show that deoxynivalenol disrupted the first cleavage of the zygote. The high deoxynivalenol dose disturbed the movement of the pronucleus after fertilization, while the low deoxynivalenol dose caused aberrant spindle morphology during the metaphase of the first cleavage. Further analysis showed that the reactive oxygen species level increased in the deoxynivalenol-exposed two-cell embryos, indicating oxidative stress."
+        },
+        {
+          "document_id": "W2922070852",
+          "title": "Oxygen concentration alters mitochondrial structure and function in <i>in vitro</i> fertilized preimplantation mouse embryos",
+          "doi": "10.1093/humrep/dez011",
+          "year": "2019",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract STUDY QUESTION Does the oxygen concentration in the culture medium [either physiologic (5%) or atmospheric (20%)] affect mitochondrial ultrastructure and function in preimplantation mouse embryos generated by IVF? SUMMARY ANSWER Embryos cultured in 20% oxygen show increased mitochondrial abnormalities compared to embryos cultured in 5% oxygen. WHAT IS KNOWN ALREADY ART are widely used and have resulted in the birth of more than 8 million children."
+        }
+      ]
+    }
+  }
+}

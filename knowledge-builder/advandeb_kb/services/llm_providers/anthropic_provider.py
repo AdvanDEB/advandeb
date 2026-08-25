@@ -12,6 +12,7 @@ import logging
 import time
 from typing import Any, AsyncIterator, Dict, List, Optional, Tuple
 
+from advandeb_kb.config.settings import settings
 from advandeb_kb.services.llm_providers.base import (
     BaseLLMProvider,
     ProviderAuthError,
@@ -19,6 +20,15 @@ from advandeb_kb.services.llm_providers.base import (
 )
 
 logger = logging.getLogger(__name__)
+
+# Models that support adaptive thinking + the `effort` control. Older Claude
+# models (and any future ones we haven't tagged) gracefully skip it.
+_ADAPTIVE_MODELS = ("opus-4-6", "opus-4-7", "opus-4-8", "sonnet-4-6", "fable-5", "mythos-5")
+
+
+def _supports_adaptive(model: str) -> bool:
+    m = (model or "").lower()
+    return any(tag in m for tag in _ADAPTIVE_MODELS)
 
 
 def _split_system(messages: List[Dict[str, str]]) -> Tuple[Optional[str], List[Dict[str, str]]]:
@@ -49,11 +59,79 @@ def _is_temperature_rejection(exc: Exception) -> bool:
     return "temperature" in str(exc).lower()
 
 
+def _build_anthropic_messages(
+    messages: List[Dict[str, Any]],
+) -> Tuple[Optional[str], List[Dict[str, Any]]]:
+    """Convert unified messages (may include tool turns) to Anthropic format.
+
+    Handles:
+      * system messages → extracted as system string
+      * assistant turns with tool_calls → content list with tool_use blocks
+      * tool-result turns → folded into a "user" turn with tool_result blocks
+    """
+    system_parts: List[str] = []
+    out: List[Dict[str, Any]] = []
+
+    for m in messages:
+        role = m.get("role", "")
+        content = m.get("content") or ""
+
+        if role == "system":
+            if content:
+                system_parts.append(content)
+            continue
+
+        if role == "assistant":
+            tool_calls = m.get("tool_calls") or []
+            if tool_calls:
+                blocks: List[Dict[str, Any]] = []
+                if content:
+                    blocks.append({"type": "text", "text": content})
+                for tc in tool_calls:
+                    blocks.append({
+                        "type": "tool_use",
+                        "id": tc["id"],
+                        "name": tc["name"],
+                        "input": tc["input"],
+                    })
+                out.append({"role": "assistant", "content": blocks})
+            else:
+                out.append({"role": "assistant", "content": content})
+            continue
+
+        if role == "tool":
+            # Tool results go in a user turn in Anthropic's protocol.
+            result_block = {
+                "type": "tool_result",
+                "tool_use_id": m.get("tool_call_id", ""),
+                "content": content,
+            }
+            # If the last out-message is already a user-tool-result turn, append.
+            if (
+                out
+                and out[-1]["role"] == "user"
+                and isinstance(out[-1]["content"], list)
+                and out[-1]["content"]
+                and out[-1]["content"][0].get("type") == "tool_result"
+            ):
+                out[-1]["content"].append(result_block)
+            else:
+                out.append({"role": "user", "content": [result_block]})
+            continue
+
+        # Regular user message
+        out.append({"role": role, "content": content})
+
+    system = "\n\n".join(system_parts) if system_parts else None
+    return system, out
+
+
 class AnthropicProvider(BaseLLMProvider):
     """Anthropic Claude provider using the ``anthropic`` async SDK."""
 
     provider_name = "anthropic"
     default_model = "claude-opus-4-7"
+    supports_tools = True
     available_models = [
         "claude-opus-4-7",
         "claude-sonnet-4-6",
@@ -99,24 +177,38 @@ class AnthropicProvider(BaseLLMProvider):
         }
         if system:
             kwargs_out["system"] = system
+
+        # Adaptive thinking + effort for capable models. Capable models also
+        # reject `temperature`, so drop it here (older models keep it).
+        adaptive = settings.CHAT_ADAPTIVE_THINKING and _supports_adaptive(model)
+        if adaptive:
+            kwargs_out["thinking"] = {"type": "adaptive"}
+            kwargs_out["output_config"] = {"effort": settings.CHAT_THINKING_EFFORT}
+            kwargs_out.pop("temperature", None)
+
         try:
-            resp = await self._client.messages.create(**kwargs_out)
+            try:
+                resp = await self._final_message(kwargs_out)
+            except self._anthropic.APIStatusError as e:
+                # Graceful degradation: strip advanced params the model/SDK rejects
+                # (adaptive thinking / effort), or `temperature` on newer models.
+                changed = False
+                if "thinking" in kwargs_out or "output_config" in kwargs_out:
+                    kwargs_out.pop("thinking", None)
+                    kwargs_out.pop("output_config", None)
+                    changed = True
+                if _is_temperature_rejection(e) and "temperature" in kwargs_out:
+                    kwargs_out.pop("temperature", None)
+                    changed = True
+                if not changed:
+                    raise
+                resp = await self._final_message(kwargs_out)
         except self._anthropic.AuthenticationError as e:
             raise ProviderAuthError(str(e), self.provider_name) from e
         except self._anthropic.APIStatusError as e:
-            # Newer Claude models deprecate `temperature`; retry once without it.
-            if _is_temperature_rejection(e) and "temperature" in kwargs_out:
-                kwargs_out.pop("temperature", None)
-                try:
-                    resp = await self._client.messages.create(**kwargs_out)
-                except self._anthropic.APIStatusError as e2:
-                    raise ProviderError(
-                        str(e2), provider=self.provider_name, code=str(e2.status_code)
-                    ) from e2
-            else:
-                raise ProviderError(
-                    str(e), provider=self.provider_name, code=str(e.status_code)
-                ) from e
+            raise ProviderError(
+                str(e), provider=self.provider_name, code=str(e.status_code)
+            ) from e
         except Exception as e:
             raise ProviderError(str(e), provider=self.provider_name) from e
 
@@ -144,6 +236,17 @@ class AnthropicProvider(BaseLLMProvider):
                 "total_tokens": in_tok + out_tok,
             },
         }
+
+    async def _final_message(self, kwargs_out: Dict[str, Any]):
+        """Run a non-streaming request via the streaming API and return the final
+        Message. Using ``messages.stream(...).get_final_message()`` instead of
+        ``messages.create(...)`` avoids the SDK's non-streaming timeout guard, so
+        large ``max_tokens`` (long answers, up to the model's 128K output) neither
+        raise nor hit HTTP timeouts. The return value has the same shape as
+        ``messages.create`` (``.content`` / ``.usage`` / ``.stop_reason``).
+        """
+        async with self._client.messages.stream(**kwargs_out) as stream_ctx:
+            return await stream_ctx.get_final_message()
 
     async def _stream(
         self,
@@ -213,6 +316,143 @@ class AnthropicProvider(BaseLLMProvider):
                 }
             ],
         }
+
+    async def chat_with_tools(
+        self,
+        model: str,
+        messages: List[Dict[str, Any]],
+        tools: List[Dict[str, Any]],
+        *,
+        max_tokens: int = 8192,
+        temperature: float = 0.3,
+    ) -> Dict[str, Any]:
+        """Single step in an Anthropic tool-calling conversation.
+
+        Translates our unified message / tool format to Anthropic's protocol and
+        back. Returns a unified response dict — see BaseLLMProvider docstring.
+        """
+        system, anthropic_msgs = _build_anthropic_messages(messages)
+
+        anthropic_tools = [
+            {
+                "name": t["name"],
+                "description": t["description"],
+                "input_schema": t["input_schema"],
+            }
+            for t in tools
+        ]
+
+        kwargs_out: Dict[str, Any] = {
+            "model": model,
+            "max_tokens": max_tokens,
+            "tools": anthropic_tools,
+            "messages": anthropic_msgs,
+        }
+        if system:
+            kwargs_out["system"] = system
+
+        adaptive = settings.CHAT_ADAPTIVE_THINKING and _supports_adaptive(model)
+        if adaptive:
+            kwargs_out["thinking"] = {"type": "adaptive"}
+            kwargs_out["output_config"] = {"effort": settings.CHAT_THINKING_EFFORT}
+        else:
+            kwargs_out["temperature"] = temperature
+
+        try:
+            resp = await self._client.messages.create(**kwargs_out)
+        except self._anthropic.APIStatusError as e:
+            # Graceful degradation: strip unsupported params and retry once.
+            changed = False
+            for key in ("thinking", "output_config", "temperature"):
+                if key in kwargs_out:
+                    kwargs_out.pop(key, None)
+                    changed = True
+            if not changed:
+                raise ProviderError(str(e), provider=self.provider_name, code=str(e.status_code)) from e
+            try:
+                resp = await self._client.messages.create(**kwargs_out)
+            except Exception as e2:
+                raise ProviderError(str(e2), provider=self.provider_name) from e2
+        except self._anthropic.AuthenticationError as e:
+            raise ProviderAuthError(str(e), self.provider_name) from e
+        except Exception as e:
+            raise ProviderError(str(e), provider=self.provider_name) from e
+
+        # Parse response
+        text_parts: List[str] = []
+        tool_calls: List[Dict[str, Any]] = []
+        for block in (resp.content or []):
+            btype = getattr(block, "type", "")
+            if btype == "text":
+                text_parts.append(getattr(block, "text", ""))
+            elif btype == "tool_use":
+                tool_calls.append({
+                    "id": getattr(block, "id", ""),
+                    "name": getattr(block, "name", ""),
+                    "input": getattr(block, "input", {}),
+                })
+
+        finish = resp.stop_reason or "stop"
+        return {
+            "finish_reason": "tool_calls" if tool_calls else finish,
+            "content": "".join(text_parts),
+            "tool_calls": tool_calls,
+        }
+
+    async def stream_final_answer(
+        self,
+        model: str,
+        messages: List[Dict[str, Any]],
+        *,
+        max_tokens: Optional[int] = None,
+        temperature: float = 0.3,
+    ) -> AsyncIterator[str]:
+        """Stream the final synthesis given conversation history including tool turns.
+
+        Uses ``_build_anthropic_messages`` to convert the unified tool_use/tool_result
+        format and streams via the Anthropic text_stream API. Called after the agentic
+        tool loop so the browser sees the final answer appearing progressively.
+        """
+        system, anthropic_msgs = _build_anthropic_messages(messages)
+        effective_max = max_tokens if max_tokens is not None else 8192
+        kwargs_out: Dict[str, Any] = {"model": model, "messages": anthropic_msgs, "max_tokens": effective_max}
+        if system:
+            kwargs_out["system"] = system
+
+        adaptive = settings.CHAT_ADAPTIVE_THINKING and _supports_adaptive(model)
+        if adaptive:
+            kwargs_out["thinking"] = {"type": "adaptive"}
+            kwargs_out["output_config"] = {"effort": settings.CHAT_THINKING_EFFORT}
+        else:
+            kwargs_out["temperature"] = temperature
+
+        async def _emit() -> AsyncIterator[str]:
+            async with self._client.messages.stream(**kwargs_out) as stream_ctx:
+                async for text in stream_ctx.text_stream:
+                    if text:
+                        yield text
+
+        try:
+            async for delta in _emit():
+                yield delta
+        except self._anthropic.APIStatusError as e:
+            # Graceful degradation: strip advanced params and retry once.
+            changed = False
+            for key in ("thinking", "output_config"):
+                if key in kwargs_out:
+                    kwargs_out.pop(key, None)
+                    changed = True
+            if _is_temperature_rejection(e) and "temperature" in kwargs_out:
+                kwargs_out.pop("temperature", None)
+                changed = True
+            if not changed:
+                raise ProviderError(str(e), provider=self.provider_name, code=str(e.status_code)) from e
+            async for delta in _emit():
+                yield delta
+        except self._anthropic.AuthenticationError as e:
+            raise ProviderAuthError(str(e), self.provider_name) from e
+        except Exception as e:
+            raise ProviderError(str(e), provider=self.provider_name) from e
 
     async def list_models(self) -> List[str]:
         """Return the account's available Claude model IDs, live.

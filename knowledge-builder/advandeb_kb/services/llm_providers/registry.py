@@ -15,6 +15,7 @@ from advandeb_kb.services.llm_providers.gemini_provider import GeminiProvider
 from advandeb_kb.services.llm_providers.github_models_provider import (
     GitHubModelsProvider,
 )
+from advandeb_kb.services.llm_providers.nvidia_provider import NvidiaProvider
 from advandeb_kb.services.llm_providers.ollama_provider import OllamaProvider
 from advandeb_kb.services.llm_providers.openai_provider import OpenAIProvider
 
@@ -24,6 +25,7 @@ PROVIDERS: Dict[str, Type[BaseLLMProvider]] = {
     "openai": OpenAIProvider,
     "gemini": GeminiProvider,
     "github_models": GitHubModelsProvider,
+    "nvidia": NvidiaProvider,
 }
 
 

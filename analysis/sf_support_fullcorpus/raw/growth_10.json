@@ -1,0 +1,1920 @@
+{
+  "sf_id": "growth_10",
+  "category": "Growth",
+  "statement": "Maximal growth rate in some species can be obtained through high feeding, regardless of nutritional status (energy reserves).",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "The corpus contains several excerpts that explicitly link high feeding rates to maximal growth (snippets 1-5), providing supportive evidence for the stylized fact. However, an equal number of passages highlight the importance of nutritional quality or internal reserves for achieving maximal growth (snippets 6,7,12,13,15), which contradicts the claim that maximal growth can be obtained regardless of reserve status. The remaining snippets are largely neutral with respect to the specific assertion. Because supportive and contradictory evidence are balanced, the overall evidential support is moderate, and the consensus direction is mixed rather than clearly corroborating or refuting the fact."
+          },
+          "n_references": 9,
+          "references": {
+            "3170": {
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1821
+            },
+            "3045": {
+              "title": "HeatJone2016.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1873
+            },
+            "3499": {
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1964
+            },
+            "3364": {
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1979
+            },
+            "2769": {
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2027
+            },
+            "2402": {
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2041
+            },
+            "2395": {
+              "title": "Stavrakidis-Zachou et al. - 2025 - A Nutritional Bioenergetic Model for Farmed Fish .pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2116
+            },
+            "3358": {
+              "title": "Candela - 2018 - Linking individual behaviour and life history bio.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2119
+            },
+            "2397": {
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2134
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1821,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "its such as growth and reproduction. If animals are indeed physiologically capable of increasing their feeding rate beyond control conditions, this raises an interesting evolutionary question. A mutant that always has this up-regulated feeding rate would reproduce earlier and more, and thus outcompete its conspeciﬁcs. So why did natural selection not lead to the maximum possible feeding rate? It is likely that there are ﬁtness disadvantages of having an up-regulated feeding rate, which could relate to negative side effects of rapid growth (e.g., decreased survival proba- bility), or of being large bodied (e.g., increased predation risk). If up-regulation of feeding occurs after exposure to t"
+            },
+            {
+              "document_id": "3045",
+              "title": "HeatJone2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1873,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "enzymes and transporters maximizes the total amount of energy available for reproduction, and in the case where growth rates are maximal, this optimal investment in di- gestion may approach (but not exceed) half the energy budget (see ﬁg. 3). Exploration and Exploitation: Trade-Offs and Optimal Control All else being equal, species with a higher growth rate are expected to outcompete species with a lower growth rate, as they are likely to capture a larger fraction of the available resource, giving higher ﬁtness as a result of more efﬁcient exploration of the resource environment. An equally reason- able claim is that, all else being equal, species that convert a larger fraction of the energy"
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1964,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "growth rate may be selected when food 501 availability and/or nutrition is high, foraging risks are low (Kozlowski, Konarzewski 502 and Czarnoleski, 2020). Therefore, it can be predicted that organisms may exhibit 503 rapid growth rates to reach large body sizes, but in addition the rates of organism 504 growth are also likely to reflect adaptations to different environmental conditions. 505 Thus, observed rates of organism growth, or realised growth rates, are likely to reflect 506 [Page 29] 19 optimal rates that result from a trade-off between the costs and benefits of growing at 507 maximal rates in given environmental conditions. 508 Growth rate can be influenced by, or correlate with, m"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3364",
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1979,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "limited to an intrinsic-physiological maximum Qm. In food-saturated environments, the assimilation rate will be close to this maximum, regardless of how much area the ani- mals cover because f (eqn 7) approaches one, increasing either the resource level or the explored HR area. Accordingly, the growth and reproduction outcomes of different e became more evident in scenarios with a moderate or low resource density. Hence, animals with higher e or living in resource- rich environments grew faster and allocated more energy to reproduction across their lifetime (Fig. 2c). Therefore, inter- estingly, from an ecological perspective, the lower the resource density is, the more important the movemen"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2027,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "g homeostasis assumption is not valid, but may also be an effect of behavioral changes during growth, such that larger body sizes experience higher food densities, and therefore increase their feed- ing rate, reserves, RNA content, and speciﬁc growth rate. When we compare different species of unicellulars grown at abundant food (substrate) density, DEB the- ory predicts that the speciﬁc growth rate increases with the unicellulars’ reserve capacity. The RNA content is therefore expected to increase with the speciﬁc growth rate among species. The predicted positive relationship between speciﬁc growth rate and RNA content can be seen among both prokaryotic and eukaryotic micro- organisms (Fig. "
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2041,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "high maximum growth rate (gmax). (2) Low-quality food supports a low gmax and requires a higher Thr. (3) Low-quality food supports a low gmax, but the Thr does not differ between high- and low-quality food. They tested these options by measur- ing the juvenile somatic growth rates of D. magna at limiting concentrations of P-rich (C:P = 152) and P- limited (C:P = 1800) Scenedesmus. Based on their experimental results, they re- jected hypothesis two. Although gmax was reduced in low-quality food, no difference in Thr was found for the two food types. Sterner and Robinson explained this result with two physiological conditions required for the Thr (maintenance of mass) and for growth (in- creas"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "lts of the same species) increases among species approximately with the volumetric length of the full- grown adult. The maximum speciﬁc growth rate, which is expected to occur at a body size of 4/27 of the max- imum size, is proportional to the inverse of the volu- metric length of the full-grown adult. If we assume that the composition of reserve is independent of maximum body size, and that RNA is more abundant in reserve than in structure, we expect a negative relationship be- tween mass-speciﬁc RNA content and maximum spe- ciﬁc growth rate among multicellular species. This co- variation of parameter values among species, and their relationship with maximum body size, rests on the idea th"
+            },
+            {
+              "document_id": "2617",
+              "title": "MullNisb2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2099,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "c growth; development; maintenance of the state of maturity; and reproduction. These energy ﬂuxes are irreversible. • There are maximally three life stages: embryos, which neither feed nor reproduce; juveniles, which may feed but do not reproduce; and adults, which may feed and reproduce. • The rate of food uptake is proportional to the surface area of an organism, and is a hyperbolic function of the food density (type II functional response). • Energy assimilated from food becomes part of the reserves. The dynamics of the energy reserve density are ﬁrst order, with a rate that is inversely proportional to the volumetric length of an organism. • A ﬁxed fraction of the energy released from th"
+            },
+            {
+              "document_id": "3502",
+              "title": "Nepal et al. - 2021 - Effects of food limitation on growth, body conditi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2101,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "tes of the species at specific food densities. Bioenergetics models can then provide insights on growth and feeding rates observed in the wild (Kooijman, 2010).An ability to grow and maintain a good body condition in restricted food environments would be beneficial for an invading organism. The estimates of metabolic rates of an invasive species can also inform growth dynamics (van Poorten and Walters, 2016), elucidate ecological traits (Killen et al., 2016) and support the development of bioenergetics models for the species (Cooke and Hill, 2010; Kooijman, 2010). Species with low maintenance costs, as measured by standard metabolic rate (SMR) in fish, are more likely to succeed under harsh,"
+            },
+            {
+              "document_id": "2687",
+              "title": "LikaKear2011a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2112,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "nsity, a rapid occurrence of problems during starvation. The maximum size is not affected by this parameter. The energy conductance is unlikely to deviate strongly from the typical value independent of the body size of the species. Range: N0. Allocation fraction to soma κ, 0.8: controls the allocation of mobilised reserve to somatic maintenance and growth as opposed to maturity maintenance and maturation of reproduction. A high value gives rapid growth to a large size, long development times and low reproduction. A small value (κb0.5) can reduce growth and reproduction, since food uptake is linked to size. Range: N0, b1. Reproduction efﬁciency κR, 0.95: is the fraction of reserve allocated t"
+            },
+            {
+              "document_id": "2395",
+              "title": "Stavrakidis-Zachou et al. - 2025 - A Nutritional Bioenergetic Model for Farmed Fish .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2116,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "irect experimentation and observation are not feasible. One critical consideration in ﬁsh nutrition and feed formu- lation is the energy-to-protein ratio. The optimal ratio is highly species-speciﬁc and needs to be experimentally determined for each species [71–73]. Feeds with excessive energy-to-protein content and vice versa are known to result in reduced weight gain because the ﬁsh may eat as much as they can, but depend- ing on the case, either the protein or the energy they can retain is not sufﬁcient to cover their growth requirements [74, 75]. Moreover, the source of energy, whether it is predominantly derived from fats, protein or carbohydrates further inﬂuences its utilisation by th"
+            },
+            {
+              "document_id": "3358",
+              "title": "Candela - 2018 - Linking individual behaviour and life history bio.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2119,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "H: Fast growth We expect higher 𝑣̇ along with high internal reserves to evolve in food rich environments (then internal energy can be maintained in high levels thanks to a fast assimilation that overcome the fast mobilization) where high predation exists (higher 𝑣̇ implies faster growth and that will help in avoiding predation). Risk of starvation. Safe from predation. LH: Slow growth We expect low 𝑣̇ along with high internal reserves to evolve in scenarios with high risk of starvation but safe from predation, then a slow growth is optimal because it helps to reduce the risk of starvation, keeping smaller sizes and keeping higher reserves for overcoming the environmental uncertainties. Strat"
+            },
+            {
+              "document_id": "3103",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2125,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "use and transformation) to fuel its various vital activities. In addition, since all organisms are products of countless generations of natural selection, one may predict that they should have evolved the highest metabolic rates possible to support competitively superior, maximal rates of resource exploitation and progeny production [1–6]. However, living organisms display a wide variety of metabolic and reproductive rates, a fundamental, but insufficiently understood theoretical problem of much interest to biologists. Both intrinsic and extrinsic factors may influence this variation, including body size, temperature, resource availability and exploitation by other organisms. For example, va"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2134,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "ntity produce increasingly positive growth rates till length reaches an asymptote at the point where the energy intake rate is no longer limited by food availability but instead by some other factor such as food digestion and nutrient absorption (Blier et al., 1997) or oxygen supply (Pauly, 2021). The shape of the growth-ration curve is itself influenced by the quality of the prey. In the context of growth, the quality of a food item relates to the rate of growth it can sustain when not quantitatively limited. Food that provides the consumer with poor nutritional condition or a low rate of energy intake (Elner and Hughes, 1978) causes shallower increases in growth with increased ration and a"
+            },
+            {
+              "document_id": "3296",
+              "title": "Civitello_et_al-2018-Ecology_Letters.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2138,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "three terms: their maximum surface area-speciﬁc ingestion rate, iM; a Type II functional response, fH, with half saturation constant, Fh, and their physical length squared (which is proportional to surface area; eqn 1). Hosts assimilate energy from food into an energy ‘reserve’, with yield of reserves on food YEF. The maximum assimilation rate, aM, is the product of the maximum ingestion rate and the yield of reserves on food. Hosts use these reserves to build two types of biomass : structure (which performs vital functions and requires maintenance at rate mV) and reproductive matter (re- serve biomass that has been irreversibly committed to offspring). The reserve dynamics in the absence of"
+            },
+            {
+              "document_id": "3579",
+              "title": "Lika et al. - 2022 - The comparative energetics of the ray-finned fish .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2142,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "rates. Right: specific body growth at maximum growth as function of weight at maximum growth. The line has slope -0.38. Markers like in Fig. 4. constant environmental conditions: the increase of the feeding rate of individuals due to growth, is exactly balanced by a reduction in numbers of individuals in the cohort (Kooijman et al., 2020). The specific population growth rate under thin- ning was found to be more or less equal to the specific body growth rate at maximum growth for many animal species, suggesting an evolutionary relict from times when organisms were dividing unicellulars and a direct relationship between these quantities existed (Kooijman et al., 2020). Figure 7 shows, however"
+            },
+            {
+              "document_id": "3304",
+              "title": "AndeBoer2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2147,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ents in short sup- ply, whereas rates of gain should be maximized when animals are time limited. Various specialized morpho- logical and physiological adaptations, including sym- biotic associations, may be involved in optimizing the gain of limiting nutrients (Raubenheimer and Simpson 1998). Stoichiometric studies of element transfer operate by assuming that limiting elements are used as efﬁciently as possible for growth, with excesses of nonlimiting nutrients remaining unutilized. Hence it is essential to understand what the maximum potential growth efﬁ- ciencies are for different elements and animals. The theoretical maximum for carbon (C) is ;80% (Schroe- der 1981), although the real max"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "A substantial subset of the abstracts (especially 4, 7, 11, 13, and 14) report that when food is abundant organisms achieve rapid or maximal growth rates, often independent of prior energetic condition, indicating support for the stylized fact. Several other papers provide indirect but consistent evidence linking high intake capacity to fast growth (e.g., 3, 5). Few snippets contradict the claim, and most are off‑topic. The preponderance of supportive evidence gives a moderate overall strength and a clear consensus that the corpus corroborates the statement."
+          },
+          "n_references": 8,
+          "references": {
+            "W2109371672": {
+              "title": "Aerobic scope explains individual variation in feeding capacity",
+              "doi": "https://doi.org/10.1098/rsbl.2015.0793",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2138
+            },
+            "W2152650287": {
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2161
+            },
+            "W2169879920": {
+              "title": "Maximum energy intake rate is proportional to basal metabolic rate in passerine birds",
+              "doi": "https://doi.org/10.1098/rspb.1995.0156",
+              "year": "1995",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.217
+            },
+            "W1989003791": {
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2205
+            },
+            "W2100937175": {
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2254
+            },
+            "W4380046112": {
+              "title": "Why do some fish grow faster than others?",
+              "doi": "https://doi.org/10.1111/faf.12770",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2294
+            },
+            "W1975752688": {
+              "title": "Preliminary Models for Growth Rates in Altricial Birds",
+              "doi": "https://doi.org/10.2307/1936894",
+              "year": "1969",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2295
+            },
+            "W2003921161": {
+              "title": "Trade-Off Between Growth and Energy Storage in Male Vipera berus (L.) Under Different Prey Densities",
+              "doi": "https://doi.org/10.2307/2389533",
+              "year": "1991",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2322
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2563272659",
+              "title": "Is Maximum Food Intake in Endotherms Constrained by Net or Factorial Aerobic Scope? Lessons from the Leaf-Eared Mouse",
+              "doi": "https://doi.org/10.3389/fphys.2016.00649",
+              "year": "2016",
+              "distance": 0.1945,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Food availability varies substantially throughout animals' lifespans, thus the ability to profit from high food levels may directly influence animal fitness. Studies exploring the link between basal metabolic rate (BMR), growth, reproduction, and other fitness traits have shown varying relationships in terms of both magnitude and direction. The diversity of results has led to the hypothesis that these relationships are modulated by environmental conditions (e.g., food availability), suggesting that the fitness consequences of a given BMR may be context-dependent. In turn, there is indirect evidence that individuals with an increased capacity for aerobic work also have a high capacity for acq"
+            },
+            {
+              "document_id": "W2075429508",
+              "title": "The Physiological Ecology of Daphnia: Development of a Model of Growth and Reproduction",
+              "doi": "https://doi.org/10.2307/1940324",
+              "year": "1990",
+              "distance": 0.2122,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Patterns of growth, development, and reproduction have been observed in many Daphnia species, and there have been some attempts to explain them using models that take into account rates of intake, assimilation, maintenance, and energy allocation rules. We show, however, that existing models cannot capture some essential features of individual growth, especially under conditions of low food supply that are typical of field conditions. These features include: (1) a sigmoid growth curve, and (2) the time to starvation or the performance of individuals during periods of low food availability. We propose and test a new hypothesis based on the idea that allometric relationship for physiological ra"
+            },
+            {
+              "document_id": "W2109371672",
+              "title": "Aerobic scope explains individual variation in feeding capacity",
+              "doi": "https://doi.org/10.1098/rsbl.2015.0793",
+              "year": "2015",
+              "distance": 0.2138,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Links between metabolism and components of fitness such as growth, reproduction and survival can depend on food availability. A high standard metabolic rate (SMR; baseline energy expenditure) or aerobic scope (AS; the difference between an individual's maximum and SMR) is often beneficial when food is abundant or easily accessible but can be less important or even disadvantageous when food levels decline. While the mechanisms underlying these context-dependent associations are not well understood, they suggest that individuals with a higher SMR or AS are better able to take advantage of high food abundance. Here we show that juvenile brown trout ( Salmo trutta ) with a higher AS were able to"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2161,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2169879920",
+              "title": "Maximum energy intake rate is proportional to basal metabolic rate in passerine birds",
+              "doi": "https://doi.org/10.1098/rspb.1995.0156",
+              "year": "1995",
+              "distance": 0.217,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "A high energy intake rate may be important for many animals, but little is known of factors that determine intake capacity. Birds in migratory disposition presumably eat at their maximum capacity and therefore form a good model for studying the energy intake capacity of animals. We measured the maximum daily gross energy intake (GEImax) and basal metabolic rates (BMR) in 22 species of migrant passerines during autumn. Both GEImax and BMR scaled to body mass (w) close to w0.70. More importantly, species with high GEImax for their body mass also had relatively high BMR. BMR may reflect the size of the metabolic machinery involved in energy uptake. The maximum daily metabolizable energy intake "
+            },
+            {
+              "document_id": "W1968287417",
+              "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+              "doi": "https://doi.org/10.1080/00785326.1976.10425457",
+              "year": "1976",
+              "distance": 0.2195,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Data from the literature on rates of growth and metabolism, mainly in Mytilus edulis, but also in M. californianus and Modiolus demissus have been used in an attempt to estimate the maximum rates at which mussels can convert absorbed food energy into growth and reproduction, and to evaluate which factors control these maximum net growth efficiencies. It is concluded that high maximum growth efficiencies can be maintained at a constant level up to a certain critical body size above which the maximum growth efficiency declines with increasing size. The critical body size at which growth efficiency starts to decline is independent of the initial level of maximum growth efficiency. The "
+            },
+            {
+              "document_id": "W1989003791",
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "distance": 0.2205,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "Many organisms exploit highly variable food supplies and, as an adaptation to such conditions, show elevated growth during recovery from starvation. In some species this response enables starved and re-fed individuals to outpace those growing continuously. The main engine of compensatory growth is a relative increase in food ingestion as a reaction to poor nutritional condition. We use a series of mathematical energy-budget models to investigate the interaction between the mechanisms that control such hyperphagia and those that control internal allocation, with the aim of identifying those strategies that permit overcompensation. We find that hyperphagia alone normally produces weak compensa"
+            },
+            {
+              "document_id": "W2077909838",
+              "title": "Functional Response and Fitness in a Generalist Filter Feeder, Daphnia Magna (Cladocera: Crustacea)",
+              "doi": "https://doi.org/10.2307/1937196",
+              "year": "1983",
+              "distance": 0.2212,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The functional response of an organism is often assumed to maximize its fitness. We examined the relationship between functional response and body growth, survivorship, and reproduction in Daphnia magna under controlled and comparable conditions. In a previous study we determined that D. magna exhibits a Holling Type II functional response with an asymptotic increase in ingestion rate with increasing food concentration to a maximum rate at an incipient limiting concentration of °10 4 Chlamydomonas reinhardi cells/cm 3 (measured as carbon, 0.2 mg/L) and that observed feeding activity does not follow the predictions of energy optimization models. In this study, we determined the fitness respon"
+            },
+            {
+              "document_id": "W2032200504",
+              "title": "Compensatory responses in lepidopteran larvae: a test of growth rate maximisation",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.13363.x",
+              "year": "2004",
+              "distance": 0.2214,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "It is often claimed that some organisms maximise individual growth rates (within limits set by physiological and environmental constraints) whereas others do not. Adequate experimental protocol to test for these hypotheses has not been available. We proceeded from the idea that a maximiser should be unable to further improve its growth performance, i.e. there should be no adaptive plasticity in relative growth rates. In the case of an insect larva always maximising its weight gain, we should thus expect no increase in growth rate following a short‐term environmental perturbation. Another prediction is that initial and final weights of a larval instar should be highly correlated. We applied t"
+            },
+            {
+              "document_id": "W1902265851",
+              "title": "High temperature slows down growth in tobacco hornworms (<i>Manduca sexta</i> larvae) under food restriction",
+              "doi": "https://doi.org/10.1111/1744-7917.12109",
+              "year": "2014",
+              "distance": 0.2239,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract When fed ad libitum (AL), ectothermic animals usually grow faster and have higher metabolic rate at higher ambient temperature. However, if food supply is limited, there is an energy tradeoff between growth and metabolism. Here we hypothesize that for ectothermic animals under food restriction (FR), high temperature will lead to a high metabolic rate, but growth will slow down to compensate for the high metabolism. We measure the rates of growth and metabolism of 4 cohorts of 5th instar hornworms ( Manduca sexta larvae) reared at 2 levels of food supply (AL and FR) and 2 temperatures (20 and 30 °C). Our results show that, compared to the cohorts reared at 20 °C, the ones reared at 3"
+            },
+            {
+              "document_id": "W2100937175",
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "distance": 0.2254,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Maximum energy assimilation rate has been implicated as a constraint on maximal sustained energy expenditure, on biomass production, and in various behavioural and life history models. Data on the upper limit to energy assimilation rate are scarce, and the factors that set the limit remain poorly known. We studied migratory waders in captivity, given unlimited food supply around the clock. Many of these waders assimilated energy at rates of seven to ten times basal metabolism, exceeding maximum rates reported for vertebrates during periods of high energy demand, for example during reproduction and in extreme cold. One factor allowing the high energy assimilation rates may be that much of the"
+            },
+            {
+              "document_id": "W4389191972",
+              "title": "How Life-history Traits and Mating Behaviour in Female Fall Field Crickets is Influenced by Macronutrient-ratio Specific Rearing Diets",
+              "doi": "https://doi.org/10.22215/etd/2023-15648",
+              "year": "2023",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Nutrition can strongly influence life-history traits and behaviours related to sexual selection. An individuals ability to acquire and allocate nutrients has proven to be a pertinent driver behind individual variation within populations and between sexes. Organisms must acquire the ratio of essential nutrients appropriate for growth, reproduction, and survival. I investigated whether high-protein versus high-carbohydrate rearing diet [3:1 versus 1:3 protein:carbohydrate (P:C), respectively] fed during development and into adulthood influenced various life history traits and female mating behaviours in G. pennsylvanicus. I determined that a high-protein diet promoted growth, fecundity, respon"
+            },
+            {
+              "document_id": "W4380046112",
+              "title": "Why do some fish grow faster than others?",
+              "doi": "https://doi.org/10.1111/faf.12770",
+              "year": "2023",
+              "distance": 0.2294,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Abstract All animals must acquire food to grow, but there is a vast diversity in how different species and even different individuals approach and achieve this task. Individuals within a species appear to fall along a bold‐shy continuum, whereby some fish acquire food aggressively and with seemingly high risk, while others appear more submissive and opportunistic. Greater food consumption generally results in faster growth, but only if the energy acquired through food is more than enough to compensate for heightened metabolism associated with a more active lifestyle. Fast‐growing phenotypes also tend to have elevated baseline metabolism – at least when food is plentiful – which may be linked"
+            },
+            {
+              "document_id": "W1975752688",
+              "title": "Preliminary Models for Growth Rates in Altricial Birds",
+              "doi": "https://doi.org/10.2307/1936894",
+              "year": "1969",
+              "distance": 0.2295,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "The rate of growth in body weight of birds is not correlated with nestling mortality, but rather is a function of the adult body size of the species and the mode of development of the young. To examine the adaptive basis of growth rates, models are formulated which incorporate the mortality of the young, their energy requirement and their rate of growth into a function which determines the productivity of offspring. This function is maximized when growth rate occurs as rapidly as possible, at the expense of brood size. Optimally, one young should be raised which grows as rapidly as the parents are able to supply food. Because this is not observed in nature, and because of other inefficiencie"
+            },
+            {
+              "document_id": "W2079854692",
+              "title": "Cost and efficiency of growth in the larvae of two species of fish with widely differing metabolic rates",
+              "doi": "https://doi.org/10.1098/rspb.1990.0102",
+              "year": "1990",
+              "distance": 0.2303,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "This investigation was designed to test two hypotheses. First, does the proportional relation between rate of growth and rate of oxygen consumption in excess of maintenance, demanded by classic nutrition physiology, apply to small poikilotherms growing at 20% of body mass per day and faster? Secondly, to what extent are net and gross efficiencies of growth affected by the level of metabolic power? The metabolic rates of the coregonid species, Coregonus wartmanni (L.), exceeded the metabolic rates of the cyprinid species, Rutilus rutilus (L.) by a factor of 1.5-2.0. Relative growth rate (g, in % DBM per day) and oxygen consumption in excess of maintenance (= feeding-induced thermogenesis: FIT"
+            },
+            {
+              "document_id": "W1998701857",
+              "title": "The evolution of growth trajectories: what limits growth rate?",
+              "doi": "https://doi.org/10.1111/j.1469-185x.2010.00136.x",
+              "year": "2010",
+              "distance": 0.2319,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "According to life-history theory, growth rates are subject to strong directional selection due to reproductive and survival advantages associated with large adult body size. Yet, growth is commonly observed to occur at rates lower than the maximum that is physiologically possible and intrinsic growth rates often vary among populations. This implies that slower growth is favoured under certain conditions. Realized growth rate is thus the result of a compromise between the costs and advantages of growing rapidly, and the optimal rate of growth is not equivalent to the fundamental maximum rate. The ecological and evolutionary factors influencing growth rate are reviewed, with particular emphasi"
+            },
+            {
+              "document_id": "W2003921161",
+              "title": "Trade-Off Between Growth and Energy Storage in Male Vipera berus (L.) Under Different Prey Densities",
+              "doi": "https://doi.org/10.2307/2389533",
+              "year": "1991",
+              "distance": 0.2322,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "There are constraints on the rate of energy intake of foraging animals, and allocation of energy, for example, to growth therefore must be at the expense of allocation to other purposes, such as energy storage. Moreover, the relative amount of energy allocated to different kinds of activities is likely to depend upon food availability. We have compared the patterns of energy allocation between adders, Vipera berus (L.), in populations inhabiting two different island groups in the Baltic Sea. These adders primarily feed on field voles, Microtus agrestis (L.), which undergo great population density fluctuations. In order to survive periods of low food supply adders allocate some energy to stor"
+            },
+            {
+              "document_id": "W2112459053",
+              "title": "Age‐related variation in energy expenditure in a long‐lived bird within the envelope of an energy ceiling",
+              "doi": "https://doi.org/10.1111/1365-2656.12126",
+              "year": "2013",
+              "distance": 0.2328,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary Energy expenditure in wild animals can be limited (i) intrinsically by physiological processes that constrain an animal's capacity to use energy, (ii) extrinsically by energy availability in the environment and/or (iii) strategically based on trade‐offs between elevated metabolism and survival. Although these factors apply to all individuals within a population, some individuals expend more or less energy than other individuals. To examine the role of an energy ceiling in a species with a high and individually repeatable metabolic rate, we compared energy expenditure of thick‐billed murres ( Uria lomvia ) with and without handicaps during a period of peak energy demand (chick‐rearing"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "The corpus contains several snippets that describe maximal growth rates being achieved when feeding rates are high (e.g., increased assimilation in food‑saturated environments, hyperphagic compensatory growth, and very high energy assimilation in migratory waders), providing moderate support for the stylized fact. However, an equally substantial set of excerpts emphasize the dependence of maximal growth on nutritional quality, reserve capacity, or internal energetic status (e.g., reserve‑dependent specific growth rates, RNA content correlations, protein–energy balance constraints). Because supportive and contradictory evidence are both present and neither dominates decisively, the overall strength of evidence is moderate and the consensus leans toward a neutral/mixed interpretation."
+          },
+          "n_references": 11,
+          "references": {
+            "3170": {
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1978
+            },
+            "3364": {
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1979
+            },
+            "2769": {
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 0,
+              "contradicts": 2,
+              "best_distance": 0.2027
+            },
+            "2402": {
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2041
+            },
+            "2395": {
+              "title": "Stavrakidis-Zachou et al. - 2025 - A Nutritional Bioenergetic Model for Farmed Fish .pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2116
+            },
+            "W2109371672": {
+              "title": "Aerobic scope explains individual variation in feeding capacity",
+              "doi": "https://doi.org/10.1098/rsbl.2015.0793",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2138
+            },
+            "W2152650287": {
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2161
+            },
+            "W2169879920": {
+              "title": "Maximum energy intake rate is proportional to basal metabolic rate in passerine birds",
+              "doi": "https://doi.org/10.1098/rspb.1995.0156",
+              "year": "1995",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.217
+            },
+            "W1989003791": {
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2205
+            },
+            "W2100937175": {
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2254
+            },
+            "W4389191972": {
+              "title": "How Life-history Traits and Mating Behaviour in Female Fall Field Crickets is Influenced by Macronutrient-ratio Specific Rearing Diets",
+              "doi": "https://doi.org/10.22215/etd/2023-15648",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2274
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1821,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "its such as growth and reproduction. If animals are indeed physiologically capable of increasing their feeding rate beyond control conditions, this raises an interesting evolutionary question. A mutant that always has this up-regulated feeding rate would reproduce earlier and more, and thus outcompete its conspeciﬁcs. So why did natural selection not lead to the maximum possible feeding rate? It is likely that there are ﬁtness disadvantages of having an up-regulated feeding rate, which could relate to negative side effects of rapid growth (e.g., decreased survival proba- bility), or of being large bodied (e.g., increased predation risk). If up-regulation of feeding occurs after exposure to t"
+            },
+            {
+              "document_id": "3045",
+              "title": "HeatJone2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1873,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "enzymes and transporters maximizes the total amount of energy available for reproduction, and in the case where growth rates are maximal, this optimal investment in di- gestion may approach (but not exceed) half the energy budget (see ﬁg. 3). Exploration and Exploitation: Trade-Offs and Optimal Control All else being equal, species with a higher growth rate are expected to outcompete species with a lower growth rate, as they are likely to capture a larger fraction of the available resource, giving higher ﬁtness as a result of more efﬁcient exploration of the resource environment. An equally reason- able claim is that, all else being equal, species that convert a larger fraction of the energy"
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1964,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "growth rate may be selected when food 501 availability and/or nutrition is high, foraging risks are low (Kozlowski, Konarzewski 502 and Czarnoleski, 2020). Therefore, it can be predicted that organisms may exhibit 503 rapid growth rates to reach large body sizes, but in addition the rates of organism 504 growth are also likely to reflect adaptations to different environmental conditions. 505 Thus, observed rates of organism growth, or realised growth rates, are likely to reflect 506 [Page 29] 19 optimal rates that result from a trade-off between the costs and benefits of growing at 507 maximal rates in given environmental conditions. 508 Growth rate can be influenced by, or correlate with, m"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.3,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3364",
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1979,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "limited to an intrinsic-physiological maximum Qm. In food-saturated environments, the assimilation rate will be close to this maximum, regardless of how much area the ani- mals cover because f (eqn 7) approaches one, increasing either the resource level or the explored HR area. Accordingly, the growth and reproduction outcomes of different e became more evident in scenarios with a moderate or low resource density. Hence, animals with higher e or living in resource- rich environments grew faster and allocated more energy to reproduction across their lifetime (Fig. 2c). Therefore, inter- estingly, from an ecological perspective, the lower the resource density is, the more important the movemen"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2027,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "g homeostasis assumption is not valid, but may also be an effect of behavioral changes during growth, such that larger body sizes experience higher food densities, and therefore increase their feed- ing rate, reserves, RNA content, and speciﬁc growth rate. When we compare different species of unicellulars grown at abundant food (substrate) density, DEB the- ory predicts that the speciﬁc growth rate increases with the unicellulars’ reserve capacity. The RNA content is therefore expected to increase with the speciﬁc growth rate among species. The predicted positive relationship between speciﬁc growth rate and RNA content can be seen among both prokaryotic and eukaryotic micro- organisms (Fig. "
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2041,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.4,
+              "text": "high maximum growth rate (gmax). (2) Low-quality food supports a low gmax and requires a higher Thr. (3) Low-quality food supports a low gmax, but the Thr does not differ between high- and low-quality food. They tested these options by measur- ing the juvenile somatic growth rates of D. magna at limiting concentrations of P-rich (C:P = 152) and P- limited (C:P = 1800) Scenedesmus. Based on their experimental results, they re- jected hypothesis two. Although gmax was reduced in low-quality food, no difference in Thr was found for the two food types. Sterner and Robinson explained this result with two physiological conditions required for the Thr (maintenance of mass) and for growth (in- creas"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "lts of the same species) increases among species approximately with the volumetric length of the full- grown adult. The maximum speciﬁc growth rate, which is expected to occur at a body size of 4/27 of the max- imum size, is proportional to the inverse of the volu- metric length of the full-grown adult. If we assume that the composition of reserve is independent of maximum body size, and that RNA is more abundant in reserve than in structure, we expect a negative relationship be- tween mass-speciﬁc RNA content and maximum spe- ciﬁc growth rate among multicellular species. This co- variation of parameter values among species, and their relationship with maximum body size, rests on the idea th"
+            },
+            {
+              "document_id": "2617",
+              "title": "MullNisb2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2099,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "c growth; development; maintenance of the state of maturity; and reproduction. These energy ﬂuxes are irreversible. • There are maximally three life stages: embryos, which neither feed nor reproduce; juveniles, which may feed but do not reproduce; and adults, which may feed and reproduce. • The rate of food uptake is proportional to the surface area of an organism, and is a hyperbolic function of the food density (type II functional response). • Energy assimilated from food becomes part of the reserves. The dynamics of the energy reserve density are ﬁrst order, with a rate that is inversely proportional to the volumetric length of an organism. • A ﬁxed fraction of the energy released from th"
+            },
+            {
+              "document_id": "3502",
+              "title": "Nepal et al. - 2021 - Effects of food limitation on growth, body conditi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2101,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "tes of the species at specific food densities. Bioenergetics models can then provide insights on growth and feeding rates observed in the wild (Kooijman, 2010).An ability to grow and maintain a good body condition in restricted food environments would be beneficial for an invading organism. The estimates of metabolic rates of an invasive species can also inform growth dynamics (van Poorten and Walters, 2016), elucidate ecological traits (Killen et al., 2016) and support the development of bioenergetics models for the species (Cooke and Hill, 2010; Kooijman, 2010). Species with low maintenance costs, as measured by standard metabolic rate (SMR) in fish, are more likely to succeed under harsh,"
+            },
+            {
+              "document_id": "2687",
+              "title": "LikaKear2011a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2112,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "nsity, a rapid occurrence of problems during starvation. The maximum size is not affected by this parameter. The energy conductance is unlikely to deviate strongly from the typical value independent of the body size of the species. Range: N0. Allocation fraction to soma κ, 0.8: controls the allocation of mobilised reserve to somatic maintenance and growth as opposed to maturity maintenance and maturation of reproduction. A high value gives rapid growth to a large size, long development times and low reproduction. A small value (κb0.5) can reduce growth and reproduction, since food uptake is linked to size. Range: N0, b1. Reproduction efﬁciency κR, 0.95: is the fraction of reserve allocated t"
+            },
+            {
+              "document_id": "2395",
+              "title": "Stavrakidis-Zachou et al. - 2025 - A Nutritional Bioenergetic Model for Farmed Fish .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2116,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.4,
+              "text": "irect experimentation and observation are not feasible. One critical consideration in ﬁsh nutrition and feed formu- lation is the energy-to-protein ratio. The optimal ratio is highly species-speciﬁc and needs to be experimentally determined for each species [71–73]. Feeds with excessive energy-to-protein content and vice versa are known to result in reduced weight gain because the ﬁsh may eat as much as they can, but depend- ing on the case, either the protein or the energy they can retain is not sufﬁcient to cover their growth requirements [74, 75]. Moreover, the source of energy, whether it is predominantly derived from fats, protein or carbohydrates further inﬂuences its utilisation by th"
+            },
+            {
+              "document_id": "W2563272659",
+              "title": "Is Maximum Food Intake in Endotherms Constrained by Net or Factorial Aerobic Scope? Lessons from the Leaf-Eared Mouse",
+              "doi": "https://doi.org/10.3389/fphys.2016.00649",
+              "year": "2016",
+              "distance": 0.1945,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Food availability varies substantially throughout animals' lifespans, thus the ability to profit from high food levels may directly influence animal fitness. Studies exploring the link between basal metabolic rate (BMR), growth, reproduction, and other fitness traits have shown varying relationships in terms of both magnitude and direction. The diversity of results has led to the hypothesis that these relationships are modulated by environmental conditions (e.g., food availability), suggesting that the fitness consequences of a given BMR may be context-dependent. In turn, there is indirect evidence that individuals with an increased capacity for aerobic work also have a high capacity for acq"
+            },
+            {
+              "document_id": "W2075429508",
+              "title": "The Physiological Ecology of Daphnia: Development of a Model of Growth and Reproduction",
+              "doi": "https://doi.org/10.2307/1940324",
+              "year": "1990",
+              "distance": 0.2122,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Patterns of growth, development, and reproduction have been observed in many Daphnia species, and there have been some attempts to explain them using models that take into account rates of intake, assimilation, maintenance, and energy allocation rules. We show, however, that existing models cannot capture some essential features of individual growth, especially under conditions of low food supply that are typical of field conditions. These features include: (1) a sigmoid growth curve, and (2) the time to starvation or the performance of individuals during periods of low food availability. We propose and test a new hypothesis based on the idea that allometric relationship for physiological ra"
+            },
+            {
+              "document_id": "W2109371672",
+              "title": "Aerobic scope explains individual variation in feeding capacity",
+              "doi": "https://doi.org/10.1098/rsbl.2015.0793",
+              "year": "2015",
+              "distance": 0.2138,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.3,
+              "text": "Links between metabolism and components of fitness such as growth, reproduction and survival can depend on food availability. A high standard metabolic rate (SMR; baseline energy expenditure) or aerobic scope (AS; the difference between an individual's maximum and SMR) is often beneficial when food is abundant or easily accessible but can be less important or even disadvantageous when food levels decline. While the mechanisms underlying these context-dependent associations are not well understood, they suggest that individuals with a higher SMR or AS are better able to take advantage of high food abundance. Here we show that juvenile brown trout ( Salmo trutta ) with a higher AS were able to"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2161,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2169879920",
+              "title": "Maximum energy intake rate is proportional to basal metabolic rate in passerine birds",
+              "doi": "https://doi.org/10.1098/rspb.1995.0156",
+              "year": "1995",
+              "distance": 0.217,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.3,
+              "text": "A high energy intake rate may be important for many animals, but little is known of factors that determine intake capacity. Birds in migratory disposition presumably eat at their maximum capacity and therefore form a good model for studying the energy intake capacity of animals. We measured the maximum daily gross energy intake (GEImax) and basal metabolic rates (BMR) in 22 species of migrant passerines during autumn. Both GEImax and BMR scaled to body mass (w) close to w0.70. More importantly, species with high GEImax for their body mass also had relatively high BMR. BMR may reflect the size of the metabolic machinery involved in energy uptake. The maximum daily metabolizable energy intake "
+            },
+            {
+              "document_id": "W1968287417",
+              "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+              "doi": "https://doi.org/10.1080/00785326.1976.10425457",
+              "year": "1976",
+              "distance": 0.2195,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Data from the literature on rates of growth and metabolism, mainly in Mytilus edulis, but also in M. californianus and Modiolus demissus have been used in an attempt to estimate the maximum rates at which mussels can convert absorbed food energy into growth and reproduction, and to evaluate which factors control these maximum net growth efficiencies. It is concluded that high maximum growth efficiencies can be maintained at a constant level up to a certain critical body size above which the maximum growth efficiency declines with increasing size. The critical body size at which growth efficiency starts to decline is independent of the initial level of maximum growth efficiency. The "
+            },
+            {
+              "document_id": "W1989003791",
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "distance": 0.2205,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Many organisms exploit highly variable food supplies and, as an adaptation to such conditions, show elevated growth during recovery from starvation. In some species this response enables starved and re-fed individuals to outpace those growing continuously. The main engine of compensatory growth is a relative increase in food ingestion as a reaction to poor nutritional condition. We use a series of mathematical energy-budget models to investigate the interaction between the mechanisms that control such hyperphagia and those that control internal allocation, with the aim of identifying those strategies that permit overcompensation. We find that hyperphagia alone normally produces weak compensa"
+            },
+            {
+              "document_id": "W2077909838",
+              "title": "Functional Response and Fitness in a Generalist Filter Feeder, Daphnia Magna (Cladocera: Crustacea)",
+              "doi": "https://doi.org/10.2307/1937196",
+              "year": "1983",
+              "distance": 0.2212,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The functional response of an organism is often assumed to maximize its fitness. We examined the relationship between functional response and body growth, survivorship, and reproduction in Daphnia magna under controlled and comparable conditions. In a previous study we determined that D. magna exhibits a Holling Type II functional response with an asymptotic increase in ingestion rate with increasing food concentration to a maximum rate at an incipient limiting concentration of °10 4 Chlamydomonas reinhardi cells/cm 3 (measured as carbon, 0.2 mg/L) and that observed feeding activity does not follow the predictions of energy optimization models. In this study, we determined the fitness respon"
+            },
+            {
+              "document_id": "W2032200504",
+              "title": "Compensatory responses in lepidopteran larvae: a test of growth rate maximisation",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.13363.x",
+              "year": "2004",
+              "distance": 0.2214,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "It is often claimed that some organisms maximise individual growth rates (within limits set by physiological and environmental constraints) whereas others do not. Adequate experimental protocol to test for these hypotheses has not been available. We proceeded from the idea that a maximiser should be unable to further improve its growth performance, i.e. there should be no adaptive plasticity in relative growth rates. In the case of an insect larva always maximising its weight gain, we should thus expect no increase in growth rate following a short‐term environmental perturbation. Another prediction is that initial and final weights of a larval instar should be highly correlated. We applied t"
+            },
+            {
+              "document_id": "W1902265851",
+              "title": "High temperature slows down growth in tobacco hornworms (<i>Manduca sexta</i> larvae) under food restriction",
+              "doi": "https://doi.org/10.1111/1744-7917.12109",
+              "year": "2014",
+              "distance": 0.2239,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract When fed ad libitum (AL), ectothermic animals usually grow faster and have higher metabolic rate at higher ambient temperature. However, if food supply is limited, there is an energy tradeoff between growth and metabolism. Here we hypothesize that for ectothermic animals under food restriction (FR), high temperature will lead to a high metabolic rate, but growth will slow down to compensate for the high metabolism. We measure the rates of growth and metabolism of 4 cohorts of 5th instar hornworms ( Manduca sexta larvae) reared at 2 levels of food supply (AL and FR) and 2 temperatures (20 and 30 °C). Our results show that, compared to the cohorts reared at 20 °C, the ones reared at 3"
+            },
+            {
+              "document_id": "W2100937175",
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "distance": 0.2254,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Maximum energy assimilation rate has been implicated as a constraint on maximal sustained energy expenditure, on biomass production, and in various behavioural and life history models. Data on the upper limit to energy assimilation rate are scarce, and the factors that set the limit remain poorly known. We studied migratory waders in captivity, given unlimited food supply around the clock. Many of these waders assimilated energy at rates of seven to ten times basal metabolism, exceeding maximum rates reported for vertebrates during periods of high energy demand, for example during reproduction and in extreme cold. One factor allowing the high energy assimilation rates may be that much of the"
+            },
+            {
+              "document_id": "W4389191972",
+              "title": "How Life-history Traits and Mating Behaviour in Female Fall Field Crickets is Influenced by Macronutrient-ratio Specific Rearing Diets",
+              "doi": "https://doi.org/10.22215/etd/2023-15648",
+              "year": "2023",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.3,
+              "text": "Nutrition can strongly influence life-history traits and behaviours related to sexual selection. An individuals ability to acquire and allocate nutrients has proven to be a pertinent driver behind individual variation within populations and between sexes. Organisms must acquire the ratio of essential nutrients appropriate for growth, reproduction, and survival. I investigated whether high-protein versus high-carbohydrate rearing diet [3:1 versus 1:3 protein:carbohydrate (P:C), respectively] fed during development and into adulthood influenced various life history traits and female mating behaviours in G. pennsylvanicus. I determined that a high-protein diet promoted growth, fecundity, respon"
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The stylized fact—that maximal growth can be obtained through high feeding regardless of nutritional/reserve status—is only weakly and indirectly addressed by the corpus. Snippets 4 and 5 support the general principle that high food/feeding rates drive growth toward an intrinsic maximum and assimilation saturates near a physiological ceiling (f approaching one), and snippet 15 describes growth-ration curves asymptoting when food is no longer limiting. However, none directly demonstrates that maximal growth is achieved independent of energy reserves; in standard DEB, growth depends on mobilized reserve, and snippets 6, 8, and 13 emphasize a tight link between reserve density/capacity and specific growth rate, partly conflicting with the 'regardless of reserves' phrasing. Most snippets are about evolutionary optimality, parameters, or food quality and are neutral. Overall the evidence is sparse and only loosely on point, yielding weak support and an indeterminate-to-mildly-supportive consensus."
+          },
+          "n_references": 5,
+          "references": {
+            "3170": {
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1978
+            },
+            "3364": {
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1979
+            },
+            "2769": {
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2027
+            },
+            "2402": {
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2041
+            },
+            "2397": {
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2134
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1821,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "its such as growth and reproduction. If animals are indeed physiologically capable of increasing their feeding rate beyond control conditions, this raises an interesting evolutionary question. A mutant that always has this up-regulated feeding rate would reproduce earlier and more, and thus outcompete its conspeciﬁcs. So why did natural selection not lead to the maximum possible feeding rate? It is likely that there are ﬁtness disadvantages of having an up-regulated feeding rate, which could relate to negative side effects of rapid growth (e.g., decreased survival proba- bility), or of being large bodied (e.g., increased predation risk). If up-regulation of feeding occurs after exposure to t"
+            },
+            {
+              "document_id": "3045",
+              "title": "HeatJone2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1873,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "enzymes and transporters maximizes the total amount of energy available for reproduction, and in the case where growth rates are maximal, this optimal investment in di- gestion may approach (but not exceed) half the energy budget (see ﬁg. 3). Exploration and Exploitation: Trade-Offs and Optimal Control All else being equal, species with a higher growth rate are expected to outcompete species with a lower growth rate, as they are likely to capture a larger fraction of the available resource, giving higher ﬁtness as a result of more efﬁcient exploration of the resource environment. An equally reason- able claim is that, all else being equal, species that convert a larger fraction of the energy"
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1964,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "growth rate may be selected when food 501 availability and/or nutrition is high, foraging risks are low (Kozlowski, Konarzewski 502 and Czarnoleski, 2020). Therefore, it can be predicted that organisms may exhibit 503 rapid growth rates to reach large body sizes, but in addition the rates of organism 504 growth are also likely to reflect adaptations to different environmental conditions. 505 Thus, observed rates of organism growth, or realised growth rates, are likely to reflect 506 [Page 29] 19 optimal rates that result from a trade-off between the costs and benefits of growing at 507 maximal rates in given environmental conditions. 508 Growth rate can be influenced by, or correlate with, m"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3364",
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1979,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "limited to an intrinsic-physiological maximum Qm. In food-saturated environments, the assimilation rate will be close to this maximum, regardless of how much area the ani- mals cover because f (eqn 7) approaches one, increasing either the resource level or the explored HR area. Accordingly, the growth and reproduction outcomes of different e became more evident in scenarios with a moderate or low resource density. Hence, animals with higher e or living in resource- rich environments grew faster and allocated more energy to reproduction across their lifetime (Fig. 2c). Therefore, inter- estingly, from an ecological perspective, the lower the resource density is, the more important the movemen"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2027,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "g homeostasis assumption is not valid, but may also be an effect of behavioral changes during growth, such that larger body sizes experience higher food densities, and therefore increase their feed- ing rate, reserves, RNA content, and speciﬁc growth rate. When we compare different species of unicellulars grown at abundant food (substrate) density, DEB the- ory predicts that the speciﬁc growth rate increases with the unicellulars’ reserve capacity. The RNA content is therefore expected to increase with the speciﬁc growth rate among species. The predicted positive relationship between speciﬁc growth rate and RNA content can be seen among both prokaryotic and eukaryotic micro- organisms (Fig. "
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2041,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "high maximum growth rate (gmax). (2) Low-quality food supports a low gmax and requires a higher Thr. (3) Low-quality food supports a low gmax, but the Thr does not differ between high- and low-quality food. They tested these options by measur- ing the juvenile somatic growth rates of D. magna at limiting concentrations of P-rich (C:P = 152) and P- limited (C:P = 1800) Scenedesmus. Based on their experimental results, they re- jected hypothesis two. Although gmax was reduced in low-quality food, no difference in Thr was found for the two food types. Sterner and Robinson explained this result with two physiological conditions required for the Thr (maintenance of mass) and for growth (in- creas"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "lts of the same species) increases among species approximately with the volumetric length of the full- grown adult. The maximum speciﬁc growth rate, which is expected to occur at a body size of 4/27 of the max- imum size, is proportional to the inverse of the volu- metric length of the full-grown adult. If we assume that the composition of reserve is independent of maximum body size, and that RNA is more abundant in reserve than in structure, we expect a negative relationship be- tween mass-speciﬁc RNA content and maximum spe- ciﬁc growth rate among multicellular species. This co- variation of parameter values among species, and their relationship with maximum body size, rests on the idea th"
+            },
+            {
+              "document_id": "2617",
+              "title": "MullNisb2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2099,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "c growth; development; maintenance of the state of maturity; and reproduction. These energy ﬂuxes are irreversible. • There are maximally three life stages: embryos, which neither feed nor reproduce; juveniles, which may feed but do not reproduce; and adults, which may feed and reproduce. • The rate of food uptake is proportional to the surface area of an organism, and is a hyperbolic function of the food density (type II functional response). • Energy assimilated from food becomes part of the reserves. The dynamics of the energy reserve density are ﬁrst order, with a rate that is inversely proportional to the volumetric length of an organism. • A ﬁxed fraction of the energy released from th"
+            },
+            {
+              "document_id": "3502",
+              "title": "Nepal et al. - 2021 - Effects of food limitation on growth, body conditi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2101,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "tes of the species at specific food densities. Bioenergetics models can then provide insights on growth and feeding rates observed in the wild (Kooijman, 2010).An ability to grow and maintain a good body condition in restricted food environments would be beneficial for an invading organism. The estimates of metabolic rates of an invasive species can also inform growth dynamics (van Poorten and Walters, 2016), elucidate ecological traits (Killen et al., 2016) and support the development of bioenergetics models for the species (Cooke and Hill, 2010; Kooijman, 2010). Species with low maintenance costs, as measured by standard metabolic rate (SMR) in fish, are more likely to succeed under harsh,"
+            },
+            {
+              "document_id": "2687",
+              "title": "LikaKear2011a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2112,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "nsity, a rapid occurrence of problems during starvation. The maximum size is not affected by this parameter. The energy conductance is unlikely to deviate strongly from the typical value independent of the body size of the species. Range: N0. Allocation fraction to soma κ, 0.8: controls the allocation of mobilised reserve to somatic maintenance and growth as opposed to maturity maintenance and maturation of reproduction. A high value gives rapid growth to a large size, long development times and low reproduction. A small value (κb0.5) can reduce growth and reproduction, since food uptake is linked to size. Range: N0, b1. Reproduction efﬁciency κR, 0.95: is the fraction of reserve allocated t"
+            },
+            {
+              "document_id": "2395",
+              "title": "Stavrakidis-Zachou et al. - 2025 - A Nutritional Bioenergetic Model for Farmed Fish .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2116,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "irect experimentation and observation are not feasible. One critical consideration in ﬁsh nutrition and feed formu- lation is the energy-to-protein ratio. The optimal ratio is highly species-speciﬁc and needs to be experimentally determined for each species [71–73]. Feeds with excessive energy-to-protein content and vice versa are known to result in reduced weight gain because the ﬁsh may eat as much as they can, but depend- ing on the case, either the protein or the energy they can retain is not sufﬁcient to cover their growth requirements [74, 75]. Moreover, the source of energy, whether it is predominantly derived from fats, protein or carbohydrates further inﬂuences its utilisation by th"
+            },
+            {
+              "document_id": "3358",
+              "title": "Candela - 2018 - Linking individual behaviour and life history bio.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2119,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "H: Fast growth We expect higher 𝑣̇ along with high internal reserves to evolve in food rich environments (then internal energy can be maintained in high levels thanks to a fast assimilation that overcome the fast mobilization) where high predation exists (higher 𝑣̇ implies faster growth and that will help in avoiding predation). Risk of starvation. Safe from predation. LH: Slow growth We expect low 𝑣̇ along with high internal reserves to evolve in scenarios with high risk of starvation but safe from predation, then a slow growth is optimal because it helps to reduce the risk of starvation, keeping smaller sizes and keeping higher reserves for overcoming the environmental uncertainties. Strat"
+            },
+            {
+              "document_id": "3103",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2125,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "use and transformation) to fuel its various vital activities. In addition, since all organisms are products of countless generations of natural selection, one may predict that they should have evolved the highest metabolic rates possible to support competitively superior, maximal rates of resource exploitation and progeny production [1–6]. However, living organisms display a wide variety of metabolic and reproductive rates, a fundamental, but insufficiently understood theoretical problem of much interest to biologists. Both intrinsic and extrinsic factors may influence this variation, including body size, temperature, resource availability and exploitation by other organisms. For example, va"
+            },
+            {
+              "document_id": "2397",
+              "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2134,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "ntity produce increasingly positive growth rates till length reaches an asymptote at the point where the energy intake rate is no longer limited by food availability but instead by some other factor such as food digestion and nutrient absorption (Blier et al., 1997) or oxygen supply (Pauly, 2021). The shape of the growth-ration curve is itself influenced by the quality of the prey. In the context of growth, the quality of a food item relates to the rate of growth it can sustain when not quantitatively limited. Food that provides the consumer with poor nutritional condition or a low rate of energy intake (Elner and Hughes, 1978) causes shallower increases in growth with increased ration and a"
+            },
+            {
+              "document_id": "3296",
+              "title": "Civitello_et_al-2018-Ecology_Letters.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2138,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "three terms: their maximum surface area-speciﬁc ingestion rate, iM; a Type II functional response, fH, with half saturation constant, Fh, and their physical length squared (which is proportional to surface area; eqn 1). Hosts assimilate energy from food into an energy ‘reserve’, with yield of reserves on food YEF. The maximum assimilation rate, aM, is the product of the maximum ingestion rate and the yield of reserves on food. Hosts use these reserves to build two types of biomass : structure (which performs vital functions and requires maintenance at rate mV) and reproductive matter (re- serve biomass that has been irreversibly committed to offspring). The reserve dynamics in the absence of"
+            },
+            {
+              "document_id": "3579",
+              "title": "Lika et al. - 2022 - The comparative energetics of the ray-finned fish .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2142,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "rates. Right: specific body growth at maximum growth as function of weight at maximum growth. The line has slope -0.38. Markers like in Fig. 4. constant environmental conditions: the increase of the feeding rate of individuals due to growth, is exactly balanced by a reduction in numbers of individuals in the cohort (Kooijman et al., 2020). The specific population growth rate under thin- ning was found to be more or less equal to the specific body growth rate at maximum growth for many animal species, suggesting an evolutionary relict from times when organisms were dividing unicellulars and a direct relationship between these quantities existed (Kooijman et al., 2020). Figure 7 shows, however"
+            },
+            {
+              "document_id": "3304",
+              "title": "AndeBoer2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2147,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ents in short sup- ply, whereas rates of gain should be maximized when animals are time limited. Various specialized morpho- logical and physiological adaptations, including sym- biotic associations, may be involved in optimizing the gain of limiting nutrients (Raubenheimer and Simpson 1998). Stoichiometric studies of element transfer operate by assuming that limiting elements are used as efﬁciently as possible for growth, with excesses of nonlimiting nutrients remaining unutilized. Hence it is essential to understand what the maximum potential growth efﬁ- ciencies are for different elements and animals. The theoretical maximum for carbon (C) is ;80% (Schroe- der 1981), although the real max"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The stylized fact states that some species achieve maximal growth via high feeding irrespective of reserve/nutritional status. The snippets are largely about metabolic rate, food availability, and growth in general terms, and none directly tests the specific claim that maximal growth is driven by feeding independent of energy reserves. Several snippets weakly support the idea that high food intake yields faster growth (e.g., [4], [8], [13], [14], [11]), and the concept of growth-rate maximizers ([9]) is consistent. However, others emphasize trade-offs, hyperphagia driven by nutritional condition, and growth being below physiological maximum ([7], [16], [17]), which complicates or contradicts the 'regardless of nutritional status' qualifier. Overall the evidence is sparse, indirect, and mixed, providing weak support with no clear consensus directly on the specific claim."
+          },
+          "n_references": 8,
+          "references": {
+            "W2152650287": {
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2161
+            },
+            "W1989003791": {
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2205
+            },
+            "W2077909838": {
+              "title": "Functional Response and Fitness in a Generalist Filter Feeder, Daphnia Magna (Cladocera: Crustacea)",
+              "doi": "https://doi.org/10.2307/1937196",
+              "year": "1983",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2212
+            },
+            "W2032200504": {
+              "title": "Compensatory responses in lepidopteran larvae: a test of growth rate maximisation",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.13363.x",
+              "year": "2004",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2214
+            },
+            "W2100937175": {
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2254
+            },
+            "W4380046112": {
+              "title": "Why do some fish grow faster than others?",
+              "doi": "https://doi.org/10.1111/faf.12770",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2294
+            },
+            "W1975752688": {
+              "title": "Preliminary Models for Growth Rates in Altricial Birds",
+              "doi": "https://doi.org/10.2307/1936894",
+              "year": "1969",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2295
+            },
+            "W1998701857": {
+              "title": "The evolution of growth trajectories: what limits growth rate?",
+              "doi": "https://doi.org/10.1111/j.1469-185x.2010.00136.x",
+              "year": "2010",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2319
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2563272659",
+              "title": "Is Maximum Food Intake in Endotherms Constrained by Net or Factorial Aerobic Scope? Lessons from the Leaf-Eared Mouse",
+              "doi": "https://doi.org/10.3389/fphys.2016.00649",
+              "year": "2016",
+              "distance": 0.1945,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Food availability varies substantially throughout animals' lifespans, thus the ability to profit from high food levels may directly influence animal fitness. Studies exploring the link between basal metabolic rate (BMR), growth, reproduction, and other fitness traits have shown varying relationships in terms of both magnitude and direction. The diversity of results has led to the hypothesis that these relationships are modulated by environmental conditions (e.g., food availability), suggesting that the fitness consequences of a given BMR may be context-dependent. In turn, there is indirect evidence that individuals with an increased capacity for aerobic work also have a high capacity for acq"
+            },
+            {
+              "document_id": "W2075429508",
+              "title": "The Physiological Ecology of Daphnia: Development of a Model of Growth and Reproduction",
+              "doi": "https://doi.org/10.2307/1940324",
+              "year": "1990",
+              "distance": 0.2122,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Patterns of growth, development, and reproduction have been observed in many Daphnia species, and there have been some attempts to explain them using models that take into account rates of intake, assimilation, maintenance, and energy allocation rules. We show, however, that existing models cannot capture some essential features of individual growth, especially under conditions of low food supply that are typical of field conditions. These features include: (1) a sigmoid growth curve, and (2) the time to starvation or the performance of individuals during periods of low food availability. We propose and test a new hypothesis based on the idea that allometric relationship for physiological ra"
+            },
+            {
+              "document_id": "W2109371672",
+              "title": "Aerobic scope explains individual variation in feeding capacity",
+              "doi": "https://doi.org/10.1098/rsbl.2015.0793",
+              "year": "2015",
+              "distance": 0.2138,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "Links between metabolism and components of fitness such as growth, reproduction and survival can depend on food availability. A high standard metabolic rate (SMR; baseline energy expenditure) or aerobic scope (AS; the difference between an individual's maximum and SMR) is often beneficial when food is abundant or easily accessible but can be less important or even disadvantageous when food levels decline. While the mechanisms underlying these context-dependent associations are not well understood, they suggest that individuals with a higher SMR or AS are better able to take advantage of high food abundance. Here we show that juvenile brown trout ( Salmo trutta ) with a higher AS were able to"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2161,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2169879920",
+              "title": "Maximum energy intake rate is proportional to basal metabolic rate in passerine birds",
+              "doi": "https://doi.org/10.1098/rspb.1995.0156",
+              "year": "1995",
+              "distance": 0.217,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "A high energy intake rate may be important for many animals, but little is known of factors that determine intake capacity. Birds in migratory disposition presumably eat at their maximum capacity and therefore form a good model for studying the energy intake capacity of animals. We measured the maximum daily gross energy intake (GEImax) and basal metabolic rates (BMR) in 22 species of migrant passerines during autumn. Both GEImax and BMR scaled to body mass (w) close to w0.70. More importantly, species with high GEImax for their body mass also had relatively high BMR. BMR may reflect the size of the metabolic machinery involved in energy uptake. The maximum daily metabolizable energy intake "
+            },
+            {
+              "document_id": "W1968287417",
+              "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+              "doi": "https://doi.org/10.1080/00785326.1976.10425457",
+              "year": "1976",
+              "distance": 0.2195,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Abstract Data from the literature on rates of growth and metabolism, mainly in Mytilus edulis, but also in M. californianus and Modiolus demissus have been used in an attempt to estimate the maximum rates at which mussels can convert absorbed food energy into growth and reproduction, and to evaluate which factors control these maximum net growth efficiencies. It is concluded that high maximum growth efficiencies can be maintained at a constant level up to a certain critical body size above which the maximum growth efficiency declines with increasing size. The critical body size at which growth efficiency starts to decline is independent of the initial level of maximum growth efficiency. The "
+            },
+            {
+              "document_id": "W1989003791",
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "distance": 0.2205,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "Many organisms exploit highly variable food supplies and, as an adaptation to such conditions, show elevated growth during recovery from starvation. In some species this response enables starved and re-fed individuals to outpace those growing continuously. The main engine of compensatory growth is a relative increase in food ingestion as a reaction to poor nutritional condition. We use a series of mathematical energy-budget models to investigate the interaction between the mechanisms that control such hyperphagia and those that control internal allocation, with the aim of identifying those strategies that permit overcompensation. We find that hyperphagia alone normally produces weak compensa"
+            },
+            {
+              "document_id": "W2077909838",
+              "title": "Functional Response and Fitness in a Generalist Filter Feeder, Daphnia Magna (Cladocera: Crustacea)",
+              "doi": "https://doi.org/10.2307/1937196",
+              "year": "1983",
+              "distance": 0.2212,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "The functional response of an organism is often assumed to maximize its fitness. We examined the relationship between functional response and body growth, survivorship, and reproduction in Daphnia magna under controlled and comparable conditions. In a previous study we determined that D. magna exhibits a Holling Type II functional response with an asymptotic increase in ingestion rate with increasing food concentration to a maximum rate at an incipient limiting concentration of °10 4 Chlamydomonas reinhardi cells/cm 3 (measured as carbon, 0.2 mg/L) and that observed feeding activity does not follow the predictions of energy optimization models. In this study, we determined the fitness respon"
+            },
+            {
+              "document_id": "W2032200504",
+              "title": "Compensatory responses in lepidopteran larvae: a test of growth rate maximisation",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.13363.x",
+              "year": "2004",
+              "distance": 0.2214,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "It is often claimed that some organisms maximise individual growth rates (within limits set by physiological and environmental constraints) whereas others do not. Adequate experimental protocol to test for these hypotheses has not been available. We proceeded from the idea that a maximiser should be unable to further improve its growth performance, i.e. there should be no adaptive plasticity in relative growth rates. In the case of an insect larva always maximising its weight gain, we should thus expect no increase in growth rate following a short‐term environmental perturbation. Another prediction is that initial and final weights of a larval instar should be highly correlated. We applied t"
+            },
+            {
+              "document_id": "W1902265851",
+              "title": "High temperature slows down growth in tobacco hornworms (<i>Manduca sexta</i> larvae) under food restriction",
+              "doi": "https://doi.org/10.1111/1744-7917.12109",
+              "year": "2014",
+              "distance": 0.2239,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract When fed ad libitum (AL), ectothermic animals usually grow faster and have higher metabolic rate at higher ambient temperature. However, if food supply is limited, there is an energy tradeoff between growth and metabolism. Here we hypothesize that for ectothermic animals under food restriction (FR), high temperature will lead to a high metabolic rate, but growth will slow down to compensate for the high metabolism. We measure the rates of growth and metabolism of 4 cohorts of 5th instar hornworms ( Manduca sexta larvae) reared at 2 levels of food supply (AL and FR) and 2 temperatures (20 and 30 °C). Our results show that, compared to the cohorts reared at 20 °C, the ones reared at 3"
+            },
+            {
+              "document_id": "W2100937175",
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "distance": 0.2254,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.45,
+              "text": "Maximum energy assimilation rate has been implicated as a constraint on maximal sustained energy expenditure, on biomass production, and in various behavioural and life history models. Data on the upper limit to energy assimilation rate are scarce, and the factors that set the limit remain poorly known. We studied migratory waders in captivity, given unlimited food supply around the clock. Many of these waders assimilated energy at rates of seven to ten times basal metabolism, exceeding maximum rates reported for vertebrates during periods of high energy demand, for example during reproduction and in extreme cold. One factor allowing the high energy assimilation rates may be that much of the"
+            },
+            {
+              "document_id": "W4389191972",
+              "title": "How Life-history Traits and Mating Behaviour in Female Fall Field Crickets is Influenced by Macronutrient-ratio Specific Rearing Diets",
+              "doi": "https://doi.org/10.22215/etd/2023-15648",
+              "year": "2023",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Nutrition can strongly influence life-history traits and behaviours related to sexual selection. An individuals ability to acquire and allocate nutrients has proven to be a pertinent driver behind individual variation within populations and between sexes. Organisms must acquire the ratio of essential nutrients appropriate for growth, reproduction, and survival. I investigated whether high-protein versus high-carbohydrate rearing diet [3:1 versus 1:3 protein:carbohydrate (P:C), respectively] fed during development and into adulthood influenced various life history traits and female mating behaviours in G. pennsylvanicus. I determined that a high-protein diet promoted growth, fecundity, respon"
+            },
+            {
+              "document_id": "W4380046112",
+              "title": "Why do some fish grow faster than others?",
+              "doi": "https://doi.org/10.1111/faf.12770",
+              "year": "2023",
+              "distance": 0.2294,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Abstract All animals must acquire food to grow, but there is a vast diversity in how different species and even different individuals approach and achieve this task. Individuals within a species appear to fall along a bold‐shy continuum, whereby some fish acquire food aggressively and with seemingly high risk, while others appear more submissive and opportunistic. Greater food consumption generally results in faster growth, but only if the energy acquired through food is more than enough to compensate for heightened metabolism associated with a more active lifestyle. Fast‐growing phenotypes also tend to have elevated baseline metabolism – at least when food is plentiful – which may be linked"
+            },
+            {
+              "document_id": "W1975752688",
+              "title": "Preliminary Models for Growth Rates in Altricial Birds",
+              "doi": "https://doi.org/10.2307/1936894",
+              "year": "1969",
+              "distance": 0.2295,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "The rate of growth in body weight of birds is not correlated with nestling mortality, but rather is a function of the adult body size of the species and the mode of development of the young. To examine the adaptive basis of growth rates, models are formulated which incorporate the mortality of the young, their energy requirement and their rate of growth into a function which determines the productivity of offspring. This function is maximized when growth rate occurs as rapidly as possible, at the expense of brood size. Optimally, one young should be raised which grows as rapidly as the parents are able to supply food. Because this is not observed in nature, and because of other inefficiencie"
+            },
+            {
+              "document_id": "W2079854692",
+              "title": "Cost and efficiency of growth in the larvae of two species of fish with widely differing metabolic rates",
+              "doi": "https://doi.org/10.1098/rspb.1990.0102",
+              "year": "1990",
+              "distance": 0.2303,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "This investigation was designed to test two hypotheses. First, does the proportional relation between rate of growth and rate of oxygen consumption in excess of maintenance, demanded by classic nutrition physiology, apply to small poikilotherms growing at 20% of body mass per day and faster? Secondly, to what extent are net and gross efficiencies of growth affected by the level of metabolic power? The metabolic rates of the coregonid species, Coregonus wartmanni (L.), exceeded the metabolic rates of the cyprinid species, Rutilus rutilus (L.) by a factor of 1.5-2.0. Relative growth rate (g, in % DBM per day) and oxygen consumption in excess of maintenance (= feeding-induced thermogenesis: FIT"
+            },
+            {
+              "document_id": "W1998701857",
+              "title": "The evolution of growth trajectories: what limits growth rate?",
+              "doi": "https://doi.org/10.1111/j.1469-185x.2010.00136.x",
+              "year": "2010",
+              "distance": 0.2319,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.45,
+              "text": "According to life-history theory, growth rates are subject to strong directional selection due to reproductive and survival advantages associated with large adult body size. Yet, growth is commonly observed to occur at rates lower than the maximum that is physiologically possible and intrinsic growth rates often vary among populations. This implies that slower growth is favoured under certain conditions. Realized growth rate is thus the result of a compromise between the costs and advantages of growing rapidly, and the optimal rate of growth is not equivalent to the fundamental maximum rate. The ecological and evolutionary factors influencing growth rate are reviewed, with particular emphasi"
+            },
+            {
+              "document_id": "W2003921161",
+              "title": "Trade-Off Between Growth and Energy Storage in Male Vipera berus (L.) Under Different Prey Densities",
+              "doi": "https://doi.org/10.2307/2389533",
+              "year": "1991",
+              "distance": 0.2322,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "There are constraints on the rate of energy intake of foraging animals, and allocation of energy, for example, to growth therefore must be at the expense of allocation to other purposes, such as energy storage. Moreover, the relative amount of energy allocated to different kinds of activities is likely to depend upon food availability. We have compared the patterns of energy allocation between adders, Vipera berus (L.), in populations inhabiting two different island groups in the Baltic Sea. These adders primarily feed on field voles, Microtus agrestis (L.), which undergo great population density fluctuations. In order to survive periods of low food supply adders allocate some energy to stor"
+            },
+            {
+              "document_id": "W2112459053",
+              "title": "Age‐related variation in energy expenditure in a long‐lived bird within the envelope of an energy ceiling",
+              "doi": "https://doi.org/10.1111/1365-2656.12126",
+              "year": "2013",
+              "distance": 0.2328,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Summary Energy expenditure in wild animals can be limited (i) intrinsically by physiological processes that constrain an animal's capacity to use energy, (ii) extrinsically by energy availability in the environment and/or (iii) strategically based on trade‐offs between elevated metabolism and survival. Although these factors apply to all individuals within a population, some individuals expend more or less energy than other individuals. To examine the role of an energy ceiling in a species with a high and individually repeatable metabolic rate, we compared energy expenditure of thick‐billed murres ( Uria lomvia ) with and without handicaps during a period of peak energy demand (chick‐rearing"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "The stylized fact claims that some species achieve maximal growth through high feeding regardless of energy reserve status. Several snippets indirectly support the idea that high food intake/assimilation drives maximal growth (e.g., [4] increased feeding implies increased growth and maximum size; [5] food-saturated assimilation approaches an intrinsic maximum; [15][16] individuals capable of higher intake grow faster when food is abundant; [20][21] growth-rate maximization in Daphnia and lepidopteran larvae). However, much of the support is generic about feeding driving growth rather than specifically demonstrating that maximal growth is reserve-independent; several snippets are about RNA-reserve covariation, metabolic scope, or nutrition quality which are tangential, and [19] (hyperphagia/compensatory growth driven by poor nutritional condition) and [7] (food quality limits gmax) suggest nutritional/reserve status does matter. Overall evidence is moderate but mixed and not decisively confirming the reserve-independence claim, warranting a neutral-to-corroborated middle rating."
+          },
+          "n_references": 10,
+          "references": {
+            "3170": {
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1821
+            },
+            "3499": {
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1964
+            },
+            "3364": {
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1979
+            },
+            "W2563272659": {
+              "title": "Is Maximum Food Intake in Endotherms Constrained by Net or Factorial Aerobic Scope? Lessons from the Leaf-Eared Mouse",
+              "doi": "https://doi.org/10.3389/fphys.2016.00649",
+              "year": "2016",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1945
+            },
+            "W2109371672": {
+              "title": "Aerobic scope explains individual variation in feeding capacity",
+              "doi": "https://doi.org/10.1098/rsbl.2015.0793",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2138
+            },
+            "W2152650287": {
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2161
+            },
+            "W1989003791": {
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2205
+            },
+            "W2077909838": {
+              "title": "Functional Response and Fitness in a Generalist Filter Feeder, Daphnia Magna (Cladocera: Crustacea)",
+              "doi": "https://doi.org/10.2307/1937196",
+              "year": "1983",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2212
+            },
+            "W2032200504": {
+              "title": "Compensatory responses in lepidopteran larvae: a test of growth rate maximisation",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.13363.x",
+              "year": "2004",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2214
+            },
+            "W2100937175": {
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2254
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1821,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "its such as growth and reproduction. If animals are indeed physiologically capable of increasing their feeding rate beyond control conditions, this raises an interesting evolutionary question. A mutant that always has this up-regulated feeding rate would reproduce earlier and more, and thus outcompete its conspeciﬁcs. So why did natural selection not lead to the maximum possible feeding rate? It is likely that there are ﬁtness disadvantages of having an up-regulated feeding rate, which could relate to negative side effects of rapid growth (e.g., decreased survival proba- bility), or of being large bodied (e.g., increased predation risk). If up-regulation of feeding occurs after exposure to t"
+            },
+            {
+              "document_id": "3045",
+              "title": "HeatJone2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1873,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "enzymes and transporters maximizes the total amount of energy available for reproduction, and in the case where growth rates are maximal, this optimal investment in di- gestion may approach (but not exceed) half the energy budget (see ﬁg. 3). Exploration and Exploitation: Trade-Offs and Optimal Control All else being equal, species with a higher growth rate are expected to outcompete species with a lower growth rate, as they are likely to capture a larger fraction of the available resource, giving higher ﬁtness as a result of more efﬁcient exploration of the resource environment. An equally reason- able claim is that, all else being equal, species that convert a larger fraction of the energy"
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1964,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "growth rate may be selected when food 501 availability and/or nutrition is high, foraging risks are low (Kozlowski, Konarzewski 502 and Czarnoleski, 2020). Therefore, it can be predicted that organisms may exhibit 503 rapid growth rates to reach large body sizes, but in addition the rates of organism 504 growth are also likely to reflect adaptations to different environmental conditions. 505 Thus, observed rates of organism growth, or realised growth rates, are likely to reflect 506 [Page 29] 19 optimal rates that result from a trade-off between the costs and benefits of growing at 507 maximal rates in given environmental conditions. 508 Growth rate can be influenced by, or correlate with, m"
+            },
+            {
+              "document_id": "3170",
+              "title": "JageBars2013.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "e explained by an increase in the uptake of energy from the environment, i.e., an increase in the feeding rate or in the assimilation efﬁciency of energy from food (e.g., related to food quality). Increasing the uptake of energy from the environment implies an increase in the growth rate and in maximum size. Furthermore, there will be a decrease in the time to ﬁrst reproduction, and an increase in the maximum reproduction rate (in terms of mass or energy output per time). It is possible that up-regulation of feeding is an adaptive response of the organism to counteract the energetic losses due to toxicant effects (e.g., the induction of detoxiﬁcation processes or damage repair, see Calow 199"
+            },
+            {
+              "document_id": "3364",
+              "title": "Campos-Candela, e.a. - 2019 - A mechanistic theory of personality-dependent move.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1979,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "limited to an intrinsic-physiological maximum Qm. In food-saturated environments, the assimilation rate will be close to this maximum, regardless of how much area the ani- mals cover because f (eqn 7) approaches one, increasing either the resource level or the explored HR area. Accordingly, the growth and reproduction outcomes of different e became more evident in scenarios with a moderate or low resource density. Hence, animals with higher e or living in resource- rich environments grew faster and allocated more energy to reproduction across their lifetime (Fig. 2c). Therefore, inter- estingly, from an ecological perspective, the lower the resource density is, the more important the movemen"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2027,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "g homeostasis assumption is not valid, but may also be an effect of behavioral changes during growth, such that larger body sizes experience higher food densities, and therefore increase their feed- ing rate, reserves, RNA content, and speciﬁc growth rate. When we compare different species of unicellulars grown at abundant food (substrate) density, DEB the- ory predicts that the speciﬁc growth rate increases with the unicellulars’ reserve capacity. The RNA content is therefore expected to increase with the speciﬁc growth rate among species. The predicted positive relationship between speciﬁc growth rate and RNA content can be seen among both prokaryotic and eukaryotic micro- organisms (Fig. "
+            },
+            {
+              "document_id": "2402",
+              "title": "Lampert - 2025 - Daphnia magna.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2041,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "high maximum growth rate (gmax). (2) Low-quality food supports a low gmax and requires a higher Thr. (3) Low-quality food supports a low gmax, but the Thr does not differ between high- and low-quality food. They tested these options by measur- ing the juvenile somatic growth rates of D. magna at limiting concentrations of P-rich (C:P = 152) and P- limited (C:P = 1800) Scenedesmus. Based on their experimental results, they re- jected hypothesis two. Although gmax was reduced in low-quality food, no difference in Thr was found for the two food types. Sterner and Robinson explained this result with two physiological conditions required for the Thr (maintenance of mass) and for growth (in- creas"
+            },
+            {
+              "document_id": "2769",
+              "title": "VredDobb2004.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2058,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "lts of the same species) increases among species approximately with the volumetric length of the full- grown adult. The maximum speciﬁc growth rate, which is expected to occur at a body size of 4/27 of the max- imum size, is proportional to the inverse of the volu- metric length of the full-grown adult. If we assume that the composition of reserve is independent of maximum body size, and that RNA is more abundant in reserve than in structure, we expect a negative relationship be- tween mass-speciﬁc RNA content and maximum spe- ciﬁc growth rate among multicellular species. This co- variation of parameter values among species, and their relationship with maximum body size, rests on the idea th"
+            },
+            {
+              "document_id": "2617",
+              "title": "MullNisb2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2099,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "c growth; development; maintenance of the state of maturity; and reproduction. These energy ﬂuxes are irreversible. • There are maximally three life stages: embryos, which neither feed nor reproduce; juveniles, which may feed but do not reproduce; and adults, which may feed and reproduce. • The rate of food uptake is proportional to the surface area of an organism, and is a hyperbolic function of the food density (type II functional response). • Energy assimilated from food becomes part of the reserves. The dynamics of the energy reserve density are ﬁrst order, with a rate that is inversely proportional to the volumetric length of an organism. • A ﬁxed fraction of the energy released from th"
+            },
+            {
+              "document_id": "3502",
+              "title": "Nepal et al. - 2021 - Effects of food limitation on growth, body conditi.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2101,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "tes of the species at specific food densities. Bioenergetics models can then provide insights on growth and feeding rates observed in the wild (Kooijman, 2010).An ability to grow and maintain a good body condition in restricted food environments would be beneficial for an invading organism. The estimates of metabolic rates of an invasive species can also inform growth dynamics (van Poorten and Walters, 2016), elucidate ecological traits (Killen et al., 2016) and support the development of bioenergetics models for the species (Cooke and Hill, 2010; Kooijman, 2010). Species with low maintenance costs, as measured by standard metabolic rate (SMR) in fish, are more likely to succeed under harsh,"
+            },
+            {
+              "document_id": "2687",
+              "title": "LikaKear2011a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2112,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "nsity, a rapid occurrence of problems during starvation. The maximum size is not affected by this parameter. The energy conductance is unlikely to deviate strongly from the typical value independent of the body size of the species. Range: N0. Allocation fraction to soma κ, 0.8: controls the allocation of mobilised reserve to somatic maintenance and growth as opposed to maturity maintenance and maturation of reproduction. A high value gives rapid growth to a large size, long development times and low reproduction. A small value (κb0.5) can reduce growth and reproduction, since food uptake is linked to size. Range: N0, b1. Reproduction efﬁciency κR, 0.95: is the fraction of reserve allocated t"
+            },
+            {
+              "document_id": "2395",
+              "title": "Stavrakidis-Zachou et al. - 2025 - A Nutritional Bioenergetic Model for Farmed Fish .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2116,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "irect experimentation and observation are not feasible. One critical consideration in ﬁsh nutrition and feed formu- lation is the energy-to-protein ratio. The optimal ratio is highly species-speciﬁc and needs to be experimentally determined for each species [71–73]. Feeds with excessive energy-to-protein content and vice versa are known to result in reduced weight gain because the ﬁsh may eat as much as they can, but depend- ing on the case, either the protein or the energy they can retain is not sufﬁcient to cover their growth requirements [74, 75]. Moreover, the source of energy, whether it is predominantly derived from fats, protein or carbohydrates further inﬂuences its utilisation by th"
+            },
+            {
+              "document_id": "W2563272659",
+              "title": "Is Maximum Food Intake in Endotherms Constrained by Net or Factorial Aerobic Scope? Lessons from the Leaf-Eared Mouse",
+              "doi": "https://doi.org/10.3389/fphys.2016.00649",
+              "year": "2016",
+              "distance": 0.1945,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.45,
+              "text": "Food availability varies substantially throughout animals' lifespans, thus the ability to profit from high food levels may directly influence animal fitness. Studies exploring the link between basal metabolic rate (BMR), growth, reproduction, and other fitness traits have shown varying relationships in terms of both magnitude and direction. The diversity of results has led to the hypothesis that these relationships are modulated by environmental conditions (e.g., food availability), suggesting that the fitness consequences of a given BMR may be context-dependent. In turn, there is indirect evidence that individuals with an increased capacity for aerobic work also have a high capacity for acq"
+            },
+            {
+              "document_id": "W2075429508",
+              "title": "The Physiological Ecology of Daphnia: Development of a Model of Growth and Reproduction",
+              "doi": "https://doi.org/10.2307/1940324",
+              "year": "1990",
+              "distance": 0.2122,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Patterns of growth, development, and reproduction have been observed in many Daphnia species, and there have been some attempts to explain them using models that take into account rates of intake, assimilation, maintenance, and energy allocation rules. We show, however, that existing models cannot capture some essential features of individual growth, especially under conditions of low food supply that are typical of field conditions. These features include: (1) a sigmoid growth curve, and (2) the time to starvation or the performance of individuals during periods of low food availability. We propose and test a new hypothesis based on the idea that allometric relationship for physiological ra"
+            },
+            {
+              "document_id": "W2109371672",
+              "title": "Aerobic scope explains individual variation in feeding capacity",
+              "doi": "https://doi.org/10.1098/rsbl.2015.0793",
+              "year": "2015",
+              "distance": 0.2138,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Links between metabolism and components of fitness such as growth, reproduction and survival can depend on food availability. A high standard metabolic rate (SMR; baseline energy expenditure) or aerobic scope (AS; the difference between an individual's maximum and SMR) is often beneficial when food is abundant or easily accessible but can be less important or even disadvantageous when food levels decline. While the mechanisms underlying these context-dependent associations are not well understood, they suggest that individuals with a higher SMR or AS are better able to take advantage of high food abundance. Here we show that juvenile brown trout ( Salmo trutta ) with a higher AS were able to"
+            },
+            {
+              "document_id": "W2152650287",
+              "title": "Metabolism and Food Availability as Regulators of Production in Juvenile Cotton Rats",
+              "doi": "https://doi.org/10.2307/1940210",
+              "year": "1989",
+              "distance": 0.2161,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Recent studies have shown positive relationships between mass—specific rates of basal metabolism (BMR) and production rates for interspecific comparisons of mammals. This study investigated associations between BMR and production rates by determining whether simultaneous increases in BMR and production occur at the individual level. Growth, reproductive development, and food—processing rates of juvenile Sigmodon hispidus with naturally occurring or experimentally elevated levels of BMR and with ad libitum or restricted food availability were compared. When food was readily available, elevated BMR was associated with higher ingestion rates, faster and more efficient growth, and earlier sexual"
+            },
+            {
+              "document_id": "W2169879920",
+              "title": "Maximum energy intake rate is proportional to basal metabolic rate in passerine birds",
+              "doi": "https://doi.org/10.1098/rspb.1995.0156",
+              "year": "1995",
+              "distance": 0.217,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "A high energy intake rate may be important for many animals, but little is known of factors that determine intake capacity. Birds in migratory disposition presumably eat at their maximum capacity and therefore form a good model for studying the energy intake capacity of animals. We measured the maximum daily gross energy intake (GEImax) and basal metabolic rates (BMR) in 22 species of migrant passerines during autumn. Both GEImax and BMR scaled to body mass (w) close to w0.70. More importantly, species with high GEImax for their body mass also had relatively high BMR. BMR may reflect the size of the metabolic machinery involved in energy uptake. The maximum daily metabolizable energy intake "
+            },
+            {
+              "document_id": "W1968287417",
+              "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+              "doi": "https://doi.org/10.1080/00785326.1976.10425457",
+              "year": "1976",
+              "distance": 0.2195,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "Abstract Data from the literature on rates of growth and metabolism, mainly in Mytilus edulis, but also in M. californianus and Modiolus demissus have been used in an attempt to estimate the maximum rates at which mussels can convert absorbed food energy into growth and reproduction, and to evaluate which factors control these maximum net growth efficiencies. It is concluded that high maximum growth efficiencies can be maintained at a constant level up to a certain critical body size above which the maximum growth efficiency declines with increasing size. The critical body size at which growth efficiency starts to decline is independent of the initial level of maximum growth efficiency. The "
+            },
+            {
+              "document_id": "W1989003791",
+              "title": "RESOURCE ALLOCATION, HYPERPHAGIA, AND COMPENSATORY GROWTH IN JUVENILES",
+              "doi": "https://doi.org/10.1890/02-0536",
+              "year": "2003",
+              "distance": 0.2205,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "Many organisms exploit highly variable food supplies and, as an adaptation to such conditions, show elevated growth during recovery from starvation. In some species this response enables starved and re-fed individuals to outpace those growing continuously. The main engine of compensatory growth is a relative increase in food ingestion as a reaction to poor nutritional condition. We use a series of mathematical energy-budget models to investigate the interaction between the mechanisms that control such hyperphagia and those that control internal allocation, with the aim of identifying those strategies that permit overcompensation. We find that hyperphagia alone normally produces weak compensa"
+            },
+            {
+              "document_id": "W2077909838",
+              "title": "Functional Response and Fitness in a Generalist Filter Feeder, Daphnia Magna (Cladocera: Crustacea)",
+              "doi": "https://doi.org/10.2307/1937196",
+              "year": "1983",
+              "distance": 0.2212,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "The functional response of an organism is often assumed to maximize its fitness. We examined the relationship between functional response and body growth, survivorship, and reproduction in Daphnia magna under controlled and comparable conditions. In a previous study we determined that D. magna exhibits a Holling Type II functional response with an asymptotic increase in ingestion rate with increasing food concentration to a maximum rate at an incipient limiting concentration of °10 4 Chlamydomonas reinhardi cells/cm 3 (measured as carbon, 0.2 mg/L) and that observed feeding activity does not follow the predictions of energy optimization models. In this study, we determined the fitness respon"
+            },
+            {
+              "document_id": "W2032200504",
+              "title": "Compensatory responses in lepidopteran larvae: a test of growth rate maximisation",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.13363.x",
+              "year": "2004",
+              "distance": 0.2214,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "It is often claimed that some organisms maximise individual growth rates (within limits set by physiological and environmental constraints) whereas others do not. Adequate experimental protocol to test for these hypotheses has not been available. We proceeded from the idea that a maximiser should be unable to further improve its growth performance, i.e. there should be no adaptive plasticity in relative growth rates. In the case of an insect larva always maximising its weight gain, we should thus expect no increase in growth rate following a short‐term environmental perturbation. Another prediction is that initial and final weights of a larval instar should be highly correlated. We applied t"
+            },
+            {
+              "document_id": "W1902265851",
+              "title": "High temperature slows down growth in tobacco hornworms (<i>Manduca sexta</i> larvae) under food restriction",
+              "doi": "https://doi.org/10.1111/1744-7917.12109",
+              "year": "2014",
+              "distance": 0.2239,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract When fed ad libitum (AL), ectothermic animals usually grow faster and have higher metabolic rate at higher ambient temperature. However, if food supply is limited, there is an energy tradeoff between growth and metabolism. Here we hypothesize that for ectothermic animals under food restriction (FR), high temperature will lead to a high metabolic rate, but growth will slow down to compensate for the high metabolism. We measure the rates of growth and metabolism of 4 cohorts of 5th instar hornworms ( Manduca sexta larvae) reared at 2 levels of food supply (AL and FR) and 2 temperatures (20 and 30 °C). Our results show that, compared to the cohorts reared at 20 °C, the ones reared at 3"
+            },
+            {
+              "document_id": "W2100937175",
+              "title": "Gluttony in migratory waders – unprecedented energy assimilation rates in vertebrates",
+              "doi": "https://doi.org/10.1034/j.1600-0706.2003.12259.x",
+              "year": "2003",
+              "distance": 0.2254,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.45,
+              "text": "Maximum energy assimilation rate has been implicated as a constraint on maximal sustained energy expenditure, on biomass production, and in various behavioural and life history models. Data on the upper limit to energy assimilation rate are scarce, and the factors that set the limit remain poorly known. We studied migratory waders in captivity, given unlimited food supply around the clock. Many of these waders assimilated energy at rates of seven to ten times basal metabolism, exceeding maximum rates reported for vertebrates during periods of high energy demand, for example during reproduction and in extreme cold. One factor allowing the high energy assimilation rates may be that much of the"
+            },
+            {
+              "document_id": "W4389191972",
+              "title": "How Life-history Traits and Mating Behaviour in Female Fall Field Crickets is Influenced by Macronutrient-ratio Specific Rearing Diets",
+              "doi": "https://doi.org/10.22215/etd/2023-15648",
+              "year": "2023",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Nutrition can strongly influence life-history traits and behaviours related to sexual selection. An individuals ability to acquire and allocate nutrients has proven to be a pertinent driver behind individual variation within populations and between sexes. Organisms must acquire the ratio of essential nutrients appropriate for growth, reproduction, and survival. I investigated whether high-protein versus high-carbohydrate rearing diet [3:1 versus 1:3 protein:carbohydrate (P:C), respectively] fed during development and into adulthood influenced various life history traits and female mating behaviours in G. pennsylvanicus. I determined that a high-protein diet promoted growth, fecundity, respon"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

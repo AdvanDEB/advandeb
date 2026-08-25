@@ -35,6 +35,12 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/documentation',
+      name: 'documentation',
+      component: () => import('@/views/DocumentationView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/scenarios',
       name: 'scenarios',
       component: () => import('@/views/ScenariosView.vue'),
@@ -53,10 +59,28 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/settings/privacy',
+      name: 'privacy-settings',
+      component: () => import('@/views/PrivacySettingsView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/kb',
       name: 'knowledge-builder',
       component: () => import('@/views/KnowledgeBuilderView.vue'),
       meta: { requiresAuth: true, requiresKB: true }
+    },
+    {
+      path: '/admin/users',
+      name: 'admin-users',
+      component: () => import('@/views/AdminUsersView.vue'),
+      meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      path: '/admin/users/:id/chats',
+      name: 'admin-user-chats',
+      component: () => import('@/views/AdminUserChatsView.vue'),
+      meta: { requiresAuth: true, requiresAdmin: true }
     }
   ]
 })
@@ -70,6 +94,11 @@ router.beforeEach((to: RouteLocationNormalized, _from: RouteLocationNormalized, 
   }
 
   if (to.meta.requiresKB && !KB_ROLES.some(r => authStore.hasRole(r))) {
+    next({ name: 'home' })
+    return
+  }
+
+  if (to.meta.requiresAdmin && !authStore.hasRole('administrator')) {
     next({ name: 'home' })
     return
   }

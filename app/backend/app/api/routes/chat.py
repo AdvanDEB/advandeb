@@ -1,15 +1,62 @@
 """
 Chat API routes.
 """
+from datetime import datetime, timezone
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
 from app.core.auth import get_current_user
+from app.core.config import settings
 from app.services.chat_service import ChatService
 
 
 router = APIRouter()
+
+
+@router.get("/default-model")
+async def get_default_model(
+    current_user: dict = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """Return info about the operator-configured default chat model.
+
+    The frontend uses this to label the 'Nemotron (default)' picker option
+    with the actual model name and provider. ``available`` is False when no
+    default key is configured (the option should be hidden or disabled).
+    """
+    return {
+        "available": bool(settings.DEFAULT_CHAT_API_KEY),
+        "provider": settings.DEFAULT_CHAT_PROVIDER,
+        "model": settings.DEFAULT_CHAT_MODEL,
+        "rpm": settings.DEFAULT_CHAT_RPM,
+    }
+
+
+@router.get("/local-models")
+async def list_local_models(
+    current_user: dict = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """List locally-available Ollama models for the chat model picker.
+
+    Queries Ollama's ``/api/tags`` directly so any authenticated user can pick a
+    local model for their session (the curator-only KB endpoint is for admin UI).
+    Returns an empty list (the UI then falls back to the server default) when
+    Ollama is unreachable.
+    """
+    import httpx
+    from advandeb_kb.config.settings import settings as kb_settings
+
+    models: List[str] = []
+    try:
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            resp = await client.get(f"{settings.OLLAMA_BASE_URL}/api/tags")
+            resp.raise_for_status()
+            data = resp.json()
+            models = [m["name"] for m in data.get("models", []) if m.get("name")]
+    except Exception:
+        models = []
+    return {"models": models, "default_model": kb_settings.CHAT_ANSWER_MODEL}
 
 
 class ChatMessage(BaseModel):
@@ -147,7 +194,7 @@ async def set_session_llm(
     """
     user_id = current_user["id"]
 
-    if body.provider != "ollama":
+    if body.provider not in ("ollama", "default"):
         if not body.key_id:
             raise HTTPException(
                 status_code=422,
@@ -171,3 +218,80 @@ async def set_session_llm(
     if not ok:
         raise HTTPException(status_code=404, detail="Session not found")
     return body.model_dump()
+
+
+@router.delete("/sessions/{session_id}")
+async def delete_chat_session(
+    session_id: str,
+    current_user: dict = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """Delete a chat session and all its messages."""
+    chat_service = ChatService()
+    ok = await chat_service.delete_session(session_id, current_user["id"])
+    if not ok:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return {"deleted": session_id}
+
+
+@router.put("/sessions/{session_id}/rename")
+async def rename_chat_session_v2(
+    session_id: str,
+    body: RenameSessionRequest,
+    current_user: dict = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """Rename a chat session (clean-path alias for the PUT /sessions/{id} route)."""
+    chat_service = ChatService()
+    ok = await chat_service.rename_session(session_id, current_user["id"], body.title)
+    if not ok:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return {"id": session_id, "title": body.title}
+
+
+class SystemPromptRequest(BaseModel):
+    system_prompt: str = ""
+
+
+@router.put("/sessions/{session_id}/system-prompt")
+async def set_session_system_prompt(
+    session_id: str,
+    body: SystemPromptRequest,
+    current_user: dict = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """Store a custom system prompt for a session."""
+    chat_service = ChatService()
+    ok = await chat_service.set_session_system_prompt(
+        session_id, current_user["id"], body.system_prompt
+    )
+    if not ok:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return {"session_id": session_id, "system_prompt": body.system_prompt}
+
+
+class FeedbackRequest(BaseModel):
+    rating: int = Field(..., ge=-1, le=1)
+
+
+@router.post("/messages/{message_id}/feedback")
+async def submit_message_feedback(
+    message_id: str,
+    body: FeedbackRequest,
+    current_user: dict = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """Record thumbs-up / thumbs-down feedback for an assistant message."""
+    db = ChatService().db
+    await db.chat_message_feedback.update_one(
+        {"message_id": message_id, "user_id": current_user["id"]},
+        {
+            "$set": {
+                "rating": body.rating,
+                "updated_at": datetime.now(timezone.utc),
+            },
+            "$setOnInsert": {
+                "message_id": message_id,
+                "user_id": current_user["id"],
+                "created_at": datetime.now(timezone.utc),
+            },
+        },
+        upsert=True,
+    )
+    return {"ok": True}

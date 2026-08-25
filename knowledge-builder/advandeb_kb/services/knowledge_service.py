@@ -63,11 +63,17 @@ class KnowledgeService:
         data = document.model_dump(by_alias=True)
         key = str(data.pop("_id"))
         data["_key"] = key
-        # Serialise datetime fields
         for f in ("created_at", "updated_at"):
             if isinstance(data.get(f), datetime):
                 data[f] = data[f].isoformat()
         await self._run(self.db.insert, "documents", data)
+        # Mirror pipeline docs into document_meta for fast UI queries
+        _WEB_TYPES = {"web"}
+        if data.get("source_type") not in _WEB_TYPES:
+            try:
+                await self._run(self.db.insert, "document_meta", data)
+            except Exception:
+                pass
         graph_rebuild_queue.mark_dirty("citation")
         return document
 
@@ -104,8 +110,16 @@ class KnowledgeService:
     async def update_document(self, document_id: str, fields: Dict[str, Any]) -> Optional[Document]:
         fields["updated_at"] = _now_iso()
         def _update():
+            patch = {"_key": document_id, **fields}
             col = self.db.db.collection("documents")
-            col.update({"_key": document_id, **fields})
+            col.update(patch)
+            # Mirror update into document_meta if the doc lives there
+            try:
+                meta_col = self.db.db.collection("document_meta")
+                if meta_col.has(document_id):
+                    meta_col.update(patch)
+            except Exception:
+                pass
             return col.get(document_id)
         raw = await self._run(_update)
         if fields.keys() & {"doi", "references", "title", "year", "authors"}:

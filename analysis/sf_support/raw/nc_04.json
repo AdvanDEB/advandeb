@@ -1,0 +1,743 @@
+{
+  "sf_id": "nc_04",
+  "category": "N:C ratio",
+  "statement": "N:C decreases with irradiance in nutrient replete conditions.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact (SF4: N:C decreases with irradiance in nutrient replete conditions) is directly enumerated and explicitly modeled/simulated in the LoreMarq2010 paper, with multiple snippets ([7], [9], [10], [13]) explicitly stating and providing a mechanistic rationale (irradiance increases C-reserve density and reduces N-reserve density, lowering N:C). Snippet [2] states the N:C ratio decreases with irradiance as a simulated stylized fact, and [1] (OmtaBrug2009) describes the complementary C:N increasing with irradiance, both consistent with the fact. Related chl:N evidence ([6], [13]) is indirectly supportive. No snippet contradicts the pattern; the remaining snippets are topically related but neutral. The corpus provides clear, multiple, and convergent support with no conflict."
+      },
+      "n_references": 2,
+      "references": {
+        "69b89188ecbd4702b29a611f": {
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.26620566844940186
+        },
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 6,
+          "supports": 6,
+          "contradicts": 0,
+          "best_distance": 0.2829136848449707
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2662,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "-saturation constant. In this regime of low irradiance, theuptake of DIC into the carbohydrate reserve increases with irradiance(Fig. 2 ), while all the other rates, such as DIN uptake, are unaffectedand hence, the C:N ratio strongly increases with increasing lightintensity. Furthermore, the C:N ratio increases with decreasing tem-perature in this low-irradiance regime, because at low lightintensities, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrate"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2829,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3138,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "N that has been taken up/synthesised by the cell but is in excess to stoichiometric requirements for growth Organic containing carbon and nitrogen at C:N of 4.3 mol C (mol C)-1 hr-1 2.2.3.3j 136 Table 4.2 Ambient conditions for Experiments 1 -5. (X/K) is the ratio of the ambient nutrient concentration to the nutrient’s half saturation constant, explained in Section 2.3.1. Environmental factor Exp. 1 Exp. 2 Exp. 3 Exp. 4 Irradiance (µmols photons m-2 s-1) 0 and 500 500 500 500 DIN ( X/K) 5 0-5 5 5 DON (X/K) 5 5 0-5 5 DOC ( X/K) 5 5 5 0-5 137 4.7. Figures"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3141,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "unction of irradiance and the nutrient supplyrate according to Eq. (1). The range of irradiance and nutrient ﬂux combinations atwhich both are signiﬁcantly limiting photosynthesis is narrow; in effect, one sub-strate determines the capacity of the SU in most cases. The impact of photoinhibitionbecomes increasingly more pronounced as the nutrient ﬂux increases. At low nutri-ent availability, the impact of photoinhibition is insigniﬁcant. Quantities have beenscaled as follows: scaled photosynthesis rate = JX/JXm; scaled irradiance =J∗L/JL,K;scaled nutrient ﬂux = JN/JN,K;J∗I,p=5J∗L,Kand J∗I,b=∞ (inhibition in processing stateonly)."
+        },
+        {
+          "document_id": "69b88b59ecbd4702b29a59d8",
+          "title": "EynaNisb2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3246,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Fig. 2. The speciﬁc rate of excess photosynthate production, i.e. the speciﬁc rate atwhich the symbiont excretes photosynthate in the host, in steady state is a functionof irradiance and ambient nitrogen levels. Without effects of detrimental radiation(A), the speciﬁc rate of excess photosynthate production approaches an asymp-totic maximum with increasing irradiance due to saturation of the photosyntheticmachinery; it declines with increasing ambient nitrogen levels, as the assimilationof photosynthate by the symbiont requires nitrogen."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3274,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3299,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3301,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nhibition) also yields a relatively steep increasingcurve when nutrients become severely limiting at higher irradi-ance levels. This may suggest that nutrient limitation is a factorin experiments yielding data featuring a relatively initial steepascent in photosynthetic rates as irradiance increases. Furthermore,because photoinhibition is relatively important even in dim light(Tyystjarvi, 2008 ), a model of photosynthesis should always include"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3354,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333(typical environmental setting). Irradiance bolsters _|ECAand thus the C-reserve density. The 334consequent increase of MVand decrease of _|ENRreduces N-reserve density. The overall 335result is a decrease of the N:C ratio. 3363.2.2 Chlorophyll concentration 337Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338the dilution rate (SF7 and SF8). Until this point no explicit considerations were made concern- 339"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3378,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "rature range (approximately from 280 to 300 K). 327The N:C ratio that results from these dynamics has a minimum at T= 300 K. 328Finally, SF4 - N:C ratio decreases with irradiance in nutrient replete conditions - is represented 329in ﬁgure 4D. The rationale is similar to the one for curve 4B. The microalgal population will grow 330if irradiance is such that _r > _h. If such condition is fulﬁlled then the population will grow until 33115another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333"
+        },
+        {
+          "document_id": "69b870afecbd4702b29a3697",
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3397,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "epends on the af ﬁnity ( κN)given by:νextN¼κNN½/C138: ð13ÞNote that Nis the generic designation for the nutrients, which in thiscase can be nitrogen or phosphate, and [ N] represents the concentrationof nutrient. Finally, the realized uptake is the minimum of the internaland external uptake rates multiplied by the carbon quota concentration:νN¼min νintN;νextN/C16/C17: ð14ÞThe equation de ﬁnes the realized or effective uptake,νN, as the minimum of available nutrient, νNext(supply-driven), and theamount needed for achieving maximum nutrient quota, νNint(demand-driven). During dark periods the respiration may cause the realized up-"
+        },
+        {
+          "document_id": "69b866ddecbd4702b29a2b8d",
+          "title": "Ledder et al. - 2020 - Local control of resource allocation is sufficient.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3405,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": ") and increaseswith increasing availability of dissolved inorganic nitrogen(corresponding to increasing αN), consistent with thesimpler model here (Fig. 7). Cunning et al. ( 2017 ) citesmany observations of negative trends between irradianceand symbiont density and one study in which increasingsymbiont to host ratio increases with increasing dissolvedinorganic nitrogen in the environment.Looking forward, there is a growing literature withapplications of models incorporating syntrophic interactions"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3451,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "bilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.347,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "en density (superscript h).Maintenance costs (pg carbon per mm3per day) [MC]XN Nitrogen concentration in the environment (molar)fN Hyperbolically transformed nitrogen concentration: fN xN:(KN\u001bxN) (dimensionless),with KNthe half-saturation constant of the uptake kineticsI Irradiance or light intensity ( mEinst m 2s 1)Hyperbolically transformed light intensity (dimensionless): fI I:(Is\u001bI) with Isis the fIirradiance at which the photosynthesis process is half saturatednx Nutrient rate of x(per day). This parameter is a measure for the rate at which thetransient nutrient pool can be replenishedReferences"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3507,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "bient nutrient conditions and irradiance are as in Experiment 1 (Table 4.2) and again only the behaviour at 𝛽𝑜𝑝𝑡 is ev aluated. Experiment 4: The fourth experiment analyses the influence of ambient DOC on photoheterotrophy by comparing the dynamics of SAR11 -PH and SAR11 -H at multiple ambient DOC (X/K) from 0 to 5. All other ambient nutrient conditions and irradiance are he ld constant (Table 4.2) and only the behaviour at 𝛽𝑜𝑝𝑡 is evaluated. 115 4.3. Results 4.3.1. Experiment 1: non -liming conditions (the default parameter set) 4.3.1.1. Growth rate and the uptake and use of carbon and nitrogen at 𝜷𝒐𝒑𝒕"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3534,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "nd 71 % in Pro -PH at saturating irradiance (Figure 3.16). The rate of excess carbon release continues to decrease further with decreasing irradian ce. Photoheterotrophic light use reduces the rate of excess carbon release by up to 33.0 % in Pro -PH relative to Pro -PA, the biggest difference being at ~10 µmol photons m-2 s-1 (Figure 3.16). Both cell types assimilate less nitrogen at low irradiance com pared to saturating irradiance because of the increase in the percentage of nitrogen used to satisfy maintenance, and released as ammonium (Figure 3.16). Pro -PA and Pro -PH both assimilate ~80 % total"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3544,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "c nutrientsshould be taken up based on a demand rather than a supply system and, therefore, theuptake rate is quantiﬁed as jN=j+N. Any unassimilated carbon and nutrients from prey orany surplus of organic carbon from photosynthesis quantiﬁed from the relationship (jC\u0000j+C)(withjCgiven in Eq. (B.21)) is excreted outside the cell.3.2.2 Modelling mixotrophic growthInordertostudytheirgrowthdynamicsundervaryingavailabilityoftheregulatingresources,namely inorganic nutrients, prey and irradiance, the models developed above for the fourtypes of PNF are incorporated into the DEB model for photosynthetic cells presented in"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3548,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "es not grow (Fig. 3.7c, d). Under lowinorganic nutrients concentration growth rate decreases, however, the organism can maintainpositive growth by using the nutrients contained in the ingested prey (Fig. 3.7 d).Type IIC PNF can use phototrophy and phagotrophy in a substitutable way. Underhigh inorganic nutrients concentration, growth rate increases with irradiance, whereas forlow irradiance the organisms can use prey as a source of energy and nutrients to grow(Fig. 3.7 e). Under low inorganic nutrients concentration and for low irradiance values, type"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets directly address the relationship between N:C ratio and irradiance under nutrient-replete conditions. The snippets cover diverse topics including nitrogen fertilization of crops, photosynthesis responses to temperature/UVR, stoichiometry in plants and zooplankton, and reproductive energy allocation, but none provide quantitative or qualitative evidence linking increased irradiance to decreased N:C ratios. Snippet 9 mentions low C:X ratios in high nutrient environments and irradiance-governed photosynthesis but does not establish the irradiance-N:C relationship. The corpus is essentially off-topic with respect to the stylized fact, providing neither support nor contradiction, so evidence is sparse and the direction cannot be determined."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W3106494406",
+          "title": "Response of Medical Cannabis (Cannabis sativa L.) to Nitrogen Supply Under Long Photoperiod",
+          "doi": "10.3389/fpls.2020.572293",
+          "year": "2020",
+          "distance": 0.3831,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "p>-1</sup> N, with visual deficiency symptoms, and 75 and 25% reduction in plant biomass and photosynthesis rate, respectively. Nitrogen use efficiency (NUE) decreased with increasing N supply, while osmotic potential, water use efficiency, photosynthetic pigments, and total N and N-NO<sub>3</sub> concentrations in plant tissues increased with N supply. The plant ionome was considerably affected by N supply. Concentrations of K, P, Ca, Mg, and Fe in the plant were highest under the optimal N level of 160 mgL<sup>-1</sup> N, with differences between organs in the extent of nutrient accumulation."
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.3854,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W2030825066",
+          "title": "Regulatory Mechanisms of Reproductive Effort in Plants 1. Plasticity in Reproductive Energy Allocation and Propagule Output of <i>Helianthus annuus</i> L. (Compositae) Cultivated at Varying Densities and Nitrogen Levels",
+          "doi": "10.1111/j.1442-1984.1986.tb00010.x",
+          "year": "1986",
+          "distance": 0.4112,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "decreasing soil nitrogen levels. However, differences due to different N‐levels were not as great as those to changing density. One of the most significant findings was that seed production under limited resource availability, i.e., lack of ample solar radiation and soil nutrients, due to strong interference at higher density plots, is exceedingly costlty , This was most clearly demonstrated by a very sharp increase in relative energy partitioning to a single propagule in response to the increased density and decreasing nitrogen levels, the relative energy cost to a single achcne (R A ) increasing from one to twenty‐fourfold."
+        },
+        {
+          "document_id": "W2482045212",
+          "title": "Physiological Mechanisms of Nitrogen Absorption and Assimilation in Plants under Stressful Conditions",
+          "doi": "10.1201/b16675-29",
+          "year": "2014",
+          "distance": 0.4114,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nstituent of nucleic acids that serve as genetic material and regulate vital processes like growth, reproduction, and heredity. Being a principal macronutrient, N has a special place in plant nutrition, and plants require it in large amounts. Though N is the most abundant element in our atmosphere, majority of the plants cannot utilize it directly in the elemental form. An adequate supply of N in the soil is essential to maintain proper growth and yield of crops."
+        },
+        {
+          "document_id": "W2294263433",
+          "title": "Short‐ and long‐term acclimation patterns of the giant kelp <i>Macrocystis pyrifera</i> (Laminariales, Phaeophyceae) along a depth gradient",
+          "doi": "10.1111/jpy.12394",
+          "year": "2016",
+          "distance": 0.4165,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ntation from 4 m to 0.2 m depth with a rise in the degree of saturation and a switch from shorter‐ to longer‐chain fatty acids. These changes seem to be essential for the readjustment of thylakoid membranes and might, thus, facilitate efficient photosynthesis under changing irradiances and temperatures. Further experiments are needed to disentangle the relative contribution of solar radiation, temperature and also other abiotic parameters in the observed physiological changes."
+        },
+        {
+          "document_id": "W2101794623",
+          "title": "Effect of Nitrogen Fertilization upon the Yield and Digestibility of Aftermath Timothy Forages Fed to Dairy Heifers",
+          "doi": "10.3168/jds.s0022-0302(63)88962-6",
+          "year": "1963",
+          "distance": 0.4244,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "e nutrients 0-50 lb of nitrogen 153.2% increase, 50-100 lb of nitrogen 9.9% increase, and 100-200 lb of nitrogen 2.8% increase. Recent work byPoulton et al. (7) and Mellin et al. (6), at this station, and others including Reid et al. (10) and Martz et al."
+        },
+        {
+          "document_id": "W4322501248",
+          "title": "Effects of UVR on Photosynthesis in Sargassum horneri (Turner) C. Agardh Adapted to Different Nitrogen Levels",
+          "doi": "10.3390/jmse11030498",
+          "year": "2023",
+          "distance": 0.426,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "then exposed to three levels of radiation (P: photosynthetically active radiation (PAR), 400–700 nm; PA: PAR + UVA, 320–700 nm; PAB: PAR + UVA + UVB, 280–700 nm) under each level of nitrogen for 2 h to investigate the effects of high UVR and nitrogen on photosynthesis."
+        },
+        {
+          "document_id": "W3106494406",
+          "title": "Response of Medical Cannabis (Cannabis sativa L.) to Nitrogen Supply Under Long Photoperiod",
+          "doi": "10.3389/fpls.2020.572293",
+          "year": "2020",
+          "distance": 0.4288,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "monstrate that the optimal N level for plant development and function at the vegetative growth phase is 160 mgL<sup>-1</sup> N. Growth retardation under lower N supply (30-80 mgL<sup>-1</sup>) results from restricted availability of photosynthetic pigments, carbon fixation, and impaired water relations. Excess uptake of N under supply higher than 160 mgL<sup>-1</sup> N, promoted physiological and developmental restrictions, by ion-specific toxicity or indirect induced restrictions of carbon fixation and energy availability."
+        },
+        {
+          "document_id": "W2035914645",
+          "title": "SEASONAL PRIMARY PRODUCTION OF UNDERSTORY RHODOPHYTA IN AN UPWELLING SYSTEM<sup>1</sup>",
+          "doi": "10.1111/j.0022-3646.1990.00214.x",
+          "year": "1990",
+          "distance": 0.4306,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "onal P max and I k values reveal that the obligate understory species, B. prolifera and E. obtusa, are shade‐adapted whereas G. radula, a low intertidal and shallow subtidal dominant, is sun‐adapted. Low C: X ratios consistent with a high nutrient environment and high rates of productivity were found in all three species. Net photosynthesis to respiration (Pn:R) ratios were fairly constant for B. prolifera and E. obtusa, implying that then photosynthetic processes were governed more by seasonal variations in irradiance than by instantaneous light availability. The Pn: R ratio of G."
+        },
+        {
+          "document_id": "W4285677734",
+          "title": "Kinetics of nitrogen in sodic soil of Kumulur village, Trichy District, Tamil Nadu under different organic and inorganic amendments",
+          "doi": "10.31018/jans.v14isi.3572",
+          "year": "2022",
+          "distance": 0.4338,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d along with amendments, a significant (CD-0.05%) buildup in available N contents was observed over the application of N alone. Available nitrogen (325 kg ha-1), nitrate nitrogen (102 kg ha-1) and ammonical nitrogen (205 kg ha-1) were significantly increased due to the addition of amendments. However, the decline in available N with incubation period was only marginal when nitrogen was applied along with amendments. An increase in NH4-N at 30 DAI might be due to the release of nutrients."
+        },
+        {
+          "document_id": "W4280540908",
+          "title": "Effects of increased precipitation on C, N and P stoichiometry at different growth stages of a cold desert annual",
+          "doi": "10.1016/j.gecco.2022.e02158",
+          "year": "2022",
+          "distance": 0.4414,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "during the vegetative stage; culm N concentration decreased and P concentration increased and then decreased with plant growth. Increased precipitation significantly increased the leaf N and P concentration and decreased the C:N and C:P ratios at the vegetative growth stage, but leaf N:P was lower than 14 during the whole growth stage. Increased precipitation could improve the leaf N and P resorption efficiency to cope with the reproduction allocation, and the root nutrients are more sensitive to increased precipitation."
+        },
+        {
+          "document_id": "W2740860467",
+          "title": "Effects of prey of different nutrient quality on elemental nutrient budgets in Noctiluca scintillans",
+          "doi": "10.1038/s41598-017-05991-w",
+          "year": "2017",
+          "distance": 0.4431,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "nd mass balance models, it was found that excretion of C, N, and P by Noctiluca is highly affected by prey nutritional quality. However, based on modeling results, nutrients seem efficiently retained in actively feeding Noctiluca for reproduction rather than directly released as was shown experimentally in starved cells. Moreover, actively feeding Noctiluca tend to retain P and preferentially release N, highlighting its susceptible to P-limitation. Recycling of N and P by Noctiluca may supply substantial nutrients for phytoplankton growth, especially following bloom senescence."
+        },
+        {
+          "document_id": "W2146139588",
+          "title": "The minimum size of seeds and spores in relation to the ontogeny of homoiohydric plants",
+          "doi": "10.1046/j.1365-2435.1999.00293.x",
+          "year": "1999",
+          "distance": 0.4436,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nputs related to the greater C and energy costs of wall synthesis per unit N and P in a vacuolate than in a non-vacuolate cell. In terms of photosynthetic organisms as whole, and our homoiohydric seedlings in particular, vacuolation increases the effectiveness of use of dry matter, C, N, P and energy resources in resource acquisition."
+        },
+        {
+          "document_id": "W4280540908",
+          "title": "Effects of increased precipitation on C, N and P stoichiometry at different growth stages of a cold desert annual",
+          "doi": "10.1016/j.gecco.2022.e02158",
+          "year": "2022",
+          "distance": 0.4448,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Plant C, N and P can reflect plant strategies of nutrient utilization and allocation. Precipitation is a key factor affecting plant nutrient uptake and utilization strategies especially in arid and semiarid regions, and it is predicted to increase in the cold deserts of Northwest China due to climate change. However, the balance of C, N and P stoichiometry in annual plants at different growth stages in response to increased precipitation is not known."
+        },
+        {
+          "document_id": "W2619105384",
+          "title": "Environment-Sensitive Male-Sterility in some Food Crops",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.4485,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "re, photoperiod and irradiation. According to Bernier et al.&#13;\\n(1993) these factors are perceived by different plant parts. For example, leaves are&#13;\\naffected by photoperiod and irradiation; while temperature is perceived by all plant&#13;\\nparts. Similarly, vernalization affects shoot apex and moisture availability is perceived&#13;\\nby roots. These external determinants do not act independently and their interaction&#13;\\nis inevitable and a particular factor may alter or substitute the direct effect of the other&#13;\\nfactors; and this may change the threshold level of individual factor in inducing&#13;\\nflowering."
+        },
+        {
+          "document_id": "W2834133750",
+          "title": "The influence of fertilization and environment on some nutritionally important quality criteria in vegetables - a review of research in the Nordic countries",
+          "doi": "10.23986/afsci.72692",
+          "year": "1994",
+          "distance": 0.4486,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "To understand the phenomena caused by nutrient applications on the quality of vegetables, some research has been done in Finland and in Scandinavia during the last decades. Purpose of this review is to evaluate this data against the information available on genetic and environmental factors. Genotype and light intensity highly affect the vitamin C content of plants. Optimal nitrogen level has a small effect, but excess of nitrogen decreases vitamin C content."
+        },
+        {
+          "document_id": "W2591624350",
+          "title": "The energetics of the brackish water serpulid polychaete Mercierella enigmatica Fauvel",
+          "doi": "",
+          "year": "1977",
+          "distance": 0.4489,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "c compounds; egestion; respiration; nitrogenous excretion; somatic growth; reproduction; tube production; and mucus production. The flow of energy through the various channels was quantified using microbomb calorimetry, biochemical techniques, respirometry (a volumetric micro-respirometer was designed specifically for this purpose), and radioactive tracers. &lt;p&gt; A comprehensive investigation of the uptake kinetics, effects of endogenous and exogenous factors, and the fate of absorbed organic molecules, shows that these are apparently of little value as a supplementary nutritional source."
+        },
+        {
+          "document_id": "W2136669876",
+          "title": "Biological stoichiometry from genes to ecosystems",
+          "doi": "10.1046/j.1461-0248.2000.00185.x",
+          "year": "2000",
+          "distance": 0.4529,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "n the rDNA to provide the raw material for selection and to generate ecologically significant variation in C:N:P stoichiometry. This leads us to hypothesize that the continuous generation of such variation may also play a role in how species interactions develop in ecosystems under different conditions of energy input and nutrient supply."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets from the DEB-focused LoreMarq2010 paper (notably [7], [9], [10], [2], [6]) explicitly state and model the stylized fact as SF4: 'N:C decreases with irradiance in nutrient replete conditions,' providing a clear mechanistic rationale (irradiance boosts C-reserve density and reduces N-reserve density, lowering N:C) and noting consistency with related facts (chl:N decreasing with irradiance). Snippet [1] (OmtaBrug2009) corroborates the inverse perspective, showing C:N increases with irradiance—equivalent to N:C decreasing. The remaining snippets are off-topic (terrestrial plants, kelp, soil nitrogen, zooplankton) and do not bear on the fact. No snippet contradicts the stylized fact, so the evidence is strong and the consensus direction is corroborative."
+      },
+      "n_references": 2,
+      "references": {
+        "69b89188ecbd4702b29a611f": {
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.26620566844940186
+        },
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 5,
+          "supports": 5,
+          "contradicts": 0,
+          "best_distance": 0.2829136848449707
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b89188ecbd4702b29a611f",
+          "title": "OmtaBrug2009.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2662,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "-saturation constant. In this regime of low irradiance, theuptake of DIC into the carbohydrate reserve increases with irradiance(Fig. 2 ), while all the other rates, such as DIN uptake, are unaffectedand hence, the C:N ratio strongly increases with increasing lightintensity. Furthermore, the C:N ratio increases with decreasing tem-perature in this low-irradiance regime, because at low lightintensities, the photosynthesis rate is almost independent of tem-perature ( Fig. 2 ), while the rates of other processes such as nitrate"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2829,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "21). Furthermore, the N:C 275ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277the following equation 278NtotalCtotal=nNV\u0001MV+MENMV+MEC=nNV+mEN1 +mEC; (17)wherenNVis the elemental coefﬁcient of nitrogen in structure and MEistands for the to- 279tal mass of reserve i. Equation 17 shows that to assess N:C ratio one should look to the 280dependence of reserve densities on forcing variables. 281The ﬁrst curve (ﬁgure 4A) shows that the N:C ratio increases with dilution rate in nutrient 282"
+        },
+        {
+          "document_id": "69b84808ec32c55db5430b58",
+          "title": "Lew2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3138,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "N that has been taken up/synthesised by the cell but is in excess to stoichiometric requirements for growth Organic containing carbon and nitrogen at C:N of 4.3 mol C (mol C)-1 hr-1 2.2.3.3j 136 Table 4.2 Ambient conditions for Experiments 1 -5. (X/K) is the ratio of the ambient nutrient concentration to the nutrient’s half saturation constant, explained in Section 2.3.1. Environmental factor Exp. 1 Exp. 2 Exp. 3 Exp. 4 Irradiance (µmols photons m-2 s-1) 0 and 500 500 500 500 DIN ( X/K) 5 0-5 5 5 DON (X/K) 5 5 0-5 5 DOC ( X/K) 5 5 5 0-5 137 4.7. Figures"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3141,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "unction of irradiance and the nutrient supplyrate according to Eq. (1). The range of irradiance and nutrient ﬂux combinations atwhich both are signiﬁcantly limiting photosynthesis is narrow; in effect, one sub-strate determines the capacity of the SU in most cases. The impact of photoinhibitionbecomes increasingly more pronounced as the nutrient ﬂux increases. At low nutri-ent availability, the impact of photoinhibition is insigniﬁcant. Quantities have beenscaled as follows: scaled photosynthesis rate = JX/JXm; scaled irradiance =J∗L/JL,K;scaled nutrient ﬂux = JN/JN,K;J∗I,p=5J∗L,Kand J∗I,b=∞ (inhibition in processing stateonly)."
+        },
+        {
+          "document_id": "69b88b59ecbd4702b29a59d8",
+          "title": "EynaNisb2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3246,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Fig. 2. The speciﬁc rate of excess photosynthate production, i.e. the speciﬁc rate atwhich the symbiont excretes photosynthate in the host, in steady state is a functionof irradiance and ambient nitrogen levels. Without effects of detrimental radiation(A), the speciﬁc rate of excess photosynthate production approaches an asymp-totic maximum with increasing irradiance due to saturation of the photosyntheticmachinery; it declines with increasing ambient nitrogen levels, as the assimilationof photosynthate by the symbiont requires nitrogen."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3274,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355conditions (which is equivalent to say that N-reserve density decreases with irradiance – see 356discussion on SF4). Similar conclusion can be drawn from SF5 and SF6. These two stylized 357facts are similar to SF1 and SF2, which suggests that the ratio chl:C behaves similarly to the 358ratio N:C in those conditions (see ﬁgures 4A and 4B), i.e. chlorophyll increases (decreases) 359when N-reserve density increases (decreases). However, chlorophyll being part of N-reserve 360"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3299,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3301,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "nhibition) also yields a relatively steep increasingcurve when nutrients become severely limiting at higher irradi-ance levels. This may suggest that nutrient limitation is a factorin experiments yielding data featuring a relatively initial steepascent in photosynthetic rates as irradiance increases. Furthermore,because photoinhibition is relatively important even in dim light(Tyystjarvi, 2008 ), a model of photosynthesis should always include"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3354,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "ure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333(typical environmental setting). Irradiance bolsters _|ECAand thus the C-reserve density. The 334consequent increase of MVand decrease of _|ENRreduces N-reserve density. The overall 335result is a decrease of the N:C ratio. 3363.2.2 Chlorophyll concentration 337Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338the dilution rate (SF7 and SF8). Until this point no explicit considerations were made concern- 339"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3378,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "rature range (approximately from 280 to 300 K). 327The N:C ratio that results from these dynamics has a minimum at T= 300 K. 328Finally, SF4 - N:C ratio decreases with irradiance in nutrient replete conditions - is represented 329in ﬁgure 4D. The rationale is similar to the one for curve 4B. The microalgal population will grow 330if irradiance is such that _r > _h. If such condition is fulﬁlled then the population will grow until 33115another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333"
+        },
+        {
+          "document_id": "69b870afecbd4702b29a3697",
+          "title": "MarqMate2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3397,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "epends on the af ﬁnity ( κN)given by:νextN¼κNN½/C138: ð13ÞNote that Nis the generic designation for the nutrients, which in thiscase can be nitrogen or phosphate, and [ N] represents the concentrationof nutrient. Finally, the realized uptake is the minimum of the internaland external uptake rates multiplied by the carbon quota concentration:νN¼min νintN;νextN/C16/C17: ð14ÞThe equation de ﬁnes the realized or effective uptake,νN, as the minimum of available nutrient, νNext(supply-driven), and theamount needed for achieving maximum nutrient quota, νNint(demand-driven). During dark periods the respiration may cause the realized up-"
+        },
+        {
+          "document_id": "69b866ddecbd4702b29a2b8d",
+          "title": "Ledder et al. - 2020 - Local control of resource allocation is sufficient.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3405,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": ") and increaseswith increasing availability of dissolved inorganic nitrogen(corresponding to increasing αN), consistent with thesimpler model here (Fig. 7). Cunning et al. ( 2017 ) citesmany observations of negative trends between irradianceand symbiont density and one study in which increasingsymbiont to host ratio increases with increasing dissolvedinorganic nitrogen in the environment.Looking forward, there is a growing literature withapplications of models incorporating syntrophic interactions"
+        },
+        {
+          "document_id": "W3106494406",
+          "title": "Response of Medical Cannabis (Cannabis sativa L.) to Nitrogen Supply Under Long Photoperiod",
+          "doi": "10.3389/fpls.2020.572293",
+          "year": "2020",
+          "distance": 0.3831,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "p>-1</sup> N, with visual deficiency symptoms, and 75 and 25% reduction in plant biomass and photosynthesis rate, respectively. Nitrogen use efficiency (NUE) decreased with increasing N supply, while osmotic potential, water use efficiency, photosynthetic pigments, and total N and N-NO<sub>3</sub> concentrations in plant tissues increased with N supply. The plant ionome was considerably affected by N supply. Concentrations of K, P, Ca, Mg, and Fe in the plant were highest under the optimal N level of 160 mgL<sup>-1</sup> N, with differences between organs in the extent of nutrient accumulation."
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.3854,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W2030825066",
+          "title": "Regulatory Mechanisms of Reproductive Effort in Plants 1. Plasticity in Reproductive Energy Allocation and Propagule Output of <i>Helianthus annuus</i> L. (Compositae) Cultivated at Varying Densities and Nitrogen Levels",
+          "doi": "10.1111/j.1442-1984.1986.tb00010.x",
+          "year": "1986",
+          "distance": 0.4112,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "decreasing soil nitrogen levels. However, differences due to different N‐levels were not as great as those to changing density. One of the most significant findings was that seed production under limited resource availability, i.e., lack of ample solar radiation and soil nutrients, due to strong interference at higher density plots, is exceedingly costlty , This was most clearly demonstrated by a very sharp increase in relative energy partitioning to a single propagule in response to the increased density and decreasing nitrogen levels, the relative energy cost to a single achcne (R A ) increasing from one to twenty‐fourfold."
+        },
+        {
+          "document_id": "W2482045212",
+          "title": "Physiological Mechanisms of Nitrogen Absorption and Assimilation in Plants under Stressful Conditions",
+          "doi": "10.1201/b16675-29",
+          "year": "2014",
+          "distance": 0.4114,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "nstituent of nucleic acids that serve as genetic material and regulate vital processes like growth, reproduction, and heredity. Being a principal macronutrient, N has a special place in plant nutrition, and plants require it in large amounts. Though N is the most abundant element in our atmosphere, majority of the plants cannot utilize it directly in the elemental form. An adequate supply of N in the soil is essential to maintain proper growth and yield of crops."
+        },
+        {
+          "document_id": "W2294263433",
+          "title": "Short‐ and long‐term acclimation patterns of the giant kelp <i>Macrocystis pyrifera</i> (Laminariales, Phaeophyceae) along a depth gradient",
+          "doi": "10.1111/jpy.12394",
+          "year": "2016",
+          "distance": 0.4165,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ntation from 4 m to 0.2 m depth with a rise in the degree of saturation and a switch from shorter‐ to longer‐chain fatty acids. These changes seem to be essential for the readjustment of thylakoid membranes and might, thus, facilitate efficient photosynthesis under changing irradiances and temperatures. Further experiments are needed to disentangle the relative contribution of solar radiation, temperature and also other abiotic parameters in the observed physiological changes."
+        },
+        {
+          "document_id": "W2101794623",
+          "title": "Effect of Nitrogen Fertilization upon the Yield and Digestibility of Aftermath Timothy Forages Fed to Dairy Heifers",
+          "doi": "10.3168/jds.s0022-0302(63)88962-6",
+          "year": "1963",
+          "distance": 0.4244,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "e nutrients 0-50 lb of nitrogen 153.2% increase, 50-100 lb of nitrogen 9.9% increase, and 100-200 lb of nitrogen 2.8% increase. Recent work byPoulton et al. (7) and Mellin et al. (6), at this station, and others including Reid et al. (10) and Martz et al."
+        },
+        {
+          "document_id": "W4322501248",
+          "title": "Effects of UVR on Photosynthesis in Sargassum horneri (Turner) C. Agardh Adapted to Different Nitrogen Levels",
+          "doi": "10.3390/jmse11030498",
+          "year": "2023",
+          "distance": 0.426,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "then exposed to three levels of radiation (P: photosynthetically active radiation (PAR), 400–700 nm; PA: PAR + UVA, 320–700 nm; PAB: PAR + UVA + UVB, 280–700 nm) under each level of nitrogen for 2 h to investigate the effects of high UVR and nitrogen on photosynthesis."
+        },
+        {
+          "document_id": "W3106494406",
+          "title": "Response of Medical Cannabis (Cannabis sativa L.) to Nitrogen Supply Under Long Photoperiod",
+          "doi": "10.3389/fpls.2020.572293",
+          "year": "2020",
+          "distance": 0.4288,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "monstrate that the optimal N level for plant development and function at the vegetative growth phase is 160 mgL<sup>-1</sup> N. Growth retardation under lower N supply (30-80 mgL<sup>-1</sup>) results from restricted availability of photosynthetic pigments, carbon fixation, and impaired water relations. Excess uptake of N under supply higher than 160 mgL<sup>-1</sup> N, promoted physiological and developmental restrictions, by ion-specific toxicity or indirect induced restrictions of carbon fixation and energy availability."
+        },
+        {
+          "document_id": "W2035914645",
+          "title": "SEASONAL PRIMARY PRODUCTION OF UNDERSTORY RHODOPHYTA IN AN UPWELLING SYSTEM<sup>1</sup>",
+          "doi": "10.1111/j.0022-3646.1990.00214.x",
+          "year": "1990",
+          "distance": 0.4306,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "onal P max and I k values reveal that the obligate understory species, B. prolifera and E. obtusa, are shade‐adapted whereas G. radula, a low intertidal and shallow subtidal dominant, is sun‐adapted. Low C: X ratios consistent with a high nutrient environment and high rates of productivity were found in all three species. Net photosynthesis to respiration (Pn:R) ratios were fairly constant for B. prolifera and E. obtusa, implying that then photosynthetic processes were governed more by seasonal variations in irradiance than by instantaneous light availability. The Pn: R ratio of G."
+        },
+        {
+          "document_id": "W4285677734",
+          "title": "Kinetics of nitrogen in sodic soil of Kumulur village, Trichy District, Tamil Nadu under different organic and inorganic amendments",
+          "doi": "10.31018/jans.v14isi.3572",
+          "year": "2022",
+          "distance": 0.4338,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d along with amendments, a significant (CD-0.05%) buildup in available N contents was observed over the application of N alone. Available nitrogen (325 kg ha-1), nitrate nitrogen (102 kg ha-1) and ammonical nitrogen (205 kg ha-1) were significantly increased due to the addition of amendments. However, the decline in available N with incubation period was only marginal when nitrogen was applied along with amendments. An increase in NH4-N at 30 DAI might be due to the release of nutrients."
+        },
+        {
+          "document_id": "W4280540908",
+          "title": "Effects of increased precipitation on C, N and P stoichiometry at different growth stages of a cold desert annual",
+          "doi": "10.1016/j.gecco.2022.e02158",
+          "year": "2022",
+          "distance": 0.4414,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "during the vegetative stage; culm N concentration decreased and P concentration increased and then decreased with plant growth. Increased precipitation significantly increased the leaf N and P concentration and decreased the C:N and C:P ratios at the vegetative growth stage, but leaf N:P was lower than 14 during the whole growth stage. Increased precipitation could improve the leaf N and P resorption efficiency to cope with the reproduction allocation, and the root nutrients are more sensitive to increased precipitation."
+        },
+        {
+          "document_id": "W2740860467",
+          "title": "Effects of prey of different nutrient quality on elemental nutrient budgets in Noctiluca scintillans",
+          "doi": "10.1038/s41598-017-05991-w",
+          "year": "2017",
+          "distance": 0.4431,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nd mass balance models, it was found that excretion of C, N, and P by Noctiluca is highly affected by prey nutritional quality. However, based on modeling results, nutrients seem efficiently retained in actively feeding Noctiluca for reproduction rather than directly released as was shown experimentally in starved cells. Moreover, actively feeding Noctiluca tend to retain P and preferentially release N, highlighting its susceptible to P-limitation. Recycling of N and P by Noctiluca may supply substantial nutrients for phytoplankton growth, especially following bloom senescence."
+        }
+      ]
+    }
+  }
+}

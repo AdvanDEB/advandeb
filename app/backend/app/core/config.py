@@ -74,6 +74,9 @@ class Settings(BaseSettings):
     # Chatbot agent WebSocket endpoint (used by the chat WS bridge in B10)
     CHATBOT_AGENT_WS: str = "ws://localhost:8086"
 
+    # Retrieval agent WebSocket endpoint (direct call for BYOK/default key path)
+    RETRIEVAL_AGENT_WS: str = "ws://localhost:8081"
+
     # Ollama
     OLLAMA_BASE_URL: str = "http://localhost:11434"
     
@@ -86,6 +89,16 @@ class Settings(BaseSettings):
     # Graph artifacts
     GRAPH_ARTIFACT_DIR: str = "data/graph_artifacts"
     GRAPH_ARTIFACT_LAYOUT_NAME: str = "schema_default_v1"
+    # Rebuild-queue pacing. Callers mark schemas dirty on every mutation (chat
+    # marks "chatbot" dirty per message); without pacing the worker rebuilds the
+    # full graph back-to-back, pinning a CPU and ratcheting RSS. SETTLE coalesces
+    # bursts; MIN_INTERVAL is the floor between two rebuilds of the same schema.
+    GRAPH_ARTIFACT_REBUILD_SETTLE_SECONDS: float = 5.0
+    GRAPH_ARTIFACT_REBUILD_MIN_INTERVAL_SECONDS: float = 120.0
+    # Hard cap on nodes loaded when building an artifact (0 = unlimited). Bounds
+    # the memory + layout cost of a single rebuild — notably the live "chatbot"
+    # schema, which grows without bound as conversations accumulate.
+    GRAPH_ARTIFACT_MAX_NODES: int = 50000
 
     # MongoDB connection pool
     MONGO_MAX_POOL_SIZE: int = 10
@@ -99,6 +112,15 @@ class Settings(BaseSettings):
     #   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
     # Leave unset to disable the BYOK feature; the rest of the app still boots.
     LLM_KEY_ENCRYPTION_KEY: Optional[str] = None
+
+    # Default chat API key — a shared key offered to all users so they can
+    # try chat without supplying their own key.  When set, it is used for any
+    # session that has no user BYOK config.  Set PROVIDER/MODEL to match what
+    # the key can reach; RPM must not exceed the key's rate-limit tier.
+    DEFAULT_CHAT_API_KEY: Optional[str] = None
+    DEFAULT_CHAT_PROVIDER: str = "nvidia"
+    DEFAULT_CHAT_MODEL: str = "nvidia/nemotron-3-ultra-550b-a55b"
+    DEFAULT_CHAT_RPM: int = 5
     
     @property
     def cors_origins_list(self) -> List[str]:

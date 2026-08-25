@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 
 interface AgentStatus {
   name: string
@@ -81,8 +81,9 @@ defineProps<{
 
 const now = ref(Date.now())
 
-// Update elapsed timers every second
-setInterval(() => { now.value = Date.now() }, 1000)
+// Update elapsed timers every second — cleared on unmount to avoid leak
+const timer = setInterval(() => { now.value = Date.now() }, 1000)
+onUnmounted(() => clearInterval(timer))
 
 function getElapsed(startedAt?: number): string {
   if (!startedAt) return '0'

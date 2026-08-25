@@ -1,0 +1,864 @@
+{
+  "sf_id": "hypoxia_08",
+  "category": "Hypoxia / DO",
+  "statement": "O2 consumption starts to diminish at a reduced PO2 below a critical saturation level; when an animal has an elevated O2 consumption (swimming, digesting, etc.), consumption starts to diminish at a greater PO2 than the critical saturation.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Snippet 1 states the stylized fact almost verbatim with multiple primary citations (Artigaud, Claireaux & Chabot, Schurmann & Steffensen, etc.), and snippet 2 provides the conceptual definition of critical PO2 as the threshold below which O2 consumption can no longer be maintained. Snippet 6 reinforces that above PcO2 compensatory mechanisms maintain respiration, and snippet 12 confirms that organisms oxyregulate until a threshold beyond which maximum metabolic rate becomes limiting. Snippets 4, 5, and 9 add corroborating evidence that elevated-demand processes like feeding/digestion are impaired at higher oxygen levels than basal respiration, consistent with the claim that elevated O2 consumption raises the effective critical PO2. No snippets contradict the fact; remaining snippets are off-topic or only tangentially related (general O2 consumption, moult-cycle, methodology). Overall the corpus strongly and consistently supports the stylized fact."
+      },
+      "n_references": 5,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2084139585494995
+        },
+        "69b88155ecbd4702b29a4d0c": {
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.40213751792907715
+        },
+        "69b88a9cecbd4702b29a5917": {
+          "title": "Holt2015.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4045100212097168
+        },
+        "69b8982cecbd4702b29a6862": {
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.41407668590545654
+        },
+        "69b8485bec32c55db5430c00": {
+          "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4158856272697449
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2084,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "docrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al., 2006; Wu et al., 2003) Respiration B1. O 2 consumption starts to diminish with a reduced PO2 below a critical saturation level (PcO 2); when an animal has an elevated O 2 consumption (swimming, digesting, etc.), O 2 consumption starts to diminish at a greater PO2 than PcO 2. (Artigaud et al., 2014; Claire aux and Chabot, 2016; Claireaux and Lagardère, 1999; Mangum and Winkle, 1973; Schurmann and Steffensen, 1997) B2. Above PcO 2, compensatory mechanisms compensate the O 2 reduction to maintain"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3798,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "1971; Pörtner and Grieshaber, 1993) . The concept of critical PO 2, noted PcO 2, characterize s the oxygen PO 2 below which an organism is no longer able to maintain its minimum rate of oxygen consumption and exhib its a decreasing rate of oxygen uptake (i.e. below its standard metabolic rate, Claireaux and Chabot, 2016) . PcO 2 indicates the transition from oxygen independency to oxygen dependency, as well as characterize s the onset of anaerobic energy metabolism (Pörtner and Grieshaber, 1993) . Nonetheless, it appears obvious that PcO 2 varies with the"
+        },
+        {
+          "document_id": "69b8485bec32c55db5430c00",
+          "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3962,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "reased ration and a lowerasymptote. The quality of the prey can have numerousandcomplexinfluences,acting ongrowthratethroughboththe rate of food intake and/or metabolic expenditure. Forexample, some prey may be of poor quality because theytake a long time for the consumer to digest, thus limitingthe consumer’s rate of food intake and growth (a postcon-sumptive constraint). Meanwhile, the energetic costs asso-ciated with consuming ( Grimmond et al., 1994 ) ordigesting ( Goodrich et al., 2022 ) other prey types mayrender them poor quality.OxygenLike food, oxygen is a critical resource for aerobic metab-"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4021,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "oxyregulation capacity down to 20– 25% O 2sat(Aguirre-Velardeet al., 2016 ). Such ability would allow A. purpuratus to maintainmost of its physiological functions independent of ambient oxygensaturation. A lower critical point for feeding activity than respira-tion may indicate a decoupling of these physiological rates enablingfoodﬁltering even under low oxygen saturations.2. First phase of severe hypoxia (below 11.2% O2sat): drop in theclearance rate. Below this oxygen threshold, we can hypothesizethat the aerobic energy production decreases considerably and theenergy demand might then be supplied by reserves such as phos-"
+        },
+        {
+          "document_id": "69b88a9cecbd4702b29a5917",
+          "title": "Holt2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4045,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "ponses or burst swimming under the threat of predation. However, if organisms are to maintain energy balance in the longer term they also need to forage and digest, which incur additional oxygen demand beyond SMR, and can be thought of as overhead costs. The overhead costs of foraging and digestion also increase with temperature, taking up a great proportion of the free aerobic scope left for key processes such as growth and reproduction. If locomotion, digestion and growth were all running at a maximum rate, the oxygen requirement would greatly exceed aerobic scope (Priede, 1985). An organism’s aerobic scope is"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4069,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "inkle, 1973; Schurmann and Steffensen, 1997) B2. Above PcO 2, compensatory mechanisms compensate the O 2 reduction to maintain respiration and sustain the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 13 (increase of O 2 conductance: ventilation, heart -beat, O 2 affinity for respiratory pigment etc.). These responses can lead to increased O 2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4123,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ctivity ). The other two transformations are Assimilation (food + O 2 transformed into reserve + metabolic products) and Growth (reserve + O 2 transformed into structure + metabolic products) . A decrease in O2 availability may thus reduce the me tabolic energy production provoking a general metabolic depression. Some species of a nimals may thus enter into a hypometabolic state, their ATP turn over and demand can be down -regulated by more than an order of magnitude, and metabolic rate reduced e.g. by 5-20 fold during hypoxia , from 7 to 1 mgO 2"
+        },
+        {
+          "document_id": "69b889e0ecbd4702b29a582c",
+          "title": "Marn et al. - 2022 - Energetic basis for bird ontogeny and egg-laying a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4127,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ions for H2 O2consumption calculated with and without feeding suggestalmost three times higher (relative to no-feeding scenario)O2consumption when contribution of feeding to respirationis taken into account. The higher O 2consumption (H2) isonly half of that calculated based on results in Pick et al.(2016) (Table4),however,if we assume a similar metabolismof the bobwhite and Japanese quail, our results suggest thatthe feeding restrictions in the original experiment were notlong.Bothfemalesandmaleschangefoodandbodycompositionprior to and during the reproduction season ( Brennan et al.,"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4141,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "wed by Thomas et al. (2018, this issue) , the feeding processis commonly impaired by oxygen limitation ( Wu, 2002), probably dueto the high oxygen demand of digestive/assimilation processes (seeKramer, 1987 ;Willows, 1992 ). We thus assumed that the assimilationrate (ṗA) was a ﬀected by low oxygen saturations according to Aguirre-Velarde et al. (2018) . Under hypoxic conditions, energy productionthrough aerobic metabolic pathways is impaired and less e ﬃcientanaerobic pathways are activated. As hypothesized in Aguirre-Velardeet al. (2018) , we assumed that an organism under hypoxic conditions is"
+        },
+        {
+          "document_id": "69b84757ec32c55db5430939",
+          "title": "Talbot et al. - 2019 - Adapting the dynamic energy budget (DEB) approach .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4149,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "doesnot capture the changes ingestion ( Figure 7 ) and oxygen con-sumption rate ( Figure 8 ) that occur as an animal progressesthrough the moult cycle. In order to improve model performancein these areas it is necessary to build a true “moulting period”into the model code, which causes the suppression of feeding andan increase in O2consumption. While O 2consumption is an out-put of the model, and so cannot be coupled to the moult cycle di-rectly, model parameters affecting O2consumption (e.g.maintenance rate kM) can be. By coupling maintenance and in-gestion rates to aboth ingestion and O 2consumption will change"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4156,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "entilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008) . Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activit y and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009) . These behaviours can change energy expenditure for activity in opposite ways and then act on dissipation rate accordingly : more energy expenditure with increased activity (e. g. escape) or less energy expenditure with reduced activity ."
+        },
+        {
+          "document_id": "69b8485bec32c55db5430c00",
+          "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4159,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "ch et al., 2022 ) other prey types mayrender them poor quality.OxygenLike food, oxygen is a critical resource for aerobic metab-olism and can therefore put limitationson maximum meta-bolicrate.Fishhavevaryinghypoxiatolerance,butmostareable to compensate forsomereduction in dissolved oxygenlevels, either because metabolism is limited by anotherfactor (e.g., food) or through biochemical or physiologicaloxyregulation, which maintains oxygen supply ( ClaireauxandChabot,2016 ).Asoxygenlevelsdropfurther,however,a point is reached at which maximum metabolic rate (andthereforescopeforactivity)becomes limiting:beyond this,"
+        },
+        {
+          "document_id": "69b885f4ecbd4702b29a5315",
+          "title": "Tomlinson - Applications and implications of ecological energe.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4181,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "e orwater turnover relative tometabolic rate often results inoverestimates of CO2production. Fossorialenvironments result in re-enrichment and underestimatesof CO2production.Liquid diets are problematic, asare diets with high incidentalwater intake (such as in ﬁsh)because they often lead to highwater turnover andoverestimates of CO2production.Reptiles, birds, mammals86Rb kb Small to medium86Rb persists for longer periodsin small animals than DLW,reducing washout issues, andthe whole-body countingobviates the need to subsamplebody ﬂuid. Large animalsrequire larger doses of radiationto be effective, and this becomes"
+        },
+        {
+          "document_id": "69b84757ec32c55db5430939",
+          "title": "Talbot et al. - 2019 - Adapting the dynamic energy budget (DEB) approach .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4264,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.25,
+          "text": "values(Alcaraz and Sarda, 1981 ;Penkoff and Thurberg, 1982 ;Stern andCohen, 1982 ;Carvalho and Phan, 1998 ). Of the animals mea-sured here, two had moulted within the 48 h previous to meas-urements being taken, which would explain the higher rates of O2consumption measured, and which the model failed to capture(Figure 8 , black ﬁlled circles). Similarly, the individual with thehighest value for O2consumption may have been approaching amoult ( Figure 8 , grey ﬁlled circle). However, oxygen consump-tion can vary for reasons besides moult stage, such as disease orFigure 8. Measured versus modelled oxygen consumption rate for"
+        },
+        {
+          "document_id": "69b8a45becbd4702b29a7749",
+          "title": "Eich2008.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4366,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "sample was in contact with atmospheric O 2 before each measurement, we cannot deduce the instantaneous O 2 concentration in the batch cultures. However, the decreasing O 2 concentration allowed estimating the continuous O 2 consumption at each time point. O 2 consumption was calculated by considering a linear regression on th e O 2 concentration curve, where the slope corresponds to the consumption. In order to get rid of the thermodynamic effects induced by the movement of th e stopper when opening and closing the chambers (Figure III-B-3), the O 2 consumption"
+        },
+        {
+          "document_id": "69b89820ecbd4702b29a684e",
+          "title": "SchaMcCa2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4384,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "s and adultsraises important questions about mechanisms that individ-uals use to assess food quality of the environment relativeto their own ‘‘stoichiometric state’’. Our results suggest thatcommon assumptions used to model the dynamics ofconsumers in the presence of variation in prey quality andquantity should be re-examined to include aspects offoraging behavior as a compliment to only digestive pro-cesses. At present, models typically assume that stoichi-ometric regulation, or the maintenance of ‘‘elementalhomeostasis’’, involves only assimilatory mechanismscoupled with respiration (Sterner 1997 ; Logan et al. 2004 ;"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4398,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "animal (reserve eand size l) as˙JOA˙JX= (n−1M)O∗nO10−µAXµ−1E−µAXηPA=−1−1412n4nNNTnCX nCE nCPnHX nHE nHPnOX nOE nOPnNX nNE nNP1−µAXµE−µAXµAP(4.56)where ( n−1M)O∗denotes the row of n−1Mthat relates to O, which is the third row. The expres-sion shows how assimilation-associated dioxygen consumption depends on the compositionof food, faeces, reserves and nitrogenous waste, and the digestion efficiency through theparameters µAX,µAPandµE.4.5 Nitrogen balanceStandard ‘static’ energy budget studies treat energy in urine similar to energy in faeces, by"
+        },
+        {
+          "document_id": "69b84757ec32c55db5430939",
+          "title": "Talbot et al. - 2019 - Adapting the dynamic energy budget (DEB) approach .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4404,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "those animalsthat ingested all the food that was presented to them.Modelled rates of oxygen consumption demonstrated less vari-ability than the measured rates ( Figure 8 ). Of the eight animalsmeasured, six were assumed to be in the intermoult stage of themoult cycle, while two had moulted within 48 h prior to havingO2consumption measured (black ﬁlled circles, Figure 8 ).However, one of the animals assumed to be in the IP had a veryhigh rate of O2consumption (grey ﬁlled circle, Figure 8 ) perhaps"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact concerns the existence of a critical PO2 below which O2 consumption declines, with the critical point shifting upward when metabolic demand is elevated. The most directly relevant snippet is [11], which explicitly reports O2crit and shows warming (which raises SMR) increased O2crit and that hypoxia caused larger reductions in MMR/aerobic scope at higher demand—consistent with elevated demand raising the critical PO2. Snippet [8] describes a P.O. (critical oxygen) level above which no further increase occurs, supporting the existence of a critical saturation. Snippets [5] and [15] (OCLTT/pejus framework) support the conceptual basis that oxygen supply limits performance as demand rises. The remaining snippets concern oxygen consumption in various reproductive or metabolic contexts but do not bear on critical PO2 thresholds. No snippet contradicts the fact. Overall, there is moderate, consistent corroboration but few snippets address the precise quantitative claim about shifting critical saturation with elevated demand."
+      },
+      "n_references": 4,
+      "references": {
+        "W2139246245": {
+          "title": "How and how not to investigate the oxygen and capacity limitation of thermal tolerance (OCLTT) and aerobic scope – remarks on the article by Gräns et al.",
+          "doi": "10.1242/jeb.114181",
+          "year": "2014",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.44125115871429443
+        },
+        "W1578999499": {
+          "title": "Optimalisering van de groei bij de karper (Cyprinus carpio L.) : een op de visteelt gericht onderzoek",
+          "doi": "10.18174/200285",
+          "year": "1974",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.451557993888855
+        },
+        "W3138488206": {
+          "title": "Temperature and O<sub>2</sub>, but not CO<sub>2</sub>, interact to affect aerobic performance of European sea bass (Dicentrarchus labrax)",
+          "doi": "10.1101/2021.03.12.435078",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4545125961303711
+        },
+        "W2106804015": {
+          "title": "Response to Farrell and to Pörtner and Giomi",
+          "doi": "10.1242/jeb.096313",
+          "year": "2013",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4620165228843689
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2343419928",
+          "title": "The functional response of the Antarctic bivalve Laternula elliptica to ocean warming and acidification",
+          "doi": "10.26686/wgtn.17014217.v1",
+          "year": "2016",
+          "distance": 0.3923,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "en (O₂) consumption was measured as a proxy for standard metabolic rate to show whether animals had acclimatised to conditions. O₂ consumption was significantly negatively correlated with physiological condition, and increased, becoming more variable, with both elevated temperature and lowered pH. This indicated that L. elliptica experienced increased metabolic demand in response to these conditions, and there was a general lack of acclimation to these conditions over time. Overall, pH had no significant effect on survival, metabolic rate, or condition."
+        },
+        {
+          "document_id": "W1967706417",
+          "title": "Oxygen consumption and egg production in the blood feeding insect<i>Rhodnius prolixus</i>",
+          "doi": "10.1080/07924259.1993.9672292",
+          "year": "1993",
+          "distance": 0.418,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Summary Summary Resting O2 consumption as measured by respirometry rises sharply immediately after feeding in females of Rhodnius prolixus and undergoes a slow decline after about the fourth day, returning to pre-feed levels by the tenth or twelfth day after feeding. The O2 consumption of mated females remains slightly higher than that of virgin females during the period of egg production."
+        },
+        {
+          "document_id": "W2018054532",
+          "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+          "doi": "10.1093/icb/28.1.137",
+          "year": "1988",
+          "distance": 0.4216,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "restricted. The balance between intake and expenditure of energy may limit zonation, body size, and even mode of reproduction. One pattern is that species suffering shortage of food (\"conservers\") have low rates of oxygen consumption while those with abundant food (\"exploiters\") have high rates. Conservers appear to have several means of reducing metabolic costs, but exploiters maintain high (seemingly wasteful) rates of oxygen consumption. Oxygen consumption cannot, however, be considered separately, since it reflects turnover,including growth rate and reproductive output."
+        },
+        {
+          "document_id": "W2045248407",
+          "title": "Oxygen consumption of a single embryo/planula in the reef-building coral Acropora intermedia",
+          "doi": "10.3354/meps07562",
+          "year": "2008",
+          "distance": 0.4234,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "s and corresponds to the beginning of gastrulation. The rate of O2 consumption peaked during the teardrop-shaped planula stage. During this stage planulae are able to swim actively, especially in the vertical plane, so an increase in energy consumption during this stage is to be expected. O2 consumption began to decrease gradually 5 d after spawning. At this stage, the larvae frequently touched the substrate with their concave aboral end, which features numerous spirocysts required for substrate attachment."
+        },
+        {
+          "document_id": "W2139246245",
+          "title": "How and how not to investigate the oxygen and capacity limitation of thermal tolerance (OCLTT) and aerobic scope – remarks on the article by Gräns et al.",
+          "doi": "10.1242/jeb.114181",
+          "year": "2014",
+          "distance": 0.4413,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "use it suggests coordination of the largest number of body compartments across tissues through O2 supply and demand capacities. OCLTT traces the performance curve of the organism because it primarily focuses on sublethal limits and associated functional constraints, which develop from pejus (mismatch in oxygen supply and demand systems) to critical limits (transition to anaerobic metabolism) and then molecular denaturation, with ecological effects starting beyond pejus limits. Finally, limitations reach lethal values as an end point."
+        },
+        {
+          "document_id": "W1797218635",
+          "title": "Dopaminergic correlates of motivated behavior: importance of drive",
+          "doi": "10.1523/jneurosci.15-07-05169.1995",
+          "year": "1995",
+          "distance": 0.4464,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "increase was significantly enhanced (30% vs 71% peak increase) in animals that were 20 hr food deprived at the time of testing. The latter animals also showed a statistically significant increase (24%) in DA release during the anticipatory phase. A subsequent experiment in which consumption of the palatable liquid was limited to 5 ml in deprived and nondeprived animals indicated that only part of the deprivation-induced potentiation of accumbal DA release could be attributed to the larger volume consumed by the deprived animals."
+        },
+        {
+          "document_id": "W2422011137",
+          "title": "Patterns of oxygen consumption during simultaneously occurring elevated metabolic states in the viviparous snake,<i>Thamnophis marcianus</i>",
+          "doi": "10.1242/jeb.115477",
+          "year": "2015",
+          "distance": 0.4504,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "V̇O2 during digestion (∼5 fold) and activity (∼9 fold), and that ACT+DIG results in a similar increments in V̇O2 (∼9-10 fold). During reproduction, resting V̇O2 increased by 1.6–1.7 fold, and peak increments during digestion were elevated by 30 to 50% above non-reproductive values, but values associated with ACT and ACT+DIG were not significantly different. During ACT+DIG, endurance time remained similar for all of the groups in the present study. Overall, our results indicate that prioritization is the primary pattern of interaction in oxygen delivery exhibited by this species."
+        },
+        {
+          "document_id": "W1578999499",
+          "title": "Optimalisering van de groei bij de karper (Cyprinus carpio L.) : een op de visteelt gericht onderzoek",
+          "doi": "10.18174/200285",
+          "year": "1974",
+          "distance": 0.4516,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "increased. However, no further increase of oxygen consumption could be demonstrated at levels above the P.O.-level (fig. XIV). For P.O.- level the relationship between oxygen consumption (T, in ml/h) and fish weight (W, in grams) could be described by the equation: T = 0.861 W 0.776 (fig. XVI).At P.O.-levels the amount of oxygen consumed for each kg of food was 147 l, independent of fish weight and water temperature (table XXIV)."
+        },
+        {
+          "document_id": "W2156779915",
+          "title": "THE EFFECTS OF CAFFEINE ON OXYGEN CONSUMPTION AND CELL DIVISION IN THE FERTILIZED EGG OF THE SEA URCHIN, ARBACIA PUNCTULATA",
+          "doi": "10.1085/jgp.29.2.63",
+          "year": "1945",
+          "distance": 0.4525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "lete cleavage inhibition was noted only when the O2 uptake had been depressed to 50 per cent or more of the normal controls. 6. O2 consumption-time relationship data indicate an average depression, in O2 consumption over a 3 hour period, ranging from 25 per cent with a caffeine concentration of 0.1 per cent to a 61 per cent inhibition with a concentration of 2 per cent. 7. Concentrations of less than 0.1 per cent (certainly of less than 0.02 per cent) give variable results and indicate no significant effect. 8."
+        },
+        {
+          "document_id": "W2794934484",
+          "title": "Water Level Fluctuations Influence Wading Bird Prey Availability and Nesting in a Subtropical Lake Ecosystem",
+          "doi": "10.1675/063.041.0105",
+          "year": "2018",
+          "distance": 0.4543,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "oductivity increased with increasing prey density, the effects of which were more pronounced when habitat availability was low. Saturation thresholds existed for both fledging success (147 prey/m2) and total productivity (189 prey/m2), above which high concentrations of prey could sustain nesting when habitat availability was low."
+        },
+        {
+          "document_id": "W3138488206",
+          "title": "Temperature and O<sub>2</sub>, but not CO<sub>2</sub>, interact to affect aerobic performance of European sea bass (Dicentrarchus labrax)",
+          "doi": "10.1101/2021.03.12.435078",
+          "year": "2021",
+          "distance": 0.4545,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "d O 2 transport (P 50 ) of a marine fish, the European sea bass (Dicentrarchus labrax). Warming increased SMR and O 2crit (i.e. reduced hypoxia tolerance) as well as MMR in normoxia but there was an interactive effect with O 2 so that hypoxia caused larger reductions in MMR and aerobic scope at higher temperatures. Increasing CO 2 had minimal effects on SMR, MMR and O 2crit and did not show interactive effects with temperature or O 2 for any measured variables. Aerobic performance was not linked to changes in blood chemistry or P 50 ."
+        },
+        {
+          "document_id": "W7112731704",
+          "title": "Foraging values of <em>Mulinia lateralis</em> and <em>Ischadium recurvum</em>: energetics effects of surf scoters wintering in the Chesapeake Bay.",
+          "doi": "",
+          "year": "2008",
+          "distance": 0.4577,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "aging in a large diving tank 2 m deep, intake (# s<sup>-1</sup>) for <em>M. lateralis</em> was significantly higher than <em>I. recurvum</em> at high densities, but lower at the low densities. Gross energy intake (kJ s<sup>-1</sup>) and metabolized energy intake (kJ s<sup>-1</sup>) were significantly greater for <em>I. recurvum</em> than <em>M. lateralis</em>. Based on nutrient content, metabolizability, behavior and intake rates, and energy expenditure at naturally occurring densities, the foraging value for <em>M. lateralis</em> was significantly lower than <em>I. recurvum</em>."
+        },
+        {
+          "document_id": "W2026102257",
+          "title": "Effect of an acute necrotic bacterial gill infection and feed deprivation on the metabolic rate of Atlantic salmon Salmo salar",
+          "doi": "10.3354/dao01855",
+          "year": "2007",
+          "distance": 0.4579,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "2max) regardless of infection status. Increases in M(O2rout) corresponded to a significant increase in blood plasma osmolality. A decrease in metabolic scope has implications for how individuals allocate energy; fish with smaller metabolic scope will have less energy to allocate to functions such as growth, reproduction and immune response, which may adversely affect the efficiency of fish growth."
+        },
+        {
+          "document_id": "W2109502749",
+          "title": "Routine and Active Metabolic Rates of Migrating Adult Wild Sockeye Salmon (<i>Oncorhynchus nerka</i>Walbaum) in Seawater and Freshwater",
+          "doi": "10.1086/498186",
+          "year": "2006",
+          "distance": 0.4588,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "uptake and critical swimming speed as in the first swim test, even without restoring routine metabolic rate between swim tests. Thus, elevated MO2 related to either being in seawater as opposed to freshwater or not being fully recovered from previous exhaustive exercise did not present itself as a metabolic loading that limited either critical swimming performance or maximum MO2. The basis for the difference in metabolic rates of migratory sockeye salmon held in seawater and freshwater is uncertain, but it could include differences in states of nutrition, reproduction, and restlessness, as well as ionic differences."
+        },
+        {
+          "document_id": "W2106804015",
+          "title": "Response to Farrell and to Pörtner and Giomi",
+          "doi": "10.1242/jeb.096313",
+          "year": "2013",
+          "distance": 0.462,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "competence,behaviorsandcompetitiveness.Performance in animals is supported by aerobic scope, the increase in oxygen consumption rate from resting to maximal. Performance falls below its optimum during cooling and warming. At both upper and lower pejus temperatures, performance decrements result as the limiting capacity for oxygen supply causes hypoxemia’."
+        },
+        {
+          "document_id": "W109074870",
+          "title": "Influence of parental swimming stamina on the cardiac and metabolic performance of larval zebrafish (Danio rerio).",
+          "doi": "10.12794/metadc3669",
+          "year": "2007",
+          "distance": 0.4638,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "consumption subsequently peaked at 0.70 μmol·mg-1·hr-1 at 9dpf in the HSL, compared to 0.71 μmol·mg-1·hr-1, at 9dpf in the LSL. These values dramatically decreased before leveling off at around 0.20 μmol·mg-1·hr-1 and 0.15 μmol·mg-1·h-1, respectively. Active O2 consumption at 5dpf for HSL was 0.38 μmol·mg-1·hr-1, compared to 0.57 μmol·mg-1·hr-1 for LSL. Active O2 consumption subsequently peaked at 0.97 μmol·mg-1·hr-1 at 10dpf in HSL, compared to 1.19 μmol·mg-1·hr-1 at 7dpf in LSL. These values also dramatically decreased and leveled off."
+        },
+        {
+          "document_id": "W1992331012",
+          "title": "Oxygen consumption and body temperature of the Chuditch (Dasyurus geoffroii)",
+          "doi": "10.1111/j.1469-7998.1970.tb03089.x",
+          "year": "1970",
+          "distance": 0.4685,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ame temperature show that, in the absence of activity, comparatively low O 2 consumption rates are maintained for long periods. The linear regression equation relating simultaneous O 2 consumption rates and colonic temperatures measured at an ambient temperature of 30°C estimates that O 2 consumption will increase from 40 to 105% of that predicted when body temperature is raised from 34.5 to 38.7°C; and furthermore that an O 2 consumption rate of 67% of the predicted should occur at a body temperature of 36.2°C."
+        },
+        {
+          "document_id": "W2018054532",
+          "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+          "doi": "10.1093/icb/28.1.137",
+          "year": "1988",
+          "distance": 0.4709,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "SYNOPSIS: In intertidal animals rates of oxygen consumption span an order of magnitude (even when standardised for body size and temperature). This may reflect different adaptations to this variable habitat. Temperatures range widely and potentially increase metabolic expenditure during the heat of the day, while periods of feeding may be restricted. The balance between intake and expenditure of energy may limit zonation, body size, and even mode of reproduction."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly support the stylized fact. Snippet 1 restates it almost verbatim with multiple supporting citations, and snippet 2 defines the critical PO2 (PcO2) below which oxygen consumption declines, characterizing the transition from oxygen independence to dependence. Snippets 4, 6, 9, and 12 corroborate the existence of critical thresholds and oxyregulation breaking down at lower PO2, with feeding/digestion (elevated O2 demand) being impaired earlier. Snippet 23 provides empirical O2crit data linking elevated metabolic states (warming, MMR) to greater hypoxia sensitivity. Several others (5, 19, 20) reinforce that elevated metabolic states (activity, digestion) raise O2 demand and thus would reach limitation at higher PO2. No snippet contradicts the fact; remaining snippets are off-topic or only tangentially related. The evidence is strong and consistent."
+      },
+      "n_references": 7,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2084139585494995
+        },
+        "69b88155ecbd4702b29a4d0c": {
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.40213751792907715
+        },
+        "69b88a9cecbd4702b29a5917": {
+          "title": "Holt2015.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4045100212097168
+        },
+        "69b8982cecbd4702b29a6862": {
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.41407668590545654
+        },
+        "69b8485bec32c55db5430c00": {
+          "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4158856272697449
+        },
+        "W1578999499": {
+          "title": "Optimalisering van de groei bij de karper (Cyprinus carpio L.) : een op de visteelt gericht onderzoek",
+          "doi": "10.18174/200285",
+          "year": "1974",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.451557993888855
+        },
+        "W3138488206": {
+          "title": "Temperature and O<sub>2</sub>, but not CO<sub>2</sub>, interact to affect aerobic performance of European sea bass (Dicentrarchus labrax)",
+          "doi": "10.1101/2021.03.12.435078",
+          "year": "2021",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4545125961303711
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2084,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "docrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al., 2006; Wu et al., 2003) Respiration B1. O 2 consumption starts to diminish with a reduced PO2 below a critical saturation level (PcO 2); when an animal has an elevated O 2 consumption (swimming, digesting, etc.), O 2 consumption starts to diminish at a greater PO2 than PcO 2. (Artigaud et al., 2014; Claire aux and Chabot, 2016; Claireaux and Lagardère, 1999; Mangum and Winkle, 1973; Schurmann and Steffensen, 1997) B2. Above PcO 2, compensatory mechanisms compensate the O 2 reduction to maintain"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3798,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "1971; Pörtner and Grieshaber, 1993) . The concept of critical PO 2, noted PcO 2, characterize s the oxygen PO 2 below which an organism is no longer able to maintain its minimum rate of oxygen consumption and exhib its a decreasing rate of oxygen uptake (i.e. below its standard metabolic rate, Claireaux and Chabot, 2016) . PcO 2 indicates the transition from oxygen independency to oxygen dependency, as well as characterize s the onset of anaerobic energy metabolism (Pörtner and Grieshaber, 1993) . Nonetheless, it appears obvious that PcO 2 varies with the"
+        },
+        {
+          "document_id": "69b8485bec32c55db5430c00",
+          "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3962,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "reased ration and a lowerasymptote. The quality of the prey can have numerousandcomplexinfluences,acting ongrowthratethroughboththe rate of food intake and/or metabolic expenditure. Forexample, some prey may be of poor quality because theytake a long time for the consumer to digest, thus limitingthe consumer’s rate of food intake and growth (a postcon-sumptive constraint). Meanwhile, the energetic costs asso-ciated with consuming ( Grimmond et al., 1994 ) ordigesting ( Goodrich et al., 2022 ) other prey types mayrender them poor quality.OxygenLike food, oxygen is a critical resource for aerobic metab-"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4021,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "oxyregulation capacity down to 20– 25% O 2sat(Aguirre-Velardeet al., 2016 ). Such ability would allow A. purpuratus to maintainmost of its physiological functions independent of ambient oxygensaturation. A lower critical point for feeding activity than respira-tion may indicate a decoupling of these physiological rates enablingfoodﬁltering even under low oxygen saturations.2. First phase of severe hypoxia (below 11.2% O2sat): drop in theclearance rate. Below this oxygen threshold, we can hypothesizethat the aerobic energy production decreases considerably and theenergy demand might then be supplied by reserves such as phos-"
+        },
+        {
+          "document_id": "69b88a9cecbd4702b29a5917",
+          "title": "Holt2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4045,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ponses or burst swimming under the threat of predation. However, if organisms are to maintain energy balance in the longer term they also need to forage and digest, which incur additional oxygen demand beyond SMR, and can be thought of as overhead costs. The overhead costs of foraging and digestion also increase with temperature, taking up a great proportion of the free aerobic scope left for key processes such as growth and reproduction. If locomotion, digestion and growth were all running at a maximum rate, the oxygen requirement would greatly exceed aerobic scope (Priede, 1985). An organism’s aerobic scope is"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4069,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "inkle, 1973; Schurmann and Steffensen, 1997) B2. Above PcO 2, compensatory mechanisms compensate the O 2 reduction to maintain respiration and sustain the standard metabolic rate (Bayne, 1971b; Dejours and Beekenkamp, 1977; Herreid II, 1980; Kramer, 1987; Maxime et al., 2000; ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 13 (increase of O 2 conductance: ventilation, heart -beat, O 2 affinity for respiratory pigment etc.). These responses can lead to increased O 2 consumption (e.g. ventilation rate, heartbeat, mobility). Racotta et al., 2002; Wei et al., 2009; Wu, 2002a) B3. Behavioural responses under hypoxia can lead to"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4123,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ctivity ). The other two transformations are Assimilation (food + O 2 transformed into reserve + metabolic products) and Growth (reserve + O 2 transformed into structure + metabolic products) . A decrease in O2 availability may thus reduce the me tabolic energy production provoking a general metabolic depression. Some species of a nimals may thus enter into a hypometabolic state, their ATP turn over and demand can be down -regulated by more than an order of magnitude, and metabolic rate reduced e.g. by 5-20 fold during hypoxia , from 7 to 1 mgO 2"
+        },
+        {
+          "document_id": "69b889e0ecbd4702b29a582c",
+          "title": "Marn et al. - 2022 - Energetic basis for bird ontogeny and egg-laying a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4127,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ions for H2 O2consumption calculated with and without feeding suggestalmost three times higher (relative to no-feeding scenario)O2consumption when contribution of feeding to respirationis taken into account. The higher O 2consumption (H2) isonly half of that calculated based on results in Pick et al.(2016) (Table4),however,if we assume a similar metabolismof the bobwhite and Japanese quail, our results suggest thatthe feeding restrictions in the original experiment were notlong.Bothfemalesandmaleschangefoodandbodycompositionprior to and during the reproduction season ( Brennan et al.,"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4141,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "wed by Thomas et al. (2018, this issue) , the feeding processis commonly impaired by oxygen limitation ( Wu, 2002), probably dueto the high oxygen demand of digestive/assimilation processes (seeKramer, 1987 ;Willows, 1992 ). We thus assumed that the assimilationrate (ṗA) was a ﬀected by low oxygen saturations according to Aguirre-Velarde et al. (2018) . Under hypoxic conditions, energy productionthrough aerobic metabolic pathways is impaired and less e ﬃcientanaerobic pathways are activated. As hypothesized in Aguirre-Velardeet al. (2018) , we assumed that an organism under hypoxic conditions is"
+        },
+        {
+          "document_id": "69b84757ec32c55db5430939",
+          "title": "Talbot et al. - 2019 - Adapting the dynamic energy budget (DEB) approach .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4149,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "doesnot capture the changes ingestion ( Figure 7 ) and oxygen con-sumption rate ( Figure 8 ) that occur as an animal progressesthrough the moult cycle. In order to improve model performancein these areas it is necessary to build a true “moulting period”into the model code, which causes the suppression of feeding andan increase in O2consumption. While O 2consumption is an out-put of the model, and so cannot be coupled to the moult cycle di-rectly, model parameters affecting O2consumption (e.g.maintenance rate kM) can be. By coupling maintenance and in-gestion rates to aboth ingestion and O 2consumption will change"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4156,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "entilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008) . Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activit y and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009) . These behaviours can change energy expenditure for activity in opposite ways and then act on dissipation rate accordingly : more energy expenditure with increased activity (e. g. escape) or less energy expenditure with reduced activity ."
+        },
+        {
+          "document_id": "69b8485bec32c55db5430c00",
+          "title": "Lobry et al. - 2025 - Fish growth Patterns and modeling.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4159,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "ch et al., 2022 ) other prey types mayrender them poor quality.OxygenLike food, oxygen is a critical resource for aerobic metab-olism and can therefore put limitationson maximum meta-bolicrate.Fishhavevaryinghypoxiatolerance,butmostareable to compensate forsomereduction in dissolved oxygenlevels, either because metabolism is limited by anotherfactor (e.g., food) or through biochemical or physiologicaloxyregulation, which maintains oxygen supply ( ClaireauxandChabot,2016 ).Asoxygenlevelsdropfurther,however,a point is reached at which maximum metabolic rate (andthereforescopeforactivity)becomes limiting:beyond this,"
+        },
+        {
+          "document_id": "W2343419928",
+          "title": "The functional response of the Antarctic bivalve Laternula elliptica to ocean warming and acidification",
+          "doi": "10.26686/wgtn.17014217.v1",
+          "year": "2016",
+          "distance": 0.3923,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "en (O₂) consumption was measured as a proxy for standard metabolic rate to show whether animals had acclimatised to conditions. O₂ consumption was significantly negatively correlated with physiological condition, and increased, becoming more variable, with both elevated temperature and lowered pH. This indicated that L. elliptica experienced increased metabolic demand in response to these conditions, and there was a general lack of acclimation to these conditions over time. Overall, pH had no significant effect on survival, metabolic rate, or condition."
+        },
+        {
+          "document_id": "W1967706417",
+          "title": "Oxygen consumption and egg production in the blood feeding insect<i>Rhodnius prolixus</i>",
+          "doi": "10.1080/07924259.1993.9672292",
+          "year": "1993",
+          "distance": 0.418,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Summary Summary Resting O2 consumption as measured by respirometry rises sharply immediately after feeding in females of Rhodnius prolixus and undergoes a slow decline after about the fourth day, returning to pre-feed levels by the tenth or twelfth day after feeding. The O2 consumption of mated females remains slightly higher than that of virgin females during the period of egg production."
+        },
+        {
+          "document_id": "W2018054532",
+          "title": "Temperature and Food as Factors Influencing Oxygen Consumption of Intertidal Organisms, Particularly Limpets",
+          "doi": "10.1093/icb/28.1.137",
+          "year": "1988",
+          "distance": 0.4216,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "restricted. The balance between intake and expenditure of energy may limit zonation, body size, and even mode of reproduction. One pattern is that species suffering shortage of food (\"conservers\") have low rates of oxygen consumption while those with abundant food (\"exploiters\") have high rates. Conservers appear to have several means of reducing metabolic costs, but exploiters maintain high (seemingly wasteful) rates of oxygen consumption. Oxygen consumption cannot, however, be considered separately, since it reflects turnover,including growth rate and reproductive output."
+        },
+        {
+          "document_id": "W2045248407",
+          "title": "Oxygen consumption of a single embryo/planula in the reef-building coral Acropora intermedia",
+          "doi": "10.3354/meps07562",
+          "year": "2008",
+          "distance": 0.4234,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "s and corresponds to the beginning of gastrulation. The rate of O2 consumption peaked during the teardrop-shaped planula stage. During this stage planulae are able to swim actively, especially in the vertical plane, so an increase in energy consumption during this stage is to be expected. O2 consumption began to decrease gradually 5 d after spawning. At this stage, the larvae frequently touched the substrate with their concave aboral end, which features numerous spirocysts required for substrate attachment."
+        },
+        {
+          "document_id": "W2139246245",
+          "title": "How and how not to investigate the oxygen and capacity limitation of thermal tolerance (OCLTT) and aerobic scope – remarks on the article by Gräns et al.",
+          "doi": "10.1242/jeb.114181",
+          "year": "2014",
+          "distance": 0.4413,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "use it suggests coordination of the largest number of body compartments across tissues through O2 supply and demand capacities. OCLTT traces the performance curve of the organism because it primarily focuses on sublethal limits and associated functional constraints, which develop from pejus (mismatch in oxygen supply and demand systems) to critical limits (transition to anaerobic metabolism) and then molecular denaturation, with ecological effects starting beyond pejus limits. Finally, limitations reach lethal values as an end point."
+        },
+        {
+          "document_id": "W1797218635",
+          "title": "Dopaminergic correlates of motivated behavior: importance of drive",
+          "doi": "10.1523/jneurosci.15-07-05169.1995",
+          "year": "1995",
+          "distance": 0.4464,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "increase was significantly enhanced (30% vs 71% peak increase) in animals that were 20 hr food deprived at the time of testing. The latter animals also showed a statistically significant increase (24%) in DA release during the anticipatory phase. A subsequent experiment in which consumption of the palatable liquid was limited to 5 ml in deprived and nondeprived animals indicated that only part of the deprivation-induced potentiation of accumbal DA release could be attributed to the larger volume consumed by the deprived animals."
+        },
+        {
+          "document_id": "W2422011137",
+          "title": "Patterns of oxygen consumption during simultaneously occurring elevated metabolic states in the viviparous snake,<i>Thamnophis marcianus</i>",
+          "doi": "10.1242/jeb.115477",
+          "year": "2015",
+          "distance": 0.4504,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "V̇O2 during digestion (∼5 fold) and activity (∼9 fold), and that ACT+DIG results in a similar increments in V̇O2 (∼9-10 fold). During reproduction, resting V̇O2 increased by 1.6–1.7 fold, and peak increments during digestion were elevated by 30 to 50% above non-reproductive values, but values associated with ACT and ACT+DIG were not significantly different. During ACT+DIG, endurance time remained similar for all of the groups in the present study. Overall, our results indicate that prioritization is the primary pattern of interaction in oxygen delivery exhibited by this species."
+        },
+        {
+          "document_id": "W1578999499",
+          "title": "Optimalisering van de groei bij de karper (Cyprinus carpio L.) : een op de visteelt gericht onderzoek",
+          "doi": "10.18174/200285",
+          "year": "1974",
+          "distance": 0.4516,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "increased. However, no further increase of oxygen consumption could be demonstrated at levels above the P.O.-level (fig. XIV). For P.O.- level the relationship between oxygen consumption (T, in ml/h) and fish weight (W, in grams) could be described by the equation: T = 0.861 W 0.776 (fig. XVI).At P.O.-levels the amount of oxygen consumed for each kg of food was 147 l, independent of fish weight and water temperature (table XXIV)."
+        },
+        {
+          "document_id": "W2156779915",
+          "title": "THE EFFECTS OF CAFFEINE ON OXYGEN CONSUMPTION AND CELL DIVISION IN THE FERTILIZED EGG OF THE SEA URCHIN, ARBACIA PUNCTULATA",
+          "doi": "10.1085/jgp.29.2.63",
+          "year": "1945",
+          "distance": 0.4525,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "lete cleavage inhibition was noted only when the O2 uptake had been depressed to 50 per cent or more of the normal controls. 6. O2 consumption-time relationship data indicate an average depression, in O2 consumption over a 3 hour period, ranging from 25 per cent with a caffeine concentration of 0.1 per cent to a 61 per cent inhibition with a concentration of 2 per cent. 7. Concentrations of less than 0.1 per cent (certainly of less than 0.02 per cent) give variable results and indicate no significant effect. 8."
+        },
+        {
+          "document_id": "W2794934484",
+          "title": "Water Level Fluctuations Influence Wading Bird Prey Availability and Nesting in a Subtropical Lake Ecosystem",
+          "doi": "10.1675/063.041.0105",
+          "year": "2018",
+          "distance": 0.4543,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "oductivity increased with increasing prey density, the effects of which were more pronounced when habitat availability was low. Saturation thresholds existed for both fledging success (147 prey/m2) and total productivity (189 prey/m2), above which high concentrations of prey could sustain nesting when habitat availability was low."
+        },
+        {
+          "document_id": "W3138488206",
+          "title": "Temperature and O<sub>2</sub>, but not CO<sub>2</sub>, interact to affect aerobic performance of European sea bass (Dicentrarchus labrax)",
+          "doi": "10.1101/2021.03.12.435078",
+          "year": "2021",
+          "distance": 0.4545,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "d O 2 transport (P 50 ) of a marine fish, the European sea bass (Dicentrarchus labrax). Warming increased SMR and O 2crit (i.e. reduced hypoxia tolerance) as well as MMR in normoxia but there was an interactive effect with O 2 so that hypoxia caused larger reductions in MMR and aerobic scope at higher temperatures. Increasing CO 2 had minimal effects on SMR, MMR and O 2crit and did not show interactive effects with temperature or O 2 for any measured variables. Aerobic performance was not linked to changes in blood chemistry or P 50 ."
+        },
+        {
+          "document_id": "W7112731704",
+          "title": "Foraging values of <em>Mulinia lateralis</em> and <em>Ischadium recurvum</em>: energetics effects of surf scoters wintering in the Chesapeake Bay.",
+          "doi": "",
+          "year": "2008",
+          "distance": 0.4577,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "aging in a large diving tank 2 m deep, intake (# s<sup>-1</sup>) for <em>M. lateralis</em> was significantly higher than <em>I. recurvum</em> at high densities, but lower at the low densities. Gross energy intake (kJ s<sup>-1</sup>) and metabolized energy intake (kJ s<sup>-1</sup>) were significantly greater for <em>I. recurvum</em> than <em>M. lateralis</em>. Based on nutrient content, metabolizability, behavior and intake rates, and energy expenditure at naturally occurring densities, the foraging value for <em>M. lateralis</em> was significantly lower than <em>I. recurvum</em>."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1840 @@
+{
+  "sf_id": "genphys_05",
+  "category": "General Physiology",
+  "statement": "Life span typically increases inter-specifically with maximum body length in endotherms, hardly depends on body length in ectotherms.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The corpus contains multiple DEB‑based statements that explicitly claim or derive the observed pattern: endotherm life span scales positively with maximum body length/weight (often as ~weight^0.2), whereas ectotherm life span is largely independent of size. These appear in high‑relevance passages (e.g., snippets 4,7,8,12,16) and are reinforced by several moderate‑relevance citations (1,3,9,10). No snippet provides a clear contradiction; the few neutral excerpts merely discuss related mechanisms without addressing the size‑lifespan relationship. Consequently the evidence is strong and the overall consensus strongly supports the stylized fact."
+          },
+          "n_references": 6,
+          "references": {
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1301
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.148
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1723
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1883
+            },
+            "3525": {
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.19
+            },
+            "3040": {
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2063
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1301,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "life span is thus independent of the maximum body volume of a species. Finch [281] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ǫ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {139}, I discussed the coupling between the eﬀectiveness of antioxidants, life spans and genetical ﬂexibility. If aging allows long life spans, individ- uals are likely"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1409,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ng is concerned amounts to Γ(4 3)/˙hW and is thus independent of maximum size. Finch [350] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ϵ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. If the Gompertz ageing pattern is followed (as most endotherms do), the median age at death is log(1 + ˙h2 G log 2/¨q(0))/˙hG. The incrementally small value of ¨q(0) relates to the smal"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "period that die from aging is found from [Page 253] 6.3. Secondary scaling relationships 237 (4.48) to be 1 3Γ(1 3)(1 6 ¨pa ˙m)−1/3 for l = f. The mean life span is thus indepent of maximum body volume of a species. Finch [219] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period and the mean life span is 5.55¨p1/3 a ˙m−2/3(1+f/g) ln ǫ(1−lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {105}, I discussed the coupl"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1723,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "the median age is dominated by ˙hG, however, so median age at death increases with volumetric length for endotherms. This is consistent with the conclusion of Finch [350] that the life span of mammals scales with weight0.2, given that weight increases faster than structural body volume. If ageing allows long life spans, individuals are likely to have effective means for dealing with a threatening environment, such as avoidance behaviour for dangerous situations (learning), physiological regulation to accommodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in t"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1868,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "y round), but in the length of periods for which no animal can ﬁnd suﬃcient food. This has been conﬁrmed experimentally by Goulden and Hornig [340]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ǫ)3V∞as the end of the growth [Page 308] 290 8. Comparison of species period, for some chosen small fraction ǫ = 0.05, say. The length of the growth period at constant food density is given in (3.21) and amounts to ˙r−1 B ln ǫ(1 −lb/f). It thus increases with volumetric length for diﬀerent species, just as the juvenile period. The mean life span of ectotherms with a relatively short growth p"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.187,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "e follow a growing individual at constant food, body weight is proportional to the amount of structure (weak homeostasis), but the allocation to growth declines with size; the overhead costs of growth contribute to respiration. Inter-speciﬁcally, when we compare fully grown adults and growth plays no role, respiration is dominated by maintenance. Since reserve density increases with maximum length, and maintenance is only paid for structure, weight-speciﬁc maintenance decreases with maximum length. Reserve density increases with maximum length, because it equals the ratio of the speciﬁc assimilation rate and energy conductance, while the latter is intensive. The length of the juvenile period"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1883,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "ss ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms A2 Survivor curves for life span terminated by ageing are typically well described by the Weibull and Gompertz models S.A.L.M. Kooijman Ecological Modelling 428 (2020) 109106 2 [Page 3] the standard DEB model is that 26 popular empirical models for various aspects of metabolism turn out to be special cases of DEB models or very good numerical approximations, see Table 3. This suggests that the set of stylised facts constrain simple models more than is apparent on ﬁrst sight, even without "
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.19,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ns why mean life span increases with maximum body weight among en- dotherms, but not among ectotherms. To my knowledge nobody came up with an explanation for this. The mean life span of a mouse is less than that of an elephant, but extremely small wasps exist than can grow very old. [Page 40] 40 Eﬀects of compounds on budgets • We need at least on death process to determine population dynamics, so avoiding the topic is not an option. Death is essential for life, so ageing is too important to neglect. In the context of deb theory, death by ageing cannot be seen as metabolic switch linked to maturity, because if food levels are low enough, such a threshold is never reached. deb theory here fol"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1908,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "long life spans, individuals are likely to possess eﬀective means of dealing with a threatening environment such as avoidance behaviour for dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain to body weight ratios than mammals and live twice as long. The life spans of both mammals and birds tend to scale empirically with weight0.2 [117,219], whi"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain-to-body-weight ratios than mammals and live twice as long. The life spans both of mammals and birds tend to scale empirically with weight0.2 [146,281], which is close to volume1/3. Although I have not worked out aging for endotherms quantitatively, this is consistent with the deb-based expectat"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2031,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "no animal can find sufficient food. This has been confirmed experimentally by Goulden and Hornig [424]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ϵ)3V∞as the end of the growth period, for some chosen small fraction ϵ = 0.05, say. The length of the growth period at constant food density is given in (2.23) and amounts to ˙r−1 B ln ϵ(1 −lb/f). It thus increases with volumetric length for different species, just as the juvenile period. Inspection of the ageing parameters as discussed at {209} reveals that ¨ha = z¨href a and sG = sref G , so that ˙hW = ˙href W and ˙hG = ˙href G /z. I"
+            },
+            {
+              "document_id": "3040",
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "olution of DEB systems (Kooijman and Troost, 2007; Kooi and van der Meer, 2010; Muller et al., 2009; Troost et al., 2008). We ﬁnally understand, we think, why the life span of en- dotherms increases with maximum body size amount species, but is almost independent of body size in ectotherms: it is in the ageing acceleration, which is (almost) zero in ectotherms (Kooijman, 2010; van Leeuwen, 2007; van Leeuwen et al., 2010). The subsections below further detail some of the developments. These developments came with the need to become even more rigorous in the notation, which was also vital to the further extension of the DEBtool software, written in Matlab and Octave, which now has over 1000 fu"
+            },
+            {
+              "document_id": "3313",
+              "title": "GiacMari2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2109,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ymptotic length in VBGF does not strictly depend on body temperature (Kooijman, 2010). This sup- ports the concepts that ectotherms such as gastropods and bivalves, living under different body temperature conditions (as our exper- imental animals did), should not record signiﬁcant deviations from natural common patterns (as those at ambient temperature did) in reaching the maximum/asymptotic size. In contrast, theory would suggest that the maximum body size of an individual is dependent on energy allocated to growth and maintenance requirements, and that it is directly dependent on food characteristics (i.e. quality and density). Such a fact will have consequences on the approaching Table 1 "
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2124,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "heory suggests that the explanation does not lie in the size dependence of threshold food density (because this would operate the other way round), but in the length of periods during which no animal can ﬁnd suﬃcient food. This has been conﬁrmed experimentally by Goulden and Hornig [269]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ǫ)3V∞, as the end of the growth period, for some chosen small fraction ǫ = 0.05, say. The length of the growth period at constant food density is given in (3.15) and amounts to ˙γ−1 ln ǫ(1−lb/f). It thus increases with a volumetric length for diﬀerent s"
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2126,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ing and live longer. Aging Cell 3:87–95. Speakman JR, Król E (2005) Limits to sustained energy intake IX: A review of hypotheses. J Comp Physiol B Biochem Syst Environ Physiol 175:375–394. Speakman JR, Król E (2010a) The heat dissipation limit theory and evolution of life histories in endotherms-time to dispose of the disposable soma theory? Integr Comp Biol 50:793–807. Speakman JR, Król E (2010b) Maximal heat dissipation capacity and hyperthermia risk: Neglected key factors in the ecology of endotherms. J Anim Ecol 79:726–746. Sperfeld E, Wagner ND, Halvorson HM, Malishev M, Raubenheimer D (2017) Bridging ecological stoichiometry and nutritional geometry with homeostasis concepts and integr"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2133,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "lation thereof, which makes the link between brain size and life span more direct. Birds have larger brain-to-body-weight ratios than mammals and live twice as long. The life spans both of mammals and birds tend to scale empirically with weight0.2 [182, 350], which is close to volume1/3. This is consistent with the deb-based expectation, because surface-bound heating costs dominate respiration, and thus ageing. Brain size is found, empirically, to be approximately proportional to surface area in birds and mammals [182]. Mammals tend to have higher volume-specific respiration rates than birds [1231], which contributes to the difference in mean life span and jeopardises easy explanations. It m"
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2169,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "larger animals. Some of the residual variation in this relationship in mammals is explained by ambient temperature. In addition, there is a signiﬁcant negative relationship between residual lifespan and residual daily energy expenditure in mammals. A potentially much better model to explore the links of body size, metabolism and aging is to examine the intraspeciﬁc links. These studies have generated some data that support the original rate of living theory and other data that conﬂict. In particular, several studies have shown that manipulating animals to expend more or less energy generate the expected effects on lifespan (particularly when the subjects are ectotherms). However, smaller ind"
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2209,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "re dependent and so it can be predicted that individuals will reach a larger 2324 size at maturity in warmer temperatures than colder ones, hence the fact that many 2325 ectotherm species conform to the temperature-size rule is a puzzling topic that has 2326 received much attention in the literature. Furthermore, because size at maturity is often 2327 linked to reproductive success (Roff, 2002) it can be considered as a key life history 2328 trait. Therefore, understanding observed variation in size at maturity in response to 2329 environmental change, as is highlighted by the temperature-size rule, is thus crucial to 2330 understanding the adaptive evolution of organisms. Whilst temperature"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several abstracts (1, 4, 9) explicitly report that larger endotherms have longer maximum lifespans, directly supporting the first half of the stylized fact. No abstract provides clear evidence that ectotherm lifespan scales strongly with body length; the few studies on squamates and reptiles (2, 18) are descriptive and do not present definitive contrary results, so they are treated as neutral. Consequently the corpus offers moderate overall support for the pattern—strong for endotherms, but limited information on ectotherms—yielding a moderate evidence strength and an overall consensus that corroborates the stylized fact."
+          },
+          "n_references": 5,
+          "references": {
+            "W2164464880": {
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2009
+            },
+            "W2068100539": {
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2117
+            },
+            "W1800471699": {
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2244
+            },
+            "W2030389371": {
+              "title": "Body size, energy metabolism and lifespan",
+              "doi": "https://doi.org/10.1242/jeb.01556",
+              "year": "2005",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2267
+            },
+            "W2904288071": {
+              "title": "Cold and isolated ectotherms: drivers of reptilian longevity",
+              "doi": "https://doi.org/10.1093/biolinnean/bly153",
+              "year": "2018",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2362
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2164464880",
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "distance": 0.2009,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "A major factor influencing life-history strategies of endotherms is body size. Larger endotherms live longer, develop more slowly, breed later and less frequently, and have fewer offspring per attempt at breeding. The classical evolutionary explanation for this pattern is that smaller animals experience greater extrinsic mortality, which favors early reproduction at high intensity. This leads to a short lifespan and early senescence by three suggested mechanisms. First, detrimental late-acting mutations cannot be removed because of the low force of selection upon older animals (mutation accumulation). Second, genes that promote early reproduction will be favored in small animals, even if the"
+            },
+            {
+              "document_id": "W2121294442",
+              "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+              "doi": "https://doi.org/10.1111/geb.12244",
+              "year": "2014",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Aim Longevity is an important life‐history trait, directly linked to the core attributes of fitness (reproduction and survival), yet large‐scale comparative studies quantifying its implications for the ecology and life history of ectotherms are scarce. We tested the allometry of longevity in squamates and the tuatara, and determined how longevity is related to key environmental characteristics and life‐history traits. Predictions based on life‐history theory are expected to hold true for ectotherms, similarly to mammals and birds. Location World‐wide. Methods We assembled from the literature a dataset of the maximum longevities of more than a thousand squamate species, representing "
+            },
+            {
+              "document_id": "W4306793265",
+              "title": "Mechanistic Temperature-Size Rule Explanation Should Reconcile Physiological and Mortality Responses to Temperature",
+              "doi": "https://doi.org/10.1086/722027",
+              "year": "2022",
+              "distance": 0.21,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "AbstractThe temperature-size rule is one of the universal rules in ecology and states that ectotherms in warmer waters will grow faster as juveniles, mature at smaller sizes and younger ages, and reach smaller maximum body sizes. Many models have unsuccessfully attempted to reproduce temperature-size rule-consistent life histories by using two-term (anabolism and catabolism) Pütter-type growth models, such as the von Bertalanffy. Here, we present a physiologically structured individual growth model, which incorporates an energy budget and optimizes energy allocation to growth, reproduction, and reserves. Growth, maturation, and reproductive output emerge as a result of life-history optimizat"
+            },
+            {
+              "document_id": "W2068100539",
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "distance": 0.2117,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Abstract Allometric principles account for most of the observed variation in maximum life span among mammals. When body‐size effects are controlled for, most of the residual variance in mammalian life span can be explained by variations in brain size, metabolic rate and body temperature. It is shown that species with large brains for a given body size and metabolic rate, such as anthropoid primates, also have long maximum life spans. Conversely, mammals with relatively high metabolic rates and low levels of encephalization, as in most insectivores and rodents, tend to have short life spans. The hypothesis is put forward that encephalization and metabolic rate, which may govern other life his"
+            },
+            {
+              "document_id": "W1975606520",
+              "title": "Being cool: how body temperature influences ageing and longevity",
+              "doi": "https://doi.org/10.1007/s10522-015-9571-2",
+              "year": "2015",
+              "distance": 0.2158,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Temperature is a basic and essential property of any physical system, including living systems. Even modest variations in temperature can have profound effects on organisms, and it has long been thought that as metabolism increases at higher temperatures so should rates of ageing. Here, we review the literature on how temperature affects longevity, ageing and life history traits. From poikilotherms to homeotherms, there is a clear trend for lower temperature being associated with longer lifespans both in wild populations and in laboratory conditions. Many life-extending manipulations in rodents, such as caloric restriction, also decrease core body temperature. Nonetheless, an inverse relatio"
+            },
+            {
+              "document_id": "W3029108140",
+              "title": "Longevity and the drift barrier: Bridging the gap between Medawar and Hamilton",
+              "doi": "https://doi.org/10.1002/evl3.173",
+              "year": "2020",
+              "distance": 0.2185,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract Most organisms have finite life spans. The maximum life span of mammals, for example, is at most some years, decades, or centuries. Why not thousands of years or more? Can we explain and predict maximum life spans theoretically, based on other traits of organisms and associated ecological constraints? Existing theory provides reasons for the prevalence of ageing, but making explicit quantitative predictions of life spans is difficult. Here, I show that there are important unappreciated differences between two backbones of the theory of senescence: Peter Medawar's verbal model, and William Hamilton's subsequent mathematical model. I construct a mathematical model corresponding more c"
+            },
+            {
+              "document_id": "W1535272280",
+              "title": "Comparative and meta‐analytic insights into life extension via dietary restriction",
+              "doi": "https://doi.org/10.1111/j.1474-9726.2012.00798.x",
+              "year": "2012",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary Dietary restriction (DR) extends the lifespan of a wide range of species, although the universality of this effect has never been quantitatively examined. Here, we report the first comprehensive comparative meta‐analysis of DR across studies and species. Overall, DR significantly increased lifespan, but this effect is modulated by several factors. In general, DR has less effect in extending lifespan in males and also in non‐model organisms. Surprisingly, the proportion of protein intake was more important for life extension via DR than the degree of caloric restriction. Furthermore, we show that reduction in both age‐dependent and age‐independent mortality rates drives life extension"
+            },
+            {
+              "document_id": "W1800471699",
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.6,
+              "text": "Abstract The metabolic theory of ecology ( MTE ) predicts that biological times should universally scale to body mass M as M 0.25 . However, support for this prediction came principally from non‐phylogenetically controlled studies, whereas more recent analyses, which take the degree of shared ancestry between species into account, have revealed that both length of the gestation period and time to first reproduction do not follow this rule. In the present study, we test this prediction of MTE on maximum longevity using two commonly accessible sources of information in zoology and ecology ( AnAge and PanTHERIA data bases) that allow us to assess the scaling relation of longevity in more than 1"
+            },
+            {
+              "document_id": "W2030389371",
+              "title": "Body size, energy metabolism and lifespan",
+              "doi": "https://doi.org/10.1242/jeb.01556",
+              "year": "2005",
+              "distance": 0.2267,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "SUMMARY Bigger animals live longer. The scaling exponent for the relationship between lifespan and body mass is between 0.15 and 0.3. Bigger animals also expend more energy, and the scaling exponent for the relationship of resting metabolic rate (RMR) to body mass lies somewhere between 0.66 and 0.8. Mass-specific RMR therefore scales with a corresponding exponent between -0.2 and -0.33. Because the exponents for mass-specific RMR are close to the exponents for lifespan, but have opposite signs, their product (the mass-specific expenditure of energy per lifespan) is independent of body mass(exponent between -0.08 and 0.08). This means that across species a gram of tissue on average expends a"
+            },
+            {
+              "document_id": "W1995894583",
+              "title": "Mitochondrial function as a determinant of life span",
+              "doi": "https://doi.org/10.1007/s00424-009-0724-5",
+              "year": "2009",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Average human life expectancy has progressively increased over many decades largely due to improvements in nutrition, vaccination, antimicrobial agents, and effective treatment/prevention of cardiovascular disease, cancer, etc. Maximal life span, in contrast, has changed very little. Caloric restriction (CR) increases maximal life span in many species, in concert with improvements in mitochondrial function. These effects have yet to be demonstrated in humans, and the duration and level of CR required to extend life span in animals is not realistic in humans. Physical activity (voluntary exercise) continues to hold much promise for increasing healthy life expectancy in humans, but remains to "
+            },
+            {
+              "document_id": "W1995869264",
+              "title": "Conditional tradeoffs between aging and organismal performance of <i>Indy</i> long-lived mutant flies",
+              "doi": "https://doi.org/10.1073/pnas.0634985100",
+              "year": "2003",
+              "distance": 0.229,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Alterations that extend the life span of animals and yeast typically involve decreases in metabolic rate, growth, physical activity, and/or early-life fecundity. This negative correlation between life span and the ability to assimilate and process energy, to move, grow, and reproduce, raises questions about the potential utility of life span extension. Tradeoffs between early-life fitness and longevity are central to theories of the evolution of aging, which suggests there is necessarily a price to be paid for reducing the rate of aging. It is not yet clear whether life span can be extended without undesirable effects on metabolism and fecundity. Here, we report that the long-lived Indy muta"
+            },
+            {
+              "document_id": "W4224308237",
+              "title": "Healthy Long-Lived Human Beings—Working on Life Stages to Break the Limitation of Human Lifespans",
+              "doi": "https://doi.org/10.3390/biology11050656",
+              "year": "2022",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The human lifespan has been increasing but will soon reach a plateau. A new direction based on the principal law of lifespan (PLOSP) may enable the human lifespan to be extremely healthy and long by the proper manipulation of the well-defined growing stages of the lifespan. The lifespan of creatures on earth from a single cell to animals can be elongated at different life stages including prenatal development, body growth, reproductivity, and aging. Each life stage has its own specific physiological and metabolic characteristics. Each life stage can be lengthened by either slowing its processes or continuously maintaining the activities of its function. Unfortunately, the current biomedical "
+            },
+            {
+              "document_id": "W3087646956",
+              "title": "Shrinking body sizes in response to warming: explanations for the temperature–size rule with special emphasis on the role of oxygen",
+              "doi": "https://doi.org/10.1111/brv.12653",
+              "year": "2020",
+              "distance": 0.2318,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT Body size is central to ecology at levels ranging from organismal fecundity to the functioning of communities and ecosystems. Understanding temperature‐induced variations in body size is therefore of fundamental and applied interest, yet thermal responses of body size remain poorly understood. Temperature–size (T–S) responses tend to be negative (e.g. smaller body size at maturity when reared under warmer conditions), which has been termed the temperature–size rule (TSR). Explanations emphasize either physiological mechanisms (e.g. limitation of oxygen or other resources and temperature‐dependent resource allocation) or the adaptive value of either a large body size (e.g. to increas"
+            },
+            {
+              "document_id": "W2132619936",
+              "title": "The Unfortunate Influence of the Weather on the Rate of Ageing: Why Human Caloric Restriction or Its Emulation May Only Extend Life Expectancy by 2–3 Years",
+              "doi": "https://doi.org/10.1159/000082192",
+              "year": "2005",
+              "distance": 0.2333,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Much research interest, and recently even commercial interest, has been predicated on the assumption that reasonably closely-related species – humans and mice, for example – should, in principle, respond to ageing-retarding interventions with an increase in maximum lifespan roughly proportional to their control lifespan (that without the intervention). Here, it is argued that the best-studied life-extending manipulations of mice are examples of a category that is highly unlikely to follow this rule, and more likely to exhibit only a similar absolute increase in maximum lifespan from one species to the next, independent of the species’ control lifespan. That category – reduction in dietary ca"
+            },
+            {
+              "document_id": "W2004553392",
+              "title": "Unexpected discontinuities in life–history evolution under size–dependent mortality",
+              "doi": "https://doi.org/10.1098/rspb.2002.2255",
+              "year": "2003",
+              "distance": 0.2341,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "In many organisms survival depends on body size. We investigate the implications of size-selective mortality on life-history evolution by introducing and analysing a new and particularly flexible life-history model with the following key features: the lengths of growth and reproductive periods in successive reproductive cycles can vary evolutionarily, the model does not constrain evolution to patterns of either determinate or indeterminate growth, and lifetime number and sizes of broods are the outcomes of evolutionarily optimal life-history decisions. We find that small changes in environmental conditions can lead to abrupt transitions in optimal life histories when size-dependent mortality"
+            },
+            {
+              "document_id": "W2489373276",
+              "title": "Parallels in understanding the endocrine control of lifespan with the firebug Pyrrhocoris apterus and the fruit fly Drosophila melanogaster",
+              "doi": "https://doi.org/10.1093/acprof:oso/9780199568765.003.0013",
+              "year": "2011",
+              "distance": 0.2346,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "In many organisms, reproduction is negatively correlated with life span, but little is known about proximate mechanisms of this trade-off. According to the traditional view, internal energy reserves are limited, thus giving rise to the trade-off of their use. More recently, this idea was challenged by the observation that survival and reproduction can be experimentally decoupled. Pleiotropic effects of endocrine signals are currently considered to play a key role in the modulation of life history trade-offs, but the way these signals connect reproduction (or other fitness traits) and longevity still remains elusive. An extensive body of work has shown that mutations in many genes in insulin-"
+            },
+            {
+              "document_id": "W2918620983",
+              "title": "“Data for the Problem of Evolution in Man. V. On the Correlation between Duration of Life and the Number of Offspring”",
+              "doi": "https://doi.org/10.1017/s0020268100007150",
+              "year": "1901",
+              "distance": 0.2348,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "According to the Darwinian theory of evolution the members of a community less fitted to their environment are removed by death. But this process of natural selection would not permanently modify a race, if the members thus removed were able before death to propagate their species in average numbers. It then becomes an important question to ascertain how far duration of life is related to fertility. In the case of many insects death can interfere only with their single chance of offspring; they live or not for their one breeding season only. A similar statement holds good with regard to annual and biennial plants. In such cases there might still be a correlation between duration of life and "
+            },
+            {
+              "document_id": "W2904288071",
+              "title": "Cold and isolated ectotherms: drivers of reptilian longevity",
+              "doi": "https://doi.org/10.1093/biolinnean/bly153",
+              "year": "2018",
+              "distance": 0.2362,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.7,
+              "text": "Animal lifespan is determined by extrinsic and intrinsic factors causing mortality. According to the evolutionary theories of senescence, when mortality pressures are low, animals delay reproduction. This enables species to grow more slowly and, consequently, natural selection can act against harmful mutations in adulthood, thereby increasing lifespans. To test predictions of these theories we assembled a dataset on the maximum longevities and relevant ecological variables of 1320 reptilian species. Correcting for phylogeny, we modelled the link between reptile longevity and factors such as body size, microhabitat, activity period, insularity, annual temperature, temperature seasonality, ele"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "A substantial portion of the corpus (especially snippets 1‑4, 7‑8, 12 and several others) explicitly states that lifespan scales positively with maximum body length in endotherms while showing little or no dependence on size in ectotherms. These statements are either direct citations of empirical patterns or theoretical explanations within DEB theory, giving them high relevance. No snippet provides convincing evidence against the stylized fact; the remaining items are either unrelated to size‑lifespan scaling or discuss peripheral topics. Consequently, the overall body of evidence strongly supports the claimed pattern, leading to a high evidence strength and a consensus that corroborates the stylized fact."
+          },
+          "n_references": 9,
+          "references": {
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1301
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1409
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.148
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1883
+            },
+            "3525": {
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.19
+            },
+            "3040": {
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2063
+            },
+            "W2164464880": {
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2009
+            },
+            "W2068100539": {
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2117
+            },
+            "W1800471699": {
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2244
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1301,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "life span is thus independent of the maximum body volume of a species. Finch [281] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ǫ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {139}, I discussed the coupling between the eﬀectiveness of antioxidants, life spans and genetical ﬂexibility. If aging allows long life spans, individ- uals are likely"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1409,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ng is concerned amounts to Γ(4 3)/˙hW and is thus independent of maximum size. Finch [350] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ϵ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. If the Gompertz ageing pattern is followed (as most endotherms do), the median age at death is log(1 + ˙h2 G log 2/¨q(0))/˙hG. The incrementally small value of ¨q(0) relates to the smal"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "period that die from aging is found from [Page 253] 6.3. Secondary scaling relationships 237 (4.48) to be 1 3Γ(1 3)(1 6 ¨pa ˙m)−1/3 for l = f. The mean life span is thus indepent of maximum body volume of a species. Finch [219] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period and the mean life span is 5.55¨p1/3 a ˙m−2/3(1+f/g) ln ǫ(1−lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {105}, I discussed the coupl"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1723,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "the median age is dominated by ˙hG, however, so median age at death increases with volumetric length for endotherms. This is consistent with the conclusion of Finch [350] that the life span of mammals scales with weight0.2, given that weight increases faster than structural body volume. If ageing allows long life spans, individuals are likely to have effective means for dealing with a threatening environment, such as avoidance behaviour for dangerous situations (learning), physiological regulation to accommodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in t"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1868,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "y round), but in the length of periods for which no animal can ﬁnd suﬃcient food. This has been conﬁrmed experimentally by Goulden and Hornig [340]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ǫ)3V∞as the end of the growth [Page 308] 290 8. Comparison of species period, for some chosen small fraction ǫ = 0.05, say. The length of the growth period at constant food density is given in (3.21) and amounts to ˙r−1 B ln ǫ(1 −lb/f). It thus increases with volumetric length for diﬀerent species, just as the juvenile period. The mean life span of ectotherms with a relatively short growth p"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.187,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e follow a growing individual at constant food, body weight is proportional to the amount of structure (weak homeostasis), but the allocation to growth declines with size; the overhead costs of growth contribute to respiration. Inter-speciﬁcally, when we compare fully grown adults and growth plays no role, respiration is dominated by maintenance. Since reserve density increases with maximum length, and maintenance is only paid for structure, weight-speciﬁc maintenance decreases with maximum length. Reserve density increases with maximum length, because it equals the ratio of the speciﬁc assimilation rate and energy conductance, while the latter is intensive. The length of the juvenile period"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1883,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "ss ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms A2 Survivor curves for life span terminated by ageing are typically well described by the Weibull and Gompertz models S.A.L.M. Kooijman Ecological Modelling 428 (2020) 109106 2 [Page 3] the standard DEB model is that 26 popular empirical models for various aspects of metabolism turn out to be special cases of DEB models or very good numerical approximations, see Table 3. This suggests that the set of stylised facts constrain simple models more than is apparent on ﬁrst sight, even without "
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.19,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ns why mean life span increases with maximum body weight among en- dotherms, but not among ectotherms. To my knowledge nobody came up with an explanation for this. The mean life span of a mouse is less than that of an elephant, but extremely small wasps exist than can grow very old. [Page 40] 40 Eﬀects of compounds on budgets • We need at least on death process to determine population dynamics, so avoiding the topic is not an option. Death is essential for life, so ageing is too important to neglect. In the context of deb theory, death by ageing cannot be seen as metabolic switch linked to maturity, because if food levels are low enough, such a threshold is never reached. deb theory here fol"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1908,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "long life spans, individuals are likely to possess eﬀective means of dealing with a threatening environment such as avoidance behaviour for dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain to body weight ratios than mammals and live twice as long. The life spans of both mammals and birds tend to scale empirically with weight0.2 [117,219], whi"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain-to-body-weight ratios than mammals and live twice as long. The life spans both of mammals and birds tend to scale empirically with weight0.2 [146,281], which is close to volume1/3. Although I have not worked out aging for endotherms quantitatively, this is consistent with the deb-based expectat"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2031,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "no animal can find sufficient food. This has been confirmed experimentally by Goulden and Hornig [424]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ϵ)3V∞as the end of the growth period, for some chosen small fraction ϵ = 0.05, say. The length of the growth period at constant food density is given in (2.23) and amounts to ˙r−1 B ln ϵ(1 −lb/f). It thus increases with volumetric length for different species, just as the juvenile period. Inspection of the ageing parameters as discussed at {209} reveals that ¨ha = z¨href a and sG = sref G , so that ˙hW = ˙href W and ˙hG = ˙href G /z. I"
+            },
+            {
+              "document_id": "3040",
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "olution of DEB systems (Kooijman and Troost, 2007; Kooi and van der Meer, 2010; Muller et al., 2009; Troost et al., 2008). We ﬁnally understand, we think, why the life span of en- dotherms increases with maximum body size amount species, but is almost independent of body size in ectotherms: it is in the ageing acceleration, which is (almost) zero in ectotherms (Kooijman, 2010; van Leeuwen, 2007; van Leeuwen et al., 2010). The subsections below further detail some of the developments. These developments came with the need to become even more rigorous in the notation, which was also vital to the further extension of the DEBtool software, written in Matlab and Octave, which now has over 1000 fu"
+            },
+            {
+              "document_id": "W2164464880",
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "distance": 0.2009,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "A major factor influencing life-history strategies of endotherms is body size. Larger endotherms live longer, develop more slowly, breed later and less frequently, and have fewer offspring per attempt at breeding. The classical evolutionary explanation for this pattern is that smaller animals experience greater extrinsic mortality, which favors early reproduction at high intensity. This leads to a short lifespan and early senescence by three suggested mechanisms. First, detrimental late-acting mutations cannot be removed because of the low force of selection upon older animals (mutation accumulation). Second, genes that promote early reproduction will be favored in small animals, even if the"
+            },
+            {
+              "document_id": "W2121294442",
+              "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+              "doi": "https://doi.org/10.1111/geb.12244",
+              "year": "2014",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Abstract Aim Longevity is an important life‐history trait, directly linked to the core attributes of fitness (reproduction and survival), yet large‐scale comparative studies quantifying its implications for the ecology and life history of ectotherms are scarce. We tested the allometry of longevity in squamates and the tuatara, and determined how longevity is related to key environmental characteristics and life‐history traits. Predictions based on life‐history theory are expected to hold true for ectotherms, similarly to mammals and birds. Location World‐wide. Methods We assembled from the literature a dataset of the maximum longevities of more than a thousand squamate species, representing "
+            },
+            {
+              "document_id": "W4306793265",
+              "title": "Mechanistic Temperature-Size Rule Explanation Should Reconcile Physiological and Mortality Responses to Temperature",
+              "doi": "https://doi.org/10.1086/722027",
+              "year": "2022",
+              "distance": 0.21,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "AbstractThe temperature-size rule is one of the universal rules in ecology and states that ectotherms in warmer waters will grow faster as juveniles, mature at smaller sizes and younger ages, and reach smaller maximum body sizes. Many models have unsuccessfully attempted to reproduce temperature-size rule-consistent life histories by using two-term (anabolism and catabolism) Pütter-type growth models, such as the von Bertalanffy. Here, we present a physiologically structured individual growth model, which incorporates an energy budget and optimizes energy allocation to growth, reproduction, and reserves. Growth, maturation, and reproductive output emerge as a result of life-history optimizat"
+            },
+            {
+              "document_id": "W2068100539",
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "distance": 0.2117,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Abstract Allometric principles account for most of the observed variation in maximum life span among mammals. When body‐size effects are controlled for, most of the residual variance in mammalian life span can be explained by variations in brain size, metabolic rate and body temperature. It is shown that species with large brains for a given body size and metabolic rate, such as anthropoid primates, also have long maximum life spans. Conversely, mammals with relatively high metabolic rates and low levels of encephalization, as in most insectivores and rodents, tend to have short life spans. The hypothesis is put forward that encephalization and metabolic rate, which may govern other life his"
+            },
+            {
+              "document_id": "W1975606520",
+              "title": "Being cool: how body temperature influences ageing and longevity",
+              "doi": "https://doi.org/10.1007/s10522-015-9571-2",
+              "year": "2015",
+              "distance": 0.2158,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Temperature is a basic and essential property of any physical system, including living systems. Even modest variations in temperature can have profound effects on organisms, and it has long been thought that as metabolism increases at higher temperatures so should rates of ageing. Here, we review the literature on how temperature affects longevity, ageing and life history traits. From poikilotherms to homeotherms, there is a clear trend for lower temperature being associated with longer lifespans both in wild populations and in laboratory conditions. Many life-extending manipulations in rodents, such as caloric restriction, also decrease core body temperature. Nonetheless, an inverse relatio"
+            },
+            {
+              "document_id": "W3029108140",
+              "title": "Longevity and the drift barrier: Bridging the gap between Medawar and Hamilton",
+              "doi": "https://doi.org/10.1002/evl3.173",
+              "year": "2020",
+              "distance": 0.2185,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Most organisms have finite life spans. The maximum life span of mammals, for example, is at most some years, decades, or centuries. Why not thousands of years or more? Can we explain and predict maximum life spans theoretically, based on other traits of organisms and associated ecological constraints? Existing theory provides reasons for the prevalence of ageing, but making explicit quantitative predictions of life spans is difficult. Here, I show that there are important unappreciated differences between two backbones of the theory of senescence: Peter Medawar's verbal model, and William Hamilton's subsequent mathematical model. I construct a mathematical model corresponding more c"
+            },
+            {
+              "document_id": "W1535272280",
+              "title": "Comparative and meta‐analytic insights into life extension via dietary restriction",
+              "doi": "https://doi.org/10.1111/j.1474-9726.2012.00798.x",
+              "year": "2012",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary Dietary restriction (DR) extends the lifespan of a wide range of species, although the universality of this effect has never been quantitatively examined. Here, we report the first comprehensive comparative meta‐analysis of DR across studies and species. Overall, DR significantly increased lifespan, but this effect is modulated by several factors. In general, DR has less effect in extending lifespan in males and also in non‐model organisms. Surprisingly, the proportion of protein intake was more important for life extension via DR than the degree of caloric restriction. Furthermore, we show that reduction in both age‐dependent and age‐independent mortality rates drives life extension"
+            },
+            {
+              "document_id": "W1800471699",
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "Abstract The metabolic theory of ecology ( MTE ) predicts that biological times should universally scale to body mass M as M 0.25 . However, support for this prediction came principally from non‐phylogenetically controlled studies, whereas more recent analyses, which take the degree of shared ancestry between species into account, have revealed that both length of the gestation period and time to first reproduction do not follow this rule. In the present study, we test this prediction of MTE on maximum longevity using two commonly accessible sources of information in zoology and ecology ( AnAge and PanTHERIA data bases) that allow us to assess the scaling relation of longevity in more than 1"
+            },
+            {
+              "document_id": "W2030389371",
+              "title": "Body size, energy metabolism and lifespan",
+              "doi": "https://doi.org/10.1242/jeb.01556",
+              "year": "2005",
+              "distance": 0.2267,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "SUMMARY Bigger animals live longer. The scaling exponent for the relationship between lifespan and body mass is between 0.15 and 0.3. Bigger animals also expend more energy, and the scaling exponent for the relationship of resting metabolic rate (RMR) to body mass lies somewhere between 0.66 and 0.8. Mass-specific RMR therefore scales with a corresponding exponent between -0.2 and -0.33. Because the exponents for mass-specific RMR are close to the exponents for lifespan, but have opposite signs, their product (the mass-specific expenditure of energy per lifespan) is independent of body mass(exponent between -0.08 and 0.08). This means that across species a gram of tissue on average expends a"
+            },
+            {
+              "document_id": "W1995894583",
+              "title": "Mitochondrial function as a determinant of life span",
+              "doi": "https://doi.org/10.1007/s00424-009-0724-5",
+              "year": "2009",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Average human life expectancy has progressively increased over many decades largely due to improvements in nutrition, vaccination, antimicrobial agents, and effective treatment/prevention of cardiovascular disease, cancer, etc. Maximal life span, in contrast, has changed very little. Caloric restriction (CR) increases maximal life span in many species, in concert with improvements in mitochondrial function. These effects have yet to be demonstrated in humans, and the duration and level of CR required to extend life span in animals is not realistic in humans. Physical activity (voluntary exercise) continues to hold much promise for increasing healthy life expectancy in humans, but remains to "
+            },
+            {
+              "document_id": "W1995869264",
+              "title": "Conditional tradeoffs between aging and organismal performance of <i>Indy</i> long-lived mutant flies",
+              "doi": "https://doi.org/10.1073/pnas.0634985100",
+              "year": "2003",
+              "distance": 0.229,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Alterations that extend the life span of animals and yeast typically involve decreases in metabolic rate, growth, physical activity, and/or early-life fecundity. This negative correlation between life span and the ability to assimilate and process energy, to move, grow, and reproduce, raises questions about the potential utility of life span extension. Tradeoffs between early-life fitness and longevity are central to theories of the evolution of aging, which suggests there is necessarily a price to be paid for reducing the rate of aging. It is not yet clear whether life span can be extended without undesirable effects on metabolism and fecundity. Here, we report that the long-lived Indy muta"
+            },
+            {
+              "document_id": "W4224308237",
+              "title": "Healthy Long-Lived Human Beings—Working on Life Stages to Break the Limitation of Human Lifespans",
+              "doi": "https://doi.org/10.3390/biology11050656",
+              "year": "2022",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The human lifespan has been increasing but will soon reach a plateau. A new direction based on the principal law of lifespan (PLOSP) may enable the human lifespan to be extremely healthy and long by the proper manipulation of the well-defined growing stages of the lifespan. The lifespan of creatures on earth from a single cell to animals can be elongated at different life stages including prenatal development, body growth, reproductivity, and aging. Each life stage has its own specific physiological and metabolic characteristics. Each life stage can be lengthened by either slowing its processes or continuously maintaining the activities of its function. Unfortunately, the current biomedical "
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The corpus strongly and consistently corroborates the stylized fact. Multiple snippets explicitly state the pattern: snippet [7] reproduces the stylized fact almost verbatim (DEB stylized fact A1), and snippets [8] and [12] explicitly affirm that mean life span increases with maximum body size among endotherms but is almost independent of body size in ectotherms, with [12] attributing this to ageing acceleration being near-zero in ectotherms. Snippets [2], [3], [4] provide the theoretical DEB derivation: mean life span is independent of maximum body volume (consistent with the weak ectotherm dependence, citing Finch on the lack of clear-cut relationships), while for endotherms following Gompertz ageing the median age at death increases with volumetric length and scales with weight^0.2 ([4], [9], [10], [16]). No snippet contradicts the fact; the off-topic ones concern temperature-size rules, growth periods, or general ageing theory. Overall this is strong, multi-source support with no conflict."
+          },
+          "n_references": 6,
+          "references": {
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.1301
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.1409
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.148
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1883
+            },
+            "3525": {
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.19
+            },
+            "3040": {
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2063
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1301,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "life span is thus independent of the maximum body volume of a species. Finch [281] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ǫ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {139}, I discussed the coupling between the eﬀectiveness of antioxidants, life spans and genetical ﬂexibility. If aging allows long life spans, individ- uals are likely"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1409,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "ng is concerned amounts to Γ(4 3)/˙hW and is thus independent of maximum size. Finch [350] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ϵ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. If the Gompertz ageing pattern is followed (as most endotherms do), the median age at death is log(1 + ˙h2 G log 2/¨q(0))/˙hG. The incrementally small value of ¨q(0) relates to the smal"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "period that die from aging is found from [Page 253] 6.3. Secondary scaling relationships 237 (4.48) to be 1 3Γ(1 3)(1 6 ¨pa ˙m)−1/3 for l = f. The mean life span is thus indepent of maximum body volume of a species. Finch [219] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period and the mean life span is 5.55¨p1/3 a ˙m−2/3(1+f/g) ln ǫ(1−lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {105}, I discussed the coupl"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1723,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "the median age is dominated by ˙hG, however, so median age at death increases with volumetric length for endotherms. This is consistent with the conclusion of Finch [350] that the life span of mammals scales with weight0.2, given that weight increases faster than structural body volume. If ageing allows long life spans, individuals are likely to have effective means for dealing with a threatening environment, such as avoidance behaviour for dangerous situations (learning), physiological regulation to accommodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in t"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1868,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "y round), but in the length of periods for which no animal can ﬁnd suﬃcient food. This has been conﬁrmed experimentally by Goulden and Hornig [340]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ǫ)3V∞as the end of the growth [Page 308] 290 8. Comparison of species period, for some chosen small fraction ǫ = 0.05, say. The length of the growth period at constant food density is given in (3.21) and amounts to ˙r−1 B ln ǫ(1 −lb/f). It thus increases with volumetric length for diﬀerent species, just as the juvenile period. The mean life span of ectotherms with a relatively short growth p"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.187,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e follow a growing individual at constant food, body weight is proportional to the amount of structure (weak homeostasis), but the allocation to growth declines with size; the overhead costs of growth contribute to respiration. Inter-speciﬁcally, when we compare fully grown adults and growth plays no role, respiration is dominated by maintenance. Since reserve density increases with maximum length, and maintenance is only paid for structure, weight-speciﬁc maintenance decreases with maximum length. Reserve density increases with maximum length, because it equals the ratio of the speciﬁc assimilation rate and energy conductance, while the latter is intensive. The length of the juvenile period"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1883,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "ss ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms A2 Survivor curves for life span terminated by ageing are typically well described by the Weibull and Gompertz models S.A.L.M. Kooijman Ecological Modelling 428 (2020) 109106 2 [Page 3] the standard DEB model is that 26 popular empirical models for various aspects of metabolism turn out to be special cases of DEB models or very good numerical approximations, see Table 3. This suggests that the set of stylised facts constrain simple models more than is apparent on ﬁrst sight, even without "
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.19,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "ns why mean life span increases with maximum body weight among en- dotherms, but not among ectotherms. To my knowledge nobody came up with an explanation for this. The mean life span of a mouse is less than that of an elephant, but extremely small wasps exist than can grow very old. [Page 40] 40 Eﬀects of compounds on budgets • We need at least on death process to determine population dynamics, so avoiding the topic is not an option. Death is essential for life, so ageing is too important to neglect. In the context of deb theory, death by ageing cannot be seen as metabolic switch linked to maturity, because if food levels are low enough, such a threshold is never reached. deb theory here fol"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1908,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "long life spans, individuals are likely to possess eﬀective means of dealing with a threatening environment such as avoidance behaviour for dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain to body weight ratios than mammals and live twice as long. The life spans of both mammals and birds tend to scale empirically with weight0.2 [117,219], whi"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain-to-body-weight ratios than mammals and live twice as long. The life spans both of mammals and birds tend to scale empirically with weight0.2 [146,281], which is close to volume1/3. Although I have not worked out aging for endotherms quantitatively, this is consistent with the deb-based expectat"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2031,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "no animal can find sufficient food. This has been confirmed experimentally by Goulden and Hornig [424]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ϵ)3V∞as the end of the growth period, for some chosen small fraction ϵ = 0.05, say. The length of the growth period at constant food density is given in (2.23) and amounts to ˙r−1 B ln ϵ(1 −lb/f). It thus increases with volumetric length for different species, just as the juvenile period. Inspection of the ageing parameters as discussed at {209} reveals that ¨ha = z¨href a and sG = sref G , so that ˙hW = ˙href W and ˙hG = ˙href G /z. I"
+            },
+            {
+              "document_id": "3040",
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "olution of DEB systems (Kooijman and Troost, 2007; Kooi and van der Meer, 2010; Muller et al., 2009; Troost et al., 2008). We ﬁnally understand, we think, why the life span of en- dotherms increases with maximum body size amount species, but is almost independent of body size in ectotherms: it is in the ageing acceleration, which is (almost) zero in ectotherms (Kooijman, 2010; van Leeuwen, 2007; van Leeuwen et al., 2010). The subsections below further detail some of the developments. These developments came with the need to become even more rigorous in the notation, which was also vital to the further extension of the DEBtool software, written in Matlab and Octave, which now has over 1000 fu"
+            },
+            {
+              "document_id": "3313",
+              "title": "GiacMari2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2109,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ymptotic length in VBGF does not strictly depend on body temperature (Kooijman, 2010). This sup- ports the concepts that ectotherms such as gastropods and bivalves, living under different body temperature conditions (as our exper- imental animals did), should not record signiﬁcant deviations from natural common patterns (as those at ambient temperature did) in reaching the maximum/asymptotic size. In contrast, theory would suggest that the maximum body size of an individual is dependent on energy allocated to growth and maintenance requirements, and that it is directly dependent on food characteristics (i.e. quality and density). Such a fact will have consequences on the approaching Table 1 "
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2124,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "heory suggests that the explanation does not lie in the size dependence of threshold food density (because this would operate the other way round), but in the length of periods during which no animal can ﬁnd suﬃcient food. This has been conﬁrmed experimentally by Goulden and Hornig [269]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ǫ)3V∞, as the end of the growth period, for some chosen small fraction ǫ = 0.05, say. The length of the growth period at constant food density is given in (3.15) and amounts to ˙γ−1 ln ǫ(1−lb/f). It thus increases with a volumetric length for diﬀerent s"
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2126,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ing and live longer. Aging Cell 3:87–95. Speakman JR, Król E (2005) Limits to sustained energy intake IX: A review of hypotheses. J Comp Physiol B Biochem Syst Environ Physiol 175:375–394. Speakman JR, Król E (2010a) The heat dissipation limit theory and evolution of life histories in endotherms-time to dispose of the disposable soma theory? Integr Comp Biol 50:793–807. Speakman JR, Król E (2010b) Maximal heat dissipation capacity and hyperthermia risk: Neglected key factors in the ecology of endotherms. J Anim Ecol 79:726–746. Sperfeld E, Wagner ND, Halvorson HM, Malishev M, Raubenheimer D (2017) Bridging ecological stoichiometry and nutritional geometry with homeostasis concepts and integr"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2133,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "lation thereof, which makes the link between brain size and life span more direct. Birds have larger brain-to-body-weight ratios than mammals and live twice as long. The life spans both of mammals and birds tend to scale empirically with weight0.2 [182, 350], which is close to volume1/3. This is consistent with the deb-based expectation, because surface-bound heating costs dominate respiration, and thus ageing. Brain size is found, empirically, to be approximately proportional to surface area in birds and mammals [182]. Mammals tend to have higher volume-specific respiration rates than birds [1231], which contributes to the difference in mean life span and jeopardises easy explanations. It m"
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2169,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "larger animals. Some of the residual variation in this relationship in mammals is explained by ambient temperature. In addition, there is a signiﬁcant negative relationship between residual lifespan and residual daily energy expenditure in mammals. A potentially much better model to explore the links of body size, metabolism and aging is to examine the intraspeciﬁc links. These studies have generated some data that support the original rate of living theory and other data that conﬂict. In particular, several studies have shown that manipulating animals to expend more or less energy generate the expected effects on lifespan (particularly when the subjects are ectotherms). However, smaller ind"
+            },
+            {
+              "document_id": "3499",
+              "title": "Lee - 2020 - Towards improved predictions of growth and metabol.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2209,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "re dependent and so it can be predicted that individuals will reach a larger 2324 size at maturity in warmer temperatures than colder ones, hence the fact that many 2325 ectotherm species conform to the temperature-size rule is a puzzling topic that has 2326 received much attention in the literature. Furthermore, because size at maturity is often 2327 linked to reproductive success (Roff, 2002) it can be considered as a key life history 2328 trait. Therefore, understanding observed variation in size at maturity in response to 2329 environmental change, as is highlighted by the temperature-size rule, is thus crucial to 2330 understanding the adaptive evolution of organisms. Whilst temperature"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "The snippets address two halves of the stylized fact unevenly. For endotherms, several snippets (1, 4, 8, 9) clearly support that larger body size is associated with longer life span ('Larger endotherms live longer'; allometric scaling of longevity with body mass ~M^0.15-0.3 in mammals), corroborating the first clause. For ectotherms, the evidence is weaker and somewhat mixed: snippets 2 and 18 explicitly test the allometry of longevity in squamates/reptiles, with snippet 18 indicating body size is one of multiple ecological drivers (microhabitat, temperature, insularity) of reptilian longevity, which leans against the 'hardly depends on body length' claim by suggesting body size does matter alongside other factors, hence a contradicting tilt. Most remaining snippets concern dietary restriction, temperature effects on aging, mitochondrial function, or insect endocrine trade-offs and are off-topic to the inter-specific length-lifespan scaling contrast. Overall there is moderate support for the endotherm half but insufficient and partly conflicting evidence specifically affirming that ectotherm lifespan is independent of body length, so consensus is neutral."
+          },
+          "n_references": 6,
+          "references": {
+            "W2164464880": {
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2009
+            },
+            "W2121294442": {
+              "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+              "doi": "https://doi.org/10.1111/geb.12244",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2046
+            },
+            "W2068100539": {
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2117
+            },
+            "W1800471699": {
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2244
+            },
+            "W2030389371": {
+              "title": "Body size, energy metabolism and lifespan",
+              "doi": "https://doi.org/10.1242/jeb.01556",
+              "year": "2005",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2267
+            },
+            "W2904288071": {
+              "title": "Cold and isolated ectotherms: drivers of reptilian longevity",
+              "doi": "https://doi.org/10.1093/biolinnean/bly153",
+              "year": "2018",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2362
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2164464880",
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "distance": 0.2009,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "A major factor influencing life-history strategies of endotherms is body size. Larger endotherms live longer, develop more slowly, breed later and less frequently, and have fewer offspring per attempt at breeding. The classical evolutionary explanation for this pattern is that smaller animals experience greater extrinsic mortality, which favors early reproduction at high intensity. This leads to a short lifespan and early senescence by three suggested mechanisms. First, detrimental late-acting mutations cannot be removed because of the low force of selection upon older animals (mutation accumulation). Second, genes that promote early reproduction will be favored in small animals, even if the"
+            },
+            {
+              "document_id": "W2121294442",
+              "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+              "doi": "https://doi.org/10.1111/geb.12244",
+              "year": "2014",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "Abstract Aim Longevity is an important life‐history trait, directly linked to the core attributes of fitness (reproduction and survival), yet large‐scale comparative studies quantifying its implications for the ecology and life history of ectotherms are scarce. We tested the allometry of longevity in squamates and the tuatara, and determined how longevity is related to key environmental characteristics and life‐history traits. Predictions based on life‐history theory are expected to hold true for ectotherms, similarly to mammals and birds. Location World‐wide. Methods We assembled from the literature a dataset of the maximum longevities of more than a thousand squamate species, representing "
+            },
+            {
+              "document_id": "W4306793265",
+              "title": "Mechanistic Temperature-Size Rule Explanation Should Reconcile Physiological and Mortality Responses to Temperature",
+              "doi": "https://doi.org/10.1086/722027",
+              "year": "2022",
+              "distance": 0.21,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "AbstractThe temperature-size rule is one of the universal rules in ecology and states that ectotherms in warmer waters will grow faster as juveniles, mature at smaller sizes and younger ages, and reach smaller maximum body sizes. Many models have unsuccessfully attempted to reproduce temperature-size rule-consistent life histories by using two-term (anabolism and catabolism) Pütter-type growth models, such as the von Bertalanffy. Here, we present a physiologically structured individual growth model, which incorporates an energy budget and optimizes energy allocation to growth, reproduction, and reserves. Growth, maturation, and reproductive output emerge as a result of life-history optimizat"
+            },
+            {
+              "document_id": "W2068100539",
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "distance": 0.2117,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Abstract Allometric principles account for most of the observed variation in maximum life span among mammals. When body‐size effects are controlled for, most of the residual variance in mammalian life span can be explained by variations in brain size, metabolic rate and body temperature. It is shown that species with large brains for a given body size and metabolic rate, such as anthropoid primates, also have long maximum life spans. Conversely, mammals with relatively high metabolic rates and low levels of encephalization, as in most insectivores and rodents, tend to have short life spans. The hypothesis is put forward that encephalization and metabolic rate, which may govern other life his"
+            },
+            {
+              "document_id": "W1975606520",
+              "title": "Being cool: how body temperature influences ageing and longevity",
+              "doi": "https://doi.org/10.1007/s10522-015-9571-2",
+              "year": "2015",
+              "distance": 0.2158,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Temperature is a basic and essential property of any physical system, including living systems. Even modest variations in temperature can have profound effects on organisms, and it has long been thought that as metabolism increases at higher temperatures so should rates of ageing. Here, we review the literature on how temperature affects longevity, ageing and life history traits. From poikilotherms to homeotherms, there is a clear trend for lower temperature being associated with longer lifespans both in wild populations and in laboratory conditions. Many life-extending manipulations in rodents, such as caloric restriction, also decrease core body temperature. Nonetheless, an inverse relatio"
+            },
+            {
+              "document_id": "W3029108140",
+              "title": "Longevity and the drift barrier: Bridging the gap between Medawar and Hamilton",
+              "doi": "https://doi.org/10.1002/evl3.173",
+              "year": "2020",
+              "distance": 0.2185,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Most organisms have finite life spans. The maximum life span of mammals, for example, is at most some years, decades, or centuries. Why not thousands of years or more? Can we explain and predict maximum life spans theoretically, based on other traits of organisms and associated ecological constraints? Existing theory provides reasons for the prevalence of ageing, but making explicit quantitative predictions of life spans is difficult. Here, I show that there are important unappreciated differences between two backbones of the theory of senescence: Peter Medawar's verbal model, and William Hamilton's subsequent mathematical model. I construct a mathematical model corresponding more c"
+            },
+            {
+              "document_id": "W1535272280",
+              "title": "Comparative and meta‐analytic insights into life extension via dietary restriction",
+              "doi": "https://doi.org/10.1111/j.1474-9726.2012.00798.x",
+              "year": "2012",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary Dietary restriction (DR) extends the lifespan of a wide range of species, although the universality of this effect has never been quantitatively examined. Here, we report the first comprehensive comparative meta‐analysis of DR across studies and species. Overall, DR significantly increased lifespan, but this effect is modulated by several factors. In general, DR has less effect in extending lifespan in males and also in non‐model organisms. Surprisingly, the proportion of protein intake was more important for life extension via DR than the degree of caloric restriction. Furthermore, we show that reduction in both age‐dependent and age‐independent mortality rates drives life extension"
+            },
+            {
+              "document_id": "W1800471699",
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Abstract The metabolic theory of ecology ( MTE ) predicts that biological times should universally scale to body mass M as M 0.25 . However, support for this prediction came principally from non‐phylogenetically controlled studies, whereas more recent analyses, which take the degree of shared ancestry between species into account, have revealed that both length of the gestation period and time to first reproduction do not follow this rule. In the present study, we test this prediction of MTE on maximum longevity using two commonly accessible sources of information in zoology and ecology ( AnAge and PanTHERIA data bases) that allow us to assess the scaling relation of longevity in more than 1"
+            },
+            {
+              "document_id": "W2030389371",
+              "title": "Body size, energy metabolism and lifespan",
+              "doi": "https://doi.org/10.1242/jeb.01556",
+              "year": "2005",
+              "distance": 0.2267,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "SUMMARY Bigger animals live longer. The scaling exponent for the relationship between lifespan and body mass is between 0.15 and 0.3. Bigger animals also expend more energy, and the scaling exponent for the relationship of resting metabolic rate (RMR) to body mass lies somewhere between 0.66 and 0.8. Mass-specific RMR therefore scales with a corresponding exponent between -0.2 and -0.33. Because the exponents for mass-specific RMR are close to the exponents for lifespan, but have opposite signs, their product (the mass-specific expenditure of energy per lifespan) is independent of body mass(exponent between -0.08 and 0.08). This means that across species a gram of tissue on average expends a"
+            },
+            {
+              "document_id": "W1995894583",
+              "title": "Mitochondrial function as a determinant of life span",
+              "doi": "https://doi.org/10.1007/s00424-009-0724-5",
+              "year": "2009",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Average human life expectancy has progressively increased over many decades largely due to improvements in nutrition, vaccination, antimicrobial agents, and effective treatment/prevention of cardiovascular disease, cancer, etc. Maximal life span, in contrast, has changed very little. Caloric restriction (CR) increases maximal life span in many species, in concert with improvements in mitochondrial function. These effects have yet to be demonstrated in humans, and the duration and level of CR required to extend life span in animals is not realistic in humans. Physical activity (voluntary exercise) continues to hold much promise for increasing healthy life expectancy in humans, but remains to "
+            },
+            {
+              "document_id": "W1995869264",
+              "title": "Conditional tradeoffs between aging and organismal performance of <i>Indy</i> long-lived mutant flies",
+              "doi": "https://doi.org/10.1073/pnas.0634985100",
+              "year": "2003",
+              "distance": 0.229,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Alterations that extend the life span of animals and yeast typically involve decreases in metabolic rate, growth, physical activity, and/or early-life fecundity. This negative correlation between life span and the ability to assimilate and process energy, to move, grow, and reproduce, raises questions about the potential utility of life span extension. Tradeoffs between early-life fitness and longevity are central to theories of the evolution of aging, which suggests there is necessarily a price to be paid for reducing the rate of aging. It is not yet clear whether life span can be extended without undesirable effects on metabolism and fecundity. Here, we report that the long-lived Indy muta"
+            },
+            {
+              "document_id": "W4224308237",
+              "title": "Healthy Long-Lived Human Beings—Working on Life Stages to Break the Limitation of Human Lifespans",
+              "doi": "https://doi.org/10.3390/biology11050656",
+              "year": "2022",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The human lifespan has been increasing but will soon reach a plateau. A new direction based on the principal law of lifespan (PLOSP) may enable the human lifespan to be extremely healthy and long by the proper manipulation of the well-defined growing stages of the lifespan. The lifespan of creatures on earth from a single cell to animals can be elongated at different life stages including prenatal development, body growth, reproductivity, and aging. Each life stage has its own specific physiological and metabolic characteristics. Each life stage can be lengthened by either slowing its processes or continuously maintaining the activities of its function. Unfortunately, the current biomedical "
+            },
+            {
+              "document_id": "W3087646956",
+              "title": "Shrinking body sizes in response to warming: explanations for the temperature–size rule with special emphasis on the role of oxygen",
+              "doi": "https://doi.org/10.1111/brv.12653",
+              "year": "2020",
+              "distance": 0.2318,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT Body size is central to ecology at levels ranging from organismal fecundity to the functioning of communities and ecosystems. Understanding temperature‐induced variations in body size is therefore of fundamental and applied interest, yet thermal responses of body size remain poorly understood. Temperature–size (T–S) responses tend to be negative (e.g. smaller body size at maturity when reared under warmer conditions), which has been termed the temperature–size rule (TSR). Explanations emphasize either physiological mechanisms (e.g. limitation of oxygen or other resources and temperature‐dependent resource allocation) or the adaptive value of either a large body size (e.g. to increas"
+            },
+            {
+              "document_id": "W2132619936",
+              "title": "The Unfortunate Influence of the Weather on the Rate of Ageing: Why Human Caloric Restriction or Its Emulation May Only Extend Life Expectancy by 2–3 Years",
+              "doi": "https://doi.org/10.1159/000082192",
+              "year": "2005",
+              "distance": 0.2333,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Much research interest, and recently even commercial interest, has been predicated on the assumption that reasonably closely-related species – humans and mice, for example – should, in principle, respond to ageing-retarding interventions with an increase in maximum lifespan roughly proportional to their control lifespan (that without the intervention). Here, it is argued that the best-studied life-extending manipulations of mice are examples of a category that is highly unlikely to follow this rule, and more likely to exhibit only a similar absolute increase in maximum lifespan from one species to the next, independent of the species’ control lifespan. That category – reduction in dietary ca"
+            },
+            {
+              "document_id": "W2004553392",
+              "title": "Unexpected discontinuities in life–history evolution under size–dependent mortality",
+              "doi": "https://doi.org/10.1098/rspb.2002.2255",
+              "year": "2003",
+              "distance": 0.2341,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "In many organisms survival depends on body size. We investigate the implications of size-selective mortality on life-history evolution by introducing and analysing a new and particularly flexible life-history model with the following key features: the lengths of growth and reproductive periods in successive reproductive cycles can vary evolutionarily, the model does not constrain evolution to patterns of either determinate or indeterminate growth, and lifetime number and sizes of broods are the outcomes of evolutionarily optimal life-history decisions. We find that small changes in environmental conditions can lead to abrupt transitions in optimal life histories when size-dependent mortality"
+            },
+            {
+              "document_id": "W2489373276",
+              "title": "Parallels in understanding the endocrine control of lifespan with the firebug Pyrrhocoris apterus and the fruit fly Drosophila melanogaster",
+              "doi": "https://doi.org/10.1093/acprof:oso/9780199568765.003.0013",
+              "year": "2011",
+              "distance": 0.2346,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "In many organisms, reproduction is negatively correlated with life span, but little is known about proximate mechanisms of this trade-off. According to the traditional view, internal energy reserves are limited, thus giving rise to the trade-off of their use. More recently, this idea was challenged by the observation that survival and reproduction can be experimentally decoupled. Pleiotropic effects of endocrine signals are currently considered to play a key role in the modulation of life history trade-offs, but the way these signals connect reproduction (or other fitness traits) and longevity still remains elusive. An extensive body of work has shown that mutations in many genes in insulin-"
+            },
+            {
+              "document_id": "W2918620983",
+              "title": "“Data for the Problem of Evolution in Man. V. On the Correlation between Duration of Life and the Number of Offspring”",
+              "doi": "https://doi.org/10.1017/s0020268100007150",
+              "year": "1901",
+              "distance": 0.2348,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "According to the Darwinian theory of evolution the members of a community less fitted to their environment are removed by death. But this process of natural selection would not permanently modify a race, if the members thus removed were able before death to propagate their species in average numbers. It then becomes an important question to ascertain how far duration of life is related to fertility. In the case of many insects death can interfere only with their single chance of offspring; they live or not for their one breeding season only. A similar statement holds good with regard to annual and biennial plants. In such cases there might still be a correlation between duration of life and "
+            },
+            {
+              "document_id": "W2904288071",
+              "title": "Cold and isolated ectotherms: drivers of reptilian longevity",
+              "doi": "https://doi.org/10.1093/biolinnean/bly153",
+              "year": "2018",
+              "distance": 0.2362,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.7,
+              "text": "Animal lifespan is determined by extrinsic and intrinsic factors causing mortality. According to the evolutionary theories of senescence, when mortality pressures are low, animals delay reproduction. This enables species to grow more slowly and, consequently, natural selection can act against harmful mutations in adulthood, thereby increasing lifespans. To test predictions of these theories we assembled a dataset on the maximum longevities and relevant ecological variables of 1320 reptilian species. Correcting for phylogeny, we modelled the link between reptile longevity and factors such as body size, microhabitat, activity period, insularity, annual temperature, temperature seasonality, ele"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple DEB-corpus snippets explicitly state and explain the stylized fact: life span increases with maximum body size among endotherms (scaling with weight^0.2, near volume^1/3) but is largely independent of body size in ectotherms, attributed to ageing acceleration being near zero in ectotherms (snippets 1-4, 7, 8, 10, 12). The independent literature corroborates that larger endotherms (mammals/birds) live longer (snippets 13, 16, 21) and that ectotherm longevity scaling is less clear-cut. Only snippet 20 offers some tension by noting longevity may not follow simple mass scaling under phylogenetic correction, but this challenges the exponent magnitude rather than the qualitative endotherm/ectotherm contrast. Overall the evidence strongly and consistently supports the stylized fact."
+          },
+          "n_references": 11,
+          "references": {
+            "2962": {
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.1301
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1409
+            },
+            "2801": {
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.148
+            },
+            "2490": {
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.1883
+            },
+            "3525": {
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.19
+            },
+            "3040": {
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2063
+            },
+            "W2164464880": {
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2009
+            },
+            "W2121294442": {
+              "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+              "doi": "https://doi.org/10.1111/geb.12244",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2046
+            },
+            "W2068100539": {
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2117
+            },
+            "W1800471699": {
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2244
+            },
+            "W2030389371": {
+              "title": "Body size, energy metabolism and lifespan",
+              "doi": "https://doi.org/10.1242/jeb.01556",
+              "year": "2005",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2267
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1301,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "life span is thus independent of the maximum body volume of a species. Finch [281] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ǫ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {139}, I discussed the coupling between the eﬀectiveness of antioxidants, life spans and genetical ﬂexibility. If aging allows long life spans, individ- uals are likely"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1409,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ng is concerned amounts to Γ(4 3)/˙hW and is thus independent of maximum size. Finch [350] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period to the mean life span is 5.55¨h1/3 a ˙k−2/3 M (1 + f/g) ln ϵ(1 −lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. If the Gompertz ageing pattern is followed (as most endotherms do), the median age at death is log(1 + ˙h2 G log 2/¨q(0))/˙hG. The incrementally small value of ¨q(0) relates to the smal"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "period that die from aging is found from [Page 253] 6.3. Secondary scaling relationships 237 (4.48) to be 1 3Γ(1 3)(1 6 ¨pa ˙m)−1/3 for l = f. The mean life span is thus indepent of maximum body volume of a species. Finch [219] concluded that the scanty data on life spans of ectotherms do not reveal clear-cut relationships with body volume. Large variations in life spans exist, both within and between taxa. The ratio of the growth period and the mean life span is 5.55¨p1/3 a ˙m−2/3(1+f/g) ln ǫ(1−lb/f) and increases with volumetric length. If this ratio approaches 1, life span tends to increase with maximum body volume in a sigmoid manner. In the section on aging, {105}, I discussed the coupl"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1723,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "the median age is dominated by ˙hG, however, so median age at death increases with volumetric length for endotherms. This is consistent with the conclusion of Finch [350] that the life span of mammals scales with weight0.2, given that weight increases faster than structural body volume. If ageing allows long life spans, individuals are likely to have effective means for dealing with a threatening environment, such as avoidance behaviour for dangerous situations (learning), physiological regulation to accommodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in t"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1868,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "y round), but in the length of periods for which no animal can ﬁnd suﬃcient food. This has been conﬁrmed experimentally by Goulden and Hornig [340]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ǫ)3V∞as the end of the growth [Page 308] 290 8. Comparison of species period, for some chosen small fraction ǫ = 0.05, say. The length of the growth period at constant food density is given in (3.21) and amounts to ˙r−1 B ln ǫ(1 −lb/f). It thus increases with volumetric length for diﬀerent species, just as the juvenile period. The mean life span of ectotherms with a relatively short growth p"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.187,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e follow a growing individual at constant food, body weight is proportional to the amount of structure (weak homeostasis), but the allocation to growth declines with size; the overhead costs of growth contribute to respiration. Inter-speciﬁcally, when we compare fully grown adults and growth plays no role, respiration is dominated by maintenance. Since reserve density increases with maximum length, and maintenance is only paid for structure, weight-speciﬁc maintenance decreases with maximum length. Reserve density increases with maximum length, because it equals the ratio of the speciﬁc assimilation rate and energy conductance, while the latter is intensive. The length of the juvenile period"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1883,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "ss ﬂows: carbon dioxide, dioxygen and nitrogenous waste Ageing A1 Mean life span typically increases inter-speciﬁcally with maximum body length in endotherms, but hardly depends on body length in ectotherms A2 Survivor curves for life span terminated by ageing are typically well described by the Weibull and Gompertz models S.A.L.M. Kooijman Ecological Modelling 428 (2020) 109106 2 [Page 3] the standard DEB model is that 26 popular empirical models for various aspects of metabolism turn out to be special cases of DEB models or very good numerical approximations, see Table 3. This suggests that the set of stylised facts constrain simple models more than is apparent on ﬁrst sight, even without "
+            },
+            {
+              "document_id": "3525",
+              "title": "Kooy2010_i.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.19,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "ns why mean life span increases with maximum body weight among en- dotherms, but not among ectotherms. To my knowledge nobody came up with an explanation for this. The mean life span of a mouse is less than that of an elephant, but extremely small wasps exist than can grow very old. [Page 40] 40 Eﬀects of compounds on budgets • We need at least on death process to determine population dynamics, so avoiding the topic is not an option. Death is essential for life, so ageing is too important to neglect. In the context of deb theory, death by ageing cannot be seen as metabolic switch linked to maturity, because if food levels are low enough, such a threshold is never reached. deb theory here fol"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1908,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "long life spans, individuals are likely to possess eﬀective means of dealing with a threatening environment such as avoidance behaviour for dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain to body weight ratios than mammals and live twice as long. The life spans of both mammals and birds tend to scale empirically with weight0.2 [117,219], whi"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2006,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "dangerous situations (learning), physiological regulation to ac- commodate changes in diet, temperature and so on. This is likely to involve large brain size and thus an indirect coupling between brain size and life span. The brain may also be involved in the production of antioxidants or the regulation thereof, which makes the link between brain size and life span more direct. Birds have larger brain-to-body-weight ratios than mammals and live twice as long. The life spans both of mammals and birds tend to scale empirically with weight0.2 [146,281], which is close to volume1/3. Although I have not worked out aging for endotherms quantitatively, this is consistent with the deb-based expectat"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2031,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "no animal can find sufficient food. This has been confirmed experimentally by Goulden and Hornig [424]. Life span Growth never stops in the most elementary formulation of the deb model, but it is practical to consider the moment at which body volume exceeds (1−ϵ)3V∞as the end of the growth period, for some chosen small fraction ϵ = 0.05, say. The length of the growth period at constant food density is given in (2.23) and amounts to ˙r−1 B ln ϵ(1 −lb/f). It thus increases with volumetric length for different species, just as the juvenile period. Inspection of the ageing parameters as discussed at {209} reveals that ¨ha = z¨href a and sG = sref G , so that ˙hW = ˙href W and ˙hG = ˙href G /z. I"
+            },
+            {
+              "document_id": "3040",
+              "title": "AlunVeer2011.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "olution of DEB systems (Kooijman and Troost, 2007; Kooi and van der Meer, 2010; Muller et al., 2009; Troost et al., 2008). We ﬁnally understand, we think, why the life span of en- dotherms increases with maximum body size amount species, but is almost independent of body size in ectotherms: it is in the ageing acceleration, which is (almost) zero in ectotherms (Kooijman, 2010; van Leeuwen, 2007; van Leeuwen et al., 2010). The subsections below further detail some of the developments. These developments came with the need to become even more rigorous in the notation, which was also vital to the further extension of the DEBtool software, written in Matlab and Octave, which now has over 1000 fu"
+            },
+            {
+              "document_id": "W2164464880",
+              "title": "The Heat Dissipation Limit Theory and Evolution of Life Histories in Endotherms—Time to Dispose of the Disposable Soma Theory?",
+              "doi": "https://doi.org/10.1093/icb/icq049",
+              "year": "2010",
+              "distance": 0.2009,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "A major factor influencing life-history strategies of endotherms is body size. Larger endotherms live longer, develop more slowly, breed later and less frequently, and have fewer offspring per attempt at breeding. The classical evolutionary explanation for this pattern is that smaller animals experience greater extrinsic mortality, which favors early reproduction at high intensity. This leads to a short lifespan and early senescence by three suggested mechanisms. First, detrimental late-acting mutations cannot be removed because of the low force of selection upon older animals (mutation accumulation). Second, genes that promote early reproduction will be favored in small animals, even if the"
+            },
+            {
+              "document_id": "W2121294442",
+              "title": "Late bloomers and baby boomers: ecological drivers of longevity in squamates and the tuatara",
+              "doi": "https://doi.org/10.1111/geb.12244",
+              "year": "2014",
+              "distance": 0.2046,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.55,
+              "text": "Abstract Aim Longevity is an important life‐history trait, directly linked to the core attributes of fitness (reproduction and survival), yet large‐scale comparative studies quantifying its implications for the ecology and life history of ectotherms are scarce. We tested the allometry of longevity in squamates and the tuatara, and determined how longevity is related to key environmental characteristics and life‐history traits. Predictions based on life‐history theory are expected to hold true for ectotherms, similarly to mammals and birds. Location World‐wide. Methods We assembled from the literature a dataset of the maximum longevities of more than a thousand squamate species, representing "
+            },
+            {
+              "document_id": "W4306793265",
+              "title": "Mechanistic Temperature-Size Rule Explanation Should Reconcile Physiological and Mortality Responses to Temperature",
+              "doi": "https://doi.org/10.1086/722027",
+              "year": "2022",
+              "distance": 0.21,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "AbstractThe temperature-size rule is one of the universal rules in ecology and states that ectotherms in warmer waters will grow faster as juveniles, mature at smaller sizes and younger ages, and reach smaller maximum body sizes. Many models have unsuccessfully attempted to reproduce temperature-size rule-consistent life histories by using two-term (anabolism and catabolism) Pütter-type growth models, such as the von Bertalanffy. Here, we present a physiologically structured individual growth model, which incorporates an energy budget and optimizes energy allocation to growth, reproduction, and reserves. Growth, maturation, and reproductive output emerge as a result of life-history optimizat"
+            },
+            {
+              "document_id": "W2068100539",
+              "title": "Encephalization and the evolution of longevity in mammals",
+              "doi": "https://doi.org/10.1046/j.1420-9101.1993.6020209.x",
+              "year": "1993",
+              "distance": 0.2117,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "Abstract Allometric principles account for most of the observed variation in maximum life span among mammals. When body‐size effects are controlled for, most of the residual variance in mammalian life span can be explained by variations in brain size, metabolic rate and body temperature. It is shown that species with large brains for a given body size and metabolic rate, such as anthropoid primates, also have long maximum life spans. Conversely, mammals with relatively high metabolic rates and low levels of encephalization, as in most insectivores and rodents, tend to have short life spans. The hypothesis is put forward that encephalization and metabolic rate, which may govern other life his"
+            },
+            {
+              "document_id": "W1975606520",
+              "title": "Being cool: how body temperature influences ageing and longevity",
+              "doi": "https://doi.org/10.1007/s10522-015-9571-2",
+              "year": "2015",
+              "distance": 0.2158,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Temperature is a basic and essential property of any physical system, including living systems. Even modest variations in temperature can have profound effects on organisms, and it has long been thought that as metabolism increases at higher temperatures so should rates of ageing. Here, we review the literature on how temperature affects longevity, ageing and life history traits. From poikilotherms to homeotherms, there is a clear trend for lower temperature being associated with longer lifespans both in wild populations and in laboratory conditions. Many life-extending manipulations in rodents, such as caloric restriction, also decrease core body temperature. Nonetheless, an inverse relatio"
+            },
+            {
+              "document_id": "W3029108140",
+              "title": "Longevity and the drift barrier: Bridging the gap between Medawar and Hamilton",
+              "doi": "https://doi.org/10.1002/evl3.173",
+              "year": "2020",
+              "distance": 0.2185,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Most organisms have finite life spans. The maximum life span of mammals, for example, is at most some years, decades, or centuries. Why not thousands of years or more? Can we explain and predict maximum life spans theoretically, based on other traits of organisms and associated ecological constraints? Existing theory provides reasons for the prevalence of ageing, but making explicit quantitative predictions of life spans is difficult. Here, I show that there are important unappreciated differences between two backbones of the theory of senescence: Peter Medawar's verbal model, and William Hamilton's subsequent mathematical model. I construct a mathematical model corresponding more c"
+            },
+            {
+              "document_id": "W1535272280",
+              "title": "Comparative and meta‐analytic insights into life extension via dietary restriction",
+              "doi": "https://doi.org/10.1111/j.1474-9726.2012.00798.x",
+              "year": "2012",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Summary Dietary restriction (DR) extends the lifespan of a wide range of species, although the universality of this effect has never been quantitatively examined. Here, we report the first comprehensive comparative meta‐analysis of DR across studies and species. Overall, DR significantly increased lifespan, but this effect is modulated by several factors. In general, DR has less effect in extending lifespan in males and also in non‐model organisms. Surprisingly, the proportion of protein intake was more important for life extension via DR than the degree of caloric restriction. Furthermore, we show that reduction in both age‐dependent and age‐independent mortality rates drives life extension"
+            },
+            {
+              "document_id": "W1800471699",
+              "title": "A test of the metabolic theory of ecology with two longevity data sets reveals no common cause of scaling in biological times",
+              "doi": "https://doi.org/10.1111/mam.12023",
+              "year": "2014",
+              "distance": 0.2244,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "Abstract The metabolic theory of ecology ( MTE ) predicts that biological times should universally scale to body mass M as M 0.25 . However, support for this prediction came principally from non‐phylogenetically controlled studies, whereas more recent analyses, which take the degree of shared ancestry between species into account, have revealed that both length of the gestation period and time to first reproduction do not follow this rule. In the present study, we test this prediction of MTE on maximum longevity using two commonly accessible sources of information in zoology and ecology ( AnAge and PanTHERIA data bases) that allow us to assess the scaling relation of longevity in more than 1"
+            },
+            {
+              "document_id": "W2030389371",
+              "title": "Body size, energy metabolism and lifespan",
+              "doi": "https://doi.org/10.1242/jeb.01556",
+              "year": "2005",
+              "distance": 0.2267,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "SUMMARY Bigger animals live longer. The scaling exponent for the relationship between lifespan and body mass is between 0.15 and 0.3. Bigger animals also expend more energy, and the scaling exponent for the relationship of resting metabolic rate (RMR) to body mass lies somewhere between 0.66 and 0.8. Mass-specific RMR therefore scales with a corresponding exponent between -0.2 and -0.33. Because the exponents for mass-specific RMR are close to the exponents for lifespan, but have opposite signs, their product (the mass-specific expenditure of energy per lifespan) is independent of body mass(exponent between -0.08 and 0.08). This means that across species a gram of tissue on average expends a"
+            },
+            {
+              "document_id": "W1995894583",
+              "title": "Mitochondrial function as a determinant of life span",
+              "doi": "https://doi.org/10.1007/s00424-009-0724-5",
+              "year": "2009",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "Average human life expectancy has progressively increased over many decades largely due to improvements in nutrition, vaccination, antimicrobial agents, and effective treatment/prevention of cardiovascular disease, cancer, etc. Maximal life span, in contrast, has changed very little. Caloric restriction (CR) increases maximal life span in many species, in concert with improvements in mitochondrial function. These effects have yet to be demonstrated in humans, and the duration and level of CR required to extend life span in animals is not realistic in humans. Physical activity (voluntary exercise) continues to hold much promise for increasing healthy life expectancy in humans, but remains to "
+            },
+            {
+              "document_id": "W1995869264",
+              "title": "Conditional tradeoffs between aging and organismal performance of <i>Indy</i> long-lived mutant flies",
+              "doi": "https://doi.org/10.1073/pnas.0634985100",
+              "year": "2003",
+              "distance": 0.229,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Alterations that extend the life span of animals and yeast typically involve decreases in metabolic rate, growth, physical activity, and/or early-life fecundity. This negative correlation between life span and the ability to assimilate and process energy, to move, grow, and reproduce, raises questions about the potential utility of life span extension. Tradeoffs between early-life fitness and longevity are central to theories of the evolution of aging, which suggests there is necessarily a price to be paid for reducing the rate of aging. It is not yet clear whether life span can be extended without undesirable effects on metabolism and fecundity. Here, we report that the long-lived Indy muta"
+            },
+            {
+              "document_id": "W4224308237",
+              "title": "Healthy Long-Lived Human Beings—Working on Life Stages to Break the Limitation of Human Lifespans",
+              "doi": "https://doi.org/10.3390/biology11050656",
+              "year": "2022",
+              "distance": 0.2297,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The human lifespan has been increasing but will soon reach a plateau. A new direction based on the principal law of lifespan (PLOSP) may enable the human lifespan to be extremely healthy and long by the proper manipulation of the well-defined growing stages of the lifespan. The lifespan of creatures on earth from a single cell to animals can be elongated at different life stages including prenatal development, body growth, reproductivity, and aging. Each life stage has its own specific physiological and metabolic characteristics. Each life stage can be lengthened by either slowing its processes or continuously maintaining the activities of its function. Unfortunately, the current biomedical "
+            }
+          ]
+        }
+      }
+    }
+  }
+}

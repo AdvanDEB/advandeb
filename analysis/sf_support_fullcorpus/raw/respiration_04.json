@@ -1,0 +1,1880 @@
+{
+  "sf_id": "respiration_04",
+  "category": "Respiration",
+  "statement": "Intraspecific scaling of maximum dioxygen use with size depends on morphology of the energy and material transport network(s).",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The majority of the excerpts explicitly link the intraspecific scaling of maximum dioxygen consumption to morphological features of transport networks, often describing scaling exponents that lie between surface‑area (2/3) and volume (1) limits or invoking fractal branching models. No snippet provides evidence contradicting this dependence. Consequently, the corpus offers strong, consistent support for the stylized fact."
+          },
+          "n_references": 11,
+          "references": {
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2264
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2346
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.249
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.254
+            },
+            "3652": {
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2584
+            },
+            "2648": {
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2589
+            },
+            "3127": {
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2604
+            },
+            "2777": {
+              "title": "KooyBaas2009.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2641
+            },
+            "2650": {
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2642
+            },
+            "3809": {
+              "title": "Kooijman - 2024 - Ways to reduce or avoid juvenile-driven cycles in .pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.265
+            },
+            "2565": {
+              "title": "HirsGlaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2659
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2264,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": ", V A m . The powers ˙pM and ˙pJ are proportional to maximum body size volume V A m while ˙pT is proportional to V A 2/3 m . The dioxygen consumption must be approximately proportional to V A α m with α ∈[2/3, 1] because it is a linear combination of V A 2/3 m and V A m . The relationship between the weigth and the volume of the species considered, w = [Em]e µEV 1/3 m V A 4/3 m + dV V A m , (5.69) [Page 134] 122 Chapter 5 is obtained from Eq. 5.57 by replacing body size V with Vm, energy density [E] with [Em]e and rewriting the parameters of species A as a function of the parameters of a ref- erence species with the exception of V A m . Thus, (1) the mass is approximately proportional to V β"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2346,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "fluxes, and so the dioxygen consumption rate and the carbon dioxide production rate, depend on structural body length via the powers ˙pD and ˙pG, which are both weighted sums of surface area and volume, i.e. of l2 and l3. This is noth- ing new. If we compare species of different (maximum) body size, however, we keep the state variables constant, and vary the parameters that depend on the maximum structural body volume. In the respiration rate (4.49), Lm, l−1 T and g−1 are proportional to structural body length; none of the other parameters depend on maximum structural body length (or volume). Generally, this again results in a scaling of respiration somewhere between a surface area and a vol"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.249,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "eases with the similarity between the species. The design parameters are { ˙JEAm} and ¨ha, which scale with maximum length, M b H and M p H, which scale with maximum volume. All 16 [Page 17] the other primary parameters are independent of size, so also independent of the maximum size of a species. The body-size scaling relationships can also be used partially, making optimal use of all data at hand [52, 59] to detect species-speciﬁc deviations from the general trend. These rules also determine how properties that can be written as functions of the primary pa- rameters depend on maximum length. An example is the respiration rate (i.e. the use of dioxy- gen). It works out to be approximately p"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2521,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2566",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2528,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "t total ecosystem energy use should scale to system size (V or B) with a power as low as 1/2 (depending on the scaling of A and water depth with V or B), because according to Euclidian geometry for isomorphic shapes, P should scale with A to the 1/2 power (i.e., in proportion to the square root of A). Data are needed to test these hypotheses, some of which is presented in Section 5.1. 4.4.2. Resource Transport (RT) Models RT theory may help explain how rates or patterns of energy flow through food webs vary with community or ecosystem size. Food webs can be modelled as “energy transportation networks” [246–248]. By doing so, it is possible to calculate power functions describing relationship"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.254,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "h curve Respiration The use of dioxygen scales with body mass raised to a power close to 0.75 compared to that of DEB (Table 2). Table 6: The basic assumptions of the Metabolic Theory of Ecology, and more speciﬁcally of the extended ontogenetic growth model (EOGM). Interpreted from West et al. [18] and Hou et al. [5]. See text for further explanation. 1. An organism is characterized by its body mass. 2. Nine detailed assumptions on the design of the distribution network (not spelled out here, but see assumptions A1-A9 in [14]) result in the predic- tion that the delivery of oxygen to the cells is proportional to body mass raised to the power 3/4. 3. The oxygen delivered to the cells is used "
+            },
+            {
+              "document_id": "3652",
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2584,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "eral model of transport of essential materials through space-ﬁlling fractal networks of branching tubes. Banavar et al. (1999) proposed a simi- lar explanation based on branching transportation networks within the organism. In their subsequent work West et al. (1999) proposed to consider four-dimensional biology and suggested that the quarter-power scaling laws originate from hierarchical branching nu- trient supply networks that terminate in size-invariant units, such as capillaries, leaves, 378 http://www.demographic-research.org [Page 35] Demographic Research: Volume 15, Article 12 mitochondria, and oxidase molecules. They hypothesize that natural selection tends to maximize both metaboli"
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2589,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ld elucidate constraints on overall ecosystem functioning. Surface areas often mediate the passage of food from the environment into an organism, for example, a spider’s web, the mouth of a filter feeder, the gut of caterpillar, or the plasma membrane of a prokaryote. This has led some to argue that, all other things being equal, consumption should scale in proportion to a relevant surface area and hence with mass2/3 (von Bertalanffy 1957, Kooijman 2010). Others have claimed a 3/4 power scaling of consumption on the basis of the 3/4 power scaling of metabolic rate, arguing that supply matches demand (Calder 1984, Peters 1986, West et al. 2001). Recently it has been found that consumption sca"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2596,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3127",
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2604,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "at focus on transport of resources and waste products such as respiratory gases between the external environment and metabolizing cells. This transport may be influenced by two major steps: the exchange of materials across body surfaces and the transport of materials through internal networks. These steps are the foci for two prominent theoretical approaches to understanding and predicting biological scal- ing: SA theory [4,8,14,15] and resource-transport network (RTN) theory [1,2,16,17], respectively. Although both SA and internal transport networks may be important in influencing metabolic rate and its scaling with body size, SA theory (including widely applied DEB theory, which incorporat"
+            },
+            {
+              "document_id": "3251",
+              "title": "Augustine and Kooijman - A new phase in DEB research.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2606,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "years. The sig- niﬁcance of this in terms of changes in DEB parameters that last far S. Augustine, S.A.L.M. Kooijman Journal of Sea Research xxx (xxxx) xxx–xxx 5 [Page 6] beyond the disappearance of the chemical in the body is examined. A major challenge for the future is to translate such eﬀects on in- dividuals to larger spatial and temporal scales that are of ecological relevance. This is an urgent research theme with far reaching implica- tions for environmental quality and resource management. Ecosystem models are in their infancy. The population is an intermediate level of organization between individual and ecosystems; the latter can be seen as systems of interacting populations. The "
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2608,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "anisms (e.g. in pelagic habitats) scaled with an exponent of 1.06  0.6 (95% confidence interval). While dimensionality did effect the interspecific scaling of consumption as they predicted, all estimated exponents were close to the range of 3/4 to 1, as we predict for interspecific scaling, and were significantly higher than the canonical 3/4. In contrast, the ontogenetic scaling of consumption was better approximated by a less steep, surface area or mass2/3 scal- ing. DEB theory explains the scaling as a result of organisms being more similar in shape to a larger conspecific than to one of a different species. If maintenance scales with volume and uptake scales with a surface area, organis"
+            },
+            {
+              "document_id": "2777",
+              "title": "KooyBaas2009.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2641,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "birth and puberty by 559 the cubed maximum length, we arrive at a maturity-density, which reﬂects the local bio- 560 chemical environment and should not depend on maximum length. So the maturity at 561 34 [Page 35] birth and puberty are proportional to the cubed maximum length. Many quantities, such 562 as the use of dioxygen by an individual, can be written as functions of parameter values 563 and amounts of reserve and structure. So the maximum respiration rate of a species is a 564 function of parameter values, while we know of each parameter how it depends on maxi- 565 mum length. It can be show that maximum respiration rate scales between a squared and 566 a cubed maximum length, and th"
+            },
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2642,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "5 confidence interval) and for 3D interacting organisms (e.g. in pelagic habitats) scaled with an 1 exponent of 1.06±0.6 (95% confidence interval). While dimensionality did effect the 2 interspecific scaling of consumption as they predicted, all estimated exponents were close to 3 the range of ¾ to 1, as we predict for interspecific scaling, and were significantly higher than 4 the canonical 3/4. 5 In contrast, the ontogenetic scaling of consumption was better approximated by a less 6 steep, surface area or mass2/3 scaling. DEB theory explains the scaling as a result of 7 organisms being more similar in shape to a larger conspecific than to one of a different 8 species. If maintenance scales"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2649,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "e network equals the total metabolic rate fB0m3/4. This option thus im- plies that the EOGM requires additional and unknown ways of transport to deliver the building materials for biosynthesis to the cells. The other option is that the network is able to transport the building materials as well. It can easily be shown that the network should be designed such that the capacity equals (f + γ)B0m3/4. Smaller 3/4 scaling networks cannot transport the assimilated matter when the animals are small. In this case the supply rate is no longer constrained by the network when the animal gets larger. For larger animals the network has a huge overcapacity and it remains unclear by what mechanism the tota"
+            },
+            {
+              "document_id": "3809",
+              "title": "Kooijman - 2024 - Ways to reduce or avoid juvenile-driven cycles in .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.265,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "for food. Although dioxygen consumption is a cubic polynomial of length of the individual in the standard DEB model (with constant coefficients in constant environments), it is similar to an allometric function of volume with scaling parameter 3/4 (Kooijman, 2010); a much-discussed issue in the literature. Although the result holds approximately for both intra- and inter-specific comparisons, the explanations that DEB theory offers are fundamentally different. The frequently used Holling type II functional response results from the dynamics of Synthesising Units (SUs), when time is partitioned in spells of either food searching or food processing, while food processing is independent of size"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2657,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "duction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78] but decreases with size inter-speciﬁcally Respiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113] The use of dioxygen increases with decreasing mass in animals embryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113] The use of dioxygen scales approximately with body weight raised animals [10, 84, 91] to a power close to 0.75 [45] Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88] after ingesting food (heat increment of feeding) Ageing Lifespan increases with size for endotherms, animals [19, 85] but is indep"
+            },
+            {
+              "document_id": "2565",
+              "title": "HirsGlaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2659,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "eny, ﬁsh and other organisms showing iso- metric metabolic scaling may also rely heavily on integumen- tary exchange of respiratory gases, which when coupled with shape change, parental resource supplements, or both, can prevent negatively allometric resource encounters (Brody 1945; Mori et al. 2010). Our data do not allow us to test interspeciﬁc scaling exponents, but future tests at this scale may beneﬁt from attention to SA constraints. Our tests have clearly distinguished between predictions of SA- and existing RTN-metabolic scaling models. However, the relative importance of resource supply, waste removal and metabolic demand in driving the slopes of the scaling relation- ships that we "
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "A few abstracts (10, 11, 16) explicitly discuss how the geometry or architecture of supply/transport networks constrains metabolic scaling, which aligns with the stylized fact that intraspecific maximum O₂ use depends on transport morphology. Most other snippets either address general allometric patterns without reference to network structure or are unrelated to respiration, providing little direct evidence. No snippet contradicts the claim. Consequently the corpus offers moderate but not overwhelming support, yielding a modest evidence strength and an overall neutral consensus due to limited corroboration."
+          },
+          "n_references": 3,
+          "references": {
+            "W2149361279": {
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2999
+            },
+            "W2260205413": {
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3
+            },
+            "W4404138154": {
+              "title": "The bioenergetic cost of building a metazoan",
+              "doi": "https://doi.org/10.1073/pnas.2414742121",
+              "year": "2024",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3039
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2117184765",
+              "title": "The origin of allometric scaling laws in biology from genomes to ecosystems: towards a quantitative unifying theory of biological structure and organization",
+              "doi": "https://doi.org/10.1242/jeb.01589",
+              "year": "2005",
+              "distance": 0.2889,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "SUMMARY Life is the most complex physical phenomenon in the Universe, manifesting an extraordinary diversity of form and function over an enormous scale from the largest animals and plants to the smallest microbes and subcellular units. Despite this many of its most fundamental and complex phenomena scale with size in a surprisingly simple fashion. For example, metabolic rate scales as the 3/4-power of mass over 27 orders of magnitude, from molecular and intracellular levels up to the largest organisms. Similarly, time-scales (such as lifespans and growth rates) and sizes (such as bacterial genome lengths,tree heights and mitochondrial densities) scale with exponents that are typically simpl"
+            },
+            {
+              "document_id": "W4417096410",
+              "title": "Diffusive Spreading Across Dynamic Mitochondrial Network Architectures",
+              "doi": "https://doi.org/10.48550/arxiv.2506.05643",
+              "year": "2025",
+              "distance": 0.2903,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Networks of physical units can vary from a stationary set of spatially-embedded links to a collection of mobile agents that undergo transient social interactions. In living cells, mitochondria form architectures that span across these regimes, transitioning between fragmented, partly connected, and highly fused structures depending on cell type and state. Diffusive transport of biomolecular components through these networks limits the heterogeneity of the mitochondrial population. Here we address the connection between dynamic network architecture and the rate of diffusive mixing through simulations and analytic models that incorporate fusion, fission, and rearrangement. We find that the mat"
+            },
+            {
+              "document_id": "W4213341356",
+              "title": "Energetic dissociation of individual and species ranges",
+              "doi": "https://doi.org/10.1098/rsbl.2021.0374",
+              "year": "2022",
+              "distance": 0.2913,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The use of energy is universal to all life forms and all levels of biological organization, potentially linking processes operating at variable scales. Individual and species ranges might be energetically constrained, yet divergent metabolic limitations at both scales can disassociate these individual and species traits. We analysed comparative energetic and range data to unravel the mechanistic basis of the dissociation between individual and species range sizes observed among mammalian species. Our results demonstrate that basal, or maintenance, metabolism negatively correlates with individual ranges, but, at the same time, it positively correlates with species ranges. High aerobic capacit"
+            },
+            {
+              "document_id": "W3207950334",
+              "title": "Strategic traits of bacteria and archaea vary widely within substrate-use groups",
+              "doi": "https://doi.org/10.1093/femsec/fiab142",
+              "year": "2021",
+              "distance": 0.2931,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT Quantitative traits such as maximum growth rate and cell radial diameter are one facet of ecological strategy variation across bacteria and archaea. Another facet is substrate-use pathways, such as iron reduction or methylotrophy. Here, we ask how these two facets intersect, using a large compilation of data for culturable species and examining seven quantitative traits (genome size, signal transduction protein count, histidine kinase count, growth temperature, temperature-adjusted maximum growth rate, cell radial diameter and 16S rRNA operon copy number). Overall, quantitative trait variation within groups of organisms possessing a particular substrate-use pathway was very broad, o"
+            },
+            {
+              "document_id": "W3130797445",
+              "title": "Chemical energy storage enables the transformation of fossil energy systems to sustainability",
+              "doi": "https://doi.org/10.1039/d0gc03171b",
+              "year": "2021",
+              "distance": 0.2953,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The enormous dimensions of sustainable energy transitions and their overarching systemic nature require adequate responses from chemical science."
+            },
+            {
+              "document_id": "W2508294631",
+              "title": "The Role of Morphological Biochemical Reciprocity in Early Land Plant Evolution",
+              "doi": "https://doi.org/10.1093/oxfordjournals.aob.a085245",
+              "year": "1976",
+              "distance": 0.2957,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "A morphological-biochemical reciprocity is used to construct a scenario for the evolution of the land and vascular plant habits. The optimal designs of autotrophs are shown to be limited by their biosynthetic capacities, i.e., the morphological manner in which surface area-dependent functions are maintained with increasing size is primarily dictated by the availability of specific architectural polymers. The evolution of biosynthetic pathways (involving the detoxification-conversion of primary metabolites into useful architectural polymers, e.g., cellulose, lignin) predates and allows for transitions from simple dichotomous-convoluted morphologies to ‘tree-like’ erect plants. The reciprocity"
+            },
+            {
+              "document_id": "W2032410204",
+              "title": "Scaling properties of cell and organelle size",
+              "doi": "https://doi.org/10.4161/org.6.2.11464",
+              "year": "2010",
+              "distance": 0.2959,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "How size is controlled is a fundamental question in biology. In this review, we discuss the use of scaling relationships-for example, power-laws of the form y∝x(α)-to provide a framework for comparison and interpretation of size measurements. Such analysis can illustrate the biological and physical principles underlying observed trends, as has been proposed for the allometric dependence of metabolic rate or limb structure on organism mass. Techniques for measuring size at smaller length-scales continue to improve, leading to more data on the control of size in cells and organelles. Size scaling of these structures is expected to influence growth patterns, functional capacity and intracellula"
+            },
+            {
+              "document_id": "W4327597837",
+              "title": "Scaling of leaf area with biomass in trees reconsidered: constant metabolically active sapwood volume per unit leaf area with height growth",
+              "doi": "https://doi.org/10.22541/au.167896117.78692691/v1",
+              "year": "2023",
+              "distance": 0.2963,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "¾-power scaling between metabolic rate and body mass is regarded as near-universal across organisms. However, there are compelling reasons to question ¾-power scaling in woody plants, where metabolic rate≈leaf area. This leaf area must provide carbon to the metabolically active sapwood volume (V ). V is necessarily a much smaller volume than total wood volume, meaning that scaling of total leaf area LA with V should be &gt;¾. Within populations of a species, variants in which V increases per unit leaf area with height growth (e.g. ¾ scaling) would have proportionally less carbon for growth and reproduction as they grow taller. Therefore, selection should favor individuals in which, as they g"
+            },
+            {
+              "document_id": "W2941637565",
+              "title": "The scaling of genome size and cell size limits maximum rates of photosynthesis with implications for ecological strategies",
+              "doi": "https://doi.org/10.1101/619585",
+              "year": "2019",
+              "distance": 0.2983,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract A central challenge in plant ecology is to define the major axes of plant functional variation with direct consequences for fitness. Central to the three main components of plant fitness (growth, survival, and reproduction) is the rate of metabolic conversion of CO 2 into carbon that can be allocated to various structures and functions. Here we (1) argue that a primary constraint on the maximum rate of photosynthesis per unit leaf area is the size and packing density of cells and (2) show that variation in genome size is a strong predictor of cell sizes, packing densities, and the maximum rate of photosynthesis across terrestrial vascular plants. Regardless of the genic content asso"
+            },
+            {
+              "document_id": "W2149361279",
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "distance": 0.2999,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Summary Metabolic theory specifies constraints on the metabolic organisation of individual organisms. These constraints have important implications for biological processes ranging from the scale of molecules all the way to the level of populations, communities and ecosystems, with their application to the latter emerging as the field of metabolic ecology. While ecologists continue to use individual metabolism to identify constraints in ecological processes, the topic of metabolic scaling remains controversial. Much of the current interest and controversy in metabolic theory relates to recent ideas about the role of supply networks in constraining energy supply to cells. We show that an alte"
+            },
+            {
+              "document_id": "W2260205413",
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "distance": 0.3,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "The West-Brown-Enquist (WBE) metabolic scaling theory posits that many organismal features scale predictably with body size because of selection to minimize transport costs in resource distribution networks. Many scaling exponents are quarter-powers, as predicted by WBE, but there are also biologically significant deviations that could reflect adaptation to different environments. A central but untested prediction of the WBE model is that wide deviation from optimal scaling is penalized, leading to a pattern of constraint on scaling exponents. Here, we demonstrate, using phylogenetic comparative methods, that variation in allometric scaling between mass and leaf area across 17 wild tomato ta"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.3003,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            },
+            {
+              "document_id": "W2103965874",
+              "title": "Allometry and Metabolic Scaling in Ecology",
+              "doi": "https://doi.org/10.1002/9780470015902.a0021222",
+              "year": "2009",
+              "distance": 0.3011,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Body size affects the structure and function of all levels of biological organization. In ecological systems, body size strongly influences individuals (e.g. rates of individual growth, reproduction and mortality), populations (e.g. population growth rate, abundance and space use), communities (e.g. community abundance, food‐web structure and interspecific interactions) and ecosystems (e.g. flux, storage and turnover of materials and energy). This is because individual metabolic rate – the rate at which an organism takes up and utilizes energy and materials – is largely controlled by body size. Here we review how body‐size allometries at the individual level affect the structure and"
+            },
+            {
+              "document_id": "W2979176951",
+              "title": "The Scaling of Genome Size and Cell Size Limits Maximum Rates of Photosynthesis with Implications for Ecological Strategies",
+              "doi": "https://doi.org/10.1086/706186",
+              "year": "2019",
+              "distance": 0.3021,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "A central challenge in plant ecology is to define the major axes of plant functional variation with direct consequences for fitness. Central to the three main components of plant fitness (growth, survival, and reproduction) is the rate of metabolic conversion of CO2 into carbon that can be allocated to various structures and functions. Here we (1) argue that a primary constraint on the maximum rate of photosynthesis per unit leaf area is the size and packing density of cells and (2) show that variation in genome size is a strong predictor of cell sizes, packing densities, and the maximum rate of photosynthesis across terrestrial vascular plants. Regardless of the genic content associated wit"
+            },
+            {
+              "document_id": "W1977384682",
+              "title": "Amphipod crustacean size spectra: new insights in the relationship between size and oxygen",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.12934.x",
+              "year": "2004",
+              "distance": 0.3035,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Oxygen availability limits the maximum potential size attainable in benthic gammaridean amphipods from the suborder to the generic level, while also influencing size within species. In this paper we investigate the effect of oxygen on 15 size spectra worldwide, established by compiling maximum length data of more than 2000 amphipod species. We used TS95/5 as a proxy for maximum size and defined this as the threshold size between the 95% smallest and the 5% largest species at any given site. Our data show that beside TS95/5, minimum, mean and modal sizes, as well as all 10% increment threshold sizes (from TS10/90 to TS90/10) also vary significantly with oxygen concentration. Size distribution"
+            },
+            {
+              "document_id": "W4404138154",
+              "title": "The bioenergetic cost of building a metazoan",
+              "doi": "https://doi.org/10.1073/pnas.2414742121",
+              "year": "2024",
+              "distance": 0.3039,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "All life forms depend on the conversion of energy into biomass used in growth and reproduction. For unicellular heterotrophs, the energetic cost associated with building a cell scales slightly sublinearly with cell weight. However, observations on multiple Daphnia species and numerous other metazoans suggest that although a similar size-specific scaling is retained in multicellular heterotrophs, there is a quantum leap in the energy required to build a replacement soma, presumably owing to the added investment in nonproductive features such as cell adhesion, support tissue, and intercellular communication and transport. Thus, any context-dependent ecological advantages that accompany the evo"
+            },
+            {
+              "document_id": "W2388470274",
+              "title": "CHAPTER 10. Scale‐up of Extraction Processes",
+              "doi": "https://doi.org/10.1039/9781849737579-00363",
+              "year": "2013",
+              "distance": 0.3047,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The challenge of finding scale‐up criteria that allow the reproduction of laboratory data at higher scales is discussed in this chapter. The main factors that should be considered when scaling‐up extraction processes will be presented, and the nature of thermodynamic and mass transfer changes implied by scale‐up will be extensively discussed. The chapter contains an overview of the latest developments and applications in the field of natural products. Some simple examples of application of scale‐up criteria are shown. Moreover, a case study will present experimental data of a scale‐up procedure of supercritical fluid extraction from laboratory to pilot scale."
+            },
+            {
+              "document_id": "W2979688413",
+              "title": "Linking scaling laws across eukaryotes",
+              "doi": "https://doi.org/10.1073/pnas.1900492116",
+              "year": "2019",
+              "distance": 0.306,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Significance Metabolic scaling theory has had a profound influence on ecology, but the core links between species characteristics have not been formally tested across the full domain to which the theory claims to apply. We compiled datasets spanning all eukaryotes for the foremost body mass scaling laws: metabolism, abundance, growth, and mortality. We show that metabolism and abundance scaling only follow the canonical ±3/4 slopes within some taxonomic groups, but across eukaryotes reveal reciprocal near ±1 slopes, broadly supporting the “energetic equivalence rule.” In contrast to metabolism, growth follows consistent ∼3/4 scaling within many groups and across all eukaryotes. Our findings "
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The majority of the retrieved excerpts (approximately half) explicitly link intraspecific scaling of maximum dioxygen consumption to morphological features of transport networks—surface‑area versus volume considerations, fractal branching, or distribution‑network design. These passages provide direct theoretical or empirical support for the stylized fact, yielding a strong evidential base. No snippet presents evidence that contradicts the claim; the remaining excerpts are either unrelated or only tangentially mention metabolism without addressing network morphology, resulting in a clear consensus that the corpus corroborates the stated pattern."
+          },
+          "n_references": 9,
+          "references": {
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2264
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2346
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.249
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.254
+            },
+            "3652": {
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2584
+            },
+            "2648": {
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2589
+            },
+            "3127": {
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2604
+            },
+            "W2149361279": {
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2999
+            },
+            "W2260205413": {
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2264,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": ", V A m . The powers ˙pM and ˙pJ are proportional to maximum body size volume V A m while ˙pT is proportional to V A 2/3 m . The dioxygen consumption must be approximately proportional to V A α m with α ∈[2/3, 1] because it is a linear combination of V A 2/3 m and V A m . The relationship between the weigth and the volume of the species considered, w = [Em]e µEV 1/3 m V A 4/3 m + dV V A m , (5.69) [Page 134] 122 Chapter 5 is obtained from Eq. 5.57 by replacing body size V with Vm, energy density [E] with [Em]e and rewriting the parameters of species A as a function of the parameters of a ref- erence species with the exception of V A m . Thus, (1) the mass is approximately proportional to V β"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2346,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "fluxes, and so the dioxygen consumption rate and the carbon dioxide production rate, depend on structural body length via the powers ˙pD and ˙pG, which are both weighted sums of surface area and volume, i.e. of l2 and l3. This is noth- ing new. If we compare species of different (maximum) body size, however, we keep the state variables constant, and vary the parameters that depend on the maximum structural body volume. In the respiration rate (4.49), Lm, l−1 T and g−1 are proportional to structural body length; none of the other parameters depend on maximum structural body length (or volume). Generally, this again results in a scaling of respiration somewhere between a surface area and a vol"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.249,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "eases with the similarity between the species. The design parameters are { ˙JEAm} and ¨ha, which scale with maximum length, M b H and M p H, which scale with maximum volume. All 16 [Page 17] the other primary parameters are independent of size, so also independent of the maximum size of a species. The body-size scaling relationships can also be used partially, making optimal use of all data at hand [52, 59] to detect species-speciﬁc deviations from the general trend. These rules also determine how properties that can be written as functions of the primary pa- rameters depend on maximum length. An example is the respiration rate (i.e. the use of dioxy- gen). It works out to be approximately p"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2521,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2566",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2528,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "t total ecosystem energy use should scale to system size (V or B) with a power as low as 1/2 (depending on the scaling of A and water depth with V or B), because according to Euclidian geometry for isomorphic shapes, P should scale with A to the 1/2 power (i.e., in proportion to the square root of A). Data are needed to test these hypotheses, some of which is presented in Section 5.1. 4.4.2. Resource Transport (RT) Models RT theory may help explain how rates or patterns of energy flow through food webs vary with community or ecosystem size. Food webs can be modelled as “energy transportation networks” [246–248]. By doing so, it is possible to calculate power functions describing relationship"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.254,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "h curve Respiration The use of dioxygen scales with body mass raised to a power close to 0.75 compared to that of DEB (Table 2). Table 6: The basic assumptions of the Metabolic Theory of Ecology, and more speciﬁcally of the extended ontogenetic growth model (EOGM). Interpreted from West et al. [18] and Hou et al. [5]. See text for further explanation. 1. An organism is characterized by its body mass. 2. Nine detailed assumptions on the design of the distribution network (not spelled out here, but see assumptions A1-A9 in [14]) result in the predic- tion that the delivery of oxygen to the cells is proportional to body mass raised to the power 3/4. 3. The oxygen delivered to the cells is used "
+            },
+            {
+              "document_id": "3652",
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2584,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "eral model of transport of essential materials through space-ﬁlling fractal networks of branching tubes. Banavar et al. (1999) proposed a simi- lar explanation based on branching transportation networks within the organism. In their subsequent work West et al. (1999) proposed to consider four-dimensional biology and suggested that the quarter-power scaling laws originate from hierarchical branching nu- trient supply networks that terminate in size-invariant units, such as capillaries, leaves, 378 http://www.demographic-research.org [Page 35] Demographic Research: Volume 15, Article 12 mitochondria, and oxidase molecules. They hypothesize that natural selection tends to maximize both metaboli"
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2589,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "ld elucidate constraints on overall ecosystem functioning. Surface areas often mediate the passage of food from the environment into an organism, for example, a spider’s web, the mouth of a filter feeder, the gut of caterpillar, or the plasma membrane of a prokaryote. This has led some to argue that, all other things being equal, consumption should scale in proportion to a relevant surface area and hence with mass2/3 (von Bertalanffy 1957, Kooijman 2010). Others have claimed a 3/4 power scaling of consumption on the basis of the 3/4 power scaling of metabolic rate, arguing that supply matches demand (Calder 1984, Peters 1986, West et al. 2001). Recently it has been found that consumption sca"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2596,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3127",
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2604,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "at focus on transport of resources and waste products such as respiratory gases between the external environment and metabolizing cells. This transport may be influenced by two major steps: the exchange of materials across body surfaces and the transport of materials through internal networks. These steps are the foci for two prominent theoretical approaches to understanding and predicting biological scal- ing: SA theory [4,8,14,15] and resource-transport network (RTN) theory [1,2,16,17], respectively. Although both SA and internal transport networks may be important in influencing metabolic rate and its scaling with body size, SA theory (including widely applied DEB theory, which incorporat"
+            },
+            {
+              "document_id": "3251",
+              "title": "Augustine and Kooijman - A new phase in DEB research.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2606,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "years. The sig- niﬁcance of this in terms of changes in DEB parameters that last far S. Augustine, S.A.L.M. Kooijman Journal of Sea Research xxx (xxxx) xxx–xxx 5 [Page 6] beyond the disappearance of the chemical in the body is examined. A major challenge for the future is to translate such eﬀects on in- dividuals to larger spatial and temporal scales that are of ecological relevance. This is an urgent research theme with far reaching implica- tions for environmental quality and resource management. Ecosystem models are in their infancy. The population is an intermediate level of organization between individual and ecosystems; the latter can be seen as systems of interacting populations. The "
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2608,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "anisms (e.g. in pelagic habitats) scaled with an exponent of 1.06  0.6 (95% confidence interval). While dimensionality did effect the interspecific scaling of consumption as they predicted, all estimated exponents were close to the range of 3/4 to 1, as we predict for interspecific scaling, and were significantly higher than the canonical 3/4. In contrast, the ontogenetic scaling of consumption was better approximated by a less steep, surface area or mass2/3 scal- ing. DEB theory explains the scaling as a result of organisms being more similar in shape to a larger conspecific than to one of a different species. If maintenance scales with volume and uptake scales with a surface area, organis"
+            },
+            {
+              "document_id": "W2117184765",
+              "title": "The origin of allometric scaling laws in biology from genomes to ecosystems: towards a quantitative unifying theory of biological structure and organization",
+              "doi": "https://doi.org/10.1242/jeb.01589",
+              "year": "2005",
+              "distance": 0.2889,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "SUMMARY Life is the most complex physical phenomenon in the Universe, manifesting an extraordinary diversity of form and function over an enormous scale from the largest animals and plants to the smallest microbes and subcellular units. Despite this many of its most fundamental and complex phenomena scale with size in a surprisingly simple fashion. For example, metabolic rate scales as the 3/4-power of mass over 27 orders of magnitude, from molecular and intracellular levels up to the largest organisms. Similarly, time-scales (such as lifespans and growth rates) and sizes (such as bacterial genome lengths,tree heights and mitochondrial densities) scale with exponents that are typically simpl"
+            },
+            {
+              "document_id": "W4417096410",
+              "title": "Diffusive Spreading Across Dynamic Mitochondrial Network Architectures",
+              "doi": "https://doi.org/10.48550/arxiv.2506.05643",
+              "year": "2025",
+              "distance": 0.2903,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Networks of physical units can vary from a stationary set of spatially-embedded links to a collection of mobile agents that undergo transient social interactions. In living cells, mitochondria form architectures that span across these regimes, transitioning between fragmented, partly connected, and highly fused structures depending on cell type and state. Diffusive transport of biomolecular components through these networks limits the heterogeneity of the mitochondrial population. Here we address the connection between dynamic network architecture and the rate of diffusive mixing through simulations and analytic models that incorporate fusion, fission, and rearrangement. We find that the mat"
+            },
+            {
+              "document_id": "W4213341356",
+              "title": "Energetic dissociation of individual and species ranges",
+              "doi": "https://doi.org/10.1098/rsbl.2021.0374",
+              "year": "2022",
+              "distance": 0.2913,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The use of energy is universal to all life forms and all levels of biological organization, potentially linking processes operating at variable scales. Individual and species ranges might be energetically constrained, yet divergent metabolic limitations at both scales can disassociate these individual and species traits. We analysed comparative energetic and range data to unravel the mechanistic basis of the dissociation between individual and species range sizes observed among mammalian species. Our results demonstrate that basal, or maintenance, metabolism negatively correlates with individual ranges, but, at the same time, it positively correlates with species ranges. High aerobic capacit"
+            },
+            {
+              "document_id": "W3207950334",
+              "title": "Strategic traits of bacteria and archaea vary widely within substrate-use groups",
+              "doi": "https://doi.org/10.1093/femsec/fiab142",
+              "year": "2021",
+              "distance": 0.2931,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT Quantitative traits such as maximum growth rate and cell radial diameter are one facet of ecological strategy variation across bacteria and archaea. Another facet is substrate-use pathways, such as iron reduction or methylotrophy. Here, we ask how these two facets intersect, using a large compilation of data for culturable species and examining seven quantitative traits (genome size, signal transduction protein count, histidine kinase count, growth temperature, temperature-adjusted maximum growth rate, cell radial diameter and 16S rRNA operon copy number). Overall, quantitative trait variation within groups of organisms possessing a particular substrate-use pathway was very broad, o"
+            },
+            {
+              "document_id": "W3130797445",
+              "title": "Chemical energy storage enables the transformation of fossil energy systems to sustainability",
+              "doi": "https://doi.org/10.1039/d0gc03171b",
+              "year": "2021",
+              "distance": 0.2953,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The enormous dimensions of sustainable energy transitions and their overarching systemic nature require adequate responses from chemical science."
+            },
+            {
+              "document_id": "W2508294631",
+              "title": "The Role of Morphological Biochemical Reciprocity in Early Land Plant Evolution",
+              "doi": "https://doi.org/10.1093/oxfordjournals.aob.a085245",
+              "year": "1976",
+              "distance": 0.2957,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "A morphological-biochemical reciprocity is used to construct a scenario for the evolution of the land and vascular plant habits. The optimal designs of autotrophs are shown to be limited by their biosynthetic capacities, i.e., the morphological manner in which surface area-dependent functions are maintained with increasing size is primarily dictated by the availability of specific architectural polymers. The evolution of biosynthetic pathways (involving the detoxification-conversion of primary metabolites into useful architectural polymers, e.g., cellulose, lignin) predates and allows for transitions from simple dichotomous-convoluted morphologies to ‘tree-like’ erect plants. The reciprocity"
+            },
+            {
+              "document_id": "W2032410204",
+              "title": "Scaling properties of cell and organelle size",
+              "doi": "https://doi.org/10.4161/org.6.2.11464",
+              "year": "2010",
+              "distance": 0.2959,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "How size is controlled is a fundamental question in biology. In this review, we discuss the use of scaling relationships-for example, power-laws of the form y∝x(α)-to provide a framework for comparison and interpretation of size measurements. Such analysis can illustrate the biological and physical principles underlying observed trends, as has been proposed for the allometric dependence of metabolic rate or limb structure on organism mass. Techniques for measuring size at smaller length-scales continue to improve, leading to more data on the control of size in cells and organelles. Size scaling of these structures is expected to influence growth patterns, functional capacity and intracellula"
+            },
+            {
+              "document_id": "W4327597837",
+              "title": "Scaling of leaf area with biomass in trees reconsidered: constant metabolically active sapwood volume per unit leaf area with height growth",
+              "doi": "https://doi.org/10.22541/au.167896117.78692691/v1",
+              "year": "2023",
+              "distance": 0.2963,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "¾-power scaling between metabolic rate and body mass is regarded as near-universal across organisms. However, there are compelling reasons to question ¾-power scaling in woody plants, where metabolic rate≈leaf area. This leaf area must provide carbon to the metabolically active sapwood volume (V ). V is necessarily a much smaller volume than total wood volume, meaning that scaling of total leaf area LA with V should be &gt;¾. Within populations of a species, variants in which V increases per unit leaf area with height growth (e.g. ¾ scaling) would have proportionally less carbon for growth and reproduction as they grow taller. Therefore, selection should favor individuals in which, as they g"
+            },
+            {
+              "document_id": "W2941637565",
+              "title": "The scaling of genome size and cell size limits maximum rates of photosynthesis with implications for ecological strategies",
+              "doi": "https://doi.org/10.1101/619585",
+              "year": "2019",
+              "distance": 0.2983,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract A central challenge in plant ecology is to define the major axes of plant functional variation with direct consequences for fitness. Central to the three main components of plant fitness (growth, survival, and reproduction) is the rate of metabolic conversion of CO 2 into carbon that can be allocated to various structures and functions. Here we (1) argue that a primary constraint on the maximum rate of photosynthesis per unit leaf area is the size and packing density of cells and (2) show that variation in genome size is a strong predictor of cell sizes, packing densities, and the maximum rate of photosynthesis across terrestrial vascular plants. Regardless of the genic content asso"
+            },
+            {
+              "document_id": "W2149361279",
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "distance": 0.2999,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Summary Metabolic theory specifies constraints on the metabolic organisation of individual organisms. These constraints have important implications for biological processes ranging from the scale of molecules all the way to the level of populations, communities and ecosystems, with their application to the latter emerging as the field of metabolic ecology. While ecologists continue to use individual metabolism to identify constraints in ecological processes, the topic of metabolic scaling remains controversial. Much of the current interest and controversy in metabolic theory relates to recent ideas about the role of supply networks in constraining energy supply to cells. We show that an alte"
+            },
+            {
+              "document_id": "W2260205413",
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "distance": 0.3,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "The West-Brown-Enquist (WBE) metabolic scaling theory posits that many organismal features scale predictably with body size because of selection to minimize transport costs in resource distribution networks. Many scaling exponents are quarter-powers, as predicted by WBE, but there are also biologically significant deviations that could reflect adaptation to different environments. A central but untested prediction of the WBE model is that wide deviation from optimal scaling is penalized, leading to a pattern of constraint on scaling exponents. Here, we demonstrate, using phylogenetic comparative methods, that variation in allometric scaling between mass and leaf area across 17 wild tomato ta"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.3003,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact asserts that intraspecific scaling of maximum dioxygen use depends on the morphology of transport networks. Several snippets bear directly on this. Snippets [10] and [18] (from RTN/SA scaling literature) explicitly contrast surface-area exchange versus internal resource-transport network theory as determinants of metabolic scaling, supporting the notion that network morphology shapes O2-use scaling. Snippets [7] and [6] describe branching fractal transport networks producing particular scaling exponents (West/Banavar), and [15] discusses how network design constraints determine metabolic/supply scaling. [12] and [14] note dimensionality (related to network/geometry) affecting scaling exponents. DEB-specific snippets [1], [2], [3], [13], [16] explain that respiration scales between surface area (l^2) and volume (l^3) as a function of how parameters depend on body size and shape (isomorphy/morphology), which is consistent with the fact, though they emphasize DEB's own mechanism rather than explicit transport-network morphology. No snippet contradicts the fact. Overall, support is moderate: multiple relevant references corroborate that morphology/network geometry influences respiration scaling, with no conflicting evidence, but the explicit 'transport-network morphology' framing is strongest in the RTN-comparison papers rather than core DEB texts."
+          },
+          "n_references": 7,
+          "references": {
+            "2566": {
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2528
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.254
+            },
+            "3652": {
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2584
+            },
+            "2648": {
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2589
+            },
+            "3127": {
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2604
+            },
+            "2650": {
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2642
+            },
+            "2565": {
+              "title": "HirsGlaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2659
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2264,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": ", V A m . The powers ˙pM and ˙pJ are proportional to maximum body size volume V A m while ˙pT is proportional to V A 2/3 m . The dioxygen consumption must be approximately proportional to V A α m with α ∈[2/3, 1] because it is a linear combination of V A 2/3 m and V A m . The relationship between the weigth and the volume of the species considered, w = [Em]e µEV 1/3 m V A 4/3 m + dV V A m , (5.69) [Page 134] 122 Chapter 5 is obtained from Eq. 5.57 by replacing body size V with Vm, energy density [E] with [Em]e and rewriting the parameters of species A as a function of the parameters of a ref- erence species with the exception of V A m . Thus, (1) the mass is approximately proportional to V β"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2346,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "fluxes, and so the dioxygen consumption rate and the carbon dioxide production rate, depend on structural body length via the powers ˙pD and ˙pG, which are both weighted sums of surface area and volume, i.e. of l2 and l3. This is noth- ing new. If we compare species of different (maximum) body size, however, we keep the state variables constant, and vary the parameters that depend on the maximum structural body volume. In the respiration rate (4.49), Lm, l−1 T and g−1 are proportional to structural body length; none of the other parameters depend on maximum structural body length (or volume). Generally, this again results in a scaling of respiration somewhere between a surface area and a vol"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.249,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "eases with the similarity between the species. The design parameters are { ˙JEAm} and ¨ha, which scale with maximum length, M b H and M p H, which scale with maximum volume. All 16 [Page 17] the other primary parameters are independent of size, so also independent of the maximum size of a species. The body-size scaling relationships can also be used partially, making optimal use of all data at hand [52, 59] to detect species-speciﬁc deviations from the general trend. These rules also determine how properties that can be written as functions of the primary pa- rameters depend on maximum length. An example is the respiration rate (i.e. the use of dioxy- gen). It works out to be approximately p"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2521,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2566",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2528,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "t total ecosystem energy use should scale to system size (V or B) with a power as low as 1/2 (depending on the scaling of A and water depth with V or B), because according to Euclidian geometry for isomorphic shapes, P should scale with A to the 1/2 power (i.e., in proportion to the square root of A). Data are needed to test these hypotheses, some of which is presented in Section 5.1. 4.4.2. Resource Transport (RT) Models RT theory may help explain how rates or patterns of energy flow through food webs vary with community or ecosystem size. Food webs can be modelled as “energy transportation networks” [246–248]. By doing so, it is possible to calculate power functions describing relationship"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.254,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "h curve Respiration The use of dioxygen scales with body mass raised to a power close to 0.75 compared to that of DEB (Table 2). Table 6: The basic assumptions of the Metabolic Theory of Ecology, and more speciﬁcally of the extended ontogenetic growth model (EOGM). Interpreted from West et al. [18] and Hou et al. [5]. See text for further explanation. 1. An organism is characterized by its body mass. 2. Nine detailed assumptions on the design of the distribution network (not spelled out here, but see assumptions A1-A9 in [14]) result in the predic- tion that the delivery of oxygen to the cells is proportional to body mass raised to the power 3/4. 3. The oxygen delivered to the cells is used "
+            },
+            {
+              "document_id": "3652",
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2584,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "eral model of transport of essential materials through space-ﬁlling fractal networks of branching tubes. Banavar et al. (1999) proposed a simi- lar explanation based on branching transportation networks within the organism. In their subsequent work West et al. (1999) proposed to consider four-dimensional biology and suggested that the quarter-power scaling laws originate from hierarchical branching nu- trient supply networks that terminate in size-invariant units, such as capillaries, leaves, 378 http://www.demographic-research.org [Page 35] Demographic Research: Volume 15, Article 12 mitochondria, and oxidase molecules. They hypothesize that natural selection tends to maximize both metaboli"
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2589,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "ld elucidate constraints on overall ecosystem functioning. Surface areas often mediate the passage of food from the environment into an organism, for example, a spider’s web, the mouth of a filter feeder, the gut of caterpillar, or the plasma membrane of a prokaryote. This has led some to argue that, all other things being equal, consumption should scale in proportion to a relevant surface area and hence with mass2/3 (von Bertalanffy 1957, Kooijman 2010). Others have claimed a 3/4 power scaling of consumption on the basis of the 3/4 power scaling of metabolic rate, arguing that supply matches demand (Calder 1984, Peters 1986, West et al. 2001). Recently it has been found that consumption sca"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2596,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3127",
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2604,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "at focus on transport of resources and waste products such as respiratory gases between the external environment and metabolizing cells. This transport may be influenced by two major steps: the exchange of materials across body surfaces and the transport of materials through internal networks. These steps are the foci for two prominent theoretical approaches to understanding and predicting biological scal- ing: SA theory [4,8,14,15] and resource-transport network (RTN) theory [1,2,16,17], respectively. Although both SA and internal transport networks may be important in influencing metabolic rate and its scaling with body size, SA theory (including widely applied DEB theory, which incorporat"
+            },
+            {
+              "document_id": "3251",
+              "title": "Augustine and Kooijman - A new phase in DEB research.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2606,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "years. The sig- niﬁcance of this in terms of changes in DEB parameters that last far S. Augustine, S.A.L.M. Kooijman Journal of Sea Research xxx (xxxx) xxx–xxx 5 [Page 6] beyond the disappearance of the chemical in the body is examined. A major challenge for the future is to translate such eﬀects on in- dividuals to larger spatial and temporal scales that are of ecological relevance. This is an urgent research theme with far reaching implica- tions for environmental quality and resource management. Ecosystem models are in their infancy. The population is an intermediate level of organization between individual and ecosystems; the latter can be seen as systems of interacting populations. The "
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2608,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "anisms (e.g. in pelagic habitats) scaled with an exponent of 1.06  0.6 (95% confidence interval). While dimensionality did effect the interspecific scaling of consumption as they predicted, all estimated exponents were close to the range of 3/4 to 1, as we predict for interspecific scaling, and were significantly higher than the canonical 3/4. In contrast, the ontogenetic scaling of consumption was better approximated by a less steep, surface area or mass2/3 scal- ing. DEB theory explains the scaling as a result of organisms being more similar in shape to a larger conspecific than to one of a different species. If maintenance scales with volume and uptake scales with a surface area, organis"
+            },
+            {
+              "document_id": "2777",
+              "title": "KooyBaas2009.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2641,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "birth and puberty by 559 the cubed maximum length, we arrive at a maturity-density, which reﬂects the local bio- 560 chemical environment and should not depend on maximum length. So the maturity at 561 34 [Page 35] birth and puberty are proportional to the cubed maximum length. Many quantities, such 562 as the use of dioxygen by an individual, can be written as functions of parameter values 563 and amounts of reserve and structure. So the maximum respiration rate of a species is a 564 function of parameter values, while we know of each parameter how it depends on maxi- 565 mum length. It can be show that maximum respiration rate scales between a squared and 566 a cubed maximum length, and th"
+            },
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2642,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "5 confidence interval) and for 3D interacting organisms (e.g. in pelagic habitats) scaled with an 1 exponent of 1.06±0.6 (95% confidence interval). While dimensionality did effect the 2 interspecific scaling of consumption as they predicted, all estimated exponents were close to 3 the range of ¾ to 1, as we predict for interspecific scaling, and were significantly higher than 4 the canonical 3/4. 5 In contrast, the ontogenetic scaling of consumption was better approximated by a less 6 steep, surface area or mass2/3 scaling. DEB theory explains the scaling as a result of 7 organisms being more similar in shape to a larger conspecific than to one of a different 8 species. If maintenance scales"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2649,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "e network equals the total metabolic rate fB0m3/4. This option thus im- plies that the EOGM requires additional and unknown ways of transport to deliver the building materials for biosynthesis to the cells. The other option is that the network is able to transport the building materials as well. It can easily be shown that the network should be designed such that the capacity equals (f + γ)B0m3/4. Smaller 3/4 scaling networks cannot transport the assimilated matter when the animals are small. In this case the supply rate is no longer constrained by the network when the animal gets larger. For larger animals the network has a huge overcapacity and it remains unclear by what mechanism the tota"
+            },
+            {
+              "document_id": "3809",
+              "title": "Kooijman - 2024 - Ways to reduce or avoid juvenile-driven cycles in .pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.265,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "for food. Although dioxygen consumption is a cubic polynomial of length of the individual in the standard DEB model (with constant coefficients in constant environments), it is similar to an allometric function of volume with scaling parameter 3/4 (Kooijman, 2010); a much-discussed issue in the literature. Although the result holds approximately for both intra- and inter-specific comparisons, the explanations that DEB theory offers are fundamentally different. The frequently used Holling type II functional response results from the dynamics of Synthesising Units (SUs), when time is partitioned in spells of either food searching or food processing, while food processing is independent of size"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2657,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "duction Reproduction increases with size intra-speciﬁcally animals [52, pp69,323][78] but decreases with size inter-speciﬁcally Respiration Freshly laid eggs do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113] The use of dioxygen increases with decreasing mass in animals embryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113] The use of dioxygen scales approximately with body weight raised animals [10, 84, 91] to a power close to 0.75 [45] Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88] after ingesting food (heat increment of feeding) Ageing Lifespan increases with size for endotherms, animals [19, 85] but is indep"
+            },
+            {
+              "document_id": "2565",
+              "title": "HirsGlaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2659,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "eny, ﬁsh and other organisms showing iso- metric metabolic scaling may also rely heavily on integumen- tary exchange of respiratory gases, which when coupled with shape change, parental resource supplements, or both, can prevent negatively allometric resource encounters (Brody 1945; Mori et al. 2010). Our data do not allow us to test interspeciﬁc scaling exponents, but future tests at this scale may beneﬁt from attention to SA constraints. Our tests have clearly distinguished between predictions of SA- and existing RTN-metabolic scaling models. However, the relative importance of resource supply, waste removal and metabolic demand in driving the slopes of the scaling relation- ships that we "
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The stylized fact concerns intraspecific scaling of maximum dioxygen use depending on the morphology of energy/material transport networks. Several snippets discuss metabolic scaling theory and the role of supply/transport networks in constraining metabolic rate (e.g., the WBE network model in [10], [11], and sapwood transport geometry in [8]), which are topically aligned with the idea that transport network morphology shapes metabolic-size scaling. However, none directly address intraspecific maximum O2 consumption and its dependence on network morphology in the DEB-specific sense; most focus on interspecific allometric scaling and plant resource networks. The evidence is therefore sparse and indirect, with no contradicting data but no strong, clearly on-point support. Overall the corpus is largely topical/neutral with weak, tangential corroboration."
+          },
+          "n_references": 5,
+          "references": {
+            "W4327597837": {
+              "title": "Scaling of leaf area with biomass in trees reconsidered: constant metabolically active sapwood volume per unit leaf area with height growth",
+              "doi": "https://doi.org/10.22541/au.167896117.78692691/v1",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2963
+            },
+            "W2149361279": {
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2999
+            },
+            "W2260205413": {
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3
+            },
+            "W4404138154": {
+              "title": "The bioenergetic cost of building a metazoan",
+              "doi": "https://doi.org/10.1073/pnas.2414742121",
+              "year": "2024",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3039
+            },
+            "W2979688413": {
+              "title": "Linking scaling laws across eukaryotes",
+              "doi": "https://doi.org/10.1073/pnas.1900492116",
+              "year": "2019",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.306
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2117184765",
+              "title": "The origin of allometric scaling laws in biology from genomes to ecosystems: towards a quantitative unifying theory of biological structure and organization",
+              "doi": "https://doi.org/10.1242/jeb.01589",
+              "year": "2005",
+              "distance": 0.2889,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "SUMMARY Life is the most complex physical phenomenon in the Universe, manifesting an extraordinary diversity of form and function over an enormous scale from the largest animals and plants to the smallest microbes and subcellular units. Despite this many of its most fundamental and complex phenomena scale with size in a surprisingly simple fashion. For example, metabolic rate scales as the 3/4-power of mass over 27 orders of magnitude, from molecular and intracellular levels up to the largest organisms. Similarly, time-scales (such as lifespans and growth rates) and sizes (such as bacterial genome lengths,tree heights and mitochondrial densities) scale with exponents that are typically simpl"
+            },
+            {
+              "document_id": "W4417096410",
+              "title": "Diffusive Spreading Across Dynamic Mitochondrial Network Architectures",
+              "doi": "https://doi.org/10.48550/arxiv.2506.05643",
+              "year": "2025",
+              "distance": 0.2903,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Networks of physical units can vary from a stationary set of spatially-embedded links to a collection of mobile agents that undergo transient social interactions. In living cells, mitochondria form architectures that span across these regimes, transitioning between fragmented, partly connected, and highly fused structures depending on cell type and state. Diffusive transport of biomolecular components through these networks limits the heterogeneity of the mitochondrial population. Here we address the connection between dynamic network architecture and the rate of diffusive mixing through simulations and analytic models that incorporate fusion, fission, and rearrangement. We find that the mat"
+            },
+            {
+              "document_id": "W4213341356",
+              "title": "Energetic dissociation of individual and species ranges",
+              "doi": "https://doi.org/10.1098/rsbl.2021.0374",
+              "year": "2022",
+              "distance": 0.2913,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The use of energy is universal to all life forms and all levels of biological organization, potentially linking processes operating at variable scales. Individual and species ranges might be energetically constrained, yet divergent metabolic limitations at both scales can disassociate these individual and species traits. We analysed comparative energetic and range data to unravel the mechanistic basis of the dissociation between individual and species range sizes observed among mammalian species. Our results demonstrate that basal, or maintenance, metabolism negatively correlates with individual ranges, but, at the same time, it positively correlates with species ranges. High aerobic capacit"
+            },
+            {
+              "document_id": "W3207950334",
+              "title": "Strategic traits of bacteria and archaea vary widely within substrate-use groups",
+              "doi": "https://doi.org/10.1093/femsec/fiab142",
+              "year": "2021",
+              "distance": 0.2931,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT Quantitative traits such as maximum growth rate and cell radial diameter are one facet of ecological strategy variation across bacteria and archaea. Another facet is substrate-use pathways, such as iron reduction or methylotrophy. Here, we ask how these two facets intersect, using a large compilation of data for culturable species and examining seven quantitative traits (genome size, signal transduction protein count, histidine kinase count, growth temperature, temperature-adjusted maximum growth rate, cell radial diameter and 16S rRNA operon copy number). Overall, quantitative trait variation within groups of organisms possessing a particular substrate-use pathway was very broad, o"
+            },
+            {
+              "document_id": "W3130797445",
+              "title": "Chemical energy storage enables the transformation of fossil energy systems to sustainability",
+              "doi": "https://doi.org/10.1039/d0gc03171b",
+              "year": "2021",
+              "distance": 0.2953,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The enormous dimensions of sustainable energy transitions and their overarching systemic nature require adequate responses from chemical science."
+            },
+            {
+              "document_id": "W2508294631",
+              "title": "The Role of Morphological Biochemical Reciprocity in Early Land Plant Evolution",
+              "doi": "https://doi.org/10.1093/oxfordjournals.aob.a085245",
+              "year": "1976",
+              "distance": 0.2957,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "A morphological-biochemical reciprocity is used to construct a scenario for the evolution of the land and vascular plant habits. The optimal designs of autotrophs are shown to be limited by their biosynthetic capacities, i.e., the morphological manner in which surface area-dependent functions are maintained with increasing size is primarily dictated by the availability of specific architectural polymers. The evolution of biosynthetic pathways (involving the detoxification-conversion of primary metabolites into useful architectural polymers, e.g., cellulose, lignin) predates and allows for transitions from simple dichotomous-convoluted morphologies to ‘tree-like’ erect plants. The reciprocity"
+            },
+            {
+              "document_id": "W2032410204",
+              "title": "Scaling properties of cell and organelle size",
+              "doi": "https://doi.org/10.4161/org.6.2.11464",
+              "year": "2010",
+              "distance": 0.2959,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "How size is controlled is a fundamental question in biology. In this review, we discuss the use of scaling relationships-for example, power-laws of the form y∝x(α)-to provide a framework for comparison and interpretation of size measurements. Such analysis can illustrate the biological and physical principles underlying observed trends, as has been proposed for the allometric dependence of metabolic rate or limb structure on organism mass. Techniques for measuring size at smaller length-scales continue to improve, leading to more data on the control of size in cells and organelles. Size scaling of these structures is expected to influence growth patterns, functional capacity and intracellula"
+            },
+            {
+              "document_id": "W4327597837",
+              "title": "Scaling of leaf area with biomass in trees reconsidered: constant metabolically active sapwood volume per unit leaf area with height growth",
+              "doi": "https://doi.org/10.22541/au.167896117.78692691/v1",
+              "year": "2023",
+              "distance": 0.2963,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "¾-power scaling between metabolic rate and body mass is regarded as near-universal across organisms. However, there are compelling reasons to question ¾-power scaling in woody plants, where metabolic rate≈leaf area. This leaf area must provide carbon to the metabolically active sapwood volume (V ). V is necessarily a much smaller volume than total wood volume, meaning that scaling of total leaf area LA with V should be &gt;¾. Within populations of a species, variants in which V increases per unit leaf area with height growth (e.g. ¾ scaling) would have proportionally less carbon for growth and reproduction as they grow taller. Therefore, selection should favor individuals in which, as they g"
+            },
+            {
+              "document_id": "W2941637565",
+              "title": "The scaling of genome size and cell size limits maximum rates of photosynthesis with implications for ecological strategies",
+              "doi": "https://doi.org/10.1101/619585",
+              "year": "2019",
+              "distance": 0.2983,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract A central challenge in plant ecology is to define the major axes of plant functional variation with direct consequences for fitness. Central to the three main components of plant fitness (growth, survival, and reproduction) is the rate of metabolic conversion of CO 2 into carbon that can be allocated to various structures and functions. Here we (1) argue that a primary constraint on the maximum rate of photosynthesis per unit leaf area is the size and packing density of cells and (2) show that variation in genome size is a strong predictor of cell sizes, packing densities, and the maximum rate of photosynthesis across terrestrial vascular plants. Regardless of the genic content asso"
+            },
+            {
+              "document_id": "W2149361279",
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "distance": 0.2999,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "Summary Metabolic theory specifies constraints on the metabolic organisation of individual organisms. These constraints have important implications for biological processes ranging from the scale of molecules all the way to the level of populations, communities and ecosystems, with their application to the latter emerging as the field of metabolic ecology. While ecologists continue to use individual metabolism to identify constraints in ecological processes, the topic of metabolic scaling remains controversial. Much of the current interest and controversy in metabolic theory relates to recent ideas about the role of supply networks in constraining energy supply to cells. We show that an alte"
+            },
+            {
+              "document_id": "W2260205413",
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "distance": 0.3,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "The West-Brown-Enquist (WBE) metabolic scaling theory posits that many organismal features scale predictably with body size because of selection to minimize transport costs in resource distribution networks. Many scaling exponents are quarter-powers, as predicted by WBE, but there are also biologically significant deviations that could reflect adaptation to different environments. A central but untested prediction of the WBE model is that wide deviation from optimal scaling is penalized, leading to a pattern of constraint on scaling exponents. Here, we demonstrate, using phylogenetic comparative methods, that variation in allometric scaling between mass and leaf area across 17 wild tomato ta"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.3003,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            },
+            {
+              "document_id": "W2103965874",
+              "title": "Allometry and Metabolic Scaling in Ecology",
+              "doi": "https://doi.org/10.1002/9780470015902.a0021222",
+              "year": "2009",
+              "distance": 0.3011,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Body size affects the structure and function of all levels of biological organization. In ecological systems, body size strongly influences individuals (e.g. rates of individual growth, reproduction and mortality), populations (e.g. population growth rate, abundance and space use), communities (e.g. community abundance, food‐web structure and interspecific interactions) and ecosystems (e.g. flux, storage and turnover of materials and energy). This is because individual metabolic rate – the rate at which an organism takes up and utilizes energy and materials – is largely controlled by body size. Here we review how body‐size allometries at the individual level affect the structure and"
+            },
+            {
+              "document_id": "W2979176951",
+              "title": "The Scaling of Genome Size and Cell Size Limits Maximum Rates of Photosynthesis with Implications for Ecological Strategies",
+              "doi": "https://doi.org/10.1086/706186",
+              "year": "2019",
+              "distance": 0.3021,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "A central challenge in plant ecology is to define the major axes of plant functional variation with direct consequences for fitness. Central to the three main components of plant fitness (growth, survival, and reproduction) is the rate of metabolic conversion of CO2 into carbon that can be allocated to various structures and functions. Here we (1) argue that a primary constraint on the maximum rate of photosynthesis per unit leaf area is the size and packing density of cells and (2) show that variation in genome size is a strong predictor of cell sizes, packing densities, and the maximum rate of photosynthesis across terrestrial vascular plants. Regardless of the genic content associated wit"
+            },
+            {
+              "document_id": "W1977384682",
+              "title": "Amphipod crustacean size spectra: new insights in the relationship between size and oxygen",
+              "doi": "https://doi.org/10.1111/j.0030-1299.2004.12934.x",
+              "year": "2004",
+              "distance": 0.3035,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Oxygen availability limits the maximum potential size attainable in benthic gammaridean amphipods from the suborder to the generic level, while also influencing size within species. In this paper we investigate the effect of oxygen on 15 size spectra worldwide, established by compiling maximum length data of more than 2000 amphipod species. We used TS95/5 as a proxy for maximum size and defined this as the threshold size between the 95% smallest and the 5% largest species at any given site. Our data show that beside TS95/5, minimum, mean and modal sizes, as well as all 10% increment threshold sizes (from TS10/90 to TS90/10) also vary significantly with oxygen concentration. Size distribution"
+            },
+            {
+              "document_id": "W4404138154",
+              "title": "The bioenergetic cost of building a metazoan",
+              "doi": "https://doi.org/10.1073/pnas.2414742121",
+              "year": "2024",
+              "distance": 0.3039,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "All life forms depend on the conversion of energy into biomass used in growth and reproduction. For unicellular heterotrophs, the energetic cost associated with building a cell scales slightly sublinearly with cell weight. However, observations on multiple Daphnia species and numerous other metazoans suggest that although a similar size-specific scaling is retained in multicellular heterotrophs, there is a quantum leap in the energy required to build a replacement soma, presumably owing to the added investment in nonproductive features such as cell adhesion, support tissue, and intercellular communication and transport. Thus, any context-dependent ecological advantages that accompany the evo"
+            },
+            {
+              "document_id": "W2388470274",
+              "title": "CHAPTER 10. Scale‐up of Extraction Processes",
+              "doi": "https://doi.org/10.1039/9781849737579-00363",
+              "year": "2013",
+              "distance": 0.3047,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The challenge of finding scale‐up criteria that allow the reproduction of laboratory data at higher scales is discussed in this chapter. The main factors that should be considered when scaling‐up extraction processes will be presented, and the nature of thermodynamic and mass transfer changes implied by scale‐up will be extensively discussed. The chapter contains an overview of the latest developments and applications in the field of natural products. Some simple examples of application of scale‐up criteria are shown. Moreover, a case study will present experimental data of a scale‐up procedure of supercritical fluid extraction from laboratory to pilot scale."
+            },
+            {
+              "document_id": "W2979688413",
+              "title": "Linking scaling laws across eukaryotes",
+              "doi": "https://doi.org/10.1073/pnas.1900492116",
+              "year": "2019",
+              "distance": 0.306,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Significance Metabolic scaling theory has had a profound influence on ecology, but the core links between species characteristics have not been formally tested across the full domain to which the theory claims to apply. We compiled datasets spanning all eukaryotes for the foremost body mass scaling laws: metabolism, abundance, growth, and mortality. We show that metabolism and abundance scaling only follow the canonical ±3/4 slopes within some taxonomic groups, but across eukaryotes reveal reciprocal near ±1 slopes, broadly supporting the “energetic equivalence rule.” In contrast to metabolism, growth follows consistent ∼3/4 scaling within many groups and across all eukaryotes. Our findings "
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several snippets directly bear on the idea that the scaling of maximum dioxygen use with size depends on transport-network morphology. Snippet 10 explicitly contrasts surface-area theory (including DEB) with resource-transport network (RTN) theory, noting that internal transport networks influence metabolic rate and its scaling. Snippets 7, 13, 22, and 23 articulate the WBE/Banavar branching-network framework, in which network design (fractal, space-filling tubes) determines the metabolic scaling exponent—consistent with the stylized fact. DEB-focused snippets (1, 2, 3, 12) show that DEB derives respiration scaling between surface-area (2/3) and volume (1) depending on morphology and shape similarity, again linking the exponent to geometric/transport considerations. Snippet 8 contrasts surface-area vs supply-network rationales for scaling. None of the snippets contradict the fact; most either support it or are topically neutral. Evidence is moderate rather than overwhelming because much of the support is framed around the canonical 0.75 exponent and interspecific rather than strictly intraspecific scaling, but the direction is clearly corroborative."
+          },
+          "n_references": 12,
+          "references": {
+            "2902": {
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2264
+            },
+            "3728": {
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2346
+            },
+            "2835": {
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.249
+            },
+            "2566": {
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2528
+            },
+            "3124": {
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.254
+            },
+            "3652": {
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2584
+            },
+            "2648": {
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2589
+            },
+            "3127": {
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2604
+            },
+            "W2117184765": {
+              "title": "The origin of allometric scaling laws in biology from genomes to ecosystems: towards a quantitative unifying theory of biological structure and organization",
+              "doi": "https://doi.org/10.1242/jeb.01589",
+              "year": "2005",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2889
+            },
+            "W4327597837": {
+              "title": "Scaling of leaf area with biomass in trees reconsidered: constant metabolically active sapwood volume per unit leaf area with height growth",
+              "doi": "https://doi.org/10.22541/au.167896117.78692691/v1",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2963
+            },
+            "W2149361279": {
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2999
+            },
+            "W2260205413": {
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2264,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": ", V A m . The powers ˙pM and ˙pJ are proportional to maximum body size volume V A m while ˙pT is proportional to V A 2/3 m . The dioxygen consumption must be approximately proportional to V A α m with α ∈[2/3, 1] because it is a linear combination of V A 2/3 m and V A m . The relationship between the weigth and the volume of the species considered, w = [Em]e µEV 1/3 m V A 4/3 m + dV V A m , (5.69) [Page 134] 122 Chapter 5 is obtained from Eq. 5.57 by replacing body size V with Vm, energy density [E] with [Em]e and rewriting the parameters of species A as a function of the parameters of a ref- erence species with the exception of V A m . Thus, (1) the mass is approximately proportional to V β"
+            },
+            {
+              "document_id": "3728",
+              "title": "Kooy2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2346,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "fluxes, and so the dioxygen consumption rate and the carbon dioxide production rate, depend on structural body length via the powers ˙pD and ˙pG, which are both weighted sums of surface area and volume, i.e. of l2 and l3. This is noth- ing new. If we compare species of different (maximum) body size, however, we keep the state variables constant, and vary the parameters that depend on the maximum structural body volume. In the respiration rate (4.49), Lm, l−1 T and g−1 are proportional to structural body length; none of the other parameters depend on maximum structural body length (or volume). Generally, this again results in a scaling of respiration somewhere between a surface area and a vol"
+            },
+            {
+              "document_id": "2835",
+              "title": "SousDomi2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.249,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "eases with the similarity between the species. The design parameters are { ˙JEAm} and ¨ha, which scale with maximum length, M b H and M p H, which scale with maximum volume. All 16 [Page 17] the other primary parameters are independent of size, so also independent of the maximum size of a species. The body-size scaling relationships can also be used partially, making optimal use of all data at hand [52, 59] to detect species-speciﬁc deviations from the general trend. These rules also determine how properties that can be written as functions of the primary pa- rameters depend on maximum length. An example is the respiration rate (i.e. the use of dioxy- gen). It works out to be approximately p"
+            },
+            {
+              "document_id": "2490",
+              "title": "Kooijman - 2020 - The standard dynamic energy budget model has no pl.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2521,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Respiration O1 Animal eggs and plant seeds initially hardly use dioxygen O2 The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults O3 The use of dioxygen by isomorphs scales approximately with body weight raised to a power close to 0.75 O4 Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding) Stoichiometry S1 The chemical composition of organisms depends on the nutritional status (starved vs well-fed) S2 The chemical composition of organisms at constant food density of constant composition becomes constant during growth Energy E1 Some energy always dissipates, also in absence of dioxygen E2 "
+            },
+            {
+              "document_id": "2566",
+              "title": "Glaz2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2528,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "t total ecosystem energy use should scale to system size (V or B) with a power as low as 1/2 (depending on the scaling of A and water depth with V or B), because according to Euclidian geometry for isomorphic shapes, P should scale with A to the 1/2 power (i.e., in proportion to the square root of A). Data are needed to test these hypotheses, some of which is presented in Section 5.1. 4.4.2. Resource Transport (RT) Models RT theory may help explain how rates or patterns of energy flow through food webs vary with community or ecosystem size. Food webs can be modelled as “energy transportation networks” [246–248]. By doing so, it is possible to calculate power functions describing relationship"
+            },
+            {
+              "document_id": "3124",
+              "title": "Meer2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.254,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "h curve Respiration The use of dioxygen scales with body mass raised to a power close to 0.75 compared to that of DEB (Table 2). Table 6: The basic assumptions of the Metabolic Theory of Ecology, and more speciﬁcally of the extended ontogenetic growth model (EOGM). Interpreted from West et al. [18] and Hou et al. [5]. See text for further explanation. 1. An organism is characterized by its body mass. 2. Nine detailed assumptions on the design of the distribution network (not spelled out here, but see assumptions A1-A9 in [14]) result in the predic- tion that the delivery of oxygen to the cells is proportional to body mass raised to the power 3/4. 3. The oxygen delivered to the cells is used "
+            },
+            {
+              "document_id": "3652",
+              "title": "Karkach - 2006 - Trajectories and models of individual growth.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2584,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "eral model of transport of essential materials through space-ﬁlling fractal networks of branching tubes. Banavar et al. (1999) proposed a simi- lar explanation based on branching transportation networks within the organism. In their subsequent work West et al. (1999) proposed to consider four-dimensional biology and suggested that the quarter-power scaling laws originate from hierarchical branching nu- trient supply networks that terminate in size-invariant units, such as capillaries, leaves, 378 http://www.demographic-research.org [Page 35] Demographic Research: Volume 15, Article 12 mitochondria, and oxidase molecules. They hypothesize that natural selection tends to maximize both metaboli"
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2589,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "ld elucidate constraints on overall ecosystem functioning. Surface areas often mediate the passage of food from the environment into an organism, for example, a spider’s web, the mouth of a filter feeder, the gut of caterpillar, or the plasma membrane of a prokaryote. This has led some to argue that, all other things being equal, consumption should scale in proportion to a relevant surface area and hence with mass2/3 (von Bertalanffy 1957, Kooijman 2010). Others have claimed a 3/4 power scaling of consumption on the basis of the 3/4 power scaling of metabolic rate, arguing that supply matches demand (Calder 1984, Peters 1986, West et al. 2001). Recently it has been found that consumption sca"
+            },
+            {
+              "document_id": "2986",
+              "title": "Kooy2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2596,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "y with the maximum body length • Fetuses increase in weight approximately proportional to cubed time Reproduction • Many species (almost all animals and plants) have a juvenile stage that does not reproduce • Reproduction increases with size intra-speciﬁcally, but decreases with size inter-speciﬁcally • A range of constant low food levels exists at which an individual can survive, but not reproduce Respiration • Animal eggs and plant seeds initially hardly use dioxygen • The use of dioxygen increases with decreasing mass in embryos and increases with mass in juveniles and adults • The use of dioxygen scales approximately with body weight raised to a power close to 0.75 • Animals show a trans"
+            },
+            {
+              "document_id": "3127",
+              "title": "GlazHirs2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2604,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "at focus on transport of resources and waste products such as respiratory gases between the external environment and metabolizing cells. This transport may be influenced by two major steps: the exchange of materials across body surfaces and the transport of materials through internal networks. These steps are the foci for two prominent theoretical approaches to understanding and predicting biological scal- ing: SA theory [4,8,14,15] and resource-transport network (RTN) theory [1,2,16,17], respectively. Although both SA and internal transport networks may be important in influencing metabolic rate and its scaling with body size, SA theory (including widely applied DEB theory, which incorporat"
+            },
+            {
+              "document_id": "3251",
+              "title": "Augustine and Kooijman - A new phase in DEB research.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2606,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "years. The sig- niﬁcance of this in terms of changes in DEB parameters that last far S. Augustine, S.A.L.M. Kooijman Journal of Sea Research xxx (xxxx) xxx–xxx 5 [Page 6] beyond the disappearance of the chemical in the body is examined. A major challenge for the future is to translate such eﬀects on in- dividuals to larger spatial and temporal scales that are of ecological relevance. This is an urgent research theme with far reaching implica- tions for environmental quality and resource management. Ecosystem models are in their infancy. The population is an intermediate level of organization between individual and ecosystems; the latter can be seen as systems of interacting populations. The "
+            },
+            {
+              "document_id": "2648",
+              "title": "MainoKear2015a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2608,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "anisms (e.g. in pelagic habitats) scaled with an exponent of 1.06  0.6 (95% confidence interval). While dimensionality did effect the interspecific scaling of consumption as they predicted, all estimated exponents were close to the range of 3/4 to 1, as we predict for interspecific scaling, and were significantly higher than the canonical 3/4. In contrast, the ontogenetic scaling of consumption was better approximated by a less steep, surface area or mass2/3 scal- ing. DEB theory explains the scaling as a result of organisms being more similar in shape to a larger conspecific than to one of a different species. If maintenance scales with volume and uptake scales with a surface area, organis"
+            },
+            {
+              "document_id": "W2117184765",
+              "title": "The origin of allometric scaling laws in biology from genomes to ecosystems: towards a quantitative unifying theory of biological structure and organization",
+              "doi": "https://doi.org/10.1242/jeb.01589",
+              "year": "2005",
+              "distance": 0.2889,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "SUMMARY Life is the most complex physical phenomenon in the Universe, manifesting an extraordinary diversity of form and function over an enormous scale from the largest animals and plants to the smallest microbes and subcellular units. Despite this many of its most fundamental and complex phenomena scale with size in a surprisingly simple fashion. For example, metabolic rate scales as the 3/4-power of mass over 27 orders of magnitude, from molecular and intracellular levels up to the largest organisms. Similarly, time-scales (such as lifespans and growth rates) and sizes (such as bacterial genome lengths,tree heights and mitochondrial densities) scale with exponents that are typically simpl"
+            },
+            {
+              "document_id": "W4417096410",
+              "title": "Diffusive Spreading Across Dynamic Mitochondrial Network Architectures",
+              "doi": "https://doi.org/10.48550/arxiv.2506.05643",
+              "year": "2025",
+              "distance": 0.2903,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Networks of physical units can vary from a stationary set of spatially-embedded links to a collection of mobile agents that undergo transient social interactions. In living cells, mitochondria form architectures that span across these regimes, transitioning between fragmented, partly connected, and highly fused structures depending on cell type and state. Diffusive transport of biomolecular components through these networks limits the heterogeneity of the mitochondrial population. Here we address the connection between dynamic network architecture and the rate of diffusive mixing through simulations and analytic models that incorporate fusion, fission, and rearrangement. We find that the mat"
+            },
+            {
+              "document_id": "W4213341356",
+              "title": "Energetic dissociation of individual and species ranges",
+              "doi": "https://doi.org/10.1098/rsbl.2021.0374",
+              "year": "2022",
+              "distance": 0.2913,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "The use of energy is universal to all life forms and all levels of biological organization, potentially linking processes operating at variable scales. Individual and species ranges might be energetically constrained, yet divergent metabolic limitations at both scales can disassociate these individual and species traits. We analysed comparative energetic and range data to unravel the mechanistic basis of the dissociation between individual and species range sizes observed among mammalian species. Our results demonstrate that basal, or maintenance, metabolism negatively correlates with individual ranges, but, at the same time, it positively correlates with species ranges. High aerobic capacit"
+            },
+            {
+              "document_id": "W3207950334",
+              "title": "Strategic traits of bacteria and archaea vary widely within substrate-use groups",
+              "doi": "https://doi.org/10.1093/femsec/fiab142",
+              "year": "2021",
+              "distance": 0.2931,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT Quantitative traits such as maximum growth rate and cell radial diameter are one facet of ecological strategy variation across bacteria and archaea. Another facet is substrate-use pathways, such as iron reduction or methylotrophy. Here, we ask how these two facets intersect, using a large compilation of data for culturable species and examining seven quantitative traits (genome size, signal transduction protein count, histidine kinase count, growth temperature, temperature-adjusted maximum growth rate, cell radial diameter and 16S rRNA operon copy number). Overall, quantitative trait variation within groups of organisms possessing a particular substrate-use pathway was very broad, o"
+            },
+            {
+              "document_id": "W3130797445",
+              "title": "Chemical energy storage enables the transformation of fossil energy systems to sustainability",
+              "doi": "https://doi.org/10.1039/d0gc03171b",
+              "year": "2021",
+              "distance": 0.2953,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "The enormous dimensions of sustainable energy transitions and their overarching systemic nature require adequate responses from chemical science."
+            },
+            {
+              "document_id": "W2508294631",
+              "title": "The Role of Morphological Biochemical Reciprocity in Early Land Plant Evolution",
+              "doi": "https://doi.org/10.1093/oxfordjournals.aob.a085245",
+              "year": "1976",
+              "distance": 0.2957,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "A morphological-biochemical reciprocity is used to construct a scenario for the evolution of the land and vascular plant habits. The optimal designs of autotrophs are shown to be limited by their biosynthetic capacities, i.e., the morphological manner in which surface area-dependent functions are maintained with increasing size is primarily dictated by the availability of specific architectural polymers. The evolution of biosynthetic pathways (involving the detoxification-conversion of primary metabolites into useful architectural polymers, e.g., cellulose, lignin) predates and allows for transitions from simple dichotomous-convoluted morphologies to ‘tree-like’ erect plants. The reciprocity"
+            },
+            {
+              "document_id": "W2032410204",
+              "title": "Scaling properties of cell and organelle size",
+              "doi": "https://doi.org/10.4161/org.6.2.11464",
+              "year": "2010",
+              "distance": 0.2959,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "How size is controlled is a fundamental question in biology. In this review, we discuss the use of scaling relationships-for example, power-laws of the form y∝x(α)-to provide a framework for comparison and interpretation of size measurements. Such analysis can illustrate the biological and physical principles underlying observed trends, as has been proposed for the allometric dependence of metabolic rate or limb structure on organism mass. Techniques for measuring size at smaller length-scales continue to improve, leading to more data on the control of size in cells and organelles. Size scaling of these structures is expected to influence growth patterns, functional capacity and intracellula"
+            },
+            {
+              "document_id": "W4327597837",
+              "title": "Scaling of leaf area with biomass in trees reconsidered: constant metabolically active sapwood volume per unit leaf area with height growth",
+              "doi": "https://doi.org/10.22541/au.167896117.78692691/v1",
+              "year": "2023",
+              "distance": 0.2963,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "¾-power scaling between metabolic rate and body mass is regarded as near-universal across organisms. However, there are compelling reasons to question ¾-power scaling in woody plants, where metabolic rate≈leaf area. This leaf area must provide carbon to the metabolically active sapwood volume (V ). V is necessarily a much smaller volume than total wood volume, meaning that scaling of total leaf area LA with V should be &gt;¾. Within populations of a species, variants in which V increases per unit leaf area with height growth (e.g. ¾ scaling) would have proportionally less carbon for growth and reproduction as they grow taller. Therefore, selection should favor individuals in which, as they g"
+            },
+            {
+              "document_id": "W2941637565",
+              "title": "The scaling of genome size and cell size limits maximum rates of photosynthesis with implications for ecological strategies",
+              "doi": "https://doi.org/10.1101/619585",
+              "year": "2019",
+              "distance": 0.2983,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract A central challenge in plant ecology is to define the major axes of plant functional variation with direct consequences for fitness. Central to the three main components of plant fitness (growth, survival, and reproduction) is the rate of metabolic conversion of CO 2 into carbon that can be allocated to various structures and functions. Here we (1) argue that a primary constraint on the maximum rate of photosynthesis per unit leaf area is the size and packing density of cells and (2) show that variation in genome size is a strong predictor of cell sizes, packing densities, and the maximum rate of photosynthesis across terrestrial vascular plants. Regardless of the genic content asso"
+            },
+            {
+              "document_id": "W2149361279",
+              "title": "Reconciling theories for metabolic scaling",
+              "doi": "https://doi.org/10.1111/1365-2656.12085",
+              "year": "2013",
+              "distance": 0.2999,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Summary Metabolic theory specifies constraints on the metabolic organisation of individual organisms. These constraints have important implications for biological processes ranging from the scale of molecules all the way to the level of populations, communities and ecosystems, with their application to the latter emerging as the field of metabolic ecology. While ecologists continue to use individual metabolism to identify constraints in ecological processes, the topic of metabolic scaling remains controversial. Much of the current interest and controversy in metabolic theory relates to recent ideas about the role of supply networks in constraining energy supply to cells. We show that an alte"
+            },
+            {
+              "document_id": "W2260205413",
+              "title": "Constraint around Quarter-Power Allometric Scaling in Wild Tomatoes (<i>Solanum</i> sect. <i>Lycopersicon</i>; Solanaceae)",
+              "doi": "https://doi.org/10.1086/682409",
+              "year": "2015",
+              "distance": 0.3,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "The West-Brown-Enquist (WBE) metabolic scaling theory posits that many organismal features scale predictably with body size because of selection to minimize transport costs in resource distribution networks. Many scaling exponents are quarter-powers, as predicted by WBE, but there are also biologically significant deviations that could reflect adaptation to different environments. A central but untested prediction of the WBE model is that wide deviation from optimal scaling is penalized, leading to a pattern of constraint on scaling exponents. Here, we demonstrate, using phylogenetic comparative methods, that variation in allometric scaling between mass and leaf area across 17 wild tomato ta"
+            },
+            {
+              "document_id": "W4245499571",
+              "title": "Strategy of Transcription Regulation in the Budding Yeast",
+              "doi": "https://doi.org/10.1201/b16586-16",
+              "year": "2014",
+              "distance": 0.3003,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Cellular functionality is tightly coupled to the external environment. The type of nutrients available defines the internal metabolic flow, while their abundance often limits the rate of biomass production and energy available for growth. An abundance of toxins impede upon various aspects of cellular machinery, including metabolic capacity, protein stability or DNA integrity. Over evolutionary time scales, cells may encounter virtually endless environmental states at widely different frequencies. Maintaining optimal functionality in the presence of such external variability is a central evolutionary constraint."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

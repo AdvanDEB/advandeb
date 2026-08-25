@@ -86,6 +86,53 @@ class ProvenanceService:
         # 2. Reconstruct from raw collections
         return await self._reconstruct_provenance(citation_id)
 
+    async def enrich_citations(self, citations: list) -> list:
+        """Attach source-document provenance to each citation in place.
+
+        For every citation that resolves to a source document via
+        ``get_provenance``, fill ``document_id``/``title``/``authors``/``year``/
+        ``url`` (and ``doi`` when derivable from the url). Idempotent: a citation
+        that already has a ``title`` is left untouched, so this is safe to call
+        more than once along the response path. Citations with no local
+        provenance (e.g. ``external:`` sources) are returned unchanged.
+        """
+        if not citations:
+            return citations
+        for cit in citations:
+            if not isinstance(cit, dict) or cit.get("title"):
+                continue
+            citation_id = cit.get("citation_id")
+            if not citation_id:
+                continue
+            try:
+                prov = await self.get_provenance(citation_id)
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("enrich_citations: provenance lookup failed for %s: %s",
+                               citation_id, exc)
+                continue
+            docs = (prov or {}).get("documents") or []
+            if not docs:
+                continue
+            doc = docs[0]
+            if not cit.get("document_id"):
+                cit["document_id"] = doc.get("id")
+            cit["title"] = doc.get("title")
+            authors = doc.get("authors")
+            if isinstance(authors, str):
+                authors = [authors] if authors.strip() else []
+            elif not isinstance(authors, list):
+                authors = []
+            if authors:
+                cit["authors"] = authors
+            if doc.get("year") is not None:
+                cit["year"] = doc.get("year")
+            url = doc.get("url")
+            if url:
+                cit["url"] = url
+                if not cit.get("doi") and "doi.org/" in url:
+                    cit["doi"] = url.split("doi.org/", 1)[1]
+        return citations
+
     async def _reconstruct_provenance(self, citation_id: str) -> Optional[Dict[str, Any]]:
         """Build a provenance record from raw chunk / fact data in ArangoDB."""
         source_type, raw_id = parse_citation_id(citation_id)
@@ -98,6 +145,9 @@ class ProvenanceService:
 
         if source_type == "external_document":
             return None
+
+        if source_type == "platform_doc":
+            return await self._provenance_from_platform_doc(raw_id, citation_id)
 
         chunk = await self._find_chunk(raw_id or citation_id)
         if chunk:
@@ -187,6 +237,34 @@ class ProvenanceService:
                 "page": None,
             }],
             "documents": [document] if document else [],
+        }
+
+    async def _provenance_from_platform_doc(
+        self, raw_id: str, citation_id: str
+    ) -> Optional[dict]:
+        """Build provenance for an AdvanDEB documentation/tutorial citation.
+
+        These are static in-app help sections, not KB records, so there is no
+        database lookup — the "document" points back at the in-app
+        Documentation page instead of an external source.
+        """
+        from app.services.platform_docs_service import get_platform_doc
+
+        doc = await self._run(get_platform_doc, raw_id)
+        if not doc:
+            return None
+        return {
+            "citation_id": citation_id,
+            "answer": {"excerpt": doc.get("text", "")[:200]},
+            "facts": [],
+            "chunks": [],
+            "documents": [{
+                "id": doc.get("id"),
+                "title": doc.get("title") or "AdvanDEB Documentation",
+                "authors": "",
+                "year": None,
+                "url": f"/documentation#{doc.get('id')}",
+            }],
         }
 
     # ------------------------------------------------------------------

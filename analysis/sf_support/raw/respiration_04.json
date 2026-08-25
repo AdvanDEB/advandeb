@@ -1,0 +1,813 @@
+{
+  "sf_id": "respiration_04",
+  "category": "Respiration",
+  "statement": "Intraspecific scaling of maximum dioxygen use with size depends on morphology of the energy and material transport network(s).",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact links intraspecific scaling of maximum oxygen use to morphology/transport network design. Several snippets bear on this. Snippet 13 explicitly contrasts MTE's transport-network assumptions (detailed distribution network design predicting oxygen delivery scaling) with DEB. Snippet 17 derives that dioxygen consumption scales as V^alpha with alpha in [2/3,1] as a linear combination of surface-area (2/3) and volume (1) terms, directly tying the exponent to geometric/morphological considerations. Snippet 5 shows ontogenetic (intraspecific) scaling differs from interspecific scaling and is explained by shape/morphology arguments. Snippet 18 demonstrates that respiration can deviate from 3/4 (e.g., proportional to sqrt of biomass in encrusting bryozoans), consistent with morphology-dependent scaling. Snippet 16 explicitly qualifies the 3/4 power as holding 'by isomorphs,' implying shape dependence. The remaining snippets restate the 3/4 rule or describe oxygen as derived from mass balance without bearing on network morphology, hence neutral. No snippet contradicts the fact. Overall there is moderate, consistent support with no conflict, but the evidence is somewhat indirect and scattered rather than a single decisive demonstration."
+      },
+      "n_references": 5,
+      "references": {
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.3844401240348816
+        },
+        "69b8a547ecbd4702b29a7839": {
+          "title": "MainoKear2015a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3916766047477722
+        },
+        "69b89d63ecbd4702b29a6eb3": {
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4088733196258545
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.41463398933410645
+        },
+        "69b84723ec32c55db5430702": {
+          "title": "LikaKooy2011.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4164189100265503
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3601,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "mposition of reserve and structure match,no dioxygen is used. In other words: all use of dioxygen that is linked to growth comesfrom the growth overheads, if the elemental composition of reserve and structure match.98 4. Univariate DEB models-0.05 0 0.05 0.1 0 0.2 0.4 0.6 0.8 1j, mol.mol−1h−1scaled specific growth rate ˙ r/˙rmH2OHCO−3NH3H∗-0.05 0 0.05 0 0.2 0.4 0.6 0.8 1j, mol.mol−1h−1scaled specific growth rate ˙ r/˙rmN2NO−3ENO−2Figure 4.7: The specific fluxes of the compounds as a function of the specific growth rateas fraction of the maximum of ˙ rm= 0.003 h−1of the anammox bacteria. DEB Parameters:"
+        },
+        {
+          "document_id": "69b8a084ecbd4702b29a71f7",
+          "title": "Tang and Riley - 2024 - Technical Note A modified formulation of dynamic .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.368,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Preprint. Discussion started: 5 August 2024c Author(s) 2024. CC BY 4.0 License. 17 Tang, J. Y. and Riley, W. J.: SUPECA kinetics for scaling redox reactions in networks of mixed substrates and consumers and an example application to aerobic soil respiration, Geosci Model Dev, 10, 3277-3295, 10.5194/gmd-10-3277-2017, 2017. Tang, J. Y. and Riley, W. J.: Competitor and substrate sizes and diffusion together define enzymatic depolymerization and 345 microbial substrate uptake rates, Soil Biol Biochem, 139, ARTN 107624 10.1016/j.soilbio.2019.107624, 2019. Tang, J. Y. and Riley, W."
+        },
+        {
+          "document_id": "69b8994aecbd4702b29a69fd",
+          "title": "KlanNisb2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3834,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ty phenom-enological, but we note that the pattern of inhibition byenvironmental degradation (Figure 2, top right panel) closelymatches dioxygen concentration in microplate wells measured byKocincova et al. (2008 [28], Figure 8). Alternatives do, however,exist; for example, we were also able to capture the slowercessation of growth using an assumption that substrate is ofheterogeneous quality, and that the half-saturation constant(handling time) increases for substrates of lower quality. Final"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3844,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b8a547ecbd4702b29a7839",
+          "title": "MainoKear2015a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3917,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "l 3/4.In contrast, the ontogenetic scaling of consumption was better approximated by a less steep, surface area or mass2/3 scal-ing. DEB theory explains the scaling as a result of organisms being more similar in shape to a larger conspecific than to one of a different species. If maintenance scales with volume and uptake scales with a surface area, organisms will reach an asymptotic size where energy uptake matches maintenance demand with nothing remaining for growth. T o overcome this limit in ontogenetic size, uptake is expected to scale greater than mass2/3 between species (Maino et al. 2014). It turns out"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3977,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "A 0 00 0 ηV G˙pGµ−1E˙pA−µ−1E˙pD−µ−1E˙pGηPA˙pA 0 0The dioxygen flux that is associated to growth is given in element 3, i.e.˙JOG= ˙pG((−1−nHE/4 +nOE/2 + 3 nNE/4)/µE−(−1−nHV/4 +nOV/2 + 3 nNV/4)ηV G)= ˙pG(−1−nHE/4 +nOE/2 + 3 nNE/4)\u0010µ−1E−ηV G\u0011fornHV=nHEnOV=nOEnNV=nNEwhere the mass-energy coupler for growth is given by ˙JV=ηV G˙pG=κG˙pG/µV. So inabsence of overhead costs of growth, i.e. ηV G=µ−1EorµGV=µEorµV˙JV= ˙pGorκG=µV[MV]/[EG] = 1, and if the elemental composition of reserve and structure match,no dioxygen is used. In other words: all use of dioxygen that is linked to growth comes"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3993,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4019,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "embryos, but increases with mass in juvenilesand adultsThe use of dioxygen scales with body mass raisedto a power close to 0.75Stoichiometry Well-fed animals have a di erent body chemicalcomposition than poorly-fed organismsAnimals growing with constant food density con-verge to a constant chemical compositionReproduction Reproduction increases with size intra-speci cally,but decreases with size inter-speci cally2 DEB, DEVELOPMENT AND CRITICISMS 6Table 2: The basic assumptions of the standard DEB model. After Kooij-man [9]1. An organism is characterized by a structural body, reserves, and matu-"
+        },
+        {
+          "document_id": "69b8921becbd4702b29a61b2",
+          "title": "AuguRosa2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4023,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "from Larson (1987a) assuming 14 d growth atf= 0:46 followed by 6 d at f= 0, g 9A-B. We discuss the predicted growth and repro-duction later, however what we illustrate here is that predicted dioxygen consumptionexpressed as \u0016mol d\u00001decreases during starvation ( g 9C) which is realistic. The reasonis that both reserve mobilization and structure decrease during shrinking. Dioxygen con-sumption is actually commonly represented in three other ways in the literature: \u0016mold\u00001against length, \u0016mol d\u00001against wet mass and as \u0016mol per gram (dry) biomass as"
+        },
+        {
+          "document_id": "69b8a56decbd4702b29a7863",
+          "title": "KooyAuge2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4028,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ge that the environ-ment is homogeneous again. It is clear that these dif-ferences hardly aﬀect the dynamics with this choice ofparameter values, the curves in steps 3–5 are very simi-lar; the diﬀerences are clear for smaller transport rates.The uptake of product evolves from concentration-based to ﬂux-based (see Fig. 6); this comes with anincrease of the maximum throughput rate and a quali-tative change in behaviour of the steady-state amountsof structure around this growth rate: the symbiosis be-comes independent of the extracellular product con-centration. The role of the products partly degrades"
+        },
+        {
+          "document_id": "69b84857ec32c55db5430bf1",
+          "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4035,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ion at best. Feeding and temperature affect metabolic ratesubstantially, as does body size (both intra- and inter-speci ﬁcally).The trajectory of metabolic rate over the life cycle of an individual andthe inter-species variation are well understood quantitatively by theDEB theory ( Kooijman, 1986, 2001 ). The DEB theory makes no (direct)assumption about the use of dioxygen and obtains it by closing themass balance for chemical elements (carbon, hydrogen, oxygen andnitrogen). The implication is that the use of dioxygen can only beevaluated in combination with the production ﬂux of water, carbon-"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4088,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ting substrate. M etabolic processes are therefore not controlled by the uptake of oxygen. Rather, in the DEB framework, oxygen consumption is predicted from metabolic processes such as assimilation, somatic maintenance and growth , and obtained by closing the mass balance for chemical elements (carbon, hyd rogen, nitrogen and oxygen ) by writing specific macrochemical reactions (see supplementary material for details) . The implication is that the use of dioxygen can only be evaluated in combination with the production flux of water, carbon dioxide and nitroge n waste (e.g. ammonia) (Kooijman, 2017) . Additional parameters are"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4089,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "owth curveRespiration The use of dioxygen scales with body mass raisedto a power close to 0.75compared to that of DEB (Table 2).Table 6: The basic assumptions of the Metabolic Theory of Ecology, and morespeci cally of the extended ontogenetic growth model (EOGM). Interpretedfrom West et al. [18] and Hou et al. [5]. See text for further explanation.1. An organism is characterized by its body mass.2. Nine detailed assumptions on the design of the distribution network (notspelled out here, but see assumptions A1-A9 in [14]) result in the predic-tion that the delivery of oxygen to the cells is proportional to body mass"
+        },
+        {
+          "document_id": "69b8795becbd4702b29a4239",
+          "title": "Kooy2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4102,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "arts with ideas on energetics and respiration and heat dissipation follow from conservation laws. So the theory does not suffer from these interpretation problems. More specifically, respi-ration, i.e. the use of dioxygen, follows from conservation of chemical elements; since carbon, hydrogen, oxygen and nitrogen together typically comprise over 95% of the mass of an organism, we can, as first approximation, focus on just these four. The mentioned DEB assumptions specify the fluxes of food, faeces, reserve and structure. Given elemental frequencies of these four generalized compounds, the"
+        },
+        {
+          "document_id": "69b84804ec32c55db5430b55",
+          "title": "SousDomi2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4102,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "do not use dioxygen in signiﬁcant amounts animals [5, 79, 87, 113]The use of dioxygen increases with decreasing mass in animalsembryos and increases with mass in juveniles and adults [5, 10, 79, 84, 87, 91, 113]The use of dioxygen scales approximately with body weight raised animals [10, 84, 91]to a power close to 0.75 [45]Organisms show a transient increase in metabolic rate animals [6, 28, 40, 73, 88]after ingesting food (heat increment of feeding)Ageing Lifespan increases with size for endotherms, animals [19, 85]but is independent of size in ectotherms"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4125,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "ardly use dioxygenO2The use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adultsO3The use of dioxygen by isomorphs scales approximately with body weight raised to a power closeto 0.75O4Animals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)StoichiometryS1The chemical composition of organisms depends on the nutritional status (starved vs well-fed)S2The chemical composition of organisms at constant food density becomes constant during growthEnergyE1Some energy always dissipates, also in absence of dioxygen"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4146,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "by ﬁrst replacing body sizeVwithVmbecausel= 1and then rewriting DEB parameters of the species being consi dered, species A, as afunction of the DEB parameters of a reference species using T ab. 5.5 with the exceptionof the maximum body size, VAm.The powers ˙pMand˙pJare proportional to maximum body size volume VAmwhile ˙pTis proportional to VA2/3m . The dioxygen consumption must be approximately proportio naltoVA αmwithα∈[2/3,1]because it is a linear combination of VA2/3m andVAm.The relationship between the weigth and the volume of the spe cies considered,w=[Em]eµEV1/3mVA4/3m+dVVAm, (5.69)122 Chapter 5"
+        },
+        {
+          "document_id": "69b84723ec32c55db5430702",
+          "title": "LikaKooy2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4164,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "a constant dioxygen-energy conversion. Respiration has, how-ever, contributions from growth (overheads), meaning that it is alsolinked to production processes and cannot be simply interpreted aslosses. Respiration in encrusting bryozoans Celleporaria , for instance,was found to be proportional to the square root of biomass ( Whiteet al., 2011 ), demonstrating that the growth overheads dominate res-piration in this species. Moreover, none of the models have the prop-erty that the dioxygen-energy conversion is constant, independent of"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the 18 snippets address the stylized fact about intraspecific scaling of maximum dioxygen consumption with body size as a function of transport network morphology. The snippets concern unrelated topics: bacterial penetration through porous glass beads, biomass deoxygenation chemistry, oxide scale oxidation, oxygen diffusion through cover materials, composting models, scaffold oxygen gradients, eggshell/contaminant effects on bird reproduction, and scale-up of extraction processes. The closest tangential items (13 on scaffold oxygen diffusion gradients, 14 on organismal scaling/biomimetics) mention scale or oxygen but provide no evidence bearing on metabolic-rate scaling tied to transport-network morphology. There is neither support nor contradiction, so evidence strength is weak and the direction is insufficient/neutral."
+      },
+      "n_references": 0,
+      "references": {},
+      "snippets": [
+        {
+          "document_id": "W1574948262",
+          "title": "Effect of Grain Size on Bacterial Penetration, Reproduction, and Metabolic Activity in Porous Glass Bead Chambers",
+          "doi": "10.1128/aem.60.5.1481-1486.1994",
+          "year": "1994",
+          "distance": 0.4276,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "enetration rates observed in chambers packed with small beads were due to restriction of bacterial activity in the small pores. The large increases in the final amount of hydrogen produced without corresponding increases in the final amount of protein made indicated that metabolism became uncoupled from cell mass biosynthesis as bead size increased, suggesting that pore size influenced the efficiency of substrate utilization."
+        },
+        {
+          "document_id": "W1523656345",
+          "title": "Methods and Applications of Deoxygenation for the Conversion of Biomass to Petrochemical Products",
+          "doi": "10.5772/53983",
+          "year": "2013",
+          "distance": 0.4621,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "© 2013 Gunawardena and Fernando, licensee InTech. This is an open access chapter distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/3.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited. Methods and Applications of Deoxygenation for the Conversion of Biomass to Petrochemical Products"
+        },
+        {
+          "document_id": "W3150383824",
+          "title": "Reaction-Diffusion-Stress Coupling Effect in Inelastic Oxide Scale During Oxidation",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.4622,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "he oxidation causes plastic defor- mation. An inhomogeneous growth strain formulation is proposed based on evolution equations. Using the inhomogeneous growth strain, a reaction-diffusion- stress coupling elastic-plastic model, which accounts for factors, such as the chemical reaction, kinetics of the oxide scale and diffusion of reactant species, is developed for the analysis of stress and effects of stress on these factors in the oxide scale during high-temperature oxidation."
+        },
+        {
+          "document_id": "W1979539653",
+          "title": "Determination of the Diffusion Coefficient of Oxygen for a Cover System Including a Pulp and Paper By-Product",
+          "doi": "10.1520/gtj11233",
+          "year": "2004",
+          "distance": 0.468,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "o deduce the diffusion coefficients based on the best reproductions of laboratory results, using the computer code POLLUTE v.6. As expected, it was found that the diffusion coefficient—and the associated flux—is highly influenced by the degree of saturation of the sample. Beyond a threshold in the vicinity of 85%, a one order of magnitude drop in the diffusion coefficient was observed. A comparison of the results obtained with previously published data shows that deinking residues constitute a very effective oxygen barrier material due both to its ability to maintain a high degree of saturation and to rapidly consume oxygen."
+        },
+        {
+          "document_id": "W3188378245",
+          "title": "Disintegration half-life of biodegradable plastic films on different marine beach sediments",
+          "doi": "10.7717/peerj.11981",
+          "year": "2021",
+          "distance": 0.481,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "t of the grain size on the disintegration rate was masked by other parameters influencing the microbial community and activity. Understanding the parameters driving biodegradation is key to reliably report the range of disintegration rates occurring under the various conditions in different ecosystems."
+        },
+        {
+          "document_id": "W112232898",
+          "title": "Modélisation d'un traitement par compostage : développement d'outils expérimentaux d'étude du procédé et conception du modèle",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.4844,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "assess the biodegradability of substrates and to test the influence of parameters such as temperature and humidity on kinetics. Secondly, the characteristics of the gas flow within the composting reactor were studied using a gas tracing method and modelled according to a piston dispersion flow, guiding the writing of mass and heat transfers via the gas flow. Finally, the biological model and the mass and heat transfer models were integrated into mass and energy balances in order to design a global one-dimensional composting model."
+        },
+        {
+          "document_id": "W1979539653",
+          "title": "Determination of the Diffusion Coefficient of Oxygen for a Cover System Including a Pulp and Paper By-Product",
+          "doi": "10.1520/gtj11233",
+          "year": "2004",
+          "distance": 0.4905,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d layer, a much slower process than in air. As a consequence, its availability is drastically reduced, reducing ARD generation. An experimental procedure was developed to obtain the diffusion coefficient of oxygen through compacted deinking residues, an organic matter-rich by-product of paper recycling. With the oxygen concentrations obtained as a function of time, it was possible to deduce the diffusion coefficients based on the best reproductions of laboratory results, using the computer code POLLUTE v.6."
+        },
+        {
+          "document_id": "W2800608665",
+          "title": "The Application of Detrital Actors in Industrial Systems",
+          "doi": "10.1016/j.procir.2017.11.091",
+          "year": "2018",
+          "distance": 0.4915,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Biological systems have evolved to retain and recycle materials via decomposer networks. However, engineered systems are often deficient in the employment of decomposers despite their potential to improve efficiency and sustainability. These systems favor unmitigated growth and exploit natural resources, exporting pollutants to the environment as waste. Reducing this disparity between industrial and natural systems presents the opportunity for greater material and energetic efficiency."
+        },
+        {
+          "document_id": "W1574948262",
+          "title": "Effect of Grain Size on Bacterial Penetration, Reproduction, and Metabolic Activity in Porous Glass Bead Chambers",
+          "doi": "10.1128/aem.60.5.1481-1486.1994",
+          "year": "1994",
+          "distance": 0.4944,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "m or greater were used. The rate of H 2 production and the final amount of H 2 produced decreased when bead size was decreased. However, the final protein concentrations were similar in chambers packed with 116-, 192-, and 281-μm beads and were only slightly higher in chambers packed with 398- and 767-μm beads. Our data indicated that conditions that favored faster growth rates also resulted in faster penetration times and that the lower penetration rates observed in chambers packed with small beads were due to restriction of bacterial activity in the small pores."
+        },
+        {
+          "document_id": "W4231684306",
+          "title": "The Role of DDE, PCB, Coplanar PCB and Eggshell Parameters for Reproduction in the White-tailed Sea Eagle (Haliaeetus albicilla) in Sweden",
+          "doi": "10.1639/0044-7447(2002)031[0386:trodpc]2.0.co;2",
+          "year": "2002",
+          "distance": 0.5018,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "benzo-p-dioxin equivalents (TEQ), remained constant and TEQ can be assumed to have decreased in a similar way as PCB over time. Productivity (P), shell thickness (St), shell index (Si) and Di increased over time in the Bp but no change in Di or productivity occurred in the Lp, where residue concentrations were 5–8 times lower. P of the Bp was not correlated to St or Si but was negatively correlated to Di, DDE and PCB. An S-shaped dose-response relationship was indicated between P and DDE."
+        },
+        {
+          "document_id": "W2096128989",
+          "title": "Pore dimensions for accumulating biomass. I. Microbes that reproduce by fission or by budding",
+          "doi": "10.1002/bit.260210105",
+          "year": "1979",
+          "distance": 0.5027,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ined. That relationship is dependent upon the cell dimensions, the mode of reproduction, and the pore diameter of the material. In order to achieve high accumulation of microbes that reproduce by fission, at least 70% of the pores of an inorganic carrier should have pore diameters in the range of one times the smallest major dimension through five times the largest major dimension of the cell. To achieve the highest accumulation of microbes that reproduce by budding, at least 70% of the pores should have pore diameters in the range of one times the smallest dimension of the cell and less than four times the largest cell dimension."
+        },
+        {
+          "document_id": "W4223615434",
+          "title": "Microfluidic Reproduction of Dynamic Bioreactor Environment Based on Computational Lifelines",
+          "doi": "10.3389/fceng.2022.826485",
+          "year": "2022",
+          "distance": 0.5071,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ogy and growth rate. In this study, each colony in the dMSCC device represents a single cell as it travels through the reactor. Under oscillating conditions reproduced in the dMSCC device, a decrease in growth rate of about 40% was observed compared to continuous supply with the same average glucose availability. The presented approach provides insights into environmental conditions observed by microorganisms in large-scale bioreactors. It also paves the way for an improved understanding of how inhomogeneous environmental conditions influence cellular physiology, growth and production."
+        },
+        {
+          "document_id": "W1983960150",
+          "title": "Fabrication and characterization of a porous multidomain hydroxyapatite scaffold for bone tissue engineering investigations",
+          "doi": "10.1002/jbm.b.31603",
+          "year": "2010",
+          "distance": 0.5106,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "depth, while maintaining relatively high seeding efficiencies (67.7% ± 2.2% for trimodal, 79.1% ± 2.1% for bimodal scaffolds). Numerical models demonstrated the effectiveness and efficacy of incorporating channels to increase the core oxygen concentration, with the accuracy of these models improved by using experimentally measured cellular oxygen consumption rates and effective diffusion coefficients. The presence of channels had a positive influence in minimizing the concentration gradients compared with bimodal scaffolds for the same cell density distributions. © 2010 Wiley Periodicals, Inc."
+        },
+        {
+          "document_id": "W3202159938",
+          "title": "Organismal Design and Biomimetics: A Problem of Scale",
+          "doi": "10.3390/biomimetics6040056",
+          "year": "2021",
+          "distance": 0.5167,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "realm. In nature, size changes determine remarkable effects in organismal structures, functions, and evolutionary innovations. Similarly, size and scaling rules need to be considered in the biomimetic transfer of solutions to different dimensions, from nature to artefacts. The observation of principles that occur at very small scales, such as for nano- and microstructures, can often be seen and transferred to a macroscopic scale. However, this transfer is not always possible; numerous biological structures lose their functionality when applied to different scale dimensions."
+        },
+        {
+          "document_id": "W112232898",
+          "title": "Modélisation d'un traitement par compostage : développement d'outils expérimentaux d'étude du procédé et conception du modèle",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.5179,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "biodégradabilité des substrats et de tester l'influence de paramètres tels que la température et l'humidité sur les cinétiques. Deuxièmement, les caractéristiques de l'écoulement gazeux au sein du réacteur de compostage ont été étudiées à l'aide d'une méthode de traçages des gaz et modélisées selon un flux de nature piston dispersion, orientant l'écriture des transferts de masse et de chaleur via le flux gazeux. Enfin, le modèle biologique et les modèles de transferts de masse et de chaleur ont été intégrés dans des bilans massiques et énergétiques afin de concevoir un modèle global de compostage à une dimension."
+        },
+        {
+          "document_id": "W2080284651",
+          "title": "Proton Transfer Mediated by Water: Experimental Evidence by Neutron Diffraction",
+          "doi": "10.1021/jp100370u",
+          "year": "2010",
+          "distance": 0.5181,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "on O4 framework oxygen, occupied to 18%; the second (D2) was on O6, occupied to 8%; the latter (D3) was on O1, occupied to 35%. This Brønsted site distribution strongly differs from that found in the nonrehydrated deuterium form (D-FER) in the same ferrierite sample (Martucci, A.; Alberti, A.; Cruciani, G.; Radaelli, P.; Ciambelli, P.; Rapacciuolo, M. Microporous Mesoporous Mater. 1999, 30, 95.), where D3 site is absent and D1 and D2 are occupied to 14 and 16%, respectively."
+        },
+        {
+          "document_id": "W1574948262",
+          "title": "Effect of Grain Size on Bacterial Penetration, Reproduction, and Metabolic Activity in Porous Glass Bead Chambers",
+          "doi": "10.1128/aem.60.5.1481-1486.1994",
+          "year": "1994",
+          "distance": 0.5224,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "We determined the effects of grain size and nutritional conditions on the penetration rate and metabolic activity of Escherichia coli strains in anaerobic, nutrient-saturated chambers packed with different sizes of glass beads (diameters, 116 to 767 μm) under static conditions. The chambers had nearly equal porosities (38%) but different calculated pore sizes (range, 10 to 65 μm)."
+        },
+        {
+          "document_id": "W2388470274",
+          "title": "CHAPTER 10. Scale‐up of Extraction Processes",
+          "doi": "10.1039/9781849737579-00363",
+          "year": "2013",
+          "distance": 0.5233,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "The challenge of finding scale‐up criteria that allow the reproduction of laboratory data at higher scales is discussed in this chapter. The main factors that should be considered when scaling‐up extraction processes will be presented, and the nature of thermodynamic and mass transfer changes implied by scale‐up will be extensively discussed. The chapter contains an overview of the latest developments and applications in the field of natural products."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "The stylized fact concerns intraspecific scaling of maximum dioxygen use depending on the morphology of transport networks. The DEB snippets confirm the general empirical pattern that dioxygen use scales with body mass to a power near 0.75 (snippets 7, 8) and that ontogenetic scaling depends on shape/morphology, with DEB explaining scaling as a result of organisms changing shape during growth (snippet 5) and deriving oxygen use from underlying metabolic processes (snippets 11, 12, 4). However, none of the snippets directly addresses the specific claim that the scaling exponent depends on the morphology of energy/material transport networks (e.g., supply-network or West-Brown-Enquist-style arguments). Snippet 5's shape-based reasoning is the closest, but it is about DEB's surface-area/volume framing rather than transport-network morphology per se. The remaining snippets (2, 3, 9, 10, 13-24) are off-topic, dealing with soil/composting/biomass conversion, oxygen diffusion in materials, or microbial reproduction. Overall the corpus offers only weak, indirect support and no contradiction, leaving the specific network-morphology claim under-evidenced."
+      },
+      "n_references": 6,
+      "references": {
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3844401240348816
+        },
+        "69b8a547ecbd4702b29a7839": {
+          "title": "MainoKear2015a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3916766047477722
+        },
+        "69b847b5ec32c55db5430a05": {
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3992503881454468
+        },
+        "69b89d63ecbd4702b29a6eb3": {
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.40189802646636963
+        },
+        "69b84857ec32c55db5430bf1": {
+          "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.40346747636795044
+        },
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.40877747535705566
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3601,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "mposition of reserve and structure match,no dioxygen is used. In other words: all use of dioxygen that is linked to growth comesfrom the growth overheads, if the elemental composition of reserve and structure match.98 4. Univariate DEB models-0.05 0 0.05 0.1 0 0.2 0.4 0.6 0.8 1j, mol.mol−1h−1scaled specific growth rate ˙ r/˙rmH2OHCO−3NH3H∗-0.05 0 0.05 0 0.2 0.4 0.6 0.8 1j, mol.mol−1h−1scaled specific growth rate ˙ r/˙rmN2NO−3ENO−2Figure 4.7: The specific fluxes of the compounds as a function of the specific growth rateas fraction of the maximum of ˙ rm= 0.003 h−1of the anammox bacteria. DEB Parameters:"
+        },
+        {
+          "document_id": "69b8a084ecbd4702b29a71f7",
+          "title": "Tang and Riley - 2024 - Technical Note A modified formulation of dynamic .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.368,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Preprint. Discussion started: 5 August 2024c Author(s) 2024. CC BY 4.0 License. 17 Tang, J. Y. and Riley, W. J.: SUPECA kinetics for scaling redox reactions in networks of mixed substrates and consumers and an example application to aerobic soil respiration, Geosci Model Dev, 10, 3277-3295, 10.5194/gmd-10-3277-2017, 2017. Tang, J. Y. and Riley, W. J.: Competitor and substrate sizes and diffusion together define enzymatic depolymerization and 345 microbial substrate uptake rates, Soil Biol Biochem, 139, ARTN 107624 10.1016/j.soilbio.2019.107624, 2019. Tang, J. Y. and Riley, W."
+        },
+        {
+          "document_id": "69b8994aecbd4702b29a69fd",
+          "title": "KlanNisb2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3834,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ty phenom-enological, but we note that the pattern of inhibition byenvironmental degradation (Figure 2, top right panel) closelymatches dioxygen concentration in microplate wells measured byKocincova et al. (2008 [28], Figure 8). Alternatives do, however,exist; for example, we were also able to capture the slowercessation of growth using an assumption that substrate is ofheterogeneous quality, and that the half-saturation constant(handling time) increases for substrates of lower quality. Final"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3844,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "rdly use dioxygen, see Section 2.6.2.O2The use of dioxygen increases with decreasing mass in embryos because it looses (dry)mass(namely reserve) during development, while its structure is growing, see Section 2.6.2.Respiration increases with mass in juveniles and adults because reserve density remainsconstant at constant food, due to the assumption of weak homeostasis, see Subsection1.2.2, and their increasing structure requires maintenance.O3The weight-specific use of dioxygen decreases during the life cycle because investment ingrowth decreases (and growth-overheads contribute to respiration), see Section 4.4. Fully"
+        },
+        {
+          "document_id": "69b8a547ecbd4702b29a7839",
+          "title": "MainoKear2015a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3917,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "l 3/4.In contrast, the ontogenetic scaling of consumption was better approximated by a less steep, surface area or mass2/3 scal-ing. DEB theory explains the scaling as a result of organisms being more similar in shape to a larger conspecific than to one of a different species. If maintenance scales with volume and uptake scales with a surface area, organisms will reach an asymptotic size where energy uptake matches maintenance demand with nothing remaining for growth. T o overcome this limit in ontogenetic size, uptake is expected to scale greater than mass2/3 between species (Maino et al. 2014). It turns out"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3977,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "A 0 00 0 ηV G˙pGµ−1E˙pA−µ−1E˙pD−µ−1E˙pGηPA˙pA 0 0The dioxygen flux that is associated to growth is given in element 3, i.e.˙JOG= ˙pG((−1−nHE/4 +nOE/2 + 3 nNE/4)/µE−(−1−nHV/4 +nOV/2 + 3 nNV/4)ηV G)= ˙pG(−1−nHE/4 +nOE/2 + 3 nNE/4)\u0010µ−1E−ηV G\u0011fornHV=nHEnOV=nOEnNV=nNEwhere the mass-energy coupler for growth is given by ˙JV=ηV G˙pG=κG˙pG/µV. So inabsence of overhead costs of growth, i.e. ηV G=µ−1EorµGV=µEorµV˙JV= ˙pGorκG=µV[MV]/[EG] = 1, and if the elemental composition of reserve and structure match,no dioxygen is used. In other words: all use of dioxygen that is linked to growth comes"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3993,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "hardly use dioxygen\u000fThe use of dioxygen increases with decreasing mass in embryos and increases with mass in juvenilesand adults\u000fThe use of dioxygen scales approximately with body weight raised to a power close to 0.75\u000fAnimals show a transient increase in metabolic rate after ingesting food (heat increment of feeding)Stoichiometry\u000fThe chemical composition of organisms depends on the nutritional status (starved vs well-fed)\u000fThe chemical composition of organisms at constant food density becomes constant during growthEnergy\u000fDissipating heat is a weighted sum of three mass ows: carbon dioxide, dioxygen and nitrogenouswasteAgeing"
+        },
+        {
+          "document_id": "69b89d63ecbd4702b29a6eb3",
+          "title": "Meer2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4019,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "embryos, but increases with mass in juvenilesand adultsThe use of dioxygen scales with body mass raisedto a power close to 0.75Stoichiometry Well-fed animals have a di erent body chemicalcomposition than poorly-fed organismsAnimals growing with constant food density con-verge to a constant chemical compositionReproduction Reproduction increases with size intra-speci cally,but decreases with size inter-speci cally2 DEB, DEVELOPMENT AND CRITICISMS 6Table 2: The basic assumptions of the standard DEB model. After Kooij-man [9]1. An organism is characterized by a structural body, reserves, and matu-"
+        },
+        {
+          "document_id": "69b8921becbd4702b29a61b2",
+          "title": "AuguRosa2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4023,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "from Larson (1987a) assuming 14 d growth atf= 0:46 followed by 6 d at f= 0, g 9A-B. We discuss the predicted growth and repro-duction later, however what we illustrate here is that predicted dioxygen consumptionexpressed as \u0016mol d\u00001decreases during starvation ( g 9C) which is realistic. The reasonis that both reserve mobilization and structure decrease during shrinking. Dioxygen con-sumption is actually commonly represented in three other ways in the literature: \u0016mold\u00001against length, \u0016mol d\u00001against wet mass and as \u0016mol per gram (dry) biomass as"
+        },
+        {
+          "document_id": "69b8a56decbd4702b29a7863",
+          "title": "KooyAuge2003.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4028,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ge that the environ-ment is homogeneous again. It is clear that these dif-ferences hardly aﬀect the dynamics with this choice ofparameter values, the curves in steps 3–5 are very simi-lar; the diﬀerences are clear for smaller transport rates.The uptake of product evolves from concentration-based to ﬂux-based (see Fig. 6); this comes with anincrease of the maximum throughput rate and a quali-tative change in behaviour of the steady-state amountsof structure around this growth rate: the symbiosis be-comes independent of the extracellular product con-centration. The role of the products partly degrades"
+        },
+        {
+          "document_id": "69b84857ec32c55db5430bf1",
+          "title": "Kooijman - 2014 - Metabolic acceleration in animal ontogeny An evol.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4035,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "ion at best. Feeding and temperature affect metabolic ratesubstantially, as does body size (both intra- and inter-speci ﬁcally).The trajectory of metabolic rate over the life cycle of an individual andthe inter-species variation are well understood quantitatively by theDEB theory ( Kooijman, 1986, 2001 ). The DEB theory makes no (direct)assumption about the use of dioxygen and obtains it by closing themass balance for chemical elements (carbon, hydrogen, oxygen andnitrogen). The implication is that the use of dioxygen can only beevaluated in combination with the production ﬂux of water, carbon-"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4088,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "ting substrate. M etabolic processes are therefore not controlled by the uptake of oxygen. Rather, in the DEB framework, oxygen consumption is predicted from metabolic processes such as assimilation, somatic maintenance and growth , and obtained by closing the mass balance for chemical elements (carbon, hyd rogen, nitrogen and oxygen ) by writing specific macrochemical reactions (see supplementary material for details) . The implication is that the use of dioxygen can only be evaluated in combination with the production flux of water, carbon dioxide and nitroge n waste (e.g. ammonia) (Kooijman, 2017) . Additional parameters are"
+        },
+        {
+          "document_id": "W1574948262",
+          "title": "Effect of Grain Size on Bacterial Penetration, Reproduction, and Metabolic Activity in Porous Glass Bead Chambers",
+          "doi": "10.1128/aem.60.5.1481-1486.1994",
+          "year": "1994",
+          "distance": 0.4276,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "enetration rates observed in chambers packed with small beads were due to restriction of bacterial activity in the small pores. The large increases in the final amount of hydrogen produced without corresponding increases in the final amount of protein made indicated that metabolism became uncoupled from cell mass biosynthesis as bead size increased, suggesting that pore size influenced the efficiency of substrate utilization."
+        },
+        {
+          "document_id": "W1523656345",
+          "title": "Methods and Applications of Deoxygenation for the Conversion of Biomass to Petrochemical Products",
+          "doi": "10.5772/53983",
+          "year": "2013",
+          "distance": 0.4621,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "© 2013 Gunawardena and Fernando, licensee InTech. This is an open access chapter distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/3.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited. Methods and Applications of Deoxygenation for the Conversion of Biomass to Petrochemical Products"
+        },
+        {
+          "document_id": "W3150383824",
+          "title": "Reaction-Diffusion-Stress Coupling Effect in Inelastic Oxide Scale During Oxidation",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.4622,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "he oxidation causes plastic defor- mation. An inhomogeneous growth strain formulation is proposed based on evolution equations. Using the inhomogeneous growth strain, a reaction-diffusion- stress coupling elastic-plastic model, which accounts for factors, such as the chemical reaction, kinetics of the oxide scale and diffusion of reactant species, is developed for the analysis of stress and effects of stress on these factors in the oxide scale during high-temperature oxidation."
+        },
+        {
+          "document_id": "W1979539653",
+          "title": "Determination of the Diffusion Coefficient of Oxygen for a Cover System Including a Pulp and Paper By-Product",
+          "doi": "10.1520/gtj11233",
+          "year": "2004",
+          "distance": 0.468,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "o deduce the diffusion coefficients based on the best reproductions of laboratory results, using the computer code POLLUTE v.6. As expected, it was found that the diffusion coefficient—and the associated flux—is highly influenced by the degree of saturation of the sample. Beyond a threshold in the vicinity of 85%, a one order of magnitude drop in the diffusion coefficient was observed. A comparison of the results obtained with previously published data shows that deinking residues constitute a very effective oxygen barrier material due both to its ability to maintain a high degree of saturation and to rapidly consume oxygen."
+        },
+        {
+          "document_id": "W3188378245",
+          "title": "Disintegration half-life of biodegradable plastic films on different marine beach sediments",
+          "doi": "10.7717/peerj.11981",
+          "year": "2021",
+          "distance": 0.481,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "t of the grain size on the disintegration rate was masked by other parameters influencing the microbial community and activity. Understanding the parameters driving biodegradation is key to reliably report the range of disintegration rates occurring under the various conditions in different ecosystems."
+        },
+        {
+          "document_id": "W112232898",
+          "title": "Modélisation d'un traitement par compostage : développement d'outils expérimentaux d'étude du procédé et conception du modèle",
+          "doi": "",
+          "year": "2004",
+          "distance": 0.4844,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "assess the biodegradability of substrates and to test the influence of parameters such as temperature and humidity on kinetics. Secondly, the characteristics of the gas flow within the composting reactor were studied using a gas tracing method and modelled according to a piston dispersion flow, guiding the writing of mass and heat transfers via the gas flow. Finally, the biological model and the mass and heat transfer models were integrated into mass and energy balances in order to design a global one-dimensional composting model."
+        },
+        {
+          "document_id": "W1979539653",
+          "title": "Determination of the Diffusion Coefficient of Oxygen for a Cover System Including a Pulp and Paper By-Product",
+          "doi": "10.1520/gtj11233",
+          "year": "2004",
+          "distance": 0.4905,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "d layer, a much slower process than in air. As a consequence, its availability is drastically reduced, reducing ARD generation. An experimental procedure was developed to obtain the diffusion coefficient of oxygen through compacted deinking residues, an organic matter-rich by-product of paper recycling. With the oxygen concentrations obtained as a function of time, it was possible to deduce the diffusion coefficients based on the best reproductions of laboratory results, using the computer code POLLUTE v.6."
+        },
+        {
+          "document_id": "W2800608665",
+          "title": "The Application of Detrital Actors in Industrial Systems",
+          "doi": "10.1016/j.procir.2017.11.091",
+          "year": "2018",
+          "distance": 0.4915,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "Biological systems have evolved to retain and recycle materials via decomposer networks. However, engineered systems are often deficient in the employment of decomposers despite their potential to improve efficiency and sustainability. These systems favor unmitigated growth and exploit natural resources, exporting pollutants to the environment as waste. Reducing this disparity between industrial and natural systems presents the opportunity for greater material and energetic efficiency."
+        },
+        {
+          "document_id": "W1574948262",
+          "title": "Effect of Grain Size on Bacterial Penetration, Reproduction, and Metabolic Activity in Porous Glass Bead Chambers",
+          "doi": "10.1128/aem.60.5.1481-1486.1994",
+          "year": "1994",
+          "distance": 0.4944,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "m or greater were used. The rate of H 2 production and the final amount of H 2 produced decreased when bead size was decreased. However, the final protein concentrations were similar in chambers packed with 116-, 192-, and 281-μm beads and were only slightly higher in chambers packed with 398- and 767-μm beads. Our data indicated that conditions that favored faster growth rates also resulted in faster penetration times and that the lower penetration rates observed in chambers packed with small beads were due to restriction of bacterial activity in the small pores."
+        },
+        {
+          "document_id": "W4231684306",
+          "title": "The Role of DDE, PCB, Coplanar PCB and Eggshell Parameters for Reproduction in the White-tailed Sea Eagle (Haliaeetus albicilla) in Sweden",
+          "doi": "10.1639/0044-7447(2002)031[0386:trodpc]2.0.co;2",
+          "year": "2002",
+          "distance": 0.5018,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "benzo-p-dioxin equivalents (TEQ), remained constant and TEQ can be assumed to have decreased in a similar way as PCB over time. Productivity (P), shell thickness (St), shell index (Si) and Di increased over time in the Bp but no change in Di or productivity occurred in the Lp, where residue concentrations were 5–8 times lower. P of the Bp was not correlated to St or Si but was negatively correlated to Di, DDE and PCB. An S-shaped dose-response relationship was indicated between P and DDE."
+        },
+        {
+          "document_id": "W2096128989",
+          "title": "Pore dimensions for accumulating biomass. I. Microbes that reproduce by fission or by budding",
+          "doi": "10.1002/bit.260210105",
+          "year": "1979",
+          "distance": 0.5027,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ined. That relationship is dependent upon the cell dimensions, the mode of reproduction, and the pore diameter of the material. In order to achieve high accumulation of microbes that reproduce by fission, at least 70% of the pores of an inorganic carrier should have pore diameters in the range of one times the smallest major dimension through five times the largest major dimension of the cell. To achieve the highest accumulation of microbes that reproduce by budding, at least 70% of the pores should have pore diameters in the range of one times the smallest dimension of the cell and less than four times the largest cell dimension."
+        },
+        {
+          "document_id": "W4223615434",
+          "title": "Microfluidic Reproduction of Dynamic Bioreactor Environment Based on Computational Lifelines",
+          "doi": "10.3389/fceng.2022.826485",
+          "year": "2022",
+          "distance": 0.5071,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.05,
+          "text": "ogy and growth rate. In this study, each colony in the dMSCC device represents a single cell as it travels through the reactor. Under oscillating conditions reproduced in the dMSCC device, a decrease in growth rate of about 40% was observed compared to continuous supply with the same average glucose availability. The presented approach provides insights into environmental conditions observed by microorganisms in large-scale bioreactors. It also paves the way for an improved understanding of how inhomogeneous environmental conditions influence cellular physiology, growth and production."
+        }
+      ]
+    }
+  }
+}

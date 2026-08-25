@@ -6,6 +6,7 @@
  */
 import api from './api'
 import type {
+  DefaultModelInfo,
   DeviceFlowPoll,
   DeviceFlowStart,
   LLMKey,
@@ -29,6 +30,18 @@ export async function listProviders(): Promise<Provider[]> {
  */
 export async function fetchKeyModels(keyId: string): Promise<ProviderModels> {
   const { data } = await api.get<ProviderModels>(`${BASE}/${keyId}/models`)
+  return data
+}
+
+/** Locally-available Ollama models (for the chat model picker, "Local" source). */
+export async function fetchLocalModels(): Promise<ProviderModels> {
+  const { data } = await api.get<ProviderModels>('/chat/local-models')
+  return data
+}
+
+/** Info about the operator-configured default model (Nemotron). */
+export async function fetchDefaultModel(): Promise<DefaultModelInfo> {
+  const { data } = await api.get<DefaultModelInfo>('/chat/default-model')
   return data
 }
 

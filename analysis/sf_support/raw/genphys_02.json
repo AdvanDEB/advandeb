@@ -1,0 +1,884 @@
+{
+  "sf_id": "genphys_02",
+  "category": "General Physiology",
+  "statement": "Cells in a tissue are metabolically similar regardless of the size of the organism.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 2,
+        "rationale": "The stylized fact (the DEB assumption of cell similarity / 'cells are similar regardless of organism size') is explicitly stated and supported by core DEB references: Sousa et al. [5] lists 'cells are similar across species' as a foundational DEB assumption underpinning Kleiber's law and growth curves, and Jusup et al. [12] explicitly affirms the metabolic similarity of cells being mostly independent of organism size, with a concrete evolutionary example. However, a substantial body of the retrieved snippets comes from the metabolic-scaling/Cell Metabolism Hypothesis literature (Glazier, Starostová, Kozłowski, Kearney/White), which argues that cell size and per-cell metabolic intensity DO vary with body size and drive metabolic scaling deviations from isometry [3,4,6,13,14,15,18]—directly tensioning the strict version of the claim. Thus the corpus contains clear DEB-internal support but also notable conflicting evidence from comparative physiology, yielding moderate, mixed evidence rather than firm corroboration."
+      },
+      "n_references": 8,
+      "references": {
+        "69b8476cec32c55db5430963": {
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 1,
+          "contradicts": 1,
+          "best_distance": 0.3218320608139038
+        },
+        "69b87789ecbd4702b29a3f47": {
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.32783204317092896
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3365042209625244
+        },
+        "69b86ef8ecbd4702b29a3462": {
+          "title": "StarKona2013.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 0,
+          "contradicts": 3,
+          "best_distance": 0.33774638175964355
+        },
+        "69b8a686ecbd4702b29a79f0": {
+          "title": "Kozlowski et al. - 2020 - Coevolution of body size and metabolic rate in ver.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.34773194789886475
+        },
+        "69b8a592ecbd4702b29a7884": {
+          "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3507295250892639
+        },
+        "69b8a04becbd4702b29a71a8": {
+          "title": "KearWhit2012.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3579337000846863
+        },
+        "69b88f29ecbd4702b29a5ea1": {
+          "title": "WhitKear2013.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.362398624420166
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b88ef7ecbd4702b29a5e5e",
+          "title": "KooyHeng2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2966,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "he vague boundaries of multicellularity and even those of individuality. A sharpening of definitions or concepts may reduce the number of transition cases to some extent, but this cannot hide the fact that we are dealing here with a continuum of metabolic integration in the twilight-zone between individuals and populations. This illustrates that organisms, and especially eukaryotes, need each other metabolically.The implications of body size and shape Although some individual cells can become quite large, with inherent consequences for physiological design and metabolic performance (Hope and"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3218,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ders of mammals.The cell-surface hypothesis is worth further testing, butmay only be able to explain relatively minor diﬀerencesin the interspeciﬁc scaling of metabolic rate ( cf. Bligh, 1998).This is because cell number almost always contributesmuch more to species diﬀerences in body size than cell sizedoes (Rensch, 1960; Peters, 1983; Calder, 1984; Schmidt-Nielsen, 1984; Riska & Atchley, 1985; Niklas, 1994).For example, mammalian cell size scales as My0.03–0.05(Gu¨nther, 1975; Peters, 1983; Calder, 1984), such that,although an elephant weighs about 100 000 times moreVariation in the scaling of metabolism 639"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3266,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "ngs suggestthat body-size-related diﬀerences in cell metabolic ratecannot be entirely attributed to transport-network properties(cf. Kleiber, 1961; Schmidt-Nielsen, 1984; Suarez, Darveau& Childress, 2004), at least in a proximate (immediatefunctional) sense. However, these ﬁndings do not excludethe possibility that, in an ultimate (evolutionary) sense,the intrinsic metabolic rate of cells has been adjusted, at leastin part, to limits set by transport networks or some othersystemic property of the organism.(b)Scale of applicationSome metabolic scaling explanations appear to focus onbroad comparisons encompassing many orders of magni-"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3278,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "cells [187], and whether this transport affects how metabolic rate scales with cell size. 4.1.3. System Composition (SC) Models Some workers have suggested that changes in cell compos ition, including the proportions of metabolically active components, with increasing cell size may significantly affect metabolic scaling in unicellular organisms [106,173]. Some studies indicate that relative dry mass or carbon content may decline [188,18 9], and the relative size of vacuoles increase [106], as cell size increases, both of which"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3365,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "that cells are similar across species (C 1).The propositions obtained explain the following empirical ﬁndings: (1) the method ofindirect calorimetry (I1), (2) body size growth (von Bertal anffy curves), (3) the variationof von Bertalanffy’s growth rates within (G5) and across spe cies (G4), (4) Kleiber’s lawon metabolic rate (R3) and (5) the pattern of foetal growth (G 3).These assumptions and propositions are at the core of DEB the ory. This theory hasalready been tested for many organisms including bacteria [ 4, 5, 43, 79], crustaceans [40],collemboles [33], appendicularians [41], rotiﬁers [2], ye asts [20], molluscs [21, 24, 25,"
+        },
+        {
+          "document_id": "69b86ef8ecbd4702b29a3462",
+          "title": "StarKona2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3377,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "sus cellnumber increase to body mass enlargement within a clade [2].Therefore, individuals of species characterized by cell-sizeinvariance should exhibit an isometric (linear) relationshipbetween metabolic rate and body mass during ontogeny.Conversely, an increase of cell size during ontogeny should resultin flattening of metabolic rate scaling.Chown et al. [25] supported the aforementioned predictions ofthe Cell Metabolism Hypothesis for a mutual relationship betweencell size contribution to body size changes and metabolic scaling at"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430ad7",
+          "title": "WhitKear2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3385,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "as demonstratedthat patterns of mass dependence of cell sizes in differentanimal groups are inconsistent with the assumptions ofthe model and has called for revision of the model(Kozłowski et al. 2010).Further test of theories for metabolic scaling are there-"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.34,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ed.; Cambridge University Press: Cambridge, UK, 1942. 89. Brody, S. Bioenergetics and Growth ; Hafner: New York, NY, USA, 1945. 90. Lehmann, G. Energetik des organismus. In Oppenheimer’s Handb. Biochem. , 2nd ed.; Fischer: Jena, Germa ny, 1926 ; pp. 564–608. 91. Ellenby, C. Relation between body size and metabolism. Nature 1937 , 140, 853. 92. Barenblatt, G.I.; Monin, A.S. Similarity principles for the biology of pelagic animals. Proc. Natl. Acad. Sci. USA 1983 , 80, 3540 –3542. 93. Pfaundler, M. Über die energetische Flä chenregel. Pflü ger ’s Arch . Gesamte Physiol. Mensch en Tiere 1921 , 188, 273 –280."
+        },
+        {
+          "document_id": "69b8a547ecbd4702b29a7839",
+          "title": "MainoKear2015a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3452,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ding on whether the size comparison is ontogenetic or inter-specific.Attention to the physico-chemical constraints on metabolic organisation has increasingly aided the interpretation of seemingly distinct biological phenomena (Brown et al. 2004)."
+        },
+        {
+          "document_id": "69b8a686ecbd4702b29a79f0",
+          "title": "Kozlowski et al. - 2020 - Coevolution of body size and metabolic rate in ver.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3477,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "n mor-tality, as in the approach considered here (see Section II).Below, we link these allocation ‘decisions’not only to changesin body components but to their underlying cellular architec-ture, which is another important property largely ignored inscaling studies.(2) Body mass, cell size and MRUnlike unicells or eutelic multicellular organisms with a ﬁxednumber of cells, the body sizes of non-eutelic animals canevolve viaalterations in cell size as well as cell number. Unfor-tunately, the cellular basis of body size evolution has rarelybeen studied (Javed et al., 2010), although it can help address"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3506,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ontributions of the metabolic activity of various tissues to estimate whole organism metabolic rate (see Sections 3.3 and 5.3). However, a comprehensive th eory of metabolic scaling requires both proximate and ultimate explanations that also depend on downward causation. Despite their potential usefulness in providing proximate mechanisms, molecular, cellular and tissue based models of metabolic scaling canno t by themselves effectively explain the diversity of metabolic scaling exponents ( b) that have been observed (also see Section 5.4). To do so requires that we also examine whole system effects as mediated by"
+        },
+        {
+          "document_id": "69b8a592ecbd4702b29a7884",
+          "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3507,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "iﬁcations.Cell similarity . The metabolic similarity of cells is mostly independent of org anism size. The context here is much broader than the life cycle of a single individual. Once a successful metabolic pathway evolves, it can be preserved by evolution to serve very similar functions in various organs or even the same function in diff erent species. A famous example is the cyclic AMP pathway used in cell communication by all animals investigated, including bacteria and other unicellular organisms [18]. This pathway produces a cell-wide biochemical change that can last long after the"
+        },
+        {
+          "document_id": "69b86ef8ecbd4702b29a3462",
+          "title": "StarKona2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3511,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "ctive ‘‘reserve’’ with an increase of structural body mass [12].The last of the currently most explored hypotheses is the ‘‘CellMetabolism Hypothesis’’ [2,13], which postulates that variation inmetabolic scaling could be largely attributed to differences in cellsize. This hypothesis predicts that larger cells are metabolicallymore frugal, i.e., they have lower metabolic rate per volume unit,due to their relatively smaller membrane surface to cell volume,which should determine the cell metabolic rate. The CellMetabolism Hypothesis was supported by studies of metabolicscaling within mammalian and bird lineages [2], within a reptilian"
+        },
+        {
+          "document_id": "69b8a04becbd4702b29a71a8",
+          "title": "KearWhit2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3579,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "3/4and therefore that thewhole-organism metabolic rate scales this way as well.Thus, under the WBE theory the explanation for inter-speciﬁc scaling of metabolic rate with size is the same asthe ontogenetic explanation (see above): the metabolicrates of in vivo cells are increasingly constrained as sizeincreases because of the scaling of the supply network."
+        },
+        {
+          "document_id": "69b86ef8ecbd4702b29a3462",
+          "title": "StarKona2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3586,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "fectsall tissues [39] and thus the total metabolic rate of an organism.The variation in cell size is a key component of the CellMetabolism Hypothesis on metabolic rate scaling [2]. Forontogenetic scaling, this hypothesis expecting causal relationshipbetween RBC size and metabolic rate, predicts a linearrelationship between logarithmically untransformed SMR andbody mass across individuals without correlation between RBCsize and body mass, but slower than linear SMR increaserelationship across individuals with such correlation (i.e., flatteningof metabolic rate scaling). The pattern of ontogenetic scaling"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.359,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "e in multicellular animals with permeable integuments [46]. Furthermore, degree of heterogeneity in the metabolic intensity of various components of a cell and their scaling with cell size can be predicted to modulate the relative influence of the SC and R D modules on the metabolic scaling of unicellular organisms (see Section 4.1.1). A major unknown is whether RT theory can be applied at the cellular level (see Sections 4.1.1 and 5.2). 8.3.2. Application of CMT to Groups of Organisms The shape of groups of huddling small mammals appears to modulate SA effects on the metabolic"
+        },
+        {
+          "document_id": "69b8a686ecbd4702b29a79f0",
+          "title": "Kozlowski et al. - 2020 - Coevolution of body size and metabolic rate in ver.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.361,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "GAWELCZYK ,A .T . (2003b). Intraspeci ﬁc body sizeoptimization produces interspeci ﬁc allometries. In Macroecology: Concepts andConsequences (eds T. M. B LACKBURN and K. J. G ASTON ), pp. 299 –320. Oxford:Blackwell Publishing.KOZŁOWSKI ,J .,CZARNOLESKI ,M .,FRANCOIS -KRASSOWSKA ,A .,MACIAK,S .&PIS,T .(2010). Cell size is positively correlated between different tissues in passerine birdsand amphibians, but not necessarily in mammals. Biology Letters 6, 792 –796.KREBS,H .A . (1950). Body size and tissue respiration. Biochimica et Biophysica Acta 4,249 –269."
+        },
+        {
+          "document_id": "69b88f29ecbd4702b29a5ea1",
+          "title": "WhitKear2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3624,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "ing cell size, the cellsurface area:volume ratio decreases (Davison 1955 ;Kozłowski et al. 2003a ,2010 ). All other things beingequal, the model predicts that metabolic rate should scaleisometrically when evolutionary increases in body size areachieved entirely through increases in cell number (i.e. cellsize scales as M0), or as M2/3when increases in size areachieved through increases in cell volume (i.e. cell sizeincreases with M). Experimental studies have supported thelink between cell size and metabolic rate (Maciak et al.2011 ), and the cell size model for metabolic scaling hasbeen supported in studies of endotherms (Vinogradov"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "None of the snippets directly addresses the stylized fact that cells in a tissue are metabolically similar regardless of organism size. Most snippets concern allometric scaling of metabolic rate with organism mass, cell/organelle size control, genome size, or cytoskeletal mechanics—topically adjacent but not evidentiary for cellular metabolic invariance across organism sizes. Snippet 3 weakly touches the notion that somatic cells share genetic makeup, which is tangentially relevant but does not address metabolic similarity. Several snippets emphasize that cell size and metabolic activity covary with genome and body size (7, 8, 14), which could even complicate the claim, but none make the specific tissue-level metabolic comparison across organism sizes. Overall the corpus provides no clear support and no clear contradiction, so evidence is weak and the direction is best judged neutral/insufficient."
+      },
+      "n_references": 1,
+      "references": {
+        "W2974861784": {
+          "title": "Mitosis and Meiosis and the Cell Cycle",
+          "doi": "",
+          "year": "2003",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3910703659057617
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2559148707",
+          "title": "Interspecific allometric scaling of unicellular organisms as an evolutionary process of food chain creation",
+          "doi": "10.48550/arxiv.1611.09824",
+          "year": "2016",
+          "distance": 0.3779,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "allometric scaling is the total effect of physiological and adaptation mechanisms inherent to organisms composing a food chain. Together, the workings of these mechanisms are united by a primary goal of any living creature - its successful reproduction. This primary necessity of each organism and of the entire food chain is that common denominator, to which all organisms adjust their metabolic rates. In this article, we consider unicellular organisms, while the second paper studies multicellular organisms and the entire concept in more detail."
+        },
+        {
+          "document_id": "W2064169216",
+          "title": "Weight-Watching at the University: The Consequences of Growth",
+          "doi": "10.1126/science.175.4020.381",
+          "year": "1972",
+          "distance": 0.3817,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "s. There are no cells the size of basketballs because essential metabolic functions are limited by the surface-to-volume ratio. We must emphasize that one does not need a grand theory of life in order to identify this limiting condition. If cells could talk, they would no doubt differ on the general philosophy of being a cell, yet all conceptions would be subject to certain physically inevitable limitations on size."
+        },
+        {
+          "document_id": "W2974861784",
+          "title": "Mitosis and Meiosis and the Cell Cycle",
+          "doi": "",
+          "year": "2003",
+          "distance": 0.3911,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "gether. The cells that make up different tissues have different shapes and perform different functions for the plant or animal. Even though they have diverse functions, each somatic cell in the organism normally has the same chromosomes and therefore the same genetic makeup. Furthermore, the millions of cells that makeup a mature organism originated from a single cell formed when the male and female gametes from the parents of the organism fused. This single cell established the life of the organism."
+        },
+        {
+          "document_id": "W2034527813",
+          "title": "A Modern Concept of the \"Cell Theory\": A Perspective on Competing Hypotheses of Structure",
+          "doi": "10.1086/297059",
+          "year": "1992",
+          "distance": 0.3917,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "According to the \"cell theory\" in its original form, morphogenesis in multicellular organisms results from oriented cell divisions and cell growth. This view is based on the still-valid fact that cells represent the smallest structural and functional units exhibiting all fundamental properties and manifestations of life. Each cell stores, replicates, and partially expresses the genetic information of an organism."
+        },
+        {
+          "document_id": "W2032410204",
+          "title": "Scaling properties of cell and organelle size",
+          "doi": "10.4161/org.6.2.11464",
+          "year": "2010",
+          "distance": 0.3932,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "lying observed trends, as has been proposed for the allometric dependence of metabolic rate or limb structure on organism mass. Techniques for measuring size at smaller length-scales continue to improve, leading to more data on the control of size in cells and organelles. Size scaling of these structures is expected to influence growth patterns, functional capacity and intracellular transport. Furthermore, organelles such as the nucleus, mitochondria and endoplasmic reticulum show widely varying morphologies that affect their scaling properties."
+        },
+        {
+          "document_id": "W3150252748",
+          "title": "Genome Size Covaries More Positively with Propagule Size than Adult Size: New Insights into an Old Problem",
+          "doi": "10.3390/biology10040270",
+          "year": "2021",
+          "distance": 0.3977,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "lives. However, since body size results from growth in cell size or number or both, it relates to genome size in diverse ways. Relationships between genome size and body size should be especially weak in large organisms whose size relates more to cell multiplication than to cell enlargement, as is generally observed."
+        },
+        {
+          "document_id": "W1945784300",
+          "title": "Temperature‐size relations from the cellular‐genomic perspective",
+          "doi": "10.1111/brv.12006",
+          "year": "2012",
+          "distance": 0.4166,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "s. Processes leading to changed cell size are of great interest from an ecological, physiological and evolutionary perspective. Cell size scales with fundamental properties such as genome size, growth rate, protein synthesis rates and metabolic activity, although the causal directions of these correlations are not clear. Changes in genome size will thus, in many cases, not only affect cell or body size, but also life‐cycle strategies. Symmetrically, evolutionary drivers of life‐history strategies may impact growth rate and thus cell size, genome size and metabolic rates."
+        },
+        {
+          "document_id": "W2559148707",
+          "title": "Interspecific allometric scaling of unicellular organisms as an evolutionary process of food chain creation",
+          "doi": "10.48550/arxiv.1611.09824",
+          "year": "2016",
+          "distance": 0.4187,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "Metabolism of living organisms is a foundation of life. The metabolic rate (energy production per unit time) increases slower than organisms' mass. When this phenomenon is considered across different species, it is called interspecific allometric scaling, whose causes are unknown. We argue that the cause of interspecific allometric scaling is the total effect of physiological and adaptation mechanisms inherent to organisms composing a food chain."
+        },
+        {
+          "document_id": "W2162807561",
+          "title": "Cytoskeletal Mechanisms for Breaking Cellular Symmetry",
+          "doi": "10.1101/cshperspect.a003392",
+          "year": "2009",
+          "distance": 0.4325,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "erties relevant to cellular physiology, including: the number and activity of macromolecules, cell shape, and mechanical force. Most animal cells are 10-50 microns in diameter, whereas the macromolecules that comprise them are 10,000-fold smaller (2-20 nm). To establish long-range order over cellular length scales, individual molecules must, therefore, self-assemble into larger polymers, with lengths (0.1-20 m) comparable to the size of a cell. These polymers must then be cross-linked into organized networks that fill the cytoplasm."
+        },
+        {
+          "document_id": "W4306391961",
+          "title": "Go with the flow – bulk transport by molecular motors",
+          "doi": "10.1242/jcs.260300",
+          "year": "2022",
+          "distance": 0.4387,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ABSTRACT Cells are the smallest building blocks of all living eukaryotic organisms, usually ranging from a couple of micrometers (for example, platelets) to hundreds of micrometers (for example, neurons and oocytes) in size. In eukaryotic cells that are more than 100 µm in diameter, very often a self-organized large-scale movement of cytoplasmic contents, known as cytoplasmic streaming, occurs to compensate for the physical constraints of large cells."
+        },
+        {
+          "document_id": "W2004553392",
+          "title": "Unexpected discontinuities in life–history evolution under size–dependent mortality",
+          "doi": "10.1098/rspb.2002.2255",
+          "year": "2003",
+          "distance": 0.4392,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "In many organisms survival depends on body size."
+        },
+        {
+          "document_id": "W187311180",
+          "title": "Prokaryotes: Trends towards Complexity",
+          "doi": "10.1007/978-3-0348-8668-0_6",
+          "year": "2000",
+          "distance": 0.4397,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "As the complexity of structures is correlated with the number of proteins which take part in their composition (Section 4.3, beginning), the complexity of organisms is correlated, more or less implicitly, with the number of different cellular types they contain57. These types appear during the lifecycle of the species as temporary modification of the single cell in unicellular organisms or, in addition, some of these types may be co-present in multicellular organisms as differentiated cells."
+        },
+        {
+          "document_id": "W2891541146",
+          "title": "The Costs of a Big Brain: How Region Scaling and Energetic Costs Influence Brain Size Evolution in Weakly Electric African Fishes (Mormyridae)",
+          "doi": "10.7936/he7c-p732",
+          "year": "2018",
+          "distance": 0.4404,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "). However, I found that intraspecific energetic trade-offs and metabolic relationships varied among the three species studied. This suggests that the interspecific relationship between metabolic rate and relative brain size is not due to a direct constraint on brain size, and, instead, reflects a series of species-specific indirect constraints and adaptations that have resulted in macroevolutionary patterns (Chapter 4)."
+        },
+        {
+          "document_id": "W2032410204",
+          "title": "Scaling properties of cell and organelle size",
+          "doi": "10.4161/org.6.2.11464",
+          "year": "2010",
+          "distance": 0.442,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "How size is controlled is a fundamental question in biology. In this review, we discuss the use of scaling relationships-for example, power-laws of the form y∝x(α)-to provide a framework for comparison and interpretation of size measurements. Such analysis can illustrate the biological and physical principles underlying observed trends, as has been proposed for the allometric dependence of metabolic rate or limb structure on organism mass."
+        },
+        {
+          "document_id": "W3150252748",
+          "title": "Genome Size Covaries More Positively with Propagule Size than Adult Size: New Insights into an Old Problem",
+          "doi": "10.3390/biology10040270",
+          "year": "2021",
+          "distance": 0.4423,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ally weak in large organisms whose size relates more to cell multiplication than to cell enlargement, as is generally observed. The ubiquitous single-cell ‘bottleneck’ of life cycles may affect both genome size and composition, and via both informational (genotypic) and non-informational (nucleotypic) effects, many other properties of multicellular organisms (e.g., rates of growth and metabolism) that have both theoretical and practical significance."
+        },
+        {
+          "document_id": "W1549577203",
+          "title": "Origin of life in an iron–sulfur world",
+          "doi": "10.1017/cbo9780511626180.011",
+          "year": "1998",
+          "distance": 0.4426,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Higher organisms consist of a plurality of different cells. They can reproduce only by an orderly reproduction of all their individual component cells. Therefore, we hold that unicellular organisms are logically and phylogenetically prior to multicellular organisms."
+        },
+        {
+          "document_id": "W4308953580",
+          "title": "Molecular divergence with major morphological consequences: development and evolution of organ size and shape",
+          "doi": "10.1042/ebc20220118",
+          "year": "2022",
+          "distance": 0.4435,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "at potential to advance our understanding of the specification and evolution of organ size and shape differences among species. The results from these two examples, and those from other species, show that species-specific variation in organ size and shape typically evolves via changes in the timing, location, and amount of gene/protein expression that act on tissue growth processes."
+        },
+        {
+          "document_id": "W3198722143",
+          "title": "Direct Force Measurements of Subcellular Mechanics in Confinement using Optical Tweezers",
+          "doi": "10.3791/62865",
+          "year": "2021",
+          "distance": 0.4452,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "During the development of a multicellular organism, a single fertilized cell divides and gives rise to multiple tissues with diverse functions. Tissue morphogenesis goes in hand with molecular and structural changes at the single cell level that result in variations of subcellular mechanical properties."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 2,
+        "rationale": "The stylized fact is a core DEB assumption ('cells are similar across species'). It receives direct, explicit support from snippet 12 (Jusup et al. states 'The metabolic similarity of cells is mostly independent of organism size') and snippet 5 (Sousa et al. lists 'cells are similar across species' as a foundational DEB proposition). Snippets 15 and 16 give supporting context that cells are the basic functional units with the same genetic makeup, and snippet 2 notes cell size scales very weakly with body mass (My^0.03–0.05), implying near-invariance. However, several snippets from the metabolic-scaling literature (4, 7, 19) suggest cell composition, cell size, and metabolic activity can change with size, partially contradicting strict metabolic invariance. Overall the evidence is moderate and somewhat mixed: clear affirmation within DEB-aligned sources, but the broader scaling literature debates the extent of cellular invariance, yielding insufficient consensus to score as fully corroborated."
+      },
+      "n_references": 9,
+      "references": {
+        "69b8476cec32c55db5430963": {
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3218320608139038
+        },
+        "69b87789ecbd4702b29a3f47": {
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.32783204317092896
+        },
+        "69b89f8fecbd4702b29a70a4": {
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3365042209625244
+        },
+        "69b86ef8ecbd4702b29a3462": {
+          "title": "StarKona2013.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 0,
+          "best_distance": 0.33774638175964355
+        },
+        "69b847e9ec32c55db5430ad7": {
+          "title": "WhitKear2011.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.33853745460510254
+        },
+        "69b8a592ecbd4702b29a7884": {
+          "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3507295250892639
+        },
+        "W2974861784": {
+          "title": "Mitosis and Meiosis and the Cell Cycle",
+          "doi": "",
+          "year": "2003",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3910703659057617
+        },
+        "W2034527813": {
+          "title": "A Modern Concept of the \"Cell Theory\": A Perspective on Competing Hypotheses of Structure",
+          "doi": "10.1086/297059",
+          "year": "1992",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.39170265197753906
+        },
+        "W1945784300": {
+          "title": "Temperature‐size relations from the cellular‐genomic perspective",
+          "doi": "10.1111/brv.12006",
+          "year": "2012",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.41658300161361694
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b88ef7ecbd4702b29a5e5e",
+          "title": "KooyHeng2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2966,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "he vague boundaries of multicellularity and even those of individuality. A sharpening of definitions or concepts may reduce the number of transition cases to some extent, but this cannot hide the fact that we are dealing here with a continuum of metabolic integration in the twilight-zone between individuals and populations. This illustrates that organisms, and especially eukaryotes, need each other metabolically.The implications of body size and shape Although some individual cells can become quite large, with inherent consequences for physiological design and metabolic performance (Hope and"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3218,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ders of mammals.The cell-surface hypothesis is worth further testing, butmay only be able to explain relatively minor diﬀerencesin the interspeciﬁc scaling of metabolic rate ( cf. Bligh, 1998).This is because cell number almost always contributesmuch more to species diﬀerences in body size than cell sizedoes (Rensch, 1960; Peters, 1983; Calder, 1984; Schmidt-Nielsen, 1984; Riska & Atchley, 1985; Niklas, 1994).For example, mammalian cell size scales as My0.03–0.05(Gu¨nther, 1975; Peters, 1983; Calder, 1984), such that,although an elephant weighs about 100 000 times moreVariation in the scaling of metabolism 639"
+        },
+        {
+          "document_id": "69b8476cec32c55db5430963",
+          "title": "Glaz2005.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3266,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ngs suggestthat body-size-related diﬀerences in cell metabolic ratecannot be entirely attributed to transport-network properties(cf. Kleiber, 1961; Schmidt-Nielsen, 1984; Suarez, Darveau& Childress, 2004), at least in a proximate (immediatefunctional) sense. However, these ﬁndings do not excludethe possibility that, in an ultimate (evolutionary) sense,the intrinsic metabolic rate of cells has been adjusted, at leastin part, to limits set by transport networks or some othersystemic property of the organism.(b)Scale of applicationSome metabolic scaling explanations appear to focus onbroad comparisons encompassing many orders of magni-"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3278,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "cells [187], and whether this transport affects how metabolic rate scales with cell size. 4.1.3. System Composition (SC) Models Some workers have suggested that changes in cell compos ition, including the proportions of metabolically active components, with increasing cell size may significantly affect metabolic scaling in unicellular organisms [106,173]. Some studies indicate that relative dry mass or carbon content may decline [188,18 9], and the relative size of vacuoles increase [106], as cell size increases, both of which"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3365,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "that cells are similar across species (C 1).The propositions obtained explain the following empirical ﬁndings: (1) the method ofindirect calorimetry (I1), (2) body size growth (von Bertal anffy curves), (3) the variationof von Bertalanffy’s growth rates within (G5) and across spe cies (G4), (4) Kleiber’s lawon metabolic rate (R3) and (5) the pattern of foetal growth (G 3).These assumptions and propositions are at the core of DEB the ory. This theory hasalready been tested for many organisms including bacteria [ 4, 5, 43, 79], crustaceans [40],collemboles [33], appendicularians [41], rotiﬁers [2], ye asts [20], molluscs [21, 24, 25,"
+        },
+        {
+          "document_id": "69b86ef8ecbd4702b29a3462",
+          "title": "StarKona2013.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3377,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "sus cellnumber increase to body mass enlargement within a clade [2].Therefore, individuals of species characterized by cell-sizeinvariance should exhibit an isometric (linear) relationshipbetween metabolic rate and body mass during ontogeny.Conversely, an increase of cell size during ontogeny should resultin flattening of metabolic rate scaling.Chown et al. [25] supported the aforementioned predictions ofthe Cell Metabolism Hypothesis for a mutual relationship betweencell size contribution to body size changes and metabolic scaling at"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430ad7",
+          "title": "WhitKear2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3385,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.4,
+          "text": "as demonstratedthat patterns of mass dependence of cell sizes in differentanimal groups are inconsistent with the assumptions ofthe model and has called for revision of the model(Kozłowski et al. 2010).Further test of theories for metabolic scaling are there-"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.34,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ed.; Cambridge University Press: Cambridge, UK, 1942. 89. Brody, S. Bioenergetics and Growth ; Hafner: New York, NY, USA, 1945. 90. Lehmann, G. Energetik des organismus. In Oppenheimer’s Handb. Biochem. , 2nd ed.; Fischer: Jena, Germa ny, 1926 ; pp. 564–608. 91. Ellenby, C. Relation between body size and metabolism. Nature 1937 , 140, 853. 92. Barenblatt, G.I.; Monin, A.S. Similarity principles for the biology of pelagic animals. Proc. Natl. Acad. Sci. USA 1983 , 80, 3540 –3542. 93. Pfaundler, M. Über die energetische Flä chenregel. Pflü ger ’s Arch . Gesamte Physiol. Mensch en Tiere 1921 , 188, 273 –280."
+        },
+        {
+          "document_id": "69b8a547ecbd4702b29a7839",
+          "title": "MainoKear2015a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3452,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ding on whether the size comparison is ontogenetic or inter-specific.Attention to the physico-chemical constraints on metabolic organisation has increasingly aided the interpretation of seemingly distinct biological phenomena (Brown et al. 2004)."
+        },
+        {
+          "document_id": "69b8a686ecbd4702b29a79f0",
+          "title": "Kozlowski et al. - 2020 - Coevolution of body size and metabolic rate in ver.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3477,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "n mor-tality, as in the approach considered here (see Section II).Below, we link these allocation ‘decisions’not only to changesin body components but to their underlying cellular architec-ture, which is another important property largely ignored inscaling studies.(2) Body mass, cell size and MRUnlike unicells or eutelic multicellular organisms with a ﬁxednumber of cells, the body sizes of non-eutelic animals canevolve viaalterations in cell size as well as cell number. Unfor-tunately, the cellular basis of body size evolution has rarelybeen studied (Javed et al., 2010), although it can help address"
+        },
+        {
+          "document_id": "69b87789ecbd4702b29a3f47",
+          "title": "Glaz2014.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3506,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ontributions of the metabolic activity of various tissues to estimate whole organism metabolic rate (see Sections 3.3 and 5.3). However, a comprehensive th eory of metabolic scaling requires both proximate and ultimate explanations that also depend on downward causation. Despite their potential usefulness in providing proximate mechanisms, molecular, cellular and tissue based models of metabolic scaling canno t by themselves effectively explain the diversity of metabolic scaling exponents ( b) that have been observed (also see Section 5.4). To do so requires that we also examine whole system effects as mediated by"
+        },
+        {
+          "document_id": "69b8a592ecbd4702b29a7884",
+          "title": "Jusup et al. - 2017 - The universality and the future prospects of physi.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3507,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "iﬁcations.Cell similarity . The metabolic similarity of cells is mostly independent of org anism size. The context here is much broader than the life cycle of a single individual. Once a successful metabolic pathway evolves, it can be preserved by evolution to serve very similar functions in various organs or even the same function in diff erent species. A famous example is the cyclic AMP pathway used in cell communication by all animals investigated, including bacteria and other unicellular organisms [18]. This pathway produces a cell-wide biochemical change that can last long after the"
+        },
+        {
+          "document_id": "W2559148707",
+          "title": "Interspecific allometric scaling of unicellular organisms as an evolutionary process of food chain creation",
+          "doi": "10.48550/arxiv.1611.09824",
+          "year": "2016",
+          "distance": 0.3779,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "allometric scaling is the total effect of physiological and adaptation mechanisms inherent to organisms composing a food chain. Together, the workings of these mechanisms are united by a primary goal of any living creature - its successful reproduction. This primary necessity of each organism and of the entire food chain is that common denominator, to which all organisms adjust their metabolic rates. In this article, we consider unicellular organisms, while the second paper studies multicellular organisms and the entire concept in more detail."
+        },
+        {
+          "document_id": "W2064169216",
+          "title": "Weight-Watching at the University: The Consequences of Growth",
+          "doi": "10.1126/science.175.4020.381",
+          "year": "1972",
+          "distance": 0.3817,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "s. There are no cells the size of basketballs because essential metabolic functions are limited by the surface-to-volume ratio. We must emphasize that one does not need a grand theory of life in order to identify this limiting condition. If cells could talk, they would no doubt differ on the general philosophy of being a cell, yet all conceptions would be subject to certain physically inevitable limitations on size."
+        },
+        {
+          "document_id": "W2974861784",
+          "title": "Mitosis and Meiosis and the Cell Cycle",
+          "doi": "",
+          "year": "2003",
+          "distance": 0.3911,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "gether. The cells that make up different tissues have different shapes and perform different functions for the plant or animal. Even though they have diverse functions, each somatic cell in the organism normally has the same chromosomes and therefore the same genetic makeup. Furthermore, the millions of cells that makeup a mature organism originated from a single cell formed when the male and female gametes from the parents of the organism fused. This single cell established the life of the organism."
+        },
+        {
+          "document_id": "W2034527813",
+          "title": "A Modern Concept of the \"Cell Theory\": A Perspective on Competing Hypotheses of Structure",
+          "doi": "10.1086/297059",
+          "year": "1992",
+          "distance": 0.3917,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.4,
+          "text": "According to the \"cell theory\" in its original form, morphogenesis in multicellular organisms results from oriented cell divisions and cell growth. This view is based on the still-valid fact that cells represent the smallest structural and functional units exhibiting all fundamental properties and manifestations of life. Each cell stores, replicates, and partially expresses the genetic information of an organism."
+        },
+        {
+          "document_id": "W2032410204",
+          "title": "Scaling properties of cell and organelle size",
+          "doi": "10.4161/org.6.2.11464",
+          "year": "2010",
+          "distance": 0.3932,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "lying observed trends, as has been proposed for the allometric dependence of metabolic rate or limb structure on organism mass. Techniques for measuring size at smaller length-scales continue to improve, leading to more data on the control of size in cells and organelles. Size scaling of these structures is expected to influence growth patterns, functional capacity and intracellular transport. Furthermore, organelles such as the nucleus, mitochondria and endoplasmic reticulum show widely varying morphologies that affect their scaling properties."
+        },
+        {
+          "document_id": "W3150252748",
+          "title": "Genome Size Covaries More Positively with Propagule Size than Adult Size: New Insights into an Old Problem",
+          "doi": "10.3390/biology10040270",
+          "year": "2021",
+          "distance": 0.3977,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "lives. However, since body size results from growth in cell size or number or both, it relates to genome size in diverse ways. Relationships between genome size and body size should be especially weak in large organisms whose size relates more to cell multiplication than to cell enlargement, as is generally observed."
+        },
+        {
+          "document_id": "W1945784300",
+          "title": "Temperature‐size relations from the cellular‐genomic perspective",
+          "doi": "10.1111/brv.12006",
+          "year": "2012",
+          "distance": 0.4166,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.4,
+          "text": "s. Processes leading to changed cell size are of great interest from an ecological, physiological and evolutionary perspective. Cell size scales with fundamental properties such as genome size, growth rate, protein synthesis rates and metabolic activity, although the causal directions of these correlations are not clear. Changes in genome size will thus, in many cases, not only affect cell or body size, but also life‐cycle strategies. Symmetrically, evolutionary drivers of life‐history strategies may impact growth rate and thus cell size, genome size and metabolic rates."
+        },
+        {
+          "document_id": "W2559148707",
+          "title": "Interspecific allometric scaling of unicellular organisms as an evolutionary process of food chain creation",
+          "doi": "10.48550/arxiv.1611.09824",
+          "year": "2016",
+          "distance": 0.4187,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Metabolism of living organisms is a foundation of life. The metabolic rate (energy production per unit time) increases slower than organisms' mass. When this phenomenon is considered across different species, it is called interspecific allometric scaling, whose causes are unknown. We argue that the cause of interspecific allometric scaling is the total effect of physiological and adaptation mechanisms inherent to organisms composing a food chain."
+        },
+        {
+          "document_id": "W2162807561",
+          "title": "Cytoskeletal Mechanisms for Breaking Cellular Symmetry",
+          "doi": "10.1101/cshperspect.a003392",
+          "year": "2009",
+          "distance": 0.4325,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "erties relevant to cellular physiology, including: the number and activity of macromolecules, cell shape, and mechanical force. Most animal cells are 10-50 microns in diameter, whereas the macromolecules that comprise them are 10,000-fold smaller (2-20 nm). To establish long-range order over cellular length scales, individual molecules must, therefore, self-assemble into larger polymers, with lengths (0.1-20 m) comparable to the size of a cell. These polymers must then be cross-linked into organized networks that fill the cytoplasm."
+        },
+        {
+          "document_id": "W4306391961",
+          "title": "Go with the flow – bulk transport by molecular motors",
+          "doi": "10.1242/jcs.260300",
+          "year": "2022",
+          "distance": 0.4387,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ABSTRACT Cells are the smallest building blocks of all living eukaryotic organisms, usually ranging from a couple of micrometers (for example, platelets) to hundreds of micrometers (for example, neurons and oocytes) in size. In eukaryotic cells that are more than 100 µm in diameter, very often a self-organized large-scale movement of cytoplasmic contents, known as cytoplasmic streaming, occurs to compensate for the physical constraints of large cells."
+        },
+        {
+          "document_id": "W2004553392",
+          "title": "Unexpected discontinuities in life–history evolution under size–dependent mortality",
+          "doi": "10.1098/rspb.2002.2255",
+          "year": "2003",
+          "distance": 0.4392,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "In many organisms survival depends on body size."
+        },
+        {
+          "document_id": "W187311180",
+          "title": "Prokaryotes: Trends towards Complexity",
+          "doi": "10.1007/978-3-0348-8668-0_6",
+          "year": "2000",
+          "distance": 0.4397,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "As the complexity of structures is correlated with the number of proteins which take part in their composition (Section 4.3, beginning), the complexity of organisms is correlated, more or less implicitly, with the number of different cellular types they contain57. These types appear during the lifecycle of the species as temporary modification of the single cell in unicellular organisms or, in addition, some of these types may be co-present in multicellular organisms as differentiated cells."
+        }
+      ]
+    }
+  }
+}

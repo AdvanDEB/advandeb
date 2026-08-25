@@ -1,0 +1,8 @@
+[Unit]
+Description=AdvanDEB (full application: agent stack + web)
+# Pull up both halves of the app as one logical unit.
+Wants=advandeb-stack.service advandeb.service
+After=advandeb-stack.service advandeb.service
+
+[Install]
+WantedBy=multi-user.target

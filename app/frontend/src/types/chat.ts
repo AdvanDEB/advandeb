@@ -3,6 +3,7 @@ export type CitationSourceType =
   | 'fact'
   | 'stylized_fact'
   | 'external_document'
+  | 'platform_doc'
 
 export type EvidenceMode =
   | 'local'
@@ -32,6 +33,10 @@ export interface ChatMessage {
   content: string
   citations?: CitationRef[]
   timestamp?: string
+  /** true while tokens are streaming in (shows content with cursor) */
+  streaming?: boolean
+  /** true for reconnect placeholder (shows bouncing dots) */
   generating?: boolean
   evidence_mode?: EvidenceMode
+  feedback?: 1 | -1
 }

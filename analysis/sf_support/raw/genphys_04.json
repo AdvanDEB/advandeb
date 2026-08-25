@@ -1,0 +1,1004 @@
+{
+  "sf_id": "genphys_04",
+  "category": "General Physiology",
+  "statement": "Survivor curves for life span terminated by ageing are typically well described by the Weibull and Gompertz models.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly and consistently affirm the stylized fact. Snippets [1], [3], [7], [8], [15], and [18] explicitly state that the Gompertz and Weibull models are 'famous'/'popular' empirical models for ageing that describe ageing/survival data well, and that the DEB ageing module has both as special cases. Snippets [2] and [5] formally define both models as 'classic, widely used' survival distributions. Snippet [6] reports the Weibull model fitting empirical survivorship data with good goodness of fit. Snippets [9], [12], and [14] provide empirical fits using Weibull/Gompertz forms. Several other snippets are topically related (define parameters or apply the framework) but are more peripheral. No snippet contradicts the fact. The corpus provides strong, repeated corroboration with no conflict."
+      },
+      "n_references": 9,
+      "references": {
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2779613733291626
+        },
+        "69b847d2ec32c55db5430a8f": {
+          "title": "LeeuVera2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2800249457359314
+        },
+        "69b89762ecbd4702b29a6787": {
+          "title": "KooyHoev89.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3344106674194336
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34139955043792725
+        },
+        "69b86fe0ecbd4702b29a3542": {
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34167492389678955
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34785354137420654
+        },
+        "69b8664decbd4702b29a2abc": {
+          "title": "DucrPery2007a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3638368248939514
+        },
+        "69b8a074ecbd4702b29a71ea": {
+          "title": "LeeuKelp2002.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36567503213882446
+        },
+        "69b867c2ecbd4702b29a2ca0": {
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36613643169403076
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.278,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ncerned), and the Gompertz stress coe\u000ecientis small, the famous Weibull model for ageing results, with shape-parameter 3. If theWeibull ageing acceleration is small, however, the (general) Gompertz model results. Theliterature argues which of these two famous models t ageing data best. Contrary to thesemodels, the deb module now also speci es the e ects of caloric restriction and how ageingdepends on energy parameters. The di erences in survival curves for male and femaledaphnids can now be understood to result from energetics only; these sexes seems to havethe same ageing parameters."
+        },
+        {
+          "document_id": "69b847d2ec32c55db5430a8f",
+          "title": "LeeuVera2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.28,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": ".2010.00713443 This journal is q2010 The Royal Societygeneral deﬁnition of hazard rate:_hyðtÞ¼limDt!0Pft,ay/C20tþDtjay.tgDt¼/C01SyðtÞdSyðtÞdt;which yieldsSyðtÞ¼e/C0Ðt0_hyðuÞdufor t/C210; ð1:3Þwith a†the random variable age at the time of death(i.e. S†(t)¼Pfa†.tg). Besides the Gompertz law,there is another classic, widely used survival distribution(Ricklefs & Scheuerlein 2002 ): the Weibull model,which has the form:d_hydt¼nðn/C01Þ_hnWtn/C02with initial condition _hyð0Þ¼0;ð1:4Þthat is, h˙†(t)¼nh˙Wntn21. The symbols h˙Wandnrep-resent the Weibull ageing rate and shape parameter,respectively ( Weibull 1951 )."
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3218,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "`wrong' proteins) atconstant rate, which cumulate in the body\u000fthe hazard rate is proportional to the density of damage compoundsThese components involve two new state variables (which can be written as the hazard rateand an acceleration with dimension per squared time) and two parameters: the Weibullageing acceleration and the Gompertz stress coe\u000ecient. If the growth period is shortrelative to the life span (as far as ageing is concerned), and the Gompertz stress coe\u000ecientis small, the famous Weibull model for ageing results, with shape-parameter 3. If the"
+        },
+        {
+          "document_id": "69b89582ecbd4702b29a663d",
+          "title": "Goedegebuure - 2018 - Improving representations of higher trophic-level .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.33,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "age (yr) 10.74±0.06Lifespan (yr) 11.73±0.08Max lifespan (yr) 28.80±0.99Fecundity 0.28±0.00Max number of births per mum 8.9±1.10Juvenile size (cm) 168±0.16Adult size (cm) 188±0.31Max size (cm) 193±0.59Relative food availability for (age >360 d) 0.71±0.00150Appendix A5Table A4. Life table for baseline model of Goedegebuure et al. (2018). Results are means often model runs. Headings of table following Krebs et al. (1989); Nelson (2017): dx= Pro-portion of individuals of a cohort dying during the age interval X; qx= Finite rate of mortal-ity during the age interval X to X+1; px= Finite rate of survival during the age interval X"
+        },
+        {
+          "document_id": "69b847d2ec32c55db5430a8f",
+          "title": "LeeuVera2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3323,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "t is, h˙†(t)¼nh˙Wntn21. The symbols h˙Wandnrep-resent the Weibull ageing rate and shape parameter,respectively ( Weibull 1951 ).Since Gompertz’s and Weibull’s efforts, severalresearch groups have used mathematical modellingtechniques to study ageing. Gavrilov & Gavrilova(1991) considered ageing as a systemic phenomenonand, therefore, viewed the mortality rate as a systemicfailure rate and applied ideas from reliability theoryto gain new insight. In contrast, Kirkwood & Kowald(1997) adopted a bottom-up approach and formulated"
+        },
+        {
+          "document_id": "69b89762ecbd4702b29a6787",
+          "title": "KooyHoev89.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3344,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "model is given by Pr(a, - ab>a) = exp(- [a/an]g), where a, is age at death and ab is age at hatching. Besides goodness of fit, an argument in favour of the Weibull model is that temperature has an effect on the time parameter, am, only, and sex only on the shape parameter, g. The model has been introduced as a simple generalization of the hazard rate of the purely random death process, given by a/am. This results in an exponential survivorship curve. The hazard rate corresponding with the Weibull curve is (alam)9. The way the time-parameters in Fig. Al depend on temperature is well described by the Arrhenius relation"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3414,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "with the Weibull model. This has beenthe reason not to include them in the book any longer. I still show it here to demonstratethat the debmodel can be very similar to the general Weibull model, even when the shapecoefficient is much higher than 3. We can conclude that the debmodel can span the fullrange of shapes of survival curves for the general Weibull and Gompertz models, but alsoshows how aging is linked to nutrition.146 6. Effects of compounds on budgets6.2 Temperature stressMetabolic rates, including the ageing process, depend on temperature. The 1-parameter"
+        },
+        {
+          "document_id": "69b86fe0ecbd4702b29a3542",
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3417,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "far out of r ange. The resulting estimateof ˙m= 0.073 d−1at 20◦C is much more realistic, which in itself lends strong support tomy interpretation. It can be shown that the Weibull model with shape parameter 3 resultsif the growth period is short relative to the mean life span, {154}.The Gompertz model for survival Prob {a†> t}= exp {β(1−exp{˙pGt})}is also fre-quently used as a model for aging; see e.g. [779]. It can be mecha nistically underpinnedby a constant and independent failure rate for a ﬁxed number of hypothetical critical ele-3.12. Aging 109"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3479,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ishable from the Weibull one with rate˙hW= 0.00269 d−1. Parameters: length at birth Lb= 0.5 mm, energy investment ratio g= 1.43,somatic maintenance rate coefficient ˙kM= 0.073 d−1, energy conductave ˙ v= 3.68 mm d−1, ageingacceleration ¨ha= 3.56 10−6d−1, Gompertz stress sG=−0.0652.and Weibull [1228] has used it to model the failure of a mechanical device composed ofseveral parts of varying strength, according to Elandt-Johnson and Johnson [316].In absence of growth, this survival probability fits well, see Figure 7.21, and even ifgrowth occurs during a considerable part of the life span, see Figure 6.4. The slightly"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3566,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "hetissue. A necin the tissue, i.e. the upper boundary of the tolerance range, still exists, ofcourse, and is exceeded at t0= [M0Q](˙kdVc)−1. The hazard rate amounts to ˙hc=¨b†c(t−t0)+.The relationship between the killing acceleration ¨b†and the killing rate ˙b†, in the case that˙ke̸= 0, is ¨b†=˙b†˙ke. The survival probability isq(c, t) = exp( −¨b†c(t−t0)2/2) (6.40)For small necs in the tissue, so t0→0, this represents a Weibull distribution with shapeparameter 2. The only difference with the survival probability related to ageing, see {213},is the extra accumulation step of products made by affected dna, which results in a Weibull"
+        },
+        {
+          "document_id": "69b888efecbd4702b29a56b5",
+          "title": "LikaKear2011b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.362,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "As explained in ( Kooijman et al., this issue ), the energyinvestment ratio, and so the water content of tissue, plays an impor-tant role in the morphology of growth curves. Notice that the cost forstructure [ EG] and the energy conductance ˙vaffect the growth rate,but not the ultimate size.Some species sport suicide reproduction (e.g. Oikopleura ). Al-though this has nothing to do with ageing, the effect on survival canbe captured be selecting a low value for the Weibull ageing accelera-tion ̈haand a high value for the Gompertz stress coef ﬁcient sG, suchthat the moment of death is correct. In this way the calculated popu-"
+        },
+        {
+          "document_id": "69b8664decbd4702b29a2abc",
+          "title": "DucrPery2007a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3638,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "the life-cycle test using a Weibullmodel:NtðÞ¼ Np/C2e/C0wt/C0tpðÞ2/C2/C3with N(t) and Npthe mean percentage of survivors at theage tand tp, respectively, tpthe mean age at firstbreeding, and ψa parameter accounting for the increaseof the mortality rate with aging. The global goodness offit of the model was analysed by studying the sum ofsquared differences between test data and modelpredictions using Fisher tests. All tests were performedforα=5%, with the Statistica 6.0 software (StatSoft Inc,Tulsa, OK, USA).3. Results3.1. Effects of the type of substrate on individualperformances"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.364,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.45,
+          "text": "3]. The growth curves are of the vonBertalanffy type with common length at birth. The survival probabilites have a common ageingacceleration ¨hsand Gompertz stress sG; the difference in survival is due to the difference inspecific assimilation. The 8 % initial female death is assumed to be accidental. Parameters:Lb= 0.82 mm, ˙kM= 1 d−1, ˙v= 0.862 mm d−1,gfemale = 0.169,gmale= 0.308,¨ha= 1.25 10−3d−2,sG=−0.5.and other metabolic products) at a constant rate. The hazard rate ˙hdue to ageing is justproportional to the damage density mD=MD/MV. Because of the uncertainty in the"
+        },
+        {
+          "document_id": "69b8a074ecbd4702b29a71ea",
+          "title": "LeeuKelp2002.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3657,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "odel is able to predictdifferences in survival on the basis of differences infood consumption. As can be seen from Figure 5, themodel not only predicts CR animals to live longer, butalso provides CR survival curves that are consistentwith the experimental observations; (3) we obtainedan interpretation of the Gompertz parameters in termsof DEB parameters. We deduced that the exponen-tial mortality-rate coefﬁcient ηis a function of thecatabolic rate and, thus, depends on food supply; (4)the aging module is based on fundamental mechan-isms that are not species speciﬁc; and (5) as explainedabove, the model can be extended to incorporate"
+        },
+        {
+          "document_id": "69b867c2ecbd4702b29a2ca0",
+          "title": "Kooy2000.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3661,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ee parameters. T his is done because theavailable estimate for the maintenance rate coeﬃcient on the basis of egg development asreported in Table 3.1 is rather far out of range. The resulting estimate of ˙kM= 0.073 d−1at 20◦C is much more realistic, which in itself lends strong support to m y interpretation. Itcan be shown that the Weibull model with shape parameter 3 result s if the growth periodis short relative to the mean life span, {257}.The Gompertz model for survival Pr {a†> t}= exp{β(1−exp{˙hGt})}is also frequentlyused as a model for aging; see e.g. [1011]. It can be mechanistica lly underpinned by a"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3665,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "hese equations it can be seen thatthe model has two ageing parameters: Weibull ageing acceleration ¨ha=˙ha˙kWyDQηQCmrefD[Em][MV]and Gompertz stress coefficient sG. The model represents an extension of the single-parameter debmodel for ageing [640] into the direction of the three-parameter model byvan Leeuwen et la. [691].The strength of the model is in revealing the role of energetics in ageing; energy budgetparameters show up in the survival process, which can also be obtained from data that do212 Effects of compounds on budgets 0 20 40 60 0 500 1000 1500age, d0.440.751weight, g 0 0.25 0.5 0.75 1 0 500 1000 1500"
+        },
+        {
+          "document_id": "69b89e39ecbd4702b29a6ee4",
+          "title": "MartZimm2012b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3683,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.45,
+          "text": "ing compounds and damage are assumed to be diluted via growth (r&). The ageing submodel includes two new parameters the Weibull ageing acceleration parameter, and Gompertz stress coefficient, . To reduce the total number of parameters, the equations for damage-inducing compounds, damage and hazard rate are scaled and combined to two ODE’s, for “scaled acceleration” ( q) and hazard rate (): ah& &Gs& &h&) ) ( ) ((33q r rLve h sLLq qdtda Gm& & & &&& & & & & & − − + = where LdtdLr3=& h r q hdtd&& & &&− = When the aging submodel is turned off individuals have a set probability of dying each day"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3687,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "general, placing ageing in amore general context.\u000fIt is simple (2 parameters) and mechanistic and has both the Gompertz and theWeibull models as special cases. These two empirical models are still very popularand describe di erent data very well, making it hard to choose. Now the choice isno longer necessary, which is quite remarkable from a mathematical point of view,because all three have 2 parameters.\u000fIt explains why mean life span increases with maximum body weight among en-dotherms, but not among ectotherms. To my knowledge nobody came up with an"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly support the use of Weibull and Gompertz models to describe ageing-related survivorship/mortality patterns: [1] ranked Gompertz first for actuarial senescence in birds, [3] found senescence generally described by the Gompertz model across taxa, [4] and [13] fit Weibull functions to plant survival data to separate baseline and senescent mortality, [8] and [14] discuss Gompertz law describing mortality, and [10] explicitly uses Gompertz parameters for ageing. These give moderate-to-strong corroboration. Some snippets contradict universality: [2] shows Weibull can be inaccurate when mortality concentrates in specific life stages, and [18] documents age-independent (constant) mortality in a long-lived herb, indicating exceptions. However, the stylized fact says 'typically well described,' which these exceptions do not overturn. Overall the corpus corroborates the fact (consensus_direction 3) with moderate evidence strength (2), since several relevant references affirm Weibull/Gompertz applicability while a couple note limitations."
+      },
+      "n_references": 8,
+      "references": {
+        "W2129456960": {
+          "title": "Frailty in state-space models: application to actuarial senescence in the Dipper",
+          "doi": "10.1890/10-0306.1",
+          "year": "2010",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.28628551959991455
+        },
+        "W2536990587": {
+          "title": "Host plants mixture and fitness of<i>Kolla paulula</i>: with an evaluation of the application of Weibull function",
+          "doi": "10.1111/jen.12357",
+          "year": "2016",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.35356205701828003
+        },
+        "W1507156758": {
+          "title": "Evolutionary biology and life histories",
+          "doi": "10.32800/abc.2004.27.0021",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35406315326690674
+        },
+        "W8366436": {
+          "title": "Evolution of senescence in iteroparous perennial plants",
+          "doi": "10.7547/87507315-83-8-469",
+          "year": "2001",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.36514943838119507
+        },
+        "W3113107509": {
+          "title": "Mortality: A physics perspective",
+          "doi": "10.1016/j.physa.2020.125660",
+          "year": "2020",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3890366554260254
+        },
+        "W2290616700": {
+          "title": "Multiple Metazoan Life-span Interventions Exhibit a Sex-specific Strehler–Mildvan Inverse Relationship Between Initial Mortality Rate and Age-dependent Mortality Rate Acceleration",
+          "doi": "10.1093/gerona/glw005",
+          "year": "2016",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3917871117591858
+        },
+        "W2023390453": {
+          "title": "GOMPERTZ LAW IN SIMPLE COMPUTER MODEL OF AGING OF BIOLOGICAL POPULATION",
+          "doi": "10.1142/s0129183101002310",
+          "year": "2001",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4120004177093506
+        },
+        "W2978914115": {
+          "title": "Age-Independent Adult Mortality in a Long-Lived Herb",
+          "doi": "10.3390/d11100187",
+          "year": "2019",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.41923487186431885
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2129456960",
+          "title": "Frailty in state-space models: application to actuarial senescence in the Dipper",
+          "doi": "10.1890/10-0306.1",
+          "year": "2010",
+          "distance": 0.2863,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "variation in annual survival by statistical comparisons of piecewise linear, quadratic, Gompertz, and Weibull survival models. The Gompertz model was ranked first in our set. It provided strong evidence for actuarial senescence with an onset of senescence estimated at about 2.3 years. The probability for this model to involve a frailty was 0.15, and the probability to involve an individual latent effect in detection was about 0.4. The estimated mean age at first reproduction was 1.2 years."
+        },
+        {
+          "document_id": "W2536990587",
+          "title": "Host plants mixture and fitness of<i>Kolla paulula</i>: with an evaluation of the application of Weibull function",
+          "doi": "10.1111/jen.12357",
+          "year": "2016",
+          "distance": 0.3536,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "that had fed on both PB and TW and compared these with the values obtained for offspring of females that had fed solely on PB. We also evaluated the usefulness of applying the Weibull distribution in demographic studies. We demonstrated that when there is a higher mortality in specific life stages, the fitted Weibull distribution would be inaccurate in describing the survival curve and that application of the fitted curve to the calculation of life expectancy or other statistics would result in significant discrepancy to the actual curve."
+        },
+        {
+          "document_id": "W1507156758",
+          "title": "Evolutionary biology and life histories",
+          "doi": "10.32800/abc.2004.27.0021",
+          "year": "2004",
+          "distance": 0.3541,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ombined traditional mark–recapture analysis with the commonly used Gompertz and Weibull models to describe senescence patterns. They found that senescence in these species can be generally described by the Gompertz model, a result likely to be of interest to researchers working on senescence in a variety of taxa. Both studies (Catchpole et al., 2004; Gaillard et al., 2004) represent useful refinements of the typical approach in senescence studies of simply fitting linear or quadratic relationships between survival and age. Two studies addressed important methodological issues. E. Cam et al."
+        },
+        {
+          "document_id": "W8366436",
+          "title": "Evolution of senescence in iteroparous perennial plants",
+          "doi": "10.7547/87507315-83-8-469",
+          "year": "2001",
+          "distance": 0.3651,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "to initial or baseline mortality and senescent mortality by fitting the survival data of these 65 species to Weibull functions. Unlike published results with animals, the rate of senescence was inde-pendent of initial mortality rate. However, a positive relationship was found between rate of senescence and reproductive lifespan, suggesting increasing risk of death with successive repro-ductive events. It has been suggested that a decline in reproductive value with age is a better diagnostic of senescence, but (in test 3) this occurred in only 9 % of species (6/65)."
+        },
+        {
+          "document_id": "W2138845720",
+          "title": "Ageing and typical survivorship curves result from optimal resource allocation",
+          "doi": "",
+          "year": "2000",
+          "distance": 0.3774,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "h age, being highest early in life, diminishing later and stopping completely well before the end of the maximum expected life. Because the level of repair varies, the rate of ageing is highest under high extrinsic mortality and lowest under low mortality. The allocation strategy shapes the survivorship curve and maximum lifespan. The model results provide an explanation of the variety of survivorship curves and maximum lifespans observed in nature. The results are discussed alongside empirical data from studies using mainly comparative approaches."
+        },
+        {
+          "document_id": "W2239062834",
+          "title": "Demographic response to constant temperatures in Neoseiulus barkeri (Phytoseiidae) fed on Tetranychus urticae (Tetranychidae)",
+          "doi": "10.11158/saa.15.2.1",
+          "year": "2010",
+          "distance": 0.3778,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "that the adult survival curve was type I at all temperatures tested, which means most deaths occurred among older individuals. The values of the life table entropy at the temperature range of 15–37°C (H < 0.5) correspond to type I Slobodkin's survivorship curve. The oviposition period and female and male adult longevity decreased as temperature increased from 15 to 37ºC. The highest value of the net reproductive rate (R0) was 22.02 females/female at 25ºC.The longest and shortest female longevity were 86.28 and 20.5 days at 15 and 37°C, respectively."
+        },
+        {
+          "document_id": "W2102782801",
+          "title": "A simple graphical technique for displaying individual fertility data and cohort survival: case study of 1000 Mediterranean Fruit Fly females",
+          "doi": "10.1046/j.1365-2435.1998.00197.x",
+          "year": "1998",
+          "distance": 0.3791,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "1. A graphic technique is presented in which data on age‐specific reproduction of individuals are portrayed using: (i) a horizontal life line, the length of which is proportional to individual longevity; (ii) colour‐coded segments depicting the level of reproduction at each age; and (iii) a cohort survival schedule created by rank‐ordering individual life lines from shortest‐ to longest‐lived. 2."
+        },
+        {
+          "document_id": "W3113107509",
+          "title": "Mortality: A physics perspective",
+          "doi": "10.1016/j.physa.2020.125660",
+          "year": "2020",
+          "distance": 0.389,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.65,
+          "text": "Dietrich Stauffer was the modelling of mortality. Here we review the features of mortality data for various biological species. Age specific mortality (death rate) leads to a discussion of possible models of the death rate, including that of Gompertz, raising the interesting question: is our lifetime finite or could we contemplate living for ever? The answer judging from many different data sources is that without radical changes in our biology it seems death above age 120 is extremely unlikely."
+        },
+        {
+          "document_id": "W2379942319",
+          "title": "Temperature‐dependent phenology and growth potential of the Andean potato tuber moth, <i>Symmetrischema tangolias</i> (Gyen) (Lep., Gelechiidae)",
+          "doi": "10.1111/jen.12321",
+          "year": "2016",
+          "distance": 0.3894,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.35,
+          "text": "immature mortality were described using different nonlinear models. Optimal temperature for survival was between 14° and 17°C. Temperature effects on adult senescence and oviposition time were described by simple exponential models; within‐group variability was described by a Weibull distribution function. Fecundity per female due to temperature followed a nonlinear model indicating maximum reproduction at ~17°C. The established model revealed good convergence with historical life tables established at fluctuating temperatures. The results confirm that S."
+        },
+        {
+          "document_id": "W2290616700",
+          "title": "Multiple Metazoan Life-span Interventions Exhibit a Sex-specific Strehler–Mildvan Inverse Relationship Between Initial Mortality Rate and Age-dependent Mortality Rate Acceleration",
+          "doi": "10.1093/gerona/glw005",
+          "year": "2016",
+          "distance": 0.3918,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "The Gompertz equation describes survival in terms of initial mortality rate (parameter a), indicative of health, and age-dependent acceleration in mortality rate (parameter b), indicative of aging. Gompertz parameters were analyzed for several published studies. In Drosophila females, mating increases egg production and decreases median life span, consistent with a trade-off between reproduction and longevity."
+        },
+        {
+          "document_id": "W137279594",
+          "title": "Life span : evolutionary, ecological, and demographic perspectives",
+          "doi": "",
+          "year": "2003",
+          "distance": 0.4005,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "perspectives on life span Life span should be considered within a larger biological framework concerned with life duration—a model where the end points of life for an individual do not necessarily correspond to the conventional events of birth PDR 29 Supp Carey.sp 7/6/06, 3:16 PM 1 2 L I F E S P A N : A C O N C E P T U A L O V E R V I E W and death."
+        },
+        {
+          "document_id": "W2087519015",
+          "title": "Density Dependence Triggers Runaway Selection of Reduced Senescence",
+          "doi": "10.1371/journal.pcbi.0030256",
+          "year": "2007",
+          "distance": 0.408,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "out requirement for special life-history characteristics such as indeterminate somatic growth or increasing fecundity with age. The evolution of nonsenescence from senescence is robust to the presence of exogenous adult mortality, which tends instead to increase the age-independent component of vitality loss. We simulate examples of runaway selection leading to negligible senescence and even intrinsic immortality."
+        },
+        {
+          "document_id": "W8366436",
+          "title": "Evolution of senescence in iteroparous perennial plants",
+          "doi": "10.7547/87507315-83-8-469",
+          "year": "2001",
+          "distance": 0.4101,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "We applied four tests to detect evidence of the evolution of senescence in life tables and fecundity schedules for 65 species of iteroparous perennial plants. Test 1 determined the pattern of variation in age-specific mortality with age (µx). Fifty-five percent of species showed an increase in, or maximum value of, µx at the end of life. In test 2, we tried to separate mortality into initial or baseline mortality and senescent mortality by fitting the survival data of these 65 species to Weibull functions."
+        },
+        {
+          "document_id": "W2023390453",
+          "title": "GOMPERTZ LAW IN SIMPLE COMPUTER MODEL OF AGING OF BIOLOGICAL POPULATION",
+          "doi": "10.1142/s0129183101002310",
+          "year": "2001",
+          "distance": 0.412,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "It is shown that if the computer model of biological aging proposed by Stauffer is modified such that the late reproduction is privileged, then the Gompertz law of exponential increase of mortality can be retrieved."
+        },
+        {
+          "document_id": "W2900137720",
+          "title": "Estimates of the Heritability of Human Longevity Are Substantially Inflated due to Assortative Mating",
+          "doi": "10.1534/genetics.118.301613",
+          "year": "2018",
+          "distance": 0.4132,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "at integrates many aspects of health and environment into a single ultimate quantity: the elapsed time between birth and death. Though it is widely believed that long life runs in families for genetic reasons, estimates of life span “heritability” are consistently low (∼15–30%). Here, we used pedigree data from Ancestry public trees, including hundreds of millions of historical persons, to estimate the heritability of human longevity."
+        },
+        {
+          "document_id": "W2766650768",
+          "title": "Constructing stage-structured matrix population models from life tables: comparison of methods",
+          "doi": "10.7717/peerj.3971",
+          "year": "2017",
+          "distance": 0.4142,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "λ or generation time. Similarly, assuming a fixed age of maturation at the mean age of maturation does not introduce much bias. However, aggregating age-specific survival rates into a stage-specific survival rate and estimating a stage-transition rate can introduce substantial bias depending on the organism’s life history type and the true values of λ . In order to aggregate survival rates, the use of the weighted arithmetic mean was the most robust method for estimating λ . Here, the weights are given by survivorship curve after discounting with λ ."
+        },
+        {
+          "document_id": "W2107603913",
+          "title": "First year demography of the foundation species, <i>Ascophyllum nodosum</i> , and its community implications",
+          "doi": "10.1111/j.0030-1299.2005.13782.x",
+          "year": "2005",
+          "distance": 0.4179,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ts early demography is incompletely characterized. Here we provide data on age‐specific survivorship throughout the first year. Weoutplantedzygotesgeneratedfromartificialfertilizationsandfollowedtheirsurvivorshipunderdifferentconditionsthattestedthefollowinghypotheses:(1)survivorshipisinverselyrelatedtoclearingsize,(2)germlingssurvivebetterinclearingsinconspecificstandsthaninclearingsinmusselbeds,(3)survivorshipinmicrohabitatrefugia(groovesofartificialsurfaces)isgreaterthanthatonflatsurfaces,and(4)protectionfromgrazingandphysicalfactors,likecanopysweepinganddesiccation,enhancesgermlingsurvival."
+        },
+        {
+          "document_id": "W2978914115",
+          "title": "Age-Independent Adult Mortality in a Long-Lived Herb",
+          "doi": "10.3390/d11100187",
+          "year": "2019",
+          "distance": 0.4192,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.55,
+          "text": "mature individuals show actuarial senescence, current estimations of life spans assuming constant survival would be incorrect. There is also a lack of studies documenting how life history trade-offs and disturbance influence the mortality trajectories of plants. We conducted Bayesian survival trajectory analyses (BaSTA) of a 33-year individual-based dataset of Pulsatilla vulgaris ssp. gotlandica. Mortality trajectories corresponded to “Type III” survivorship patterns, with rapidly decreasing annual mortality rates for young plants, but with constant mortality for reproductively mature individuals."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets directly affirm that survivor curves for aging-terminated life span are well described by the Weibull and Gompertz models. The DEB sources (Kooijman, LeeuVera2010, KooyHoev89, Kooy93) explicitly derive how the DEB ageing module reduces to the Weibull model (shape parameter 3) or the general Gompertz model and note these are the two famous, frequently used aging models with good empirical fit (snippets 1,2,3,6,7,8,9). Independent literature corroborates these models describing senescence in birds, mammals, and plants (13,15,16,20,22). Only snippet 14 offers a caveat—Weibull can be inaccurate when mortality is concentrated in specific life stages—but this qualifies rather than overturns the general fact. Overall the evidence is strong and consistent, supporting the stylized fact."
+      },
+      "n_references": 13,
+      "references": {
+        "69b87d05ecbd4702b29a4720": {
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2779613733291626
+        },
+        "69b847d2ec32c55db5430a8f": {
+          "title": "LeeuVera2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.2800249457359314
+        },
+        "69b89762ecbd4702b29a6787": {
+          "title": "KooyHoev89.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3344106674194336
+        },
+        "69b847a7ec32c55db54309d2": {
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34139955043792725
+        },
+        "69b86fe0ecbd4702b29a3542": {
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.34167492389678955
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.34785354137420654
+        },
+        "69b8664decbd4702b29a2abc": {
+          "title": "DucrPery2007a.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3638368248939514
+        },
+        "W2129456960": {
+          "title": "Frailty in state-space models: application to actuarial senescence in the Dipper",
+          "doi": "10.1890/10-0306.1",
+          "year": "2010",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.28628551959991455
+        },
+        "W2536990587": {
+          "title": "Host plants mixture and fitness of<i>Kolla paulula</i>: with an evaluation of the application of Weibull function",
+          "doi": "10.1111/jen.12357",
+          "year": "2016",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.35356205701828003
+        },
+        "W1507156758": {
+          "title": "Evolutionary biology and life histories",
+          "doi": "10.32800/abc.2004.27.0021",
+          "year": "2004",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.35406315326690674
+        },
+        "W8366436": {
+          "title": "Evolution of senescence in iteroparous perennial plants",
+          "doi": "10.7547/87507315-83-8-469",
+          "year": "2001",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36514943838119507
+        },
+        "W3113107509": {
+          "title": "Mortality: A physics perspective",
+          "doi": "10.1016/j.physa.2020.125660",
+          "year": "2020",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3890366554260254
+        },
+        "W2290616700": {
+          "title": "Multiple Metazoan Life-span Interventions Exhibit a Sex-specific Strehler–Mildvan Inverse Relationship Between Initial Mortality Rate and Age-dependent Mortality Rate Acceleration",
+          "doi": "10.1093/gerona/glw005",
+          "year": "2016",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3917871117591858
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.278,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ncerned), and the Gompertz stress coe\u000ecientis small, the famous Weibull model for ageing results, with shape-parameter 3. If theWeibull ageing acceleration is small, however, the (general) Gompertz model results. Theliterature argues which of these two famous models t ageing data best. Contrary to thesemodels, the deb module now also speci es the e ects of caloric restriction and how ageingdepends on energy parameters. The di erences in survival curves for male and femaledaphnids can now be understood to result from energetics only; these sexes seems to havethe same ageing parameters."
+        },
+        {
+          "document_id": "69b847d2ec32c55db5430a8f",
+          "title": "LeeuVera2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.28,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": ".2010.00713443 This journal is q2010 The Royal Societygeneral deﬁnition of hazard rate:_hyðtÞ¼limDt!0Pft,ay/C20tþDtjay.tgDt¼/C01SyðtÞdSyðtÞdt;which yieldsSyðtÞ¼e/C0Ðt0_hyðuÞdufor t/C210; ð1:3Þwith a†the random variable age at the time of death(i.e. S†(t)¼Pfa†.tg). Besides the Gompertz law,there is another classic, widely used survival distribution(Ricklefs & Scheuerlein 2002 ): the Weibull model,which has the form:d_hydt¼nðn/C01Þ_hnWtn/C02with initial condition _hyð0Þ¼0;ð1:4Þthat is, h˙†(t)¼nh˙Wntn21. The symbols h˙Wandnrep-resent the Weibull ageing rate and shape parameter,respectively ( Weibull 1951 )."
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3218,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "`wrong' proteins) atconstant rate, which cumulate in the body\u000fthe hazard rate is proportional to the density of damage compoundsThese components involve two new state variables (which can be written as the hazard rateand an acceleration with dimension per squared time) and two parameters: the Weibullageing acceleration and the Gompertz stress coe\u000ecient. If the growth period is shortrelative to the life span (as far as ageing is concerned), and the Gompertz stress coe\u000ecientis small, the famous Weibull model for ageing results, with shape-parameter 3. If the"
+        },
+        {
+          "document_id": "69b89582ecbd4702b29a663d",
+          "title": "Goedegebuure - 2018 - Improving representations of higher trophic-level .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.33,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "age (yr) 10.74±0.06Lifespan (yr) 11.73±0.08Max lifespan (yr) 28.80±0.99Fecundity 0.28±0.00Max number of births per mum 8.9±1.10Juvenile size (cm) 168±0.16Adult size (cm) 188±0.31Max size (cm) 193±0.59Relative food availability for (age >360 d) 0.71±0.00150Appendix A5Table A4. Life table for baseline model of Goedegebuure et al. (2018). Results are means often model runs. Headings of table following Krebs et al. (1989); Nelson (2017): dx= Pro-portion of individuals of a cohort dying during the age interval X; qx= Finite rate of mortal-ity during the age interval X to X+1; px= Finite rate of survival during the age interval X"
+        },
+        {
+          "document_id": "69b847d2ec32c55db5430a8f",
+          "title": "LeeuVera2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3323,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "t is, h˙†(t)¼nh˙Wntn21. The symbols h˙Wandnrep-resent the Weibull ageing rate and shape parameter,respectively ( Weibull 1951 ).Since Gompertz’s and Weibull’s efforts, severalresearch groups have used mathematical modellingtechniques to study ageing. Gavrilov & Gavrilova(1991) considered ageing as a systemic phenomenonand, therefore, viewed the mortality rate as a systemicfailure rate and applied ideas from reliability theoryto gain new insight. In contrast, Kirkwood & Kowald(1997) adopted a bottom-up approach and formulated"
+        },
+        {
+          "document_id": "69b89762ecbd4702b29a6787",
+          "title": "KooyHoev89.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3344,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "model is given by Pr(a, - ab>a) = exp(- [a/an]g), where a, is age at death and ab is age at hatching. Besides goodness of fit, an argument in favour of the Weibull model is that temperature has an effect on the time parameter, am, only, and sex only on the shape parameter, g. The model has been introduced as a simple generalization of the hazard rate of the purely random death process, given by a/am. This results in an exponential survivorship curve. The hazard rate corresponding with the Weibull curve is (alam)9. The way the time-parameters in Fig. Al depend on temperature is well described by the Arrhenius relation"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3414,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "with the Weibull model. This has beenthe reason not to include them in the book any longer. I still show it here to demonstratethat the debmodel can be very similar to the general Weibull model, even when the shapecoefficient is much higher than 3. We can conclude that the debmodel can span the fullrange of shapes of survival curves for the general Weibull and Gompertz models, but alsoshows how aging is linked to nutrition.146 6. Effects of compounds on budgets6.2 Temperature stressMetabolic rates, including the ageing process, depend on temperature. The 1-parameter"
+        },
+        {
+          "document_id": "69b86fe0ecbd4702b29a3542",
+          "title": "Kooy93.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3417,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "far out of r ange. The resulting estimateof ˙m= 0.073 d−1at 20◦C is much more realistic, which in itself lends strong support tomy interpretation. It can be shown that the Weibull model with shape parameter 3 resultsif the growth period is short relative to the mean life span, {154}.The Gompertz model for survival Prob {a†> t}= exp {β(1−exp{˙pGt})}is also fre-quently used as a model for aging; see e.g. [779]. It can be mecha nistically underpinnedby a constant and independent failure rate for a ﬁxed number of hypothetical critical ele-3.12. Aging 109"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3479,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ishable from the Weibull one with rate˙hW= 0.00269 d−1. Parameters: length at birth Lb= 0.5 mm, energy investment ratio g= 1.43,somatic maintenance rate coefficient ˙kM= 0.073 d−1, energy conductave ˙ v= 3.68 mm d−1, ageingacceleration ¨ha= 3.56 10−6d−1, Gompertz stress sG=−0.0652.and Weibull [1228] has used it to model the failure of a mechanical device composed ofseveral parts of varying strength, according to Elandt-Johnson and Johnson [316].In absence of growth, this survival probability fits well, see Figure 7.21, and even ifgrowth occurs during a considerable part of the life span, see Figure 6.4. The slightly"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3566,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "hetissue. A necin the tissue, i.e. the upper boundary of the tolerance range, still exists, ofcourse, and is exceeded at t0= [M0Q](˙kdVc)−1. The hazard rate amounts to ˙hc=¨b†c(t−t0)+.The relationship between the killing acceleration ¨b†and the killing rate ˙b†, in the case that˙ke̸= 0, is ¨b†=˙b†˙ke. The survival probability isq(c, t) = exp( −¨b†c(t−t0)2/2) (6.40)For small necs in the tissue, so t0→0, this represents a Weibull distribution with shapeparameter 2. The only difference with the survival probability related to ageing, see {213},is the extra accumulation step of products made by affected dna, which results in a Weibull"
+        },
+        {
+          "document_id": "69b888efecbd4702b29a56b5",
+          "title": "LikaKear2011b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.362,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "As explained in ( Kooijman et al., this issue ), the energyinvestment ratio, and so the water content of tissue, plays an impor-tant role in the morphology of growth curves. Notice that the cost forstructure [ EG] and the energy conductance ˙vaffect the growth rate,but not the ultimate size.Some species sport suicide reproduction (e.g. Oikopleura ). Al-though this has nothing to do with ageing, the effect on survival canbe captured be selecting a low value for the Weibull ageing accelera-tion ̈haand a high value for the Gompertz stress coef ﬁcient sG, suchthat the moment of death is correct. In this way the calculated popu-"
+        },
+        {
+          "document_id": "69b8664decbd4702b29a2abc",
+          "title": "DucrPery2007a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3638,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "the life-cycle test using a Weibullmodel:NtðÞ¼ Np/C2e/C0wt/C0tpðÞ2/C2/C3with N(t) and Npthe mean percentage of survivors at theage tand tp, respectively, tpthe mean age at firstbreeding, and ψa parameter accounting for the increaseof the mortality rate with aging. The global goodness offit of the model was analysed by studying the sum ofsquared differences between test data and modelpredictions using Fisher tests. All tests were performedforα=5%, with the Statistica 6.0 software (StatSoft Inc,Tulsa, OK, USA).3. Results3.1. Effects of the type of substrate on individualperformances"
+        },
+        {
+          "document_id": "W2129456960",
+          "title": "Frailty in state-space models: application to actuarial senescence in the Dipper",
+          "doi": "10.1890/10-0306.1",
+          "year": "2010",
+          "distance": 0.2863,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "variation in annual survival by statistical comparisons of piecewise linear, quadratic, Gompertz, and Weibull survival models. The Gompertz model was ranked first in our set. It provided strong evidence for actuarial senescence with an onset of senescence estimated at about 2.3 years. The probability for this model to involve a frailty was 0.15, and the probability to involve an individual latent effect in detection was about 0.4. The estimated mean age at first reproduction was 1.2 years."
+        },
+        {
+          "document_id": "W2536990587",
+          "title": "Host plants mixture and fitness of<i>Kolla paulula</i>: with an evaluation of the application of Weibull function",
+          "doi": "10.1111/jen.12357",
+          "year": "2016",
+          "distance": 0.3536,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "that had fed on both PB and TW and compared these with the values obtained for offspring of females that had fed solely on PB. We also evaluated the usefulness of applying the Weibull distribution in demographic studies. We demonstrated that when there is a higher mortality in specific life stages, the fitted Weibull distribution would be inaccurate in describing the survival curve and that application of the fitted curve to the calculation of life expectancy or other statistics would result in significant discrepancy to the actual curve."
+        },
+        {
+          "document_id": "W1507156758",
+          "title": "Evolutionary biology and life histories",
+          "doi": "10.32800/abc.2004.27.0021",
+          "year": "2004",
+          "distance": 0.3541,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.75,
+          "text": "ombined traditional mark–recapture analysis with the commonly used Gompertz and Weibull models to describe senescence patterns. They found that senescence in these species can be generally described by the Gompertz model, a result likely to be of interest to researchers working on senescence in a variety of taxa. Both studies (Catchpole et al., 2004; Gaillard et al., 2004) represent useful refinements of the typical approach in senescence studies of simply fitting linear or quadratic relationships between survival and age. Two studies addressed important methodological issues. E. Cam et al."
+        },
+        {
+          "document_id": "W8366436",
+          "title": "Evolution of senescence in iteroparous perennial plants",
+          "doi": "10.7547/87507315-83-8-469",
+          "year": "2001",
+          "distance": 0.3651,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "to initial or baseline mortality and senescent mortality by fitting the survival data of these 65 species to Weibull functions. Unlike published results with animals, the rate of senescence was inde-pendent of initial mortality rate. However, a positive relationship was found between rate of senescence and reproductive lifespan, suggesting increasing risk of death with successive repro-ductive events. It has been suggested that a decline in reproductive value with age is a better diagnostic of senescence, but (in test 3) this occurred in only 9 % of species (6/65)."
+        },
+        {
+          "document_id": "W2138845720",
+          "title": "Ageing and typical survivorship curves result from optimal resource allocation",
+          "doi": "",
+          "year": "2000",
+          "distance": 0.3774,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "h age, being highest early in life, diminishing later and stopping completely well before the end of the maximum expected life. Because the level of repair varies, the rate of ageing is highest under high extrinsic mortality and lowest under low mortality. The allocation strategy shapes the survivorship curve and maximum lifespan. The model results provide an explanation of the variety of survivorship curves and maximum lifespans observed in nature. The results are discussed alongside empirical data from studies using mainly comparative approaches."
+        },
+        {
+          "document_id": "W2239062834",
+          "title": "Demographic response to constant temperatures in Neoseiulus barkeri (Phytoseiidae) fed on Tetranychus urticae (Tetranychidae)",
+          "doi": "10.11158/saa.15.2.1",
+          "year": "2010",
+          "distance": 0.3778,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "that the adult survival curve was type I at all temperatures tested, which means most deaths occurred among older individuals. The values of the life table entropy at the temperature range of 15–37°C (H < 0.5) correspond to type I Slobodkin's survivorship curve. The oviposition period and female and male adult longevity decreased as temperature increased from 15 to 37ºC. The highest value of the net reproductive rate (R0) was 22.02 females/female at 25ºC.The longest and shortest female longevity were 86.28 and 20.5 days at 15 and 37°C, respectively."
+        },
+        {
+          "document_id": "W2102782801",
+          "title": "A simple graphical technique for displaying individual fertility data and cohort survival: case study of 1000 Mediterranean Fruit Fly females",
+          "doi": "10.1046/j.1365-2435.1998.00197.x",
+          "year": "1998",
+          "distance": 0.3791,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "1. A graphic technique is presented in which data on age‐specific reproduction of individuals are portrayed using: (i) a horizontal life line, the length of which is proportional to individual longevity; (ii) colour‐coded segments depicting the level of reproduction at each age; and (iii) a cohort survival schedule created by rank‐ordering individual life lines from shortest‐ to longest‐lived. 2."
+        },
+        {
+          "document_id": "W3113107509",
+          "title": "Mortality: A physics perspective",
+          "doi": "10.1016/j.physa.2020.125660",
+          "year": "2020",
+          "distance": 0.389,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "Dietrich Stauffer was the modelling of mortality. Here we review the features of mortality data for various biological species. Age specific mortality (death rate) leads to a discussion of possible models of the death rate, including that of Gompertz, raising the interesting question: is our lifetime finite or could we contemplate living for ever? The answer judging from many different data sources is that without radical changes in our biology it seems death above age 120 is extremely unlikely."
+        },
+        {
+          "document_id": "W2379942319",
+          "title": "Temperature‐dependent phenology and growth potential of the Andean potato tuber moth, <i>Symmetrischema tangolias</i> (Gyen) (Lep., Gelechiidae)",
+          "doi": "10.1111/jen.12321",
+          "year": "2016",
+          "distance": 0.3894,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "immature mortality were described using different nonlinear models. Optimal temperature for survival was between 14° and 17°C. Temperature effects on adult senescence and oviposition time were described by simple exponential models; within‐group variability was described by a Weibull distribution function. Fecundity per female due to temperature followed a nonlinear model indicating maximum reproduction at ~17°C. The established model revealed good convergence with historical life tables established at fluctuating temperatures. The results confirm that S."
+        },
+        {
+          "document_id": "W2290616700",
+          "title": "Multiple Metazoan Life-span Interventions Exhibit a Sex-specific Strehler–Mildvan Inverse Relationship Between Initial Mortality Rate and Age-dependent Mortality Rate Acceleration",
+          "doi": "10.1093/gerona/glw005",
+          "year": "2016",
+          "distance": 0.3918,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.55,
+          "text": "The Gompertz equation describes survival in terms of initial mortality rate (parameter a), indicative of health, and age-dependent acceleration in mortality rate (parameter b), indicative of aging. Gompertz parameters were analyzed for several published studies. In Drosophila females, mating increases egg production and decreases median life span, consistent with a trade-off between reproduction and longevity."
+        },
+        {
+          "document_id": "W137279594",
+          "title": "Life span : evolutionary, ecological, and demographic perspectives",
+          "doi": "",
+          "year": "2003",
+          "distance": 0.4005,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.15,
+          "text": "perspectives on life span Life span should be considered within a larger biological framework concerned with life duration—a model where the end points of life for an individual do not necessarily correspond to the conventional events of birth PDR 29 Supp Carey.sp 7/6/06, 3:16 PM 1 2 L I F E S P A N : A C O N C E P T U A L O V E R V I E W and death."
+        },
+        {
+          "document_id": "W2087519015",
+          "title": "Density Dependence Triggers Runaway Selection of Reduced Senescence",
+          "doi": "10.1371/journal.pcbi.0030256",
+          "year": "2007",
+          "distance": 0.408,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "out requirement for special life-history characteristics such as indeterminate somatic growth or increasing fecundity with age. The evolution of nonsenescence from senescence is robust to the presence of exogenous adult mortality, which tends instead to increase the age-independent component of vitality loss. We simulate examples of runaway selection leading to negligible senescence and even intrinsic immortality."
+        }
+      ]
+    }
+  }
+}

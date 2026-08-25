@@ -1,0 +1,804 @@
+{
+  "sf_id": "chl_04",
+  "category": "Chlorophyll",
+  "statement": "Chlorophyll concentration decreases with irradiance.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 3,
+        "consensus_direction": 3,
+        "rationale": "Multiple snippets, especially from LoreMarq2010, explicitly state the stylized fact (SF8) that chlorophyll concentration decreases with irradiance and use it to constrain model structure (snippets 3, 4, 8, 13). Kooy2010 (5) and Zonn98b (10) corroborate that relative chlorophyll is high at low irradiance, consistent with the fact. The main tension comes from Zonneveld (6, 14), which note that while chlorophyll production rate decreases with decreasing irradiance, the chlorophyll cell quota still increases at low light due to reduced dilution by growth—an alternative mechanistic framing that nonetheless ends up consistent with higher chlorophyll at low irradiance (i.e., decreasing with irradiance). These were labeled 'contradicts' because they challenge the simplistic production-based interpretation, but directionally they align. Overall the corpus provides strong, repeated support for the fact with little genuine conflict."
+      },
+      "n_references": 3,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 6,
+          "supports": 5,
+          "contradicts": 0,
+          "best_distance": 0.22223055362701416
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2427399754524231
+        },
+        "69b87866ecbd4702b29a4073": {
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 4,
+          "supports": 2,
+          "contradicts": 2,
+          "best_distance": 0.24744880199432373
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2222,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "diance but increases with 338the dilution rate (SF7 and SF8). Until this point no explicit considerations were made concern- 339ing chlorophyll; it was implicitly assumed that it was a part of structure (since photon capture 340_Jphis assumed to be proportional to structural mass MV). Keeping with that assumption, it 341is possible to analyze chlorophyll concentration if one considers it as proportional to structural 342massMV. 343Values for structural mass and reserve density are presented in ﬁgure 5 for a simulation in 344which the effect of increasing irradiance is tested. After day 20 the irradiance is forced to 345"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2269,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "and adaptation to low and high irradiance levels are likely todiffer considerably among samples. Since photosynthesis rates areexpressed per chlorophyll A content, which may vary considerablydepending on ambient irradiance levels, it is to be expected that themaximum photosynthesis rate expressed per chlorophyll A con-tent differs substantially among samples."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2393,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "ﬁgure 5 for a simulation in 344which the effect of increasing irradiance is tested. After day 20 the irradiance is forced to 345be twice the previous value. The expected effect in C-reserve is conﬁrmed - it increases 346until reaching a new steady-state. Structural mass follows the same behaviour since it is 347also supported by a greater C-reserve. Finally, N-reserve density does not get bolstered by 348increased irradiance but needs to support a larger structure, thus stabilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.24,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2427,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "principle differ fromthat for photoinhibition. Accounting for such difference would obviously complicate themodel considerably.The amount of chlorophyll per cell turns out to be rather variable, see e.g. [1291].Generally the relative amount is high at low mean levels of irradiance and the chlorophylldensity acts as if it is compensation. Part of the variation of chlorophyll per cell weightcan be explained by the contribution of the various reserves to the cell weight. A moredetailed analysis might involve a workload allocation model, see {199}, for chlorophyll."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2474,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.7,
+          "text": "l. The data are mute about thevalue of the speciﬁc rate of chlorophyll destruc-tion: values between 0 and 0.5 d 1are all consis-tent with the data. Note that although the rateof chlorophyll production decreases with decreas-ing irradiance (at low irradiances) the chloro-phyll cell quota does increase. The reason forthis increase is that dilution through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observed"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2479,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "plished by making PSU density \u001aPSU and the activation coefﬁcient functions of 374irradiance at which cells were acclimated. 37517The addition of a chlorophyll structure would obviously increase model precision at the cost 376of additional parameters. The variation of chlorophyll content is rather important in natural 377setting and in large time-scales, but for relatively constant or cyclic irradiances the chlorophyll 378concentration varies little from an average value (for example, Geider et al. (11), Owens et al. 379(27), Pawlowski (29) show variations of approximately \u000615% in controled settings, while for 380"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2567,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "bilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2605,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "o model photoacclimation - 369the process by which cells adjust chlorophyll content in accordance to irradiance (25, 28, 41) 370- by establishing a growth-SU for the chlorophyll structure in which light directly or indirectly 371inhibits growth. Alternatively, Papadakis et al. (28) proposed varying parameter values to cope 372with the variation of chlorophyll content by photoacclimation. In the proposed model, this could 373be accomplished by making PSU density \u001aPSU and the activation coefﬁcient functions of 374irradiance at which cells were acclimated. 375"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2716,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "in increased chlorophyllcell quota when cell are kept under low lightFig. 7. (A) Chlorophyll: Carbon ratio; (B) Carbon: Chloro-phyll ratio, both as dependent on irradiance; and (C) Chloro-phyll: Carbon ratio as dependent on the speciﬁc growth rate.C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 66conditions. However, the maximum rate of photo-"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2778,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r).By assumption, the chlorophyll production rateequals kNl, with ka proportionality constant.(The chlorophyll production rate may also dependon irradiance, in which case kwould depend onthe irradiance. As studies on nutrient-limitedgrowth are generally restricted to one level ofirradiance, information on this aspect is lacking. Itherefore treat kas a constant.) This implies thatthe cellular chlorophyll concentration changes ac-cording toddt[Chl] k[Nl] (m\u001br) · [Chl]so that at steady-state (when m D)"
+        },
+        {
+          "document_id": "69b8474fec32c55db5430807",
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2842,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "h rate would thus in- crease at low and decrease at high light intensities, which improves the agreement with experimental data (Figs. 2-4). Chlorophyll-specific photosynthetic rate can also depend on light or shade adaptati~n.~ According to the model of Gons and Mur,\"s6 the fol- lowing relationship holds: D = qeY, = qeym - pe (14) where Y, is growth yield corrected for maintenance (g/J) and pe is the specific maintenance rate constant (h-I). The models of Gons and Mur6 and Iehana8 ne- cessitate measuring the amount of light that is absorbed by the whole culture, which depends on irradiated light"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2884,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ure 4D presents the N:C 332ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333(typical environmental setting). Irradiance bolsters _|ECAand thus the C-reserve density. The 334consequent increase of MVand decrease of _|ENRreduces N-reserve density. The overall 335result is a decrease of the N:C ratio. 3363.2.2 Chlorophyll concentration 337Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338the dilution rate (SF7 and SF8). Until this point no explicit considerations were made concern- 339"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2908,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.6,
+          "text": "ion through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observeddependence of chlorophyll cell quota on irradi-ance is that the chlorophyll production rate in-creases monotonically with irradiance (or withthe amount of carbon in the transient carbonpool), while the destruction rate increases withirradiance. These assumptions lead to similar ﬁtsas those in Fig. 6, but with unrealistically highchlorophyll destruction rates (up to 3 d 1at 600C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 65mEinst m 2s 1). Therefore I conclude that thisalternative is not viable."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.291,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": ". This shows thatthe chlorophyll cell quota only weakly character-ises the absorptive potential of a cell. The sameapplies to u.In Fig. 8, I also analyse the consequences ofphotoacclimation for the photosynthesis–irradi-ance ( PI) curve. The saturation constant of thePI-curve is proportional to the cellular cross sec-tion (Zonneveld, 1997), which depends on thelight intensity at which the cells grow. To ﬁx theproportionality constant, I set the saturation con-stant of cells grown at a light intensity of 300mmol quanta m2s 1equal to 150 mmol quantam2s 1. The saturation constants of cells grown at"
+        },
+        {
+          "document_id": "69b892e6ecbd4702b29a62b3",
+          "title": "Zonn98a.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2996,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "via theireffects on Chl:C, as low nutrient cell quota tendto decrease this ratio.‘Irradiance’ is generally interpreted as photo-synthetically active radiation (PAR), i.e. the scalarirradiance integrated over the wavelength range of400–700 nm:PAR &400 nm700 nmE0(l)dlwith E0the wavelength-speciﬁc irradiance.Light absorption by chlorophyll is wavelengthdependent. To account for this dependence,Morel (1978) introduced the concept of photosyn-thetically usable radiation (PUR), deﬁned as:PUR &400 nm700 nmE0(l)A(l)dlwhere A(l) is the probability that a photon of"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3061,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "thephotosynthetic capacity of the cell. A cell-basedmodel circumvents this pitfall.Due to the so-called package effect the efﬁ-ciency of light capture of chlorophyll decreaseswhen chlorophyll cell quota increase. The in-creased amount of chlorophyll of cells grown inlow light is packed in the same or (generally) asmaller volume, in comparison with cells grown inhigh light conditions. Self-shading of chlorophyllprohibits a proportional increase in light captureefﬁciency of the cell with the concentration ofchlorophyll. As a result, light absorption is notproportional to u. The remainder of this section"
+        },
+        {
+          "document_id": "69b8486cec32c55db5430c6c",
+          "title": "FrecUrqu2016.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3208,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "sition-related differences in clearance rate would increasethrough time. A rough estimate of chlorophyll aconcentration enteringthe fourth chamber of each series was based on actual mean daily clear-ance rate ð_CRc¼555 L d−1Þand nominal daily ﬂow rate fc(L d−1). Withfc= 1368 L d−1(i.e., the median of the interval of fc), and assumingconstant clearance rate along the series of chambers, a proportion fd¼1−ð1368−5551368Þ¼0:41 of incoming chlorophyll aconcentration was de-pleted by a single chamber. Therefore, on average the three upstreamchambers depleted chlorophyll aentering the fourth chamber down"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "Only one snippet (10) clearly supports the stylized fact, reporting that chlorophyll (and carotenoid) contents decreased in Lemna minor plants exposed to high irradiation as a long-term acclimation response; snippet 2 is its companion describing the experimental setup but reports no directional result. Snippet 5 weakly contradicts by showing light-stored cabbage retained more chlorophyll than dark-stored, though this concerns storage chlorophyll loss rather than photoacclimation, so its bearing is ambiguous. The remaining snippets are off-topic, concerning photoperiod/salinity (no effect), temperature, senescence, biosynthesis genetics, or fish reproduction. Overall the corpus offers sparse, mostly indirect evidence with a single clear supporting case, yielding weak evidence strength and insufficient consensus to firmly corroborate the fact."
+      },
+      "n_references": 2,
+      "references": {
+        "W3034042903": {
+          "title": "Effects of low and high irradiation levels on growth and PSII efficiency in Lemna minor L.",
+          "doi": "10.37427/botcro-2020-016",
+          "year": "2020",
+          "corpus": "reproduction",
+          "n_chunks": 2,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.36937665939331055
+        },
+        "W4283729738": {
+          "title": "Light regulates chlorophyll biosynthesis via ELIP1 during the storage of Chinese cabbage",
+          "doi": "10.1038/s41598-022-15451-9",
+          "year": "2022",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.37549126148223877
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2151339337",
+          "title": "10.1016/s0967-0653(97)82003-0",
+          "doi": "10.1016/s0967-0653(97)82003-0",
+          "year": "2000",
+          "distance": 0.3003,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "cteristics, chlorophyll a (chl a) concentration, vertical stratifi-cation, and phytoplankton sensitivity to UV radiation (UVRI. Results demonstrated that primary pro-duction was enhanced in the upper -30 m of the water column by the presence of CDOM, where pre-dicted increases in production due to the removal of damaging UVR more than offset its reductionresulting from the absorption of photosynthetically usable radiation. At greater depths, where littleUVR remained, primary production was always reduced due to removal by CDOM of photosyntheti-cally usable radiation."
+        },
+        {
+          "document_id": "W3034042903",
+          "title": "Effects of low and high irradiation levels on growth and PSII efficiency in Lemna minor L.",
+          "doi": "10.37427/botcro-2020-016",
+          "year": "2020",
+          "distance": 0.3694,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "wn in two different irradiation regimes: low light (LL) – 50 μmolPHOTONS m-2 s-1 and high light (HL) – 500 μmolPHOTONS m-2 s-1. The main goal was to investigate the photosynthetic regulatory mechanisms that ensure adjustment to different light conditions and integrate these observations with the data on plant multiplication and biomass production. For this purpose, we measured chlorophyll (Chls) and carotenoid (Cars) contents and analyzed the energy fluxes through the PSII by saturation pulse method as well as by Chl a transient induction and JIP test."
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.3728,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W4387234312",
+          "title": "ADAPTATION TO EX VITRO CONDITIONS OF MICROPLANTS LAVANDULA ANGUSTIFOLIA MILL. AT LONG-TERM REPRODUCTION IN VITRO",
+          "doi": "10.12737/2073-0462-2023-11-19",
+          "year": "2023",
+          "distance": 0.3753,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "to the number of nodes on the main shoot, a tendency to their decrease with an increase in the number of passages was observed. A significant increase in the content of chlorophyll a with an increase in the number of subcultivations on the 14th day of adaptation was revealed, however, later these differences leveled out. On average, the in vitro viability index for passages was 1.45 and increased up to 30 days of adaptation to 1.75."
+        },
+        {
+          "document_id": "W4283729738",
+          "title": "Light regulates chlorophyll biosynthesis via ELIP1 during the storage of Chinese cabbage",
+          "doi": "10.1038/s41598-022-15451-9",
+          "year": "2022",
+          "distance": 0.3755,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "Abstract Chlorophyll loss is a major problem during green vegetable storage. However, the molecular mechanism is still unclear. In this study, a 21 days of storage experiments showed chlorophyll content was higher in light-stored Chinese cabbage ( Brassica chinensis L . ) leaves than those in dark-stored samples. Transcriptome analyses were performed on these samples to determine the effects of light."
+        },
+        {
+          "document_id": "W1515429516",
+          "title": "Accelerated maturation of processed yerba-mate under the controlled conditions of temperature and humidity",
+          "doi": "10.1108/nfs-12-2014-0105",
+          "year": "2015",
+          "distance": 0.379,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "and b* colorimetric coordinates were measured. Findings – The most expressive changes in the color occur in the first 14 days. At this time, 23.161 ± 2.984 per cent of total chlorophyll was degraded, considering that in 42 days, 37.458 ± 0.955 per cent is degraded, according to an exponential model. A positive correlation between theobromine amount and maturation time was found. This was verified by an increase in dicaffeoylquinic acid concentrations and small changes in chlorogenic acid isomers."
+        },
+        {
+          "document_id": "W2380351226",
+          "title": "Changes of Concentration of Superoxide Anion and Organic Radical in Senescent Leaves and Chloroplasts",
+          "doi": "",
+          "year": "1988",
+          "distance": 0.3818,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "by UV radiation. It is found that the higher levels of free radicals on chlorophyll content basis occurred in dry sample of old leaves before and after ra- diation. The data suggest that leaf senescence is accompanied by damage caused by free radi- cals."
+        },
+        {
+          "document_id": "W2015317495",
+          "title": "Effect of Water Activity and Temperature in Color and Chlorophylls Changes in Yerba Mate Leaves",
+          "doi": "10.1081/jfp-200060250",
+          "year": "2005",
+          "distance": 0.3827,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ction in all cases. Rate constant values were fitted to different models to describe temperature and water activity dependence. When an Arrhenius model was used, the activation energy was found to be dependant on water activity for chlorophyll a (80.4–99.7 kJ/mol), while for chlorophyll b activation energy showed only a little variation (88.1–89.5 kJ/mol). Color parameter a* underwent a great decrease while parameters L* and b* had only a little variation."
+        },
+        {
+          "document_id": "W4324258648",
+          "title": "Impacts of environmental factors on Chlorophyll-a in lakes in cold and arid regions: A 10-year study of Wuliangsuhai Lake, China",
+          "doi": "10.1016/j.ecolind.2023.110133",
+          "year": "2023",
+          "distance": 0.3829,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "The study of seasonal variations in Chlorophyll-a (Chl.a) concentration and its influencing factors is particularly important for lake management. The study showed that there was a strong non-linear relationship between Chl.a and environmental factors in spring and autumn, whereas there was a strong linear relationship in summer and winter. Chl.a was redistributed during the ice period, and its concentration in water generally exceeded that in the ice sheet."
+        },
+        {
+          "document_id": "W3034042903",
+          "title": "Effects of low and high irradiation levels on growth and PSII efficiency in Lemna minor L.",
+          "doi": "10.37427/botcro-2020-016",
+          "year": "2020",
+          "distance": 0.3895,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ars contents were decreased in plants exposed to HL which indicated long-term acclimation response to the increased irradiance. Furthermore, the HL plants revealed better capability for the utilization of absorbed light in photosynthesis accompanied by photoprotective adjustment of certain number of PSII reaction centers from active to dissipative mode of functioning."
+        },
+        {
+          "document_id": "W26910968",
+          "title": "Regulation of chlorophyll synthesis in Chlamydomonas reinhardtii: the role of FLP and GUN4",
+          "doi": "10.13097/archive-ouverte/unige:5077",
+          "year": "2009",
+          "distance": 0.3899,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ion de cette protéine est régulée par un signal chloroplastique dépendant de l'accumulation des précurseurs de la chlorophylle. Nous avons montré que l'absence de GUN4 limite l'accumulation de la chlorophylle dans la cellule et qu'un niveau réduit de FLP provoque l'accumulation de niveaux élevés de différents précurseurs de la chlorophylle. Nous avons également identifié deux régulateurs putatifs de l'épissage alternatif de FLP."
+        },
+        {
+          "document_id": "W2912296239",
+          "title": "Pengaruh Lama Penyinaran dan Salinitas terhadap Pertumbuhan dan Jumlah Klorofil A Sargassum sp. &lt;br&gt;&lt;i&gt;[Effect Of Photoperiod And Salinity On The Growth And Chlorophyll A From Sargassum sp. ]&lt;i&gt;",
+          "doi": "10.20473/jipk.v5i1.11432",
+          "year": "2013",
+          "distance": 0.3964,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "F table 0.05) on the growth of Sargassum sp. Effect of photoperiod did not different significant on the growth of Sargassum sp. in the first week until the third week, but different very significant (F calculated&gt; F table 0.01) in the fourth week of treatment where E is the salinity of 30 ppt with photoperiod light 16 and 8 hours dark that significantly different with A, C, D, F, and I which not significantly different with B, G, H. On growth, there is no interaction of salinity and photoperiod. On chlorophyll a there is no difference significant in treatment A, B, C, D, E, F, G, H, and I."
+        },
+        {
+          "document_id": "W2912296239",
+          "title": "Pengaruh Lama Penyinaran dan Salinitas terhadap Pertumbuhan dan Jumlah Klorofil A Sargassum sp. &lt;br&gt;&lt;i&gt;[Effect Of Photoperiod And Salinity On The Growth And Chlorophyll A From Sargassum sp. ]&lt;i&gt;",
+          "doi": "10.20473/jipk.v5i1.11432",
+          "year": "2013",
+          "distance": 0.397,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "on of salinity and photoperiod. On chlorophyll a there is no difference significant in treatment A, B, C, D, E, F, G, H, and I. Salinity and photoperiod had no effect on chlorophyll a Sargassum sp., and there is no interaction of salinity and photoperiod."
+        },
+        {
+          "document_id": "W4385230918",
+          "title": "Compartment‐specific Ca<sup>2+</sup> imaging in the green alga <i>Chlamydomonas reinhardtii</i> reveals high light‐induced chloroplast Ca<sup>2+</sup> signatures",
+          "doi": "10.1111/nph.19142",
+          "year": "2023",
+          "distance": 0.3979,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ed the light‐dependent chloroplast Ca 2+ response, while the absence of the blue photoreceptor PHOT had no significant effects. A correlation between high light‐induced chloroplast H 2 O 2 gradients and Ca 2+ transients was drawn, supported by H 2 O 2 ‐induced chloroplast Ca 2+ transients in the dark. In conclusion, different triggers are involved in the light‐induced chloroplast Ca 2+ signaling as saturation of the photosynthetic electron transport, H 2 O 2 formation, and aCRY‐dependent light perception."
+        },
+        {
+          "document_id": "W2619105384",
+          "title": "Environment-Sensitive Male-Sterility in some Food Crops",
+          "doi": "",
+          "year": "2015",
+          "distance": 0.3993,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "re, photoperiod and irradiation. According to Bernier et al.&#13;\\n(1993) these factors are perceived by different plant parts. For example, leaves are&#13;\\naffected by photoperiod and irradiation; while temperature is perceived by all plant&#13;\\nparts. Similarly, vernalization affects shoot apex and moisture availability is perceived&#13;\\nby roots. These external determinants do not act independently and their interaction&#13;\\nis inevitable and a particular factor may alter or substitute the direct effect of the other&#13;\\nfactors; and this may change the threshold level of individual factor in inducing&#13;\\nflowering."
+        },
+        {
+          "document_id": "W2057121201",
+          "title": "Photosynthesis in reproductive unicells of Ulva fasciata and Enteromorpha flexuosa:implications for ecological success",
+          "doi": "10.3354/meps125229",
+          "year": "1995",
+          "distance": 0.4008,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "g generalizations: (1) Pmax (maximum net photosynthetic rate) for motile cells (e.g. gametes of U. fasciata and zoospores of E. flexuosa) can be equivalent to Pmax of appropriate adult tissues when expressed on a chlorophyll a (chl a) or chl a+b basis; (2) respiration rates for all motile cells were 1.5- to 6-fold higher than rates for adult thalli when normalized to chl; (3) as expected with increasing respiration rates, compensation irradiance (Ic) and saturation irradiance (Ik) also increased for all motile cell types; (4) chl a:b ratios were lower in all motile cell types than in adult cells;"
+        },
+        {
+          "document_id": "W2082200171",
+          "title": "Responses of the biennial forest herb <i>Alliaria petiolata</i> to variation in population density, nutrient addition and light availability",
+          "doi": "10.1046/j.1365-2745.2000.00461.x",
+          "year": "2000",
+          "distance": 0.4011,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "was lowest for plants in the highest light treatment and increased with nutrient addition at the two highest light treatments. 5 Plants growing at high density responded to nutrient addition and light attenuation in the same direction but with greatly reduced magnitude compared with plants growing at low density. The effect of irradiance was the most important determinant of all facets of growth and allocation patterns in both rosettes and mature plants."
+        },
+        {
+          "document_id": "W2527744074",
+          "title": "SEBARAN DAN HUBUNGAN PARAMETER REPRODUKSI IKAN TUNA MADIDIHANG (Thunnus albacares) DENGAN SUHU DAN KLOROFIL-a DI LAUT BANDA",
+          "doi": "10.15578/bawal.7.3.2015.183-191",
+          "year": "2015",
+          "distance": 0.4012,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "gonads and gonadal maturation index increases occurred when the temperatures begin to warm and chlorophyll-a start to decline. The maturity level of gonads and gonadal maturation index decreases occurred at the beginning of the early drop in temperature and increase in chlorophyll-a."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several DEB-focused snippets explicitly state the stylized fact that chlorophyll concentration decreases with irradiance (SF8 in LoreMarq2010), with supporting model reasoning (snippets 3, 4, 8). Kooy2010 (5) and Zonn98b (6, 10) corroborate that relative chlorophyll is high at low irradiance and increases as irradiance decreases, and the Lemna minor experiment (22) shows reduced pigment content under high light. These constitute moderate, consistent support. A few snippets are off-topic (e.g., storage, senescence, salinity studies), and one (17) involves light effects in a non-comparable storage context that runs counter but is not a direct contradiction of the irradiance-acclimation pattern. Overall the corpus clearly corroborates the stylized fact with little genuine conflict, though much of the support comes from a single source family."
+      },
+      "n_references": 5,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.23933839797973633
+        },
+        "69b8754becbd4702b29a3ccf": {
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.2427399754524231
+        },
+        "69b87866ecbd4702b29a4073": {
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.24744880199432373
+        },
+        "W4283729738": {
+          "title": "Light regulates chlorophyll biosynthesis via ELIP1 during the storage of Chinese cabbage",
+          "doi": "10.1038/s41598-022-15451-9",
+          "year": "2022",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.37549126148223877
+        },
+        "W3034042903": {
+          "title": "Effects of low and high irradiation levels on growth and PSII efficiency in Lemna minor L.",
+          "doi": "10.37427/botcro-2020-016",
+          "year": "2020",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3895282745361328
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2222,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "diance but increases with 338the dilution rate (SF7 and SF8). Until this point no explicit considerations were made concern- 339ing chlorophyll; it was implicitly assumed that it was a part of structure (since photon capture 340_Jphis assumed to be proportional to structural mass MV). Keeping with that assumption, it 341is possible to analyze chlorophyll concentration if one considers it as proportional to structural 342massMV. 343Values for structural mass and reserve density are presented in ﬁgure 5 for a simulation in 344which the effect of increasing irradiance is tested. After day 20 the irradiance is forced to 345"
+        },
+        {
+          "document_id": "69b8a225ecbd4702b29a749c",
+          "title": "Mull2011.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2269,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "and adaptation to low and high irradiance levels are likely todiffer considerably among samples. Since photosynthesis rates areexpressed per chlorophyll A content, which may vary considerablydepending on ambient irradiance levels, it is to be expected that themaximum photosynthesis rate expressed per chlorophyll A con-tent differs substantially among samples."
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2393,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "ﬁgure 5 for a simulation in 344which the effect of increasing irradiance is tested. After day 20 the irradiance is forced to 345be twice the previous value. The expected effect in C-reserve is conﬁrmed - it increases 346until reaching a new steady-state. Structural mass follows the same behaviour since it is 347also supported by a greater C-reserve. Finally, N-reserve density does not get bolstered by 348increased irradiance but needs to support a larger structure, thus stabilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.24,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "ilution rate in light limiting conditions; (21)SF3. N:C decreases with temperature in nutrient or light limiting conditions; (2)SF4. N:C decreases with irradiance in nutrient replete conditions; (11)ChlorophyllSF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11)SF6. chl:C decreases with dilution rate in light limiting conditions; (3)SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30)SF8. chlorophyll concentration decreases with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPS"
+        },
+        {
+          "document_id": "69b8754becbd4702b29a3ccf",
+          "title": "Kooy2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2427,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "principle differ fromthat for photoinhibition. Accounting for such difference would obviously complicate themodel considerably.The amount of chlorophyll per cell turns out to be rather variable, see e.g. [1291].Generally the relative amount is high at low mean levels of irradiance and the chlorophylldensity acts as if it is compensation. Part of the variation of chlorophyll per cell weightcan be explained by the contribution of the various reserves to the cell weight. A moredetailed analysis might involve a workload allocation model, see {199}, for chlorophyll."
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2474,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "l. The data are mute about thevalue of the speciﬁc rate of chlorophyll destruc-tion: values between 0 and 0.5 d 1are all consis-tent with the data. Note that although the rateof chlorophyll production decreases with decreas-ing irradiance (at low irradiances) the chloro-phyll cell quota does increase. The reason forthis increase is that dilution through growth be-comes progressively less important with decreas-ing irradiance.An alternative explanation for the observed"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2479,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "plished by making PSU density \u001aPSU and the activation coefﬁcient functions of 374irradiance at which cells were acclimated. 37517The addition of a chlorophyll structure would obviously increase model precision at the cost 376of additional parameters. The variation of chlorophyll content is rather important in natural 377setting and in large time-scales, but for relatively constant or cyclic irradiances the chlorophyll 378concentration varies little from an average value (for example, Geider et al. (11), Owens et al. 379(27), Pawlowski (29) show variations of approximately \u000615% in controled settings, while for 380"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2567,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "bilizing at a lower value. 349Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2605,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "o model photoacclimation - 369the process by which cells adjust chlorophyll content in accordance to irradiance (25, 28, 41) 370- by establishing a growth-SU for the chlorophyll structure in which light directly or indirectly 371inhibits growth. Alternatively, Papadakis et al. (28) proposed varying parameter values to cope 372with the variation of chlorophyll content by photoacclimation. In the proposed model, this could 373be accomplished by making PSU density \u001aPSU and the activation coefﬁcient functions of 374irradiance at which cells were acclimated. 375"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2716,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "in increased chlorophyllcell quota when cell are kept under low lightFig. 7. (A) Chlorophyll: Carbon ratio; (B) Carbon: Chloro-phyll ratio, both as dependent on irradiance; and (C) Chloro-phyll: Carbon ratio as dependent on the speciﬁc growth rate.C.Zonne6eld:Ecological Modelling 113 (1998) 55–70 66conditions. However, the maximum rate of photo-"
+        },
+        {
+          "document_id": "69b87866ecbd4702b29a4073",
+          "title": "Zonn98b.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2778,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "because of dilution through growth, andmay also decrease through chlorophyll destruc-tion (characterised by a rate constant r).By assumption, the chlorophyll production rateequals kNl, with ka proportionality constant.(The chlorophyll production rate may also dependon irradiance, in which case kwould depend onthe irradiance. As studies on nutrient-limitedgrowth are generally restricted to one level ofirradiance, information on this aspect is lacking. Itherefore treat kas a constant.) This implies thatthe cellular chlorophyll concentration changes ac-cording toddt[Chl] k[Nl] (m\u001br) · [Chl]so that at steady-state (when m D)"
+        },
+        {
+          "document_id": "69b8474fec32c55db5430807",
+          "title": "Ever1991.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2842,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "h rate would thus in- crease at low and decrease at high light intensities, which improves the agreement with experimental data (Figs. 2-4). Chlorophyll-specific photosynthetic rate can also depend on light or shade adaptati~n.~ According to the model of Gons and Mur,\"s6 the fol- lowing relationship holds: D = qeY, = qeym - pe (14) where Y, is growth yield corrected for maintenance (g/J) and pe is the specific maintenance rate constant (h-I). The models of Gons and Mur6 and Iehana8 ne- cessitate measuring the amount of light that is absorbed by the whole culture, which depends on irradiated light"
+        },
+        {
+          "document_id": "W2151339337",
+          "title": "10.1016/s0967-0653(97)82003-0",
+          "doi": "10.1016/s0967-0653(97)82003-0",
+          "year": "2000",
+          "distance": 0.3003,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "cteristics, chlorophyll a (chl a) concentration, vertical stratifi-cation, and phytoplankton sensitivity to UV radiation (UVRI. Results demonstrated that primary pro-duction was enhanced in the upper -30 m of the water column by the presence of CDOM, where pre-dicted increases in production due to the removal of damaging UVR more than offset its reductionresulting from the absorption of photosynthetically usable radiation. At greater depths, where littleUVR remained, primary production was always reduced due to removal by CDOM of photosyntheti-cally usable radiation."
+        },
+        {
+          "document_id": "W3034042903",
+          "title": "Effects of low and high irradiation levels on growth and PSII efficiency in Lemna minor L.",
+          "doi": "10.37427/botcro-2020-016",
+          "year": "2020",
+          "distance": 0.3694,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "wn in two different irradiation regimes: low light (LL) – 50 μmolPHOTONS m-2 s-1 and high light (HL) – 500 μmolPHOTONS m-2 s-1. The main goal was to investigate the photosynthetic regulatory mechanisms that ensure adjustment to different light conditions and integrate these observations with the data on plant multiplication and biomass production. For this purpose, we measured chlorophyll (Chls) and carotenoid (Cars) contents and analyzed the energy fluxes through the PSII by saturation pulse method as well as by Chl a transient induction and JIP test."
+        },
+        {
+          "document_id": "W4239522429",
+          "title": "Carbon Flux in the Temperate Zooxanthellate Sea Anemone Anthopleura aureoradiata",
+          "doi": "10.26686/wgtn.16959136.v1",
+          "year": "2008",
+          "distance": 0.3728,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "te all increased with temperature, however under GTC these parameters all decreased between 32.5 [degrees]C and 35 [degrees] C. Photosynthetic compensation irradiance increased with temperature under both GTC and RTC until 30 [degrees] C, after which respiration exceeded maximum photosynthesis, meaning that photosynthetic compensation did not occur. Furthermore, photosynthetic saturation irradiance increased with temperature and peaked at 15 [degrees] C before declining with temperature under both GTC and RTC."
+        },
+        {
+          "document_id": "W4387234312",
+          "title": "ADAPTATION TO EX VITRO CONDITIONS OF MICROPLANTS LAVANDULA ANGUSTIFOLIA MILL. AT LONG-TERM REPRODUCTION IN VITRO",
+          "doi": "10.12737/2073-0462-2023-11-19",
+          "year": "2023",
+          "distance": 0.3753,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "to the number of nodes on the main shoot, a tendency to their decrease with an increase in the number of passages was observed. A significant increase in the content of chlorophyll a with an increase in the number of subcultivations on the 14th day of adaptation was revealed, however, later these differences leveled out. On average, the in vitro viability index for passages was 1.45 and increased up to 30 days of adaptation to 1.75."
+        },
+        {
+          "document_id": "W4283729738",
+          "title": "Light regulates chlorophyll biosynthesis via ELIP1 during the storage of Chinese cabbage",
+          "doi": "10.1038/s41598-022-15451-9",
+          "year": "2022",
+          "distance": 0.3755,
+          "corpus": "reproduction",
+          "label": "contradicts",
+          "relevance": 0.3,
+          "text": "Abstract Chlorophyll loss is a major problem during green vegetable storage. However, the molecular mechanism is still unclear. In this study, a 21 days of storage experiments showed chlorophyll content was higher in light-stored Chinese cabbage ( Brassica chinensis L . ) leaves than those in dark-stored samples. Transcriptome analyses were performed on these samples to determine the effects of light."
+        },
+        {
+          "document_id": "W1515429516",
+          "title": "Accelerated maturation of processed yerba-mate under the controlled conditions of temperature and humidity",
+          "doi": "10.1108/nfs-12-2014-0105",
+          "year": "2015",
+          "distance": 0.379,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "and b* colorimetric coordinates were measured. Findings – The most expressive changes in the color occur in the first 14 days. At this time, 23.161 ± 2.984 per cent of total chlorophyll was degraded, considering that in 42 days, 37.458 ± 0.955 per cent is degraded, according to an exponential model. A positive correlation between theobromine amount and maturation time was found. This was verified by an increase in dicaffeoylquinic acid concentrations and small changes in chlorogenic acid isomers."
+        },
+        {
+          "document_id": "W2380351226",
+          "title": "Changes of Concentration of Superoxide Anion and Organic Radical in Senescent Leaves and Chloroplasts",
+          "doi": "",
+          "year": "1988",
+          "distance": 0.3818,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "by UV radiation. It is found that the higher levels of free radicals on chlorophyll content basis occurred in dry sample of old leaves before and after ra- diation. The data suggest that leaf senescence is accompanied by damage caused by free radi- cals."
+        },
+        {
+          "document_id": "W2015317495",
+          "title": "Effect of Water Activity and Temperature in Color and Chlorophylls Changes in Yerba Mate Leaves",
+          "doi": "10.1081/jfp-200060250",
+          "year": "2005",
+          "distance": 0.3827,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ction in all cases. Rate constant values were fitted to different models to describe temperature and water activity dependence. When an Arrhenius model was used, the activation energy was found to be dependant on water activity for chlorophyll a (80.4–99.7 kJ/mol), while for chlorophyll b activation energy showed only a little variation (88.1–89.5 kJ/mol). Color parameter a* underwent a great decrease while parameters L* and b* had only a little variation."
+        },
+        {
+          "document_id": "W4324258648",
+          "title": "Impacts of environmental factors on Chlorophyll-a in lakes in cold and arid regions: A 10-year study of Wuliangsuhai Lake, China",
+          "doi": "10.1016/j.ecolind.2023.110133",
+          "year": "2023",
+          "distance": 0.3829,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The study of seasonal variations in Chlorophyll-a (Chl.a) concentration and its influencing factors is particularly important for lake management. The study showed that there was a strong non-linear relationship between Chl.a and environmental factors in spring and autumn, whereas there was a strong linear relationship in summer and winter. Chl.a was redistributed during the ice period, and its concentration in water generally exceeded that in the ice sheet."
+        },
+        {
+          "document_id": "W3034042903",
+          "title": "Effects of low and high irradiation levels on growth and PSII efficiency in Lemna minor L.",
+          "doi": "10.37427/botcro-2020-016",
+          "year": "2020",
+          "distance": 0.3895,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ars contents were decreased in plants exposed to HL which indicated long-term acclimation response to the increased irradiance. Furthermore, the HL plants revealed better capability for the utilization of absorbed light in photosynthesis accompanied by photoprotective adjustment of certain number of PSII reaction centers from active to dissipative mode of functioning."
+        },
+        {
+          "document_id": "W26910968",
+          "title": "Regulation of chlorophyll synthesis in Chlamydomonas reinhardtii: the role of FLP and GUN4",
+          "doi": "10.13097/archive-ouverte/unige:5077",
+          "year": "2009",
+          "distance": 0.3899,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ion de cette protéine est régulée par un signal chloroplastique dépendant de l'accumulation des précurseurs de la chlorophylle. Nous avons montré que l'absence de GUN4 limite l'accumulation de la chlorophylle dans la cellule et qu'un niveau réduit de FLP provoque l'accumulation de niveaux élevés de différents précurseurs de la chlorophylle. Nous avons également identifié deux régulateurs putatifs de l'épissage alternatif de FLP."
+        },
+        {
+          "document_id": "W2912296239",
+          "title": "Pengaruh Lama Penyinaran dan Salinitas terhadap Pertumbuhan dan Jumlah Klorofil A Sargassum sp. &lt;br&gt;&lt;i&gt;[Effect Of Photoperiod And Salinity On The Growth And Chlorophyll A From Sargassum sp. ]&lt;i&gt;",
+          "doi": "10.20473/jipk.v5i1.11432",
+          "year": "2013",
+          "distance": 0.3964,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "F table 0.05) on the growth of Sargassum sp. Effect of photoperiod did not different significant on the growth of Sargassum sp. in the first week until the third week, but different very significant (F calculated&gt; F table 0.01) in the fourth week of treatment where E is the salinity of 30 ppt with photoperiod light 16 and 8 hours dark that significantly different with A, C, D, F, and I which not significantly different with B, G, H. On growth, there is no interaction of salinity and photoperiod. On chlorophyll a there is no difference significant in treatment A, B, C, D, E, F, G, H, and I."
+        }
+      ]
+    }
+  }
+}

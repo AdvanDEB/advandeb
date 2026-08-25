@@ -47,6 +47,7 @@ from app.api.routes.kb import database as kb_db
 from app.api.routes.kb import filesystem as kb_fs
 from app.api.routes.kb import kg_builder as kb_kg
 from app.api.routes.kb import documents as kb_documents
+from app.api.routes.kb import facts as kb_facts
 from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 from app.kb.watchdog import batch_watchdog
 
@@ -164,7 +165,9 @@ app.include_router(kb_ingestion.router,   prefix="/api/kb/ingestion", tags=["kb"
 app.include_router(kb_db.router,          prefix="/api/kb/db",        tags=["kb"])
 app.include_router(kb_fs.router,          prefix="/api/kb/fs",        tags=["kb"])
 app.include_router(kb_kg.router,          prefix="/api/kb/kg",        tags=["kb"])
-app.include_router(kb_documents.router,   prefix="/api/kb/documents", tags=["kb"])
+app.include_router(kb_documents.router,          prefix="/api/kb/documents",      tags=["kb"])
+app.include_router(kb_facts.stylized_router,     prefix="/api/kb/stylized-facts", tags=["kb"])
+app.include_router(kb_facts.facts_router,        prefix="/api/kb/facts",          tags=["kb"])
 
 
 @app.get("/")
@@ -227,4 +230,7 @@ if FRONTEND_DIST.exists():
 
     @app.get("/{full_path:path}", include_in_schema=False)
     async def spa_fallback(full_path: str):
-        return FileResponse(FRONTEND_DIST / "index.html")
+        return FileResponse(
+            FRONTEND_DIST / "index.html",
+            headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
+        )

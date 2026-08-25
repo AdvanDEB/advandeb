@@ -1,0 +1,1720 @@
+{
+  "sf_id": "hypoxia_04",
+  "category": "Hypoxia / DO",
+  "statement": "Energy allocation is reprioritized to first pay maintenance costs under hypoxic conditions.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Several snippets (especially 1, 2, 3 and 12) explicitly describe a shift in energy allocation under low oxygen, giving maintenance the highest priority before growth or reproduction. Snippet 3 directly states the stylized fact with citations. No snippet contradicts this pattern; most other excerpts merely restate generic DEB hierarchy principles without addressing hypoxia, contributing little to the claim but not opposing it. The presence of multiple clear, hypoxia‑specific supporting statements yields strong evidence and a consensus that the corpus corroborates the stylized fact."
+          },
+          "n_references": 3,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2164
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2564
+            },
+            "3453": {
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2872
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2164,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2564,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2597,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2642,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2685,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "sis of the role of MRD in organismal energy budget must take into account the duration, timing and recovery costs of MRD relative to important life cycle events and stages. Energy metabolism as an integrator of multiple stress impacts The energy dependence of life processes and the inevitable constraint of the rate at which energy can be acquired, assimilated and converted into the biologically usable form creates a basis for the trade-offs between different energy-demanding functions. Typically, basal maintenance costs have high priority in the energy allocation hierarchy because cellular and organismal homeostasis is essential 6 REVIEW Journal of Experimental Biology (2021) 224, jeb236802."
+            },
+            {
+              "document_id": "3365",
+              "title": "Desforges et al. - 2019 - Quantification of the full lifecycle bioenergetics.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2725,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "(2010), with some muskox-speciﬁc modiﬁcations. Starvation occurs when the fraction of mobilized reserves going to somatic maintenance is in- suﬃcient to cover the costs thereof (e.g. < κ p p ˙ ˙ C S). Somatic main- tenance takes priority over all other metabolic processes when this occurs. The deviation in allocation rules is as follows. First, allocation to growth ceases ( = p˙ 0 G ), and somatic maintenance needs are paid by diverting energy from maturation (for juveniles) or the reproduction buﬀer (for adults). Next, if maturation or the reproduction buﬀer be- comes unable to cover somatic maintenance, the missing energy is di- verted directly from the reserves. This process continues unt"
+            },
+            {
+              "document_id": "3267",
+              "title": "Ren e.a. - 2012 - An ecosystem model for optimising production in in.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2743,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": ", whereas mainte- nance depends on biovolume. The energy acquired from feeding is immediately incorporated into reserves from which it is utilised at a ﬁxed fraction of \u0002 for maintenance and growth, while the remaining fraction of 1 − \u0002 is spent on development in juveniles and reproduction in adults. Metabolic maintenance competes for energy with growth but has priority, while development and repro- duction compete with growth plus maintenance at a higher level. If the energy allocation with respect to maintenance and growth is less than maintenance cost, growth stops and maintenance need is met by reducing reproduction. The individual would die when the energy utilisation rate from reserves"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2771,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ction. Furthermore, the delayed energy costs (due to the reinstatement of physiological homeostasis, oxidation of anaerobic end-products or replenishment of depleted energy reserves) can be substantial, as shown by a major (up to 200–500% of the BMR) overshoot of oxygen consumption rates during recovery (Ellington, 1983; Lewis et al., 2007; Maxime et al., 2000; Plambech et al., 2013; Svendsen et al., 2011; Vismann and Hagerman, 1996). The recovery costs after MRD might lead to trade-offs with other energy-demanding fitness-related functions, as shown in a stress-tolerant mammal, the naked mole rat, that enters a transient comatose state during post-hypoxic recovery, ceasing locomotion and ma"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2807,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "nergy conductance parameter (v̇) that controls the reserve mobilization rate, using a rule that reﬂects the organism oxyregulation capacity such as the one used in Aguirre- Velarde et al. (2016). Low oxygen conditions might also aﬀect assim- ilation since it is an oxygen-demanding activity, and a common strategy under hypoxia is to reduce food intake (Wu, 2002). However, our ob- servations suggest a decoupling strategy between food intake and as- similation that might limit the eﬀect of hypoxia on energy intake. The inclusion of those eﬀects of hypoxia in dynamic energy budget models will help to better predict the consequences of oxygen limitation on growth patterns of benthic aquatic organ"
+            },
+            {
+              "document_id": "3599",
+              "title": "Pousse et al. - 2022 - Dynamic energy budget modeling of Atlantic surfcla.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2833,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "tenance costs (ṗM). Those costs correspond to the energy that an organism needs to “stay alive,” and thus have priority over somatic tissue growth; energy above this is available for somatic growth. Somatic maintenance energy is used, for example, for cell renewal, maintaining homeostasis or muscle tension. The other fraction (1-κ) of energy mobilized from reserves is allocated either to maturation in juveniles or reproduction (ṗR) in adults, and maturity maintenance processes (ṗJ). Accordingly, as is the case for somatic maintenance costs, maturity maintenance has priority over the energy allocated to maturation/reproduction. When energy acquisition cannot meet maintenance costs, energy is "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2845,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ry (albeit not sufficient) prerequisite for the organism’s ability to carry out other fitness-related functions. Some exceptions occur when basal maintenance is sacrificed for the benefit of other functions such reproduction in terminal breeders (Junghanns et al., 2019; Royle et al., 2012) or activity to escape an immediate threat (Haideret al., 2018; Haideret al., 2019; Husak et al., 2016). However, such priority reversals are not sustainable and eventually lead to mortality. For the most part of an organism’s life cycle, the energy costs of basal maintenance constitute a top allocation priority. Under the conditions close to the species’ optimum, selection acts to reduce the maintenance co"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2872,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "its environment. Because the energetic burden to an individual is a continuum dependent on the severity and duration of the environmental perturbation, some of the literature describing organismal energy homeostasis demarcates organismal ener- getic status: “optimum” describes individuals with sufﬁcient energetic capacity to cover basal maintenance costs as well as growth, reproduction, and activity; “pejus” (Latin for “worse”) describes individuals with reduced energy allocation to nones- sential processes due to elevated maintenance costs and/or reduced metabolic scope; and “pessimum” (Latin for “worst”) describes individuals that allocate all available energy to maintenance costs (Frederi"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2891,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "rimental Biology (2021) 224, jeb236802. doi:10.1242/jeb.236802 Journal of Experimental Biology [Page 8] effects at different levels of biological organization. Analysis of energy budgets provides an ideal mechanistic tool to overcome this challenge, as energy investment is involved in the functional and structural responses to stressors at all levels of biological organization, from molecular interactions inside the cell to the nutrient cycles and trophic webs (Segner et al., 2014). Despite the MRD Normal range Environmental conditions SMR SFS SFP Wmax Basal metabolic costs Optimum O Pj Ps L A WO2 SMR SMR SMR SMR WGl MRD No MRD SMR SFP SFP SFP~0 SFP>>0 SFP>0 Optimum Pejus Pessimum Lethal ED "
+            },
+            {
+              "document_id": "3328",
+              "title": "McFa2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2911,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "e and overhead costs of growth. Once maintenance is paid, energy may be allocated to growth and if maintenance costs are higher than κ, growth will cease. The remainder of the energy mobilized from reserves (1-κ) is allocated to maturation in juveniles and reproduction (gametes) in adults, with a priority given to maturity maintenance costs, which include maintaining the level of maturity, overheads of gamete production and metabolic costs of spawning. While these two metabolic processes are separated in the model, they share similarities and are both strongly influenced by temperature and functional response. Under conditions of severe nutrient limitation or starvation, energy may be taken "
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2913,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "of offspring. The two pathways of energy allocation are usually referred to as “maintenance energy” (Brody 1945) and “productivity”. Productivity, as defined here, is equivalent to the net primary productivity of plants or the secondary productivity of consumers in Odum’s (1959) terminology. The energy allocated to maintenance is dissipated as heat to outer space; the energy allocated to productivity is stored in organic matter and becomes available to other organisms in the food web. These two possible pathways of energy compete for the common supply of assimilated energy. By the law of requisite variety, it follows that in a relatively more stable environment, less energy is needed for reg"
+            },
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2932,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ding and maintenance costs. Reserves drive metabolism and consists of matter that is immediately available for somatic maintenance, development and reproduction. Reserves are divided into energy reserves and reproductive buffer. Energy reserves include tissues that store energy for growth and somatic maintenance. Reproductive buffer is the energy stored for reproduction. Individuals are characterized by a description of their structure, energy reserves, reproductive buffer and maturity. Maturity is a state variable that regulates transitions between the three life stages; embryo, juvenile and adult (Kooijman, 2000). An embryo does not [Page 20] 14 feed and allocates no energy to reproduction"
+            },
+            {
+              "document_id": "2667",
+              "title": "Serpa et al. - 2013 - Modelling the growth of white seabream (Diplodus s.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2936,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "the energy mobilization rate. The rate at which energy is mobilized from the reserves and is allocated to somatic maintenance and growth (κ fraction) and to development or reproduction (1−κ), may be calculated according to the following equation (Kooijman, 2000): _pC ¼ E ½ \u0003 EG ½ \u0003 þ κ E ½ \u0003 _pAm f g EG ½ \u0003V 2=3 Em ½ \u0003 þ _pM ½ \u0003V ! k T ð Þ ð9Þ where [E] stands for reserve density ([E]=E/V, J cm−3), [EG] is the volume-speciﬁc costs for structural growth (J cm−3), κ is the fraction of energy spent on soma (i.e. somatic maintenance plus growth), [Em] is the maximum energy density in the reserve compartment (J cm−3), _pM ½ \u0003 is the volume-speciﬁc costs for maintenance (J cm−3 d−1) and V is the s"
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2942,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "lenge which must be countered by an appropriate corrective response of the organism (Connell & Orias 1964). Thus the amount and variety of regulatory activity required for maintenance of the steady state is dictated by the environment. This concept was formalized by Ashby (1958) as the \"Law of Requisite Variety,\" which states that for maximum stability, the variety of homeostatic responses required in any system is equal to the variety of environmental challenges offered to it (see Heininger 2015a). The maintenance of life requires the assimilation of a continual supply of energy. Some of this assimilated energy is used in regulatory activities, while the remaining portion is used for reprod"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "A few abstracts (especially those on functional hypoxia in insects and tumor hypoxia) explicitly describe metabolic re‑organization that suppresses growth, feeding or reproduction, which is consistent with a shift of energy toward maintenance under low oxygen. These provide moderate support, but the majority of snippets either discuss physiological effects of hypoxia without reference to allocation priorities or focus on unrelated clinical contexts, yielding overall weak to moderate evidence and no clear consensus against the stylized fact."
+          },
+          "n_references": 3,
+          "references": {
+            "W28992421": {
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3058
+            },
+            "W2593050815": {
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3121
+            },
+            "W3141585456": {
+              "title": "Molecular Imaging of Hypoxia",
+              "doi": "https://doi.org/10.2967/jnumed.107.045914",
+              "year": "2008",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3185
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2813,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.3058,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W3185378999",
+              "title": "Hypoxia Signaling in Parkinson’s Disease: There Is Use in Asking “What HIF?”",
+              "doi": "https://doi.org/10.3390/biology10080723",
+              "year": "2021",
+              "distance": 0.3071,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Hypoxia is a condition characterized by insufficient tissue oxygenation, which results in impaired oxidative energy production. A reduction in cellular oxygen levels induces the stabilization of hypoxia inducible factor α (HIF-1α), master regulator of the molecular response to hypoxia, involved in maintaining cellular homeostasis and driving hypoxic adaptation through the control of gene expression. Due to its high energy requirement, the brain is particularly vulnerable to oxygen shortage. Thus, hypoxic injury can cause significant metabolic changes in neural cell populations, which are associated with neurodegeneration. Recent evidence suggests that regulating HIF-1α may ameliorate the cel"
+            },
+            {
+              "document_id": "W4382196235",
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "distance": 0.308,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Reduced oxygen availability (hypoxia) can lead to cell and organ damage. Therefore, aerobic species depend on efficient mechanisms to counteract detrimental consequences of hypoxia. Hypoxia inducible factors (HIFs) and mitochondria are integral components of the cellular response to hypoxia and coordinate both distinct and highly intertwined adaptations. This leads to reduced dependence on oxygen, improved oxygen supply, maintained energy provision by metabolic remodeling and tapping into alternative pathways and increased resilience to hypoxic injuries. On one hand, many pathologies are associated with hypoxia and hypoxia can drive disease progression, for example in many cancer and neurolo"
+            },
+            {
+              "document_id": "W4281637853",
+              "title": "Hypoxic Gas Therapy in Neonatology: Considerations in Practice",
+              "doi": "https://doi.org/10.2174/1570163819666220520112220",
+              "year": "2022",
+              "distance": 0.3106,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Background: Adequate oxygenation is essential for sick newborns. Each disease determines the target of oxygenation. Nevertheless, hyperoxia and hypoxia are related to adverse outcomes. Most studies related to this aspect have been conducted in preterm infants or term babies with pulmonary pathology. Introduction: Congenital heart diseases may also require careful oxygenation control and management of oxygen supply. Problem: Presurgical stabilization of complex heart diseases (CHD) may be difficult, especially after the physiological decrease of pulmonary resistance, which generates pulmonary edema (due to overcirculation) and systemic hypoperfusion. Several strategies have been described to "
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.3121,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2073731382",
+              "title": "Obstructive sleep apnea and endothelial progenitor cells",
+              "doi": "https://doi.org/10.2147/ppa.s51562",
+              "year": "2013",
+              "distance": 0.3139,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Intermittent hypoxia cycles and sleep fragmentation are major pathophysiologic characters of OSA. Intermittent hypoxia acts as a trigger of oxidative stress, systemic inflammation, and sympathetic activation. Sleep fragmentation is associated with a burst of sympathetic activation and systemic inflammation. In most studies, a reduction in circulating EPCs has emerged. The possible mechanisms underlying the decrease in the number or function of EPCs include prolonged inflammation response, oxidative stress, increased sympathetic activation, physiological adaptive responses of tissue to hypoxia, reduced EPC mobilization, EPC apoptosis, and functional impairment in untreated OSA. Continuous pos"
+            },
+            {
+              "document_id": "W4403545739",
+              "title": "Mitochondrial Stress as a Central Player in the Pathogenesis of Hypoxia-Related Myocardial Dysfunction: New Insights",
+              "doi": "https://doi.org/10.7150/ijms.99359",
+              "year": "2024",
+              "distance": 0.3146,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Hypoxic injury is a critical pathological factor in the development of various cardiovascular diseases, such as congenital heart disease, myocardial infarction, and heart failure. Mitochondrial quality control is essential for protecting cardiomyocytes from hypoxic damage. Under hypoxic conditions, disruptions in mitochondrial homeostasis result in excessive reactive oxygen species (ROS) production, imbalances in mitochondrial dynamics, and initiate pathological processes including oxidative stress, inflammatory responses, and apoptosis. Targeted interventions to enhance mitochondrial quality control, such as coenzyme Q10 and statins, have shown promise in mitigating hypoxia-induced mitochon"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.3164,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W4385837597",
+              "title": "Mitochondria in hypoxic pulmonary hypertension, roles and the potential targets",
+              "doi": "https://doi.org/10.3389/fphys.2023.1239643",
+              "year": "2023",
+              "distance": 0.3166,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Mitochondria are the centrol hub for cellular energy metabolisms. They regulate fuel metabolism by oxygen levels, participate in physiological signaling pathways, and act as oxygen sensors. Once oxygen deprived, the fuel utilizations can be switched from mitochondrial oxidative phosphorylation to glycolysis for ATP production. Notably, mitochondria can also adapt to hypoxia by making various functional and phenotypes changes to meet the demanding of oxygen levels. Hypoxic pulmonary hypertension is a life-threatening disease, but its exact pathgenesis mechanism is still unclear and there is no effective treatment available until now. Ample of evidence indicated that mitochondria play key fact"
+            },
+            {
+              "document_id": "W3141585456",
+              "title": "Molecular Imaging of Hypoxia",
+              "doi": "https://doi.org/10.2967/jnumed.107.045914",
+              "year": "2008",
+              "distance": 0.3185,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "Hypoxia, a condition of insufficient O2 to support metabolism, occurs when the vascular supply is interrupted, as in stroke or myocardial infarction, or when a tumor outgrows its vascular supply. When otherwise healthy tissues lose their O2 supply acutely, the cells usually die, whereas when cells gradually become hypoxic, they adapt by up-regulating the production of numerous proteins that promote their survival. These proteins slow the rate of growth, switch the mitochondria to glycolysis, stimulate growth of new vasculature, inhibit apoptosis, and promote metastatic spread. The consequence of these changes is that patients with hypoxic tumors invariably experience poor outcome to treatmen"
+            },
+            {
+              "document_id": "W2063470687",
+              "title": "The Effects of Different Oxygen Concentrations on Recruitment Maneuver During General Anesthesia for Laparoscopic Surgery",
+              "doi": "https://doi.org/10.1097/sle.0000000000000048",
+              "year": "2014",
+              "distance": 0.321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "On the basis of our results, maintaining oxygen concentrations below 100% during RM may be more beneficial in terms of respiratory mechanics and gas exchange."
+            },
+            {
+              "document_id": "W3197956234",
+              "title": "AMPK–mTOR Signaling and Cellular Adaptations in Hypoxia",
+              "doi": "https://doi.org/10.3390/ijms22189765",
+              "year": "2021",
+              "distance": 0.3219,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Cellular energy is primarily provided by the oxidative degradation of nutrients coupled with mitochondrial respiration, in which oxygen participates in the mitochondrial electron transport chain to enable electron flow through the chain complex (I–IV), leading to ATP production. Therefore, oxygen supply is an indispensable chapter in intracellular bioenergetics. In mammals, oxygen is delivered by the bloodstream. Accordingly, the decrease in cellular oxygen level (hypoxia) is accompanied by nutrient starvation, thereby integrating hypoxic signaling and nutrient signaling at the cellular level. Importantly, hypoxia profoundly affects cellular metabolism and many relevant physiological reactio"
+            },
+            {
+              "document_id": "W2222900072",
+              "title": "Silk moth larvae suffer more than pupae in heat",
+              "doi": "https://doi.org/10.1242/jeb.125187",
+              "year": "2015",
+              "distance": 0.3233,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Striking a deal with the environment, ectotherms have come up with a low-cost lifestyle compromise by hitching their body temperature to that of their surroundings. However, as climate change takes a grip and the equilibrium begins shifting, this compromise may come unstuck if conditions become uncomfortably hot. Leigh Boardman and John Terblanche from Stellenbosch University, South Africa, explain that as temperatures rise, aquatic ectotherms are unable to meet the oxygen demands of their warmer bodies, but it wasn't clear whether insects suffered the same fate. Knowing that oxygen availability should alter the thermal tolerance of animals if it is the factor limiting their ability to adapt"
+            },
+            {
+              "document_id": "W1995546118",
+              "title": "Adaptation of Red Blood Cell Function to Hypoxia and Temperature in Ectothermic Vertebrates",
+              "doi": "https://doi.org/10.1093/icb/20.1.163",
+              "year": "1980",
+              "distance": 0.3238,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "function in adaptations of ectothermic ver? tebrates to hypoxia and temperature. The term adaptation, as used in this ar? ticle, means an alteration of physiological function which compensates for a stressful environmental or organismic factor. Two such factors of paramount importance to ectothermic vertebrates are temperature and availability. The physiological function to be examined in terms of adapt? ability is transport by blood from the gas exchange surface to the intracel? lular sites of 02 utilization. Hypoxia is best defined as inadequate uptake of 02 by tissues. The cause may be environmental (reduced 02 content and/or partial pressure in the respiratory medi? um) or organismic. In"
+            },
+            {
+              "document_id": "W3133657576",
+              "title": "Evolved changes in maternal care in high-altitude native deer mice",
+              "doi": "https://doi.org/10.1242/jeb.235218",
+              "year": "2021",
+              "distance": 0.3254,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT At high altitude (HA), unremitting low oxygen and persistent cold push small mammals close to their metabolic ceilings, leaving limited scope for aerobically demanding activities. However, HA breeding seasons are relatively short and endemic rodents compensate with larger litters than low altitude (LA) conspecifics. Rodent mothers are the sole source of heat and nutrition for altricial offspring and lactation is energetically costly. Thus, it is unclear how HA females balance energy allocation during the nursing period. We hypothesized that HA female rodents invest heavily in each litter to ensure postnatal survival. We measured maternal energetic output and behaviour in nursing dee"
+            },
+            {
+              "document_id": "W1586695636",
+              "title": "Pulmonary Gas Exchange and Acid‐Base Balance During Exercise",
+              "doi": "https://doi.org/10.1002/cphy.c110048",
+              "year": "2013",
+              "distance": 0.3255,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract As the first step in the oxygen‐transport chain, the lung has a critical task: optimizing the exchange of respiratory gases to maintain delivery of oxygen and the elimination of carbon dioxide. In healthy subjects, gas exchange, as evaluated by the alveolar‐to‐arterial P O 2 difference ( A ‐ a DO 2 ), worsens with incremental exercise, and typically reaches an A ‐ a DO 2 of approximately 25 mmHg at peak exercise. While there is great individual variability, A ‐ a DO 2 is generally largest at peak exercise in subjects with the highest peak oxygen consumption. Inert gas data has shown that the increase in A ‐ a DO 2 is explained by decreased ventilation‐perfusion matching, and the dev"
+            },
+            {
+              "document_id": "W2753797980",
+              "title": "Non-Mammalian Vertebrates: Distinct Models to Assess the Role of Ion Gradients in Energy Expenditure",
+              "doi": "https://doi.org/10.3389/fendo.2017.00224",
+              "year": "2017",
+              "distance": 0.3261,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Animals store metabolic energy as electrochemical gradients. At least 50% of mammalian energy is expended to maintain electrochemical gradients across the inner mitochondrial membrane (H<sup>+</sup>), the sarcoplasmic reticulum (Ca<sup>++</sup>), and the plasma membrane (Na<sup>+</sup>/K<sup>+</sup>). The potential energy of these gradients can be used to perform work (e.g., transport molecules, stimulate contraction, and release hormones) or can be released as heat. Because ectothermic species adapt their body temperature to the environment, they are not constrained by energetic demands that are required to maintain a constant body temperature. In fact, ectothermic species expend seven to e"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple excerpts (especially snippets 1‑3) explicitly state that under hypoxic conditions organisms reprioritize energy allocation to cover maintenance before growth or reproduction, directly confirming the stylized fact. Additional references (5,12,14,18) reinforce this principle across taxa, while the remaining texts are either unrelated or only tangentially mention general maintenance priority without addressing hypoxia. No contradictory evidence is present, yielding strong overall support and a clear consensus that maintenance costs dominate energy allocation during hypoxia."
+          },
+          "n_references": 6,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2164
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2564
+            },
+            "3485": {
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2685
+            },
+            "3453": {
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2872
+            },
+            "W28992421": {
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3058
+            },
+            "W2593050815": {
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3121
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2164,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2564,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2597,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2642,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2685,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "sis of the role of MRD in organismal energy budget must take into account the duration, timing and recovery costs of MRD relative to important life cycle events and stages. Energy metabolism as an integrator of multiple stress impacts The energy dependence of life processes and the inevitable constraint of the rate at which energy can be acquired, assimilated and converted into the biologically usable form creates a basis for the trade-offs between different energy-demanding functions. Typically, basal maintenance costs have high priority in the energy allocation hierarchy because cellular and organismal homeostasis is essential 6 REVIEW Journal of Experimental Biology (2021) 224, jeb236802."
+            },
+            {
+              "document_id": "3365",
+              "title": "Desforges et al. - 2019 - Quantification of the full lifecycle bioenergetics.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2725,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "(2010), with some muskox-speciﬁc modiﬁcations. Starvation occurs when the fraction of mobilized reserves going to somatic maintenance is in- suﬃcient to cover the costs thereof (e.g. < κ p p ˙ ˙ C S). Somatic main- tenance takes priority over all other metabolic processes when this occurs. The deviation in allocation rules is as follows. First, allocation to growth ceases ( = p˙ 0 G ), and somatic maintenance needs are paid by diverting energy from maturation (for juveniles) or the reproduction buﬀer (for adults). Next, if maturation or the reproduction buﬀer be- comes unable to cover somatic maintenance, the missing energy is di- verted directly from the reserves. This process continues unt"
+            },
+            {
+              "document_id": "3267",
+              "title": "Ren e.a. - 2012 - An ecosystem model for optimising production in in.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2743,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": ", whereas mainte- nance depends on biovolume. The energy acquired from feeding is immediately incorporated into reserves from which it is utilised at a ﬁxed fraction of \u0002 for maintenance and growth, while the remaining fraction of 1 − \u0002 is spent on development in juveniles and reproduction in adults. Metabolic maintenance competes for energy with growth but has priority, while development and repro- duction compete with growth plus maintenance at a higher level. If the energy allocation with respect to maintenance and growth is less than maintenance cost, growth stops and maintenance need is met by reducing reproduction. The individual would die when the energy utilisation rate from reserves"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2771,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ction. Furthermore, the delayed energy costs (due to the reinstatement of physiological homeostasis, oxidation of anaerobic end-products or replenishment of depleted energy reserves) can be substantial, as shown by a major (up to 200–500% of the BMR) overshoot of oxygen consumption rates during recovery (Ellington, 1983; Lewis et al., 2007; Maxime et al., 2000; Plambech et al., 2013; Svendsen et al., 2011; Vismann and Hagerman, 1996). The recovery costs after MRD might lead to trade-offs with other energy-demanding fitness-related functions, as shown in a stress-tolerant mammal, the naked mole rat, that enters a transient comatose state during post-hypoxic recovery, ceasing locomotion and ma"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2807,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "nergy conductance parameter (v̇) that controls the reserve mobilization rate, using a rule that reﬂects the organism oxyregulation capacity such as the one used in Aguirre- Velarde et al. (2016). Low oxygen conditions might also aﬀect assim- ilation since it is an oxygen-demanding activity, and a common strategy under hypoxia is to reduce food intake (Wu, 2002). However, our ob- servations suggest a decoupling strategy between food intake and as- similation that might limit the eﬀect of hypoxia on energy intake. The inclusion of those eﬀects of hypoxia in dynamic energy budget models will help to better predict the consequences of oxygen limitation on growth patterns of benthic aquatic organ"
+            },
+            {
+              "document_id": "3599",
+              "title": "Pousse et al. - 2022 - Dynamic energy budget modeling of Atlantic surfcla.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2833,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "tenance costs (ṗM). Those costs correspond to the energy that an organism needs to “stay alive,” and thus have priority over somatic tissue growth; energy above this is available for somatic growth. Somatic maintenance energy is used, for example, for cell renewal, maintaining homeostasis or muscle tension. The other fraction (1-κ) of energy mobilized from reserves is allocated either to maturation in juveniles or reproduction (ṗR) in adults, and maturity maintenance processes (ṗJ). Accordingly, as is the case for somatic maintenance costs, maturity maintenance has priority over the energy allocated to maturation/reproduction. When energy acquisition cannot meet maintenance costs, energy is "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2845,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "ry (albeit not sufficient) prerequisite for the organism’s ability to carry out other fitness-related functions. Some exceptions occur when basal maintenance is sacrificed for the benefit of other functions such reproduction in terminal breeders (Junghanns et al., 2019; Royle et al., 2012) or activity to escape an immediate threat (Haideret al., 2018; Haideret al., 2019; Husak et al., 2016). However, such priority reversals are not sustainable and eventually lead to mortality. For the most part of an organism’s life cycle, the energy costs of basal maintenance constitute a top allocation priority. Under the conditions close to the species’ optimum, selection acts to reduce the maintenance co"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2872,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "its environment. Because the energetic burden to an individual is a continuum dependent on the severity and duration of the environmental perturbation, some of the literature describing organismal energy homeostasis demarcates organismal ener- getic status: “optimum” describes individuals with sufﬁcient energetic capacity to cover basal maintenance costs as well as growth, reproduction, and activity; “pejus” (Latin for “worse”) describes individuals with reduced energy allocation to nones- sential processes due to elevated maintenance costs and/or reduced metabolic scope; and “pessimum” (Latin for “worst”) describes individuals that allocate all available energy to maintenance costs (Frederi"
+            },
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2813,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.3058,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W3185378999",
+              "title": "Hypoxia Signaling in Parkinson’s Disease: There Is Use in Asking “What HIF?”",
+              "doi": "https://doi.org/10.3390/biology10080723",
+              "year": "2021",
+              "distance": 0.3071,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Hypoxia is a condition characterized by insufficient tissue oxygenation, which results in impaired oxidative energy production. A reduction in cellular oxygen levels induces the stabilization of hypoxia inducible factor α (HIF-1α), master regulator of the molecular response to hypoxia, involved in maintaining cellular homeostasis and driving hypoxic adaptation through the control of gene expression. Due to its high energy requirement, the brain is particularly vulnerable to oxygen shortage. Thus, hypoxic injury can cause significant metabolic changes in neural cell populations, which are associated with neurodegeneration. Recent evidence suggests that regulating HIF-1α may ameliorate the cel"
+            },
+            {
+              "document_id": "W4382196235",
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "distance": 0.308,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Reduced oxygen availability (hypoxia) can lead to cell and organ damage. Therefore, aerobic species depend on efficient mechanisms to counteract detrimental consequences of hypoxia. Hypoxia inducible factors (HIFs) and mitochondria are integral components of the cellular response to hypoxia and coordinate both distinct and highly intertwined adaptations. This leads to reduced dependence on oxygen, improved oxygen supply, maintained energy provision by metabolic remodeling and tapping into alternative pathways and increased resilience to hypoxic injuries. On one hand, many pathologies are associated with hypoxia and hypoxia can drive disease progression, for example in many cancer and neurolo"
+            },
+            {
+              "document_id": "W4281637853",
+              "title": "Hypoxic Gas Therapy in Neonatology: Considerations in Practice",
+              "doi": "https://doi.org/10.2174/1570163819666220520112220",
+              "year": "2022",
+              "distance": 0.3106,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Background: Adequate oxygenation is essential for sick newborns. Each disease determines the target of oxygenation. Nevertheless, hyperoxia and hypoxia are related to adverse outcomes. Most studies related to this aspect have been conducted in preterm infants or term babies with pulmonary pathology. Introduction: Congenital heart diseases may also require careful oxygenation control and management of oxygen supply. Problem: Presurgical stabilization of complex heart diseases (CHD) may be difficult, especially after the physiological decrease of pulmonary resistance, which generates pulmonary edema (due to overcirculation) and systemic hypoperfusion. Several strategies have been described to "
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.3121,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2073731382",
+              "title": "Obstructive sleep apnea and endothelial progenitor cells",
+              "doi": "https://doi.org/10.2147/ppa.s51562",
+              "year": "2013",
+              "distance": 0.3139,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Intermittent hypoxia cycles and sleep fragmentation are major pathophysiologic characters of OSA. Intermittent hypoxia acts as a trigger of oxidative stress, systemic inflammation, and sympathetic activation. Sleep fragmentation is associated with a burst of sympathetic activation and systemic inflammation. In most studies, a reduction in circulating EPCs has emerged. The possible mechanisms underlying the decrease in the number or function of EPCs include prolonged inflammation response, oxidative stress, increased sympathetic activation, physiological adaptive responses of tissue to hypoxia, reduced EPC mobilization, EPC apoptosis, and functional impairment in untreated OSA. Continuous pos"
+            },
+            {
+              "document_id": "W4403545739",
+              "title": "Mitochondrial Stress as a Central Player in the Pathogenesis of Hypoxia-Related Myocardial Dysfunction: New Insights",
+              "doi": "https://doi.org/10.7150/ijms.99359",
+              "year": "2024",
+              "distance": 0.3146,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Hypoxic injury is a critical pathological factor in the development of various cardiovascular diseases, such as congenital heart disease, myocardial infarction, and heart failure. Mitochondrial quality control is essential for protecting cardiomyocytes from hypoxic damage. Under hypoxic conditions, disruptions in mitochondrial homeostasis result in excessive reactive oxygen species (ROS) production, imbalances in mitochondrial dynamics, and initiate pathological processes including oxidative stress, inflammatory responses, and apoptosis. Targeted interventions to enhance mitochondrial quality control, such as coenzyme Q10 and statins, have shown promise in mitigating hypoxia-induced mitochon"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.3164,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W4385837597",
+              "title": "Mitochondria in hypoxic pulmonary hypertension, roles and the potential targets",
+              "doi": "https://doi.org/10.3389/fphys.2023.1239643",
+              "year": "2023",
+              "distance": 0.3166,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Mitochondria are the centrol hub for cellular energy metabolisms. They regulate fuel metabolism by oxygen levels, participate in physiological signaling pathways, and act as oxygen sensors. Once oxygen deprived, the fuel utilizations can be switched from mitochondrial oxidative phosphorylation to glycolysis for ATP production. Notably, mitochondria can also adapt to hypoxia by making various functional and phenotypes changes to meet the demanding of oxygen levels. Hypoxic pulmonary hypertension is a life-threatening disease, but its exact pathgenesis mechanism is still unclear and there is no effective treatment available until now. Ample of evidence indicated that mitochondria play key fact"
+            },
+            {
+              "document_id": "W3141585456",
+              "title": "Molecular Imaging of Hypoxia",
+              "doi": "https://doi.org/10.2967/jnumed.107.045914",
+              "year": "2008",
+              "distance": 0.3185,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Hypoxia, a condition of insufficient O2 to support metabolism, occurs when the vascular supply is interrupted, as in stroke or myocardial infarction, or when a tumor outgrows its vascular supply. When otherwise healthy tissues lose their O2 supply acutely, the cells usually die, whereas when cells gradually become hypoxic, they adapt by up-regulating the production of numerous proteins that promote their survival. These proteins slow the rate of growth, switch the mitochondria to glycolysis, stimulate growth of new vasculature, inhibit apoptosis, and promote metastatic spread. The consequence of these changes is that patients with hypoxic tumors invariably experience poor outcome to treatmen"
+            },
+            {
+              "document_id": "W2063470687",
+              "title": "The Effects of Different Oxygen Concentrations on Recruitment Maneuver During General Anesthesia for Laparoscopic Surgery",
+              "doi": "https://doi.org/10.1097/sle.0000000000000048",
+              "year": "2014",
+              "distance": 0.321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "On the basis of our results, maintaining oxygen concentrations below 100% during RM may be more beneficial in terms of respiratory mechanics and gas exchange."
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "The corpus provides strong and consistent support for the stylized fact. Snippet 3 explicitly states the stylized fact verbatim (G2) with multiple citations, and snippet 1 details a hypoxia-specific allocation hierarchy in which essential maintenance has first priority for O2 inflow. Multiple DEB-framework snippets (5, 6, 7, 10, 11, 12, 14) confirm the general DEB principle that somatic/maintenance costs take top priority in the energy allocation hierarchy and that growth/reproduction are reduced first when energy is limited—directly applicable under hypoxic energy limitation. Snippet 12 describes the optimum/pejus/pessimum continuum culminating in all energy allocated to maintenance. Snippet 2 notes maintenance is fulfilled in priority, though it observes species-specific oxyregulation can buffer effects, which does not contradict the fact. No snippet contradicts the pattern; some (8, 9, 13, 15-18) are topically related but neutral. Overall the evidence is strong and consensus is corroborative."
+          },
+          "n_references": 8,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2164
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2564
+            },
+            "3485": {
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2685
+            },
+            "3365": {
+              "title": "Desforges et al. - 2019 - Quantification of the full lifecycle bioenergetics.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2725
+            },
+            "3267": {
+              "title": "Ren e.a. - 2012 - An ecosystem model for optimising production in in.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2743
+            },
+            "3599": {
+              "title": "Pousse et al. - 2022 - Dynamic energy budget modeling of Atlantic surfcla.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2833
+            },
+            "3453": {
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2872
+            },
+            "3328": {
+              "title": "McFa2015.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2911
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2164,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2564,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2597,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2642,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2685,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "sis of the role of MRD in organismal energy budget must take into account the duration, timing and recovery costs of MRD relative to important life cycle events and stages. Energy metabolism as an integrator of multiple stress impacts The energy dependence of life processes and the inevitable constraint of the rate at which energy can be acquired, assimilated and converted into the biologically usable form creates a basis for the trade-offs between different energy-demanding functions. Typically, basal maintenance costs have high priority in the energy allocation hierarchy because cellular and organismal homeostasis is essential 6 REVIEW Journal of Experimental Biology (2021) 224, jeb236802."
+            },
+            {
+              "document_id": "3365",
+              "title": "Desforges et al. - 2019 - Quantification of the full lifecycle bioenergetics.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2725,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "(2010), with some muskox-speciﬁc modiﬁcations. Starvation occurs when the fraction of mobilized reserves going to somatic maintenance is in- suﬃcient to cover the costs thereof (e.g. < κ p p ˙ ˙ C S). Somatic main- tenance takes priority over all other metabolic processes when this occurs. The deviation in allocation rules is as follows. First, allocation to growth ceases ( = p˙ 0 G ), and somatic maintenance needs are paid by diverting energy from maturation (for juveniles) or the reproduction buﬀer (for adults). Next, if maturation or the reproduction buﬀer be- comes unable to cover somatic maintenance, the missing energy is di- verted directly from the reserves. This process continues unt"
+            },
+            {
+              "document_id": "3267",
+              "title": "Ren e.a. - 2012 - An ecosystem model for optimising production in in.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2743,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": ", whereas mainte- nance depends on biovolume. The energy acquired from feeding is immediately incorporated into reserves from which it is utilised at a ﬁxed fraction of \u0002 for maintenance and growth, while the remaining fraction of 1 − \u0002 is spent on development in juveniles and reproduction in adults. Metabolic maintenance competes for energy with growth but has priority, while development and repro- duction compete with growth plus maintenance at a higher level. If the energy allocation with respect to maintenance and growth is less than maintenance cost, growth stops and maintenance need is met by reducing reproduction. The individual would die when the energy utilisation rate from reserves"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2771,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ction. Furthermore, the delayed energy costs (due to the reinstatement of physiological homeostasis, oxidation of anaerobic end-products or replenishment of depleted energy reserves) can be substantial, as shown by a major (up to 200–500% of the BMR) overshoot of oxygen consumption rates during recovery (Ellington, 1983; Lewis et al., 2007; Maxime et al., 2000; Plambech et al., 2013; Svendsen et al., 2011; Vismann and Hagerman, 1996). The recovery costs after MRD might lead to trade-offs with other energy-demanding fitness-related functions, as shown in a stress-tolerant mammal, the naked mole rat, that enters a transient comatose state during post-hypoxic recovery, ceasing locomotion and ma"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2807,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "nergy conductance parameter (v̇) that controls the reserve mobilization rate, using a rule that reﬂects the organism oxyregulation capacity such as the one used in Aguirre- Velarde et al. (2016). Low oxygen conditions might also aﬀect assim- ilation since it is an oxygen-demanding activity, and a common strategy under hypoxia is to reduce food intake (Wu, 2002). However, our ob- servations suggest a decoupling strategy between food intake and as- similation that might limit the eﬀect of hypoxia on energy intake. The inclusion of those eﬀects of hypoxia in dynamic energy budget models will help to better predict the consequences of oxygen limitation on growth patterns of benthic aquatic organ"
+            },
+            {
+              "document_id": "3599",
+              "title": "Pousse et al. - 2022 - Dynamic energy budget modeling of Atlantic surfcla.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2833,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "tenance costs (ṗM). Those costs correspond to the energy that an organism needs to “stay alive,” and thus have priority over somatic tissue growth; energy above this is available for somatic growth. Somatic maintenance energy is used, for example, for cell renewal, maintaining homeostasis or muscle tension. The other fraction (1-κ) of energy mobilized from reserves is allocated either to maturation in juveniles or reproduction (ṗR) in adults, and maturity maintenance processes (ṗJ). Accordingly, as is the case for somatic maintenance costs, maturity maintenance has priority over the energy allocated to maturation/reproduction. When energy acquisition cannot meet maintenance costs, energy is "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2845,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "ry (albeit not sufficient) prerequisite for the organism’s ability to carry out other fitness-related functions. Some exceptions occur when basal maintenance is sacrificed for the benefit of other functions such reproduction in terminal breeders (Junghanns et al., 2019; Royle et al., 2012) or activity to escape an immediate threat (Haideret al., 2018; Haideret al., 2019; Husak et al., 2016). However, such priority reversals are not sustainable and eventually lead to mortality. For the most part of an organism’s life cycle, the energy costs of basal maintenance constitute a top allocation priority. Under the conditions close to the species’ optimum, selection acts to reduce the maintenance co"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2872,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "its environment. Because the energetic burden to an individual is a continuum dependent on the severity and duration of the environmental perturbation, some of the literature describing organismal energy homeostasis demarcates organismal ener- getic status: “optimum” describes individuals with sufﬁcient energetic capacity to cover basal maintenance costs as well as growth, reproduction, and activity; “pejus” (Latin for “worse”) describes individuals with reduced energy allocation to nones- sential processes due to elevated maintenance costs and/or reduced metabolic scope; and “pessimum” (Latin for “worst”) describes individuals that allocate all available energy to maintenance costs (Frederi"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2891,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "rimental Biology (2021) 224, jeb236802. doi:10.1242/jeb.236802 Journal of Experimental Biology [Page 8] effects at different levels of biological organization. Analysis of energy budgets provides an ideal mechanistic tool to overcome this challenge, as energy investment is involved in the functional and structural responses to stressors at all levels of biological organization, from molecular interactions inside the cell to the nutrient cycles and trophic webs (Segner et al., 2014). Despite the MRD Normal range Environmental conditions SMR SFS SFP Wmax Basal metabolic costs Optimum O Pj Ps L A WO2 SMR SMR SMR SMR WGl MRD No MRD SMR SFP SFP SFP~0 SFP>>0 SFP>0 Optimum Pejus Pessimum Lethal ED "
+            },
+            {
+              "document_id": "3328",
+              "title": "McFa2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2911,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "e and overhead costs of growth. Once maintenance is paid, energy may be allocated to growth and if maintenance costs are higher than κ, growth will cease. The remainder of the energy mobilized from reserves (1-κ) is allocated to maturation in juveniles and reproduction (gametes) in adults, with a priority given to maturity maintenance costs, which include maintaining the level of maturity, overheads of gamete production and metabolic costs of spawning. While these two metabolic processes are separated in the model, they share similarities and are both strongly influenced by temperature and functional response. Under conditions of severe nutrient limitation or starvation, energy may be taken "
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2913,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "of offspring. The two pathways of energy allocation are usually referred to as “maintenance energy” (Brody 1945) and “productivity”. Productivity, as defined here, is equivalent to the net primary productivity of plants or the secondary productivity of consumers in Odum’s (1959) terminology. The energy allocated to maintenance is dissipated as heat to outer space; the energy allocated to productivity is stored in organic matter and becomes available to other organisms in the food web. These two possible pathways of energy compete for the common supply of assimilated energy. By the law of requisite variety, it follows that in a relatively more stable environment, less energy is needed for reg"
+            },
+            {
+              "document_id": "3532",
+              "title": "Mauritsson - 2020 - EFFECTS OF PCB ON THE POPULATION GROWTH RATE OF BA.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2932,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ding and maintenance costs. Reserves drive metabolism and consists of matter that is immediately available for somatic maintenance, development and reproduction. Reserves are divided into energy reserves and reproductive buffer. Energy reserves include tissues that store energy for growth and somatic maintenance. Reproductive buffer is the energy stored for reproduction. Individuals are characterized by a description of their structure, energy reserves, reproductive buffer and maturity. Maturity is a state variable that regulates transitions between the three life stages; embryo, juvenile and adult (Kooijman, 2000). An embryo does not [Page 20] 14 feed and allocates no energy to reproduction"
+            },
+            {
+              "document_id": "2667",
+              "title": "Serpa et al. - 2013 - Modelling the growth of white seabream (Diplodus s.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2936,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "the energy mobilization rate. The rate at which energy is mobilized from the reserves and is allocated to somatic maintenance and growth (κ fraction) and to development or reproduction (1−κ), may be calculated according to the following equation (Kooijman, 2000): _pC ¼ E ½ \u0003 EG ½ \u0003 þ κ E ½ \u0003 _pAm f g EG ½ \u0003V 2=3 Em ½ \u0003 þ _pM ½ \u0003V ! k T ð Þ ð9Þ where [E] stands for reserve density ([E]=E/V, J cm−3), [EG] is the volume-speciﬁc costs for structural growth (J cm−3), κ is the fraction of energy spent on soma (i.e. somatic maintenance plus growth), [Em] is the maximum energy density in the reserve compartment (J cm−3), _pM ½ \u0003 is the volume-speciﬁc costs for maintenance (J cm−3 d−1) and V is the s"
+            },
+            {
+              "document_id": "3742",
+              "title": "Heininger - 2022 - Aging is selected for, adaptive, and programmed. 1.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2942,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "lenge which must be countered by an appropriate corrective response of the organism (Connell & Orias 1964). Thus the amount and variety of regulatory activity required for maintenance of the steady state is dictated by the environment. This concept was formalized by Ashby (1958) as the \"Law of Requisite Variety,\" which states that for maximum stability, the variety of homeostatic responses required in any system is equal to the variety of environmental challenges offered to it (see Heininger 2015a). The maintenance of life requires the assimilation of a continual supply of energy. Some of this assimilated energy is used in regulatory activities, while the remaining portion is used for reprod"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the snippets directly address the DEB-specific claim that energy allocation is reprioritized to first pay somatic/maintenance costs under hypoxia. Several snippets (2, 4, 6, 10, 13) describe organismal/cellular responses to hypoxia including metabolic reorganization, suppression of growth/feeding/activity, and a switch to glycolysis to maintain energy provision, which are broadly consistent with the idea of prioritizing survival/maintenance over growth, but they are mechanistic or descriptive rather than evidence of the specific allocation hierarchy in DEB terms. Most snippets are clinical, mammalian, or off-topic (retina, neonatology, sleep apnea, anesthesia) and bear little on the fact. There is no contradicting evidence, but support is weak and indirect, so evidence_strength is low and consensus is insufficient to confirm the precise stylized fact."
+          },
+          "n_references": 4,
+          "references": {
+            "W28992421": {
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3058
+            },
+            "W4382196235": {
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.308
+            },
+            "W2593050815": {
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3121
+            },
+            "W4385837597": {
+              "title": "Mitochondria in hypoxic pulmonary hypertension, roles and the potential targets",
+              "doi": "https://doi.org/10.3389/fphys.2023.1239643",
+              "year": "2023",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.3166
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2813,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.3058,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W3185378999",
+              "title": "Hypoxia Signaling in Parkinson’s Disease: There Is Use in Asking “What HIF?”",
+              "doi": "https://doi.org/10.3390/biology10080723",
+              "year": "2021",
+              "distance": 0.3071,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Hypoxia is a condition characterized by insufficient tissue oxygenation, which results in impaired oxidative energy production. A reduction in cellular oxygen levels induces the stabilization of hypoxia inducible factor α (HIF-1α), master regulator of the molecular response to hypoxia, involved in maintaining cellular homeostasis and driving hypoxic adaptation through the control of gene expression. Due to its high energy requirement, the brain is particularly vulnerable to oxygen shortage. Thus, hypoxic injury can cause significant metabolic changes in neural cell populations, which are associated with neurodegeneration. Recent evidence suggests that regulating HIF-1α may ameliorate the cel"
+            },
+            {
+              "document_id": "W4382196235",
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "distance": 0.308,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Reduced oxygen availability (hypoxia) can lead to cell and organ damage. Therefore, aerobic species depend on efficient mechanisms to counteract detrimental consequences of hypoxia. Hypoxia inducible factors (HIFs) and mitochondria are integral components of the cellular response to hypoxia and coordinate both distinct and highly intertwined adaptations. This leads to reduced dependence on oxygen, improved oxygen supply, maintained energy provision by metabolic remodeling and tapping into alternative pathways and increased resilience to hypoxic injuries. On one hand, many pathologies are associated with hypoxia and hypoxia can drive disease progression, for example in many cancer and neurolo"
+            },
+            {
+              "document_id": "W4281637853",
+              "title": "Hypoxic Gas Therapy in Neonatology: Considerations in Practice",
+              "doi": "https://doi.org/10.2174/1570163819666220520112220",
+              "year": "2022",
+              "distance": 0.3106,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Background: Adequate oxygenation is essential for sick newborns. Each disease determines the target of oxygenation. Nevertheless, hyperoxia and hypoxia are related to adverse outcomes. Most studies related to this aspect have been conducted in preterm infants or term babies with pulmonary pathology. Introduction: Congenital heart diseases may also require careful oxygenation control and management of oxygen supply. Problem: Presurgical stabilization of complex heart diseases (CHD) may be difficult, especially after the physiological decrease of pulmonary resistance, which generates pulmonary edema (due to overcirculation) and systemic hypoperfusion. Several strategies have been described to "
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.3121,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2073731382",
+              "title": "Obstructive sleep apnea and endothelial progenitor cells",
+              "doi": "https://doi.org/10.2147/ppa.s51562",
+              "year": "2013",
+              "distance": 0.3139,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Intermittent hypoxia cycles and sleep fragmentation are major pathophysiologic characters of OSA. Intermittent hypoxia acts as a trigger of oxidative stress, systemic inflammation, and sympathetic activation. Sleep fragmentation is associated with a burst of sympathetic activation and systemic inflammation. In most studies, a reduction in circulating EPCs has emerged. The possible mechanisms underlying the decrease in the number or function of EPCs include prolonged inflammation response, oxidative stress, increased sympathetic activation, physiological adaptive responses of tissue to hypoxia, reduced EPC mobilization, EPC apoptosis, and functional impairment in untreated OSA. Continuous pos"
+            },
+            {
+              "document_id": "W4403545739",
+              "title": "Mitochondrial Stress as a Central Player in the Pathogenesis of Hypoxia-Related Myocardial Dysfunction: New Insights",
+              "doi": "https://doi.org/10.7150/ijms.99359",
+              "year": "2024",
+              "distance": 0.3146,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Hypoxic injury is a critical pathological factor in the development of various cardiovascular diseases, such as congenital heart disease, myocardial infarction, and heart failure. Mitochondrial quality control is essential for protecting cardiomyocytes from hypoxic damage. Under hypoxic conditions, disruptions in mitochondrial homeostasis result in excessive reactive oxygen species (ROS) production, imbalances in mitochondrial dynamics, and initiate pathological processes including oxidative stress, inflammatory responses, and apoptosis. Targeted interventions to enhance mitochondrial quality control, such as coenzyme Q10 and statins, have shown promise in mitigating hypoxia-induced mitochon"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.3164,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W4385837597",
+              "title": "Mitochondria in hypoxic pulmonary hypertension, roles and the potential targets",
+              "doi": "https://doi.org/10.3389/fphys.2023.1239643",
+              "year": "2023",
+              "distance": 0.3166,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.4,
+              "text": "Mitochondria are the centrol hub for cellular energy metabolisms. They regulate fuel metabolism by oxygen levels, participate in physiological signaling pathways, and act as oxygen sensors. Once oxygen deprived, the fuel utilizations can be switched from mitochondrial oxidative phosphorylation to glycolysis for ATP production. Notably, mitochondria can also adapt to hypoxia by making various functional and phenotypes changes to meet the demanding of oxygen levels. Hypoxic pulmonary hypertension is a life-threatening disease, but its exact pathgenesis mechanism is still unclear and there is no effective treatment available until now. Ample of evidence indicated that mitochondria play key fact"
+            },
+            {
+              "document_id": "W3141585456",
+              "title": "Molecular Imaging of Hypoxia",
+              "doi": "https://doi.org/10.2967/jnumed.107.045914",
+              "year": "2008",
+              "distance": 0.3185,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Hypoxia, a condition of insufficient O2 to support metabolism, occurs when the vascular supply is interrupted, as in stroke or myocardial infarction, or when a tumor outgrows its vascular supply. When otherwise healthy tissues lose their O2 supply acutely, the cells usually die, whereas when cells gradually become hypoxic, they adapt by up-regulating the production of numerous proteins that promote their survival. These proteins slow the rate of growth, switch the mitochondria to glycolysis, stimulate growth of new vasculature, inhibit apoptosis, and promote metastatic spread. The consequence of these changes is that patients with hypoxic tumors invariably experience poor outcome to treatmen"
+            },
+            {
+              "document_id": "W2063470687",
+              "title": "The Effects of Different Oxygen Concentrations on Recruitment Maneuver During General Anesthesia for Laparoscopic Surgery",
+              "doi": "https://doi.org/10.1097/sle.0000000000000048",
+              "year": "2014",
+              "distance": 0.321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "On the basis of our results, maintaining oxygen concentrations below 100% during RM may be more beneficial in terms of respiratory mechanics and gas exchange."
+            },
+            {
+              "document_id": "W3197956234",
+              "title": "AMPK–mTOR Signaling and Cellular Adaptations in Hypoxia",
+              "doi": "https://doi.org/10.3390/ijms22189765",
+              "year": "2021",
+              "distance": 0.3219,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Cellular energy is primarily provided by the oxidative degradation of nutrients coupled with mitochondrial respiration, in which oxygen participates in the mitochondrial electron transport chain to enable electron flow through the chain complex (I–IV), leading to ATP production. Therefore, oxygen supply is an indispensable chapter in intracellular bioenergetics. In mammals, oxygen is delivered by the bloodstream. Accordingly, the decrease in cellular oxygen level (hypoxia) is accompanied by nutrient starvation, thereby integrating hypoxic signaling and nutrient signaling at the cellular level. Importantly, hypoxia profoundly affects cellular metabolism and many relevant physiological reactio"
+            },
+            {
+              "document_id": "W2222900072",
+              "title": "Silk moth larvae suffer more than pupae in heat",
+              "doi": "https://doi.org/10.1242/jeb.125187",
+              "year": "2015",
+              "distance": 0.3233,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Striking a deal with the environment, ectotherms have come up with a low-cost lifestyle compromise by hitching their body temperature to that of their surroundings. However, as climate change takes a grip and the equilibrium begins shifting, this compromise may come unstuck if conditions become uncomfortably hot. Leigh Boardman and John Terblanche from Stellenbosch University, South Africa, explain that as temperatures rise, aquatic ectotherms are unable to meet the oxygen demands of their warmer bodies, but it wasn't clear whether insects suffered the same fate. Knowing that oxygen availability should alter the thermal tolerance of animals if it is the factor limiting their ability to adapt"
+            },
+            {
+              "document_id": "W1995546118",
+              "title": "Adaptation of Red Blood Cell Function to Hypoxia and Temperature in Ectothermic Vertebrates",
+              "doi": "https://doi.org/10.1093/icb/20.1.163",
+              "year": "1980",
+              "distance": 0.3238,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "function in adaptations of ectothermic ver? tebrates to hypoxia and temperature. The term adaptation, as used in this ar? ticle, means an alteration of physiological function which compensates for a stressful environmental or organismic factor. Two such factors of paramount importance to ectothermic vertebrates are temperature and availability. The physiological function to be examined in terms of adapt? ability is transport by blood from the gas exchange surface to the intracel? lular sites of 02 utilization. Hypoxia is best defined as inadequate uptake of 02 by tissues. The cause may be environmental (reduced 02 content and/or partial pressure in the respiratory medi? um) or organismic. In"
+            },
+            {
+              "document_id": "W3133657576",
+              "title": "Evolved changes in maternal care in high-altitude native deer mice",
+              "doi": "https://doi.org/10.1242/jeb.235218",
+              "year": "2021",
+              "distance": 0.3254,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT At high altitude (HA), unremitting low oxygen and persistent cold push small mammals close to their metabolic ceilings, leaving limited scope for aerobically demanding activities. However, HA breeding seasons are relatively short and endemic rodents compensate with larger litters than low altitude (LA) conspecifics. Rodent mothers are the sole source of heat and nutrition for altricial offspring and lactation is energetically costly. Thus, it is unclear how HA females balance energy allocation during the nursing period. We hypothesized that HA female rodents invest heavily in each litter to ensure postnatal survival. We measured maternal energetic output and behaviour in nursing dee"
+            },
+            {
+              "document_id": "W1586695636",
+              "title": "Pulmonary Gas Exchange and Acid‐Base Balance During Exercise",
+              "doi": "https://doi.org/10.1002/cphy.c110048",
+              "year": "2013",
+              "distance": 0.3255,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract As the first step in the oxygen‐transport chain, the lung has a critical task: optimizing the exchange of respiratory gases to maintain delivery of oxygen and the elimination of carbon dioxide. In healthy subjects, gas exchange, as evaluated by the alveolar‐to‐arterial P O 2 difference ( A ‐ a DO 2 ), worsens with incremental exercise, and typically reaches an A ‐ a DO 2 of approximately 25 mmHg at peak exercise. While there is great individual variability, A ‐ a DO 2 is generally largest at peak exercise in subjects with the highest peak oxygen consumption. Inert gas data has shown that the increase in A ‐ a DO 2 is explained by decreased ventilation‐perfusion matching, and the dev"
+            },
+            {
+              "document_id": "W2753797980",
+              "title": "Non-Mammalian Vertebrates: Distinct Models to Assess the Role of Ion Gradients in Energy Expenditure",
+              "doi": "https://doi.org/10.3389/fendo.2017.00224",
+              "year": "2017",
+              "distance": 0.3261,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Animals store metabolic energy as electrochemical gradients. At least 50% of mammalian energy is expended to maintain electrochemical gradients across the inner mitochondrial membrane (H<sup>+</sup>), the sarcoplasmic reticulum (Ca<sup>++</sup>), and the plasma membrane (Na<sup>+</sup>/K<sup>+</sup>). The potential energy of these gradients can be used to perform work (e.g., transport molecules, stimulate contraction, and release hormones) or can be released as heat. Because ectothermic species adapt their body temperature to the environment, they are not constrained by energetic demands that are required to maintain a constant body temperature. In fact, ectothermic species expend seven to e"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 3,
+            "consensus_direction": 3,
+            "rationale": "Multiple snippets directly and clearly support the stylized fact. Snippet [3] explicitly states the fact (G2: energy allocation reprioritized to first pay maintenance costs under hypoxia) with citations, and [1] details a DEB-consistent priority scheme where essential maintenance gets first claim on O2 inflow. Core DEB modeling snippets [6, 7, 10] confirm maintenance has priority in the allocation hierarchy with energy diverted from growth/reproduction when acquisition is insufficient. Sokolova [5, 11] and Goodchild [12] further corroborate that basal maintenance is a top allocation priority across stress conditions, noting that priority reversals are unsustainable. Snippet [2] is consistent (maintenance fulfilled in priority) though it observes compensation mechanisms. No snippets contradict the fact; the medical/cellular hypoxia snippets [13-24] are off-topic. Overall the corpus strongly corroborates the stylized fact."
+          },
+          "n_references": 7,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 3,
+              "contradicts": 0,
+              "best_distance": 0.2164
+            },
+            "3049": {
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2564
+            },
+            "3485": {
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.2685
+            },
+            "3365": {
+              "title": "Desforges et al. - 2019 - Quantification of the full lifecycle bioenergetics.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2725
+            },
+            "3267": {
+              "title": "Ren e.a. - 2012 - An ecosystem model for optimising production in in.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2743
+            },
+            "3599": {
+              "title": "Pousse et al. - 2022 - Dynamic energy budget modeling of Atlantic surfcla.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2833
+            },
+            "3453": {
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2872
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2164,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2564,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "he reserve mobilization ﬂux is aﬀected, energy available for growth and reproduction might be com- promised considering that the costs of maintenance are fulﬁlled in priority (Kooijman, 2010). Nevertheless, we observed comparable weight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fed treatments. This result suggests that physiological/metabolic mechan- isms allowing the regulation of oxygen consumption e.g. increased ventilation, heart rhythm and/or oxygen transport eﬃciency (Brand and Morris, 1984; Wu, 2002) in relation with the high oxyregulation capacity of A. purpuratus (Aguirre-Velarde et al., 2016), might reduce the eﬀect of low oxygen conditions on reserve mobilization ﬂow."
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2597,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2642,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "derived from food is required for maintenance when food ingestion is very limited, even stopped, and the animal mostly lives on energy reserves: there is a reduced aerobic scope, so the cost for processing food (SDA) is not overcast. Moreover increased ventilation cost during digestion under low oxygenation levels could reduce conversion efficiency (Chabot and Claireaux, 2008). Organisms may respond to hypoxia conditions by behavioural compensation, leading to escape from hypoxic water, or to a reduction of the activity and thus limiting energy and O2 consumption (Herreid II, 1980; Schurmann and Steffensen, 1997; Wei et al., 2009). These behaviours can change energy expenditure for activity "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2685,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "sis of the role of MRD in organismal energy budget must take into account the duration, timing and recovery costs of MRD relative to important life cycle events and stages. Energy metabolism as an integrator of multiple stress impacts The energy dependence of life processes and the inevitable constraint of the rate at which energy can be acquired, assimilated and converted into the biologically usable form creates a basis for the trade-offs between different energy-demanding functions. Typically, basal maintenance costs have high priority in the energy allocation hierarchy because cellular and organismal homeostasis is essential 6 REVIEW Journal of Experimental Biology (2021) 224, jeb236802."
+            },
+            {
+              "document_id": "3365",
+              "title": "Desforges et al. - 2019 - Quantification of the full lifecycle bioenergetics.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2725,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "(2010), with some muskox-speciﬁc modiﬁcations. Starvation occurs when the fraction of mobilized reserves going to somatic maintenance is in- suﬃcient to cover the costs thereof (e.g. < κ p p ˙ ˙ C S). Somatic main- tenance takes priority over all other metabolic processes when this occurs. The deviation in allocation rules is as follows. First, allocation to growth ceases ( = p˙ 0 G ), and somatic maintenance needs are paid by diverting energy from maturation (for juveniles) or the reproduction buﬀer (for adults). Next, if maturation or the reproduction buﬀer be- comes unable to cover somatic maintenance, the missing energy is di- verted directly from the reserves. This process continues unt"
+            },
+            {
+              "document_id": "3267",
+              "title": "Ren e.a. - 2012 - An ecosystem model for optimising production in in.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2743,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": ", whereas mainte- nance depends on biovolume. The energy acquired from feeding is immediately incorporated into reserves from which it is utilised at a ﬁxed fraction of \u0002 for maintenance and growth, while the remaining fraction of 1 − \u0002 is spent on development in juveniles and reproduction in adults. Metabolic maintenance competes for energy with growth but has priority, while development and repro- duction compete with growth plus maintenance at a higher level. If the energy allocation with respect to maintenance and growth is less than maintenance cost, growth stops and maintenance need is met by reducing reproduction. The individual would die when the energy utilisation rate from reserves"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2771,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "ction. Furthermore, the delayed energy costs (due to the reinstatement of physiological homeostasis, oxidation of anaerobic end-products or replenishment of depleted energy reserves) can be substantial, as shown by a major (up to 200–500% of the BMR) overshoot of oxygen consumption rates during recovery (Ellington, 1983; Lewis et al., 2007; Maxime et al., 2000; Plambech et al., 2013; Svendsen et al., 2011; Vismann and Hagerman, 1996). The recovery costs after MRD might lead to trade-offs with other energy-demanding fitness-related functions, as shown in a stress-tolerant mammal, the naked mole rat, that enters a transient comatose state during post-hypoxic recovery, ceasing locomotion and ma"
+            },
+            {
+              "document_id": "3049",
+              "title": "AguiJean2018.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2807,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "nergy conductance parameter (v̇) that controls the reserve mobilization rate, using a rule that reﬂects the organism oxyregulation capacity such as the one used in Aguirre- Velarde et al. (2016). Low oxygen conditions might also aﬀect assim- ilation since it is an oxygen-demanding activity, and a common strategy under hypoxia is to reduce food intake (Wu, 2002). However, our ob- servations suggest a decoupling strategy between food intake and as- similation that might limit the eﬀect of hypoxia on energy intake. The inclusion of those eﬀects of hypoxia in dynamic energy budget models will help to better predict the consequences of oxygen limitation on growth patterns of benthic aquatic organ"
+            },
+            {
+              "document_id": "3599",
+              "title": "Pousse et al. - 2022 - Dynamic energy budget modeling of Atlantic surfcla.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2833,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "tenance costs (ṗM). Those costs correspond to the energy that an organism needs to “stay alive,” and thus have priority over somatic tissue growth; energy above this is available for somatic growth. Somatic maintenance energy is used, for example, for cell renewal, maintaining homeostasis or muscle tension. The other fraction (1-κ) of energy mobilized from reserves is allocated either to maturation in juveniles or reproduction (ṗR) in adults, and maturity maintenance processes (ṗJ). Accordingly, as is the case for somatic maintenance costs, maturity maintenance has priority over the energy allocated to maturation/reproduction. When energy acquisition cannot meet maintenance costs, energy is "
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2845,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ry (albeit not sufficient) prerequisite for the organism’s ability to carry out other fitness-related functions. Some exceptions occur when basal maintenance is sacrificed for the benefit of other functions such reproduction in terminal breeders (Junghanns et al., 2019; Royle et al., 2012) or activity to escape an immediate threat (Haideret al., 2018; Haideret al., 2019; Husak et al., 2016). However, such priority reversals are not sustainable and eventually lead to mortality. For the most part of an organism’s life cycle, the energy costs of basal maintenance constitute a top allocation priority. Under the conditions close to the species’ optimum, selection acts to reduce the maintenance co"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2872,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "its environment. Because the energetic burden to an individual is a continuum dependent on the severity and duration of the environmental perturbation, some of the literature describing organismal energy homeostasis demarcates organismal ener- getic status: “optimum” describes individuals with sufﬁcient energetic capacity to cover basal maintenance costs as well as growth, reproduction, and activity; “pejus” (Latin for “worse”) describes individuals with reduced energy allocation to nones- sential processes due to elevated maintenance costs and/or reduced metabolic scope; and “pessimum” (Latin for “worst”) describes individuals that allocate all available energy to maintenance costs (Frederi"
+            },
+            {
+              "document_id": "W2032801058",
+              "title": "Inner Retinal Oxygen Delivery and Metabolism Under Normoxia and Hypoxia in Rat",
+              "doi": "https://doi.org/10.1167/iovs.13-11887",
+              "year": "2013",
+              "distance": 0.2813,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "DO2_IR and MO2_IR were maintained during moderate hypoxia, but reduced under severe hypoxia, indicating blood flow compensation became insufficient for the reduced oxygen availability. Future studies may aid our understanding of retinal metabolic function in ischemic conditions."
+            },
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.3058,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.45,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W3185378999",
+              "title": "Hypoxia Signaling in Parkinson’s Disease: There Is Use in Asking “What HIF?”",
+              "doi": "https://doi.org/10.3390/biology10080723",
+              "year": "2021",
+              "distance": 0.3071,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Hypoxia is a condition characterized by insufficient tissue oxygenation, which results in impaired oxidative energy production. A reduction in cellular oxygen levels induces the stabilization of hypoxia inducible factor α (HIF-1α), master regulator of the molecular response to hypoxia, involved in maintaining cellular homeostasis and driving hypoxic adaptation through the control of gene expression. Due to its high energy requirement, the brain is particularly vulnerable to oxygen shortage. Thus, hypoxic injury can cause significant metabolic changes in neural cell populations, which are associated with neurodegeneration. Recent evidence suggests that regulating HIF-1α may ameliorate the cel"
+            },
+            {
+              "document_id": "W4382196235",
+              "title": "Environmental and behavioral regulation of HIF-mitochondria crosstalk",
+              "doi": "https://doi.org/10.1016/j.freeradbiomed.2023.06.015",
+              "year": "2023",
+              "distance": 0.308,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Reduced oxygen availability (hypoxia) can lead to cell and organ damage. Therefore, aerobic species depend on efficient mechanisms to counteract detrimental consequences of hypoxia. Hypoxia inducible factors (HIFs) and mitochondria are integral components of the cellular response to hypoxia and coordinate both distinct and highly intertwined adaptations. This leads to reduced dependence on oxygen, improved oxygen supply, maintained energy provision by metabolic remodeling and tapping into alternative pathways and increased resilience to hypoxic injuries. On one hand, many pathologies are associated with hypoxia and hypoxia can drive disease progression, for example in many cancer and neurolo"
+            },
+            {
+              "document_id": "W4281637853",
+              "title": "Hypoxic Gas Therapy in Neonatology: Considerations in Practice",
+              "doi": "https://doi.org/10.2174/1570163819666220520112220",
+              "year": "2022",
+              "distance": 0.3106,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Background: Adequate oxygenation is essential for sick newborns. Each disease determines the target of oxygenation. Nevertheless, hyperoxia and hypoxia are related to adverse outcomes. Most studies related to this aspect have been conducted in preterm infants or term babies with pulmonary pathology. Introduction: Congenital heart diseases may also require careful oxygenation control and management of oxygen supply. Problem: Presurgical stabilization of complex heart diseases (CHD) may be difficult, especially after the physiological decrease of pulmonary resistance, which generates pulmonary edema (due to overcirculation) and systemic hypoperfusion. Several strategies have been described to "
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.3121,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2073731382",
+              "title": "Obstructive sleep apnea and endothelial progenitor cells",
+              "doi": "https://doi.org/10.2147/ppa.s51562",
+              "year": "2013",
+              "distance": 0.3139,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Intermittent hypoxia cycles and sleep fragmentation are major pathophysiologic characters of OSA. Intermittent hypoxia acts as a trigger of oxidative stress, systemic inflammation, and sympathetic activation. Sleep fragmentation is associated with a burst of sympathetic activation and systemic inflammation. In most studies, a reduction in circulating EPCs has emerged. The possible mechanisms underlying the decrease in the number or function of EPCs include prolonged inflammation response, oxidative stress, increased sympathetic activation, physiological adaptive responses of tissue to hypoxia, reduced EPC mobilization, EPC apoptosis, and functional impairment in untreated OSA. Continuous pos"
+            },
+            {
+              "document_id": "W4403545739",
+              "title": "Mitochondrial Stress as a Central Player in the Pathogenesis of Hypoxia-Related Myocardial Dysfunction: New Insights",
+              "doi": "https://doi.org/10.7150/ijms.99359",
+              "year": "2024",
+              "distance": 0.3146,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Hypoxic injury is a critical pathological factor in the development of various cardiovascular diseases, such as congenital heart disease, myocardial infarction, and heart failure. Mitochondrial quality control is essential for protecting cardiomyocytes from hypoxic damage. Under hypoxic conditions, disruptions in mitochondrial homeostasis result in excessive reactive oxygen species (ROS) production, imbalances in mitochondrial dynamics, and initiate pathological processes including oxidative stress, inflammatory responses, and apoptosis. Targeted interventions to enhance mitochondrial quality control, such as coenzyme Q10 and statins, have shown promise in mitigating hypoxia-induced mitochon"
+            },
+            {
+              "document_id": "W1550353890",
+              "title": "Ascites Syndrome in Broiler Chickens - A Physiological Syndrome Affected by Red Blood Cell",
+              "doi": "https://doi.org/10.5772/48307",
+              "year": "2012",
+              "distance": 0.3164,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Reduced oxygen availability to the tissues (hypoxia) poses numerous challenges to animal life. Hypoxia occurs as a result of diminished partial pressure of oxygen, such as occurs with increasing altitude, or reduced oxygen percentage in the air capillaries of the lung. The oxygen partial pressure drops by approximately 7 mm Hg, i.e, approximately 2.5% in the case of atmospheric oxygen, for each 1,000 m increase in altitude, and thereby reduces the amount of oxygen available to the hemoglobin in red blood cells as blood passes through the lung."
+            },
+            {
+              "document_id": "W4385837597",
+              "title": "Mitochondria in hypoxic pulmonary hypertension, roles and the potential targets",
+              "doi": "https://doi.org/10.3389/fphys.2023.1239643",
+              "year": "2023",
+              "distance": 0.3166,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Mitochondria are the centrol hub for cellular energy metabolisms. They regulate fuel metabolism by oxygen levels, participate in physiological signaling pathways, and act as oxygen sensors. Once oxygen deprived, the fuel utilizations can be switched from mitochondrial oxidative phosphorylation to glycolysis for ATP production. Notably, mitochondria can also adapt to hypoxia by making various functional and phenotypes changes to meet the demanding of oxygen levels. Hypoxic pulmonary hypertension is a life-threatening disease, but its exact pathgenesis mechanism is still unclear and there is no effective treatment available until now. Ample of evidence indicated that mitochondria play key fact"
+            },
+            {
+              "document_id": "W3141585456",
+              "title": "Molecular Imaging of Hypoxia",
+              "doi": "https://doi.org/10.2967/jnumed.107.045914",
+              "year": "2008",
+              "distance": 0.3185,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "Hypoxia, a condition of insufficient O2 to support metabolism, occurs when the vascular supply is interrupted, as in stroke or myocardial infarction, or when a tumor outgrows its vascular supply. When otherwise healthy tissues lose their O2 supply acutely, the cells usually die, whereas when cells gradually become hypoxic, they adapt by up-regulating the production of numerous proteins that promote their survival. These proteins slow the rate of growth, switch the mitochondria to glycolysis, stimulate growth of new vasculature, inhibit apoptosis, and promote metastatic spread. The consequence of these changes is that patients with hypoxic tumors invariably experience poor outcome to treatmen"
+            },
+            {
+              "document_id": "W2063470687",
+              "title": "The Effects of Different Oxygen Concentrations on Recruitment Maneuver During General Anesthesia for Laparoscopic Surgery",
+              "doi": "https://doi.org/10.1097/sle.0000000000000048",
+              "year": "2014",
+              "distance": 0.321,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "On the basis of our results, maintaining oxygen concentrations below 100% during RM may be more beneficial in terms of respiratory mechanics and gas exchange."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

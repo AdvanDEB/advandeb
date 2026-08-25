@@ -1,0 +1,1520 @@
+{
+  "sf_id": "chl_03",
+  "category": "Chlorophyll",
+  "statement": "Chlorophyll concentration increases with dilution rate in nutrient limiting conditions.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Several DEB excerpts (snippets 1, 3, and 12) explicitly state or derive that chlorophyll concentration (or chl:C ratio) rises with dilution rate under nutrient‑limited conditions, providing direct supportive evidence. One source (snippet 2) reports a decrease in chlorophyll quota due to dilution in nitrogen‑limited cultures, which contradicts the stylized fact but is limited in scope and relevance. The remaining snippets either discuss unrelated processes or mention dilution without linking it to chlorophyll concentration, contributing little to the question. Overall, the corpus contains moderate but clear support outweighing the isolated contradictory claim, leading to a moderate evidence strength and a consensus that the stylized fact is corroborated."
+          },
+          "n_references": 2,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1812
+            },
+            "2939": {
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 1,
+              "best_distance": 0.206
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1812,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.206,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "3306",
+              "title": "WijsDede2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2175,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "hyll-a concentration. Solid lines are for a PIM concentration of 10 mg l-1 and broken lines are for a PIM concentration of 100 mg l-1. In Figure 25, it can be seen that the ingestion rate of chlorophyll increases with increasing chlorophyll-a concentration. The shape of the curve corresponds to the shape of the scaled functional response (Figure 21) and the effect of inorganic particles on the shape of the curve is the same. 0 5 10 15 20 0.5 1.0 1.5 2.0 Clearance rate Chla (µg l−1) Clearance rate (l hr −1) 0 5 10 15 20 0 10 20 30 40 50 Filtration rate Chla (µg l−1) Filtration rate PIM (mg hr −1) 0 5 10 15 20 0 2 4 6 8 Ingestion rate Chla (µg l −1) Ingestion rate PIM (mg hr −1) 0 5 10 15 20 0"
+            },
+            {
+              "document_id": "2938",
+              "title": "Zonn96b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2189,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "l quotas of limiting and non-limiting nutrient vary in proportion to each other (with the dilution rate) if the concentration of the non- limiting nutrient in the external environment is saturating. The ratio of the cell quotas is given by Ql Qn = [Gl] + [ ˆNl] [Gn] + [ ˆNn] = [Am l ] ˆfn[Am n ] , (17) which identity is obtained after insertion of equations (12) and (16). If the concentration of non-limiting nutrient is saturating, the ratio of cell quotas equals the ratio of the maximum uptake rates. Figure 2 shows the relationship between the cell quotas of the two nutrients, based on the analysis in the previous section. The shaded area represents the set of all possible steady state valu"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2217,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2259,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "release rate increases (Fig. 7, dash-dot lines). The decrease in PP rate is due to the effects of nutrient limitation on the photosynthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase (Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash- dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10 than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of the jDOC,R ﬂux (Fig. 6, solid line) and it is indicative of"
+            },
+            {
+              "document_id": "3146",
+              "title": "LarsFilg2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2312,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "tion. Both ﬁltration and respiration rates in SFG are dependent on body dry weight following allometric relationships, which are empiri- cally determined, and consequently, SFG application is limited to the same environmental conditions in which these relationships were de- termined. BEG does not need calibration; it assumes that the ingestion rate increases linearly with algal concentration because the ﬁltration rate is constant maximum between about 1 and 6 μg chl a L−1, where the upper limit corresponds to saturation above which growth de- creases sharply even though the ingestion rate remains nearly constant (Riisgård et al., 2013b). According to this, the application of BEG to tro- phic"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2352,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2407,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.8,
+              "text": "h the carbon to chlorophyll ratio (right panels). Though they convey the same informa- tion, the impact of parameter values on Chl:C is more easily recognized. Chl:C is proportional to the dilution rate if ah=0 and ap=a0\"0. Such a proportionality has been found in Thalassiosira ﬁn6iatilis Hustedt, for example (Laws and Bannister, 1980). Depend- ing on the parameter values, other patterns may be also be observed. 3.3. Test against data The relevance of the above derived expressions will now be evaluated by comparing them to experimental data. To this end, I choose data on nitrogen-limited Dunaliella tertiolecta Butcher, presented by Goldman and Peavey (1979) and Goldman (1980). These articles"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2408,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "dilution rate. Then culture biomass density will increase. This increase is coupled with a decrease in light intensity everywhere in the ves- sel, caused by shading. Therefore, the specific growth rate decreases until it equals the applied dilution rate. An increase in the D value will lead to a lower steady state biomass density since the light intensity in the ves- sel must increase to make p equal to the new D. An increase in the Iin value will lead to a higher biomass density since the light intensity in the vessel must re- main the same to have no change in p. The reasonable fit to experimental data (Figs. 2 and 3) confirms the cor- rectness of the concept of shading as a regulating fac"
+            },
+            {
+              "document_id": "3305",
+              "title": "Grim2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2426,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "anges. The chlorophyll concentration is adjusted to the photon ﬂux and to the cell capacity of converting it into chemical energy. It has been clearly shown that the carbon to chlorophyll ratio (C/Chla) decreases exponentially with temperature, and Geider [1987] modelled it: C Chla = a −bT + cIe−kT (3.46) where a, b, c, k are constants and I is the light intensity. However, eq. 3.46 isn’t valid anymore when the temperature is higher than the species Topt [Geider, 1987]. This model has thus to be included into a dynamical model where carbon or chlorophyll are state variables. Later, Geider et al. [1998] developed a dynamical model for the whole phytoplank- ton growth. The model deals with the"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2434,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "s observed that the N:C ratio increases with dilution rate 274 when nutrient limited (3, 11, 21) and decreases when light limited (21). Furthermore, the N:C 275 ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276 stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277 the following equation 278 Ntotal Ctotal = nNV · MV + MEN MV + MEC = nNV + mEN 1 + mEC , (17) where nNV is the elemental coefﬁcient of nitrogen in structure and MEi stands for the to- 279 tal mass of reserve i . Equation 17 shows that to assess N:C ratio one should look to the 280 dependence of reserve densities on forcing variables. 281 The"
+            },
+            {
+              "document_id": "3412",
+              "title": "Klein - 2018 - analysis and optimization of ecotoxicological mode.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2443,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "rient levels lead to higher effects on growth (Figure 4.5.11). The higher effects are due to the smaller biomass amount such that the difference between control and treatment is smaller. We have effects smaller than 25 % for the lowest nutrient concentrations up to a safety margin of 5.62, whereas the effect for the highest nutrient concentrations for multiplication factor 1.78 is already 28 %. For the nutrient concentrations yielding a photosynthesis response function value of 0.75 to 0.99 the difference of the effect on growth is relatively small (maximal 6 % for multiplication factor 3.16). We only consider constant nutrient levels. As the nutrient concentration in water is essential for "
+            },
+            {
+              "document_id": "2940",
+              "title": "Zonn98a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.245,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "an equation for the daily carbon-spe- ciﬁc rate of photosynthesis. Two of the quantities in this equation, the maximum instantaneous car- bon speciﬁc rate of photosynthesis and the carbon to chlorophyll ratio, are subsequently considered to depend on the nutrient concentration of the environment (and also on temperature, see be- low). In this approach neither nutrient nor light is exclusively limiting; both nutrient and light simul- taneously affect the rate of photosynthesis. Shuter’s model features a pool of stored nutri- ent, but somehow the size of this pool plays no role in the derivation of the model (Shuter, 1979). He derives an expression for the optimal nutrient uptake rate, based o"
+            },
+            {
+              "document_id": "2719",
+              "title": "Grossowicz et al. - 2017 - A dynamic energy budget (DEB) model to describe po.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2454,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Phytoplankton growth and stoichiometry depend on the avail- ability of multiple nutrients, and limitation of N and P has an impact on stoichiometry (Klausmeier et al., 2008). Klausmeier et al. (2004a) found that a higher N:P ratio is achieved during competitive equilibrium which favors P-poor resource-acquisition machinery, and a low N:P ratio during exponential growth, when there is a greater allocation to P-rich machinery. P-limited environ- ments favor slightly less allocation to assembly than N-limited or light-limited environments (Klausmeier et al., 2004a). In addition, Klausmeier et al. (2004b) found that as the growth rate approaches the maximum growth rate, phytoplankton stoichiomet"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The corpus contains virtually no direct observations linking chlorophyll concentration to dilution rate under nutrient‑limited conditions. Only one abstract (snippet 4) mentions experiments that varied dilution rates in P‑limited semicontinuous cultures, but it reports changes in elemental ratios rather than chlorophyll levels, providing at best indirect relevance. All other snippets discuss nutrient enrichment, pigment measurements, or unrelated topics without reference to dilution rate. Consequently the evidence is weak and insufficient to support or refute the stylized fact, leading to a low evidence strength (1) and a neutral consensus direction (2)."
+          },
+          "n_references": 1,
+          "references": {
+            "W2080700174": {
+              "title": "Phosphate Uptake Rates of Phytoplankton Assemblages Grown at Different Dilution Rates in Semicontinuous Culture",
+              "doi": "https://doi.org/10.1139/f86-184",
+              "year": "1986",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2596
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W1965102064",
+              "title": "Phytoplankton Nutrient Enrichment Experiments off Baja California and in the Eastern Equatorial Pacific Ocean",
+              "doi": "https://doi.org/10.1139/f69-104",
+              "year": "1969",
+              "distance": 0.2308,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Natural phytoplankton populations were enriched with various nutrients both singly and as mixtures. After 4 or 5 days of incubation in natural light, the effects of enrichment were assessed by measuring the rate of 14 C uptake or changes in chlorophyll. Off Baja California, in June 1964, September 1965, and November 1966, increases in chlorophyll or 14 C uptake occurred in treatments containing added nitrate or trace metals. In February 1967, three enrichment experiments done in nutrient-poor water well offshore and both north and south of the Equator showed that nitrogen was the most likely limiting nutrient. In two experiments in equatorial upwelling water, no nutrient appeared to limit ph"
+            },
+            {
+              "document_id": "W2130665185",
+              "title": "Estimating the carbon flux through main phytoplankton groups in the northwestern Mediterranean",
+              "doi": "https://doi.org/10.4319/lo.2005.50.5.1447",
+              "year": "2005",
+              "distance": 0.2501,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "We performed dilution experiments and primary production measurements in surface waters during a cruise in the northwestern Mediterranean Sea in June 2000 to quantify the carbon (C) flux through phytoplankton groups that can be distinguished by their pigment markers. Pigments in the dilution experiments were measured by highpressure liquid chromatography (HPLC). Pigment per cell and synthesis rates of photoprotectant versus light-harvesting pigments indicated that cells did not undergo photoacclimation during the 24-h dilution experiments. Mean chlorophyll a (Chl a) concentration was 0.128 mg m−3, and mean primary production was 4.99 mg of C m−3 d−1. Prymnesiophyceae contributed 51% of the t"
+            },
+            {
+              "document_id": "W2154302398",
+              "title": "Seasonal Variation of Potential Nutrient Limitation to Chlorophyll Production in Southern Lake Huron",
+              "doi": "https://doi.org/10.1139/f81-001",
+              "year": "1981",
+              "distance": 0.2511,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Potential nutrient limitation to chlorophyll production in surface waters of southern Lake Huron was assayed monthly from April to December 1975. Natural phytoplankton assemblage responses to nutrient enrichment were determined from chlorophyll production in laboratory incubations under seasonally varied light and temperature conditions. Experimental treatments included a complete treatment containing P, N, Si, EDTA, vitamins, and trace metals; treatments with deletions from the complete treatment; complete treatments with different P concentrations; and treatments with single nutrient additions. Effects were most pronounced during summer and fall when P, EDTA, FeEDTA, vitamins, and Si were "
+            },
+            {
+              "document_id": "W2080700174",
+              "title": "Phosphate Uptake Rates of Phytoplankton Assemblages Grown at Different Dilution Rates in Semicontinuous Culture",
+              "doi": "https://doi.org/10.1139/f86-184",
+              "year": "1986",
+              "distance": 0.2596,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "We studied the effects of pulsed nutrient supplies on the physiology of natural phytoplankton assemblages. A natural phytoplankton community, from an oligotrophic lake, was grown at several dilution rates from 0.1 to 1.5∙d −1 in P-limited semicontinuous cultures. Particulate C:P and N:P ratios (by atoms) were approximately 300:1 and 50:1, respectively, at the lowest dilution rate and 40:1 and 7:1, respectively, at the highest dilution rate. This demonstrates that a range of P-limited conditions can be established using the semicontinuous culturing technique. The time-course of uptake, in response to a saturating addition of phosphate, revealed that there was a short lag before maximum rates "
+            },
+            {
+              "document_id": "W2091626603",
+              "title": "Nutrient regimes control phytoplankton ecophysiology in the South Atlantic",
+              "doi": "https://doi.org/10.5194/bg-11-463-2014",
+              "year": "2014",
+              "distance": 0.2627,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Abstract. Fast Repetition Rate fluorometry (FRRf) measurements of phytoplankton photophysiology from an across-basin South Atlantic cruise (as part of the GEOTRACES programme) characterised two dominant ecophysiological regimes which were interpreted on the basis of nutrient limitation. South of the South Subtropical Convergence (SSTC) in the northern sub-Antarctic sector of the Antarctic Circumpolar Current (ACC) in the Eastern Atlantic Basin, waters are characterised by elevated chlorophyll concentrations, a dominance by larger phytoplankton cells, and low apparent photochemical efficiency (Fv / Fm). Shipboard 24 h iron (Fe) addition incubation experiments confirmed that Fe stress was prim"
+            },
+            {
+              "document_id": "W1964652340",
+              "title": "Phytoplankton nutrient limitation in a polymictic eutrophic lake: community versus species-specific responses",
+              "doi": "https://doi.org/10.1127/1863-9135/2007/0169-0057",
+              "year": "2007",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Phytoplankton nutrient limitation was examined in polymictic, eutrophic Lake Rotorua. New Zealand using three in situ incubation experiments of 4 to 6 days' duration in summer 2004. Two of the incubations were conducted during stratification, and one immediately after breakdown of stratification. Samples were enriched with ammonium (1 mg NH 4 -N L -1 ), phosphate (0.1 mg PO 4 -P L -1 ) or with both nutrients. A control containing no added nutrients was used for comparison. Phytoplankton responses to nutrient additions were determined at a species level from cell counts and at a community level from changes in chlorophyll-a concentration. Phytoplankton biomass generally responded to N plus P "
+            },
+            {
+              "document_id": "W2017139372",
+              "title": "Phytoplankton community growth-rate response to nutrient pulses in a shallow turbid estuary, Galveston Bay, Texas",
+              "doi": "https://doi.org/10.1093/plankt/fbh035",
+              "year": "2004",
+              "distance": 0.267,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Phytoplankton growth is a physiological process often limited by temperature, nutrients or light, while biomass accumulation is a function of growth rates, grazing and deposition. Although primary productivity measurements are usually used to assess responses to limiting factors, the rates are proportional to biomass and inversely related to grazing pressure during experimental incubations. Alternatively, carbon-specific growth-rate determinations provide insights into physiological responses without the confounding effects of biomass and grazing. The objective of this study was to quantify the growth-rate responses of phytoplankton to enhanced nutrient availability (nitrate and phosphate) o"
+            },
+            {
+              "document_id": "W2781655384",
+              "title": "Konsentrasi Klorofil-a dan Keterkaitannya dengan Nutrient N, P di Perairan Jepara : Studi Perbandingan Perairan Muara Sungai Wiso dan Serang",
+              "doi": "https://doi.org/10.14710/jkt.v20i2.1697",
+              "year": "2017",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The existenece of nutrient is highly affected by human activities and causing the amount of chlorophyll-a which is the indicator of water fertility. Muara Wiso is a location located in the urban center of Jepara while Serang estuary is mostly impacted by agriculture activities in the upper area. This study has compared the concentration of chlrorophyll-a and its association with N and P nutrients in the two different environmental conditions in Jepara waters. Nutrient N was determined as a nitrite ion using the sulphanilamide method after it was reduced using a reduction column. P was determined as orthophosphate using ascorbic acid and chlorophyll-a method which were extracted from water sa"
+            },
+            {
+              "document_id": "W2582886452",
+              "title": "<i>In Vivo</i> Single-Cell Fluorescence and Size Scaling of Phytoplankton Chlorophyll Content",
+              "doi": "https://doi.org/10.1128/aem.03317-16",
+              "year": "2017",
+              "distance": 0.2679,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ABSTRACT In unicellular phytoplankton, the size scaling exponent of chlorophyll content per cell decreases with increasing light limitation. Empirical studies have explored this allometry by combining data from several species, using average values of pigment content and cell size for each species. The resulting allometry thus includes phylogenetic and size scaling effects. The possibility of measuring single-cell fluorescence with imaging-in-flow cytometry devices allows the study of the size scaling of chlorophyll content at both the inter- and intraspecific levels. In this work, the changing allometry of chlorophyll content was estimated for the first time for single phytoplankton populat"
+            },
+            {
+              "document_id": "W2159410991",
+              "title": "Phytoplankton dynamics within the subsurface chlorophyll maximum of Lake Michigan",
+              "doi": "https://doi.org/10.1093/plankt/6.5.751",
+              "year": "1984",
+              "distance": 0.2681,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "The Lake Michigan deep chlorophyll maximum during July 1977 was a broad band of phytoplankton −15 m thick rather than the thin layers observed in smaller lakes. The maximum concentration of chlorophyll was typically four times surface values. 14 C uptake incubations showed that the deep plankton layer was a viable component of the pelagic ecosystem accounting for up to 60% of primary production on an areal (m 2 ) basis. The Lake Michigan chlorophyll maximum was composed primarily of large diatoms, filaxnentous green algae, and flagellates. Although large scale physical processes such as seiches had some effect on the chlorophyll maximum, the basic integrity of the layer was maintained by bio"
+            },
+            {
+              "document_id": "W2026275351",
+              "title": "Time-lag algal growth dynamics: biological constraints on primary production in aquatic environments",
+              "doi": "https://doi.org/10.3354/meps033193",
+              "year": "1986",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Changes in the nutrient regime of phytoplankton cells induce variable time lags before the onset of cell division (quasi-instantaneous response to more than 24 h lags), dependent mainly on the algal species and the magnitude of the nutrient pulse.The latter parameter appears to be a main controlling factor in algal growth dynamics under transient conditions, overriding other variables such as temperature, irradiance and nutritional state.The presence of such phenomena puts intrinsic limits on primary production in a variable nutrient environment because algal cells are not made up of synthetic components only (sensu Williams 1971), but also of structural and genetic material.Under these cond"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.2757,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            },
+            {
+              "document_id": "W2111555895",
+              "title": "Role of Suspended Sediments and Mixing in Reducing Photoinhibition in the Bloom-Forming Cyanobacterium Microcystis",
+              "doi": "https://doi.org/10.4236/jwarp.2012.412119",
+              "year": "2012",
+              "distance": 0.2763,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Toxic cyanobacterial blooms are becoming a global problem. Previous research of cyanobacterial bloom development has examined how high nutrient concentrations promote cyanobacteria dominance, and how positive buoyancy provides an ecological advantage over sinking phytoplankton. Tributaries responsible for loading nutrients into lakes often simultaneously contribute high concentrations of suspended sediments. High concentrations of suspended sediments may also influence blooms by affecting the ambient light climate, reducing photodamage, and increasing the efficiency of photosynthesis. We examined the effects of sediments and vertical mixing in potentially reducing photodamage to Microcystis "
+            },
+            {
+              "document_id": "W2314105371",
+              "title": "The Ratio of Chlorophyll a to b in the Plumule of Nelumbo nucifera",
+              "doi": "https://doi.org/10.15281/jplantres1887.73.398",
+              "year": "1960",
+              "distance": 0.278,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "1. Paper chromatography is useful to some extent for quantitative analysis of chlorophylls.2. The ratio of chlorophyll a to b in the Nelumbo plumule was calculated with the absorbance values at 663 and 645mμ using simultaneous equations.3. In the absorption curve of chlorophyll pigment dissolved in methanol, a shoulder of chlorophyll b at 645mμ did not appear. Calculating the ratio of E 440 to E 470 in the absorption curve of Nelumbo plumule, however, it was found that these ratios became progressively smaller with maturing. It is considered that those ratios have a close correlation with the ratio of chlorophyll a to b.4. In the Nelumbo plumule, the ratio of chlorophyll a to b was considera"
+            },
+            {
+              "document_id": "W2012048107",
+              "title": "Macromolecular labelling patterns and inorganic nutrient limitation of a North Atlantic spring bloom",
+              "doi": "https://doi.org/10.3354/meps092111",
+              "year": "1993",
+              "distance": 0.2798,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Synthesis rates of macromolecular classes (protein, polysaccharide, neutral lipid, glycolipid and phospholipid) were measured using 14C incorporation to assess the physiological condition of phytoplankton during a spring bloon~ in the northeastern Sargasso Sea.The relative allocation of labelled photosynthate to polysaccharide increased with incubation irradiance, and declined overnight; opposite trends were found in the protein fraction.The rate of protein synthesis at night was a small fraction (0 to 23 '%I) of the day-time rate.Incubation irradiance and overnight metabolism had relatively little effect on total or class-specific lipid synthesis.lnorganic nutrients decreased to below analy"
+            },
+            {
+              "document_id": "W2885548870",
+              "title": "Response of Natural Cyanobacteria and Algae Assemblages to a Nutrient Pulse and Elevated Temperature",
+              "doi": "https://doi.org/10.3389/fmicb.2018.01851",
+              "year": "2018",
+              "distance": 0.2798,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "Eutrophication (nutrient over-enrichment) is the primary worldwide water quality issue often leading to nuisance cyanobacterial blooms. Climate change is predicted to cause further rise of cyanobacteria blooms as cyanobacteria can have a competitive advantage at elevated temperatures. We tested the hypothesis that simultaneous rise in nutrients and temperature will promote cyanobacteria more than a single increase in one of the two drivers. To this end, controlled experiments were run with seston from 39 different urban water bodies varying in trophic state from mesotrophic to hypertrophic. These experiments were carried out at two different temperatures, 20°C (ambient) and 25°C (warming sce"
+            },
+            {
+              "document_id": "W2065287103",
+              "title": "INDUCTION OF SPECIFIC PROTEINS IN EUKARYOTIC ALGAE GROWN UNDER IRON‐, PHOSPHORUS‐, OR NITROGEN‐DEFICIENT CONDITIONS<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1993.00767.x",
+              "year": "1993",
+              "distance": 0.2803,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ABSTRACT What limits phytoplankton growth in nature? The answer is elusive because of methodological problems associated with bottle incubations and nutrient addition experiments. We are investigating the possibility that antibodies to proteins repressed by a specific nutrient can be used as probes to indicate which nutrient limits photosynthetic carbon fixation in the ocean. The diatom Phaeodactylum tricornutum Bohlin and the chlorophyte Dunaliella tertiolecta Butcher were grown in batch cultures in artificial seawater and f/2 nutrient lacking either phosphorus, iron, or nitrogen. Chlorosis was induced by nutrient limitation in both species with the exception of phosphorus‐limited D. tertio"
+            },
+            {
+              "document_id": "W2137142035",
+              "title": "Relative addition rate and external concentration; Driving variables used in plant nutrition research",
+              "doi": "https://doi.org/10.1111/1365-3040.ep11611714",
+              "year": "1982",
+              "distance": 0.2813,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Abstract An increasing literature accounting for various types of experiments indicates that far lower external nutrient concentrations are required by plants than is usually thought to be the case. It is concluded that the ion uptake capacity of the roots, as described by the carrier concept, is high compared to that required for maintenance of the internal concentration. Serious errors in experimental conclusions are associated with insufficient and constant nutrient addition rates. The main errors are caused by non‐steady states of the plants both with regard to the internal nutrient concentrations and the relative growth rate. A dynamic concept has been proposed for direct use as the tre"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "Three excerpts (snippets 1, 3, and 12) explicitly state or derive that chlorophyll concentration (or chl:C ratio) rises with increasing dilution rate under nutrient‑limited conditions, providing clear supporting evidence. No snippet offers direct contradictory data; the remaining items either discuss unrelated aspects (e.g., ingestion rates, light limitation) or mention dilution without linking it to chlorophyll levels, so they are treated as neutral. The presence of multiple independent confirmations yields moderate overall support (strength = 2) and a consensus that the stylized fact is corroborated (direction = 3)."
+          },
+          "n_references": 2,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1812
+            },
+            "2939": {
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2407
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1812,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.206,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "3306",
+              "title": "WijsDede2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2175,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "hyll-a concentration. Solid lines are for a PIM concentration of 10 mg l-1 and broken lines are for a PIM concentration of 100 mg l-1. In Figure 25, it can be seen that the ingestion rate of chlorophyll increases with increasing chlorophyll-a concentration. The shape of the curve corresponds to the shape of the scaled functional response (Figure 21) and the effect of inorganic particles on the shape of the curve is the same. 0 5 10 15 20 0.5 1.0 1.5 2.0 Clearance rate Chla (µg l−1) Clearance rate (l hr −1) 0 5 10 15 20 0 10 20 30 40 50 Filtration rate Chla (µg l−1) Filtration rate PIM (mg hr −1) 0 5 10 15 20 0 2 4 6 8 Ingestion rate Chla (µg l −1) Ingestion rate PIM (mg hr −1) 0 5 10 15 20 0"
+            },
+            {
+              "document_id": "2938",
+              "title": "Zonn96b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2189,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "l quotas of limiting and non-limiting nutrient vary in proportion to each other (with the dilution rate) if the concentration of the non- limiting nutrient in the external environment is saturating. The ratio of the cell quotas is given by Ql Qn = [Gl] + [ ˆNl] [Gn] + [ ˆNn] = [Am l ] ˆfn[Am n ] , (17) which identity is obtained after insertion of equations (12) and (16). If the concentration of non-limiting nutrient is saturating, the ratio of cell quotas equals the ratio of the maximum uptake rates. Figure 2 shows the relationship between the cell quotas of the two nutrients, based on the analysis in the previous section. The shaded area represents the set of all possible steady state valu"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2217,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2259,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "release rate increases (Fig. 7, dash-dot lines). The decrease in PP rate is due to the effects of nutrient limitation on the photosynthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase (Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash- dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10 than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of the jDOC,R ﬂux (Fig. 6, solid line) and it is indicative of"
+            },
+            {
+              "document_id": "3146",
+              "title": "LarsFilg2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2312,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "tion. Both ﬁltration and respiration rates in SFG are dependent on body dry weight following allometric relationships, which are empiri- cally determined, and consequently, SFG application is limited to the same environmental conditions in which these relationships were de- termined. BEG does not need calibration; it assumes that the ingestion rate increases linearly with algal concentration because the ﬁltration rate is constant maximum between about 1 and 6 μg chl a L−1, where the upper limit corresponds to saturation above which growth de- creases sharply even though the ingestion rate remains nearly constant (Riisgård et al., 2013b). According to this, the application of BEG to tro- phic"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2352,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2407,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "h the carbon to chlorophyll ratio (right panels). Though they convey the same informa- tion, the impact of parameter values on Chl:C is more easily recognized. Chl:C is proportional to the dilution rate if ah=0 and ap=a0\"0. Such a proportionality has been found in Thalassiosira ﬁn6iatilis Hustedt, for example (Laws and Bannister, 1980). Depend- ing on the parameter values, other patterns may be also be observed. 3.3. Test against data The relevance of the above derived expressions will now be evaluated by comparing them to experimental data. To this end, I choose data on nitrogen-limited Dunaliella tertiolecta Butcher, presented by Goldman and Peavey (1979) and Goldman (1980). These articles"
+            },
+            {
+              "document_id": "W1965102064",
+              "title": "Phytoplankton Nutrient Enrichment Experiments off Baja California and in the Eastern Equatorial Pacific Ocean",
+              "doi": "https://doi.org/10.1139/f69-104",
+              "year": "1969",
+              "distance": 0.2308,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Natural phytoplankton populations were enriched with various nutrients both singly and as mixtures. After 4 or 5 days of incubation in natural light, the effects of enrichment were assessed by measuring the rate of 14 C uptake or changes in chlorophyll. Off Baja California, in June 1964, September 1965, and November 1966, increases in chlorophyll or 14 C uptake occurred in treatments containing added nitrate or trace metals. In February 1967, three enrichment experiments done in nutrient-poor water well offshore and both north and south of the Equator showed that nitrogen was the most likely limiting nutrient. In two experiments in equatorial upwelling water, no nutrient appeared to limit ph"
+            },
+            {
+              "document_id": "W2130665185",
+              "title": "Estimating the carbon flux through main phytoplankton groups in the northwestern Mediterranean",
+              "doi": "https://doi.org/10.4319/lo.2005.50.5.1447",
+              "year": "2005",
+              "distance": 0.2501,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "We performed dilution experiments and primary production measurements in surface waters during a cruise in the northwestern Mediterranean Sea in June 2000 to quantify the carbon (C) flux through phytoplankton groups that can be distinguished by their pigment markers. Pigments in the dilution experiments were measured by highpressure liquid chromatography (HPLC). Pigment per cell and synthesis rates of photoprotectant versus light-harvesting pigments indicated that cells did not undergo photoacclimation during the 24-h dilution experiments. Mean chlorophyll a (Chl a) concentration was 0.128 mg m−3, and mean primary production was 4.99 mg of C m−3 d−1. Prymnesiophyceae contributed 51% of the t"
+            },
+            {
+              "document_id": "W2154302398",
+              "title": "Seasonal Variation of Potential Nutrient Limitation to Chlorophyll Production in Southern Lake Huron",
+              "doi": "https://doi.org/10.1139/f81-001",
+              "year": "1981",
+              "distance": 0.2511,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Potential nutrient limitation to chlorophyll production in surface waters of southern Lake Huron was assayed monthly from April to December 1975. Natural phytoplankton assemblage responses to nutrient enrichment were determined from chlorophyll production in laboratory incubations under seasonally varied light and temperature conditions. Experimental treatments included a complete treatment containing P, N, Si, EDTA, vitamins, and trace metals; treatments with deletions from the complete treatment; complete treatments with different P concentrations; and treatments with single nutrient additions. Effects were most pronounced during summer and fall when P, EDTA, FeEDTA, vitamins, and Si were "
+            },
+            {
+              "document_id": "W2080700174",
+              "title": "Phosphate Uptake Rates of Phytoplankton Assemblages Grown at Different Dilution Rates in Semicontinuous Culture",
+              "doi": "https://doi.org/10.1139/f86-184",
+              "year": "1986",
+              "distance": 0.2596,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "We studied the effects of pulsed nutrient supplies on the physiology of natural phytoplankton assemblages. A natural phytoplankton community, from an oligotrophic lake, was grown at several dilution rates from 0.1 to 1.5∙d −1 in P-limited semicontinuous cultures. Particulate C:P and N:P ratios (by atoms) were approximately 300:1 and 50:1, respectively, at the lowest dilution rate and 40:1 and 7:1, respectively, at the highest dilution rate. This demonstrates that a range of P-limited conditions can be established using the semicontinuous culturing technique. The time-course of uptake, in response to a saturating addition of phosphate, revealed that there was a short lag before maximum rates "
+            },
+            {
+              "document_id": "W2091626603",
+              "title": "Nutrient regimes control phytoplankton ecophysiology in the South Atlantic",
+              "doi": "https://doi.org/10.5194/bg-11-463-2014",
+              "year": "2014",
+              "distance": 0.2627,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract. Fast Repetition Rate fluorometry (FRRf) measurements of phytoplankton photophysiology from an across-basin South Atlantic cruise (as part of the GEOTRACES programme) characterised two dominant ecophysiological regimes which were interpreted on the basis of nutrient limitation. South of the South Subtropical Convergence (SSTC) in the northern sub-Antarctic sector of the Antarctic Circumpolar Current (ACC) in the Eastern Atlantic Basin, waters are characterised by elevated chlorophyll concentrations, a dominance by larger phytoplankton cells, and low apparent photochemical efficiency (Fv / Fm). Shipboard 24 h iron (Fe) addition incubation experiments confirmed that Fe stress was prim"
+            },
+            {
+              "document_id": "W1964652340",
+              "title": "Phytoplankton nutrient limitation in a polymictic eutrophic lake: community versus species-specific responses",
+              "doi": "https://doi.org/10.1127/1863-9135/2007/0169-0057",
+              "year": "2007",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Phytoplankton nutrient limitation was examined in polymictic, eutrophic Lake Rotorua. New Zealand using three in situ incubation experiments of 4 to 6 days' duration in summer 2004. Two of the incubations were conducted during stratification, and one immediately after breakdown of stratification. Samples were enriched with ammonium (1 mg NH 4 -N L -1 ), phosphate (0.1 mg PO 4 -P L -1 ) or with both nutrients. A control containing no added nutrients was used for comparison. Phytoplankton responses to nutrient additions were determined at a species level from cell counts and at a community level from changes in chlorophyll-a concentration. Phytoplankton biomass generally responded to N plus P "
+            },
+            {
+              "document_id": "W2017139372",
+              "title": "Phytoplankton community growth-rate response to nutrient pulses in a shallow turbid estuary, Galveston Bay, Texas",
+              "doi": "https://doi.org/10.1093/plankt/fbh035",
+              "year": "2004",
+              "distance": 0.267,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Phytoplankton growth is a physiological process often limited by temperature, nutrients or light, while biomass accumulation is a function of growth rates, grazing and deposition. Although primary productivity measurements are usually used to assess responses to limiting factors, the rates are proportional to biomass and inversely related to grazing pressure during experimental incubations. Alternatively, carbon-specific growth-rate determinations provide insights into physiological responses without the confounding effects of biomass and grazing. The objective of this study was to quantify the growth-rate responses of phytoplankton to enhanced nutrient availability (nitrate and phosphate) o"
+            },
+            {
+              "document_id": "W2781655384",
+              "title": "Konsentrasi Klorofil-a dan Keterkaitannya dengan Nutrient N, P di Perairan Jepara : Studi Perbandingan Perairan Muara Sungai Wiso dan Serang",
+              "doi": "https://doi.org/10.14710/jkt.v20i2.1697",
+              "year": "2017",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The existenece of nutrient is highly affected by human activities and causing the amount of chlorophyll-a which is the indicator of water fertility. Muara Wiso is a location located in the urban center of Jepara while Serang estuary is mostly impacted by agriculture activities in the upper area. This study has compared the concentration of chlrorophyll-a and its association with N and P nutrients in the two different environmental conditions in Jepara waters. Nutrient N was determined as a nitrite ion using the sulphanilamide method after it was reduced using a reduction column. P was determined as orthophosphate using ascorbic acid and chlorophyll-a method which were extracted from water sa"
+            },
+            {
+              "document_id": "W2582886452",
+              "title": "<i>In Vivo</i> Single-Cell Fluorescence and Size Scaling of Phytoplankton Chlorophyll Content",
+              "doi": "https://doi.org/10.1128/aem.03317-16",
+              "year": "2017",
+              "distance": 0.2679,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ABSTRACT In unicellular phytoplankton, the size scaling exponent of chlorophyll content per cell decreases with increasing light limitation. Empirical studies have explored this allometry by combining data from several species, using average values of pigment content and cell size for each species. The resulting allometry thus includes phylogenetic and size scaling effects. The possibility of measuring single-cell fluorescence with imaging-in-flow cytometry devices allows the study of the size scaling of chlorophyll content at both the inter- and intraspecific levels. In this work, the changing allometry of chlorophyll content was estimated for the first time for single phytoplankton populat"
+            },
+            {
+              "document_id": "W2159410991",
+              "title": "Phytoplankton dynamics within the subsurface chlorophyll maximum of Lake Michigan",
+              "doi": "https://doi.org/10.1093/plankt/6.5.751",
+              "year": "1984",
+              "distance": 0.2681,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The Lake Michigan deep chlorophyll maximum during July 1977 was a broad band of phytoplankton −15 m thick rather than the thin layers observed in smaller lakes. The maximum concentration of chlorophyll was typically four times surface values. 14 C uptake incubations showed that the deep plankton layer was a viable component of the pelagic ecosystem accounting for up to 60% of primary production on an areal (m 2 ) basis. The Lake Michigan chlorophyll maximum was composed primarily of large diatoms, filaxnentous green algae, and flagellates. Although large scale physical processes such as seiches had some effect on the chlorophyll maximum, the basic integrity of the layer was maintained by bio"
+            },
+            {
+              "document_id": "W2026275351",
+              "title": "Time-lag algal growth dynamics: biological constraints on primary production in aquatic environments",
+              "doi": "https://doi.org/10.3354/meps033193",
+              "year": "1986",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Changes in the nutrient regime of phytoplankton cells induce variable time lags before the onset of cell division (quasi-instantaneous response to more than 24 h lags), dependent mainly on the algal species and the magnitude of the nutrient pulse.The latter parameter appears to be a main controlling factor in algal growth dynamics under transient conditions, overriding other variables such as temperature, irradiance and nutritional state.The presence of such phenomena puts intrinsic limits on primary production in a variable nutrient environment because algal cells are not made up of synthetic components only (sensu Williams 1971), but also of structural and genetic material.Under these cond"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.2757,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact is explicitly stated and corroborated within the DEB literature, most directly by snippet [1] which lists it as SF7 with citation, and snippet [3] which restates that chlorophyll concentration increases with dilution rate (while decreasing with irradiance). Snippets [2] and [12] from Zonneveld provide mechanistic and empirical support: chlorophyll production depends on nitrogen pool, and Chl:C is proportional to dilution rate as observed in Thalassiosira and tested against nitrogen-limited Dunaliella data. While related chl:C facts (SF5/SF6) and N:C relationships appear frequently, fewer snippets address the chlorophyll concentration (as opposed to ratio) fact directly, so support is moderate rather than abundant. No snippet contradicts the fact, yielding a corroborated consensus direction."
+          },
+          "n_references": 2,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1812
+            },
+            "2939": {
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.206
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1812,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.206,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.7,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "3306",
+              "title": "WijsDede2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2175,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "hyll-a concentration. Solid lines are for a PIM concentration of 10 mg l-1 and broken lines are for a PIM concentration of 100 mg l-1. In Figure 25, it can be seen that the ingestion rate of chlorophyll increases with increasing chlorophyll-a concentration. The shape of the curve corresponds to the shape of the scaled functional response (Figure 21) and the effect of inorganic particles on the shape of the curve is the same. 0 5 10 15 20 0.5 1.0 1.5 2.0 Clearance rate Chla (µg l−1) Clearance rate (l hr −1) 0 5 10 15 20 0 10 20 30 40 50 Filtration rate Chla (µg l−1) Filtration rate PIM (mg hr −1) 0 5 10 15 20 0 2 4 6 8 Ingestion rate Chla (µg l −1) Ingestion rate PIM (mg hr −1) 0 5 10 15 20 0"
+            },
+            {
+              "document_id": "2938",
+              "title": "Zonn96b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2189,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "l quotas of limiting and non-limiting nutrient vary in proportion to each other (with the dilution rate) if the concentration of the non- limiting nutrient in the external environment is saturating. The ratio of the cell quotas is given by Ql Qn = [Gl] + [ ˆNl] [Gn] + [ ˆNn] = [Am l ] ˆfn[Am n ] , (17) which identity is obtained after insertion of equations (12) and (16). If the concentration of non-limiting nutrient is saturating, the ratio of cell quotas equals the ratio of the maximum uptake rates. Figure 2 shows the relationship between the cell quotas of the two nutrients, based on the analysis in the previous section. The shaded area represents the set of all possible steady state valu"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2217,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2259,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "release rate increases (Fig. 7, dash-dot lines). The decrease in PP rate is due to the effects of nutrient limitation on the photosynthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase (Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash- dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10 than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of the jDOC,R ﬂux (Fig. 6, solid line) and it is indicative of"
+            },
+            {
+              "document_id": "3146",
+              "title": "LarsFilg2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2312,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "tion. Both ﬁltration and respiration rates in SFG are dependent on body dry weight following allometric relationships, which are empiri- cally determined, and consequently, SFG application is limited to the same environmental conditions in which these relationships were de- termined. BEG does not need calibration; it assumes that the ingestion rate increases linearly with algal concentration because the ﬁltration rate is constant maximum between about 1 and 6 μg chl a L−1, where the upper limit corresponds to saturation above which growth de- creases sharply even though the ingestion rate remains nearly constant (Riisgård et al., 2013b). According to this, the application of BEG to tro- phic"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2352,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2407,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "h the carbon to chlorophyll ratio (right panels). Though they convey the same informa- tion, the impact of parameter values on Chl:C is more easily recognized. Chl:C is proportional to the dilution rate if ah=0 and ap=a0\"0. Such a proportionality has been found in Thalassiosira ﬁn6iatilis Hustedt, for example (Laws and Bannister, 1980). Depend- ing on the parameter values, other patterns may be also be observed. 3.3. Test against data The relevance of the above derived expressions will now be evaluated by comparing them to experimental data. To this end, I choose data on nitrogen-limited Dunaliella tertiolecta Butcher, presented by Goldman and Peavey (1979) and Goldman (1980). These articles"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2408,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "dilution rate. Then culture biomass density will increase. This increase is coupled with a decrease in light intensity everywhere in the ves- sel, caused by shading. Therefore, the specific growth rate decreases until it equals the applied dilution rate. An increase in the D value will lead to a lower steady state biomass density since the light intensity in the ves- sel must increase to make p equal to the new D. An increase in the Iin value will lead to a higher biomass density since the light intensity in the vessel must re- main the same to have no change in p. The reasonable fit to experimental data (Figs. 2 and 3) confirms the cor- rectness of the concept of shading as a regulating fac"
+            },
+            {
+              "document_id": "3305",
+              "title": "Grim2016.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2426,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "anges. The chlorophyll concentration is adjusted to the photon ﬂux and to the cell capacity of converting it into chemical energy. It has been clearly shown that the carbon to chlorophyll ratio (C/Chla) decreases exponentially with temperature, and Geider [1987] modelled it: C Chla = a −bT + cIe−kT (3.46) where a, b, c, k are constants and I is the light intensity. However, eq. 3.46 isn’t valid anymore when the temperature is higher than the species Topt [Geider, 1987]. This model has thus to be included into a dynamical model where carbon or chlorophyll are state variables. Later, Geider et al. [1998] developed a dynamical model for the whole phytoplank- ton growth. The model deals with the"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2434,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "s observed that the N:C ratio increases with dilution rate 274 when nutrient limited (3, 11, 21) and decreases when light limited (21). Furthermore, the N:C 275 ratio decreases with temperature when nutrient or light limited and with irradiance. These four 276 stylized facts were simulated with our model (ﬁgure 4). The N:C ratio can be computed using 277 the following equation 278 Ntotal Ctotal = nNV · MV + MEN MV + MEC = nNV + mEN 1 + mEC , (17) where nNV is the elemental coefﬁcient of nitrogen in structure and MEi stands for the to- 279 tal mass of reserve i . Equation 17 shows that to assess N:C ratio one should look to the 280 dependence of reserve densities on forcing variables. 281 The"
+            },
+            {
+              "document_id": "3412",
+              "title": "Klein - 2018 - analysis and optimization of ecotoxicological mode.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2443,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "rient levels lead to higher effects on growth (Figure 4.5.11). The higher effects are due to the smaller biomass amount such that the difference between control and treatment is smaller. We have effects smaller than 25 % for the lowest nutrient concentrations up to a safety margin of 5.62, whereas the effect for the highest nutrient concentrations for multiplication factor 1.78 is already 28 %. For the nutrient concentrations yielding a photosynthesis response function value of 0.75 to 0.99 the difference of the effect on growth is relatively small (maximal 6 % for multiplication factor 3.16). We only consider constant nutrient levels. As the nutrient concentration in water is essential for "
+            },
+            {
+              "document_id": "2940",
+              "title": "Zonn98a.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.245,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "an equation for the daily carbon-spe- ciﬁc rate of photosynthesis. Two of the quantities in this equation, the maximum instantaneous car- bon speciﬁc rate of photosynthesis and the carbon to chlorophyll ratio, are subsequently considered to depend on the nutrient concentration of the environment (and also on temperature, see be- low). In this approach neither nutrient nor light is exclusively limiting; both nutrient and light simul- taneously affect the rate of photosynthesis. Shuter’s model features a pool of stored nutri- ent, but somehow the size of this pool plays no role in the derivation of the model (Shuter, 1979). He derives an expression for the optimal nutrient uptake rate, based o"
+            },
+            {
+              "document_id": "2719",
+              "title": "Grossowicz et al. - 2017 - A dynamic energy budget (DEB) model to describe po.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2454,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Phytoplankton growth and stoichiometry depend on the avail- ability of multiple nutrients, and limitation of N and P has an impact on stoichiometry (Klausmeier et al., 2008). Klausmeier et al. (2004a) found that a higher N:P ratio is achieved during competitive equilibrium which favors P-poor resource-acquisition machinery, and a low N:P ratio during exponential growth, when there is a greater allocation to P-rich machinery. P-limited environ- ments favor slightly less allocation to assembly than N-limited or light-limited environments (Klausmeier et al., 2004a). In addition, Klausmeier et al. (2004b) found that as the growth rate approaches the maximum growth rate, phytoplankton stoichiomet"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the snippets directly test the relationship between chlorophyll concentration and dilution rate under nutrient limitation. Snippet 4 is the closest, examining P-limited semicontinuous cultures at multiple dilution rates and showing that cellular stoichiometry (C:P, N:P) varies strongly with dilution rate (lower ratios at higher dilution rates, indicating less nutrient stress), which is mechanistically consistent with higher chlorophyll at higher dilution rates—but it does not report chlorophyll directly, so it only weakly supports the fact. The remaining snippets concern nutrient enrichment effects on chlorophyll, photoacclimation, pigment chemistry, or plant nutrition generally, and bear only tangentially on the specific dilution-rate dependence stated. Overall the corpus provides weak, indirect support with no contradicting evidence, leaving the evidence sparse and the direction insufficiently determined."
+          },
+          "n_references": 1,
+          "references": {
+            "W2080700174": {
+              "title": "Phosphate Uptake Rates of Phytoplankton Assemblages Grown at Different Dilution Rates in Semicontinuous Culture",
+              "doi": "https://doi.org/10.1139/f86-184",
+              "year": "1986",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2596
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W1965102064",
+              "title": "Phytoplankton Nutrient Enrichment Experiments off Baja California and in the Eastern Equatorial Pacific Ocean",
+              "doi": "https://doi.org/10.1139/f69-104",
+              "year": "1969",
+              "distance": 0.2308,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Natural phytoplankton populations were enriched with various nutrients both singly and as mixtures. After 4 or 5 days of incubation in natural light, the effects of enrichment were assessed by measuring the rate of 14 C uptake or changes in chlorophyll. Off Baja California, in June 1964, September 1965, and November 1966, increases in chlorophyll or 14 C uptake occurred in treatments containing added nitrate or trace metals. In February 1967, three enrichment experiments done in nutrient-poor water well offshore and both north and south of the Equator showed that nitrogen was the most likely limiting nutrient. In two experiments in equatorial upwelling water, no nutrient appeared to limit ph"
+            },
+            {
+              "document_id": "W2130665185",
+              "title": "Estimating the carbon flux through main phytoplankton groups in the northwestern Mediterranean",
+              "doi": "https://doi.org/10.4319/lo.2005.50.5.1447",
+              "year": "2005",
+              "distance": 0.2501,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "We performed dilution experiments and primary production measurements in surface waters during a cruise in the northwestern Mediterranean Sea in June 2000 to quantify the carbon (C) flux through phytoplankton groups that can be distinguished by their pigment markers. Pigments in the dilution experiments were measured by highpressure liquid chromatography (HPLC). Pigment per cell and synthesis rates of photoprotectant versus light-harvesting pigments indicated that cells did not undergo photoacclimation during the 24-h dilution experiments. Mean chlorophyll a (Chl a) concentration was 0.128 mg m−3, and mean primary production was 4.99 mg of C m−3 d−1. Prymnesiophyceae contributed 51% of the t"
+            },
+            {
+              "document_id": "W2154302398",
+              "title": "Seasonal Variation of Potential Nutrient Limitation to Chlorophyll Production in Southern Lake Huron",
+              "doi": "https://doi.org/10.1139/f81-001",
+              "year": "1981",
+              "distance": 0.2511,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Potential nutrient limitation to chlorophyll production in surface waters of southern Lake Huron was assayed monthly from April to December 1975. Natural phytoplankton assemblage responses to nutrient enrichment were determined from chlorophyll production in laboratory incubations under seasonally varied light and temperature conditions. Experimental treatments included a complete treatment containing P, N, Si, EDTA, vitamins, and trace metals; treatments with deletions from the complete treatment; complete treatments with different P concentrations; and treatments with single nutrient additions. Effects were most pronounced during summer and fall when P, EDTA, FeEDTA, vitamins, and Si were "
+            },
+            {
+              "document_id": "W2080700174",
+              "title": "Phosphate Uptake Rates of Phytoplankton Assemblages Grown at Different Dilution Rates in Semicontinuous Culture",
+              "doi": "https://doi.org/10.1139/f86-184",
+              "year": "1986",
+              "distance": 0.2596,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "We studied the effects of pulsed nutrient supplies on the physiology of natural phytoplankton assemblages. A natural phytoplankton community, from an oligotrophic lake, was grown at several dilution rates from 0.1 to 1.5∙d −1 in P-limited semicontinuous cultures. Particulate C:P and N:P ratios (by atoms) were approximately 300:1 and 50:1, respectively, at the lowest dilution rate and 40:1 and 7:1, respectively, at the highest dilution rate. This demonstrates that a range of P-limited conditions can be established using the semicontinuous culturing technique. The time-course of uptake, in response to a saturating addition of phosphate, revealed that there was a short lag before maximum rates "
+            },
+            {
+              "document_id": "W2091626603",
+              "title": "Nutrient regimes control phytoplankton ecophysiology in the South Atlantic",
+              "doi": "https://doi.org/10.5194/bg-11-463-2014",
+              "year": "2014",
+              "distance": 0.2627,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract. Fast Repetition Rate fluorometry (FRRf) measurements of phytoplankton photophysiology from an across-basin South Atlantic cruise (as part of the GEOTRACES programme) characterised two dominant ecophysiological regimes which were interpreted on the basis of nutrient limitation. South of the South Subtropical Convergence (SSTC) in the northern sub-Antarctic sector of the Antarctic Circumpolar Current (ACC) in the Eastern Atlantic Basin, waters are characterised by elevated chlorophyll concentrations, a dominance by larger phytoplankton cells, and low apparent photochemical efficiency (Fv / Fm). Shipboard 24 h iron (Fe) addition incubation experiments confirmed that Fe stress was prim"
+            },
+            {
+              "document_id": "W1964652340",
+              "title": "Phytoplankton nutrient limitation in a polymictic eutrophic lake: community versus species-specific responses",
+              "doi": "https://doi.org/10.1127/1863-9135/2007/0169-0057",
+              "year": "2007",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Phytoplankton nutrient limitation was examined in polymictic, eutrophic Lake Rotorua. New Zealand using three in situ incubation experiments of 4 to 6 days' duration in summer 2004. Two of the incubations were conducted during stratification, and one immediately after breakdown of stratification. Samples were enriched with ammonium (1 mg NH 4 -N L -1 ), phosphate (0.1 mg PO 4 -P L -1 ) or with both nutrients. A control containing no added nutrients was used for comparison. Phytoplankton responses to nutrient additions were determined at a species level from cell counts and at a community level from changes in chlorophyll-a concentration. Phytoplankton biomass generally responded to N plus P "
+            },
+            {
+              "document_id": "W2017139372",
+              "title": "Phytoplankton community growth-rate response to nutrient pulses in a shallow turbid estuary, Galveston Bay, Texas",
+              "doi": "https://doi.org/10.1093/plankt/fbh035",
+              "year": "2004",
+              "distance": 0.267,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Phytoplankton growth is a physiological process often limited by temperature, nutrients or light, while biomass accumulation is a function of growth rates, grazing and deposition. Although primary productivity measurements are usually used to assess responses to limiting factors, the rates are proportional to biomass and inversely related to grazing pressure during experimental incubations. Alternatively, carbon-specific growth-rate determinations provide insights into physiological responses without the confounding effects of biomass and grazing. The objective of this study was to quantify the growth-rate responses of phytoplankton to enhanced nutrient availability (nitrate and phosphate) o"
+            },
+            {
+              "document_id": "W2781655384",
+              "title": "Konsentrasi Klorofil-a dan Keterkaitannya dengan Nutrient N, P di Perairan Jepara : Studi Perbandingan Perairan Muara Sungai Wiso dan Serang",
+              "doi": "https://doi.org/10.14710/jkt.v20i2.1697",
+              "year": "2017",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The existenece of nutrient is highly affected by human activities and causing the amount of chlorophyll-a which is the indicator of water fertility. Muara Wiso is a location located in the urban center of Jepara while Serang estuary is mostly impacted by agriculture activities in the upper area. This study has compared the concentration of chlrorophyll-a and its association with N and P nutrients in the two different environmental conditions in Jepara waters. Nutrient N was determined as a nitrite ion using the sulphanilamide method after it was reduced using a reduction column. P was determined as orthophosphate using ascorbic acid and chlorophyll-a method which were extracted from water sa"
+            },
+            {
+              "document_id": "W2582886452",
+              "title": "<i>In Vivo</i> Single-Cell Fluorescence and Size Scaling of Phytoplankton Chlorophyll Content",
+              "doi": "https://doi.org/10.1128/aem.03317-16",
+              "year": "2017",
+              "distance": 0.2679,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT In unicellular phytoplankton, the size scaling exponent of chlorophyll content per cell decreases with increasing light limitation. Empirical studies have explored this allometry by combining data from several species, using average values of pigment content and cell size for each species. The resulting allometry thus includes phylogenetic and size scaling effects. The possibility of measuring single-cell fluorescence with imaging-in-flow cytometry devices allows the study of the size scaling of chlorophyll content at both the inter- and intraspecific levels. In this work, the changing allometry of chlorophyll content was estimated for the first time for single phytoplankton populat"
+            },
+            {
+              "document_id": "W2159410991",
+              "title": "Phytoplankton dynamics within the subsurface chlorophyll maximum of Lake Michigan",
+              "doi": "https://doi.org/10.1093/plankt/6.5.751",
+              "year": "1984",
+              "distance": 0.2681,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The Lake Michigan deep chlorophyll maximum during July 1977 was a broad band of phytoplankton −15 m thick rather than the thin layers observed in smaller lakes. The maximum concentration of chlorophyll was typically four times surface values. 14 C uptake incubations showed that the deep plankton layer was a viable component of the pelagic ecosystem accounting for up to 60% of primary production on an areal (m 2 ) basis. The Lake Michigan chlorophyll maximum was composed primarily of large diatoms, filaxnentous green algae, and flagellates. Although large scale physical processes such as seiches had some effect on the chlorophyll maximum, the basic integrity of the layer was maintained by bio"
+            },
+            {
+              "document_id": "W2026275351",
+              "title": "Time-lag algal growth dynamics: biological constraints on primary production in aquatic environments",
+              "doi": "https://doi.org/10.3354/meps033193",
+              "year": "1986",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Changes in the nutrient regime of phytoplankton cells induce variable time lags before the onset of cell division (quasi-instantaneous response to more than 24 h lags), dependent mainly on the algal species and the magnitude of the nutrient pulse.The latter parameter appears to be a main controlling factor in algal growth dynamics under transient conditions, overriding other variables such as temperature, irradiance and nutritional state.The presence of such phenomena puts intrinsic limits on primary production in a variable nutrient environment because algal cells are not made up of synthetic components only (sensu Williams 1971), but also of structural and genetic material.Under these cond"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.2757,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            },
+            {
+              "document_id": "W2111555895",
+              "title": "Role of Suspended Sediments and Mixing in Reducing Photoinhibition in the Bloom-Forming Cyanobacterium Microcystis",
+              "doi": "https://doi.org/10.4236/jwarp.2012.412119",
+              "year": "2012",
+              "distance": 0.2763,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Toxic cyanobacterial blooms are becoming a global problem. Previous research of cyanobacterial bloom development has examined how high nutrient concentrations promote cyanobacteria dominance, and how positive buoyancy provides an ecological advantage over sinking phytoplankton. Tributaries responsible for loading nutrients into lakes often simultaneously contribute high concentrations of suspended sediments. High concentrations of suspended sediments may also influence blooms by affecting the ambient light climate, reducing photodamage, and increasing the efficiency of photosynthesis. We examined the effects of sediments and vertical mixing in potentially reducing photodamage to Microcystis "
+            },
+            {
+              "document_id": "W2314105371",
+              "title": "The Ratio of Chlorophyll a to b in the Plumule of Nelumbo nucifera",
+              "doi": "https://doi.org/10.15281/jplantres1887.73.398",
+              "year": "1960",
+              "distance": 0.278,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "1. Paper chromatography is useful to some extent for quantitative analysis of chlorophylls.2. The ratio of chlorophyll a to b in the Nelumbo plumule was calculated with the absorbance values at 663 and 645mμ using simultaneous equations.3. In the absorption curve of chlorophyll pigment dissolved in methanol, a shoulder of chlorophyll b at 645mμ did not appear. Calculating the ratio of E 440 to E 470 in the absorption curve of Nelumbo plumule, however, it was found that these ratios became progressively smaller with maturing. It is considered that those ratios have a close correlation with the ratio of chlorophyll a to b.4. In the Nelumbo plumule, the ratio of chlorophyll a to b was considera"
+            },
+            {
+              "document_id": "W2012048107",
+              "title": "Macromolecular labelling patterns and inorganic nutrient limitation of a North Atlantic spring bloom",
+              "doi": "https://doi.org/10.3354/meps092111",
+              "year": "1993",
+              "distance": 0.2798,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Synthesis rates of macromolecular classes (protein, polysaccharide, neutral lipid, glycolipid and phospholipid) were measured using 14C incorporation to assess the physiological condition of phytoplankton during a spring bloon~ in the northeastern Sargasso Sea.The relative allocation of labelled photosynthate to polysaccharide increased with incubation irradiance, and declined overnight; opposite trends were found in the protein fraction.The rate of protein synthesis at night was a small fraction (0 to 23 '%I) of the day-time rate.Incubation irradiance and overnight metabolism had relatively little effect on total or class-specific lipid synthesis.lnorganic nutrients decreased to below analy"
+            },
+            {
+              "document_id": "W2885548870",
+              "title": "Response of Natural Cyanobacteria and Algae Assemblages to a Nutrient Pulse and Elevated Temperature",
+              "doi": "https://doi.org/10.3389/fmicb.2018.01851",
+              "year": "2018",
+              "distance": 0.2798,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Eutrophication (nutrient over-enrichment) is the primary worldwide water quality issue often leading to nuisance cyanobacterial blooms. Climate change is predicted to cause further rise of cyanobacteria blooms as cyanobacteria can have a competitive advantage at elevated temperatures. We tested the hypothesis that simultaneous rise in nutrients and temperature will promote cyanobacteria more than a single increase in one of the two drivers. To this end, controlled experiments were run with seston from 39 different urban water bodies varying in trophic state from mesotrophic to hypertrophic. These experiments were carried out at two different temperatures, 20°C (ambient) and 25°C (warming sce"
+            },
+            {
+              "document_id": "W2065287103",
+              "title": "INDUCTION OF SPECIFIC PROTEINS IN EUKARYOTIC ALGAE GROWN UNDER IRON‐, PHOSPHORUS‐, OR NITROGEN‐DEFICIENT CONDITIONS<sup>1</sup>",
+              "doi": "https://doi.org/10.1111/j.0022-3646.1993.00767.x",
+              "year": "1993",
+              "distance": 0.2803,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ABSTRACT What limits phytoplankton growth in nature? The answer is elusive because of methodological problems associated with bottle incubations and nutrient addition experiments. We are investigating the possibility that antibodies to proteins repressed by a specific nutrient can be used as probes to indicate which nutrient limits photosynthetic carbon fixation in the ocean. The diatom Phaeodactylum tricornutum Bohlin and the chlorophyte Dunaliella tertiolecta Butcher were grown in batch cultures in artificial seawater and f/2 nutrient lacking either phosphorus, iron, or nitrogen. Chlorosis was induced by nutrient limitation in both species with the exception of phosphorus‐limited D. tertio"
+            },
+            {
+              "document_id": "W2137142035",
+              "title": "Relative addition rate and external concentration; Driving variables used in plant nutrition research",
+              "doi": "https://doi.org/10.1111/1365-3040.ep11611714",
+              "year": "1982",
+              "distance": 0.2813,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract An increasing literature accounting for various types of experiments indicates that far lower external nutrient concentrations are required by plants than is usually thought to be the case. It is concluded that the ion uptake capacity of the roots, as described by the carrier concept, is high compared to that required for maintenance of the internal concentration. Serious errors in experimental conclusions are associated with insufficient and constant nutrient addition rates. The main errors are caused by non‐steady states of the plants both with regard to the internal nutrient concentrations and the relative growth rate. A dynamic concept has been proposed for direct use as the tre"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact is directly stated and corroborated within the DEB modeling literature: snippet 1 explicitly lists SF7 (chlorophyll concentration increases with dilution rate in nutrient limiting conditions) with a supporting reference, and snippet 3 reaffirms that chlorophyll concentration increases with dilution rate. Snippets 2 and 12 provide mechanistic and empirical backing (chl:C proportional to dilution rate, with chlorophyll production tied to nitrogen pool dynamics), and snippet 12 cites empirical data (Laws and Bannister, 1980; Goldman) under nitrogen-limited conditions. Snippet 13 offers field evidence that chlorophyll increases when nutrient limitation is relaxed. No snippet contradicts the fact. The remaining snippets are topically related to chlorophyll, nutrients, or dilution but do not directly bear on this specific relationship. Overall the evidence is moderate (driven largely by closely related modeling papers stating the same stylized fact) and consistently in the direction of support."
+          },
+          "n_references": 3,
+          "references": {
+            "2837": {
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1812
+            },
+            "2939": {
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.206
+            },
+            "W1965102064": {
+              "title": "Phytoplankton Nutrient Enrichment Experiments off Baja California and in the Eastern Equatorial Pacific Ocean",
+              "doi": "https://doi.org/10.1139/f69-104",
+              "year": "1969",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2308
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1812,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.95,
+              "text": "nditions; (2) SF4. N:C decreases with irradiance in nutrient replete conditions; (11) Chlorophyll SF5. chl:C increases with dilution rate in nutrient limiting conditions; (3, 11) SF6. chl:C decreases with dilution rate in light limiting conditions; (3) SF7. chlorophyll concentration increases with dilution rate in nutrient limiting conditions; (30) SF8. chlorophyll concentration decreases with irradiance; (21) SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11) EPS SF10. no EPS production results directly from light-dependent carbon assimilation; (38) SF11. cellular production rates of EPS and other extracellular carbohydrates increase with"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.206,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.6,
+              "text": "hat when cells are nitrogen-limited, the absolute rate at which chlorophyll is produced depends on the amount of nitrogen in the tran- sient pool. Furthermore, chlorophyll cell quota decrease because of dilution through growth, and may also decrease through chlorophyll destruc- tion (characterised by a rate constant r). By assumption, the chlorophyll production rate equals kNl, with k a proportionality constant. (The chlorophyll production rate may also depend on irradiance, in which case k would depend on the irradiance. As studies on nutrient-limited growth are generally restricted to one level of irradiance, information on this aspect is lacking. I therefore treat k as a constant.) This i"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2148,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "ch that ˙r > ˙h. If such condition is fulﬁlled then the population will grow until 331 15 [Page 16] another factor is limiting, and only then will it reach steady-state. Figure 4D presents the N:C 332 ratio for a simulation in which nitrogen becomes limiting for all values of irradiance considered 333 (typical environmental setting). Irradiance bolsters ˙ECA and thus the C-reserve density. The 334 consequent increase of MV and decrease of ˙ENR reduces N-reserve density. The overall 335 result is a decrease of the N:C ratio. 336 3.2.2 Chlorophyll concentration 337 Stylized facts state that chlorophyll concentration decreases with irradiance but increases with 338 the dilution rate (SF7 and "
+            },
+            {
+              "document_id": "3306",
+              "title": "WijsDede2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2175,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "hyll-a concentration. Solid lines are for a PIM concentration of 10 mg l-1 and broken lines are for a PIM concentration of 100 mg l-1. In Figure 25, it can be seen that the ingestion rate of chlorophyll increases with increasing chlorophyll-a concentration. The shape of the curve corresponds to the shape of the scaled functional response (Figure 21) and the effect of inorganic particles on the shape of the curve is the same. 0 5 10 15 20 0.5 1.0 1.5 2.0 Clearance rate Chla (µg l−1) Clearance rate (l hr −1) 0 5 10 15 20 0 10 20 30 40 50 Filtration rate Chla (µg l−1) Filtration rate PIM (mg hr −1) 0 5 10 15 20 0 2 4 6 8 Ingestion rate Chla (µg l −1) Ingestion rate PIM (mg hr −1) 0 5 10 15 20 0"
+            },
+            {
+              "document_id": "2938",
+              "title": "Zonn96b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2189,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "l quotas of limiting and non-limiting nutrient vary in proportion to each other (with the dilution rate) if the concentration of the non- limiting nutrient in the external environment is saturating. The ratio of the cell quotas is given by Ql Qn = [Gl] + [ ˆNl] [Gn] + [ ˆNn] = [Am l ] ˆfn[Am n ] , (17) which identity is obtained after insertion of equations (12) and (16). If the concentration of non-limiting nutrient is saturating, the ratio of cell quotas equals the ratio of the maximum uptake rates. Figure 2 shows the relationship between the cell quotas of the two nutrients, based on the analysis in the previous section. The shaded area represents the set of all possible steady state valu"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2203,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "2 0.036 0.04 PFD (µEm−2s−1) N:C (mol N.mol C−1) A B C D dilution rate (d−1) temperature (ºC) 12 17 22 27 32 Figure 4: Prediction of N:C ratio (A) for a range of dilution rates when nutrient limited (XNr=10µM; XCr=1mM; T=298K; I = 250µEm−2s−1); (B) for a range of dilution rates when light or carbon limited (XNr=1mM; XCr=1mM; T=298K; I = 25µEm−2s−1); (C) for a range of temperature values when nutrient limited (XNr=10µM; XCr=1mM; I = 250µEm−2s−1; h = 0.4d−1); (D) and for a range of irradiance values in nutrient limiting conditions (XNr=1mM; XCr=1mM; T=298K; h = 0.4d−1). case C-reserve (eq. 14) – which then leads to a decrease in reserve density (eq. 7) since 288 carbon assimilation is constant."
+            },
+            {
+              "document_id": "3093",
+              "title": "Aloi2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2217,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ease in pCO2 in nutrient-limited conditions is hard to as- sess. Ideally, when pCO2 is changed in the chemostat, the dilution rate should be adjusted so that the nutrient concen- tration remains unaltered. In this way, two nutrient-limited chemostat experiments with different pCO2 levels could be compared. To the best of my knowledge this has not been done. However, the results of Müller et al. (2012) suggest that the growth rate changes little with pCO2 in conditions of nitrate limitation. In these experiments, the cell size and cell-speciﬁc photosynthesis rate of nitrate-limited cells in- creases with pCO2. Nitrate is below the detection limit in all of these chemostat experiments. However"
+            },
+            {
+              "document_id": "3309",
+              "title": "LivaLaga2017.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2259,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "release rate increases (Fig. 7, dash-dot lines). The decrease in PP rate is due to the effects of nutrient limitation on the photosynthetic rate (see Sect. 2.2.1). In the N-limited scenario, the linearity is lost as soon as cells enter the intermediate phase (Fig. 7, dash-dot blue line) while in the P-limited scenario, the linearity is lost later in the intermediate phase (Fig. 7, dash- dot red line). This suggests that the effects of nutrient limitation on PP rate are stronger under nitrogen-limiting conditions 10 than under phosphate-limiting conditions. In both scenarios, the increase in DOC release rate is due to the increase of the jDOC,R ﬂux (Fig. 6, solid line) and it is indicative of"
+            },
+            {
+              "document_id": "3146",
+              "title": "LarsFilg2014.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2312,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "tion. Both ﬁltration and respiration rates in SFG are dependent on body dry weight following allometric relationships, which are empiri- cally determined, and consequently, SFG application is limited to the same environmental conditions in which these relationships were de- termined. BEG does not need calibration; it assumes that the ingestion rate increases linearly with algal concentration because the ﬁltration rate is constant maximum between about 1 and 6 μg chl a L−1, where the upper limit corresponds to saturation above which growth de- creases sharply even though the ingestion rate remains nearly constant (Riisgård et al., 2013b). According to this, the application of BEG to tro- phic"
+            },
+            {
+              "document_id": "3214",
+              "title": "Ever1991.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2352,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "imiting nutrient concentration as state vari- ables.16 Steady state formulas can readily be derived from the model. This assumes that multiple nutrient limitation does not occur, which is confirmed by uni- algal chemostat culture^.^ This article describes light-limited growth. Colimita- tion by light and a nutrient is demonstrable in unialgal chemo~tats.~ The following therefore only applies to a situation in which nutrients are present in excess. Two light-limited continuous culture methods can be di~tinguished.'~ In the chemostat type, dilution rate is adjusted to the desired level and biomass changes to a steady state level. In the turbidostat type, biomass is measured (e.g., by a photoce"
+            },
+            {
+              "document_id": "2837",
+              "title": "LoreMarq2010.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2353,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "support a larger structure, thus stabilizing at a lower value. 349 Since it is observed that chlorophyll concentration decreases with irradiance (SF8), our model 350 results suggest that chlorophyll can not be solely in structure or in C-reserve (both increase with 351 increasing irradiance). If this was veriﬁed then structure or C-reserve would have varying chem- 352 ical composition thus breaking the strong homeostasis assumption. This leaves the hypothesis 353 that a relevant fraction of chlorophyll be a part of the N-reserve, which is indirectly supported 354 by the SF9 – chl:N ratio decreases with irradiance for constant dilution rate in nutrient replete 355 conditions (which is equival"
+            },
+            {
+              "document_id": "2939",
+              "title": "Zonn98b.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2407,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.75,
+              "text": "h the carbon to chlorophyll ratio (right panels). Though they convey the same informa- tion, the impact of parameter values on Chl:C is more easily recognized. Chl:C is proportional to the dilution rate if ah=0 and ap=a0\"0. Such a proportionality has been found in Thalassiosira ﬁn6iatilis Hustedt, for example (Laws and Bannister, 1980). Depend- ing on the parameter values, other patterns may be also be observed. 3.3. Test against data The relevance of the above derived expressions will now be evaluated by comparing them to experimental data. To this end, I choose data on nitrogen-limited Dunaliella tertiolecta Butcher, presented by Goldman and Peavey (1979) and Goldman (1980). These articles"
+            },
+            {
+              "document_id": "W1965102064",
+              "title": "Phytoplankton Nutrient Enrichment Experiments off Baja California and in the Eastern Equatorial Pacific Ocean",
+              "doi": "https://doi.org/10.1139/f69-104",
+              "year": "1969",
+              "distance": 0.2308,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "Natural phytoplankton populations were enriched with various nutrients both singly and as mixtures. After 4 or 5 days of incubation in natural light, the effects of enrichment were assessed by measuring the rate of 14 C uptake or changes in chlorophyll. Off Baja California, in June 1964, September 1965, and November 1966, increases in chlorophyll or 14 C uptake occurred in treatments containing added nitrate or trace metals. In February 1967, three enrichment experiments done in nutrient-poor water well offshore and both north and south of the Equator showed that nitrogen was the most likely limiting nutrient. In two experiments in equatorial upwelling water, no nutrient appeared to limit ph"
+            },
+            {
+              "document_id": "W2130665185",
+              "title": "Estimating the carbon flux through main phytoplankton groups in the northwestern Mediterranean",
+              "doi": "https://doi.org/10.4319/lo.2005.50.5.1447",
+              "year": "2005",
+              "distance": 0.2501,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "We performed dilution experiments and primary production measurements in surface waters during a cruise in the northwestern Mediterranean Sea in June 2000 to quantify the carbon (C) flux through phytoplankton groups that can be distinguished by their pigment markers. Pigments in the dilution experiments were measured by highpressure liquid chromatography (HPLC). Pigment per cell and synthesis rates of photoprotectant versus light-harvesting pigments indicated that cells did not undergo photoacclimation during the 24-h dilution experiments. Mean chlorophyll a (Chl a) concentration was 0.128 mg m−3, and mean primary production was 4.99 mg of C m−3 d−1. Prymnesiophyceae contributed 51% of the t"
+            },
+            {
+              "document_id": "W2154302398",
+              "title": "Seasonal Variation of Potential Nutrient Limitation to Chlorophyll Production in Southern Lake Huron",
+              "doi": "https://doi.org/10.1139/f81-001",
+              "year": "1981",
+              "distance": 0.2511,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Potential nutrient limitation to chlorophyll production in surface waters of southern Lake Huron was assayed monthly from April to December 1975. Natural phytoplankton assemblage responses to nutrient enrichment were determined from chlorophyll production in laboratory incubations under seasonally varied light and temperature conditions. Experimental treatments included a complete treatment containing P, N, Si, EDTA, vitamins, and trace metals; treatments with deletions from the complete treatment; complete treatments with different P concentrations; and treatments with single nutrient additions. Effects were most pronounced during summer and fall when P, EDTA, FeEDTA, vitamins, and Si were "
+            },
+            {
+              "document_id": "W2080700174",
+              "title": "Phosphate Uptake Rates of Phytoplankton Assemblages Grown at Different Dilution Rates in Semicontinuous Culture",
+              "doi": "https://doi.org/10.1139/f86-184",
+              "year": "1986",
+              "distance": 0.2596,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.45,
+              "text": "We studied the effects of pulsed nutrient supplies on the physiology of natural phytoplankton assemblages. A natural phytoplankton community, from an oligotrophic lake, was grown at several dilution rates from 0.1 to 1.5∙d −1 in P-limited semicontinuous cultures. Particulate C:P and N:P ratios (by atoms) were approximately 300:1 and 50:1, respectively, at the lowest dilution rate and 40:1 and 7:1, respectively, at the highest dilution rate. This demonstrates that a range of P-limited conditions can be established using the semicontinuous culturing technique. The time-course of uptake, in response to a saturating addition of phosphate, revealed that there was a short lag before maximum rates "
+            },
+            {
+              "document_id": "W2091626603",
+              "title": "Nutrient regimes control phytoplankton ecophysiology in the South Atlantic",
+              "doi": "https://doi.org/10.5194/bg-11-463-2014",
+              "year": "2014",
+              "distance": 0.2627,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract. Fast Repetition Rate fluorometry (FRRf) measurements of phytoplankton photophysiology from an across-basin South Atlantic cruise (as part of the GEOTRACES programme) characterised two dominant ecophysiological regimes which were interpreted on the basis of nutrient limitation. South of the South Subtropical Convergence (SSTC) in the northern sub-Antarctic sector of the Antarctic Circumpolar Current (ACC) in the Eastern Atlantic Basin, waters are characterised by elevated chlorophyll concentrations, a dominance by larger phytoplankton cells, and low apparent photochemical efficiency (Fv / Fm). Shipboard 24 h iron (Fe) addition incubation experiments confirmed that Fe stress was prim"
+            },
+            {
+              "document_id": "W1964652340",
+              "title": "Phytoplankton nutrient limitation in a polymictic eutrophic lake: community versus species-specific responses",
+              "doi": "https://doi.org/10.1127/1863-9135/2007/0169-0057",
+              "year": "2007",
+              "distance": 0.2662,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Phytoplankton nutrient limitation was examined in polymictic, eutrophic Lake Rotorua. New Zealand using three in situ incubation experiments of 4 to 6 days' duration in summer 2004. Two of the incubations were conducted during stratification, and one immediately after breakdown of stratification. Samples were enriched with ammonium (1 mg NH 4 -N L -1 ), phosphate (0.1 mg PO 4 -P L -1 ) or with both nutrients. A control containing no added nutrients was used for comparison. Phytoplankton responses to nutrient additions were determined at a species level from cell counts and at a community level from changes in chlorophyll-a concentration. Phytoplankton biomass generally responded to N plus P "
+            },
+            {
+              "document_id": "W2017139372",
+              "title": "Phytoplankton community growth-rate response to nutrient pulses in a shallow turbid estuary, Galveston Bay, Texas",
+              "doi": "https://doi.org/10.1093/plankt/fbh035",
+              "year": "2004",
+              "distance": 0.267,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "Phytoplankton growth is a physiological process often limited by temperature, nutrients or light, while biomass accumulation is a function of growth rates, grazing and deposition. Although primary productivity measurements are usually used to assess responses to limiting factors, the rates are proportional to biomass and inversely related to grazing pressure during experimental incubations. Alternatively, carbon-specific growth-rate determinations provide insights into physiological responses without the confounding effects of biomass and grazing. The objective of this study was to quantify the growth-rate responses of phytoplankton to enhanced nutrient availability (nitrate and phosphate) o"
+            },
+            {
+              "document_id": "W2781655384",
+              "title": "Konsentrasi Klorofil-a dan Keterkaitannya dengan Nutrient N, P di Perairan Jepara : Studi Perbandingan Perairan Muara Sungai Wiso dan Serang",
+              "doi": "https://doi.org/10.14710/jkt.v20i2.1697",
+              "year": "2017",
+              "distance": 0.2677,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "The existenece of nutrient is highly affected by human activities and causing the amount of chlorophyll-a which is the indicator of water fertility. Muara Wiso is a location located in the urban center of Jepara while Serang estuary is mostly impacted by agriculture activities in the upper area. This study has compared the concentration of chlrorophyll-a and its association with N and P nutrients in the two different environmental conditions in Jepara waters. Nutrient N was determined as a nitrite ion using the sulphanilamide method after it was reduced using a reduction column. P was determined as orthophosphate using ascorbic acid and chlorophyll-a method which were extracted from water sa"
+            },
+            {
+              "document_id": "W2582886452",
+              "title": "<i>In Vivo</i> Single-Cell Fluorescence and Size Scaling of Phytoplankton Chlorophyll Content",
+              "doi": "https://doi.org/10.1128/aem.03317-16",
+              "year": "2017",
+              "distance": 0.2679,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "ABSTRACT In unicellular phytoplankton, the size scaling exponent of chlorophyll content per cell decreases with increasing light limitation. Empirical studies have explored this allometry by combining data from several species, using average values of pigment content and cell size for each species. The resulting allometry thus includes phylogenetic and size scaling effects. The possibility of measuring single-cell fluorescence with imaging-in-flow cytometry devices allows the study of the size scaling of chlorophyll content at both the inter- and intraspecific levels. In this work, the changing allometry of chlorophyll content was estimated for the first time for single phytoplankton populat"
+            },
+            {
+              "document_id": "W2159410991",
+              "title": "Phytoplankton dynamics within the subsurface chlorophyll maximum of Lake Michigan",
+              "doi": "https://doi.org/10.1093/plankt/6.5.751",
+              "year": "1984",
+              "distance": 0.2681,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "The Lake Michigan deep chlorophyll maximum during July 1977 was a broad band of phytoplankton −15 m thick rather than the thin layers observed in smaller lakes. The maximum concentration of chlorophyll was typically four times surface values. 14 C uptake incubations showed that the deep plankton layer was a viable component of the pelagic ecosystem accounting for up to 60% of primary production on an areal (m 2 ) basis. The Lake Michigan chlorophyll maximum was composed primarily of large diatoms, filaxnentous green algae, and flagellates. Although large scale physical processes such as seiches had some effect on the chlorophyll maximum, the basic integrity of the layer was maintained by bio"
+            },
+            {
+              "document_id": "W2026275351",
+              "title": "Time-lag algal growth dynamics: biological constraints on primary production in aquatic environments",
+              "doi": "https://doi.org/10.3354/meps033193",
+              "year": "1986",
+              "distance": 0.2734,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "Changes in the nutrient regime of phytoplankton cells induce variable time lags before the onset of cell division (quasi-instantaneous response to more than 24 h lags), dependent mainly on the algal species and the magnitude of the nutrient pulse.The latter parameter appears to be a main controlling factor in algal growth dynamics under transient conditions, overriding other variables such as temperature, irradiance and nutritional state.The presence of such phenomena puts intrinsic limits on primary production in a variable nutrient environment because algal cells are not made up of synthetic components only (sensu Williams 1971), but also of structural and genetic material.Under these cond"
+            },
+            {
+              "document_id": "W2069873746",
+              "title": "Role of inorganic nitrogen in the synthesis and degradation of chlorophyll and carotenoids in maize leaves",
+              "doi": "https://doi.org/10.1007/bf02878262",
+              "year": "1983",
+              "distance": 0.2757,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Supply of KNO3, NH4Cl or NH4NO3 to the maize seedlings increased total chlorophyll and carotenoids (over zero nitrogen control) amounts per fresh matter unit of the primary leaves. The increase was most apparent when the pigment level in control plants started declining,i.e. between days 14 and 16. Supply of inorganic nitrogen increased pigment synthesis in excised leaf segments from dark grown seedlings, although the increase during a 24 h incubation was not as high as with either glycine or glutamine. Salicylic acid at 0.01 to 1 mM concentration increased and at 10 mM lowered the pigment biosynthesis. The increase at lower concentrations of salicylic acid was unaffected by KNO3 but it was "
+            }
+          ]
+        }
+      }
+    }
+  }
+}

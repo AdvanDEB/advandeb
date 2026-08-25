@@ -39,7 +39,7 @@ class Settings:
 
     # Chat role-specific settings.
     CHAT_MODE: str = os.getenv("CHAT_MODE", "react")
-    CHAT_DEFAULT_TOP_K: int = int(os.getenv("CHAT_DEFAULT_TOP_K", "8"))
+    CHAT_DEFAULT_TOP_K: int = int(os.getenv("CHAT_DEFAULT_TOP_K", "20"))
     CHAT_ENABLE_EXTERNAL_FALLBACK: bool = (
         os.getenv("CHAT_ENABLE_EXTERNAL_FALLBACK", "true").lower() == "true"
     )
@@ -52,10 +52,30 @@ class Settings:
         CHAT_ANSWER_MODEL,
     )
     CHAT_ANSWER_NUM_CTX: int = int(os.getenv("CHAT_ANSWER_NUM_CTX", str(OLLAMA_NUM_CTX)))
+    # Max output tokens for the final answer (both Ollama num_predict and BYOK
+    # provider max_tokens). 1200 was too small and truncated answers — and for
+    # reasoning models the <think> block also consumes this budget.
+    CHAT_ANSWER_MAX_TOKENS: int = int(os.getenv("CHAT_ANSWER_MAX_TOKENS", "32000"))
     CHAT_VERIFY_NUM_CTX: int = int(os.getenv("CHAT_VERIFY_NUM_CTX", "4096"))
     CHAT_GRAPH_NUM_CTX: int = int(os.getenv("CHAT_GRAPH_NUM_CTX", "4096"))
     CHAT_FOLLOWUP_NUM_CTX: int = int(os.getenv("CHAT_FOLLOWUP_NUM_CTX", "2048"))
     CHAT_EXTERNAL_NUM_CTX: int = int(os.getenv("CHAT_EXTERNAL_NUM_CTX", str(OLLAMA_NUM_CTX)))
+
+    # ------------------------------------------------------------------
+    # Exploration quality (ReAct retrieval + reasoning)
+    # ------------------------------------------------------------------
+    # Max ReAct tool-calling steps before forcing a final answer.
+    CHAT_MAX_STEPS: int = int(os.getenv("CHAT_MAX_STEPS", "15"))
+    # Rerank fused hybrid-search candidates with the LLM reranker for precision.
+    CHAT_USE_RERANKING: bool = os.getenv("CHAT_USE_RERANKING", "true").lower() == "true"
+    # Enable adaptive thinking / reasoning-effort on any BYOK provider that
+    # supports it (Anthropic adaptive thinking, OpenAI/GitHub reasoning_effort,
+    # Gemini thinking, Ollama think). No-ops gracefully where unsupported.
+    CHAT_ADAPTIVE_THINKING: bool = (
+        os.getenv("CHAT_ADAPTIVE_THINKING", "true").lower() == "true"
+    )
+    # Effort level when adaptive thinking is on: low | medium | high | max.
+    CHAT_THINKING_EFFORT: str = os.getenv("CHAT_THINKING_EFFORT", "high")
 
     # ------------------------------------------------------------------
     # API / service

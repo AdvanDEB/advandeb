@@ -33,6 +33,9 @@ mcp/certs/key.pem
 # ── Data directories ─────────────────────────────────────────────────────────
 knowledge-builder/data/
 data/
+# …but the backend's shipped data files are source, not runtime state.
+!app/backend/app/data/
+!app/backend/app/data/**
 
 # ── Runtime / log files ──────────────────────────────────────────────────────
 logs/

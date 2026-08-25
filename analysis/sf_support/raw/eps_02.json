@@ -1,0 +1,824 @@
+{
+  "sf_id": "eps_02",
+  "category": "EPS Production",
+  "statement": "Cellular production rates of EPS and other extracellular carbohydrates increase with specific growth rate.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Snippet [1] directly states the stylized fact (cellular EPS/extracellular carbohydrate production rates increase with specific growth rate, citing source 38). Several DEB-based modeling papers (Livanou et al., LivaLaga2017) provide consistent supporting evidence: higher specific (per cell) carbohydrate release rates are observed in the exponential growth phase than the stationary phase ([2], [12], [14], [7]), aligning with the idea that production scales with growth rate. Snippet [4] (MarsTang2023) supports the mechanistic analog that extracellular enzyme production is proportional to specific growth rate. However, some snippets note maximum carbohydrate production at the transition/intermediate phase rather than strictly at peak growth, introducing minor nuance but not direct contradiction. Many remaining snippets are off-topic (cell size, C:N stoichiometry, rRNA/protein, maturity). Overall the evidence is moderate, with no contradicting findings, so the consensus direction is corroborative."
+      },
+      "n_references": 5,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33481329679489136
+        },
+        "69b8a441ecbd4702b29a770e": {
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3762843608856201
+        },
+        "69b847c2ec32c55db5430a35": {
+          "title": "MarsTang2023_SI.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.38533884286880493
+        },
+        "69b8484aec32c55db5430bc1": {
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 2,
+          "supports": 2,
+          "contradicts": 0,
+          "best_distance": 0.4100453853607178
+        },
+        "69b847bdec32c55db5430a29": {
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4195624589920044
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3348,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.95,
+          "text": "with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPSSF10. no EPS production results directly from light-dependent carbon assimilation; (38)SF11. cellular production rates of EPS and other extracellular carbohydrates increase with speciﬁc growth rate; (38)SF12. EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells; (38)1 Introduction 23A common approach in microalgae research is to obtain and generalize empirical patterns 24through experimental work. These patterns, which in this paper will be referred as stylized 25"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3763,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "the development of nutrient limitation.The pattern of speciﬁc PP and DOC release rates and the range of PER values predicted bythe present model is in accordance with many experimental and ﬁeld studies. For example,in nutrient-limited diatom cultures, maximum extracellular production of carbohydrates hasbeen observed at the transition phase between the exponential and the stationary phase(Alcoverro et al., 2000; Urbani et al., 2005), while higher speciﬁc (per cell) carbohydratesand amino acids release rates have been observed in the exponential phase than in the"
+        },
+        {
+          "document_id": "69b882bbecbd4702b29a4f08",
+          "title": "VredDobb2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3767,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "areallowed to differsubstantiallyatlowgrowthrateswhereasthestoichiometryathighgrowthrates is much more constricted at low N:P. The model ®ts empirical data reasonably well,butitisalsoacknowledgedthatcomplexlifecyclesandassociatedphysiologicalconstraintsmay result in other patterns. We also use a similar approach of modeling organism growthfrom basic biochemicalprinciplestoillustratefundamentalconnectionsamongbiochemicalallocation and C:N stoichiometry in autotroph production, which is based on allocationpatterns between carbohydrates and rubisco."
+        },
+        {
+          "document_id": "69b847c2ec32c55db5430a35",
+          "title": "MarsTang2023_SI.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3853,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "xtracellularenzyme production pX, i.e.,pC=pG+pM+pX. (5)The specific growth rate is then obtained by combining (5) and (3) asr=pGµEyEV=kEmE−(pM+pX)/µEmE+yEV(6)where yEVis the efficiency of the growth machinery. 22Extracellular enzyme production 23We only consider free extracellular enzymes that are released into the microenvironment by thecell [40]. In the absence of regulation, extracellular enzymes are produced constitutively at a specificratexproportional to the specific growth rate, i.e.x=pXµEyEX=zXpGµEyEX, (7)where zXscales the enzyme production power according to the normalized relative frequency of glycoside 24"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430add",
+          "title": "Aloi2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3859,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "biogeosciences.net/12/4665/2015/ Biogeosciences, 12, 4665–4692, 20154682 G. Aloisi: Covariation of metabolic rates and cell sizeuration power (Fig. 11b). Controls on cell size are slightlymore complicated. Cell size is affected both by the rate ofbiomass increase and by the generation time. Speciﬁcally,cell size is proportional both to the rate of biomass increaseand to the generation time (and thus inversely proportionalto the growth rate). The key model quantity determining howthe average cell size changes following a change in nutrientconcentrations is the ratio of the energy ﬂuxes dedicated togrowth and maturation:PpGPpR: (23)"
+        },
+        {
+          "document_id": "69b84780ec32c55db5430981",
+          "title": "Marschmann et al. - 2024 - Predictions of rhizosphere microbiome dynamics wit.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4038,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "maximum growth rates occur at suboptimal CUE for organisms with the fastest growth rates. The rate–yield trade-off emerges from thermodynamic constraints reflecting energy generation and trans -fer from catabolism to anabolism, resulting in decreasing structural biomass yield to accommodate increasing protein synthesis rates (Supplementary Fig. 5), as well as increased maintenance costs at high growth rates. Energy dissipation increases with the rate of C uptake50, resulting in lower thermodynamic efficiency for growth on amino acids as compared with sugars, and an overall disproportional scaling"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.41,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "theca closterium carbohydrates content washigher under P-limited growth than under N-limited growth (Alcoverro et al., 2000). 20Irrespective of the limiting nutrient, our results showed that DOC release rate followed closely the carbohydrates reservedensity dynamics. DOC was produced at high and steady structural mass-speciﬁc rates during the nutrient-replete period ofgrowth. Speciﬁc DOC release rate had a maximum value during the intermediate phase and a minimum value in the nutrient-limited phase as a result of the reduced photosynthetic rate (PP) during this phase, that fuels the ECH-reserve. Conversely, PER,"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430add",
+          "title": "Aloi2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4149,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "BIO: (20)At any time, the instantaneous growth rate \u0016INST (in day\u00001/can be calculated as the ratio of the carbon uptake rate andthe cellular carbon quota:\u0016INSTDPJGMV: (21)Figure 10 shows how maturity, cell volume and the instan-taneous growth rate (calculated with Eq. 21) evolve during atypical model run in non-limiting conditions. The model isrun starting with initial cell size equal to 10 µm3. As nutri-ents are taken up, they contribute to the structure. Biomassand cell size increase. As the cell grows, maturity accumu-lates until the threshold maturity for cell division is attained"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4156,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "f the maturationSUs.The metabolic relevance of cell size is in membrane-cytoplasm interactions; many catalysing enzymes are onlyactive when bound to membranes (Baltscheffsky, Schultz &Baltscheffsky, 1999), and cellular compartmentalisationaffects morphology and metabolism. The turnover ofreserve decreases with a length measure for an isomorphiccell, which comes with the need to reset cell size. Apart fromthe increase of residence time of compounds in the reservewith a length measure, the cell’s surface area to volumeratio decreases with increasing cell size, as does the growthpotential. The increase in metabolic performance requires"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4165,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "l puberty, all further growth is onlyby cell growth; gastrotrichs complete all cell divisions even at birth. Cells of some typesof tissue or organs of animals that don’t sport eutely loose their ability to divide andfurther growth only results from cell growth. The relationship between cell growth andbody growth is a complex one in multicellulars.While the specific change in volume and weight ˙ rat constant food density is decreasingwith age after birth in the standard DEB model, the growth rate ˙ rWor ˙rL3has a maximumforddt˙r+ ˙r2= 0 (this follows fromddt˙rL3= 0 withddtL=L˙r/3), which occurs at L=23L∞,with L∞=fLm−LTanda−ab= ˙r−1"
+        },
+        {
+          "document_id": "69b882bbecbd4702b29a4f08",
+          "title": "VredDobb2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4167,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "310213sec]). Since proteinsynthesis rate to a large extent depends on the numberof ribosomes rather than their ef®ciency (Nomura etal. 1984), a high growth rate should be closely relatedto the protein production rate and to the amount ofrRNA in a cell."
+        },
+        {
+          "document_id": "69b847bdec32c55db5430a29",
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4196,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "e of PER values predicted by our model is in accordance withmany experimental and ﬁeld studies. For example, in nutrient-limiteddiatom cultures, maximum extracellular production of carbohydrateshas been observed at the transition phase between the exponential andthe stationary phase ( Alcoverro et al., 2000; Urbani et al., 2005), whilehigher speci ﬁc (per cell) carbohydrates and amino acids release rateshave been observed in the exponential phase than in the stationaryphase ( Myklestad et al., 1989; Myklestad, 1995 ;Granum et al., 2002;Flynnet al., 2008). Furthermore, in a study with the diatom Chaetoceros"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4205,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "diatoms glucose has been also identiﬁed asthe most abundant monomer during the exponential, nutrient-replete phase of growth inthe extracellular carbohydrates. A pronounced decrease of glucose and increase of het-eropolysacharides, containing various monomers, has been observed in the stationary phase(Underwood et al., 2004; Urbani et al., 2005). In addition, in N-replete cultures of T. pseudo-nanaamino acids accounted for 70% of total DOC while carbohydrates accounted for therest 30 %. On the other hand, extracellular release of amino acids decreased markedly in the"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4223,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.8,
+          "text": "limitation.The pattern of PP and DOC release rates and the range of PER values predicted by our model is in accordance with manyexperimental and ﬁeld studies. For example, in nutrient-limited diatom cultures, maximum extracellular production of carbo-hydrates has been observed at the transition phase between the exponential and the stationary phase (Alcoverro et al., 2000; 30Urbani et al., 2005), while higher speciﬁc (per cell) carbohydrates release rate has been observed in the exponential phasethan in the stationary phase (Myklestad, 1995; Myklestad et al., 1989; Granum et al., 2002; Flynn et al., 2008). Furthermore,"
+        },
+        {
+          "document_id": "69b882bbecbd4702b29a4f08",
+          "title": "VredDobb2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4295,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "mical mechanisms underlying a major determinantof N cycling in ecosystems.At the outset we note that this approach is not likelyto be strictly accurate, or least precisely analogous tothe analysis performed above for rRNA and protein,asthe carbohydrate output of photosynthesis is not de-ployed solely as carbohydrate or carbohydrate poly-mers.Instead,aconsiderableamountoftheoutputmustalso be shunted into biosynthesis pathways for synthe-sis of other macromolecules, such as lipids, proteins,and nucleic acids. Thus, we would expect that the ap-proach will overestimate growth rate relative to ob-served values."
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4328,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "017-426Manuscript under review for journal BiogeosciencesDiscussion started: 23 October 2017c Author(s) 2017. CC BY 4.0 License.(cell content) and less signiﬁcant in the larger size fractions (>10 kDa) (Borchard and Engel, 2015). In contrast, arabinoseand galacturonic acid were the most abundant monomers in the larger size fractions and contributed less to the small andparticulate size fractions (Borchard and Engel, 2015). In cultures of marine diatoms, glucose has been identiﬁed as the mostabundant monomer during the exponential, nutrient-replete phase of growth in the extracellular carbohydrates. A pronounced"
+        },
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4331,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "est existing and new models 501for the production extracellular carbohydrates. A third issue that should be completed is the 50221collection and comparison of parameter values for microalgae species. This is simpliﬁed in the 503context of DEB theory since it gives a framework in which parameter values can be systemati- 504cally categorized and compared for most microalgae species. 505Acknowledgments 506The authors are grateful to Prof. J.C. Poggiale for his helpful comments and M. Baklouti 507for providing the experimental data presented. The authors would also like to thank three 508"
+        },
+        {
+          "document_id": "69b882bbecbd4702b29a4f08",
+          "title": "VredDobb2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4348,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "eed 95%.(A) Potential growth rate of the carbohydrate biomass (mp) assuming 30% respiratory losses. (B) Potential growth rate ofthe biomass ( m) assuming balanced growth (no change in relative allocation to different biomolecules) and respiratory lossof 50%.ular rubisco allocation, and tis the time interval as-sumed. Once biomass C:N and growth rate were cal-culated for each feasible combination of carbohydrateandrubiscoallocations,C:Nwasplottedagainstgrowthrate for different values of rubisco allocation holdingcarbohydrate allocation constant.The model reveals trends similar to those resulting"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "Only one snippet (9, with its companion 1) bears meaningfully on the stylized fact: it states that accumulation of extracellular carbohydrates and polysaccharides in algal culture media depended on cell photosynthetic activity and reproduction, weakly consistent with production scaling with growth. However, it does not quantify a rate-versus-specific-growth-rate relationship, so the support is only indirect. All other snippets concern unrelated topics (fish meal diets, plant carbohydrate allocation, bivalve growth efficiency, embryo metabolism, general growth laws) and provide no bearing on the EPS-production-versus-growth-rate claim. The corpus offers sparse, weak support and no contradiction, so evidence strength is low and the direction is best judged as insufficient/neutral."
+      },
+      "n_references": 1,
+      "references": {
+        "W2010994958": {
+          "title": "[Extracellular carbohydrates and polysaccharides of the algae Chlorella pyrenoidosa Chick S-39].",
+          "doi": "",
+          "year": "2005",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4455089569091797
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W2010994958",
+          "title": "[Extracellular carbohydrates and polysaccharides of the algae Chlorella pyrenoidosa Chick S-39].",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "In the growing culture of the thermophilic alga Chlorella pyrenoidosa Chick S-39, the amount of extracellular carbohydrates in the medium reached 5-17% of their content in the cells and 20-40% of the total content of extracellular organic matter."
+        },
+        {
+          "document_id": "W2113539254",
+          "title": "The Response of Chicks to Fish Meal in Relation to the Composition of the Basal Diet",
+          "doi": "10.3382/ps.0350924",
+          "year": "1956",
+          "distance": 0.4123,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "EVIDENCE has been presented supporting the view that carbohydrates influence the sensitivity of purified diets to unidentified growth factors. Arscott et al. (1955) have reviewed this aspect of the problem and submitted data of their own showing that significantly greater growth responses to unidentified factors were obtained with sucrose diets than from cerelose diets and greater responses from diets containing iodinated casein than from diets not containing this compound."
+        },
+        {
+          "document_id": "W2424520363",
+          "title": "THE STRATEGIES OF MORPHOLOGY, REPRODUCTION AND CARBOHYDRATE METABOLISM OF Hydrilla verticillata (Linn.f.) Royle IN FLUCTUATING WATERS",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.4269,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "ld acclimatize itself to different water depths and conditions via physiological and morphological changes in the life history. However, in different water depth, the strategies of morphology acclimations, reproduction and carbohydrate metabolism showed various states, and some significant differences were detectable between them in most measured indexes. The relative growth rate (RGR) of the plants increased with water depth until 120 cm, which were 74.1 +/- 2.5 mg.g(-1).d(-1) dry weight (DW) and 68.6 +/- 2.2 mg.g(-1).d(-1) DW at 120 and 90 cm water levels."
+        },
+        {
+          "document_id": "W2793585498",
+          "title": "Effects of bud-flushing strategies on tree growth",
+          "doi": "10.1093/treephys/tpy005",
+          "year": "2018",
+          "distance": 0.4282,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Allocation of carbohydrates between competing organs is fundamental to plant development, growth and productivity. Carbohydrates are synthesized in mature leaves and distributed via the phloem vasculature to developing buds where they are consumed to produce new biomass. The distribution and mass-allocation processes within the plant remain poorly understood and may involve complex feedbacks between different plant functions, with implications for the emergent structure of the plant."
+        },
+        {
+          "document_id": "W2035003163",
+          "title": "CELL SIZE DIFFERENTIATION IN THE BLOOM‐FORMING DINOFLAGELLATE<i>GYMNODINIUM</i>CF.<i>NAGASAKIENSE</i><sup>1</sup>",
+          "doi": "10.1111/j.0022-3646.1989.00741.x",
+          "year": "1989",
+          "distance": 0.4297,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "growth dynamics; therefore, any intermediary between pure populations of “small” and of “large” cells were observed in culture. The “large” form generated a “small” cell by an atypical budding‐like division, whereas the “small” form gave back a “large” form, once it ceased to divide, by simple enlargement of its cell body. Factory inducing cell size differentiation are yet unclear. Neither nitrogen nor phosphorus starvation induced a significant increase in the relative proportion of “small” and budding cells."
+        },
+        {
+          "document_id": "W1998891945",
+          "title": "Quantitative seasonal changes in the protein, lipid and energy content of the carcass, ovaries and liver of adult female plaice, <i>Pleuronectes platessa</i> L.",
+          "doi": "10.1111/j.1095-8649.1980.tb03729.x",
+          "year": "1980",
+          "distance": 0.4387,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "and the remainder 167 kcal, is used in growth. There is an increase in length to 35.9 cm and in weight to 462 g over the year. From December until March, when plaice do not feed but grow large ovaries, 40% of the protein in the body is utilised, 33% is devoted to egg production and 7% is metabolised to provide energy; 64% of the lipid is used, only 14% being used for egg production but 50% is metabolised for energy. Lipid supplies 75% of the energy for metabolism and so forms the major reserve; 42% of the energy assimilated during the year is devoted to reproduction. The main source of lipid and protein reserves is the carcass."
+        },
+        {
+          "document_id": "W1893581393",
+          "title": "Spatial and temporal deployment of crop roots in CO<sub>2</sub>‐enriched environments",
+          "doi": "10.1046/j.1469-8137.2000.00678.x",
+          "year": "2000",
+          "distance": 0.4411,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Growth of crops in CO 2 ‐enriched atmospheres typically results in significant changes in root growth and development. Increased root carbohydrates stimulate root growth either directly (functioning as substrates) or indirectly (functioning as signal molecules) by enhancing cell division or cell expansion, or both."
+        },
+        {
+          "document_id": "W2111958635",
+          "title": "Variation of (1 leads to 3)-beta-glucanases in Saccharomyces cerevisiae during vegetative growth, conjugation, and sporulation",
+          "doi": "10.1128/jb.156.3.1214-1221.1983",
+          "year": "1983",
+          "distance": 0.4448,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "of the increase was due to a dramatic rise in the activity of glucanase V, which appeared to be a sporulation-specific enzyme. Glucanase activity was not derepressed by lowering the glucose concentration in the growth medium."
+        },
+        {
+          "document_id": "W2010994958",
+          "title": "[Extracellular carbohydrates and polysaccharides of the algae Chlorella pyrenoidosa Chick S-39].",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.4455,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.5,
+          "text": "ates in the medium reached 5-17% of their content in the cells and 20-40% of the total content of extracellular organic matter. Experiments with the enrichment and synchronous algal cultures showed that the accumulation of extracellular carbohydrates and polysaccharides in the media occurred due to their release from the cells, rather than to cell lysis, and depended on cell photosynthetic activity and reproduction. Chromatographic determination of free sugars revealed the presence of saccharose, glucose, and fructose in the culture medium. Extracellular carbohydrates in C."
+        },
+        {
+          "document_id": "W2471620773",
+          "title": "Growth rate evolution in improved environments under Prodigal Son dynamics",
+          "doi": "10.1111/eva.12403",
+          "year": "2016",
+          "distance": 0.4493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "growth, which I call Prodigal Son dynamics, because the consequences of ‘living fast’ force a return to ancestral growth rates. Understanding the conditions under which environmental enrichment is expected to sustainably increase cell division rates is important in applications that require rapid cell division (e.g. biofuel reactors) or seek to avoid the emergence of rapid cell division rates (controlling biofouling)."
+        },
+        {
+          "document_id": "W2137882243",
+          "title": "The effect of nutrient enrichment on the growth, nucleic acid concentrations, and elemental stoichiometry of coral reef macroalgae",
+          "doi": "10.1002/ece3.330",
+          "year": "2012",
+          "distance": 0.4501,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract The growth rate hypothesis ( GRH ) links growth rates with organism elemental stoichiometry. Support for the GRH was found for many animal species, but less so for plants. This is the first study to test the GRH in macroalgae."
+        },
+        {
+          "document_id": "W2424520363",
+          "title": "THE STRATEGIES OF MORPHOLOGY, REPRODUCTION AND CARBOHYDRATE METABOLISM OF Hydrilla verticillata (Linn.f.) Royle IN FLUCTUATING WATERS",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.4504,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "20 cm, which were 74.1 +/- 2.5 mg.g(-1).d(-1) dry weight (DW) and 68.6 +/- 2.2 mg.g(-1).d(-1) DW at 120 and 90 cm water levels. The number of ramets and shoots, especially the flowering buds number &amp;amp; biomass, which is important for colonization and the maintenance of macrophyte populations, were relatively higher at 90 cm water level. Among the three different non-structural carbohydrates (soluble sugar, reducing sugar and starch) measured, which can increase the ability of the plant to re-grow, or survive time periods of seasonal dormancy, H."
+        },
+        {
+          "document_id": "W2807658808",
+          "title": "Physical Paradigm of Life as a Generalization of Biochemical Conception. A Physical Law Governing Life Origin and Development",
+          "doi": "10.5281/zenodo.3949223",
+          "year": "2020",
+          "distance": 0.4538,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "re, we present such a <em>physical</em> mechanism (General growth law), which represents a new <em>physical</em> law of nature. It acts at cellular, organ, system and whole organism scale levels, directing growth and reproduction together with biomolecular mechanisms by imposing uniquely defined constraints on distribution of nutrients between biomass production and maintenance, thus defining the composition of biochemical reactions, their change and irreversibility during the organismal life cycle. Mathematically, this law is represented by the growth equation."
+        },
+        {
+          "document_id": "W1968287417",
+          "title": "Growth efficiencies and factors controlling size in some mytilid bivalves. Especially<i>Mytilus edulis</i>L.: review and interpretation",
+          "doi": "10.1080/00785326.1976.10425457",
+          "year": "1976",
+          "distance": 0.454,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "absorbed food energy into growth and reproduction, and to evaluate which factors control these maximum net growth efficiencies. It is concluded that high maximum growth efficiencies can be maintained at a constant level up to a certain critical body size above which the maximum growth efficiency declines with increasing size. The critical body size at which growth efficiency starts to decline is independent of the initial level of maximum growth efficiency. The maximum body size that can be attained depends upon the body size at which the growth efficiency starts to decline and the rate at which it is declining."
+        },
+        {
+          "document_id": "W2023475777",
+          "title": "The twelfth Tansley Lecture. Small is beautiful: the picophytoplankton",
+          "doi": "10.1046/j.1365-2435.1998.00233.x",
+          "year": "1998",
+          "distance": 0.4545,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "growth rate in smaller cells, increases the availability of low concentrations of nutrients to small relative to larger cells. If the supply of CO 2 to the core photosynthetic carboxylase ribulose bisphosphate carboxylase‐oxygenase is purely by diffusion then smaller cells could satisfy their catalytic requirements with less of this enzyme whose synthesis has high energy, C and N costs. Overall, resources can be acquired, and used in growth, more effectively in smaller than in larger cells. 4. Some factors work against the conclusion in ( 3. ) but, in most habitats, do not negate these conclusions."
+        },
+        {
+          "document_id": "W2151059249",
+          "title": "Growth and reproduction of <i>Arabidopsis thaliana</i> in relation to storage of starch and nitrate in the wild‐type and in starch‐deficient and nitrate‐uptake‐deficient mutants",
+          "doi": "10.1111/j.1365-3040.1994.tb00174.x",
+          "year": "1994",
+          "distance": 0.4564,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "tions of nitrate and organic nitrogen and shoot growth on the one hand, and sucrose concentration and root growth on the other. In addition, nitrate reductase activity (NRA) was correlated with the total carbohydrate concentration: low carbohydrate levels in starchless mutants led to low NRA even at high nitrate supply. Thus the concentrations of stored carbohydrates and nitrate are directly or indirectly involved in regulating allocation."
+        },
+        {
+          "document_id": "W2099564666",
+          "title": "Is there a universal rule for cellular growth? - Problems in studying and interpreting this phenomenon",
+          "doi": "10.1111/1567-1364.12168",
+          "year": "2014",
+          "distance": 0.4634,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "y that there is a general law describing the growth kinetics of every cell considering that several of them do not grow at all. However, when unicellular microorganisms (like bacteria or yeasts) reside in a stirred liquid medium containing appropriate nutrients both in qualitative and quantitative terms, the pure culture soon reaches an exponential phase of growth where the cell number (or cell mass) increases exponentially in time (Black, ⇓). Notably, the known general growth kinetics of this asynchronous population tells us nothing about the growth kinetics of mass observed in the individual cells of the population."
+        },
+        {
+          "document_id": "W4249371669",
+          "title": "92 UTILISATION OF ENDOGENOUS FATTY ACID STORES FOR ENERGY PRODUCTION IN BOVINE PRE-IMPLANTATION EMBRYOS",
+          "doi": "10.1071/rdv24n1ab92",
+          "year": "2011",
+          "distance": 0.4635,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "and cultured for 4 days. The absence of carbohydrates during culture resulted in embryos arresting at the 2- and 4-cell stages. Remarkably, +carnitine significantly increased development to the morula stage compared with +carbohydrates alone (20.4 ± 3% vs 4.7 ± 2.5% morula development; P &amp;lt; 0.001)."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Snippet 1 directly states the stylized fact verbatim (citing ref 38), and several other snippets provide consistent support: snippets 2 and 12 report higher specific carbohydrate/DOC release rates in the exponential (high-growth) phase than the stationary phase, snippet 4 models extracellular enzyme production as proportional to specific growth rate, and snippets 13/21 link extracellular carbohydrate accumulation to cell reproduction and photosynthetic activity. There is some nuance—snippets 2, 7, and 12 note maximum carbohydrate production at the transition to nutrient limitation, which is a phase-specific effect rather than a contradiction. No snippet directly contradicts the fact. The supporting evidence is moderate, largely originating from the same DEB modeling lineage plus a couple of empirical algal studies, so consensus is corroborative but not overwhelmingly strong."
+      },
+      "n_references": 6,
+      "references": {
+        "69b84745ec32c55db54307bf": {
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.33481329679489136
+        },
+        "69b8a441ecbd4702b29a770e": {
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3762843608856201
+        },
+        "69b847c2ec32c55db5430a35": {
+          "title": "MarsTang2023_SI.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.38533884286880493
+        },
+        "69b8484aec32c55db5430bc1": {
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 0,
+          "best_distance": 0.4100453853607178
+        },
+        "69b847bdec32c55db5430a29": {
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4195624589920044
+        },
+        "W2010994958": {
+          "title": "[Extracellular carbohydrates and polysaccharides of the algae Chlorella pyrenoidosa Chick S-39].",
+          "doi": "",
+          "year": "2005",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.4455089569091797
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b84745ec32c55db54307bf",
+          "title": "LoreMarq2010.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3348,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "with irradiance; (21)SF9. chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions; (3, 11)EPSSF10. no EPS production results directly from light-dependent carbon assimilation; (38)SF11. cellular production rates of EPS and other extracellular carbohydrates increase with speciﬁc growth rate; (38)SF12. EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells; (38)1 Introduction 23A common approach in microalgae research is to obtain and generalize empirical patterns 24through experimental work. These patterns, which in this paper will be referred as stylized 25"
+        },
+        {
+          "document_id": "69b8a441ecbd4702b29a770e",
+          "title": "Livanou, Eleni - 2020 - Metabolic processes and ecological adaptations of .pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3763,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "the development of nutrient limitation.The pattern of speciﬁc PP and DOC release rates and the range of PER values predicted bythe present model is in accordance with many experimental and ﬁeld studies. For example,in nutrient-limited diatom cultures, maximum extracellular production of carbohydrates hasbeen observed at the transition phase between the exponential and the stationary phase(Alcoverro et al., 2000; Urbani et al., 2005), while higher speciﬁc (per cell) carbohydratesand amino acids release rates have been observed in the exponential phase than in the"
+        },
+        {
+          "document_id": "69b882bbecbd4702b29a4f08",
+          "title": "VredDobb2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3767,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "areallowed to differsubstantiallyatlowgrowthrateswhereasthestoichiometryathighgrowthrates is much more constricted at low N:P. The model ®ts empirical data reasonably well,butitisalsoacknowledgedthatcomplexlifecyclesandassociatedphysiologicalconstraintsmay result in other patterns. We also use a similar approach of modeling organism growthfrom basic biochemicalprinciplestoillustratefundamentalconnectionsamongbiochemicalallocation and C:N stoichiometry in autotroph production, which is based on allocationpatterns between carbohydrates and rubisco."
+        },
+        {
+          "document_id": "69b847c2ec32c55db5430a35",
+          "title": "MarsTang2023_SI.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3853,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "xtracellularenzyme production pX, i.e.,pC=pG+pM+pX. (5)The specific growth rate is then obtained by combining (5) and (3) asr=pGµEyEV=kEmE−(pM+pX)/µEmE+yEV(6)where yEVis the efficiency of the growth machinery. 22Extracellular enzyme production 23We only consider free extracellular enzymes that are released into the microenvironment by thecell [40]. In the absence of regulation, extracellular enzymes are produced constitutively at a specificratexproportional to the specific growth rate, i.e.x=pXµEyEX=zXpGµEyEX, (7)where zXscales the enzyme production power according to the normalized relative frequency of glycoside 24"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430add",
+          "title": "Aloi2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3859,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "biogeosciences.net/12/4665/2015/ Biogeosciences, 12, 4665–4692, 20154682 G. Aloisi: Covariation of metabolic rates and cell sizeuration power (Fig. 11b). Controls on cell size are slightlymore complicated. Cell size is affected both by the rate ofbiomass increase and by the generation time. Speciﬁcally,cell size is proportional both to the rate of biomass increaseand to the generation time (and thus inversely proportionalto the growth rate). The key model quantity determining howthe average cell size changes following a change in nutrientconcentrations is the ratio of the energy ﬂuxes dedicated togrowth and maturation:PpGPpR: (23)"
+        },
+        {
+          "document_id": "69b84780ec32c55db5430981",
+          "title": "Marschmann et al. - 2024 - Predictions of rhizosphere microbiome dynamics wit.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4038,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "maximum growth rates occur at suboptimal CUE for organisms with the fastest growth rates. The rate–yield trade-off emerges from thermodynamic constraints reflecting energy generation and trans -fer from catabolism to anabolism, resulting in decreasing structural biomass yield to accommodate increasing protein synthesis rates (Supplementary Fig. 5), as well as increased maintenance costs at high growth rates. Energy dissipation increases with the rate of C uptake50, resulting in lower thermodynamic efficiency for growth on amino acids as compared with sugars, and an overall disproportional scaling"
+        },
+        {
+          "document_id": "69b8484aec32c55db5430bc1",
+          "title": "LivaLaga2017.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.41,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.5,
+          "text": "theca closterium carbohydrates content washigher under P-limited growth than under N-limited growth (Alcoverro et al., 2000). 20Irrespective of the limiting nutrient, our results showed that DOC release rate followed closely the carbohydrates reservedensity dynamics. DOC was produced at high and steady structural mass-speciﬁc rates during the nutrient-replete period ofgrowth. Speciﬁc DOC release rate had a maximum value during the intermediate phase and a minimum value in the nutrient-limited phase as a result of the reduced photosynthetic rate (PP) during this phase, that fuels the ECH-reserve. Conversely, PER,"
+        },
+        {
+          "document_id": "69b847e9ec32c55db5430add",
+          "title": "Aloi2015.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4149,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "BIO: (20)At any time, the instantaneous growth rate \u0016INST (in day\u00001/can be calculated as the ratio of the carbon uptake rate andthe cellular carbon quota:\u0016INSTDPJGMV: (21)Figure 10 shows how maturity, cell volume and the instan-taneous growth rate (calculated with Eq. 21) evolve during atypical model run in non-limiting conditions. The model isrun starting with initial cell size equal to 10 µm3. As nutri-ents are taken up, they contribute to the structure. Biomassand cell size increase. As the cell grows, maturity accumu-lates until the threshold maturity for cell division is attained"
+        },
+        {
+          "document_id": "69b8478eec32c55db54309a5",
+          "title": "KooyTroo2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4156,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "f the maturationSUs.The metabolic relevance of cell size is in membrane-cytoplasm interactions; many catalysing enzymes are onlyactive when bound to membranes (Baltscheffsky, Schultz &Baltscheffsky, 1999), and cellular compartmentalisationaffects morphology and metabolism. The turnover ofreserve decreases with a length measure for an isomorphiccell, which comes with the need to reset cell size. Apart fromthe increase of residence time of compounds in the reservewith a length measure, the cell’s surface area to volumeratio decreases with increasing cell size, as does the growthpotential. The increase in metabolic performance requires"
+        },
+        {
+          "document_id": "69b847a7ec32c55db54309d2",
+          "title": "Kooy2010_c.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4165,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "l puberty, all further growth is onlyby cell growth; gastrotrichs complete all cell divisions even at birth. Cells of some typesof tissue or organs of animals that don’t sport eutely loose their ability to divide andfurther growth only results from cell growth. The relationship between cell growth andbody growth is a complex one in multicellulars.While the specific change in volume and weight ˙ rat constant food density is decreasingwith age after birth in the standard DEB model, the growth rate ˙ rWor ˙rL3has a maximumforddt˙r+ ˙r2= 0 (this follows fromddt˙rL3= 0 withddtL=L˙r/3), which occurs at L=23L∞,with L∞=fLm−LTanda−ab= ˙r−1"
+        },
+        {
+          "document_id": "69b882bbecbd4702b29a4f08",
+          "title": "VredDobb2004.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4167,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "310213sec]). Since proteinsynthesis rate to a large extent depends on the numberof ribosomes rather than their ef®ciency (Nomura etal. 1984), a high growth rate should be closely relatedto the protein production rate and to the amount ofrRNA in a cell."
+        },
+        {
+          "document_id": "69b847bdec32c55db5430a29",
+          "title": "Livanou e.a. - 2019 - A DEB-based approach of modeling dissolved organic.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.4196,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.7,
+          "text": "e of PER values predicted by our model is in accordance withmany experimental and ﬁeld studies. For example, in nutrient-limiteddiatom cultures, maximum extracellular production of carbohydrateshas been observed at the transition phase between the exponential andthe stationary phase ( Alcoverro et al., 2000; Urbani et al., 2005), whilehigher speci ﬁc (per cell) carbohydrates and amino acids release rateshave been observed in the exponential phase than in the stationaryphase ( Myklestad et al., 1989; Myklestad, 1995 ;Granum et al., 2002;Flynnet al., 2008). Furthermore, in a study with the diatom Chaetoceros"
+        },
+        {
+          "document_id": "W2010994958",
+          "title": "[Extracellular carbohydrates and polysaccharides of the algae Chlorella pyrenoidosa Chick S-39].",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.4093,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "In the growing culture of the thermophilic alga Chlorella pyrenoidosa Chick S-39, the amount of extracellular carbohydrates in the medium reached 5-17% of their content in the cells and 20-40% of the total content of extracellular organic matter."
+        },
+        {
+          "document_id": "W2113539254",
+          "title": "The Response of Chicks to Fish Meal in Relation to the Composition of the Basal Diet",
+          "doi": "10.3382/ps.0350924",
+          "year": "1956",
+          "distance": 0.4123,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "EVIDENCE has been presented supporting the view that carbohydrates influence the sensitivity of purified diets to unidentified growth factors. Arscott et al. (1955) have reviewed this aspect of the problem and submitted data of their own showing that significantly greater growth responses to unidentified factors were obtained with sucrose diets than from cerelose diets and greater responses from diets containing iodinated casein than from diets not containing this compound."
+        },
+        {
+          "document_id": "W2424520363",
+          "title": "THE STRATEGIES OF MORPHOLOGY, REPRODUCTION AND CARBOHYDRATE METABOLISM OF Hydrilla verticillata (Linn.f.) Royle IN FLUCTUATING WATERS",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.4269,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ld acclimatize itself to different water depths and conditions via physiological and morphological changes in the life history. However, in different water depth, the strategies of morphology acclimations, reproduction and carbohydrate metabolism showed various states, and some significant differences were detectable between them in most measured indexes. The relative growth rate (RGR) of the plants increased with water depth until 120 cm, which were 74.1 +/- 2.5 mg.g(-1).d(-1) dry weight (DW) and 68.6 +/- 2.2 mg.g(-1).d(-1) DW at 120 and 90 cm water levels."
+        },
+        {
+          "document_id": "W2793585498",
+          "title": "Effects of bud-flushing strategies on tree growth",
+          "doi": "10.1093/treephys/tpy005",
+          "year": "2018",
+          "distance": 0.4282,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Allocation of carbohydrates between competing organs is fundamental to plant development, growth and productivity. Carbohydrates are synthesized in mature leaves and distributed via the phloem vasculature to developing buds where they are consumed to produce new biomass. The distribution and mass-allocation processes within the plant remain poorly understood and may involve complex feedbacks between different plant functions, with implications for the emergent structure of the plant."
+        },
+        {
+          "document_id": "W2035003163",
+          "title": "CELL SIZE DIFFERENTIATION IN THE BLOOM‐FORMING DINOFLAGELLATE<i>GYMNODINIUM</i>CF.<i>NAGASAKIENSE</i><sup>1</sup>",
+          "doi": "10.1111/j.0022-3646.1989.00741.x",
+          "year": "1989",
+          "distance": 0.4297,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "growth dynamics; therefore, any intermediary between pure populations of “small” and of “large” cells were observed in culture. The “large” form generated a “small” cell by an atypical budding‐like division, whereas the “small” form gave back a “large” form, once it ceased to divide, by simple enlargement of its cell body. Factory inducing cell size differentiation are yet unclear. Neither nitrogen nor phosphorus starvation induced a significant increase in the relative proportion of “small” and budding cells."
+        },
+        {
+          "document_id": "W1998891945",
+          "title": "Quantitative seasonal changes in the protein, lipid and energy content of the carcass, ovaries and liver of adult female plaice, <i>Pleuronectes platessa</i> L.",
+          "doi": "10.1111/j.1095-8649.1980.tb03729.x",
+          "year": "1980",
+          "distance": 0.4387,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "and the remainder 167 kcal, is used in growth. There is an increase in length to 35.9 cm and in weight to 462 g over the year. From December until March, when plaice do not feed but grow large ovaries, 40% of the protein in the body is utilised, 33% is devoted to egg production and 7% is metabolised to provide energy; 64% of the lipid is used, only 14% being used for egg production but 50% is metabolised for energy. Lipid supplies 75% of the energy for metabolism and so forms the major reserve; 42% of the energy assimilated during the year is devoted to reproduction. The main source of lipid and protein reserves is the carcass."
+        },
+        {
+          "document_id": "W1893581393",
+          "title": "Spatial and temporal deployment of crop roots in CO<sub>2</sub>‐enriched environments",
+          "doi": "10.1046/j.1469-8137.2000.00678.x",
+          "year": "2000",
+          "distance": 0.4411,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Growth of crops in CO 2 ‐enriched atmospheres typically results in significant changes in root growth and development. Increased root carbohydrates stimulate root growth either directly (functioning as substrates) or indirectly (functioning as signal molecules) by enhancing cell division or cell expansion, or both."
+        },
+        {
+          "document_id": "W2111958635",
+          "title": "Variation of (1 leads to 3)-beta-glucanases in Saccharomyces cerevisiae during vegetative growth, conjugation, and sporulation",
+          "doi": "10.1128/jb.156.3.1214-1221.1983",
+          "year": "1983",
+          "distance": 0.4448,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "of the increase was due to a dramatic rise in the activity of glucanase V, which appeared to be a sporulation-specific enzyme. Glucanase activity was not derepressed by lowering the glucose concentration in the growth medium."
+        },
+        {
+          "document_id": "W2010994958",
+          "title": "[Extracellular carbohydrates and polysaccharides of the algae Chlorella pyrenoidosa Chick S-39].",
+          "doi": "",
+          "year": "2005",
+          "distance": 0.4455,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ates in the medium reached 5-17% of their content in the cells and 20-40% of the total content of extracellular organic matter. Experiments with the enrichment and synchronous algal cultures showed that the accumulation of extracellular carbohydrates and polysaccharides in the media occurred due to their release from the cells, rather than to cell lysis, and depended on cell photosynthetic activity and reproduction. Chromatographic determination of free sugars revealed the presence of saccharose, glucose, and fructose in the culture medium. Extracellular carbohydrates in C."
+        },
+        {
+          "document_id": "W2471620773",
+          "title": "Growth rate evolution in improved environments under Prodigal Son dynamics",
+          "doi": "10.1111/eva.12403",
+          "year": "2016",
+          "distance": 0.4493,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "growth, which I call Prodigal Son dynamics, because the consequences of ‘living fast’ force a return to ancestral growth rates. Understanding the conditions under which environmental enrichment is expected to sustainably increase cell division rates is important in applications that require rapid cell division (e.g. biofuel reactors) or seek to avoid the emergence of rapid cell division rates (controlling biofouling)."
+        },
+        {
+          "document_id": "W2137882243",
+          "title": "The effect of nutrient enrichment on the growth, nucleic acid concentrations, and elemental stoichiometry of coral reef macroalgae",
+          "doi": "10.1002/ece3.330",
+          "year": "2012",
+          "distance": 0.4501,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract The growth rate hypothesis ( GRH ) links growth rates with organism elemental stoichiometry. Support for the GRH was found for many animal species, but less so for plants. This is the first study to test the GRH in macroalgae."
+        },
+        {
+          "document_id": "W2424520363",
+          "title": "THE STRATEGIES OF MORPHOLOGY, REPRODUCTION AND CARBOHYDRATE METABOLISM OF Hydrilla verticillata (Linn.f.) Royle IN FLUCTUATING WATERS",
+          "doi": "",
+          "year": "2013",
+          "distance": 0.4504,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "20 cm, which were 74.1 +/- 2.5 mg.g(-1).d(-1) dry weight (DW) and 68.6 +/- 2.2 mg.g(-1).d(-1) DW at 120 and 90 cm water levels. The number of ramets and shoots, especially the flowering buds number &amp;amp; biomass, which is important for colonization and the maintenance of macrophyte populations, were relatively higher at 90 cm water level. Among the three different non-structural carbohydrates (soluble sugar, reducing sugar and starch) measured, which can increase the ability of the plant to re-grow, or survive time periods of seasonal dormancy, H."
+        }
+      ]
+    }
+  }
+}

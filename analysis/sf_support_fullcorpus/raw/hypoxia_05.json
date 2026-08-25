@@ -1,0 +1,1540 @@
+{
+  "sf_id": "hypoxia_05",
+  "category": "Hypoxia / DO",
+  "statement": "Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth.",
+  "retrieval": "fullcorpus_nomic",
+  "judges": {
+    "gptoss": {
+      "model": "gpt-oss:120b",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 2,
+            "rationale": "Snippet 1 explicitly states the stylized fact and thus provides strong direct support. Snippet 11 reports that hypoxia reduces reproductive output, directly contradicting the claim. The remaining snippets either discuss general DEB allocation principles or mention hypoxia without linking it to reproduction versus growth, offering at best weak indirect relevance. Consequently, the corpus contains moderate evidence (one clear supporting reference) but also a contradictory observation, leading to an overall neutral consensus."
+          },
+          "n_references": 1,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 1,
+              "best_distance": 0.1529
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1529,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "2434",
+              "title": "Debelgarric and Récapet - 2025 - Exploring physiological constraints on life-histor.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1869,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "torage, ultimately affecting growth, metabolism and reproduction rates in both ectotherms and endotherms (Niven and Laughlin, 2008; Speakman, 2005; Speakman et al., 2002; Morash et al., 2021; Maino et al., 2016). In freshwater organisms, hypoxia may also modulate physiological parameters (Wang and Widdows, 1993). Moreover, organisms often prioritise growth in size during periods of high predation risk, shifting towards energy storage as seasons change (Ivan and Höök, 2015; Jacobs et al., 2012). This dynamic allocation strategy helps in maximising survival and reproductive success by adapting to environmental conditions and balancing trade-offs between growth, maintenance, and storage tis- su"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1899,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "n enhanced by hypoxic conditions from 34.6% at 11 kPa to 69.3% at 1.2 kPa (Sobral and Widdows, 1997). The effect of hypoxic conditions on food assimilation efficiency seems thus to be very species-dependent. 2.2 Hypoxia and growth Two hypotheses explain the decrease in growth when organisms are exposed to hypoxia: (1) a decrease in energy uptake; as previously highlighted, a reduction in food ACCEPTED MANUSCRIPT [Page 10] ACCEPTED MANUSCRIPT 9 consumption seems to be the major cause of growth limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters may decrease the energy available for growth (Kramer, 1987). Some species w"
+            },
+            {
+              "document_id": "2804",
+              "title": "Kooy97.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "growth stops if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy into the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses, which receive nutrition from the mother during development.) The structural biomass of eggs is negligibly small initially, the embryo develops "
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.204,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2044,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.15,
+              "text": "ties; they do not change sharply in respiration, so it seems unlikely that they digest their food much more eﬃciently. So where does the energy allocated to reproduction come from? A solution to this problem can be found in development. Juvenile animals have to mature and become more complex. They have to develop new organs and install regulation systems. The increase in size (somatic growth) of the adult does not include an increase in complexity. The energy spent on development in juveniles is spent on reproduction in adults. This switch does not aﬀect growth and suggests the ‘κ-rule’: a ﬁxed proportion κ of energy utilized from the reserves is spent on growth plus maintenance, the remaini"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "iven decline in oxygen solubility in water (Bozinovic and Pörtner, 2015; Deutsch et al., 2015; Pörtner et al., 2017). Thus, oxygen delivery might present an additional bottleneck for energy flux in the organism, especially when the metabolic rates are close to the maximum and/or the ambient oxygen levels decline. Due to the extrinsic and intrinsic constraints on energy flux, the amount of energy available to an organism at any given time is restricted and must be allocated to different fitness-related activities such as production (including somatic growth and reproduction), maintenance and activity (including mechanical work involved in a variety of animal behaviors) (Fig. 1A). Balancing en"
+            },
+            {
+              "document_id": "2813",
+              "title": "KooyBeda96.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy in the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses which receive nutrition from the mother during development.) Initially, the structural biomass of eggs is negligibly small, the embryo develops at the expense "
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.212,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "eproduction, in an adult, was allocated to maturation in a juvenile instead of being allocated to growth because manyorganisms do not stop growing after reproduction has started (G2). The amount of energy invested into maturation is the third state variable. It controls life-history events such as the initiation of feeding and reproduction coupled to the ceasing of maturation. Metabolic organization is further restricted by the k rule and the weak homeostasis assumption. The k rule imposes that (i) the allocations of energy to reproduc- tion and growth do not compete with each other, which is suggested by the laws of mass and energy transfer (P3) and (ii) the energy allocation to growth comp"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2143,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "s the gastropod Nassarius festivus, for which most of the energy acquired was allocated to either shell growth or reproduction, the energy allocated to body tissue growth being relatively insignificant (Cheung et al., 2008a). Similar changes in energy allocation were evidenced in the common carp (Cyprinus carpio) and Chinese shrimp (Fenneropenaeus chinensis) submitted to hypoxic conditions. Energy uptake was significantly reduced and energy allocation was mainly oriented toward respiration processes (Wei et al., 2009; Zhou et al., 2001). 2.3 Hypoxia and reproduction Hypoxia clearly reduces reproductive output in numerous marine organisms, typically by reducing gonadal growth (i.e., decrease "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2145,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2148,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "ce and reproductions, organisms also allocate energy to maturity maintenance, which is imposed by the need to spend energy to keep the organism far away from equilibrium (P2). The allocations of energy to repoduction and growth do not compete with each other; this is suggested by empirical evidence on growth (G2) and the laws of mass and energy transfer (P4). Also, energy allocation to growth competes directly with the energy allocation to somatic maintenance, which imposes a maximum size within a species (G4, G5). Organisms tend to a constant chemical composition in an environment with constant food availability; this is supported by empirical evidence on a constant stoichiometry under cert"
+            },
+            {
+              "document_id": "2903",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2154,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because transport occurs across surfaces (P4). In the organism, (i) food is transformed into the reserve and (ii) the reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This internal organization is suggested by the empirical evidence on the heat increment of feeding (R4) and by the fact that starving organisms survive, grow and reproduce (F1–F3). Additionally, to the processes of growth, maturation, maintenance and reproduction, organisms also allocate energy to maturity maintenance, which is imposed by the need to spend energy to keep the organism far away from equilibr"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2156,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "problem is that growth is not retarded in animals crossing the 2.5 mm barrier; they also do not feed much more but they simply follow the surface area rule with a ﬁxed proportionality constant at constant food densities. It seems unlikely that they digest their food much more eﬃciently, so where does the energy allocated to reproduction come from? A solution to this problem can be found in development. Juvenile animals have to mature and become more complex. They have to develop new organs and install regulation systems. Increase in size (somatic growth) of the adult does not include an increase in complexity. The energy no longer spent on development in adults is spent on reproduction. Grow"
+            },
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2169,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ntenance of structure, and reproduction (not considered here but see Kooijman (2010)). In 15 this way, both the composition of biomass (proportion of reserve to structure) and the size of 16 the organism (structure) can affect metabolism. This captures, for example, why two 17 organisms of identical mass but different feeding histories are not equivalent in terms of their 18 metabolism, or why organisms may continue to grow and reproduce under starvation. 19 Besides food availability, ontogeny can cause the ratio of ‘reserve’ and ‘structure’ to 20 vary dynamically with time, which explains differences in respiration patterns. In a DEB 21 framework, it is convenient to think of a fresh egg as"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2171,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.05,
+              "text": "for growth and division pathways; when energy or amino acids become limiting, cell proliferation and growth is depressed, so that cells can use their limited resources to survive (Ma and Blenis 2009). There was not sufﬁcient replication in published data to test for a correlation between cellular energy allocation and reproduction; nonetheless, De Coen and Janssen (2003) report a positive correlation between reproduction and cellular energy allocation in mysid amphipods, and Novais et al. (2013) found that cadmium reproduction EC50 in oligochaetes (Enchytraeus albidus) also caused a reduction in cellular energy allocation. Thus, there is some evidence for a link between cellular energy alloc"
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2179,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "e.g., Schurmann and Steffensen 1997; Barnes et al. 2011), and oxygen delivery can constrain growth per- formance at high temperatures (Po¨rtner and Knust 2007). Thus, the extent to which oxygen availability constrains oxygen uptake is temperature dependent, and the nature of the metabolic response to hypoxia (continuous or threshold) varies among species. Hyperoxia might be expected to increase growth and ultimate size under the WBE model, assuming that blood or other components of the chain of aerobic metabolism are not saturated with O2 under normoxia. Consistent with this is the correlation between large body sizes and atmo- spheric hyperoxia in a range of groups of arthropods and vertebr"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "The corpus provides only one clear empirical contradiction (snippet 4) showing loss of fertility under hypoxia and a single theoretical support (snippet 5) suggesting allocation to reproduction when energy is scarce. The remaining abstracts either discuss growth suppression, metabolic responses, or are unrelated to reproductive allocation under moderate hypoxia, offering little direct evidence. Consequently, the overall evidential base for the stylized fact is weak, and the balance of information does not favor a consistent direction, yielding a neutral consensus."
+          },
+          "n_references": 3,
+          "references": {
+            "W3110907929": {
+              "title": "Oxygen limitation fails to explain upper chronic thermal limits and the temperature size rule in mayflies",
+              "doi": "https://doi.org/10.1242/jeb.233338",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2159
+            },
+            "W1964383623": {
+              "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+              "doi": "https://doi.org/10.1086/596536",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2241
+            },
+            "W2339083002": {
+              "title": "A mesocosm study investigating the effects of hypoxia and population density on respiration and reproductive biology in the brittlestar Amphiura filiformis",
+              "doi": "https://doi.org/10.3354/meps11379",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2283
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.1901,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.1967,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2100247568",
+              "title": "Comment on “Energy Uptake and Allocation During Ontogeny”",
+              "doi": "https://doi.org/10.1126/science.1169523",
+              "year": "2009",
+              "distance": 0.2133,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.0,
+              "text": "Hou et al . (Reports, 31 October 2008, p. 736) presented a model for energy uptake and allocation over an organism’s growth and development. However, their model does not account for allocation to reproduction (essential to adults) and growth without assimilation (essential to embryos) and is therefore only applicable to organisms growing with abundant food in the juvenile stage."
+            },
+            {
+              "document_id": "W3110907929",
+              "title": "Oxygen limitation fails to explain upper chronic thermal limits and the temperature size rule in mayflies",
+              "doi": "https://doi.org/10.1242/jeb.233338",
+              "year": "2020",
+              "distance": 0.2159,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.6,
+              "text": "An inability to adequately meet tissue oxygen demands has been proposed as an important factor setting upper thermal limits in ectothermic invertebrates (especially aquatic species) as well as explaining the observed decline in adult size with increased rearing temperature during the immature stages (a phenomenon known as the Temperature Size Rule, or TSR). We tested this by rearing three aquatic insects (the mayflies Neocloeon triangulifer and two species of the Cloeon dipterum complex) through their entire larval life under a range of temperature and oxygen concentrations. Hyperoxia did not extend upper thermal limits, nor did it prevent the loss of size or fertility experienced near upper"
+            },
+            {
+              "document_id": "W1964383623",
+              "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+              "doi": "https://doi.org/10.1086/596536",
+              "year": "2009",
+              "distance": 0.2241,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.5,
+              "text": "When environmental conditions vary stochastically, individuals accrue fitness benefits by exhibiting phenotypic plasticity. Here we analyze a general dynamic-programming model describing an individual's optimal energy allocation in a stochastic environment. After maturation, individuals repeatedly decide how to allocate incoming energy between reproduction and maintenance. We analyze the optimal fraction of energy invested in reproduction and the resultant degree of plasticity in dependence on environmental variability and predictability. Our analyses reveal unexpected patterns of optimal energy allocation. When energy availability is low, all energy is allocated to reproduction, although th"
+            },
+            {
+              "document_id": "W2165554455",
+              "title": "Egg-Mass Size and Cell Size: Effects of Temperature on Oxygen Distribution",
+              "doi": "https://doi.org/10.1093/icb/39.2.244",
+              "year": "1999",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Two processes strongly influence the distribution of oxygen within egg masses and cells: the supply of oxygen by diffusion and the consumption of oxygen by embryos and mitochondria. These processes are differentially sensitive to temperature. The diffusion coefficient of oxygen depends only weakly on temperature, having a Q10 of approximately 1.4. In contrast, the consumption of oxygen depends strongly on temperature, having a Q10 between 1.5 and 4.0. Thus, at higher temperatures, the ratio of oxygen supply to demand decreases. I show, by extending a model of oxygen distribution within metabolizing spheres, that maximal egg-mass sizes and cell sizes are predicted to be smaller at higher temp"
+            },
+            {
+              "document_id": "W2788753927",
+              "title": "Twelve fundamental life histories evolving through allocation‐dependent fecundity and survival",
+              "doi": "https://doi.org/10.1002/ece3.3730",
+              "year": "2018",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract An organism's life history is closely interlinked with its allocation of energy between growth and reproduction at different life stages. Theoretical models have established that diminishing returns from reproductive investment promote strategies with simultaneous investment into growth and reproduction (indeterminate growth) over strategies with distinct phases of growth and reproduction (determinate growth). We extend this traditional, binary classification by showing that allocation‐dependent fecundity and mortality rates allow for a large diversity of optimal allocation schedules. By analyzing a model of organisms that allocate energy between growth and reproduction, we find twe"
+            },
+            {
+              "document_id": "W2991290125",
+              "title": "The Effect of Oxygen Limitation on a Xylophagous Insect’s Heat Tolerance Is Influenced by Life-Stage Through Variation in Aerobic Scope and Respiratory Anatomy",
+              "doi": "https://doi.org/10.3389/fphys.2019.01426",
+              "year": "2019",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Temperature has a profound impact on insect fitness and performance via metabolic, enzymatic or chemical reaction rate effects. However, oxygen availability can interact with these thermal responses in complex and often poorly understood ways, especially in hypoxia-adapted species. Here we test the hypothesis that thermal limits are reduced under low oxygen availability - such as might happen when key life-stages reside within plants - but also extend this test to attempt to explain that the magnitude of the effect of hypoxia depends on variation in key respiration-related parameters such as aerobic scope and respiratory morphology. Using two life-stages of a xylophagous cerambycid beetle, <"
+            },
+            {
+              "document_id": "W2021522493",
+              "title": "Insulin- and Warts-Dependent Regulation of Tracheal Plasticity Modulates Systemic Larval Growth during Hypoxia in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1371/journal.pone.0115297",
+              "year": "2014",
+              "distance": 0.2282,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Adaptation to dynamic environmental cues during organismal development requires coordination of tissue growth with available resources. More specifically, the effects of oxygen availability on body size have been well-documented, but the mechanisms through which hypoxia restricts systemic growth have not been fully elucidated. Here, we characterize the larval growth and metabolic defects in Drosophila that result from hypoxia. Hypoxic conditions reduced fat body opacity and increased lipid droplet accumulation in this tissue, without eliciting lipid aggregation in hepatocyte-like cells called oenocytes. Additionally, hypoxia increased the retention of Dilp2 in the insulin-producing cells of "
+            },
+            {
+              "document_id": "W2339083002",
+              "title": "A mesocosm study investigating the effects of hypoxia and population density on respiration and reproductive biology in the brittlestar Amphiura filiformis",
+              "doi": "https://doi.org/10.3354/meps11379",
+              "year": "2015",
+              "distance": 0.2283,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "ABSTRACT: Hypoxic events are increasing in frequency and duration, especially in areas susceptible to eutrophication. Such events pose a growing threat to the health and function of marine ecosystems by altering key biological and ecological processes. Of particular concern is how hypoxia impacts upon both the reproductive biology and metabolic activity of marine organisms and what these impacts mean for biodiversity and ecosystem function. Furthermore, information on the effect of population-level processes (e.g. organism density) on individuals’ biological responses to hypoxia is currently lacking, hampering predictions on population and species sensitivity to this stressor. Using a mesoco"
+            },
+            {
+              "document_id": "W797963729",
+              "title": "The Metabolic Transitions Regulated by the Estrogen-related Receptor (ERR) in Drosophila melanogaster",
+              "doi": "https://doi.org/10.25772/x9bt-4376",
+              "year": "2013",
+              "distance": 0.2303,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "In multicellular organism, bioenergetic metabolism is strictly regulated toward efficient generation of ATP. However, in certain situations, such as in limiting oxygen or in the rapidly proliferating system like growing juvenile or cancer cells, organisms apply the metabolic strategy that favors the production of biomass (e.g., nucleotides, amino acids, and lipids) over efficiency of ATP generation. The conserved estrogen-related receptors (ERRs) are master regulators in controlling metabolic homeostasis, and good candidates for mediating the metabolic transition induced by hypoxia and development. First, we investigate how dERR influences hypoxic adaptation in Drosophila melanogaster. We fi"
+            },
+            {
+              "document_id": "W1992705588",
+              "title": "AgRP neurons: The foes of reproduction in leptin-deficient obese subjects",
+              "doi": "https://doi.org/10.1073/pnas.1121355109",
+              "year": "2012",
+              "distance": 0.2312,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Evolutionarily, the ability to regulate energy balance and reproduction in parallel is critical, because reproductive success will only occur when sufficient energy supplies are available. In periods when energy stores are depleted, reproduction is switched off in an attempt to save energy to optimize survival for subsequent reproductive success. The cellular mechanisms involved in the fine coordination of energy balance and reproduction are largely unknown. In PNAS, Wu et al. (1) shed light on a previously unsuspected neuronal population that appears to be fundamental for the coupling of energy deficit with impaired reproduction."
+            },
+            {
+              "document_id": "W2186441130",
+              "title": "Developmental changes in hypoxic exposure and responses to anoxia in <i>Drosophila melanogaster</i>",
+              "doi": "https://doi.org/10.1242/jeb.125849",
+              "year": "2015",
+              "distance": 0.2312,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Holometabolous insects undergo dramatic morphological and physiological changes during ontogeny. In particular, the larvae of many holometabolous insects are specialized to feed in soil, water or dung, inside plant structures, or inside other organisms as parasites where they may commonly experience hypoxia or anoxia. In contrast, holometabolous adults usually are winged and live with access to air. Here we show that larval Drosophila experience severe hypoxia in their normal laboratory environments; third instar larvae feed by tunneling into a medium without usable oxygen. Larvae move strongly in anoxia for many minutes, while adults (like most other adult insects) are quickly paralyzed. Ad"
+            },
+            {
+              "document_id": "W1994714922",
+              "title": "Single and multigenerational responses of body mass to atmospheric oxygen concentrations in <i>Drosophila melanogaster</i> : evidence for roles of plasticity and evolution",
+              "doi": "https://doi.org/10.1111/j.1420-9101.2009.01866.x",
+              "year": "2009",
+              "distance": 0.2317,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Abstract Greater oxygen availability has been hypothesized to be important in allowing the evolution of larger invertebrates during the Earth’s history, and across aquatic environments. We tested for evolutionary and developmental responses of adult body size of Drosophila melanogaster to hypoxia and hyperoxia. Individually reared flies were smaller in hypoxia, but hyperoxia had no effect. In each of three oxygen treatments (hypoxia, normoxia or hyperoxia) we reared three replicate lines of flies for seven generations, followed by four generations in normoxia. In hypoxia, responses were due primarily to developmental plasticity, as average body size fell in one generation and returned to con"
+            },
+            {
+              "document_id": "W4292219767",
+              "title": "Metabolic scaling is the product of life-history optimization",
+              "doi": "https://doi.org/10.1126/science.abm7649",
+              "year": "2022",
+              "distance": 0.2323,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Organisms use energy to grow and reproduce, so the processes of energy metabolism and biological production should be tightly bound. On the basis of this tenet, we developed and tested a new theory that predicts the relationships among three fundamental aspects of life: metabolic rate, growth, and reproduction. We show that the optimization of these processes yields the observed allometries of metazoan life, particularly metabolic scaling. We conclude that metabolism, growth, and reproduction are inextricably linked; that together they determine fitness; and, in contrast to longstanding dogma, that no single component drives another. Our model predicts that anthropogenic change will cause an"
+            },
+            {
+              "document_id": "W4395661664",
+              "title": "Hypoxia delays steroid-induced developmental maturation in Drosophila by suppressing EGF signaling",
+              "doi": "https://doi.org/10.1371/journal.pgen.1011232",
+              "year": "2024",
+              "distance": 0.2329,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "Animals often grow and develop in unpredictable environments where factors like food availability, temperature, and oxygen levels can fluctuate dramatically. To ensure proper sexual maturation into adulthood, juvenile animals need to adapt their growth and developmental rates to these fluctuating environmental conditions. Failure to do so can result in impaired maturation and incorrect body size. Here we describe a mechanism by which Drosophila larvae adapt their development in low oxygen (hypoxia). During normal development, larvae grow and increase in mass until they reach critical weight (CW), after which point a neuroendocrine circuit triggers the production of the steroid hormone ecdyso"
+            },
+            {
+              "document_id": "W2265961796",
+              "title": "Hypoxic Gene Regulation in Differentiating ES Cells",
+              "doi": "https://doi.org/10.1385/1-59259-241-4:55",
+              "year": "2003",
+              "distance": 0.2332,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "AbstractMammalian development occurs in the hypoxic environment of the uterus (1,2). Initially, the limited oxygen available can adequately diffuse to all the cells of the growing conceptus. However, with continued growth, diffusion becomes less efficient and results in a \"physiologic hypoxia\" within the embryo (3). Current models suggest this physiologic hypoxia acts as a stimulus to coordinate the development of the cardiovascular system. Once formed, oxygen can be transported throughout the organism to enable aerobic respiration and promote increased ATP production. Unless the increasing energy demands of the embryo are met, further development will be halted, and early lethality will occ"
+            },
+            {
+              "document_id": "W2999401260",
+              "title": "Oxygen supply limits the heat tolerance of locusts during the first instar only",
+              "doi": "https://doi.org/10.1101/2020.01.16.909705",
+              "year": "2020",
+              "distance": 0.2335,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Extreme heat directly limits an organism’s survival and reproduction, but scientists cannot agree on what causes organisms to lose function or die during heating. According to the theory of oxygen- and capacity-limitation of thermal tolerance, heat stress occurs when a warming organism’s demand for oxygen exceeds its supply, triggering a widespread drop in ATP concentration. This model predicts that an organism’s heat tolerance should decrease under hypoxia, yet most terrestrial organisms tolerate the same amount of warming across a wide range of oxygen concentrations. This point is especially true for adult insects, who deliver oxygen through highly efficient respiratory systems. H"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 1,
+            "rationale": "The corpus contains a single explicit citation (snippet 1) that directly states the stylized fact, providing clear support. Several other passages discuss general energy allocation under hypoxia but do not address reproduction without growth, yielding neutral relevance. Three snippets (11, 16, 24) report reduced reproductive output or shutdown of reproduction under low‑oxygen conditions, which contradicts the claim. Because supportive evidence is limited to one source while contradictory evidence appears in multiple sources, overall support is moderate at best, and the balance of the literature leans toward contradiction."
+          },
+          "n_references": 3,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 1,
+              "contradicts": 1,
+              "best_distance": 0.1529
+            },
+            "W3110907929": {
+              "title": "Oxygen limitation fails to explain upper chronic thermal limits and the temperature size rule in mayflies",
+              "doi": "https://doi.org/10.1242/jeb.233338",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2159
+            },
+            "W1992705588": {
+              "title": "AgRP neurons: The foes of reproduction in leptin-deficient obese subjects",
+              "doi": "https://doi.org/10.1073/pnas.1121355109",
+              "year": "2012",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2312
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1529,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.9,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "2434",
+              "title": "Debelgarric and Récapet - 2025 - Exploring physiological constraints on life-histor.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1869,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "torage, ultimately affecting growth, metabolism and reproduction rates in both ectotherms and endotherms (Niven and Laughlin, 2008; Speakman, 2005; Speakman et al., 2002; Morash et al., 2021; Maino et al., 2016). In freshwater organisms, hypoxia may also modulate physiological parameters (Wang and Widdows, 1993). Moreover, organisms often prioritise growth in size during periods of high predation risk, shifting towards energy storage as seasons change (Ivan and Höök, 2015; Jacobs et al., 2012). This dynamic allocation strategy helps in maximising survival and reproductive success by adapting to environmental conditions and balancing trade-offs between growth, maintenance, and storage tis- su"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1899,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "n enhanced by hypoxic conditions from 34.6% at 11 kPa to 69.3% at 1.2 kPa (Sobral and Widdows, 1997). The effect of hypoxic conditions on food assimilation efficiency seems thus to be very species-dependent. 2.2 Hypoxia and growth Two hypotheses explain the decrease in growth when organisms are exposed to hypoxia: (1) a decrease in energy uptake; as previously highlighted, a reduction in food ACCEPTED MANUSCRIPT [Page 10] ACCEPTED MANUSCRIPT 9 consumption seems to be the major cause of growth limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters may decrease the energy available for growth (Kramer, 1987). Some species w"
+            },
+            {
+              "document_id": "2804",
+              "title": "Kooy97.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "growth stops if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy into the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses, which receive nutrition from the mother during development.) The structural biomass of eggs is negligibly small initially, the embryo develops "
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.204,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2044,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "ties; they do not change sharply in respiration, so it seems unlikely that they digest their food much more eﬃciently. So where does the energy allocated to reproduction come from? A solution to this problem can be found in development. Juvenile animals have to mature and become more complex. They have to develop new organs and install regulation systems. The increase in size (somatic growth) of the adult does not include an increase in complexity. The energy spent on development in juveniles is spent on reproduction in adults. This switch does not aﬀect growth and suggests the ‘κ-rule’: a ﬁxed proportion κ of energy utilized from the reserves is spent on growth plus maintenance, the remaini"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "iven decline in oxygen solubility in water (Bozinovic and Pörtner, 2015; Deutsch et al., 2015; Pörtner et al., 2017). Thus, oxygen delivery might present an additional bottleneck for energy flux in the organism, especially when the metabolic rates are close to the maximum and/or the ambient oxygen levels decline. Due to the extrinsic and intrinsic constraints on energy flux, the amount of energy available to an organism at any given time is restricted and must be allocated to different fitness-related activities such as production (including somatic growth and reproduction), maintenance and activity (including mechanical work involved in a variety of animal behaviors) (Fig. 1A). Balancing en"
+            },
+            {
+              "document_id": "2813",
+              "title": "KooyBeda96.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy in the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses which receive nutrition from the mother during development.) Initially, the structural biomass of eggs is negligibly small, the embryo develops at the expense "
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.212,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "eproduction, in an adult, was allocated to maturation in a juvenile instead of being allocated to growth because manyorganisms do not stop growing after reproduction has started (G2). The amount of energy invested into maturation is the third state variable. It controls life-history events such as the initiation of feeding and reproduction coupled to the ceasing of maturation. Metabolic organization is further restricted by the k rule and the weak homeostasis assumption. The k rule imposes that (i) the allocations of energy to reproduc- tion and growth do not compete with each other, which is suggested by the laws of mass and energy transfer (P3) and (ii) the energy allocation to growth comp"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2143,
+              "corpus": "deb",
+              "label": "contradicts",
+              "relevance": 0.5,
+              "text": "s the gastropod Nassarius festivus, for which most of the energy acquired was allocated to either shell growth or reproduction, the energy allocated to body tissue growth being relatively insignificant (Cheung et al., 2008a). Similar changes in energy allocation were evidenced in the common carp (Cyprinus carpio) and Chinese shrimp (Fenneropenaeus chinensis) submitted to hypoxic conditions. Energy uptake was significantly reduced and energy allocation was mainly oriented toward respiration processes (Wei et al., 2009; Zhou et al., 2001). 2.3 Hypoxia and reproduction Hypoxia clearly reduces reproductive output in numerous marine organisms, typically by reducing gonadal growth (i.e., decrease "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2145,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.1901,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.1967,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2100247568",
+              "title": "Comment on “Energy Uptake and Allocation During Ontogeny”",
+              "doi": "https://doi.org/10.1126/science.1169523",
+              "year": "2009",
+              "distance": 0.2133,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Hou et al . (Reports, 31 October 2008, p. 736) presented a model for energy uptake and allocation over an organism’s growth and development. However, their model does not account for allocation to reproduction (essential to adults) and growth without assimilation (essential to embryos) and is therefore only applicable to organisms growing with abundant food in the juvenile stage."
+            },
+            {
+              "document_id": "W3110907929",
+              "title": "Oxygen limitation fails to explain upper chronic thermal limits and the temperature size rule in mayflies",
+              "doi": "https://doi.org/10.1242/jeb.233338",
+              "year": "2020",
+              "distance": 0.2159,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.4,
+              "text": "An inability to adequately meet tissue oxygen demands has been proposed as an important factor setting upper thermal limits in ectothermic invertebrates (especially aquatic species) as well as explaining the observed decline in adult size with increased rearing temperature during the immature stages (a phenomenon known as the Temperature Size Rule, or TSR). We tested this by rearing three aquatic insects (the mayflies Neocloeon triangulifer and two species of the Cloeon dipterum complex) through their entire larval life under a range of temperature and oxygen concentrations. Hyperoxia did not extend upper thermal limits, nor did it prevent the loss of size or fertility experienced near upper"
+            },
+            {
+              "document_id": "W1964383623",
+              "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+              "doi": "https://doi.org/10.1086/596536",
+              "year": "2009",
+              "distance": 0.2241,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "When environmental conditions vary stochastically, individuals accrue fitness benefits by exhibiting phenotypic plasticity. Here we analyze a general dynamic-programming model describing an individual's optimal energy allocation in a stochastic environment. After maturation, individuals repeatedly decide how to allocate incoming energy between reproduction and maintenance. We analyze the optimal fraction of energy invested in reproduction and the resultant degree of plasticity in dependence on environmental variability and predictability. Our analyses reveal unexpected patterns of optimal energy allocation. When energy availability is low, all energy is allocated to reproduction, although th"
+            },
+            {
+              "document_id": "W2165554455",
+              "title": "Egg-Mass Size and Cell Size: Effects of Temperature on Oxygen Distribution",
+              "doi": "https://doi.org/10.1093/icb/39.2.244",
+              "year": "1999",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Two processes strongly influence the distribution of oxygen within egg masses and cells: the supply of oxygen by diffusion and the consumption of oxygen by embryos and mitochondria. These processes are differentially sensitive to temperature. The diffusion coefficient of oxygen depends only weakly on temperature, having a Q10 of approximately 1.4. In contrast, the consumption of oxygen depends strongly on temperature, having a Q10 between 1.5 and 4.0. Thus, at higher temperatures, the ratio of oxygen supply to demand decreases. I show, by extending a model of oxygen distribution within metabolizing spheres, that maximal egg-mass sizes and cell sizes are predicted to be smaller at higher temp"
+            },
+            {
+              "document_id": "W2788753927",
+              "title": "Twelve fundamental life histories evolving through allocation‐dependent fecundity and survival",
+              "doi": "https://doi.org/10.1002/ece3.3730",
+              "year": "2018",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.1,
+              "text": "Abstract An organism's life history is closely interlinked with its allocation of energy between growth and reproduction at different life stages. Theoretical models have established that diminishing returns from reproductive investment promote strategies with simultaneous investment into growth and reproduction (indeterminate growth) over strategies with distinct phases of growth and reproduction (determinate growth). We extend this traditional, binary classification by showing that allocation‐dependent fecundity and mortality rates allow for a large diversity of optimal allocation schedules. By analyzing a model of organisms that allocate energy between growth and reproduction, we find twe"
+            },
+            {
+              "document_id": "W2991290125",
+              "title": "The Effect of Oxygen Limitation on a Xylophagous Insect’s Heat Tolerance Is Influenced by Life-Stage Through Variation in Aerobic Scope and Respiratory Anatomy",
+              "doi": "https://doi.org/10.3389/fphys.2019.01426",
+              "year": "2019",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Temperature has a profound impact on insect fitness and performance via metabolic, enzymatic or chemical reaction rate effects. However, oxygen availability can interact with these thermal responses in complex and often poorly understood ways, especially in hypoxia-adapted species. Here we test the hypothesis that thermal limits are reduced under low oxygen availability - such as might happen when key life-stages reside within plants - but also extend this test to attempt to explain that the magnitude of the effect of hypoxia depends on variation in key respiration-related parameters such as aerobic scope and respiratory morphology. Using two life-stages of a xylophagous cerambycid beetle, <"
+            },
+            {
+              "document_id": "W2021522493",
+              "title": "Insulin- and Warts-Dependent Regulation of Tracheal Plasticity Modulates Systemic Larval Growth during Hypoxia in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1371/journal.pone.0115297",
+              "year": "2014",
+              "distance": 0.2282,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Adaptation to dynamic environmental cues during organismal development requires coordination of tissue growth with available resources. More specifically, the effects of oxygen availability on body size have been well-documented, but the mechanisms through which hypoxia restricts systemic growth have not been fully elucidated. Here, we characterize the larval growth and metabolic defects in Drosophila that result from hypoxia. Hypoxic conditions reduced fat body opacity and increased lipid droplet accumulation in this tissue, without eliciting lipid aggregation in hepatocyte-like cells called oenocytes. Additionally, hypoxia increased the retention of Dilp2 in the insulin-producing cells of "
+            },
+            {
+              "document_id": "W2339083002",
+              "title": "A mesocosm study investigating the effects of hypoxia and population density on respiration and reproductive biology in the brittlestar Amphiura filiformis",
+              "doi": "https://doi.org/10.3354/meps11379",
+              "year": "2015",
+              "distance": 0.2283,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ABSTRACT: Hypoxic events are increasing in frequency and duration, especially in areas susceptible to eutrophication. Such events pose a growing threat to the health and function of marine ecosystems by altering key biological and ecological processes. Of particular concern is how hypoxia impacts upon both the reproductive biology and metabolic activity of marine organisms and what these impacts mean for biodiversity and ecosystem function. Furthermore, information on the effect of population-level processes (e.g. organism density) on individuals’ biological responses to hypoxia is currently lacking, hampering predictions on population and species sensitivity to this stressor. Using a mesoco"
+            },
+            {
+              "document_id": "W797963729",
+              "title": "The Metabolic Transitions Regulated by the Estrogen-related Receptor (ERR) in Drosophila melanogaster",
+              "doi": "https://doi.org/10.25772/x9bt-4376",
+              "year": "2013",
+              "distance": 0.2303,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "In multicellular organism, bioenergetic metabolism is strictly regulated toward efficient generation of ATP. However, in certain situations, such as in limiting oxygen or in the rapidly proliferating system like growing juvenile or cancer cells, organisms apply the metabolic strategy that favors the production of biomass (e.g., nucleotides, amino acids, and lipids) over efficiency of ATP generation. The conserved estrogen-related receptors (ERRs) are master regulators in controlling metabolic homeostasis, and good candidates for mediating the metabolic transition induced by hypoxia and development. First, we investigate how dERR influences hypoxic adaptation in Drosophila melanogaster. We fi"
+            },
+            {
+              "document_id": "W1992705588",
+              "title": "AgRP neurons: The foes of reproduction in leptin-deficient obese subjects",
+              "doi": "https://doi.org/10.1073/pnas.1121355109",
+              "year": "2012",
+              "distance": 0.2312,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.3,
+              "text": "Evolutionarily, the ability to regulate energy balance and reproduction in parallel is critical, because reproductive success will only occur when sufficient energy supplies are available. In periods when energy stores are depleted, reproduction is switched off in an attempt to save energy to optimize survival for subsequent reproductive success. The cellular mechanisms involved in the fine coordination of energy balance and reproduction are largely unknown. In PNAS, Wu et al. (1) shed light on a previously unsuspected neuronal population that appears to be fundamental for the coupling of energy deficit with impaired reproduction."
+            }
+          ]
+        }
+      }
+    },
+    "claude": {
+      "model": "claude-opus-4-8",
+      "scopes": {
+        "deb": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact is directly stated and attributed in snippet 1 (citing Cheung et al. 2008a), and snippet 11 provides concrete supporting evidence: in the gastropod Nassarius festivus under hypoxia, most acquired energy was allocated to shell growth or reproduction while body tissue growth was insignificant. These two snippets directly corroborate the fact, both tracing to the same primary source (Cheung et al. 2008a), which limits independence. The remaining snippets are general DEB allocation theory or broader hypoxia-metabolism discussions that do not directly test the claim and provide no contradicting evidence. Overall there is moderate, consistent support with no conflict, but the supporting evidence rests largely on a single underlying study."
+          },
+          "n_references": 1,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 3,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1529
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1529,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 1.0,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "2434",
+              "title": "Debelgarric and Récapet - 2025 - Exploring physiological constraints on life-histor.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1869,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "torage, ultimately affecting growth, metabolism and reproduction rates in both ectotherms and endotherms (Niven and Laughlin, 2008; Speakman, 2005; Speakman et al., 2002; Morash et al., 2021; Maino et al., 2016). In freshwater organisms, hypoxia may also modulate physiological parameters (Wang and Widdows, 1993). Moreover, organisms often prioritise growth in size during periods of high predation risk, shifting towards energy storage as seasons change (Ivan and Höök, 2015; Jacobs et al., 2012). This dynamic allocation strategy helps in maximising survival and reproductive success by adapting to environmental conditions and balancing trade-offs between growth, maintenance, and storage tis- su"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1899,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "n enhanced by hypoxic conditions from 34.6% at 11 kPa to 69.3% at 1.2 kPa (Sobral and Widdows, 1997). The effect of hypoxic conditions on food assimilation efficiency seems thus to be very species-dependent. 2.2 Hypoxia and growth Two hypotheses explain the decrease in growth when organisms are exposed to hypoxia: (1) a decrease in energy uptake; as previously highlighted, a reduction in food ACCEPTED MANUSCRIPT [Page 10] ACCEPTED MANUSCRIPT 9 consumption seems to be the major cause of growth limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters may decrease the energy available for growth (Kramer, 1987). Some species w"
+            },
+            {
+              "document_id": "2804",
+              "title": "Kooy97.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "growth stops if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy into the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses, which receive nutrition from the mother during development.) The structural biomass of eggs is negligibly small initially, the embryo develops "
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.204,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2044,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ties; they do not change sharply in respiration, so it seems unlikely that they digest their food much more eﬃciently. So where does the energy allocated to reproduction come from? A solution to this problem can be found in development. Juvenile animals have to mature and become more complex. They have to develop new organs and install regulation systems. The increase in size (somatic growth) of the adult does not include an increase in complexity. The energy spent on development in juveniles is spent on reproduction in adults. This switch does not aﬀect growth and suggests the ‘κ-rule’: a ﬁxed proportion κ of energy utilized from the reserves is spent on growth plus maintenance, the remaini"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "iven decline in oxygen solubility in water (Bozinovic and Pörtner, 2015; Deutsch et al., 2015; Pörtner et al., 2017). Thus, oxygen delivery might present an additional bottleneck for energy flux in the organism, especially when the metabolic rates are close to the maximum and/or the ambient oxygen levels decline. Due to the extrinsic and intrinsic constraints on energy flux, the amount of energy available to an organism at any given time is restricted and must be allocated to different fitness-related activities such as production (including somatic growth and reproduction), maintenance and activity (including mechanical work involved in a variety of animal behaviors) (Fig. 1A). Balancing en"
+            },
+            {
+              "document_id": "2813",
+              "title": "KooyBeda96.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy in the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses which receive nutrition from the mother during development.) Initially, the structural biomass of eggs is negligibly small, the embryo develops at the expense "
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.212,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "eproduction, in an adult, was allocated to maturation in a juvenile instead of being allocated to growth because manyorganisms do not stop growing after reproduction has started (G2). The amount of energy invested into maturation is the third state variable. It controls life-history events such as the initiation of feeding and reproduction coupled to the ceasing of maturation. Metabolic organization is further restricted by the k rule and the weak homeostasis assumption. The k rule imposes that (i) the allocations of energy to reproduc- tion and growth do not compete with each other, which is suggested by the laws of mass and energy transfer (P3) and (ii) the energy allocation to growth comp"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2143,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "s the gastropod Nassarius festivus, for which most of the energy acquired was allocated to either shell growth or reproduction, the energy allocated to body tissue growth being relatively insignificant (Cheung et al., 2008a). Similar changes in energy allocation were evidenced in the common carp (Cyprinus carpio) and Chinese shrimp (Fenneropenaeus chinensis) submitted to hypoxic conditions. Energy uptake was significantly reduced and energy allocation was mainly oriented toward respiration processes (Wei et al., 2009; Zhou et al., 2001). 2.3 Hypoxia and reproduction Hypoxia clearly reduces reproductive output in numerous marine organisms, typically by reducing gonadal growth (i.e., decrease "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2145,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "2902",
+              "title": "Sous2007.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2148,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "ce and reproductions, organisms also allocate energy to maturity maintenance, which is imposed by the need to spend energy to keep the organism far away from equilibrium (P2). The allocations of energy to repoduction and growth do not compete with each other; this is suggested by empirical evidence on growth (G2) and the laws of mass and energy transfer (P4). Also, energy allocation to growth competes directly with the energy allocation to somatic maintenance, which imposes a maximum size within a species (G4, G5). Organisms tend to a constant chemical composition in an environment with constant food availability; this is supported by empirical evidence on a constant stoichiometry under cert"
+            },
+            {
+              "document_id": "2903",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2154,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "and adult (R1, R2). Feeding is considered to be proportional to surface area within a species because transport occurs across surfaces (P4). In the organism, (i) food is transformed into the reserve and (ii) the reserve is mobilized to fuel growth, maturation, maintenance and reproduction. This internal organization is suggested by the empirical evidence on the heat increment of feeding (R4) and by the fact that starving organisms survive, grow and reproduce (F1–F3). Additionally, to the processes of growth, maturation, maintenance and reproduction, organisms also allocate energy to maturity maintenance, which is imposed by the need to spend energy to keep the organism far away from equilibr"
+            },
+            {
+              "document_id": "2801",
+              "title": "Kooy93.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2156,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "problem is that growth is not retarded in animals crossing the 2.5 mm barrier; they also do not feed much more but they simply follow the surface area rule with a ﬁxed proportionality constant at constant food densities. It seems unlikely that they digest their food much more eﬃciently, so where does the energy allocated to reproduction come from? A solution to this problem can be found in development. Juvenile animals have to mature and become more complex. They have to develop new organs and install regulation systems. Increase in size (somatic growth) of the adult does not include an increase in complexity. The energy no longer spent on development in adults is spent on reproduction. Grow"
+            },
+            {
+              "document_id": "2650",
+              "title": "Main2015.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2169,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "ntenance of structure, and reproduction (not considered here but see Kooijman (2010)). In 15 this way, both the composition of biomass (proportion of reserve to structure) and the size of 16 the organism (structure) can affect metabolism. This captures, for example, why two 17 organisms of identical mass but different feeding histories are not equivalent in terms of their 18 metabolism, or why organisms may continue to grow and reproduce under starvation. 19 Besides food availability, ontogeny can cause the ratio of ‘reserve’ and ‘structure’ to 20 vary dynamically with time, which explains differences in respiration patterns. In a DEB 21 framework, it is convenient to think of a fresh egg as"
+            },
+            {
+              "document_id": "3453",
+              "title": "Goodchild et al. - 2019 - Bioenergetics-Adverse Outcome Pathway Linking Org.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2171,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "for growth and division pathways; when energy or amino acids become limiting, cell proliferation and growth is depressed, so that cells can use their limited resources to survive (Ma and Blenis 2009). There was not sufﬁcient replication in published data to test for a correlation between cellular energy allocation and reproduction; nonetheless, De Coen and Janssen (2003) report a positive correlation between reproduction and cellular energy allocation in mysid amphipods, and Novais et al. (2013) found that cadmium reproduction EC50 in oligochaetes (Enchytraeus albidus) also caused a reduction in cellular energy allocation. Thus, there is some evidence for a link between cellular energy alloc"
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2179,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "e.g., Schurmann and Steffensen 1997; Barnes et al. 2011), and oxygen delivery can constrain growth per- formance at high temperatures (Po¨rtner and Knust 2007). Thus, the extent to which oxygen availability constrains oxygen uptake is temperature dependent, and the nature of the metabolic response to hypoxia (continuous or threshold) varies among species. Hyperoxia might be expected to increase growth and ultimate size under the WBE model, assuming that blood or other components of the chain of aerobic metabolism are not saturated with O2 under normoxia. Consistent with this is the correlation between large body sizes and atmo- spheric hyperoxia in a range of groups of arthropods and vertebr"
+            }
+          ]
+        },
+        "reproduction": {
+          "scores": {
+            "evidence_strength": 1,
+            "consensus_direction": 2,
+            "rationale": "None of the snippets directly test or document the specific stylized fact that organisms under moderate hypoxia continue allocating energy to reproduction while halting structural growth. Snippet 10 is the most topically relevant (hypoxia effects on reproductive biology and metabolism of a brittlestar) but the excerpt provides no concrete finding on the growth-vs-reproduction allocation split. Snippet 5 supports the broader principle that under low energy availability organisms may prioritize reproduction over maintenance/growth, but this is a stochastic-environment optimization model, not a hypoxia study. Snippet 12 suggests reproduction is switched off under energy deficit, which runs somewhat counter to the fact, though it concerns leptin-deficient mammals, not hypoxia. The remaining snippets concern insect functional hypoxia, thermal limits, developmental biology, or metabolic scaling and largely report that hypoxia suppresses growth and reduces size/fertility, but they do not separately confirm continued reproductive allocation. Overall evidence specific to the fact is weak/sparse, with no clear corroboration and only tangential, mixed bearing."
+          },
+          "n_references": 3,
+          "references": {
+            "W1964383623": {
+              "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+              "doi": "https://doi.org/10.1086/596536",
+              "year": "2009",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 1,
+              "contradicts": 0,
+              "best_distance": 0.2241
+            },
+            "W2339083002": {
+              "title": "A mesocosm study investigating the effects of hypoxia and population density on respiration and reproductive biology in the brittlestar Amphiura filiformis",
+              "doi": "https://doi.org/10.3354/meps11379",
+              "year": "2015",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 0,
+              "best_distance": 0.2283
+            },
+            "W1992705588": {
+              "title": "AgRP neurons: The foes of reproduction in leptin-deficient obese subjects",
+              "doi": "https://doi.org/10.1073/pnas.1121355109",
+              "year": "2012",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2312
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.1901,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.1967,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2100247568",
+              "title": "Comment on “Energy Uptake and Allocation During Ontogeny”",
+              "doi": "https://doi.org/10.1126/science.1169523",
+              "year": "2009",
+              "distance": 0.2133,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Hou et al . (Reports, 31 October 2008, p. 736) presented a model for energy uptake and allocation over an organism’s growth and development. However, their model does not account for allocation to reproduction (essential to adults) and growth without assimilation (essential to embryos) and is therefore only applicable to organisms growing with abundant food in the juvenile stage."
+            },
+            {
+              "document_id": "W3110907929",
+              "title": "Oxygen limitation fails to explain upper chronic thermal limits and the temperature size rule in mayflies",
+              "doi": "https://doi.org/10.1242/jeb.233338",
+              "year": "2020",
+              "distance": 0.2159,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "An inability to adequately meet tissue oxygen demands has been proposed as an important factor setting upper thermal limits in ectothermic invertebrates (especially aquatic species) as well as explaining the observed decline in adult size with increased rearing temperature during the immature stages (a phenomenon known as the Temperature Size Rule, or TSR). We tested this by rearing three aquatic insects (the mayflies Neocloeon triangulifer and two species of the Cloeon dipterum complex) through their entire larval life under a range of temperature and oxygen concentrations. Hyperoxia did not extend upper thermal limits, nor did it prevent the loss of size or fertility experienced near upper"
+            },
+            {
+              "document_id": "W1964383623",
+              "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+              "doi": "https://doi.org/10.1086/596536",
+              "year": "2009",
+              "distance": 0.2241,
+              "corpus": "reproduction",
+              "label": "supports",
+              "relevance": 0.55,
+              "text": "When environmental conditions vary stochastically, individuals accrue fitness benefits by exhibiting phenotypic plasticity. Here we analyze a general dynamic-programming model describing an individual's optimal energy allocation in a stochastic environment. After maturation, individuals repeatedly decide how to allocate incoming energy between reproduction and maintenance. We analyze the optimal fraction of energy invested in reproduction and the resultant degree of plasticity in dependence on environmental variability and predictability. Our analyses reveal unexpected patterns of optimal energy allocation. When energy availability is low, all energy is allocated to reproduction, although th"
+            },
+            {
+              "document_id": "W2165554455",
+              "title": "Egg-Mass Size and Cell Size: Effects of Temperature on Oxygen Distribution",
+              "doi": "https://doi.org/10.1093/icb/39.2.244",
+              "year": "1999",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Two processes strongly influence the distribution of oxygen within egg masses and cells: the supply of oxygen by diffusion and the consumption of oxygen by embryos and mitochondria. These processes are differentially sensitive to temperature. The diffusion coefficient of oxygen depends only weakly on temperature, having a Q10 of approximately 1.4. In contrast, the consumption of oxygen depends strongly on temperature, having a Q10 between 1.5 and 4.0. Thus, at higher temperatures, the ratio of oxygen supply to demand decreases. I show, by extending a model of oxygen distribution within metabolizing spheres, that maximal egg-mass sizes and cell sizes are predicted to be smaller at higher temp"
+            },
+            {
+              "document_id": "W2788753927",
+              "title": "Twelve fundamental life histories evolving through allocation‐dependent fecundity and survival",
+              "doi": "https://doi.org/10.1002/ece3.3730",
+              "year": "2018",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract An organism's life history is closely interlinked with its allocation of energy between growth and reproduction at different life stages. Theoretical models have established that diminishing returns from reproductive investment promote strategies with simultaneous investment into growth and reproduction (indeterminate growth) over strategies with distinct phases of growth and reproduction (determinate growth). We extend this traditional, binary classification by showing that allocation‐dependent fecundity and mortality rates allow for a large diversity of optimal allocation schedules. By analyzing a model of organisms that allocate energy between growth and reproduction, we find twe"
+            },
+            {
+              "document_id": "W2991290125",
+              "title": "The Effect of Oxygen Limitation on a Xylophagous Insect’s Heat Tolerance Is Influenced by Life-Stage Through Variation in Aerobic Scope and Respiratory Anatomy",
+              "doi": "https://doi.org/10.3389/fphys.2019.01426",
+              "year": "2019",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Temperature has a profound impact on insect fitness and performance via metabolic, enzymatic or chemical reaction rate effects. However, oxygen availability can interact with these thermal responses in complex and often poorly understood ways, especially in hypoxia-adapted species. Here we test the hypothesis that thermal limits are reduced under low oxygen availability - such as might happen when key life-stages reside within plants - but also extend this test to attempt to explain that the magnitude of the effect of hypoxia depends on variation in key respiration-related parameters such as aerobic scope and respiratory morphology. Using two life-stages of a xylophagous cerambycid beetle, <"
+            },
+            {
+              "document_id": "W2021522493",
+              "title": "Insulin- and Warts-Dependent Regulation of Tracheal Plasticity Modulates Systemic Larval Growth during Hypoxia in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1371/journal.pone.0115297",
+              "year": "2014",
+              "distance": 0.2282,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Adaptation to dynamic environmental cues during organismal development requires coordination of tissue growth with available resources. More specifically, the effects of oxygen availability on body size have been well-documented, but the mechanisms through which hypoxia restricts systemic growth have not been fully elucidated. Here, we characterize the larval growth and metabolic defects in Drosophila that result from hypoxia. Hypoxic conditions reduced fat body opacity and increased lipid droplet accumulation in this tissue, without eliciting lipid aggregation in hepatocyte-like cells called oenocytes. Additionally, hypoxia increased the retention of Dilp2 in the insulin-producing cells of "
+            },
+            {
+              "document_id": "W2339083002",
+              "title": "A mesocosm study investigating the effects of hypoxia and population density on respiration and reproductive biology in the brittlestar Amphiura filiformis",
+              "doi": "https://doi.org/10.3354/meps11379",
+              "year": "2015",
+              "distance": 0.2283,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.5,
+              "text": "ABSTRACT: Hypoxic events are increasing in frequency and duration, especially in areas susceptible to eutrophication. Such events pose a growing threat to the health and function of marine ecosystems by altering key biological and ecological processes. Of particular concern is how hypoxia impacts upon both the reproductive biology and metabolic activity of marine organisms and what these impacts mean for biodiversity and ecosystem function. Furthermore, information on the effect of population-level processes (e.g. organism density) on individuals’ biological responses to hypoxia is currently lacking, hampering predictions on population and species sensitivity to this stressor. Using a mesoco"
+            },
+            {
+              "document_id": "W797963729",
+              "title": "The Metabolic Transitions Regulated by the Estrogen-related Receptor (ERR) in Drosophila melanogaster",
+              "doi": "https://doi.org/10.25772/x9bt-4376",
+              "year": "2013",
+              "distance": 0.2303,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "In multicellular organism, bioenergetic metabolism is strictly regulated toward efficient generation of ATP. However, in certain situations, such as in limiting oxygen or in the rapidly proliferating system like growing juvenile or cancer cells, organisms apply the metabolic strategy that favors the production of biomass (e.g., nucleotides, amino acids, and lipids) over efficiency of ATP generation. The conserved estrogen-related receptors (ERRs) are master regulators in controlling metabolic homeostasis, and good candidates for mediating the metabolic transition induced by hypoxia and development. First, we investigate how dERR influences hypoxic adaptation in Drosophila melanogaster. We fi"
+            },
+            {
+              "document_id": "W1992705588",
+              "title": "AgRP neurons: The foes of reproduction in leptin-deficient obese subjects",
+              "doi": "https://doi.org/10.1073/pnas.1121355109",
+              "year": "2012",
+              "distance": 0.2312,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.4,
+              "text": "Evolutionarily, the ability to regulate energy balance and reproduction in parallel is critical, because reproductive success will only occur when sufficient energy supplies are available. In periods when energy stores are depleted, reproduction is switched off in an attempt to save energy to optimize survival for subsequent reproductive success. The cellular mechanisms involved in the fine coordination of energy balance and reproduction are largely unknown. In PNAS, Wu et al. (1) shed light on a previously unsuspected neuronal population that appears to be fundamental for the coupling of energy deficit with impaired reproduction."
+            },
+            {
+              "document_id": "W2186441130",
+              "title": "Developmental changes in hypoxic exposure and responses to anoxia in <i>Drosophila melanogaster</i>",
+              "doi": "https://doi.org/10.1242/jeb.125849",
+              "year": "2015",
+              "distance": 0.2312,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Holometabolous insects undergo dramatic morphological and physiological changes during ontogeny. In particular, the larvae of many holometabolous insects are specialized to feed in soil, water or dung, inside plant structures, or inside other organisms as parasites where they may commonly experience hypoxia or anoxia. In contrast, holometabolous adults usually are winged and live with access to air. Here we show that larval Drosophila experience severe hypoxia in their normal laboratory environments; third instar larvae feed by tunneling into a medium without usable oxygen. Larvae move strongly in anoxia for many minutes, while adults (like most other adult insects) are quickly paralyzed. Ad"
+            },
+            {
+              "document_id": "W1994714922",
+              "title": "Single and multigenerational responses of body mass to atmospheric oxygen concentrations in <i>Drosophila melanogaster</i> : evidence for roles of plasticity and evolution",
+              "doi": "https://doi.org/10.1111/j.1420-9101.2009.01866.x",
+              "year": "2009",
+              "distance": 0.2317,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract Greater oxygen availability has been hypothesized to be important in allowing the evolution of larger invertebrates during the Earth’s history, and across aquatic environments. We tested for evolutionary and developmental responses of adult body size of Drosophila melanogaster to hypoxia and hyperoxia. Individually reared flies were smaller in hypoxia, but hyperoxia had no effect. In each of three oxygen treatments (hypoxia, normoxia or hyperoxia) we reared three replicate lines of flies for seven generations, followed by four generations in normoxia. In hypoxia, responses were due primarily to developmental plasticity, as average body size fell in one generation and returned to con"
+            },
+            {
+              "document_id": "W4292219767",
+              "title": "Metabolic scaling is the product of life-history optimization",
+              "doi": "https://doi.org/10.1126/science.abm7649",
+              "year": "2022",
+              "distance": 0.2323,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Organisms use energy to grow and reproduce, so the processes of energy metabolism and biological production should be tightly bound. On the basis of this tenet, we developed and tested a new theory that predicts the relationships among three fundamental aspects of life: metabolic rate, growth, and reproduction. We show that the optimization of these processes yields the observed allometries of metazoan life, particularly metabolic scaling. We conclude that metabolism, growth, and reproduction are inextricably linked; that together they determine fitness; and, in contrast to longstanding dogma, that no single component drives another. Our model predicts that anthropogenic change will cause an"
+            },
+            {
+              "document_id": "W4395661664",
+              "title": "Hypoxia delays steroid-induced developmental maturation in Drosophila by suppressing EGF signaling",
+              "doi": "https://doi.org/10.1371/journal.pgen.1011232",
+              "year": "2024",
+              "distance": 0.2329,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Animals often grow and develop in unpredictable environments where factors like food availability, temperature, and oxygen levels can fluctuate dramatically. To ensure proper sexual maturation into adulthood, juvenile animals need to adapt their growth and developmental rates to these fluctuating environmental conditions. Failure to do so can result in impaired maturation and incorrect body size. Here we describe a mechanism by which Drosophila larvae adapt their development in low oxygen (hypoxia). During normal development, larvae grow and increase in mass until they reach critical weight (CW), after which point a neuroendocrine circuit triggers the production of the steroid hormone ecdyso"
+            },
+            {
+              "document_id": "W2265961796",
+              "title": "Hypoxic Gene Regulation in Differentiating ES Cells",
+              "doi": "https://doi.org/10.1385/1-59259-241-4:55",
+              "year": "2003",
+              "distance": 0.2332,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "AbstractMammalian development occurs in the hypoxic environment of the uterus (1,2). Initially, the limited oxygen available can adequately diffuse to all the cells of the growing conceptus. However, with continued growth, diffusion becomes less efficient and results in a \"physiologic hypoxia\" within the embryo (3). Current models suggest this physiologic hypoxia acts as a stimulus to coordinate the development of the cardiovascular system. Once formed, oxygen can be transported throughout the organism to enable aerobic respiration and promote increased ATP production. Unless the increasing energy demands of the embryo are met, further development will be halted, and early lethality will occ"
+            },
+            {
+              "document_id": "W2999401260",
+              "title": "Oxygen supply limits the heat tolerance of locusts during the first instar only",
+              "doi": "https://doi.org/10.1101/2020.01.16.909705",
+              "year": "2020",
+              "distance": 0.2335,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Abstract Extreme heat directly limits an organism’s survival and reproduction, but scientists cannot agree on what causes organisms to lose function or die during heating. According to the theory of oxygen- and capacity-limitation of thermal tolerance, heat stress occurs when a warming organism’s demand for oxygen exceeds its supply, triggering a widespread drop in ATP concentration. This model predicts that an organism’s heat tolerance should decrease under hypoxia, yet most terrestrial organisms tolerate the same amount of warming across a wide range of oxygen concentrations. This point is especially true for adult insects, who deliver oxygen through highly efficient respiratory systems. H"
+            }
+          ]
+        },
+        "combined": {
+          "scores": {
+            "evidence_strength": 2,
+            "consensus_direction": 3,
+            "rationale": "The stylized fact is directly affirmed by snippet 1, which restates it verbatim citing Cheung et al. (2008a), and by snippet 11, which describes the gastropod Nassarius festivus allocating most acquired energy to shell growth or reproduction with negligible body tissue growth under hypoxia (the same Cheung et al. source). Both clearly support the claim, though they trace back to a single primary study, so the support is real but not broadly independent. Most other snippets address related themes (general hypoxia-energy reprioritization, DEB allocation rules, maintenance priority) without bearing directly on the specific claim that reproduction may continue while structural growth ceases; they are neutral. Snippet 16 reports loss of fertility near thermal limits under oxygen manipulation, which is mildly counter to continued reproduction under stress, but its hypoxia conditions are extreme rather than moderate. Overall the evidence is moderate (effectively one well-articulated example), with no substantive conflict at the moderate-hypoxia regime described, so consensus is corroborated."
+          },
+          "n_references": 2,
+          "references": {
+            "3283": {
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "corpus": "deb",
+              "n_chunks": 2,
+              "supports": 2,
+              "contradicts": 0,
+              "best_distance": 0.1529
+            },
+            "W3110907929": {
+              "title": "Oxygen limitation fails to explain upper chronic thermal limits and the temperature size rule in mayflies",
+              "doi": "https://doi.org/10.1242/jeb.233338",
+              "year": "2020",
+              "corpus": "reproduction",
+              "n_chunks": 1,
+              "supports": 0,
+              "contradicts": 1,
+              "best_distance": 0.2159
+            }
+          },
+          "snippets": [
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1529,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.98,
+              "text": "[2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation). (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. "
+            },
+            {
+              "document_id": "2434",
+              "title": "Debelgarric and Récapet - 2025 - Exploring physiological constraints on life-histor.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1869,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "torage, ultimately affecting growth, metabolism and reproduction rates in both ectotherms and endotherms (Niven and Laughlin, 2008; Speakman, 2005; Speakman et al., 2002; Morash et al., 2021; Maino et al., 2016). In freshwater organisms, hypoxia may also modulate physiological parameters (Wang and Widdows, 1993). Moreover, organisms often prioritise growth in size during periods of high predation risk, shifting towards energy storage as seasons change (Ivan and Höök, 2015; Jacobs et al., 2012). This dynamic allocation strategy helps in maximising survival and reproductive success by adapting to environmental conditions and balancing trade-offs between growth, maintenance, and storage tis- su"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1899,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "n enhanced by hypoxic conditions from 34.6% at 11 kPa to 69.3% at 1.2 kPa (Sobral and Widdows, 1997). The effect of hypoxic conditions on food assimilation efficiency seems thus to be very species-dependent. 2.2 Hypoxia and growth Two hypotheses explain the decrease in growth when organisms are exposed to hypoxia: (1) a decrease in energy uptake; as previously highlighted, a reduction in food ACCEPTED MANUSCRIPT [Page 10] ACCEPTED MANUSCRIPT 9 consumption seems to be the major cause of growth limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters may decrease the energy available for growth (Kramer, 1987). Some species w"
+            },
+            {
+              "document_id": "2804",
+              "title": "Kooy97.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.1978,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "growth stops if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy into the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses, which receive nutrition from the mother during development.) The structural biomass of eggs is negligibly small initially, the embryo develops "
+            },
+            {
+              "document_id": "3639",
+              "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.204,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "n conditions compared to oxyconformity (Stickle et al. 1989) as oxyregulation allows for maintenance of aerobic respiration during low-oxygen conditions. Therefore, individuals able to maintain oxyregulation over a wider range of dissolved oxygen concentrations (i.e., have a lower Pcrit value, e.g., Mandic et al. 2013) are more tolerant to low oxygen owing to the greater energetic yield afforded by the maintenance of aerobic pathways (Grieshaber et al. 1994). [Page 26] 11 Ecological Consequences of Hypoxia The physiological and behavioral responses of organisms to hypoxia can have broad- reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2044,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.45,
+              "text": "an organism faces hypoxic conditions is likely to be a temporary non-essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could be examined: somatic maintenance is split into an essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O2 inflow. The non-essential part of these demand fluxes is the next to be able to use the O2 inflow. And finally, the supply processes such as growth, development and reproduction can use the remaining O 2 if there is any. Assimilation requires careful a"
+            },
+            {
+              "document_id": "2962",
+              "title": "Kooy2000.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2053,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "ties; they do not change sharply in respiration, so it seems unlikely that they digest their food much more eﬃciently. So where does the energy allocated to reproduction come from? A solution to this problem can be found in development. Juvenile animals have to mature and become more complex. They have to develop new organs and install regulation systems. The increase in size (somatic growth) of the adult does not include an increase in complexity. The energy spent on development in juveniles is spent on reproduction in adults. This switch does not aﬀect growth and suggests the ‘κ-rule’: a ﬁxed proportion κ of energy utilized from the reserves is spent on growth plus maintenance, the remaini"
+            },
+            {
+              "document_id": "3485",
+              "title": "Sokolova - 2021 - Bioenergetics in environmental adaptation and stre.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2063,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "iven decline in oxygen solubility in water (Bozinovic and Pörtner, 2015; Deutsch et al., 2015; Pörtner et al., 2017). Thus, oxygen delivery might present an additional bottleneck for energy flux in the organism, especially when the metabolic rates are close to the maximum and/or the ambient oxygen levels decline. Due to the extrinsic and intrinsic constraints on energy flux, the amount of energy available to an organism at any given time is restricted and must be allocated to different fitness-related activities such as production (including somatic growth and reproduction), maintenance and activity (including mechanical work involved in a variety of animal behaviors) (Fig. 1A). Balancing en"
+            },
+            {
+              "document_id": "2813",
+              "title": "KooyBeda96.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2072,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "if the energy allocated to growth plus maintenance is fully consumed by the process of maintenance; reproduction is a parallel process. The organism switches from embryo to juvenile and from juvenile to adult when it has invested a certain cumulative amount of energy in the increase of its state of maturity. The material allocated to reproduction is cumulated into a buﬀer and at the moment of reproduction this material is converted into one or more eggs. (Some organisms, such as most mammals, do not reproduce via eggs but via foetuses which receive nutrition from the mother during development.) Initially, the structural biomass of eggs is negligibly small, the embryo develops at the expense "
+            },
+            {
+              "document_id": "2760",
+              "title": "SousDomi2008.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.212,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "eproduction, in an adult, was allocated to maturation in a juvenile instead of being allocated to growth because manyorganisms do not stop growing after reproduction has started (G2). The amount of energy invested into maturation is the third state variable. It controls life-history events such as the initiation of feeding and reproduction coupled to the ceasing of maturation. Metabolic organization is further restricted by the k rule and the weak homeostasis assumption. The k rule imposes that (i) the allocations of energy to reproduc- tion and growth do not compete with each other, which is suggested by the laws of mass and energy transfer (P3) and (ii) the energy allocation to growth comp"
+            },
+            {
+              "document_id": "3283",
+              "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2143,
+              "corpus": "deb",
+              "label": "supports",
+              "relevance": 0.85,
+              "text": "s the gastropod Nassarius festivus, for which most of the energy acquired was allocated to either shell growth or reproduction, the energy allocated to body tissue growth being relatively insignificant (Cheung et al., 2008a). Similar changes in energy allocation were evidenced in the common carp (Cyprinus carpio) and Chinese shrimp (Fenneropenaeus chinensis) submitted to hypoxic conditions. Energy uptake was significantly reduced and energy allocation was mainly oriented toward respiration processes (Wei et al., 2009; Zhou et al., 2001). 2.3 Hypoxia and reproduction Hypoxia clearly reduces reproductive output in numerous marine organisms, typically by reducing gonadal growth (i.e., decrease "
+            },
+            {
+              "document_id": "2567",
+              "title": "KearWhit2012.pdf",
+              "doi": "",
+              "year": "",
+              "distance": 0.2145,
+              "corpus": "deb",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "kowicz et al. 2009), and embryonic mammals and birds (de Grauw et al. 1986; Giussani et al. 2007). For many species, processes like growth respond to hypoxia in a threshold manner and only under extreme conditions (Chabot and Dutil 1999; McNatt and Rice 2004). This may reﬂect an excess capacity of the supply surfaces and network in most environments, in which case oxygen supply would not limit size and growth, consistent with the assumptions of DEB theory. Examination of the relationship between oxygen avail- ability and rate of oxygen uptake is also informative. Spe- cies for which oxygen uptake is more or less constant over a wide range of ambient oxygen levels are known as oxy- regulators"
+            },
+            {
+              "document_id": "W28992421",
+              "title": "Evaluation of an module on complementary therapies",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2002",
+              "distance": 0.1901,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "Insects can experience functional hypoxia, a situation in which O<sub>2</sub> supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in e"
+            },
+            {
+              "document_id": "W2593050815",
+              "title": "Functional Hypoxia in Insects: Definition, Assessment, and Consequences for Physiology, Ecology, and Evolution",
+              "doi": "https://doi.org/10.1146/annurev-ento-020117-043145",
+              "year": "2017",
+              "distance": 0.1967,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.35,
+              "text": "Insects can experience functional hypoxia, a situation in which O 2 supply is inadequate to meet oxygen demand. Assessing when functional hypoxia occurs is complex, because responses are graded, age and tissue dependent, and compensatory. Here, we compare information gained from metabolomics and transcriptional approaches and by manipulation of the partial pressure of oxygen. Functional hypoxia produces graded damage, including damaged macromolecules and inflammation. Insects respond by compensatory physiological and morphological changes in the tracheal system, metabolic reorganization, and suppression of activity, feeding, and growth. There is evidence for functional hypoxia in eggs, near "
+            },
+            {
+              "document_id": "W2100247568",
+              "title": "Comment on “Energy Uptake and Allocation During Ontogeny”",
+              "doi": "https://doi.org/10.1126/science.1169523",
+              "year": "2009",
+              "distance": 0.2133,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Hou et al . (Reports, 31 October 2008, p. 736) presented a model for energy uptake and allocation over an organism’s growth and development. However, their model does not account for allocation to reproduction (essential to adults) and growth without assimilation (essential to embryos) and is therefore only applicable to organisms growing with abundant food in the juvenile stage."
+            },
+            {
+              "document_id": "W3110907929",
+              "title": "Oxygen limitation fails to explain upper chronic thermal limits and the temperature size rule in mayflies",
+              "doi": "https://doi.org/10.1242/jeb.233338",
+              "year": "2020",
+              "distance": 0.2159,
+              "corpus": "reproduction",
+              "label": "contradicts",
+              "relevance": 0.4,
+              "text": "An inability to adequately meet tissue oxygen demands has been proposed as an important factor setting upper thermal limits in ectothermic invertebrates (especially aquatic species) as well as explaining the observed decline in adult size with increased rearing temperature during the immature stages (a phenomenon known as the Temperature Size Rule, or TSR). We tested this by rearing three aquatic insects (the mayflies Neocloeon triangulifer and two species of the Cloeon dipterum complex) through their entire larval life under a range of temperature and oxygen concentrations. Hyperoxia did not extend upper thermal limits, nor did it prevent the loss of size or fertility experienced near upper"
+            },
+            {
+              "document_id": "W1964383623",
+              "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+              "doi": "https://doi.org/10.1086/596536",
+              "year": "2009",
+              "distance": 0.2241,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.4,
+              "text": "When environmental conditions vary stochastically, individuals accrue fitness benefits by exhibiting phenotypic plasticity. Here we analyze a general dynamic-programming model describing an individual's optimal energy allocation in a stochastic environment. After maturation, individuals repeatedly decide how to allocate incoming energy between reproduction and maintenance. We analyze the optimal fraction of energy invested in reproduction and the resultant degree of plasticity in dependence on environmental variability and predictability. Our analyses reveal unexpected patterns of optimal energy allocation. When energy availability is low, all energy is allocated to reproduction, although th"
+            },
+            {
+              "document_id": "W2165554455",
+              "title": "Egg-Mass Size and Cell Size: Effects of Temperature on Oxygen Distribution",
+              "doi": "https://doi.org/10.1093/icb/39.2.244",
+              "year": "1999",
+              "distance": 0.2253,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Two processes strongly influence the distribution of oxygen within egg masses and cells: the supply of oxygen by diffusion and the consumption of oxygen by embryos and mitochondria. These processes are differentially sensitive to temperature. The diffusion coefficient of oxygen depends only weakly on temperature, having a Q10 of approximately 1.4. In contrast, the consumption of oxygen depends strongly on temperature, having a Q10 between 1.5 and 4.0. Thus, at higher temperatures, the ratio of oxygen supply to demand decreases. I show, by extending a model of oxygen distribution within metabolizing spheres, that maximal egg-mass sizes and cell sizes are predicted to be smaller at higher temp"
+            },
+            {
+              "document_id": "W2788753927",
+              "title": "Twelve fundamental life histories evolving through allocation‐dependent fecundity and survival",
+              "doi": "https://doi.org/10.1002/ece3.3730",
+              "year": "2018",
+              "distance": 0.2274,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Abstract An organism's life history is closely interlinked with its allocation of energy between growth and reproduction at different life stages. Theoretical models have established that diminishing returns from reproductive investment promote strategies with simultaneous investment into growth and reproduction (indeterminate growth) over strategies with distinct phases of growth and reproduction (determinate growth). We extend this traditional, binary classification by showing that allocation‐dependent fecundity and mortality rates allow for a large diversity of optimal allocation schedules. By analyzing a model of organisms that allocate energy between growth and reproduction, we find twe"
+            },
+            {
+              "document_id": "W2991290125",
+              "title": "The Effect of Oxygen Limitation on a Xylophagous Insect’s Heat Tolerance Is Influenced by Life-Stage Through Variation in Aerobic Scope and Respiratory Anatomy",
+              "doi": "https://doi.org/10.3389/fphys.2019.01426",
+              "year": "2019",
+              "distance": 0.2277,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "Temperature has a profound impact on insect fitness and performance via metabolic, enzymatic or chemical reaction rate effects. However, oxygen availability can interact with these thermal responses in complex and often poorly understood ways, especially in hypoxia-adapted species. Here we test the hypothesis that thermal limits are reduced under low oxygen availability - such as might happen when key life-stages reside within plants - but also extend this test to attempt to explain that the magnitude of the effect of hypoxia depends on variation in key respiration-related parameters such as aerobic scope and respiratory morphology. Using two life-stages of a xylophagous cerambycid beetle, <"
+            },
+            {
+              "document_id": "W2021522493",
+              "title": "Insulin- and Warts-Dependent Regulation of Tracheal Plasticity Modulates Systemic Larval Growth during Hypoxia in Drosophila melanogaster",
+              "doi": "https://doi.org/10.1371/journal.pone.0115297",
+              "year": "2014",
+              "distance": 0.2282,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.3,
+              "text": "Adaptation to dynamic environmental cues during organismal development requires coordination of tissue growth with available resources. More specifically, the effects of oxygen availability on body size have been well-documented, but the mechanisms through which hypoxia restricts systemic growth have not been fully elucidated. Here, we characterize the larval growth and metabolic defects in Drosophila that result from hypoxia. Hypoxic conditions reduced fat body opacity and increased lipid droplet accumulation in this tissue, without eliciting lipid aggregation in hepatocyte-like cells called oenocytes. Additionally, hypoxia increased the retention of Dilp2 in the insulin-producing cells of "
+            },
+            {
+              "document_id": "W2339083002",
+              "title": "A mesocosm study investigating the effects of hypoxia and population density on respiration and reproductive biology in the brittlestar Amphiura filiformis",
+              "doi": "https://doi.org/10.3354/meps11379",
+              "year": "2015",
+              "distance": 0.2283,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.45,
+              "text": "ABSTRACT: Hypoxic events are increasing in frequency and duration, especially in areas susceptible to eutrophication. Such events pose a growing threat to the health and function of marine ecosystems by altering key biological and ecological processes. Of particular concern is how hypoxia impacts upon both the reproductive biology and metabolic activity of marine organisms and what these impacts mean for biodiversity and ecosystem function. Furthermore, information on the effect of population-level processes (e.g. organism density) on individuals’ biological responses to hypoxia is currently lacking, hampering predictions on population and species sensitivity to this stressor. Using a mesoco"
+            },
+            {
+              "document_id": "W797963729",
+              "title": "The Metabolic Transitions Regulated by the Estrogen-related Receptor (ERR) in Drosophila melanogaster",
+              "doi": "https://doi.org/10.25772/x9bt-4376",
+              "year": "2013",
+              "distance": 0.2303,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.25,
+              "text": "In multicellular organism, bioenergetic metabolism is strictly regulated toward efficient generation of ATP. However, in certain situations, such as in limiting oxygen or in the rapidly proliferating system like growing juvenile or cancer cells, organisms apply the metabolic strategy that favors the production of biomass (e.g., nucleotides, amino acids, and lipids) over efficiency of ATP generation. The conserved estrogen-related receptors (ERRs) are master regulators in controlling metabolic homeostasis, and good candidates for mediating the metabolic transition induced by hypoxia and development. First, we investigate how dERR influences hypoxic adaptation in Drosophila melanogaster. We fi"
+            },
+            {
+              "document_id": "W1992705588",
+              "title": "AgRP neurons: The foes of reproduction in leptin-deficient obese subjects",
+              "doi": "https://doi.org/10.1073/pnas.1121355109",
+              "year": "2012",
+              "distance": 0.2312,
+              "corpus": "reproduction",
+              "label": "neutral",
+              "relevance": 0.2,
+              "text": "Evolutionarily, the ability to regulate energy balance and reproduction in parallel is critical, because reproductive success will only occur when sufficient energy supplies are available. In periods when energy stores are depleted, reproduction is switched off in an attempt to save energy to optimize survival for subsequent reproductive success. The cellular mechanisms involved in the fine coordination of energy balance and reproduction are largely unknown. In PNAS, Wu et al. (1) shed light on a previously unsuspected neuronal population that appears to be fundamental for the coupling of energy deficit with impaired reproduction."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

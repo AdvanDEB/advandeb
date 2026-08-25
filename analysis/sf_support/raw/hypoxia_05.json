@@ -1,0 +1,764 @@
+{
+  "sf_id": "hypoxia_05",
+  "category": "Hypoxia / DO",
+  "statement": "Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth.",
+  "model": "claude-opus-4-8",
+  "scopes": {
+    "deb": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "The stylized fact is directly stated and supported by snippet [1], which is the verbatim source rule (R1) citing Cheung et al. 2008a, and corroborated by snippet [3] describing Nassarius festivus allocating most acquired energy to shell growth or reproduction while body tissue growth is insignificant under hypoxia. Snippet [11] supports the broader mechanism that energy allocation is reprioritized to maintenance first under hypoxia. The support traces largely to a single empirical source (Cheung et al. 2008a) and the same review paper, so the evidence base is somewhat narrow. Snippet [9] (Landry et al. 2007) suggests long-term hypoxia suppresses reproductive capacity, which is the more severe-hypoxia case and provides mild tension, but the stylized fact specifically concerns moderate hypoxia, so it is not a direct contradiction. Most other snippets are topically related to hypoxia and DEB but do not bear directly on the specific allocation-to-reproduction-without-growth claim. Overall the fact is clearly stated and supported with little genuine conflict, but resting on limited independent sources."
+      },
+      "n_references": 2,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2730896472930908
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3345252275466919
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2731,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "rioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may co ntinue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. Decrease in DO may decrease the gonado -somatic index . (Cheung et al., 2008a; Landry et al., 2007; Long et al., 2013a; Thomas et al., 2006; Wu et al., 2003) R3. Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al.,"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2934,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ses of organisms to hypoxia can have broad -reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth rates of organisms (e.g., Da s and Stickle 1993, McNatt and Rice 2004, Stevens and Gobler 2018) as well as their reproductive potential (e.g., Wiklund and Sundelin 2001, Landry et al. 2007, Long et al. 2014). At the population level, hypoxia can lead to reduced population growth rates (e.g., Marcus et al. 2004, Eby et al. 2005) and alterations to the size structure of populations (e.g., Burd 1985, Pihl et al. 1991, Breitburg 1992). Individual reductions in fecundity – either via"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2988,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters may decrease the energy available for growth (Kramer, 1987) . Some species would also be able to modify their energy allo cation under hypoxic conditions, such as the gastropod Nassarius festivus , for which most of the energy acquired was allocated to either shell growth or reproduction, the energy allocated to body tissue growth being relatively insignificant (Cheung et al., 2008a) . Similar changes in energy allocation were evidenced"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3039,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "uding hypoxia, on fish growth and physiology (DePasquale et al., 2015 ; Miller et al., 2016 ; Schwemmer et al., 2020 ). Hypoxia significantly delays M. menidia hatching and reduces embryo and larval growth (Cross et al., 2019 ).Dynamic Energy Budget (DEB) theory is a bioenergetic framework designed to bridge multiple levels of biological organization in assessing stressor effects and their mechanisms in a vast variety of species (Kooijman, 2010a ; AmP, 2023 ). This approach follows energy alloca -tion, represented in suborganismal metabolic fluxes, and how it leads to"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3091,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "eserve mobilization (ṗc) because ATP production yield isreduced in those conditions (Shick et al., 1986; de Zwaan et al., 1991)(Fig. 6 b). Under the assumption that the reserve mobilization ﬂux isaﬀected, energy available for growth and reproduction might be com-promised considering that the costs of maintenance are ful ﬁlled inpriority ( Kooijman, 2010 ). Nevertheless, we observed comparableweight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fedtreatments. This result suggests that physiological/metabolic mechan-isms allowing the regulation of oxygen consumption e.g. increased"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3131,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "he same value across life stages (e.g. JaAm, JvM, yVA) and similarly that values of the hypoxia correction factors are the same regardless of life stage. We lacked data on the effects of hypoxia on the proportion of total energy allocated to reproduction (1-κ), which is an additional component of DEB useful in connecting organismal effects to populations. Future experimentation could provide the adult-stage in-formation that is needed to extend this DEB model to predict population growth, which would be useful for resource management applications (Kooijman et al., 2020 ; Lavaud et al., 2021 ), given the ecological"
+        },
+        {
+          "document_id": "69b870c8ecbd4702b29a36ea",
+          "title": "Debelgarric and Récapet - 2025 - Exploring physiological constraints on life-histor.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3252,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "nggrowth, metabolism and reproduction rates in both ectotherms andendotherms (Niven and Laughlin ,2008 ;Speakman ,2005 ;Speakmanet al.,2002 ;Morash et al.,2021 ;Maino et al.,2016 ). In freshwaterorganisms, hypoxia may also modulate physiological parameters (Wangand Widdows ,1993 ). Moreover, organisms often prioritise growth insize during periods of high predation risk, shifting towards energystorage as seasons change (Ivan and Höök ,2015 ;Jacobs et al.,2012 ).This dynamic allocation strategy helps in maximising survival andreproductive success by adapting to environmental conditions and"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3296,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "PTED MANUSCRIPTACCEPTED MANUSCRIPT 6 aspects of the energetic budget, from energy acquisition to allocat ion for growth and/or reproduction and dissipation for maintenance costs. Here, we discuss how empirical evidence of sub-lethal physiological responses to hypoxia, measured at the individual scale in marine organisms, might be summarized into simple rules in the framework of DEB theory , giving a broad generalization of the effects of hypoxia on metabolic functions based on empirical findings . Second, these rules are used to formulate assumptions regarding the effects of hypoxia on physiological functions"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3345,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "s://doi.org/10.1007/978-1-4419-0197-2_9 .Kooijman, S.A.L.M., Lika, K., Augustine, S., Marn, N., Kooi, B.W., 2020. The energetic basis of population growth in animal kingdom. Ecol. Modell. 428, 109055. https:// doi.org/10.1016/j.ecolmodel.2020.109055 .Landry, C.A., Steele, S.L., Manning, S., Cheek, A.O., 2007. Long term hypoxia suppresses reproductive capacity in the estuarine fish, Fundulus grandis . Comp. Biochem. Physiol. Part A Mol. Integr. Physiol. 148 (2), 317–323. https://doi.org/10.1016/j. cbpa.2007.04.023 .Lankford, T.E., Billerbeck, J.M., Conover, D.O., 2001. Evolution of intrinsic growth and"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3403,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "anisms survive, gro w and reproduce (F1-F3).Additionally to the processes of growth, maturation, maint enance and reproductions,organisms also allocate energy to maturity maintenance, wh ich is imposed by the needto spend energy to keep the organism far away from equilibriu m (P2). The allocationsof energy to repoduction and growth do not compete with each o ther; this is suggestedby empirical evidence on growth (G2) and the laws of mass and e nergy transfer (P4).Also, energy allocation to growth competes directly with th e energy allocation to somaticmaintenance, which imposes a maximum size within a species ( G4, G5)."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3417,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ws, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level , due to reduction in energy uptake and/or increase in energy expenditure (dissipation) . (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001)"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3471,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "enance as it is necessary for survival, developmen t, growth and reproduction. However, movement when an organism faces hypoxic conditions is likely to be a temporary non -essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could b e examined: somatic maintenance is split into a n essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O 2 inflow. The n on-essential part of"
+        },
+        {
+          "document_id": "69b8982cecbd4702b29a6862",
+          "title": "Aguirre-Velarde et al. - 2018 - Predicting the energy budget of the scallop Argope.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3481,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "oved knowledge for an ecosystem-based sustainablemanagement.Unlike vagile organisms such as ﬁshes that are, to some extent, ableto avoid unfavorable conditions, sessile or semi-vagile organisms suchas bivalves have to deal with local environmental constraints such asoxygen limitation. Although they have developed adaptations to copewith such events ( Abele-Oeschger and Oeschger, 1995 ;Diaz andRosenberg, 1995 ;Levin, 2003 ), negative e ﬀects of hypoxia/anoxia onmetabolism, physiology, growth, reproduction and survival have beendescribed ( Herreid, 1980 ;Grieshaber et al., 1994 ;Burnett and Stickle,"
+        },
+        {
+          "document_id": "69b87d05ecbd4702b29a4720",
+          "title": "Kooy2010_i.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3482,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "nd resource availability. An analysis ofthe energy budget does not imply that energy would be limiting. In many situations it isuseful to follow the energy aspects of systems that are nitrogen limited, for instance.Organisms typically grow during their life cycle, and food uptake and maintenance arecoupled to the size of the organism. Ultimate size of organisms (i.e. the ceasing of growth)is controlled by the balance between uptake of energy and drain in the form of maintenanceand reproduction. Just after the start of maturation, during the embryo stage, organisms"
+        },
+        {
+          "document_id": "69b847b5ec32c55db5430a05",
+          "title": "Kooy2012.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3487,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "n. A static energy budget represents akind of snapshot of these uxes for an individual in a given state, while a dynamic energybudget follows the changes of these uxes during the life cycle of an organism.I. Why are energy budgets important?Organisms typically grow during their life cycle, and food uptake and maintenance arecoupled to the size of the organism. Ultimate size of organisms (i.e. the ceasing of growth)is controlled by the balance between uptake of energy and drain in the form of maintenanceand reproduction. Just after the start of maturation, during the embryo stage, organisms"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3509,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "even enhanced by hypoxic conditions from 34.6% at 11 kPa to 69.3% at 1.2 kPa (Sobral and Widdows, 1997) . The effect of hypoxic conditions on food assimilation efficiency seems thus to be very species -dependent. 2.2 Hypoxia and growt h Two hypothes es explain the decrease in growth when organisms are exposed to hypoxia: (1) a decrease in energy uptake; as previously highlighted, a reduction in food ACCEPTED MANUSCRIPTACCEPTED MANUSCRIPT 9 consumption seems to be the major cause of growth limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3516,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "hication , ocean and coastal ecosystems worldwide are becoming less oxygenated . In order to better understand the consequences of hypoxia on marine systems, there is a need for predicting hypoxia -induced changes from individual organisms to populations . By combining the effect of several stress ors on species metabolic performance s and life -history traits across their full life -cycle , the Dynamic Energy Budget (DEB) theory offers a suitable framework for studying the consequences of hypoxia on marine organisms and to envision an up scaling of these"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3576,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ation that might limit the e ﬀect of hypoxia on energy intake.The inclusion of those e ﬀects of hypoxia in dynamic energy budgetmodels will help to better predict the consequences of oxygen limitationon growth patterns of benthic aquatic organisms submitted to hypoxicevents.AcknowledgementsWe thank the Instituto del Mar del Peru and especially Carla Aguilarfor allowing the use of the IMARPE experimental facilities. We thank“Los Chichos ”Diego Herrera and Alex Vega for their active help duringthe experiments. We thank also the Hatchery of “La Arena ”(FONDEPES) for providing the scallops used in the experiments. This"
+        }
+      ]
+    },
+    "reproduction": {
+      "scores": {
+        "evidence_strength": 1,
+        "consensus_direction": 2,
+        "rationale": "Only snippet [11] (Daphnia magna hypoxia acclimation) directly bears on the stylized fact: it reports that reduced mass-specific oxygen consumption under hypoxia reduced energy allocation to somatic growth without greatly affecting reproduction, which is consistent with continued reproductive allocation despite suppressed growth. The remaining snippets concern general life-history energy-allocation theory, capital breeding, or hypoxia/spawning stress without specifically demonstrating maintained reproduction in the absence of growth. The spawning/hypoxia snippets [13,15] suggest hypoxia is a metabolic stressor that hinders recovery but do not directly affirm or contradict the differential allocation pattern. Thus evidence is sparse (one clear supporting case) and largely neutral, yielding weak overall support with no clear contradiction."
+      },
+      "n_references": 1,
+      "references": {
+        "W2072144793": {
+          "title": "Effects of hypoxia acclimation on morpho-physiological traits over three generations of <i>Daphnia magna</i>",
+          "doi": "10.1242/jeb.01614",
+          "year": "2005",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3869858980178833
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "W1964383623",
+          "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+          "doi": "10.1086/596536",
+          "year": "2009",
+          "distance": 0.3438,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ty is low, all energy is allocated to reproduction, although this implies that individuals will not survive after reproduction. Above a certain threshold of energy availability, the optimal reproductive investment decreases to a minimum and even vanishes entirely in highly variable environments. With further improving energy availability, optimal reproductive investment gradually increases again. Costs of plasticity affect this allocation pattern only quantitatively."
+        },
+        {
+          "document_id": "W2027333231",
+          "title": "Metabolism, Growth, and the Energetic Definition of Fitness: A Quantitative Genetic Study in the Land Snail<i>Cornu aspersum</i>",
+          "doi": "10.1086/672092",
+          "year": "2013",
+          "distance": 0.355,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Life-history evolution-the way organisms allocate time and energy to reproduction, survival, and growth-is a central question in evolutionary biology. One of its main tenets, the allocation principle, predicts that selection will reduce energy costs of maintenance in order to divert energy to survival and reproduction. The empirical support for this principle is the existence of a negative relationship between fitness and metabolic rate, which has been observed in some ectotherms."
+        },
+        {
+          "document_id": "W4228997658",
+          "title": "Seed banks alter the molecular evolutionary dynamics of <i>Bacillus subtilis</i>",
+          "doi": "10.1093/genetics/iyac071",
+          "year": "2022",
+          "distance": 0.3561,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.0,
+          "text": "Abstract Fluctuations in the availability of resources constrain the growth and reproduction of individuals, which subsequently affects the evolution of their respective populations. Many organisms contend with such fluctuations by entering a reversible state of reduced metabolic activity, a phenomenon known as dormancy. This pool of dormant individuals (i.e."
+        },
+        {
+          "document_id": "W2489373276",
+          "title": "Parallels in understanding the endocrine control of lifespan with the firebug Pyrrhocoris apterus and the fruit fly Drosophila melanogaster",
+          "doi": "10.1093/acprof:oso/9780199568765.003.0013",
+          "year": "2011",
+          "distance": 0.3604,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "In many organisms, reproduction is negatively correlated with life span, but little is known about proximate mechanisms of this trade-off. According to the traditional view, internal energy reserves are limited, thus giving rise to the trade-off of their use. More recently, this idea was challenged by the observation that survival and reproduction can be experimentally decoupled."
+        },
+        {
+          "document_id": "W2052524816",
+          "title": "Somatic versus reproductive energy allocation in Papua New Guinea: Life history theory and public health policy",
+          "doi": "10.1002/ajhb.10073",
+          "year": "2002",
+          "distance": 0.3777,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract A fundamental evolutionary problem faced by organisms is how to allocate energy to somatic and reproductive functions in ways that optimize fitness. Given that energy is limited in all environments, energy allocation necessarily involves physiological tradeoffs between such factors as growth and reproduction, reproduction and condition, and current reproduction and future survival."
+        },
+        {
+          "document_id": "W2001765747",
+          "title": "Caterpillars selected for large body size and short development time are more susceptible to oxygen‐related stress",
+          "doi": "10.1002/ece3.551",
+          "year": "2013",
+          "distance": 0.379,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "responses to hyperoxia with greater reductions in juvenile and adult mass, growth rate, and survival than the other two lines. Hypoxia generally negatively affected survival and growth/size, but the lines responded similarly. These results are mostly consistent with the hypothesis that simultaneous acquisition of large body sizes and short development times leads to reduced capacities for coping with stressful conditions including oxidative damage. This result is of particular importance in that natural selection tends to decrease development time and increase body size."
+        },
+        {
+          "document_id": "W2039207184",
+          "title": "The adjustment of reproductive threshold to prey abundance in a capital breeder",
+          "doi": "10.1046/j.1365-2656.1999.00306.x",
+          "year": "1999",
+          "distance": 0.3842,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "1. Many organisms rely upon stored energy reserves to support reproduction and do not initiate breeding until their reserves exceed some ‘reproductive threshold’. However, the determinants of such thresholds are poorly understood; for example, we do not know if they are fixed (invariant) or respond dynamically to fluctuations in resource availability. 2."
+        },
+        {
+          "document_id": "W4380611734",
+          "title": "Energy allocation trade-offs as a function of age in fungiid corals",
+          "doi": "10.3389/fmars.2023.1113987",
+          "year": "2023",
+          "distance": 0.3842,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "To compete effectively, living organisms must adjust the allocation of available energy resources for growth, survival, maintenance, and reproduction throughout their life histories. Energy demands and allocations change throughout the life history of an organism, and understanding their energy allocation strategies requires determination of the relative age of individuals."
+        },
+        {
+          "document_id": "W1964383623",
+          "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+          "doi": "10.1086/596536",
+          "year": "2009",
+          "distance": 0.3865,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ironment. After maturation, individuals repeatedly decide how to allocate incoming energy between reproduction and maintenance. We analyze the optimal fraction of energy invested in reproduction and the resultant degree of plasticity in dependence on environmental variability and predictability. Our analyses reveal unexpected patterns of optimal energy allocation. When energy availability is low, all energy is allocated to reproduction, although this implies that individuals will not survive after reproduction."
+        },
+        {
+          "document_id": "W2481587538",
+          "title": "Lizard energetics and the sit-and-wait vs. wide-foraging paradigm",
+          "doi": "10.1017/cbo9780511752438.006",
+          "year": "2007",
+          "distance": 0.3868,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The acquisition and allocation of energy can be two of the most critical processes in an organism's life. The amount of energy an individual obtains from the environment can determine not only its survival, but also whether it can engage in reproduction, a very evolutionarily important activity. Among vertebrates, there exists a fairly definitive dichotomy between the high-energy requirements of endotherms and the more energetically “conservative” ectotherms."
+        },
+        {
+          "document_id": "W2072144793",
+          "title": "Effects of hypoxia acclimation on morpho-physiological traits over three generations of <i>Daphnia magna</i>",
+          "doi": "10.1242/jeb.01614",
+          "year": "2005",
+          "distance": 0.387,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "e performance and oxygen-sensitive control of the ventilatory and circulatory systems were the same in both acclimation groups. The Hb concentration and oxygen affinity increased by 266% and 32%,respectively. The 22% decrease in mass-specific oxygen consumption rate reduced the energy allocation to somatic growth without greatly affecting reproduction. The onset and duration of hypoxic exposure during ontogenesis have had a significant influence on Hb oxygen affinity and body size. Transgenerational effects of hypoxia acclimation could not be observed."
+        },
+        {
+          "document_id": "W2100247568",
+          "title": "Comment on “Energy Uptake and Allocation During Ontogeny”",
+          "doi": "10.1126/science.1169523",
+          "year": "2009",
+          "distance": 0.3895,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Hou et al . (Reports, 31 October 2008, p. 736) presented a model for energy uptake and allocation over an organism’s growth and development. However, their model does not account for allocation to reproduction (essential to adults) and growth without assimilation (essential to embryos) and is therefore only applicable to organisms growing with abundant food in the juvenile stage."
+        },
+        {
+          "document_id": "W4388752706",
+          "title": "Spawning acts as a metabolic stressor enhanced by hypoxia and independent of sex in a broadcast marine spawner",
+          "doi": "10.1016/j.scitotenv.2023.168419",
+          "year": "2023",
+          "distance": 0.3925,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "press aerobic metabolism. However, the energy implications of spawning in marine broadcast spawners have not been well studied. We examined the effects of short-term hypoxia (7 days) and spawning on mitochondrial activity, reactive oxygen species (ROS) production, and cellular energy allocation (ratio of tissue energy reserves to energy demand) in somatic tissues of M. edulis. Under normoxic conditions, post-spawning (72 h) recovery correlated with increased phosphorylation (OXPHOS) rate in mitochondria from the digestive gland, while hypoxia inhibited this response."
+        },
+        {
+          "document_id": "W1964383623",
+          "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+          "doi": "10.1086/596536",
+          "year": "2009",
+          "distance": 0.3941,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "imal reproductive investment gradually increases again. Costs of plasticity affect this allocation pattern only quantitatively. Our results show that optimal reproductive investment does not increase monotonically with growing energy availability and that small changes in energy availability can lead to major variations in optimal energy allocation. Our results help to unify two apparently opposing predictions from life-history theory, that organisms should increase reproductive investment both with improved environmental conditions and when conditions deteriorate (\"terminal investment\")."
+        },
+        {
+          "document_id": "W4388752706",
+          "title": "Spawning acts as a metabolic stressor enhanced by hypoxia and independent of sex in a broadcast marine spawner",
+          "doi": "10.1016/j.scitotenv.2023.168419",
+          "year": "2023",
+          "distance": 0.395,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "breakdown. Additionally, cellular energy allocation dropped 3 h post-spawning, indicating a shift in energy demand and supply. Normoxic conditions allowed recovery in 72 h, but hypoxia hindered recuperation. These findings underscore spawning's bioenergetic challenge for broadcast spawners like M. edulis, potentially elevating post-spawning mortality risk, especially in hypoxic coastal habitats."
+        },
+        {
+          "document_id": "W4381158105",
+          "title": "Evidence for energy reallocation, not oxygen limitation, driving the deceleration in growth of adult fish",
+          "doi": "10.1242/jeb.246012",
+          "year": "2023",
+          "distance": 0.3955,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "he individual growth trajectories of ∼100 female Galaxias maculatus, ranging in size, during their first 3 months of adulthood. At a summer temperature of 20°C, we provided subsets of fish with additional energy (fed once versus twice a day), supplementary oxygen (normoxia versus hyperoxia), or a combination of the two, to assess whether we could change the trajectory of adult growth. We found that growth improved marginally with additional energy, yet remained unaffected by supplementary oxygen, thereby providing evidence for a role for energy reallocation in the deceleration of adult growth."
+        },
+        {
+          "document_id": "W4287218395",
+          "title": "Body mass and cell size shape the tolerance of fishes to low oxygen in a temperature‐dependent manner",
+          "doi": "10.1111/gcb.16319",
+          "year": "2022",
+          "distance": 0.3976,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract Aerobic metabolism generates 15–20 times more energy (ATP) than anaerobic metabolism, which is crucial in maintaining energy budgets in animals, fueling metabolism, activity, growth and reproduction. For ectothermic water‐breathers such as fishes, low dissolved oxygen may limit oxygen uptake and hence aerobic metabolism. Here, we assess, within a phylogenetic context, how abiotic and biotic drivers explain the variation in hypoxia tolerance observed in fishes."
+        },
+        {
+          "document_id": "W2116723029",
+          "title": "PHYSIOLOGICAL ONTOGENY",
+          "doi": "10.1085/jgp.9.1.1",
+          "year": "1925",
+          "distance": 0.3991,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "stant an increase of catabolism would make inroads upon the amount of energy which otherwise would remain for storage (growth). If, as Pembrey's (20) experiments would tend to show, there is an increase of metabolism in the oldest embryos when the outside temperature is lowered, one would find at the end of incubation in such cases that there was a greater amount of so called \"Energy of Development\" but smaller embryo. It seems that the potential energy amassed as growth comes from that remaining after the needs of the body have been satisfied."
+        }
+      ]
+    },
+    "combined": {
+      "scores": {
+        "evidence_strength": 2,
+        "consensus_direction": 3,
+        "rationale": "Several snippets directly support the stylized fact. Snippet 1 is the verbatim statement of the rule, citing Cheung et al. 2008a. Snippet 3 elaborates on the gastropod Nassarius festivus example, in which acquired energy was allocated to shell growth or reproduction with negligible allocation to body tissue growth, providing concrete empirical backing. Snippet 23 (Daphnia magna) shows reduced energy allocation to somatic growth under hypoxia without greatly affecting reproduction, a direct corroboration. Snippet 11 supports the related maintenance-prioritization mechanism. Snippet 9 (Landry et al.) notes long-term hypoxia suppresses reproductive capacity, which is mildly counter to continued reproductive allocation, but this concerns severe/long-term hypoxia rather than moderate hypoxia and addresses gonado-somatic decline rather than contradicting selective allocation. Most other snippets are topically related (general energy allocation, DEB theory, hypoxia effects) but do not bear directly on the specific fact. Overall there is moderate, fairly consistent support with minimal genuine conflict."
+      },
+      "n_references": 3,
+      "references": {
+        "69b8a47eecbd4702b29a775e": {
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 3,
+          "supports": 3,
+          "contradicts": 0,
+          "best_distance": 0.2730896472930908
+        },
+        "69b84743ec32c55db54307a4": {
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "corpus": "deb",
+          "n_chunks": 1,
+          "supports": 0,
+          "contradicts": 1,
+          "best_distance": 0.3345252275466919
+        },
+        "W2072144793": {
+          "title": "Effects of hypoxia acclimation on morpho-physiological traits over three generations of <i>Daphnia magna</i>",
+          "doi": "10.1242/jeb.01614",
+          "year": "2005",
+          "corpus": "reproduction",
+          "n_chunks": 1,
+          "supports": 1,
+          "contradicts": 0,
+          "best_distance": 0.3869858980178833
+        }
+      },
+      "snippets": [
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2731,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 1.0,
+          "text": "rioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001) Reproduction R1. Under moderate hypoxia, organisms may co ntinue to allocate energy to reproduction even if there is no allocation to structural growth. (Cheung et al., 2008a) R2. Decrease in DO may decrease the gonado -somatic index . (Cheung et al., 2008a; Landry et al., 2007; Long et al., 2013a; Thomas et al., 2006; Wu et al., 2003) R3. Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity. (Landry et al., 2007; Thomas et al.,"
+        },
+        {
+          "document_id": "69b8a57fecbd4702b29a7879",
+          "title": "Davis - 2021 - PHYSIOLOGICAL, MOLECULAR, AND  ECOLOGICAL RESPONSE.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2934,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "ses of organisms to hypoxia can have broad -reaching ecological consequences. On an individual level, hypoxia has the potential to reduce both growth rates of organisms (e.g., Da s and Stickle 1993, McNatt and Rice 2004, Stevens and Gobler 2018) as well as their reproductive potential (e.g., Wiklund and Sundelin 2001, Landry et al. 2007, Long et al. 2014). At the population level, hypoxia can lead to reduced population growth rates (e.g., Marcus et al. 2004, Eby et al. 2005) and alterations to the size structure of populations (e.g., Burd 1985, Pihl et al. 1991, Breitburg 1992). Individual reductions in fecundity – either via"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.2988,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.9,
+          "text": "limitation, and (2) an increase of energy expenditure; for example, cost for ventilation or locomotion to avoid hypoxic waters may decrease the energy available for growth (Kramer, 1987) . Some species would also be able to modify their energy allo cation under hypoxic conditions, such as the gastropod Nassarius festivus , for which most of the energy acquired was allocated to either shell growth or reproduction, the energy allocated to body tissue growth being relatively insignificant (Cheung et al., 2008a) . Similar changes in energy allocation were evidenced"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3039,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "uding hypoxia, on fish growth and physiology (DePasquale et al., 2015 ; Miller et al., 2016 ; Schwemmer et al., 2020 ). Hypoxia significantly delays M. menidia hatching and reduces embryo and larval growth (Cross et al., 2019 ).Dynamic Energy Budget (DEB) theory is a bioenergetic framework designed to bridge multiple levels of biological organization in assessing stressor effects and their mechanisms in a vast variety of species (Kooijman, 2010a ; AmP, 2023 ). This approach follows energy alloca -tion, represented in suborganismal metabolic fluxes, and how it leads to"
+        },
+        {
+          "document_id": "69b88155ecbd4702b29a4d0c",
+          "title": "AguiJean2018.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3091,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.4,
+          "text": "eserve mobilization (ṗc) because ATP production yield isreduced in those conditions (Shick et al., 1986; de Zwaan et al., 1991)(Fig. 6 b). Under the assumption that the reserve mobilization ﬂux isaﬀected, energy available for growth and reproduction might be com-promised considering that the costs of maintenance are ful ﬁlled inpriority ( Kooijman, 2010 ). Nevertheless, we observed comparableweight growth in both normoxia (F-N) and cyclic hypoxia (F-H) fedtreatments. This result suggests that physiological/metabolic mechan-isms allowing the regulation of oxygen consumption e.g. increased"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3131,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "he same value across life stages (e.g. JaAm, JvM, yVA) and similarly that values of the hypoxia correction factors are the same regardless of life stage. We lacked data on the effects of hypoxia on the proportion of total energy allocated to reproduction (1-κ), which is an additional component of DEB useful in connecting organismal effects to populations. Future experimentation could provide the adult-stage in-formation that is needed to extend this DEB model to predict population growth, which would be useful for resource management applications (Kooijman et al., 2020 ; Lavaud et al., 2021 ), given the ecological"
+        },
+        {
+          "document_id": "69b870c8ecbd4702b29a36ea",
+          "title": "Debelgarric and Récapet - 2025 - Exploring physiological constraints on life-histor.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3252,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "nggrowth, metabolism and reproduction rates in both ectotherms andendotherms (Niven and Laughlin ,2008 ;Speakman ,2005 ;Speakmanet al.,2002 ;Morash et al.,2021 ;Maino et al.,2016 ). In freshwaterorganisms, hypoxia may also modulate physiological parameters (Wangand Widdows ,1993 ). Moreover, organisms often prioritise growth insize during periods of high predation risk, shifting towards energystorage as seasons change (Ivan and Höök ,2015 ;Jacobs et al.,2012 ).This dynamic allocation strategy helps in maximising survival andreproductive success by adapting to environmental conditions and"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3296,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "PTED MANUSCRIPTACCEPTED MANUSCRIPT 6 aspects of the energetic budget, from energy acquisition to allocat ion for growth and/or reproduction and dissipation for maintenance costs. Here, we discuss how empirical evidence of sub-lethal physiological responses to hypoxia, measured at the individual scale in marine organisms, might be summarized into simple rules in the framework of DEB theory , giving a broad generalization of the effects of hypoxia on metabolic functions based on empirical findings . Second, these rules are used to formulate assumptions regarding the effects of hypoxia on physiological functions"
+        },
+        {
+          "document_id": "69b84743ec32c55db54307a4",
+          "title": "Schwemmer et al. - 2024 - Attributing hypoxia responses of early life Men.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3345,
+          "corpus": "deb",
+          "label": "contradicts",
+          "relevance": 0.5,
+          "text": "s://doi.org/10.1007/978-1-4419-0197-2_9 .Kooijman, S.A.L.M., Lika, K., Augustine, S., Marn, N., Kooi, B.W., 2020. The energetic basis of population growth in animal kingdom. Ecol. Modell. 428, 109055. https:// doi.org/10.1016/j.ecolmodel.2020.109055 .Landry, C.A., Steele, S.L., Manning, S., Cheek, A.O., 2007. Long term hypoxia suppresses reproductive capacity in the estuarine fish, Fundulus grandis . Comp. Biochem. Physiol. Part A Mol. Integr. Physiol. 148 (2), 317–323. https://doi.org/10.1016/j. cbpa.2007.04.023 .Lankford, T.E., Billerbeck, J.M., Conover, D.O., 2001. Evolution of intrinsic growth and"
+        },
+        {
+          "document_id": "69b89f8fecbd4702b29a70a4",
+          "title": "Sous2007.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3403,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "anisms survive, gro w and reproduce (F1-F3).Additionally to the processes of growth, maturation, maint enance and reproductions,organisms also allocate energy to maturity maintenance, wh ich is imposed by the needto spend energy to keep the organism far away from equilibriu m (P2). The allocationsof energy to repoduction and growth do not compete with each o ther; this is suggestedby empirical evidence on growth (G2) and the laws of mass and e nergy transfer (P4).Also, energy allocation to growth competes directly with th e energy allocation to somaticmaintenance, which imposes a maximum size within a species ( G4, G5)."
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3417,
+          "corpus": "deb",
+          "label": "supports",
+          "relevance": 0.6,
+          "text": "ws, 1997; Wang et al., 2011) F2. Food assimilation efficiency can be enhanced [1], unchanged [2] or reduced [3] under hypoxia, depending on species. [1] (Sobral and Widdows, 1997) [2] (Cheung et al., 2008a) [3] (Chabot, 2001; Wang et al., 2011; Wei et al., 2009; Zhou et al., 2001) Growth G1. Growth decrease with decreasing DO level , due to reduction in energy uptake and/or increase in energy expenditure (dissipation) . (Chabot and Dutil, 1999; Kramer, 1987) G2. Energy allocation reprioritized to first pay maintenance costs under hypoxic conditions. (Cheung et al., 2008a; Wei et al., 2009; Zhou et al., 2001)"
+        },
+        {
+          "document_id": "69b8a47eecbd4702b29a775e",
+          "title": "Thomas et al. - Effects of hypoxia on metabolic functions in marin.pdf",
+          "doi": "",
+          "year": "",
+          "distance": 0.3471,
+          "corpus": "deb",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "enance as it is necessary for survival, developmen t, growth and reproduction. However, movement when an organism faces hypoxic conditions is likely to be a temporary non -essential energy expense (if escape does not appear as a possible strategy). Therefore, we believe that the following priorities could b e examined: somatic maintenance is split into a n essential fraction (that cannot be reduced) and a non-essential fraction (that can be temporarily reduced, e.g. activity). The essential part of maintenance has first priority for the use of O 2 inflow. The n on-essential part of"
+        },
+        {
+          "document_id": "W1964383623",
+          "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+          "doi": "10.1086/596536",
+          "year": "2009",
+          "distance": 0.3438,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.3,
+          "text": "ty is low, all energy is allocated to reproduction, although this implies that individuals will not survive after reproduction. Above a certain threshold of energy availability, the optimal reproductive investment decreases to a minimum and even vanishes entirely in highly variable environments. With further improving energy availability, optimal reproductive investment gradually increases again. Costs of plasticity affect this allocation pattern only quantitatively."
+        },
+        {
+          "document_id": "W2027333231",
+          "title": "Metabolism, Growth, and the Energetic Definition of Fitness: A Quantitative Genetic Study in the Land Snail<i>Cornu aspersum</i>",
+          "doi": "10.1086/672092",
+          "year": "2013",
+          "distance": 0.355,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Life-history evolution-the way organisms allocate time and energy to reproduction, survival, and growth-is a central question in evolutionary biology. One of its main tenets, the allocation principle, predicts that selection will reduce energy costs of maintenance in order to divert energy to survival and reproduction. The empirical support for this principle is the existence of a negative relationship between fitness and metabolic rate, which has been observed in some ectotherms."
+        },
+        {
+          "document_id": "W4228997658",
+          "title": "Seed banks alter the molecular evolutionary dynamics of <i>Bacillus subtilis</i>",
+          "doi": "10.1093/genetics/iyac071",
+          "year": "2022",
+          "distance": 0.3561,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Abstract Fluctuations in the availability of resources constrain the growth and reproduction of individuals, which subsequently affects the evolution of their respective populations. Many organisms contend with such fluctuations by entering a reversible state of reduced metabolic activity, a phenomenon known as dormancy. This pool of dormant individuals (i.e."
+        },
+        {
+          "document_id": "W2489373276",
+          "title": "Parallels in understanding the endocrine control of lifespan with the firebug Pyrrhocoris apterus and the fruit fly Drosophila melanogaster",
+          "doi": "10.1093/acprof:oso/9780199568765.003.0013",
+          "year": "2011",
+          "distance": 0.3604,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "In many organisms, reproduction is negatively correlated with life span, but little is known about proximate mechanisms of this trade-off. According to the traditional view, internal energy reserves are limited, thus giving rise to the trade-off of their use. More recently, this idea was challenged by the observation that survival and reproduction can be experimentally decoupled."
+        },
+        {
+          "document_id": "W2052524816",
+          "title": "Somatic versus reproductive energy allocation in Papua New Guinea: Life history theory and public health policy",
+          "doi": "10.1002/ajhb.10073",
+          "year": "2002",
+          "distance": 0.3777,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "Abstract A fundamental evolutionary problem faced by organisms is how to allocate energy to somatic and reproductive functions in ways that optimize fitness. Given that energy is limited in all environments, energy allocation necessarily involves physiological tradeoffs between such factors as growth and reproduction, reproduction and condition, and current reproduction and future survival."
+        },
+        {
+          "document_id": "W2001765747",
+          "title": "Caterpillars selected for large body size and short development time are more susceptible to oxygen‐related stress",
+          "doi": "10.1002/ece3.551",
+          "year": "2013",
+          "distance": 0.379,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "responses to hyperoxia with greater reductions in juvenile and adult mass, growth rate, and survival than the other two lines. Hypoxia generally negatively affected survival and growth/size, but the lines responded similarly. These results are mostly consistent with the hypothesis that simultaneous acquisition of large body sizes and short development times leads to reduced capacities for coping with stressful conditions including oxidative damage. This result is of particular importance in that natural selection tends to decrease development time and increase body size."
+        },
+        {
+          "document_id": "W2039207184",
+          "title": "The adjustment of reproductive threshold to prey abundance in a capital breeder",
+          "doi": "10.1046/j.1365-2656.1999.00306.x",
+          "year": "1999",
+          "distance": 0.3842,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "1. Many organisms rely upon stored energy reserves to support reproduction and do not initiate breeding until their reserves exceed some ‘reproductive threshold’. However, the determinants of such thresholds are poorly understood; for example, we do not know if they are fixed (invariant) or respond dynamically to fluctuations in resource availability. 2."
+        },
+        {
+          "document_id": "W4380611734",
+          "title": "Energy allocation trade-offs as a function of age in fungiid corals",
+          "doi": "10.3389/fmars.2023.1113987",
+          "year": "2023",
+          "distance": 0.3842,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "To compete effectively, living organisms must adjust the allocation of available energy resources for growth, survival, maintenance, and reproduction throughout their life histories. Energy demands and allocations change throughout the life history of an organism, and understanding their energy allocation strategies requires determination of the relative age of individuals."
+        },
+        {
+          "document_id": "W1964383623",
+          "title": "Unexpected Patterns of Plastic Energy Allocation in Stochastic Environments",
+          "doi": "10.1086/596536",
+          "year": "2009",
+          "distance": 0.3865,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.2,
+          "text": "ironment. After maturation, individuals repeatedly decide how to allocate incoming energy between reproduction and maintenance. We analyze the optimal fraction of energy invested in reproduction and the resultant degree of plasticity in dependence on environmental variability and predictability. Our analyses reveal unexpected patterns of optimal energy allocation. When energy availability is low, all energy is allocated to reproduction, although this implies that individuals will not survive after reproduction."
+        },
+        {
+          "document_id": "W2481587538",
+          "title": "Lizard energetics and the sit-and-wait vs. wide-foraging paradigm",
+          "doi": "10.1017/cbo9780511752438.006",
+          "year": "2007",
+          "distance": 0.3868,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "The acquisition and allocation of energy can be two of the most critical processes in an organism's life. The amount of energy an individual obtains from the environment can determine not only its survival, but also whether it can engage in reproduction, a very evolutionarily important activity. Among vertebrates, there exists a fairly definitive dichotomy between the high-energy requirements of endotherms and the more energetically “conservative” ectotherms."
+        },
+        {
+          "document_id": "W2072144793",
+          "title": "Effects of hypoxia acclimation on morpho-physiological traits over three generations of <i>Daphnia magna</i>",
+          "doi": "10.1242/jeb.01614",
+          "year": "2005",
+          "distance": 0.387,
+          "corpus": "reproduction",
+          "label": "supports",
+          "relevance": 0.85,
+          "text": "e performance and oxygen-sensitive control of the ventilatory and circulatory systems were the same in both acclimation groups. The Hb concentration and oxygen affinity increased by 266% and 32%,respectively. The 22% decrease in mass-specific oxygen consumption rate reduced the energy allocation to somatic growth without greatly affecting reproduction. The onset and duration of hypoxic exposure during ontogenesis have had a significant influence on Hb oxygen affinity and body size. Transgenerational effects of hypoxia acclimation could not be observed."
+        },
+        {
+          "document_id": "W2100247568",
+          "title": "Comment on “Energy Uptake and Allocation During Ontogeny”",
+          "doi": "10.1126/science.1169523",
+          "year": "2009",
+          "distance": 0.3895,
+          "corpus": "reproduction",
+          "label": "neutral",
+          "relevance": 0.1,
+          "text": "Hou et al . (Reports, 31 October 2008, p. 736) presented a model for energy uptake and allocation over an organism’s growth and development. However, their model does not account for allocation to reproduction (essential to adults) and growth without assimilation (essential to embryos) and is therefore only applicable to organisms growing with abundant food in the juvenile stage."
+        }
+      ]
+    }
+  }
+}

@@ -9,6 +9,7 @@ export interface User {
   avatar_url?: string
   roles: string[]
   capabilities: string[]
+  chat_history_visible_to_admin: boolean
 }
 
 export const useAuthStore = defineStore('auth', () => {

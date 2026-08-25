@@ -36,7 +36,7 @@ async def list_supported_providers(current_user: dict = Depends(get_current_user
     """
     from advandeb_kb.services.llm_providers import list_providers
 
-    byok = {"anthropic", "openai", "gemini", "github_models"}
+    byok = {"anthropic", "openai", "gemini", "github_models", "nvidia"}
     return [p for p in list_providers() if p["name"] in byok]
 
 
