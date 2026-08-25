@@ -49,7 +49,7 @@ function mapRawCitation(raw: Record<string, unknown>): CitationRef {
   const marker = (raw.marker as string) || legacyMarker || citationId.slice(0, 8)
   const rawSourceType = (raw.source_type as string) || ''
   const source_type: CitationSourceType = (
-    ['chunk', 'fact', 'stylized_fact', 'external_document'].includes(rawSourceType)
+    ['chunk', 'fact', 'stylized_fact', 'external_document', 'platform_doc'].includes(rawSourceType)
       ? rawSourceType
       : 'chunk'
   ) as CitationSourceType

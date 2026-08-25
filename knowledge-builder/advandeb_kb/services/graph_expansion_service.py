@@ -304,6 +304,7 @@ class GraphExpansionService:
                         relation: e.relation_type,
                         confidence: e.confidence,
                         fact: f.content,
+                        fact_id: f._key,
                         page: f.page_number,
                         document: d != null ? {
                             id: f.document_id, title: d.title, authors: d.authors,

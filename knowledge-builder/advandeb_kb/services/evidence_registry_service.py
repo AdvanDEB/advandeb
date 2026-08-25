@@ -43,6 +43,14 @@ class RegistryEntry:
     fact_id: Optional[str]
     stylized_fact_id: Optional[str]
     evidence_text: str           # first 300 chars of content
+    # Optional pre-resolved document metadata (e.g. from get_claim_consensus,
+    # which already joins the source document). When present, downstream
+    # provenance enrichment is skipped for this entry.
+    title: Optional[str] = None
+    authors: list = field(default_factory=list)
+    year: Optional[int | str] = None
+    journal: Optional[str] = None
+    doi: Optional[str] = None
 
 
 class EvidenceRegistry:
@@ -59,6 +67,13 @@ class EvidenceRegistry:
         # Lookup maps for O(1) access
         self._by_marker: dict[str, RegistryEntry] = {}
         self._by_citation_id: dict[str, RegistryEntry] = {}
+        # Running counters so markers stay stable and non-colliding across
+        # multiple rounds of evidence being added (e.g. agentic tool calls
+        # made *after* the initial retrieval).
+        self._chunk_n = 0
+        self._graph_n = 0
+        self._sf_n = 0
+        self._doc_n = 0
 
     # ------------------------------------------------------------------
     # Factory
@@ -78,24 +93,27 @@ class EvidenceRegistry:
         Stylized facts get [SF1], [SF2], …
         """
         reg = cls()
-        chunk_n = 0
-        graph_n = 0
-        sf_n = 0
+        reg.add_chunks(chunks)
+        reg.add_graph_facts((graph_result or {}).get("facts", [])[:8])
+        reg.add_stylized_facts((graph_result or {}).get("stylized_facts", [])[:5])
+        return reg
 
+    # ------------------------------------------------------------------
+    # Incremental additions — used both by the initial retrieval and by
+    # agentic tool calls made mid-conversation, so every piece of evidence
+    # the LLM ever sees gets a stable, resolvable marker. Each is dedup'd by
+    # citation_id: re-adding the same chunk/fact/SF reuses its existing
+    # marker instead of minting a new (colliding-looking) one.
+    # ------------------------------------------------------------------
+
+    def add_chunks(self, chunks: list[dict]) -> list[RegistryEntry]:
+        added: list[RegistryEntry] = []
         for chunk in chunks:
-            # Skip synthetic graph chunks that will be added from graph_result
-            meta = chunk.get("metadata", {})
+            meta = chunk.get("metadata", {}) or {}
             source = meta.get("source", "chunk")
             if source in ("fact", "stylized_fact"):
                 continue
 
-            chunk_n += 1
-            marker = str(chunk_n)
-            doc_id = (
-                chunk.get("document_id")
-                or meta.get("document_id")
-                or ""
-            )
             raw_id = (
                 chunk.get("chunk_id")
                 or chunk.get("id")
@@ -104,6 +122,15 @@ class EvidenceRegistry:
             )
             chunk_id = strip_collection_prefix(str(raw_id))
             citation_id = make_citation_id("chunk", chunk_id)
+
+            existing = self._by_citation_id.get(citation_id) if citation_id else None
+            if existing is not None:
+                added.append(existing)
+                continue
+
+            self._chunk_n += 1
+            marker = str(self._chunk_n)
+            doc_id = chunk.get("document_id") or meta.get("document_id") or ""
             text = (chunk.get("text") or "")[:300]
 
             entry = RegistryEntry(
@@ -116,20 +143,32 @@ class EvidenceRegistry:
                 stylized_fact_id=None,
                 evidence_text=text,
             )
-            reg._add(entry)
+            self._add(entry)
+            added.append(entry)
+        return added
 
-        # Graph facts
-        for fact in (graph_result or {}).get("facts", [])[:8]:
-            graph_n += 1
-            marker = f"G{graph_n}"
+    def add_graph_facts(self, facts: list[dict]) -> list[RegistryEntry]:
+        added: list[RegistryEntry] = []
+        for fact in facts:
             raw_id = (
                 fact.get("_key")
                 or fact.get("_id")
                 or fact.get("id")
-                or f"gfact_{graph_n}"
+                or ""
             )
-            fact_id = strip_collection_prefix(str(raw_id))
-            citation_id = make_citation_id("fact", fact_id)
+            fact_id = strip_collection_prefix(str(raw_id)) if raw_id else ""
+            citation_id = make_citation_id("fact", fact_id) if fact_id else ""
+
+            existing = self._by_citation_id.get(citation_id) if citation_id else None
+            if existing is not None:
+                added.append(existing)
+                continue
+
+            self._graph_n += 1
+            marker = f"G{self._graph_n}"
+            if not fact_id:
+                fact_id = f"gfact_{self._graph_n}"
+                citation_id = make_citation_id("fact", fact_id)
             doc_id = str(fact.get("document_id") or "")
             text = (fact.get("content") or "")[:300]
 
@@ -143,20 +182,32 @@ class EvidenceRegistry:
                 stylized_fact_id=None,
                 evidence_text=text,
             )
-            reg._add(entry)
+            self._add(entry)
+            added.append(entry)
+        return added
 
-        # Stylized facts
-        for sf in (graph_result or {}).get("stylized_facts", [])[:5]:
-            sf_n += 1
-            marker = f"SF{sf_n}"
+    def add_stylized_facts(self, sfs: list[dict]) -> list[RegistryEntry]:
+        added: list[RegistryEntry] = []
+        for sf in sfs:
             raw_id = (
                 sf.get("_key")
                 or sf.get("_id")
                 or sf.get("id")
-                or f"gsf_{sf_n}"
+                or ""
             )
-            sf_id = strip_collection_prefix(str(raw_id))
-            citation_id = make_citation_id("stylized_fact", sf_id)
+            sf_id = strip_collection_prefix(str(raw_id)) if raw_id else ""
+            citation_id = make_citation_id("stylized_fact", sf_id) if sf_id else ""
+
+            existing = self._by_citation_id.get(citation_id) if citation_id else None
+            if existing is not None:
+                added.append(existing)
+                continue
+
+            self._sf_n += 1
+            marker = f"SF{self._sf_n}"
+            if not sf_id:
+                sf_id = f"gsf_{self._sf_n}"
+                citation_id = make_citation_id("stylized_fact", sf_id)
             doc_id = str(sf.get("document_id") or "")
             text = (sf.get("statement") or "")[:300]
 
@@ -170,9 +221,101 @@ class EvidenceRegistry:
                 stylized_fact_id=sf_id or None,
                 evidence_text=text,
             )
-            reg._add(entry)
+            self._add(entry)
+            added.append(entry)
+        return added
 
-        return reg
+    def add_consensus_facts(self, rows: list[dict]) -> list[RegistryEntry]:
+        """Register get_claim_consensus supporting/opposing facts as citable
+        evidence. Each item already carries its joined source document
+        (title/authors/year/journal/doi), so that metadata is stored directly
+        on the entry and provenance re-lookup is skipped downstream.
+
+        Mirrors the row/supports/opposes slicing that
+        ``ByokChatService._tool_result_to_text`` renders to the LLM (top-3
+        rows, top-3 supports, top-2 opposes) so the returned entries line up
+        1:1, in order, with what the LLM actually sees.
+        """
+        added: list[RegistryEntry] = []
+        for row in rows[:3]:
+            items = list((row.get("supports") or [])[:3]) + list((row.get("opposes") or [])[:2])
+            for item in items:
+                raw_fact_id = item.get("fact_id") or ""
+                fact_id = strip_collection_prefix(str(raw_fact_id)) if raw_fact_id else ""
+                citation_id = make_citation_id("fact", fact_id) if fact_id else ""
+
+                existing = self._by_citation_id.get(citation_id) if citation_id else None
+                if existing is not None:
+                    added.append(existing)
+                    continue
+
+                self._graph_n += 1
+                marker = f"G{self._graph_n}"
+                if not fact_id:
+                    fact_id = f"gfact_{self._graph_n}"
+                    citation_id = make_citation_id("fact", fact_id)
+                doc = item.get("document") or {}
+                doc_id = str(doc.get("id") or "")
+                authors = doc.get("authors") or []
+                if isinstance(authors, str):
+                    authors = [authors] if authors.strip() else []
+
+                entry = RegistryEntry(
+                    marker=marker,
+                    citation_id=citation_id,
+                    source_type="fact",
+                    document_id=doc_id or None,
+                    chunk_id=None,
+                    fact_id=fact_id or None,
+                    stylized_fact_id=None,
+                    evidence_text=(item.get("fact") or "")[:300],
+                    title=doc.get("title") or None,
+                    authors=authors,
+                    year=doc.get("year"),
+                    journal=doc.get("journal"),
+                    doi=doc.get("doi"),
+                )
+                self._add(entry)
+                added.append(entry)
+        return added
+
+    def add_platform_docs(self, docs: list[dict]) -> list[RegistryEntry]:
+        """Register AdvanDEB's own documentation/tutorial sections (from
+        ``PlatformDocsService.search_platform_docs``) as citable evidence, so
+        the assistant can answer questions about the platform itself instead
+        of guessing from general training knowledge. Title/text are already
+        final — no provenance DB lookup is needed for these.
+        """
+        added: list[RegistryEntry] = []
+        for doc in docs:
+            doc_id = str(doc.get("id") or "")
+            citation_id = make_citation_id("platform_doc", doc_id) if doc_id else ""
+
+            existing = self._by_citation_id.get(citation_id) if citation_id else None
+            if existing is not None:
+                added.append(existing)
+                continue
+
+            self._doc_n += 1
+            marker = f"D{self._doc_n}"
+            if not doc_id:
+                doc_id = f"doc_section_{self._doc_n}"
+                citation_id = make_citation_id("platform_doc", doc_id)
+
+            entry = RegistryEntry(
+                marker=marker,
+                citation_id=citation_id,
+                source_type="platform_doc",
+                document_id=None,
+                chunk_id=None,
+                fact_id=None,
+                stylized_fact_id=None,
+                evidence_text=(doc.get("text") or "")[:300],
+                title=doc.get("title") or None,
+            )
+            self._add(entry)
+            added.append(entry)
+        return added
 
     # ------------------------------------------------------------------
     # Accessors
@@ -237,6 +380,13 @@ class EvidenceRegistry:
             for e in sf_entries:
                 lines.append(f"  [{e.marker}] {e.evidence_text}")
 
+        # AdvanDEB's own documentation/tutorials (about the platform, not the science)
+        doc_entries = [e for e in self._entries if e.source_type == "platform_doc"]
+        if doc_entries:
+            lines.append(f"\n{len(doc_entries)} AdvanDEB documentation section(s):")
+            for e in doc_entries:
+                lines.append(f"  [{e.marker}] {e.title}: {e.evidence_text}")
+
         return "\n".join(lines) if lines else "No relevant evidence found."
 
     def render_chunk_list_for_synthesis(self) -> list[dict]:
@@ -267,10 +417,10 @@ class EvidenceRegistry:
         Extract inline citation markers from the LLM answer and resolve them
         against the registry.
 
-        Handles [1], [G3], [SF2] markers.  Out-of-registry markers are
+        Handles [1], [G3], [SF2], [D1] markers.  Out-of-registry markers are
         silently skipped (they cannot be attributed to any evidence).
         """
-        cited_markers = set(re.findall(r"\[((?:SF|G)?\d+)\]", answer_text))
+        cited_markers = set(re.findall(r"\[((?:SF|G|D)?\d+)\]", answer_text))
         citations: list[CitationRef] = []
 
         for marker in sorted(cited_markers, key=_sort_key):
@@ -287,9 +437,33 @@ class EvidenceRegistry:
                     fact_id=entry.fact_id,
                     stylized_fact_id=entry.stylized_fact_id,
                     evidence_text=entry.evidence_text,
+                    title=entry.title,
+                    authors=list(entry.authors),
+                    year=entry.year,
+                    journal=entry.journal,
+                    doi=entry.doi,
                 )
             )
         return citations
+
+    def render_new_entries_block(self, entries: list[RegistryEntry]) -> str:
+        """Render freshly-added entries (e.g. from a mid-conversation tool
+        call) with their real, registry-assigned markers — so the LLM cites
+        markers that ``extract_citations`` can actually resolve, instead of
+        a locally-restarted numbering that collides with earlier evidence.
+        """
+        if not entries:
+            return "No new results."
+        lines = []
+        for e in entries:
+            if e.source_type == "chunk":
+                doc_tag = f"[doc:{(e.document_id or '?')[:8]}]"
+                lines.append(f"  [{e.marker}] {doc_tag} {e.evidence_text}")
+            elif e.source_type == "platform_doc":
+                lines.append(f"  [{e.marker}] {e.title}: {e.evidence_text}")
+            else:
+                lines.append(f"  [{e.marker}] {e.evidence_text}")
+        return "\n".join(lines)
 
     # ------------------------------------------------------------------
     # Internal helpers
@@ -307,12 +481,14 @@ class EvidenceRegistry:
 # ---------------------------------------------------------------------------
 
 def _sort_key(marker: str) -> tuple[int, int]:
-    """Sort order: text chunks first (numeric), then G-facts, then SF-facts."""
+    """Sort order: text chunks first (numeric), then G-facts, SF-facts, D-docs."""
     if marker.startswith("SF"):
         return (2, int(marker[2:]))
     if marker.startswith("G"):
         return (1, int(marker[1:]))
+    if marker.startswith("D"):
+        return (3, int(marker[1:]))
     try:
         return (0, int(marker))
     except ValueError:
-        return (3, 0)
+        return (4, 0)

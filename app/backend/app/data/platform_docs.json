@@ -1,0 +1,67 @@
+[
+  {
+    "id": "quick-start",
+    "title": "Quick start",
+    "text": "AdvanDEB helps you explore research knowledge about Dynamic Energy Budget biology. A good first session is simple: sign in, open Chat, ask one focused scientific question, then inspect the cited sources behind the answer. The app works best when questions are specific. For example, ask how temperature affects maintenance costs in ectotherms, or which studies support a particular DEB assumption. Short, precise questions give the assistant a clearer search target. Steps: 1. Sign in — use the sign-in page provided by your deployment. Most users sign in with email and password; Google sign-in may also appear when it is configured. 2. Open Chat — use Chat for scientific questions. Read the answer, then use citations and provenance to check which documents or facts support it. 3. Browse the evidence — use Documents to inspect the corpus and Facts to inspect extracted facts, stylized facts, and submitted fact suggestions. 4. Add your own model key when needed — use LLM Keys if you want to use your own Claude, ChatGPT, Gemini, GitHub Models, or NVIDIA key instead of the shared default model."
+  },
+  {
+    "id": "introduction",
+    "title": "Introduction — what is AdvanDEB",
+    "text": "AdvanDEB is a research support application for Dynamic Energy Budget (DEB) biology. DEB theory describes how organisms take up, store, and use energy for maintenance, growth, development, and reproduction. The application combines a curated document corpus, extracted facts, stylized facts, a knowledge graph, and an AI chat assistant. Its goal is to help users find scientific claims and trace them back to supporting sources. The app is not a replacement for reading papers or making expert judgement. Treat it as a guide for discovery, comparison, and evidence tracing."
+  },
+  {
+    "id": "roles",
+    "title": "Role-based access",
+    "text": "Documentation and app features are shown according to your role. This keeps everyday research tasks visible for all users while exposing ingestion, review, and administration guidance only to users who need it. Knowledge explorer — the standard user role. Explorers can use Chat, browse the document corpus, inspect facts, submit new fact suggestions, manage their own LLM keys, and use future modeling views when available. Knowledge curator — a review and maintenance role. Curators can upload or ingest documents, review document and fact suggestions, maintain graph links, and use the Knowledge Builder workspace. Administrator — a governance role with additional maintenance permissions. If you do not see Knowledge in the sidebar, your account is not a curator or administrator account."
+  },
+  {
+    "id": "ui-overview",
+    "title": "UI explanation — pages and navigation",
+    "text": "Authenticated users see a left sidebar. On desktop the sidebar expands when hovered; on mobile it opens from the top menu. The main pages are Home, Chat, Documents, Facts, Scenarios, Models, LLM Keys, Documentation, and for curators or administrators, Knowledge. Home is a starting dashboard with links to the main research areas. Chat is the conversational assistant for asking scientific questions and checking cited answers. Documents is a searchable corpus view for source documents and their processing status. Facts is a fact library with stylized facts, extracted knowledge-base facts, and submitted fact suggestions. LLM Keys is a personal settings page for adding, testing, and deleting your own model provider credentials. Knowledge is a curator workspace for graph exploration, ingestion, database inspection, graph-building tasks, and review queues."
+  },
+  {
+    "id": "knowledge-base",
+    "title": "Knowledge base description",
+    "text": "The knowledge base is the scientific memory behind the app. It contains source documents, document chunks, extracted facts, stylized facts, taxa, and graph links that connect these pieces. A document is a source such as a research paper. A chunk is a smaller passage from a document. A fact is a specific claim extracted from a source or submitted by a user. A stylized fact is a broader curated pattern or principle that can be supported or challenged by many facts. A taxon is an organism group, such as a species or genus. When the chat assistant answers, it searches this knowledge base and tries to connect its answer to supporting material. Use citations, document metadata, and provenance to judge whether the support is strong enough for your purpose."
+  },
+  {
+    "id": "chatbot",
+    "title": "Chatbot explanation",
+    "text": "The Chat page is designed for question-driven exploration. It keeps a conversation list on the left, the current conversation in the middle, and agent activity or provenance on the right. The assistant can use retrieval and graph tools to search the knowledge base before it writes an answer. It may show active steps while it is working. Conversations — create a new conversation for each topic. You can search old sessions, rename a session by double-clicking its title, delete sessions you no longer need, and export a conversation. Model source — use the model selector to choose the shared default model or one of your stored LLM keys. Custom instructions — use instructions for session-level preferences, such as asking for concise answers, a table, or a focus on marine organisms. Prompt library and follow-ups — starter prompts help you begin common searches; suggested follow-up questions appear when useful. Citations and provenance — citation badges connect an answer to source material; open provenance to inspect how a cited item relates to facts, chunks, and documents. If an answer seems surprising, vague, or weakly cited, narrow the question and inspect the source documents before using the claim in scientific work."
+  },
+  {
+    "id": "documents",
+    "title": "Documents view explanation",
+    "text": "The Documents page shows the corpus used by the knowledge base. It is the best place to check whether a paper or source has been included and how far it has moved through processing. Use search and filters to narrow the list. Document rows can include title, authors, publication details, source type, processing status, chunk counts, fact counts, and flags. Processing status values indicate whether a document is pending, processing, completed, or failed; completed documents have already contributed searchable chunks or facts. Flags — any authenticated user can flag a document that appears irrelevant or problematic; curators review these flags. Uploads — curators see document upload controls; explorers can browse the corpus and should contact a curator when a new source needs to be added."
+  },
+  {
+    "id": "facts",
+    "title": "Facts view explanation",
+    "text": "The Facts page organizes scientific claims into three working views: Stylized Facts, KB Facts, and Submissions. Stylized Facts are broad, curated statements about DEB biology, useful for understanding general patterns, assumptions, or repeated findings across sources. KB Facts are specific extracted claims from the knowledge base, often closer to the wording or evidence found in individual source documents. Submissions are user-submitted fact suggestions; you can create a new fact suggestion with a clear statement, optional tags, and a confidence estimate, and curators decide whether suggestions are published or rejected. Use search fields, category filters, domain filters, status filters, and pagination to narrow large result sets."
+  },
+  {
+    "id": "llm-keys",
+    "title": "LLM API key management (BYOK)",
+    "text": "The LLM Keys page lets you bring your own model credentials for supported providers. Stored keys are used only to power chat reasoning over the knowledge base for your account. The app validates a key before saving it. The saved credential is encrypted at rest, and the interface shows only the provider, optional label, model, last-used time, and the last four characters — the full key is not shown again. Add a key — choose a provider, optionally add a label, paste the key, and save it. Connect with GitHub — when enabled, GitHub Models can be connected through GitHub authorization instead of a pasted key. Use a key in Chat — open Chat, select the model source, then choose a stored key and model. Test or delete keys — use Test to confirm a stored credential still works; delete keys that are old, revoked, or no longer needed. Do not paste API keys into chat messages, document uploads, or fact submissions — add them only on the LLM Keys page."
+  },
+  {
+    "id": "scenarios-models",
+    "title": "Scenarios and models",
+    "text": "Scenarios and Models are visible as app areas for future DEB modeling workflows. In the current interface they explain the planned direction and link back to Chat or Knowledge Graph exploration where useful. Use Chat and the knowledge base today to gather assumptions, evidence, and candidate model context; use the future modeling views when your deployment enables them."
+  },
+  {
+    "id": "curator-workflow",
+    "title": "Curator workflow",
+    "text": "Curators maintain the quality and freshness of the knowledge base. The curator workflow starts with source selection, continues through ingestion, and ends with review of suggestions and graph links. Upload and ingest documents — use Knowledge, then Ingestion, to upload PDFs or scan approved source folders, then start ingestion batches and monitor progress. Review suggestions — use the Suggestions tab to approve or reject document, fact, and stylized fact suggestions; publishing makes accepted material visible to the wider knowledge base. Inspect the graph — use the Graph tab to explore graph schemas, select nodes, inspect connections, and reload graph data after ingestion or linking work. Maintain document-taxon links — use KG Builder to suggest, confirm, or reject document-taxon relations."
+  },
+  {
+    "id": "knowledge-builder",
+    "title": "Knowledge Builder explanation",
+    "text": "Knowledge Builder is the advanced workspace for curators and administrators, separate from the regular sidebar because it is a focused maintenance environment. Graph — visualize available graph schemas, inspect nodes, open the node table, and refresh graph data. Ingestion — stage local PDFs or select source folders, start ingestion, and manage ingestion batches and jobs. Database — inspect database collections and sample records. KG Builder — build and review document-taxon links, then rebuild graph structure when links are ready. Suggestions — review user-submitted document, fact, and stylized fact suggestions."
+  },
+  {
+    "id": "good-use",
+    "title": "Good scientific use of AdvanDEB",
+    "text": "Use AdvanDEB as a structured assistant, not as an authority. The strongest workflow is to ask a narrow question, read the cited answer, inspect the source trail, compare related facts, and then decide whether the evidence supports your scientific use case. When citing results outside the app, cite the original papers or sources, not the chatbot — the chatbot can help you find and compare evidence, but the source documents remain the scientific record."
+  }
+]

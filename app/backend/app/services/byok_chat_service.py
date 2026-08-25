@@ -10,7 +10,7 @@ Pipeline for every external-key session:
        GraphExpansionService  — expand chunk seeds through the knowledge graph
                                 → more facts, stylized facts, taxa context
   3. EVIDENCE REGISTRY
-       EvidenceRegistry       — stable [N], [G1], [SF1] markers for all evidence
+       EvidenceRegistry       — stable [N], [G1], [SF1], [D1] markers for all evidence
   4. SYNTHESIS  (two sub-modes)
      a. AGENTIC TOOL-CALLING  (Claude, OpenAI, GitHub Models, Nvidia)
           Multi-step: LLM calls search tools autonomously, accumulates evidence,
@@ -57,7 +57,7 @@ logger = logging.getLogger(__name__)
 _SYSTEM_PROMPT = (
     "You are a scientific knowledge assistant for Dynamic Energy Budget (DEB) "
     "theory and organism bioenergetics. Answer using ONLY the numbered sources "
-    "provided. Cite sources inline as [1], [G1], [SF1], etc. matching the "
+    "provided. Cite sources inline as [1], [G1], [SF1], [D1], etc. matching the "
     "evidence markers. If the sources do not contain the answer, say so "
     "explicitly rather than guessing."
 )
@@ -75,7 +75,7 @@ _SYSTEM_PROMPT_AGENT = (
     "3. When you have enough evidence, write your final answer.\n\n"
     "CITATION RULES:\n"
     "- Every factual claim MUST carry at least one citation marker.\n"
-    "- Use the markers from the evidence list: [1], [2], [G1], [SF1], etc.\n"
+    "- Use the markers from the evidence list: [1], [2], [G1], [SF1], [D1], etc.\n"
     "- Tool results are additional evidence — cite specific items from them.\n"
     "- Never fabricate information not present in the evidence.\n\n"
     "FORMAT:\n"
@@ -102,7 +102,7 @@ _SYSTEM_PROMPT_DEFINITIONAL = (
     "TASK: Provide a clear, accurate definition or short explanation of the queried concept.\n\n"
     "STRATEGY: The initial stylized facts and evidence should fully cover a definitional "
     "question. Do NOT call search tools unless a critical citation is completely absent.\n\n"
-    "CITATION RULES: Cite every factual claim with [SF1], [1], etc. "
+    "CITATION RULES: Cite every factual claim with [SF1], [1], [D1], etc. "
     "Never fabricate information.\n\n"
     "FORMAT: 2–4 focused paragraphs with inline citations. Clear and accessible."
 )
@@ -131,7 +131,7 @@ _SYSTEM_PROMPT_TARGETED = (
     "2. If the initial evidence is sufficient, answer directly.\n"
     "3. If key specifics are missing, make 1–2 targeted searches for the gaps.\n\n"
     "CITATION RULES: Every factual claim must carry at least one citation marker "
-    "([1], [G1], [SF1]). Never fabricate.\n\n"
+    "([1], [G1], [SF1], [D1]). Never fabricate.\n\n"
     "FORMAT: Flowing prose with inline citations. Include relevant quantitative values "
     "if the evidence provides them.\n\n"
     "CONVERSATIONAL MESSAGES: For greetings or acks, respond naturally without tools."
@@ -296,6 +296,24 @@ _DOMAIN_SIGNAL_RE = re.compile(
     re.IGNORECASE,
 )
 
+# "deb" as a bare, whole word (via _DOMAIN_SIGNAL_RE above) misses the many
+# DEB-ecosystem names that embed it without word boundaries — AdvanDEB,
+# DEBtox, DEBkiss, DEBtool, add-my-DEB, etc. Deliberately unbounded: a false
+# positive here just costs one extra (harmless) retrieval round-trip, while a
+# false negative sends a real DEB-related question down the raw, ungrounded
+# LLM path — the asymmetry favors being permissive.
+_DEB_SUBSTRING_RE = re.compile(r"deb", re.IGNORECASE)
+
+# A genuine question about a specific thing ("what is X", "who is X", "define X").
+# Short messages matching this must never take the ungrounded conversational
+# shortcut just because they lack a DEB keyword — an unfamiliar proper noun or
+# acronym has nothing to match, but the user still wants a KB-checked answer
+# rather than the raw LLM guessing from its general training knowledge.
+_ASKS_ABOUT_SOMETHING_RE = re.compile(
+    r"^(what|who|where|when|which|why|how)\b|^(define|explain|describe|tell\s+me\s+about)\b",
+    re.IGNORECASE,
+)
+
 
 def _is_conversational(query: str) -> bool:
     """Return True when the message needs no KB retrieval (greeting, ack, filler)."""
@@ -304,8 +322,19 @@ def _is_conversational(query: str) -> bool:
         return True
     if _CONVERSATIONAL_RE.match(q):
         return True
+    # A real question about a specific named thing (e.g. "what is AdvanDEB?")
+    # must go through retrieval even if short and DEB-keyword-free — otherwise
+    # it falls to the raw LLM with zero grounding and no citation requirement,
+    # which happily fabricates from general training knowledge instead of
+    # honestly saying the KB has no relevant sources.
+    if _ASKS_ABOUT_SOMETHING_RE.match(q):
+        return False
     # Short messages (≤ 4 words) with no domain signals are treated as conversational
-    if len(q.split()) <= 4 and not _DOMAIN_SIGNAL_RE.search(q):
+    if (
+        len(q.split()) <= 4
+        and not _DOMAIN_SIGNAL_RE.search(q)
+        and not _DEB_SUBSTRING_RE.search(q)
+    ):
         return True
     return False
 
@@ -511,6 +540,27 @@ _CHAT_TOOLS: List[Dict[str, Any]] = [
                 },
             },
             "required": ["claim"],
+        },
+    },
+    {
+        "name": "search_platform_docs",
+        "description": (
+            "Search AdvanDEB's own documentation and tutorials — NOT scientific "
+            "literature. Use this when the user asks about the platform itself: "
+            "what AdvanDEB is, how a feature works (Chat, Documents, Facts, LLM "
+            "Keys, citations/provenance), what a role can do, or how to do "
+            "something in the app. Never answer such questions from general "
+            "knowledge — always check this tool first."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "What the user wants to know about the app",
+                },
+            },
+            "required": ["query"],
         },
     },
 ]
@@ -897,16 +947,19 @@ class ByokChatService:
 
         # ── Phase 1: Fan-out retrieval ─────────────────────────────────────────
         yield {"type": "status", "phase": "retrieving"}
-        chunks, direct_sfs = await self._retrieve_fan_out(query, params.top_k)
+        chunks, direct_sfs, platform_docs = await self._retrieve_fan_out(query, params.top_k)
 
         yield {
             "type": "agent_activity",
             "agent": "retrieval_agent",
             "status": "completed",
-            "task": f"Retrieved {len(chunks)} chunks, {len(direct_sfs)} stylized facts",
+            "task": (
+                f"Retrieved {len(chunks)} chunks, {len(direct_sfs)} stylized facts, "
+                f"{len(platform_docs)} doc section(s)"
+            ),
         }
 
-        if not chunks and not direct_sfs:
+        if not chunks and not direct_sfs and not platform_docs:
             answer = (
                 "I could not find any relevant sources in the knowledge base for "
                 "that question."
@@ -966,6 +1019,7 @@ class ByokChatService:
 
         # ── Phase 3: Build evidence registry ──────────────────────────────────
         registry = EvidenceRegistry.from_retrieval(chunks, graph_result)
+        registry.add_platform_docs(platform_docs)
 
         # ── Phase 4: Synthesis ─────────────────────────────────────────────────
         yield {"type": "status", "phase": "synthesizing"}
@@ -1221,8 +1275,16 @@ class ByokChatService:
 
     async def _retrieve_fan_out(
         self, query: str, top_k: int
-    ) -> tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-        """Parallel: hybrid_search + direct ArangoDB stylized-facts search."""
+    ) -> tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]]]:
+        """Parallel: hybrid_search + direct ArangoDB stylized-facts search +
+        AdvanDEB's own documentation search.
+
+        The documentation search always runs (it's a cheap in-memory keyword
+        scan, no DB round trip) so that questions about the platform itself —
+        "what is AdvanDEB", "how do citations work" — are grounded in the
+        app's real docs even when no tool call is made and the provider isn't
+        agentic.
+        """
 
         async def _sf_search() -> List[Dict[str, Any]]:
             try:
@@ -1240,14 +1302,24 @@ class ByokChatService:
                 logger.debug("byok: SF direct search skipped: %s", exc)
                 return []
 
+        async def _platform_docs_search() -> List[Dict[str, Any]]:
+            try:
+                from app.services.platform_docs_service import search_platform_docs
+                return search_platform_docs(query, limit=3)
+            except Exception as exc:
+                logger.debug("byok: platform docs search skipped: %s", exc)
+                return []
+
         results = await asyncio.gather(
             self._retrieve(query, top_k),
             _sf_search(),
+            _platform_docs_search(),
             return_exceptions=True,
         )
         chunks = results[0] if not isinstance(results[0], Exception) else []
         sfs = results[1] if not isinstance(results[1], Exception) else []
-        return chunks, sfs  # type: ignore[return-value]
+        platform_docs = results[2] if not isinstance(results[2], Exception) else []
+        return chunks, sfs, platform_docs  # type: ignore[return-value]
 
     async def _graph_augment(self, chunks: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Expand seed chunks through ArangoDB knowledge graph."""
@@ -1275,27 +1347,33 @@ class ByokChatService:
     # --------------------------------------------------------------- tool execution
 
     async def _execute_tool(
-        self, tool_name: str, tool_input: Dict[str, Any]
+        self, tool_name: str, tool_input: Dict[str, Any], registry: EvidenceRegistry
     ) -> Dict[str, Any]:
-        """Dispatch a tool call from the LLM and return the result as a dict."""
+        """Dispatch a tool call from the LLM and return the result as a dict.
+
+        Every evidentiary tool result is registered into the shared
+        ``EvidenceRegistry`` as it comes back, so markers cited from tool
+        results are the same stable markers ``extract_citations`` resolves
+        at the end — no local re-numbering that could collide with the
+        initial evidence block.
+        """
         if tool_name == "search_knowledge_base":
             q = tool_input.get("query", "")
             k = min(int(tool_input.get("top_k", 15)), 30)
             try:
                 chunks = await self._retrieve(q, k)
             except ByokSynthesisError:
-                return {"chunks": [], "count": 0}
-            return {
-                "chunks": [
-                    {
-                        "text": c.get("text", "")[:500],
-                        "chunk_id": c.get("chunk_id") or c.get("id", ""),
-                        "document_id": (c.get("metadata") or {}).get("document_id", ""),
-                    }
-                    for c in chunks
-                ],
-                "count": len(chunks),
-            }
+                return {"chunks": [], "count": 0, "_new_entries": []}
+            normalised = [
+                {
+                    "text": c.get("text", "")[:500],
+                    "chunk_id": c.get("chunk_id") or c.get("id", ""),
+                    "document_id": (c.get("metadata") or {}).get("document_id", ""),
+                }
+                for c in chunks
+            ]
+            new_entries = registry.add_chunks(normalised)
+            return {"chunks": normalised, "count": len(normalised), "_new_entries": new_entries}
 
         if tool_name == "search_stylized_facts":
             q = tool_input.get("query", "")
@@ -1310,9 +1388,10 @@ class ByokChatService:
                 facts = await loop.run_in_executor(
                     None, svc.search_stylized_facts, q, lim
                 )
-                return {"facts": facts, "count": len(facts)}
+                new_entries = registry.add_stylized_facts(facts)
+                return {"facts": facts, "count": len(facts), "_new_entries": new_entries}
             except Exception as exc:
-                return {"facts": [], "count": 0, "error": str(exc)}
+                return {"facts": [], "count": 0, "error": str(exc), "_new_entries": []}
 
         if tool_name == "get_claim_consensus":
             claim = tool_input.get("claim", "")
@@ -1326,9 +1405,18 @@ class ByokChatService:
                 rows = await loop.run_in_executor(
                     None, svc.claim_consensus, claim, 3, 30
                 )
-                return {"consensus": rows, "count": len(rows)}
+                new_entries = registry.add_consensus_facts(rows)
+                return {"consensus": rows, "count": len(rows), "_new_entries": new_entries}
             except Exception as exc:
-                return {"consensus": [], "count": 0, "error": str(exc)}
+                return {"consensus": [], "count": 0, "error": str(exc), "_new_entries": []}
+
+        if tool_name == "search_platform_docs":
+            from app.services.platform_docs_service import search_platform_docs
+
+            q = tool_input.get("query", "")
+            docs = search_platform_docs(q, limit=3)
+            new_entries = registry.add_platform_docs(docs)
+            return {"docs": docs, "count": len(docs), "_new_entries": new_entries}
 
         # ── Analytics tools (ANALYTICAL tier) ────────────────────────────────
         if tool_name in (
@@ -1429,29 +1517,41 @@ class ByokChatService:
 
     @staticmethod
     def _tool_result_to_text(tool_name: str, result: Dict[str, Any]) -> str:
-        """Render a tool result as human-readable text for the LLM."""
+        """Render a tool result as human-readable text for the LLM.
+
+        For the three evidentiary tools, uses the registry-assigned markers
+        in ``result["_new_entries"]`` (parallel to the source list) rather
+        than renumbering from 1 — those markers are the ones
+        ``EvidenceRegistry.extract_citations`` can actually resolve later.
+        """
         if tool_name == "search_knowledge_base":
             chunks = result.get("chunks", [])
             if not chunks:
                 return "No relevant chunks found."
+            entries = result.get("_new_entries") or []
             lines = [f"Found {len(chunks)} chunk(s):"]
             for i, c in enumerate(chunks[:15]):
-                lines.append(f"  [{i+1}] {c.get('text', '')[:400]}")
+                marker = entries[i].marker if i < len(entries) else str(i + 1)
+                lines.append(f"  [{marker}] {c.get('text', '')[:400]}")
             return "\n".join(lines)
 
         if tool_name == "search_stylized_facts":
             facts = result.get("facts", [])
             if not facts:
                 return "No matching stylized facts found."
+            entries = result.get("_new_entries") or []
             lines = [f"Found {len(facts)} stylized fact(s):"]
-            for f in facts[:12]:
-                lines.append(f"  • {f.get('statement', '')[:300]}")
+            for i, f in enumerate(facts[:12]):
+                marker = entries[i].marker if i < len(entries) else "?"
+                lines.append(f"  [{marker}] {f.get('statement', '')[:300]}")
             return "\n".join(lines)
 
         if tool_name == "get_claim_consensus":
             rows = result.get("consensus", [])
             if not rows:
                 return "No consensus data found for this claim."
+            entries = result.get("_new_entries") or []
+            entry_idx = 0
             lines: List[str] = []
             for row in rows[:3]:
                 sf = row.get("stylized_fact", "")
@@ -1463,16 +1563,31 @@ class ByokChatService:
                 )
                 for item in (row.get("supports") or [])[:3]:
                     doc = item.get("document") or {}
+                    marker = entries[entry_idx].marker if entry_idx < len(entries) else "?"
+                    entry_idx += 1
                     lines.append(
-                        f"    SUPPORT: {item.get('fact', '')[:200]} "
+                        f"    [{marker}] SUPPORT: {item.get('fact', '')[:200]} "
                         f"({doc.get('title', 'unknown')} {doc.get('year', '')})"
                     )
                 for item in (row.get("opposes") or [])[:2]:
                     doc = item.get("document") or {}
+                    marker = entries[entry_idx].marker if entry_idx < len(entries) else "?"
+                    entry_idx += 1
                     lines.append(
-                        f"    OPPOSE: {item.get('fact', '')[:200]} "
+                        f"    [{marker}] OPPOSE: {item.get('fact', '')[:200]} "
                         f"({doc.get('title', 'unknown')} {doc.get('year', '')})"
                     )
+            return "\n".join(lines)
+
+        if tool_name == "search_platform_docs":
+            docs = result.get("docs", [])
+            if not docs:
+                return "No matching AdvanDEB documentation found."
+            entries = result.get("_new_entries") or []
+            lines = [f"Found {len(docs)} documentation section(s):"]
+            for i, d in enumerate(docs):
+                marker = entries[i].marker if i < len(entries) else "?"
+                lines.append(f"  [{marker}] {d.get('title', '')}: {d.get('text', '')[:400]}")
             return "\n".join(lines)
 
         if tool_name == "graph_stats":
@@ -1773,7 +1888,7 @@ class ByokChatService:
 
             # Execute each tool and add results
             for tc in tool_calls:
-                tool_result = await self._execute_tool(tc["name"], tc.get("input", {}))
+                tool_result = await self._execute_tool(tc["name"], tc.get("input", {}), registry)
                 result_text = self._tool_result_to_text(tc["name"], tool_result)
 
                 yield {

@@ -146,6 +146,9 @@ class ProvenanceService:
         if source_type == "external_document":
             return None
 
+        if source_type == "platform_doc":
+            return await self._provenance_from_platform_doc(raw_id, citation_id)
+
         chunk = await self._find_chunk(raw_id or citation_id)
         if chunk:
             return await self._provenance_from_chunk(chunk, citation_id)
@@ -234,6 +237,34 @@ class ProvenanceService:
                 "page": None,
             }],
             "documents": [document] if document else [],
+        }
+
+    async def _provenance_from_platform_doc(
+        self, raw_id: str, citation_id: str
+    ) -> Optional[dict]:
+        """Build provenance for an AdvanDEB documentation/tutorial citation.
+
+        These are static in-app help sections, not KB records, so there is no
+        database lookup — the "document" points back at the in-app
+        Documentation page instead of an external source.
+        """
+        from app.services.platform_docs_service import get_platform_doc
+
+        doc = await self._run(get_platform_doc, raw_id)
+        if not doc:
+            return None
+        return {
+            "citation_id": citation_id,
+            "answer": {"excerpt": doc.get("text", "")[:200]},
+            "facts": [],
+            "chunks": [],
+            "documents": [{
+                "id": doc.get("id"),
+                "title": doc.get("title") or "AdvanDEB Documentation",
+                "authors": "",
+                "year": None,
+                "url": f"/documentation#{doc.get('id')}",
+            }],
         }
 
     # ------------------------------------------------------------------

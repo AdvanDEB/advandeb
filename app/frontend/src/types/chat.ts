@@ -3,6 +3,7 @@ export type CitationSourceType =
   | 'fact'
   | 'stylized_fact'
   | 'external_document'
+  | 'platform_doc'
 
 export type EvidenceMode =
   | 'local'

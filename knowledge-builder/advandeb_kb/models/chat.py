@@ -10,6 +10,7 @@ CitationSourceType = Literal[
     "fact",
     "stylized_fact",
     "external_document",
+    "platform_doc",
 ]
 
 EvidenceMode = Literal[
@@ -39,6 +40,8 @@ def make_citation_id(source_type: CitationSourceType, raw_id: str) -> str:
         return f"fact:{key}"
     if source_type == "stylized_fact":
         return f"sf:{key}"
+    if source_type == "platform_doc":
+        return f"platformdoc:{key}"
     return f"external:{key}"
 
 
@@ -56,6 +59,8 @@ def parse_citation_id(citation_id: str) -> tuple[CitationSourceType, str]:
         return "stylized_fact", strip_collection_prefix(value[len("sf:"):])
     if value.startswith("external:"):
         return "external_document", value[len("external:"):]
+    if value.startswith("platformdoc:"):
+        return "platform_doc", value[len("platformdoc:"):]
     if value.startswith("gfact_"):
         return "fact", strip_collection_prefix(value[len("gfact_"):])
     if value.startswith("gsf_"):
