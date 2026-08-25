@@ -31,10 +31,11 @@
       </button>
     </form>
 
-    <div v-if="authStore.googleOAuthEnabled" class="divider">or</div>
+    <!-- Temporarily hidden; flip GOOGLE_LOGIN_HIDDEN to false to restore -->
+    <div v-if="authStore.googleOAuthEnabled && !GOOGLE_LOGIN_HIDDEN" class="divider">or</div>
 
     <button
-      v-if="authStore.googleOAuthEnabled"
+      v-if="authStore.googleOAuthEnabled && !GOOGLE_LOGIN_HIDDEN"
       @click="handleGoogleLogin"
       class="google-btn"
     >
@@ -52,6 +53,8 @@ import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
 const router = useRouter()
+
+const GOOGLE_LOGIN_HIDDEN = true
 
 const email = ref('')
 const password = ref('')
