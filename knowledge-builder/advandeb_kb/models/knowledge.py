@@ -48,7 +48,12 @@ class Document(BaseModel):
     # Scope tag for development / domain-limited testing (e.g. "reproduction")
     general_domain: Optional[str] = None
 
-    processing_status: Literal["pending", "processing", "completed", "failed"] = "pending"
+    processing_status: Literal[
+        "pending", "processing", "completed", "failed", "excluded"
+    ] = "pending"
+    # Set when processing_status == "excluded" — why the domain-relevance gate
+    # skipped fact extraction / SF matching / embedding for this document.
+    exclusion_reason: Optional[str] = None
 
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

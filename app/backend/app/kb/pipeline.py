@@ -907,6 +907,34 @@ async def _enrich_metadata(filename: str, text: str = "") -> Dict[str, Any]:
     return result
 
 
+# Bibliographic/administrative boilerplate that occasionally leaks into fact
+# extraction (mostly via the non-JSON fallback line-split, which just grabs
+# any line over 20 chars). These are structural signatures of metadata, not
+# scientific claims — deliberately NOT based on matching the document's own
+# title or author names, since a title can legitimately double as a genuine
+# factual claim and a naive similarity check was shown to false-positive on
+# real facts (e.g. a place name coincidentally overlapping an author surname).
+_BIBLIOGRAPHIC_NOISE_RE = re.compile(
+    r"©|all rights reserved|correspondence to|corresponding author|"
+    r"\bissn\b|\borcid\b|\bdoi:\s*10\.|https?://doi\.org/10\.|"
+    r"\breceived:|\baccepted:|\bpublished online\b|"
+    r"supplementary material|conflict(s)? of interest|"
+    r"this (article|work) is licensed|creative commons",
+    re.IGNORECASE,
+)
+# Reference-list entry shape: two or more "Surname, I." citation-style author
+# tokens followed by a (YYYY) year — the classic bibliography line format.
+_REFERENCE_ENTRY_RE = re.compile(
+    r"([A-Z][a-zA-Z\-]+,\s*[A-Z]\.[A-Z]?\.?[,;]?\s*(&|and)?\s*){2,}.{0,80}\(\d{4}\)"
+)
+
+
+def _is_bibliographic_noise(text: str) -> bool:
+    """True if a candidate fact is administrative/bibliographic boilerplate
+    rather than a scientific claim (see patterns above)."""
+    return bool(_BIBLIOGRAPHIC_NOISE_RE.search(text) or _REFERENCE_ENTRY_RE.search(text))
+
+
 async def _extract_facts(text: str) -> List[str]:
     """
     Extract scientific facts from a document by calling Ollama.
@@ -928,11 +956,23 @@ async def _extract_facts(text: str) -> List[str]:
 
     model = settings.OLLAMA_MODEL
     system = (
-        "You are a scientific fact extractor. "
+        "You are a scientific fact extractor for a Dynamic Energy Budget (DEB) / "
+        "organism bioenergetics knowledge base. "
         "Given text from a scientific document, return ONLY a JSON array of "
         "concise, self-contained factual statements drawn from the text. "
         "Focus on quantitative relationships, biological mechanisms, model "
-        "parameters, experimental findings, and theoretical claims. "
+        "parameters, experimental findings, and theoretical claims about "
+        "organisms, ecology, physiology, or DEB theory.\n\n"
+        "DO NOT extract as facts: the paper's own title, author names or "
+        "affiliations, journal/publisher/copyright/ISSN/ORCID metadata, page "
+        "headers or footers, reference-list entries, or funding/acknowledgment "
+        "text — these are bibliographic noise, not scientific claims.\n\n"
+        "DO NOT extract claims that are fundamentally about human religion, "
+        "politics, government policy debates, or human social science — UNLESS "
+        "the claim describes a measurable effect on organisms, wildlife, or "
+        "ecosystems (e.g. a fishing quota's effect on a measured population "
+        "trend is in scope; a claim only about cultural or religious belief is "
+        "not).\n\n"
         "Each element must be a plain string. "
         "No commentary, no markdown, no keys — just the JSON array."
     )
@@ -948,14 +988,20 @@ async def _extract_facts(text: str) -> List[str]:
         try:
             parsed = _json.loads(clean)
             if isinstance(parsed, list):
-                return [str(f).strip() for f in parsed if f and len(str(f).strip()) > 10]
+                return [
+                    str(f).strip() for f in parsed
+                    if f and len(str(f).strip()) > 10
+                    and not _is_bibliographic_noise(str(f))
+                ]
         except (_json.JSONDecodeError, ValueError):
             pass
-        # Fallback: extract lines that look like statements
+        # Fallback: extract lines that look like statements. This path is the
+        # riskiest for bibliographic noise (no LLM judgment involved), so the
+        # boilerplate filter matters most here.
         return [
             ln.lstrip("•-*0123456789. ").strip()
             for ln in content.splitlines()
-            if len(ln.strip()) > 20
+            if len(ln.strip()) > 20 and not _is_bibliographic_noise(ln)
         ]
 
     # Build sections covering the entire text
@@ -1011,6 +1057,75 @@ async def _extract_facts(text: str) -> List[str]:
             # Continue with remaining sections even if one fails
 
     return all_facts
+
+
+async def _classify_domain_relevance(
+    title: str, abstract: Optional[str], model: Optional[str] = None
+) -> tuple[bool, str]:
+    """Gate a document by domain relevance before the expensive stages
+    (fact extraction, SF matching, embedding) run on it.
+
+    Uses only the title + abstract — cheap, and almost always enough to
+    judge a paper's primary subject. Returns (is_relevant, reason). Fails
+    OPEN (treated as relevant) on any error or unparseable response — an
+    ingestion pipeline bug should never silently drop a real paper, so the
+    asymmetry favors keeping data over excluding it.
+
+    ``model`` overrides ``settings.OLLAMA_MODEL`` — this is a simple binary
+    judgment, so bulk/retroactive callers processing millions of records can
+    pass a much smaller, faster model than the one used for live ingestion.
+    """
+    import httpx
+    import json as _json
+
+    if not abstract or not abstract.strip():
+        # No abstract to judge from — let it through; fact-level extraction
+        # prompting still screens out off-topic tangents within the text.
+        return True, "no abstract available for gating"
+
+    system = (
+        "You are a domain-relevance gate for a Dynamic Energy Budget (DEB) / "
+        "organism bioenergetics knowledge base (biology, ecology, physiology, "
+        "zoology, aquaculture, toxicology of organisms, and related quantitative "
+        "life-history modeling).\n\n"
+        "Given a paper's title and abstract, judge whether it is PRIMARILY about "
+        "that domain. Answer YES if the paper is about organisms, ecosystems, or "
+        "their biology/energetics — including papers that touch human social "
+        "topics (policy, economics, culture) SPECIFICALLY as they affect "
+        "wildlife, fisheries, or ecosystems.\n"
+        "Answer NO only if the paper's primary subject is unrelated to organism "
+        "biology — e.g. it is fundamentally about human religion, theology, "
+        "politics, government policy with no ecological/organism angle, pure "
+        "human social science, or an unrelated technical field.\n\n"
+        'Return ONLY a JSON object: {"relevant": true|false, "reason": "<one short sentence>"}.'
+    )
+    prompt = f"Title: {title}\n\nAbstract: {abstract[:2000]}"
+    payload = {
+        "model": model or settings.OLLAMA_MODEL,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": prompt},
+        ],
+        "stream": False,
+        "options": {"temperature": 0.0},
+    }
+
+    try:
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            resp = await client.post(f"{settings.OLLAMA_BASE_URL}/api/chat", json=payload)
+            resp.raise_for_status()
+            raw = resp.json()["message"]["content"].strip()
+
+        clean = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
+        if clean.startswith("```"):
+            clean = clean.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
+        parsed = _json.loads(clean)
+        is_relevant = bool(parsed.get("relevant", True))
+        reason = str(parsed.get("reason") or "").strip()[:300]
+        return is_relevant, reason or ("off-topic per domain gate" if not is_relevant else "")
+    except Exception as exc:
+        logger.warning("_classify_domain_relevance: gate failed, defaulting to relevant: %s", exc)
+        return True, "domain gate check failed — defaulted to relevant"
 
 
 async def _classify_sf_relations(
@@ -1268,6 +1383,30 @@ async def run_pdf_job(job_id: str, db: AsyncIOMotorDatabase) -> None:
             {"_id": job.id},
             {"$set": {"document_id": document.id, "updated_at": datetime.now(timezone.utc)}},
         )
+
+        # ---- Domain-relevance gate --------------------------------------
+        # Skip the expensive stages (fact extraction, SF matching, embedding)
+        # for papers that aren't fundamentally about organism biology/DEB —
+        # e.g. a stray non-domain PDF in the source folder. The document
+        # record is kept (not deleted) so a curator can review/override.
+        is_relevant, exclusion_reason = await _classify_domain_relevance(
+            document.title or filename_only, document.abstract
+        )
+        if not is_relevant:
+            await db.documents.update_one(
+                {"_id": document.id},
+                {"$set": {
+                    "processing_status": "excluded",
+                    "exclusion_reason": exclusion_reason,
+                    "updated_at": datetime.now(timezone.utc),
+                }},
+            )
+            await _set_job_stage(db, job.id, "excluded", status="completed", progress=100)
+            await _update_batch_status(db, job.batch_id)
+            logger.info(
+                "Job %s: document excluded by domain gate — %s", job_id, exclusion_reason
+            )
+            return
 
         # ---- Stage 2: fact extraction ----------------------------------
         if await _is_cancelled(db, batch_id_str):
