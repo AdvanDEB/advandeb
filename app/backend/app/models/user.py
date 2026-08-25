@@ -30,10 +30,21 @@ class UserUpdate(BaseModel):
     """User update model."""
     full_name: Optional[str] = None
     avatar_url: Optional[str] = None
+    chat_history_visible_to_admin: Optional[bool] = None
 
 
 class PasswordSet(BaseModel):
     """Model for setting or changing a password."""
+    password: str
+
+
+class UserStatusUpdate(BaseModel):
+    """Model for changing a user's account status (admin only)."""
+    status: str
+
+
+class PasswordResetResponse(BaseModel):
+    """Response for an admin-triggered password reset."""
     password: str
 
 
@@ -50,6 +61,10 @@ class User(UserBase):
     roles: List[str] = []
     capabilities: List[str] = []
     status: str = "active"  # active, inactive, suspended
+    # Research-consent flag: whether AdvanDEB staff may review this user's
+    # chat history. Defaults to opted-in, matching the existing blanket
+    # consent given by current users; self-service opt-out via PUT /users/me.
+    chat_history_visible_to_admin: bool = True
     created_at: datetime
     updated_at: datetime
 

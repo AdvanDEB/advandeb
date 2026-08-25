@@ -79,12 +79,16 @@ const baseLinks = [
   { path: '/scenarios',  icon: '⚗',  label: 'Scenarios' },
   { path: '/models',     icon: '📐', label: 'Models' },
   { path: '/settings/llm-keys', icon: '🔑', label: 'LLM Keys' },
+  { path: '/settings/privacy', icon: '🔒', label: 'Privacy' },
 ]
 
 const navLinks = computed(() => {
   const links = [...baseLinks]
   if (authStore.hasRole('administrator') || authStore.hasRole('knowledge_curator')) {
     links.push({ path: '/kb', icon: '⬡', label: 'Knowledge' })
+  }
+  if (authStore.hasRole('administrator')) {
+    links.push({ path: '/admin/users', icon: '👤', label: 'Admin' })
   }
   return links
 })

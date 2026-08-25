@@ -249,15 +249,22 @@
 import { ref, reactive, computed, onMounted, watch } from 'vue'
 import api from '@/utils/api'
 import { useNotificationsStore } from '@/stores/notifications'
+import { useAuthStore } from '@/stores/auth'
 
 const notifs = useNotificationsStore()
+const auth = useAuthStore()
+const isCurator = computed(
+  () => auth.hasRole('administrator') || auth.hasRole('knowledge_curator'),
+)
 
 type TabKey = 'sf' | 'kbfacts' | 'submissions'
-const TABS: { key: TabKey; label: string }[] = [
+const ALL_TABS: { key: TabKey; label: string }[] = [
   { key: 'sf', label: 'Stylized Facts' },
   { key: 'kbfacts', label: 'KB Facts' },
   { key: 'submissions', label: 'Submissions' },
 ]
+// KB Facts exposes raw extracted facts (incl. unreviewed/noisy ones) — curator/admin only.
+const TABS = computed(() => ALL_TABS.filter((t) => t.key !== 'kbfacts' || isCurator.value))
 const activeTab = ref<TabKey>('sf')
 
 const SF_CATEGORIES = [
