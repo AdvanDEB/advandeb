@@ -88,7 +88,23 @@ class Settings(BaseSettings):
 
     # Graph artifacts
     GRAPH_ARTIFACT_DIR: str = "data/graph_artifacts"
-    GRAPH_ARTIFACT_LAYOUT_NAME: str = "schema_default_v1"
+    # Version stamp for the layout functions in graph_query_layouts. The frontend
+    # only renders an artifact's stored x2d/y2d when this matches what it knows;
+    # older artifacts fall back to a force simulation instead of drawing a layout
+    # whose meaning has since changed. Bump this whenever a layout function
+    # changes shape, and rebuild the artifacts.
+    #   v1 → v2: taxonomical became a radial dendrogram (was a tidy tree with a
+    #            67M-unit-wide bounding box); sf_support/citation/knowledge_graph
+    #            artifacts still on disk predated the clustered-spring rewrite and
+    #            held a flat layered layout.
+    #   v2 → v3: cluster centroid placement. No cluster ever sat at the origin
+    #            (radius was base*sqrt(i+1)) and the gap was driven by the single
+    #            largest cluster, so graphs rendered as a ring of clusters with
+    #            their edges bundling across an empty middle.
+    #   v3 → v4: spring iterations now taper with cluster size (see
+    #            _taper_iterations). Clusters under 2,000 nodes are unchanged;
+    #            bigger ones settle less far, so their coordinates differ.
+    GRAPH_ARTIFACT_LAYOUT_NAME: str = "schema_default_v4"
     # Rebuild-queue pacing. Callers mark schemas dirty on every mutation (chat
     # marks "chatbot" dirty per message); without pacing the worker rebuilds the
     # full graph back-to-back, pinning a CPU and ratcheting RSS. SETTLE coalesces

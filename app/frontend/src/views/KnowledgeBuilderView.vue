@@ -62,6 +62,14 @@
             {{ graphEmptyMessage }}
           </div>
 
+          <GraphLegendPanel
+            v-if="hasGraphData && graphBundle"
+            :schema-name="graphBundle.schemaName"
+            :layout-mode="displayConfig.layoutMode ?? 'auto'"
+            :has-stored-layout="graphBundle.hasLayout"
+            @update:layout-mode="displayConfig = { ...displayConfig, layoutMode: $event }"
+          />
+
           <div v-if="graphOverlayVisible" class="graph-loading-overlay">
             <div class="graph-loading-card">
               <div class="graph-loading-title">{{ graphLoad.message }}</div>
@@ -560,6 +568,7 @@
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import CosmographCanvas from '@/components/kb/CosmographCanvas.vue'
+import GraphLegendPanel from '@/components/kb/GraphLegendPanel.vue'
 import NodeInspector from '@/components/kb/NodeInspector.vue'
 import NodeTablePanel from '@/components/kb/NodeTablePanel.vue'
 import SchemaPanel from '@/components/kb/SchemaPanel.vue'
@@ -767,7 +776,7 @@ async function loadGraph(
   try {
     // Step 1 — check artifact status; if not ready, trigger rebuild
     updateGraphLoad({ completed: 1, message: 'Checking artifact…', detail: schema.name })
-    const status = await fetchArtifactStatus(schemaId)
+    let status = await fetchArtifactStatus(schemaId)
     if (requestToken !== graphLoadToken) return false
 
     if (status.status === 'missing' || status.status === 'building') {
@@ -784,9 +793,9 @@ async function loadGraph(
       while (pollStatus === 'building' || pollStatus === 'missing') {
         await new Promise(r => setTimeout(r, 2000))
         if (requestToken !== graphLoadToken) return false
-        const s = await fetchArtifactStatus(schemaId)
+        status = await fetchArtifactStatus(schemaId)
         if (requestToken !== graphLoadToken) return false
-        pollStatus = s.status as typeof pollStatus
+        pollStatus = status.status as typeof pollStatus
       }
       if (pollStatus === 'failed') {
         setError(new Error(`Graph artifact for "${schema.name}" failed to build`))
@@ -797,14 +806,17 @@ async function loadGraph(
 
     // Step 2 — download artifact
     updateGraphLoad({ completed: 2, message: 'Downloading graph data…', detail: schema.name, indeterminate: false })
-    const artifact = await fetchGraphArtifact(schemaId)
+    const artifact = await fetchGraphArtifact(schemaId, status.build_id)
     if (requestToken !== graphLoadToken) return false
 
-    // Step 3 — parse in worker, build render bundle
+    // Step 3 — parse in worker, build render bundle.
+    // Indeterminate: the worker reports no intermediate progress, and a bar
+    // parked at 100% while the tab is busy reads as a hang.
     updateGraphLoad({
       completed: 3,
       message: 'Building render buffers…',
       detail: `${fmtNum(artifact.nodes.length)} nodes · ${fmtNum(artifact.edges.length)} edges`,
+      indeterminate: true,
     })
 
     const bundle = await new Promise<GraphRenderBundle>((resolve, reject) => {

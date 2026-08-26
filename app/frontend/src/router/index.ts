@@ -85,12 +85,19 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
+router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
   const authStore = useAuthStore()
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({ name: 'login' })
     return
+  }
+
+  // Role checks below read authStore.user. On a hard load of a deep link the
+  // token is in localStorage but the profile hasn't come back yet, so wait for
+  // it — otherwise /kb and /admin/* redirect to home on every refresh.
+  if ((to.meta.requiresKB || to.meta.requiresAdmin) && !authStore.user) {
+    await authStore.hydrate()
   }
 
   if (to.meta.requiresKB && !KB_ROLES.some(r => authStore.hasRole(r))) {

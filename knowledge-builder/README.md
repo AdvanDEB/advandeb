@@ -20,15 +20,26 @@ All user-facing UI (chat, visualization, document library, etc.) lives in the ma
 
 ### Components
 
-- **Storage**: MongoDB for facts and metadata; ArangoDB for graph data; ChromaDB for vector embeddings
+- **Storage**:
+  - **ArangoDB** — canonical store for documents, chunks, facts, stylized facts,
+    taxa, and the graph edges between them
+  - **ChromaDB** — canonical store for chunk embeddings
+  - **MongoDB** — application state, ingestion workflow state, and the
+    *materialized* graphs the host app renders
+
+  Full ownership rules: `../docs/STORAGE-CONTRACT.md`.
 - **AI integration**: Ollama LLM hosting (native, in-house only)
+- **Agents**: six websocket agents launched by the host app's stack service —
+  `retrieval_agent` (8081), `graph_explorer_agent` (8082), `synthesis_agent`
+  (8083), `query_planner_agent` (8084), `curator_agent` (8085),
+  `chatbot_agent` (8086)
 - **Environment management**: Conda (or venv) for Python
 
 ## Features
 
 ### Core functionality
 
-- MongoDB-based knowledge storage
+- ArangoDB-backed knowledge storage, with hybrid vector + full-text retrieval
 - Ollama LLM hosting support (localhost/remote)
 - Web browsing capabilities
 - PDF document ingestion

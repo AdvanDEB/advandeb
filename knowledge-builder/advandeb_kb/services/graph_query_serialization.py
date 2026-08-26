@@ -83,6 +83,36 @@ def _fact_node_type(doc: Dict[str, Any]) -> str:
     return ft if ft in _FACT_SUBTYPES else "fact"
 
 
+# NCBI emits ~40 distinct rank strings. Collapsing them onto the eight major
+# ranks keeps the graph legible — eight colours and eight sidebar filters
+# instead of forty — while still separating species from the clades above them.
+TAXON_RANKS = ("kingdom", "phylum", "class", "order", "family", "genus", "species", "clade")
+
+_TAXON_RANK_ALIASES: Dict[str, str] = {
+    "domain": "kingdom", "superkingdom": "kingdom", "kingdom": "kingdom", "subkingdom": "kingdom",
+    "superphylum": "phylum", "phylum": "phylum", "subphylum": "phylum", "infraphylum": "phylum",
+    "superclass": "class", "class": "class", "subclass": "class", "infraclass": "class",
+    "superorder": "order", "order": "order", "suborder": "order",
+    "infraorder": "order", "parvorder": "order",
+    "superfamily": "family", "family": "family", "subfamily": "family",
+    "tribe": "genus", "subtribe": "genus", "genus": "genus", "subgenus": "genus",
+    "species group": "genus", "species subgroup": "genus",
+    "species": "species", "subspecies": "species", "varietas": "species",
+    "forma": "species", "forma specialis": "species", "strain": "species",
+    "isolate": "species", "serotype": "species", "biotype": "species",
+}
+
+
+def taxon_node_type(doc: Dict[str, Any]) -> str:
+    """Map a taxon's NCBI rank onto one of ``TAXON_RANKS``.
+
+    Unranked entries ("clade", "no rank", and anything unrecognised) become
+    ``clade`` — they are real nodes in the lineage and dropping them would
+    disconnect the tree.
+    """
+    return _TAXON_RANK_ALIASES.get(str(doc.get("rank") or "").strip().lower(), "clade")
+
+
 def _document_node_type(doc: Dict[str, Any]) -> str:
     """Distinguish abstract-only records from full papers.
 
@@ -97,11 +127,15 @@ def _document_node_type(doc: Dict[str, Any]) -> str:
 def _serialize_vertex(doc: Dict[str, Any], node_type: str) -> Dict[str, Any]:
     """Convert an ArangoDB vertex document to a graph node dict."""
     # Refine generic "document" into "abstract" vs "document" (full paper),
-    # and generic "fact" into its extracted sub-type (conclusion/background/citation).
+    # generic "fact" into its extracted sub-type (conclusion/background/citation),
+    # and generic "taxon" into its major rank so the UI can colour and filter by
+    # rank instead of painting every organism a single colour.
     if node_type == "document":
         node_type = _document_node_type(doc)
     elif node_type == "fact":
         node_type = _fact_node_type(doc)
+    elif node_type == "taxon":
+        node_type = taxon_node_type(doc)
     key = doc.get("_key", "")
     return {
         "_id": key,
@@ -144,8 +178,15 @@ def _node_type_to_collection(node_type: str) -> str:
         "taxon": "taxa",
         "user": "users",
         "chat_session": "chat_sessions",
+        # Rank-typed taxa (see taxon_node_type) still live in `taxa`.
+        **{rank: "taxa" for rank in TAXON_RANKS},
     }
     return mapping.get(node_type, node_type)
+
+
+def _is_taxon(node_type: str) -> bool:
+    """True for the generic ``taxon`` type and for rank-typed taxa alike."""
+    return node_type == "taxon" or node_type in TAXON_RANKS
 
 
 def _get_label(doc: Dict[str, Any], node_type: str) -> str:
@@ -155,7 +196,7 @@ def _get_label(doc: Dict[str, Any], node_type: str) -> str:
         return doc.get("content", doc.get("_key", ""))
     if node_type == "stylized_fact":
         return doc.get("statement", doc.get("_key", ""))
-    if node_type == "taxon":
+    if _is_taxon(node_type):
         return doc.get("name", str(doc.get("tax_id", doc.get("_key", ""))))
     if node_type == "user":
         return doc.get("user_id", doc.get("_key", ""))
@@ -173,7 +214,7 @@ def _get_cluster_id(doc: Dict[str, Any], node_type: str) -> str:
         return node_type  # cluster conclusions/background/citations separately
     if node_type == "stylized_fact":
         return f"sf:{doc.get('category', 'uncategorized')}"
-    if node_type == "taxon":
+    if _is_taxon(node_type):
         return f"taxon:{doc.get('rank', 'unknown')}"
     return node_type
 
@@ -186,7 +227,7 @@ def _extract_properties(doc: Dict[str, Any], node_type: str) -> Dict[str, Any]:
         return {k: doc.get(k) for k in ("confidence", "status", "entities", "document_id", "fact_type")}
     if node_type == "stylized_fact":
         return {k: doc.get(k) for k in ("category", "status", "sf_number")}
-    if node_type == "taxon":
+    if _is_taxon(node_type):
         return {k: doc.get(k) for k in ("rank", "tax_id", "gbif_usage_key", "common_names")}
     if node_type == "user":
         return {"user_id": doc.get("user_id")}

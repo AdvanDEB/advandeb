@@ -97,6 +97,13 @@ export interface GraphRenderBundle {
   buildId: string
   nodeCount: number
   edgeCount: number
+  /**
+   * True when `pointPositions` carries the layout the backend computed for this
+   * schema (rescaled into cosmos space). False means the artifact had no usable
+   * layout and the positions are a placeholder spiral for the simulation to
+   * untangle.
+   */
+  hasLayout: boolean
   pointPositions: Float32Array
   pointColors: Float32Array
   pointSizes: Float32Array

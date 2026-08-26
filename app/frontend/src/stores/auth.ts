@@ -68,6 +68,23 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  // Single in-flight hydration, shared by app startup and the router guard.
+  // Role-gated routes (/kb, /admin/*) can only be decided once `user` is
+  // populated; without something to await, a hard load or refresh resolves the
+  // guard against a null user and bounces to home.
+  let _hydration: Promise<void> | null = null
+
+  function hydrate(): Promise<void> {
+    if (!_hydration) {
+      _hydration = fetchCurrentUser().finally(() => {
+        // Clear on failure so a later navigation can retry rather than
+        // replaying a rejected hydration forever.
+        if (!user.value) _hydration = null
+      })
+    }
+    return _hydration
+  }
+
   return {
     user,
     accessToken,
@@ -80,6 +97,7 @@ export const useAuthStore = defineStore('auth', () => {
     loginNative,
     fetchAuthConfig,
     logout,
-    fetchCurrentUser
+    fetchCurrentUser,
+    hydrate
   }
 })

@@ -1,255 +1,200 @@
 # AdvanDEB Cross-Repository Roadmap
 
-## Status (as of 2026-05-18)
-
-A consolidated snapshot of where each phase stands. The phase sections below carry
-fine-grained `[STATUS: ...]` annotations where they can be judged credibly from
-`docs/SYSTEM-OVERVIEW.md` and the running services; everything else is marked
-`[STATUS: UNCERTAIN]`.
-
-- **Phase 0 — Multi-Agent RAG-KG Foundation**: largely shipped. The five
-  specialized agents (`retrieval_agent`, `graph_explorer_agent`,
-  `synthesis_agent`, `query_planner_agent`, `curator_agent`) plus the
-  `chatbot_agent` orchestrator are running inside `advandeb_kb`; the Rust MCP
-  gateway is up; ArangoDB is the canonical KB store; ChromaDB powers vector
-  retrieval; the ingestion pipeline is processing ~1300 papers; 1236 stylized
-  facts are seeded into the `advandeb` MongoDB; the `sf_support` graph is at
-  3373 nodes / 2243 edges.
-- **Phase 0.5 — User Management & Authentication**: basics shipped. Google
-  OAuth, JWT issuance/validation, role-based FastAPI dependencies, and the
-  document/fact submission workflow are live. Reviewer status, capability
-  request workflows, and full audit logs are only partially done.
-- **Phase 1 / 1.5 — App Visualization & UX**: in progress. The Cosmograph WebGL
-  canvas is live for graph rendering, the agent-activity panel streams live
-  status, and the provenance trail panel is in place. Polish, schema-side
-  filtering, and node-table interactions are still moving.
-- **Outstanding work**: tracked in `docs/REVIEW-2026-05-18.md` §11 (the change
-  plan). That document is the authoritative source for what remains for the
-  current review cycle.
+> **Revised 2026-08-26.** This replaces the 2026-05-18 revision. The phase
+> structure below is unchanged in spirit but re-anchored to what is actually
+> running: every status claim here was verified against the live services,
+> the three datastores, and the committed tree at `cb7dd3c1`. The change plan
+> that used to live in `docs/REVIEW-2026-05-18.md` §11 is superseded by
+> `docs/PLAN-2026-08-26.md`.
 
 ---
 
-## Critical Issue: Hallucinations & Wrong Document References
+## 1. Where the system actually is (2026-08-26)
 
-**Current Problem**: The system hallucinates facts and references wrong documents, undermining trust and usability for research work.
+AdvanDEB is past the "does it work" stage and into the "can anyone else use
+it" stage. The retrieval and multi-agent machinery is built, running, and
+holding a substantial corpus. What is missing is almost entirely at the
+edges: a public face, operational confidence, and documentation that matches
+reality.
 
-**Root Cause**: 
-- Keyword-only search (regex) misses semantically similar content
-- No vector embeddings or semantic retrieval
-- Weak provenance tracking
-- Single-agent system lacks verification steps
-- No graph-based context expansion
+### Running topology (verified)
 
-**Solution**: Multi-Agent RAG-KG Hybrid System (detailed in component plans below)
+| Component | Port | Bind | Managed by |
+|---|---|---|---|
+| App backend — FastAPI + compiled Vue SPA | 8400 | `0.0.0.0` | `advandeb.service` |
+| MCP gateway (Rust) | 8080 | `127.0.0.1` | `advandeb-stack.service` |
+| Agents — retrieval, graph_explorer, synthesis, query_planner, curator, chatbot | 8081–8086 | `127.0.0.1` | `advandeb-stack.service` |
+| MongoDB | 27017 | `0.0.0.0` | system |
+| ArangoDB | 8529 | `127.0.0.1` | system |
+| Ollama | 11434 | `127.0.0.1` | system |
 
----
+All three units (`advandeb.target` → `advandeb.service` +
+`advandeb-stack.service`) are active.
 
-## Phase 0: Multi-Agent RAG-KG Foundation (PRIORITY - 12 weeks)  [STATUS: SHIPPED]
+### Data on disk (verified counts, not estimates)
 
-**Goal**: Eliminate hallucinations by implementing semantic retrieval, multi-agent verification, and graph-augmented context with full provenance tracking.
+**ArangoDB `advandeb_kb`** — the canonical knowledge store:
 
-### Architecture Overview
+| Collection | Count | Note |
+|---|---|---|
+| `documents` | 3,899,789 | broad literature index; 3,818,403 distinct titles |
+| `chunks` | 3,077,659 | spanning 603,739 distinct documents |
+| `chunk_belongs_to` | 2,464,969 | edge |
+| `taxa` / `taxonomical` | 1,257,912 each | full taxonomy backbone |
+| `facts` | 109,395 | across 11,913 distinct documents |
+| `sf_support` | 31,311 | edge — stylized-fact support graph |
+| `citations` | 8,521 | edge |
+| `document_meta` | 1,253 | the curated, fully-ingested paper set |
+| `stylized_facts` | 1,236 | |
+| `knowledge_graph` | 35 | edge |
+| `provenance_traces` | **0** | dead schema — provenance is reconstructed on read, never persisted. See `STORAGE-CONTRACT.md` §5. |
 
-```
-┌─────────────────────────────────────────────────┐
-│         MULTI-AGENT COORDINATION                │
-│    (Agents communicate via MCP protocol)        │
-│                                                  │
-│  Query Planner → Retrieval → Graph Explorer     │
-│                      ↓              ↓            │
-│                  Synthesis ← Curator             │
-└─────────────────────┬───────────────────────────┘
-                      │
-        ┌─────────────┴──────────────┐
-        │                            │
-┌───────▼────────┐         ┌─────────▼────────┐
-│  HYBRID RAG    │         │  KNOWLEDGE GRAPH │
-│                │         │                  │
-│ • ChromaDB     │◄────────┤  • ArangoDB      │
-│   (vectors)    │ refs    │    (unified DB)  │
-│ • Sentence     │         │  • Graph edges   │
-│   Transformers │         │  • Documents     │
-│ • Reranking    │         │  • Facts & Taxa  │
-└────────────────┘         └──────────────────┘
-```
+**ChromaDB** — 17 GB at `data/chromadb`.
 
-### Implementation Strategy
+**MongoDB** — two databases with deliberate but undocumented overlap:
 
-**Approach**: Vertical slices with 2-person team (full-time)
-- Build complete workflows end-to-end
-- Start with highest-value features
-- Build fresh in ArangoDB (no MongoDB migration initially)
-- Focus on production code, minimal tests during development
+- `advandeb` (app/user surface): 9 users, 1,695 documents, 28,309 facts,
+  1,236 stylized facts, 49,700 graph nodes / 70,724 edges, 1,258,523
+  taxonomy nodes, 1,316 ingestion jobs, 9 chat sessions / 37 messages.
+- `advandeb_knowledge_builder_kb` (KB working surface): 1,305 documents,
+  263,691 chunks, 63,709 facts, 102,060 graph nodes / 155,397 edges,
+  1,257,912 taxonomy nodes, 7,529 snapshot cluster views.
 
-### Slice 1: Semantic RAG Foundation (Weeks 1-4)  [STATUS: SHIPPED]
+**These are not three views of one dataset — they are three generations of the
+same corpus, mid-migration.** `app/backend/app/core/config.py:61` states it
+outright: `KB_DB_NAME` is *"Transitional: used during MongoDB→ArangoDB
+migration. Remove after migration."* The second Mongo database is the previous
+generation, still present and still written to by ingestion, visualization
+artifacts, and user submissions.
 
-**Deliverable**: Vector search eliminates basic hallucinations
+Ownership, sync paths, and staleness tolerances are now written down in
+`docs/STORAGE-CONTRACT.md`. **Finishing or formally abandoning that migration
+is the largest untracked piece of work in the system.**
 
-- Week 1: Infrastructure (ChromaDB, ArangoDB, sentence-transformers)
-- Week 2: Embedding service + document chunking
-- Week 3: Vector search implementation
-- Week 4: Integration with existing retrieval agent + basic testing
+### Corpus scale correction
 
-**Success Metric**: Retrieval MRR improves from ~0.45 (keyword) to >0.70 (vector)
-
-### Slice 2: Multi-Agent Coordination (Weeks 5-8)  [STATUS: SHIPPED]
-
-**Deliverable**: Multiple specialized agents verify and cross-check results
-
-- Week 5: MCP agent server framework (Python)
-- Week 6: Create 3 specialized agent MCP servers (Retrieval, Graph Explorer, Synthesis)
-- Week 7: MCP Gateway routing (Rust enhancement)
-- Week 8: Query Planner agent + agent coordination workflows
-
-**Success Metric**: Multi-agent responses cite sources with full provenance, contradictions detected
-
-### Slice 3: Graph-Augmented Retrieval (Weeks 9-11)  [STATUS: SHIPPED]
-
-**Deliverable**: Graph structure expands context and improves relevance
-
-- Week 9: ArangoDB graph schema + edge collections
-- Week 10: Graph traversal tools + hybrid retrieval (vector + graph expansion)
-- Week 11: Graph-augmented agent workflows
-
-**Success Metric**: Graph expansion improves recall by 25%+, related facts discovered automatically
-
-### Slice 4: Production Readiness (Week 12)  [STATUS: IN PROGRESS]
-
-**Deliverable**: Stable, observable, debuggable multi-agent system
-
-- Performance optimization (caching, indexing)
-- Observability (agent activity logs, reasoning traces)
-- Error handling and graceful degradation
-- Documentation of architecture and workflows
-
-**Success Metric**: No hallucinations in test scenarios, full citation trails, <5s response time
+The previous revision described the corpus as "~1300 papers" with an
+"sf_support graph at 3373 nodes / 2243 edges." Both numbers are now badly
+stale: `document_meta` is 1,253 (so the curated set is roughly right), but
+the surrounding literature index is three orders of magnitude larger, and
+`sf_support` is at 31,311 edges. Any planning that assumed the small numbers
+should be re-checked.
 
 ---
 
-## Phase 0.5: User Management & Authentication (15 weeks)  [STATUS: IN PROGRESS]
+## 2. Phase status, reconciled
 
-**Foundation** (Weeks 1-3):  [STATUS: SHIPPED]
-- Implement user database models with base_role + capabilities structure
-- Google OAuth 2.0 integration
-- JWT and API key authentication
-- Capability-based permission system
-- Audit logging infrastructure
+### Phase 0 — Multi-Agent RAG-KG Foundation — **SHIPPED**
 
-**User Management** (Weeks 4-5):  [STATUS: IN PROGRESS]
-- Base role request workflow (new users)
-- Capability request workflow (existing curators)
-- API key management with capability-based scopes
-- Email notification system
-- Administrator dashboard
+Five specialized agents (`retrieval_agent`, `graph_explorer_agent`,
+`synthesis_agent`, `query_planner_agent`, `curator_agent`) plus the
+`chatbot_agent` orchestrator run under `advandeb-stack.service`. The Rust MCP
+gateway routes between them. ArangoDB is the canonical KB store; ChromaDB
+powers vector retrieval; `HybridRetrievalService` fuses vector + full-text
+with RRF and optional LLM reranking.
 
-**Frontend Integration** (Weeks 6-8):  [STATUS: IN PROGRESS]
-- Login page and OAuth flow
-- Auth state management (Pinia/Vuex)
-- Role request form
-- API key management UI
-- Permission-based view rendering
+All four slices (Semantic RAG, Multi-Agent Coordination, Graph-Augmented
+Retrieval, Production Readiness) are shipped. Slice 4 was the last to close:
+CI, rate limiting, graceful shutdown, loopback binding, and token revocation
+all landed since May.
 
-**Review Workflow** (Weeks 9-10):  [STATUS: IN PROGRESS]
-- Knowledge review queue (backend + frontend)
-- Approve/reject/request changes functionality
-- Status-based visibility filtering
-- Reviewer dashboard
+### Phase 0.5 — User Management & Authentication — **SHIPPED (with gaps)**
 
-**Day Zero & Migration** (Weeks 11-12):  [STATUS: IN PROGRESS]
-- Day Zero knowledge seeding workflow
-- Batch ingestion for foundational content
-- Migration of existing 1,300 PDFs
-- Legacy data attribution
+Shipped since the last revision: the administrator dashboard
+(`AdminUsersView`, `AdminUserChatsView`), a staff-access audit log
+(`chat_access_log`), a user-facing privacy opt-out (`PrivacySettingsView`),
+real `/logout` with `jti` revocation, `slowapi` rate limiting on auth,
+constant-time login, and the full JWT hardening set.
 
-**Modeling Assistant Integration & Polish** (Weeks 13-15):  [STATUS: NOT STARTED]
-- Configure MA backend to use shared authentication
-- Implement JWT validation in MA using shared library
-- Test cross-component authentication (same token works for KB and MA)
-- End-to-end testing across all roles and components
-- Security audit
-- Documentation and deployment
+Still open: API-key management with capability scopes, the capability-request
+workflow for existing curators, and email notifications. Google sign-in is
+currently hidden in the UI (`ed3d21d6`) — that is a deliberate temporary
+state and needs a decision, not just a re-enable.
 
-**Deliverable**: Fully authenticated platform with 3 base roles + 3 capabilities, unified SSO across KB and MA, Google OAuth, API keys, review workflow, and Day Zero seeding
+### Phase 1 — Stabilize knowledge-builder — **SHIPPED (with gaps)**
 
-See `USER-MANAGEMENT-PLAN.md` for detailed implementation plan.
+CI exists (`.github/workflows/ci.yml`: backend pytest, frontend
+vue-tsc + vitest, mcp cargo test + clippy). The backend suite is 15/15 green.
+Two gaps, both tracked in the new plan: the KB job is `|| true` and points at
+the wrong directory, and one root-level test module does not import.
 
----
+### Phase 1.5 — App Visualization & UX — **SHIPPED**
 
-## Phase 1: Stabilize advandeb-knowledge-builder  [STATUS: IN PROGRESS]
+Cosmograph WebGL canvas, live agent-activity panel, provenance trail panel,
+and the enhanced chat interface with source cards are all in. Citation and
+retraction signals on `claim_consensus` landed in the August merge.
 
-- Finish hardening CRUD and data processing paths.
-- Stabilize agent framework and logging.
-- Add basic test coverage and CI.
-- **Integration with authentication**: All endpoints protected, audit logging active
+### Phase 1.75 — MCP Gateway — **SHIPPED**
 
-## Phase 1.5: App Visualization & UX (Parallel - 4 weeks)  [STATUS: IN PROGRESS]
+WebSocket MCP protocol, agent routing, tool registry, SIGTERM graceful
+shutdown, loopback-only bind.
 
-**Goal**: User-facing graph visualization and enhanced chat interface
+### Phase 2 — Modeling Assistant — **NOT STARTED**
 
-See `APP-VISUALIZATION-PLAN.md` for details.
+Unchanged. `ScenariosView` and `ModelsView` exist in the frontend and
+`scenario_service` / `model_service` in the backend, but these are the
+knowledge-side scaffolding, not the modeling assistant itself.
 
-- Interactive knowledge graph visualization (Cosmograph WebGL canvas)  [STATUS: SHIPPED]
-- Agent activity viewer (real-time multi-agent status)  [STATUS: SHIPPED]
-- Provenance display (citation trails, reasoning traces)  [STATUS: SHIPPED]
-- Enhanced chat interface with source cards  [STATUS: IN PROGRESS]
+### Phases 3 & 4 — **NOT STARTED**
 
-**Deliverable**: Rich UI showing how agents find and verify information
+Unchanged.
 
 ---
 
-## Phase 1.75: Bootstrap advandeb-MCP Gateway (Integrated with Phase 0)  [STATUS: SHIPPED]
+## 3. Shipped work that was never on the roadmap
 
-**Scope**: MCP Gateway enhancement integrated with Multi-Agent RAG-KG system
+The following are live in the product and had no roadmap entry. They are
+recorded here so the roadmap stops under-describing the system:
 
-- WebSocket MCP protocol implementation
-- Agent-to-agent routing and coordination
-- Tool registry with dynamic loading
-- Integration with Python MCP agent servers (from knowledge-builder)
-
-**Status**: Integrated with Phase 0 (Multi-Agent RAG-KG Foundation)
-
-See `MCP-MULTI-AGENT-COORDINATION-PLAN.md` for detailed implementation plan.
-
----
-
-## Phase 2: Define and Prototype advandeb-modeling-assistant  [STATUS: NOT STARTED]
-
-- Finalize integration contracts with `advandeb-knowledge-builder`.
-- Configure MA to use shared platform authentication (same JWT tokens and user database).
-- Implement a thin prototype of the modeling assistant backend and basic UI.
-- Validate end-to-end flow: from knowledge ingestion to modeling recommendations.
-- **MCP Integration**: Use MCP server for LLM-based agent features in MA.
-
-## Phase 3: Deepen Integration and UX  [STATUS: NOT STARTED]
-
-- Improve search and retrieval paths tailored for modeling use cases.
-- Enhance visual and interactive exploration of the knowledge used in models.
-- Add collaboration and sharing around scenarios and models.
-- Implement multi-user contribution tracking (Phase 2 of USER-MANAGEMENT-PLAN).
-- **MCP Expansion**: Enhanced MCP tools for complex knowledge graph queries and analysis.
-
-## Phase 4: Extensions and Plugins  [STATUS: NOT STARTED]
-
-- Support project-specific tools and agents via a plugin mechanism.
-- Extend modeling support to additional modeling paradigms as needed.
-- Advanced collaboration features (workspaces, teams).
-- Trust and reputation system for contributors.
-- **MCP Extensions**: Custom tool development for specialized workflows.
+- **BYOK (bring-your-own-key) chat** — `byok_chat_service`, `LLMKeysView`,
+  `user_llm_keys`, per-provider adapters including Anthropic and Nvidia.
+- **Admin console** — user management plus consented chat review, backed by
+  an access audit log.
+- **Graph analytics service** and the `claim_consensus` / `find_by_taxon`
+  graph tools with citation + retraction signals.
+- **AdvanDEB's own documentation as a citable `[D1]` evidence source**, with
+  stable citation markers for evidence gathered mid-conversation.
+- **Corpus quality gating** — domain-relevance gate and bibliographic noise
+  filter at extraction, applied retroactively to the reproduction abstracts.
+- **GitHub OAuth device flow** (`github_oauth_service`).
+- **Prompt library** and an in-app `DocumentationView`.
+- **Graph artifact / snapshot pipeline** — `graph_artifact_builder`,
+  `graph_artifact_store`, `graph_snapshot_service`, `graph_rebuild_queue`.
 
 ---
 
-## Performance targets
+## 4. Current quarter — Q3 2026
 
-The previous `app/README.md` published a set of performance numbers (initial
-load, bundle size, Lighthouse score) as "achieved." Those numbers were
-aspirational and have not been re-measured against the current build. Track
-them here as targets until they can be re-measured against `frontend/dist/`
-served by the FastAPI backend on :8400.
+The theme is **"make it presentable and make it trustworthy."** The engine
+works; nobody outside the project can see it, and we cannot yet prove it
+stays working.
 
-- **Frontend initial load**: target <3s
-- **Bundle size**: target <1MB gzipped
-- **Build time**: target <10s
-- **Lighthouse score**: target >90
-- **Backend health check**: target <100ms
+1. **Close the CI blind spot.** A test suite that silently passes is worse
+   than no test suite.
+2. **Give AdvanDEB a public face.** A landing page above the auth wall, and
+   a decision on anonymous read-only knowledge browsing.
+3. **Finish or formally abandon the Mongo→Arango migration.** The storage
+   contract is now written (`docs/STORAGE-CONTRACT.md`); the half-migrated
+   state it documents is the thing to resolve.
+4. **Decide whether provenance becomes durable.** It is currently
+   reconstructed on read, which means historical answers cannot be audited.
+5. **Re-measure before re-claiming.** The performance targets below have
+   still never been measured against the current build.
 
-Performance is yet to be re-measured against the current build.
+Detail, ordering, and acceptance criteria: `docs/PLAN-2026-08-26.md`.
+
+---
+
+## 5. Performance targets
+
+Still targets, still unmeasured. Carried forward unchanged from the previous
+revision so the gap stays visible:
+
+- Frontend initial load: <3s
+- Bundle size: <1MB gzipped
+- Build time: <10s
+- Lighthouse score: >90
+- Backend health check: <100ms
+
+`/api/health` now exists as the canonical endpoint, so the last one is
+finally measurable.

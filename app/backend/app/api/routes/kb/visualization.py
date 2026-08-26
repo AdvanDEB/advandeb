@@ -183,6 +183,13 @@ async def get_schema_artifact(
         "Content-Encoding": "gzip",
         "ETag": meta.get("sha256", ""),
         "X-Graph-Build-Id": meta.get("build_id", ""),
+        # This URL is stable per schema but its content changes on every
+        # rebuild. Without an explicit directive the response is heuristically
+        # cacheable (FileResponse sends Last-Modified), so browsers kept serving
+        # a months-old artifact and rebuilds never reached anyone. no-cache
+        # still allows the cache to be used — it just has to revalidate first,
+        # and the ETag makes that a cheap 304.
+        "Cache-Control": "no-cache, must-revalidate",
     }
     return FileResponse(
         Path(file_path),

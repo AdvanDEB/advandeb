@@ -24,6 +24,47 @@ import networkx as nx
 SCHEMA_LAYOUT_MAP: Dict[str, Any] = {}   # populated at module bottom
 
 
+# ---------------------------------------------------------------------------
+# Spring-iteration tapering
+# ---------------------------------------------------------------------------
+#
+# ``nx.spring_layout`` costs roughly O(N^1.57) per call at a fixed iteration
+# count, and is linear in the iteration count on top of that. Measured on the
+# dev box at 60 iterations: 1k nodes = 3.5s, 2k = 10.4s, 4k = 31.0s. Real
+# rebuilds were far worse — sf_support (one 18k-node ``fact`` cluster) took
+# 546s, knowledge_graph 489s — which is long enough that a rebuild kicked off
+# from the UI looks like a hang, and long enough that back-to-back rebuilds
+# from ``graph_rebuild_queue`` can pile up.
+#
+# Big clusters don't need the full iteration budget: past a few thousand nodes
+# the extra passes are refining positions well below what anyone can see at the
+# zoom level a 20k-node graph is viewed at. So spend the full budget on small
+# clusters, where each iteration is cheap and visibly improves the picture, and
+# taper logarithmically towards a floor as clusters grow.
+ITER_FULL_BELOW = 2_000      # clusters up to this size get the full budget
+ITER_FLOOR_ABOVE = 20_000    # clusters this size or larger get ITER_FLOOR
+ITER_FLOOR = 15              # minimum passes, however large the cluster
+
+
+def _taper_iterations(n_in_cluster: int, budget: int) -> int:
+    """Spring iterations to spend on a cluster of ``n_in_cluster`` nodes.
+
+    Returns ``budget`` unchanged below ``ITER_FULL_BELOW`` — so small graphs,
+    including every graph in the test suite, lay out exactly as before — then
+    interpolates log-linearly down to ``ITER_FLOOR`` at ``ITER_FLOOR_ABOVE``.
+    """
+    if budget <= ITER_FLOOR or n_in_cluster <= ITER_FULL_BELOW:
+        return budget
+    if n_in_cluster >= ITER_FLOOR_ABOVE:
+        return ITER_FLOOR
+    # Log-linear because the cost curve is a power law: equal ratios of cluster
+    # size cost equal multiples, so they should shed equal shares of the budget.
+    t = math.log(n_in_cluster / ITER_FULL_BELOW) / math.log(
+        ITER_FLOOR_ABOVE / ITER_FULL_BELOW
+    )
+    return max(ITER_FLOOR, int(round(budget + t * (ITER_FLOOR - budget))))
+
+
 def _apply_layout(
     nodes: List[Dict],
     edges: List[Dict],
@@ -51,7 +92,7 @@ def _clustered_spring_layout(
     intra_seed: int = 42,
     scale_per_node: float = 18.0,
     min_cluster_scale: float = 60.0,
-    cluster_separation: float = 1.8,
+    cluster_padding: float = 1.15,
 ) -> None:
     """
     Unified clustered-spring layout.
@@ -59,10 +100,16 @@ def _clustered_spring_layout(
       1. Partition nodes into clusters via ``cluster_fn(node) -> str``.
       2. Run a weighted ``nx.spring_layout`` INSIDE each cluster — edge weights
          drive intra-cluster distance.  Larger clusters get a larger
-         coordinate scale so dense groups don't compress to a single point.
-      3. Place cluster centroids on a Fibonacci-spiral (well-separated,
-         deterministic, no privileged angle).  Cluster size sets the
-         per-cluster radius; ``cluster_separation`` controls the gap.
+         coordinate scale so dense groups don't compress to a single point,
+         and a smaller share of ``intra_iterations`` (see ``_taper_iterations``)
+         so a single huge cluster can't dominate the rebuild time.
+      3. Place cluster centroids by greedy golden-angle packing: the largest
+         cluster takes the centre, each next one goes out along the golden
+         angle until it clears every cluster already placed.
+         ``cluster_padding`` is the centre-distance multiplier on the sum of
+         two clusters' radii — 1.0 means exactly touching, 1.15 leaves a
+         modest gap. Values much above ~1.5 push clusters so far apart that
+         the edges between them dominate the picture.
       4. Final node position = cluster_centroid + intra_cluster_offset.
       5. 3D Z coordinate = (cluster_index * 80) - centroid, so clusters
          stack along Z too (helps disambiguate in 3D view) but X/Y still
@@ -137,7 +184,7 @@ def _clustered_spring_layout(
                 sub,
                 weight="weight",
                 k=k_sub,
-                iterations=intra_iterations,
+                iterations=_taper_iterations(n_in_cluster, intra_iterations),
                 seed=intra_seed,
                 scale=cluster_scale,
             )
@@ -161,19 +208,51 @@ def _clustered_spring_layout(
 
         intra_pos.update({nid: (float(xy[0]), float(xy[1])) for nid, xy in sub_pos.items()})
 
-    # ---- 4. Centroid placement on a Fibonacci spiral ----
-    max_cluster_radius = max(cluster_scales.values(), default=min_cluster_scale)
-    base_separation = cluster_separation * (max_cluster_radius + min_cluster_scale)
+    # ---- 4. Centroid placement: greedy golden-angle packing ----
+    #
+    # The largest cluster takes the centre; every other cluster goes out along
+    # the golden angle only as far as it needs to clear what is already placed.
+    #
+    # The previous version put cluster i at `base * sqrt(i + 1)` — note the +1,
+    # so *no* cluster ever sat at the origin — with `base` driven by the single
+    # largest cluster's radius. On sf_support that meant one 18k-node cluster
+    # (radius ~2400) flung the two ~600-radius clusters 5,500 and 9,300 units
+    # out, leaving the middle of the canvas empty. What you saw was 49k edges
+    # bundling across a void, not three clusters.
     golden_angle = math.pi * (3 - math.sqrt(5))  # ~2.39996
 
+    # Descending by radius: the biggest cluster is the one worth the centre, and
+    # placing large before small means later clearance checks rarely iterate.
+    placement_order = sorted(cluster_order, key=lambda c: -cluster_scales[c])
+
     centroids: Dict[str, tuple] = {}
-    for i, cid in enumerate(cluster_order):
-        if len(cluster_order) == 1:
+    placed: List[tuple] = []  # (x, y, radius) of clusters already positioned
+
+    for i, cid in enumerate(placement_order):
+        radius = cluster_scales[cid]
+        if i == 0:
             centroids[cid] = (0.0, 0.0)
+            placed.append((0.0, 0.0, radius))
             continue
-        r = base_separation * math.sqrt(i + 1)
+
         theta = i * golden_angle
-        centroids[cid] = (r * math.cos(theta), r * math.sin(theta))
+        dx, dy = math.cos(theta), math.sin(theta)
+        step = max(radius * 0.25, min_cluster_scale * 0.5)
+        r = radius
+        x = y = 0.0
+        # Walk outwards until this cluster clears every placed one. Bounded by
+        # the cluster count (tens at most), so the loop is cheap.
+        while True:
+            x, y = r * dx, r * dy
+            if all(
+                math.hypot(x - px, y - py) >= (radius + pr) * cluster_padding
+                for px, py, pr in placed
+            ):
+                break
+            r += step
+
+        centroids[cid] = (x, y)
+        placed.append((x, y, radius))
 
     # ---- 5. Z slabs (centred on 0) ----
     n_clusters = len(cluster_order)
@@ -255,7 +334,7 @@ def _layout_sf_support(nodes: List[Dict], edges: List[Dict]) -> None:
     def cluster_fn(n: Dict) -> str:
         return f"sf:{n.get('node_type', 'other')}"
 
-    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_separation=2.2)
+    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_padding=1.2)
 
 
 # ---------------------------------------------------------------------------
@@ -263,84 +342,126 @@ def _layout_sf_support(nodes: List[Dict], edges: List[Dict]) -> None:
 # ---------------------------------------------------------------------------
 
 def _layout_taxonomical(nodes: List[Dict], edges: List[Dict]) -> None:
-    """Root taxon at top, children spread radially below."""
-    G = nx.DiGraph()
-    id_set = {n["_id"] for n in nodes}
-    for n in nodes:
-        G.add_node(n["_id"])
-    child_to_parent = {}
-    for e in edges:
-        if e.get("edge_type") == "is_child_of":
-            src = e.get("source_node_id")
-            tgt = e.get("target_node_id")
-            if src and tgt and src in id_set and tgt in id_set:
-                child_to_parent[src] = tgt
-                G.add_edge(src, tgt)
+    """Radial dendrogram: root at the centre, each rank one ring further out.
 
-    children_set = set(child_to_parent.keys())
-    parents_set = set(child_to_parent.values())
-    candidates = parents_set - children_set
-    root = next(iter(candidates)) if candidates else next(iter(id_set), None)
-    if root is None:
+    Angular span is divided by leaf count, so sibling subtrees get room in
+    proportion to how much they contain and no two branches overlap. The result
+    is roughly circular, which matters — the previous tidy-tree layout laid
+    depth on Y and cumulative leaf offsets on X, giving bounds tens of millions
+    of units wide and a few thousand tall. Nothing can render that.
+
+    Handles a forest (several roots), which the scoped taxonomy can produce when
+    the lineage of a studied taxon reaches a tax_id absent from the import.
+    """
+    id_set = {n["_id"] for n in nodes}
+    if not id_set:
+        return
+
+    child_to_parent: Dict[str, str] = {}
+    children_map: Dict[str, List[str]] = {}
+    for e in edges:
+        if e.get("edge_type") != "is_child_of":
+            continue
+        child = e.get("source_node_id")
+        parent = e.get("target_node_id")
+        if not child or not parent or child == parent:
+            continue
+        if child in id_set and parent in id_set and child not in child_to_parent:
+            child_to_parent[child] = parent
+            children_map.setdefault(parent, []).append(child)
+
+    if not child_to_parent:
         _layout_generic(nodes, edges)
         return
 
-    # Build parent→children map up-front so BFS is O(n) not O(n²)
-    children_map: Dict[str, List[str]] = {}
-    for child, parent in child_to_parent.items():
-        children_map.setdefault(parent, []).append(child)
+    roots = sorted(nid for nid in id_set if nid not in child_to_parent)
+    if not roots:
+        # Every node has a parent — the graph is cyclic. Break the cycle by
+        # picking a deterministic entry point rather than looping forever.
+        roots = [min(id_set)]
 
-    levels = {}
-    q = deque([(root, 0)])
-    visited = {root}
-    while q:
-        nid, depth = q.popleft()
-        levels[nid] = depth
+    # A lone root sits at the centre (ring 0). Several roots have to share the
+    # innermost ring instead, so push everything out by one.
+    depth_offset = 0 if len(roots) == 1 else 1
+
+    # ---- Depths, BFS from every root (iterative; lineages can be deep) ----
+    depths: Dict[str, int] = {}
+    queue = deque((r, depth_offset) for r in roots)
+    for r in roots:
+        depths[r] = depth_offset
+    while queue:
+        nid, depth = queue.popleft()
         for child in children_map.get(nid, []):
-            if child not in visited:
-                visited.add(child)
-                q.append((child, depth + 1))
+            if child not in depths:
+                depths[child] = depth + 1
+                queue.append((child, depth + 1))
 
-    for nid in id_set:
-        if nid not in levels:
-            levels[nid] = 0
+    # ---- Leaf counts, iterative post-order ----
+    leaf_counts: Dict[str, int] = {}
+    for root in roots:
+        stack = [(root, False)]
+        while stack:
+            nid, expanded = stack.pop()
+            children = children_map.get(nid, [])
+            if not children:
+                leaf_counts[nid] = 1
+            elif expanded:
+                leaf_counts[nid] = sum(leaf_counts.get(c, 1) for c in children)
+            else:
+                stack.append((nid, True))
+                for c in children:
+                    if c not in leaf_counts:
+                        stack.append((c, False))
 
-    LEVEL_HEIGHT = 100
-    _leaf_cache: Dict[str, int] = {}
+    # ---- Angular wedges, iterative pre-order ----
+    TWO_PI = 2 * math.pi
+    RING = 130.0
 
-    def count_leaves(nid):
-        if nid in _leaf_cache:
-            return _leaf_cache[nid]
+    angles: Dict[str, float] = {}
+    total_leaves = sum(leaf_counts.get(r, 1) for r in roots) or 1
+
+    cursor = 0.0
+    stack: List[tuple] = []
+    for root in roots:
+        span = TWO_PI * leaf_counts.get(root, 1) / total_leaves
+        stack.append((root, cursor, cursor + span))
+        cursor += span
+
+    while stack:
+        nid, start, end = stack.pop()
+        angles[nid] = (start + end) / 2
         children = children_map.get(nid, [])
-        result = sum(count_leaves(c) for c in children) if children else 1
-        _leaf_cache[nid] = result
-        return result
+        if not children:
+            continue
+        span = end - start
+        own_leaves = leaf_counts.get(nid, 1) or 1
+        child_cursor = start
+        for child in children:
+            child_span = span * leaf_counts.get(child, 1) / own_leaves
+            stack.append((child, child_cursor, child_cursor + child_span))
+            child_cursor += child_span
 
-    pos_x: Dict[str, float] = {}
+    # ---- Write coordinates ----
+    # Anything unreachable from a root (only possible via a cycle) goes on an
+    # outer ring so it stays visible instead of piling up at the origin.
+    orphan_depth = max(depths.values(), default=0) + 1
+    orphans = [nid for nid in sorted(id_set) if nid not in depths]
 
-    def assign_x(nid, left_offset):
-        w = count_leaves(nid) * 60
-        pos_x[nid] = left_offset + w / 2
-        cursor = left_offset
-        for child in children_map.get(nid, []):
-            child_w = count_leaves(child) * 60
-            assign_x(child, cursor)
-            cursor += child_w
-
-    assign_x(root, 0.0)
-    all_x = list(pos_x.values())
-    cx = (min(all_x) + max(all_x)) / 2 if all_x else 0
+    for i, nid in enumerate(orphans):
+        depths[nid] = orphan_depth
+        angles[nid] = TWO_PI * i / max(len(orphans), 1)
 
     for n in nodes:
         nid = n["_id"]
-        depth = levels.get(nid, 0)
-        rx = pos_x.get(nid, 0.0) - cx
-        ry = -depth * LEVEL_HEIGHT
-        n["x2d"] = round(rx, 1)
-        n["y2d"] = round(ry, 1)
-        n["x"]   = round(rx, 1)
-        n["y"]   = round(ry, 1)
-        n["z"]   = round(float(depth) * 50 * ((hash(nid) % 100) / 100 - 0.5), 1)
+        depth = depths.get(nid, 0)
+        theta = angles.get(nid, 0.0)
+        r = depth * RING
+        n["x2d"] = round(r * math.cos(theta), 1)
+        n["y2d"] = round(r * math.sin(theta), 1)
+        n["x"]   = n["x2d"]
+        n["y"]   = n["y2d"]
+        # Lift each ring in Z so the 3D view reads as a cone, not a flat disc.
+        n["z"]   = round(float(depth) * 40.0, 1)
 
 
 # ---------------------------------------------------------------------------
@@ -366,7 +487,7 @@ def _layout_citation(nodes: List[Dict], edges: List[Dict]) -> None:
     def cluster_fn(n: Dict) -> str:
         return f"cit:{comm_map.get(n['_id'], 0)}"
 
-    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_separation=2.0)
+    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_padding=1.15)
 
 
 # ---------------------------------------------------------------------------
@@ -383,7 +504,7 @@ def _layout_knowledge_graph(nodes: List[Dict], edges: List[Dict]) -> None:
             or "default"
         )
 
-    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_separation=2.0)
+    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_padding=1.15)
 
 
 # ---------------------------------------------------------------------------
@@ -396,7 +517,7 @@ def _layout_physiological(nodes: List[Dict], edges: List[Dict]) -> None:
     def cluster_fn(n: Dict) -> str:
         return f"phys:{n.get('node_type', 'other')}"
 
-    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_separation=2.0)
+    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_padding=1.15)
 
 
 # ---------------------------------------------------------------------------
@@ -409,7 +530,7 @@ def _layout_chatbot(nodes: List[Dict], edges: List[Dict]) -> None:
     def cluster_fn(n: Dict) -> str:
         return f"chat:{n.get('node_type', 'other')}"
 
-    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_separation=2.5)
+    _clustered_spring_layout(nodes, edges, cluster_fn, cluster_padding=1.3)
 
 
 # ---------------------------------------------------------------------------

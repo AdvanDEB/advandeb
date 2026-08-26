@@ -1,13 +1,17 @@
-# AdvanDEB Modeling Assistant - App
+# AdvanDEB — App
 
-**Status**: Internal beta — under active development (2026-05).
+**Status**: Internal beta — under active development (2026-08).
 **Version**: 0.1.0
+
+> Note: this component was historically called the "Modeling Assistant." The
+> modeling assistant proper is Phase 2 and has not been started; this is the
+> AdvanDEB application itself. See `../docs/SYSTEM-OVERVIEW.md`.
 
 ---
 
 ## Overview
 
-The AdvanDEB Modeling Assistant is a full-stack web application that provides an interactive interface for working with Dynamic Energy Budget (DEB) models. It integrates knowledge building, document management, and AI-powered chat assistance through a modern, responsive UI.
+AdvanDEB is a full-stack web application providing an interactive interface to a curated knowledge graph for Dynamic Energy Budget (DEB) biology. It integrates knowledge building, document management, and AI-powered chat assistance through a modern, responsive UI.
 
 ### Key Features
 
@@ -29,6 +33,9 @@ The AdvanDEB Modeling Assistant is a full-stack web application that provides an
 - Citation trails (Answer → Facts → Chunks → Documents)
 - Expandable chunk context
 - Source document linking
+- Note: trails are **reconstructed on read**, not persisted — a historical
+  answer's evidence chain cannot be audited after the fact. See
+  `../docs/STORAGE-CONTRACT.md` §5.
 
 **Document Management**
 - Drag-and-drop upload
@@ -246,14 +253,21 @@ When running the backend, interactive API docs are available at:
 ### Backend
 - **Framework**: FastAPI
 - **Language**: Python 3.11
-- **Database**: MongoDB (Motor async driver)
-- **Authentication**: JWT + Google OAuth
+- **Datastores**: ArangoDB (canonical knowledge), ChromaDB (vectors),
+  MongoDB via Motor (application state + materialized graphs).
+  See `../docs/STORAGE-CONTRACT.md`.
+- **Authentication**: JWT + native password; Google OAuth implemented but
+  currently hidden in the UI; GitHub OAuth device flow
 - **WebSockets**: FastAPI WebSockets
 - **Testing**: pytest + pytest-asyncio
 
 ### Infrastructure
 - **Web server**: FastAPI (uvicorn) on :8400 — serves API and the built SPA
-- **Monitoring**: Sentry, Prometheus (optional)
+- **Process management**: systemd — `advandeb.target` pulls in `advandeb.service`
+  (backend) and `advandeb-stack.service` (MCP gateway + 6 agents)
+- **Monitoring**: Prometheus/Grafana configs under `../monitoring/`; Prometheus
+  currently scrapes the MCP gateway (:8080), node exporter, and itself. The
+  backend exposes no metrics endpoint yet. Sentry is **not** integrated.
 
 ---
 
@@ -267,9 +281,11 @@ See [`docs/ROADMAP.md`](../docs/ROADMAP.md) for current phase status and outstan
 
 ### With Knowledge Builder
 - Imports `advandeb_kb` package (`pip install -e ../../knowledge-builder`)
-- Shares MongoDB collections
-- Uses provenance data format
-- Retrieves graph data from ArangoDB (via KB)
+- Shares the MongoDB application database (`advandeb`)
+- Reads canonical knowledge from ArangoDB (via KB) and renders the
+  *materialized* graph from Mongo `graph_nodes` / `graph_edges`
+- Note: a second Mongo database, `advandeb_knowledge_builder_kb`, is a
+  transitional Mongo→Arango migration remnant. Do not add new writers to it.
 
 ### With MCP Gateway
 - MCP client for tool calls
@@ -284,16 +300,28 @@ Defined in `backend/app/core/dependencies.py`:
 
 - **Administrator**: Full access
 - **Knowledge Curator**: Create/edit knowledge, run agents
-- **Knowledge Explorator**: Read-only access
+- **Knowledge Explorator**: Read-only access; the default role on account creation
 
 Role enforcement via FastAPI dependencies.
+
+**Not implemented:** the `capabilities` field on the user model is initialised
+to `[]` and never granted or checked. The capability set described in older
+docs (Knowledge Creation, Agent Access, Analytics Access, Reviewer Status) is a
+design, not a feature.
+
+**No anonymous access.** Every route requires authentication, including
+read-only browsing.
 
 ---
 
 ## Security
 
-- JWT-based authentication
-- Google OAuth integration
+- JWT-based authentication with enforced `type` claims (access vs refresh)
+- Refresh-token revocation on logout (`revoked_tokens`, TTL-indexed)
+- `slowapi` rate limiting on auth endpoints
+- Constant-time login (bcrypt against a dummy hash on user-not-found)
+- `JWT_SECRET_KEY` validator rejects unset/short/example secrets outside development
+- Google OAuth integration (currently hidden in the UI)
 - CORS configuration
 - Security headers (X-Frame-Options, X-Content-Type-Options, etc.)
 - Environment variable secrets

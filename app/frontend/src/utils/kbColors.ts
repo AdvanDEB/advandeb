@@ -15,6 +15,16 @@
 
 // ---- Nodes ------------------------------------------------------------------
 
+/**
+ * Taxon ranks are coloured on a violet → pink ramp rather than a categorical
+ * palette. Two reasons: rank is ordinal, so a ramp says something true about
+ * the data; and staying inside the violet family keeps "purple = organism"
+ * legible in the mixed knowledge_graph view, where taxa sit alongside
+ * blue documents, green facts and amber stylized facts.
+ *
+ * `clade` (NCBI's unranked lineage nodes) is deliberately desaturated — those
+ * nodes are scaffolding that connects the tree, not findings.
+ */
 export const NODE_TYPE_COLORS: Record<string, [number, number, number, number]> = {
   document:          [99/255,  179/255, 255/255, 1.0],   // vivid sky-blue
   external_document: [148/255, 163/255, 184/255, 0.55],  // slate-400 (faded)
@@ -23,13 +33,15 @@ export const NODE_TYPE_COLORS: Record<string, [number, number, number, number]> 
   taxon:             [179/255, 148/255, 255/255, 1.0],   // bright violet
   user:              [255/255, 115/255, 115/255, 1.0],   // vivid red
   chat_session:      [125/255, 221/255, 255/255, 1.0],   // sky-300
-  species:           [210/255, 140/255, 255/255, 1.0],   // bright purple
-  genus:             [185/255, 155/255, 255/255, 1.0],   // violet-400+
-  family:            [160/255, 110/255, 255/255, 1.0],   // violet-500+
-  order:             [130/255,  70/255, 240/255, 0.9],   // deeper violet
-  class:             [110/255,  50/255, 210/255, 0.85],  // deep violet
-  phylum:            [255/255, 155/255,  70/255, 0.9],   // vivid orange
-  kingdom:           [255/255,  90/255,  90/255, 0.9],   // vivid red
+  // Taxon ranks, innermost ring → outermost.
+  kingdom:           [106/255,  92/255, 255/255, 1.0],
+  phylum:            [138/255,  92/255, 255/255, 1.0],
+  class:             [165/255,  92/255, 245/255, 1.0],
+  order:             [189/255,  92/255, 224/255, 1.0],
+  family:            [209/255,  92/255, 196/255, 1.0],
+  genus:             [224/255,  92/255, 163/255, 1.0],
+  species:           [238/255, 107/255, 143/255, 1.0],
+  clade:             [123/255, 116/255, 150/255, 0.7],
 }
 
 export const NODE_TYPE_HEX: Record<string, string> = {
@@ -40,17 +52,18 @@ export const NODE_TYPE_HEX: Record<string, string> = {
   taxon:             '#b394ff',
   user:              '#ff7373',
   chat_session:      '#7dddff',
-  species:           '#d28cff',
-  genus:             '#b99bff',
-  family:            '#a06eff',
-  order:             '#8246f0',
-  class:             '#6e32d2',
-  phylum:            '#ff9b46',
-  kingdom:           '#ff5a5a',
+  kingdom:           '#6a5cff',
+  phylum:            '#8a5cff',
+  class:             '#a55cf5',
+  order:             '#bd5ce0',
+  family:            '#d15cc4',
+  genus:             '#e05ca3',
+  species:           '#ee6b8f',
+  clade:             '#7b7496',
 }
 
-export const DEFAULT_NODE_COLOR: [number, number, number, number] = [255/255, 140/255, 210/255, 1.0] // vivid pink
-export const DEFAULT_NODE_HEX = '#ff8cd2'
+export const DEFAULT_NODE_COLOR: [number, number, number, number] = [176/255, 180/255, 200/255, 1.0] // neutral slate
+export const DEFAULT_NODE_HEX = '#b0b4c8'
 
 // ---- Edges ------------------------------------------------------------------
 
@@ -58,7 +71,9 @@ export const EDGE_TYPE_COLORS: Record<string, [number, number, number, number]> 
   supports:       [ 52/255, 231/255, 120/255, 0.75],  // bright green
   extracted_from: [ 99/255, 179/255, 255/255, 0.65],  // sky-blue
   opposes:        [255/255,  80/255,  80/255, 0.72],  // vivid red
-  is_child_of:    [200/255, 200/255, 200/255, 0.22],  // subtle gray
+  // In the taxonomy view the edges *are* the structure, so they carry more
+  // weight than the incidental link types in the other graphs.
+  is_child_of:    [168/255, 150/255, 220/255, 0.40],  // muted violet
   studies:        [220/255, 165/255,  90/255, 0.60],  // amber
   cites:          [100/255, 195/255, 255/255, 0.55],  // sky
   regulates:      [255/255, 170/255,  60/255, 0.55],  // orange
@@ -72,7 +87,7 @@ export const EDGE_TYPE_HEX: Record<string, string> = {
   supports:       '#34e778',
   extracted_from: '#63b3ff',
   opposes:        '#ff5050',
-  is_child_of:    '#c8c8c8',
+  is_child_of:    '#a896dc',
   studies:        '#dca55a',
   cites:          '#64c3ff',
   regulates:      '#ffaa3c',

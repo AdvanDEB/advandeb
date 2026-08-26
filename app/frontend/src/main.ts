@@ -11,10 +11,10 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 
-// Hydrate the user from the stored token before the router resolves its
-// first navigation. Without this, the navigation guard sees user=null on a
-// hard refresh and redirects away from protected routes like /kb.
+// Kick off hydration before mounting so the first paint already knows who the
+// user is. The router guard awaits the same shared promise, so a slow or
+// retried /users/me can't race a role-gated route into a redirect.
 const authStore = useAuthStore()
-authStore.fetchCurrentUser().finally(() => {
+authStore.hydrate().finally(() => {
   app.mount('#app')
 })

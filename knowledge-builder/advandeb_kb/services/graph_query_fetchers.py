@@ -194,52 +194,210 @@ def fetch_sf_support(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, Any]
     return {"nodes": nodes, "edges": edges}
 
 
+# The `taxa` collection is a full NCBI backbone import (~1.26M rows). It exists
+# so the ingestion pipeline can resolve any organism name it meets; it is not a
+# graph anybody can read. The taxonomical schema therefore shows the organisms
+# the corpus actually studies, plus the lineage that connects them to the root.
+_TAXON_BACKBONE_RANKS = ["superkingdom", "kingdom", "phylum", "class", "order", "family"]
+
+# Cap for the no-seeds fallback below — the backbone down to family is ~8k nodes.
+_TAXON_FALLBACK_LIMIT = 10_000
+
+_TAXON_SCOPE_AQL = """
+LET seeds = (
+    FOR e IN knowledge_graph
+        FOR side IN [e._from, e._to]
+            FILTER STARTS_WITH(side, 'taxa/')
+            RETURN DISTINCT PARSE_IDENTIFIER(side).key
+)
+LET closure = UNIQUE(FLATTEN(
+    FOR k IN seeds
+        LET t = DOCUMENT('taxa', k)
+        FILTER t != null
+        RETURN APPEND(t.lineage[* RETURN TO_STRING(CURRENT)], [t._key])
+))
+RETURN {seeds: seeds, closure: closure}
+"""
+
+
 def fetch_taxonomical(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, Any]:
-    """Fetch taxonomy tree: taxon nodes + is_child_of edges."""
-    taxa_limit_clause, taxa_bind = _aql_limit("limit", limit)
-    edge_limit_clause, edge_bind = _aql_limit("edge_limit", None if limit is None else limit * 2)
-    taxa = aql(db,
-        f"FOR t IN taxa {taxa_limit_clause} RETURN t", taxa_bind
-    )
-    nodes = [_serialize_vertex(t, "taxon") for t in taxa]
+    """Fetch the taxonomy tree scoped to taxa the knowledge base actually uses.
+
+    Nodes are the taxa referenced by ``knowledge_graph`` edges (documents that
+    study an organism) together with every ancestor on their ``lineage`` — the
+    ancestors are what make the result a connected tree rather than a scatter of
+    unrelated species. Taxa reached from the corpus carry ``properties.studied``
+    so the UI can pick them out from the lineage scaffolding around them.
+
+    When nothing references a taxon yet the graph would be empty, so it falls
+    back to the high-rank backbone (down to family) as an orientation view.
+    """
+    scope = aql(db, _TAXON_SCOPE_AQL, {})
+    seeds: List[str] = list(scope[0].get("seeds") or []) if scope else []
+    closure: List[str] = list(scope[0].get("closure") or []) if scope else []
+
+    if closure:
+        taxa = aql(db, "FOR t IN DOCUMENT('taxa', @keys) RETURN t", {"keys": closure})
+        scoped = True
+    else:
+        logger.info("taxonomical: no taxa referenced by knowledge_graph — falling back to rank backbone")
+        fallback_limit = min(limit or _TAXON_FALLBACK_LIMIT, _TAXON_FALLBACK_LIMIT)
+        taxa = aql(db,
+            "FOR t IN taxa FILTER t.rank IN @ranks LIMIT @lim RETURN t",
+            {"ranks": _TAXON_BACKBONE_RANKS, "lim": fallback_limit},
+        )
+        scoped = False
+
+    seed_keys = set(seeds)
+    nodes = []
+    for t in taxa:
+        node = _serialize_vertex(t, "taxon")
+        node["properties"]["studied"] = node["_id"] in seed_keys
+        nodes.append(node)
     node_keys = {n["_id"] for n in nodes}
 
-    raw_edges = aql(db,
-        f"""
-        FOR e IN taxonomical
-            {edge_limit_clause}
-            RETURN {{_from: e._from, _to: e._to, _key: e._key}}
-        """,
-        edge_bind,
-    )
+    # Build is_child_of edges from each taxon's own parent pointer rather than
+    # scanning the 1.26M-row `taxonomical` edge collection: the parent link is
+    # already on the document, and this guarantees every edge stays inside the
+    # scoped node set. Key format matches the stored edges (`<child>_to_<parent>`).
     edges = []
-    for e in raw_edges:
-        se = _serialize_edge(e["_from"], e["_to"], "is_child_of", 1.0, e.get("_key", ""))
-        if se["source_node_id"] in node_keys and se["target_node_id"] in node_keys:
-            edges.append(se)
+    for t in taxa:
+        child = str(t.get("_key", ""))
+        parent = str(t.get("parent_tax_id") or "")
+        if not child or not parent or child == parent:
+            continue
+        if child in node_keys and parent in node_keys:
+            edges.append(
+                _serialize_edge(child, parent, "is_child_of", 1.0, f"{child}_to_{parent}")
+            )
 
     _compute_degrees(nodes, edges)
+    logger.info(
+        "taxonomical: %d nodes / %d edges (%s, %d studied)",
+        len(nodes), len(edges), "scoped to corpus" if scoped else "rank backbone", len(seed_keys),
+    )
     return {"nodes": nodes, "edges": edges}
 
 
+# The integrated graph joins four collections, three of which are far too big to
+# show whole: documents (~3.9M), taxa (~1.26M), facts (~109k). A blind `LIMIT n`
+# over each takes an arbitrary first-n slice, and an edge only survives if BOTH
+# endpoints land inside their slice — so the *rarest* edge type is the one that
+# vanishes. That is exactly what happened to `studies`: 35 edges in
+# `knowledge_graph`, spanning 22 documents and 28 taxa that are nowhere near the
+# front of a 3.9M / 1.26M scan, of which a single edge used to survive.
+#
+# So scope each collection to what actually carries an edge — the taxa the corpus
+# studies plus the lineage that connects them, the documents that cite / are
+# cited / are a fact's source, and the facts that support or oppose a stylized
+# fact. Everything left out was an isolated dot in the view anyway.
+_KG_SCOPE_AQL = """
+LET kg_docs = (
+    FOR e IN knowledge_graph
+        FILTER STARTS_WITH(e._from, 'documents/')
+        RETURN DISTINCT PARSE_IDENTIFIER(e._from).key
+)
+LET kg_facts = (
+    FOR e IN knowledge_graph
+        FILTER STARTS_WITH(e._from, 'facts/')
+        RETURN DISTINCT PARSE_IDENTIFIER(e._from).key
+)
+LET kg_taxa = (
+    FOR e IN knowledge_graph
+        FOR side IN [e._from, e._to]
+            FILTER STARTS_WITH(side, 'taxa/')
+            RETURN DISTINCT PARSE_IDENTIFIER(side).key
+)
+LET taxa_closure = UNIQUE(FLATTEN(
+    FOR k IN kg_taxa
+        LET t = DOCUMENT('taxa', k)
+        FILTER t != null
+        RETURN APPEND(t.lineage[* RETURN TO_STRING(CURRENT)], [t._key])
+))
+LET cite_docs = (
+    FOR e IN citations
+        FOR side IN [e._from, e._to]
+            FILTER STARTS_WITH(side, 'documents/')
+            RETURN DISTINCT PARSE_IDENTIFIER(side).key
+)
+LET supported_facts = (
+    FOR e IN sf_support
+        FILTER STARTS_WITH(e._from, 'facts/')
+        RETURN DISTINCT PARSE_IDENTIFIER(e._from).key
+)
+RETURN {kg_docs: kg_docs, kg_facts: kg_facts, kg_taxa: kg_taxa,
+        taxa_closure: taxa_closure, cite_docs: cite_docs,
+        supported_facts: supported_facts}
+"""
+
+
+def _load_by_keys(db: ArangoDatabase, collection: str, keys: List[str]) -> List[Dict[str, Any]]:
+    """Load documents by ``_key`` in one round trip, dropping keys that miss.
+
+    ``DOCUMENT(coll, keys)`` silently skips keys with no row, which is what we
+    want here: a taxon's ``lineage`` names ancestors (1, 131567, …) that the NCBI
+    backbone import does not carry as documents.
+    """
+    if not keys:
+        return []
+    return aql(db,
+        "FOR d IN DOCUMENT(@coll, @keys) FILTER d != null RETURN d",
+        {"coll": collection, "keys": list(keys)},
+    )
+
+
 def fetch_knowledge_graph(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, Any]:
-    """Fetch integrated knowledge graph from ArangoDB."""
-    node_limit = None if limit is None else max(1, limit // 4)
-    node_limit_clause, node_bind = _aql_limit("lim", node_limit)
+    """Fetch the integrated knowledge graph, scoped to entities that carry edges.
+
+    The point of this view is the document→organism link, so the taxa are the
+    ones ``knowledge_graph`` edges reference plus their ancestor ``lineage``
+    closure (the scaffolding that makes them a tree rather than a scatter), and
+    the documents are the ones that participate in an edge — never a blind slice
+    of the multi-million-row backbone imports. See ``_KG_SCOPE_AQL`` above.
+    """
     edge_limit_clause, edge_bind = _aql_limit("lim", limit)
 
-    docs = aql(db,
-        f"FOR d IN documents {node_limit_clause} RETURN d", node_bind
-    )
-    facts = aql(db,
-        f"FOR f IN facts {node_limit_clause} RETURN f", node_bind
-    )
-    sfs = aql(db,
-        f"FOR s IN stylized_facts {node_limit_clause} RETURN s", node_bind
-    )
-    taxa = aql(db,
-        f"FOR t IN taxa {node_limit_clause} RETURN t", node_bind
-    )
+    scope_rows = aql(db, _KG_SCOPE_AQL, {})
+    scope = scope_rows[0] if scope_rows else {}
+    kg_doc_keys: List[str] = list(scope.get("kg_docs") or [])
+    cite_doc_keys: List[str] = list(scope.get("cite_docs") or [])
+    taxa_closure: List[str] = list(scope.get("taxa_closure") or [])
+    # `knowledge_graph` is declared as documents,facts → taxa,stylized_facts. Only
+    # the document→taxon half is populated today, but a fact that studies a taxon
+    # without also supporting a stylized fact would otherwise miss the scope, so
+    # take those facts first and keep them ahead of the budget cap below.
+    kg_fact_keys: List[str] = list(scope.get("kg_facts") or [])
+    supported_fact_keys: List[str] = list(dict.fromkeys(
+        kg_fact_keys + list(scope.get("supported_facts") or [])
+    ))
+
+    # taxa (lineage closure) and stylized facts are the small structural layers —
+    # a few hundred / ~1.2k rows. Take them whole; capping them buys nothing and
+    # a missing ancestor breaks the tree.
+    taxa = _load_by_keys(db, "taxa", taxa_closure)
+    sfs = aql(db, "FOR s IN stylized_facts RETURN s", {})
+
+    # `facts` is the only layer that can realistically outgrow the node budget,
+    # so it is the only one that keeps a cap. Documents are derived from the
+    # facts that survive, so the extracted_from edges stay whole.
+    spent = len(taxa) + len(sfs) + len(kg_doc_keys) + len(cite_doc_keys)
+    if limit is not None and len(supported_fact_keys) > max(0, limit - spent):
+        keep = max(0, limit - spent)
+        logger.warning(
+            "knowledge_graph: node budget %d truncates facts %d → %d; "
+            "raise GRAPH_ARTIFACT_MAX_NODES for a fuller graph.",
+            limit, len(supported_fact_keys), keep,
+        )
+        supported_fact_keys = supported_fact_keys[:keep]
+    facts = _load_by_keys(db, "facts", supported_fact_keys)
+
+    # kg docs first: they are the `studies` endpoints and must never be the ones
+    # dropped if the union ever has to be trimmed.
+    fact_doc_keys = sorted({f.get("document_id") for f in facts if f.get("document_id")})
+    scoped_doc_keys = list(dict.fromkeys(kg_doc_keys + cite_doc_keys + fact_doc_keys))
+    if limit is not None:
+        scoped_doc_keys = scoped_doc_keys[: max(0, limit - len(taxa) - len(sfs) - len(facts))]
+    docs = _load_by_keys(db, "documents", scoped_doc_keys)
 
     nodes = (
         [_serialize_vertex(d, "document") for d in docs]
@@ -294,6 +452,13 @@ def fetch_knowledge_graph(db: ArangoDatabase, limit: Optional[int]) -> Dict[str,
                 })
 
     _compute_degrees(nodes, edges)
+    studies = sum(1 for e in edges if e.get("edge_type") == "studies")
+    logger.info(
+        "knowledge_graph: %d nodes (%d doc / %d fact / %d sf / %d taxon) / %d edges "
+        "(%d studies of %d in scope)",
+        len(nodes), len(docs), len(facts), len(sfs), len(taxa), len(edges),
+        studies, len(raw_kg),
+    )
     return {"nodes": nodes, "edges": edges}
 
 

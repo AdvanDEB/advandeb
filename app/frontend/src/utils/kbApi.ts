@@ -122,8 +122,13 @@ export async function fetchArtifactStatus(schemaId: string): Promise<GraphArtifa
   return data
 }
 
-export async function fetchGraphArtifact(schemaId: string): Promise<GraphArtifact> {
-  const { data } = await api.get(`/kb/viz/schema/${schemaId}/artifact`)
+export async function fetchGraphArtifact(schemaId: string, buildId?: string): Promise<GraphArtifact> {
+  // The build id makes each rebuild its own URL. Belt-and-braces alongside the
+  // endpoint's Cache-Control: it means no cache anywhere in the chain can hand
+  // back a previous build, while unchanged builds still hit cache on revisit.
+  const { data } = await api.get(`/kb/viz/schema/${schemaId}/artifact`, {
+    params: buildId ? { build: buildId } : undefined,
+  })
   return data
 }
 

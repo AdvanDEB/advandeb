@@ -3,6 +3,15 @@
     <div v-if="initError" class="cosmo-error">
       <span>WebGL unavailable: {{ initError }}</span>
     </div>
+    <!-- Node labels — sampled by screen density, ranked by degree -->
+    <div class="cosmo-labels">
+      <span
+        v-for="l in labels"
+        :key="l.key"
+        class="cosmo-label"
+        :style="{ left: l.x + 'px', top: l.y + 'px' }"
+      >{{ l.text }}</span>
+    </div>
     <!-- Hover tooltip -->
     <div
       v-if="tooltip.visible"
@@ -25,6 +34,7 @@ import {
   NODE_TYPE_COLORS, DEFAULT_NODE_COLOR,
   EDGE_TYPE_COLORS, DEFAULT_EDGE_COLOR,
 } from '@/utils/kbColors'
+import { prefersServerLayout } from '@/utils/kbGraphLayouts'
 
 export interface DisplayConfig {
   nodeSizeScale: number      // 0.5 – 3.0
@@ -36,6 +46,14 @@ export interface DisplayConfig {
   linkDistance: number       // 1 – 100
   gravity: number            // 0 – 1.0
   searchQuery: string
+  showLabels: boolean
+  /**
+   * 'auto'   — use the backend layout only for schemas where it beats the
+   *            simulation (see kbGraphLayouts)
+   * 'server' — always draw the backend layout as computed, no simulation
+   * 'force'  — always ignore it and run the force simulation
+   */
+  layoutMode: 'auto' | 'server' | 'force'
 }
 
 const DEFAULT_DISPLAY: DisplayConfig = {
@@ -48,10 +66,31 @@ const DEFAULT_DISPLAY: DisplayConfig = {
   linkDistance: 60,
   gravity: 1,
   searchQuery: '',
+  showLabels: true,
+  layoutMode: 'auto',
 }
+
+// ---- Label overlay tuning ---------------------------------------------------
+
+/** Most labels drawn at once — beyond this the canvas reads as a word cloud. */
+const MAX_LABELS = 48
+/** Graphs at or below this size are labelled at any zoom level. */
+const LABEL_ALWAYS_MAX_NODES = 2_500
+/** Larger graphs only get labels once the user has zoomed in this far. */
+const LABEL_ZOOM_THRESHOLD = 1.2
+/** Labels are truncated to this many characters — fact/document titles are long. */
+const LABEL_MAX_CHARS = 34
+/** Approximate advance width of one character at the label font size, in px. */
+const LABEL_CHAR_WIDTH = 5.6
+/** Must track the `translate(-50%, -170%)` in .cosmo-label. */
+const LABEL_LINE_HEIGHT = 11
+const LABEL_LIFT = 8
+
+interface CanvasLabel { key: number; text: string; x: number; y: number }
 
 const initError = ref<string | null>(null)
 const tooltip = ref({ visible: false, label: '', x: 0, y: 0, flipX: false })
+const labels = ref<CanvasLabel[]>([])
 
 const props = defineProps<{
   bundle?: GraphRenderBundle | null
@@ -187,6 +226,7 @@ function buildBundleData(
   widthScale: number,
   searchQuery: string,
   preservePositions: boolean,
+  useServerLayout: boolean,
 ) {
   // Filter nodes
   const visibleIndices: number[] = []
@@ -214,14 +254,19 @@ function buildBundleData(
     newHoverLabels[ni] = b.hoverLabels[oi]
     newNodeSummaries[ni] = b.nodeSummaries[oi]
 
-    // Position: use live position if preserving, else recompute the same spiral
-    // used in the worker (oi = original bundle index → same angle/radius)
+    // Position: live position when preserving layout across a filter change;
+    // otherwise the backend's computed coordinates, or a seed spiral for the
+    // force simulation to untangle. Spiral indices use the *original* bundle
+    // index so hiding a node type doesn't reshuffle everything else.
     if (preservePositions && _livePositions.has(nodeId)) {
       const [lx, ly] = _livePositions.get(nodeId)!
       positions[ni * 2]     = lx
       positions[ni * 2 + 1] = ly
+    } else if (useServerLayout) {
+      positions[ni * 2]     = b.pointPositions[oi * 2]
+      positions[ni * 2 + 1] = b.pointPositions[oi * 2 + 1]
     } else {
-      const angle = oi * 2.399963
+      const angle = oi * 2.399963  // golden angle
       const radius = Math.sqrt(oi + 1)
       positions[ni * 2]     = Math.cos(angle) * radius
       positions[ni * 2 + 1] = Math.sin(angle) * radius
@@ -268,6 +313,107 @@ function buildBundleData(
   return { count, positions, colors, sizes, linkIndices, linkColors, linkWidths, newNodeIds, newHoverLabels, newNodeSummaries }
 }
 
+/**
+ * Whether to draw the backend's layout for this bundle, or seed a spiral and
+ * let the simulation arrange it.
+ */
+function resolveUseServerLayout(b: GraphRenderBundle): boolean {
+  // No usable stored layout (missing, degenerate, or built by a layout version
+  // this renderer doesn't recognise) — the simulation is the only option.
+  if (!b.hasLayout) return false
+  const mode = getDisplayConfig().layoutMode
+  if (mode === 'server') return true
+  if (mode === 'force') return false
+  return prefersServerLayout(b.schemaName)
+}
+
+// ---- Label overlay ----------------------------------------------------------
+
+let _labelFrame: number | null = null
+
+function scheduleLabelRefresh() {
+  if (_labelFrame !== null) return
+  _labelFrame = requestAnimationFrame(() => {
+    _labelFrame = null
+    refreshLabels()
+  })
+}
+
+function truncateLabel(text: string): string {
+  const clean = text.replace(/\s+/g, ' ').trim()
+  return clean.length > LABEL_MAX_CHARS ? `${clean.slice(0, LABEL_MAX_CHARS - 1)}…` : clean
+}
+
+/**
+ * Pick which nodes get a visible label.
+ *
+ * cosmos samples the points currently on screen at a fixed screen-space
+ * spacing, which keeps labels from stacking on top of each other regardless of
+ * zoom. Of that sample we take the highest-degree nodes — in every one of these
+ * graphs degree is the best available proxy for "worth naming".
+ */
+function refreshLabels() {
+  if (!graph || !containerEl.value) return
+  if (!getDisplayConfig().showLabels) {
+    if (labels.value.length) labels.value = []
+    return
+  }
+
+  // On a large graph, labels zoomed all the way out are noise, not information.
+  if (_cachedNodeIds.length > LABEL_ALWAYS_MAX_NODES && graph.getZoomLevel() < LABEL_ZOOM_THRESHOLD) {
+    if (labels.value.length) labels.value = []
+    return
+  }
+
+  const sampled = graph.getSampledPointPositionsMap()
+  if (!sampled || sampled.size === 0) {
+    if (labels.value.length) labels.value = []
+    return
+  }
+
+  const candidates: { index: number; degree: number; position: [number, number] }[] = []
+  for (const [index, position] of sampled) {
+    const summary = _cachedNodeSummaries[index]
+    if (!summary || !summary.label) continue
+    candidates.push({ index, degree: summary.degree ?? 0, position })
+  }
+  candidates.sort((a, b) => b.degree - a.degree)
+
+  const { width, height } = containerEl.value.getBoundingClientRect()
+  const next: CanvasLabel[] = []
+  // Screen-space boxes of labels already placed. Cosmos' sampling spaces out
+  // the *points*, but labels are far wider than the dots they name, so
+  // neighbouring titles still collide — highest degree wins the spot.
+  const placed: { x1: number; y1: number; x2: number; y2: number }[] = []
+
+  for (const candidate of candidates) {
+    if (next.length >= MAX_LABELS) break
+    const [x, y] = graph.spaceToScreenPosition(candidate.position)
+    if (!Number.isFinite(x) || !Number.isFinite(y)) continue
+    if (x < 0 || y < 0 || x > width || y > height) continue
+
+    const text = truncateLabel(_cachedNodeSummaries[candidate.index].label)
+    if (!text) continue
+
+    // Approximate the rendered box from the character count — cheap, and only
+    // needs to be good enough to keep neighbours apart. Matches the .cosmo-label
+    // transform: centred horizontally, lifted above the point.
+    const halfWidth = (text.length * LABEL_CHAR_WIDTH) / 2
+    const box = {
+      x1: x - halfWidth,
+      x2: x + halfWidth,
+      y1: y - LABEL_LIFT - LABEL_LINE_HEIGHT,
+      y2: y - LABEL_LIFT,
+    }
+    const overlaps = placed.some(p => box.x1 < p.x2 && box.x2 > p.x1 && box.y1 < p.y2 && box.y2 > p.y1)
+    if (overlaps) continue
+
+    placed.push(box)
+    next.push({ key: candidate.index, text, x, y })
+  }
+  labels.value = next
+}
+
 // ---- Lifecycle --------------------------------------------------------------
 
 let _fitViewTimer: ReturnType<typeof setTimeout> | null = null
@@ -297,6 +443,13 @@ function initGraph() {
       simulationLinkDistance: d.linkDistance, // default 10
       pointSizeScale: 1,
       scalePointsOnZoom: true,
+      // Map incoming coordinates into cosmos' space (uniform scale, centred).
+      // Without this cosmos only rescales when the simulation is disabled, so
+      // precomputed layouts would land in a corner of the 4096-unit space.
+      rescalePositions: true,
+      // Screen-space spacing used by getSampledPointPositionsMap() — drives how
+      // densely the label overlay is allowed to pack.
+      pointSamplingDistance: 110,
       // Don't fit on init — data/layout isn't settled yet (sim runs ~3s).
       // We fit once the simulation first settles via onSimulationEnd below.
       fitViewOnInit: false,
@@ -309,7 +462,7 @@ function initGraph() {
       linkGreyoutOpacity: 0.04,
       hoveredPointCursor: 'pointer',
       // Scrape live positions every tick so we can preserve layout on filter changes
-      onSimulationTick: () => { scrapeLivePositions() },
+      onSimulationTick: () => { scrapeLivePositions(); scheduleLabelRefresh() },
       onSimulationEnd: () => {
         // Auto-fit once, after the very first time the layout settles, so the
         // graph lands inside the viewport without a manual "Fit view" click.
@@ -317,7 +470,9 @@ function initGraph() {
           _didInitialFit = true
           graph?.fitView(400)
         }
+        scheduleLabelRefresh()
       },
+      onZoom: () => { scheduleLabelRefresh() },
       onClick: (index, _pos, _ev) => {
         if (index === undefined) {
           _selectedIndex = null
@@ -374,17 +529,9 @@ function pushData(preservePositions = false, alpha = 1) {
   try {
     if (props.bundle) {
       const b = props.bundle
+      const useServerLayout = resolveUseServerLayout(b)
       const { positions, colors, sizes, linkIndices, linkColors, linkWidths, newNodeIds, newHoverLabels, newNodeSummaries } =
-        buildBundleData(b, props.hiddenTypes, props.hiddenEdgeTypes, d.nodeSizeScale, d.linkWidthScale, d.searchQuery, preservePositions)
-
-      console.log('[CosmographCanvas] pushData bundle', {
-        preservePositions, alpha,
-        nodeCount: newNodeIds.length,
-        edgeCount: linkIndices.length / 2,
-        pos0: [positions[0], positions[1]],
-        pos1: [positions[2], positions[3]],
-        livePositionsSize: _livePositions.size,
-      })
+        buildBundleData(b, props.hiddenTypes, props.hiddenEdgeTypes, d.nodeSizeScale, d.linkWidthScale, d.searchQuery, preservePositions, useServerLayout)
 
       _cachedNodeIds = newNodeIds
       _cachedHoverLabels = newHoverLabels
@@ -400,8 +547,20 @@ function pushData(preservePositions = false, alpha = 1) {
       graph.setLinkColors(linkColors)
       graph.setLinkWidths(linkWidths)
 
-      if (alpha > 0) graph.start(alpha)
-      graph.render()
+      // When the backend layout is the one being drawn, running the simulation
+      // over it would stir a meaningful arrangement (a radial taxonomy, citation
+      // communities) back into an undifferentiated blob. Render it as-is; the
+      // FORCES panel re-simulates only if the user asks for it.
+      const effectiveAlpha = useServerLayout ? 0 : alpha
+      if (effectiveAlpha > 0) graph.start(effectiveAlpha)
+      graph.render(effectiveAlpha > 0 ? undefined : 0)
+
+      // A static graph never fires onSimulationEnd, so fit it explicitly.
+      if (useServerLayout && !preservePositions) {
+        _didInitialFit = true
+        scheduleFitView(80)
+      }
+      scheduleLabelRefresh()
       return
     }
 
@@ -452,6 +611,7 @@ function scheduleFitView(delay: number) {
   _fitViewTimer = setTimeout(() => {
     graph?.fitView(400)
     _fitViewTimer = null
+    scheduleLabelRefresh()
   }, delay)
 }
 
@@ -471,6 +631,7 @@ onMounted(() => { initGraph() })
 
 onUnmounted(() => {
   if (_fitViewTimer !== null) { clearTimeout(_fitViewTimer); _fitViewTimer = null }
+  if (_labelFrame !== null) { cancelAnimationFrame(_labelFrame); _labelFrame = null }
   _resizeObserver?.disconnect()
   _resizeObserver = null
   graph?.destroy()
@@ -499,14 +660,25 @@ watch(
       ? (newVal[5]?.nodeSizeScale !== oldVal[5]?.nodeSizeScale ||
          newVal[5]?.linkWidthScale !== oldVal[5]?.linkWidthScale)
       : false
+    const labelsChanged = oldVal
+      ? (newVal[5]?.showLabels ?? true) !== (oldVal[5]?.showLabels ?? true)
+      : false
+    // Switching between the stored layout and the simulation replaces every
+    // position, so it needs the same full re-push a new dataset gets.
+    const layoutModeChanged = oldVal
+      ? (newVal[5]?.layoutMode ?? 'auto') !== (oldVal[5]?.layoutMode ?? 'auto')
+      : false
 
-    if (dataChanged) {
+    if (dataChanged || layoutModeChanged) {
       _selectedIndex = null
       _livePositions.clear()
+      labels.value = []
       _didInitialFit = false  // re-fit once the new dataset's layout settles
       graph.unselectPoints()
       graph.setConfig({ focusedPointIndex: undefined })
       pushData(false, 1)
+    } else if (labelsChanged) {
+      refreshLabels()
     } else if (filterChanged || searchChanged) {
       // Scrape current positions before rebuilding filtered arrays
       scrapeLivePositions()
@@ -569,6 +741,31 @@ defineExpose({
   font-size: 0.85rem;
   padding: 1rem;
   text-align: center;
+}
+
+/* Label overlay — sits above the canvas, never intercepts pointer events so
+   hover/click still reach the WebGL surface underneath. */
+.cosmo-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.cosmo-label {
+  position: absolute;
+  transform: translate(-50%, -170%);
+  white-space: nowrap;
+  font-size: 0.66rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: #e6e8f2;
+  /* Dark halo instead of a background box — keeps the graph readable through
+     the text at any node density. */
+  text-shadow:
+    0 0 3px #0a0b0f, 0 0 3px #0a0b0f,
+    0 1px 2px rgba(0, 0, 0, 0.95), 0 -1px 2px rgba(0, 0, 0, 0.95);
 }
 
 /* Obsidian-style tooltip: dark pill with subtle glow border */

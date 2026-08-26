@@ -124,6 +124,15 @@
         </div>
         <div class="ob-control-row">
           <label class="ob-toggle-label">
+            <span class="ob-ctrl-label">Labels</span>
+            <input type="checkbox" class="ob-cb" :checked="localDisplay.showLabels"
+              @change="setDisplay('showLabels', ($event.target as HTMLInputElement).checked)"
+            />
+            <span class="ob-toggle-track" :class="{ on: localDisplay.showLabels }" />
+          </label>
+        </div>
+        <div class="ob-control-row">
+          <label class="ob-toggle-label">
             <span class="ob-ctrl-label">Particles</span>
             <input type="checkbox" class="ob-cb" :checked="localDisplay.linkParticles"
               @change="setDisplay('linkParticles', ($event.target as HTMLInputElement).checked)"
@@ -242,6 +251,8 @@ const DEFAULT_DISPLAY: Required<DisplayConfig> = {
   linkDistance: 60,
   gravity: 1,
   searchQuery: '',
+  showLabels: true,
+  layoutMode: 'auto',
 }
 
 const props = defineProps<{
