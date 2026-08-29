@@ -1,0 +1,84 @@
+{
+    "_description": "Default equations for tDEB Simulator. These are the original hardcoded formulas.",
+    "_version": "1.0",
+
+    "transport": {
+        "linear": {
+            "formula": "k * X_source * T_corr",
+            "description": "Linear flux: J = k * X_source * T_corr",
+            "latex": "J = k \\cdot X_{src} \\cdot T_{corr}",
+            "variables": ["k", "X_source", "T_corr"]
+        },
+        "michaelis_menten": {
+            "formula": "V_max * T_corr * X_source**n / (X_source**n + K_m**n)",
+            "description": "Michaelis-Menten / Hill kinetics",
+            "latex": "J = \\frac{V_{max} \\cdot X_{src}^{n}}{X_{src}^{n} + K_m^{n}} \\cdot T_{corr}",
+            "variables": ["V_max", "K_m", "X_source", "T_corr", "n"]
+        },
+        "gradient": {
+            "formula": "max(0, k * (X_source - X_target) * T_corr)",
+            "description": "Gradient-driven flux (no reverse flow)",
+            "latex": "J = \\max(0,\\; k \\cdot (X_{src} - X_{tgt}) \\cdot T_{corr})",
+            "variables": ["k", "X_source", "X_target", "T_corr"]
+        },
+        "kappa_split": {
+            "formula": "kappa * k * X_source * T_corr",
+            "description": "Kappa-split: fraction of mobilization flux",
+            "latex": "J = \\kappa \\cdot k \\cdot X_{src} \\cdot T_{corr}",
+            "variables": ["kappa", "k", "X_source", "T_corr"]
+        },
+        "regulated": {
+            "formula": "V_max * T_corr * signal * s * X_source / (X_source + K_m)",
+            "description": "Signal-regulated Michaelis-Menten",
+            "latex": "J = V_{max} \\cdot \\sigma \\cdot s \\cdot \\frac{X_{src}}{X_{src} + K_m} \\cdot T_{corr}",
+            "variables": ["V_max", "K_m", "X_source", "T_corr", "signal", "s"]
+        },
+        "threshold": {
+            "formula": "k * max(0, X_source - threshold) * T_corr",
+            "description": "Threshold-activated flux",
+            "latex": "J = k \\cdot \\max(0,\\; X_{src} - X_{thr}) \\cdot T_{corr}",
+            "variables": ["k", "X_source", "threshold", "T_corr"]
+        },
+        "fixed": {
+            "formula": "k * T_corr",
+            "description": "Fixed (constant) rate flux",
+            "latex": "J = k \\cdot T_{corr}",
+            "variables": ["k", "T_corr"]
+        }
+    },
+
+    "arrhenius": {
+        "formula": "exp(T_A / T_ref - T_A / T)",
+        "description": "Arrhenius temperature correction factor",
+        "latex": "T_{corr} = \\exp\\!\\left(\\frac{T_A}{T_{ref}} - \\frac{T_A}{T}\\right)",
+        "variables": ["T_A", "T_ref", "T"]
+    },
+
+    "maintenance": {
+        "formula": "maintenance_rate * X_value * T_corr",
+        "description": "Somatic maintenance cost (STRUCTURE nodes only)",
+        "latex": "\\dot{r}_{V} = p_M \\cdot V \\cdot T_{corr}",
+        "variables": ["maintenance_rate", "X_value", "T_corr"]
+    },
+
+    "ode_rule": {
+        "formula": "sum_incoming - sum_outgoing - maintenance",
+        "description": "ODE accumulation rule: dX_i/dt = sum(incoming) - sum(outgoing) - maintenance",
+        "latex": "\\frac{dX_i}{dt} = \\sum J_{in} - \\sum J_{out} - \\dot{r}_i",
+        "note": "This is structural — changing it changes the fundamental ODE assembly logic"
+    },
+
+    "non_negativity": {
+        "formula": "dydt if not (X_value <= 0 and dydt < 0) else 0",
+        "description": "Clamp derivative to zero when state is non-positive and decreasing",
+        "latex": "\\text{if } X_i \\leq 0 \\text{ and } \\dot{X}_i < 0 \\Rightarrow \\dot{X}_i = 0",
+        "enabled": true
+    },
+
+    "efficiency": {
+        "formula": "flux * eta",
+        "description": "Post-flux efficiency multiplier applied to all transport types",
+        "latex": "J_{eff} = J \\cdot \\eta",
+        "variables": ["flux", "eta"]
+    }
+}

@@ -39,6 +39,11 @@ export default defineConfig({
           'vue-vendor':      ['vue', 'vue-router', 'pinia'],
           'markdown-vendor': ['marked', 'highlight.js'],
           'cosmos-vendor':   ['@cosmos.gl/graph'],
+          // tDEB simulator libraries. Split out so the (large) Plotly bundle
+          // caches separately from the view code and is re-fetched only when
+          // Plotly itself changes.
+          'plotly-vendor':   ['plotly.js/lib/core'],
+          'tdeb-vendor':     ['d3', 'katex', 'jszip'],
         }
       }
     },

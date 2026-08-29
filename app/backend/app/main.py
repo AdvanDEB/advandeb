@@ -38,7 +38,7 @@ _configure_logging()
 # ────────────────────────────────────────────────────────────────────────────
 
 from app.core.database import connect_to_mongo, close_mongo_connection, get_database, get_kb_database, ensure_app_indexes
-from app.api.routes import auth, users, documents, facts, chat, scenarios, models, ws, graph, llm_keys
+from app.api.routes import auth, users, documents, facts, chat, scenarios, models, ws, graph, llm_keys, tdeb
 from app.api.routes.kb import agents as kb_agents
 from app.api.routes.kb import visualization as kb_viz
 from app.api.routes.kb import visualization_stream as kb_viz_stream
@@ -48,6 +48,7 @@ from app.api.routes.kb import filesystem as kb_fs
 from app.api.routes.kb import kg_builder as kb_kg
 from app.api.routes.kb import documents as kb_documents
 from app.api.routes.kb import facts as kb_facts
+from app.tdeb.service import ensure_tdeb_indexes
 from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 from app.kb.watchdog import batch_watchdog
 
@@ -101,6 +102,7 @@ async def lifespan(app: FastAPI):
     await connect_to_mongo()
     db = get_database()
     await ensure_app_indexes(db)
+    await ensure_tdeb_indexes(db)
 
     # Singleton background tasks — only start in the primary worker so that
     # multiple Uvicorn/Gunicorn workers don't each run their own independent
@@ -156,6 +158,7 @@ app.include_router(facts.router, prefix="/api/facts", tags=["facts"])
 app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 app.include_router(scenarios.router, prefix="/api/scenarios", tags=["scenarios"])
 app.include_router(models.router, prefix="/api/models", tags=["models"])
+app.include_router(tdeb.router, prefix="/api/tdeb", tags=["tdeb"])
 app.include_router(ws.router, prefix="/ws", tags=["websocket"])
 app.include_router(graph.router, prefix="/api/graph", tags=["graph"])
 app.include_router(kb_agents.router,      prefix="/api/kb/agents",    tags=["kb"])
