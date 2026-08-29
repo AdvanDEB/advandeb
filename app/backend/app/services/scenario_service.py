@@ -4,6 +4,8 @@ Scenario service - business logic for scenario management.
 from datetime import datetime, timezone
 from typing import List, Optional
 from bson import ObjectId
+from bson.errors import InvalidId
+from fastapi import HTTPException, status
 
 from app.core.database import get_database
 from app.models.scenario import Scenario, ScenarioCreate
@@ -36,7 +38,11 @@ class ScenarioService:
     
     async def get_scenario(self, scenario_id: str) -> Optional[Scenario]:
         """Get scenario by ID."""
-        scenario_doc = await self.collection.find_one({"_id": ObjectId(scenario_id)})
+        try:
+            oid = ObjectId(scenario_id)
+        except (InvalidId, TypeError):
+            return None
+        scenario_doc = await self.collection.find_one({"_id": oid})
         if scenario_doc:
             scenario_doc["_id"] = str(scenario_doc["_id"])
             return Scenario(**scenario_doc)
@@ -59,20 +65,56 @@ class ScenarioService:
         self,
         scenario_id: str,
         scenario_update: ScenarioCreate,
-        user_id: str
-    ) -> Scenario:
-        """Update scenario."""
+        user_id: str,
+        is_admin: bool = False
+    ) -> Optional[Scenario]:
+        """Update scenario with ownership check."""
+        try:
+            oid = ObjectId(scenario_id)
+        except (InvalidId, TypeError):
+            return None
+
+        scenario_doc = await self.collection.find_one({"_id": oid})
+        if not scenario_doc:
+            return None
+
+        if scenario_doc.get("creator_id") != user_id and not is_admin:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Not authorized to modify this scenario"
+            )
+
         update_data = scenario_update.model_dump()
         update_data["updated_at"] = datetime.now(timezone.utc)
         
         await self.collection.update_one(
-            {"_id": ObjectId(scenario_id)},
+            {"_id": oid},
             {"$set": update_data}
         )
         
         return await self.get_scenario(scenario_id)
     
-    async def delete_scenario(self, scenario_id: str, user_id: str):
-        """Delete scenario."""
-        # TODO: Check ownership or permissions
-        await self.collection.delete_one({"_id": ObjectId(scenario_id)})
+    async def delete_scenario(
+        self,
+        scenario_id: str,
+        user_id: str,
+        is_admin: bool = False
+    ) -> bool:
+        """Delete scenario with ownership check."""
+        try:
+            oid = ObjectId(scenario_id)
+        except (InvalidId, TypeError):
+            return False
+
+        scenario_doc = await self.collection.find_one({"_id": oid})
+        if not scenario_doc:
+            return False
+
+        if scenario_doc.get("creator_id") != user_id and not is_admin:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Not authorized to delete this scenario"
+            )
+
+        result = await self.collection.delete_one({"_id": oid})
+        return result.deleted_count > 0

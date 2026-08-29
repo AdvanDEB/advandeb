@@ -170,9 +170,9 @@ app.include_router(kb_facts.stylized_router,     prefix="/api/kb/stylized-facts"
 app.include_router(kb_facts.facts_router,        prefix="/api/kb/facts",          tags=["kb"])
 
 
-@app.get("/")
-async def root():
-    """Root endpoint."""
+@app.get("/api/info", tags=["health"])
+async def api_info():
+    """Service metadata endpoint."""
     return {
         "name": settings.APP_NAME,
         "version": settings.APP_VERSION,
@@ -234,3 +234,12 @@ if FRONTEND_DIST.exists():
             FRONTEND_DIST / "index.html",
             headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
         )
+else:
+    @app.get("/")
+    async def root_dev_fallback():
+        return {
+            "name": settings.APP_NAME,
+            "version": settings.APP_VERSION,
+            "status": "running",
+            "frontend": "not built (run npm run build in app/frontend)"
+        }

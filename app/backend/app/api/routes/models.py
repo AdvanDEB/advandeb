@@ -64,11 +64,18 @@ async def update_model(
 ):
     """Update model."""
     model_service = ModelService()
+    is_admin = "administrator" in current_user.get("roles", [])
     model = await model_service.update_model(
         model_id,
         model_update,
-        current_user["id"]
+        current_user["id"],
+        is_admin=is_admin,
     )
+    if not model:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Model not found"
+        )
     return model
 
 
@@ -79,5 +86,15 @@ async def delete_model(
 ):
     """Delete model."""
     model_service = ModelService()
-    await model_service.delete_model(model_id, current_user["id"])
+    is_admin = "administrator" in current_user.get("roles", [])
+    deleted = await model_service.delete_model(
+        model_id,
+        current_user["id"],
+        is_admin=is_admin,
+    )
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Model not found"
+        )
     return {"message": "Model deleted"}

@@ -12,7 +12,7 @@ from typing import List, Optional
 
 from bson import ObjectId
 from bson.errors import InvalidId
-from fastapi import UploadFile
+from fastapi import HTTPException, UploadFile, status
 
 from app.core.database import get_database
 from app.models.user_submission import (
@@ -59,13 +59,33 @@ class UserSubmissionService:
         doc["_id"] = str(result.inserted_id)
         return DocumentSubmission(**doc)
 
+    # 50 MB upload limit
+    MAX_UPLOAD_SIZE_BYTES = 50 * 1024 * 1024
+
     async def upload_document_submission(
         self,
         file: UploadFile,
         uploader_id: str,
     ) -> DocumentSubmission:
         """Upload a PDF/text file and create a document submission."""
-        content = await file.read()
+        # Read in chunks to enforce size limit before allocating unbounded memory
+        chunks = []
+        total_size = 0
+        chunk_size = 64 * 1024  # 64 KB
+
+        while True:
+            chunk = await file.read(chunk_size)
+            if not chunk:
+                break
+            total_size += len(chunk)
+            if total_size > self.MAX_UPLOAD_SIZE_BYTES:
+                raise HTTPException(
+                    status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                    detail=f"File exceeds maximum allowed size of {self.MAX_UPLOAD_SIZE_BYTES // (1024 * 1024)}MB",
+                )
+            chunks.append(chunk)
+
+        content = b"".join(chunks)
         filename = file.filename or ""
         content_type = file.content_type or ""
 

@@ -7,10 +7,10 @@ node dicts in-place.
 """
 import math
 import sys
-import os
+from pathlib import Path
 
 # Allow importing from the knowledge-builder package without a full install
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "knowledge-builder"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "knowledge-builder"))
 
 from advandeb_kb.services import graph_query_layouts as layouts
 from advandeb_kb.services.graph_query_layouts import (
@@ -19,6 +19,7 @@ from advandeb_kb.services.graph_query_layouts import (
     _layout_citation,
     _layout_knowledge_graph,
     _layout_physiological,
+    _apply_layout,
     _apply_layout as _dispatch_layout,
 )
 
@@ -346,22 +347,19 @@ def test_physiological_layout_empty():
 
 
 # ---------------------------------------------------------------------------
-# Task 4 — _dispatch_layout
+# Task 4 — _apply_layout
 # ---------------------------------------------------------------------------
 
 def test_dispatch_routes_correctly():
     """Dispatcher should select the right algorithm per schema name."""
     for schema_name in ("sf_support", "taxonomical", "citation", "knowledge_graph", "physiological_process"):
         nodes = make_nodes(["fact"] * 3)
-        _dispatch_layout(nodes, [], schema_name)
+        _apply_layout(nodes, [], schema_name)
         assert_coords(nodes), f"Dispatch for '{schema_name}' did not set coords"
 
 
 def test_dispatch_unknown_schema_uses_legacy():
-    """Unknown schema name should fall back to legacy layout without raising."""
+    """Unknown schema name should fall back to generic spring layout without raising."""
     nodes = make_nodes(["fact"] * 3)
-    _dispatch_layout(nodes, [], "nonexistent_schema")
-    # Legacy layout sets x/y/z but not necessarily x2d/y2d
-    for n in nodes:
-        for field in ("x", "y", "z"):
-            assert field in n, f"Legacy layout missing '{field}' for node {n['_id']}"
+    _apply_layout(nodes, [], "nonexistent_schema")
+    assert_coords(nodes)

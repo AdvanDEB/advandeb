@@ -2,13 +2,13 @@
 Common dependencies for API routes.
 """
 from fastapi import Depends, HTTPException, status
-from typing import List
+from typing import Callable, List
 
 from app.core.auth import get_current_user
 
 
-async def require_role(required_roles: List[str]):
-    """Dependency to require specific user roles."""
+def require_role(required_roles: List[str]) -> Callable:
+    """Dependency factory to require specific user roles."""
     async def role_checker(current_user: dict = Depends(get_current_user)):
         user_roles = current_user.get("roles", [])
         if not any(role in required_roles for role in user_roles):

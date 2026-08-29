@@ -59,11 +59,18 @@ async def update_scenario(
 ):
     """Update scenario."""
     scenario_service = ScenarioService()
+    is_admin = "administrator" in current_user.get("roles", [])
     scenario = await scenario_service.update_scenario(
         scenario_id,
         scenario_update,
-        current_user["id"]
+        current_user["id"],
+        is_admin=is_admin,
     )
+    if not scenario:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Scenario not found"
+        )
     return scenario
 
 
@@ -74,5 +81,15 @@ async def delete_scenario(
 ):
     """Delete scenario."""
     scenario_service = ScenarioService()
-    await scenario_service.delete_scenario(scenario_id, current_user["id"])
+    is_admin = "administrator" in current_user.get("roles", [])
+    deleted = await scenario_service.delete_scenario(
+        scenario_id,
+        current_user["id"],
+        is_admin=is_admin,
+    )
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Scenario not found"
+        )
     return {"message": "Scenario deleted"}

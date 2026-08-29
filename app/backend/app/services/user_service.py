@@ -1,6 +1,7 @@
 """
 User service - business logic for user management.
 """
+import re
 import secrets
 import string
 from datetime import datetime, timezone
@@ -182,9 +183,10 @@ class UserService:
         """Build a Mongo filter for list_users / count_users."""
         filt: dict = {}
         if q:
+            escaped_q = re.escape(q)
             filt["$or"] = [
-                {"email": {"$regex": q, "$options": "i"}},
-                {"full_name": {"$regex": q, "$options": "i"}},
+                {"email": {"$regex": escaped_q, "$options": "i"}},
+                {"full_name": {"$regex": escaped_q, "$options": "i"}},
             ]
         if role:
             filt["roles"] = role
