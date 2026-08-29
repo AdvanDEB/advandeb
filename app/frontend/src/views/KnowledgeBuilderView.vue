@@ -3,13 +3,16 @@
     <!-- Top bar -->
     <header class="kb-header">
       <div class="header-left">
-        <router-link to="/" class="back-link" title="Back to app">←</router-link>
+        <router-link to="/" class="back-link" title="Back to app" aria-label="Back to app">←</router-link>
         <span class="header-title">Knowledge Builder</span>
       </div>
-      <nav class="tab-nav">
+      <nav class="tab-nav" role="tablist" aria-label="Knowledge Builder sections">
         <button
           v-for="tab in TABS"
           :key="tab.id"
+          role="tab"
+          type="button"
+          :aria-selected="activeTab === tab.id"
           :class="['tab-btn', { active: activeTab === tab.id }]"
           @click="activeTab = tab.id"
         >{{ tab.label }}</button>
@@ -204,7 +207,8 @@
               <li v-for="(f, i) in stagedFiles" :key="i" class="staged-item">
                 <span class="staged-name">{{ f.name }}</span>
                 <span class="staged-size dim">{{ fmtSize(f.size) }}</span>
-                <button class="staged-remove" @click="stagedFiles.splice(i, 1)" title="Remove">✕</button>
+                <button class="staged-remove" type="button" @click="stagedFiles.splice(i, 1)"
+                        :title="`Remove ${f.name}`" :aria-label="`Remove ${f.name}`">✕</button>
               </li>
             </ul>
           </div>
@@ -367,25 +371,40 @@
     <div v-show="activeTab === 'database'" class="tab-content database-tab">
       <div class="tab-inner">
         <div class="section-header">
-          <h2>MongoDB Collections</h2>
-          <button class="btn primary" @click="loadCollections">Refresh</button>
+          <!-- The endpoint inspects ArangoDB, not MongoDB. Naming the wrong
+               store matters in a codebase mid-migration where both exist. -->
+          <h2>ArangoDB Collections</h2>
+          <button class="btn primary" :disabled="collectionsLoading" @click="loadCollections">
+            {{ collectionsLoading ? 'Loading…' : 'Refresh' }}
+          </button>
         </div>
-        <div class="collections-grid">
-          <div
+
+        <div v-if="collectionsLoading && !collections.length" class="empty-state">Loading collections…</div>
+        <div v-else-if="!collections.length" class="empty-state">
+          No collections loaded — click Refresh
+        </div>
+        <div v-else class="collections-grid">
+          <button
             v-for="c in collections"
             :key="c.name"
+            type="button"
             :class="['coll-card', { active: selectedCollection === c.name }]"
+            :aria-pressed="selectedCollection === c.name"
             @click="loadCollectionDocs(c.name)"
           >
             <span class="coll-name">{{ c.name }}</span>
             <span class="coll-count">{{ fmtNum(c.count) }}</span>
-          </div>
+          </button>
         </div>
 
-        <div v-if="collectionDocs.length">
+        <div v-if="docsLoading" class="empty-state">Loading documents…</div>
+        <div v-else-if="selectedCollection && !collectionDocs.length" class="empty-state">
+          {{ selectedCollection }} is empty
+        </div>
+        <div v-else-if="collectionDocs.length">
           <h3 class="subsection-title">{{ selectedCollection }} <span class="dim">(first 20)</span></h3>
           <div class="doc-list">
-            <pre v-for="(doc, i) in collectionDocs" :key="i" class="doc-pre">{{ JSON.stringify(doc, null, 2).slice(0, 500) }}</pre>
+            <pre v-for="(doc, i) in collectionDocs" :key="i" class="doc-pre">{{ previewDoc(doc) }}</pre>
           </div>
         </div>
       </div>
@@ -400,15 +419,15 @@
         <div v-if="kgStats" class="kg-stats">
           <div class="stat-card">
             <span class="stat-label">Document–Taxon relations</span>
-            <span class="stat-value">{{ kgStats.total ?? 0 }}</span>
+            <span class="stat-value">{{ fmtNum(kgStats.total_relations ?? 0) }}</span>
           </div>
           <div class="stat-card">
             <span class="stat-label">Suggested</span>
-            <span class="stat-value">{{ kgStats.suggested ?? 0 }}</span>
+            <span class="stat-value">{{ fmtNum(kgStats.suggested_relations ?? 0) }}</span>
           </div>
           <div class="stat-card">
             <span class="stat-label">Confirmed</span>
-            <span class="stat-value">{{ kgStats.confirmed ?? 0 }}</span>
+            <span class="stat-value">{{ fmtNum(kgStats.confirmed_relations ?? 0) }}</span>
           </div>
         </div>
         <div class="kg-actions">
@@ -419,6 +438,152 @@
           Keyword linking scans document titles for taxon names and creates suggested document–taxon relations.
           Confirm or reject them in the relation list below, then rebuild the knowledge_graph schema.
         </p>
+
+        <!-- ── Automatic resolution ─────────────────────────────── -->
+        <section class="kg-review">
+          <div class="section-header">
+            <h3>Resolve automatically</h3>
+          </div>
+          <p class="dim small">
+            Most links need no judgement — an exact match of a complete binomial in a domain-relevant
+            paper is a string identity. These rules settle those; only what genuinely turns on a
+            judgement call is left for review below.
+          </p>
+          <div class="kg-actions">
+            <button class="btn primary" :disabled="autoBusy" @click="previewAutoResolve">
+              {{ autoBusy ? 'Working…' : 'Preview automatic rules' }}
+            </button>
+          </div>
+
+          <div v-if="autoPreview" class="auto-preview">
+            <table class="data-table">
+              <thead>
+                <tr><th>Rule</th><th>Action</th><th>Links</th></tr>
+              </thead>
+              <tbody>
+                <tr v-for="r in autoPreview.rules" :key="r.rule">
+                  <td>
+                    <span class="mono">{{ r.rule }}</span>
+                    <div class="dim small">{{ r.description }}</div>
+                  </td>
+                  <td :class="r.action === 'confirmed' ? 'tally-ok' : 'tally-no'">{{ r.action }}</td>
+                  <td>{{ fmtNum(r.matched) }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="bulk-confirm">
+              Applies to <strong>{{ fmtNum(autoPreview.total) }}</strong> links, leaving
+              <strong>{{ fmtNum(autoPreview.remaining_suggested - autoPreview.total) }}</strong> for review.
+              Auto-decisions are stamped <span class="mono">auto:&lt;rule&gt;</span> so they stay
+              distinguishable from human review.
+              <button class="btn xs danger" :disabled="autoBusy" @click="applyAutoResolve">Apply rules</button>
+              <button class="btn xs" :disabled="autoBusy" @click="autoPreview = null">Cancel</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Relation review ──────────────────────────────────── -->
+        <section class="kg-review">
+          <div class="section-header">
+            <h3>Review what's left</h3>
+            <span class="dim small" v-if="relTotal !== null">{{ fmtNum(relTotal) }} match the filter</span>
+          </div>
+
+          <div class="kg-filters">
+            <label>Status
+              <select v-model="relFilter.status">
+                <option value="suggested">suggested</option>
+                <option value="confirmed">confirmed</option>
+                <option value="rejected">rejected</option>
+                <option value="">any</option>
+              </select>
+            </label>
+            <label>Min confidence
+              <input type="number" min="0" max="1" step="0.05" v-model.number="relFilter.min_confidence" />
+            </label>
+            <label>Max confidence
+              <input type="number" min="0" max="1" step="0.05" v-model.number="relFilter.max_confidence" />
+            </label>
+            <button class="btn sm primary" :disabled="relLoading" @click="loadRelations(true)">
+              {{ relLoading ? 'Loading…' : 'Load random sample (50)' }}
+            </button>
+            <button class="btn sm" :disabled="relLoading" @click="loadRelations(false)">Load top by confidence</button>
+          </div>
+
+          <!-- Running tally: what the sample says about the whole set -->
+          <div v-if="relReviewed > 0" class="kg-tally">
+            <span>Reviewed <strong>{{ relReviewed }}</strong> of {{ relations.length }} shown</span>
+            <span class="tally-ok">✓ {{ relConfirmed }}</span>
+            <span class="tally-no">✕ {{ relRejected }}</span>
+            <span v-if="relSampled" class="tally-est">
+              — reject rate <strong>{{ (100 * relRejected / relReviewed).toFixed(0) }}%</strong>;
+              on {{ fmtNum(relTotal ?? 0) }} matching that projects to
+              <strong>~{{ fmtNum(Math.round((relTotal ?? 0) * relRejected / relReviewed)) }}</strong> bad links
+            </span>
+            <span v-else class="dim small">— not a random sample, so no rate estimate</span>
+          </div>
+
+          <div v-if="relLoading" class="empty-state">Loading…</div>
+          <div v-else-if="!relations.length" class="empty-state">No relations match — load a sample to begin</div>
+          <p v-if="relations.length && !relLoading" class="dim small kbd-hint">
+            Keyboard: <kbd>j</kbd>/<kbd>k</kbd> move · <kbd>y</kbd> confirm · <kbd>n</kbd> reject — decisions auto-advance
+          </p>
+          <table v-if="relations.length && !relLoading" class="data-table sugg-table rel-table">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Taxon</th>
+                <th>Conf.</th>
+                <th>Evidence</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(rel, i) in relations"
+                :key="rel._key"
+                :class="{ decided: relDecisions[rel._key], cursor: i === relCursor }"
+                :ref="el => setRelRowRef(el, i)"
+                @click="relCursor = i"
+              >
+                <td class="sugg-title">
+                  {{ rel.document_title || rel.document_id }}
+                  <span v-if="rel.document_domain_relevant === false" class="off-domain" title="Domain gate marked this document off-domain">off-domain</span>
+                </td>
+                <td>
+                  <span class="taxon-name">{{ rel.taxon_name || rel.tax_id }}</span>
+                  <span class="dim small"> {{ rel.taxon_rank }}</span>
+                </td>
+                <td :class="{ 'low-conf': rel.confidence < 0.8 }">{{ rel.confidence?.toFixed(2) }}</td>
+                <td class="dim small evidence-cell">{{ rel.evidence }}</td>
+                <td class="actions-cell">
+                  <template v-if="relDecisions[rel._key]">
+                    <span :class="relDecisions[rel._key] === 'confirmed' ? 'tally-ok' : 'tally-no'">
+                      {{ relDecisions[rel._key] }}
+                    </span>
+                  </template>
+                  <template v-else>
+                    <button class="btn xs primary" @click="decideRelation(rel, 'confirmed')">Confirm</button>
+                    <button class="btn xs danger" @click="decideRelation(rel, 'rejected')">Reject</button>
+                  </template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Bulk action, gated behind a dry-run count -->
+          <div class="kg-bulk">
+            <span class="dim small">Bulk apply to <strong>all {{ fmtNum(relTotal ?? 0) }}</strong> matching the filter above:</span>
+            <button class="btn sm" :disabled="relBulkBusy" @click="previewBulk('rejected')">Preview reject all</button>
+            <button class="btn sm" :disabled="relBulkBusy" @click="previewBulk('confirmed')">Preview confirm all</button>
+            <div v-if="relBulkPreview" class="bulk-confirm">
+              This will set <strong>{{ fmtNum(relBulkPreview.matched) }}</strong> relations to
+              <strong>{{ relBulkPreview.status }}</strong>. This cannot be undone from the UI.
+              <button class="btn xs danger" :disabled="relBulkBusy" @click="applyBulk">Apply</button>
+              <button class="btn xs" :disabled="relBulkBusy" @click="relBulkPreview = null">Cancel</button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -426,13 +591,52 @@
     <div v-show="activeTab === 'suggestions'" class="tab-content suggestions-tab">
       <div class="tab-inner suggestions-inner">
 
+        <!-- ── Pipeline review queues ───────────────────────────── -->
+        <section class="sugg-section">
+          <div class="section-header">
+            <h2>Pipeline review queues</h2>
+            <button class="btn sm" @click="loadSuggestions">Refresh</button>
+          </div>
+          <p class="dim small">
+            Machine-generated output awaiting review. The sections below cover <em>user submissions</em> only,
+            which is why they are usually empty — this is where the pipeline's own backlog lives.
+          </p>
+
+          <div v-if="!reviewQueues" class="empty-state">Loading queues…</div>
+          <div v-else class="queue-grid">
+            <button type="button" class="queue-card" @click="activeTab = 'kg'">
+              <span class="queue-n">{{ fmtNum(reviewQueues.studies_suggested) }}</span>
+              <span class="queue-label">document → organism links</span>
+              <span class="queue-sub">
+                {{ fmtNum(reviewQueues.studies_confirmed) }} confirmed · review in KG Builder →
+              </span>
+            </button>
+            <div class="queue-card static">
+              <span class="queue-n">{{ fmtNum(reviewQueues.sf_support_suggested) }}</span>
+              <span class="queue-label">fact → stylized-fact links</span>
+              <span class="queue-sub">of {{ fmtNum(reviewQueues.sf_support_total) }} total · no review UI yet</span>
+            </div>
+            <div class="queue-card static">
+              <span class="queue-n">{{ fmtNum(reviewQueues.facts_pending) }}</span>
+              <span class="queue-label">extracted facts pending</span>
+              <span class="queue-sub">of {{ fmtNum(reviewQueues.facts_total) }} total · no review UI yet</span>
+            </div>
+            <div class="queue-card static">
+              <span class="queue-n">{{ fmtNum(reviewQueues.documents_off_domain) }}</span>
+              <span class="queue-label">documents judged off-domain</span>
+              <span class="queue-sub">
+                of {{ fmtNum(reviewQueues.documents_gated) }} gated · no review UI yet
+              </span>
+            </div>
+          </div>
+        </section>
+
         <!-- ── Document suggestions ─────────────────────────────── -->
         <section class="sugg-section">
           <div class="section-header">
             <h2>Document Suggestions
               <span class="sugg-count" v-if="docSuggestions.length">({{ docSuggestions.length }})</span>
             </h2>
-            <button class="btn sm" @click="loadSuggestions">Refresh</button>
           </div>
           <p class="dim small">Documents uploaded by users pending KB ingestion. Approve to queue for the ingestion pipeline; reject to discard.</p>
 
@@ -575,10 +779,16 @@ import SchemaPanel from '@/components/kb/SchemaPanel.vue'
 import FolderTree from '@/components/kb/FolderTree.vue'
 import type { FolderNode } from '@/components/kb/FolderTree.vue'
 import {
+  fetchKgRelations,
+  updateKgRelation,
+  bulkUpdateKgRelations,
+  autoResolveKgRelations,
   fetchSchemas,
   fetchGraphArtifact,
   fetchArtifactStatus,
   resetKnowledgeBase,
+  fetchResetPreview,
+  fetchReviewQueues,
   fetchCollections, fetchCollectionDocs as _fetchCollectionDocs,
   fetchBatches as _fetchBatches, fetchJobs,
   runBatch as _runBatch, deleteBatch as _deleteBatch, stopBatch as _stopBatch,
@@ -593,6 +803,11 @@ import type {
   GraphSchema, GraphNode, GraphStats, TypeCounts,
   IngestionBatch, IngestionJob, CollectionInfo, KgStats, SourceEntry,
   DocumentSuggestion, FactSuggestion, StylizedFactSuggestion,
+  KgRelation,
+  KgRelationFilter,
+  ResetPreview,
+  ReviewQueues,
+  AutoResolveResult,
 } from '@/utils/kbApi'
 import type { GraphRenderBundle } from '@/types/graphArtifact'
 import type { DisplayConfig } from '@/components/kb/CosmographCanvas.vue'
@@ -928,11 +1143,35 @@ function toggleEdgeType(type: string) {
 }
 
 async function confirmReset() {
-  if (!confirm('This will delete all documents, chunks, facts, graph nodes, and ingestion jobs. taxonomy_nodes and stylized_facts are kept. Continue?')) return
+  // Ask the server what it would clear rather than describing it here. The
+  // hardcoded text had drifted: it warned about "graph nodes" and "ingestion
+  // jobs" (neither is cleared) and called taxa "taxonomy_nodes". Showing real
+  // row counts also makes the scale of an irreversible action visible.
+  resetting.value = true
+  let preview: ResetPreview
+  try {
+    preview = await fetchResetPreview()
+  } catch (e) {
+    setError(e)
+    resetting.value = false
+    return
+  }
+  resetting.value = false
+
+  const clears = preview.clears.map(c => `  • ${c.name} (${fmtNum(c.count)})`).join('\n')
+  const keeps = preview.keeps.map(k => `${k.name} (${fmtNum(k.count)})`).join(', ')
+  if (!confirm(
+    `This permanently deletes ${fmtNum(preview.total_rows)} rows from ArangoDB:\n\n${clears}\n\n` +
+    `Kept: ${keeps}\n\nThis cannot be undone. Continue?`
+  )) return
+
   resetting.value = true
   try {
     const result = await resetKnowledgeBase()
-    alert(`Reset complete. Deleted: ${JSON.stringify(result.deleted)}`)
+    const summary = Object.entries(result.cleared ?? {})
+      .map(([name, n]) => `${name}: ${fmtNum(n)}`)
+      .join('\n')
+    alert(`Reset complete.\n\n${summary || 'Nothing to clear.'}`)
     graphBundle.value = null
     selectedNode.value = null
     terminateWorker()
@@ -1214,13 +1453,40 @@ const collections      = ref<CollectionInfo[]>([])
 const selectedCollection = ref<string | null>(null)
 const collectionDocs   = ref<unknown[]>([])
 
+const collectionsLoading = ref(false)
+const docsLoading        = ref(false)
+
+/** Preview limit per document in the browser — long enough to identify a record. */
+const DOC_PREVIEW_CHARS = 500
+
+/**
+ * Truncated JSON preview that says it was truncated.
+ *
+ * Slicing pretty-printed JSON leaves output that looks like malformed data —
+ * a dangling key, an unclosed brace — with nothing to signal it was cut.
+ */
+function previewDoc(doc: unknown): string {
+  const full = JSON.stringify(doc, null, 2)
+  if (full.length <= DOC_PREVIEW_CHARS) return full
+  return `${full.slice(0, DOC_PREVIEW_CHARS)}\n… (${fmtNum(full.length - DOC_PREVIEW_CHARS)} more characters)`
+}
+
 async function loadCollections() {
-  try { collections.value = await fetchCollections() } catch (e) { setError(e) }
+  collectionsLoading.value = true
+  try { collections.value = await fetchCollections() }
+  catch (e) { setError(e) }
+  finally { collectionsLoading.value = false }
 }
 
 async function loadCollectionDocs(name: string) {
   selectedCollection.value = name
-  try { collectionDocs.value = await _fetchCollectionDocs(name) } catch (e) { setError(e) }
+  docsLoading.value = true
+  // Clear first so a slow load can't show the previous collection's rows under
+  // the new collection's heading.
+  collectionDocs.value = []
+  try { collectionDocs.value = await _fetchCollectionDocs(name) }
+  catch (e) { setError(e) }
+  finally { docsLoading.value = false }
 }
 
 // ---- KG Builder tab ---------------------------------------------------------
@@ -1235,6 +1501,172 @@ async function runKgLink(overwrite: boolean) {
   try { await linkDocuments(1000, overwrite); await loadKgStats() } catch (e) { setError(e) }
 }
 
+// ---- Automatic resolution ---------------------------------------------------
+
+const autoPreview = ref<AutoResolveResult | null>(null)
+const autoBusy    = ref(false)
+
+async function previewAutoResolve() {
+  autoBusy.value = true
+  try { autoPreview.value = await autoResolveKgRelations(true) }
+  catch (e) { setError(e) }
+  finally { autoBusy.value = false }
+}
+
+async function applyAutoResolve() {
+  autoBusy.value = true
+  try {
+    const res = await autoResolveKgRelations(false)
+    autoPreview.value = null
+    alert(
+      `Applied ${fmtNum(res.total)} automatic decisions.\n` +
+      res.rules.map(r => `  ${r.rule}: ${fmtNum(r.applied)} ${r.action}`).join('\n') +
+      `\n\n${fmtNum(res.remaining_suggested)} left to review.`
+    )
+    await Promise.all([loadKgStats(), loadRelations(relSampled.value)])
+  } catch (e) { setError(e) }
+  finally { autoBusy.value = false }
+}
+
+// ---- Relation review --------------------------------------------------------
+//
+// Sample-then-bulk: 6,003 suggested relations is far too many to click through,
+// but reviewing a *random* sample gives a measured reject rate that can be
+// projected onto the whole filtered set — so a bulk decision is made against a
+// number rather than a hunch. Reviewing the first page instead would only tell
+// you about the highest-confidence rows, which is the opposite of informative.
+
+const relations     = ref<KgRelation[]>([])
+const relTotal      = ref<number | null>(null)
+const relLoading    = ref(false)
+const relSampled    = ref(false)
+const relDecisions  = ref<Record<string, 'confirmed' | 'rejected'>>({})
+const relBulkBusy   = ref(false)
+const relBulkPreview = ref<{ matched: number; status: 'confirmed' | 'rejected' } | null>(null)
+
+const relFilter = ref<KgRelationFilter>({ status: 'suggested' })
+
+const relReviewed  = computed(() => Object.keys(relDecisions.value).length)
+const relConfirmed = computed(() => Object.values(relDecisions.value).filter(v => v === 'confirmed').length)
+const relRejected  = computed(() => Object.values(relDecisions.value).filter(v => v === 'rejected').length)
+
+function activeRelFilter(): KgRelationFilter {
+  // Strip empty values so the backend doesn't filter on undefined.
+  const f = relFilter.value
+  const out: KgRelationFilter = {}
+  if (f.status) out.status = f.status
+  if (typeof f.min_confidence === 'number' && !Number.isNaN(f.min_confidence)) out.min_confidence = f.min_confidence
+  if (typeof f.max_confidence === 'number' && !Number.isNaN(f.max_confidence)) out.max_confidence = f.max_confidence
+  if (f.created_by) out.created_by = f.created_by
+  return out
+}
+
+async function loadRelations(sample: boolean) {
+  relLoading.value = true
+  relBulkPreview.value = null
+  try {
+    const res = await fetchKgRelations(activeRelFilter(), { sample, limit: 50 })
+    relations.value = res.relations
+    relTotal.value = res.total
+    relSampled.value = sample
+    relDecisions.value = {}
+    relCursor.value = 0
+    relRowEls.length = 0
+  } catch (e) {
+    setError(e)
+  } finally {
+    relLoading.value = false
+  }
+}
+
+// Cursor + keyboard review. Clicking two small buttons per row, 50 rows at a
+// time, is the difference between a queue that gets worked and one that does
+// not — so j/k to move and y/n to decide, with auto-advance to the next
+// undecided row.
+const relCursor = ref(0)
+const relRowEls: (Element | null)[] = []
+
+function setRelRowRef(el: unknown, i: number) {
+  relRowEls[i] = (el as Element) ?? null
+}
+
+function moveRelCursor(delta: number) {
+  if (!relations.value.length) return
+  const next = Math.min(relations.value.length - 1, Math.max(0, relCursor.value + delta))
+  relCursor.value = next
+  relRowEls[next]?.scrollIntoView({ block: 'nearest' })
+}
+
+/** Advance to the next row that has not been decided yet, else just step on. */
+function advancePastDecided() {
+  const list = relations.value
+  for (let i = relCursor.value + 1; i < list.length; i++) {
+    if (!relDecisions.value[list[i]._key]) {
+      relCursor.value = i
+      relRowEls[i]?.scrollIntoView({ block: 'nearest' })
+      return
+    }
+  }
+  moveRelCursor(1)
+}
+
+function onReviewKey(ev: KeyboardEvent) {
+  if (activeTab.value !== 'kg' || !relations.value.length) return
+  // Never hijack typing in the filter inputs.
+  const tag = (ev.target as HTMLElement | null)?.tagName
+  if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return
+
+  const key = ev.key.toLowerCase()
+  if (key === 'j' || ev.key === 'ArrowDown') { ev.preventDefault(); moveRelCursor(1) }
+  else if (key === 'k' || ev.key === 'ArrowUp') { ev.preventDefault(); moveRelCursor(-1) }
+  else if (key === 'y') { ev.preventDefault(); decideCurrent('confirmed') }
+  else if (key === 'n') { ev.preventDefault(); decideCurrent('rejected') }
+}
+
+function decideCurrent(status: 'confirmed' | 'rejected') {
+  const rel = relations.value[relCursor.value]
+  if (rel && !relDecisions.value[rel._key]) decideRelation(rel, status)
+  else advancePastDecided()
+}
+
+async function decideRelation(rel: KgRelation, status: 'confirmed' | 'rejected') {
+  try {
+    await updateKgRelation(rel._key, status)
+    relDecisions.value = { ...relDecisions.value, [rel._key]: status }
+    advancePastDecided()
+    loadKgStats()
+  } catch (e) {
+    setError(e)
+  }
+}
+
+async function previewBulk(status: 'confirmed' | 'rejected') {
+  relBulkBusy.value = true
+  try {
+    const res = await bulkUpdateKgRelations(status, activeRelFilter(), true)
+    relBulkPreview.value = { matched: res.matched, status }
+  } catch (e) {
+    setError(e)
+  } finally {
+    relBulkBusy.value = false
+  }
+}
+
+async function applyBulk() {
+  const preview = relBulkPreview.value
+  if (!preview) return
+  relBulkBusy.value = true
+  try {
+    await bulkUpdateKgRelations(preview.status, activeRelFilter(), false)
+    relBulkPreview.value = null
+    await Promise.all([loadKgStats(), loadRelations(relSampled.value)])
+  } catch (e) {
+    setError(e)
+  } finally {
+    relBulkBusy.value = false
+  }
+}
+
 // ---- Suggestions tab --------------------------------------------------------
 
 const docSuggestions  = ref<DocumentSuggestion[]>([])
@@ -1245,17 +1677,24 @@ const pendingDocIds   = ref<Set<string>>(new Set())
 const pendingFactIds  = ref<Set<string>>(new Set())
 const pendingSfIds    = ref<Set<string>>(new Set())
 
+const reviewQueues = ref<ReviewQueues | null>(null)
+
 async function loadSuggestions() {
   suggLoading.value = true
   try {
-    const [docs, facts, sfs] = await Promise.all([
+    // Queue counts are fetched alongside the submission lists, and separately
+    // guarded: the submission collections are empty in every deployment so far,
+    // and their emptiness must not hide the pipeline backlog.
+    const [docs, facts, sfs, queues] = await Promise.all([
       fetchDocumentSuggestions('suggestion'),
       fetchFactSuggestions('suggestion'),
       fetchStylizedFactSuggestions('suggestion'),
+      fetchReviewQueues().catch((e) => { setError(e); return null }),
     ])
-    docSuggestions.value  = docs
-    factSuggestions.value = facts
-    sfSuggestions.value   = sfs
+    docSuggestions.value  = Array.isArray(docs) ? docs : []
+    factSuggestions.value = Array.isArray(facts) ? facts : []
+    sfSuggestions.value   = Array.isArray(sfs) ? sfs : []
+    reviewQueues.value    = queues
   } catch (e) { setError(e) }
   finally { suggLoading.value = false }
 }
@@ -1315,6 +1754,7 @@ function fmtDate(s?: string): string {
 // ---- Init -------------------------------------------------------------------
 
 onMounted(async () => {
+  window.addEventListener('keydown', onReviewKey)
   await loadSchemas()
   if (activeTab.value === 'database') await loadCollections()
   if (activeTab.value === 'ingestion') await loadBatches()
@@ -1327,7 +1767,7 @@ watch(activeTab, async (tab) => {
   if (tab === 'suggestions') await loadSuggestions()
 })
 
-onUnmounted(() => { stopBatchPolling(); terminateWorker() })
+onUnmounted(() => { stopBatchPolling(); terminateWorker(); window.removeEventListener('keydown', onReviewKey) })
 </script>
 
 <style scoped>
@@ -1596,7 +2036,11 @@ onUnmounted(() => { stopBatchPolling(); terminateWorker() })
 /* ---- Non-ingestion tab inner wrapper -------------------------------------- */
 .tab-inner {
   padding: 1.5rem;
-  max-width: 1200px;
+  /* Was max-width:1200px with no auto margin, so every non-graph tab hugged the
+     left edge and left a dead column on the right — while table cells truncated. */
+  max-width: 1600px;
+  margin-inline: auto;
+  width: 100%;
   height: 100%;
   overflow-y: auto;
   display: flex;
@@ -1976,7 +2420,36 @@ onUnmounted(() => { stopBatchPolling(); terminateWorker() })
   gap: 0.5rem;
 }
 
+.queue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.queue-card {
+  font: inherit;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.8rem;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.queue-card.static { cursor: default; }
+.queue-card:not(.static):hover { border-color: #3b82f6; }
+.queue-card:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; }
+.queue-n { font-size: 1.25rem; font-weight: 600; color: #e2e8f0; }
+.queue-label { font-size: 0.75rem; color: #cbd5e1; }
+.queue-sub { font-size: 0.68rem; color: #64748b; }
+
 .coll-card {
+  /* Now a <button> so it is reachable and activatable by keyboard — as a
+     clickable <div> it was mouse-only. Needs the button defaults reset. */
+  font: inherit;
+  text-align: left;
   padding: 0.6rem 0.75rem;
   background: #1e293b;
   border: 1px solid #334155;
@@ -1987,6 +2460,7 @@ onUnmounted(() => { stopBatchPolling(); terminateWorker() })
   gap: 0.2rem;
 }
 .coll-card:hover { border-color: #3b82f6; }
+.coll-card:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; }
 .coll-card.active { border-color: #60a5fa; background: #1e3a5f; }
 .coll-name { font-size: 0.75rem; color: #e2e8f0; font-weight: 500; }
 .coll-count { font-size: 0.7rem; color: #64748b; }
@@ -2025,6 +2499,102 @@ onUnmounted(() => { stopBatchPolling(); terminateWorker() })
 .stat-value { font-size: 1.4rem; font-weight: 700; color: #e2e8f0; }
 
 .kg-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+/* ── Relation review ─────────────────────────────────────────────────────── */
+.kg-review { margin-top: 1.5rem; }
+
+/* The document title is what a reviewer judges on, so it must not be clipped to
+   320px like the compact suggestion tables. */
+.rel-table .sugg-title {
+  max-width: none;
+  white-space: normal;
+  line-height: 1.35;
+}
+.rel-table td { vertical-align: top; }
+.rel-table tr.cursor td {
+  background: rgba(96, 165, 250, 0.12);
+  box-shadow: inset 3px 0 0 #60a5fa;
+}
+.auto-preview { margin-top: 0.6rem; }
+.auto-preview .mono { color: #cbd5e1; }
+.kbd-hint { margin: 0 0 0.5rem; }
+.kbd-hint kbd {
+  padding: 0.05rem 0.28rem;
+  border: 1px solid #475569;
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  color: #cbd5e1;
+  background: #1e293b;
+}
+.kg-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+.kg-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  color: #64748b;
+}
+.kg-filters select, .kg-filters input { padding: 0.25rem 0.4rem; font-size: 0.78rem; width: 8rem; }
+
+.kg-tally {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.7rem;
+  margin-bottom: 0.6rem;
+  border-radius: 5px;
+  background: rgba(100, 130, 220, 0.08);
+  border: 1px solid rgba(100, 130, 220, 0.2);
+  font-size: 0.78rem;
+}
+.tally-ok  { color: #16a34a; font-weight: 600; }
+.tally-no  { color: #dc2626; font-weight: 600; }
+.tally-est { color: #475569; }
+
+.evidence-cell { max-width: 22rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.taxon-name { font-style: italic; }
+.low-conf { color: #b45309; font-weight: 600; }
+tr.decided { opacity: 0.55; }
+.off-domain {
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.62rem;
+  background: rgba(180, 83, 9, 0.15);
+  color: #b45309;
+}
+
+.kg-bulk {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.bulk-confirm {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 5px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  font-size: 0.78rem;
+  color: #7f1d1d;
+}
 
 /* ---- Suggestions tab ------------------------------------------------------- */
 .suggestions-tab { overflow-y: auto; }

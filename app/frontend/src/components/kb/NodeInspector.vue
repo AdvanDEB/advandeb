@@ -5,7 +5,7 @@
         <span class="type-badge" :class="`type-${node.node_type.replace(/_/g, '-')}`">
           {{ node.node_type.replace(/_/g, ' ') }}
         </span>
-        <button class="close-btn" @click="$emit('close')" title="Close">✕</button>
+        <button class="close-btn" type="button" @click="$emit('close')" title="Close" aria-label="Close node inspector">✕</button>
       </div>
 
       <div class="inspector-body">

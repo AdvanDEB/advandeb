@@ -51,13 +51,48 @@ Full-text indexes: `documents.content`, `documents.abstract`, `facts.text`,
 | `taxonomical` | 1,257,912 | `taxa` → `taxa` (parent) |
 | `sf_support` | 31,311 | `facts` → `stylized_facts` |
 | `citations` | 8,521 | `documents` → `documents` |
-| `knowledge_graph` | **35** | `documents`, `facts` → `taxa`, `stylized_facts` |
+| `knowledge_graph` | 6,003 | `documents`, `facts` → `taxa`, `stylized_facts` |
 
-**`knowledge_graph` is effectively empty at 35 edges.** Despite the name, the
+**`knowledge_graph` held only 35 edges until 2026-08-26.** Despite the name, the
 integrated cross-entity graph users actually see is the *materialized*
 `knowledge_graph` schema in Layer 2, which is built from Mongo relation
 collections rather than from this Arango edge collection. Do not assume this
 collection is the integrated graph.
+
+### Why it was empty, and what changed (2026-08-26)
+
+All 35 edges shared one timestamp — `2026-05-27T14:27:41` — a single manual run.
+Three compounding causes, all now fixed:
+
+1. **The name index was restricted to mammals.** `root_taxid` defaulted to
+   40674 (Mammalia) at every entry point, so the index held 14,469 of 1,257,912
+   taxa — 1.15% of the vocabulary. Measured over 20,000 titles, 88% of species
+   mentions in this corpus are non-mammalian (ray-finned fishes outnumber
+   mammals roughly 4:1). Every one of the 28 linked taxa was a mammal. The
+   default is now `None` — index the whole taxonomy.
+2. **The candidate regex was greedy.** `_BINOMIAL_RE` captures a capitalised
+   word plus up to two following lowercase words, so "Growth of Danio rerio
+   under stress" yielded `"Danio rerio under"` and matched nothing. Names were
+   only found when they happened to end a phrase. `_candidate_names` now emits
+   every leading sub-phrase of each capture.
+3. **Nothing triggered it.** The only callers were the HTTP routes and a
+   standalone script. Linking is now hooked into `_update_batch_status`, so an
+   ingestion batch links its own documents on completion.
+
+Because the index went from 14k mammal names to 1.5M entries, matching needed a
+precision guard — see `_AMBIGUOUS_TAXON_NAMES` and `_SINGLE_TOKEN_RANKS` in
+`kg_builder_service.py`. Multi-word names are accepted anywhere; a bare
+capitalised word must resolve to genus-or-below and must not be an English
+homograph. Without it the crab genus *Cancer* claimed 90 oncology papers per
+40,000 titles, and the moth genus *Data* claimed 27.
+
+Result: **35 → 6,003 edges, 22 → 3,171 documents, 28 → 2,659 distinct taxa.**
+Of the curated `document_meta` set, 557 of 1,253 papers (44%) now carry a link.
+All edges are written with `status: "suggested"` for curator review, and the
+`evidence` field records the matched text.
+
+The backfill covered the `curated` and `with_facts` scopes. The remaining ~3.9M
+OpenAlex abstract records have **not** been linked — see the scope note below.
 
 ## Named graphs
 

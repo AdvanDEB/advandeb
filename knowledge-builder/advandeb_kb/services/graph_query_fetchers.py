@@ -462,6 +462,52 @@ def fetch_knowledge_graph(db: ArangoDatabase, limit: Optional[int]) -> Dict[str,
     return {"nodes": nodes, "edges": edges}
 
 
+_REPRO_FACTS_AQL = """
+FOR f IN facts
+    FILTER f.document_id IN @doc_keys
+    SORT f.document_id, f._key
+    {limit_clause}
+    RETURN f
+"""
+
+
+def _fetch_reproduction_facts(
+    db: ArangoDatabase,
+    doc_keys: List[str],
+    linked_doc_keys: List[str],
+    budget: Optional[int],
+) -> List[Dict[str, Any]]:
+    """Facts for the reproduction documents, best-first within a node budget.
+
+    Facts from documents that also carry a taxon link are taken first: those are
+    the documents that contribute structure to the graph, so their detail is
+    worth more than detail hanging off an isolated abstract. Ordering is
+    deterministic (`SORT f.document_id, f._key`) so the same rebuild produces the
+    same graph — the previous query had no SORT and silently resampled on every
+    build.
+    """
+    if budget is not None and budget <= 0:
+        return []
+
+    linked_set = set(linked_doc_keys)
+    facts = aql(db, _REPRO_FACTS_AQL.format(limit_clause="LIMIT @lim" if budget else ""),
+                {"doc_keys": linked_doc_keys, **({"lim": budget} if budget else {})}) if linked_set else []
+
+    if budget is None:
+        remaining_keys = [k for k in doc_keys if k not in linked_set]
+        return facts + aql(db, _REPRO_FACTS_AQL.format(limit_clause=""), {"doc_keys": remaining_keys})
+
+    remaining = budget - len(facts)
+    if remaining <= 0:
+        return facts[:budget]
+
+    remaining_keys = [k for k in doc_keys if k not in linked_set]
+    if not remaining_keys:
+        return facts
+    return facts + aql(db, _REPRO_FACTS_AQL.format(limit_clause="LIMIT @lim"),
+                       {"doc_keys": remaining_keys, "lim": remaining})
+
+
 def fetch_reproduction(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, Any]:
     """Reproduction-domain subgraph.
 
@@ -470,35 +516,81 @@ def fetch_reproduction(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, An
     documents study — and the edges among them. Mirrors ``fetch_knowledge_graph``
     but scoped to the reproduction domain rather than the whole KB.
     """
-    node_limit = None if limit is None else max(1, limit // 4)
-    node_limit_clause, node_bind = _aql_limit("lim", node_limit)
     edge_limit_clause, edge_bind = _aql_limit("lim", limit)
 
     # Documents scoped to the reproduction domain. Prefer abstracts that have
     # already been processed (so the graph surfaces their extracted conclusions /
     # background knowledge / citations); fall back to bare abstracts only if none
     # have been processed yet.
+    #
+    # No LIMIT on this query: `general_domain` does not actually narrow anything
+    # — 3,898,536 of 3,899,789 documents carry the 'reproduction' tag, the only
+    # exceptions being the 1,253 curated papers. `processing_status` is the real
+    # selector and it bounds the result to ~10.7k on its own.
     docs = aql(db,
-        f"FOR d IN documents FILTER d.general_domain == 'reproduction' "
-        f"AND d.processing_status == 'completed' {node_limit_clause} RETURN d",
-        node_bind,
+        "FOR d IN documents FILTER d.general_domain == 'reproduction' "
+        "AND d.processing_status == 'completed' SORT d._key RETURN d",
+        {},
     )
     if not docs:
         docs = aql(db,
-            f"FOR d IN documents FILTER d.general_domain == 'reproduction' {node_limit_clause} RETURN d",
-            node_bind,
+            f"FOR d IN documents FILTER d.general_domain == 'reproduction' "
+            f"SORT d._key {_aql_limit('lim', limit)[0]} RETURN d",
+            _aql_limit("lim", limit)[1],
         )
     doc_nodes = [_serialize_vertex(d, "document") for d in docs]
     doc_key_set = {n["_id"] for n in doc_nodes}
     if not doc_key_set:
         return {"nodes": [], "edges": []}
-    doc_keys = list(doc_key_set)
+    doc_keys = sorted(doc_key_set)
 
-    # Facts extracted from those documents (fact.document_id == document _key)
-    facts = aql(db,
-        f"FOR f IN facts FILTER f.document_id IN @doc_keys {node_limit_clause} RETURN f",
-        {"doc_keys": doc_keys, **node_bind},
+    # ---- Taxa studied by those documents, plus their lineage ----------------
+    # Pulled before facts because they are what makes this graph worth looking
+    # at — which organisms the reproduction literature covers — and they are
+    # cheap. The lineage closure turns a scatter of species into a tree.
+    studies_edges_raw = aql(db,
+        """
+        FOR e IN knowledge_graph
+            FILTER e._from IN @doc_vertex_ids AND STARTS_WITH(e._to, 'taxa/')
+            RETURN {_from: e._from, _to: e._to, _key: e._key, w: e.confidence || 1.0}
+        """,
+        {"doc_vertex_ids": [f"documents/{k}" for k in doc_keys]},
     )
+    studied_taxon_keys = sorted({e["_to"].split("/")[-1] for e in studies_edges_raw if e.get("_to")})
+
+    taxa: List[Dict[str, Any]] = []
+    if studied_taxon_keys:
+        taxa = aql(db,
+            """
+            LET closure = UNIQUE(FLATTEN(
+                FOR k IN @taxon_keys
+                    LET t = DOCUMENT('taxa', k)
+                    FILTER t != null
+                    RETURN APPEND(t.lineage[* RETURN TO_STRING(CURRENT)], [t._key])
+            ))
+            FOR t IN DOCUMENT('taxa', closure) RETURN t
+            """,
+            {"taxon_keys": studied_taxon_keys},
+        )
+    studied_set = set(studied_taxon_keys)
+    taxon_nodes = []
+    for t in taxa:
+        node = _serialize_vertex(t, "taxon")
+        node["properties"]["studied"] = node["_id"] in studied_set
+        taxon_nodes.append(node)
+    taxon_key_set = {n["_id"] for n in taxon_nodes}
+
+    # ---- Facts, filling whatever node budget is left ------------------------
+    # The old query took `LIMIT limit // 4` with no SORT: an arbitrary 12,500 of
+    # the 45,710 available facts, and a different arbitrary subset on every
+    # rebuild. Facts from documents that also have a taxon come first, so the
+    # detail attaches to the part of the graph that carries structure.
+    fact_budget = None
+    if limit:
+        fact_budget = max(0, limit - len(doc_nodes) - len(taxon_nodes))
+
+    linked_doc_keys = sorted({e["_from"].split("/")[-1] for e in studies_edges_raw if e.get("_from")})
+    facts = _fetch_reproduction_facts(db, doc_keys, linked_doc_keys, fact_budget)
     fact_nodes = [_serialize_vertex(f, "fact") for f in facts]
     fact_keys = [n["_id"] for n in fact_nodes]
 
@@ -523,24 +615,6 @@ def fetch_reproduction(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, An
                 {"sf_keys": sf_key_set},
             )
             sf_nodes = [_serialize_vertex(s, "stylized_fact") for s in sfs]
-
-    # Taxa studied by those documents (knowledge_graph edge: documents/<k> → taxa/<k>)
-    studies_edges_raw = aql(db,
-        """
-        FOR e IN knowledge_graph
-            FILTER e._from IN @doc_vertex_ids AND STARTS_WITH(e._to, 'taxa/')
-            RETURN {_from: e._from, _to: e._to, _key: e._key, w: e.confidence || 1.0}
-        """,
-        {"doc_vertex_ids": [f"documents/{k}" for k in doc_keys]},
-    )
-    taxon_nodes: List[Dict[str, Any]] = []
-    taxon_key_set = sorted({e["_to"].split("/")[-1] for e in studies_edges_raw if e.get("_to")})
-    if taxon_key_set:
-        taxa = aql(db,
-            "FOR t IN taxa FILTER t._key IN @taxon_keys RETURN t",
-            {"taxon_keys": taxon_key_set},
-        )
-        taxon_nodes = [_serialize_vertex(t, "taxon") for t in taxa]
 
     nodes = doc_nodes + fact_nodes + sf_nodes + taxon_nodes
     all_keys = {n["_id"] for n in nodes}
@@ -570,6 +644,17 @@ def fetch_reproduction(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, An
         se = _serialize_edge(e["_from"], e["_to"], "studies", float(e.get("w", 1.0)), e.get("_key", ""))
         if se["source_node_id"] in all_keys and se["target_node_id"] in all_keys:
             edges.append(se)
+
+    # is_child_of, from each taxon's own parent pointer — without these the taxa
+    # are an unconnected scatter of species hanging off documents rather than a
+    # readable slice of the tree of life.
+    for t in taxa:
+        child = str(t.get("_key", ""))
+        parent = str(t.get("parent_tax_id") or "")
+        if child and parent and child != parent and child in taxon_key_set and parent in taxon_key_set:
+            edges.append(
+                _serialize_edge(child, parent, "is_child_of", 1.0, f"{child}_to_{parent}")
+            )
 
     # extracted_from (fact → document), synthesized from fact.document_id
     for fn in fact_nodes:

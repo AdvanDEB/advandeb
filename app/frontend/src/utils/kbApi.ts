@@ -91,11 +91,18 @@ export interface ScanResult {
   num_files: number
 }
 
+// Field names must match GET /kb/kg/stats exactly. They previously read
+// total/suggested/confirmed, none of which the endpoint returns, so every stat
+// card fell through its `?? 0` and displayed zero while 6,003 relations existed.
 export interface KgStats {
-  total: number
-  suggested: number
-  confirmed: number
-  rejected: number
+  total_documents: number
+  linked_documents: number
+  unlinked_documents: number
+  total_relations: number
+  confirmed_relations: number
+  suggested_relations: number
+  index_entries: number
+  index_root_taxid: number | null
 }
 
 export interface IngestionJob {
@@ -234,7 +241,39 @@ export async function seedSchemas(): Promise<unknown> {
   return data
 }
 
-export async function resetKnowledgeBase(): Promise<{ status: string; deleted: Record<string, number> }> {
+export interface ReviewQueues {
+  facts_pending: number
+  facts_total: number
+  sf_support_suggested: number
+  sf_support_total: number
+  studies_suggested: number
+  studies_confirmed: number
+  documents_off_domain: number
+  documents_gated: number
+}
+
+/** Pipeline output awaiting review — distinct from user submissions. */
+export async function fetchReviewQueues(): Promise<ReviewQueues> {
+  const { data } = await api.get('/kb/db/review-queues')
+  return data
+}
+
+export interface ResetPreview {
+  clears: { name: string; count: number }[]
+  keeps: { name: string; count: number }[]
+  total_rows: number
+}
+
+/** What a reset would clear, straight from the list the reset itself uses. */
+export async function fetchResetPreview(): Promise<ResetPreview> {
+  const { data } = await api.get('/kb/db/reset/preview')
+  return data
+}
+
+// NOTE: the response key is `cleared`, not `deleted`. This interface previously
+// declared `deleted`, so the success dialog rendered "Deleted: undefined" after
+// every reset — a hand-written type can't be checked against the server.
+export async function resetKnowledgeBase(): Promise<{ status: string; cleared: Record<string, number> }> {
   const { data } = await api.post('/kb/db/reset')
   return data
 }
@@ -376,6 +415,91 @@ export async function linkDocuments(limit = 1000, overwrite = false): Promise<un
 
 export async function fetchKgStats(): Promise<KgStats> {
   const { data } = await api.get('/kb/kg/stats')
+  return data
+}
+
+// ---- KG relation review -----------------------------------------------------
+
+export interface KgRelation {
+  _key: string
+  document_id: string
+  document_title: string | null
+  document_domain_relevant: boolean | null
+  tax_id: number
+  taxon_name: string | null
+  taxon_rank: string | null
+  relation_type: string
+  confidence: number
+  evidence: string
+  status: string
+  created_by: string
+  created_at: string
+  updated_at: string
+}
+
+export interface KgRelationFilter {
+  status?: string
+  min_confidence?: number
+  max_confidence?: number
+  created_by?: string
+}
+
+export async function fetchKgRelations(
+  filter: KgRelationFilter = {},
+  options: { sample?: boolean; limit?: number; skip?: number } = {},
+): Promise<{ total: number; relations: KgRelation[] }> {
+  const { data } = await api.get('/kb/kg/relations', {
+    params: { ...filter, ...options },
+  })
+  return data
+}
+
+export interface AutoResolveRule {
+  rule: string
+  action: 'confirmed' | 'rejected'
+  description: string
+  matched: number
+  applied: number
+}
+
+export interface AutoResolveResult {
+  dry_run: boolean
+  rules: AutoResolveRule[]
+  total: number
+  remaining_suggested: number
+}
+
+/**
+ * Apply the deterministic link rules. Defaults to a dry run: most of this queue
+ * needs no judgement, so the rules do the bulk of the work and a human only
+ * sees what genuinely turns on one.
+ */
+export async function autoResolveKgRelations(dryRun = true): Promise<AutoResolveResult> {
+  const { data } = await api.post('/kb/kg/relations/auto-resolve', { dry_run: dryRun })
+  return data
+}
+
+export async function updateKgRelation(
+  relationKey: string,
+  status: 'confirmed' | 'rejected',
+): Promise<unknown> {
+  const { data } = await api.put(`/kb/kg/relations/${relationKey}`, { status })
+  return data
+}
+
+/**
+ * Confirm or reject every relation matching `filter`.
+ *
+ * `dryRun` defaults to true — the caller is expected to show the matched count
+ * and have the user confirm before applying, because a bulk status change can
+ * touch thousands of rows and cannot be undone from the UI.
+ */
+export async function bulkUpdateKgRelations(
+  status: 'confirmed' | 'rejected',
+  filter: KgRelationFilter,
+  dryRun = true,
+): Promise<{ matched: number; updated: number; dry_run: boolean; status: string }> {
+  const { data } = await api.post('/kb/kg/relations/bulk', { status, filter, dry_run: dryRun })
   return data
 }
 

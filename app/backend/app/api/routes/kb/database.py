@@ -30,6 +30,82 @@ _CLEARABLE_ARANGO = [
 ]
 
 
+@router.get("/review-queues")
+async def review_queues(
+    current_user: dict = Depends(require_curator),
+) -> Dict[str, Any]:
+    """Counts of pipeline output awaiting human review.
+
+    The Suggestions tab only ever listed *user submissions*
+    (``document_submissions`` / ``fact_submissions`` / ``sf_submissions``),
+    which are empty — so it showed nothing while tens of thousands of
+    machine-generated items sat unreviewed and invisible. These are those items.
+    """
+    arango = get_arango_db()
+
+    def _counts():
+        def n(aql: str) -> int:
+            rows = arango.aql(aql, {})
+            return rows[0] if rows else 0
+
+        return {
+            "facts_pending": n("RETURN LENGTH(FOR f IN facts FILTER f.status == 'pending' RETURN 1)"),
+            "facts_total": n("RETURN LENGTH(facts)"),
+            "sf_support_suggested": n(
+                "RETURN LENGTH(FOR e IN sf_support FILTER e.status == 'suggested' RETURN 1)"
+            ),
+            "sf_support_total": n("RETURN LENGTH(sf_support)"),
+            "studies_suggested": n(
+                "RETURN LENGTH(FOR e IN knowledge_graph "
+                "FILTER e.relation_type == 'studies' AND e.status == 'suggested' RETURN 1)"
+            ),
+            "studies_confirmed": n(
+                "RETURN LENGTH(FOR e IN knowledge_graph "
+                "FILTER e.relation_type == 'studies' AND e.status == 'confirmed' RETURN 1)"
+            ),
+            "documents_off_domain": n(
+                "RETURN LENGTH(FOR d IN documents FILTER d.domain_relevant == false RETURN 1)"
+            ),
+            "documents_gated": n(
+                "RETURN LENGTH(FOR d IN documents FILTER d.domain_relevant != null RETURN 1)"
+            ),
+        }
+
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(_executor, _counts)
+
+
+@router.get("/reset/preview")
+async def preview_reset(
+    current_user: dict = Depends(require_admin),
+) -> Dict[str, Any]:
+    """Report exactly what a reset would clear, with current row counts.
+
+    Exists so the confirmation dialog can be generated from the same
+    ``_CLEARABLE_ARANGO`` list the reset actually uses. The dialog previously
+    hardcoded its own description and had drifted out of step — it warned about
+    "graph nodes" and "ingestion jobs" (neither is touched) and named
+    "taxonomy_nodes" (the collection is ``taxa``). For an irreversible action
+    the description must come from the code that performs it.
+    """
+    arango = get_arango_db()
+
+    def _preview():
+        clears = []
+        for name in _CLEARABLE_ARANGO:
+            if arango.db.has_collection(name):
+                clears.append({"name": name, "count": arango.db.collection(name).count()})
+        kept = [
+            {"name": name, "count": arango.db.collection(name).count()}
+            for name in ("taxa", "stylized_facts")
+            if arango.db.has_collection(name)
+        ]
+        return {"clears": clears, "keeps": kept, "total_rows": sum(c["count"] for c in clears)}
+
+    loop = asyncio.get_running_loop()
+    return await loop.run_in_executor(_executor, _preview)
+
+
 @router.post("/reset")
 async def reset_knowledge_base(
     current_user: dict = Depends(require_admin),

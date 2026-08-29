@@ -3,7 +3,7 @@ Async ingestion and KG-linking pipeline — runs as FastAPI BackgroundTasks.
 
 Call via FastAPI BackgroundTasks:
     background_tasks.add_task(run_pdf_job, job_id, db)
-    background_tasks.add_task(run_kg_link_batch, db, root_taxid=40674)
+    background_tasks.add_task(run_kg_link_batch, db)
 """
 import asyncio
 import logging
@@ -1295,6 +1295,28 @@ async def _update_batch_status(db: AsyncIOMotorDatabase, batch_id: ObjectId) -> 
         {"$set": {"status": batch_status, "updated_at": datetime.now(timezone.utc)}},
     )
 
+    # Link this batch's documents to the taxonomy now that it has finished.
+    #
+    # Hooked at batch level rather than per document on purpose: matching needs
+    # the taxonomy name index, which is ~1.5M entries and takes ~30s and ~1GB to
+    # build. Once per batch is proportionate; once per document would not be.
+    #
+    # Without this hook nothing ever calls the linker — the only callers were
+    # the HTTP routes and a standalone script, which is why every document→taxon
+    # edge in the database shared a single timestamp from one manual run.
+    doc_keys = [
+        str(job["document_id"])
+        async for job in db.ingestion_jobs.find(
+            {"batch_id": batch_id, "document_id": {"$ne": None}}, {"document_id": 1, "_id": 0}
+        )
+    ]
+    if doc_keys:
+        try:
+            from app.core.database import get_arango_db
+            asyncio.create_task(run_kg_link_documents(get_arango_db(), doc_keys))
+        except Exception:
+            logger.exception("Could not schedule KG linking for batch %s", batch_id)
+
 
 # ---------------------------------------------------------------------------
 # PDF ingestion job
@@ -1627,22 +1649,57 @@ async def run_batch_worker(batch_id: str, db: AsyncIOMotorDatabase) -> None:
 
 async def run_kg_link_batch(
     db,  # ArangoDatabase
-    root_taxid: Optional[int] = 40674,
+    root_taxid: Optional[int] = None,
     limit: int = 1000,
     skip: int = 0,
     overwrite: bool = False,
+    scope: str = "all",
 ) -> None:
+    """Link documents to taxa by name matching.
+
+    ``root_taxid`` defaults to None — index the whole taxonomy. It used to
+    default to 40674 (Mammalia), which meant the name index held 14,469 of
+    1,257,912 taxa and the linker was structurally blind to every non-mammal.
+    Measured on 20,000 titles, 88% of species mentions in this corpus are
+    non-mammalian (ray-finned fishes alone outnumber mammals ~4:1), which is why
+    a single historical run produced only 35 edges over 22 documents.
+    """
     from advandeb_kb.services.kg_builder_service import KGBuilderService
     try:
         svc = KGBuilderService(db)
         await svc.ensure_indexes()
         n = await svc.build_name_index(root_taxid=root_taxid)
-        logger.info("KG link: name index %d entries", n)
-        result = await svc.link_documents(limit=limit, skip=skip, overwrite=overwrite)
+        logger.info("KG link: name index %d entries (root_taxid=%s)", n, root_taxid)
+        result = await svc.link_documents(limit=limit, skip=skip, overwrite=overwrite, scope=scope)
         logger.info("KG link complete: %s", result)
         graph_rebuild_queue.mark_dirty("knowledge_graph")
+        graph_rebuild_queue.mark_dirty("taxonomical")
+        graph_rebuild_queue.mark_dirty("physiological_process")
     except Exception:
         logger.exception("KG link batch failed")
+
+
+async def run_kg_link_documents(db, doc_keys: List[str]) -> None:
+    """Link a specific set of freshly-ingested documents to taxa.
+
+    Called at the end of ingestion so new documents are linked on arrival
+    instead of waiting for someone to remember to POST /api/kb/kg/link.
+    """
+    from advandeb_kb.services.kg_builder_service import KGBuilderService
+    if not doc_keys:
+        return
+    try:
+        svc = KGBuilderService(db)
+        await svc.ensure_indexes()
+        await svc.build_name_index(root_taxid=None)
+        result = await svc.link_documents(doc_keys=doc_keys)
+        logger.info("KG link (ingest hook) for %d docs: %s", len(doc_keys), result)
+        if result.get("relations_written"):
+            graph_rebuild_queue.mark_dirty("knowledge_graph")
+            graph_rebuild_queue.mark_dirty("taxonomical")
+            graph_rebuild_queue.mark_dirty("physiological_process")
+    except Exception:
+        logger.exception("KG link for ingested documents failed")
 
 
 async def run_kg_link_agent(

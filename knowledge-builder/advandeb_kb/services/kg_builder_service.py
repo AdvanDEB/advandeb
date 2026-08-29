@@ -49,8 +49,22 @@ def _normalize(name: str) -> str:
 
 
 def _candidate_names(text: str) -> List[str]:
-    """Return candidate taxon names from free text (binomial patterns)."""
-    return _BINOMIAL_RE.findall(text or "")
+    """Return candidate taxon names from free text (binomial patterns).
+
+    The regex is greedy — on "Growth of Danio rerio under stress" it captures
+    "Danio rerio under", which matches no index key. Emitting every leading
+    sub-phrase of each capture ("Danio", "Danio rerio", "Danio rerio under")
+    means a name is found wherever it sits in the sentence, not only when it
+    happens to fall at the end of a phrase. Longer candidates are still
+    generated, so binomials keep winning over their bare genus via the
+    confidence ranking in ``_match_document``.
+    """
+    seen: Dict[str, None] = {}
+    for match in _BINOMIAL_RE.finditer(text or ""):
+        words = match.group(1).split()
+        for length in range(1, len(words) + 1):
+            seen.setdefault(" ".join(words[:length]), None)
+    return list(seen)
 
 
 _CONF = {
@@ -61,6 +75,110 @@ _CONF = {
     "concept_genus":    0.75,
     "concept_other":    0.68,
 }
+
+# Ranks a *single-token* match is allowed to resolve to.
+#
+# Multi-word names ("Danio rerio") are unambiguous and accepted at any rank. A
+# bare capitalised word is not, and matching it against coarse ranks produces
+# assertions that are technically true and useless: scanning 40,000 titles, the
+# single word "Animals" hit Animalia 15 times, "Fish" hit three fish classes 88
+# times, "Birds"/"Avian"/"Amphibians"/"Rodent" likewise. "This paper studies
+# Animalia" is not knowledge. Genus and below is where a lone word carries
+# enough information to be worth an edge.
+_SINGLE_TOKEN_RANKS = frozenset({"species", "subspecies", "genus", "subgenus"})
+
+# Single-token taxon names whose ordinary-English reading dominates in
+# scientific prose. Without this the linker asserts that every oncology paper
+# studies the crab genus *Cancer*.
+#
+# Derived empirically, not guessed: built the full 1.5M-entry name index and
+# counted single-token title matches across 40,000 documents (2026-08-26). Each
+# entry below is a real NCBI genus/species name that outscored its taxonomic
+# reading in this corpus. Frequencies from that scan are noted so the cost of
+# each exclusion is on the record.
+#
+# Deliberately NOT blocked, because their taxonomic reading is the common one
+# and they are exactly the matches this linker exists to find: Mouse (910),
+# Zebrafish (787), Human (627), Drosophila (932), Xenopus (471), Chicken (380),
+# Bovine (325), Cattle (71), Rabbit (80), Sheep, Goat, Duck, Medaka, Artemia.
+_AMBIGUOUS_TAXON_NAMES = frozenset({
+    "cancer",     # 90 — crab genus vs. the disease
+    "data",       # 27 — moth genus
+    "axis",       # 53 — deer genus vs. anatomical/geometric axis
+    "china",      # 41 — genus vs. the country
+    "argentina",  # 13 — fish genus vs. the country
+    "electron",   # 31 — genus vs. the particle
+    "major",      # 25 — genus vs. the adjective
+    "beta",       # 20 — genus vs. the Greek letter
+    "meta",       # 20 — spider genus vs. the prefix
+    "delta",      # 19 — genus vs. the Greek letter / river delta
+    "lens",       # 20 — genus vs. the optical/ocular structure
+    "helix",      # 15 — snail genus vs. the geometric form (DNA helix)
+    # Same class, not seen in the sample but well-known homographs that would
+    # behave identically on a larger corpus.
+    "chaos", "aurora", "iris", "pandora", "basilica", "proxima",
+})
+
+
+# Projection shared by every scan. `content` is only pulled when there is no
+# abstract to read — it is the largest field in the collection and fetching 8 KB
+# of it per document across 3.9M rows is the difference between a scan that
+# finishes and one that does not.
+_DOC_PROJECTION = """
+    RETURN {_key: doc._key, title: doc.title, abstract: doc.abstract,
+            content: doc.abstract ? null : LEFT(doc.content, 8000),
+            tags: doc.tags}
+"""
+
+# Paged scans sort by _key so paging is stable: the previous query had no SORT,
+# so `LIMIT skip, limit` walked an arbitrary order and successive pages could
+# repeat or miss documents.
+_SCOPE_QUERIES = {
+    "all": f"""
+    FOR doc IN documents
+        FILTER doc.title != null OR doc.abstract != null
+        SORT doc._key
+        LIMIT @skip, @limit
+        {_DOC_PROJECTION}
+    """,
+    "curated": f"""
+    FOR meta IN document_meta
+        SORT meta._key
+        LIMIT @skip, @limit
+        LET doc = DOCUMENT(CONCAT('documents/', meta._key))
+        FILTER doc != null
+        {_DOC_PROJECTION}
+    """,
+    # Documents that facts were extracted from — the set that actually feeds the
+    # sf_support and physiological_process graphs, so linking these first is what
+    # makes those views useful soonest.
+    "with_facts": f"""
+    LET keys = (FOR f IN facts FILTER f.document_id != null RETURN DISTINCT f.document_id)
+    FOR key IN keys
+        SORT key
+        LIMIT @skip, @limit
+        LET doc = DOCUMENT(CONCAT('documents/', key))
+        FILTER doc != null
+        {_DOC_PROJECTION}
+    """,
+}
+
+_DOCS_BY_KEY_AQL = f"""
+FOR key IN @keys
+    LET doc = DOCUMENT(CONCAT('documents/', key))
+    FILTER doc != null
+    {_DOC_PROJECTION}
+"""
+
+
+def _index_entries_for_single_token(
+    key: str,
+    index: Dict[str, List[Tuple[int, str]]],
+) -> List[Tuple[int, str]]:
+    """Index entries a lone capitalised word may resolve to (may be empty)."""
+    if key in _AMBIGUOUS_TAXON_NAMES:
+        return []
+    return [(tax_id, rank) for tax_id, rank in index.get(key, ()) if rank in _SINGLE_TOKEN_RANKS]
 
 
 class KGBuilderService:
@@ -145,19 +263,29 @@ class KGBuilderService:
         limit: int = 1000,
         skip: int = 0,
         overwrite: bool = False,
+        scope: str = "all",
+        doc_keys: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """Match documents to taxa and write edges to knowledge_graph.
 
         Args:
             limit:     Number of documents to process in this call.
-            skip:      Offset into the documents collection.
+            skip:      Offset into the document set (ignored when doc_keys given).
             overwrite: If False (default), skip documents already linked.
                        If True, upsert relations (refresh existing).
+            scope:     Which documents to walk:
+                       "curated"    — the ``document_meta`` set (fully ingested papers)
+                       "with_facts" — documents facts were extracted from
+                       "all"        — every document with a title or abstract
+            doc_keys:  Link exactly these documents, ignoring scope/skip/limit.
+                       Used by the ingestion hook to link a document on arrival.
 
         Returns summary dict.
         """
         if not self._index:
             raise RuntimeError("Call build_name_index() before link_documents()")
+        if scope not in _SCOPE_QUERIES:
+            raise ValueError(f"Unknown scope {scope!r}; expected one of {sorted(_SCOPE_QUERIES)}")
 
         def _link():
             # Fetch existing linked doc keys (to skip)
@@ -169,14 +297,10 @@ class KGBuilderService:
                 )
                 exclude_keys = {r for r in existing}
 
-            # Fetch documents
-            aql = """
-            FOR doc IN documents
-                LIMIT @skip, @limit
-                RETURN {_key: doc._key, title: doc.title, abstract: doc.abstract,
-                        content: LEFT(doc.content, 8000), tags: doc.tags}
-            """
-            docs = self.db.aql(aql, {"skip": skip, "limit": limit})
+            if doc_keys is not None:
+                docs = self.db.aql(_DOCS_BY_KEY_AQL, {"keys": list(doc_keys)})
+            else:
+                docs = self.db.aql(_SCOPE_QUERIES[scope], {"skip": skip, "limit": limit})
 
             now_iso = datetime.now(timezone.utc).isoformat()
             docs_processed = 0
@@ -274,19 +398,20 @@ def _match_document(
         if tax_id not in matched or matched[tax_id][0] < conf:
             matched[tax_id] = (conf, evidence)
 
-    # 1. Title candidates
+    # 1. Title candidates. Multi-word names are unambiguous; a lone capitalised
+    #    word has to clear the ambiguity guard first.
     for candidate in _candidate_names(doc.get("title", "") or ""):
         key = _normalize(candidate)
-        if key in index:
-            for tax_id, rank in index[key]:
-                _update(tax_id, rank, "title", f"title: {candidate}")
+        entries = index.get(key, ()) if " " in candidate else _index_entries_for_single_token(key, index)
+        for tax_id, rank in entries:
+            _update(tax_id, rank, "title", f"title: {candidate}")
 
-    # 2. Tags
+    # 2. Tags — same rule; OpenAlex concept tags are often single words.
     for tag in (doc.get("tags") or []):
         key = _normalize(tag)
-        if key in index:
-            for tax_id, rank in index[key]:
-                _update(tax_id, rank, "concept", f"tag: {tag}")
+        entries = index.get(key, ()) if " " in key else _index_entries_for_single_token(key, index)
+        for tax_id, rank in entries:
+            _update(tax_id, rank, "concept", f"tag: {tag}")
 
     # 3. Abstract (multi-word binomials only)
     for candidate in _candidate_names(doc.get("abstract", "") or ""):

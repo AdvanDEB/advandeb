@@ -2,20 +2,23 @@
   <aside class="ob-panel">
     <!-- ── Search ──────────────────────────────────────────────────── -->
     <div class="ob-search-row">
-      <svg class="ob-search-icon" viewBox="0 0 16 16" fill="none">
+      <svg class="ob-search-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/>
         <line x1="10" y1="10" x2="14" y2="14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
       <input
         class="ob-search-input"
-        type="text"
+        type="search"
         placeholder="Search node..."
+        aria-label="Search nodes by label"
         :value="localDisplay.searchQuery"
         @input="setDisplay('searchQuery', ($event.target as HTMLInputElement).value)"
       />
       <button
         v-if="localDisplay.searchQuery"
         class="ob-search-clear"
+        type="button"
+        aria-label="Clear search"
         @click="setDisplay('searchQuery', '')"
       >✕</button>
     </div>
