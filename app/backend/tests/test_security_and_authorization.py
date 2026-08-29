@@ -104,7 +104,7 @@ async def test_model_update_and_delete_ownership():
 
         # Malformed ID returns None/False
         assert await service.get_model("invalid-id") is None
-        assert await service.update_model("invalid-id", ModelCreate(name="m", description="d", model_type="t"), "u1") is None
+        assert await service.update_model("invalid-id", ModelCreate(name="m", description="d", model_type="t", scenario_id="s1"), "u1") is None
         assert await service.delete_model("invalid-id", "u1") is False
 
         # Model owned by user-1
@@ -126,7 +126,7 @@ async def test_model_update_and_delete_ownership():
 
         # Different non-admin user cannot modify -> 403
         with pytest.raises(HTTPException) as exc_info:
-            await service.update_model(str(oid), ModelCreate(name="New", description="d", model_type="t"), user_id="user-2", is_admin=False)
+            await service.update_model(str(oid), ModelCreate(name="New", description="d", model_type="t", scenario_id="s1"), user_id="user-2", is_admin=False)
         assert exc_info.value.status_code == 403
 
         # Different non-admin user cannot delete -> 403
