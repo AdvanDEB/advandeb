@@ -16,8 +16,8 @@ let _refreshPromise: Promise<string> | null = null
 
 /**
  * Attempt a token refresh.  Returns the new access token on success.
- * Clears localStorage and redirects to /login if the refresh token is
- * missing or the refresh request fails.
+ * Ends the session if the refresh token is missing or the refresh request
+ * fails — see `_endSession` for what "ends" means per route.
  */
 export async function refreshAccessToken(): Promise<string> {
   // Coalesce concurrent callers into a single in-flight request
@@ -26,7 +26,11 @@ export async function refreshAccessToken(): Promise<string> {
   _refreshPromise = (async () => {
     const refreshToken = localStorage.getItem('refresh_token')
     if (!refreshToken) {
-      _redirectToLogin()
+      // Awaited so the session is fully torn down before this promise settles.
+      // main.ts mounts the app off the back of hydrate(), and the router guard
+      // reads `isAuthenticated` immediately — leaving the teardown in flight
+      // would let the guard decide against a token that is already dead.
+      await _endSession()
       throw new Error('No refresh token available')
     }
 
@@ -37,8 +41,8 @@ export async function refreshAccessToken(): Promise<string> {
       localStorage.setItem('refresh_token', newRefresh)
       return access_token as string
     } catch {
-      _redirectToLogin()
-      throw new Error('Token refresh failed — redirecting to login')
+      await _endSession()
+      throw new Error('Token refresh failed — session ended')
     } finally {
       _refreshPromise = null
     }
@@ -47,11 +51,49 @@ export async function refreshAccessToken(): Promise<string> {
   return _refreshPromise
 }
 
-function _redirectToLogin() {
-  localStorage.removeItem('access_token')
-  localStorage.removeItem('refresh_token')
-  if (!window.location.pathname.startsWith('/login')) {
-    window.location.href = '/login'
+/**
+ * Drop the dead session, and send the visitor to /login *only* if the page
+ * they are on actually requires auth.
+ *
+ * This used to redirect unconditionally, which meant a returning visitor with
+ * an expired token never saw the public landing page: app startup hydrates by
+ * calling /users/me, the stale token 401s, the refresh fails, and the hard
+ * `window.location` assignment bounced `/` straight to `/login`. An expired
+ * session is not a reason to hide public pages — it just means the visitor is
+ * anonymous, which is exactly what those pages are built to render.
+ *
+ * `requiresAuth` is read off the matched route rather than a path list here, so
+ * this stays correct as routes are added — the router remains the single source
+ * of truth for what is protected.
+ */
+async function _endSession() {
+  // Lazy imports: this module sits inside the router's import cycle
+  // (router → stores/auth → utils/api → this), so pulling either in at module
+  // scope would be a load-order hazard. api.ts uses the same trick for stores.
+  try {
+    const { useAuthStore } = await import('@/stores/auth')
+    // Clears the store refs as well as localStorage — dropping only the
+    // localStorage keys would leave `isAuthenticated` true against a null user,
+    // so the landing page would render the signed-in dashboard to a logged-out
+    // visitor.
+    useAuthStore().logout()
+  } catch {
+    // Pinia not active yet (very early startup) — fall back to the raw keys.
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+  }
+
+  try {
+    const { default: router } = await import('@/router')
+    const current = router.currentRoute.value
+    if (current.meta.requiresAuth && current.name !== 'login') {
+      // replace(), not window.location: a full page reload here would throw
+      // away the app we just booted only to boot it again.
+      router.replace({ name: 'login' })
+    }
+  } catch {
+    // Router unavailable — leave the visitor where they are rather than
+    // guessing. The session is cleared either way.
   }
 }
 
