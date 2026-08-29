@@ -74,7 +74,9 @@
 import { computed, nextTick, onBeforeUnmount, reactive, ref, watch } from 'vue'
 import Plotly from '@/utils/plotlyCore'
 import type { SimulationRequest, SimulationResult, TDebNode } from '@/utils/tdebApi'
-import { KELVIN_OFFSET, SOLVER_METHODS, nodeColor } from '@/utils/tdebConstants'
+import {
+  DEFAULT_SOLVER_METHOD, KELVIN_OFFSET, SOLVER_METHODS, nodeColor,
+} from '@/utils/tdebConstants'
 
 const props = defineProps<{
   nodes: Record<string, TDebNode>
@@ -95,7 +97,7 @@ const emit = defineEmits<{
 const config = reactive({
   duration: 365,
   dt: 1,
-  method: 'RK45' as SimulationRequest['method'],
+  method: DEFAULT_SOLVER_METHOD as SimulationRequest['method'],
   temperatureC: 20,
   foodDensity: 1,
 })

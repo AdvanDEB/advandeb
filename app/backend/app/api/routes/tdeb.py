@@ -24,7 +24,8 @@ from app.core.auth import get_current_user, verify_token
 from app.core.database import get_database
 from app.tdeb.core import (
     EDITABLE_SECTIONS, Edge, EdgeParams, EnvironmentParams, EquationSet,
-    KNOWN_VARS, Node, NodeParams, NodeType, SOLVER_METHODS, SimulationParams,
+    DEFAULT_METHOD, KNOWN_VARS, Node, NodeParams, NodeType, SOLVER_METHODS,
+    SimulationParams,
     Solver, StreamingRun, TransportNetwork, TransportType,
     build_template, list_templates, validate_formula,
 )
@@ -92,7 +93,7 @@ class EdgeUpdate(BaseModel):
 class SimRequest(BaseModel):
     t_end: float = 365.0
     dt_output: float = 1.0
-    method: str = "RK45"
+    method: str = DEFAULT_METHOD
     temperature: float = 293.15     # Kelvin
     food_density: float = 1.0
 
@@ -488,7 +489,7 @@ async def stream_simulation(websocket: WebSocket, model_id: str,
         sim_params = SimulationParams(
             t_end=float(config.get("t_end", 365.0)),
             dt_output=float(config.get("dt_output", 1.0)),
-            method=str(config.get("method", "RK45")),
+            method=str(config.get("method", DEFAULT_METHOD)),
         )
 
         equations = await _equation_service().build_equation_set(user["id"])

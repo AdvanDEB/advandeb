@@ -17,6 +17,7 @@ from __future__ import annotations
 import copy
 import io
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -132,20 +133,70 @@ def validate_formula(formula: str, extra_vars: Optional[List[str]] = None) -> Tu
         return False, str(e)
 
 
+def _normalize(formula: str) -> str:
+    """Collapse whitespace so trivial reformatting still matches a known default."""
+    return " ".join((formula or "").split())
+
+
+def _mm(v):
+    denom = v["X_source"] ** v["n"] + v["K_m"] ** v["n"]
+    if denom == 0:
+        return None
+    return v["V_max"] * v["T_corr"] * v["X_source"] ** v["n"] / denom
+
+
+def _regulated(v):
+    denom = v["X_source"] + v["K_m"]
+    if denom == 0:
+        return None
+    return v["V_max"] * v["T_corr"] * v["signal"] * v["s"] * v["X_source"] / denom
+
+
+def _arrhenius(v):
+    if v["T"] == 0 or v["T_ref"] == 0:
+        return None
+    return math.exp(v["T_A"] / v["T_ref"] - v["T_A"] / v["T"])
+
+
+# Native equivalents of the shipped default formulas, keyed by their exact
+# normalized text.  Interpreting these through asteval on every ODE step was 87%
+# of simulation runtime; a stiff 100-day run evaluates them millions of times.
+# The lookup is by formula string, so the moment a user edits one it stops
+# matching and transparently falls back to the interpreter — the fast path only
+# ever runs code we wrote, never anything user-supplied.
+_NATIVE_FORMULAS = {
+    "k * X_source * T_corr": lambda v: v["k"] * v["X_source"] * v["T_corr"],
+    "V_max * T_corr * X_source**n / (X_source**n + K_m**n)": _mm,
+    "max(0, k * (X_source - X_target) * T_corr)":
+        lambda v: max(0.0, v["k"] * (v["X_source"] - v["X_target"]) * v["T_corr"]),
+    "kappa * k * X_source * T_corr":
+        lambda v: v["kappa"] * v["k"] * v["X_source"] * v["T_corr"],
+    "V_max * T_corr * signal * s * X_source / (X_source + K_m)": _regulated,
+    "k * max(0, X_source - threshold) * T_corr":
+        lambda v: v["k"] * max(0.0, v["X_source"] - v["threshold"]) * v["T_corr"],
+    "k * T_corr": lambda v: v["k"] * v["T_corr"],
+    "exp(T_A / T_ref - T_A / T)": _arrhenius,
+    "maintenance_rate * X_value * T_corr":
+        lambda v: v["maintenance_rate"] * v["X_value"] * v["T_corr"],
+    "flux * eta": lambda v: v["flux"] * v["eta"],
+}
+
+
 class EquationSet:
     """
     A resolved set of formulas plus the evaluator that runs them.
 
-    One instance is built per simulation run.  It owns a single asteval
-    interpreter and a cache of parsed ASTs keyed by formula string, so a formula
-    is parsed once per run rather than once per ODE step — the same optimisation
-    the upstream code did per-edge, but shared across the whole network.
+    One instance is built per simulation run.  Unedited default formulas run
+    through native Python (see ``_NATIVE_FORMULAS``); anything the user has
+    customised falls back to asteval, whose parsed AST is cached by formula
+    string so it is parsed once per run rather than once per ODE step.
     """
 
     def __init__(self, data: Optional[Dict[str, Any]] = None):
         self.data: Dict[str, Any] = data if data is not None else load_defaults()
         self._aeval = _make_interpreter()
         self._ast_cache: Dict[str, Any] = {}
+        self._native_cache: Dict[str, Any] = {}
 
     # ── formula lookup ────────────────────────────────────────────────
 
@@ -190,6 +241,18 @@ class EquationSet:
         """
         if not formula:
             return None
+
+        # Fast path: an unedited default formula runs as native Python.
+        if formula not in self._native_cache:
+            self._native_cache[formula] = _NATIVE_FORMULAS.get(_normalize(formula))
+        native = self._native_cache[formula]
+        if native is not None:
+            try:
+                result = native(variables)
+            except (ArithmeticError, KeyError, TypeError, ValueError):
+                return None
+            return None if result is None else float(result)
+
         node = self._parse(formula)
         if node is None:
             return None

@@ -13,11 +13,12 @@ import pytest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "app", "backend"))
 
 from app.tdeb.core import (  # noqa: E402
-    EnvironmentParams, EquationSet, SimulationParams, Solver, StreamingRun,
-    TransportNetwork, TransportType, Edge, EdgeParams, NodeType,
+    DEFAULT_METHOD, EnvironmentParams, EquationSet, SimulationParams, Solver,
+    StreamingRun, TransportNetwork, TransportType, Edge, EdgeParams, NodeType,
     build_template, extract_overrides, list_templates, load_defaults,
     merge_overrides, validate_formula,
 )
+from app.tdeb.core import equations as eqmod  # noqa: E402
 from app.tdeb.core.nodes import (  # noqa: E402
     create_food_node, create_reserve_node, create_structure_node,
 )
@@ -292,6 +293,138 @@ def test_removing_a_node_removes_its_edges():
     assert all(
         reserve.id not in (e.source_id, e.target_id) for e in net.edges.values()
     )
+
+
+# ─── Performance: stiffness and the native formula path ───────────────
+
+def _count_rhs_calls(method, t_end=100.0):
+    """Run the Daphnia template and count right-hand-side evaluations."""
+    network = build_template("daphnia_magna")
+    calls = {"n": 0}
+    original = network.derivatives
+
+    def counting(t, y, equations, env=None):
+        calls["n"] += 1
+        return original(t, y, equations, env)
+
+    network.derivatives = counting
+    result = Solver(
+        network, EquationSet(), SimulationParams(t_end=t_end, method=method)
+    ).run(EnvironmentParams())
+    assert result.success, result.message
+    return calls["n"], result
+
+
+def test_default_method_handles_stiff_templates():
+    """
+    The default solver must cope with stiff DEB networks.
+
+    The shipped organism templates are stiff — mobilisation and maintenance
+    rates differ by orders of magnitude. An explicit method needs hundreds of
+    thousands of RHS evaluations on Daphnia where an implicit one needs
+    hundreds, which is the difference between an interactive page and one that
+    appears to hang.
+    """
+    n_default, default_result = _count_rhs_calls(DEFAULT_METHOD)
+    n_explicit, explicit_result = _count_rhs_calls("RK45")
+
+    assert n_default < 10_000, (
+        f"Default solver {DEFAULT_METHOD} took {n_default:,} RHS evaluations; "
+        f"it is not coping with the stiffness."
+    )
+    assert n_default * 10 < n_explicit
+
+    # ...and it must be the *same* trajectory, not a faster wrong answer.
+    for label in default_result.to_dict()["states"]:
+        a = default_result.to_dict()["states"][label][-1]
+        b = explicit_result.to_dict()["states"][label][-1]
+        assert a == pytest.approx(b, rel=1e-4), label
+
+
+def test_every_default_formula_has_a_native_implementation():
+    """
+    The fast path must cover every shipped formula.
+
+    A default that falls through to asteval silently costs orders of magnitude
+    in the ODE inner loop, so a new or reworded default should fail here rather
+    than quietly regress simulation speed.
+    """
+    defaults = load_defaults()
+    uncovered = [
+        f"transport.{key}"
+        for key, entry in defaults["transport"].items()
+        if eqmod._normalize(entry["formula"]) not in eqmod._NATIVE_FORMULAS
+    ]
+    uncovered += [
+        section
+        for section in ("arrhenius", "maintenance", "efficiency")
+        if eqmod._normalize(defaults[section]["formula"]) not in eqmod._NATIVE_FORMULAS
+    ]
+    assert uncovered == []
+
+
+def test_native_and_interpreted_paths_agree():
+    """Native shortcuts must return exactly what asteval would have returned."""
+    variables = dict(
+        k=0.3, X_source=7.0, X_target=2.0, T_corr=1.4, V_max=13.0, K_m=0.5,
+        kappa=0.58, threshold=1.09, n=1.0, s=0.8, signal=1.0, eta=0.9,
+        T_A=6400.0, T_ref=293.15, T=300.0, maintenance_rate=1200.0,
+        X_value=0.09, flux=3.3,
+    )
+    native_table = dict(eqmod._NATIVE_FORMULAS)
+
+    eqmod._NATIVE_FORMULAS.clear()
+    try:
+        interpreted = {f: EquationSet().evaluate(f, variables) for f in native_table}
+    finally:
+        eqmod._NATIVE_FORMULAS.update(native_table)
+
+    fast = {f: EquationSet().evaluate(f, variables) for f in native_table}
+
+    for formula in native_table:
+        assert interpreted[formula] is not None, formula
+        assert fast[formula] == pytest.approx(interpreted[formula], rel=1e-12), formula
+
+
+def test_edited_formula_falls_back_to_the_interpreter():
+    """
+    Editing a formula must change the result.
+
+    If the fast path were keyed on anything looser than the exact formula text,
+    a user's edit could be silently ignored and they would be shown results from
+    the default law instead.
+    """
+    edited = EquationSet(merge_overrides(
+        {"transport": {"kappa_split": {"formula": "0.5 * kappa * k * X_source * T_corr"}}}
+    ))
+    assert edited.evaluate(
+        edited.transport_formula("kappa_split"),
+        {"kappa": 2.0, "k": 3.0, "X_source": 5.0, "T_corr": 1.0},
+    ) == pytest.approx(15.0)
+
+    default = EquationSet()
+    assert default.evaluate(
+        default.transport_formula("kappa_split"),
+        {"kappa": 2.0, "k": 3.0, "X_source": 5.0, "T_corr": 1.0},
+    ) == pytest.approx(30.0)
+
+
+def test_native_path_survives_reformatting_but_not_rewriting():
+    """Whitespace changes still hit the fast path; a real edit must not."""
+    eqs = EquationSet()
+    assert eqs.evaluate("k  *   X_source * T_corr", {"k": 2.0, "X_source": 3.0, "T_corr": 4.0}) \
+        == pytest.approx(24.0)
+    assert eqs.evaluate("k * X_source * T_corr * 2", {"k": 2.0, "X_source": 3.0, "T_corr": 4.0}) \
+        == pytest.approx(48.0)
+
+
+def test_native_division_guard_matches_interpreter():
+    """A zero denominator degrades to None rather than raising."""
+    eqs = EquationSet()
+    assert eqs.evaluate(
+        eqs.transport_formula("michaelis_menten"),
+        {"V_max": 1.0, "T_corr": 1.0, "X_source": 0.0, "K_m": 0.0, "n": 1.0},
+    ) is None
 
 
 # ─── Streaming ────────────────────────────────────────────────────────

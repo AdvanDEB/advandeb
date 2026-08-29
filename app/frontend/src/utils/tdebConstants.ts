@@ -66,13 +66,23 @@ export const TRANSPORT_TYPES: { value: TransportTypeId; label: string }[] = [
   { value: 'custom', label: 'Custom formula' },
 ]
 
+/**
+ * Solver methods, stiff-capable first.
+ *
+ * DEB transport networks are routinely stiff, and the explicit Runge–Kutta
+ * methods grind on them — RK45 needs ~400x the right-hand-side evaluations of
+ * LSODA on the Daphnia template for the same trajectory. LSODA leads because it
+ * switches between non-stiff and stiff internally.
+ */
 export const SOLVER_METHODS: { value: SolverMethod; label: string }[] = [
-  { value: 'RK45', label: 'RK45 (Runge–Kutta)' },
-  { value: 'RK23', label: 'RK23' },
-  { value: 'Radau', label: 'Radau (stiff)' },
+  { value: 'LSODA', label: 'LSODA (auto stiff/non-stiff)' },
   { value: 'BDF', label: 'BDF (stiff)' },
-  { value: 'LSODA', label: 'LSODA (auto)' },
+  { value: 'Radau', label: 'Radau (stiff)' },
+  { value: 'RK45', label: 'RK45 (Runge–Kutta, non-stiff)' },
+  { value: 'RK23', label: 'RK23 (non-stiff)' },
 ]
+
+export const DEFAULT_SOLVER_METHOD: SolverMethod = 'LSODA'
 
 /** Plot series colours, cycled in order. */
 export const PLOT_COLORS = [
