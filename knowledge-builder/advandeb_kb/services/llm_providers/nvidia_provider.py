@@ -10,7 +10,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List, Optional
 
-from advandeb_kb.services.llm_providers.base import ProviderError
+from advandeb_kb.services.llm_providers.base import ProviderAuthError, ProviderError
 from advandeb_kb.services.llm_providers.openai_provider import OpenAIProvider, _to_openai_messages
 
 logger = logging.getLogger(__name__)
@@ -79,9 +79,48 @@ class NvidiaProvider(OpenAIProvider):
             raise
 
     async def list_models(self) -> List[str]:
-        # NIM doesn't expose a compatible /models route; return known list.
-        return list(self.available_models)
+        """Live catalog from NIM, with the curated list as a fallback.
+
+        NIM *does* serve ``GET /v1/models`` — but it is **unauthenticated**
+        (verified: 200 with ~80 entries even with no Authorization header), so
+        this can never double as key validation the way it does for the OpenAI
+        base class. See ``validate()``.
+
+        Still worth fetching live: the curated ``available_models`` list is
+        stale (it names models this account gets a 404 for), and the live
+        catalog gives the picker real options. Any failure falls back.
+        """
+        try:
+            return await super().list_models()
+        except (ProviderAuthError, ProviderError):
+            logger.warning(
+                "nvidia: /models unavailable — falling back to the curated list"
+            )
+            return list(self.available_models)
 
     async def validate(self) -> bool:
-        # Can't enumerate models live; trust the key format as a proxy.
-        return bool(self._api_key)
+        """Prove the key works with a minimal authenticated completion.
+
+        ``/v1/models`` is unauthenticated on NIM, so the base implementation's
+        "a successful list call proves the key works" is false here — it
+        accepted any non-empty string. ``/chat/completions`` is the endpoint
+        that actually checks credentials: a bad key gets
+        ``403 Authorization failed``.
+        """
+        try:
+            await self.chat_completion(
+                model=self.default_model,
+                messages=[{"role": "user", "content": "ping"}],
+                max_tokens=1,
+                temperature=0.0,
+            )
+        except ProviderAuthError:
+            raise
+        except ProviderError as exc:
+            # The OpenAI SDK surfaces 403 as PermissionDeniedError, which the
+            # base class maps to a plain ProviderError — re-classify so callers
+            # can tell "bad key" from "NIM is having a moment".
+            if str(getattr(exc, "code", "")) in ("401", "403"):
+                raise ProviderAuthError(str(exc), self.provider_name) from None
+            raise
+        return True

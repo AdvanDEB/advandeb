@@ -14,7 +14,7 @@ from app.core.auth import get_current_user
 from app.core.config import settings
 from app.core.limiter import limiter
 from app.models.llm_key import LLMKey, LLMKeyCreate
-from app.services.llm_key_service import LLMKeyService
+from app.services.llm_key_service import BYOK_PROVIDER_NAMES, LLMKeyService
 
 router = APIRouter()
 
@@ -33,11 +33,13 @@ async def list_supported_providers(current_user: dict = Depends(get_current_user
 
     Used by the UI to populate the provider/model pickers. Excludes ``ollama``
     (local, no key to store) — only key-bearing providers are listed.
+
+    Filtered through the same allow-list ``create_key`` enforces, so the picker
+    can never offer a provider that POST would reject with a 422.
     """
     from advandeb_kb.services.llm_providers import list_providers
 
-    byok = {"anthropic", "openai", "gemini", "github_models", "nvidia"}
-    return [p for p in list_providers() if p["name"] in byok]
+    return [p for p in list_providers() if p["name"] in BYOK_PROVIDER_NAMES]
 
 
 @router.get("", response_model=List[LLMKey])

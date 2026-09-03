@@ -5,7 +5,8 @@ Storage layout (collection ``user_llm_keys`` in the app MongoDB):
     {
         _id:            ObjectId,
         user_id:        str   (str(ObjectId) of the owning user),
-        provider:       str   ("anthropic" | "openai" | "gemini" | "github_models"),
+        provider:       str   ("anthropic" | "openai" | "gemini" | "github_models"
+                               | "nvidia"),
         credential_type:str   ("api_key" | "oauth"),
         label:          str | None,
         default_model:  str | None,
@@ -49,7 +50,15 @@ logger = logging.getLogger(__name__)
 
 # Provider names exposed via BYOK. Ollama is intentionally excluded —
 # it is a local provider with no key to store.
-_BYOK_PROVIDER_NAMES = {"anthropic", "openai", "gemini", "github_models"}
+#
+# This is the SINGLE source of truth: the /providers route filters its catalog
+# through this same set, so what the UI offers and what create_key() accepts
+# cannot drift apart. (They did once: the picker offered "nvidia" while this
+# allow-list omitted it, so every NVIDIA key was rejected with a 422.)
+BYOK_PROVIDER_NAMES = {"anthropic", "openai", "gemini", "github_models", "nvidia"}
+
+#: Backwards-compatible private alias.
+_BYOK_PROVIDER_NAMES = BYOK_PROVIDER_NAMES
 
 
 def _pick_default_model(
@@ -129,10 +138,14 @@ class LLMKeyService:
             )
 
         # 2. Round-trip the key through the provider so we never store junk.
-        #    list_models() is an authenticated call, so it doubles as validation
-        #    while also telling us which models the key can actually use.
+        #    validate() is the authoritative check — do NOT assume list_models()
+        #    implies it. NVIDIA NIM serves GET /v1/models with no Authorization
+        #    header at all, so for that provider a catalog fetch succeeds for any
+        #    string and junk keys were being stored, failing only later at chat
+        #    time. Each provider's validate() knows what actually authenticates.
         try:
             provider_instance = get_provider(provider, api_key=api_key)
+            await provider_instance.validate()
             models = await provider_instance.list_models()
         except ProviderAuthError as exc:
             # Sanitised message — never include the plaintext key.
