@@ -130,13 +130,16 @@ class OpenAIProvider(BaseLLMProvider):
         return resp.model_dump()
 
     async def _create_with_retry(self, call_kwargs: Dict[str, Any], *, max_retries: int = 4):
-        """Call chat.completions.create with exponential backoff on 429 / ResourceExhausted.
+        """Call chat.completions.create with exponential backoff on transient errors.
 
-        NIM worker-concurrency errors (status 429, body contains "ResourceExhausted"
-        or "limit reached") are transient — a short wait is enough to clear them.
-        Delays: 5 s, 15 s, 30 s, 60 s before giving up.
+        Two families are transient and worth retrying:
+          * NIM worker-concurrency errors (status 429, body contains
+            "ResourceExhausted" or "limit reached");
+          * upstream capacity errors (5xx, e.g. NVIDIA's 503 "Service temporarily
+            overloaded"), which clear within seconds.
+        Delays: 2 s, 5 s, 15 s, 30 s, 60 s before giving up.
         """
-        delays = [5, 15, 30, 60]
+        delays = [2, 5, 15, 30, 60]
         last_exc: Exception | None = None
 
         # First try: with reasoning_effort if configured; strip and retry once on 400.
@@ -145,7 +148,7 @@ class OpenAIProvider(BaseLLMProvider):
         except self._openai.APIStatusError as e:
             if "reasoning_effort" in call_kwargs and e.status_code == 400:
                 call_kwargs = {k: v for k, v in call_kwargs.items() if k != "reasoning_effort"}
-            elif self._is_rate_limit(e):
+            elif self._is_transient(e):
                 last_exc = e
             else:
                 raise
@@ -157,29 +160,70 @@ class OpenAIProvider(BaseLLMProvider):
                 try:
                     return await self._client.chat.completions.create(**call_kwargs)
                 except self._openai.APIStatusError as e:
-                    if not self._is_rate_limit(e):
+                    if not self._is_transient(e):
                         raise
                     last_exc = e
 
             logger.warning(
-                "%s rate-limited (ResourceExhausted); retrying in %ds", self.provider_name, delay
+                "%s transient error (%s); retrying in %ds",
+                self.provider_name, last_exc, delay,
             )
             await asyncio.sleep(delay)
             try:
                 return await self._client.chat.completions.create(**call_kwargs)
             except self._openai.APIStatusError as e:
-                if not self._is_rate_limit(e):
+                if not self._is_transient(e):
                     raise
                 last_exc = e
 
         raise last_exc  # type: ignore[misc]
 
     @staticmethod
-    def _is_rate_limit(exc: Exception) -> bool:
-        """True for 429 / ResourceExhausted / worker-limit errors."""
+    def _is_transient(exc: Exception) -> bool:
+        """True for retryable upstream errors.
+
+        Covers rate limiting (429 / ResourceExhausted / worker-limit) *and*
+        transient server-side capacity failures (500/502/503/504). NVIDIA's
+        hosted NIM endpoints return 503 "Service temporarily overloaded" under
+        load; without this the whole chat turn aborts on a blip that clears in
+        a couple of seconds.
+        """
         status = getattr(exc, "status_code", None)
         body = str(exc).lower()
-        return status == 429 or "resourceexhausted" in body or "limit reached" in body
+        if status in (429, 500, 502, 503, 504):
+            return True
+        return (
+            "resourceexhausted" in body
+            or "limit reached" in body
+            or "temporarily overloaded" in body
+            or "service unavailable" in body
+        )
+
+    async def _open_stream_with_retry(self, call_kwargs: Dict[str, Any], last_exc: Exception):
+        """Re-open a streaming completion after a transient upstream failure.
+
+        Delays: 2 s, 5 s, 15 s. Re-raises the last error as ProviderError if the
+        upstream never recovers.
+        """
+        for delay in (2, 5, 15):
+            logger.warning(
+                "%s stream transient error (%s); retrying in %ds",
+                self.provider_name, last_exc, delay,
+            )
+            await asyncio.sleep(delay)
+            try:
+                return await self._client.chat.completions.create(**call_kwargs)
+            except self._openai.APIStatusError as e:
+                if not self._is_transient(e):
+                    raise ProviderError(
+                        str(e), provider=self.provider_name, code=str(e.status_code)
+                    ) from e
+                last_exc = e
+        raise ProviderError(
+            str(last_exc),
+            provider=self.provider_name,
+            code=str(getattr(last_exc, "status_code", "")),
+        ) from last_exc
 
     async def _stream(self, call_kwargs: Dict[str, Any]) -> AsyncIterator[Dict[str, Any]]:
         call_kwargs = {**call_kwargs, "stream": True}
@@ -190,11 +234,11 @@ class OpenAIProvider(BaseLLMProvider):
             if "reasoning_effort" in call_kwargs and e.status_code == 400:
                 call_kwargs = {k: v for k, v in call_kwargs.items() if k != "reasoning_effort"}
                 stream = await self._client.chat.completions.create(**call_kwargs)
-            elif self._is_rate_limit(e):
-                # For streaming, wait once then retry (complex multi-retry not worth it).
-                logger.warning("%s stream rate-limited; waiting 15s", self.provider_name)
-                await asyncio.sleep(15)
-                stream = await self._client.chat.completions.create(**call_kwargs)
+            elif self._is_transient(e):
+                # Opening the stream is the failure point for upstream capacity
+                # blips (429 / 503). Nothing has been yielded yet, so re-opening
+                # is safe — back off and retry rather than killing the turn.
+                stream = await self._open_stream_with_retry(call_kwargs, e)
             else:
                 raise ProviderError(str(e), provider=self.provider_name, code=str(e.status_code)) from e
         try:
