@@ -95,12 +95,16 @@ class ChatService:
             from app.services.default_chat_rate_limiter import default_rate_limiter
 
             if not await default_rate_limiter.acquire():
+                # Quote the cap actually in force. This message hardcoded
+                # "40 req/min" while DEFAULT_CHAT_RPM was 5, so users were told
+                # to wait for headroom that was eight times smaller than stated.
                 yield {
                     "type": "error",
                     "detail": (
-                        "The shared AI service is temporarily rate-limited "
-                        "(40 req/min). Please wait a moment or add your own "
-                        "API key in Settings."
+                        f"The shared AI service is temporarily rate-limited "
+                        f"({settings.DEFAULT_CHAT_RPM} requests/min shared "
+                        f"across all users). Please wait a moment or add your "
+                        f"own API key in Settings."
                     ),
                 }
                 return

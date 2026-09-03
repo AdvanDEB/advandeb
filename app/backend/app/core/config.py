@@ -136,7 +136,9 @@ class Settings(BaseSettings):
     DEFAULT_CHAT_API_KEY: Optional[str] = None
     DEFAULT_CHAT_PROVIDER: str = "nvidia"
     DEFAULT_CHAT_MODEL: str = "nvidia/nemotron-3-ultra-550b-a55b"
-    DEFAULT_CHAT_RPM: int = 5
+    #: Shared across ALL users of the default key (one acquire per chat turn),
+    #: not per user. At 5 the whole site could only send five messages a minute.
+    DEFAULT_CHAT_RPM: int = 40
     
     @property
     def cors_origins_list(self) -> List[str]:
