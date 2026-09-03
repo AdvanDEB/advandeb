@@ -175,6 +175,7 @@ import type { LLMSessionConfig } from '@/types/llm'
 import api from '@/utils/api'
 import { useAuthStore } from '@/stores/auth'
 import { useChatStore } from '@/stores/chat'
+import { useChatSocket } from '@/composables/useChatSocket'
 
 const authStore = useAuthStore()
 const store = useChatStore()
@@ -197,8 +198,6 @@ const hoveredSessionId = ref<string | null>(null)
 // Item 13: pending message if session creation race
 const pendingMessage = ref<string | null>(null)
 
-let ws: WebSocket | null = null
-
 const PROVIDER_SHORT: Record<string, string> = {
   default: 'Nemotron', nvidia: 'NVIDIA',
   ollama: 'Local', anthropic: 'Claude', openai: 'ChatGPT',
@@ -218,19 +217,24 @@ onMounted(async () => {
 })
 
 onUnmounted(() => {
-  ws?.close()
+  chatSocket.close()
 })
 
-function connectWebSocket() {
-  const sessionId = store.currentSessionId
-  const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  const token = authStore.accessToken
-  const tokenParam = token ? `?token=${encodeURIComponent(token)}` : ''
-  const wsUrl = `${proto}//${window.location.host}/ws/chat/${sessionId}${tokenParam}`
-  ws = new WebSocket(wsUrl)
-
-  ws.onmessage = (event) => {
-    const data = JSON.parse(event.data) as Record<string, unknown>
+/**
+ * Socket lifecycle lives in useChatSocket, which owns the single-socket
+ * invariant, reconnect timer, and the queue-while-connecting behaviour.
+ */
+const chatSocket = useChatSocket({
+  sessionId: () => store.currentSessionId,
+  token: () => authStore.accessToken,
+  onAuthFailure: () => {
+    store.messages.push({
+      id: crypto.randomUUID(),
+      role: 'assistant',
+      content: 'Session expired. Please log in again.',
+    })
+  },
+  onEvent: (data) => {
     const result = store.handleServerEvent(data)
     if (result?.newSessionId && result.newSessionId !== store.currentSessionId) {
       const newId = result.newSessionId
@@ -257,33 +261,19 @@ function connectWebSocket() {
         nextTick(() => sendOverWs(queued))
       }
     }
-  }
+  },
+})
 
-  ws.onclose = (ev) => {
-    if (ev.code === 4401) {
-      store.messages.push({
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: 'Session expired. Please log in again.',
-      })
-      return
-    }
-    setTimeout(() => {
-      if (store.currentSessionId) connectWebSocket()
-    }, 2000)
-  }
+function connectWebSocket() {
+  chatSocket.connect()
 }
 
 function sendOverWs(text: string) {
-  if (ws?.readyState === WebSocket.OPEN) {
-    ws.send(
-      JSON.stringify({
-        type: 'user_message',
-        text,
-        llm_config: store.llmConfig || undefined,
-      }),
-    )
-  }
+  chatSocket.send({
+    type: 'user_message',
+    text,
+    llm_config: store.llmConfig || undefined,
+  })
 }
 
 async function handleSendMessage(text: string) {
@@ -352,7 +342,7 @@ async function saveSystemPrompt() {
 }
 
 function startNewSession() {
-  ws?.close()
+  chatSocket.close()
   store.currentSessionId = 'new'
   store.resetConversation()
   store.llmConfig = store.defaultLLMConfig()
@@ -362,7 +352,7 @@ function startNewSession() {
 }
 
 async function handleLoadSession(sessionId: string) {
-  ws?.close()
+  chatSocket.close()
   store.currentSessionId = sessionId
   pendingMessage.value = null
   await store.loadSession(sessionId)
