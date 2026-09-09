@@ -49,6 +49,12 @@ const router = createRouter({
     {
       path: '/models',
       name: 'models',
+      component: () => import('@/views/ModelsLibraryView.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/models/:id',
+      name: 'model-editor',
       component: () => import('@/views/ModelsView.vue'),
       meta: { requiresAuth: true }
     },

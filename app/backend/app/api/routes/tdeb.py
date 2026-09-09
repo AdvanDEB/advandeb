@@ -22,6 +22,7 @@ from pydantic import BaseModel, Field
 
 from app.core.auth import get_current_user, verify_token
 from app.core.database import get_database
+from app.core.dependencies import require_curator
 from app.tdeb.core import (
     EDITABLE_SECTIONS, Edge, EdgeParams, EnvironmentParams, EquationSet,
     DEFAULT_METHOD, KNOWN_VARS, Node, NodeParams, NodeType, SOLVER_METHODS,
@@ -30,7 +31,8 @@ from app.tdeb.core import (
     build_template, list_templates, validate_formula,
 )
 from app.tdeb.service import (
-    TDebEquationService, TDebModelNotFound, TDebModelService, TDebModelTooLarge,
+    TDebEquationService, TDebModelForbidden, TDebModelNotFound, TDebModelService,
+    TDebModelTooLarge,
 )
 
 logger = logging.getLogger(__name__)
@@ -48,11 +50,18 @@ class NetworkCreate(BaseModel):
     """Create from a template id, an imported network document, or empty."""
     template: Optional[str] = None
     network: Optional[Dict[str, Any]] = None
-    name: Optional[str] = None
+    name: Optional[str] = Field(default=None, max_length=200)
+    description: Optional[str] = Field(default=None, max_length=2000)
 
 
 class NetworkUpdate(BaseModel):
-    name: str = Field(min_length=1, max_length=200)
+    """Rename and/or re-describe a model. Omitted fields are left alone."""
+    name: Optional[str] = Field(default=None, min_length=1, max_length=200)
+    description: Optional[str] = Field(default=None, max_length=2000)
+
+
+class DuplicateRequest(BaseModel):
+    name: Optional[str] = Field(default=None, min_length=1, max_length=200)
 
 
 class NodeCreate(BaseModel):
@@ -232,7 +241,11 @@ async def create_model(payload: NetworkCreate,
         network = TransportNetwork(name=payload.name or "New model")
 
     try:
-        created = await _model_service().create(current_user["id"], network, template_id)
+        created = await _model_service().create(
+            current_user["id"], network, template_id,
+            description=payload.description or "",
+            source="template" if template_id else ("import" if payload.network else "blank"),
+        )
     except TDebModelTooLarge as exc:
         raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, str(exc))
 
@@ -246,12 +259,91 @@ async def get_model(model_id: str, current_user: dict = Depends(get_current_user
 
 
 @router.put("/models/{model_id}")
-async def rename_model(model_id: str, payload: NetworkUpdate,
-                       current_user: dict = Depends(get_current_user)) -> dict:
-    network = await _load(current_user["id"], model_id)
-    network.name = payload.name.strip()
-    saved = await _save(current_user["id"], model_id, network)
-    return _as_response(model_id, saved)
+async def update_model_metadata(model_id: str, payload: NetworkUpdate,
+                                current_user: dict = Depends(get_current_user)) -> dict:
+    """
+    Rename a model and/or update its description.
+
+    A targeted update rather than a load-modify-save of the whole network, so
+    renaming does not rewrite every node and edge.
+    """
+    if payload.name is None and payload.description is None:
+        raise HTTPException(
+            status.HTTP_422_UNPROCESSABLE_ENTITY,
+            "Provide a name and/or a description to update",
+        )
+    try:
+        return await _model_service().set_metadata(
+            current_user["id"], model_id,
+            name=payload.name.strip() if payload.name is not None else None,
+            description=payload.description if payload.description is not None else None,
+        )
+    except TDebModelNotFound:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Model not found")
+
+
+@router.post("/models/{model_id}/duplicate", status_code=status.HTTP_201_CREATED)
+async def duplicate_model(model_id: str, payload: DuplicateRequest,
+                          current_user: dict = Depends(get_current_user)) -> dict:
+    """
+    Copy a model into the caller's own library.
+
+    Works on the caller's own models and on org-published templates; anything
+    else is not visible to them and reads as not found.
+    """
+    try:
+        created = await _model_service().duplicate(
+            current_user["id"], model_id,
+            new_name=payload.name.strip() if payload.name else None,
+        )
+    except TDebModelNotFound:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Model not found")
+    except TDebModelTooLarge as exc:
+        raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, str(exc))
+    return _as_response(created["id"], created["network"])
+
+
+# ─── Org-published templates ──────────────────────────────────────────
+
+@router.get("/published")
+async def list_published_models(
+    current_user: dict = Depends(get_current_user),
+) -> List[dict]:
+    """Models a curator has published as org-wide starting templates."""
+    return await _model_service().list_published()
+
+
+@router.post("/models/{model_id}/publish")
+async def publish_model(model_id: str,
+                        current_user: dict = Depends(require_curator)) -> dict:
+    """
+    Publish one of your own models as an org-wide starting template.
+
+    Curator or administrator only, and only over a model you own — the role
+    grants the right to publish, not the right to publish someone else's work.
+    """
+    try:
+        return await _model_service().publish(current_user["id"], model_id)
+    except TDebModelNotFound:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Model not found")
+    except TDebModelForbidden:
+        raise HTTPException(
+            status.HTTP_403_FORBIDDEN, "You can only publish models you own"
+        )
+
+
+@router.delete("/models/{model_id}/publish")
+async def unpublish_model(model_id: str,
+                          current_user: dict = Depends(require_curator)) -> dict:
+    """Withdraw a published template. Copies others already made are untouched."""
+    try:
+        return await _model_service().unpublish(current_user["id"], model_id)
+    except TDebModelNotFound:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Model not found")
+    except TDebModelForbidden:
+        raise HTTPException(
+            status.HTTP_403_FORBIDDEN, "You can only unpublish models you own"
+        )
 
 
 @router.delete("/models/{model_id}")

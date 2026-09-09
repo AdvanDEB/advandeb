@@ -36,7 +36,11 @@ MAX_EDGES = 400
 
 
 class TDebModelNotFound(Exception):
-    """Raised when a model id does not exist or is not owned by the caller."""
+    """Raised when a model id does not exist or is not visible to the caller."""
+
+
+class TDebModelForbidden(Exception):
+    """Raised when a caller may see a model but not perform this action on it."""
 
 
 class TDebModelTooLarge(Exception):
@@ -68,17 +72,39 @@ class TDebModelService:
             )
 
     @staticmethod
-    def _to_summary(doc: dict) -> dict:
+    def _to_summary(doc: dict, owner_email: Optional[str] = None) -> dict:
         network = doc.get("network") or {}
+        published = doc.get("published")
         return {
             "id": str(doc["_id"]),
             "name": network.get("name") or "Untitled",
+            "description": doc.get("description") or "",
             "n_nodes": len(network.get("nodes") or {}),
             "n_edges": len(network.get("edges") or {}),
             "template_id": doc.get("template_id"),
+            "source": doc.get("source") or "template",
             "created_at": doc.get("created_at"),
             "updated_at": doc.get("updated_at"),
+            "is_published": bool(published),
+            "published_at": (published or {}).get("at"),
+            "owner_email": owner_email,
         }
+
+    async def _owner_emails(self, owner_ids) -> Dict[str, str]:
+        """Map owner id -> email, for attributing published templates."""
+        unique = {oid for oid in owner_ids if oid}
+        if not unique:
+            return {}
+        object_ids = []
+        for oid in unique:
+            try:
+                object_ids.append(ObjectId(oid))
+            except (InvalidId, TypeError):
+                continue
+        if not object_ids:
+            return {}
+        cursor = get_database().users.find({"_id": {"$in": object_ids}}, {"email": 1})
+        return {str(u["_id"]): u.get("email", "") async for u in cursor}
 
     async def list_models(self, user_id: str, limit: int = 100) -> List[dict]:
         """Every model owned by ``user_id``, newest first."""
@@ -90,13 +116,17 @@ class TDebModelService:
         return [self._to_summary(doc) async for doc in cursor]
 
     async def create(self, user_id: str, network: TransportNetwork,
-                     template_id: Optional[str] = None) -> dict:
+                     template_id: Optional[str] = None,
+                     description: str = "",
+                     source: str = "template") -> dict:
         """Persist a new network and return ``{id, network}``."""
         self._check_size(network)
         now = datetime.now(timezone.utc)
         doc = {
             "owner_id": user_id,
             "template_id": template_id,
+            "description": description,
+            "source": source,
             "network": network.to_dict(),
             "created_at": now,
             "updated_at": now,
@@ -130,12 +160,99 @@ class TDebModelService:
             raise TDebModelNotFound(model_id)
         return payload
 
+    async def set_metadata(self, user_id: str, model_id: str, *,
+                           name: Optional[str] = None,
+                           description: Optional[str] = None) -> dict:
+        """Rename a model and/or update its description."""
+        updates: Dict[str, Any] = {"updated_at": datetime.now(timezone.utc)}
+        if name is not None:
+            updates["network.name"] = name
+        if description is not None:
+            updates["description"] = description
+
+        result = await self.collection.update_one(
+            {"_id": _oid(model_id), "owner_id": user_id}, {"$set": updates}
+        )
+        if result.matched_count == 0:
+            raise TDebModelNotFound(model_id)
+        doc = await self.collection.find_one({"_id": _oid(model_id)})
+        return self._to_summary(doc)
+
+    async def duplicate(self, user_id: str, model_id: str,
+                        new_name: Optional[str] = None) -> dict:
+        """
+        Copy a model into ``user_id``'s library.
+
+        The source may be the caller's own model or one published as an org
+        template; anything else is invisible to them and reads as not found.
+        """
+        doc = await self.collection.find_one({
+            "_id": _oid(model_id),
+            "$or": [{"owner_id": user_id}, {"published": {"$ne": None}}],
+        })
+        if not doc:
+            raise TDebModelNotFound(model_id)
+
+        network = TransportNetwork.from_dict(doc.get("network") or {})
+        network.name = new_name or f"{network.name} (copy)"
+
+        return await self.create(
+            user_id, network,
+            template_id=doc.get("template_id"),
+            description=doc.get("description") or "",
+            # A copy is never itself published — publishing is a separate,
+            # curator-only act on the copy.
+            source="published" if doc.get("published") else "copy",
+        )
+
     async def delete(self, user_id: str, model_id: str) -> None:
         result = await self.collection.delete_one(
             {"_id": _oid(model_id), "owner_id": user_id}
         )
         if result.deleted_count == 0:
             raise TDebModelNotFound(model_id)
+
+    # ── Org-published templates ───────────────────────────────────────
+
+    async def list_published(self) -> List[dict]:
+        """Models published as org-wide starting templates, newest first."""
+        docs = [d async for d in self.collection.find({"published": {"$ne": None}})
+                .sort("published.at", -1).limit(200)]
+        emails = await self._owner_emails([d.get("owner_id") for d in docs])
+        return [self._to_summary(d, emails.get(d.get("owner_id"))) for d in docs]
+
+    async def publish(self, user_id: str, model_id: str) -> dict:
+        """
+        Publish one of the caller's own models as an org-wide template.
+
+        Callers must already have passed the curator check at the route; this
+        additionally requires ownership, so a curator cannot publish someone
+        else's private model out from under them.
+        """
+        doc = await self.collection.find_one({"_id": _oid(model_id)})
+        if not doc:
+            raise TDebModelNotFound(model_id)
+        if doc.get("owner_id") != user_id:
+            raise TDebModelForbidden(model_id)
+
+        await self.collection.update_one(
+            {"_id": _oid(model_id)},
+            {"$set": {"published": {"at": datetime.now(timezone.utc), "by": user_id}}},
+        )
+        return self._to_summary(await self.collection.find_one({"_id": _oid(model_id)}))
+
+    async def unpublish(self, user_id: str, model_id: str) -> dict:
+        """Withdraw a published template. Existing copies are unaffected."""
+        doc = await self.collection.find_one({"_id": _oid(model_id)})
+        if not doc:
+            raise TDebModelNotFound(model_id)
+        if doc.get("owner_id") != user_id:
+            raise TDebModelForbidden(model_id)
+
+        await self.collection.update_one(
+            {"_id": _oid(model_id)}, {"$set": {"published": None}}
+        )
+        return self._to_summary(await self.collection.find_one({"_id": _oid(model_id)}))
 
 
 class TDebEquationService:
@@ -188,6 +305,14 @@ async def ensure_tdeb_indexes(app_db) -> None:
         [("owner_id", 1), ("updated_at", -1)],
         background=True,
         name="tdeb_models_owner_updated",
+    )
+    # Serves the published-template listing, which filters on `published` and
+    # sorts by when it was published.
+    await app_db[MODELS_COLLECTION].create_index(
+        [("published.at", -1)],
+        background=True,
+        sparse=True,
+        name="tdeb_models_published_at",
     )
     await app_db[EQUATIONS_COLLECTION].create_index(
         "user_id", unique=True, background=True, name="tdeb_equations_user",

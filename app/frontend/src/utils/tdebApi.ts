@@ -78,11 +78,18 @@ export interface TDebNetwork {
 export interface TDebModelSummary {
   id: string
   name: string
+  description: string
   n_nodes: number
   n_edges: number
   template_id: string | null
+  /** How the model came to exist: template | import | blank | copy | published. */
+  source: string
   created_at: string
   updated_at: string
+  is_published: boolean
+  published_at: string | null
+  /** Only populated for published templates, to attribute them. */
+  owner_email: string | null
 }
 
 export interface TDebTemplate {
@@ -158,6 +165,7 @@ export async function createModel(payload: {
   template?: string
   network?: unknown
   name?: string
+  description?: string
 }): Promise<TDebNetwork> {
   const { data } = await api.post<TDebNetwork>(`${BASE}/models`, payload)
   return data
@@ -168,8 +176,38 @@ export async function getModel(modelId: string): Promise<TDebNetwork> {
   return data
 }
 
-export async function renameModel(modelId: string, name: string): Promise<TDebNetwork> {
-  const { data } = await api.put<TDebNetwork>(`${BASE}/models/${modelId}`, { name })
+/** Rename and/or re-describe a model. Omitted fields are left untouched. */
+export async function updateModelMetadata(
+  modelId: string, changes: { name?: string; description?: string },
+): Promise<TDebModelSummary> {
+  const { data } = await api.put<TDebModelSummary>(`${BASE}/models/${modelId}`, changes)
+  return data
+}
+
+/** Copy a model — your own, or an org-published template — into your library. */
+export async function duplicateModel(
+  modelId: string, name?: string,
+): Promise<TDebNetwork> {
+  const { data } = await api.post<TDebNetwork>(
+    `${BASE}/models/${modelId}/duplicate`, name ? { name } : {},
+  )
+  return data
+}
+
+/** Models a curator has published as org-wide starting templates. */
+export async function listPublished(): Promise<TDebModelSummary[]> {
+  const { data } = await api.get<TDebModelSummary[]>(`${BASE}/published`)
+  return data
+}
+
+/** Publish one of your own models org-wide. Curator/administrator only. */
+export async function publishModel(modelId: string): Promise<TDebModelSummary> {
+  const { data } = await api.post<TDebModelSummary>(`${BASE}/models/${modelId}/publish`)
+  return data
+}
+
+export async function unpublishModel(modelId: string): Promise<TDebModelSummary> {
+  const { data } = await api.delete<TDebModelSummary>(`${BASE}/models/${modelId}/publish`)
   return data
 }
 

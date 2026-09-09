@@ -2,10 +2,9 @@
   <div class="models-view">
     <!-- ── Header ── -->
     <header class="page-header">
-      <div class="header-left">
-        <h1>Models</h1>
-        <span class="subtitle">tDEB — transport-network energy budgets</span>
-      </div>
+      <router-link :to="{ name: 'models' }" class="back-link" title="Back to your models">
+        ← Models
+      </router-link>
 
       <input
         v-if="network"
@@ -18,10 +17,21 @@
         @keydown.esc="resetName"
       />
 
+      <span class="save-status" :class="saveStatus.kind" :title="saveStatus.title">
+        {{ saveStatus.label }}
+      </span>
+
       <div class="header-actions">
-        <button class="btn-ghost" @click="openPicker">＋ New / Open</button>
+        <button class="btn-ghost" :disabled="!network" @click="duplicateCurrent">
+          ⧉ Save as copy
+        </button>
+        <button
+          v-if="canPublish"
+          class="btn-ghost"
+          :disabled="!network"
+          @click="togglePublish"
+        >{{ isPublished ? '⊗ Unpublish' : '⇧ Publish' }}</button>
         <button class="btn-ghost" :disabled="!network" @click="exportJson">↓ Export</button>
-        <button class="btn-ghost" @click="importJson">↑ Import</button>
         <button class="btn-ghost" :disabled="!result?.success" @click="exportLatex">
           LaTeX
         </button>
@@ -124,18 +134,6 @@
       </section>
     </div>
 
-    <TemplatePicker
-      v-if="showPicker"
-      :templates="templates"
-      :saved-models="savedModels"
-      :loading="pickerLoading"
-      :error="pickerError"
-      @close="showPicker = false"
-      @create="createFromTemplate"
-      @open="openModel"
-      @delete="removeModel"
-    />
-
     <AddNodeDialog
       v-if="showAddNode"
       @close="showAddNode = false"
@@ -146,19 +144,20 @@
 
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import AddNodeDialog from '@/components/tdeb/AddNodeDialog.vue'
 import ElementInspector from '@/components/tdeb/ElementInspector.vue'
 import EquationsPanel from '@/components/tdeb/EquationsPanel.vue'
 import NetworkCanvas from '@/components/tdeb/NetworkCanvas.vue'
 import ResultsPanel from '@/components/tdeb/ResultsPanel.vue'
 import SimulationPanel from '@/components/tdeb/SimulationPanel.vue'
-import TemplatePicker from '@/components/tdeb/TemplatePicker.vue'
+import { useAuthStore } from '@/stores/auth'
 import { useNotificationsStore } from '@/stores/notifications'
 import * as tdeb from '@/utils/tdebApi'
 import type {
   EquationDocument, NodeTypeId, SimulationRequest, SimulationResult,
-  StreamSnapshot, TDebEdge, TDebEdgeParams, TDebModelSummary, TDebNetwork,
-  TDebNode, TDebTemplate, TransportTypeId,
+  StreamSnapshot, TDebEdge, TDebEdgeParams, TDebNetwork, TDebNode,
+  TransportTypeId,
 } from '@/utils/tdebApi'
 import { nodeColor } from '@/utils/tdebConstants'
 import { buildLatexBundle } from '@/utils/tdebLatex'
@@ -178,22 +177,78 @@ const simPanelRef = ref<InstanceType<typeof SimulationPanel> | null>(null)
 const resultsRef = ref<InstanceType<typeof ResultsPanel> | null>(null)
 const equationsRef = ref<InstanceType<typeof EquationsPanel> | null>(null)
 
+const route = useRoute()
+const router = useRouter()
+const auth = useAuthStore()
+
 const modelId = ref<string | null>(null)
 const network = ref<TDebNetwork | null>(null)
 const equations = ref<EquationDocument | null>(null)
-const templates = ref<TDebTemplate[]>([])
-const savedModels = ref<TDebModelSummary[]>([])
 
 const modelName = ref('')
 const activeTab = ref<TabId>('params')
 const selected = ref<{ type: 'node' | 'edge'; id: string } | null>(null)
 const edgeMode = ref(false)
-const showPicker = ref(false)
 const showAddNode = ref(false)
-const pickerLoading = ref(false)
-const pickerError = ref('')
 const loadError = ref('')
 const formulaError = ref('')
+const isPublished = ref(false)
+
+// Publishing is a curator/administrator act — mirrors require_curator on the API.
+const canPublish = computed(() =>
+  auth.hasRole('administrator') || auth.hasRole('knowledge_curator'))
+
+// ─── Save tracking ───────────────────────────────────────────────────
+// Every edit persists immediately. That is only trustworthy if the user can
+// see it happening, so each write goes through `tracked()` and the header
+// reports the result rather than leaving saving invisible.
+type SaveKind = 'idle' | 'saving' | 'saved' | 'error'
+const saveKind = ref<SaveKind>('idle')
+const savedAt = ref<number | null>(null)
+const now = ref(Date.now())
+let pendingWrites = 0
+let clockTimer: number | null = null
+
+async function tracked<T>(operation: () => Promise<T>): Promise<T> {
+  pendingWrites += 1
+  saveKind.value = 'saving'
+  try {
+    const outcome = await operation()
+    pendingWrites -= 1
+    // Only settle to "saved" once nothing else is still in flight, so a burst
+    // of edits does not flicker between saving and saved.
+    if (pendingWrites === 0) {
+      saveKind.value = 'saved'
+      savedAt.value = Date.now()
+    }
+    return outcome
+  } catch (err) {
+    pendingWrites = Math.max(0, pendingWrites - 1)
+    saveKind.value = 'error'
+    throw err
+  }
+}
+
+const saveStatus = computed(() => {
+  if (saveKind.value === 'saving') {
+    return { kind: 'saving', label: 'Saving…', title: 'Writing your changes' }
+  }
+  if (saveKind.value === 'error') {
+    return {
+      kind: 'error',
+      label: 'Not saved',
+      title: 'The last change could not be saved. Check your connection and try again.',
+    }
+  }
+  if (saveKind.value === 'saved' && savedAt.value !== null) {
+    const seconds = Math.max(0, Math.round((now.value - savedAt.value) / 1000))
+    const when = seconds < 5 ? 'just now'
+      : seconds < 60 ? `${seconds}s ago`
+      : `${Math.round(seconds / 60)}m ago`
+    return { kind: 'saved', label: `Saved ${when}`, title: 'All changes are stored' }
+  }
+  return { kind: 'idle', label: 'Saved', title: 'No changes since this model was opened' }
+})
 
 const running = ref(false)
 const streaming = ref(false)
@@ -225,25 +280,6 @@ function errorMessage(err: unknown, fallback: string): string {
 
 // ─── Loading ─────────────────────────────────────────────────────────
 
-async function refreshPickerData() {
-  pickerLoading.value = true
-  pickerError.value = ''
-  try {
-    const [t, m] = await Promise.all([tdeb.listTemplates(), tdeb.listModels()])
-    templates.value = t
-    savedModels.value = m
-  } catch (err) {
-    pickerError.value = errorMessage(err, 'Could not load templates.')
-  } finally {
-    pickerLoading.value = false
-  }
-}
-
-function openPicker() {
-  showPicker.value = true
-  refreshPickerData()
-}
-
 function adoptNetwork(net: TDebNetwork, id: string) {
   modelId.value = id
   network.value = net
@@ -253,45 +289,28 @@ function adoptNetwork(net: TDebNetwork, id: string) {
   result.value = null
   simError.value = ''
   progress.value = null
+  saveKind.value = 'idle'
+  savedAt.value = null
   // Wait for the canvas to render the new nodes before framing them.
   requestAnimationFrame(() => canvasRef.value?.fitToView())
 }
 
-async function createFromTemplate(templateId: string | null) {
-  showPicker.value = false
-  loadError.value = ''
-  try {
-    const net = templateId
-      ? await tdeb.createModel({ template: templateId })
-      : await tdeb.createModel({ name: 'New model' })
-    adoptNetwork(net, net.id)
-  } catch (err) {
-    loadError.value = errorMessage(err, 'Could not create the model.')
-  }
-}
-
-async function openModel(id: string) {
-  showPicker.value = false
+async function loadModel(id: string) {
   loadError.value = ''
   try {
     adoptNetwork(await tdeb.getModel(id), id)
   } catch (err) {
-    loadError.value = errorMessage(err, 'Could not open the model.')
+    loadError.value = errorMessage(err, 'Could not open this model.')
+    return
   }
-}
-
-async function removeModel(id: string) {
-  if (!window.confirm('Delete this model permanently?')) return
+  // Publish state is not carried on the network document. Only curators can act
+  // on it, so only they pay the extra request to find out.
+  if (!canPublish.value) return
   try {
-    await tdeb.deleteModel(id)
-    savedModels.value = savedModels.value.filter(m => m.id !== id)
-    if (modelId.value === id) {
-      modelId.value = null
-      network.value = null
-      modelName.value = ''
-    }
-  } catch (err) {
-    notifications.error(errorMessage(err, 'Could not delete the model.'))
+    isPublished.value =
+      (await tdeb.listModels()).find(m => m.id === id)?.is_published ?? false
+  } catch {
+    isPublished.value = false
   }
 }
 
@@ -303,12 +322,44 @@ async function commitRename() {
     return
   }
   try {
-    const updated = await tdeb.renameModel(modelId.value, next)
+    const updated = await tracked(() =>
+      tdeb.updateModelMetadata(modelId.value!, { name: next }))
     network.value.name = updated.name
     modelName.value = updated.name
   } catch (err) {
     modelName.value = network.value.name
     notifications.error(errorMessage(err, 'Could not rename the model.'))
+  }
+}
+
+/** Fork the current model into a fresh copy and open it. */
+async function duplicateCurrent() {
+  if (!modelId.value) return
+  try {
+    const copy = await tdeb.duplicateModel(modelId.value)
+    notifications.success('Copy created.')
+    router.push({ name: 'model-editor', params: { id: copy.id } })
+  } catch (err) {
+    notifications.error(errorMessage(err, 'Could not copy this model.'))
+  }
+}
+
+async function togglePublish() {
+  if (!modelId.value) return
+  const publishing = !isPublished.value
+  if (publishing && !window.confirm(
+    `Publish "${modelName.value}" as a shared template? Everyone will be able to `
+    + `copy it into their own models.`)) return
+  try {
+    const updated = publishing
+      ? await tdeb.publishModel(modelId.value)
+      : await tdeb.unpublishModel(modelId.value)
+    isPublished.value = updated.is_published
+    notifications.success(publishing
+      ? 'Published as a shared template.'
+      : 'Withdrawn from shared templates.')
+  } catch (err) {
+    notifications.error(errorMessage(err, 'Could not change the published state.'))
   }
 }
 
@@ -347,7 +398,7 @@ function onNodeMoveEnd({ id, x, y }: { id: string; x: number; y: number }) {
   if (movePersistTimer !== null) window.clearTimeout(movePersistTimer)
   movePersistTimer = window.setTimeout(() => {
     movePersistTimer = null
-    tdeb.updateNode(modelId.value!, id, { x, y }).catch(() => {
+    tracked(() => tdeb.updateNode(modelId.value!, id, { x, y })).catch(() => {
       // A dropped position update is cosmetic; the next edit will carry it.
     })
   }, 250)
@@ -360,12 +411,12 @@ async function onAddNode(payload: {
   if (!modelId.value) return
   try {
     // Drop new compartments into open space near the middle of the canvas.
-    const node = await tdeb.addNode(modelId.value, {
+    const node = await tracked(() => tdeb.addNode(modelId.value!, {
       ...payload,
       x: 200 + Math.random() * 380,
       y: 120 + Math.random() * 280,
       color: nodeColor(payload.node_type),
-    })
+    }))
     if (network.value) network.value.nodes[node.id] = node
     selectNode(node.id)
   } catch (err) {
@@ -377,12 +428,12 @@ async function onConnect({ sourceId, targetId }: { sourceId: string; targetId: s
   edgeMode.value = false
   if (!modelId.value) return
   try {
-    const edge = await tdeb.addEdge(modelId.value, {
+    const edge = await tracked(() => tdeb.addEdge(modelId.value!, {
       source_id: sourceId,
       target_id: targetId,
       name: 'transport',
       transport_type: 'linear',
-    })
+    }))
     if (network.value) network.value.edges[edge.id] = edge
     selectEdge(edge.id)
   } catch (err) {
@@ -396,7 +447,8 @@ async function onUpdateNode(payload: {
 }) {
   if (!modelId.value || !selectedNode.value) return
   try {
-    const updated = await tdeb.updateNode(modelId.value, selectedNode.value.id, payload)
+    const updated = await tracked(() =>
+      tdeb.updateNode(modelId.value!, selectedNode.value!.id, payload))
     if (network.value) network.value.nodes[updated.id] = updated
   } catch (err) {
     notifications.error(errorMessage(err, 'Could not update the compartment.'))
@@ -408,9 +460,8 @@ async function onUpdateEdge(payload: {
 }) {
   if (!modelId.value || !selectedEdge.value) return
   try {
-    const updated: TDebEdge = await tdeb.updateEdge(
-      modelId.value, selectedEdge.value.id, payload,
-    )
+    const updated: TDebEdge = await tracked(() =>
+      tdeb.updateEdge(modelId.value!, selectedEdge.value!.id, payload))
     if (network.value) network.value.edges[updated.id] = updated
     formulaError.value = updated.formula_error ?? ''
   } catch (err) {
@@ -423,7 +474,7 @@ async function deleteSelected() {
   const { type, id } = selected.value
   try {
     if (type === 'node') {
-      await tdeb.deleteNode(modelId.value, id)
+      await tracked(() => tdeb.deleteNode(modelId.value!, id))
       // The server removes attached channels too; mirror that locally.
       for (const [eid, edge] of Object.entries(network.value.edges)) {
         if (edge.source_id === id || edge.target_id === id) {
@@ -432,7 +483,7 @@ async function deleteSelected() {
       }
       delete network.value.nodes[id]
     } else {
-      await tdeb.deleteEdge(modelId.value, id)
+      await tracked(() => tdeb.deleteEdge(modelId.value!, id))
       delete network.value.edges[id]
     }
     selected.value = null
@@ -603,24 +654,6 @@ async function exportJson() {
   }
 }
 
-function importJson() {
-  const input = document.createElement('input')
-  input.type = 'file'
-  input.accept = '.json,application/json'
-  input.onchange = async () => {
-    const file = input.files?.[0]
-    if (!file) return
-    try {
-      const doc = JSON.parse(await file.text())
-      const net = await tdeb.createModel({ network: doc })
-      adoptNetwork(net, net.id)
-    } catch (err) {
-      notifications.error(errorMessage(err, 'Could not import that file.'))
-    }
-  }
-  input.click()
-}
-
 /** Bundle equations, the network diagram and result charts as a LaTeX zip. */
 async function exportLatex() {
   if (!result.value?.success || !network.value) return
@@ -646,24 +679,28 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key !== 'Escape') return
   if (edgeMode.value) edgeMode.value = false
   else if (showAddNode.value) showAddNode.value = false
-  else if (showPicker.value) showPicker.value = false
 }
 
 onMounted(async () => {
   window.addEventListener('keydown', onKeydown)
+  // Keep "Saved 2m ago" honest without a timer per component instance.
+  clockTimer = window.setInterval(() => { now.value = Date.now() }, 15_000)
   await loadEquations()
-  await refreshPickerData()
-  // Reopen the most recent model rather than dropping the user on a blank
-  // canvas; with nothing saved, offer the picker instead.
-  const latest = savedModels.value[0]
-  if (latest) await openModel(latest.id)
-  else showPicker.value = true
+  const id = String(route.params.id || '')
+  if (id) await loadModel(id)
+  else router.replace({ name: 'models' })
+})
+
+// Support navigating straight from one model to another without a remount.
+watch(() => route.params.id, (id) => {
+  if (id && String(id) !== modelId.value) loadModel(String(id))
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', onKeydown)
   stopStream()
   if (movePersistTimer !== null) window.clearTimeout(movePersistTimer)
+  if (clockTimer !== null) window.clearInterval(clockTimer)
 })
 
 // Re-render the equations tab whenever the model changes shape.
@@ -688,9 +725,30 @@ watch(() => activeTab.value, (tab) => {
   gap: 1rem;
   flex-wrap: wrap;
 }
-.header-left { display: flex; align-items: baseline; gap: 0.6rem; }
-.page-header h1 { font-size: 1.35rem; font-weight: 700; color: #111827; margin: 0; }
-.subtitle { font-size: 0.78rem; color: #6b7280; }
+.back-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4b5563;
+  text-decoration: none;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  padding: 0.3rem 0.65rem;
+  white-space: nowrap;
+}
+.back-link:hover { background: #f3f4f6; color: #111827; }
+
+.save-status {
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.save-status.idle { color: #6b7280; background: #f3f4f6; }
+.save-status.saving { color: #1d4ed8; background: #eff6ff; }
+.save-status.saved { color: #047857; background: #ecfdf5; }
+.save-status.error { color: #b91c1c; background: #fef2f2; }
 
 .model-name {
   flex: 1;
