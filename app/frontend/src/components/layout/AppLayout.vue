@@ -76,7 +76,7 @@ const baseLinks = [
   { path: '/documents',  icon: '📄', label: 'Documents' },
   { path: '/facts',      icon: '🔬', label: 'Facts' },
   { path: '/documentation', icon: '?', label: 'Docs' },
-  { path: '/scenarios',  icon: '⚗',  label: 'Scenarios' },
+  { path: '/annotation', icon: '✎',  label: 'Annotation' },
   { path: '/models',     icon: '📐', label: 'Models' },
   { path: '/settings/llm-keys', icon: '🔑', label: 'LLM Keys' },
   { path: '/settings/privacy', icon: '🔒', label: 'Privacy' },

@@ -8,7 +8,7 @@ from bson.errors import InvalidId
 from fastapi import HTTPException, status
 
 from app.core.database import get_database
-from app.models.scenario import Model, ModelCreate
+from app.models.model import Model, ModelCreate
 
 
 class ModelService:

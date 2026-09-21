@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 
 from app.core.auth import get_current_user
-from app.models.scenario import Model, ModelCreate
+from app.models.model import Model, ModelCreate
 from app.services.model_service import ModelService
 
 

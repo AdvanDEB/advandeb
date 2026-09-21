@@ -214,7 +214,7 @@ const documentationSections: DocSection[] = [
     badge: 'Navigation',
     audiences: ['all'],
     paragraphs: [
-      'Authenticated users see a left sidebar. On desktop the sidebar expands when hovered; on mobile it opens from the top menu. The main pages are Home, Chat, Documents, Facts, Scenarios, Models, LLM Keys, Documentation, and for curators or administrators, Knowledge.',
+      'Authenticated users see a left sidebar. On desktop the sidebar expands when hovered; on mobile it opens from the top menu. The main pages are Home, Chat, Documents, Facts, Annotation, Models, LLM Keys, Documentation, and for curators or administrators, Knowledge.',
     ],
     items: [
       {
@@ -374,12 +374,12 @@ const documentationSections: DocSection[] = [
     },
   },
   {
-    id: 'scenarios-models',
-    title: 'Scenarios and models',
+    id: 'annotation-models',
+    title: 'Annotation and models',
     badge: 'In progress',
     audiences: ['all'],
     paragraphs: [
-      'Scenarios and Models are visible as app areas for future DEB modeling workflows. In the current interface they explain the planned direction and link back to Chat or Knowledge Graph exploration where useful.',
+      'Annotation is where domain experts record judgments about stylized facts — where each fact came from, what it ranges over, and whether it can be assessed as written. Those judgments are the reference standard the automated assessment is measured against, so the queue hands out work in a fixed order rather than letting reviewers pick: a self-selected sample cannot be reweighted back to the collection. Models remains an app area for future DEB modeling workflows.',
       'Use Chat and the knowledge base today to gather assumptions, evidence, and candidate model context. Use the future modeling views when your deployment enables them.',
     ],
   },

@@ -30,9 +30,9 @@
           <p>Role-aware guide to the app</p>
         </router-link>
 
-        <router-link to="/scenarios" class="feature-card">
-          <h3>Scenarios</h3>
-          <p>Create modeling scenarios</p>
+        <router-link to="/annotation" class="feature-card">
+          <h3>Annotation</h3>
+          <p>Review and validate stylized facts</p>
         </router-link>
 
         <router-link to="/models" class="feature-card">

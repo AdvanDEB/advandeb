@@ -5,7 +5,7 @@
         ref="inputEl"
         v-model="text"
         :disabled="disabled"
-        placeholder="Ask about DEB theory, your data, or run a scenario…"
+        placeholder="Ask about DEB theory, your data, or the evidence for a stylized fact…"
         rows="3"
         @keydown.enter.exact.prevent="submit"
         @keydown.enter.shift.exact="text += '\n'"
