@@ -76,7 +76,6 @@ const baseLinks = [
   { path: '/documents',  icon: '📄', label: 'Documents' },
   { path: '/facts',      icon: '🔬', label: 'Facts' },
   { path: '/documentation', icon: '?', label: 'Docs' },
-  { path: '/annotation', icon: '✎',  label: 'Annotation' },
   { path: '/models',     icon: '📐', label: 'Models' },
   { path: '/settings/llm-keys', icon: '🔑', label: 'LLM Keys' },
   { path: '/settings/privacy', icon: '🔒', label: 'Privacy' },
@@ -84,6 +83,16 @@ const baseLinks = [
 
 const navLinks = computed(() => {
   const links = [...baseLinks]
+  // Annotation is capability-gated: the DEB experts who do the annotating hold
+  // knowledge_explorator only, so the link follows the capability rather than
+  // the role. Showing it to everyone would mean a 403 on click.
+  if (
+    authStore.hasCapability('sf_annotator') ||
+    authStore.hasRole('administrator') ||
+    authStore.hasRole('knowledge_curator')
+  ) {
+    links.push({ path: '/annotation', icon: '✎', label: 'Annotation' })
+  }
   if (authStore.hasRole('administrator') || authStore.hasRole('knowledge_curator')) {
     links.push({ path: '/kb', icon: '⬡', label: 'Knowledge' })
   }

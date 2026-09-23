@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import os
 import random
 import statistics
 from datetime import datetime, timezone
@@ -54,8 +55,31 @@ logger = logging.getLogger(__name__)
 # annotated so far, so it is a constant and not a setting.
 QUEUE_SEED = 20260921
 
-# Every k-th position is independently annotated a second time.
+# Every k-th position is independently annotated a second time, for the
+# inter-annotator agreement that gives the human panel a measurable dispersion.
 DOUBLE_ANNOTATION_EVERY = 5
+
+# --------------------------------------------------------------------------- #
+# Human panel size — modifiable, not hard-coded
+# --------------------------------------------------------------------------- #
+#
+# The comparison the method is built for (advandeb_methods docs/09 §0) needs a
+# *human consensus* with the same structure as the agent consensus: a majority,
+# a computable dispersion, and abstention headroom. That means a real panel on
+# a designated comparison subset, not a single rating.
+#
+# Five is the starting point and the platform has the people for it — eight
+# potential annotators besides the administrator. It is a setting rather than a
+# constant because expert availability is unknown and will change; below three
+# the same identifiability argument applies to people as to models (ADR 0006).
+HUMAN_PANEL_SIZE = int(os.environ.get("ANNOTATION_HUMAN_PANEL_SIZE", "5"))
+
+# Every k-th queue position is a comparison item, judged by the full human
+# panel. Sized so the comparison subset accrues steadily from the start rather
+# than being a block at the end — the same reason double-annotation positions
+# are fixed in the queue rather than appended.
+COMPARISON_SUBSET_EVERY = int(
+    os.environ.get("ANNOTATION_COMPARISON_EVERY", "25"))
 
 # Items each stratum contributes before proportional allocation begins, so a
 # small category (phytoplankton EPS has three facts) is not crowded out of a
@@ -182,8 +206,15 @@ class AnnotationService:
                 "sf_number": sf_number,
                 "statement_sha256": f.get("statement_sha256") or "",
                 "authored_by": f.get("authored_by") or [],
-                # Fixed in the queue, never appended later.
-                "double_annotation": pos % DOUBLE_ANNOTATION_EVERY == 0,
+                # How many independent judgments this position needs. Fixed in
+                # the queue, never appended later: comparison items and
+                # double-annotation items must accrue from the start, or a
+                # queue that stops early yields no measurable agreement at all.
+                "n_required": (
+                    HUMAN_PANEL_SIZE if pos % COMPARISON_SUBSET_EVERY == 0
+                    else 2 if pos % DOUBLE_ANNOTATION_EVERY == 0
+                    else 1),
+                "comparison_item": pos % COMPARISON_SUBSET_EVERY == 0,
             })
         if docs:
             await self.db.annotation_queue.insert_many(docs)
@@ -221,7 +252,7 @@ class AnnotationService:
             if key in done:
                 continue
             n_done = counts.get(key, 0)
-            needed = 2 if q.get("double_annotation") else 1
+            needed = int(q.get("n_required", 1))
             if n_done >= needed:
                 continue
             # Conflict of interest: an author never judges their own fact.
@@ -243,7 +274,9 @@ class AnnotationService:
                 existing_provenance=fact.get("provenance_type"),
                 existing_source_citation=fact.get("source_citation"),
                 legacy_assessment=fact.get("legacy_assessment"),
-                double_annotation=bool(q.get("double_annotation")),
+                double_annotation=int(q.get("n_required", 1)) > 1,
+                n_required=int(q.get("n_required", 1)),
+                comparison_item=bool(q.get("comparison_item")),
                 stratum=q.get("stratum", ""),
             )
         return None

@@ -30,7 +30,7 @@
           <p>Role-aware guide to the app</p>
         </router-link>
 
-        <router-link to="/annotation" class="feature-card">
+        <router-link v-if="canAnnotate" to="/annotation" class="feature-card">
           <h3>Annotation</h3>
           <p>Review and validate stylized facts</p>
         </router-link>
@@ -127,9 +127,16 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
+
+// Annotation is capability-gated; see AppLayout.
+const canAnnotate = computed(() =>
+  authStore.hasCapability('sf_annotator') ||
+  authStore.hasRole('administrator') ||
+  authStore.hasRole('knowledge_curator'))
 </script>
 
 <style scoped>

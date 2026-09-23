@@ -56,8 +56,13 @@ class QueueItem(BaseModel):
     existing_source_citation: Optional[str] = None
     # Legacy 1-100 score from the older pipeline, collapsed by default.
     legacy_assessment: Optional[Dict[str, Any]] = None
-    # True when this position is designated for a second independent annotator.
+    # True when this position needs more than one independent judgment.
     double_annotation: bool = False
+    # How many independent human judgments this position needs. Comparison
+    # items take the full human panel so the human consensus has the same
+    # structure as the agent consensus (advandeb_methods docs/09 section 5.3).
+    n_required: int = 1
+    comparison_item: bool = False
     stratum: str
 
 
@@ -81,6 +86,14 @@ class AnnotationDecision(BaseModel):
     # --- required of every decision ---
     confidence: int = Field(ge=1, le=5)
     rationale: str = Field(min_length=1)
+
+    # Which evidence condition this judgment was made under
+    # (advandeb_methods docs/09 section 5.2). `matched` = the expert saw the
+    # same frozen evidence set the agents saw, isolating judgment difference.
+    # `expertise` = judged from domain knowledge alone, as in the predecessor
+    # review. Running both is what lets a human-machine disagreement be
+    # decomposed rather than merely observed.
+    evidence_condition: Optional[Literal["matched", "expertise"]] = "expertise"
 
     # --- captured by the client ---
     time_spent_s: Optional[float] = None
