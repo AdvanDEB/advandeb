@@ -1,11 +1,12 @@
 <template>
-  <div class="annotation-view">
+  <div class="elicitation-view">
     <header class="page-header">
       <div>
-        <h1>Annotation</h1>
+        <h1>Elicitation</h1>
         <p class="sub">
-          Expert judgments on stylized facts. These form the gold set every
-          machine measurement is scored against.
+          Structured expert judgment on stylized facts. One of the two
+          consensus processes the method compares — not a gold standard, a
+          second measurement.
         </p>
       </div>
       <div v-if="progress" class="progress-chip" :title="progress.rung_note">
@@ -32,7 +33,7 @@
         <div class="meta-row">
           <span class="badge">#{{ item.sf_number }}</span>
           <span class="badge muted">{{ prettyCategory(item.category) }}</span>
-          <span v-if="item.double_annotation" class="badge second">
+          <span v-if="item.repeated_judgment" class="badge second">
             second independent reading
           </span>
         </div>
@@ -132,7 +133,7 @@
     </div>
 
     <section v-if="progress" class="card ladder">
-      <h3>What the annotation so far supports</h3>
+      <h3>What the elicitation so far supports</h3>
       <p><strong>{{ progress.rung }}</strong> — {{ progress.rung_note }}</p>
       <p v-if="progress.next_rung_at" class="muted-text">
         Next rung at {{ progress.next_rung_at }} decisions
@@ -140,7 +141,7 @@
       </p>
       <p class="muted-text">
         {{ progress.completed_by_me }} by you ·
-        {{ progress.double_annotated }} double-annotated
+        {{ progress.repeated_judgments }} repeated
         <template v-if="progress.median_seconds_per_item">
           · median {{ Math.round(progress.median_seconds_per_item) }}s per item
         </template>
@@ -162,7 +163,7 @@ interface QueueItem {
   category: string
   collection_version: string
   legacy_assessment: Record<string, any> | null
-  double_annotation: boolean
+  repeated_judgment: boolean
   stratum: string
 }
 
@@ -174,7 +175,7 @@ const error = ref('')
 const machineShown = ref(false)
 
 // Time on task is captured automatically — it is the throughput figure the
-// method needs, and asking annotators to record it would be both unreliable
+// method needs, and asking experts to record it would be both unreliable
 // and irritating. Paused on blur so a coffee break is not counted as thinking.
 const elapsed = ref(0)
 let ticker: number | undefined
@@ -252,8 +253,8 @@ async function load() {
   loading.value = true
   try {
     const [next, prog] = await Promise.all([
-      api.get('/annotation/next'),
-      api.get('/annotation/progress'),
+      api.get('/elicitation/next'),
+      api.get('/elicitation/progress'),
     ])
     item.value = next.data || null
     progress.value = prog.data
@@ -270,7 +271,7 @@ async function submit() {
   submitting.value = true
   error.value = ''
   try {
-    await api.post('/annotation/decide', {
+    await api.post('/elicitation/decide', {
       task: item.value.task,
       sf_number: item.value.sf_number,
       statement_sha256: item.value.statement_sha256,
@@ -294,7 +295,7 @@ async function submit() {
 }
 
 function onKey(e: KeyboardEvent) {
-  // Keyboard-first: an annotator working two hundred items will not use a mouse.
+  // Keyboard-first: an expert working two hundred items will not use a mouse.
   if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { submit(); return }
   if (e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLInputElement) return
   if (e.key >= '1' && e.key <= '5') form.value.confidence = Number(e.key)
@@ -315,7 +316,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.annotation-view { padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 880px; }
+.elicitation-view { padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.25rem; max-width: 880px; }
 .page-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
 .page-header h1 { font-size: 1.5rem; font-weight: 700; color: #111827; }
 .sub { color: #6b7280; font-size: 0.9rem; margin-top: 0.25rem; max-width: 46ch; }

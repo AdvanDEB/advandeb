@@ -83,15 +83,15 @@ const baseLinks = [
 
 const navLinks = computed(() => {
   const links = [...baseLinks]
-  // Annotation is capability-gated: the DEB experts who do the annotating hold
-  // knowledge_explorator only, so the link follows the capability rather than
-  // the role. Showing it to everyone would mean a 403 on click.
+  // Elicitation is capability-gated: the DEB experts who provide the judgments
+  // hold knowledge_explorator only, so the link follows the capability rather
+  // than the role. Showing it to everyone would mean a 403 on click.
   if (
-    authStore.hasCapability('sf_annotator') ||
+    authStore.hasCapability('sf_elicitation') ||
     authStore.hasRole('administrator') ||
     authStore.hasRole('knowledge_curator')
   ) {
-    links.push({ path: '/annotation', icon: '✎', label: 'Annotation' })
+    links.push({ path: '/elicitation', icon: '✎', label: 'Elicitation' })
   }
   if (authStore.hasRole('administrator') || authStore.hasRole('knowledge_curator')) {
     links.push({ path: '/kb', icon: '⬡', label: 'Knowledge' })

@@ -41,9 +41,9 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/annotation',
-      name: 'annotation',
-      component: () => import('@/views/AnnotationView.vue'),
+      path: '/elicitation',
+      name: 'elicitation',
+      component: () => import('@/views/ElicitationView.vue'),
       meta: { requiresAuth: true }
     },
     {

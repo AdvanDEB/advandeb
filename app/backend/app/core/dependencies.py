@@ -47,27 +47,27 @@ async def require_curator(current_user: dict = Depends(get_current_user)):
 #
 # The user model has carried a ``capabilities: List[str]`` field since the
 # beginning, initialised to ``[]``, with nothing granting or checking it
-# (docs/SYSTEM-OVERVIEW.md §6). Annotation is the first feature that needs it:
-# the DEB experts who do the annotating hold ``knowledge_explorator`` only, so
-# gating on the curator role would lock out exactly the people the work depends
-# on.
+# (docs/SYSTEM-OVERVIEW.md §6). Elicitation is the first feature that needs it:
+# the DEB experts who provide the judgments hold ``knowledge_explorator`` only,
+# so gating on the curator role would lock out exactly the people the work
+# depends on.
 
-CAP_SF_ANNOTATOR = "sf_annotator"
+CAP_SF_ELICITATION = "sf_elicitation"
 
 
 def require_capability(capability: str) -> Callable:
     """Require a named capability, or a role that implies it.
 
-    Administrators always pass. Curators pass for annotation capabilities,
-    since the curator role already means "may contribute knowledge" — but an
-    explorator with the capability granted passes too, which is the point.
+    Administrators always pass. Curators pass for elicitation, since the
+    curator role already means "may contribute knowledge" — but an explorator
+    with the capability granted passes too, which is the point.
     """
     async def capability_checker(current_user: dict = Depends(get_current_user)):
         roles = current_user.get("roles", []) or []
         caps = current_user.get("capabilities", []) or []
         if "administrator" in roles or capability in caps:
             return current_user
-        if capability == CAP_SF_ANNOTATOR and "knowledge_curator" in roles:
+        if capability == CAP_SF_ELICITATION and "knowledge_curator" in roles:
             return current_user
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -76,4 +76,4 @@ def require_capability(capability: str) -> Callable:
     return capability_checker
 
 
-require_annotator = require_capability(CAP_SF_ANNOTATOR)
+require_elicitor = require_capability(CAP_SF_ELICITATION)

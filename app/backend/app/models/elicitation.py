@@ -1,18 +1,24 @@
 """
-Human annotation of stylized facts.
+Expert elicitation on stylized facts.
 
-Annotation records live in MongoDB alongside users, submissions and chat —
+Elicitation records live in MongoDB alongside users, submissions and chat —
 the application store. Panel verdicts, consensus records and standing live in
 ArangoDB with the knowledge graph.
 
-The design constraints these models exist to satisfy are specified in
-``advandeb_methods/docs/02-annotation-protocol.md``:
+"Elicitation" rather than "annotation" deliberately: this is the structured
+gathering of expert judgment, in the sense the term carries in risk analysis
+and Delphi-style studies, not the labelling of data by workers. The experts are
+domain authorities whose judgment is one of the two consensus processes the
+method compares (advandeb_methods docs/09 section 0).
 
-* **Interruptible sampling.** Total annotator availability is unknown, so the
+The design constraints these models exist to satisfy are specified in
+``advandeb_methods/docs/02-elicitation-protocol.md``:
+
+* **Interruptible sampling.** Total expert availability is unknown, so the
   queue is a fixed, seeded order whose every prefix is a valid reweightable
-  sample. Annotators draw strictly from the head; they never choose an item.
-* **Conflict of interest.** An annotator is never assigned a stylized fact
-  they authored. Facts 1201-1236 have a known author who is also an annotator.
+  sample. Experts draw strictly from the head; they never choose an item.
+* **Conflict of interest.** An expert is never assigned a stylized fact they
+  authored. Facts 1201-1236 have a known author who is also an expert.
 * **Anchoring control.** Whether a reviewer opened the machine verdict is
   logged, so exposure is measurable rather than assumed.
 * **Time on task** is captured automatically; it is the throughput figure the
@@ -25,7 +31,7 @@ from pydantic import BaseModel, Field
 
 
 # Day-one tasks operate on the statement alone and need no evidence set, so
-# annotation can begin before the consensus pipeline runs inside the platform.
+# elicitation can begin before the consensus pipeline runs inside the platform.
 TaskType = Literal["provenance", "scope", "assessability"]
 
 ProvenanceType = Literal["published", "new", "adapted", "unknown"]
@@ -41,7 +47,7 @@ AssessabilityVerdict = Literal[
 
 
 class QueueItem(BaseModel):
-    """One unit of work, as handed to an annotator."""
+    """One unit of work, as handed to an expert."""
 
     queue_position: int
     task: TaskType
@@ -51,14 +57,14 @@ class QueueItem(BaseModel):
     category: str
     collection_version: str
     # Present only where it already exists; deliberately not shown first in the
-    # UI for tasks where it could anchor the annotator.
+    # UI for tasks where it could anchor the expert.
     existing_provenance: Optional[ProvenanceType] = None
     existing_source_citation: Optional[str] = None
     # Legacy 1-100 score from the older pipeline, collapsed by default.
     legacy_assessment: Optional[Dict[str, Any]] = None
     # True when this position needs more than one independent judgment.
-    double_annotation: bool = False
-    # How many independent human judgments this position needs. Comparison
+    repeated_judgment: bool = False
+    # How many independent expert judgments this position needs. Comparison
     # items take the full human panel so the human consensus has the same
     # structure as the agent consensus (advandeb_methods docs/09 section 5.3).
     n_required: int = 1
@@ -66,8 +72,8 @@ class QueueItem(BaseModel):
     stratum: str
 
 
-class AnnotationDecision(BaseModel):
-    """What an annotator submits. One per (task, fact, annotator)."""
+class ElicitationDecision(BaseModel):
+    """What an expert submits. One per (task, fact, expert)."""
 
     task: TaskType
     sf_number: int
@@ -100,11 +106,11 @@ class AnnotationDecision(BaseModel):
     machine_verdict_expanded: Optional[bool] = None
 
 
-class AnnotationRecord(AnnotationDecision):
+class ElicitationRecord(ElicitationDecision):
     """A stored decision."""
 
     id: str = Field(alias="_id")
-    annotator_id: str
+    expert_id: str
     queue_position: int
     stratum: str
     collection_version: str
@@ -119,11 +125,11 @@ class AnnotationRecord(AnnotationDecision):
         populate_by_name = True
 
 
-class AnnotationProgress(BaseModel):
-    """Where the effort has actually gone — per annotator and overall.
+class ElicitationProgress(BaseModel):
+    """Where the effort has actually gone — per expert and overall.
 
     Reported against the claims ladder (docs/02 4.2) rather than as a bare
-    count, so it is visible at any moment which conclusions the annotation so
+    count, so it is visible at any moment which conclusions the elicitation so
     far can support.
     """
 
@@ -133,7 +139,7 @@ class AnnotationProgress(BaseModel):
     median_seconds_per_item: Optional[float] = None
     by_task: Dict[str, int] = {}
     by_stratum: Dict[str, int] = {}
-    double_annotated: int = 0
+    repeated_judgments: int = 0
     rung: str = "R0"
     rung_note: str = ""
     next_rung_at: Optional[int] = None

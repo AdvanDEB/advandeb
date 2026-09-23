@@ -30,9 +30,9 @@
           <p>Role-aware guide to the app</p>
         </router-link>
 
-        <router-link v-if="canAnnotate" to="/annotation" class="feature-card">
-          <h3>Annotation</h3>
-          <p>Review and validate stylized facts</p>
+        <router-link v-if="canElicit" to="/elicitation" class="feature-card">
+          <h3>Elicitation</h3>
+          <p>Provide expert judgment on stylized facts</p>
         </router-link>
 
         <router-link to="/models" class="feature-card">
@@ -132,9 +132,9 @@ import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
 
-// Annotation is capability-gated; see AppLayout.
-const canAnnotate = computed(() =>
-  authStore.hasCapability('sf_annotator') ||
+// Elicitation is capability-gated; see AppLayout.
+const canElicit = computed(() =>
+  authStore.hasCapability('sf_elicitation') ||
   authStore.hasRole('administrator') ||
   authStore.hasRole('knowledge_curator'))
 </script>
