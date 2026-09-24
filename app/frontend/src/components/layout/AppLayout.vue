@@ -81,22 +81,42 @@ const baseLinks = [
   { path: '/settings/privacy', icon: '🔒', label: 'Privacy' },
 ]
 
+// An external contributor holds the elicitation capability and nothing else
+// (advandeb_methods/docs/10 §4.1). They get a stripped sidebar: their queue and
+// their own settings, with no link to documents, chat, knowledge or models —
+// sections they cannot open. The router enforces the same boundary, so this is
+// presentation rather than the security control.
+const externalOnly = computed(() => {
+  const roles = authStore.user?.roles || []
+  return roles.length > 0 && roles.every(r => r === 'external_contributor')
+})
+
+const canElicit = computed(() =>
+  authStore.hasCapability('sf_elicitation') ||
+  authStore.hasRole('administrator') ||
+  authStore.hasRole('knowledge_curator'))
+
 const navLinks = computed(() => {
+  if (externalOnly.value) {
+    // Their queue, and nothing else. Privacy settings are deliberately not
+    // advertised here — that page is about chat-history visibility, and an
+    // external contributor has no chat. The route stays reachable if they are
+    // sent there directly; it simply is not offered.
+    return [{ path: '/elicitation', icon: '✎', label: 'Elicitation' }]
+  }
+
   const links = [...baseLinks]
   // Elicitation is capability-gated: the DEB experts who provide the judgments
   // hold knowledge_explorator only, so the link follows the capability rather
   // than the role. Showing it to everyone would mean a 403 on click.
-  if (
-    authStore.hasCapability('sf_elicitation') ||
-    authStore.hasRole('administrator') ||
-    authStore.hasRole('knowledge_curator')
-  ) {
+  if (canElicit.value) {
     links.push({ path: '/elicitation', icon: '✎', label: 'Elicitation' })
   }
   if (authStore.hasRole('administrator') || authStore.hasRole('knowledge_curator')) {
     links.push({ path: '/kb', icon: '⬡', label: 'Knowledge' })
   }
   if (authStore.hasRole('administrator')) {
+    links.push({ path: '/admin/experts', icon: '🎓', label: 'Experts' })
     links.push({ path: '/admin/users', icon: '👤', label: 'Admin' })
   }
   return links
