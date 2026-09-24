@@ -869,7 +869,20 @@ class ElicitationService:
 
         done = sum(by_task.values())
         rung, note, nxt = _rung(done)
+        # Expert-asserted evidence, summarised corpus-wide. `recall_misses` is
+        # the headline: papers the corpus held that retrieval never surfaced,
+        # each named by an expert who knew it was relevant (docs/09 §2.5a).
+        try:
+            from app.services.expert_reference_service import (
+                ExpertReferenceService,
+            )
+            expert_refs = await ExpertReferenceService().recall_summary()
+        except Exception as exc:  # never let a dashboard extra break the page
+            logger.warning("recall summary unavailable: %s", exc)
+            expert_refs = None
+
         return {
+            "expert_references": expert_refs,
             "by_stratum": by_stratum, "by_task": by_task, "by_tier": by_tier,
             "by_expert": experts,
             "by_record_tier": by_tier,

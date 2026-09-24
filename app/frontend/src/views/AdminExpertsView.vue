@@ -147,6 +147,35 @@
           </div>
         </div>
 
+        <!-- Expert-named references. `recall_misses` is a headline figure for
+             the method: each one is a paper the corpus held and retrieval
+             failed to surface, named by an expert who knew it mattered
+             (advandeb_methods docs/09 §2.5a). -->
+        <div v-if="refStats" class="stat-row refs-row">
+          <div class="stat miss">
+            <span class="stat-value">{{ refStats.recall_misses ?? 0 }}</span>
+            <span class="stat-label">
+              retrieval misses
+              <template v-if="refStats.miss_rate !== null && refStats.miss_rate !== undefined">
+                ({{ Math.round(refStats.miss_rate * 100) }}% of
+                {{ refStats.checked_for_retrieval }} checked)
+              </template>
+            </span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ refStats.by_status?.not_in_corpus ?? 0 }}</span>
+            <span class="stat-label">papers new to the corpus</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ refStats.by_status?.in_corpus_retrieved ?? 0 }}</span>
+            <span class="stat-label">already read by the panel</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ refStats.undetermined ?? 0 }}</span>
+            <span class="stat-label">retrieval undetermined</span>
+          </div>
+        </div>
+
         <p class="rung-note">
           <strong>{{ stats.rung }}</strong> — {{ stats.rung_note }}
           <span v-if="stats.next_rung_at" class="muted">
@@ -225,6 +254,9 @@ const comparisonPct = computed(() => {
   const c = stats.value?.comparison_complete || 0
   return t ? Math.round((c / t) * 100) : 0
 })
+
+// Expert-asserted references, served alongside the rest of admin stats.
+const refStats = computed(() => stats.value?.expert_references || null)
 
 const byTask = computed(() => toPairs(stats.value?.by_task))
 const byExpert = computed(() => toPairs(stats.value?.by_expert))
@@ -403,4 +435,6 @@ onMounted(() => { loadExperts(); loadRequests(); loadStats() })
 .mini.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.2rem 1.5rem; }
 
 .strata { border-top: 1px solid #f3f4f6; padding-top: 0.9rem; margin-top: 0.9rem; }
+.refs-row { margin-top: 0.6rem; }
+.stat.miss .stat-value { color: #b45309; }
 </style>

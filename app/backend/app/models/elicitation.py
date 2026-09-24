@@ -251,3 +251,105 @@ class CalibrationFeedback(BaseModel):
     explanation: str
     completed: int
     total: int
+
+
+# --------------------------------------------------------------------------- #
+# Expert-asserted evidence — the third instrument                              #
+# --------------------------------------------------------------------------- #
+#
+# An expert names a DOI that supports or opposes a fact. This is NOT an
+# adjustment to the machine's score: an expert saying "this paper supports it"
+# must never raise the panel's number directly, or the machine score becomes
+# partly a human artifact and agreement between the two panels becomes partly
+# experts editing one of them (advandeb_methods docs/09 sections 0 and 2.5).
+# The machine may still change its mind — but only by reading the passage,
+# via ingestion and re-adjudication.
+
+ReferenceDirection = Literal["supports", "opposes"]
+
+# The resolution outcomes. The first four are the settled design
+# (docs/09 section 2.5a); the fifth is required by the data and is flagged in
+# the report back to the coordinator.
+#
+#   not_in_corpus              a genuine coverage gap -> queue for ingestion
+#   in_corpus_not_retrieved    RETRIEVAL RECALL FAILURE - the corpus held it
+#                              and retrieval never surfaced it
+#   in_corpus_retrieved        the panel already read it, so a disagreement is
+#                              about JUDGMENT, not retrieval
+#   unresolvable               the DOI does not resolve; rejected, never stored
+#   pending                    async resolution not finished
+#
+#   in_corpus_retrieval_unknown
+#       Membership is known but the retrieval question CANNOT be answered.
+#       Required because the DEB full-text corpus (deb_literature_review,
+#       1,306 documents) carries no DOI field at all — its evidence sets
+#       reference documents by numeric doc_id, so a DOI can never be matched
+#       against them. Collapsing this into `not_in_corpus` would inflate the
+#       coverage-gap count and trigger spurious re-ingestion of papers already
+#       held; collapsing it into `in_corpus_not_retrieved` would inflate the
+#       headline recall-failure number with cases never actually checked.
+#       Neither is acceptable for a figure the method reports, so the
+#       undetermined case is named rather than absorbed.
+ResolutionStatus = Literal[
+    "pending", "unresolvable", "not_in_corpus",
+    "in_corpus_not_retrieved", "in_corpus_retrieved",
+    "in_corpus_retrieval_unknown",
+]
+
+# Why a retrieval determination could or could not be made. Recorded separately
+# from the status so an undetermined case can always be explained.
+RetrievalCheck = Literal[
+    "exact",                      # checked against the fact's evidence set
+    "no_evidence_set",            # no evidence set exists for this fact yet
+    "corpus_lacks_doi",           # the holding corpus stores no DOIs
+    "not_applicable",             # not in corpus, or unresolvable
+]
+
+
+class ExpertReferenceCreate(BaseModel):
+    """What an expert submits."""
+
+    sf_number: int
+    statement_sha256: str
+    doi: str = Field(min_length=3)
+    direction: ReferenceDirection
+    note: Optional[str] = None
+
+
+class ExpertReference(BaseModel):
+    """A stored expert-asserted reference."""
+
+    id: str = Field(alias="_id")
+    sf_number: int
+    statement_sha256: str
+    doi: str
+    direction: ReferenceDirection
+    note: Optional[str] = None
+    expert_id: str
+    # Stamped at write time, exactly as on an elicitation record
+    # (docs/10 section 2.1). A promotion must not retroactively relabel
+    # evidence a contributor named while they were a contributor.
+    tier: Optional[str] = None
+    resolution: Dict[str, Any] = {}
+    ingestion_queued: Optional[bool] = None
+    triggered_readjudication: Optional[bool] = None
+    created_at: datetime
+
+    class Config:
+        populate_by_name = True
+
+
+class ExpertAssertedEvidence(BaseModel):
+    """The third score, aggregated per fact.
+
+    Reported beside machine evidence strength, never summed with it.
+    """
+
+    n_supporting: int = 0
+    n_opposing: int = 0
+    n_distinct_experts: int = 0
+    n_distinct_papers: int = 0
+    n_recall_misses: int = 0
+    n_new_to_corpus: int = 0
+    n_retrieval_unknown: int = 0
+    score_1_3: Optional[int] = None

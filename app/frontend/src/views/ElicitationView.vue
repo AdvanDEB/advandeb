@@ -186,6 +186,14 @@
       </p>
     </section>
 
+    <!-- Secondary to the judgment, and placed after it deliberately: citing a
+         paper must not compete with the task the queue actually asked for. -->
+    <ReferencePanel
+      v-if="state === 'working' && item"
+      :sf-number="item.sf_number"
+      :statement-sha256="item.statement_sha256"
+    />
+
     <button class="ghost toggle-history" @click="showHistory = !showHistory">
       {{ showHistory ? 'Hide' : 'Show' }} your decisions <kbd class="inline-key">h</kbd>
     </button>
@@ -203,6 +211,7 @@ import EvidencePanel from '@/components/elicitation/EvidencePanel.vue'
 import type { EvidencePassage } from '@/components/elicitation/EvidencePanel.vue'
 import GuidelinesPanel from '@/components/elicitation/GuidelinesPanel.vue'
 import HistoryPanel from '@/components/elicitation/HistoryPanel.vue'
+import ReferencePanel from '@/components/elicitation/ReferencePanel.vue'
 import ShortcutsOverlay from '@/components/elicitation/ShortcutsOverlay.vue'
 import {
   OPTION_KEYS, prettyCategory, taskSpec, validateDecision, type TaskType,

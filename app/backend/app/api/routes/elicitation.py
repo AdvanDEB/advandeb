@@ -18,11 +18,13 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from app.core.auth import get_current_user
 from app.core.dependencies import require_admin, require_elicitor
 from app.models.elicitation import (
+    ExpertReferenceCreate,
     CalibrationDecision, CalibrationFeedback, CalibrationItem,
     ElicitationDecision, ElicitationProgress, Guidelines, HistoryResponse,
     QueueItem,
 )
 from app.services.elicitation_service import ElicitationService
+from app.services.expert_reference_service import ExpertReferenceService
 
 router = APIRouter()
 
@@ -205,3 +207,67 @@ async def admin_stats(current_user: dict = Depends(require_admin)):
     healthy progress while the panel consensus went uncollected.
     """
     return await ElicitationService().admin_stats()
+
+
+# --------------------------------------------------------------------------- #
+# Expert-asserted evidence — the third instrument                              #
+# --------------------------------------------------------------------------- #
+
+@router.post("/references")
+async def add_reference(
+    ref: ExpertReferenceCreate,
+    current_user: dict = Depends(require_elicitor),
+):
+    """Cite a publication by DOI as supporting or opposing a fact.
+
+    Never moves the machine's score. A paper the corpus lacks is queued for
+    ingestion, so the panel may change its mind — but only by reading it
+    (advandeb_methods docs/09 section 2.5).
+    """
+    svc = ExpertReferenceService()
+    tier = await ElicitationService().tier_of(current_user["id"])
+    result = await svc.add(ref, current_user["id"], tier)
+    if result.get("status") == "error":
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail=result.get("detail", "could not record"))
+    return result
+
+
+@router.get("/references")
+async def list_references(
+    sf_number: int,
+    mine_only: bool = True,
+    current_user: dict = Depends(require_elicitor),
+):
+    """References for a fact — the expert's own by default."""
+    svc = ExpertReferenceService()
+    refs = await svc.list_for(sf_number,
+                              current_user["id"] if mine_only else None)
+    return {"references": refs,
+            "asserted_evidence": await svc.asserted_evidence(sf_number)}
+
+
+@router.delete("/references/{reference_id}")
+async def delete_reference(
+    reference_id: str,
+    current_user: dict = Depends(require_elicitor),
+):
+    """Remove a reference. Own only, unless administrator."""
+    svc = ExpertReferenceService()
+    is_admin = "administrator" in (current_user.get("roles") or [])
+    result = await svc.delete(reference_id, current_user["id"], is_admin)
+    if result.get("status") == "error":
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=result.get("detail", "not found"))
+    return result
+
+
+@router.get("/references/recall")
+async def recall_summary(current_user: dict = Depends(require_admin)):
+    """Retrieval-recall measurement from expert-named references.
+
+    Every `in_corpus_not_retrieved` is a paper the corpus held and retrieval
+    failed to surface, named by an expert who knew it was relevant — a figure
+    the method has no other cheap source for (docs/09 section 2.5a).
+    """
+    return await ExpertReferenceService().recall_summary()
