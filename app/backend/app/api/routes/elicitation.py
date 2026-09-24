@@ -13,7 +13,7 @@ looking at the actual user list: six of the eight potential experts - the DEB
 authorities the comparison depends on - hold `knowledge_explorator` only. The
 capability is granted per user by an administrator.
 """
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Body, Depends, HTTPException, status
 
 from app.core.auth import get_current_user
 from app.core.dependencies import require_admin, require_elicitor
@@ -77,6 +77,34 @@ async def build_queue(
     """
     service = ElicitationService()
     return await service.build_queue(force=force)
+
+
+@router.post("/evidence/import")
+async def import_evidence_sets(
+    payload: dict = Body(...),
+    force: bool = False,
+    current_user: dict = Depends(require_admin),
+):
+    """Load the frozen evidence sets the agent panel read.
+
+    The body is the verified export from advandeb_methods
+    (`data/evidence/evidence_sets_v1.0.json`), whose content hashes were
+    checked against the backfill manifest at export time.
+    """
+    return await ElicitationService().import_evidence_sets(payload, force=force)
+
+
+@router.post("/queue/build-evidence")
+async def build_evidence_queue(
+    force: bool = False,
+    current_user: dict = Depends(require_admin),
+):
+    """Queue the evidence-scoring items, ahead of the fact-level tasks.
+
+    Evidence leads because the human ceiling is the measurement everything
+    downstream is blocked on, and expert time is the project's scarcest input.
+    """
+    return await ElicitationService().build_evidence_queue(force=force)
 
 
 @router.get("/experts")

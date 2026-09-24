@@ -46,7 +46,7 @@ from bson import ObjectId
 
 from app.core.database import get_database
 from app.models.elicitation import (
-    ElicitationDecision, ElicitationProgress, QueueItem,
+    ElicitationDecision, ElicitationProgress, EvidencePassage, QueueItem,
 )
 
 logger = logging.getLogger(__name__)
@@ -90,11 +90,55 @@ STRATUM_FLOOR = 3
 # Bumped whenever the task definitions change. A mid-study guideline change
 # invalidates prior judgments unless they are re-checked, so the version is
 # recorded rather than implied (docs/02 section 7).
-GUIDELINES_VERSION = "1.0"
+GUIDELINES_VERSION = "1.1"
 
 # Tasks offered before evidence sets exist in the platform. All three operate
 # on the statement alone.
 DAY_ONE_TASKS = ("provenance", "scope", "assessability")
+
+# --------------------------------------------------------------------------- #
+# The evidence block                                                           #
+# --------------------------------------------------------------------------- #
+#
+# Evidence items lead the queue, ahead of every fact-level task. Not a
+# preference: the human ceiling is the one measurement that unblocks the rest
+# of the method, and expert time is the scarcest input in the project. Metadata
+# tasks are worth collecting and they are worth collecting *second*.
+#
+# Ordering is expressed as a block `priority` rather than by renumbering, so
+# each block keeps its own seeded order and its own prefix property. The
+# reweighting argument (docs/02 section 4.1) therefore holds **within a
+# block** — which is what it has to do, since the two blocks stratify over
+# different populations anyway (evidence sets versus the whole collection).
+PRIORITY_EVIDENCE = 0
+PRIORITY_FACT_LEVEL = 1
+
+# Corpora an expert is asked to score. `combined` is deliberately excluded: the
+# method suppresses the combined score outright whenever one corpus returns no
+# on-topic evidence (docs/09 section 3.4), so eliciting it would spend the
+# scarcest input in the project on a number the analysis refuses to emit.
+EVIDENCE_CORPORA = ("deb", "reproduction")
+
+# The corpus whose items take the full human panel. The comparison the ceiling
+# comes from needs several independent experts on the *same* evidence set, and
+# spreading five-deep coverage across every corpus would give shallow coverage
+# of both instead of a measurable panel on one.
+EVIDENCE_COMPARISON_CORPUS = "deb"
+
+# How many of a set's passages an expert is shown. Every set holds 18.
+#
+# The trade-off is real and runs in both directions. Passage-level agreement is
+# the headline number (alpha = 0.431), and showing all 18 both maximises
+# passage judgments per expert-hour — the per-item orientation cost amortises
+# over more passages — and removes any objection that the humans were asked a
+# different question from the agents. Showing fewer covers more distinct facts
+# per hour, which is what the *fact-level* scores need.
+#
+# Set here rather than inferred, and recorded on every queue item, because an
+# expert judging 9 of 18 passages is answering a different question from one
+# judging all of them and the record has to say which.
+EVIDENCE_PASSAGES_SHOWN = int(
+    os.environ.get("ELICITATION_EVIDENCE_PASSAGES", "18"))
 
 # docs/02 4.2 — what each elicitation volume supports. Reported rather than
 # implied, so work can stop at any rung without a scramble to salvage a claim.
@@ -114,6 +158,16 @@ def _rung(n: int) -> tuple[str, str, Optional[int]]:
             rung, note = name, desc
             nxt = CLAIMS_LADDER[i + 1][0] if i + 1 < len(CLAIMS_LADDER) else None
     return rung, note, nxt
+
+
+def _item_key(doc: Dict[str, Any]) -> tuple:
+    """What makes one queue item distinct from another.
+
+    `corpus_id` is part of it. A fact is scored once per corpus, so without it
+    an expert's DEB judgment would mark the reproduction item done as well —
+    and the queue would report coverage it does not have.
+    """
+    return (doc.get("sf_number"), doc.get("task"), doc.get("corpus_id"))
 
 
 class ElicitationService:
@@ -216,6 +270,8 @@ class ElicitationService:
                 # the queue, never appended later: comparison items and
                 # repeated-judgment items must accrue from the start, or a
                 # queue that stops early yields no measurable agreement at all.
+                "priority": PRIORITY_FACT_LEVEL,
+                "corpus_id": None,
                 "n_required": (
                     HUMAN_PANEL_SIZE if pos % COMPARISON_SUBSET_EVERY == 0
                     else 2 if pos % REPEATED_JUDGMENT_EVERY == 0
@@ -224,14 +280,203 @@ class ElicitationService:
             })
         if docs:
             await self.db.elicitation_queue.insert_many(docs)
-        await self.db.elicitation_queue.create_index(
-            [("collection_version", 1), ("queue_position", 1)])
-        await self.db.elicitations.create_index(
-            [("sf_number", 1), ("task", 1), ("expert_id", 1)], unique=True)
+        await self._ensure_indexes()
 
         logger.info("elicitation queue built: %d items", len(docs))
         return {"status": "built", "queue_length": len(docs),
                 "strata": len(cells), "seed": QUEUE_SEED}
+
+    async def _ensure_indexes(self) -> None:
+        """Indexes, including the one that defines what a distinct item is.
+
+        The uniqueness key is (sf_number, task, corpus_id, expert_id). It used
+        to omit `corpus_id`, which was correct while every task was fact-level
+        and silently wrong the moment the evidence task arrived: one expert
+        scoring a fact against the DEB corpus would have blocked themselves
+        from ever scoring it against the reproduction corpus, and the failure
+        would have surfaced as a bare duplicate-key error reported to them as
+        "already judged by you".
+        """
+        await self.db.elicitation_queue.create_index(
+            [("collection_version", 1), ("priority", 1), ("queue_position", 1)])
+        await self.db.elicitation_queue.create_index(
+            [("collection_version", 1), ("sf_number", 1), ("task", 1),
+             ("corpus_id", 1)])
+        # Drop the superseded key if it is still present, then install the
+        # corpus-aware one. Ordering matters: the old index would reject the
+        # second corpus for a fact even though the new one permits it.
+        try:
+            await self.db.elicitations.drop_index("sf_number_1_task_1_expert_id_1")
+            logger.info("dropped superseded elicitations uniqueness index")
+        except Exception:
+            pass
+        await self.db.elicitations.create_index(
+            [("sf_number", 1), ("task", 1), ("corpus_id", 1), ("expert_id", 1)],
+            unique=True, name="item_expert_unique")
+
+    # ------------------------------------------------------------------ #
+    # Evidence sets
+    # ------------------------------------------------------------------ #
+
+    async def import_evidence_sets(self, artefact: Dict[str, Any],
+                                   force: bool = False) -> Dict[str, Any]:
+        """Load the frozen evidence sets the agent panel read.
+
+        The artefact is the verified export from advandeb_methods
+        (`data/evidence/evidence_sets_v1.0.json`), whose every `content_hash`
+        was checked against the backfill manifest before it was written. It is
+        stored here verbatim, hashes included, so the claim that both panels
+        read the same passages stays checkable from inside the platform
+        (ADR 0003).
+        """
+        sets = artefact.get("sets") or []
+        if not sets:
+            return {"status": "empty", "n": 0}
+        existing = await self.db.evidence_sets.count_documents({})
+        if existing and not force:
+            return {"status": "exists", "n": existing}
+        if force:
+            await self.db.evidence_sets.delete_many({})
+
+        docs = []
+        for es in sets:
+            docs.append({
+                "_id": es["evidence_set_id"],
+                **{k: es.get(k) for k in (
+                    "sf_candidate_id", "sf_number", "statement",
+                    "statement_sha256", "category", "corpus_id",
+                    "content_hash", "n_passages", "embedding_model",
+                    "passages")},
+                "artefact_version": (artefact.get("manifest") or {}).get("version"),
+                "imported_at": datetime.now(timezone.utc),
+            })
+        await self.db.evidence_sets.insert_many(docs)
+        await self.db.evidence_sets.create_index(
+            [("sf_number", 1), ("corpus_id", 1)])
+        logger.info("imported %d evidence sets", len(docs))
+        return {"status": "imported", "n": len(docs),
+                "facts": len({d["sf_number"] for d in docs}),
+                "corpora": sorted({d["corpus_id"] for d in docs})}
+
+    @staticmethod
+    def shown_passage_indices(n_total: int, n_shown: int) -> List[int]:
+        """Which passages an expert sees, when not all of them.
+
+        Spread evenly across the canonical order rather than taken from the
+        top. Passages are ordered by retrieval similarity, so the first k are
+        systematically the strongest evidence — showing those would hand the
+        human panel an easier task than the agents got and bias the ceiling
+        upward, which is the one direction that would make the machine look
+        worse for no reason.
+        """
+        if n_shown >= n_total:
+            return list(range(n_total))
+        step = n_total / float(n_shown)
+        return sorted({min(n_total - 1, int(i * step)) for i in range(n_shown)})
+
+    async def build_evidence_queue(self, collection_version: str = "1.0",
+                                   force: bool = False) -> Dict[str, Any]:
+        """Queue one evidence item per (fact, corpus), ahead of everything else.
+
+        Idempotent, and refuses a silent rebuild for the same reason
+        `build_queue` does: re-ordering after elicitation has begun changes
+        what the completed prefix represents.
+        """
+        existing = await self.db.elicitation_queue.count_documents(
+            {"collection_version": collection_version, "task": "evidence"})
+        if existing and not force:
+            return {"status": "exists", "queue_length": existing}
+
+        sets: List[Dict[str, Any]] = []
+        async for es in self.db.evidence_sets.find(
+                {"corpus_id": {"$in": list(EVIDENCE_CORPORA)}},
+                {"passages": 0}):
+            sets.append(es)
+        if not sets:
+            return {"status": "no_evidence_sets", "queue_length": 0}
+
+        authored: Dict[int, List[str]] = {}
+        async for f in self.db.stylized_facts.find(
+                {"authored_by": {"$exists": True, "$ne": []}},
+                {"sf_number": 1, "authored_by": 1}):
+            try:
+                authored[int(f["sf_number"])] = f.get("authored_by") or []
+            except (TypeError, ValueError):
+                continue
+
+        # Same stratification as the fact-level block — category x corpus —
+        # and the same floor-then-proportional allocation, so a short prefix
+        # is still representative of the evidence sets as a whole.
+        cells: Dict[str, List[Dict[str, Any]]] = {}
+        for es in sets:
+            cells.setdefault(
+                f"{es.get('category', '?')}|{es['corpus_id']}", []).append(es)
+        rng = random.Random(QUEUE_SEED)
+        for items in cells.values():
+            rng.shuffle(items)
+
+        keys = sorted(cells)
+        sizes = {k: len(cells[k]) for k in keys}
+        emitted = {k: 0 for k in keys}
+        order: List[Dict[str, Any]] = []
+        for _ in range(STRATUM_FLOOR):
+            for k in keys:
+                if cells[k]:
+                    order.append({**cells[k].pop(), "stratum": k})
+                    emitted[k] += 1
+        remaining = [k for k in keys if cells[k]]
+        while remaining:
+            k = min(remaining, key=lambda c: (emitted[c] + 1) / sizes[c])
+            order.append({**cells[k].pop(), "stratum": k})
+            emitted[k] += 1
+            if not cells[k]:
+                remaining.remove(k)
+
+        if force:
+            await self.db.elicitation_queue.delete_many(
+                {"collection_version": collection_version, "task": "evidence"})
+
+        docs = []
+        for pos, es in enumerate(order):
+            sf_number = int(es["sf_number"])
+            comparison = es["corpus_id"] == EVIDENCE_COMPARISON_CORPUS
+            docs.append({
+                "collection_version": collection_version,
+                "priority": PRIORITY_EVIDENCE,
+                "queue_position": pos,
+                "task": "evidence",
+                "stratum": es["stratum"],
+                "sf_number": sf_number,
+                "corpus_id": es["corpus_id"],
+                "evidence_set_id": es["_id"],
+                "evidence_content_hash": es.get("content_hash"),
+                "statement_sha256": es.get("statement_sha256") or "",
+                "authored_by": authored.get(sf_number, []),
+                # The comparison corpus takes the full human panel; the other
+                # is single-judged. Fixed in the queue, never appended: a
+                # position that only becomes five-deep later yields no
+                # measurable agreement if the effort stops early.
+                "n_required": HUMAN_PANEL_SIZE if comparison else 1,
+                "comparison_item": comparison,
+                "n_passages_shown": EVIDENCE_PASSAGES_SHOWN,
+            })
+        if docs:
+            await self.db.elicitation_queue.insert_many(docs)
+        # The fact-level block predates `priority`; stamp it so ordering is
+        # well defined for rows written before this existed.
+        await self.db.elicitation_queue.update_many(
+            {"collection_version": collection_version,
+             "priority": {"$exists": False}},
+            {"$set": {"priority": PRIORITY_FACT_LEVEL, "corpus_id": None}})
+        await self._ensure_indexes()
+
+        panel_items = sum(1 for d in docs if d["comparison_item"])
+        logger.info("evidence queue built: %d items (%d at panel depth)",
+                    len(docs), panel_items)
+        return {"status": "built", "queue_length": len(docs),
+                "strata": len(cells), "comparison_items": panel_items,
+                "panel_judgments_target": panel_items * HUMAN_PANEL_SIZE,
+                "passages_shown": EVIDENCE_PASSAGES_SHOWN}
 
     async def next_item(self, expert_id: str,
                         collection_version: str = "1.0") -> Optional[QueueItem]:
@@ -251,8 +496,9 @@ class ElicitationService:
 
         done = set()
         async for a in self.db.elicitations.find(
-                {"expert_id": expert_id}, {"sf_number": 1, "task": 1}):
-            done.add((a["sf_number"], a["task"]))
+                {"expert_id": expert_id},
+                {"sf_number": 1, "task": 1, "corpus_id": 1}):
+            done.add(_item_key(a))
         authored = await self.authored_by_expert(expert_id)
 
         # `n_required` is satisfied by PANEL-tier judgments only
@@ -266,14 +512,19 @@ class ElicitationService:
         # data at all.
         counts: Dict[tuple, int] = {}
         async for a in self.db.elicitations.find(
-                {"tier": "panel"}, {"sf_number": 1, "task": 1}):
-            key = (a["sf_number"], a["task"])
+                {"tier": "panel"},
+                {"sf_number": 1, "task": 1, "corpus_id": 1}):
+            key = _item_key(a)
             counts[key] = counts.get(key, 0) + 1
 
+        # Evidence first, then the fact-level block; seeded order within each
+        # (see PRIORITY_EVIDENCE). Rows written before `priority` existed sort
+        # as 1 via the backfill in build_evidence_queue.
         cursor = self.db.elicitation_queue.find(
-            {"collection_version": collection_version}).sort("queue_position", 1)
+            {"collection_version": collection_version}).sort(
+                [("priority", 1), ("queue_position", 1)])
         async for q in cursor:
-            key = (q["sf_number"], q["task"])
+            key = _item_key(q)
             if key in done:
                 continue
             n_done = counts.get(key, 0)
@@ -293,6 +544,33 @@ class ElicitationService:
                         {"sf_number": str(q["sf_number"])}]})
             if not fact:
                 continue
+
+            passages: List[EvidencePassage] = []
+            n_total = None
+            if q["task"] == "evidence":
+                es = await self.db.evidence_sets.find_one(
+                    {"_id": q.get("evidence_set_id")})
+                if not es:
+                    # Queued but not imported. Skip rather than serve an
+                    # evidence task with no evidence: an expert cannot judge
+                    # passages they were not shown, and a decision recorded
+                    # against an empty set would be indistinguishable from a
+                    # real one afterwards.
+                    logger.warning("evidence set %s missing; skipping item %s",
+                                   q.get("evidence_set_id"), q["queue_position"])
+                    continue
+                all_p = es.get("passages") or []
+                n_total = len(all_p)
+                keep = set(self.shown_passage_indices(
+                    n_total, int(q.get("n_passages_shown") or n_total)))
+                passages = [
+                    EvidencePassage(
+                        index=pp.get("index", i), text=pp.get("text", ""),
+                        similarity=float(pp.get("similarity") or 0.0),
+                        doi=pp.get("doi"), title=pp.get("title"),
+                        year=pp.get("year"), document_id=pp.get("document_id"))
+                    for i, pp in enumerate(all_p) if pp.get("index", i) in keep]
+
             return QueueItem(
                 queue_position=q["queue_position"], task=q["task"],
                 sf_number=q["sf_number"], statement=fact.get("statement", ""),
@@ -307,6 +585,11 @@ class ElicitationService:
                 n_required=int(q.get("n_required", 1)),
                 comparison_item=bool(q.get("comparison_item")),
                 stratum=q.get("stratum", ""),
+                corpus_id=q.get("corpus_id"),
+                evidence_set_id=q.get("evidence_set_id"),
+                evidence_content_hash=q.get("evidence_content_hash"),
+                passages=passages,
+                n_passages_total=n_total,
             )
         return None
 
@@ -360,15 +643,49 @@ class ElicitationService:
             return set()
         return set((u or {}).get("authored_sf_numbers") or [])
 
+    @staticmethod
+    def _evidence_problem(decision: ElicitationDecision,
+                          q: Dict[str, Any]) -> Optional[str]:
+        """Why this evidence decision cannot be recorded, or None.
+
+        Validated on the server because each of these failures is silent. A
+        decision missing its passage judgments still stores, still counts
+        toward `n_required`, and still looks like a completed item — and the
+        absence only surfaces when the agreement statistic is computed over a
+        sample smaller than the queue says it is.
+        """
+        if decision.evidence_strength is None or decision.consensus_direction is None:
+            return ("evidence decisions carry both fact-level scores "
+                    "(evidence strength and consensus direction)")
+        # The evidence hash is what makes "both panels read the same passages"
+        # checkable rather than assumed (ADR 0003). A mismatch means the client
+        # submitted against a different or a stale evidence set.
+        expected = q.get("evidence_content_hash")
+        if expected and decision.evidence_content_hash != expected:
+            return ("evidence_content_hash does not match the queued evidence "
+                    "set; the judgment would not be attributable to known "
+                    "evidence")
+        if not decision.passage_judgments:
+            return ("evidence decisions carry a judgment for every passage "
+                    "shown; passage agreement is the comparison this task "
+                    "exists to support")
+        return None
+
     async def submit(self, decision: ElicitationDecision,
                      expert_id: str,
                      collection_version: str = "1.0") -> Dict[str, Any]:
         """Record one decision. Refuses to overwrite an existing one."""
         q = await self.db.elicitation_queue.find_one({
             "collection_version": collection_version,
-            "sf_number": decision.sf_number, "task": decision.task})
+            "sf_number": decision.sf_number, "task": decision.task,
+            "corpus_id": decision.corpus_id})
         if not q:
             return {"status": "error", "detail": "item not in queue"}
+
+        if decision.task == "evidence":
+            problem = self._evidence_problem(decision, q)
+            if problem:
+                return {"status": "error", "detail": problem}
         if expert_id in (q.get("authored_by") or []):
             return {"status": "error",
                     "detail": "expert authored this fact (conflict of interest)"}
@@ -390,7 +707,7 @@ class ElicitationService:
         tier = await self.tier_of(expert_id)
         prior = await self.db.elicitations.count_documents({
             "sf_number": decision.sf_number, "task": decision.task,
-            "tier": tier})
+            "corpus_id": decision.corpus_id, "tier": tier})
         doc = {
             **decision.model_dump(),
             "expert_id": expert_id,
@@ -484,6 +801,9 @@ class ElicitationService:
                 "scope_verdict": a.get("scope_verdict"),
                 "proposed_scope": a.get("proposed_scope"),
                 "assessability": a.get("assessability"),
+                "corpus_id": a.get("corpus_id"),
+                "evidence_strength": a.get("evidence_strength"),
+                "consensus_direction": a.get("consensus_direction"),
                 "confidence": a.get("confidence", 3),
                 "rationale": a.get("rationale", ""),
                 "tier": a.get("tier"),
@@ -543,6 +863,82 @@ class ElicitationService:
                          "hint": "no scope, and none can be inferred"},
                         {"value": "not_applicable", "label": "Not applicable",
                          "hint": "not a claim about organisms"},
+                    ],
+                },
+                {
+                    "task": "evidence",
+                    "title": "How well does this literature support the fact?",
+                    "help": (
+                        "You are reading the same frozen passages the agent "
+                        "panel read, in the same wording. That parity is the "
+                        "point: it is what makes a disagreement between you "
+                        "and the machine a difference of judgment rather than "
+                        "of instructions.\n\n"
+                        "Label each passage, then give the two scores. "
+                        "`neutral` is a real answer and most passages are — "
+                        "retrieval returns nearest neighbours, not evidence. "
+                        "Judge only what the passage says; do not fill in "
+                        "from what you know about the fact. There is a "
+                        "separate place for that."),
+                    "options": [
+                        {"value": "supports", "label": "Supports",
+                         "hint": "the passage is consistent with the fact"},
+                        {"value": "contradicts", "label": "Contradicts",
+                         "hint": "the passage is inconsistent with it"},
+                        {"value": "neutral", "label": "Neutral",
+                         "hint": "on another topic, or says nothing either way"},
+                    ],
+                },
+                {
+                    "task": "evidence_role",
+                    "title": "Is the passage evidence, or a restatement?",
+                    "help": (
+                        "Asked of every passage you did not call neutral. "
+                        "Nearly half of what reads as support for DEB turns "
+                        "out to restate the theory rather than measure it "
+                        "(restatement ratio 0.474 across 3,294 passages), and "
+                        "a literature that agrees with itself is not the same "
+                        "as one that has tested itself."),
+                    "options": [
+                        {"value": "primary_evidence", "label": "Primary evidence",
+                         "hint": "reports a measurement or an observation"},
+                        {"value": "restatement", "label": "Restatement",
+                         "hint": "asserts the fact, citing it rather than testing it"},
+                        {"value": "derivation", "label": "Derivation",
+                         "hint": "follows from theory or a model, not from data"},
+                        {"value": "review", "label": "Review",
+                         "hint": "summarises others' findings"},
+                    ],
+                },
+                {
+                    "task": "evidence_strength",
+                    "title": "Evidence strength (1-3)",
+                    "help": (
+                        "How much support these passages actually provide. "
+                        "Unchanged from the predecessor's scale so every "
+                        "existing score stays comparable."),
+                    "options": [
+                        {"value": "1", "label": "1 - weak or sparse",
+                         "hint": "little or no real support here"},
+                        {"value": "2", "label": "2 - moderate", "hint": "some support"},
+                        {"value": "3", "label": "3 - strong",
+                         "hint": "multiple clear supporting references"},
+                    ],
+                },
+                {
+                    "task": "consensus_direction",
+                    "title": "Consensus direction (1-3)",
+                    "help": (
+                        "Which way the literature points, as a sign rather "
+                        "than a magnitude. How strongly is carried by the "
+                        "strength score and by contestation, not here."),
+                    "options": [
+                        {"value": "1", "label": "1 - against",
+                         "hint": "predominantly contradicted, or mixed against"},
+                        {"value": "2", "label": "2 - neutral",
+                         "hint": "insufficient evidence either way"},
+                        {"value": "3", "label": "3 - corroborated",
+                         "hint": "supported, with little conflict"},
                     ],
                 },
                 {

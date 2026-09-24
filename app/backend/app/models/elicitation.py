@@ -32,7 +32,27 @@ from pydantic import BaseModel, Field
 
 # Day-one tasks operate on the statement alone and need no evidence set, so
 # elicitation can begin before the consensus pipeline runs inside the platform.
-TaskType = Literal["provenance", "scope", "assessability"]
+#
+# `evidence` is the task the whole comparison rests on, and it came later for a
+# bad reason: the fact-level tasks were easy to queue before evidence sets
+# existed in the platform, so they were built first and the gap went unnoticed.
+# They produce useful metadata and they cannot produce the human ceiling — no
+# amount of provenance labelling says whether a machine alpha of 0.43 is poor
+# or is the task's noise floor. Only humans reading the *same frozen passages*
+# can say that.
+TaskType = Literal["provenance", "scope", "assessability", "evidence"]
+
+# Passage-level judgment, deliberately the same two axes and the same wording
+# the agents were given (advandeb_methods docs/01 section 4.2a). Parity is the
+# point: if the human task differed, a human-machine gap could always be
+# explained away as a difference of instructions rather than of judgment.
+PassageDirection = Literal["supports", "contradicts", "neutral"]
+
+# Separating evidence from assertion. Roughly half of what reads as DEB
+# "support" turns out to be restatement of the theory rather than a measurement
+# of it (restatement_ratio 0.474 across 3,294 passages), so a passage that
+# supports a fact is not yet evidence for it.
+EvidentialRole = Literal["primary_evidence", "restatement", "derivation", "review"]
 
 ProvenanceType = Literal["published", "new", "adapted", "unknown"]
 
@@ -44,6 +64,32 @@ ScopeVerdict = Literal["stated", "implicit", "absent", "not_applicable"]
 AssessabilityVerdict = Literal[
     "assessable", "too_vague", "compound", "not_empirical", "unclear_terms"
 ]
+
+
+class EvidencePassage(BaseModel):
+    """One frozen passage, as shown to an expert.
+
+    `index` is the **canonical** index within the evidence set, which is the
+    join key against every machine verdict. The agents read these rotated to
+    control positional attention decay (docs/11 section 7.1) and their labels
+    are stored against the canonical index too, so the two panels' judgments
+    line up passage for passage regardless of what order either one saw.
+    """
+
+    index: int
+    text: str
+    similarity: float
+    doi: Optional[str] = None
+    title: Optional[str] = None
+    year: Optional[Any] = None
+    document_id: Optional[str] = None
+
+
+class PassageJudgment(BaseModel):
+    """An expert's two labels for one passage."""
+
+    direction: PassageDirection
+    evidential_role: Optional[EvidentialRole] = None
 
 
 class QueueItem(BaseModel):
@@ -71,6 +117,23 @@ class QueueItem(BaseModel):
     comparison_item: bool = False
     stratum: str
 
+    # --- evidence task only ---
+    # Which corpus this judgment is about. A fact is scored once per corpus,
+    # so (sf_number, task) is no longer a unique item key and `corpus_id`
+    # completes it. Null for the fact-level tasks, which have no corpus.
+    corpus_id: Optional[str] = None
+    evidence_set_id: Optional[str] = None
+    # The hash of the passages the agent panel read. Carried onto the
+    # expert's record so that "both panels saw the same evidence" is a
+    # checkable claim rather than an assumption (ADR 0003).
+    evidence_content_hash: Optional[str] = None
+    passages: List[EvidencePassage] = []
+    # How many passages the set holds in total, when fewer are shown. Stated
+    # to the expert: judging 9 of 18 passages is a different question from
+    # judging all the evidence there is, and they are entitled to know which
+    # one they are being asked.
+    n_passages_total: Optional[int] = None
+
 
 class ElicitationDecision(BaseModel):
     """What an expert submits. One per (task, fact, expert)."""
@@ -88,6 +151,20 @@ class ElicitationDecision(BaseModel):
     proposed_taxon_ids: List[int] = []
 
     assessability: Optional[AssessabilityVerdict] = None
+
+    # evidence task. The two fact-level scores are the same 1-3 scales the
+    # agents produce (docs/09 sections 2.1 and 2.2), unchanged from the
+    # predecessor so every existing score stays on one scale.
+    corpus_id: Optional[str] = None
+    evidence_set_id: Optional[str] = None
+    evidence_content_hash: Optional[str] = None
+    evidence_strength: Optional[int] = Field(default=None, ge=1, le=3)
+    consensus_direction: Optional[int] = Field(default=None, ge=1, le=3)
+    # Keyed by canonical passage index as a string, because that is the join
+    # key against the machine panel. Passage judgments are what the headline
+    # agreement number is computed over, so an evidence decision without them
+    # is not comparable to anything.
+    passage_judgments: Dict[str, PassageJudgment] = {}
 
     # --- required of every decision ---
     confidence: int = Field(ge=1, le=5)
@@ -201,6 +278,9 @@ class HistoryItem(BaseModel):
     scope_verdict: Optional[ScopeVerdict] = None
     proposed_scope: Optional[str] = None
     assessability: Optional[AssessabilityVerdict] = None
+    corpus_id: Optional[str] = None
+    evidence_strength: Optional[int] = None
+    consensus_direction: Optional[int] = None
     confidence: int
     rationale: str
     tier: Optional[str] = None
