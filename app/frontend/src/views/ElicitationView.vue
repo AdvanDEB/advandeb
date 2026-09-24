@@ -163,7 +163,7 @@
             {{ submitting ? 'Saving…' : 'Submit and next' }}
             <kbd>⌘⏎</kbd>
           </button>
-          <span v-if="blockedReason" class="hint">{{ blockedReason }}</span>
+          <span v-if="blockedReason && dirty" class="hint">{{ blockedReason }}</span>
           <span v-if="error" class="error">{{ error }}</span>
           <span class="timer">{{ elapsed }}s on this item</span>
         </div>
@@ -205,7 +205,7 @@ import GuidelinesPanel from '@/components/elicitation/GuidelinesPanel.vue'
 import HistoryPanel from '@/components/elicitation/HistoryPanel.vue'
 import ShortcutsOverlay from '@/components/elicitation/ShortcutsOverlay.vue'
 import {
-  OPTION_KEYS, prettyCategory, taskSpec, type TaskType,
+  OPTION_KEYS, prettyCategory, taskSpec, validateDecision, type TaskType,
 } from '@/components/elicitation/taskOptions'
 
 interface QueueItem {
@@ -271,6 +271,11 @@ const blockedReason = computed(() =>
 
 const canSubmit = computed(() =>
   !!item.value && !submitting.value && blockedReason.value === null)
+
+// Only explain what is missing once they have started; an untouched form
+// showing "Pick an option" is noise, not help.
+const dirty = computed(() =>
+  !!form.value.choice || form.value.confidence > 0 || !!form.value.rationale.trim())
 
 function choose(value: string) {
   form.value.choice = value
