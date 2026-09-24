@@ -84,6 +84,35 @@ async def main():
         "roles":["external_contributor"],"capabilities":["sf_elicitation"],
         "tier":"contributor"})).inserted_id)
 
+    print("\n=== CALIBRATION GATE (docs/10 5.3) ===")
+    await svc.seed_calibration()
+    gated = await svc.next_item(panel_id)
+    check("no live item served before calibration", gated, None)
+    blocked_early = await svc.submit(ElicitationDecision(task="provenance",
+        sf_number=1, statement_sha256="x", provenance_type="unknown",
+        confidence=3, rationale="should be gated"), panel_id)
+    check("submit refused before calibration", blocked_early["status"], "error")
+    check("refusal names calibration",
+          "calibration" in blocked_early["detail"], True)
+
+    # clear calibration for the panel expert
+    while True:
+        c = await svc.calibration_next(panel_id)
+        if not c: break
+        ref = await db.elicitation_calibration.find_one(
+            {"calibration_id": c["calibration_id"]})
+        exp = (ref["reference"].get("provenance_type")
+               or ref["reference"].get("scope_verdict"))
+        await svc.calibration_submit(CalibrationDecision(
+            calibration_id=c["calibration_id"], task=c["task"],
+            provenance_type=exp if c["task"]=="provenance" else None,
+            scope_verdict=exp if c["task"]=="scope" else None,
+            confidence=4, rationale="ref"), panel_id)
+    check("queue opens after calibration",
+          (await svc.next_item(panel_id)) is not None, True)
+    prog = await svc.progress(panel_id)
+    check("progress reports calibration cleared", prog.calibration_required, False)
+
     print("\n=== COI ===")
     seen=[]
     for _ in range(40):
@@ -102,6 +131,14 @@ async def main():
     target = next(r for r in rows if r["n_required"]==5)
     key = {"sf_number": target["sf_number"], "task": target["task"]}
     before_panel = await db.elicitations.count_documents({**key, "tier":"panel"})
+    for _ in range(50):
+        c = await svc.calibration_next(contrib_id)
+        if not c: break
+        await svc.calibration_submit(CalibrationDecision(
+            calibration_id=c["calibration_id"], task=c["task"],
+            provenance_type="unknown" if c["task"]=="provenance" else None,
+            scope_verdict="absent" if c["task"]=="scope" else None,
+            confidence=2, rationale="contributor attempt"), contrib_id)
     # contributor judges the comparison item five times over? once is enough
     await svc.submit(ElicitationDecision(task=target["task"],
         sf_number=target["sf_number"], statement_sha256=target["statement_sha256"],
@@ -118,10 +155,14 @@ async def main():
     panel_have = before_panel
     check("comparison item still needs panel judgments", panel_have < 5, True)
 
-    print("\n=== CALIBRATION ===")
-    seeded = await svc.seed_calibration()
-    check("calibration cases seeded", seeded["n"] >= 10, True)
-    c1 = await svc.calibration_next(panel_id)
+    print("\n=== CALIBRATION SCORING ===")
+    # A fresh expert: panel_id and contrib_id have both already cleared the set.
+    fresh_id = str((await db.users.insert_one({
+        "email":"fresh@x.org","full_name":"Fresh","roles":["knowledge_explorator"],
+        "capabilities":["sf_elicitation"],"tier":"panel"})).inserted_id)
+    check("calibration cases seeded",
+          await db.elicitation_calibration.count_documents({}) >= 10, True)
+    c1 = await svc.calibration_next(fresh_id)
     check("calibration case served", c1 is not None, True)
     ref = await db.elicitation_calibration.find_one({"calibration_id": c1["calibration_id"]})
     exp = (ref["reference"].get("provenance_type") or ref["reference"].get("scope_verdict"))
@@ -129,9 +170,11 @@ async def main():
         calibration_id=c1["calibration_id"], task=c1["task"],
         provenance_type=exp if c1["task"]=="provenance" else None,
         scope_verdict=exp if c1["task"]=="scope" else None,
-        confidence=4, rationale="matches documented reference"), panel_id)
+        confidence=4, rationale="matches documented reference"), fresh_id)
     check("correct answer scored correct", fb["correct"], True)
     check("reference basis returned", bool(fb["reference"].get("basis")), True)
+    check("partially-calibrated expert still gated",
+          await svc.next_item(fresh_id), None)
 
     print("\n=== ENROLMENT + COI AT APPROVAL ===")
     ens = EnrolmentService()
@@ -154,6 +197,15 @@ async def main():
         str(u["_id"]))
     check("COI blocks authored fact for external contributor",
           blocked["status"], "error")
+
+    print("\n=== ADMIN STATS ===")
+    st = await svc.admin_stats()
+    check("aggregates by stamped record tier", "by_record_tier" in st, True)
+    me = next(e for e in st["by_expert"] if e["n_by_record_tier"].get("panel"))
+    check("per-expert counts split by record tier",
+          isinstance(me["n_by_record_tier"], dict), True)
+    check("per-expert calibration exposed", me["calibration"]["done"], True)
+    check("awaiting_calibration listed", "awaiting_calibration" in st, True)
 
     print("\n=== HISTORY / GUIDELINES ===")
     h = await svc.history(panel_id, 10)
