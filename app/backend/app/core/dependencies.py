@@ -54,6 +54,14 @@ async def require_curator(current_user: dict = Depends(get_current_user)):
 
 CAP_SF_ELICITATION = "sf_elicitation"
 
+# Minimum-privilege role for external elicitation participants
+# (advandeb_methods docs/10 section 4.1). Defined by what it EXCLUDES: no
+# documents, no chat, no knowledge base, no graph, no models. Every existing
+# role implies read access to curated material, some of it licensed full text
+# that cannot leave the project, so an external contributor must not inherit
+# that by accident.
+ROLE_EXTERNAL_CONTRIBUTOR = "external_contributor"
+
 
 def require_capability(capability: str) -> Callable:
     """Require a named capability, or a role that implies it.
@@ -67,7 +75,9 @@ def require_capability(capability: str) -> Callable:
         caps = current_user.get("capabilities", []) or []
         if "administrator" in roles or capability in caps:
             return current_user
-        if capability == CAP_SF_ELICITATION and "knowledge_curator" in roles:
+        if capability == CAP_SF_ELICITATION and (
+                "knowledge_curator" in roles
+                or ROLE_EXTERNAL_CONTRIBUTOR in roles):
             return current_user
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,

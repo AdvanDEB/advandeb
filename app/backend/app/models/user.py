@@ -2,7 +2,7 @@
 User data models.
 """
 from pydantic import BaseModel, EmailStr, Field
-from typing import List, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 
 
@@ -54,6 +54,34 @@ class NativeLoginRequest(BaseModel):
     password: str
 
 
+class ExpertiseProfile(BaseModel):
+    """Self-reported expertise, captured once at enrolment.
+
+    Per-category familiarity is the operationally useful field
+    (advandeb_methods docs/10 section 6): it lets reliability be reported
+    against *stated* expertise, which answers "do people who say they know this
+    area agree more?" — a question the paper can ask of both strata.
+    """
+    affiliation: Optional[str] = None
+    orcid: Optional[str] = None
+    years_in_field: Optional[int] = None
+    deb_experience: Optional[str] = None
+    # category slug -> 1-5
+    category_familiarity: Dict[str, int] = {}
+    consent_acknowledgement: bool = False
+
+
+class Approval(BaseModel):
+    """Who admitted this person, when, and at which tier.
+
+    Recorded because the paper has to be able to describe how its panel was
+    constituted (docs/10 section 5).
+    """
+    by: Optional[str] = None
+    at: Optional[datetime] = None
+    tier: Optional[str] = None
+
+
 class User(UserBase):
     """User model with database fields."""
     id: str = Field(validation_alias="_id")
@@ -61,6 +89,22 @@ class User(UserBase):
     roles: List[str] = []
     capabilities: List[str] = []
     status: str = "active"  # active, inactive, suspended
+
+    # --- elicitation tiering (advandeb_methods docs/10) ---
+    #
+    # `panel`       invited DEB experts; their judgments carry the agreement
+    #               statistics and the human consensus reported in the paper.
+    # `contributor` approved self-signups; stored, attributed and creditable,
+    #               but never pooled into panel statistics.
+    #
+    # None means the person is not an elicitation participant at all.
+    tier: Optional[str] = None
+    expertise_profile: Optional[ExpertiseProfile] = None
+    approval: Optional[Approval] = None
+    # Stylized facts this person authored, resolved at approval by ORCID then
+    # name. Drives the conflict-of-interest exclusion in the queue: an
+    # outsider's conflict is no less a conflict (docs/10 section 5.1).
+    authored_sf_numbers: List[int] = []
     # Research-consent flag: whether AdvanDEB staff may review this user's
     # chat history. Defaults to opted-in, matching the existing blanket
     # consent given by current users; self-service opt-out via PUT /users/me.

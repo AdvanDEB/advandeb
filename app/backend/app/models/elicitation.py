@@ -111,6 +111,15 @@ class ElicitationRecord(ElicitationDecision):
 
     id: str = Field(alias="_id")
     expert_id: str
+    # The expert's tier **as it was at the moment of judgment**, stamped at
+    # write time and never resolved later (advandeb_methods docs/10 section
+    # 2.1). If tier were looked up at analysis time, promoting one contributor
+    # to the panel would retroactively move all their past judgments into the
+    # panel stratum — silently changing the sampling frame and invalidating
+    # every agreement statistic already computed from it. Same principle as
+    # `panel_id` on machine records: the instrument that produced a measurement
+    # is a property of the measurement.
+    tier: Optional[Literal["panel", "contributor"]] = None
     queue_position: int
     stratum: str
     collection_version: str
@@ -143,3 +152,95 @@ class ElicitationProgress(BaseModel):
     rung: str = "R0"
     rung_note: str = ""
     next_rung_at: Optional[int] = None
+
+
+# --------------------------------------------------------------------------- #
+# Guidelines, history and calibration
+# --------------------------------------------------------------------------- #
+
+
+class TaskOption(BaseModel):
+    """One selectable answer for a task, with the hint shown beside it."""
+    value: str
+    label: str
+    hint: str
+
+
+class TaskGuideline(BaseModel):
+    task: TaskType
+    title: str
+    help: str
+    options: List[TaskOption] = []
+
+
+class Guidelines(BaseModel):
+    """Served rather than duplicated in the client.
+
+    The guidelines are a versioned instrument: a mid-study change invalidates
+    prior judgments unless they are re-checked, so the version travels with
+    them (docs/02 section 7).
+    """
+    tasks: List[TaskGuideline] = []
+    version: str
+
+
+class HistoryItem(BaseModel):
+    """One of the expert's own past judgments."""
+    sf_number: int
+    statement: str
+    task: TaskType
+    provenance_type: Optional[ProvenanceType] = None
+    source_citation: Optional[str] = None
+    scope_verdict: Optional[ScopeVerdict] = None
+    proposed_scope: Optional[str] = None
+    assessability: Optional[AssessabilityVerdict] = None
+    confidence: int
+    rationale: str
+    tier: Optional[str] = None
+    created_at: datetime
+
+
+class HistoryResponse(BaseModel):
+    items: List[HistoryItem] = []
+
+
+class CalibrationItem(BaseModel):
+    """A calibration case, shaped like a queue item so the UI can reuse it."""
+    calibration_id: str
+    queue_position: int = -1
+    task: TaskType
+    sf_number: int
+    statement: str
+    statement_sha256: str
+    category: str
+    collection_version: str
+    existing_provenance: Optional[ProvenanceType] = None
+    existing_source_citation: Optional[str] = None
+    legacy_assessment: Optional[Dict[str, Any]] = None
+    repeated_judgment: bool = False
+    n_required: int = 1
+    comparison_item: bool = False
+    stratum: str = "calibration"
+    completed: int = 0
+    total: int = 0
+
+
+class CalibrationDecision(BaseModel):
+    """An answer to one calibration case."""
+    calibration_id: str
+    task: TaskType
+    provenance_type: Optional[ProvenanceType] = None
+    scope_verdict: Optional[ScopeVerdict] = None
+    assessability: Optional[AssessabilityVerdict] = None
+    confidence: int = Field(ge=1, le=5)
+    rationale: str = Field(min_length=1)
+    time_spent_s: Optional[float] = None
+
+
+class CalibrationFeedback(BaseModel):
+    """Immediate feedback — calibration teaches, so it does not withhold."""
+    correct: bool
+    reference: Dict[str, Any] = {}
+    explanation: str
+    completed: int
+    total: int

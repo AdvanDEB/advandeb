@@ -7,8 +7,7 @@ from bson import ObjectId
 from fastapi import HTTPException
 
 from app.core.dependencies import require_role
-from app.models.scenario import ScenarioCreate, ModelCreate
-from app.services.scenario_service import ScenarioService
+from app.models.model import ModelCreate
 from app.services.model_service import ModelService
 from app.services.user_service import UserService
 from app.services.user_submission_service import UserSubmissionService
@@ -34,59 +33,6 @@ async def test_require_role_factory_returns_callable():
     with pytest.raises(HTTPException) as exc_info:
         await checker(current_user=user_explorator)
     assert exc_info.value.status_code == 403
-
-
-# ---------------------------------------------------------------------------
-# ScenarioService ownership & authorization
-# ---------------------------------------------------------------------------
-
-@pytest.mark.asyncio
-async def test_scenario_update_and_delete_ownership():
-    mock_db = MagicMock()
-    mock_coll = MagicMock()
-    mock_db.scenarios = mock_coll
-
-    with patch("app.services.scenario_service.get_database", return_value=mock_db):
-        service = ScenarioService()
-
-        # Malformed ID returns None/False
-        assert await service.get_scenario("invalid-id") is None
-        assert await service.update_scenario("invalid-id", ScenarioCreate(name="x", description="d"), "u1") is None
-        assert await service.delete_scenario("invalid-id", "u1") is False
-
-        # Scenario owned by user-1
-        oid = ObjectId()
-        mock_coll.find_one = AsyncMock(return_value={
-            "_id": oid,
-            "name": "Scenario 1",
-            "description": "Desc",
-            "creator_id": "user-1",
-            "status": "draft",
-            "parameters": {},
-            "tags": [],
-            "created_at": None,
-            "updated_at": None,
-        })
-        mock_coll.update_one = AsyncMock()
-        mock_coll.delete_one = AsyncMock(return_value=MagicMock(deleted_count=1))
-
-        # Different non-admin user cannot modify -> 403
-        with pytest.raises(HTTPException) as exc_info:
-            await service.update_scenario(str(oid), ScenarioCreate(name="New", description="d"), user_id="user-2", is_admin=False)
-        assert exc_info.value.status_code == 403
-
-        # Different non-admin user cannot delete -> 403
-        with pytest.raises(HTTPException) as exc_info:
-            await service.delete_scenario(str(oid), user_id="user-2", is_admin=False)
-        assert exc_info.value.status_code == 403
-
-        # Admin CAN delete even if not owner
-        deleted = await service.delete_scenario(str(oid), user_id="admin-user", is_admin=True)
-        assert deleted is True
-
-        # Owner CAN delete
-        deleted = await service.delete_scenario(str(oid), user_id="user-1", is_admin=False)
-        assert deleted is True
 
 
 # ---------------------------------------------------------------------------

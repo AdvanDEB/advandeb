@@ -87,6 +87,11 @@ COMPARISON_SUBSET_EVERY = int(
 # short prefix by a large one.
 STRATUM_FLOOR = 3
 
+# Bumped whenever the task definitions change. A mid-study guideline change
+# invalidates prior judgments unless they are re-checked, so the version is
+# recorded rather than implied (docs/02 section 7).
+GUIDELINES_VERSION = "1.0"
+
 # Tasks offered before evidence sets exist in the platform. All three operate
 # on the statement alone.
 DAY_ONE_TASKS = ("provenance", "scope", "assessability")
@@ -240,9 +245,20 @@ class ElicitationService:
         async for a in self.db.elicitations.find(
                 {"expert_id": expert_id}, {"sf_number": 1, "task": 1}):
             done.add((a["sf_number"], a["task"]))
+        authored = await self.authored_by_expert(expert_id)
 
+        # `n_required` is satisfied by PANEL-tier judgments only
+        # (advandeb_methods docs/10 section 2.2). A contributor may work the
+        # same position and their judgment is recorded, but it does not
+        # decrement the panel's requirement.
+        #
+        # Without this, open contributors silently "complete" comparison items
+        # and the panel consensus is never collected — and the failure looks
+        # exactly like healthy throughput until the analysis finds no panel
+        # data at all.
         counts: Dict[tuple, int] = {}
-        async for a in self.db.elicitations.find({}, {"sf_number": 1, "task": 1}):
+        async for a in self.db.elicitations.find(
+                {"tier": "panel"}, {"sf_number": 1, "task": 1}):
             key = (a["sf_number"], a["task"])
             counts[key] = counts.get(key, 0) + 1
 
@@ -257,7 +273,11 @@ class ElicitationService:
             if n_done >= needed:
                 continue
             # Conflict of interest: an author never judges their own fact.
+            # Two sources — the seeded queue for the core group, and the user
+            # record for external contributors matched at approval.
             if expert_id in (q.get("authored_by") or []):
+                continue
+            if q["sf_number"] in authored:
                 continue
 
             fact = await self.db.stylized_facts.find_one({
@@ -286,6 +306,38 @@ class ElicitationService:
     # Decisions
     # ------------------------------------------------------------------ #
 
+    async def tier_of(self, expert_id: str) -> Optional[str]:
+        """The expert's tier right now, for stamping onto a new record."""
+        try:
+            u = await self.db.users.find_one({"_id": ObjectId(expert_id)},
+                                             {"tier": 1, "roles": 1})
+        except Exception:
+            return None
+        if not u:
+            return None
+        if u.get("tier"):
+            return u["tier"]
+        # Project members admitted before tiering existed are panel members:
+        # they are the named DEB experts the comparison was designed around.
+        roles = u.get("roles") or []
+        if "external_contributor" in roles:
+            return "contributor"
+        return "panel"
+
+    async def authored_by_expert(self, expert_id: str) -> set:
+        """Fact numbers this expert authored, from their user record.
+
+        The queue also carries `authored_by` per item; this covers external
+        contributors matched at approval (docs/10 section 5.1), whose link
+        lives on the user rather than in the seeded queue.
+        """
+        try:
+            u = await self.db.users.find_one({"_id": ObjectId(expert_id)},
+                                             {"authored_sf_numbers": 1})
+        except Exception:
+            return set()
+        return set((u or {}).get("authored_sf_numbers") or [])
+
     async def submit(self, decision: ElicitationDecision,
                      expert_id: str,
                      collection_version: str = "1.0") -> Dict[str, Any]:
@@ -298,12 +350,19 @@ class ElicitationService:
         if expert_id in (q.get("authored_by") or []):
             return {"status": "error",
                     "detail": "expert authored this fact (conflict of interest)"}
+        if decision.sf_number in await self.authored_by_expert(expert_id):
+            return {"status": "error",
+                    "detail": "expert authored this fact (conflict of interest)"}
 
+        tier = await self.tier_of(expert_id)
         prior = await self.db.elicitations.count_documents({
-            "sf_number": decision.sf_number, "task": decision.task})
+            "sf_number": decision.sf_number, "task": decision.task,
+            "tier": tier})
         doc = {
             **decision.model_dump(),
             "expert_id": expert_id,
+            # Stamped now, never resolved later (docs/10 section 2.1).
+            "tier": tier,
             "queue_position": q["queue_position"],
             "stratum": q.get("stratum", ""),
             "collection_version": collection_version,
@@ -354,3 +413,386 @@ class ElicitationService:
             repeated_judgments=sum(1 for v in pairs.values() if v >= 2),
             rung=rung, rung_note=note, next_rung_at=nxt,
         )
+
+    # ------------------------------------------------------------------ #
+    # History
+    # ------------------------------------------------------------------ #
+
+    async def history(self, expert_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+        """This expert's own past judgments, newest first.
+
+        Visible to the person who made them (docs/10 section 8). Not to anyone
+        else: seeing a colleague's answer before your own would destroy the
+        independence the agreement statistics rest on.
+        """
+        limit = max(1, min(int(limit), 500))
+        out: List[Dict[str, Any]] = []
+        cursor = self.db.elicitations.find({"expert_id": expert_id}) \
+            .sort("created_at", -1).limit(limit)
+        async for a in cursor:
+            fact = await self.db.stylized_facts.find_one(
+                {"$or": [{"sf_number": a.get("sf_number")},
+                         {"sf_number": str(a.get("sf_number"))}]},
+                {"statement": 1})
+            out.append({
+                "sf_number": a.get("sf_number"),
+                "statement": (fact or {}).get("statement", ""),
+                "task": a.get("task"),
+                "provenance_type": a.get("provenance_type"),
+                "source_citation": a.get("source_citation"),
+                "scope_verdict": a.get("scope_verdict"),
+                "proposed_scope": a.get("proposed_scope"),
+                "assessability": a.get("assessability"),
+                "confidence": a.get("confidence", 3),
+                "rationale": a.get("rationale", ""),
+                "tier": a.get("tier"),
+                "created_at": a.get("created_at"),
+            })
+        return out
+
+    # ------------------------------------------------------------------ #
+    # Guidelines
+    # ------------------------------------------------------------------ #
+
+    def guidelines(self) -> Dict[str, Any]:
+        """The task definitions, served rather than duplicated in the client.
+
+        Versioned: a mid-study guideline change invalidates prior judgments
+        unless they are re-checked, so the version is stored on the record and
+        the changelog is what makes that auditable (docs/02 section 7).
+        """
+        return {
+            "version": GUIDELINES_VERSION,
+            "tasks": [
+                {
+                    "task": "provenance",
+                    "title": "Where does this fact come from?",
+                    "help": (
+                        "The collection is of mixed provenance and largely "
+                        "untraced. Published facts must be cited to their "
+                        "source; new ones are being published here for the "
+                        "first time. `unknown` is an acceptable answer — "
+                        "pretending to a provenance is worse than recording "
+                        "the gap."),
+                    "options": [
+                        {"value": "published", "label": "Published",
+                         "hint": "states a result already in the literature"},
+                        {"value": "new", "label": "New",
+                         "hint": "first stated here, not from a published source"},
+                        {"value": "adapted", "label": "Adapted",
+                         "hint": "a published result, materially restated"},
+                        {"value": "unknown", "label": "Unknown",
+                         "hint": "cannot establish — an acceptable answer"},
+                    ],
+                },
+                {
+                    "task": "scope",
+                    "title": "What does this fact range over?",
+                    "help": (
+                        "84% of the collection states no organismal scope. "
+                        "Scope adequacy compares evidence against a *claimed* "
+                        "scope, so without one that check cannot be made at "
+                        "all. Where the scope is implicit but clear, state it."),
+                    "options": [
+                        {"value": "stated", "label": "Scope stated",
+                         "hint": "the statement says what it ranges over"},
+                        {"value": "implicit", "label": "Implicit",
+                         "hint": "not stated, but clear from context — give it below"},
+                        {"value": "absent", "label": "Absent",
+                         "hint": "no scope, and none can be inferred"},
+                        {"value": "not_applicable", "label": "Not applicable",
+                         "hint": "not a claim about organisms"},
+                    ],
+                },
+                {
+                    "task": "assessability",
+                    "title": "Can this be assessed as written?",
+                    "help": (
+                        "Some statements cannot be evaluated against "
+                        "literature as written. Recording that is more useful "
+                        "than quietly excluding them: the count is itself a "
+                        "finding about the collection."),
+                    "options": [
+                        {"value": "assessable", "label": "Assessable",
+                         "hint": "could be checked against literature as written"},
+                        {"value": "too_vague", "label": "Too vague",
+                         "hint": "no determinate claim to check"},
+                        {"value": "compound", "label": "Compound",
+                         "hint": "several claims in one sentence"},
+                        {"value": "not_empirical", "label": "Not empirical",
+                         "hint": "a modelling convention or definition"},
+                        {"value": "unclear_terms", "label": "Unclear terms",
+                         "hint": "key terms undefined or ambiguous"},
+                    ],
+                },
+            ],
+        }
+
+    # ------------------------------------------------------------------ #
+    # Calibration
+    # ------------------------------------------------------------------ #
+
+    async def seed_calibration(self, force: bool = False) -> Dict[str, Any]:
+        """Build the fixed calibration set. Idempotent.
+
+        **Every case has a documented reference answer, not an invented one.**
+        Only the provenance task admits genuine references at present: facts
+        1201-1236 are published (Sousa et al. 2008 / Kooijman 2020) and
+        1237-1262 are new (Heraklion workshop), both recorded during the
+        collection build. Scope cases are drawn only from the unambiguous ends
+        of the distribution — a statement either carries an explicit organismal
+        quantifier or plainly carries none — never the contested middle.
+
+        What calibration measures is therefore agreement with a **documented
+        reference**, not with truth. That distinction is stated to the expert.
+        """
+        existing = await self.db.elicitation_calibration.count_documents({})
+        if existing and not force:
+            return {"status": "exists", "n": existing}
+        if force:
+            await self.db.elicitation_calibration.delete_many({})
+
+        cases: List[Dict[str, Any]] = []
+
+        async def _add(fact, task, reference, explanation, basis):
+            cases.append({
+                "calibration_id": f"cal_{task}_{fact['sf_number']}",
+                "order": len(cases),
+                "task": task,
+                "sf_number": int(fact["sf_number"]),
+                "statement": fact.get("statement", ""),
+                "statement_sha256": fact.get("statement_sha256", ""),
+                "category": fact.get("category", ""),
+                "reference": reference,
+                "explanation": explanation,
+                "reference_basis": basis,
+            })
+
+        # --- provenance: published (documented citation) ---
+        n = 0
+        async for f in self.db.stylized_facts.find(
+                {"provenance_type": "published"}).sort("sf_number", 1):
+            if n >= 5:
+                break
+            await _add(f, "provenance", {"provenance_type": "published"},
+                       "This is one of the core DEB rules synthesized by "
+                       "Sousa et al. (2008) and Kooijman (2020); its source is "
+                       "recorded in the collection.",
+                       "collection provenance record")
+            n += 1
+
+        # --- provenance: new (workshop-formulated) ---
+        n = 0
+        async for f in self.db.stylized_facts.find(
+                {"provenance_type": "new"}).sort("sf_number", 1):
+            if n >= 5:
+                break
+            await _add(f, "provenance", {"provenance_type": "new"},
+                       "Formulated at the AdvanDEB Heraklion workshop in June "
+                       "2025 and stated here for the first time, so it has no "
+                       "prior published source.",
+                       "collection provenance record")
+            n += 1
+
+        # --- scope: unambiguous ends only ---
+        import re as _re
+        explicit = _re.compile(
+            r"\b(all|most|many|every|some)\s+(species|organisms?|animals?|"
+            r"plants?|taxa|ectotherms?|endotherms?)\b", _re.I)
+        got_stated = got_absent = 0
+        async for f in self.db.stylized_facts.find({}).sort("sf_number", 1):
+            st = f.get("statement", "")
+            if got_stated < 3 and explicit.search(st):
+                await _add(f, "scope", {"scope_verdict": "stated"},
+                           "The statement carries an explicit organismal "
+                           "quantifier, so the scope is stated rather than "
+                           "inferred.", "explicit quantifier in the statement")
+                got_stated += 1
+            elif (got_absent < 2 and len(st.split()) > 8
+                  and not _re.search(
+                      r"\b(species|organisms?|animals?|plants?|taxa|cells?|"
+                      r"individuals?|ectotherms?|endotherms?|fish|mammals?|"
+                      r"birds?|insects?|bacteri\w*|algae?|embryos?|larva\w*|"
+                      r"juveniles?|adults?|populations?|tissues?)\b", st, _re.I)):
+                await _add(f, "scope", {"scope_verdict": "absent"},
+                           "The statement names no organism, life stage or "
+                           "taxon at all, so there is no claimed scope to "
+                           "compare evidence against.",
+                           "no organismal noun in the statement")
+                got_absent += 1
+            if got_stated >= 3 and got_absent >= 2:
+                break
+
+        for c in cases:
+            c["order"] = cases.index(c)
+        if cases:
+            await self.db.elicitation_calibration.insert_many(cases)
+            await self.db.elicitation_calibration.create_index("order")
+            await self.db.elicitation_calibration_results.create_index(
+                [("expert_id", 1), ("calibration_id", 1)], unique=True)
+        return {"status": "built", "n": len(cases)}
+
+    async def calibration_next(self, expert_id: str) -> Optional[Dict[str, Any]]:
+        """The next calibration case this expert has not answered."""
+        total = await self.db.elicitation_calibration.count_documents({})
+        if not total:
+            await self.seed_calibration()
+            total = await self.db.elicitation_calibration.count_documents({})
+        done = set()
+        async for r in self.db.elicitation_calibration_results.find(
+                {"expert_id": expert_id}, {"calibration_id": 1}):
+            done.add(r["calibration_id"])
+        cursor = self.db.elicitation_calibration.find({}).sort("order", 1)
+        async for c in cursor:
+            if c["calibration_id"] in done:
+                continue
+            return {
+                "calibration_id": c["calibration_id"],
+                "queue_position": -1,
+                "task": c["task"],
+                "sf_number": c["sf_number"],
+                "statement": c["statement"],
+                "statement_sha256": c.get("statement_sha256", ""),
+                "category": c.get("category", ""),
+                "collection_version": "1.0",
+                "stratum": "calibration",
+                "completed": len(done),
+                "total": total,
+            }
+        return None
+
+    async def calibration_submit(self, decision, expert_id: str) -> Dict[str, Any]:
+        """Score one calibration answer and give immediate feedback.
+
+        Calibration teaches, so the reference is shown straight away rather
+        than withheld. The result is stored as a **quality signal**, never as
+        an automatic exclusion gate: auto-excluding low-agreement participants
+        would quietly select for people who agree with the reference, which
+        manufactures the consensus the study is trying to measure
+        (docs/10 section 7).
+        """
+        c = await self.db.elicitation_calibration.find_one(
+            {"calibration_id": decision.calibration_id})
+        if not c:
+            return {"status": "error", "detail": "unknown calibration case"}
+
+        ref = c.get("reference", {})
+        given = {
+            "provenance": decision.provenance_type,
+            "scope": decision.scope_verdict,
+            "assessability": decision.assessability,
+        }.get(c["task"])
+        expected = (ref.get("provenance_type") or ref.get("scope_verdict")
+                    or ref.get("assessability"))
+        correct = bool(given is not None and given == expected)
+
+        await self.db.elicitation_calibration_results.update_one(
+            {"expert_id": expert_id, "calibration_id": c["calibration_id"]},
+            {"$set": {
+                "expert_id": expert_id,
+                "calibration_id": c["calibration_id"],
+                "task": c["task"],
+                "given": given,
+                "expected": expected,
+                "correct": correct,
+                "confidence": decision.confidence,
+                "rationale": decision.rationale,
+                "time_spent_s": decision.time_spent_s,
+                "created_at": datetime.now(timezone.utc),
+            }}, upsert=True)
+
+        total = await self.db.elicitation_calibration.count_documents({})
+        completed = await self.db.elicitation_calibration_results.count_documents(
+            {"expert_id": expert_id})
+        return {
+            "correct": correct,
+            "reference": {**ref, "basis": c.get("reference_basis")},
+            "explanation": c.get("explanation", ""),
+            "completed": completed,
+            "total": total,
+        }
+
+    async def calibration_status(self, expert_id: str) -> Dict[str, Any]:
+        total = await self.db.elicitation_calibration.count_documents({})
+        results = [r async for r in
+                   self.db.elicitation_calibration_results.find(
+                       {"expert_id": expert_id})]
+        return {
+            "total": total,
+            "completed": len(results),
+            "correct": sum(1 for r in results if r.get("correct")),
+            "done": bool(total) and len(results) >= total,
+        }
+
+    # ------------------------------------------------------------------ #
+    # Admin statistics
+    # ------------------------------------------------------------------ #
+
+    async def admin_stats(self, collection_version: str = "1.0") -> Dict[str, Any]:
+        """Where the effort has gone, and what the panel still owes.
+
+        `panel_coverage` is the number that matters operationally: positions
+        whose `n_required` is met **by panel-tier judgments**. A dashboard that
+        counted all judgments would show healthy progress while the panel
+        consensus went uncollected.
+        """
+        by_stratum: Dict[str, int] = {}
+        by_task: Dict[str, int] = {}
+        by_tier: Dict[str, int] = {}
+        per_expert: Dict[str, Dict[str, Any]] = {}
+        panel_counts: Dict[tuple, int] = {}
+
+        async for a in self.db.elicitations.find({}):
+            st = a.get("stratum", "?")
+            by_stratum[st] = by_stratum.get(st, 0) + 1
+            tk = a.get("task", "?")
+            by_task[tk] = by_task.get(tk, 0) + 1
+            tier = a.get("tier") or "unknown"
+            by_tier[tier] = by_tier.get(tier, 0) + 1
+            e = per_expert.setdefault(
+                a.get("expert_id", "?"),
+                {"n": 0, "times": [], "tier": tier})
+            e["n"] += 1
+            if a.get("time_spent_s"):
+                e["times"].append(float(a["time_spent_s"]))
+            if tier == "panel":
+                key = (a.get("sf_number"), a.get("task"))
+                panel_counts[key] = panel_counts.get(key, 0) + 1
+
+        met = pending = 0
+        async for q in self.db.elicitation_queue.find(
+                {"collection_version": collection_version},
+                {"sf_number": 1, "task": 1, "n_required": 1}):
+            need = int(q.get("n_required", 1))
+            have = panel_counts.get((q["sf_number"], q["task"]), 0)
+            if have >= need:
+                met += 1
+            else:
+                pending += 1
+
+        experts = []
+        for eid, v in per_expert.items():
+            name = eid
+            try:
+                u = await self.db.users.find_one({"_id": ObjectId(eid)},
+                                                 {"full_name": 1, "email": 1})
+                if u:
+                    name = u.get("full_name") or u.get("email") or eid
+            except Exception:
+                pass
+            experts.append({
+                "name": name, "tier": v["tier"], "n": v["n"],
+                "median_s": (statistics.median(v["times"])
+                             if v["times"] else None),
+            })
+        experts.sort(key=lambda x: -x["n"])
+
+        done = sum(by_task.values())
+        rung, note, nxt = _rung(done)
+        return {
+            "by_stratum": by_stratum, "by_task": by_task, "by_tier": by_tier,
+            "by_expert": experts,
+            "rung": rung, "rung_note": note, "next_rung_at": nxt,
+            "panel_coverage": {"n_required_met": met,
+                               "n_required_pending": pending},
+        }

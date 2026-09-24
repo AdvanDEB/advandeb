@@ -38,7 +38,7 @@ _configure_logging()
 # ────────────────────────────────────────────────────────────────────────────
 
 from app.core.database import connect_to_mongo, close_mongo_connection, get_database, get_kb_database, ensure_app_indexes
-from app.api.routes import auth, users, documents, facts, chat, elicitation, models, ws, graph, llm_keys, tdeb
+from app.api.routes import auth, users, documents, facts, chat, elicitation, enrolment, models, ws, graph, llm_keys, tdeb
 from app.api.routes.kb import agents as kb_agents
 from app.api.routes.kb import visualization as kb_viz
 from app.api.routes.kb import visualization_stream as kb_viz_stream
@@ -157,6 +157,7 @@ app.include_router(documents.router, prefix="/api/documents", tags=["documents"]
 app.include_router(facts.router, prefix="/api/facts", tags=["facts"])
 app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 app.include_router(elicitation.router, prefix="/api/elicitation", tags=["elicitation"])
+app.include_router(enrolment.router, prefix="/api/enrolment", tags=["enrolment"])
 app.include_router(models.router, prefix="/api/models", tags=["models"])
 app.include_router(tdeb.router, prefix="/api/tdeb", tags=["tdeb"])
 app.include_router(ws.router, prefix="/ws", tags=["websocket"])

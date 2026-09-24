@@ -18,7 +18,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from app.core.auth import get_current_user
 from app.core.dependencies import require_admin, require_elicitor
 from app.models.elicitation import (
-    ElicitationDecision, ElicitationProgress, QueueItem,
+    CalibrationDecision, CalibrationFeedback, CalibrationItem,
+    ElicitationDecision, ElicitationProgress, Guidelines, HistoryResponse,
+    QueueItem,
 )
 from app.services.elicitation_service import ElicitationService
 
@@ -130,3 +132,76 @@ async def set_expert(
                             detail="user not found")
     return {"user_id": user_id, "capability": CAP_SF_ELICITATION,
             "granted": granted}
+
+
+@router.get("/history", response_model=HistoryResponse)
+async def history(limit: int = 50,
+                  current_user: dict = Depends(require_elicitor)):
+    """This expert's own past judgments, newest first.
+
+    Visible only to the person who made them. Seeing a colleague's answer
+    before your own would destroy the independence the agreement statistics
+    rest on.
+    """
+    service = ElicitationService()
+    return {"items": await service.history(current_user["id"], limit)}
+
+
+@router.get("/guidelines", response_model=Guidelines)
+async def guidelines(current_user: dict = Depends(require_elicitor)):
+    """Task definitions and option hints, served rather than duplicated in the
+    client, and versioned so a mid-study change is auditable."""
+    return ElicitationService().guidelines()
+
+
+@router.get("/calibration/next", response_model=CalibrationItem | None)
+async def calibration_next(current_user: dict = Depends(require_elicitor)):
+    """The next calibration case, or null once the set is complete.
+
+    Every expert works the fixed set before their judgments enter either
+    stratum: it trains them, and their performance is a quality signal
+    available before any real queue item is consumed.
+    """
+    return await ElicitationService().calibration_next(current_user["id"])
+
+
+@router.post("/calibration/decide", response_model=CalibrationFeedback)
+async def calibration_decide(
+    decision: CalibrationDecision,
+    current_user: dict = Depends(require_elicitor),
+):
+    """Answer one calibration case and see the documented reference at once.
+
+    Calibration teaches, so nothing is withheld. The result is stored as a
+    quality signal, never as an automatic exclusion gate.
+    """
+    result = await ElicitationService().calibration_submit(
+        decision, current_user["id"])
+    if result.get("status") == "error":
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail=result.get("detail", "could not record"))
+    return result
+
+
+@router.get("/calibration/status")
+async def calibration_status(current_user: dict = Depends(require_elicitor)):
+    """How far through the calibration set this expert is."""
+    return await ElicitationService().calibration_status(current_user["id"])
+
+
+@router.post("/calibration/seed")
+async def calibration_seed(force: bool = False,
+                           current_user: dict = Depends(require_admin)):
+    """Build the fixed calibration set from facts with documented provenance."""
+    return await ElicitationService().seed_calibration(force=force)
+
+
+@router.get("/stats/admin")
+async def admin_stats(current_user: dict = Depends(require_admin)):
+    """Where effort has gone, and what the panel still owes.
+
+    `panel_coverage` counts positions whose `n_required` is met **by
+    panel-tier judgments**. A dashboard counting all judgments would show
+    healthy progress while the panel consensus went uncollected.
+    """
+    return await ElicitationService().admin_stats()
