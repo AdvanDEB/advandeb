@@ -142,6 +142,13 @@ class ElicitationProgress(BaseModel):
     far can support.
     """
 
+    # True until the expert has finished the calibration set. Lets the client
+    # tell "queue exhausted" from "calibrate first" — both make /next return
+    # null, and the documented /next contract stays unchanged.
+    calibration_required: bool = False
+    calibration_completed: int = 0
+    calibration_total: int = 0
+
     total_queue: int
     completed: int
     completed_by_me: int

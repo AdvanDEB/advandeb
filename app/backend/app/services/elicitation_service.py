@@ -241,6 +241,14 @@ class ElicitationService:
         decided by someone else unless the position needs more judgments; and
         **any fact they authored**.
         """
+        # Calibration gate, enforced HERE rather than in the client
+        # (advandeb_methods docs/10 section 5.3). An expert works the fixed
+        # calibration set before their judgments enter either stratum. A
+        # client-side gate would be bypassable and the stratum contamination
+        # would be silent — the judgments would look exactly like any others.
+        if not (await self.calibration_status(expert_id))["done"]:
+            return None
+
         done = set()
         async for a in self.db.elicitations.find(
                 {"expert_id": expert_id}, {"sf_number": 1, "task": 1}):
@@ -317,12 +325,26 @@ class ElicitationService:
             return None
         if u.get("tier"):
             return u["tier"]
-        # Project members admitted before tiering existed are panel members:
-        # they are the named DEB experts the comparison was designed around.
         roles = u.get("roles") or []
         if "external_contributor" in roles:
             return "contributor"
-        return "panel"
+        # No explicit tier: fail toward `contributor`, never toward `panel`.
+        #
+        # The asymmetry is the whole argument. Mislabelling a panel member as a
+        # contributor loses data from the panel stratum — visible, and
+        # recoverable by re-running. Mislabelling a contributor as panel
+        # *contaminates* the panel stratum, silently: the record stamps
+        # `panel`, every statistic still computes, and the agreement figures
+        # the study rests on quietly stop describing a known population
+        # (docs/10 section 1).
+        #
+        # Known panel members are stamped explicitly by
+        # scripts/migrate_expert_tiers.py. Anyone reaching this line was never
+        # admitted to the panel, so they are not in it.
+        logger.warning(
+            "expert %s has no explicit tier; defaulting to contributor. "
+            "Panel membership must be assigned, not inferred.", expert_id)
+        return "contributor"
 
     async def authored_by_expert(self, expert_id: str) -> set:
         """Fact numbers this expert authored, from their user record.
@@ -353,6 +375,17 @@ class ElicitationService:
         if decision.sf_number in await self.authored_by_expert(expert_id):
             return {"status": "error",
                     "detail": "expert authored this fact (conflict of interest)"}
+
+        # The authoritative gate. next_item declines to serve live items before
+        # calibration, but a crafted request could reach here directly, and the
+        # whole point is that uncalibrated judgments never enter a stratum.
+        cal = await self.calibration_status(expert_id)
+        if not cal["done"]:
+            return {"status": "error",
+                    "detail": (f"calibration incomplete "
+                               f"({cal['completed']}/{cal['total']}) — the "
+                               "calibration set must be finished before "
+                               "judgments enter a stratum")}
 
         tier = await self.tier_of(expert_id)
         prior = await self.db.elicitations.count_documents({
@@ -405,8 +438,16 @@ class ElicitationService:
             key = (a.get("sf_number"), a.get("task"))
             pairs[key] = pairs.get(key, 0) + 1
 
+        # Lets the client distinguish "queue exhausted" from "calibrate first",
+        # both of which make /next return null. Additive, so the documented
+        # /next contract (QueueItem | null) is unchanged.
+        cal = await self.calibration_status(expert_id)
+
         rung, note, nxt = _rung(done)
         return ElicitationProgress(
+            calibration_required=not cal["done"],
+            calibration_completed=cal["completed"],
+            calibration_total=cal["total"],
             total_queue=total, completed=done, completed_by_me=mine,
             median_seconds_per_item=statistics.median(times) if times else None,
             by_task=by_task, by_stratum=by_stratum,
@@ -751,8 +792,15 @@ class ElicitationService:
             by_tier[tier] = by_tier.get(tier, 0) + 1
             e = per_expert.setdefault(
                 a.get("expert_id", "?"),
-                {"n": 0, "times": [], "tier": tier})
+                {"n": 0, "times": [], "n_by_record_tier": {}})
             e["n"] += 1
+            # Counted by the tier STAMPED ON EACH RECORD, not by the person's
+            # current tier (docs/10 section 2.1). An expert promoted from
+            # contributor to panel has records under both, and collapsing them
+            # under their present tier would label historical contributor-tier
+            # judgments as panel — exactly the mixing the write-time stamp
+            # exists to prevent.
+            e["n_by_record_tier"][tier] = e["n_by_record_tier"].get(tier, 0) + 1
             if a.get("time_spent_s"):
                 e["times"].append(float(a["time_spent_s"]))
             if tier == "panel":
@@ -772,26 +820,60 @@ class ElicitationService:
 
         experts = []
         for eid, v in per_expert.items():
-            name = eid
+            name, current_tier = eid, None
             try:
                 u = await self.db.users.find_one({"_id": ObjectId(eid)},
-                                                 {"full_name": 1, "email": 1})
+                                                 {"full_name": 1, "email": 1,
+                                                  "tier": 1})
                 if u:
                     name = u.get("full_name") or u.get("email") or eid
+                    current_tier = u.get("tier")
             except Exception:
                 pass
+            cal = await self.calibration_status(eid)
             experts.append({
-                "name": name, "tier": v["tier"], "n": v["n"],
+                "name": name,
+                # The person's tier now — for routing and display only.
+                "current_tier": current_tier,
+                # What their judgments actually count as, by stamped record
+                # tier. This is the figure any coverage claim must rest on.
+                "n_by_record_tier": v["n_by_record_tier"],
+                # Kept for display compatibility; equals current_tier and is
+                # deliberately NOT what the counts are aggregated by.
+                "tier": current_tier,
+                "n": v["n"],
                 "median_s": (statistics.median(v["times"])
                              if v["times"] else None),
+                # Who is cleared to contribute at all (docs/10 section 5.3).
+                "calibration": {"completed": cal["completed"],
+                                "total": cal["total"],
+                                "correct": cal["correct"],
+                                "done": cal["done"]},
             })
         experts.sort(key=lambda x: -x["n"])
+
+        # Experts who hold the capability but have not cleared calibration, and
+        # so are contributing nothing yet — the number an administrator needs
+        # to chase.
+        uncleared = []
+        async for u in self.db.users.find(
+                {"capabilities": "sf_elicitation"},
+                {"full_name": 1, "email": 1, "tier": 1}):
+            cal = await self.calibration_status(str(u["_id"]))
+            if not cal["done"]:
+                uncleared.append({
+                    "name": u.get("full_name") or u.get("email"),
+                    "tier": u.get("tier"),
+                    "calibration": cal,
+                })
 
         done = sum(by_task.values())
         rung, note, nxt = _rung(done)
         return {
             "by_stratum": by_stratum, "by_task": by_task, "by_tier": by_tier,
             "by_expert": experts,
+            "by_record_tier": by_tier,
+            "awaiting_calibration": uncleared,
             "rung": rung, "rung_note": note, "next_rung_at": nxt,
             "panel_coverage": {"n_required_met": met,
                                "n_required_pending": pending},
