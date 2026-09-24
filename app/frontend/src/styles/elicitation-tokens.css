@@ -1,0 +1,148 @@
+/* Shared design language for the elicitation surfaces.
+ *
+ * These exist so that independently-built views converge rather than drift.
+ * Import in any elicitation, admin-expert or enrolment view and use the tokens
+ * instead of literals.
+ *
+ * The brief for this surface: an expert works it for hours at a stretch,
+ * hundreds of items in a sitting. That rules out high-chrome design — the
+ * statement being judged is the content, and everything else is scaffolding
+ * that should recede. Motion exists to explain a change of state, never to
+ * decorate.
+ */
+
+:root {
+  /* ── spacing: 4px base, used for every gap and pad ───────────────── */
+  --el-s1: 0.25rem;
+  --el-s2: 0.5rem;
+  --el-s3: 0.75rem;
+  --el-s4: 1rem;
+  --el-s5: 1.5rem;
+  --el-s6: 2rem;
+  --el-s7: 3rem;
+
+  /* ── type ─────────────────────────────────────────────────────────── */
+  --el-fs-xs: 0.75rem;
+  --el-fs-sm: 0.85rem;
+  --el-fs-base: 0.95rem;
+  --el-fs-lg: 1.12rem;   /* the statement — the thing being judged */
+  --el-fs-xl: 1.5rem;
+  --el-lh: 1.6;
+
+  /* ── colour: the existing app's greys, named ──────────────────────── */
+  --el-ink: #111827;
+  --el-ink-2: #374151;
+  --el-ink-3: #6b7280;
+  --el-ink-4: #9ca3af;
+  --el-line: #e5e7eb;
+  --el-line-2: #d1d5db;
+  --el-bg: #ffffff;
+  --el-bg-2: #f9fafb;
+  --el-bg-3: #f3f4f6;
+
+  --el-accent: #111827;          /* actions are ink, not colour */
+  --el-info-bg: #eef2ff;
+  --el-info-ink: #3730a3;
+  --el-warn-bg: #fef3c7;
+  --el-warn-ink: #92400e;
+  --el-danger: #b91c1c;
+  --el-ok-bg: #ecfdf5;
+  --el-ok-ink: #065f46;
+
+  --el-radius: 10px;
+  --el-radius-sm: 6px;
+  --el-shadow: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --el-shadow-lift: 0 4px 12px rgba(17, 24, 39, 0.08);
+
+  /* ── motion ───────────────────────────────────────────────────────── */
+  /* Fast enough not to be waited on, slow enough to be seen. Anything
+   * above ~250ms on a per-item action becomes a tax at 200 items. */
+  --el-t-fast: 120ms;
+  --el-t: 180ms;
+  --el-t-slow: 260ms;
+  --el-ease: cubic-bezier(0.22, 0.61, 0.36, 1);   /* ease-out */
+
+  /* ── touch ────────────────────────────────────────────────────────── */
+  /* 44px is the platform minimum; options are pressed repeatedly on a
+   * phone so they get more. */
+  --el-touch: 44px;
+  --el-touch-lg: 52px;
+}
+
+/* Motion is a courtesy, not a requirement. Honour the OS setting. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --el-t-fast: 0ms;
+    --el-t: 0ms;
+    --el-t-slow: 0ms;
+  }
+  .el-anim,
+  .el-anim * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── shared primitives ──────────────────────────────────────────────── */
+
+.el-card {
+  background: var(--el-bg);
+  border: 1px solid var(--el-line);
+  border-radius: var(--el-radius);
+  padding: var(--el-s4) var(--el-s5);
+  box-shadow: var(--el-shadow);
+}
+
+.el-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--el-s1);
+  background: var(--el-bg-3);
+  color: var(--el-ink-2);
+  border-radius: var(--el-radius-sm);
+  padding: 0.15rem 0.45rem;
+  font-size: var(--el-fs-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.el-btn {
+  min-height: var(--el-touch);
+  border-radius: var(--el-radius-sm);
+  padding: 0 var(--el-s4);
+  font-size: var(--el-fs-base);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background var(--el-t) var(--el-ease),
+              transform var(--el-t-fast) var(--el-ease),
+              box-shadow var(--el-t) var(--el-ease);
+}
+.el-btn:active { transform: translateY(1px); }
+.el-btn:focus-visible {
+  outline: 2px solid var(--el-accent);
+  outline-offset: 2px;
+}
+.el-btn--primary { background: var(--el-accent); color: #fff; }
+.el-btn--primary:disabled { background: var(--el-line-2); cursor: not-allowed; }
+.el-btn--ghost {
+  background: var(--el-bg);
+  border-color: var(--el-line-2);
+  color: var(--el-ink-2);
+}
+
+/* Entry of a new item. One motion, one direction, no bounce: the expert is
+ * reading, not watching. */
+@keyframes el-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.el-enter { animation: el-enter var(--el-t-slow) var(--el-ease) both; }
+
+/* ── breakpoints ────────────────────────────────────────────────────── */
+/* Single column below 720px. The expert surface is one column at every
+ * width anyway — phone layout is the same layout, with the action bar
+ * pinned and the chrome dropped. */
+@media (max-width: 720px) {
+  .el-card { padding: var(--el-s3) var(--el-s4); border-radius: var(--el-radius-sm); }
+  .el-hide-sm { display: none !important; }
+}

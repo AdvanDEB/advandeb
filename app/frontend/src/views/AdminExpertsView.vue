@@ -9,11 +9,16 @@
     </header>
 
     <!-- ── Pending enrolment requests ─────────────────────────────── -->
-    <section class="card">
+    <section class="el-card">
       <div class="card-head">
         <h2>Pending requests</h2>
-        <span v-if="requests.length" class="count-pill">{{ requests.length }}</span>
+        <Transition name="count">
+          <span v-if="requests.length" :key="requests.length" class="count-pill">
+            {{ requests.length }}
+          </span>
+        </Transition>
       </div>
+
       <p class="note">
         Tier is the scientific decision. <strong>Panel</strong> judgments carry the
         agreement statistics and the human consensus reported in the paper;
@@ -22,78 +27,105 @@
         work only — past judgments keep the tier they were made under.
       </p>
 
-      <p v-if="loadingRequests" class="muted">Loading…</p>
-      <p v-else-if="!requests.length" class="muted">No requests waiting.</p>
+      <LoadState
+        :loading="loadingRequests"
+        :error="errRequests"
+        :empty="!requests.length"
+        empty-text="No requests waiting."
+        @retry="loadRequests"
+      />
 
-      <div v-for="r in requests" :key="r.id" class="request">
-        <div class="request-head">
-          <div>
-            <strong>{{ r.full_name }}</strong>
-            <span class="email">{{ r.email }}</span>
+      <TransitionGroup name="row" tag="div">
+        <div v-for="r in requests" :key="r.id" class="request">
+          <div class="request-head">
+            <div class="who">
+              <strong>{{ r.full_name }}</strong>
+              <a class="email" :href="`mailto:${r.email}`">{{ r.email }}</a>
+            </div>
+            <span class="submitted">{{ formatDate(r.created_at) }}</span>
           </div>
-          <span class="submitted">{{ formatDate(r.created_at) }}</span>
-        </div>
 
-        <ExpertiseProfileCard :profile="r" />
+          <ExpertiseProfileCard :profile="r" />
 
-        <div class="decide">
-          <button class="btn small" :disabled="busyId === r.id"
-                  @click="decide(r, 'approve', 'panel')">
-            Approve → panel
-          </button>
-          <button class="btn small" :disabled="busyId === r.id"
-                  @click="decide(r, 'approve', 'contributor')">
-            Approve → contributor
-          </button>
-          <button class="btn small danger" :disabled="busyId === r.id"
-                  @click="decide(r, 'decline', null)">
-            Decline
-          </button>
-          <input v-model="notes[r.id]" class="note-input" placeholder="Reason / note (recorded)" />
+          <input
+            v-model="notes[r.id]"
+            class="note-input"
+            placeholder="Reason / note (recorded with the decision)"
+          />
+
+          <div class="decide">
+            <button class="el-btn el-btn--primary act" :disabled="busyId === r.id"
+                    @click="decide(r, 'approve', 'panel')">
+              Approve → panel
+            </button>
+            <button class="el-btn el-btn--ghost act" :disabled="busyId === r.id"
+                    @click="decide(r, 'approve', 'contributor')">
+              Approve → contributor
+            </button>
+            <button class="el-btn el-btn--ghost act danger" :disabled="busyId === r.id"
+                    @click="decide(r, 'decline', null)">
+              Decline
+            </button>
+          </div>
+
+          <p v-if="rowError[r.id]" class="row-error" role="alert">
+            {{ rowError[r.id] }}
+          </p>
         </div>
-      </div>
+      </TransitionGroup>
     </section>
 
     <!-- ── Current experts ────────────────────────────────────────── -->
-    <section class="card">
+    <section class="el-card">
       <div class="card-head">
         <h2>Current experts</h2>
-        <span v-if="eligible !== null" class="count-pill">{{ eligible }} eligible</span>
+        <span v-if="eligible !== null" class="count-pill ghost">{{ eligible }} eligible</span>
       </div>
 
-      <p v-if="loadingExperts" class="muted">Loading…</p>
-      <p v-else-if="!experts.length" class="muted">No users found.</p>
-      <table v-else class="experts-table">
+      <LoadState
+        :loading="loadingExperts"
+        :error="errExperts"
+        :empty="!experts.length"
+        empty-text="No users found."
+        @retry="loadExperts"
+      />
+
+      <!-- Desktop: a table. Phone: the same rows as stacked cards, because a
+           six-column table at 360px is a pinch-zoom horizontal scroll. -->
+      <table v-if="experts.length" class="experts-table">
         <thead>
           <tr>
             <th>Name</th><th>Roles</th><th>Tier</th>
-            <th class="num">Elicitations</th><th>Access</th><th></th>
+            <th class="num">Elicitations</th><th>Access</th><th><span class="sr">Actions</span></th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="u in experts" :key="u.id">
-            <td>{{ u.name }}</td>
-            <td>
+            <td data-h="Name">{{ u.name }}</td>
+            <td data-h="Roles">
               <span v-for="r in (u.roles || [])" :key="r" class="role-pill">{{ prettyRole(r) }}</span>
             </td>
-            <td>
-              <span v-if="u.tier" :class="['tier-badge', u.tier]">{{ u.tier }}</span>
-              <span v-else class="muted">—</span>
+            <td data-h="Tier">
+              <span v-if="u.tier" class="tier-badge" :class="u.tier">
+                <span class="tier-dot" aria-hidden="true"></span>{{ u.tier }}
+              </span>
+              <span v-else class="muted">unassigned</span>
             </td>
-            <td class="num">{{ u.n_elicitations ?? '—' }}</td>
-            <td>
-              <span :class="['status-badge', canElicit(u) ? 'active' : 'off']">
+            <td class="num" data-h="Elicitations">{{ u.n_elicitations ?? '—' }}</td>
+            <td data-h="Access">
+              <span class="status-badge" :class="canElicit(u) ? 'active' : 'off'">
                 {{ canElicit(u) ? 'can elicit' : 'no access' }}
               </span>
-              <span v-if="canElicit(u) && !u.has_capability" class="via-role" title="Granted by role, not by capability">
+              <span v-if="canElicit(u) && !u.has_capability" class="via-role">
                 via role
               </span>
             </td>
-            <td class="actions">
-              <button class="btn small" :disabled="busyId === u.id"
+            <td class="actions-cell">
+              <button class="el-btn el-btn--ghost act" :disabled="busyId === u.id"
                       @click="setCapability(u, !u.has_capability)">
-                {{ u.has_capability ? 'Revoke' : 'Grant' }}
+                {{ busyId === u.id ? '…' : (u.has_capability ? 'Revoke' : 'Grant') }}
               </button>
+              <p v-if="rowError[u.id]" class="row-error" role="alert">{{ rowError[u.id] }}</p>
             </td>
           </tr>
         </tbody>
@@ -101,28 +133,36 @@
     </section>
 
     <!-- ── Progress ───────────────────────────────────────────────── -->
-    <section class="card">
+    <section class="el-card">
       <div class="card-head"><h2>Progress</h2></div>
-      <p v-if="loadingStats" class="muted">Loading…</p>
-      <template v-else-if="stats">
-        <!-- Panel coverage first: it is the number that reveals whether the
-             human consensus is actually being collected, as opposed to the
-             queue merely moving. -->
+
+      <LoadState
+        :loading="loadingStats"
+        :error="errStats"
+        :empty="!stats"
+        empty-text="No statistics available."
+        @retry="loadStats"
+      />
+
+      <template v-if="stats">
+        <!-- Panel coverage leads. A comparison item contributes nothing to the
+             human consensus until every panel judgment is in, so throughput can
+             look healthy while this sits at zero. It is the number that says
+             whether the consensus is actually being collected. -->
         <div class="panel-coverage">
           <div class="pc-head">
             <span class="pc-title">Panel coverage</span>
             <span class="pc-value">
-              {{ stats.comparison_complete ?? 0 }} / {{ stats.comparison_total ?? 0 }}
-              comparison items have their full panel
+              <b>{{ stats.comparison_complete ?? 0 }}</b> of
+              {{ stats.comparison_total ?? 0 }} comparison items have their full panel
             </span>
           </div>
-          <div class="bar-track">
-            <div class="bar-fill" :style="{ width: `${comparisonPct}%` }"></div>
+          <div class="bar-track" role="img"
+               :aria-label="`Panel coverage ${comparisonPct} percent`">
+            <div class="bar-fill" :style="{ width: comparisonPct + '%' }"></div>
           </div>
           <p class="pc-note">
-            A comparison item needs every panel judgment before it contributes a
-            human consensus. Queue throughput can look healthy while this stays
-            at zero.
+            Queue throughput can look healthy while this stays at zero.
           </p>
         </div>
 
@@ -141,25 +181,24 @@
             </span>
             <span class="stat-label">median per item</span>
           </div>
-          <div class="stat rung">
+          <div class="stat">
             <span class="stat-value">{{ stats.rung ?? 'R0' }}</span>
             <span class="stat-label">claims rung</span>
           </div>
         </div>
 
-        <!-- Expert-named references. `recall_misses` is a headline figure for
-             the method: each one is a paper the corpus held and retrieval
-             failed to surface, named by an expert who knew it mattered
+        <!-- Expert-named references. `recall_misses` is a headline figure for the
+             method: each is a paper the corpus held and retrieval failed to
+             surface, named by an expert who knew it mattered
              (advandeb_methods docs/09 §2.5a). -->
-        <div v-if="refStats" class="stat-row refs-row">
-          <div class="stat miss">
+        <div v-if="refStats" class="stat-row">
+          <div class="stat">
             <span class="stat-value">{{ refStats.recall_misses ?? 0 }}</span>
             <span class="stat-label">
-              retrieval misses
-              <template v-if="refStats.miss_rate !== null && refStats.miss_rate !== undefined">
-                ({{ Math.round(refStats.miss_rate * 100) }}% of
-                {{ refStats.checked_for_retrieval }} checked)
-              </template>
+              retrieval misses<template
+                v-if="refStats.miss_rate !== null && refStats.miss_rate !== undefined"
+              > · {{ Math.round(refStats.miss_rate * 100) }}% of
+                {{ refStats.checked_for_retrieval }} checked</template>
             </span>
           </div>
           <div class="stat">
@@ -202,16 +241,16 @@
         <div v-if="byStratum.length" class="strata">
           <span class="col-title">Per-stratum coverage</span>
           <p class="hint">
-            Prefix proportionality is the property that keeps a half-finished
-            queue a valid sample — a stratum far behind the others is worth
-            noticing early.
+            Prefix proportionality is what keeps a half-finished queue a valid
+            sample — a stratum far behind the others is worth noticing early.
           </p>
           <ul class="mini two-col">
-            <li v-for="s in byStratum" :key="s.k"><span>{{ s.k }}</span><b>{{ s.v }}</b></li>
+            <li v-for="s in byStratum" :key="s.k">
+              <span class="stratum-name">{{ s.k }}</span><b>{{ s.v }}</b>
+            </li>
           </ul>
         </div>
       </template>
-      <p v-else class="muted">No statistics available.</p>
     </section>
   </div>
 </template>
@@ -220,6 +259,7 @@
 import { computed, onMounted, reactive, ref } from 'vue'
 import api from '@/utils/api'
 import ExpertiseProfileCard from '@/components/enrolment/ExpertiseProfileCard.vue'
+import LoadState from '@/components/enrolment/LoadState.vue'
 
 interface ExpertRow {
   id: string
@@ -237,14 +277,18 @@ const eligible = ref<number | null>(null)
 const requests = ref<any[]>([])
 const stats = ref<any>(null)
 const notes = reactive<Record<string, string>>({})
+const rowError = reactive<Record<string, string>>({})
 
 const loadingExperts = ref(true)
 const loadingRequests = ref(true)
 const loadingStats = ref(true)
+const errExperts = ref('')
+const errRequests = ref('')
+const errStats = ref('')
 const busyId = ref<string | null>(null)
 
-// The backend is being built in parallel; accept either spelling rather than
-// showing "no access" for everyone if one field name lands differently.
+// The backend field name landed in parallel; accept either rather than showing
+// "no access" for everyone if one spelling differs.
 function canElicit(u: ExpertRow): boolean {
   return !!(u.can_elicit ?? u.can_annotate ?? u.has_capability)
 }
@@ -255,7 +299,6 @@ const comparisonPct = computed(() => {
   return t ? Math.round((c / t) * 100) : 0
 })
 
-// Expert-asserted references, served alongside the rest of admin stats.
 const refStats = computed(() => stats.value?.expert_references || null)
 
 const byTask = computed(() => toPairs(stats.value?.by_task))
@@ -264,7 +307,7 @@ const byStratum = computed(() => toPairs(stats.value?.by_stratum))
 
 function toPairs(obj: Record<string, number> | undefined) {
   return Object.entries(obj || {})
-    .map(([k, v]) => ({ k: k.replace(/_/g, ' '), v }))
+    .map(([k, v]) => ({ k: k.replace(/_/g, ' ').replace(/\|/g, ' · '), v }))
     .sort((a, b) => b.v - a.v)
 }
 
@@ -277,49 +320,65 @@ function formatDate(d?: string) {
   try { return new Date(d).toLocaleDateString() } catch { return d }
 }
 
+function readError(e: any): string {
+  const d = e?.response?.data?.detail
+  if (typeof d === 'string') return d
+  if (Array.isArray(d) && d[0]?.msg) return d[0].msg
+  if (e?.response?.status === 403) return 'You do not have permission for this.'
+  if (e?.message === 'Network Error') return 'Could not reach the server.'
+  return 'Something went wrong. Try again.'
+}
+
 async function loadExperts() {
-  loadingExperts.value = true
+  loadingExperts.value = true; errExperts.value = ''
   try {
     const { data } = await api.get('/elicitation/experts')
     experts.value = data.users || []
     eligible.value = data.eligible ?? null
-  } catch { /* toast already surfaced by the interceptor */ }
+  } catch (e) { errExperts.value = readError(e) }
   finally { loadingExperts.value = false }
 }
 
 async function loadRequests() {
-  loadingRequests.value = true
+  loadingRequests.value = true; errRequests.value = ''
   try {
     const { data } = await api.get('/enrolment/requests')
     requests.value = data.requests || data || []
-  } catch { requests.value = [] }
+  } catch (e) { errRequests.value = readError(e); requests.value = [] }
   finally { loadingRequests.value = false }
 }
 
 async function loadStats() {
-  loadingStats.value = true
+  loadingStats.value = true; errStats.value = ''
   try {
     const { data } = await api.get('/elicitation/stats/admin')
     stats.value = data
-  } catch { stats.value = null }
+  } catch (e) { errStats.value = readError(e); stats.value = null }
   finally { loadingStats.value = false }
 }
 
 async function setCapability(u: ExpertRow, granted: boolean) {
   busyId.value = u.id
+  delete rowError[u.id]
   try {
     await api.post(`/elicitation/experts/${u.id}`, null, { params: { granted } })
     await loadExperts()
+  } catch (e) {
+    // Previously swallowed: a failed grant looked identical to a successful one.
+    rowError[u.id] = readError(e)
   } finally { busyId.value = null }
 }
 
 async function decide(r: any, decision: 'approve' | 'decline', tier: string | null) {
   busyId.value = r.id
+  delete rowError[r.id]
   try {
     await api.post(`/enrolment/requests/${r.id}/decide`, {
       decision, tier, note: notes[r.id] || undefined,
     })
-    await Promise.all([loadRequests(), loadExperts()])
+    await Promise.all([loadRequests(), loadExperts(), loadStats()])
+  } catch (e) {
+    rowError[r.id] = readError(e)
   } finally { busyId.value = null }
 }
 
@@ -327,114 +386,245 @@ onMounted(() => { loadExperts(); loadRequests(); loadStats() })
 </script>
 
 <style scoped>
+@import '@/styles/elicitation-tokens.css';
+
 .admin-experts-view {
-  padding: 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding: var(--el-s5) var(--el-s6);
+  display: flex; flex-direction: column; gap: var(--el-s5);
   max-width: 1100px;
 }
-.page-header h1 { font-size: 1.5rem; font-weight: 700; color: #111827; }
-.subtitle { color: #6b7280; line-height: 1.6; margin-top: 0.4rem; max-width: 60ch; }
+.page-header h1 { font-size: var(--el-fs-xl); font-weight: 700; color: var(--el-ink); }
+.subtitle {
+  color: var(--el-ink-3); line-height: var(--el-lh);
+  margin-top: var(--el-s1); max-width: 60ch; font-size: var(--el-fs-base);
+}
 
-.card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 1.25rem 1.5rem;
+.card-head {
+  display: flex; align-items: center; gap: var(--el-s2);
+  margin-bottom: var(--el-s2);
 }
-.card-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
-.card-head h2 { font-size: 1.05rem; font-weight: 600; color: #111827; }
+.card-head h2 { font-size: var(--el-fs-lg); font-weight: 600; color: var(--el-ink); }
+
 .count-pill {
-  background: #111827; color: #fff; border-radius: 999px;
-  padding: 0.1rem 0.5rem; font-size: 0.72rem; font-weight: 600;
+  background: var(--el-accent); color: #fff; border-radius: 999px;
+  padding: 0.1rem 0.5rem; font-size: var(--el-fs-xs); font-weight: 600;
 }
+.count-pill.ghost { background: var(--el-bg-3); color: var(--el-ink-2); }
 
 .note {
-  font-size: 0.82rem; color: #4b5563; line-height: 1.6;
-  background: #f9fafb; border-radius: 6px; padding: 0.6rem 0.8rem;
-  margin-bottom: 1rem;
+  font-size: var(--el-fs-sm); color: var(--el-ink-2); line-height: var(--el-lh);
+  background: var(--el-bg-2); border-radius: var(--el-radius-sm);
+  padding: var(--el-s3); margin-bottom: var(--el-s4);
 }
-.hint { font-size: 0.75rem; color: #9ca3af; line-height: 1.5; margin: 0.25rem 0 0.5rem; }
-.muted { color: #9ca3af; font-size: 0.9rem; }
+.hint { font-size: var(--el-fs-xs); color: var(--el-ink-4); line-height: 1.5; margin: var(--el-s1) 0 var(--el-s2); }
+.muted { color: var(--el-ink-4); font-size: var(--el-fs-sm); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 .request {
-  border: 1px solid #e5e7eb; border-radius: 8px;
-  padding: 1rem 1.1rem; margin-bottom: 0.9rem;
-  display: flex; flex-direction: column; gap: 0.9rem;
+  border: 1px solid var(--el-line); border-radius: var(--el-radius-sm);
+  padding: var(--el-s4); margin-bottom: var(--el-s3);
+  display: flex; flex-direction: column; gap: var(--el-s3);
 }
-.request-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-.request-head .email { color: #6b7280; font-size: 0.85rem; margin-left: 0.5rem; }
-.submitted { font-size: 0.75rem; color: #9ca3af; }
+.request-head {
+  display: flex; justify-content: space-between;
+  align-items: baseline; gap: var(--el-s4); flex-wrap: wrap;
+}
+.who { display: flex; align-items: baseline; gap: var(--el-s2); flex-wrap: wrap; }
+.who .email {
+  color: var(--el-ink-3); font-size: var(--el-fs-sm); text-decoration: none;
+  overflow-wrap: anywhere;   /* a long institutional address must not widen the card */
+}
+.who .email:hover { text-decoration: underline; }
+.submitted { font-size: var(--el-fs-xs); color: var(--el-ink-4); }
 
-.decide { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.decide { display: flex; gap: var(--el-s2); flex-wrap: wrap; }
+.act { font-weight: 600; font-size: var(--el-fs-sm); }
+.act.danger { color: var(--el-danger); border-color: #fecaca; }
+.act.danger:hover:not(:disabled) { background: #fef2f2; }
+
 .note-input {
-  flex: 1; min-width: 180px;
-  padding: 0.35rem 0.6rem; border: 1px solid #d1d5db;
-  border-radius: 6px; font-size: 0.82rem;
+  width: 100%;
+  min-height: var(--el-touch);
+  padding: var(--el-s2) var(--el-s3);
+  border: 1px solid var(--el-line-2); border-radius: var(--el-radius-sm);
+  font-size: 16px; font-family: inherit; color: var(--el-ink);
+}
+.note-input:focus {
+  outline: none; border-color: var(--el-accent);
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.08);
 }
 
-.btn {
-  padding: 0.5rem 1rem; border: 1px solid #d1d5db; border-radius: 6px;
-  background: #fff; color: #374151; cursor: pointer;
-  font-size: 0.85rem; font-weight: 600;
+.row-error {
+  font-size: var(--el-fs-xs); color: var(--el-danger);
+  margin-top: var(--el-s1);
 }
-.btn:hover:not(:disabled) { background: #f3f4f6; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn.small { padding: 0.35rem 0.7rem; font-size: 0.8rem; }
-.btn.danger { color: #dc2626; border-color: #fecaca; }
-.btn.danger:hover:not(:disabled) { background: #fef2f2; }
 
-.experts-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.experts-table { width: 100%; border-collapse: collapse; font-size: var(--el-fs-base); }
 .experts-table th {
-  text-align: left; padding: 0.5rem 0.6rem; border-bottom: 2px solid #e5e7eb;
-  color: #6b7280; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em;
+  text-align: left; padding: var(--el-s2); border-bottom: 2px solid var(--el-line);
+  color: var(--el-ink-3); font-size: var(--el-fs-xs);
+  text-transform: uppercase; letter-spacing: 0.03em;
 }
 .experts-table th.num, .experts-table td.num { text-align: right; }
-.experts-table td { padding: 0.6rem; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.experts-table td {
+  padding: var(--el-s3) var(--el-s2);
+  border-bottom: 1px solid var(--el-bg-3); vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+.actions-cell { text-align: right; }
 
 .role-pill {
   display: inline-block; padding: 0.15rem 0.5rem; margin: 0 0.2rem 0.2rem 0;
-  border-radius: 999px; font-size: 0.72rem; font-weight: 600;
-  border: 1px solid #e5e7eb; color: #6b7280; background: #f9fafb;
+  border-radius: 999px; font-size: var(--el-fs-xs); font-weight: 600;
+  border: 1px solid var(--el-line); color: var(--el-ink-3); background: var(--el-bg-2);
 }
+
+/* Tier is the most consequential fact on this screen, so the two values must be
+   distinguishable to every reader. The previous blue/purple pair failed CVD
+   validation at ΔE 2.0 (deutan) — indistinguishable. Blue/amber validates at
+   ΔE 30.0 protan, 35.3 normal, and each badge also carries its own word, so
+   identity never rests on colour alone. */
 .tier-badge {
+  display: inline-flex; align-items: center; gap: var(--el-s1);
   padding: 0.15rem 0.55rem; border-radius: 999px;
-  font-size: 0.75rem; font-weight: 600;
+  font-size: var(--el-fs-xs); font-weight: 600;
+  border: 1px solid transparent;
 }
-.tier-badge.panel { background: #dbeafe; color: #1d4ed8; }
-.tier-badge.contributor { background: #f3e8ff; color: #7e22ce; }
+.tier-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.tier-badge.panel { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.tier-badge.contributor { background: #fffbeb; color: #b45309; border-color: #fde68a; }
 
-.status-badge { padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
-.status-badge.active { background: #dcfce7; color: #15803d; }
-.status-badge.off { background: #f3f4f6; color: #9ca3af; }
-.via-role { font-size: 0.68rem; color: #9ca3af; margin-left: 0.35rem; }
+.status-badge {
+  padding: 0.15rem 0.55rem; border-radius: 999px;
+  font-size: var(--el-fs-xs); font-weight: 600;
+}
+.status-badge.active { background: var(--el-ok-bg); color: var(--el-ok-ink); }
+.status-badge.off { background: var(--el-bg-3); color: var(--el-ink-4); }
+.via-role { font-size: var(--el-fs-xs); color: var(--el-ink-4); margin-left: var(--el-s1); }
 
-.panel-coverage { margin-bottom: 1.2rem; }
-.pc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
-.pc-title { font-size: 0.75rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600; }
-.pc-value { font-size: 0.85rem; color: #374151; }
-.bar-track { height: 8px; background: #f3f4f6; border-radius: 999px; margin-top: 0.4rem; overflow: hidden; }
-.bar-fill { height: 100%; background: #3b82f6; border-radius: 999px; transition: width 0.3s; }
-.pc-note { font-size: 0.75rem; color: #9ca3af; margin-top: 0.4rem; line-height: 1.5; }
+.panel-coverage { margin-bottom: var(--el-s4); }
+.pc-head {
+  display: flex; justify-content: space-between;
+  align-items: baseline; gap: var(--el-s4); flex-wrap: wrap;
+}
+.pc-title {
+  font-size: var(--el-fs-xs); color: var(--el-ink-3);
+  text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600;
+}
+.pc-value { font-size: var(--el-fs-sm); color: var(--el-ink-2); }
+.pc-value b { color: var(--el-ink); font-size: var(--el-fs-base); }
 
-.stat-row { display: flex; gap: 2rem; flex-wrap: wrap; padding: 0.8rem 0; border-top: 1px solid #f3f4f6; }
-.stat { display: flex; flex-direction: column; }
-.stat-value { font-size: 1.3rem; font-weight: 700; color: #111827; }
-.stat-label { font-size: 0.72rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.03em; }
-.stat.rung .stat-value { color: #1d4ed8; }
+/* Meter: thin mark, rounded data-end, anchored to the track baseline. Eases to
+   its value rather than snapping, so a change between refreshes is visible. */
+.bar-track {
+  height: 8px; background: var(--el-bg-3);
+  border-radius: 999px; margin-top: var(--el-s2); overflow: hidden;
+}
+.bar-fill {
+  height: 100%; background: #1d4ed8;
+  border-radius: 999px;
+  transition: width var(--el-t-slow) var(--el-ease);
+}
+.pc-note { font-size: var(--el-fs-xs); color: var(--el-ink-4); margin-top: var(--el-s2); line-height: 1.5; }
 
-.rung-note { font-size: 0.85rem; color: #374151; line-height: 1.6; padding-bottom: 0.8rem; }
+.stat-row {
+  display: flex; gap: var(--el-s6); flex-wrap: wrap;
+  padding: var(--el-s3) 0; border-top: 1px solid var(--el-bg-3);
+}
+.stat { display: flex; flex-direction: column; min-width: 0; }
+/* Values wear ink, not a series colour — the label carries the meaning. */
+.stat-value { font-size: 1.3rem; font-weight: 700; color: var(--el-ink); }
+.stat-label {
+  font-size: var(--el-fs-xs); color: var(--el-ink-3);
+  text-transform: uppercase; letter-spacing: 0.03em;
+}
 
-.split { display: flex; gap: 2.5rem; flex-wrap: wrap; border-top: 1px solid #f3f4f6; padding-top: 0.9rem; }
+.rung-note {
+  font-size: var(--el-fs-sm); color: var(--el-ink-2);
+  line-height: var(--el-lh); padding-bottom: var(--el-s3);
+}
+
+.split {
+  display: flex; gap: var(--el-s6); flex-wrap: wrap;
+  border-top: 1px solid var(--el-bg-3); padding-top: var(--el-s3);
+}
 .col { flex: 1; min-width: 200px; }
-.col-title { font-size: 0.72rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600; }
-.mini { list-style: none; margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.2rem; }
-.mini li { display: flex; justify-content: space-between; font-size: 0.82rem; color: #374151; gap: 1rem; }
-.mini li b { color: #111827; }
-.mini.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.2rem 1.5rem; }
+.col-title {
+  font-size: var(--el-fs-xs); color: var(--el-ink-4);
+  text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600;
+}
+.mini { list-style: none; margin-top: var(--el-s2); display: flex; flex-direction: column; gap: var(--el-s1); }
+.mini li {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: var(--el-fs-sm); color: var(--el-ink-2); gap: var(--el-s4);
+}
+.mini li b { color: var(--el-ink); flex-shrink: 0; }
+.mini.two-col {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--el-s1) var(--el-s5);
+}
+/* Stratum keys are long (category · task), so they wrap. The first cut of this
+   truncated them and put the full name in a `title` — which is unreadable on
+   the touch devices this has to work on, and invisible to a keyboard. */
+.stratum-name { min-width: 0; line-height: 1.4; word-break: break-word; }
 
-.strata { border-top: 1px solid #f3f4f6; padding-top: 0.9rem; margin-top: 0.9rem; }
-.refs-row { margin-top: 0.6rem; }
-.stat.miss .stat-value { color: #b45309; }
+.strata { border-top: 1px solid var(--el-bg-3); padding-top: var(--el-s3); margin-top: var(--el-s3); }
+
+/* A decided request leaving the list is the feedback that the decision landed. */
+.row-enter-active, .row-leave-active {
+  transition: opacity var(--el-t-slow) var(--el-ease),
+              transform var(--el-t-slow) var(--el-ease);
+}
+.row-enter-from { opacity: 0; transform: translateY(-6px); }
+.row-leave-to { opacity: 0; transform: translateX(12px); }
+.row-leave-active { position: absolute; width: calc(100% - var(--el-s6) * 2); }
+
+.count-enter-active, .count-leave-active { transition: opacity var(--el-t) var(--el-ease); }
+.count-enter-from, .count-leave-to { opacity: 0; }
+
+/* ── phone ─────────────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .admin-experts-view { padding: var(--el-s4) var(--el-s3); gap: var(--el-s4); }
+
+  /* The table becomes stacked cards. Each cell carries its own header via
+     data-h, so nothing scrolls sideways and nothing needs pinch-zoom. */
+  .experts-table, .experts-table tbody, .experts-table tr, .experts-table td {
+    display: block; width: 100%;
+  }
+  .experts-table thead { display: none; }
+  .experts-table tr {
+    border: 1px solid var(--el-line); border-radius: var(--el-radius-sm);
+    padding: var(--el-s3); margin-bottom: var(--el-s3);
+  }
+  .experts-table td {
+    border: 0; padding: var(--el-s1) 0;
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--el-s3); text-align: left;
+    min-width: 0;
+  }
+  .experts-table td::before {
+    content: attr(data-h);
+    font-size: var(--el-fs-xs); color: var(--el-ink-4);
+    text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .experts-table td.num { text-align: right; }
+  /* Cells without a data-h get no label pseudo-element — an empty one still
+     takes part in the flex row and squeezes the control beside it. */
+  .experts-table td:not([data-h])::before { display: none; }
+  .actions-cell {
+    flex-direction: column; align-items: stretch;
+    padding-top: var(--el-s2) !important;
+  }
+  .actions-cell .el-btn { width: 100%; }
+
+  .decide { flex-direction: column; }
+  .decide .el-btn { width: 100%; }
+
+  .stat-row { gap: var(--el-s4); }
+  .stat { flex: 1 1 42%; }
+  .split { gap: var(--el-s4); }
+  .mini.two-col { grid-template-columns: 1fr; }
+  .row-leave-active { width: calc(100% - var(--el-s3) * 2); }
+}
 </style>
