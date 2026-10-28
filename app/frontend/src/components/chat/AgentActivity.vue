@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue'
+import { ref, onUnmounted, watch } from 'vue'
 
 interface AgentStatus {
   name: string
@@ -74,7 +74,7 @@ interface WorkflowStep {
   timestamp: number
 }
 
-defineProps<{
+const props = defineProps<{
   agents: AgentStatus[]
   workflowTrace: WorkflowStep[]
 }>()
@@ -85,9 +85,14 @@ const now = ref(Date.now())
 const timer = setInterval(() => { now.value = Date.now() }, 1000)
 onUnmounted(() => clearInterval(timer))
 
+// An agent's startedAt is Date.now() when its event arrives, but `now` only
+// moved on the next 1 s tick, so a fresh agent read up to "-1.0s" ("-0.8s"
+// in the review). Read the clock whenever an agent (re)starts.
+watch(() => props.agents.map(a => a.startedAt ?? 0).join(','), () => { now.value = Date.now() })
+
 function getElapsed(startedAt?: number): string {
   if (!startedAt) return '0'
-  return ((now.value - startedAt) / 1000).toFixed(1)
+  return (Math.max(0, now.value - startedAt) / 1000).toFixed(1)
 }
 
 function truncate(text: string, max: number): string {
