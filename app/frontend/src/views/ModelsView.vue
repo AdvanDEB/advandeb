@@ -152,7 +152,10 @@ import NetworkCanvas from '@/components/tdeb/NetworkCanvas.vue'
 import ResultsPanel from '@/components/tdeb/ResultsPanel.vue'
 import SimulationPanel from '@/components/tdeb/SimulationPanel.vue'
 import { useAuthStore } from '@/stores/auth'
+import { isCurator as userIsCurator } from '@/utils/access'
 import { useNotificationsStore } from '@/stores/notifications'
+import { useDialogStore } from '@/stores/dialog'
+import { apiErrorMessage } from '@/utils/api'
 import * as tdeb from '@/utils/tdebApi'
 import type {
   EquationDocument, NodeTypeId, SimulationRequest, SimulationResult,
@@ -171,6 +174,7 @@ const TABS = [
 type TabId = typeof TABS[number]['id']
 
 const notifications = useNotificationsStore()
+const dialog = useDialogStore()
 
 const canvasRef = ref<InstanceType<typeof NetworkCanvas> | null>(null)
 const simPanelRef = ref<InstanceType<typeof SimulationPanel> | null>(null)
@@ -196,7 +200,7 @@ const isPublished = ref(false)
 
 // Publishing is a curator/administrator act — mirrors require_curator on the API.
 const canPublish = computed(() =>
-  auth.hasRole('administrator') || auth.hasRole('knowledge_curator'))
+  userIsCurator(auth.user))
 
 // ─── Save tracking ───────────────────────────────────────────────────
 // Every edit persists immediately. That is only trustworthy if the user can
@@ -269,15 +273,6 @@ const selectedNode = computed(() =>
 const selectedEdge = computed(() =>
   selected.value?.type === 'edge' ? edges.value[selected.value.id] ?? null : null)
 
-function errorMessage(err: unknown, fallback: string): string {
-  if (typeof err === 'object' && err !== null) {
-    const detail = (err as { response?: { data?: { detail?: unknown } } })
-      .response?.data?.detail
-    if (typeof detail === 'string') return detail
-  }
-  return err instanceof Error ? err.message : fallback
-}
-
 // ─── Loading ─────────────────────────────────────────────────────────
 
 function adoptNetwork(net: TDebNetwork, id: string) {
@@ -300,7 +295,7 @@ async function loadModel(id: string) {
   try {
     adoptNetwork(await tdeb.getModel(id), id)
   } catch (err) {
-    loadError.value = errorMessage(err, 'Could not open this model.')
+    loadError.value = apiErrorMessage(err, 'Could not open this model.')
     return
   }
   // Publish state is not carried on the network document. Only curators can act
@@ -328,7 +323,7 @@ async function commitRename() {
     modelName.value = updated.name
   } catch (err) {
     modelName.value = network.value.name
-    notifications.error(errorMessage(err, 'Could not rename the model.'))
+    notifications.error(apiErrorMessage(err, 'Could not rename the model.'))
   }
 }
 
@@ -340,16 +335,18 @@ async function duplicateCurrent() {
     notifications.success('Copy created.')
     router.push({ name: 'model-editor', params: { id: copy.id } })
   } catch (err) {
-    notifications.error(errorMessage(err, 'Could not copy this model.'))
+    notifications.error(apiErrorMessage(err, 'Could not copy this model.'))
   }
 }
 
 async function togglePublish() {
   if (!modelId.value) return
   const publishing = !isPublished.value
-  if (publishing && !window.confirm(
-    `Publish "${modelName.value}" as a shared template? Everyone will be able to `
-    + `copy it into their own models.`)) return
+  if (publishing && !(await dialog.confirm({
+    title: 'Publish as a shared template?',
+    message: `Everyone will be able to copy “${modelName.value}” into their own models.`,
+    confirmLabel: 'Publish',
+  }))) return
   try {
     const updated = publishing
       ? await tdeb.publishModel(modelId.value)
@@ -359,7 +356,7 @@ async function togglePublish() {
       ? 'Published as a shared template.'
       : 'Withdrawn from shared templates.')
   } catch (err) {
-    notifications.error(errorMessage(err, 'Could not change the published state.'))
+    notifications.error(apiErrorMessage(err, 'Could not change the published state.'))
   }
 }
 
@@ -420,7 +417,7 @@ async function onAddNode(payload: {
     if (network.value) network.value.nodes[node.id] = node
     selectNode(node.id)
   } catch (err) {
-    notifications.error(errorMessage(err, 'Could not add the compartment.'))
+    notifications.error(apiErrorMessage(err, 'Could not add the compartment.'))
   }
 }
 
@@ -437,7 +434,7 @@ async function onConnect({ sourceId, targetId }: { sourceId: string; targetId: s
     if (network.value) network.value.edges[edge.id] = edge
     selectEdge(edge.id)
   } catch (err) {
-    notifications.error(errorMessage(err, 'Could not create the channel.'))
+    notifications.error(apiErrorMessage(err, 'Could not create the channel.'))
   }
 }
 
@@ -451,7 +448,7 @@ async function onUpdateNode(payload: {
       tdeb.updateNode(modelId.value!, selectedNode.value!.id, payload))
     if (network.value) network.value.nodes[updated.id] = updated
   } catch (err) {
-    notifications.error(errorMessage(err, 'Could not update the compartment.'))
+    notifications.error(apiErrorMessage(err, 'Could not update the compartment.'))
   }
 }
 
@@ -465,7 +462,7 @@ async function onUpdateEdge(payload: {
     if (network.value) network.value.edges[updated.id] = updated
     formulaError.value = updated.formula_error ?? ''
   } catch (err) {
-    notifications.error(errorMessage(err, 'Could not update the channel.'))
+    notifications.error(apiErrorMessage(err, 'Could not update the channel.'))
   }
 }
 
@@ -488,7 +485,7 @@ async function deleteSelected() {
     }
     selected.value = null
   } catch (err) {
-    notifications.error(errorMessage(err, 'Could not delete the element.'))
+    notifications.error(apiErrorMessage(err, 'Could not delete the element.'))
   }
 }
 
@@ -508,7 +505,7 @@ async function runBatch(request: SimulationRequest) {
     result.value = res
     activeTab.value = 'results'
   } catch (err) {
-    simError.value = errorMessage(err, 'Simulation failed.')
+    simError.value = apiErrorMessage(err, 'Simulation failed.')
   } finally {
     running.value = false
   }
@@ -535,7 +532,7 @@ async function runStream(request: SimulationRequest) {
   try {
     opened = await tdeb.openSimulationSocket(modelId.value)
   } catch (err) {
-    simError.value = errorMessage(err, 'Could not start the live stream.')
+    simError.value = apiErrorMessage(err, 'Could not start the live stream.')
     streaming.value = false
     return
   }
@@ -631,7 +628,7 @@ async function loadEquations() {
   try {
     equations.value = await tdeb.getEquations()
   } catch (err) {
-    loadError.value = errorMessage(err, 'Could not load the equation set.')
+    loadError.value = apiErrorMessage(err, 'Could not load the equation set.')
   }
 }
 
@@ -663,7 +660,7 @@ async function exportJson() {
       `${safeFilename(doc.name)}.json`,
     )
   } catch (err) {
-    notifications.error(errorMessage(err, 'Export failed.'))
+    notifications.error(apiErrorMessage(err, 'Export failed.'))
   }
 }
 
@@ -682,7 +679,7 @@ async function exportLatex() {
     })
     downloadBlob(blob, `${safeFilename(modelName.value)}_latex.zip`)
   } catch (err) {
-    notifications.error(errorMessage(err, 'LaTeX export failed.'))
+    notifications.error(apiErrorMessage(err, 'LaTeX export failed.'))
   }
 }
 

@@ -7,6 +7,9 @@
 
     <!-- Login and KB mode render without the sidebar layout -->
     <router-view v-else />
+
+    <!-- Outside AppLayout so confirmations also work on the bare /kb view. -->
+    <AppDialogHost />
   </div>
 </template>
 
@@ -15,6 +18,7 @@ import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import AppLayout from '@/components/layout/AppLayout.vue'
+import AppDialogHost from '@/components/common/AppDialogHost.vue'
 
 const authStore = useAuthStore()
 const route = useRoute()
@@ -25,7 +29,9 @@ const isBareRoute = computed(() =>
 
 onMounted(async () => {
   await authStore.fetchAuthConfig()
-  await authStore.fetchCurrentUser()
+  // main.ts already started hydration before mounting; hydrate() is memoised,
+  // so this awaits that same request instead of fetching /users/me again.
+  await authStore.hydrate()
 })
 </script>
 

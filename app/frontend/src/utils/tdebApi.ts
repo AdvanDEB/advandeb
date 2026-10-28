@@ -149,15 +149,28 @@ export interface StreamSnapshot {
 
 const BASE = '/tdeb'
 
+/**
+ * Every caller of this module reports a failure itself — ModelsView and
+ * ModelsLibraryView with a specific toast, EquationsPanel inline — so the
+ * global error toast would say the same thing a second time, less precisely.
+ */
+const QUIET = { skipErrorToast: true } as const
+const http = {
+  get: <T>(url: string) => api.get<T>(url, QUIET),
+  post: <T>(url: string, body?: unknown) => api.post<T>(url, body, QUIET),
+  put: <T>(url: string, body?: unknown) => api.put<T>(url, body, QUIET),
+  delete: <T = unknown>(url: string) => api.delete<T>(url, QUIET),
+}
+
 // ─── Templates & models ──────────────────────────────────────────────
 
 export async function listTemplates(): Promise<TDebTemplate[]> {
-  const { data } = await api.get<TDebTemplate[]>(`${BASE}/templates`)
+  const { data } = await http.get<TDebTemplate[]>(`${BASE}/templates`)
   return data
 }
 
 export async function listModels(): Promise<TDebModelSummary[]> {
-  const { data } = await api.get<TDebModelSummary[]>(`${BASE}/models`)
+  const { data } = await http.get<TDebModelSummary[]>(`${BASE}/models`)
   return data
 }
 
@@ -168,12 +181,12 @@ export async function createModel(payload: {
   name?: string
   description?: string
 }): Promise<TDebNetwork> {
-  const { data } = await api.post<TDebNetwork>(`${BASE}/models`, payload)
+  const { data } = await http.post<TDebNetwork>(`${BASE}/models`, payload)
   return data
 }
 
 export async function getModel(modelId: string): Promise<TDebNetwork> {
-  const { data } = await api.get<TDebNetwork>(`${BASE}/models/${modelId}`)
+  const { data } = await http.get<TDebNetwork>(`${BASE}/models/${modelId}`)
   return data
 }
 
@@ -181,7 +194,7 @@ export async function getModel(modelId: string): Promise<TDebNetwork> {
 export async function updateModelMetadata(
   modelId: string, changes: { name?: string; description?: string },
 ): Promise<TDebModelSummary> {
-  const { data } = await api.put<TDebModelSummary>(`${BASE}/models/${modelId}`, changes)
+  const { data } = await http.put<TDebModelSummary>(`${BASE}/models/${modelId}`, changes)
   return data
 }
 
@@ -189,7 +202,7 @@ export async function updateModelMetadata(
 export async function duplicateModel(
   modelId: string, name?: string,
 ): Promise<TDebNetwork> {
-  const { data } = await api.post<TDebNetwork>(
+  const { data } = await http.post<TDebNetwork>(
     `${BASE}/models/${modelId}/duplicate`, name ? { name } : {},
   )
   return data
@@ -197,27 +210,27 @@ export async function duplicateModel(
 
 /** Models a curator has published as org-wide starting templates. */
 export async function listPublished(): Promise<TDebModelSummary[]> {
-  const { data } = await api.get<TDebModelSummary[]>(`${BASE}/published`)
+  const { data } = await http.get<TDebModelSummary[]>(`${BASE}/published`)
   return data
 }
 
 /** Publish one of your own models org-wide. Curator/administrator only. */
 export async function publishModel(modelId: string): Promise<TDebModelSummary> {
-  const { data } = await api.post<TDebModelSummary>(`${BASE}/models/${modelId}/publish`)
+  const { data } = await http.post<TDebModelSummary>(`${BASE}/models/${modelId}/publish`)
   return data
 }
 
 export async function unpublishModel(modelId: string): Promise<TDebModelSummary> {
-  const { data } = await api.delete<TDebModelSummary>(`${BASE}/models/${modelId}/publish`)
+  const { data } = await http.delete<TDebModelSummary>(`${BASE}/models/${modelId}/publish`)
   return data
 }
 
 export async function deleteModel(modelId: string): Promise<void> {
-  await api.delete(`${BASE}/models/${modelId}`)
+  await http.delete(`${BASE}/models/${modelId}`)
 }
 
 export async function exportModel(modelId: string): Promise<TDebNetwork> {
-  const { data } = await api.get<TDebNetwork>(`${BASE}/models/${modelId}/export`)
+  const { data } = await http.get<TDebNetwork>(`${BASE}/models/${modelId}/export`)
   return data
 }
 
@@ -232,7 +245,7 @@ export async function addNode(modelId: string, payload: {
   color: string
   params?: Partial<TDebNodeParams>
 }): Promise<TDebNode> {
-  const { data } = await api.post<TDebNode>(`${BASE}/models/${modelId}/nodes`, payload)
+  const { data } = await http.post<TDebNode>(`${BASE}/models/${modelId}/nodes`, payload)
   return data
 }
 
@@ -241,12 +254,12 @@ export async function updateNode(
     params?: Partial<TDebNodeParams>
   },
 ): Promise<TDebNode> {
-  const { data } = await api.put<TDebNode>(`${BASE}/models/${modelId}/nodes/${nodeId}`, payload)
+  const { data } = await http.put<TDebNode>(`${BASE}/models/${modelId}/nodes/${nodeId}`, payload)
   return data
 }
 
 export async function deleteNode(modelId: string, nodeId: string): Promise<void> {
-  await api.delete(`${BASE}/models/${modelId}/nodes/${nodeId}`)
+  await http.delete(`${BASE}/models/${modelId}/nodes/${nodeId}`)
 }
 
 export async function addEdge(modelId: string, payload: {
@@ -256,7 +269,7 @@ export async function addEdge(modelId: string, payload: {
   transport_type: TransportTypeId
   params?: Partial<TDebEdgeParams>
 }): Promise<TDebEdge> {
-  const { data } = await api.post<TDebEdge>(`${BASE}/models/${modelId}/edges`, payload)
+  const { data } = await http.post<TDebEdge>(`${BASE}/models/${modelId}/edges`, payload)
   return data
 }
 
@@ -267,12 +280,12 @@ export async function updateEdge(
     params?: Partial<TDebEdgeParams>
   },
 ): Promise<TDebEdge> {
-  const { data } = await api.put<TDebEdge>(`${BASE}/models/${modelId}/edges/${edgeId}`, payload)
+  const { data } = await http.put<TDebEdge>(`${BASE}/models/${modelId}/edges/${edgeId}`, payload)
   return data
 }
 
 export async function deleteEdge(modelId: string, edgeId: string): Promise<void> {
-  await api.delete(`${BASE}/models/${modelId}/edges/${edgeId}`)
+  await http.delete(`${BASE}/models/${modelId}/edges/${edgeId}`)
 }
 
 // ─── Simulation ──────────────────────────────────────────────────────
@@ -280,7 +293,7 @@ export async function deleteEdge(modelId: string, edgeId: string): Promise<void>
 export async function simulate(
   modelId: string, request: SimulationRequest,
 ): Promise<SimulationResult> {
-  const { data } = await api.post<SimulationResult>(
+  const { data } = await http.post<SimulationResult>(
     `${BASE}/models/${modelId}/simulate`, request,
   )
   return data
@@ -305,28 +318,28 @@ export async function openSimulationSocket(modelId: string): Promise<WebSocket> 
 // ─── Equations ───────────────────────────────────────────────────────
 
 export async function getEquations(): Promise<EquationDocument> {
-  const { data } = await api.get<EquationDocument>(`${BASE}/equations`)
+  const { data } = await http.get<EquationDocument>(`${BASE}/equations`)
   return data
 }
 
 export async function updateEquation(
   section: string, key: string | null, payload: Record<string, unknown>,
 ): Promise<EquationDocument> {
-  const { data } = await api.put<EquationDocument>(`${BASE}/equations`, {
+  const { data } = await http.put<EquationDocument>(`${BASE}/equations`, {
     section, key, data: payload,
   })
   return data
 }
 
 export async function resetEquations(): Promise<EquationDocument> {
-  const { data } = await api.post<EquationDocument>(`${BASE}/equations/reset`)
+  const { data } = await http.post<EquationDocument>(`${BASE}/equations/reset`)
   return data
 }
 
 export async function validateFormula(
   formula: string,
 ): Promise<{ valid: boolean; error: string; variables: string[] }> {
-  const { data } = await api.post<{ valid: boolean; error: string; variables: string[] }>(
+  const { data } = await http.post<{ valid: boolean; error: string; variables: string[] }>(
     `${BASE}/equations/validate`, { formula },
   )
   return data

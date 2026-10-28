@@ -1,0 +1,92 @@
+/* App-wide design tokens and a few global accessibility primitives.
+ *
+ * The app had ~1,300 hex literals against ~430 CSS variables, and the same
+ * blue appeared as three slightly different literals for "the button colour".
+ * New and touched code uses these names instead of literals; the values are
+ * the ones already on screen, so adopting a token never changes a pixel.
+ *
+ * The greys match styles/elicitation-tokens.css (--el-ink…, --el-line…), which
+ * remains the elicitation surface's own vocabulary. Loaded once from main.ts.
+ */
+
+:root {
+  /* ── brand / action ────────────────────────────────────────────────── */
+  --app-primary: #3b82f6;
+  --app-primary-strong: #2563eb;   /* hover, and text on white: 5.2:1 */
+  --app-primary-ink: #1d4ed8;
+  --app-primary-soft: #eff6ff;
+  --app-primary-soft-2: #dbeafe;
+  --app-primary-line: #bfdbfe;
+
+  /* ── status ────────────────────────────────────────────────────────── */
+  --app-danger: #dc2626;
+  --app-danger-strong: #b91c1c;
+  --app-danger-soft: #fee2e2;
+  --app-danger-line: #fca5a5;
+  --app-success: #16a34a;
+  --app-success-ink: #166534;
+  --app-success-soft: #dcfce7;
+  --app-success-line: #86efac;
+  --app-warning: #ca8a04;
+  --app-warning-ink: #713f12;
+  --app-warning-soft: #fef9c3;
+
+  /* ── neutrals ──────────────────────────────────────────────────────── */
+  --app-ink: #111827;
+  --app-ink-2: #374151;
+  --app-ink-3: #6b7280;
+  --app-ink-4: #9ca3af;
+  --app-line: #e5e7eb;
+  --app-line-2: #d1d5db;
+  --app-bg: #ffffff;
+  --app-bg-2: #f9fafb;
+  --app-bg-3: #f3f4f6;
+
+  /* ── shape, focus, touch ───────────────────────────────────────────── */
+  --app-radius-sm: 4px;
+  --app-radius: 6px;
+  --app-radius-lg: 8px;
+  --app-radius-xl: 12px;
+  --app-shadow-pop: 0 10px 40px rgba(17, 24, 39, 0.2);
+  --app-focus: 2px solid var(--app-primary-strong);
+  /* 44px is the platform minimum touch target. */
+  --app-touch: 44px;
+}
+
+/* Visually hidden, still announced. */
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The first focusable thing on every page; invisible until a keyboard user
+ * tabs to it. */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10000;
+  padding: 0.6rem 1rem;
+  background: var(--app-ink);
+  color: #fff;
+  border-radius: var(--app-radius);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; outline: var(--app-focus); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

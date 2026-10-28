@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import { useAuthStore } from '@/stores/auth'
 import 'highlight.js/styles/github.css'
+import '@/styles/tokens.css'
 
 const app = createApp(App)
 const pinia = createPinia()

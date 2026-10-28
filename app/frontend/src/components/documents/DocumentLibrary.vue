@@ -3,16 +3,18 @@
     <!-- Filters bar -->
     <div class="filters-bar">
       <div class="search-wrap">
-        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg class="search-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input
           v-model="searchQuery"
+          type="search"
           placeholder="Search title, DOI, journal…"
+          aria-label="Search documents"
           class="search-input"
           @input="debouncedFetch"
         />
       </div>
 
-      <select v-model="statusFilter" class="filter-select" @change="resetAndFetch">
+      <select v-model="statusFilter" class="filter-select" aria-label="Status" @change="resetAndFetch">
         <option value="">All statuses</option>
         <option value="pending">Pending</option>
         <option value="processing">Processing</option>
@@ -20,7 +22,7 @@
         <option value="failed">Failed</option>
       </select>
 
-      <select v-model="typeFilter" class="filter-select" @change="resetAndFetch">
+      <select v-model="typeFilter" class="filter-select" aria-label="Source type" @change="resetAndFetch">
         <option value="">All pipeline types</option>
         <option value="pdf_local">PDF (local)</option>
         <option value="pdf_upload">PDF (upload)</option>
@@ -29,7 +31,7 @@
         <option value="web">Web abstract</option>
       </select>
 
-      <select v-model="flagFilter" class="filter-select" @change="resetAndFetch">
+      <select v-model="flagFilter" class="filter-select" aria-label="Flag" @change="resetAndFetch">
         <option value="">All documents</option>
         <option value="true">Flagged only</option>
         <option value="false">Unflagged only</option>
@@ -77,7 +79,14 @@
 
               <td class="col-title">
                 <div class="title-text">
-                  {{ doc.title || '(untitled)' }}
+                  <!-- The row stays clickable for a mouse; the title is the
+                       keyboard and screen-reader way to open the abstract. -->
+                  <button
+                    type="button"
+                    class="row-toggle"
+                    :aria-expanded="expandedId === doc.id"
+                    @click.stop="toggleExpand(doc.id)"
+                  >{{ doc.title || '(untitled)' }}</button>
                   <span v-if="doc.potentially_irrelevant" class="flag-pill" :title="doc.flag_reason || 'Flagged as potentially irrelevant'">
                     ⚑ irrelevant
                   </span>
@@ -113,19 +122,23 @@
               <td class="col-actions" @click.stop>
                 <button
                   v-if="!doc.potentially_irrelevant"
+                  type="button"
                   class="act-btn flag"
                   title="Flag as potentially irrelevant"
+                  :aria-label="`Flag ${doc.title || 'document'} as potentially irrelevant`"
                   @click="openFlagModal(doc)"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
                 </button>
                 <button
                   v-else-if="isCurator"
+                  type="button"
                   class="act-btn unflag"
                   title="Remove flag"
+                  :aria-label="`Remove flag from ${doc.title || 'document'}`"
                   @click="unflag(doc)"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
                 </button>
 
                 <button
@@ -136,9 +149,10 @@
                     ? 'Incorporated into KB — flag as irrelevant instead'
                     : 'Delete document'"
                   :disabled="doc.processing_status === 'completed'"
+                  :aria-label="`Delete ${doc.title || 'document'}`"
                   @click="confirmDelete(doc)"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
                 </button>
               </td>
             </tr>
@@ -170,7 +184,7 @@
     <!-- Pagination bar -->
     <div v-if="totalPages > 1 || documents.length > 0" class="pagination-bar">
       <div class="pagination-left">
-        <select v-model="pageSize" class="page-size-select" @change="resetAndFetch">
+        <select v-model="pageSize" class="page-size-select" aria-label="Rows per page" @change="resetAndFetch">
           <option :value="25">25 / page</option>
           <option :value="50">50 / page</option>
           <option :value="100">100 / page</option>
@@ -207,12 +221,13 @@
     </div>
 
     <!-- Flag modal -->
-    <div v-if="flagModal" class="modal-overlay" @click.self="flagModal = null">
-      <div class="modal">
-        <h3>Flag as potentially irrelevant</h3>
+    <div v-if="flagModal" class="modal-overlay" @click.self="flagModal = null" @keydown.esc="flagModal = null">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="flag-modal-title">
+        <h3 id="flag-modal-title">Flag as potentially irrelevant</h3>
         <p class="modal-doc-title">{{ flagModal.title }}</p>
-        <label class="modal-label">Reason (optional)</label>
+        <label class="modal-label" for="flag-reason">Reason (optional)</label>
         <textarea
+          id="flag-reason"
           v-model="flagReason"
           class="modal-textarea"
           placeholder="Why is this document potentially irrelevant?"
@@ -229,8 +244,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { formatDate } from '@/utils/format'
 import api from '@/utils/api'
 import { useNotificationsStore } from '@/stores/notifications'
+import { useDialogStore } from '@/stores/dialog'
 
 interface KbDocument {
   id: string
@@ -272,6 +289,7 @@ const expandedId = ref<string | null>(null)
 const flagModal = ref<KbDocument | null>(null)
 const flagReason = ref('')
 const notifs = useNotificationsStore()
+const dialog = useDialogStore()
 
 const STATUS_LABELS: Record<string, string> = {
   pending: 'Pending',
@@ -347,10 +365,6 @@ function typeClass(t: string): string {
   return { pdf_local: 'pdf', pdf_upload: 'pdf', web: 'abs', text: 'txt', manual: 'man' }[t] ?? 'doc'
 }
 
-function formatDate(iso: string): string {
-  try { return new Date(iso).toLocaleDateString() } catch { return '' }
-}
-
 function openFlagModal(doc: KbDocument) {
   flagModal.value = doc
   flagReason.value = ''
@@ -397,7 +411,12 @@ async function unflag(doc: KbDocument) {
 
 async function confirmDelete(doc: KbDocument) {
   if (doc.processing_status === 'completed') return
-  if (!window.confirm(`Delete "${doc.title}"? This cannot be undone.`)) return
+  if (!(await dialog.confirm({
+    title: 'Delete document?',
+    message: `“${doc.title}” will be removed from the knowledge base. This cannot be undone.`,
+    confirmLabel: 'Delete',
+    tone: 'danger',
+  }))) return
   try {
     await api.delete(`/kb/documents/${doc.id}`)
     documents.value = documents.value.filter((d) => d.id !== doc.id)
@@ -837,4 +856,33 @@ defineExpose({ fetchDocuments })
 .modal-btn.cancel:hover  { background: #e5e7eb; }
 .modal-btn.confirm { background: #d97706; color: white; }
 .modal-btn.confirm:hover { background: #b45309; }
+
+.row-toggle {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--app-radius-sm);
+}
+.row-toggle:focus-visible,
+.act-btn:focus-visible,
+.page-btn:focus-visible { outline: var(--app-focus); outline-offset: 1px; }
+
+@media (max-width: 720px) {
+  .filters-bar { gap: 0.5rem; }
+  .search-wrap { flex-basis: 100%; min-width: 0; }
+  .filter-select { flex: 1 1 40%; }
+  /* Six columns: scroll inside the table frame rather than the page. */
+  .table-wrap { overflow-x: auto; min-height: 50vh; }
+  .doc-table { min-width: 640px; }
+  .pagination-bar { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+  .pagination-left, .pagination-right { min-width: 0; }
+}
+
+@media (pointer: coarse) {
+  .act-btn, .page-btn { min-width: var(--app-touch); min-height: var(--app-touch); }
+}
 </style>

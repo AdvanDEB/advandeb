@@ -1,19 +1,26 @@
 import { createRouter, createWebHistory, type RouteLocationNormalized, type NavigationGuardNext } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import {
+  canElicit, canUseKnowledgeBuilder, isAdmin, isAllowedForExternal, isExternalOnly,
+} from '@/utils/access'
 
-const KB_ROLES = ['administrator', 'knowledge_curator']
+declare module 'vue-router' {
+  interface RouteMeta {
+    requiresAuth?: boolean
+    /** Administrators and knowledge curators. */
+    requiresKB?: boolean
+    requiresAdmin?: boolean
+    /** The sf_elicitation capability, or a role that implies it (utils/access.ts canElicit). */
+    requiresElicitation?: boolean
+  }
+}
 
 // An external contributor holds the elicitation capability and nothing else
 // (advandeb_methods/docs/10 §4.1). Confining them to their own queue is what
 // makes "a contributor never sees a link that 403s" true of the *routes* and
 // not only of the sidebar — Home, for one, renders cards pointing at sections
-// they cannot open.
-const EXTERNAL_ALLOWED_PREFIXES = ['/elicitation', '/settings', '/login']
-
-function isExternalOnly(roles: string[] | undefined): boolean {
-  const r = roles || []
-  return r.length > 0 && r.every(x => x === 'external_contributor')
-}
+// they cannot open. The rules themselves live in utils/access.ts, shared with
+// the sidebar and Home so the three cannot drift apart again.
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,7 +63,9 @@ const router = createRouter({
       path: '/elicitation',
       name: 'elicitation',
       component: () => import('@/views/ElicitationView.vue'),
-      meta: { requiresAuth: true }
+      // The sidebar link was capability-gated but the route was not, so a
+      // typed or bookmarked URL opened a queue whose every request 403s.
+      meta: { requiresAuth: true, requiresElicitation: true }
     },
     {
       // Public on purpose: external collaborators reach this before they have
@@ -113,6 +122,13 @@ const router = createRouter({
       name: 'admin-user-chats',
       component: () => import('@/views/AdminUserChatsView.vue'),
       meta: { requiresAuth: true, requiresAdmin: true }
+    },
+    {
+      // Last, so every real route wins. Without it an unknown URL rendered an
+      // empty main area with no hint that the address was wrong.
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/views/NotFoundView.vue')
     }
   ]
 })
@@ -135,21 +151,28 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
     await authStore.hydrate()
   }
 
+  const user = authStore.user
+
   if (
     authStore.isAuthenticated &&
-    isExternalOnly(authStore.user?.roles) &&
-    !EXTERNAL_ALLOWED_PREFIXES.some(p => to.path.startsWith(p))
+    isExternalOnly(user) &&
+    !isAllowedForExternal(to.path)
   ) {
     next({ name: 'elicitation' })
     return
   }
 
-  if (to.meta.requiresKB && !KB_ROLES.some(r => authStore.hasRole(r))) {
+  if (to.meta.requiresKB && !canUseKnowledgeBuilder(user)) {
     next({ name: 'home' })
     return
   }
 
-  if (to.meta.requiresAdmin && !authStore.hasRole('administrator')) {
+  if (to.meta.requiresAdmin && !isAdmin(user)) {
+    next({ name: 'home' })
+    return
+  }
+
+  if (to.meta.requiresElicitation && !canElicit(user)) {
     next({ name: 'home' })
     return
   }

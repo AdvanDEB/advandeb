@@ -102,7 +102,7 @@
               </code>
               <code v-else>••••{{ k.key_last_4 }}</code>
             </td>
-            <td>{{ k.last_used_at ? formatDate(k.last_used_at) : 'never' }}</td>
+            <td>{{ k.last_used_at ? formatDateTime(k.last_used_at) : 'never' }}</td>
             <td class="actions">
               <button class="btn small" :disabled="testingId === k.id" @click="onTest(k)">
                 {{ testingId === k.id ? 'Testing…' : 'Test' }}
@@ -120,7 +120,9 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import { formatDateTime } from '@/utils/format'
 import { useNotificationsStore } from '@/stores/notifications'
+import { useDialogStore } from '@/stores/dialog'
 import {
   createKey,
   deleteKey,
@@ -140,6 +142,7 @@ import type {
 } from '@/types/llm'
 
 const notifs = useNotificationsStore()
+const dialog = useDialogStore()
 
 const providers = ref<Provider[]>([])
 const keys = ref<LLMKey[]>([])
@@ -176,14 +179,6 @@ const form = reactive<{
 
 function providerLabel(name: string): string {
   return PROVIDER_LABELS[name] || name
-}
-
-function formatDate(iso: string): string {
-  try {
-    return new Date(iso).toLocaleString()
-  } catch {
-    return iso
-  }
 }
 
 async function refreshKeys() {
@@ -234,7 +229,13 @@ async function onTest(k: LLMKey) {
 }
 
 async function onDelete(k: LLMKey) {
-  if (!confirm(`Delete the ${providerLabel(k.provider)} key ending ${k.key_last_4}?`)) return
+  const ok = await dialog.confirm({
+    title: 'Delete API key?',
+    message: `The ${providerLabel(k.provider)} key ending ${k.key_last_4} will be removed. Chats using it fall back to the default model.`,
+    confirmLabel: 'Delete key',
+    tone: 'danger',
+  })
+  if (!ok) return
   deletingId.value = k.id
   try {
     await deleteKey(k.id)

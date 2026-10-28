@@ -257,6 +257,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
+import { formatDate } from '@/utils/format'
 import api from '@/utils/api'
 import ExpertiseProfileCard from '@/components/enrolment/ExpertiseProfileCard.vue'
 import LoadState from '@/components/enrolment/LoadState.vue'
@@ -313,11 +314,6 @@ function toPairs(obj: Record<string, number> | undefined) {
 
 function prettyRole(r: string) {
   return r.replace(/_/g, ' ').replace('knowledge ', '')
-}
-
-function formatDate(d?: string) {
-  if (!d) return ''
-  try { return new Date(d).toLocaleDateString() } catch { return d }
 }
 
 function readError(e: any): string {

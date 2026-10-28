@@ -33,21 +33,23 @@
         <!-- Schema selector -->
         <div class="ob-sub-label">Graph</div>
         <ul class="ob-schema-list">
-          <li
-            v-for="s in schemas"
-            :key="s._id"
-            :class="['ob-schema-item', { active: modelValue?._id === s._id }]"
-            @click="$emit('update:modelValue', s)"
-          >
-            <span
-              v-if="s.artifact"
-              :class="['ob-artifact-dot', `ob-artifact--${s.artifact.status}`]"
-              :title="artifactTitle(s.artifact)"
-            />
-            <span class="ob-schema-name">{{ s.name }}</span>
-            <span v-if="statsBySchema[s._id]" class="ob-schema-stat">
-              {{ fmtNum(statsBySchema[s._id].nodes ?? statsBySchema[s._id].node_count) }}n
-            </span>
+          <li v-for="s in schemas" :key="s._id">
+            <button
+              type="button"
+              :class="['ob-schema-item', { active: modelValue?._id === s._id }]"
+              :aria-pressed="modelValue?._id === s._id"
+              @click="$emit('update:modelValue', s)"
+            >
+              <span
+                v-if="s.artifact"
+                :class="['ob-artifact-dot', `ob-artifact--${s.artifact.status}`]"
+                :title="artifactTitle(s.artifact)"
+              />
+              <span class="ob-schema-name">{{ s.name }}</span>
+              <span v-if="statsBySchema[s._id]" class="ob-schema-stat">
+                {{ fmtNum(statsBySchema[s._id].nodes ?? statsBySchema[s._id].node_count) }}n
+              </span>
+            </button>
           </li>
         </ul>
       </div>
@@ -444,12 +446,18 @@ function artifactTitle(meta: GraphArtifactMeta): string {
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  width: 100%;
   padding: 0.32rem 0.45rem;
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid transparent;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
 }
 .ob-schema-item:hover { background: rgba(255,255,255,0.05); }
+.ob-schema-item:focus-visible { outline: 2px solid #a0b8ff; outline-offset: -2px; }
 .ob-schema-item.active {
   background: rgba(80, 120, 255, 0.12);
   border-color: rgba(80, 120, 255, 0.3);
