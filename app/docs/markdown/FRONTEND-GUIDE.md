@@ -167,10 +167,11 @@ export const documentService = {
     return response.data
   },
   
-  async upload(file: File): Promise<Document> {
+  // PDFs are saved and queued for ingestion by the KB (curator only).
+  async upload(file: File): Promise<{ batch_id: string; job_id: string; filename: string }> {
     const formData = new FormData()
     formData.append('file', file)
-    const response = await api.post('/documents/upload', formData, {
+    const response = await api.post('/kb/ingestion/upload', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
     return response.data
