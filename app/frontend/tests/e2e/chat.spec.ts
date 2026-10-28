@@ -84,6 +84,10 @@ test.describe('Chat interface', () => {
         close() {}
       }
     })
+    // A socket opens only with a one-time ticket from POST /api/auth/ws-ticket.
+    await page.route('**/api/auth/ws-ticket', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: '{"ticket":"e2e-ticket"}' })
+    )
     // Init scripts apply from the next navigation on; beforeEach already loaded /chat.
     await page.reload()
 
