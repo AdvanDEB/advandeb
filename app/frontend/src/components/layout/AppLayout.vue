@@ -249,11 +249,15 @@ onBeforeUnmount(() => {
   .sidebar:hover .user-name,
   .sidebar:hover .logout-label { opacity: 1; }
 }
-.sidebar:focus-within { width: 200px; }
-.sidebar:focus-within .nav-label,
-.sidebar:focus-within .brand-name,
-.sidebar:focus-within .user-name,
-.sidebar:focus-within .logout-label { opacity: 1; }
+/* Keyboard focus widens the rail so a tabbing user can read the labels. Only
+   keyboard focus: with :focus-within, a tap or click focused the toggle on
+   pointer-down, the rail widened before pointer-up, the toggle moved away
+   from under the finger, and the tap was lost (the rail never expanded). */
+.sidebar:has(:focus-visible) { width: 200px; }
+.sidebar:has(:focus-visible) .nav-label,
+.sidebar:has(:focus-visible) .brand-name,
+.sidebar:has(:focus-visible) .user-name,
+.sidebar:has(:focus-visible) .logout-label { opacity: 1; }
 
 .sidebar-brand {
   display: flex;
@@ -269,7 +273,18 @@ onBeforeUnmount(() => {
   margin-bottom: var(--el-s3);
 }
 
-.brand-icon { font-size: 1.35rem; flex-shrink: 0; width: 24px; text-align: center; }
+.brand-icon { font-size: 1.35rem; width: 24px; height: 24px; }
+/* The icons mix colour emoji (💬 📄) with text glyphs (⌂ ? ⬡ ✎ ⏏), whose
+   fonts have different line boxes, so rows came out 21 or 22px tall and the
+   glyphs sat at different heights. Every icon gets the same fixed, centred
+   box instead. */
+.brand-icon, .nav-icon, .logout-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
 .brand-name {
   opacity: 0; flex: 1; min-width: 0; overflow: hidden;
   transition: opacity var(--el-t-fast) var(--el-ease);
@@ -320,7 +335,7 @@ onBeforeUnmount(() => {
 .nav-link:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
 .nav-link.active { background: var(--nav-active); color: #fff; font-weight: 600; }
 
-.nav-icon { font-size: 1.05rem; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-icon { font-size: 1.05rem; width: 22px; height: 22px; }
 .nav-label {
   opacity: 0; overflow: hidden;
   transition: opacity var(--el-t-fast) var(--el-ease);
@@ -395,7 +410,7 @@ onBeforeUnmount(() => {
   border-radius: var(--el-radius-sm);
   transition: color var(--el-t) var(--el-ease), background var(--el-t) var(--el-ease);
 }
-.logout-icon { font-size: 1rem; }
+.logout-icon { font-size: 1rem; width: 20px; height: 20px; }
 .logout-label {
   opacity: 0; white-space: nowrap;
   transition: opacity var(--el-t-fast) var(--el-ease);
