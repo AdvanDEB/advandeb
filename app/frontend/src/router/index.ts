@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/auth'
 import {
   canElicit, canUseKnowledgeBuilder, isAdmin, isAllowedForExternal, isExternalOnly,
 } from '@/utils/access'
+import { isChunkLoadError, recoverFromChunkError } from '@/utils/staleChunk'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -178,6 +179,17 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
   }
 
   next()
+})
+
+// After a deploy, an open tab's next lazy route 404s and the navigation is
+// silently aborted. Load the destination afresh instead (utils/staleChunk.ts).
+router.onError((error, to) => {
+  if (isChunkLoadError(error)) {
+    void recoverFromChunkError(router.resolve(to).href)
+    return
+  }
+  // Registering a handler stops vue-router logging the rest itself.
+  console.error(error)
 })
 
 export default router
