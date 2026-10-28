@@ -20,7 +20,7 @@ vi.mock('@/views/ChatView.vue', () => stub('ChatView'))
 vi.mock('@/views/LLMKeysView.vue', () => stub('LLMKeysView'))
 vi.mock('@/views/EnrolmentView.vue', () => stub('EnrolmentView'))
 
-const { default: router } = await import('@/router')
+const { default: router, APP_TITLE } = await import('@/router')
 const { default: HomeView } = await import('@/views/HomeView.vue')
 
 function user(roles: string[], capabilities: string[] = []): User {
@@ -181,5 +181,30 @@ describe('access rules', () => {
     expect(canElicit(curator)).toBe(true)
     expect(canElicit(external)).toBe(true)
     expect(canElicit(null)).toBe(false)
+  })
+})
+
+describe('document.title', () => {
+  // Before: every route kept index.html's title, so tabs, history and a
+  // screen reader's page announcement could not tell pages apart (WCAG 2.4.2).
+  it('names the page, and keeps the full title on home', async () => {
+    signIn(null)
+    await go('/elicitation/join')
+    expect(document.title).toBe('Join the elicitation · AdvanDEB')
+    await go('/no/such/page')
+    expect(document.title).toBe('Page not found · AdvanDEB')
+    await go('/')
+    expect(document.title).toBe(APP_TITLE)
+    await go('/documents') // redirected: the title is the page actually shown
+    expect(document.title).toBe('Sign in · AdvanDEB')
+
+    signIn(admin)
+    await go('/admin/experts')
+    expect(document.title).toBe('Experts · AdvanDEB')
+  })
+
+  it('is set for every route but home', () => {
+    const untitled = router.getRoutes().filter(r => !r.meta.title).map(r => r.name)
+    expect(untitled).toEqual(['home'])
   })
 })

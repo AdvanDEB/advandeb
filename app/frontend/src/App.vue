@@ -12,6 +12,7 @@
 
     <!-- Outside AppLayout so confirmations also work on the bare /kb view. -->
     <AppDialogHost />
+    <RouteFocus />
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import AppDialogHost from '@/components/common/AppDialogHost.vue'
+import RouteFocus from '@/components/common/RouteFocus.vue'
 
 const authStore = useAuthStore()
 const route = useRoute()
