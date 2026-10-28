@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { useDialogStore } from '@/stores/dialog'
 import {
-  GUARD_MS, RELOAD_KEY, browser, claimAutoReload, isChunkLoadError, recoverFromChunkError,
+  GUARD_MS, RELOAD_KEY, browser, claimAutoReload, forgetAutoReload, isChunkLoadError,
+  recoverFromChunkError,
 } from '@/utils/staleChunk'
 
 /**
@@ -35,15 +36,35 @@ describe('isChunkLoadError', () => {
 })
 
 describe('claimAutoReload', () => {
-  it('allows one reload per guard window', () => {
-    expect(claimAutoReload(1_000_000)).toBe(true)
-    expect(claimAutoReload(1_000_000 + GUARD_MS - 1)).toBe(false)
-    expect(claimAutoReload(1_000_000 + GUARD_MS)).toBe(true)
+  const t0 = 1_000_000
+
+  it('allows one automatic reload per destination', () => {
+    expect(claimAutoReload('/login', t0)).toBe(true)
+    expect(claimAutoReload('/login', t0 + 1)).toBe(false)
+    expect(claimAutoReload('/kb', t0 + 1)).toBe(true)        // another destination
+  })
+
+  it('does not reset just because the reload was slow (the old 10 s window did)', () => {
+    expect(claimAutoReload('/login', t0)).toBe(true)
+    expect(claimAutoReload('/login', t0 + 11_000)).toBe(false)
+    expect(claimAutoReload('/login', t0 + 60_000)).toBe(false)
+  })
+
+  it('forgets a destination after GUARD_MS, or once a navigation there worked', () => {
+    expect(claimAutoReload('/login', t0)).toBe(true)
+    expect(claimAutoReload('/login', t0 + GUARD_MS)).toBe(true)
+    forgetAutoReload('/login')
+    expect(claimAutoReload('/login')).toBe(true)
   })
 
   it('refuses when sessionStorage cannot record the attempt', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('denied') })
-    expect(claimAutoReload()).toBe(false)
+    expect(claimAutoReload('/login')).toBe(false)
+  })
+
+  it('survives a garbled record', () => {
+    sessionStorage.setItem(RELOAD_KEY, '"nonsense"')
+    expect(claimAutoReload('/login')).toBe(true)
   })
 })
 
@@ -55,7 +76,7 @@ describe('recoverFromChunkError', () => {
   })
 
   it('asks instead of reloading again when the reload did not help', async () => {
-    sessionStorage.setItem(RELOAD_KEY, String(Date.now()))
+    sessionStorage.setItem(RELOAD_KEY, JSON.stringify({ '/login': Date.now() }))
     const dialog = useDialogStore()
     const done = recoverFromChunkError('/login')
     await Promise.resolve()
@@ -69,13 +90,33 @@ describe('recoverFromChunkError', () => {
   })
 
   it('stays put when the user declines', async () => {
-    sessionStorage.setItem(RELOAD_KEY, String(Date.now()))
+    sessionStorage.setItem(RELOAD_KEY, JSON.stringify({ '/login': Date.now() }))
     const dialog = useDialogStore()
     const done = recoverFromChunkError('/login')
     await Promise.resolve()
     dialog.settle(false)
     await done
     expect(browser.assign).not.toHaveBeenCalled()
+  })
+
+  it('a broken chunk behind a slow reload ends on the dialog after one reload', async () => {
+    // The Critic's case: every document load took 11 s and the chunk stayed
+    // 404; the old guard reloaded four times in 40 s and never asked.
+    vi.useFakeTimers({ toFake: ['Date'] })
+    try {
+      vi.setSystemTime(1_000_000)
+      await recoverFromChunkError('/login')           // first failure: reload
+      expect(browser.assign).toHaveBeenCalledTimes(1)
+
+      vi.setSystemTime(1_000_000 + 11_000)            // the reloaded page fails again
+      const dialog = useDialogStore()
+      void recoverFromChunkError('/login')
+      await Promise.resolve()
+      expect(browser.assign).toHaveBeenCalledTimes(1)
+      expect(dialog.current?.title).toBe('This page could not be loaded')
+    } finally {
+      vi.useRealTimers()
+    }
   })
 
   it('does not trade the app for the browser offline page', async () => {

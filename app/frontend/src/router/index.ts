@@ -3,7 +3,7 @@ import { useAuthStore } from '@/stores/auth'
 import {
   canElicit, canUseKnowledgeBuilder, isAdmin, isAllowedForExternal, isExternalOnly,
 } from '@/utils/access'
-import { isChunkLoadError, recoverFromChunkError } from '@/utils/staleChunk'
+import { forgetAutoReload, isChunkLoadError, recoverFromChunkError } from '@/utils/staleChunk'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -194,7 +194,9 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
 })
 
 router.afterEach((to, _from, failure) => {
-  if (!failure) document.title = pageTitle(to)
+  if (failure) return
+  document.title = pageTitle(to)
+  forgetAutoReload(router.resolve(to).href)
 })
 
 // After a deploy, an open tab's next lazy route 404s and the navigation is

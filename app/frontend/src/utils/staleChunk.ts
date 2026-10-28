@@ -9,14 +9,20 @@
  * The fix is a full page load of the address the user was going to, which
  * fetches the new index.html and its chunks. Guarded: a chunk that is broken
  * on the server, not merely stale, would otherwise reload the page forever.
- * At most one automatic reload per GUARD_MS; past that, or when the browser is
- * offline (a reload would only swap the app for the browser's error page), the
- * user is told what happened and offered the reload instead.
+ * At most one automatic reload per destination within GUARD_MS, forgotten
+ * once a navigation there succeeds; past that, or when the browser is offline
+ * (a reload would only swap the app for the browser's error page), the user is
+ * told what happened and offered the reload instead.
+ *
+ * The guard is per destination, not "time since the last reload": a reload
+ * that took longer than the window to reach the failing import (a slow phone
+ * link) passed a 10 s time check every time, and the tab reloaded forever.
  */
 import { useDialogStore } from '@/stores/dialog'
 
-export const RELOAD_KEY = 'advandeb.staleChunkReloadAt'
-export const GUARD_MS = 10_000
+export const RELOAD_KEY = 'advandeb.staleChunkReloads'
+/** How long an automatic reload to a destination is remembered. */
+export const GUARD_MS = 5 * 60_000
 
 // Chromium, Firefox, Safari, and Vite's CSS preload for a lazy chunk.
 const CHUNK_ERROR = new RegExp([
@@ -31,20 +37,46 @@ export function isChunkLoadError(error: unknown): boolean {
   return CHUNK_ERROR.test(message)
 }
 
+type Reloads = Record<string, number>
+
+function readReloads(now: number): Reloads {
+  const raw = JSON.parse(sessionStorage.getItem(RELOAD_KEY) || '{}') as unknown
+  const out: Reloads = {}
+  if (raw && typeof raw === 'object') {
+    for (const [href, at] of Object.entries(raw)) {
+      if (typeof at === 'number' && now - at < GUARD_MS) out[href] = at
+    }
+  }
+  return out
+}
+
 /**
- * True when an automatic reload is allowed now, and records that one is being
- * made. False when one was made within GUARD_MS, or nothing can be recorded
- * (without the record the guard could not stop a loop).
+ * True when an automatic reload to ``href`` is allowed, and records it. False
+ * when this tab already auto-reloaded to ``href`` within GUARD_MS (the reload
+ * did not help), or nothing can be recorded (without the record the guard
+ * could not stop a loop).
  */
-export function claimAutoReload(now = Date.now()): boolean {
+export function claimAutoReload(href: string, now = Date.now()): boolean {
   try {
-    const last = Number(sessionStorage.getItem(RELOAD_KEY)) || 0
-    if (now - last < GUARD_MS) return false
-    sessionStorage.setItem(RELOAD_KEY, String(now))
+    const reloads = readReloads(now)
+    if (href in reloads) return false
+    reloads[href] = now
+    sessionStorage.setItem(RELOAD_KEY, JSON.stringify(reloads))
     return true
   } catch {
     return false
   }
+}
+
+/** A navigation to ``href`` worked: a later stale chunk there may reload again. */
+export function forgetAutoReload(href: string): void {
+  try {
+    const raw = sessionStorage.getItem(RELOAD_KEY)
+    if (!raw) return
+    const reloads = readReloads(Date.now())
+    delete reloads[href]
+    sessionStorage.setItem(RELOAD_KEY, JSON.stringify(reloads))
+  } catch { /* nothing recorded, nothing to forget */ }
 }
 
 /** Seam for tests: jsdom cannot navigate. */
@@ -55,7 +87,7 @@ export const browser = {
 
 /** Called by the router when a lazy route fails to load; href is where the user was going. */
 export async function recoverFromChunkError(href: string): Promise<void> {
-  if (browser.online() && claimAutoReload()) {
+  if (browser.online() && claimAutoReload(href)) {
     browser.assign(href)
     return
   }
