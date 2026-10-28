@@ -24,8 +24,9 @@
           <h1>Join the stylized-fact elicitation</h1>
           <p class="lede">
             AdvanDEB is assembling expert judgments on the empirical regularities
-            that underpin Dynamic Energy Budget theory — where each one came from,
-            what it ranges over, and what the literature actually says about it.
+            that underpin Dynamic Energy Budget theory: how well the literature
+            supports each one, judged from retrieved passages and your own
+            knowledge.
           </p>
           <p class="lede">
             Your judgments are <strong>attributed to you and creditable</strong>.
@@ -37,89 +38,133 @@
           </p>
         </header>
 
+        <!-- Each field is a label, its control, and whatever describes the
+             control — kept as siblings, not nested in the <label>: anything
+             inside a label becomes part of the control's accessible name, so an
+             error read "Full name Please give your name." Hint and error are
+             attached with aria-describedby instead.
+
+             The error slot is always rendered and reserves its line, empty while
+             the field is valid. Inserting it on blur moved everything below by a
+             line between a finger's press and release, and the tap on the next
+             control was lost. -->
         <section class="block">
           <h2>Who you are</h2>
           <div class="grid">
-            <label class="field" :class="{ bad: showErr('name') }">
-              <span>Full name <em aria-hidden="true">*</em></span>
+            <div class="field" :class="{ bad: showErr('name') }">
+              <label :for="fieldId('name')">
+                Full name <em aria-hidden="true">*</em><span class="sr-only">(required)</span>
+              </label>
               <input
+                :id="fieldId('name')"
                 v-model.trim="form.name"
+                required
+                aria-required="true"
                 autocomplete="name"
                 autocapitalize="words"
                 :aria-invalid="showErr('name')"
+                :aria-describedby="describedBy('name')"
                 @blur="touch('name')"
               />
-              <small v-if="showErr('name')" class="err">{{ errors.name }}</small>
-            </label>
+              <small :id="errId('name')" class="err">{{ errText('name') }}</small>
+            </div>
 
-            <label class="field" :class="{ bad: showErr('email') }">
-              <span>Email <em aria-hidden="true">*</em></span>
+            <div class="field" :class="{ bad: showErr('email') }">
+              <label :for="fieldId('email')">
+                Email <em aria-hidden="true">*</em><span class="sr-only">(required)</span>
+              </label>
               <input
+                :id="fieldId('email')"
                 v-model.trim="form.email"
                 type="email"
+                required
+                aria-required="true"
                 inputmode="email"
                 autocomplete="email"
                 autocapitalize="none"
                 spellcheck="false"
                 :aria-invalid="showErr('email')"
+                :aria-describedby="describedBy('email')"
                 @blur="touch('email')"
               />
-              <small v-if="showErr('email')" class="err">{{ errors.email }}</small>
-            </label>
+              <small :id="errId('email')" class="err">{{ errText('email') }}</small>
+            </div>
 
-            <label class="field" :class="{ bad: showErr('affiliation') }">
-              <span>Affiliation <em aria-hidden="true">*</em></span>
+            <div class="field" :class="{ bad: showErr('affiliation') }">
+              <label :for="fieldId('affiliation')">
+                Affiliation <em aria-hidden="true">*</em><span class="sr-only">(required)</span>
+              </label>
               <input
+                :id="fieldId('affiliation')"
                 v-model.trim="form.affiliation"
+                required
+                aria-required="true"
                 autocomplete="organization"
                 placeholder="Institution or organisation"
                 :aria-invalid="showErr('affiliation')"
+                :aria-describedby="describedBy('affiliation')"
                 @blur="touch('affiliation')"
               />
-              <small v-if="showErr('affiliation')" class="err">{{ errors.affiliation }}</small>
-            </label>
+              <small :id="errId('affiliation')" class="err">{{ errText('affiliation') }}</small>
+            </div>
 
-            <label class="field" :class="{ bad: showErr('orcid') }">
-              <span>ORCID <small class="opt">optional</small></span>
+            <div class="field" :class="{ bad: showErr('orcid') }">
+              <label :for="fieldId('orcid')">
+                ORCID <small class="opt">optional</small>
+              </label>
               <input
+                :id="fieldId('orcid')"
                 v-model.trim="form.orcid"
                 inputmode="numeric"
                 autocapitalize="characters"
                 spellcheck="false"
                 placeholder="0000-0002-1825-0097"
                 :aria-invalid="showErr('orcid')"
+                :aria-describedby="describedBy('orcid')"
                 @blur="touch('orcid')"
               />
-              <small v-if="showErr('orcid')" class="err">{{ errors.orcid }}</small>
-              <small v-else class="hint">
+              <small :id="hintId('orcid')" class="hint">
                 Used to check whether you authored any of the facts you would be judging.
               </small>
-            </label>
+              <small :id="errId('orcid')" class="err">{{ errText('orcid') }}</small>
+            </div>
           </div>
         </section>
 
         <section class="block">
           <h2>Your background</h2>
           <div class="grid">
-            <label class="field" :class="{ bad: showErr('years_in_field') }">
-              <span>Years working in the field <em aria-hidden="true">*</em></span>
+            <div class="field" :class="{ bad: showErr('years_in_field') }">
+              <label :for="fieldId('years_in_field')">
+                Years working in the field <em aria-hidden="true">*</em><span class="sr-only">(required)</span>
+              </label>
               <input
+                :id="fieldId('years_in_field')"
                 v-model.number="form.years_in_field"
                 type="number"
+                required
+                aria-required="true"
                 inputmode="numeric"
                 min="0"
                 max="70"
                 :aria-invalid="showErr('years_in_field')"
+                :aria-describedby="describedBy('years_in_field')"
                 @blur="touch('years_in_field')"
               />
-              <small v-if="showErr('years_in_field')" class="err">{{ errors.years_in_field }}</small>
-            </label>
+              <small :id="errId('years_in_field')" class="err">{{ errText('years_in_field') }}</small>
+            </div>
 
-            <label class="field" :class="{ bad: showErr('deb_experience') }">
-              <span>DEB-specific experience <em aria-hidden="true">*</em></span>
+            <div class="field" :class="{ bad: showErr('deb_experience') }">
+              <label :for="fieldId('deb_experience')">
+                DEB-specific experience <em aria-hidden="true">*</em><span class="sr-only">(required)</span>
+              </label>
               <select
+                :id="fieldId('deb_experience')"
                 v-model="form.deb_experience"
+                required
+                aria-required="true"
                 :aria-invalid="showErr('deb_experience')"
+                :aria-describedby="describedBy('deb_experience')"
                 @blur="touch('deb_experience')"
               >
                 <option value="">Choose…</option>
@@ -128,8 +173,8 @@
                 <option value="applied">I have applied DEB models</option>
                 <option value="developer">I develop DEB theory or models</option>
               </select>
-              <small v-if="showErr('deb_experience')" class="err">{{ errors.deb_experience }}</small>
-            </label>
+              <small :id="errId('deb_experience')" class="err">{{ errText('deb_experience') }}</small>
+            </div>
           </div>
         </section>
 
@@ -159,18 +204,23 @@
           </label>
         </section>
 
-        <div class="actions">
-          <button type="submit" class="el-btn el-btn--primary" :disabled="busy">
-            {{ busy ? 'Sending…' : 'Request access' }}
-          </button>
+        <div class="submit-area">
+          <div class="actions">
+            <button type="submit" class="el-btn el-btn--primary" :disabled="busy">
+              {{ busy ? 'Sending…' : 'Request access' }}
+            </button>
+            <router-link to="/login" class="back">Already have an account?</router-link>
+          </div>
 
           <!-- A disabled button that will not say why is a dead end. The button
-               stays live and the reason is stated instead. -->
-          <span v-if="!valid && anyTouched" class="why">
-            {{ missingSummary }}
-          </span>
+               stays live and the reason is stated instead.
 
-          <router-link to="/login" class="back">Already have an account?</router-link>
+               It is a live region, so a screen reader hears what is still
+               missing as it changes, and a live region has to be in the page
+               before its text changes to be announced at all: it is always
+               rendered, empty until there is something to say. It sits below the
+               buttons, so its text arriving never moves one under a finger. -->
+          <p class="why" role="status" aria-live="polite" aria-atomic="true">{{ !valid && anyTouched ? missingSummary : '' }}</p>
         </div>
 
         <p v-if="error" class="submit-error el-anim" role="alert">
@@ -183,7 +233,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import api from '@/utils/api'
 import CategoryFamiliarity from '@/components/enrolment/CategoryFamiliarity.vue'
 import {
@@ -263,6 +313,29 @@ function showErr(k: FieldKey) {
   return !!errors.value[k] && (touched[k] || attempted.value)
 }
 
+// Ids tie each control to its label, hint and error. There is one enrolment
+// form per page, so fixed ids cannot collide.
+const fieldId = (k: FieldKey) => `enrol-${k}`
+const errId = (k: FieldKey) => `enrol-${k}-err`
+const hintId = (k: FieldKey) => `enrol-${k}-hint`
+const HAS_HINT: ReadonlySet<FieldKey> = new Set(['orcid'])
+
+/** The slot's text: the message while it is shown, otherwise nothing, so an
+ *  empty slot holds its line without giving a screen reader anything to read. */
+function errText(k: FieldKey) {
+  return showErr(k) ? errors.value[k] : ''
+}
+
+/** The error is referenced only while it is shown: an empty description is
+ *  harmless, but pointing at a message the person cannot see is not. */
+function describedBy(k: FieldKey) {
+  const ids = [
+    ...(showErr(k) ? [errId(k)] : []),
+    ...(HAS_HINT.has(k) ? [hintId(k)] : []),
+  ]
+  return ids.length ? ids.join(' ') : undefined
+}
+
 const missingSummary = computed(() => {
   const ks = Object.keys(errors.value) as FieldKey[]
   if (!ks.length) return ''
@@ -276,9 +349,12 @@ async function submit() {
   attempted.value = true
   if (!valid.value || busy.value) {
     // Put the first offending field in view rather than leaving the person
-    // hunting for what the summary is referring to.
+    // hunting for what the summary is referring to. The fields are marked
+    // invalid by the render `attempted` triggers, so wait for it: queried
+    // straight away, an untouched form had nothing marked and focus stayed put.
     const first = (Object.keys(errors.value) as FieldKey[])[0]
     if (first) {
+      await nextTick()
       document.querySelector<HTMLElement>(`[aria-invalid="true"]`)?.focus()
     }
     return
@@ -318,8 +394,6 @@ function readError(e: any): string {
 </script>
 
 <style scoped>
-@import '@/styles/elicitation-tokens.css';
-
 .enrol-page {
   /* dvh so a phone's collapsing URL bar does not clip the card */
   min-height: 100vh;
@@ -355,11 +429,13 @@ h2 {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--el-s4);
+  /* Rows sit closer than columns: each field's reserved error line already
+     spaces it from the row below. */
+  gap: var(--el-s2) var(--el-s4);
 }
 
 .field { display: flex; flex-direction: column; gap: var(--el-s1); }
-.field > span {
+.field > label {
   font-size: var(--el-fs-sm); font-weight: 600; color: var(--el-ink-2);
 }
 .field em { color: var(--el-danger); font-style: normal; }
@@ -387,7 +463,12 @@ h2 {
 .field.bad input, .field.bad select { border-color: var(--el-danger); }
 
 .hint { font-size: var(--el-fs-xs); color: var(--el-ink-4); line-height: 1.5; }
-.err { font-size: var(--el-fs-xs); color: var(--el-danger); line-height: 1.5; }
+/* One line held open whether or not there is a message, so an error appearing
+   on blur never moves what is below it (see the template). */
+.err {
+  font-size: var(--el-fs-xs); color: var(--el-danger); line-height: 1.5;
+  min-height: 1.5em;
+}
 
 .consent {
   display: flex; gap: var(--el-s3); align-items: flex-start;
@@ -409,7 +490,8 @@ h2 {
   display: flex; align-items: center; gap: var(--el-s4);
   flex-wrap: wrap;
 }
-.why { font-size: var(--el-fs-sm); color: var(--el-danger); }
+.why { font-size: var(--el-fs-sm); color: var(--el-danger); line-height: 1.5; }
+.why:not(:empty) { margin-top: var(--el-s3); }
 
 .back {
   margin-left: auto;
@@ -455,7 +537,7 @@ h2 {
 @media (max-width: 720px) {
   .enrol-page { padding: var(--el-s4) var(--el-s3); }
   .enrol-card { padding: var(--el-s4); }
-  .grid { grid-template-columns: 1fr; gap: var(--el-s3); }
+  .grid { grid-template-columns: 1fr; gap: var(--el-s2) var(--el-s3); }
   .actions { gap: var(--el-s3); }
   .actions .el-btn { width: 100%; }
   .back { margin-left: 0; }

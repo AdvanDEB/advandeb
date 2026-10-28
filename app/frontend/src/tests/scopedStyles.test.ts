@@ -16,9 +16,9 @@ import { parse } from '@vue/compiler-sfc'
  *
  * src/tests/buildChunks.test.ts checks the built entry stylesheet.
  *
- * The elicitation, enrolment and admin-experts SFCs are being redesigned in a
- * separate branch and still carry their (now dead, harmless) scoped @import of
- * the token file; they are left out here until that lands.
+ * Every SFC is in scope. The elicitation, enrolment and admin-experts views
+ * were left out while their redesign was in progress; it dropped the last
+ * scoped @import of the token file, so nothing is exempt any more.
  */
 
 const src = fileURLToPath(new URL('..', import.meta.url))
@@ -31,15 +31,10 @@ function vueFiles(dir: string): string[] {
   })
 }
 
-const REDESIGN_IN_PROGRESS = [
-  'views/ElicitationView.vue',
-  'views/EnrolmentView.vue',
-  'views/AdminExpertsView.vue',
-  'components/elicitation/',
-  'components/enrolment/',
-]
+// Must stay empty: an exempt file is one whose tokens may silently not resolve.
+const EXEMPT: string[] = []
 const inScope = (file: string) =>
-  !REDESIGN_IN_PROGRESS.some(p => path.relative(src, file).split(path.sep).join('/').startsWith(p))
+  !EXEMPT.some(p => path.relative(src, file).split(path.sep).join('/').startsWith(p))
 
 const scopedBlocks = vueFiles(src).filter(inScope).flatMap(file => {
   const { descriptor } = parse(fs.readFileSync(file, 'utf8'), { filename: file })

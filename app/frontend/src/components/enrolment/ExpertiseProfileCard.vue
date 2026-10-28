@@ -118,8 +118,6 @@ onMounted(() => { loadCategories().catch(() => {}) })
 </script>
 
 <style scoped>
-@import '@/styles/elicitation-tokens.css';
-
 .profile { display: flex; flex-direction: column; gap: var(--el-s3); }
 
 .headline { display: flex; gap: var(--el-s5); flex-wrap: wrap; }
