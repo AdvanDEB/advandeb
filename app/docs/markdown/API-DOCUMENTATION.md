@@ -61,20 +61,25 @@ Assign role to user
 
 ### Documents
 
-#### POST /documents
-Create document
+These are user *suggestions*, kept in the app database. A suggestion carries no
+PDF; to add a paper to the KB, upload it with `POST /kb/ingestion/upload`
+(curator), which saves it and queues the ingestion pipeline.
 
-#### POST /documents/upload
-Upload document file
+#### POST /documents
+Submit a document suggestion (title, DOI/URL, metadata)
 
 #### GET /documents
-List documents
+List suggestions (optional `status` filter)
 
 #### GET /documents/{document_id}
-Get document by ID
+Get a suggestion by ID
 
-#### POST /documents/{document_id}/process
-Process document for fact extraction
+#### PATCH /documents/{document_id}/approve (Curator)
+`{"action": "reject", "comment": "..."}` marks it rejected. `"approve"` is
+refused with 409 and the reason; the suggestion stays open.
+
+#### DELETE /documents/{document_id} (Curator)
+Delete a suggestion
 
 ### Facts
 

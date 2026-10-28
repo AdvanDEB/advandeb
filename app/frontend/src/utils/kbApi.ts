@@ -575,12 +575,21 @@ export async function fetchDocumentSuggestions(status = 'suggestion', limit = 10
   return data
 }
 
+/**
+ * Reject a document suggestion, or try to approve it. The backend refuses
+ * approval with 409 and a sentence saying why (a suggestion has no stored PDF
+ * to ingest); the Suggestions tab shows that on the row, so no toast for it.
+ */
 export async function approveDocument(
   documentId: string,
   action: 'approve' | 'reject',
   comment?: string,
-): Promise<{ updated: boolean; status: string; batch_id?: string }> {
-  const { data } = await api.patch(`/documents/${documentId}/approve`, { action, comment })
+): Promise<{ updated: boolean; status: string }> {
+  const { data } = await api.patch(
+    `/documents/${documentId}/approve`,
+    { action, comment },
+    { skipErrorToast: [409] },
+  )
   return data
 }
 

@@ -6,13 +6,16 @@ KB-ingested documents live in ArangoDB — accessible via /api/kb/documents.
 
 This router handles the suggestion lifecycle:
   POST   /api/documents/               — submit a document (metadata form)
-  POST   /api/documents/upload         — submit a document (file upload)
   GET    /api/documents/               — list submissions (filter by status)
   GET    /api/documents/{id}           — get a single submission
-  PATCH  /api/documents/{id}/approve   — curator approve/reject
+  PATCH  /api/documents/{id}/approve   — curator reject (approve is refused, 409)
   DELETE /api/documents/{id}           — delete a submission
+
+There is no upload here. POST /api/documents/upload stored the extracted text as
+a suggestion and dropped the file, so approving it could never ingest anything.
+PDFs go to POST /api/kb/ingestion/upload, which saves and queues them.
 """
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from typing import List, Optional
 from pydantic import BaseModel
 
@@ -41,16 +44,6 @@ async def create_document_submission(
     """Submit a document for curator review (metadata form)."""
     svc = UserSubmissionService()
     return await svc.create_document_submission(document, current_user["id"])
-
-
-@router.post("/upload", response_model=DocumentSubmission)
-async def upload_document_submission(
-    file: UploadFile = File(...),
-    current_user: dict = Depends(require_curator),
-):
-    """Upload a document file directly into the corpus. Curator/admin only."""
-    svc = UserSubmissionService()
-    return await svc.upload_document_submission(file, current_user["id"])
 
 
 @router.get("/", response_model=List[DocumentSubmission])
@@ -94,10 +87,11 @@ async def approve_document_submission(
     body: DocumentApproveRequest,
     current_user: dict = Depends(require_curator),
 ):
-    """Curator approves or rejects a document submission.
+    """Curator rejects a document submission; approving one is refused.
 
-    approve → queues the document for KB ingestion pipeline.
     reject  → marks it as rejected.
+    approve → 409 with the reason, and the suggestion stays in the queue: no
+              suggestion has a stored PDF to ingest.
     """
     if body.action not in ("approve", "reject"):
         raise HTTPException(

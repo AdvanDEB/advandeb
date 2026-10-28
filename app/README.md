@@ -279,7 +279,9 @@ administrator (`POST /api/users/`) or by approving an elicitation enrolment.
 - `GET /chunk/{chunk_id}/context`
 
 **Documents and facts**:
-- `/api/documents` — list, get, upload, approve, delete
+- `/api/documents` — document suggestions: submit, list, get, reject, delete.
+  Approving one answers 409: a suggestion has no PDF to ingest. PDFs go to
+  `POST /api/kb/ingestion/upload` (curators), which saves and queues them.
 - `/api/facts` — facts and stylized facts, with review
 
 **Knowledge Builder** (`/api/kb/*`, curators):

@@ -49,7 +49,10 @@
             <span class="sugg-count" v-if="docSuggestions.length">({{ docSuggestions.length }})</span>
           </h2>
         </div>
-        <p class="dim small">Documents uploaded by users pending KB ingestion. Approve to queue for the ingestion pipeline; reject to discard.</p>
+        <p class="dim small">
+          Papers users have suggested. A suggestion carries no PDF, so it cannot be approved into the KB:
+          upload the PDF under Ingestion, then reject the suggestion here.
+        </p>
 
         <div v-if="suggLoading" class="empty-state">Loading…</div>
         <div v-else-if="!docSuggestions.length" class="empty-state">No document suggestions</div>
@@ -64,25 +67,37 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="doc in docSuggestions" :key="doc._id">
-                <td class="sugg-title">{{ doc.title || '(untitled)' }}</td>
-                <td class="dim">{{ doc.source_type }}</td>
-                <td class="dim">{{ formatDate(doc.created_at, '—') }}</td>
-                <td class="actions-cell">
-                  <button
-                    type="button"
-                    class="btn xs primary"
-                    :disabled="pendingDocIds.has(doc._id)"
-                    @click="handleDocAction(doc._id, 'approve')"
-                  >{{ pendingDocIds.has(doc._id) ? '…' : 'Approve' }}</button>
-                  <button
-                    type="button"
-                    class="btn xs danger"
-                    :disabled="pendingDocIds.has(doc._id)"
-                    @click="handleDocAction(doc._id, 'reject')"
-                  >{{ pendingDocIds.has(doc._id) ? '…' : 'Reject' }}</button>
-                </td>
-              </tr>
+              <template v-for="doc in docSuggestions" :key="doc._id">
+                <tr>
+                  <td class="sugg-title">{{ doc.title || '(untitled)' }}</td>
+                  <td class="dim">{{ doc.source_type }}</td>
+                  <td class="dim">{{ formatDate(doc.created_at, '—') }}</td>
+                  <td class="actions-cell">
+                    <button
+                      type="button"
+                      class="btn xs primary"
+                      :disabled="pendingDocIds.has(doc._id)"
+                      @click="handleDocAction(doc._id, 'approve')"
+                    >{{ pendingDocIds.has(doc._id) ? '…' : 'Approve' }}</button>
+                    <button
+                      type="button"
+                      class="btn xs danger"
+                      :disabled="pendingDocIds.has(doc._id)"
+                      @click="handleDocAction(doc._id, 'reject')"
+                    >{{ pendingDocIds.has(doc._id) ? '…' : 'Reject' }}</button>
+                  </td>
+                </tr>
+                <!-- Why approval was refused, on the row it concerns. The row
+                     stays: the suggestion is still open until it is rejected. -->
+                <tr v-if="docRefusals[doc._id]" class="refusal-row">
+                  <td colspan="4">
+                    <div class="refusal-body">
+                      <p class="refusal" role="alert">{{ docRefusals[doc._id] }}</p>
+                      <button type="button" class="btn xs" @click="activeTab = 'ingestion'">Open Ingestion</button>
+                    </div>
+                  </td>
+                </tr>
+              </template>
             </tbody>
           </table>
         </div>
@@ -201,6 +216,7 @@ import {
 } from '@/utils/kbApi'
 import type { DocumentSuggestion, FactSuggestion, ReviewQueues, StylizedFactSuggestion } from '@/utils/kbApi'
 import { useKnowledgeBuilderStore } from '@/stores/knowledgeBuilder'
+import { apiErrorMessage } from '@/utils/api'
 import { formatCount, formatDate } from '@/utils/format'
 
 const kb = useKnowledgeBuilderStore()
@@ -212,6 +228,8 @@ const factSuggestions = ref<FactSuggestion[]>([])
 const sfSuggestions   = ref<StylizedFactSuggestion[]>([])
 const suggLoading     = ref(false)
 const pendingDocIds   = ref<Set<string>>(new Set())
+/** Per suggestion, the server's reason for refusing approval (409). */
+const docRefusals     = ref<Record<string, string>>({})
 const pendingFactIds  = ref<Set<string>>(new Set())
 const pendingSfIds    = ref<Set<string>>(new Set())
 
@@ -239,10 +257,21 @@ async function loadSuggestions() {
 
 async function handleDocAction(docId: string, action: 'approve' | 'reject') {
   pendingDocIds.value = new Set([...pendingDocIds.value, docId])
+  const refusals = { ...docRefusals.value }
+  delete refusals[docId]
+  docRefusals.value = refusals
   try {
     await approveDocument(docId, action)
     docSuggestions.value = docSuggestions.value.filter(d => d._id !== docId)
-  } catch (e) { setError(e) }
+  } catch (e) {
+    // 409 is the backend declining to approve a suggestion it cannot ingest.
+    // That is an answer about this row, not a failure of the tab.
+    if ((e as { response?: { status?: number } })?.response?.status === 409) {
+      docRefusals.value = { ...docRefusals.value, [docId]: apiErrorMessage(e) }
+    } else {
+      setError(e)
+    }
+  }
   finally {
     const next = new Set(pendingDocIds.value)
     next.delete(docId)
@@ -351,6 +380,22 @@ watch(activeTab, (tab) => {
 .data-table tr:hover td { background: #1e293b; }
 
 .actions-cell { display: flex; gap: 0.3rem; align-items: center; }
+
+.refusal-row td { border-left: 2px solid var(--app-danger-line); }
+.refusal-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+}
+.data-table tr.refusal-row:hover td { background: transparent; }
+.refusal {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--app-danger-line);
+  white-space: normal;
+}
 
 .empty-state { padding: 2rem; text-align: center; color: #475569; font-size: 0.85rem; }
 

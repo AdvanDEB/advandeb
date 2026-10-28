@@ -10,7 +10,6 @@ from app.core.dependencies import require_role
 from app.models.model import ModelCreate
 from app.services.model_service import ModelService
 from app.services.user_service import UserService
-from app.services.user_submission_service import UserSubmissionService
 
 
 # ---------------------------------------------------------------------------
@@ -94,31 +93,3 @@ def test_user_service_build_filter_escapes_regex():
     filt = UserService._build_filter(q="user+test(1)@example.com.*")
     regex_val = filt["$or"][0]["email"]["$regex"]
     assert regex_val == r"user\+test\(1\)@example\.com\.\*"
-
-
-# ---------------------------------------------------------------------------
-# UserSubmissionService max upload size
-# ---------------------------------------------------------------------------
-
-@pytest.mark.asyncio
-async def test_upload_document_submission_rejects_oversized_file():
-    mock_db = MagicMock()
-    with patch("app.services.user_submission_service.get_database", return_value=mock_db):
-        service = UserSubmissionService()
-        service.MAX_UPLOAD_SIZE_BYTES = 100  # Set small limit for testing
-
-        mock_file = MagicMock()
-        mock_file.filename = "large.pdf"
-        mock_file.content_type = "application/pdf"
-
-        async def _read_chunks(size=None):
-            if not hasattr(_read_chunks, "called"):
-                _read_chunks.called = True
-                return b"A" * 200  # 200 bytes > 100 limit
-            return b""
-
-        mock_file.read = AsyncMock(side_effect=_read_chunks)
-
-        with pytest.raises(HTTPException) as exc_info:
-            await service.upload_document_submission(mock_file, uploader_id="u1")
-        assert exc_info.value.status_code == 413
