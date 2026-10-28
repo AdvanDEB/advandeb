@@ -8,13 +8,18 @@
         <router-link to="/" class="back-link" title="Back to app" aria-label="Back to app">←</router-link>
         <span class="header-title">Knowledge Builder</span>
       </div>
-      <nav class="tab-nav" role="tablist" aria-label="Knowledge Builder sections">
+      <!-- ARIA tabs pattern: one Tab stop (the selected tab), arrow keys and
+           Home/End move between tabs, each tab names and controls its panel. -->
+      <nav class="tab-nav" role="tablist" aria-label="Knowledge Builder sections" @keydown="onTabKey">
         <button
           v-for="tab in TABS"
+          :id="`kb-tab-${tab.id}`"
           :key="tab.id"
           role="tab"
           type="button"
           :aria-selected="activeTab === tab.id"
+          :aria-controls="`kb-panel-${tab.id}`"
+          :tabindex="activeTab === tab.id ? 0 : -1"
           :class="['tab-btn', { active: activeTab === tab.id }]"
           @click="activeTab = tab.id"
         >{{ tab.label }}</button>
@@ -34,17 +39,17 @@
     <!-- Each tab owns its state and loads lazily when first shown. v-show, not
          v-if: a tab keeps its state (filters, selections, scroll) across switches. -->
     <main id="main-content" class="kb-main" tabindex="-1">
-      <GraphTab v-show="activeTab === 'graph'" />
-      <IngestionTab v-show="activeTab === 'ingestion'" />
-      <DatabaseTab v-show="activeTab === 'database'" />
-      <KgBuilderTab v-show="activeTab === 'kg'" />
-      <SuggestionsTab v-show="activeTab === 'suggestions'" />
+      <GraphTab v-show="activeTab === 'graph'" id="kb-panel-graph" aria-labelledby="kb-tab-graph" />
+      <IngestionTab v-show="activeTab === 'ingestion'" id="kb-panel-ingestion" aria-labelledby="kb-tab-ingestion" />
+      <DatabaseTab v-show="activeTab === 'database'" id="kb-panel-database" aria-labelledby="kb-tab-database" />
+      <KgBuilderTab v-show="activeTab === 'kg'" id="kb-panel-kg" aria-labelledby="kb-tab-kg" />
+      <SuggestionsTab v-show="activeTab === 'suggestions'" id="kb-panel-suggestions" aria-labelledby="kb-tab-suggestions" />
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { nextTick, ref, onMounted, onUnmounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import { useKnowledgeBuilderStore } from '@/stores/knowledgeBuilder'
@@ -70,6 +75,17 @@ const TABS: { id: KbTab; label: string }[] = [
   { id: 'kg', label: 'KG Builder' },
   { id: 'suggestions', label: 'Suggestions' },
 ]
+
+/** Arrow keys, Home and End move along the tabs (automatic activation). */
+function onTabKey(ev: KeyboardEvent) {
+  const i = TABS.findIndex(t => t.id === activeTab.value)
+  const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: TABS.length - 1 }[ev.key]
+  if (next === undefined) return
+  ev.preventDefault()
+  const tab = TABS[(next + TABS.length) % TABS.length]
+  activeTab.value = tab.id
+  nextTick(() => document.getElementById(`kb-tab-${tab.id}`)?.focus())
+}
 
 // ---- Global state -----------------------------------------------------------
 //

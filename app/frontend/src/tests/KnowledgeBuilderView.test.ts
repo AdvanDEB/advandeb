@@ -91,6 +91,33 @@ describe('KnowledgeBuilderView shell', () => {
     expect(kbApi.fetchCollections).not.toHaveBeenCalled()
   })
 
+  it('tabs follow the ARIA pattern: one Tab stop, arrows and Home/End, linked panels (F-030)', async () => {
+    const w = await mountView()
+    const tabs = () => w.findAll('[role="tab"]')
+    const selected = () => tabs().find(t => t.attributes('aria-selected') === 'true')!
+    expect(tabs().map(t => t.attributes('tabindex'))).toEqual(['0', '-1', '-1', '-1', '-1'])
+    for (const tab of tabs()) {
+      const panel = w.find(`#${tab.attributes('aria-controls')}`)
+      expect(panel.attributes('role')).toBe('tabpanel')
+      expect(panel.attributes('aria-labelledby')).toBe(tab.attributes('id'))
+    }
+
+    const key = async (k: string) => { await selected().trigger('keydown', { key: k }); await flushPromises() }
+    await key('ArrowRight')
+    expect(selected().text()).toBe('Ingestion')
+    expect(document.activeElement?.id).toBe('kb-tab-ingestion')
+    expect(isShown(w, 'Ingestion')).toBe(true)
+    await key('End')
+    expect(selected().text()).toBe('Suggestions')
+    await key('ArrowRight')                       // wraps
+    expect(selected().text()).toBe('Graph')
+    await key('ArrowLeft')
+    expect(selected().text()).toBe('Suggestions')
+    await key('Home')
+    expect(selected().text()).toBe('Graph')
+    expect(tabs().filter(t => t.attributes('tabindex') === '0')).toHaveLength(1)
+  })
+
   it('loads each tab when it is first shown, as before', async () => {
     const w = await mountView()
 

@@ -61,11 +61,13 @@ test('signed in: the sidebar lands on the heading, or on <main> with an announce
   await expect(page).toHaveTitle('Documentation · AdvanDEB')
   await expect.poll(() => focused(page)).toEqual({ tag: 'h1', text: 'Documentation' })
 
-  // The chat view has no <h1>.
+  // The chat view's heading is visually hidden (F-030); it still takes focus.
   await nav.getByRole('link', { name: 'Chat' }).click()
   await expect(page).toHaveTitle('Chat · AdvanDEB')
-  await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('main-content')
-  await expect(page.locator('[aria-live="polite"]').filter({ hasText: 'Chat · AdvanDEB' })).toHaveCount(1)
+  await expect.poll(() => focused(page)).toEqual({ tag: 'h1', text: 'Chat' })
+
+  // (A view with no <h1> - focus on <main> plus an announcement - is covered in
+  // src/tests/routeFocus.test.ts.)
 
   // Signed in, the 404 renders inside AppLayout's <main>: still one landmark.
   await page.goto('/no/such/page')
