@@ -226,7 +226,7 @@ h1 {
 .cta-primary {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: #4285f4;
+  background: var(--app-primary-strong);   /* #2563eb, 5.2:1 with white (was #4285f4, 3.56:1) */
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -235,7 +235,7 @@ h1 {
 }
 
 .cta-primary:hover {
-  background: #357ae8;
+  background: var(--app-primary-ink);
 }
 
 .cta-secondary {
@@ -293,7 +293,7 @@ h1 {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: #4285f4;
+  background: var(--app-primary-strong);   /* #2563eb, 5.2:1 with white (was #4285f4, 3.56:1) */
   color: white;
   font-weight: 600;
   margin-bottom: 0.75rem;
@@ -307,8 +307,9 @@ h1 {
 }
 
 .site-footer a {
-  color: #4285f4;
-  text-decoration: none;
+  color: var(--app-primary-strong);
+  /* Underlined: colour alone does not set a link apart from the text around it. */
+  text-decoration: underline;
 }
 
 .site-footer a:hover {

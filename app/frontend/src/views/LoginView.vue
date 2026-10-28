@@ -232,7 +232,7 @@ if (code || urlParams.get('error')) {
 .submit-btn {
   min-height: var(--app-touch);
   padding: 0.75rem;
-  background: #4285f4;
+  background: var(--app-primary-strong);   /* was #4285f4: 3.56:1 with white */
   color: white;
   border: none;
   border-radius: 4px;
@@ -242,7 +242,7 @@ if (code || urlParams.get('error')) {
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: #357ae8;
+  background: var(--app-primary-ink);
 }
 
 .submit-btn:focus-visible { outline: var(--app-focus); outline-offset: 2px; }
@@ -254,7 +254,7 @@ if (code || urlParams.get('error')) {
 
 .divider {
   margin: 1.5rem 0 0.5rem;
-  color: #888;
+  color: var(--app-ink-3);
   font-size: 0.875rem;
 }
 
@@ -276,6 +276,6 @@ if (code || urlParams.get('error')) {
 .hint {
   margin-top: 2rem;
   font-size: 0.8rem;
-  color: #888;
+  color: var(--app-ink-3);   /* #6b7280, 4.8:1 (was #888, 3.5:1) */
 }
 </style>

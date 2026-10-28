@@ -51,7 +51,9 @@ const canGoBack = typeof window !== 'undefined' && window.history.length > 1
   font-size: 3.5rem;
   font-weight: 700;
   line-height: 1;
-  color: var(--app-line-2);
+  /* Decorative (aria-hidden), but still text: 3:1 for large text, not the
+     1.5:1 of --app-line-2. */
+  color: var(--app-ink-3);
   margin-bottom: 0.75rem;
 }
 
