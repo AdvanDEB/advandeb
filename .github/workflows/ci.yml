@@ -5,6 +5,10 @@ on:
     branches: [main, review-p0]
   pull_request:
     branches: [main, review-p0]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -12,7 +16,7 @@ concurrency:
 
 jobs:
   backend:
-    name: Backend (pytest)
+    name: Python (backend, knowledge-builder, repo tests)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,12 +30,16 @@ jobs:
             knowledge-builder/pyproject.toml
 
       - name: Install backend deps
+        id: install
         working-directory: app/backend
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -e ../../knowledge-builder
 
+      # Each suite is its own pytest root (see the pytest.ini / pyproject
+      # next to it). Later suites still run when an earlier one fails, so a
+      # red run shows every failure at once.
       - name: Pytest -- app backend
         working-directory: app/backend
         env:
@@ -39,36 +47,41 @@ jobs:
           JWT_SECRET_KEY: "ci-test-secret-key-at-least-32-chars-long-1234"
           MONGODB_URI: "mongodb://localhost:27017"
           ENVIRONMENT: "development"
-        run: pytest -x -q
+        run: pytest -q
 
       - name: Pytest -- knowledge-builder
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         working-directory: knowledge-builder
-        # Tolerate missing optional deps for now; tighten once KB tests are
-        # service-free and stable in CI.
-        run: pytest -x -q tests/ || true
+        run: pytest -q
+
+      - name: Pytest -- repo-level tests (tests/integration is not collected)
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pytest -q
 
   frontend:
     name: Frontend (vue-tsc + vitest)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app/frontend
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
           cache-dependency-path: app/frontend/package-lock.json
 
       - name: Install
-        working-directory: app/frontend
-        run: npm ci || npm install
+        id: install
+        run: npm ci
 
       - name: Typecheck + build
-        working-directory: app/frontend
         run: npm run build
 
       - name: Unit tests
-        working-directory: app/frontend
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: npm test
 
   mcp:
