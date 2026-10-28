@@ -132,5 +132,7 @@ test.describe('Phone drawer', () => {
     })).toBe('Home')
     await page.keyboard.press('Escape')
     await expect(page.locator('#app-sidebar')).toBeHidden()
+    // Focus goes back to the control that opened it, not to <body>.
+    await expect(page.getByRole('button', { name: 'Navigation menu' })).toBeFocused()
   })
 })

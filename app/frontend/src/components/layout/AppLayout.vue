@@ -5,6 +5,7 @@
     <!-- Mobile top bar -->
     <div class="mobile-topbar">
       <button
+        ref="hamburgerEl"
         class="hamburger"
         :aria-expanded="mobileOpen"
         aria-controls="app-sidebar"
@@ -105,6 +106,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 const mobileOpen = ref(false)
 const sidebarEl = ref<HTMLElement | null>(null)
+const hamburgerEl = ref<HTMLButtonElement | null>(null)
 
 // The rail state is a preference, not a transient: re-collapsing it on every
 // page load would make the labels feel like something you keep losing.
@@ -179,7 +181,12 @@ function handleLogout() {
 }
 
 function onKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape' && mobileOpen.value) mobileOpen.value = false
+  if (e.key === 'Escape' && mobileOpen.value) {
+    mobileOpen.value = false
+    // Focus was in the drawer, which is now hidden; without this it fell to
+    // <body>. Back to the control that opened it.
+    hamburgerEl.value?.focus()
+  }
 }
 
 // Opening the drawer moves focus into it, so a keyboard or screen-reader user
