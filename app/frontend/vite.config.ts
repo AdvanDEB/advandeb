@@ -2,6 +2,10 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
+// The dev server forwards /api and /ws to the backend, which on this host is
+// production. The e2e run points it at a closed port instead (playwright.config.ts).
+const apiTarget = process.env.API_PROXY_TARGET || 'http://localhost:8400'
+
 export default defineConfig({
   plugins: [vue()],
   resolve: {
@@ -14,11 +18,11 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:8400',
+        target: apiTarget,
         changeOrigin: true
       },
       '/ws': {
-        target: 'http://localhost:8400',
+        target: apiTarget,
         changeOrigin: true,
         ws: true
       }
