@@ -1,0 +1,26 @@
+[Unit]
+Description=Register AdvanDEB agents with the MCP gateway
+Documentation=file:///home/adeb/dev/advandeb/scripts/systemd/README.md
+# The gateway's registry lives in memory. PartOf= re-runs this whenever the
+# gateway is restarted (by hand or by Restart=on-failure); Requires= marks it
+# failed — visibly — when the gateway itself could not start.
+Requires=advandeb-gateway.service
+PartOf=advandeb-gateway.service
+After=advandeb-gateway.service \
+      advandeb-agent@retrieval_agent.service \
+      advandeb-agent@graph_explorer_agent.service \
+      advandeb-agent@synthesis_agent.service \
+      advandeb-agent@query_planner_agent.service \
+      advandeb-agent@curator_agent.service \
+      advandeb-agent@chatbot_agent.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=adeb
+Group=adeb
+Environment=ADVANDEB_PYTHON=/home/adeb/miniforge3/envs/advandeb/bin/python REGISTER_WAIT_SECS=240
+# Exits non-zero if any agent failed to register: the unit then shows
+# "failed" instead of the old "Stack started successfully".
+ExecStart=/home/adeb/dev/advandeb/scripts/register_all_agents.sh
+TimeoutStartSec=900

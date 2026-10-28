@@ -24,7 +24,7 @@ load_dotenv(REPO_ROOT / "app" / "backend" / ".env")
 OUT = Path.home() / "dev" / "advandeb_auxiliary" / "stylized_DEB" / "data" / "repro_full_index_cache.pkl"
 TEXT_CHARS = 800  # store enough for snippet display; keeps metadata RAM bounded
 
-db = MongoClient(os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))["deb_abstracts_reproduction"]
+db = MongoClient(os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))["deb_abstracts_reproduction"]
 
 
 def log(m):

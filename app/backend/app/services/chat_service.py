@@ -17,6 +17,7 @@ For the non-streaming REST path, ``send_message`` calls the MCP gateway via
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import uuid
 from typing import AsyncIterator, Dict, Any, List, Optional
@@ -29,6 +30,7 @@ from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 
 from app.core.database import get_database
 from app.core.config import settings
+from app.core.metrics import ChatTurnMetrics
 from app.clients.mcp_client import MCPClient
 
 
@@ -50,6 +52,30 @@ class ChatService:
         message: str,
         user_id: str,
         llm_config: Optional[Dict[str, Any]] = None,
+    ) -> AsyncIterator[Dict[str, Any]]:
+        """Stream one chat turn (see ``_stream_turn``), observed for /metrics."""
+        turn = ChatTurnMetrics()
+        outcome = "incomplete"
+        try:
+            async for event in self._stream_turn(session_id, message, user_id, llm_config, turn):
+                turn.see(event)
+                yield event
+        except (GeneratorExit, asyncio.CancelledError):
+            outcome = "aborted"       # the browser went away mid-answer
+            raise
+        except BaseException:
+            outcome = "exception"
+            raise
+        finally:
+            turn.finish(outcome)
+
+    async def _stream_turn(
+        self,
+        session_id: str,
+        message: str,
+        user_id: str,
+        llm_config: Optional[Dict[str, Any]],
+        turn: ChatTurnMetrics,
     ) -> AsyncIterator[Dict[str, Any]]:
         """
         Stream chat events for the WebSocket endpoint.
@@ -94,7 +120,9 @@ class ChatService:
             from app.services.byok_chat_service import ByokChatService, ByokSynthesisError
             from app.services.default_chat_rate_limiter import default_rate_limiter
 
+            turn.path = "default"
             if not await default_rate_limiter.acquire():
+                turn.outcome = "rate_limited"
                 # Quote the cap actually in force. This message hardcoded
                 # "40 req/min" while DEFAULT_CHAT_RPM was 5, so users were told
                 # to wait for headroom that was eight times smaller than stated.
@@ -149,6 +177,7 @@ class ChatService:
         if self._byok_applies(config):
             from app.services.byok_chat_service import ByokChatService, ByokSynthesisError
 
+            turn.path = "byok"
             system_prompt = await self.get_session_system_prompt(session_id, user_id)
             try:
                 async for chunk in ByokChatService().answer_stream(

@@ -10,6 +10,8 @@ import logging
 import time
 from typing import Any
 
+from advandeb_kb import metrics
+
 logger = logging.getLogger(__name__)
 
 # Fallback defaults, used when the app config is not importable (e.g. the KB
@@ -175,13 +177,25 @@ class GraphRebuildQueue:
             # Record the start time *before* building so marks that arrive
             # during the (possibly long) rebuild respect the cooldown.
             self._last_built[schema_name] = time.monotonic()
+            started = time.perf_counter()
+            metrics.GRAPH_REBUILD_IN_PROGRESS.set(1)
+            outcome = "error"
             try:
                 builder = await self.get_builder()
                 logger.info("GraphRebuildQueue: rebuilding artifact for %s", schema_name)
                 await builder.build_schema_artifact(schema_name)
+                outcome = "ok"
+                metrics.GRAPH_REBUILD_LAST_SUCCESS.labels(schema_name).set_to_current_time()
             except Exception:
                 logger.exception("GraphRebuildQueue: artifact rebuild failed for %s", schema_name)
+            finally:
+                metrics.GRAPH_REBUILD_IN_PROGRESS.set(0)
+                metrics.GRAPH_REBUILDS.labels(schema_name, outcome).inc()
+                metrics.GRAPH_REBUILD_DURATION.labels(schema_name).observe(
+                    time.perf_counter() - started
+                )
 
 
 # Module-level singleton — import this everywhere
 graph_rebuild_queue = GraphRebuildQueue()
+metrics.GRAPH_REBUILD_DIRTY.set_function(lambda: len(graph_rebuild_queue._dirty))

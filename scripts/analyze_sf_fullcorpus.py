@@ -286,7 +286,7 @@ def main():
     from pymongo import MongoClient
     from app.core.crypto import decrypt  # type: ignore
     import anthropic
-    key = decrypt(MongoClient(os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))[
+    key = decrypt(MongoClient(os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))[
         os.environ.get("MONGODB_DB_NAME") or "advandeb"].user_llm_keys.find_one(
         {"provider": "anthropic"})["encrypted_key"])
     claude = anthropic.Anthropic(api_key=key)

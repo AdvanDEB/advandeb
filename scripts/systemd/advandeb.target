@@ -1,8 +1,10 @@
 [Unit]
-Description=AdvanDEB (full application: agent stack + web)
-# Pull up both halves of the app as one logical unit.
-Wants=advandeb-stack.service advandeb.service
-After=advandeb-stack.service advandeb.service
+Description=AdvanDEB (web app + agent stack)
+Documentation=file:///home/adeb/dev/advandeb/scripts/systemd/README.md
+# `systemctl restart advandeb.target` restarts everything; each half stays
+# independently restartable (advandeb.service, advandeb-stack.target).
+Wants=advandeb-stack.target advandeb.service
+After=advandeb-stack.target advandeb.service
 
 [Install]
 WantedBy=multi-user.target

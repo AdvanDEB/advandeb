@@ -1,0 +1,29 @@
+[Unit]
+Description=AdvanDEB agent %i
+Documentation=file:///home/adeb/dev/advandeb/scripts/systemd/README.md
+# Ordering only: MongoDB runs in Docker, ArangoDB and Ollama on the host.
+After=network.target docker.service arangodb3.service ollama.service
+PartOf=advandeb-stack.target
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Service]
+Type=exec
+User=adeb
+Group=adeb
+# The launcher gives the agent only the variables it uses from
+# app/backend/.env (not the JWT key, OAuth secret or shared chat API key) and
+# runs `python -m advandeb_kb.agents.%i` from knowledge-builder/.
+ExecStart=/home/adeb/miniforge3/envs/advandeb/bin/python \
+    /home/adeb/dev/advandeb/scripts/run_component.py %i
+SyslogIdentifier=advandeb-%i
+
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+
+# Most agents sit at ~80–110 MB. retrieval_agent holds the embedding model
+# and gets more via advandeb-agent@retrieval_agent.service.d/memory.conf.
+MemoryHigh=3G
+MemoryMax=4G
+LimitNOFILE=65536

@@ -371,6 +371,6 @@ class GraphExplorerAgent(BaseAgent):
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     agent = GraphExplorerAgent()
     agent.run()

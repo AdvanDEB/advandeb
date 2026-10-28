@@ -95,9 +95,9 @@ class ChatbotAgent(BaseAgent):
 
     async def initialize(self) -> None:
         """Connect to MongoDB and ensure indexes exist."""
-        self._mongo_client = AsyncIOMotorClient(settings.MONGODB_URL)
+        self._mongo_client = AsyncIOMotorClient(settings.MONGODB_URI)
         self._chat_db = self._mongo_client[settings.CHAT_STORE_DB_NAME]
-        self._kb_db = self._mongo_client[settings.DATABASE_NAME]
+        self._kb_db = self._mongo_client[settings.KB_DB_NAME]
 
         await self._ensure_indexes()
         logger.info(
@@ -105,7 +105,7 @@ class ChatbotAgent(BaseAgent):
             self._model,
             self._ollama_url,
             settings.CHAT_STORE_DB_NAME,
-            settings.DATABASE_NAME,
+            settings.KB_DB_NAME,
         )
 
     async def _ensure_indexes(self) -> None:
@@ -875,26 +875,46 @@ class ChatbotAgent(BaseAgent):
     # BYOK provider resolution
     # ------------------------------------------------------------------
 
-    def _decrypt_llm_key(self, encrypted: str) -> Optional[str]:
-        """Decrypt a stored BYOK key using LLM_KEY_ENCRYPTION_KEY from the env.
+    @staticmethod
+    def _byok_fernet():
+        """MultiFernet over LLM_KEY_ENCRYPTION_KEY (+ _PREVIOUS during a rotation).
 
-        The agent stack sources app/backend/.env, so the same Fernet key the
-        backend uses is available here. The plaintext lives only for the life
-        of one request and is never logged.
+        The launcher passes this agent the same keys the backend holds (see
+        scripts/run_component.py). Encrypts with the primary key and decrypts
+        with any, exactly like app.core.crypto. None when BYOK is not configured.
         """
         import os
 
         key = os.getenv("LLM_KEY_ENCRYPTION_KEY")
-        if not key or not encrypted:
-            if not key:
+        if not key:
+            return None
+        from cryptography.fernet import Fernet, MultiFernet
+
+        previous = [
+            k.strip()
+            for k in os.getenv("LLM_KEY_ENCRYPTION_KEY_PREVIOUS", "").split(",")
+            if k.strip()
+        ]
+        return MultiFernet([Fernet(k.encode()) for k in (key, *previous)])
+
+    def _decrypt_llm_key(self, encrypted: str) -> Optional[str]:
+        """Decrypt a stored BYOK key with the backend's Fernet key(s).
+
+        The plaintext lives only for the life of one request and is never logged.
+        """
+        try:
+            fernet = self._byok_fernet()
+        except Exception as exc:  # noqa: BLE001 - malformed key in env
+            logger.warning("BYOK key decrypt failed: %s", type(exc).__name__)
+            return None
+        if fernet is None or not encrypted:
+            if fernet is None:
                 logger.warning(
                     "LLM_KEY_ENCRYPTION_KEY not set in agent env — BYOK disabled"
                 )
             return None
         try:
-            from cryptography.fernet import Fernet
-
-            return Fernet(key.encode()).decrypt(encrypted.encode()).decode()
+            return fernet.decrypt(encrypted.encode()).decode()
         except Exception as exc:  # noqa: BLE001
             logger.warning("BYOK key decrypt failed: %s", exc)
             return None
@@ -936,13 +956,8 @@ class ChatbotAgent(BaseAgent):
             return access
         # Re-encrypt + persist so subsequent requests reuse the fresh token.
         try:
-            import os
-
-            from cryptography.fernet import Fernet
-
-            key = os.getenv("LLM_KEY_ENCRYPTION_KEY")
-            if key:
-                f = Fernet(key.encode())
+            f = self._byok_fernet()
+            if f is not None:
                 update = {"encrypted_access_token": f.encrypt(new_access.encode()).decode()}
                 if refreshed.get("refresh_token"):
                     update["encrypted_refresh_token"] = f.encrypt(

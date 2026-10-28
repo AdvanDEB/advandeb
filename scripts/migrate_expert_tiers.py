@@ -35,7 +35,7 @@ def main() -> int:
     args = ap.parse_args()
 
     from pymongo import MongoClient
-    url = os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
+    url = os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
     dbn = os.environ.get("MONGODB_DB_NAME") or "advandeb"
     db = MongoClient(url)[dbn]
 

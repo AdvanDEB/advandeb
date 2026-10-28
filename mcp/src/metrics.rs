@@ -22,7 +22,12 @@ pub static TOOL_LATENCY: Lazy<HistogramVec> = Lazy::new(|| {
         "mcp_tool_latency_seconds",
         "Tool call latency in seconds",
         &["tool", "agent"],
-        vec![0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0]
+        // Tool calls are LLM-bound (agent ReAct loops run for minutes); buckets
+        // that stopped at 5 s put nearly every real call into +Inf.
+        vec![
+            0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0, 30.0, 60.0, 120.0,
+            300.0, 600.0,
+        ]
     )
     .expect("register mcp_tool_latency_seconds")
 });

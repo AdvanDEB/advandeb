@@ -165,7 +165,7 @@ def load_anthropic_key() -> str:
     from pymongo import MongoClient
     from app.core.crypto import decrypt  # type: ignore
 
-    url = os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
+    url = os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
     dbn = os.environ.get("MONGODB_DB_NAME") or "advandeb"
     coll = MongoClient(url)[dbn].user_llm_keys
     row = coll.find_one({"provider": "anthropic", "encrypted_key": {"$exists": True}})

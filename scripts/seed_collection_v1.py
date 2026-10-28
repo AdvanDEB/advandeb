@@ -51,7 +51,7 @@ def main() -> int:
           f"{manifest['manifest_sha256'][:16]}, version "
           f"{manifest['collection_version']}")
 
-    url = os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
+    url = os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
     dbn = os.environ.get("MONGODB_DB_NAME") or "advandeb"
     db = MongoClient(url)[dbn]
 

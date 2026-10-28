@@ -38,13 +38,23 @@ class Database:
 db = Database()
 
 
+def redact_uri(uri: str) -> str:
+    """``mongodb://user:secret@host`` → ``mongodb://user:***@host`` for logs."""
+    scheme, sep, rest = uri.partition("://")
+    if not sep or "@" not in rest:
+        return uri
+    userinfo, _, hostpart = rest.rpartition("@")
+    user = userinfo.split(":", 1)[0]
+    return f"{scheme}://{user}:***@{hostpart}"
+
+
 async def connect_to_mongo():
     """Connect to MongoDB."""
     db.client = AsyncIOMotorClient(
         settings.MONGODB_URI,
         maxPoolSize=settings.MONGO_MAX_POOL_SIZE,
     )
-    logger.info("Connected to MongoDB at %s", settings.MONGODB_URI)
+    logger.info("Connected to MongoDB at %s", redact_uri(settings.MONGODB_URI))
 
 
 async def close_mongo_connection():

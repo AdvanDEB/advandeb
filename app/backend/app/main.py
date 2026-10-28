@@ -16,6 +16,7 @@ from slowapi.errors import RateLimitExceeded
 
 from app.core.config import settings
 from app.core.limiter import limiter
+from app.core.metrics import PrometheusMiddleware, metrics_endpoint
 
 # ── File logging ────────────────────────────────────────────────────────────
 def _configure_logging() -> None:
@@ -149,6 +150,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Request metrics for /metrics. Added last, so it is the outermost layer and
+# times the whole stack, CORS and proxy-header handling included.
+app.add_middleware(PrometheusMiddleware)
+
 # Include routers
 app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
 app.include_router(users.router, prefix="/api/users", tags=["users"])
@@ -225,6 +230,11 @@ async def api_health():
     production; ``/health`` remains available for local development.
     """
     return await _health_payload()
+
+
+# Prometheus scrape target. Registered before the SPA catch-all below, which
+# would otherwise answer /metrics with index.html.
+app.add_api_route("/metrics", metrics_endpoint, methods=["GET"], include_in_schema=False)
 
 
 # Serve Vue SPA static assets and fall back to index.html for client-side routing.

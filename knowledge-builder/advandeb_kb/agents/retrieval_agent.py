@@ -73,8 +73,8 @@ class RetrievalAgent(BaseAgent):
         self._chroma_svc._ensure_connected()
 
         # Connect to MongoDB for keyword search (sync pymongo — runs in thread pool)
-        self._mongo_client = MongoClient(settings.MONGODB_URL)
-        mongo_db = self._mongo_client[settings.DATABASE_NAME]
+        self._mongo_client = MongoClient(settings.MONGODB_URI)
+        mongo_db = self._mongo_client[settings.KB_DB_NAME]
 
         cache = CacheService(
             redis_url=settings.REDIS_URL if settings.REDIS_URL else None,
@@ -230,6 +230,6 @@ class RetrievalAgent(BaseAgent):
 
 if __name__ == "__main__":
     import logging
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     agent = RetrievalAgent()
     agent.run()

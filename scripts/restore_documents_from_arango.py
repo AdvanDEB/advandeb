@@ -77,7 +77,7 @@ def main() -> int:
         username=os.environ.get("ARANGO_USERNAME") or "root",
         password=os.environ.get("ARANGO_PASSWORD") or "")
 
-    murl = os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
+    murl = os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017")
     mdb = MongoClient(murl)["advandeb"]
 
     before = mdb.documents.count_documents({})
