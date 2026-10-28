@@ -584,7 +584,14 @@ class GraphExpansionService:
         limit: int = 50,
     ) -> dict[str, Any]:
         """
-        Run AQL graph traversal from multiple starting vertices.
+        Run AQL graph traversal from multiple starting vertices, in one query.
+
+        Each start is still its own traversal (the subquery), so
+        uniqueVertices: 'global' and LIMIT apply per start, and rows come
+        back in start order — the same result as one query per start,
+        without a round-trip per start (expand_from_chunks can pass
+        thousands of facts). A start that is not a vertex id yields a
+        warning and no rows; it does not fail the other starts.
 
         Returns:
             {"vertices": [...], "path_steps": [GraphPathStep dicts]}
@@ -592,48 +599,54 @@ class GraphExpansionService:
         if not start_ids:
             return {"vertices": [], "path_steps": []}
 
+        # See get_citation_chain: global uniqueness requires order: 'bfs'.
+        aql = f"""
+        FOR s IN @starts
+            LET hits = (
+                FOR v, e IN {min_depth}..{max_depth} {direction} s
+                    GRAPH @graph
+                    OPTIONS {{uniqueVertices: 'global', order: 'bfs'}}
+                    LIMIT @limit
+                    RETURN {{vertex: v, edge: e}}
+            )
+            FOR hit IN hits
+                RETURN hit
+        """
+        try:
+            rows = self.db.aql(
+                aql,
+                bind_vars={
+                    "starts": list(start_ids),
+                    "graph": graph_name,
+                    "limit": limit,
+                },
+            )
+        except Exception as exc:
+            logger.warning(
+                "_traverse_graph %s from %d start(s) failed: %s",
+                graph_name, len(start_ids), exc,
+            )
+            return {"vertices": [], "path_steps": []}
+
         vertices: list[dict] = []
         path_steps: list[dict] = []
         seen: set[str] = set()
-
-        for start_id in start_ids:
-            # See get_citation_chain: global uniqueness requires order: 'bfs'.
-            aql = f"""
-            FOR v, e IN {min_depth}..{max_depth} {direction} @start
-                GRAPH @graph
-                OPTIONS {{uniqueVertices: 'global', order: 'bfs'}}
-                LIMIT @limit
-                RETURN {{vertex: v, edge: e}}
-            """
-            try:
-                rows = self.db.aql(
-                    aql,
-                    bind_vars={
-                        "start": start_id,
-                        "graph": graph_name,
-                        "limit": limit,
+        for row in rows:
+            v = row.get("vertex") or {}
+            e = row.get("edge") or {}
+            vid = v.get("_id", "")
+            if vid and vid not in seen:
+                seen.add(vid)
+                vertices.append(v)
+            if e.get("_from") and e.get("_to"):
+                path_steps.append({
+                    "from_id": e["_from"],
+                    "to_id": e["_to"],
+                    "edge_type": e.get("_id", "").split("/")[0] if e.get("_id") else graph_name,
+                    "edge_attrs": {
+                        k: v for k, v in e.items()
+                        if k not in ("_id", "_key", "_rev", "_from", "_to")
                     },
-                )
-                for row in rows:
-                    v = row.get("vertex") or {}
-                    e = row.get("edge") or {}
-                    vid = v.get("_id", "")
-                    if vid and vid not in seen:
-                        seen.add(vid)
-                        vertices.append(v)
-                    if e.get("_from") and e.get("_to"):
-                        path_steps.append({
-                            "from_id": e["_from"],
-                            "to_id": e["_to"],
-                            "edge_type": e.get("_id", "").split("/")[0] if e.get("_id") else graph_name,
-                            "edge_attrs": {
-                                k: v for k, v in e.items()
-                                if k not in ("_id", "_key", "_rev", "_from", "_to")
-                            },
-                        })
-            except Exception as exc:
-                logger.warning(
-                    "_traverse_graph %s from %s failed: %s", graph_name, start_id, exc
-                )
+                })
 
         return {"vertices": vertices, "path_steps": path_steps}
