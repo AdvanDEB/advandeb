@@ -16,13 +16,18 @@ capability is granted per user by an administrator.
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 
 from app.core.auth import get_current_user
-from app.core.dependencies import require_admin, require_elicitor
+from app.core.dependencies import (
+    is_curator, require_admin, require_curator, require_elicitor,
+)
 from app.models.elicitation import (
     ExpertReferenceCreate,
     CalibrationDecision, CalibrationFeedback, CalibrationItem,
-    AdminStats, CalibrationStatus, DecisionReceipt, ElicitationDecision,
-    ElicitationEvent, ElicitationProgress, EventReceipt, ExpertList,
-    Guidelines, HistoryResponse, QueueItem,
+    CalibrationSet, CalibrationSetDraft, CalibrationSetList,
+    AdminStats, CalibrationStatus, CandidateReview, CandidateReviewResult,
+    DecisionReceipt, ElicitationDecision, ElicitationEvent,
+    ElicitationProgress, EventReceipt, EvidenceCandidateList,
+    EvidenceSetDetail, EvidenceSetOptionList, ExpertList, Guidelines,
+    HistoryResponse, QueueItem,
 )
 from app.services.elicitation_service import ElicitationService
 from app.services.expert_reference_service import ExpertReferenceService
@@ -36,6 +41,19 @@ def _raise_on_error(result: dict, default_code: int = 400) -> dict:
         raise HTTPException(status_code=int(result.get("code") or default_code),
                             detail=result.get("detail", "could not record"))
     return result
+
+
+# What the machine panel concluded about a paper. Shown to an expert while
+# they judge, it is the machine assessment by another route — an anchor in the
+# very judgment being measured — so only curators receive it.
+_MACHINE_FIELDS = ("panel_labels", "agrees_with_panel")
+
+
+def _for_expert(ref: dict) -> dict:
+    res = dict(ref.get("resolution") or {})
+    for k in _MACHINE_FIELDS:
+        res.pop(k, None)
+    return {**ref, "resolution": res}
 
 
 def _refusal(result: dict) -> dict:
@@ -100,10 +118,12 @@ async def build_queue(
     force: bool = False,
     current_user: dict = Depends(require_admin),
 ):
-    """Generate the fixed elicitation order for the current collection version.
+    """Generate the fixed fact-level order for the current collection version.
 
-    Idempotent, and refuses to rebuild once elicitation has begun unless forced:
-    reshuffling would silently change what the completed prefix represents.
+    The fact-level tasks are not served (SERVED_TASKS); the block is kept so
+    that decision can be reversed. Idempotent, and refuses to rebuild once
+    elicitation has begun unless forced: reshuffling would silently change
+    what the completed prefix represents.
     """
     service = ElicitationService()
     return _raise_on_error(_refusal(await service.build_queue(force=force)))
@@ -231,11 +251,11 @@ async def guidelines(current_user: dict = Depends(require_elicitor)):
 
 @router.get("/calibration/next", response_model=CalibrationItem | None)
 async def calibration_next(current_user: dict = Depends(require_elicitor)):
-    """The next calibration case, or null once the set is complete.
+    """The next case of the published calibration set, or null once this
+    expert has worked them all (or none is published).
 
-    Every expert works the fixed set before their judgments enter either
-    stratum: it trains them, and their performance is a quality signal
-    available before any real queue item is consumed.
+    Served like a real evidence item — passages, citations and the same form —
+    because calibration trains the act the queue asks for.
     """
     return await ElicitationService().calibration_next(current_user["id"])
 
@@ -245,7 +265,8 @@ async def calibration_decide(
     decision: CalibrationDecision,
     current_user: dict = Depends(require_elicitor),
 ):
-    """Answer one calibration case and see the documented reference at once.
+    """Answer one calibration case and see the team's reference answer and
+    explanation at once.
 
     Calibration teaches, so nothing is withheld. The result is stored as a
     quality signal, never as an automatic exclusion gate.
@@ -257,23 +278,85 @@ async def calibration_decide(
 
 @router.get("/calibration/status", response_model=CalibrationStatus)
 async def calibration_status(current_user: dict = Depends(require_elicitor)):
-    """How far through the calibration set this expert is.
+    """Where this expert stands against the published calibration set.
 
-    `done` is what the client gates on, and is what the server gates /next
-    and /decide on — false until a set exists and this expert has finished it.
+    `required` is what the client gates on, and what the server gates /next
+    and /decide on. It is false while no set is published: experts are never
+    held up by a set the team has not chosen yet.
     """
     return await ElicitationService().calibration_status(current_user["id"])
 
 
-@router.post("/calibration/seed")
-async def calibration_seed(force: bool = False,
-                           current_user: dict = Depends(require_admin)):
-    """Build the fixed calibration set from facts with documented provenance.
+@router.get("/calibration/sets", response_model=CalibrationSetList)
+async def calibration_sets(current_user: dict = Depends(require_admin)):
+    """Every calibration set version, newest first, and which is published."""
+    return await ElicitationService().list_calibration_sets()
 
-    The only way the set comes to exist. /calibration/next used to seed it as
-    a side effect of the first expert opening the page.
-    """
-    return await ElicitationService().seed_calibration(force=force)
+
+@router.get("/calibration/evidence-sets", response_model=EvidenceSetOptionList)
+async def calibration_evidence_sets(current_user: dict = Depends(require_admin)):
+    """The evidence sets a calibration item can be built from."""
+    return await ElicitationService().evidence_set_options()
+
+
+@router.get("/calibration/evidence-sets/{evidence_set_id}",
+            response_model=EvidenceSetDetail)
+async def calibration_evidence_set(
+    evidence_set_id: str,
+    current_user: dict = Depends(require_admin),
+):
+    """One evidence set with its passages as an expert sees them."""
+    detail = await ElicitationService().evidence_set_detail(evidence_set_id)
+    if detail is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail="no such evidence set")
+    return detail
+
+
+@router.post("/calibration/sets", response_model=CalibrationSet)
+async def create_calibration_set(
+    draft: CalibrationSetDraft,
+    current_user: dict = Depends(require_admin),
+):
+    """Save a new draft version: the items the team picked, each with its
+    agreed reference answer and explanation."""
+    return _raise_on_error(await ElicitationService().save_calibration_draft(
+        draft, current_user["id"]))
+
+
+@router.put("/calibration/sets/{version}", response_model=CalibrationSet)
+async def update_calibration_set(
+    version: int,
+    draft: CalibrationSetDraft,
+    current_user: dict = Depends(require_admin),
+):
+    """Replace a draft's items. Published and retired versions are not
+    edited — a change to the instrument is a new version."""
+    return _raise_on_error(await ElicitationService().save_calibration_draft(
+        draft, current_user["id"], version=version))
+
+
+@router.post("/calibration/sets/{version}/publish", response_model=CalibrationSet)
+async def publish_calibration_set(
+    version: int,
+    current_user: dict = Depends(require_admin),
+):
+    """Publish a draft, retiring the previous published set. From then on
+    each expert works it once before their next item, and its facts leave
+    the measured queue."""
+    return _raise_on_error(
+        await ElicitationService().publish_calibration_set(version))
+
+
+@router.delete("/calibration/sets/{version}")
+async def delete_calibration_set(
+    version: int,
+    current_user: dict = Depends(require_admin),
+):
+    """Delete a draft. Published and retired versions are kept: judgments
+    are stamped with them."""
+    return _raise_on_error(
+        await ElicitationService().delete_calibration_draft(version))
 
 
 @router.get("/stats/admin", response_model=AdminStats)
@@ -308,6 +391,8 @@ async def add_reference(
     if result.get("status") == "error":
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail=result.get("detail", "could not record"))
+    if not is_curator(current_user) and result.get("reference"):
+        result = {**result, "reference": _for_expert(result["reference"])}
     return result
 
 
@@ -317,10 +402,24 @@ async def list_references(
     mine_only: bool = True,
     current_user: dict = Depends(require_elicitor),
 ):
-    """References for a fact — the expert's own by default."""
+    """References for a fact — the expert's own.
+
+    Other experts' references are for curators only. An expert who could
+    read that a colleague cited a paper as opposing a fact would be judging
+    with the colleague's answer in view, which is the independence the
+    agreement statistics rest on.
+    """
+    if not mine_only and not is_curator(current_user):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
+                            detail="only curators see other experts' references")
     svc = ExpertReferenceService()
     refs = await svc.list_for(sf_number,
                               current_user["id"] if mine_only else None)
+    if not is_curator(current_user):
+        # Neither what the machine made of a paper nor what other experts
+        # asserted about this fact: both are other judges' answers.
+        return {"references": [_for_expert(r) for r in refs],
+                "asserted_evidence": None}
     return {"references": refs,
             "asserted_evidence": await svc.asserted_evidence(sf_number)}
 
@@ -349,3 +448,31 @@ async def recall_summary(current_user: dict = Depends(require_admin)):
     the method has no other cheap source for (docs/09 section 2.5a).
     """
     return await ExpertReferenceService().recall_summary()
+
+
+@router.get("/references/candidates", response_model=EvidenceCandidateList)
+async def reference_candidates(
+    status_filter: str = "pending",
+    limit: int = 200,
+    current_user: dict = Depends(require_curator),
+):
+    """Expert-named papers as evidence candidates, for curator review.
+
+    `status_filter` is pending, accepted or rejected.
+    """
+    if status_filter not in ("pending", "accepted", "rejected"):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="status_filter is pending, accepted or rejected")
+    return await ExpertReferenceService().candidates(status_filter, limit)
+
+
+@router.post("/references/{reference_id}/review",
+             response_model=CandidateReviewResult)
+async def review_reference(
+    reference_id: str,
+    review: CandidateReview,
+    current_user: dict = Depends(require_curator),
+):
+    """Accept or reject an expert-named paper as evidence for its fact."""
+    return _raise_on_error(await ExpertReferenceService().review(
+        reference_id, current_user["id"], review.accept, review.comment))

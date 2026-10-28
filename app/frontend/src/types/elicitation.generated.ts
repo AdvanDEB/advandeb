@@ -12,9 +12,28 @@ export type ScopeVerdict = "stated" | "implicit" | "absent" | "not_applicable"
 export type AssessabilityVerdict = "assessable" | "too_vague" | "compound" | "not_empirical" | "unclear_terms"
 export type EvidenceCondition = "matched" | "expertise"
 export type ElicitationEventType = "machine_verdict_opened" | "machine_verdict_closed"
-export type GuidelineSection = "provenance" | "scope" | "assessability" | "evidence" | "evidence_role" | "evidence_strength" | "consensus_direction"
+export type GuidelineSection = "provenance" | "scope" | "assessability" | "evidence" | "evidence_role" | "evidence_strength" | "consensus_direction" | "departure"
+export type ScoreLabelConflict = "corroborated_without_support" | "against_without_contradiction" | "strength_without_support"
+export type CitationStatus = "resolved" | "partial" | "unresolved"
+export type CalibrationSetStatus = "draft" | "published" | "retired"
+export type CandidateStatus = "pending" | "accepted" | "rejected"
+export type ReferenceDirection = "supports" | "opposes"
+export type ResolutionStatus = "pending" | "unresolvable" | "not_in_corpus" | "in_corpus_not_retrieved" | "in_corpus_retrieved" | "in_corpus_retrieval_unknown"
 
 // ---- responses: every field is present ----
+
+/** Where a passage comes from, as a reader would cite it. */
+export interface PassageCitation {
+  status: CitationStatus
+  authors: string[]
+  year: number | null
+  title: string | null
+  journal: string | null
+  doi: string | null
+  pages: string | null
+  file_name: string | null
+  library_id: string | null
+}
 
 /** One frozen passage, as shown to an expert. */
 export interface EvidencePassage {
@@ -25,6 +44,7 @@ export interface EvidencePassage {
   title: string | null
   year: unknown
   document_id: string | null
+  citation: PassageCitation
 }
 
 /** One unit of work, as handed to an expert. */
@@ -67,6 +87,7 @@ export interface ElicitationProgress {
   calibration_required: boolean
   calibration_completed: number
   calibration_total: number
+  calibration_version: number | null
   total_queue: number
   completed: number
   completed_by_me: number
@@ -98,6 +119,7 @@ export interface TaskGuideline {
 /** Served rather than duplicated in the client. */
 export interface Guidelines {
   tasks: TaskGuideline[]
+  how_it_works: string[]
   version: string
 }
 
@@ -114,6 +136,7 @@ export interface HistoryItem {
   corpus_id: string | null
   evidence_strength: number | null
   consensus_direction: number | null
+  departs_from_passages: boolean | null
   confidence: number
   rationale: string
   time_spent_s: number | null
@@ -125,23 +148,19 @@ export interface HistoryResponse {
   items: HistoryItem[]
 }
 
-/** A calibration case, shaped like a queue item so the UI can reuse it. */
+/** A calibration case, shaped like an evidence queue item so the expert works it in the same form as the real thing. */
 export interface CalibrationItem {
   calibration_id: string
-  queue_position: number
-  task: TaskType
+  version: number
   sf_number: number
   statement: string
   statement_sha256: string
   category: string
-  collection_version: string
-  existing_provenance: ProvenanceType | null
-  existing_source_citation: string | null
-  legacy_assessment: Record<string, unknown> | null
-  repeated_judgment: boolean
-  n_required: number
-  comparison_item: boolean
-  stratum: string
+  corpus_id: string
+  evidence_set_id: string
+  evidence_content_hash: string | null
+  passages: EvidencePassage[]
+  n_passages_total: number | null
   completed: number
   total: number
 }
@@ -149,19 +168,77 @@ export interface CalibrationItem {
 /** Immediate feedback — calibration teaches, so it does not withhold. */
 export interface CalibrationFeedback {
   correct: boolean
-  reference: Record<string, string | null>
-  explanation: string
+  strength_matches: boolean
+  consensus_matches: boolean
+  passages_compared: number
+  passages_agreed: number
+  reference: CalibrationReference
   completed: number
   total: number
 }
 
-/** How far through the calibration set an expert is. */
+/** Where an expert stands against the published calibration set. */
 export interface CalibrationStatus {
   total: number
   completed: number
   correct: number
   done: boolean
   available: boolean
+  required: boolean
+  version: number | null
+}
+
+/** A stored calibration item, with what an administrator needs to recognise it. */
+export interface CalibrationSetItem {
+  evidence_set_id: string
+  sf_number: number
+  corpus_id: string
+  category: string
+  statement: string
+  reference: CalibrationReference
+}
+
+export interface CalibrationSet {
+  version: number
+  status: CalibrationSetStatus
+  note: string | null
+  items: CalibrationSetItem[]
+  created_by: string | null
+  created_at: string
+  published_at: string | null
+  retired_at: string | null
+}
+
+export interface CalibrationSetList {
+  sets: CalibrationSet[]
+  published_version: number | null
+}
+
+/** An evidence set an administrator can pick for calibration. */
+export interface EvidenceSetOption {
+  evidence_set_id: string
+  sf_number: number
+  corpus_id: string
+  category: string
+  statement: string
+  n_passages: number
+  n_judgments: number
+}
+
+export interface EvidenceSetOptionList {
+  sets: EvidenceSetOption[]
+}
+
+/** One evidence set with the passages an expert would be shown, so the team can enter reference labels against the passages themselves. */
+export interface EvidenceSetDetail {
+  evidence_set_id: string
+  sf_number: number
+  corpus_id: string
+  category: string
+  statement: string
+  n_passages: number
+  n_judgments: number
+  passages: EvidencePassage[]
 }
 
 /** Expert-named references, by resolution status (docs/09 section 2.5a). */
@@ -234,6 +311,34 @@ export interface ExpertList {
   eligible: number
 }
 
+/** An expert-named paper awaiting (or past) curator review. */
+export interface EvidenceCandidate {
+  id: string
+  sf_number: number
+  statement: string
+  doi: string
+  direction: ReferenceDirection
+  note: string | null
+  tier: string | null
+  resolved_title: string | null
+  resolved_year: number | null
+  resolution_status: ResolutionStatus | null
+  status: CandidateStatus
+  review_comment: string | null
+  created_at: string
+  reviewed_at: string | null
+}
+
+export interface EvidenceCandidateList {
+  candidates: EvidenceCandidate[]
+  counts: Record<string, number>
+}
+
+export interface CandidateReviewResult {
+  id: string
+  status: CandidateStatus
+}
+
 // ---- requests: fields with a server default may be omitted ----
 
 /** An expert's two labels for one passage. */
@@ -259,22 +364,24 @@ export interface ElicitationDecision {
   evidence_strength?: number | null
   consensus_direction?: number | null
   passage_judgments?: Record<string, PassageJudgment>
+  departs_from_passages?: boolean | null
+  reference_ids?: string[]
   confidence: number
-  rationale: string
+  rationale?: string
   evidence_condition?: EvidenceCondition | null
   time_spent_s?: number | null
   machine_verdict_expanded?: boolean | null
 }
 
-/** An answer to one calibration case. */
+/** An answer to one calibration case — the same fields as a real evidence decision. */
 export interface CalibrationDecision {
   calibration_id: string
-  task: TaskType
-  provenance_type?: ProvenanceType | null
-  scope_verdict?: ScopeVerdict | null
-  assessability?: AssessabilityVerdict | null
+  evidence_strength?: number | null
+  consensus_direction?: number | null
+  passage_judgments?: Record<string, PassageJudgment>
+  departs_from_passages?: boolean | null
   confidence: number
-  rationale: string
+  rationale?: string
   time_spent_s?: number | null
 }
 
@@ -285,4 +392,30 @@ export interface ElicitationEvent {
   task: TaskType
   corpus_id?: string | null
   answered?: boolean
+}
+
+/** The team's agreed answer for one calibration item. */
+export interface CalibrationReference {
+  evidence_strength: number
+  consensus_direction: number
+  passage_directions?: Record<string, PassageDirection>
+  explanation: string
+}
+
+/** One item of a calibration set, as an administrator enters it. */
+export interface CalibrationItemSpec {
+  evidence_set_id: string
+  reference: CalibrationReference
+}
+
+/** A new or edited draft set. Three to five items is the intent; up to eight is accepted so a draft can hold alternatives while the team decides. */
+export interface CalibrationSetDraft {
+  items: CalibrationItemSpec[]
+  note?: string | null
+}
+
+/** A curator's decision on one candidate. */
+export interface CandidateReview {
+  accept: boolean
+  comment?: string | null
 }

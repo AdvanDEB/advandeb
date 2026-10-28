@@ -56,9 +56,13 @@
           >×</button>
         </div>
 
+        <!-- One tab stop per scale, not five: the checked step (or the first,
+             before any is) is in the tab order, and the arrow keys move within
+             the scale — the keyboard contract of a radio group, which is what
+             this is announced as. -->
         <div class="scale" role="radiogroup" :aria-label="`Familiarity with ${cat.label}`">
           <button
-            v-for="n in 5"
+            v-for="n in SCALE"
             :key="n"
             type="button"
             role="radio"
@@ -66,7 +70,11 @@
             :class="{ on: modelValue[cat.key] === n }"
             :aria-checked="modelValue[cat.key] === n"
             :aria-label="`${n} — ${FAMILIARITY_LABELS[n]}`"
+            :tabindex="tabStop(cat.key) === n ? 0 : -1"
+            :data-value="n"
             @click="set(cat.key, n)"
+            @keydown="onStepKey($event, cat.key, n)"
+            @keyup.space.prevent
           >
             <span class="step-n">{{ n }}</span>
           </button>
@@ -146,11 +154,57 @@ function set(key: string, n: number) {
   else next[key] = n
   emit('update:modelValue', next)
 }
+
+const SCALE = [1, 2, 3, 4, 5] as const
+const FIRST = SCALE[0]
+const LAST = SCALE[SCALE.length - 1]
+
+/** The one step of a scale that is in the tab order. A value off the scale
+ *  (a stray 0) falls back to the first step: matching no step would take the
+ *  whole scale out of the tab order. */
+function tabStop(key: string): number {
+  const v = props.modelValue[key]
+  return (SCALE as readonly number[]).includes(v) ? v : FIRST
+}
+
+/** Check a step without the tap's toggle: a key that lands on a value always
+ *  leaves that value checked. */
+function choose(key: string, n: number) {
+  if (props.modelValue[key] === n) return
+  emit('update:modelValue', { ...props.modelValue, [key]: n })
+}
+
+// Arrows move focus and the checked value together and wrap at the ends;
+// Home and End jump to them. Space checks the focused step: left to the
+// button it would click, and a click on the checked step clears it — so it is
+// cancelled on keydown here and on keyup in the template, since browsers
+// differ on which of the two fires a button's click. Enter still clicks, which
+// keeps the tap's way of clearing a rating on the keyboard too.
+// A key with a modifier is left alone, so Alt+Left still goes back.
+const STEP_KEYS: Record<string, (n: number) => number> = {
+  ArrowRight: n => (n === LAST ? FIRST : n + 1),
+  ArrowDown: n => (n === LAST ? FIRST : n + 1),
+  ArrowLeft: n => (n === FIRST ? LAST : n - 1),
+  ArrowUp: n => (n === FIRST ? LAST : n - 1),
+  Home: () => FIRST,
+  End: () => LAST,
+  ' ': n => n,
+}
+
+function onStepKey(e: KeyboardEvent, key: string, n: number) {
+  const move = STEP_KEYS[e.key]
+  if (!move || e.altKey || e.ctrlKey || e.metaKey) return
+  e.preventDefault()
+  const to = move(n)
+  choose(key, to)
+  if (to !== n) {
+    const group = (e.currentTarget as HTMLElement).closest('[role="radiogroup"]')
+    group?.querySelector<HTMLElement>(`[data-value="${to}"]`)?.focus()
+  }
+}
 </script>
 
 <style scoped>
-@import '@/styles/elicitation-tokens.css';
-
 .familiarity { display: flex; flex-direction: column; gap: var(--el-s4); }
 
 .pick { border: 0; padding: 0; margin: 0; }

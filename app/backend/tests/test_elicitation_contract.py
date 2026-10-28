@@ -60,11 +60,24 @@ def test_task_type_includes_the_evidence_task():
 
 
 def test_calibration_status_declares_what_the_client_gates_on():
+    """The client gates on `required`. It once read three fields the server
+    never sent, and waved every expert through to a queue that refused them."""
+    fields = {"total", "completed", "correct", "done", "available",
+              "required", "version"}
     text = _gen().OUT.read_text()
-    assert _ts_fields(text, "CalibrationStatus") == {
-        "total", "completed", "correct", "done", "available"}
-    assert set(m.CalibrationStatus.model_fields) == {
-        "total", "completed", "correct", "done", "available"}
+    assert _ts_fields(text, "CalibrationStatus") == fields
+    assert set(m.CalibrationStatus.model_fields) == fields
+
+
+def test_passages_carry_a_citation_and_decisions_the_departure_answer():
+    """Decision 1 of 2026-10-28: every passage shown with where it comes
+    from, and every judgment saying whether it goes beyond the passages."""
+    text = _gen().OUT.read_text()
+    assert "citation" in _ts_fields(text, "EvidencePassage")
+    assert {"status", "authors", "year", "title", "journal", "doi",
+            "file_name"} <= _ts_fields(text, "PassageCitation")
+    assert {"departs_from_passages", "reference_ids"} <= _ts_fields(
+        text, "ElicitationDecision")
 
 
 def _enrolment_ts() -> str:

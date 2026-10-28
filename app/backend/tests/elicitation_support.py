@@ -63,39 +63,57 @@ async def expert(db, tier: Optional[str] = "panel", slugs: Sequence[str] = (),
     return str((await db.users.insert_one(doc)).inserted_id)
 
 
-async def calibration_set(db, n: int = 1) -> List[str]:
-    ids = []
+async def calibration_set(db, n: int = 1, version: int = 1,
+                          status: str = "published",
+                          first_fact: int = 9000) -> List[str]:
+    """A calibration set of `n` evidence items on facts of its own (from
+    `first_fact`), stored as `status`. Returns the calibration ids an expert
+    is served. The facts are separate because a calibration fact leaves the
+    measured queue."""
+    items, ids = [], []
     for i in range(n):
-        cid = f"cal_test_{i}"
-        await db.elicitation_calibration.insert_one({
-            "calibration_id": cid, "order": i, "task": "provenance",
-            "sf_number": 9000 + i, "statement": f"calibration {i}",
-            "statement_sha256": sha(f"calibration {i}"), "category": "growth",
-            "reference": {"provenance_type": "published"},
-            "explanation": "documented", "reference_basis": "test"})
-        ids.append(cid)
+        f = fact(first_fact + i, "calibration")
+        await db.stylized_facts.insert_one(dict(f))
+        es = evidence_set(f, "deb", n_passages=3)
+        es["_id"] = es.pop("evidence_set_id")
+        await db.evidence_sets.insert_one(es)
+        items.append({
+            "evidence_set_id": es["_id"], "sf_number": f["sf_number"],
+            "corpus_id": "deb", "category": f["category"],
+            "statement": f["statement"],
+            "reference": {"evidence_strength": 2, "consensus_direction": 3,
+                          "passage_directions": {"0": "supports"},
+                          "explanation": "agreed by the team"}})
+        ids.append(f"v{version}:{es['_id']}")
+    await db.elicitation_calibration_sets.insert_one({
+        "version": version, "status": status, "note": None, "items": items,
+        "created_by": "admin", "created_at": datetime.now(timezone.utc),
+        "published_at": datetime.now(timezone.utc)
+        if status != "draft" else None, "retired_at": None})
     return ids
 
 
 async def calibrate(db, *expert_ids: str) -> None:
-    """Mark experts as having finished the calibration set (seeding one if
-    none exists), so the server-side gate opens for them."""
-    ids = [c["calibration_id"] async for c in db.elicitation_calibration.find()]
-    if not ids:
-        ids = await calibration_set(db)
+    """Mark experts as having finished the published calibration set, if
+    one exists. With none published the gate is open and there is nothing
+    to do."""
+    s = await db.elicitation_calibration_sets.find_one({"status": "published"})
+    if not s:
+        return
     for e in expert_ids:
-        for cid in ids:
-            await db.elicitation_calibration_results.update_one(
+        for it in s["items"]:
+            cid = f"v{s['version']}:{it['evidence_set_id']}"
+            await db.elicitation_calibration_answers.update_one(
                 {"expert_id": e, "calibration_id": cid},
                 {"$set": {"expert_id": e, "calibration_id": cid,
-                          "correct": True,
+                          "version": s["version"], "correct": True,
                           "created_at": datetime.now(timezone.utc)}},
                 upsert=True)
 
 
 def evidence_set(f: Dict, corpus: str, n_passages: int = 18) -> Dict:
     passages = [{"index": i, "text": f"passage {i} on fact {f['sf_number']}",
-                 "similarity": round(0.9 - i * 0.01, 3), "doi": f"10.1/{i}",
+                 "similarity": round(0.9 - i * 0.01, 3), "doi": f"10.5555/{i}",
                  "title": f"Paper {i}", "year": 2000 + i,
                  "document_id": f"doc{i}"} for i in range(n_passages)]
     content = "|".join(p["text"] for p in passages)
@@ -132,6 +150,7 @@ def decision_for(item: QueueItem, **over) -> ElicitationDecision:
             corpus_id=item.corpus_id, evidence_set_id=item.evidence_set_id,
             evidence_content_hash=item.evidence_content_hash,
             evidence_strength=2, consensus_direction=3,
+            departs_from_passages=False,
             passage_judgments={
                 str(p.index): PassageJudgment(
                     direction="supports" if p.index == 0 else "neutral",
@@ -139,3 +158,14 @@ def decision_for(item: QueueItem, **over) -> ElicitationDecision:
                 for p in item.passages})
     base.update(over)
     return ElicitationDecision(**base)
+
+
+def stub_citation_store(monkeypatch, deb=(), by_key=()) -> None:
+    """Replace the ArangoDB loaders behind passage citations. The tests never
+    reach a knowledge store; a test that cares about citations passes the
+    records it wants found."""
+    from app.services import passage_citation_service as pcs
+    pcs.reset_cache()
+    monkeypatch.setattr(pcs, "_load_deb_documents", lambda: list(deb))
+    monkeypatch.setattr(pcs, "_load_documents_by_key",
+                        lambda keys: [d for d in by_key if d.get("_key") in keys])

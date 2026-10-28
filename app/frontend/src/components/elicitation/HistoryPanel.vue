@@ -28,7 +28,8 @@
       <li v-for="r in rows" :key="r.id || `${r.sf_number}-${r.task}`" class="row">
         <div class="r-head">
           <span class="badge">#{{ r.sf_number }}</span>
-          <span class="badge task">{{ r.task }}</span>
+          <span v-if="r.task !== 'evidence'" class="badge task">{{ r.task }}</span>
+          <span v-if="r.corpus_id" class="badge task">{{ corpusName(r.corpus_id) }}</span>
           <span class="chosen">{{ labelFor(r) }}</span>
           <span class="conf" :title="`confidence ${r.confidence}/5`">
             {{ '●'.repeat(r.confidence || 0) }}<span class="dim">{{ '○'.repeat(5 - (r.confidence || 0)) }}</span>
@@ -50,7 +51,7 @@
 import { onMounted, ref } from 'vue'
 import api from '@/utils/api'
 import type { HistoryItem, HistoryResponse } from '@/types/elicitation.generated'
-import { optionFor } from './taskOptions'
+import { CONSENSUS_OPTIONS, STRENGTH_OPTIONS, corpusName, optionFor } from './taskOptions'
 
 type HistoryRow = HistoryItem & { id?: string }
 
@@ -70,7 +71,10 @@ function debouncedFetch() {
 
 function labelFor(r: HistoryRow): string {
   if (r.task === 'evidence') {
-    return `strength ${r.evidence_strength ?? '—'} · direction ${r.consensus_direction ?? '—'}`
+    const s = STRENGTH_OPTIONS.find((o) => o.value === r.evidence_strength)?.label ?? '—'
+    const c = CONSENSUS_OPTIONS.find((o) => o.value === r.consensus_direction)?.label ?? '—'
+    const beyond = r.departs_from_passages ? ' · beyond the passages' : ''
+    return `${c} · ${s.toLowerCase()} evidence${beyond}`
   }
   const value = r.provenance_type ?? r.scope_verdict ?? r.assessability ?? null
   return optionFor(r.task, value)?.label ?? value ?? '—'

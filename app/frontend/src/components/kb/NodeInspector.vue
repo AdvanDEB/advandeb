@@ -213,6 +213,14 @@
             <div class="content-label">Statement</div>
             <p class="content-text">{{ node.label }}</p>
           </div>
+
+          <!-- Aggregated expert verdict, for stylized facts that carry their number -->
+          <ExpertVerdictDetail
+            v-if="sfNumber !== null"
+            :summary="verdict"
+            :loading="verdictLoading"
+            dark
+          />
         </template>
 
       </div>
@@ -224,6 +232,9 @@
 import { ref, computed, watch } from 'vue'
 import type { GraphNode } from '@/utils/kbApi'
 import { fetchKbDocument, type KbDocumentMeta } from '@/utils/kbApi'
+import ExpertVerdictDetail from '@/components/kb/ExpertVerdictDetail.vue'
+import { fetchExpertVerdict } from '@/components/kb/expertVerdictApi'
+import type { ExpertVerdictSummary } from '@/types/expertVerdict.generated'
 
 const props = defineProps<{ node: GraphNode | null; loading?: boolean }>()
 defineEmits<{
@@ -259,6 +270,41 @@ watch(
       metaError.value = `Failed to load metadata (${err?.response?.status ?? err?.message ?? 'unknown error'})`
     } finally {
       metaLoading.value = false
+    }
+  },
+  { immediate: true },
+)
+
+// Stylized-fact nodes carry their sf_number in `properties`, so the verdict
+// is one request away. A node without it (an older artifact) shows nothing.
+const sfNumber = computed<number | null>(() => {
+  const node = props.node
+  if (!node || node.node_type !== 'stylized_fact') return null
+  const raw = node.properties?.sf_number
+  const n = typeof raw === 'number' || typeof raw === 'string' ? Number(raw) : NaN
+  return Number.isInteger(n) ? n : null
+})
+const verdict = ref<ExpertVerdictSummary | null>(null)
+const verdictLoading = ref(false)
+let verdictSeq = 0
+
+watch(
+  sfNumber,
+  async (n) => {
+    const seq = ++verdictSeq
+    verdict.value = null
+    if (n === null) {
+      verdictLoading.value = false
+      return
+    }
+    verdictLoading.value = true
+    try {
+      const v = await fetchExpertVerdict(n)
+      if (seq === verdictSeq) verdict.value = v
+    } catch {
+      // Shown as "—"; the rest of the panel is unaffected.
+    } finally {
+      if (seq === verdictSeq) verdictLoading.value = false
     }
   },
   { immediate: true },

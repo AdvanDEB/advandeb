@@ -46,9 +46,11 @@ from bson import ObjectId
 
 from app.core.database import get_database
 from app.models.elicitation import (
-    ElicitationDecision, ElicitationEvent, ElicitationProgress,
-    EvidencePassage, QueueItem,
+    CalibrationDecision, CalibrationSetDraft, ElicitationDecision,
+    ElicitationEvent, ElicitationProgress, EvidencePassage, PassageJudgment,
+    QueueItem,
 )
+from app.services.passage_citation_service import cite_passages
 
 logger = logging.getLogger(__name__)
 
@@ -90,12 +92,23 @@ STRATUM_FLOOR = 3
 
 # Bumped whenever the task definitions change. A mid-study guideline change
 # invalidates prior judgments unless they are re-checked, so the version is
-# recorded rather than implied (docs/02 section 7).
-GUIDELINES_VERSION = "1.1"
+# recorded on every judgment rather than implied (docs/02 section 7).
+#
+# 2.0 (2026-10-28): one combined mode. Experts judge from the passages AND
+# their own knowledge (H-EK), may add references of their own, and give a
+# rationale only where their judgment departs from the passages.
+GUIDELINES_VERSION = "2.0"
 
 # Tasks offered before evidence sets exist in the platform. All three operate
 # on the statement alone.
 DAY_ONE_TASKS = ("provenance", "scope", "assessability")
+
+# What the queue serves. The fact-level tasks were removed from the expert
+# queue on 2026-10-28: 3,786 statement-only items that measure nothing the
+# comparison needs, ahead of which no expert would ever reach the evidence.
+# Their rows stay stored and their code stays here, so serving them again is
+# a one-line change rather than a rebuild — deactivated, not deleted.
+SERVED_TASKS = ("evidence",)
 
 # --------------------------------------------------------------------------- #
 # The evidence block                                                           #
@@ -171,6 +184,30 @@ LADDER_TASK = "evidence"
 LADDER_TIER = "panel"
 LADDER_BASIS = "panel-tier judgments on the evidence task"
 
+# The one screen an expert reads before their first item, served with the
+# guidelines and versioned with them. Plain and short on purpose: experts
+# found the previous two-arm flow confusing, and every sentence here is one
+# they act on.
+HOW_IT_WORKS = [
+    "You see one stylized fact at a time, with the passages our search found "
+    "for it. Each passage shows where it comes from.",
+    "Label every passage: does it support the fact, contradict it, or "
+    "neither? Label it by what the passage itself says. For a passage that "
+    "supports or contradicts, also say what kind of evidence it is.",
+    "Then judge the fact as an expert, from the passages AND from what you "
+    "know: how strong is the evidence, and which way does it point?",
+    "Say whether your judgment goes beyond or against what the passages "
+    "show. If it does, write a line on why; you can add a reference (DOI) "
+    "you are relying on.",
+    "Set your confidence and submit. Facts come in a fixed order, so you "
+    "cannot pick them, and you are never given a fact you authored.",
+    "Other experts judge the same facts independently. You do not see their "
+    "answers, or any machine assessment, while you work.",
+    "Your judgments measure how far experts agree, and the panel's combined "
+    "verdict is shown next to each fact in the knowledge base. References "
+    "you add go to a curator for review.",
+]
+
 
 def _rung(n: int) -> tuple[str, str, Optional[int]]:
     rung, note = PRE_LADDER
@@ -197,6 +234,82 @@ def _as_int(v: Any) -> int:
         return int(v)
     except (TypeError, ValueError):
         return 1 << 62
+
+
+def score_label_conflicts(evidence_strength: Optional[int],
+                          consensus_direction: Optional[int],
+                          judgments: Dict[str, PassageJudgment]) -> List[str]:
+    """Where an expert's overall scores go beyond their own passage labels.
+
+    Computed from the expert's labels only — never from the machine
+    assessment, which is not shown: letting the machine's answer decide when
+    a reason is owed would put an anchor into the judgment being measured.
+    A conflict is not an error. It says the expert is bringing knowledge the
+    passages do not carry, which is what the combined mode is for, and so a
+    one-line reason is owed.
+    """
+    directions = [j.direction for j in judgments.values()]
+    supports = directions.count("supports")
+    contradicts = directions.count("contradicts")
+    out: List[str] = []
+    if consensus_direction == 3 and not supports:
+        out.append("corroborated_without_support")
+    if consensus_direction == 1 and not contradicts:
+        out.append("against_without_contradiction")
+    if (evidence_strength or 0) >= 2 and not supports:
+        out.append("strength_without_support")
+    return out
+
+
+def judgment_problem(evidence_strength: Optional[int],
+                     consensus_direction: Optional[int],
+                     departs: Optional[bool], rationale: str,
+                     judgments: Dict[str, PassageJudgment],
+                     shown: List[EvidencePassage]) -> Optional[str]:
+    """Why an evidence judgment — real or calibration — is incomplete.
+
+    One definition for both, so calibration trains exactly the act the queue
+    then asks for.
+    """
+    if evidence_strength is None or consensus_direction is None:
+        return ("evidence decisions carry both fact-level scores "
+                "(evidence strength and consensus direction)")
+    # Exactly the passages shown, no fewer and no others. Passage
+    # agreement is the comparison this task exists to support, and it is
+    # computed over passages both panels judged; a missing label is a hole
+    # in that sample, and a label for a passage never shown is not a
+    # judgment of anything.
+    want = {str(p.index) for p in shown}
+    got = set(judgments)
+    missing = sorted(want - got, key=_as_int)
+    if missing:
+        return (f"no judgment for passage(s) {', '.join(missing)}; every "
+                f"passage shown needs one ({len(want)} shown, "
+                f"{len(got & want)} judged)")
+    extra = sorted(got - want, key=_as_int)
+    if extra:
+        return (f"judgments for passage(s) {', '.join(extra)} that were "
+                "not shown")
+    unroled = sorted((k for k, j in judgments.items()
+                      if j.direction != "neutral" and j.evidential_role is None),
+                     key=_as_int)
+    if unroled:
+        return (f"passage(s) {', '.join(unroled)} are labelled supports or "
+                "contradicts but carry no evidential role; the role is "
+                "asked of every passage not called neutral")
+    if departs is None:
+        return ("say whether your judgment goes beyond or against what these "
+                "passages show (departs_from_passages)")
+    conflicts = score_label_conflicts(
+        evidence_strength, consensus_direction, judgments)
+    if (departs or conflicts) and not rationale.strip():
+        if departs:
+            return ("a short rationale is required when your judgment goes "
+                    "beyond or against the passages")
+        return ("a short rationale is required: your overall scores go "
+                "beyond your own passage labels "
+                f"({', '.join(conflicts)})")
+    return None
 
 
 def _condition_for(task: str) -> str:
@@ -653,18 +766,24 @@ class ElicitationService:
         # exactly like healthy throughput until the analysis finds no panel
         # data at all.
         counts = await self._panel_counts()
+        # A fact used for calibration has been shown to experts with its
+        # agreed answer; judging it afterwards would measure recall of that
+        # answer, so it leaves the measured queue for everyone.
+        calibration_facts = await self.calibration_facts()
 
-        # Evidence first, then the fact-level block; seeded order within each
-        # (see PRIORITY_EVIDENCE). Rows written before `priority` existed sort
-        # as 1 via the backfill in build_evidence_queue.
+        # Only the served tasks (SERVED_TASKS), in seeded order; evidence
+        # leads by `priority` should the fact-level block ever be served again.
         cursor = self.db.elicitation_queue.find(
-            {"collection_version": collection_version}).sort(
+            {"collection_version": collection_version,
+             "task": {"$in": list(SERVED_TASKS)}}).sort(
                 [("priority", 1), ("queue_position", 1)])
         async for q in cursor:
             key = _item_key(q)
             if key in done:
                 continue
             if counts.get(key, 0) >= int(q.get("n_required", 1)):
+                continue
+            if _as_int(q.get("sf_number")) in calibration_facts:
                 continue
             # Conflict of interest: an author never judges their own fact
             # (docs/02 section 2.2, docs/10 section 5.1).
@@ -736,7 +855,11 @@ class ElicitationService:
         # calibration set before their judgments enter either stratum. A
         # client-side gate would be bypassable and the stratum contamination
         # would be silent — the judgments would look exactly like any others.
-        if not (await self.calibration_status(expert_id))["done"]:
+        #
+        # The gate is shut only by a published set this expert has not yet
+        # worked. With no set published, it is open: the team has not chosen
+        # its calibration items yet, and experts must not wait on that.
+        if (await self.calibration_status(expert_id))["required"]:
             return None
 
         head = await self._head(expert_id, collection_version)
@@ -747,6 +870,7 @@ class ElicitationService:
         n_total = None
         if es is not None:
             passages, n_total = self._shown_passages(q, es)
+            passages = await cite_passages(q.get("corpus_id"), passages)
 
         return QueueItem(
             queue_position=q["queue_position"], task=q["task"],
@@ -756,7 +880,11 @@ class ElicitationService:
             collection_version=collection_version,
             existing_provenance=fact.get("provenance_type"),
             existing_source_citation=fact.get("source_citation"),
-            legacy_assessment=fact.get("legacy_assessment"),
+            # The older pipeline's 1-100 score is a machine verdict. Under the
+            # combined mode the expert judges the fact itself, so it is not
+            # offered as a reference point at all.
+            legacy_assessment=(None if q["task"] == "evidence"
+                               else fact.get("legacy_assessment")),
             repeated_judgment=int(q.get("n_required", 1)) > 1,
             n_required=int(q.get("n_required", 1)),
             comparison_item=bool(q.get("comparison_item")),
@@ -812,6 +940,9 @@ class ElicitationService:
         `expertise` arm.
         """
         task = decision.task
+        if task not in SERVED_TASKS:
+            return (f"{task} items are no longer served; only "
+                    f"{', '.join(SERVED_TASKS)} judgments are recorded")
         expected_condition = _condition_for(task)
         if (decision.evidence_condition is not None
                 and decision.evidence_condition != expected_condition):
@@ -842,6 +973,11 @@ class ElicitationService:
         companion = _REQUIRES_TEXT.get((task, value))
         if companion and not (getattr(decision, companion) or "").strip():
             return f"'{value}' needs {companion} — it is not an answer without it"
+        if not decision.rationale.strip():
+            return "a fact-level decision needs a short rationale"
+        if decision.departs_from_passages is not None or decision.reference_ids:
+            return (f"a {task} decision has no passages to depart from and "
+                    "carries no references")
         return None
 
     @staticmethod
@@ -855,9 +991,6 @@ class ElicitationService:
         absence only surfaces when the agreement statistic is computed over a
         sample smaller than the queue says it is.
         """
-        if decision.evidence_strength is None or decision.consensus_direction is None:
-            return ("evidence decisions carry both fact-level scores "
-                    "(evidence strength and consensus direction)")
         if decision.evidence_set_id != q.get("evidence_set_id"):
             return ("evidence_set_id does not match the queued item; the "
                     "judgment would not be attributable to the set it names")
@@ -873,29 +1006,31 @@ class ElicitationService:
             return ("evidence_content_hash does not match the queued evidence "
                     "set; the judgment would not be attributable to known "
                     "evidence")
-        # Exactly the passages shown, no fewer and no others. Passage
-        # agreement is the comparison this task exists to support, and it is
-        # computed over passages both panels judged; a missing label is a hole
-        # in that sample, and a label for a passage never shown is not a
-        # judgment of anything.
-        want = {str(p.index) for p in shown}
-        got = set(decision.passage_judgments)
-        missing = sorted(want - got, key=_as_int)
-        if missing:
-            return (f"no judgment for passage(s) {', '.join(missing)}; every "
-                    f"passage shown needs one ({len(want)} shown, "
-                    f"{len(got & want)} judged)")
-        extra = sorted(got - want, key=_as_int)
-        if extra:
-            return (f"judgments for passage(s) {', '.join(extra)} that were "
-                    "not shown")
-        unroled = sorted((k for k, j in decision.passage_judgments.items()
-                          if j.direction != "neutral" and j.evidential_role is None),
-                         key=_as_int)
-        if unroled:
-            return (f"passage(s) {', '.join(unroled)} are labelled supports or "
-                    "contradicts but carry no evidential role; the role is "
-                    "asked of every passage not called neutral")
+        return judgment_problem(
+            decision.evidence_strength, decision.consensus_direction,
+            decision.departs_from_passages, decision.rationale,
+            decision.passage_judgments, shown)
+
+    async def _references_problem(self, decision: ElicitationDecision,
+                                  expert_id: str) -> Optional[str]:
+        """The references a decision names must be this expert's own, on this
+        fact. Linking someone else's reference would credit them with
+        literature they never named."""
+        ids = list(dict.fromkeys(decision.reference_ids))
+        if not ids:
+            return None
+        oids = []
+        for rid in ids:
+            try:
+                oids.append(ObjectId(rid))
+            except Exception:
+                return f"unknown reference {rid}"
+        found = await self.db.expert_references.count_documents(
+            {"_id": {"$in": oids}, "expert_id": expert_id,
+             "sf_number": decision.sf_number})
+        if found != len(oids):
+            return ("reference_ids must name references you added to this "
+                    "fact")
         return None
 
     async def _exposure(self, expert_id: str, q: Dict[str, Any]) -> Dict[str, Any]:
@@ -948,7 +1083,7 @@ class ElicitationService:
         # calibration, but a crafted request could reach here directly, and the
         # whole point is that uncalibrated judgments never enter a stratum.
         cal = await self.calibration_status(expert_id)
-        if not cal["done"]:
+        if cal["required"]:
             return self._error(
                 f"calibration incomplete ({cal['completed']}/{cal['total']}) "
                 "— the calibration set must be finished before judgments "
@@ -980,9 +1115,16 @@ class ElicitationService:
                 "statement_sha256 does not match the statement as queued; "
                 "the text may have changed since the item was loaded", 409)
 
+        conflicts: List[str] = []
         if decision.task == "evidence":
             shown, _ = self._shown_passages(q, es)
             problem = self._evidence_problem(decision, q, shown)
+            if problem:
+                return self._error(problem)
+            conflicts = score_label_conflicts(
+                decision.evidence_strength, decision.consensus_direction,
+                decision.passage_judgments)
+            problem = await self._references_problem(decision, expert_id)
             if problem:
                 return self._error(problem)
 
@@ -1002,6 +1144,13 @@ class ElicitationService:
             "round": "secondary" if prior else "primary",
             "author_excluded": bool(q.get("authored_by")),
             **(await self._exposure(expert_id, q)),
+            # The instrument the judgment was made under, stamped now.
+            "guidelines_version": GUIDELINES_VERSION,
+            "calibration_version": cal["completed_version"],
+            "score_label_conflicts": conflicts,
+            "rationale_required": (decision.task != "evidence"
+                                   or bool(decision.departs_from_passages)
+                                   or bool(conflicts)),
             "created_at": datetime.now(timezone.utc),
         }
         try:
@@ -1044,7 +1193,8 @@ class ElicitationService:
     async def progress(self, expert_id: str,
                        collection_version: str = "1.0") -> ElicitationProgress:
         total = await self.db.elicitation_queue.count_documents(
-            {"collection_version": collection_version})
+            {"collection_version": collection_version,
+             "task": {"$in": list(SERVED_TASKS)}})
         done = await self.db.elicitations.count_documents({})
         mine = await self.db.elicitations.count_documents(
             {"expert_id": expert_id})
@@ -1077,9 +1227,10 @@ class ElicitationService:
 
         rung, note, nxt = _rung(ladder)
         return ElicitationProgress(
-            calibration_required=not cal["done"],
+            calibration_required=cal["required"],
             calibration_completed=cal["completed"],
             calibration_total=cal["total"],
+            calibration_version=cal["version"],
             total_queue=total, completed=done, completed_by_me=mine,
             median_seconds_per_item=statistics.median(times) if times else None,
             by_task=by_task, by_stratum=by_stratum,
@@ -1120,6 +1271,7 @@ class ElicitationService:
                 "corpus_id": a.get("corpus_id"),
                 "evidence_strength": a.get("evidence_strength"),
                 "consensus_direction": a.get("consensus_direction"),
+                "departs_from_passages": a.get("departs_from_passages"),
                 "confidence": a.get("confidence", 3),
                 "rationale": a.get("rationale", ""),
                 "time_spent_s": a.get("time_spent_s"),
@@ -1136,11 +1288,17 @@ class ElicitationService:
         """The task definitions, served rather than duplicated in the client.
 
         Versioned: a mid-study guideline change invalidates prior judgments
-        unless they are re-checked, so the version is stored on the record and
-        the changelog is what makes that auditable (docs/02 section 7).
+        unless they are re-checked, so the version is stored on every record
+        and the changelog is what makes that auditable (docs/02 section 7).
+
+        `how_it_works` is the one screen an expert reads before the first
+        item. Experts found the previous flow — two arms, each with its own
+        rule about what they were allowed to know — confusing, and so did the
+        project owner; this text is the whole of what they need.
         """
         return {
             "version": GUIDELINES_VERSION,
+            "how_it_works": HOW_IT_WORKS,
             "tasks": [
                 {
                     "task": "provenance",
@@ -1184,38 +1342,32 @@ class ElicitationService:
                 },
                 {
                     "task": "evidence",
-                    "title": "How well does this literature support the fact?",
+                    "title": "Label each passage",
                     "help": (
-                        "You are reading the same frozen passages the agent "
-                        "panel read, in the same wording. That parity is the "
-                        "point: it is what makes a disagreement between you "
-                        "and the machine a difference of judgment rather than "
-                        "of instructions.\n\n"
-                        "Label each passage, then give the two scores. "
-                        "`neutral` is a real answer and most passages are — "
-                        "retrieval returns nearest neighbours, not evidence. "
-                        "Judge only what the passage says; do not fill in "
-                        "from what you know about the fact. There is a "
-                        "separate place for that."),
+                        "Does the passage support the fact, contradict it, or "
+                        "neither? Label it by what the passage itself says. "
+                        "Neutral is a real answer, and most passages are: "
+                        "retrieval finds nearby text, not evidence. What you "
+                        "know beyond the passage goes into your overall "
+                        "judgment below."),
                     "options": [
                         {"value": "supports", "label": "Supports",
                          "hint": "the passage is consistent with the fact"},
                         {"value": "contradicts", "label": "Contradicts",
                          "hint": "the passage is inconsistent with it"},
                         {"value": "neutral", "label": "Neutral",
-                         "hint": "on another topic, or says nothing either way"},
+                         "hint": "another topic, or no bearing either way"},
                     ],
                 },
                 {
                     "task": "evidence_role",
-                    "title": "Is the passage evidence, or a restatement?",
+                    "title": "What kind of evidence is it?",
                     "help": (
                         "Asked of every passage you did not call neutral. "
-                        "Nearly half of what reads as support for DEB turns "
-                        "out to restate the theory rather than measure it "
-                        "(restatement ratio 0.474 across 3,294 passages), and "
-                        "a literature that agrees with itself is not the same "
-                        "as one that has tested itself."),
+                        "Nearly half of what reads as support for DEB "
+                        "restates the theory rather than tests it, and a "
+                        "literature that agrees with itself is not the same "
+                        "as one that has been tested."),
                     "options": [
                         {"value": "primary_evidence", "label": "Primary evidence",
                          "hint": "reports a measurement or an observation"},
@@ -1229,33 +1381,50 @@ class ElicitationService:
                 },
                 {
                     "task": "evidence_strength",
-                    "title": "Evidence strength (1-3)",
+                    "title": "Evidence strength",
                     "help": (
-                        "How much support these passages actually provide. "
-                        "Unchanged from the predecessor's scale so every "
-                        "existing score stays comparable."),
+                        "How much support the fact has, judged from these "
+                        "passages and from what you know of the literature."),
                     "options": [
-                        {"value": "1", "label": "1 - weak or sparse",
-                         "hint": "little or no real support here"},
-                        {"value": "2", "label": "2 - moderate", "hint": "some support"},
-                        {"value": "3", "label": "3 - strong",
-                         "hint": "multiple clear supporting references"},
+                        {"value": "1", "label": "1 — weak or sparse",
+                         "hint": "little or no real support"},
+                        {"value": "2", "label": "2 — moderate",
+                         "hint": "some support"},
+                        {"value": "3", "label": "3 — strong",
+                         "hint": "several clear, independent supporting studies"},
                     ],
                 },
                 {
                     "task": "consensus_direction",
-                    "title": "Consensus direction (1-3)",
+                    "title": "Which way the evidence points",
                     "help": (
-                        "Which way the literature points, as a sign rather "
-                        "than a magnitude. How strongly is carried by the "
-                        "strength score and by contestation, not here."),
+                        "The direction of the literature as a whole, as you "
+                        "judge it. How strongly is the strength score's job, "
+                        "not this one's."),
                     "options": [
-                        {"value": "1", "label": "1 - against",
-                         "hint": "predominantly contradicted, or mixed against"},
-                        {"value": "2", "label": "2 - neutral",
-                         "hint": "insufficient evidence either way"},
-                        {"value": "3", "label": "3 - corroborated",
+                        {"value": "1", "label": "1 — against",
+                         "hint": "mostly contradicted"},
+                        {"value": "2", "label": "2 — inconclusive",
+                         "hint": "too little evidence, or it is balanced"},
+                        {"value": "3", "label": "3 — corroborated",
                          "hint": "supported, with little conflict"},
+                    ],
+                },
+                {
+                    "task": "departure",
+                    "title": ("Does your judgment go beyond or against what "
+                              "these passages show?"),
+                    "help": (
+                        "Yes if you relied on something the passages do not "
+                        "contain: a study they miss, a known exception, your "
+                        "reading of the field. Then a short reason is "
+                        "required, and you can add the reference. No if the "
+                        "passages alone would lead you to the same scores."),
+                    "options": [
+                        {"value": "yes", "label": "Yes",
+                         "hint": "a short reason is required"},
+                        {"value": "no", "label": "No",
+                         "hint": "a note is optional"},
                     ],
                 },
                 {
@@ -1285,211 +1454,329 @@ class ElicitationService:
     # ------------------------------------------------------------------ #
     # Calibration
     # ------------------------------------------------------------------ #
+    #
+    # A handful of real evidence items the team picks, each with a reference
+    # answer and explanation the team agrees on (CalibrationReference),
+    # versioned. Administrators draft a set and publish it; publishing
+    # retires the previous one. Until a set is published nothing is gated —
+    # experts work the queue and their judgments are stamped
+    # `calibration_version: None`. Once one is published, each expert works
+    # it once before their next item.
+    #
+    # What calibration measures is agreement with the team's reference, not
+    # with truth, and it is stored as a quality signal, never as an automatic
+    # exclusion gate: auto-excluding low-agreement participants would select
+    # for people who agree with the reference, which manufactures the
+    # consensus the study is trying to measure (docs/10 section 7).
 
-    async def seed_calibration(self, force: bool = False) -> Dict[str, Any]:
-        """Build the fixed calibration set. Idempotent.
+    @staticmethod
+    def _cal_id(version: int, evidence_set_id: str) -> str:
+        return f"v{version}:{evidence_set_id}"
 
-        **Every case has a documented reference answer, not an invented one.**
-        Only the provenance task admits genuine references at present: facts
-        1201-1236 are published (Sousa et al. 2008 / Kooijman 2020) and
-        1237-1262 are new (Heraklion workshop), both recorded during the
-        collection build. Scope cases are drawn only from the unambiguous ends
-        of the distribution — a statement either carries an explicit organismal
-        quantifier or plainly carries none — never the contested middle.
+    async def _ensure_calibration_indexes(self) -> None:
+        await self.db.elicitation_calibration_sets.create_index(
+            "version", unique=True)
+        await self.db.elicitation_calibration_answers.create_index(
+            [("expert_id", 1), ("calibration_id", 1)], unique=True)
 
-        What calibration measures is therefore agreement with a **documented
-        reference**, not with truth. That distinction is stated to the expert.
-        """
-        existing = await self.db.elicitation_calibration.count_documents({})
-        if existing and not force:
-            return {"status": "exists", "n": existing}
-        if force:
-            await self.db.elicitation_calibration.delete_many({})
+    async def _published_set(self) -> Optional[Dict[str, Any]]:
+        return await self.db.elicitation_calibration_sets.find_one(
+            {"status": "published"}, sort=[("version", -1)])
 
-        cases: List[Dict[str, Any]] = []
+    async def calibration_facts(self) -> set:
+        """Facts used by any set experts have been shown — the published one
+        and every retired one. Each was seen with its agreed answer, so none
+        of them is measured afterwards."""
+        out: set = set()
+        async for s in self.db.elicitation_calibration_sets.find(
+                {"status": {"$in": ["published", "retired"]}},
+                {"items.sf_number": 1}):
+            for it in s.get("items") or []:
+                out.add(_as_int(it.get("sf_number")))
+        return out
 
-        async def _add(fact, task, reference, explanation, basis):
-            cases.append({
-                "calibration_id": f"cal_{task}_{fact['sf_number']}",
-                "order": len(cases),
-                "task": task,
-                "sf_number": int(fact["sf_number"]),
-                "statement": fact.get("statement", ""),
-                "statement_sha256": fact.get("statement_sha256", ""),
-                "category": fact.get("category", ""),
-                "reference": reference,
-                "explanation": explanation,
-                "reference_basis": basis,
+    @staticmethod
+    def _set_out(s: Dict[str, Any]) -> Dict[str, Any]:
+        return {k: s.get(k) for k in (
+            "version", "status", "note", "items", "created_by", "created_at",
+            "published_at", "retired_at")}
+
+    async def list_calibration_sets(self) -> Dict[str, Any]:
+        sets = [self._set_out(s) async for s in
+                self.db.elicitation_calibration_sets.find({}).sort("version", -1)]
+        published = next((s["version"] for s in sets
+                          if s["status"] == "published"), None)
+        return {"sets": sets, "published_version": published}
+
+    async def evidence_set_options(self) -> Dict[str, Any]:
+        """Every evidence set an administrator could pick, with how many
+        measured judgments its fact already has."""
+        judged: Dict[int, int] = {}
+        async for row in self.db.elicitations.aggregate([
+                {"$match": {"task": "evidence"}},
+                {"$group": {"_id": "$sf_number", "n": {"$sum": 1}}}]):
+            judged[_as_int(row["_id"])] = row["n"]
+        out = []
+        async for es in self.db.evidence_sets.find(
+                {}, {"sf_number": 1, "corpus_id": 1, "category": 1,
+                     "statement": 1, "n_passages": 1}):
+            n = _as_int(es.get("sf_number"))
+            out.append({
+                "evidence_set_id": es["_id"], "sf_number": n,
+                "corpus_id": es.get("corpus_id") or "",
+                "category": es.get("category") or "",
+                "statement": es.get("statement") or "",
+                "n_passages": int(es.get("n_passages") or 0),
+                "n_judgments": judged.get(n, 0)})
+        out.sort(key=lambda o: (o["sf_number"], o["corpus_id"]))
+        return {"sets": out}
+
+    async def evidence_set_detail(self, evidence_set_id: str
+                                  ) -> Optional[Dict[str, Any]]:
+        es = await self.db.evidence_sets.find_one({"_id": evidence_set_id})
+        if not es:
+            return None
+        n = _as_int(es.get("sf_number"))
+        passages, _ = self._calibration_passages(es)
+        passages = await cite_passages(es.get("corpus_id"), passages)
+        return {
+            "evidence_set_id": es["_id"], "sf_number": n,
+            "corpus_id": es.get("corpus_id") or "",
+            "category": es.get("category") or "",
+            "statement": es.get("statement") or "",
+            "n_passages": int(es.get("n_passages") or len(passages)),
+            "n_judgments": await self.db.elicitations.count_documents(
+                {"task": "evidence", "sf_number": n}),
+            "passages": passages}
+
+    async def _calibration_items(self, draft: CalibrationSetDraft
+                                 ) -> tuple[Optional[str], List[Dict[str, Any]]]:
+        """Validate a draft against the evidence sets it names."""
+        items: List[Dict[str, Any]] = []
+        seen = set()
+        for spec in draft.items:
+            if spec.evidence_set_id in seen:
+                return f"{spec.evidence_set_id} is listed twice", []
+            seen.add(spec.evidence_set_id)
+            es = await self.db.evidence_sets.find_one(
+                {"_id": spec.evidence_set_id}, {"passages.index": 1,
+                                                "sf_number": 1, "corpus_id": 1,
+                                                "category": 1, "statement": 1})
+            if not es:
+                return f"no evidence set {spec.evidence_set_id}", []
+            indices = {str(p.get("index", i))
+                       for i, p in enumerate(es.get("passages") or [])}
+            unknown = sorted(set(spec.reference.passage_directions) - indices,
+                             key=_as_int)
+            if unknown:
+                return (f"{spec.evidence_set_id}: passage(s) "
+                        f"{', '.join(unknown)} are not in the set"), []
+            items.append({
+                "evidence_set_id": spec.evidence_set_id,
+                "sf_number": _as_int(es.get("sf_number")),
+                "corpus_id": es.get("corpus_id") or "",
+                "category": es.get("category") or "",
+                "statement": es.get("statement") or "",
+                "reference": spec.reference.model_dump(),
             })
+        return None, items
 
-        # --- provenance: published (documented citation) ---
-        n = 0
-        async for f in self.db.stylized_facts.find(
-                {"provenance_type": "published"}).sort("sf_number", 1):
-            if n >= 5:
-                break
-            await _add(f, "provenance", {"provenance_type": "published"},
-                       "This is one of the core DEB rules synthesized by "
-                       "Sousa et al. (2008) and Kooijman (2020); its source is "
-                       "recorded in the collection.",
-                       "collection provenance record")
-            n += 1
+    async def save_calibration_draft(self, draft: CalibrationSetDraft,
+                                     admin_id: str,
+                                     version: Optional[int] = None
+                                     ) -> Dict[str, Any]:
+        """Create a new draft version, or replace the items of an existing
+        draft. Published and retired sets are never edited: a change to the
+        instrument is a new version, so what each expert worked stays known."""
+        problem, items = await self._calibration_items(draft)
+        if problem:
+            return self._error(problem)
+        await self._ensure_calibration_indexes()
+        now = datetime.now(timezone.utc)
+        if version is None:
+            last = await self.db.elicitation_calibration_sets.find_one(
+                {}, sort=[("version", -1)])
+            version = (int(last["version"]) + 1) if last else 1
+            doc = {"version": version, "status": "draft", "note": draft.note,
+                   "items": items, "created_by": admin_id, "created_at": now,
+                   "published_at": None, "retired_at": None}
+            await self.db.elicitation_calibration_sets.insert_one(doc)
+            return self._set_out(doc)
+        res = await self.db.elicitation_calibration_sets.find_one_and_update(
+            {"version": version, "status": "draft"},
+            {"$set": {"items": items, "note": draft.note}},
+            return_document=True)
+        if not res:
+            return self._error(
+                f"no draft version {version}; published and retired sets are "
+                "not edited — save a new version instead", 409)
+        return self._set_out(res)
 
-        # --- provenance: new (workshop-formulated) ---
-        n = 0
-        async for f in self.db.stylized_facts.find(
-                {"provenance_type": "new"}).sort("sf_number", 1):
-            if n >= 5:
-                break
-            await _add(f, "provenance", {"provenance_type": "new"},
-                       "Formulated at the AdvanDEB Heraklion workshop in June "
-                       "2025 and stated here for the first time, so it has no "
-                       "prior published source.",
-                       "collection provenance record")
-            n += 1
+    async def publish_calibration_set(self, version: int) -> Dict[str, Any]:
+        s = await self.db.elicitation_calibration_sets.find_one(
+            {"version": version})
+        if not s:
+            return self._error(f"no calibration set version {version}", 404)
+        if s["status"] != "draft":
+            return self._error(f"version {version} is {s['status']}, not a "
+                               "draft", 409)
+        if not s.get("items"):
+            return self._error("a calibration set needs at least one item")
+        for it in s["items"]:
+            if not await self.db.evidence_sets.find_one(
+                    {"_id": it["evidence_set_id"]}, {"_id": 1}):
+                return self._error(
+                    f"evidence set {it['evidence_set_id']} no longer exists")
+        now = datetime.now(timezone.utc)
+        await self.db.elicitation_calibration_sets.update_many(
+            {"status": "published"},
+            {"$set": {"status": "retired", "retired_at": now}})
+        await self.db.elicitation_calibration_sets.update_one(
+            {"version": version},
+            {"$set": {"status": "published", "published_at": now}})
+        return self._set_out(await self.db.elicitation_calibration_sets.find_one(
+            {"version": version}))
 
-        # --- scope: unambiguous ends only ---
-        import re as _re
-        explicit = _re.compile(
-            r"\b(all|most|many|every|some)\s+(species|organisms?|animals?|"
-            r"plants?|taxa|ectotherms?|endotherms?)\b", _re.I)
-        got_stated = got_absent = 0
-        async for f in self.db.stylized_facts.find({}).sort("sf_number", 1):
-            st = f.get("statement", "")
-            if got_stated < 3 and explicit.search(st):
-                await _add(f, "scope", {"scope_verdict": "stated"},
-                           "The statement carries an explicit organismal "
-                           "quantifier, so the scope is stated rather than "
-                           "inferred.", "explicit quantifier in the statement")
-                got_stated += 1
-            elif (got_absent < 2 and len(st.split()) > 8
-                  and not _re.search(
-                      r"\b(species|organisms?|animals?|plants?|taxa|cells?|"
-                      r"individuals?|ectotherms?|endotherms?|fish|mammals?|"
-                      r"birds?|insects?|bacteri\w*|algae?|embryos?|larva\w*|"
-                      r"juveniles?|adults?|populations?|tissues?)\b", st, _re.I)):
-                await _add(f, "scope", {"scope_verdict": "absent"},
-                           "The statement names no organism, life stage or "
-                           "taxon at all, so there is no claimed scope to "
-                           "compare evidence against.",
-                           "no organismal noun in the statement")
-                got_absent += 1
-            if got_stated >= 3 and got_absent >= 2:
-                break
+    async def delete_calibration_draft(self, version: int) -> Dict[str, Any]:
+        res = await self.db.elicitation_calibration_sets.delete_one(
+            {"version": version, "status": "draft"})
+        if not res.deleted_count:
+            return self._error(f"no draft version {version}", 404)
+        return {"status": "deleted", "version": version}
 
-        for c in cases:
-            c["order"] = cases.index(c)
-        if cases:
-            await self.db.elicitation_calibration.insert_many(cases)
-            await self.db.elicitation_calibration.create_index("order")
-            await self.db.elicitation_calibration_results.create_index(
-                [("expert_id", 1), ("calibration_id", 1)], unique=True)
-        return {"status": "built", "n": len(cases)}
+    async def calibration_status(self, expert_id: str) -> Dict[str, Any]:
+        """Where this expert stands against the published set.
+
+        `completed_version` is not part of the served contract; it is what a
+        judgment is stamped with.
+        """
+        s = await self._published_set()
+        if not s:
+            return {"total": 0, "completed": 0, "correct": 0, "done": False,
+                    "available": False, "required": False, "version": None,
+                    "completed_version": None}
+        version = int(s["version"])
+        ids = [self._cal_id(version, it["evidence_set_id"])
+               for it in s.get("items") or []]
+        answers = [a async for a in self.db.elicitation_calibration_answers.find(
+            {"expert_id": expert_id, "calibration_id": {"$in": ids}},
+            {"correct": 1})]
+        done = len(answers) >= len(ids)
+        return {"total": len(ids), "completed": len(answers),
+                "correct": sum(1 for a in answers if a.get("correct")),
+                "done": done, "available": True, "required": not done,
+                "version": version,
+                "completed_version": version if done else None}
+
+    def _calibration_passages(self, es: Dict[str, Any]
+                              ) -> tuple[List[EvidencePassage], int]:
+        return self._shown_passages(
+            {"n_passages_shown": EVIDENCE_PASSAGES_SHOWN}, es)
 
     async def calibration_next(self, expert_id: str) -> Optional[Dict[str, Any]]:
-        """The next calibration case this expert has not answered.
+        """The next case of the published set this expert has not answered.
 
-        Read-only. It used to seed the calibration set when it found none — a
-        GET that wrote, and that let the first expert to open the page fix the
-        calibration instrument for everyone. Seeding is the administrator's
-        explicit action (`POST /calibration/seed`); until then there is
-        nothing to serve, and `calibration_status` reports the set as
-        unavailable rather than passed.
+        Read-only, and served like a real evidence item — the same passages,
+        citations and form — because calibration trains the act the queue
+        asks for.
         """
-        total = await self.db.elicitation_calibration.count_documents({})
-        if not total:
+        s = await self._published_set()
+        if not s:
             return None
-        done = set()
-        async for r in self.db.elicitation_calibration_results.find(
-                {"expert_id": expert_id}, {"calibration_id": 1}):
-            done.add(r["calibration_id"])
-        cursor = self.db.elicitation_calibration.find({}).sort("order", 1)
-        async for c in cursor:
-            if c["calibration_id"] in done:
+        version = int(s["version"])
+        items = s.get("items") or []
+        done = {a["calibration_id"] async for a in
+                self.db.elicitation_calibration_answers.find(
+                    {"expert_id": expert_id}, {"calibration_id": 1})}
+        for it in items:
+            cid = self._cal_id(version, it["evidence_set_id"])
+            if cid in done:
                 continue
+            es = await self.db.evidence_sets.find_one({"_id": it["evidence_set_id"]})
+            if not es:
+                logger.warning("calibration item %s: evidence set missing", cid)
+                continue
+            passages, n_total = self._calibration_passages(es)
+            passages = await cite_passages(es.get("corpus_id"), passages)
             return {
-                "calibration_id": c["calibration_id"],
-                "queue_position": -1,
-                "task": c["task"],
-                "sf_number": c["sf_number"],
-                "statement": c["statement"],
-                "statement_sha256": c.get("statement_sha256", ""),
-                "category": c.get("category", ""),
-                "collection_version": "1.0",
-                "stratum": "calibration",
-                "completed": len(done),
-                "total": total,
+                "calibration_id": cid, "version": version,
+                "sf_number": _as_int(es.get("sf_number")),
+                "statement": es.get("statement") or it.get("statement") or "",
+                "statement_sha256": es.get("statement_sha256") or "",
+                "category": es.get("category") or "",
+                "corpus_id": es.get("corpus_id") or "",
+                "evidence_set_id": es["_id"],
+                "evidence_content_hash": es.get("content_hash"),
+                "passages": passages, "n_passages_total": n_total,
+                "completed": sum(1 for i in items if self._cal_id(
+                    version, i["evidence_set_id"]) in done),
+                "total": len(items),
             }
         return None
 
-    async def calibration_submit(self, decision, expert_id: str) -> Dict[str, Any]:
-        """Score one calibration answer and give immediate feedback.
+    async def calibration_submit(self, decision: CalibrationDecision,
+                                 expert_id: str) -> Dict[str, Any]:
+        """Check one calibration answer and give the reference at once.
 
-        Calibration teaches, so the reference is shown straight away rather
-        than withheld. The result is stored as a **quality signal**, never as
-        an automatic exclusion gate: auto-excluding low-agreement participants
-        would quietly select for people who agree with the reference, which
-        manufactures the consensus the study is trying to measure
-        (docs/10 section 7).
+        Calibration teaches, so nothing is withheld. The first answer to a
+        case is the one kept: it is the quality signal, and an answer given
+        after seeing the reference would not be one.
         """
-        c = await self.db.elicitation_calibration.find_one(
-            {"calibration_id": decision.calibration_id})
-        if not c:
-            return {"status": "error", "detail": "unknown calibration case"}
+        s = await self._published_set()
+        if not s:
+            return self._error("no calibration set is published", 404)
+        version = int(s["version"])
+        item = next((it for it in s.get("items") or []
+                     if self._cal_id(version, it["evidence_set_id"])
+                     == decision.calibration_id), None)
+        if not item:
+            return self._error("unknown calibration case", 404)
+        es = await self.db.evidence_sets.find_one({"_id": item["evidence_set_id"]})
+        if not es:
+            return self._error("this case's evidence set is missing", 404)
+        shown, _ = self._calibration_passages(es)
+        problem = judgment_problem(
+            decision.evidence_strength, decision.consensus_direction,
+            decision.departs_from_passages, decision.rationale,
+            decision.passage_judgments, shown)
+        if problem:
+            return self._error(problem)
 
-        ref = c.get("reference", {})
-        given = {
-            "provenance": decision.provenance_type,
-            "scope": decision.scope_verdict,
-            "assessability": decision.assessability,
-        }.get(c["task"])
-        expected = (ref.get("provenance_type") or ref.get("scope_verdict")
-                    or ref.get("assessability"))
-        correct = bool(given is not None and given == expected)
+        ref = item["reference"]
+        strength_ok = decision.evidence_strength == ref["evidence_strength"]
+        consensus_ok = decision.consensus_direction == ref["consensus_direction"]
+        compared = [k for k in ref.get("passage_directions") or {}
+                    if k in decision.passage_judgments]
+        agreed = sum(1 for k in compared if decision.passage_judgments[k].direction
+                     == ref["passage_directions"][k])
+        correct = strength_ok and consensus_ok
 
-        await self.db.elicitation_calibration_results.update_one(
-            {"expert_id": expert_id, "calibration_id": c["calibration_id"]},
-            {"$set": {
+        await self._ensure_calibration_indexes()
+        await self.db.elicitation_calibration_answers.update_one(
+            {"expert_id": expert_id, "calibration_id": decision.calibration_id},
+            {"$setOnInsert": {
                 "expert_id": expert_id,
-                "calibration_id": c["calibration_id"],
-                "task": c["task"],
-                "given": given,
-                "expected": expected,
+                "calibration_id": decision.calibration_id,
+                "version": version,
+                "evidence_set_id": item["evidence_set_id"],
+                "answer": decision.model_dump(),
+                "strength_matches": strength_ok,
+                "consensus_matches": consensus_ok,
+                "passages_compared": len(compared),
+                "passages_agreed": agreed,
                 "correct": correct,
-                "confidence": decision.confidence,
-                "rationale": decision.rationale,
-                "time_spent_s": decision.time_spent_s,
                 "created_at": datetime.now(timezone.utc),
             }}, upsert=True)
 
-        total = await self.db.elicitation_calibration.count_documents({})
-        completed = await self.db.elicitation_calibration_results.count_documents(
-            {"expert_id": expert_id})
+        ids = [self._cal_id(version, it["evidence_set_id"])
+               for it in s.get("items") or []]
+        completed = await self.db.elicitation_calibration_answers.count_documents(
+            {"expert_id": expert_id, "calibration_id": {"$in": ids}})
         return {
-            "correct": correct,
-            "reference": {**ref, "basis": c.get("reference_basis")},
-            "explanation": c.get("explanation", ""),
-            "completed": completed,
-            "total": total,
-        }
-
-    async def calibration_status(self, expert_id: str) -> Dict[str, Any]:
-        total = await self.db.elicitation_calibration.count_documents({})
-        results = [r async for r in
-                   self.db.elicitation_calibration_results.find(
-                       {"expert_id": expert_id})]
-        # Count only answers to cases in the current set, so a stale result
-        # for a case since removed cannot stand in for a missing one.
-        current = {c["calibration_id"] async for c in
-                   self.db.elicitation_calibration.find({}, {"calibration_id": 1})}
-        results = [r for r in results if r.get("calibration_id") in current]
-        return {
-            "total": total,
-            "completed": len(results),
-            "correct": sum(1 for r in results if r.get("correct")),
-            # An empty set is not a passed one: nobody has seeded it yet.
-            "done": bool(total) and len(results) >= total,
-            "available": bool(total),
+            "correct": correct, "strength_matches": strength_ok,
+            "consensus_matches": consensus_ok,
+            "passages_compared": len(compared), "passages_agreed": agreed,
+            "reference": ref, "completed": completed, "total": len(ids),
         }
 
     # ------------------------------------------------------------------ #
@@ -1548,7 +1835,8 @@ class ElicitationService:
         met = pending = total_queue = 0
         comparison_total = comparison_complete = 0
         async for q in self.db.elicitation_queue.find(
-                {"collection_version": collection_version},
+                {"collection_version": collection_version,
+                 "task": {"$in": list(SERVED_TASKS)}},
                 {"sf_number": 1, "task": 1, "corpus_id": 1, "n_required": 1,
                  "comparison_item": 1}):
             total_queue += 1
@@ -1601,7 +1889,7 @@ class ElicitationService:
                 {"capabilities": "sf_elicitation"},
                 {"full_name": 1, "email": 1, "tier": 1}):
             cal = await self.calibration_status(str(u["_id"]))
-            if not cal["done"]:
+            if cal["required"]:
                 uncleared.append({
                     "name": u.get("full_name") or u.get("email"),
                     "tier": u.get("tier"),

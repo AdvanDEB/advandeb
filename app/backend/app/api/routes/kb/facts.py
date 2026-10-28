@@ -1,17 +1,27 @@
 """
 KB facts API — ArangoDB stylized_facts and facts collections.
 
-GET /api/kb/stylized-facts/   — list stylized facts (paginated)
-GET /api/kb/facts/            — list extracted KB facts (paginated)
+GET /api/kb/stylized-facts/                          — list stylized facts (paginated)
+GET /api/kb/stylized-facts/expert-verdicts?sf_numbers=1,2
+                                                     — aggregated expert verdicts, batch
+GET /api/kb/stylized-facts/{sf_number}/expert-verdict — the same, one fact
+GET /api/kb/facts/                                   — list extracted KB facts (paginated)
+
+The expert verdicts are read from the elicitation records in MongoDB, not from
+ArangoDB; see app/services/expert_verdict_service.py.
 """
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.core.auth import get_current_user
 from app.core.database import get_arango_db
+from app.models.expert_verdict import ExpertVerdictBatch, ExpertVerdictSummary
+from app.services.expert_verdict_service import (
+    MAX_BATCH, ExpertVerdictService, min_n, parse_sf_numbers,
+)
 
 stylized_router = APIRouter()
 facts_router = APIRouter()
@@ -79,6 +89,40 @@ async def list_stylized_facts(
 
     loop = asyncio.get_running_loop()
     return await loop.run_in_executor(_executor, _fetch)
+
+
+# ---------------------------------------------------------------------------
+# Aggregated expert verdicts (MongoDB elicitation records)
+# ---------------------------------------------------------------------------
+#
+# Declared before any parameterised path, so `/expert-verdicts` is never read
+# as a fact number.
+
+@stylized_router.get("/expert-verdicts", response_model=ExpertVerdictBatch)
+async def get_expert_verdicts(
+    sf_numbers: str = Query(
+        default="", max_length=MAX_BATCH * 12,
+        description=f"Comma-separated sf_numbers, at most {MAX_BATCH}"),
+    current_user: dict = Depends(get_current_user),
+) -> ExpertVerdictBatch:
+    """Verdicts for a page of facts in one call, keyed by sf_number."""
+    try:
+        nums = parse_sf_numbers(sf_numbers)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc))
+    summaries = await ExpertVerdictService().summaries(nums, current_user)
+    return ExpertVerdictBatch(
+        min_n=min_n(), verdicts={str(n): s for n, s in summaries.items()})
+
+
+@stylized_router.get("/{sf_number}/expert-verdict",
+                     response_model=ExpertVerdictSummary)
+async def get_expert_verdict(
+    sf_number: int,
+    current_user: dict = Depends(get_current_user),
+) -> ExpertVerdictSummary:
+    """The verdict on one fact, as this user may see it."""
+    return await ExpertVerdictService().summary(sf_number, current_user)
 
 
 # ---------------------------------------------------------------------------

@@ -28,6 +28,13 @@ from tests.elicitation_support import (
 
 pytestmark = pytest.mark.asyncio
 
+
+@pytest.fixture
+def serve_fact_level(monkeypatch):
+    """The fact-level block is built and kept, and not served since
+    2026-10-28; a test that judges from it serves it again."""
+    monkeypatch.setattr(es, "SERVED_TASKS", es.DAY_ONE_TASKS + ("evidence",))
+
 # Deliberately uneven, with a category smaller than the floor — the case the
 # floor exists for (phytoplankton EPS has three facts in the real collection).
 SIZES = {"growth": 120, "reproduction": 90, "feeding": 60, "ageing": 30,
@@ -144,7 +151,8 @@ async def test_build_is_idempotent_and_refuses_a_silent_rebuild(scratch_db):
     assert after == before   # not rebuilt: same documents, same ids
 
 
-async def test_forced_rebuild_is_refused_once_judgments_exist(scratch_db):
+async def test_forced_rebuild_is_refused_once_judgments_exist(scratch_db,
+                                                              serve_fact_level):
     await seed_facts(scratch_db, collection({"growth": 10, "feeding": 5}))
     svc = ElicitationService()
     await svc.build_queue()
