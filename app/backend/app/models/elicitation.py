@@ -411,6 +411,89 @@ class CalibrationStatus(BaseModel):
     available: bool
 
 
+class RecallSummary(BaseModel):
+    """Expert-named references, by resolution status (docs/09 section 2.5a)."""
+    by_status: Dict[str, int] = {}
+    recall_misses: int = 0
+    checked_for_retrieval: int = 0
+    miss_rate: Optional[float] = None
+    undetermined: int = 0
+
+
+class PanelCoverage(BaseModel):
+    """Queue positions whose `n_required` is met by panel-tier judgments."""
+    n_required_met: int
+    n_required_pending: int
+
+
+class ExpertStats(BaseModel):
+    name: str
+    # The person's tier now — for routing and display only.
+    current_tier: Optional[str] = None
+    tier: Optional[str] = None
+    # What their judgments count as, by the tier stamped on each record.
+    n_by_record_tier: Dict[str, int] = {}
+    n: int
+    median_s: Optional[float] = None
+    calibration: CalibrationStatus
+
+
+class AwaitingCalibration(BaseModel):
+    name: Optional[str] = None
+    tier: Optional[str] = None
+    calibration: CalibrationStatus
+
+
+class AdminStats(BaseModel):
+    """Where the effort has gone, and what the panel still owes.
+
+    Typed because the admin view read six fields this endpoint never sent
+    (and rendered `by_expert`, a list, as if it were a mapping), so the
+    dashboard showed zeros while looking healthy.
+    """
+    total_queue: int
+    # All judgments recorded, every tier.
+    completed: int
+    # Queue items (sf_number, task, corpus_id) with two or more judgments.
+    repeated_judgments: int
+    median_seconds_per_item: Optional[float] = None
+    # Comparison items — the ones that take the full human panel — and how
+    # many of them have it, counted from panel-tier judgments only.
+    comparison_total: int
+    comparison_complete: int
+    panel_coverage: PanelCoverage
+    by_stratum: Dict[str, int] = {}
+    by_task: Dict[str, int] = {}
+    by_tier: Dict[str, int] = {}
+    by_record_tier: Dict[str, int] = {}
+    by_expert: List[ExpertStats] = []
+    awaiting_calibration: List[AwaitingCalibration] = []
+    ladder_count: int = 0
+    ladder_basis: str = ""
+    rung: str
+    rung_note: str
+    next_rung_at: Optional[int] = None
+    expert_references: Optional[RecallSummary] = None
+
+
+class ExpertListEntry(BaseModel):
+    id: str
+    name: Optional[str] = None
+    roles: List[str] = []
+    tier: Optional[str] = None
+    can_elicit: bool
+    has_capability: bool
+    n_elicitations: int = 0
+    # The `authored_by` slugs this account answers to; drives the
+    # conflict-of-interest exclusion.
+    author_slugs: List[str] = []
+
+
+class ExpertList(BaseModel):
+    users: List[ExpertListEntry] = []
+    eligible: int
+
+
 class DecisionReceipt(BaseModel):
     """What /decide returns when a decision is recorded."""
     status: Literal["recorded"]

@@ -20,8 +20,9 @@ from app.core.dependencies import require_admin, require_elicitor
 from app.models.elicitation import (
     ExpertReferenceCreate,
     CalibrationDecision, CalibrationFeedback, CalibrationItem,
-    CalibrationStatus, DecisionReceipt, ElicitationDecision, ElicitationEvent,
-    ElicitationProgress, EventReceipt, Guidelines, HistoryResponse, QueueItem,
+    AdminStats, CalibrationStatus, DecisionReceipt, ElicitationDecision,
+    ElicitationEvent, ElicitationProgress, EventReceipt, ExpertList,
+    Guidelines, HistoryResponse, QueueItem,
 )
 from app.services.elicitation_service import ElicitationService
 from app.services.expert_reference_service import ExpertReferenceService
@@ -137,26 +138,40 @@ async def build_evidence_queue(
         _refusal(await ElicitationService().build_evidence_queue(force=force)))
 
 
-@router.get("/experts")
+@router.get("/experts", response_model=ExpertList)
 async def list_experts(current_user: dict = Depends(require_admin)):
-    """Who currently holds the elicitation capability, and who could."""
+    """Who currently holds the elicitation capability, and who could — with
+    their tier, how much they have judged, and which author slugs they answer
+    to (the conflict-of-interest link)."""
     from app.core.database import get_database
-    from app.core.dependencies import CAP_SF_ELICITATION
+    from app.core.dependencies import CAP_SF_ELICITATION, ROLE_EXTERNAL_CONTRIBUTOR
 
     db = get_database()
+    counts = {}
+    async for row in db.elicitations.aggregate(
+            [{"$group": {"_id": "$expert_id", "n": {"$sum": 1}}}]):
+        counts[row["_id"]] = row["n"]
     out = []
     async for u in db.users.find({}, {"email": 1, "full_name": 1, "roles": 1,
-                                      "capabilities": 1}):
+                                      "capabilities": 1, "tier": 1,
+                                      "author_slugs": 1}):
         roles = u.get("roles") or []
         caps = u.get("capabilities") or []
+        uid = str(u["_id"])
         out.append({
-            "id": str(u["_id"]),
+            "id": uid,
             "name": u.get("full_name") or u.get("email"),
             "roles": roles,
+            "tier": u.get("tier"),
+            # Mirrors require_elicitor: an external contributor reaches the
+            # elicitation routes by role alone.
             "can_elicit": ("administrator" in roles
                            or "knowledge_curator" in roles
+                           or ROLE_EXTERNAL_CONTRIBUTOR in roles
                            or CAP_SF_ELICITATION in caps),
             "has_capability": CAP_SF_ELICITATION in caps,
+            "n_elicitations": counts.get(uid, 0),
+            "author_slugs": u.get("author_slugs") or [],
         })
     return {"users": out,
             "eligible": sum(1 for u in out if u["can_elicit"])}
@@ -261,7 +276,7 @@ async def calibration_seed(force: bool = False,
     return await ElicitationService().seed_calibration(force=force)
 
 
-@router.get("/stats/admin")
+@router.get("/stats/admin", response_model=AdminStats)
 async def admin_stats(current_user: dict = Depends(require_admin)):
     """Where effort has gone, and what the panel still owes.
 

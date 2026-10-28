@@ -27,6 +27,23 @@
         work only — past judgments keep the tier they were made under.
       </p>
 
+      <!-- A new account's one-time password. The server returns it once and
+           stores only its hash: if it is not shown here, it is lost and the
+           person cannot sign in. The previous view discarded it. -->
+      <div v-for="c in issued" :key="c.email" class="issued" role="status"
+           data-test="issued">
+        <p>
+          <strong>{{ c.name }}</strong> approved as <strong>{{ c.tier }}</strong>.
+          A new account was created — pass these on now; the password is not
+          shown again.
+        </p>
+        <dl class="creds">
+          <div><dt>Email</dt><dd><code>{{ c.email }}</code></dd></div>
+          <div><dt>One-time password</dt><dd><code class="pw">{{ c.password }}</code></dd></div>
+        </dl>
+        <button class="el-btn el-btn--ghost act" @click="dismissIssued(c.email)">Done</button>
+      </div>
+
       <LoadState
         :loading="loadingRequests"
         :error="errRequests"
@@ -39,7 +56,7 @@
         <div v-for="r in requests" :key="r.id" class="request">
           <div class="request-head">
             <div class="who">
-              <strong>{{ r.full_name }}</strong>
+              <strong>{{ r.name }}</strong>
               <a class="email" :href="`mailto:${r.email}`">{{ r.email }}</a>
             </div>
             <span class="submitted">{{ formatDate(r.created_at) }}</span>
@@ -55,15 +72,15 @@
 
           <div class="decide">
             <button class="el-btn el-btn--primary act" :disabled="busyId === r.id"
-                    @click="decide(r, 'approve', 'panel')">
+                    @click="decide(r, true, 'panel')">
               Approve → panel
             </button>
             <button class="el-btn el-btn--ghost act" :disabled="busyId === r.id"
-                    @click="decide(r, 'approve', 'contributor')">
+                    @click="decide(r, true, 'contributor')">
               Approve → contributor
             </button>
             <button class="el-btn el-btn--ghost act danger" :disabled="busyId === r.id"
-                    @click="decide(r, 'decline', null)">
+                    @click="decide(r, false, null)">
               Decline
             </button>
           </div>
@@ -101,7 +118,13 @@
         </thead>
         <tbody>
           <tr v-for="u in experts" :key="u.id">
-            <td data-h="Name">{{ u.name }}</td>
+            <td data-h="Name">
+              {{ u.name }}
+              <span v-if="u.author_slugs.length" class="slugs"
+                    title="Authored stylized facts under these slugs; excluded from their queue">
+                author: {{ u.author_slugs.join(', ') }}
+              </span>
+            </td>
             <td data-h="Roles">
               <span v-for="r in (u.roles || [])" :key="r" class="role-pill">{{ prettyRole(r) }}</span>
             </td>
@@ -111,7 +134,7 @@
               </span>
               <span v-else class="muted">unassigned</span>
             </td>
-            <td class="num" data-h="Elicitations">{{ u.n_elicitations ?? '—' }}</td>
+            <td class="num" data-h="Elicitations">{{ u.n_elicitations }}</td>
             <td data-h="Access">
               <span class="status-badge" :class="canElicit(u) ? 'active' : 'off'">
                 {{ canElicit(u) ? 'can elicit' : 'no access' }}
@@ -153,8 +176,8 @@
           <div class="pc-head">
             <span class="pc-title">Panel coverage</span>
             <span class="pc-value">
-              <b>{{ stats.comparison_complete ?? 0 }}</b> of
-              {{ stats.comparison_total ?? 0 }} comparison items have their full panel
+              <b>{{ stats.comparison_complete }}</b> of
+              {{ stats.comparison_total }} comparison items have their full panel
             </span>
           </div>
           <div class="bar-track" role="img"
@@ -168,11 +191,11 @@
 
         <div class="stat-row">
           <div class="stat">
-            <span class="stat-value">{{ stats.completed ?? 0 }}</span>
-            <span class="stat-label">of {{ stats.total_queue ?? 0 }} queue items</span>
+            <span class="stat-value">{{ stats.completed }}</span>
+            <span class="stat-label">judgments · {{ stats.total_queue }} queue items</span>
           </div>
           <div class="stat">
-            <span class="stat-value">{{ stats.repeated_judgments ?? 0 }}</span>
+            <span class="stat-value">{{ stats.repeated_judgments }}</span>
             <span class="stat-label">repeated judgments</span>
           </div>
           <div class="stat">
@@ -182,7 +205,7 @@
             <span class="stat-label">median per item</span>
           </div>
           <div class="stat">
-            <span class="stat-value">{{ stats.rung ?? 'R0' }}</span>
+            <span class="stat-value">{{ stats.rung }}</span>
             <span class="stat-label">claims rung</span>
           </div>
         </div>
@@ -218,8 +241,8 @@
         <p class="rung-note">
           <strong>{{ stats.rung }}</strong> — {{ stats.rung_note }}
           <span v-if="stats.next_rung_at" class="muted">
-            · next rung at {{ stats.next_rung_at }}
-            ({{ Math.max(0, stats.next_rung_at - (stats.completed ?? 0)) }} to go)
+            · next rung at {{ stats.next_rung_at }} {{ stats.ladder_basis }}
+            ({{ Math.max(0, stats.next_rung_at - stats.ladder_count) }} to go)
           </span>
         </p>
 
@@ -262,21 +285,19 @@ import api from '@/utils/api'
 import ExpertiseProfileCard from '@/components/enrolment/ExpertiseProfileCard.vue'
 import LoadState from '@/components/enrolment/LoadState.vue'
 
-interface ExpertRow {
-  id: string
-  name: string
-  roles?: string[]
-  tier?: string
-  has_capability?: boolean
-  can_elicit?: boolean
-  can_annotate?: boolean   // tolerated: pre-rename field name
-  n_elicitations?: number
-}
+import type {
+  AdminStats, ExpertList, ExpertListEntry,
+} from '@/types/elicitation.generated'
+import type {
+  EnrolmentDecision, EnrolmentDecisionResult, EnrolmentRequestList,
+  EnrolmentRequestRecord, Tier,
+} from '@/types/enrolment.generated'
 
-const experts = ref<ExpertRow[]>([])
+const experts = ref<ExpertListEntry[]>([])
 const eligible = ref<number | null>(null)
-const requests = ref<any[]>([])
-const stats = ref<any>(null)
+const requests = ref<EnrolmentRequestRecord[]>([])
+const stats = ref<AdminStats | null>(null)
+const issued = ref<{ name: string; email: string; tier: Tier; password: string }[]>([])
 const notes = reactive<Record<string, string>>({})
 const rowError = reactive<Record<string, string>>({})
 
@@ -288,10 +309,8 @@ const errRequests = ref('')
 const errStats = ref('')
 const busyId = ref<string | null>(null)
 
-// The backend field name landed in parallel; accept either rather than showing
-// "no access" for everyone if one spelling differs.
-function canElicit(u: ExpertRow): boolean {
-  return !!(u.can_elicit ?? u.can_annotate ?? u.has_capability)
+function canElicit(u: ExpertListEntry): boolean {
+  return u.can_elicit
 }
 
 const comparisonPct = computed(() => {
@@ -303,7 +322,11 @@ const comparisonPct = computed(() => {
 const refStats = computed(() => stats.value?.expert_references || null)
 
 const byTask = computed(() => toPairs(stats.value?.by_task))
-const byExpert = computed(() => toPairs(stats.value?.by_expert))
+// A list of per-expert rows, not a mapping: rendered as one before, it showed
+// array indices where names belong.
+const byExpert = computed(() => (stats.value?.by_expert ?? [])
+  .map((e) => ({ k: e.name, v: e.n }))
+  .sort((a, b) => b.v - a.v))
 const byStratum = computed(() => toPairs(stats.value?.by_stratum))
 
 function toPairs(obj: Record<string, number> | undefined) {
@@ -328,9 +351,9 @@ function readError(e: any): string {
 async function loadExperts() {
   loadingExperts.value = true; errExperts.value = ''
   try {
-    const { data } = await api.get('/elicitation/experts')
-    experts.value = data.users || []
-    eligible.value = data.eligible ?? null
+    const { data } = await api.get<ExpertList>('/elicitation/experts')
+    experts.value = data.users
+    eligible.value = data.eligible
   } catch (e) { errExperts.value = readError(e) }
   finally { loadingExperts.value = false }
 }
@@ -338,8 +361,11 @@ async function loadExperts() {
 async function loadRequests() {
   loadingRequests.value = true; errRequests.value = ''
   try {
-    const { data } = await api.get('/enrolment/requests')
-    requests.value = data.requests || data || []
+    // Pending only: this list is the queue of decisions still to make.
+    const { data } = await api.get<EnrolmentRequestList>('/enrolment/requests', {
+      params: { status_filter: 'pending' },
+    })
+    requests.value = data.requests
   } catch (e) { errRequests.value = readError(e); requests.value = [] }
   finally { loadingRequests.value = false }
 }
@@ -347,13 +373,13 @@ async function loadRequests() {
 async function loadStats() {
   loadingStats.value = true; errStats.value = ''
   try {
-    const { data } = await api.get('/elicitation/stats/admin')
+    const { data } = await api.get<AdminStats>('/elicitation/stats/admin')
     stats.value = data
   } catch (e) { errStats.value = readError(e); stats.value = null }
   finally { loadingStats.value = false }
 }
 
-async function setCapability(u: ExpertRow, granted: boolean) {
+async function setCapability(u: ExpertListEntry, granted: boolean) {
   busyId.value = u.id
   delete rowError[u.id]
   try {
@@ -365,17 +391,25 @@ async function setCapability(u: ExpertRow, granted: boolean) {
   } finally { busyId.value = null }
 }
 
-async function decide(r: any, decision: 'approve' | 'decline', tier: string | null) {
+async function decide(r: EnrolmentRequestRecord, approve: boolean, tier: Tier | null) {
   busyId.value = r.id
   delete rowError[r.id]
+  const body: EnrolmentDecision = { approve, tier, note: notes[r.id] || null }
   try {
-    await api.post(`/enrolment/requests/${r.id}/decide`, {
-      decision, tier, note: notes[r.id] || undefined,
-    })
+    const { data } = await api.post<EnrolmentDecisionResult>(
+      `/enrolment/requests/${r.id}/decide`, body)
+    if (data.temp_password && data.tier) {
+      issued.value = [...issued.value,
+        { name: r.name, email: r.email, tier: data.tier, password: data.temp_password }]
+    }
     await Promise.all([loadRequests(), loadExperts(), loadStats()])
   } catch (e) {
     rowError[r.id] = readError(e)
   } finally { busyId.value = null }
+}
+
+function dismissIssued(email: string) {
+  issued.value = issued.value.filter((c) => c.email !== email)
 }
 
 onMounted(() => { loadExperts(); loadRequests(); loadStats() })
@@ -415,6 +449,17 @@ onMounted(() => { loadExperts(); loadRequests(); loadStats() })
 .hint { font-size: var(--el-fs-xs); color: var(--el-ink-4); line-height: 1.5; margin: var(--el-s1) 0 var(--el-s2); }
 .muted { color: var(--el-ink-4); font-size: var(--el-fs-sm); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.issued {
+  border: 1px solid var(--el-line); border-left: 3px solid var(--el-accent);
+  border-radius: var(--el-radius-sm); padding: var(--el-s3);
+  margin-bottom: var(--el-s3); font-size: var(--el-fs-sm); line-height: var(--el-lh);
+}
+.creds { display: flex; flex-wrap: wrap; gap: var(--el-s2) var(--el-s5); margin: var(--el-s2) 0; }
+.creds dt { font-size: var(--el-fs-xs); color: var(--el-ink-3); }
+.creds code { font-family: ui-monospace, monospace; word-break: break-all; }
+.creds .pw { font-weight: 700; }
+.slugs { display: block; font-size: var(--el-fs-xs); color: var(--el-ink-3); }
 
 .request {
   border: 1px solid var(--el-line); border-radius: var(--el-radius-sm);

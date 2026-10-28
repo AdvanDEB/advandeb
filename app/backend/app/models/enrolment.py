@@ -13,7 +13,7 @@ nothing at all.
 from datetime import datetime
 from typing import Dict, List, Literal, Optional
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import AliasChoices, BaseModel, ConfigDict, EmailStr, Field
 
 # `panel` carries the agreement statistics and the human consensus the paper
 # reports. `contributor` is stored, attributed and creditable, but never pooled
@@ -42,7 +42,12 @@ class EnrolmentRequest(BaseModel):
 class EnrolmentRequestRecord(BaseModel):
     """A stored request, as an administrator sees it."""
 
-    id: str = Field(alias="_id")
+    model_config = ConfigDict(populate_by_name=True)
+
+    # Read from Mongo's `_id`, served as `id`. The list endpoint used to hand
+    # back raw documents keyed `_id` while the admin view read `id`, so every
+    # approval was posted to /requests/undefined/decide.
+    id: str = Field(validation_alias=AliasChoices("_id", "id"))
     name: str
     email: EmailStr
     affiliation: Optional[str] = None
@@ -59,10 +64,22 @@ class EnrolmentRequestRecord(BaseModel):
     # Facts this person authored, matched at approval by ORCID then name. Shown
     # to the administrator because it is the conflict the queue will exclude.
     matched_authored_sf_numbers: List[int] = []
+    # The `authored_by` slugs matched by the same rule. Recorded on the user
+    # at approval as `author_slugs`, which is what the queue's
+    # conflict-of-interest exclusion compares against.
+    matched_author_slugs: List[str] = []
     user_id: Optional[str] = None
+    note: Optional[str] = None
 
-    class Config:
-        populate_by_name = True
+
+class EnrolmentRequestList(BaseModel):
+    requests: List[EnrolmentRequestRecord] = []
+
+
+class EnrolmentSubmitted(BaseModel):
+    """The public endpoint's only answer — the same whether or not the email
+    is already known, so it cannot be used to enumerate who is enrolled."""
+    status: Literal["pending"]
 
 
 class EnrolmentDecision(BaseModel):
@@ -73,3 +90,17 @@ class EnrolmentDecision(BaseModel):
     # whole approval step exists for.
     tier: Optional[Tier] = None
     note: Optional[str] = Field(default=None, max_length=2000)
+
+
+class EnrolmentDecisionResult(BaseModel):
+    """What a decision returns to the administrator."""
+
+    status: Literal["approved", "declined"]
+    tier: Optional[Tier] = None
+    user_id: Optional[str] = None
+    matched_authored_sf_numbers: List[int] = []
+    author_slugs: List[str] = []
+    # Set only when approval created a new account. Returned once and stored
+    # only as a hash: if the administrator's screen does not show it, the
+    # person cannot sign in. The previous admin view discarded it.
+    temp_password: Optional[str] = None

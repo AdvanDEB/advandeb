@@ -37,7 +37,7 @@
       </div>
       <div>
         <dt>Acknowledgement consent</dt>
-        <dd>{{ profile.consent_acknowledgement ? 'Given' : 'Not given' }}</dd>
+        <dd>{{ profile.consent ? 'Given' : 'Not given' }}</dd>
       </div>
     </dl>
 
@@ -47,7 +47,9 @@
     <p v-if="authoredMatches.length" class="coi">
       <strong>Conflict of interest:</strong> matched to
       {{ authoredMatches.length }} authored stylized fact{{ authoredMatches.length === 1 ? '' : 's' }}
-      ({{ authoredMatches.slice(0, 6).join(', ') }}<span v-if="authoredMatches.length > 6">…</span>).
+      ({{ authoredMatches.slice(0, 6).join(', ') }}<span v-if="authoredMatches.length > 6">…</span>)<template
+        v-if="profile.matched_author_slugs?.length"> as
+        <code>{{ profile.matched_author_slugs.join(', ') }}</code></template>.
       These will be excluded from their queue.
     </p>
 
@@ -77,17 +79,16 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { EnrolmentRequestRecord } from '@/types/enrolment.generated'
 import { prettyCategory } from './categories'
 
-interface Profile {
-  affiliation?: string
-  orcid?: string
-  years_in_field?: number
-  deb_experience?: string
-  category_familiarity?: Record<string, number>
-  consent_acknowledgement?: boolean
-  authored_sf_numbers?: number[]
-}
+// A request as the server serves it. The card read `consent_acknowledgement`
+// and `authored_sf_numbers`, which a request does not carry, so it showed
+// "Not given" and no conflict of interest for everyone.
+type Profile = Pick<EnrolmentRequestRecord,
+  'affiliation' | 'orcid' | 'years_in_field' | 'deb_experience'
+  | 'category_familiarity' | 'consent' | 'matched_authored_sf_numbers'>
+  & Partial<Pick<EnrolmentRequestRecord, 'matched_author_slugs'>>
 
 const props = defineProps<{ profile: Profile }>()
 
@@ -109,7 +110,7 @@ const ratedCategories = computed(() =>
 const specialistCount = computed(() =>
   ratedCategories.value.filter(c => c.value >= 4).length)
 
-const authoredMatches = computed(() => props.profile.authored_sf_numbers || [])
+const authoredMatches = computed(() => props.profile.matched_authored_sf_numbers || [])
 </script>
 
 <style scoped>

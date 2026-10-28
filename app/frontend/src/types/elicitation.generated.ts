@@ -164,6 +164,76 @@ export interface CalibrationStatus {
   available: boolean
 }
 
+/** Expert-named references, by resolution status (docs/09 section 2.5a). */
+export interface RecallSummary {
+  by_status: Record<string, number>
+  recall_misses: number
+  checked_for_retrieval: number
+  miss_rate: number | null
+  undetermined: number
+}
+
+/** Queue positions whose `n_required` is met by panel-tier judgments. */
+export interface PanelCoverage {
+  n_required_met: number
+  n_required_pending: number
+}
+
+export interface ExpertStats {
+  name: string
+  current_tier: string | null
+  tier: string | null
+  n_by_record_tier: Record<string, number>
+  n: number
+  median_s: number | null
+  calibration: CalibrationStatus
+}
+
+export interface AwaitingCalibration {
+  name: string | null
+  tier: string | null
+  calibration: CalibrationStatus
+}
+
+/** Where the effort has gone, and what the panel still owes. */
+export interface AdminStats {
+  total_queue: number
+  completed: number
+  repeated_judgments: number
+  median_seconds_per_item: number | null
+  comparison_total: number
+  comparison_complete: number
+  panel_coverage: PanelCoverage
+  by_stratum: Record<string, number>
+  by_task: Record<string, number>
+  by_tier: Record<string, number>
+  by_record_tier: Record<string, number>
+  by_expert: ExpertStats[]
+  awaiting_calibration: AwaitingCalibration[]
+  ladder_count: number
+  ladder_basis: string
+  rung: string
+  rung_note: string
+  next_rung_at: number | null
+  expert_references: RecallSummary | null
+}
+
+export interface ExpertListEntry {
+  id: string
+  name: string | null
+  roles: string[]
+  tier: string | null
+  can_elicit: boolean
+  has_capability: boolean
+  n_elicitations: number
+  author_slugs: string[]
+}
+
+export interface ExpertList {
+  users: ExpertListEntry[]
+  eligible: number
+}
+
 // ---- requests: fields with a server default may be omitted ----
 
 /** An expert's two labels for one passage. */
