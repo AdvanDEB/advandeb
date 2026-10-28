@@ -23,6 +23,14 @@ from advandeb_kb.models.provenance import GraphPathStep, ProvenanceTrace
 
 logger = logging.getLogger(__name__)
 
+# What expand_from_chunks returns of each parent document. Full-text papers
+# carry `content` of up to ~100 KB; nothing downstream reads it, and the
+# result travels between agents as JSON on every chat turn.
+_DOCUMENT_FIELDS = [
+    "_id", "_key", "title", "authors", "year", "journal", "doi",
+    "source_path", "general_domain", "is_retracted", "cited_by_count",
+]
+
 
 class GraphExpansionService:
     """
@@ -52,14 +60,15 @@ class GraphExpansionService:
         Traverses:  chunk → document → facts → stylized_facts → taxa
 
         Args:
-            chunk_ids:  List of ChromaDB chunk IDs (format: "{doc_id}_chunk_{i}")
+            chunk_ids:  List of ChromaDB chunk IDs (format: "{doc_id}_chunk_{i}"),
+                        which are the ArangoDB chunk _keys.
             max_hops:   Maximum traversal depth (default 2).
             limit:      Maximum vertices to return per traversal.
 
         Returns:
             {
                 "chunks":         list of chunk docs,
-                "documents":      list of parent document docs,
+                "documents":      list of parent documents (_DOCUMENT_FIELDS only),
                 "facts":          list of related fact docs,
                 "stylized_facts": list of related SF docs,
                 "taxa":           list of related taxon docs,
@@ -78,19 +87,21 @@ class GraphExpansionService:
         if not chunk_ids:
             return result
 
-        # 1. Resolve chunk keys → ArangoDB vertex IDs
-        chunk_keys = self._chunk_ids_to_arango_keys(chunk_ids)
+        # 1-2. Fetch the chunks by _key (primary index). Retrieval ids are
+        #      chunk _keys in every lineage; `chunk_id`, where present, is a
+        #      copy of _key, and is absent on the reproduction abstracts.
+        result["chunks"] = self._fetch_vertices("chunks", chunk_ids)
+        chunk_keys = [c["_key"] for c in result["chunks"]]
         if not chunk_keys:
-            logger.debug("expand_from_chunks: no arango chunk keys found for %s", chunk_ids[:3])
+            logger.debug("expand_from_chunks: no arango chunks found for %s", chunk_ids[:3])
             return result
 
-        # 2. Fetch chunk documents themselves
-        result["chunks"] = self._fetch_vertices("chunks", chunk_keys)
-
-        # 3. For each chunk, get parent document IDs
+        # 3. For each chunk, get parent document IDs (document _keys)
         doc_ids = list({c.get("document_id", "") for c in result["chunks"] if c.get("document_id")})
         if doc_ids:
-            result["documents"] = self._fetch_by_field("documents", "mongo_id", doc_ids)
+            result["documents"] = self._fetch_vertices(
+                "documents", doc_ids, fields=_DOCUMENT_FIELDS
+            )
 
         # 4. Traverse chunk_graph: chunk → document
         chunk_arango_ids = [f"chunks/{k}" for k in chunk_keys]
@@ -506,53 +517,32 @@ class GraphExpansionService:
     # Internal helpers
     # ------------------------------------------------------------------
 
-    def _chunk_ids_to_arango_keys(self, chunk_ids: list[str]) -> list[str]:
+    def _fetch_vertices(
+        self, collection: str, keys: list[str], fields: Optional[list[str]] = None
+    ) -> list[dict]:
         """
-        Query ArangoDB chunks collection to find keys matching given chunk_ids.
-        chunk_id format stored in Arango: "{doc_id}_chunk_{index}"
-        """
-        if not chunk_ids:
-            return []
-        aql = """
-        FOR c IN chunks
-            FILTER c.chunk_id IN @ids
-            RETURN c._key
-        """
-        try:
-            return self.db.aql(aql, bind_vars={"ids": chunk_ids})
-        except Exception as exc:
-            logger.warning("_chunk_ids_to_arango_keys failed: %s", exc)
-            return []
+        Fetch vertices by _key (primary index), optionally keeping only
+        ``fields``. Keys that do not exist are skipped.
 
-    def _fetch_vertices(self, collection: str, keys: list[str]) -> list[dict]:
+        Look vertices up by _key, not by a copied attribute: chunks.chunk_id
+        and documents.mongo_id are unindexed, so filtering on them scans
+        millions of vertices (~1 s and ~2.5 s per chat turn on production).
+        """
         if not keys:
             return []
-        aql = """
+        projection = "KEEP(doc, @fields)" if fields else "doc"
+        aql = f"""
         FOR doc IN @@col
             FILTER doc._key IN @keys
-            RETURN doc
+            RETURN {projection}
         """
+        bind_vars: dict[str, Any] = {"@col": collection, "keys": keys}
+        if fields:
+            bind_vars["fields"] = fields
         try:
-            return self.db.aql(aql, bind_vars={"@col": collection, "keys": keys})
+            return self.db.aql(aql, bind_vars=bind_vars)
         except Exception as exc:
             logger.warning("_fetch_vertices %s failed: %s", collection, exc)
-            return []
-
-    def _fetch_by_field(
-        self, collection: str, field: str, values: list[str]
-    ) -> list[dict]:
-        aql = """
-        FOR doc IN @@col
-            FILTER doc[@field] IN @values
-            RETURN doc
-        """
-        try:
-            return self.db.aql(
-                aql,
-                bind_vars={"@col": collection, "field": field, "values": values},
-            )
-        except Exception as exc:
-            logger.warning("_fetch_by_field %s.%s failed: %s", collection, field, exc)
             return []
 
     def _doc_mongo_ids_to_arango(self, mongo_ids: list[str]) -> list[str]:
