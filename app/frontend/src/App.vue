@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div class="app-root">
+    <!-- Not id="app": main.ts mounts into index.html's #app and this renders
+         inside it, so the id would be on the page twice. -->
     <!-- Authenticated routes use the sidebar layout -->
     <AppLayout v-if="authStore.isAuthenticated && !isBareRoute">
       <router-view />
@@ -10,6 +12,7 @@
 
     <!-- Outside AppLayout so confirmations also work on the bare /kb view. -->
     <AppDialogHost />
+    <RouteFocus />
   </div>
 </template>
 
@@ -19,6 +22,7 @@ import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import AppLayout from '@/components/layout/AppLayout.vue'
 import AppDialogHost from '@/components/common/AppDialogHost.vue'
+import RouteFocus from '@/components/common/RouteFocus.vue'
 
 const authStore = useAuthStore()
 const route = useRoute()
@@ -42,7 +46,21 @@ onMounted(async () => {
   box-sizing: border-box;
 }
 
-#app {
+/* On <body>, not only #app: dialogs and toasts are teleported to <body> and
+   rendered in the browser's default serif. */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Form controls do not inherit the page font by default; inputs, selects and
+   buttons came out in the UA font. Family only: sizes stay as each component
+   sets them. */
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+#app,
+.app-root {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

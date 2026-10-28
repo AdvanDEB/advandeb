@@ -1,10 +1,20 @@
 User-agent: *
-Allow: /
+# Everything not listed is allowed. No leading "Allow: /": a first-match
+# parser would stop there and ignore every rule below.
+# Signed-in parts of the app: nothing to index, and every one of them
+# answers a crawler with the sign-in page.
 Disallow: /login
 Disallow: /chat
 Disallow: /kb
 Disallow: /documents
+Disallow: /documentation
 Disallow: /facts
-Disallow: /scenarios
 Disallow: /models
+Disallow: /settings
+Disallow: /admin
+# The expert enrolment form is public on purpose. Allow first: longest-match
+# parsers (Google, Bing) need no order, first-match parsers do.
+Allow: /elicitation/join
+Disallow: /elicitation
+Disallow: /api/
 Sitemap: https://advandeb.com/sitemap.xml

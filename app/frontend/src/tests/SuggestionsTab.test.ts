@@ -13,6 +13,7 @@ import { useKnowledgeBuilderStore } from '@/stores/knowledgeBuilder'
 
 const approveDocument = vi.fn()
 const patch = vi.fn()
+const get = vi.fn()
 
 vi.mock('@/utils/kbApi', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@/utils/kbApi')>()),
@@ -30,10 +31,14 @@ vi.mock('@/utils/kbApi', async (importOriginal) => ({
 // The real approveDocument, over a stubbed axios instance, for the request shape.
 vi.mock('@/utils/api', async (importOriginal) => ({
   ...(await importOriginal<typeof import('@/utils/api')>()),
-  default: { patch: (...args: unknown[]) => patch(...args) },
+  default: {
+    patch: (...args: unknown[]) => patch(...args),
+    get: (...args: unknown[]) => get(...args),
+  },
 }))
 
 const { default: SuggestionsTab } = await import('@/components/kb/tabs/SuggestionsTab.vue')
+const kbApi = await import('@/utils/kbApi')
 const realKbApi = await vi.importActual<typeof import('@/utils/kbApi')>('@/utils/kbApi')
 
 const REASON =
@@ -57,7 +62,7 @@ async function mountTab() {
 const docRows = (w: VueWrapper) => w.findAll('tbody tr').filter(r => r.text().includes('Kooijman 2010'))
 const button = (w: VueWrapper, label: string) => w.findAll('button').find(b => b.text() === label)!
 
-beforeEach(() => { approveDocument.mockReset(); patch.mockReset() })
+beforeEach(() => { approveDocument.mockReset(); patch.mockReset(); get.mockReset() })
 afterEach(() => { wrapper?.unmount(); wrapper = null })
 
 describe('SuggestionsTab — document suggestions', () => {
@@ -116,5 +121,53 @@ describe('approveDocument', () => {
       { action: 'reject', comment: 'dup' },
       { skipErrorToast: [409] },
     )
+  })
+})
+
+/**
+ * F-026: GET /api/documents and /api/facts (no trailing slash) 404'd, because
+ * the SPA catch-all answers before FastAPI's slash redirect. Promise.all then
+ * rejected: the queues stayed on "Loading queues…" for good and the lists
+ * claimed "No … suggestions" — nothing to review — when nothing had loaded.
+ */
+describe('SuggestionsTab — loading', () => {
+  const QUEUES = {
+    studies_suggested: 3, studies_confirmed: 1, sf_support_suggested: 5, sf_support_total: 9,
+    facts_pending: 7, facts_total: 20, documents_off_domain: 2, documents_gated: 4,
+  }
+
+  it('asks for the backend routes with their trailing slash', async () => {
+    get.mockResolvedValue({ data: [] })
+    await realKbApi.fetchDocumentSuggestions()
+    await realKbApi.fetchFactSuggestions()
+    expect(get).toHaveBeenCalledWith('/documents/', { params: { status: 'suggestion', limit: 100 } })
+    expect(get).toHaveBeenCalledWith('/facts/', { params: { status_filter: 'suggestion', limit: 100 } })
+  })
+
+  it('a list that fails says so; the others and the queues still load', async () => {
+    vi.mocked(kbApi.fetchReviewQueues).mockResolvedValueOnce(QUEUES)
+    vi.mocked(kbApi.fetchDocumentSuggestions).mockRejectedValueOnce(httpError(404, 'Not Found'))
+    const w = await mountTab()
+
+    const text = w.text()
+    expect(text).toContain('Could not load document suggestions: Not Found')
+    expect(text).not.toContain('No document suggestions')
+    expect(text).toContain('No fact suggestions')          // that one did load, empty
+    expect(text).not.toContain('Loading queues…')
+    expect(w.find('.queue-grid').text()).toContain('document → organism links')
+    expect(useKnowledgeBuilderStore().error).toBeFalsy()   // no tab-wide red chip
+  })
+
+  it('failed queues show an error instead of loading forever, and Try again reloads', async () => {
+    vi.mocked(kbApi.fetchReviewQueues).mockRejectedValueOnce(httpError(500, 'boom'))
+    const w = await mountTab()
+    expect(w.text()).toContain('Could not load the review queues: boom')
+    expect(w.text()).not.toContain('Loading queues…')
+
+    vi.mocked(kbApi.fetchReviewQueues).mockResolvedValueOnce(QUEUES)
+    await w.findAll('button').find(b => b.text() === 'Try again')!.trigger('click')
+    await flushPromises()
+    expect(w.text()).not.toContain('Could not load the review queues')
+    expect(w.find('.queue-grid').exists()).toBe(true)
   })
 })

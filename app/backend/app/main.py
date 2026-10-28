@@ -15,6 +15,8 @@ from slowapi.errors import RateLimitExceeded
 from app.core.config import settings
 from app.core.limiter import limiter
 from app.core.metrics import PrometheusMiddleware, metrics_endpoint
+from app.core.security_headers import SecurityHeadersMiddleware
+from app.core.security_headers import router as csp_report_router
 from app.core.spa import mount_spa
 
 # ── File logging ────────────────────────────────────────────────────────────
@@ -119,6 +121,11 @@ async def lifespan(app: FastAPI):
 
     yield
 
+    # Chat turns whose browser left: a few seconds to store their answers
+    # before the process goes (app/api/routes/ws.py), while Mongo is still up.
+    from app.api.routes.ws import drain_detached_turns
+    await drain_detached_turns(grace_seconds=5.0)
+
     if primary:
         await batch_watchdog.stop()
         await graph_rebuild_queue.stop()
@@ -156,6 +163,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# nosniff, referrer policy, anti-framing, Permissions-Policy, HSTS and the
+# (report-only) page CSP on every response, CORS preflights and errors from the
+# layers above included. See app/core/security_headers.py.
+app.add_middleware(SecurityHeadersMiddleware, hsts_max_age=settings.SECURITY_HSTS_MAX_AGE)
+
 # Request metrics for /metrics. Added last, so it is the outermost layer and
 # times the whole stack, CORS and proxy-header handling included.
 app.add_middleware(PrometheusMiddleware)
@@ -183,6 +195,7 @@ app.include_router(kb_kg.router,          prefix="/api/kb/kg",        tags=["kb"
 app.include_router(kb_documents.router,          prefix="/api/kb/documents",      tags=["kb"])
 app.include_router(kb_facts.stylized_router,     prefix="/api/kb/stylized-facts", tags=["kb"])
 app.include_router(kb_facts.facts_router,        prefix="/api/kb/facts",          tags=["kb"])
+app.include_router(csp_report_router, prefix="/api")
 
 
 @app.get("/api/info", tags=["health"])
@@ -210,9 +223,12 @@ async def _health_payload() -> dict:
         db = get_database()
         await db.command("ping")
         health_status["database"] = "connected"
-    except Exception as e:
+    except Exception:
+        # The endpoint is public: the exception text can carry the connection
+        # URI, hostnames and driver internals. It goes to the log, not out.
+        logging.getLogger(__name__).exception("health check: database ping failed")
         health_status["status"] = "degraded"
-        health_status["database"] = f"error: {str(e)}"
+        health_status["database"] = "unavailable"
 
     return health_status
 

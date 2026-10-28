@@ -84,6 +84,7 @@ ENDPOINTS = [
     ("/api/kb/facts", "GET", "/api/kb/facts/", "member", 200, "header"),
     ("/api/info", "GET", "/api/info", "public", 200, "header"),
     ("/api/health", "GET", "/api/health", "public", 200, "header"),
+    ("/api/csp-report", "POST", "/api/csp-report", "public", 204, "header"),
 ]
 
 
@@ -220,6 +221,9 @@ def test_every_api_route_requires_auth_unless_listed_public():
         # fact counts only, rate-limited.
         "/api/enrolment/categories",
         "/api/info", "/api/health",
+        # Browsers POST CSP violation reports without credentials; logged
+        # only, size-capped and rate-limited (app/core/security_headers.py).
+        "/api/csp-report",
     }
 
     def depends_on_auth(dependant):

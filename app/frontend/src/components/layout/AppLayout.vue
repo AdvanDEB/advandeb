@@ -5,6 +5,7 @@
     <!-- Mobile top bar -->
     <div class="mobile-topbar">
       <button
+        ref="hamburgerEl"
         class="hamburger"
         :aria-expanded="mobileOpen"
         aria-controls="app-sidebar"
@@ -105,6 +106,7 @@ const router = useRouter()
 const authStore = useAuthStore()
 const mobileOpen = ref(false)
 const sidebarEl = ref<HTMLElement | null>(null)
+const hamburgerEl = ref<HTMLButtonElement | null>(null)
 
 // The rail state is a preference, not a transient: re-collapsing it on every
 // page load would make the labels feel like something you keep losing.
@@ -179,15 +181,22 @@ function handleLogout() {
 }
 
 function onKeydown(e: KeyboardEvent) {
-  if (e.key === 'Escape' && mobileOpen.value) mobileOpen.value = false
+  if (e.key === 'Escape' && mobileOpen.value) {
+    mobileOpen.value = false
+    // Focus was in the drawer, which is now hidden; without this it fell to
+    // <body>. Back to the control that opened it.
+    hamburgerEl.value?.focus()
+  }
 }
 
 // Opening the drawer moves focus into it, so a keyboard or screen-reader user
-// lands on the navigation rather than continuing behind it.
+// lands on the navigation rather than continuing behind it. The first link,
+// not the first `a, button`: that was the rail toggle, which the phone layout
+// hides, so focus never moved.
 watch(mobileOpen, async (open) => {
   if (!open) return
   await nextTick()
-  sidebarEl.value?.querySelector<HTMLElement>('a, button')?.focus()
+  sidebarEl.value?.querySelector<HTMLElement>('.nav-link')?.focus()
 })
 
 // Close mobile nav on route change. afterEach returns its remover; the hook
@@ -207,8 +216,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-@import '@/styles/elicitation-tokens.css';
-
 /* The navigation is a dark surface of its own; these are its local values, not
    a second design language. Everything else on the page uses the shared tokens. */
 .app-layout {
@@ -235,6 +242,9 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
   transition: width var(--el-t) var(--el-ease);
   overflow: hidden;
+  /* The rows below lay out by the rail's actual width (collapsed, hovered,
+     expanded or the phone drawer), see the @container rule. */
+  container-type: inline-size;
 }
 
 .sidebar.expanded { width: 200px; }
@@ -248,11 +258,15 @@ onBeforeUnmount(() => {
   .sidebar:hover .user-name,
   .sidebar:hover .logout-label { opacity: 1; }
 }
-.sidebar:focus-within { width: 200px; }
-.sidebar:focus-within .nav-label,
-.sidebar:focus-within .brand-name,
-.sidebar:focus-within .user-name,
-.sidebar:focus-within .logout-label { opacity: 1; }
+/* Keyboard focus widens the rail so a tabbing user can read the labels. Only
+   keyboard focus: with :focus-within, a tap or click focused the toggle on
+   pointer-down, the rail widened before pointer-up, the toggle moved away
+   from under the finger, and the tap was lost (the rail never expanded). */
+.sidebar:has(:focus-visible) { width: 200px; }
+.sidebar:has(:focus-visible) .nav-label,
+.sidebar:has(:focus-visible) .brand-name,
+.sidebar:has(:focus-visible) .user-name,
+.sidebar:has(:focus-visible) .logout-label { opacity: 1; }
 
 .sidebar-brand {
   display: flex;
@@ -268,7 +282,18 @@ onBeforeUnmount(() => {
   margin-bottom: var(--el-s3);
 }
 
-.brand-icon { font-size: 1.35rem; flex-shrink: 0; width: 24px; text-align: center; }
+.brand-icon { font-size: 1.35rem; width: 24px; height: 24px; }
+/* The icons mix colour emoji (💬 📄) with text glyphs (⌂ ? ⬡ ✎ ⏏), whose
+   fonts have different line boxes, so rows came out 21 or 22px tall and the
+   glyphs sat at different heights. Every icon gets the same fixed, centred
+   box instead. */
+.brand-icon, .nav-icon, .logout-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
 .brand-name {
   opacity: 0; flex: 1; min-width: 0; overflow: hidden;
   transition: opacity var(--el-t-fast) var(--el-ease);
@@ -319,7 +344,7 @@ onBeforeUnmount(() => {
 .nav-link:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
 .nav-link.active { background: var(--nav-active); color: #fff; font-weight: 600; }
 
-.nav-icon { font-size: 1.05rem; flex-shrink: 0; width: 22px; text-align: center; }
+.nav-icon { font-size: 1.05rem; width: 22px; height: 22px; }
 .nav-label {
   opacity: 0; overflow: hidden;
   transition: opacity var(--el-t-fast) var(--el-ease);
@@ -394,7 +419,7 @@ onBeforeUnmount(() => {
   border-radius: var(--el-radius-sm);
   transition: color var(--el-t) var(--el-ease), background var(--el-t) var(--el-ease);
 }
-.logout-icon { font-size: 1rem; }
+.logout-icon { font-size: 1rem; width: 20px; height: 20px; }
 .logout-label {
   opacity: 0; white-space: nowrap;
   transition: opacity var(--el-t-fast) var(--el-ease);
@@ -402,6 +427,18 @@ onBeforeUnmount(() => {
 .sidebar.expanded .logout-label { opacity: 1; }
 .logout-btn:hover { color: #fca5a5; background: var(--nav-hover); }
 .logout-btn:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+
+/* The collapsed rail is 60px: one 44px control per row. Side by side, the
+   expand toggle and the log-out button were pushed past its edge and clipped
+   (the toggle entirely, which on a tablet is the only way to read the labels),
+   and log out sat on top of the avatar. Stack them instead. */
+@container (max-width: 120px) {
+  .sidebar-brand { flex-direction: column; padding: 0; }
+  .brand-name, .user-name, .logout-label { display: none; }
+  .rail-toggle { margin-right: 0; }
+  .sidebar-footer { flex-direction: column; padding: var(--el-s2) 0 0; }
+  .user-info { flex: none; }
+}
 
 .main-content {
   flex: 1;
@@ -480,13 +517,22 @@ onBeforeUnmount(() => {
     left: 0; bottom: 0;
     width: 260px;
     transform: translateX(-100%);
-    transition: transform var(--el-t-slow) var(--el-ease);
+    /* Closed, the drawer is off-screen but its links were still Tab stops (and
+       read by screen readers). visibility:hidden takes them out; it flips only
+       after the slide-out, and at once on opening. */
+    visibility: hidden;
+    transition: transform var(--el-t-slow) var(--el-ease),
+                visibility 0s linear var(--el-t-slow);
     z-index: 100;
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .sidebar:hover, .sidebar:focus-within { width: 260px; }
 
-  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform var(--el-t-slow) var(--el-ease), visibility 0s;
+  }
 
   /* On a phone the drawer is always the wide form — there is no rail to expand,
      so the toggle has nothing to do and is removed rather than left inert. */

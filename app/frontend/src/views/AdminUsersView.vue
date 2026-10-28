@@ -38,7 +38,7 @@
       <p v-else-if="users.length === 0" class="muted">No users match this search.</p>
       <!-- Seven columns cannot fit a phone; the table scrolls inside its card
            instead of pushing the whole page sideways. -->
-      <div v-else class="table-scroll">
+      <div v-else v-scroll-region="'Users'" class="table-scroll">
       <table class="users-table">
         <thead>
           <tr>
@@ -180,6 +180,7 @@
 </template>
 
 <script setup lang="ts">
+import { vScrollRegion } from '@/directives/scrollRegion'
 import { computed, onMounted, reactive, ref } from 'vue'
 import { formatDate } from '@/utils/format'
 import { useRouter } from 'vue-router'

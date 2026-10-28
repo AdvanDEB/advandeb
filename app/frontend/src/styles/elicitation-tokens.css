@@ -1,8 +1,10 @@
 /* Shared design language for the elicitation surfaces.
  *
  * These exist so that independently-built views converge rather than drift.
- * Import in any elicitation, admin-expert or enrolment view and use the tokens
- * instead of literals.
+ * Loaded once, globally, from main.ts; elicitation, admin-expert and enrolment
+ * views use the tokens instead of literals. Do not @import this file from a
+ * <style scoped> block: scoping turns :root into [data-v-…]:root, which matches
+ * no element, so every --el-* stays unset (src/tests/scopedStyles.test.ts).
  *
  * The brief for this surface: an expert works it for hours at a stretch,
  * hundreds of items in a sitting. That rules out high-chrome design — the

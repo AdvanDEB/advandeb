@@ -15,12 +15,21 @@
       <p v-if="loading" class="muted">Loading…</p>
       <div v-else class="toggle-row">
         <label class="switch">
-          <input type="checkbox" :checked="optedIn" :disabled="saving" @change="onToggle" />
+          <!-- The visible wording sits in a sibling div, not in this label, so
+               the checkbox names itself from it explicitly. -->
+          <input
+            type="checkbox"
+            :checked="optedIn"
+            :disabled="saving"
+            aria-labelledby="chat-access-state"
+            aria-describedby="chat-access-detail"
+            @change="onToggle"
+          />
           <span class="slider"></span>
         </label>
         <div class="toggle-label">
-          <strong>{{ optedIn ? 'Staff can view my chats' : "Staff can't view my chats" }}</strong>
-          <p class="muted">
+          <strong id="chat-access-state">{{ optedIn ? 'Staff can view my chats' : "Staff can't view my chats" }}</strong>
+          <p id="chat-access-detail" class="muted">
             {{ optedIn
               ? 'Administrators may open your conversation history for research review.'
               : 'You have opted out — administrators cannot open your conversation history.' }}
@@ -33,27 +42,30 @@
       <h2>Who has looked at my chats</h2>
       <p v-if="logLoading" class="muted">Loading…</p>
       <p v-else-if="log.length === 0" class="muted">No staff member has accessed your chat history yet.</p>
-      <table v-else class="log-table">
-        <thead>
-          <tr>
-            <th>Staff member</th>
-            <th>What</th>
-            <th>When</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(entry, i) in log" :key="i">
-            <td>{{ entry.admin_email }}</td>
-            <td>{{ entry.session_id ? 'Opened a conversation' : 'Viewed your conversation list' }}</td>
-            <td>{{ formatDateTime(entry.accessed_at) }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-else v-scroll-region="'Access log'" class="table-scroll">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>Staff member</th>
+              <th>What</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(entry, i) in log" :key="i">
+              <td>{{ entry.admin_email }}</td>
+              <td>{{ entry.session_id ? 'Opened a conversation' : 'Viewed your conversation list' }}</td>
+              <td>{{ formatDateTime(entry.accessed_at) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import { vScrollRegion } from '@/directives/scrollRegion'
 import { computed, onMounted, ref } from 'vue'
 import { formatDateTime } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
@@ -150,4 +162,5 @@ onMounted(async () => {
   letter-spacing: 0.03em;
 }
 .log-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid #f3f4f6; }
+.table-scroll { overflow-x: auto; }
 </style>

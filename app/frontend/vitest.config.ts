@@ -9,8 +9,9 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./src/tests/setup.ts'],
     // tests/e2e/*.spec.ts are Playwright specs (`npm run test:e2e`); loaded
-    // by vitest they abort with "did not expect test.describe()".
-    exclude: [...configDefaults.exclude, 'tests/e2e/**'],
+    // by vitest they abort with "did not expect test.describe()". tests/live
+    // holds the read-only review of the deployed site (its own config).
+    exclude: [...configDefaults.exclude, 'tests/e2e/**', 'tests/live/**'],
   },
   resolve: {
     alias: {

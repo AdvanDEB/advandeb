@@ -35,6 +35,10 @@ async def client(tmp_path: Path):
     async def make_thing():
         return {"made": True}
 
+    @app.get("/api/items/")
+    async def list_items():
+        return []
+
     mount_spa(app, tmp_path)   # last, as in app.main
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as c:
@@ -48,6 +52,18 @@ async def test_unknown_backend_paths_are_json_404(client, path):
     assert r.status_code == 404
     assert r.headers["content-type"].startswith("application/json")
     assert r.json() == {"detail": "Not Found"}
+
+
+@pytest.mark.parametrize("path,route", [("/api/items", "/api/items/"), ("/api/ping/", "/api/ping")])
+@pytest.mark.asyncio
+async def test_a_missing_or_extra_slash_is_a_404_that_names_the_route(client, path, route):
+    # F-026: GET /api/documents (route: /api/documents/) silently 404'd. Still a
+    # 404 — the catch-all runs before FastAPI's slash redirect, and a redirect
+    # would hide the caller's bug — but one that says what was meant.
+    r = await client.get(path)
+    assert r.status_code == 404
+    assert r.headers["content-type"].startswith("application/json")
+    assert r.json() == {"detail": f"Not Found. The route is {route}"}
 
 
 @pytest.mark.asyncio

@@ -53,7 +53,7 @@
     </div>
 
     <!-- Table -->
-    <div v-else class="table-wrap">
+    <div v-else v-scroll-region="'Documents'" class="table-wrap">
       <table class="doc-table">
         <thead>
           <tr>
@@ -193,13 +193,14 @@
       </div>
 
       <div class="pagination-center">
-        <button class="page-btn" :disabled="currentPage <= 1" @click="goToPage(1)">«</button>
-        <button class="page-btn" :disabled="currentPage <= 1" @click="goToPage(currentPage - 1)">‹</button>
+        <button class="page-btn" aria-label="First page" :disabled="currentPage <= 1" @click="goToPage(1)">«</button>
+        <button class="page-btn" aria-label="Previous page" :disabled="currentPage <= 1" @click="goToPage(currentPage - 1)">‹</button>
 
         <span class="page-info">
           Page
           <input
             class="page-input"
+            aria-label="Page number"
             type="number"
             :min="1"
             :max="totalPages"
@@ -209,8 +210,8 @@
           of {{ totalPages.toLocaleString() }}
         </span>
 
-        <button class="page-btn" :disabled="currentPage >= totalPages" @click="goToPage(currentPage + 1)">›</button>
-        <button class="page-btn" :disabled="currentPage >= totalPages" @click="goToPage(totalPages)">»</button>
+        <button class="page-btn" aria-label="Next page" :disabled="currentPage >= totalPages" @click="goToPage(currentPage + 1)">›</button>
+        <button class="page-btn" aria-label="Last page" :disabled="currentPage >= totalPages" @click="goToPage(totalPages)">»</button>
       </div>
 
       <div class="pagination-right">
@@ -243,6 +244,7 @@
 </template>
 
 <script setup lang="ts">
+import { vScrollRegion } from '@/directives/scrollRegion'
 import { ref, computed, onMounted } from 'vue'
 import { formatDate } from '@/utils/format'
 import api from '@/utils/api'

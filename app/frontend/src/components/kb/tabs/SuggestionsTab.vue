@@ -13,7 +13,11 @@
           which is why they are usually empty — this is where the pipeline's own backlog lives.
         </p>
 
-        <div v-if="!reviewQueues" class="empty-state">Loading queues…</div>
+        <div v-if="loadErrors.queues" class="load-error" role="alert">
+          Could not load the review queues: {{ loadErrors.queues }}
+          <button type="button" class="btn xs" @click="loadSuggestions">Try again</button>
+        </div>
+        <div v-else-if="!reviewQueues" class="empty-state">Loading queues…</div>
         <div v-else class="queue-grid">
           <button type="button" class="queue-card" @click="activeTab = 'kg'">
             <span class="queue-n">{{ formatCount(reviewQueues.studies_suggested) }}</span>
@@ -55,6 +59,10 @@
         </p>
 
         <div v-if="suggLoading" class="empty-state">Loading…</div>
+        <div v-else-if="loadErrors.docs" class="load-error" role="alert">
+          Could not load document suggestions: {{ loadErrors.docs }}
+          <button type="button" class="btn xs" @click="loadSuggestions">Try again</button>
+        </div>
         <div v-else-if="!docSuggestions.length" class="empty-state">No document suggestions</div>
         <div v-else class="table-scroll">
           <table class="data-table sugg-table">
@@ -113,6 +121,10 @@
         <p class="dim small">Facts submitted by users. Publish to make them visible in the KB; reject to discard.</p>
 
         <div v-if="suggLoading" class="empty-state">Loading…</div>
+        <div v-else-if="loadErrors.facts" class="load-error" role="alert">
+          Could not load fact suggestions: {{ loadErrors.facts }}
+          <button type="button" class="btn xs" @click="loadSuggestions">Try again</button>
+        </div>
         <div v-else-if="!factSuggestions.length" class="empty-state">No fact suggestions</div>
         <div v-else class="table-scroll">
           <table class="data-table sugg-table">
@@ -163,6 +175,10 @@
         <p class="dim small">Stylized facts submitted by users. Publish to make them citable; reject to discard.</p>
 
         <div v-if="suggLoading" class="empty-state">Loading…</div>
+        <div v-else-if="loadErrors.sfs" class="load-error" role="alert">
+          Could not load stylized fact suggestions: {{ loadErrors.sfs }}
+          <button type="button" class="btn xs" @click="loadSuggestions">Try again</button>
+        </div>
         <div v-else-if="!sfSuggestions.length" class="empty-state">No stylized fact suggestions</div>
         <div v-else class="table-scroll">
           <table class="data-table sugg-table">
@@ -235,24 +251,34 @@ const pendingSfIds    = ref<Set<string>>(new Set())
 
 const reviewQueues = ref<ReviewQueues | null>(null)
 
+type Section = 'docs' | 'facts' | 'sfs' | 'queues'
+/** Per list, why it could not be loaded. A failed list says so; it is never
+ *  shown as "No … suggestions", which would claim there is nothing to review. */
+const loadErrors = ref<Partial<Record<Section, string>>>({})
+
 async function loadSuggestions() {
   suggLoading.value = true
-  try {
-    // Queue counts are fetched alongside the submission lists, and separately
-    // guarded: the submission collections are empty in every deployment so far,
-    // and their emptiness must not hide the pipeline backlog.
-    const [docs, facts, sfs, queues] = await Promise.all([
-      fetchDocumentSuggestions('suggestion'),
-      fetchFactSuggestions('suggestion'),
-      fetchStylizedFactSuggestions('suggestion'),
-      fetchReviewQueues().catch((e) => { setError(e); return null }),
-    ])
-    docSuggestions.value  = Array.isArray(docs) ? docs : []
-    factSuggestions.value = Array.isArray(facts) ? facts : []
-    sfSuggestions.value   = Array.isArray(sfs) ? sfs : []
-    reviewQueues.value    = queues
-  } catch (e) { setError(e) }
-  finally { suggLoading.value = false }
+  // Each list settles on its own. With Promise.all, one 404 left the queues on
+  // "Loading queues…" for good and every list on its empty state.
+  const [docs, facts, sfs, queues] = await Promise.allSettled([
+    fetchDocumentSuggestions('suggestion'),
+    fetchFactSuggestions('suggestion'),
+    fetchStylizedFactSuggestions('suggestion'),
+    fetchReviewQueues(),
+  ])
+  const errors: Partial<Record<Section, string>> = {}
+  const list = <T,>(r: PromiseSettledResult<T[]>, key: Section): T[] => {
+    if (r.status === 'fulfilled') return Array.isArray(r.value) ? r.value : []
+    errors[key] = apiErrorMessage(r.reason)
+    return []
+  }
+  docSuggestions.value  = list(docs, 'docs')
+  factSuggestions.value = list(facts, 'facts')
+  sfSuggestions.value   = list(sfs, 'sfs')
+  if (queues.status === 'fulfilled') reviewQueues.value = queues.value
+  else errors.queues = apiErrorMessage(queues.reason)
+  loadErrors.value = errors
+  suggLoading.value = false
 }
 
 async function handleDocAction(docId: string, action: 'approve' | 'reject') {
@@ -398,6 +424,17 @@ watch(activeTab, (tab) => {
 }
 
 .empty-state { padding: 2rem; text-align: center; color: #475569; font-size: 0.85rem; }
+
+.load-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--app-danger-line);
+  color: var(--app-danger-line);
+  font-size: 0.8rem;
+}
 
 /* ---- Review queues ---------------------------------------------------------- */
 .queue-grid {

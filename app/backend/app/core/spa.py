@@ -7,12 +7,20 @@ API itself: a mistyped or removed endpoint used to come back as
 ``200 text/html`` — the SPA shell — which a fetch() caller then failed to parse
 as JSON, far from the real cause. Paths under the API and WebSocket prefixes
 get FastAPI's ordinary JSON 404 instead.
+
+A backend path that differs from a real route only by its trailing slash is a
+404 too, not a redirect: the catch-all matches before FastAPI's slash
+redirect can run, and a redirect would hide the caller's bug behind an extra
+round trip (behind the tunnel the backend also sees http, so an absolute
+Location would point a https page at http). The 404 names the route instead.
+tests/test_frontend_api_paths.py checks every frontend call against the routes.
 """
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.routing import Match
 
 # First path segments that belong to the backend, never to the SPA.
 BACKEND_PREFIXES = frozenset({"api", "ws"})
@@ -40,14 +48,29 @@ def public_file(dist: Path, full_path: str) -> Path | None:
     return candidate
 
 
+def slash_twin(request: Request) -> str | None:
+    """The path with its trailing slash toggled, if that is a real route."""
+    path = request.url.path
+    twin = path[:-1] if path.endswith("/") else path + "/"
+    scope = {**request.scope, "path": twin}
+    for route in request.app.router.routes:
+        if getattr(route, "name", None) == "spa_fallback":
+            continue
+        if route.matches(scope)[0] == Match.FULL:
+            return twin
+    return None
+
+
 def mount_spa(app: FastAPI, dist: Path) -> None:
     """Mount ``dist/assets`` and the index.html fallback. Register last."""
     app.mount("/assets", StaticFiles(directory=dist / "assets"), name="assets")
 
     @app.get("/{full_path:path}", include_in_schema=False)
-    async def spa_fallback(full_path: str):
+    async def spa_fallback(full_path: str, request: Request):
         if is_backend_path(full_path):
-            raise HTTPException(status_code=404, detail="Not Found")
+            twin = slash_twin(request)
+            detail = f"Not Found. The route is {twin}" if twin else "Not Found"
+            raise HTTPException(status_code=404, detail=detail)
         static = public_file(dist, full_path)
         if static is not None and static.name != "index.html":
             return FileResponse(static)

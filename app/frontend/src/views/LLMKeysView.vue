@@ -80,45 +80,48 @@
       <h2>Stored keys</h2>
       <p v-if="loading" class="muted">Loading…</p>
       <p v-else-if="keys.length === 0" class="muted">No keys yet. Add one above.</p>
-      <table v-else class="keys-table">
-        <thead>
-          <tr>
-            <th>Provider</th>
-            <th>Label</th>
-            <th>Model</th>
-            <th>Key</th>
-            <th>Last used</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="k in keys" :key="k.id">
-            <td>{{ providerLabel(k.provider) }}</td>
-            <td>{{ k.label || '—' }}</td>
-            <td>{{ k.default_model || '—' }}</td>
-            <td>
-              <code v-if="k.credential_type === 'oauth'" title="Connected via GitHub OAuth">
-                @{{ k.account_label || 'connected' }}
-              </code>
-              <code v-else>••••{{ k.key_last_4 }}</code>
-            </td>
-            <td>{{ k.last_used_at ? formatDateTime(k.last_used_at) : 'never' }}</td>
-            <td class="actions">
-              <button class="btn small" :disabled="testingId === k.id" @click="onTest(k)">
-                {{ testingId === k.id ? 'Testing…' : 'Test' }}
-              </button>
-              <button class="btn small danger" :disabled="deletingId === k.id" @click="onDelete(k)">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-else v-scroll-region="'Stored keys'" class="table-scroll">
+        <table class="keys-table">
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Label</th>
+              <th>Model</th>
+              <th>Key</th>
+              <th>Last used</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="k in keys" :key="k.id">
+              <td>{{ providerLabel(k.provider) }}</td>
+              <td>{{ k.label || '—' }}</td>
+              <td>{{ k.default_model || '—' }}</td>
+              <td>
+                <code v-if="k.credential_type === 'oauth'" title="Connected via GitHub OAuth">
+                  @{{ k.account_label || 'connected' }}
+                </code>
+                <code v-else>••••{{ k.key_last_4 }}</code>
+              </td>
+              <td>{{ k.last_used_at ? formatDateTime(k.last_used_at) : 'never' }}</td>
+              <td class="actions">
+                <button class="btn small" :disabled="testingId === k.id" @click="onTest(k)">
+                  {{ testingId === k.id ? 'Testing…' : 'Test' }}
+                </button>
+                <button class="btn small danger" :disabled="deletingId === k.id" @click="onDelete(k)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import { vScrollRegion } from '@/directives/scrollRegion'
 import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { formatDateTime } from '@/utils/format'
 import { useNotificationsStore } from '@/stores/notifications'
@@ -429,4 +432,5 @@ onMounted(async () => {
 }
 .open-link { text-decoration: none; display: inline-block; }
 .device-status { color: #6b7280; font-size: 0.85rem; min-height: 1.2em; }
+.table-scroll { overflow-x: auto; }
 </style>

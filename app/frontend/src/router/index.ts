@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/auth'
 import {
   canElicit, canUseKnowledgeBuilder, isAdmin, isAllowedForExternal, isExternalOnly,
 } from '@/utils/access'
+import { forgetAutoReload, isChunkLoadError, recoverFromChunkError } from '@/utils/staleChunk'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -12,7 +13,16 @@ declare module 'vue-router' {
     requiresAdmin?: boolean
     /** The sf_elicitation capability, or a role that implies it (utils/access.ts canElicit). */
     requiresElicitation?: boolean
+    /** Shown as "<title> · AdvanDEB" in the tab; home keeps APP_TITLE. */
+    title?: string
   }
+}
+
+/** index.html's <title>, kept for the home page. */
+export const APP_TITLE = 'AdvanDEB — Knowledge Graph for DEB Biology'
+
+export function pageTitle(route: Pick<RouteLocationNormalized, 'meta'>): string {
+  return route.meta.title ? `${route.meta.title} · AdvanDEB` : APP_TITLE
 }
 
 // An external contributor holds the elicitation capability and nothing else
@@ -33,31 +43,32 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue')
+      component: () => import('@/views/LoginView.vue'),
+      meta: { title: 'Sign in' }
     },
     {
       path: '/documents',
       name: 'documents',
       component: () => import('@/views/DocumentsView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'Corpus', requiresAuth: true }
     },
     {
       path: '/facts',
       name: 'facts',
       component: () => import('@/views/FactsView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'Facts', requiresAuth: true }
     },
     {
       path: '/chat',
       name: 'chat',
       component: () => import('@/views/ChatView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'Chat', requiresAuth: true }
     },
     {
       path: '/documentation',
       name: 'documentation',
       component: () => import('@/views/DocumentationView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'Documentation', requiresAuth: true }
     },
     {
       path: '/elicitation',
@@ -65,7 +76,7 @@ const router = createRouter({
       component: () => import('@/views/ElicitationView.vue'),
       // The sidebar link was capability-gated but the route was not, so a
       // typed or bookmarked URL opened a queue whose every request 403s.
-      meta: { requiresAuth: true, requiresElicitation: true }
+      meta: { title: 'Elicitation', requiresAuth: true, requiresElicitation: true }
     },
     {
       // Public on purpose: external collaborators reach this before they have
@@ -73,62 +84,64 @@ const router = createRouter({
       // unauthenticated visitor falls through to the bare <router-view>.
       path: '/elicitation/join',
       name: 'elicitation-join',
-      component: () => import('@/views/EnrolmentView.vue')
+      component: () => import('@/views/EnrolmentView.vue'),
+      meta: { title: 'Join the elicitation' }
     },
     {
       path: '/models',
       name: 'models',
       component: () => import('@/views/ModelsLibraryView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'Models', requiresAuth: true }
     },
     {
       path: '/models/:id',
       name: 'model-editor',
       component: () => import('@/views/ModelsView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'Model editor', requiresAuth: true }
     },
     {
       path: '/settings/llm-keys',
       name: 'llm-keys',
       component: () => import('@/views/LLMKeysView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'LLM API keys', requiresAuth: true }
     },
     {
       path: '/settings/privacy',
       name: 'privacy-settings',
       component: () => import('@/views/PrivacySettingsView.vue'),
-      meta: { requiresAuth: true }
+      meta: { title: 'Privacy', requiresAuth: true }
     },
     {
       path: '/kb',
       name: 'knowledge-builder',
       component: () => import('@/views/KnowledgeBuilderView.vue'),
-      meta: { requiresAuth: true, requiresKB: true }
+      meta: { title: 'Knowledge graph', requiresAuth: true, requiresKB: true }
     },
     {
       path: '/admin/experts',
       name: 'admin-experts',
       component: () => import('@/views/AdminExpertsView.vue'),
-      meta: { requiresAuth: true, requiresAdmin: true }
+      meta: { title: 'Experts', requiresAuth: true, requiresAdmin: true }
     },
     {
       path: '/admin/users',
       name: 'admin-users',
       component: () => import('@/views/AdminUsersView.vue'),
-      meta: { requiresAuth: true, requiresAdmin: true }
+      meta: { title: 'Users', requiresAuth: true, requiresAdmin: true }
     },
     {
       path: '/admin/users/:id/chats',
       name: 'admin-user-chats',
       component: () => import('@/views/AdminUserChatsView.vue'),
-      meta: { requiresAuth: true, requiresAdmin: true }
+      meta: { title: 'User conversations', requiresAuth: true, requiresAdmin: true }
     },
     {
       // Last, so every real route wins. Without it an unknown URL rendered an
       // empty main area with no hint that the address was wrong.
       path: '/:pathMatch(.*)*',
       name: 'not-found',
-      component: () => import('@/views/NotFoundView.vue')
+      component: () => import('@/views/NotFoundView.vue'),
+      meta: { title: 'Page not found' }
     }
   ]
 })
@@ -137,7 +150,9 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
   const authStore = useAuthStore()
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next({ name: 'login' })
+    // In the URL, not only in memory (route.redirectedFrom), so the way back
+    // survives a reload of /login. LoginView passes it through safeRedirect.
+    next({ name: 'login', query: { redirect: to.fullPath } })
     return
   }
 
@@ -178,6 +193,23 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
   }
 
   next()
+})
+
+router.afterEach((to, _from, failure) => {
+  if (failure) return
+  document.title = pageTitle(to)
+  forgetAutoReload(router.resolve(to).href)
+})
+
+// After a deploy, an open tab's next lazy route 404s and the navigation is
+// silently aborted. Load the destination afresh instead (utils/staleChunk.ts).
+router.onError((error, to) => {
+  if (isChunkLoadError(error)) {
+    void recoverFromChunkError(router.resolve(to).href)
+    return
+  }
+  // Registering a handler stops vue-router logging the rest itself.
+  console.error(error)
 })
 
 export default router

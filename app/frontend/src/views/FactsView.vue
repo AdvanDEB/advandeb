@@ -41,7 +41,7 @@
       <div v-if="sf.loading" class="state-msg">Loading…</div>
       <div v-else-if="sf.items.length === 0" class="state-msg empty">No stylized facts found.</div>
 
-      <div v-else class="table-wrap">
+      <div v-else v-scroll-region="'Stylized facts'" class="table-wrap">
         <table class="fact-table">
           <thead>
             <tr>
@@ -80,7 +80,7 @@
 
       <div v-if="sf.total > 0" class="pagination-bar">
         <div class="pagination-left">
-          <select v-model="sf.pageSize" class="page-size-select" @change="sfResetFetch">
+          <select v-model="sf.pageSize" class="page-size-select" aria-label="Stylized facts per page" @change="sfResetFetch">
             <option :value="25">25 / page</option>
             <option :value="50">50 / page</option>
             <option :value="100">100 / page</option>
@@ -88,16 +88,16 @@
           </select>
         </div>
         <div class="pagination-center">
-          <button class="page-btn" :disabled="sf.page <= 1" @click="sfGoTo(1)">«</button>
-          <button class="page-btn" :disabled="sf.page <= 1" @click="sfGoTo(sf.page - 1)">‹</button>
+          <button class="page-btn" aria-label="First page" :disabled="sf.page <= 1" @click="sfGoTo(1)">«</button>
+          <button class="page-btn" aria-label="Previous page" :disabled="sf.page <= 1" @click="sfGoTo(sf.page - 1)">‹</button>
           <span class="page-info">
             Page
-            <input class="page-input" type="number" :min="1" :max="sfTotalPages" :value="sf.page"
+            <input class="page-input" aria-label="Stylized facts page number" type="number" :min="1" :max="sfTotalPages" :value="sf.page"
               @change="sfGoTo(Number(($event.target as HTMLInputElement).value))" />
             of {{ sfTotalPages.toLocaleString() }}
           </span>
-          <button class="page-btn" :disabled="sf.page >= sfTotalPages" @click="sfGoTo(sf.page + 1)">›</button>
-          <button class="page-btn" :disabled="sf.page >= sfTotalPages" @click="sfGoTo(sfTotalPages)">»</button>
+          <button class="page-btn" aria-label="Next page" :disabled="sf.page >= sfTotalPages" @click="sfGoTo(sf.page + 1)">›</button>
+          <button class="page-btn" aria-label="Last page" :disabled="sf.page >= sfTotalPages" @click="sfGoTo(sfTotalPages)">»</button>
         </div>
         <div class="pagination-right">
           <span class="page-range">{{ sfRangeStart }}–{{ sfRangeEnd }} of {{ sf.total.toLocaleString() }}</span>
@@ -123,7 +123,7 @@
       <div v-if="kf.loading" class="state-msg">Loading…</div>
       <div v-else-if="kf.items.length === 0" class="state-msg empty">No facts found.</div>
 
-      <div v-else class="table-wrap">
+      <div v-else v-scroll-region="'Facts'" class="table-wrap">
         <table class="fact-table">
           <thead>
             <tr>
@@ -182,7 +182,7 @@
 
       <div v-if="kf.total > 0" class="pagination-bar">
         <div class="pagination-left">
-          <select v-model="kf.pageSize" class="page-size-select" @change="kfResetFetch">
+          <select v-model="kf.pageSize" class="page-size-select" aria-label="Facts per page" @change="kfResetFetch">
             <option :value="25">25 / page</option>
             <option :value="50">50 / page</option>
             <option :value="100">100 / page</option>
@@ -190,16 +190,16 @@
           </select>
         </div>
         <div class="pagination-center">
-          <button class="page-btn" :disabled="kf.page <= 1" @click="kfGoTo(1)">«</button>
-          <button class="page-btn" :disabled="kf.page <= 1" @click="kfGoTo(kf.page - 1)">‹</button>
+          <button class="page-btn" aria-label="First page" :disabled="kf.page <= 1" @click="kfGoTo(1)">«</button>
+          <button class="page-btn" aria-label="Previous page" :disabled="kf.page <= 1" @click="kfGoTo(kf.page - 1)">‹</button>
           <span class="page-info">
             Page
-            <input class="page-input" type="number" :min="1" :max="kfTotalPages" :value="kf.page"
+            <input class="page-input" aria-label="Facts page number" type="number" :min="1" :max="kfTotalPages" :value="kf.page"
               @change="kfGoTo(Number(($event.target as HTMLInputElement).value))" />
             of {{ kfTotalPages.toLocaleString() }}
           </span>
-          <button class="page-btn" :disabled="kf.page >= kfTotalPages" @click="kfGoTo(kf.page + 1)">›</button>
-          <button class="page-btn" :disabled="kf.page >= kfTotalPages" @click="kfGoTo(kfTotalPages)">»</button>
+          <button class="page-btn" aria-label="Next page" :disabled="kf.page >= kfTotalPages" @click="kfGoTo(kf.page + 1)">›</button>
+          <button class="page-btn" aria-label="Last page" :disabled="kf.page >= kfTotalPages" @click="kfGoTo(kfTotalPages)">»</button>
         </div>
         <div class="pagination-right">
           <span class="page-range">{{ kfRangeStart }}–{{ kfRangeEnd }} of {{ kf.total.toLocaleString() }}</span>
@@ -247,12 +247,12 @@
         <div class="modal">
           <h2>New Fact</h2>
           <form @submit.prevent="submitCreateFact">
-            <label class="form-label">Statement</label>
-            <textarea v-model="newFact.statement" rows="3" class="form-textarea" placeholder="State the biological fact clearly…" required></textarea>
-            <label class="form-label">Tags (comma-separated)</label>
-            <input v-model="newFactTagsRaw" type="text" class="form-input" placeholder="e.g. metabolism, DEB, energy" />
-            <label class="form-label">Confidence</label>
-            <input v-model.number="newFact.confidence" type="range" min="0" max="1" step="0.05" class="form-range" />
+            <label class="form-label" for="new-fact-statement">Statement</label>
+            <textarea id="new-fact-statement" v-model="newFact.statement" rows="3" class="form-textarea" placeholder="State the biological fact clearly…" required></textarea>
+            <label class="form-label" for="new-fact-tags">Tags (comma-separated)</label>
+            <input id="new-fact-tags" v-model="newFactTagsRaw" type="text" class="form-input" placeholder="e.g. metabolism, DEB, energy" />
+            <label class="form-label" for="new-fact-confidence">Confidence</label>
+            <input id="new-fact-confidence" v-model.number="newFact.confidence" type="range" min="0" max="1" step="0.05" class="form-range" />
             <span class="range-value">{{ Math.round((newFact.confidence ?? 0) * 100) }}%</span>
             <div class="modal-actions">
               <button type="button" class="btn-secondary" @click="showCreateModal = false">Cancel</button>
@@ -266,6 +266,7 @@
 </template>
 
 <script setup lang="ts">
+import { vScrollRegion } from '@/directives/scrollRegion'
 import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { formatDate } from '@/utils/format'
 import api from '@/utils/api'

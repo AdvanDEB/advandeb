@@ -13,8 +13,13 @@
 
       <div class="input-controls">
         <span class="hint">Enter to send · Shift+Enter for new line</span>
-        <button type="submit" :disabled="disabled || !text.trim()" class="send-btn">
-          <span v-if="disabled" class="spinner"></span>
+        <button
+          type="submit"
+          :disabled="disabled || !text.trim()"
+          class="send-btn"
+          :aria-label="disabled ? 'Sending…' : undefined"
+        >
+          <span v-if="disabled" class="spinner" aria-hidden="true"></span>
           <span v-else>Send</span>
         </button>
       </div>

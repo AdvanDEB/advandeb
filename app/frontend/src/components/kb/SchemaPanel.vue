@@ -113,7 +113,7 @@
       <div v-if="open.display" class="ob-section-body">
         <div class="ob-control-row">
           <span class="ob-ctrl-label">Node size</span>
-          <input type="range" min="0.5" max="3" step="0.1"
+          <input type="range" aria-label="Node size" min="0.5" max="3" step="0.1"
             :value="localDisplay.nodeSizeScale"
             @input="setDisplayNum('nodeSizeScale', $event)"
           />
@@ -121,7 +121,7 @@
         </div>
         <div class="ob-control-row">
           <span class="ob-ctrl-label">Link width</span>
-          <input type="range" min="0.5" max="3" step="0.1"
+          <input type="range" aria-label="Link width" min="0.5" max="3" step="0.1"
             :value="localDisplay.linkWidthScale"
             @input="setDisplayNum('linkWidthScale', $event)"
           />
@@ -148,7 +148,7 @@
         <template v-if="localDisplay.linkParticles">
           <div class="ob-control-row">
             <span class="ob-ctrl-label">Particle count</span>
-            <input type="range" min="1" max="6" step="1"
+            <input type="range" aria-label="Particle count" min="1" max="6" step="1"
               :value="localDisplay.linkParticleCount"
               @input="setDisplayNum('linkParticleCount', $event)"
             />
@@ -156,7 +156,7 @@
           </div>
           <div class="ob-control-row">
             <span class="ob-ctrl-label">Particle speed</span>
-            <input type="range" min="0.3" max="3" step="0.1"
+            <input type="range" aria-label="Particle speed" min="0.3" max="3" step="0.1"
               :value="localDisplay.linkParticleSpeed"
               @input="setDisplayNum('linkParticleSpeed', $event)"
             />
@@ -175,7 +175,7 @@
       <div v-if="open.forces" class="ob-section-body">
         <div class="ob-control-row">
           <span class="ob-ctrl-label">Repulsion</span>
-          <input type="range" min="0.1" max="10" step="0.1"
+          <input type="range" aria-label="Repulsion" min="0.1" max="10" step="0.1"
             :value="localDisplay.repulsion"
             @input="setDisplayNum('repulsion', $event)"
           />
@@ -183,7 +183,7 @@
         </div>
         <div class="ob-control-row">
           <span class="ob-ctrl-label">Link dist.</span>
-          <input type="range" min="1" max="100" step="1"
+          <input type="range" aria-label="Link distance" min="1" max="100" step="1"
             :value="localDisplay.linkDistance"
             @input="setDisplayNum('linkDistance', $event)"
           />
@@ -191,7 +191,7 @@
         </div>
         <div class="ob-control-row">
           <span class="ob-ctrl-label">Gravity</span>
-          <input type="range" min="0" max="1" step="0.01"
+          <input type="range" aria-label="Gravity" min="0" max="1" step="0.01"
             :value="localDisplay.gravity"
             @input="setDisplayNum('gravity', $event)"
           />

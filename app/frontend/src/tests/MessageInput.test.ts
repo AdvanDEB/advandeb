@@ -43,4 +43,13 @@ describe('MessageInput', () => {
     await wrapper.find('form').trigger('submit')
     expect(wrapper.emitted('send')).toBeFalsy()
   })
+
+  it('names the Send button while it only shows a spinner (F-028)', () => {
+    const sending = mount(MessageInput, { props: { disabled: true } })
+    expect(sending.find('.send-btn').attributes('aria-label')).toBe('Sending…')
+    expect(sending.find('.send-btn .spinner').attributes('aria-hidden')).toBe('true')
+    const idle = mount(MessageInput, { props: { disabled: false } })
+    expect(idle.find('.send-btn').attributes('aria-label')).toBeUndefined()
+    expect(idle.find('.send-btn').text()).toBe('Send')
+  })
 })
