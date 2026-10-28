@@ -15,17 +15,29 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from advandeb_kb.database.arango_client import ArangoDatabase
+from advandeb_kb.database.text_search import (
+    FACTS_VIEW,
+    STYLIZED_FACTS_VIEW,
+    TEXT_ANALYZER,
+    TextSearchView,
+)
 from advandeb_kb.models.knowledge import Document, Fact, StylizedFact, FactSFRelation
 from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 
 logger = logging.getLogger(__name__)
 
 _executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="knowledge-svc")
+
+# How long a missing search view is remembered before looking for it again.
+_VIEW_RECHECK_SECONDS = 60.0
+# Views whose absence has been logged (once per process, not per instance).
+_fallback_warned: set = set()
 
 
 def _now_iso() -> str:
@@ -36,9 +48,10 @@ def _doc_to_model(raw: dict, model_cls):
     """Map ArangoDB _key → _id (ObjectId alias) and return a pydantic model."""
     if raw is None:
         return None
-    # ArangoDB uses _key; our models use _id as the ObjectId alias
+    # Our models use _id as the ObjectId alias, which is the ArangoDB _key.
+    # ArangoDB's own _id ("facts/<key>") is always present and must not win.
     raw = dict(raw)
-    if "_key" in raw and "_id" not in raw:
+    if "_key" in raw:
         raw["_id"] = raw["_key"]
     return model_cls(**raw)
 
@@ -46,6 +59,8 @@ def _doc_to_model(raw: dict, model_cls):
 class KnowledgeService:
     def __init__(self, database: ArangoDatabase):
         self.db = database
+        # view name -> (exists, time.monotonic() of the check)
+        self._view_checks: Dict[str, tuple] = {}
 
     # ------------------------------------------------------------------
     # Internal: run synchronous ArangoDB calls in thread pool
@@ -375,35 +390,27 @@ class KnowledgeService:
         general_domain: Optional[str] = None,
         limit: int = 20,
     ) -> List[Fact]:
-        """Full-text search over fact content via ArangoDB FULLTEXT index."""
-        # Build FULLTEXT-compatible query — prefix search on each word
-        ft_terms = ",".join(f"prefix:{w}" for w in query.split() if len(w) > 2)
-        if not ft_terms:
-            return []
-        bind: Dict[str, Any] = {"query": ft_terms, "limit": limit, "domain": general_domain}
-        aql = """
-        FOR doc IN FULLTEXT('facts', 'content', @query)
-            FILTER @domain == null OR doc.general_domain == @domain
-            LIMIT @limit
-            RETURN doc
+        """Keyword search over fact content, best matches first.
+
+        BM25 over the ArangoSearch view on ``facts.content``: the query is
+        stemmed and stop words dropped, any term may match, and facts with more
+        and rarer query terms rank higher. Without the view, falls back to an
+        unranked case-insensitive substring scan of every fact.
         """
-        # Fall back to LIKE search if fulltext index not on 'content'
-        try:
-            rows = await self._run(self.db.aql, aql, bind)
-        except Exception:
-            # Fallback: substring filter (slower but always works)
-            bind2: Dict[str, Any] = {"q": f"%{query}%", "limit": limit}
-            f = "FILTER @domain == null OR doc.general_domain == @domain\n" if general_domain else ""
-            if general_domain:
-                bind2["domain"] = general_domain
-            aql2 = f"""
-            FOR doc IN facts
-                FILTER LIKE(doc.content, @q, true)
-                {f}
-                LIMIT @limit
-                RETURN doc
-            """
-            rows = await self._run(self.db.aql, aql2, bind2)
+        if not query.strip():
+            return []
+
+        def _search():
+            rows = self._bm25_search(
+                FACTS_VIEW, query, {"general_domain": general_domain}, limit
+            )
+            if rows is None:
+                rows = self._like_search(
+                    "facts", "content", query, {"general_domain": general_domain}, limit
+                )
+            return rows
+
+        rows = await self._run(_search)
         return [_doc_to_model(r, Fact) for r in rows]
 
     async def search_stylized_facts(
@@ -412,20 +419,114 @@ class KnowledgeService:
         category: Optional[str] = None,
         limit: int = 20,
     ) -> List[StylizedFact]:
-        """Case-insensitive substring search over stylized fact statements."""
-        bind: Dict[str, Any] = {"q": f"%{query}%", "limit": limit}
-        filters = ["LIKE(doc.statement, @q, true)"]
-        if category:
-            filters.append("doc.category == @category")
-            bind["category"] = category
+        """Keyword search over stylized fact statements, best matches first.
+
+        Same as :meth:`search_facts`, over the view on ``stylized_facts.statement``.
+        """
+        if not query.strip():
+            return []
+
+        def _search():
+            rows = self._bm25_search(
+                STYLIZED_FACTS_VIEW, query, {"category": category}, limit
+            )
+            if rows is None:
+                rows = self._like_search(
+                    "stylized_facts", "statement", query, {"category": category}, limit
+                )
+            return rows
+
+        rows = await self._run(_search)
+        return [_doc_to_model(r, StylizedFact) for r in rows]
+
+    def _view_ready(self, view: str) -> bool:
+        # A view, once seen, is assumed to stay; a failing query forgets it.
+        # A missing one is looked for again after _VIEW_RECHECK_SECONDS, so
+        # creating it takes effect without a restart.
+        exists, checked_at = self._view_checks.get(view, (False, None))
+        now = time.monotonic()
+        if exists or (checked_at is not None and now - checked_at < _VIEW_RECHECK_SECONDS):
+            return exists
+        try:
+            exists = self.db.has_view(view)
+        except Exception as exc:
+            logger.warning("Keyword search: could not check view %r: %s", view, exc)
+            exists = False
+        self._view_checks[view] = (exists, now)
+        return exists
+
+    def _bm25_search(
+        self,
+        view: TextSearchView,
+        query: str,
+        filters: Dict[str, Optional[str]],
+        limit: int,
+    ) -> Optional[List[dict]]:
+        """BM25-ranked rows from ``view``, or None when the view is unusable."""
+        if not self._view_ready(view.name):
+            if view.name not in _fallback_warned:
+                _fallback_warned.add(view.name)
+                logger.warning(
+                    "Keyword search: ArangoSearch view %r not found; falling back to "
+                    "an unranked LIKE scan of %s. Create it with "
+                    "knowledge-builder/scripts/setup_facts_search_views.py.",
+                    view.name, view.collection,
+                )
+            return None
+        bind: Dict[str, Any] = {
+            "@view": view.name,
+            "query": query,
+            "analyzer": TEXT_ANALYZER,
+            "limit": limit,
+        }
+        clauses = ""
+        for field, value in filters.items():
+            if not value:
+                continue
+            # Equality in SEARCH on a field the view does not index matches
+            # nothing, silently.
+            if field not in view.filter_fields:
+                raise ValueError(f"{field!r} is not indexed in view {view.name!r}")
+            clauses += f" AND doc.{field} == @{field}"
+            bind[field] = value
         aql = f"""
-        FOR doc IN stylized_facts
-            FILTER {' AND '.join(filters)}
+        FOR doc IN @@view
+            SEARCH ANALYZER(doc.{view.text_field} IN TOKENS(@query, @analyzer), @analyzer){clauses}
+            SORT BM25(doc) DESC
             LIMIT @limit
             RETURN doc
         """
-        rows = await self._run(self.db.aql, aql, bind)
-        return [_doc_to_model(r, StylizedFact) for r in rows]
+        try:
+            return self.db.aql(aql, bind)
+        except Exception as exc:
+            logger.warning(
+                "Keyword search over view %r failed, falling back to LIKE: %s", view.name, exc
+            )
+            self._view_checks.pop(view.name, None)
+            return None
+
+    def _like_search(
+        self,
+        collection: str,
+        field: str,
+        query: str,
+        filters: Dict[str, Optional[str]],
+        limit: int,
+    ) -> List[dict]:
+        """Case-insensitive substring match on ``field``: a full scan, unranked."""
+        bind: Dict[str, Any] = {"q": f"%{query}%", "limit": limit}
+        conditions = [f"LIKE(doc.{field}, @q, true)"]
+        for name, value in filters.items():
+            if value:
+                conditions.append(f"doc.{name} == @{name}")
+                bind[name] = value
+        aql = f"""
+        FOR doc IN {collection}
+            FILTER {' AND '.join(conditions)}
+            LIMIT @limit
+            RETURN doc
+        """
+        return self.db.aql(aql, bind)
 
     async def search(
         self,

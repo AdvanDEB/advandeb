@@ -36,7 +36,9 @@ $PY knowledge-builder/scripts/setup_chunks_search_view.py --production --apply -
 ```
 
 The retrieval agent picks the view up within 10 minutes (or restart the agent
-stack). Undo: drop view `chunks_text_search`, then analyzer `advandeb_text_en`.
+stack). Undo: drop view `chunks_text_search`. The analyzer `advandeb_text_en`
+is shared with the facts / stylized-facts views (`setup_facts_search_views.py`);
+drop it only once no view uses it (ArangoDB refuses while one does).
 
 ## 3. Corpus repair (`repair_corpus.py`)
 

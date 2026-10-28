@@ -98,6 +98,12 @@ class Settings:
     # (created by knowledge-builder/scripts/setup_chunks_search_view.py).
     RETRIEVAL_CHUNKS_VIEW: str = getenv("RETRIEVAL_CHUNKS_VIEW", "chunks_text_search")
     RETRIEVAL_TEXT_ANALYZER: str = getenv("RETRIEVAL_TEXT_ANALYZER", "advandeb_text_en")
+    # ArangoSearch views over facts.content and stylized_facts.statement, same
+    # analyzer: BM25 for KnowledgeService.search_facts / search_stylized_facts
+    # (created by knowledge-builder/scripts/setup_facts_search_views.py).
+    # Until they exist, search falls back to an unranked LIKE scan.
+    FACTS_SEARCH_VIEW: str = getenv("FACTS_SEARCH_VIEW", "facts_text_search")
+    STYLIZED_FACTS_SEARCH_VIEW: str = getenv("STYLIZED_FACTS_SEARCH_VIEW", "stylized_facts_text_search")
     # Ollama model for the LLM reranker (CHAT_USE_RERANKING). Must be
     # installed; a missing model disables reranking with one warning.
     RERANK_MODEL: str = getenv("RERANK_MODEL", "gemma3:latest")

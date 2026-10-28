@@ -71,9 +71,16 @@ holds only for the older schemas.
 | `stylized_facts` | 1,236 | General biological principles — the conceptual backbone. |
 | `provenance_traces` | **0** | See "Provenance" below. Dead schema. |
 
-Full-text indexes: `documents.content`, `documents.abstract`, `facts.text`,
-`stylized_facts.description`, `chunks.text`. These back the keyword half of
-`HybridRetrievalService`'s RRF fusion.
+Keyword search: ArangoSearch views, BM25-ranked, all with the analyzer
+`advandeb_text_en` — `chunks_text_search` on `chunks.text` (the keyword half of
+`HybridRetrievalService`'s RRF fusion), `facts_text_search` on `facts.content`
+and `stylized_facts_text_search` on `stylized_facts.statement`
+(`KnowledgeService.search_facts` / `search_stylized_facts`). Created by
+`knowledge-builder/scripts/setup_chunks_search_view.py` and
+`setup_facts_search_views.py`. FULLTEXT indexes (deprecated by ArangoDB) remain
+on `documents.content`, `documents.abstract` and `chunks.text`; the ones on
+`facts.text` and `stylized_facts.description` indexed attributes no document has
+and are no longer created.
 
 ## Edge collections
 

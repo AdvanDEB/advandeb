@@ -197,9 +197,10 @@ listed in `knowledge-builder/pyproject.toml`, but nothing imports it.
 `HybridRetrievalService` is the core of the anti-hallucination design:
 
 1. **Vector search** — cosine similarity over ChromaDB embeddings
-2. **Keyword search** — ArangoDB full-text indexes (`documents.content`,
-   `documents.abstract`, `facts.text`, `stylized_facts.description`,
-   `chunks.text`), with a MongoDB fallback
+2. **Keyword search** — BM25 over the ArangoSearch view `chunks_text_search`
+   on `chunks.text`, with a MongoDB `$text` fallback while the view is missing
+   (facts and stylized facts have views of their own for
+   `KnowledgeService.search_facts` / `search_stylized_facts`)
 3. **RRF fusion** — Reciprocal Rank Fusion combines the two ranked lists
 4. **LLM reranking** — optional, via Ollama, over the top candidates
 

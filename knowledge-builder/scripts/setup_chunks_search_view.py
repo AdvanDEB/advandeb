@@ -45,23 +45,7 @@ from typing import Optional
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from advandeb_kb.config.settings import settings  # noqa: E402
-
-# Lucene's default English stop set (EnglishAnalyzer.ENGLISH_STOP_WORDS_SET).
-STOPWORDS = [
-    "a", "an", "and", "are", "as", "at", "be", "but", "by", "for", "if", "in",
-    "into", "is", "it", "no", "not", "of", "on", "or", "such", "that", "the",
-    "their", "then", "there", "these", "they", "this", "to", "was", "will", "with",
-]
-
-ANALYZER_TYPE = "text"
-ANALYZER_PROPERTIES = {
-    "locale": "en",
-    "case": "lower",
-    "accent": False,
-    "stemming": True,
-    "stopwords": STOPWORDS,
-}
-ANALYZER_FEATURES = ["frequency", "norm"]
+from advandeb_kb.database import text_search as ts  # noqa: E402
 
 COLLECTION = "chunks"
 SCRATCH_MARKERS = ("scratch", "_test", "test_", "sandbox", "tmp")
@@ -125,34 +109,12 @@ def link_stats(db_name: str) -> Optional[dict]:
     return None
 
 
-def analyzer_state(db, name: str) -> str:
-    """'missing', 'ok' or a description of the mismatch."""
-    try:
-        existing = db.analyzer(name)
-    except Exception:
-        return "missing"
-    props = existing.get("properties", {})
-    diffs = [k for k, v in ANALYZER_PROPERTIES.items() if props.get(k) != v]
-    if existing.get("type") != ANALYZER_TYPE:
-        diffs.append("type")
-    if sorted(existing.get("features", [])) != sorted(ANALYZER_FEATURES):
-        diffs.append("features")
-    return "ok" if not diffs else f"differs in {', '.join(diffs)}"
-
-
 def view_state(db, view: str, analyzer: str) -> str:
     if not any(v["name"] == view for v in db.views()):
         return "missing"
     props = db.view(view)
     link = (props.get("links") or {}).get(COLLECTION)
-    if not link:
-        return "link missing"
-    fields = link.get("fields", {})
-    want = link_definition(analyzer)["fields"]
-    for field, spec in want.items():
-        if sorted(fields.get(field, {}).get("analyzers", [])) != sorted(spec["analyzers"]):
-            return f"field {field!r} differs"
-    return "ok"
+    return ts.link_state(link, link_definition(analyzer)["fields"])
 
 
 def count_indexed(db, view: str) -> int:
@@ -199,7 +161,7 @@ def main() -> int:
 
     db = connect(args.db)
     total = db.collection(COLLECTION).count()
-    a_state = analyzer_state(db, args.analyzer)
+    a_state = ts.analyzer_state(db, args.analyzer)
     v_state = view_state(db, args.view, args.analyzer)
     print(f"{COLLECTION}: {total:,} documents")
     print(f"analyzer {args.analyzer}: {a_state}")
@@ -248,12 +210,7 @@ def main() -> int:
         print(f"arangod RSS before: {rss_before:.1f} GB")
 
     if a_state == "missing":
-        db.create_analyzer(
-            args.analyzer,
-            analyzer_type=ANALYZER_TYPE,
-            properties=ANALYZER_PROPERTIES,
-            features=ANALYZER_FEATURES,
-        )
+        ts.create_analyzer(db, args.analyzer)
         print(f"Created analyzer {args.analyzer}")
 
     links = {COLLECTION: link_definition(args.analyzer)}

@@ -93,12 +93,12 @@ NAMED_GRAPHS = {
     },
 }
 
-# ArangoDB full-text index fields (enables keyword search)
+# ArangoDB full-text index fields (enables keyword search). FULLTEXT indexes are
+# deprecated; facts.content and stylized_facts.statement are searched through
+# ArangoSearch views instead (advandeb_kb.database.text_search).
 FULLTEXT_INDEXES = [
     ("documents", "content"),
     ("documents", "abstract"),
-    ("facts", "text"),
-    ("stylized_facts", "description"),
     ("chunks", "text"),
 ]
 
@@ -319,6 +319,10 @@ class ArangoDatabase:
     # ------------------------------------------------------------------
     # Full-text & keyword search
     # ------------------------------------------------------------------
+
+    def has_view(self, name: str) -> bool:
+        """Whether an ArangoSearch view of that name exists."""
+        return any(v["name"] == name for v in self.db.views())
 
     def keyword_search(
         self, collection: str, field: str, query: str, limit: int = 20
