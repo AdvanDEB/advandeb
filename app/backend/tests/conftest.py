@@ -16,8 +16,12 @@ import tempfile
 
 _UNREACHABLE_MONGO = "mongodb://127.0.0.1:1/never_used"
 
-os.environ["MONGODB_URI"] = _UNREACHABLE_MONGO
-os.environ["MONGODB_URL"] = _UNREACHABLE_MONGO          # advandeb_kb settings
+# A throwaway mongod named explicitly through TEST_MONGODB_URI (for the
+# database-backed tests that ask for one) may stand in; nothing else may.
+_TEST_MONGO = os.environ.get("TEST_MONGODB_URI") or _UNREACHABLE_MONGO
+
+os.environ["MONGODB_URI"] = _TEST_MONGO
+os.environ["MONGODB_URL"] = _TEST_MONGO                 # advandeb_kb settings
 os.environ["ARANGO_URL"] = "http://127.0.0.1:1"
 os.environ["ENVIRONMENT"] = "development"
 os.environ["JWT_SECRET_KEY"] = "test-secret-key-for-unit-tests-only-0123456789"
