@@ -31,7 +31,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "lib"))
 import envfile  # noqa: E402
 
 SECRETS_DIR = Path.home() / ".config" / "advandeb"
-HOST = "localhost:27017"
+# 127.0.0.1, not localhost: once the port is published on IPv4 loopback only,
+# "localhost" first resolves to ::1 and is refused before falling back.
+HOST = "127.0.0.1:27017"
 
 #: Databases the AdvanDEB web app, agents and ops scripts use. Scratch
 #: databases are listed explicitly: MongoDB grants have no wildcards, so a

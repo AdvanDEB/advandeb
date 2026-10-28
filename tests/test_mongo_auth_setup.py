@@ -22,7 +22,7 @@ def mas(tmp_path, monkeypatch):
 
 def test_uri_escapes_credentials(mas):
     uri = mas.uri_for("advandeb_app", "p@ss:w/rd")
-    assert uri.startswith("mongodb://advandeb_app:") and uri.endswith("@localhost:27017/?authSource=admin")
+    assert uri.startswith("mongodb://advandeb_app:") and uri.endswith("@127.0.0.1:27017/?authSource=admin")
     userinfo = uri.split("://", 1)[1].rsplit("@", 1)[0]
     assert unquote_plus(userinfo.split(":", 1)[1]) == "p@ss:w/rd"
 
@@ -46,7 +46,7 @@ def test_write_env_sets_uri_and_keeps_the_rest(mas, tmp_path, monkeypatch, capsy
     text = env_file.read_text()
     assert "MONGODB_DB_NAME=advandeb\n" in text
     assert text.count("MONGODB_URI=") == 1
-    assert "@localhost:27017/?authSource=admin" in text
+    assert "@127.0.0.1:27017/?authSource=admin" in text
     assert stat.S_IMODE(env_file.stat().st_mode) == 0o600
     assert password not in capsys.readouterr().out
 
