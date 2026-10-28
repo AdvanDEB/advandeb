@@ -15,12 +15,21 @@
       <p v-if="loading" class="muted">Loading…</p>
       <div v-else class="toggle-row">
         <label class="switch">
-          <input type="checkbox" :checked="optedIn" :disabled="saving" @change="onToggle" />
+          <!-- The visible wording sits in a sibling div, not in this label, so
+               the checkbox names itself from it explicitly. -->
+          <input
+            type="checkbox"
+            :checked="optedIn"
+            :disabled="saving"
+            aria-labelledby="chat-access-state"
+            aria-describedby="chat-access-detail"
+            @change="onToggle"
+          />
           <span class="slider"></span>
         </label>
         <div class="toggle-label">
-          <strong>{{ optedIn ? 'Staff can view my chats' : "Staff can't view my chats" }}</strong>
-          <p class="muted">
+          <strong id="chat-access-state">{{ optedIn ? 'Staff can view my chats' : "Staff can't view my chats" }}</strong>
+          <p id="chat-access-detail" class="muted">
             {{ optedIn
               ? 'Administrators may open your conversation history for research review.'
               : 'You have opted out — administrators cannot open your conversation history.' }}
