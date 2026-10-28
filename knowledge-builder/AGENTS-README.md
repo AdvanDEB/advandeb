@@ -156,7 +156,7 @@ python scripts/start_agents.py --stop
 ### 4. Verify Agents Are Running
 
 ```bash
-python test_agents_basic.py
+python scripts/manual_checks/check_agents_basic.py
 ```
 
 Expected output:
@@ -337,7 +337,7 @@ tail -f logs/agents/retrieval.log
    python -c "from advandeb_kb.agents.retrieval_agent import RetrievalAgent"
    
    # Test services
-   python test_agents_basic.py
+   python scripts/manual_checks/check_agents_basic.py
    ```
 3. **Check ports**: Make sure ports 8081-8085 are not already in use
    ```bash

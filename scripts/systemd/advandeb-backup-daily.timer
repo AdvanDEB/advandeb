@@ -1,0 +1,13 @@
+[Unit]
+Description=AdvanDEB daily backup (MongoDB app databases + ArangoDB)
+
+[Timer]
+# Monday to Saturday; Sunday runs the weekly profile, which includes all of this.
+OnCalendar=Mon..Sat *-*-* 03:15
+# Catch up after the machine was off at 03:15.
+Persistent=true
+RandomizedDelaySec=10min
+Unit=advandeb-backup@daily.service
+
+[Install]
+WantedBy=timers.target

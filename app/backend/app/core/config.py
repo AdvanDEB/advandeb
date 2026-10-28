@@ -116,6 +116,11 @@ class Settings(BaseSettings):
     # schema, which grows without bound as conversations accumulate.
     GRAPH_ARTIFACT_MAX_NODES: int = 50000
 
+    # The KB reset truncates canonical ArangoDB collections; it is refused
+    # unless a backup of that database (scripts/backup/) is at most this old.
+    # 26 h = one daily backup plus slack for a late run.
+    KB_RESET_MAX_BACKUP_AGE_HOURS: float = 26.0
+
     # MongoDB connection pool
     MONGO_MAX_POOL_SIZE: int = 10
 

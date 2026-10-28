@@ -174,9 +174,21 @@ class ArangoDatabase:
     # Schema setup
     # ------------------------------------------------------------------
 
-    def setup_schema(self, drop_existing: bool = False) -> None:
-        """Create all collections, edge collections, indexes, and named graphs."""
+    def setup_schema(self, drop_existing: bool = False, confirm_drop: Optional[str] = None) -> None:
+        """Create all collections, edge collections, indexes, and named graphs.
+
+        ``drop_existing`` deletes every collection first, so it also needs
+        ``confirm_drop`` set to this database's name and a recent backup of it.
+        """
         if drop_existing:
+            from advandeb_kb.backup_guard import require_recent_backup
+
+            if confirm_drop != self.db.name:
+                raise ValueError(
+                    f"setup_schema(drop_existing=True) deletes every collection in "
+                    f"{self.db.name!r}; pass confirm_drop={self.db.name!r} to proceed."
+                )
+            require_recent_backup(f"arango:{self.db.name}")
             self._drop_all()
 
         self._create_collections()

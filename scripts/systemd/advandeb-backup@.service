@@ -1,0 +1,19 @@
+[Unit]
+Description=AdvanDEB backup (%i profile)
+Documentation=file:///home/adeb/dev/advandeb/scripts/backup/README.md
+# Read-only against MongoDB, ArangoDB and ChromaDB; writes only under
+# ADVANDEB_BACKUP_DIR. Triggered by advandeb-backup-daily/weekly.timer.
+After=network.target arangodb3.service
+
+[Service]
+Type=oneshot
+User=adeb
+Group=adeb
+WorkingDirectory=/home/adeb/dev/advandeb
+Environment=ADVANDEB_BACKUP_DIR=/home/adeb/backups/advandeb
+ExecStart=/home/adeb/miniforge3/envs/advandeb/bin/python \
+    /home/adeb/dev/advandeb/scripts/backup/advandeb_backup.py --profile %i
+# Stay out of the way of the web app and the agents.
+Nice=10
+IOSchedulingClass=idle
+TimeoutStartSec=6h

@@ -60,7 +60,9 @@ def get_arango_db():
     url  = os.environ.get("ARANGO_URL",      "http://localhost:8529")
     name = os.environ.get("ARANGO_DB_NAME",  "advandeb_kb")
     user = os.environ.get("ARANGO_USERNAME", "root")
-    pwd  = os.environ.get("ARANGO_PASSWORD", "sparusaurata")
+    pwd  = os.environ.get("ARANGO_PASSWORD")
+    if not pwd:
+        sys.exit("ARANGO_PASSWORD is not set; source app/backend/.env first.")
     client = ArangoClient(hosts=url)
     return client.db(name, username=user, password=pwd)
 
@@ -107,6 +109,27 @@ def _bulk_insert(col, docs, overwrite=True):
 # ---------------------------------------------------------------------------
 # Step 1 — wipe ArangoDB collections
 # ---------------------------------------------------------------------------
+
+def guard_wipe(adb, confirm):
+    """Refuse the wipe unless the database name is typed back and a backup exists.
+
+    The wipe used to run by default (``--resume-from`` defaults to "wipe"), so
+    invoking the script with no arguments truncated every collection,
+    stylized_facts and taxa included.
+    """
+    from advandeb_kb.backup_guard import NoRecentBackupError, require_recent_backup
+
+    if confirm != adb.name:
+        sys.exit(
+            f"refusing to wipe ArangoDB {adb.name!r}: pass --confirm-wipe {adb.name} "
+            f"to truncate every collection, or --resume-from <step> to skip the wipe."
+        )
+    try:
+        backup = require_recent_backup(f"arango:{adb.name}")
+    except NoRecentBackupError as exc:
+        sys.exit(f"refusing to wipe: {exc}")
+    log.info("wipe confirmed; restore point: %s", backup["_path"])
+
 
 def step_wipe(adb):
     log.info("=== Step 1: Wiping ArangoDB collections ===")
@@ -615,6 +638,8 @@ def main():
         choices=["wipe","taxa","taxonomical","stylized_facts","documents",
                  "facts","chunks","chunk_belongs_to","sf_support","citations","verify"],
         help="Skip earlier steps and resume from this step")
+    parser.add_argument("--confirm-wipe", metavar="DB_NAME",
+        help="Required for the wipe step: the ArangoDB database name, typed back")
     args = parser.parse_args()
     rf = args.resume_from
 
@@ -628,7 +653,9 @@ def main():
              "facts","chunks","chunk_belongs_to","sf_support","citations","verify"]
     run_from = steps.index(rf)
 
-    if run_from <= steps.index("wipe"):             step_wipe(adb)
+    if run_from <= steps.index("wipe"):
+        guard_wipe(adb, args.confirm_wipe)
+        step_wipe(adb)
     if run_from <= steps.index("taxa"):             step_taxa(mongo_kb, adb)
     if run_from <= steps.index("taxonomical"):      step_taxonomical(mongo_kb, adb)
     if run_from <= steps.index("stylized_facts"):   step_stylized_facts(mongo_kb, adb)

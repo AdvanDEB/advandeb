@@ -262,6 +262,11 @@ export interface ResetPreview {
   clears: { name: string; count: number }[]
   keeps: { name: string; count: number }[]
   total_rows: number
+  /** The ArangoDB database name; the reset only proceeds if it is typed back. */
+  database: string
+  /** Newest successful backup of this database, or null if there is none. */
+  latest_backup: { path: string; finished_at: string; age_hours: number } | null
+  max_backup_age_hours: number
 }
 
 /** What a reset would clear, straight from the list the reset itself uses. */
@@ -273,8 +278,10 @@ export async function fetchResetPreview(): Promise<ResetPreview> {
 // NOTE: the response key is `cleared`, not `deleted`. This interface previously
 // declared `deleted`, so the success dialog rendered "Deleted: undefined" after
 // every reset — a hand-written type can't be checked against the server.
-export async function resetKnowledgeBase(): Promise<{ status: string; cleared: Record<string, number> }> {
-  const { data } = await api.post('/kb/db/reset')
+export async function resetKnowledgeBase(
+  confirm: string,
+): Promise<{ status: string; cleared: Record<string, number>; restore_point: string }> {
+  const { data } = await api.post('/kb/db/reset', { confirm })
   return data
 }
 

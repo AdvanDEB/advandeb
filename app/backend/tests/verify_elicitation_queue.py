@@ -25,6 +25,7 @@ sys.path.insert(0, "/home/adeb/dev/advandeb/app/backend")
 
 from bson import ObjectId
 from app.core.database import connect_to_mongo, get_database, close_mongo_connection
+from app.core.dbguard import assert_not_production
 from app.services.elicitation_service import ElicitationService
 from app.services.enrolment_service import EnrolmentService
 from app.models.elicitation import ElicitationDecision, CalibrationDecision
@@ -38,6 +39,8 @@ def check(label, got, want):
 
 async def main():
     await connect_to_mongo(); db = get_database()
+    # This drops `users` among others: check the handle in use, fail closed.
+    assert_not_production(db.name, "dropping fixture collections")
     for c in ("stylized_facts","elicitation_queue","elicitations","users",
               "elicitation_calibration","elicitation_calibration_results",
               "enrolment_requests"):

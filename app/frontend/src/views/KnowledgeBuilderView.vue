@@ -1158,16 +1158,37 @@ async function confirmReset() {
   }
   resetting.value = false
 
+  // The server refuses a reset without a recent backup; say so up front rather
+  // than after the admin has typed the confirmation.
+  const backup = preview.latest_backup
+  if (!backup || backup.age_hours > preview.max_backup_age_hours) {
+    alert(
+      backup
+        ? `The latest backup of ${preview.database} is ${backup.age_hours} h old ` +
+          `(limit ${preview.max_backup_age_hours} h). Run a fresh backup ` +
+          `(scripts/backup/advandeb_backup.py) before resetting.`
+        : `There is no backup of ${preview.database}. Run scripts/backup/advandeb_backup.py ` +
+          `before resetting: the reset cannot be undone without one.`
+    )
+    return
+  }
+
   const clears = preview.clears.map(c => `  • ${c.name} (${fmtNum(c.count)})`).join('\n')
   const keeps = preview.keeps.map(k => `${k.name} (${fmtNum(k.count)})`).join(', ')
-  if (!confirm(
+  const typed = prompt(
     `This permanently deletes ${fmtNum(preview.total_rows)} rows from ArangoDB:\n\n${clears}\n\n` +
-    `Kept: ${keeps}\n\nThis cannot be undone. Continue?`
-  )) return
+    `Kept: ${keeps}\nRestore point: ${backup.path} (${backup.age_hours} h old)\n\n` +
+    `Type the database name (${preview.database}) to confirm.`
+  )
+  if (typed === null) return
+  if (typed.trim() !== preview.database) {
+    alert('The name did not match. Nothing was deleted.')
+    return
+  }
 
   resetting.value = true
   try {
-    const result = await resetKnowledgeBase()
+    const result = await resetKnowledgeBase(typed.trim())
     const summary = Object.entries(result.cleared ?? {})
       .map(([name, n]) => `${name}: ${fmtNum(n)}`)
       .join('\n')

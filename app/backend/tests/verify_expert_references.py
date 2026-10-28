@@ -20,12 +20,16 @@ import sys
 import tempfile
 from types import SimpleNamespace
 
-os.environ.setdefault("MONGODB_DB_NAME", "advandeb_expertref_scratch")
+# Assigned, never setdefault: this script drops `documents` and
+# `stylized_facts`, and setdefault is a no-op once .env has exported
+# MONGODB_DB_NAME=advandeb — the exact mistake behind the production data loss.
+os.environ["MONGODB_DB_NAME"] = "advandeb_expertref_scratch"
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.core.database import (  # noqa: E402
     close_mongo_connection, connect_to_mongo, get_database,
 )
+from app.core.dbguard import assert_not_production  # noqa: E402
 from app.services import expert_reference_service as mod  # noqa: E402
 from app.services.expert_reference_service import (  # noqa: E402
     ExpertReferenceService, normalise_doi,
@@ -47,6 +51,8 @@ def ref(sf_number: int, doi: str, direction: str = "supports"):
 async def main() -> int:
     await connect_to_mongo()
     db = get_database()
+    # Check the handle actually in use, not the variable we hoped would apply.
+    assert_not_production(db.name, "dropping fixture collections")
     for c in ("expert_references", "documents", "stylized_facts"):
         await db[c].drop()
 

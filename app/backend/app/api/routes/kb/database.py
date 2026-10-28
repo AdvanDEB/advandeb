@@ -4,10 +4,15 @@ KB database admin API — inspects and manages ArangoDB KB collections.
 import asyncio
 import logging
 from concurrent.futures import ThreadPoolExecutor
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
+from advandeb_kb.backup_guard import (
+    NoRecentBackupError, backup_age_hours, latest_backup, require_recent_backup,
+)
 from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import BaseModel
 
+from app.core.config import settings
 from app.core.database import get_arango_db
 from app.core.dependencies import require_curator, require_admin
 
@@ -100,21 +105,61 @@ async def preview_reset(
             for name in ("taxa", "stylized_facts")
             if arango.db.has_collection(name)
         ]
-        return {"clears": clears, "keeps": kept, "total_rows": sum(c["count"] for c in clears)}
+        return {
+            "clears": clears,
+            "keeps": kept,
+            "total_rows": sum(c["count"] for c in clears),
+            "database": arango.db.name,
+            "latest_backup": _backup_summary(arango.db.name),
+            "max_backup_age_hours": settings.KB_RESET_MAX_BACKUP_AGE_HOURS,
+        }
 
     loop = asyncio.get_running_loop()
     return await loop.run_in_executor(_executor, _preview)
 
 
+def _backup_summary(db_name: str) -> Optional[Dict[str, Any]]:
+    manifest = latest_backup(f"arango:{db_name}")
+    if manifest is None:
+        return None
+    return {
+        "path": manifest["_path"],
+        "finished_at": manifest.get("finished_at"),
+        "age_hours": round(backup_age_hours(manifest), 1),
+    }
+
+
+class ResetRequest(BaseModel):
+    # The database name, typed back by the admin. A click alone must not be
+    # enough to truncate the canonical store.
+    confirm: str
+
+
 @router.post("/reset")
 async def reset_knowledge_base(
+    body: ResetRequest,
     current_user: dict = Depends(require_admin),
 ) -> Dict[str, Any]:
     """Clear all mutable KB data, keeping taxa and stylized_facts.
 
-    Requires administrator role.
+    Requires the administrator role, the database name typed back, and a
+    backup of this database newer than KB_RESET_MAX_BACKUP_AGE_HOURS — the
+    truncation cannot be undone any other way.
     """
     arango = get_arango_db()
+    db_name = arango.db.name
+    if body.confirm != db_name:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Confirmation does not match: type the database name {db_name!r}.",
+        )
+    try:
+        backup = require_recent_backup(
+            f"arango:{db_name}", settings.KB_RESET_MAX_BACKUP_AGE_HOURS)
+    except NoRecentBackupError as exc:
+        raise HTTPException(status_code=409, detail=str(exc))
+    logger.warning("KB reset of %s by user %s; restore point %s",
+                   db_name, current_user.get("id") or current_user.get("email"), backup["_path"])
 
     def _reset():
         result: Dict[str, int] = {}
@@ -128,7 +173,7 @@ async def reset_knowledge_base(
 
     loop = asyncio.get_running_loop()
     deleted = await loop.run_in_executor(_executor, _reset)
-    return {"status": "ok", "cleared": deleted}
+    return {"status": "ok", "cleared": deleted, "restore_point": backup["_path"]}
 
 
 @router.get("/collections")

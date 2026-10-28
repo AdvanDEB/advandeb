@@ -1,0 +1,11 @@
+[Unit]
+Description=AdvanDEB weekly backup (daily set + ChromaDB + deb_abstracts_reproduction)
+
+[Timer]
+OnCalendar=Sun *-*-* 03:15
+Persistent=true
+RandomizedDelaySec=10min
+Unit=advandeb-backup@weekly.service
+
+[Install]
+WantedBy=timers.target

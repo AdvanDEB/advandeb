@@ -8,7 +8,7 @@ import asyncio
 from pathlib import Path
 
 # Add project to path
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # knowledge-builder/
 
 async def test_imports():
     """Test that all agents can be imported."""
