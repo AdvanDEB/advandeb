@@ -571,7 +571,9 @@ export interface StylizedFactSuggestion {
 }
 
 export async function fetchDocumentSuggestions(status = 'suggestion', limit = 100): Promise<DocumentSuggestion[]> {
-  const { data } = await api.get('/documents', { params: { status, limit } })
+  // Trailing slash: the route is "/" under /api/documents. Without it the
+  // request 404s (the SPA catch-all answers before FastAPI's slash redirect).
+  const { data } = await api.get('/documents/', { params: { status, limit } })
   return data
 }
 
@@ -594,7 +596,7 @@ export async function approveDocument(
 }
 
 export async function fetchFactSuggestions(statusFilter = 'suggestion', limit = 100): Promise<FactSuggestion[]> {
-  const { data } = await api.get('/facts', { params: { status_filter: statusFilter, limit } })
+  const { data } = await api.get('/facts/', { params: { status_filter: statusFilter, limit } })
   return data
 }
 
