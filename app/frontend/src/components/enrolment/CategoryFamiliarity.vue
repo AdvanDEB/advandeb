@@ -149,8 +149,6 @@ function set(key: string, n: number) {
 </script>
 
 <style scoped>
-@import '@/styles/elicitation-tokens.css';
-
 .familiarity { display: flex; flex-direction: column; gap: var(--el-s4); }
 
 .pick { border: 0; padding: 0; margin: 0; }

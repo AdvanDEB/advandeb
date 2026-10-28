@@ -207,8 +207,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-@import '@/styles/elicitation-tokens.css';
-
 /* The navigation is a dark surface of its own; these are its local values, not
    a second design language. Everything else on the page uses the shared tokens. */
 .app-layout {
@@ -235,6 +233,9 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
   transition: width var(--el-t) var(--el-ease);
   overflow: hidden;
+  /* The rows below lay out by the rail's actual width (collapsed, hovered,
+     expanded or the phone drawer), see the @container rule. */
+  container-type: inline-size;
 }
 
 .sidebar.expanded { width: 200px; }
@@ -402,6 +403,18 @@ onBeforeUnmount(() => {
 .sidebar.expanded .logout-label { opacity: 1; }
 .logout-btn:hover { color: #fca5a5; background: var(--nav-hover); }
 .logout-btn:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+
+/* The collapsed rail is 60px: one 44px control per row. Side by side, the
+   expand toggle and the log-out button were pushed past its edge and clipped
+   (the toggle entirely, which on a tablet is the only way to read the labels),
+   and log out sat on top of the avatar. Stack them instead. */
+@container (max-width: 120px) {
+  .sidebar-brand { flex-direction: column; padding: 0; }
+  .brand-name, .user-name, .logout-label { display: none; }
+  .rail-toggle { margin-right: 0; }
+  .sidebar-footer { flex-direction: column; padding: var(--el-s2) 0 0; }
+  .user-info { flex: none; }
+}
 
 .main-content {
   flex: 1;

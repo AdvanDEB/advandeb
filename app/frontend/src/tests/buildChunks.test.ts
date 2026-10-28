@@ -24,6 +24,7 @@ const FEATURE_VENDORS = ['tdeb-vendor', 'plotly-vendor', 'cosmos-vendor', 'markd
 const root = fileURLToPath(new URL('../..', import.meta.url))
 
 let chunks: Rollup.OutputChunk[]
+let stylesheets: Rollup.OutputAsset[]
 let indexHtml: string
 
 beforeAll(async () => {
@@ -38,6 +39,7 @@ beforeAll(async () => {
     },
   })) as Rollup.RollupOutput
   chunks = out.output.filter((o): o is Rollup.OutputChunk => o.type === 'chunk')
+  stylesheets = out.output.filter((o): o is Rollup.OutputAsset => o.type === 'asset' && o.fileName.endsWith('.css'))
   const html = out.output.find(o => o.fileName === 'index.html') as Rollup.OutputAsset
   indexHtml = String(html.source)
 }, 120_000)
@@ -102,3 +104,22 @@ describe('vendorChunk', () => {
     expect(vendorChunk('/x/src/main.ts')).toBeUndefined()
   })
 })
+
+describe('production build: stylesheets', () => {
+  // A scoped block that declares or @imports :root compiles to
+  // [data-v-…]:root, which matches nothing (see scopedStyles.test.ts).
+  it('contain no scoped :root rule', () => {
+    const offenders = stylesheets
+      .filter(css => /\[data-v-[0-9a-f]+\]:root/.test(String(css.source)))
+      .map(css => css.fileName)
+    expect(offenders).toEqual([])
+  })
+
+  it('the stylesheet index.html links defines the elicitation tokens on :root', () => {
+    const href = indexHtml.match(/<link rel="stylesheet"[^>]*href="\/([^"]+\.css)"/)?.[1]
+    const css = String(stylesheets.find(s => s.fileName === href)?.source ?? '')
+    // Unscoped: start of file or after a rule/newline, not after [data-v-…].
+    expect(css).toMatch(/(?:^|[\s},]):root\s*\{[^}]*--el-accent:/)
+  })
+})
+

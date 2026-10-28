@@ -5,6 +5,9 @@ import router from './router'
 import { useAuthStore } from '@/stores/auth'
 import 'highlight.js/styles/github.css'
 import '@/styles/tokens.css'
+// Global, never @import-ed from a <style scoped> block: scoping rewrites its
+// :root to [data-v-…]:root, which matches nothing, and every --el-* is unset.
+import '@/styles/elicitation-tokens.css'
 
 const app = createApp(App)
 const pinia = createPinia()
