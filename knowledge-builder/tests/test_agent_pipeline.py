@@ -264,13 +264,14 @@ class TestSynthesisAgentCitations:
     def test_single_citation(self):
         result = self.agent._extract_citations("Energy [1] is key.", self._chunks(3))
         assert len(result) == 1
-        assert result[0]["number"] == 1
+        assert result[0]["marker"] == "1"
+        assert result[0]["source_type"] == "chunk"
         assert result[0]["chunk_id"] == "doc_chunk_0"
 
     def test_multiple_citations(self):
         result = self.agent._extract_citations("[1] and [3] confirm [2].", self._chunks(3))
-        nums = {c["number"] for c in result}
-        assert nums == {1, 2, 3}
+        markers = [c["marker"] for c in result]
+        assert markers == ["1", "2", "3"]
 
     def test_out_of_range_citation_ignored(self):
         result = self.agent._extract_citations("[5] is out of range.", self._chunks(3))

@@ -31,7 +31,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from advandeb_kb.database.mongodb import mongodb
+from motor.motor_asyncio import AsyncIOMotorClient
+
+from advandeb_kb.config.settings import settings
 from advandeb_kb.services.kg_builder_service import KGBuilderService
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -45,9 +47,9 @@ async def run(
     overwrite: bool,
     dry_run: bool,
 ) -> None:
-    await mongodb.connect()
+    client = AsyncIOMotorClient(settings.MONGODB_URL)
     try:
-        db = mongodb.database
+        db = client[settings.DATABASE_NAME]
         service = KGBuilderService(db)
         await service.ensure_indexes()
 
@@ -89,7 +91,7 @@ async def run(
             stats["total_documents"], stats["linked_documents"], stats["total_relations"],
         )
     finally:
-        await mongodb.disconnect()
+        client.close()
 
 
 def main() -> None:

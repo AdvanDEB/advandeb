@@ -23,10 +23,10 @@ logger = logging.getLogger(__name__)
 
 def _extract_pdf_text_sync(file_path: str) -> str:
     """Read and extract text from a PDF — runs in a thread pool."""
-    import PyPDF2
+    from pypdf import PdfReader
     text = ""
     with open(file_path, "rb") as f:
-        reader = PyPDF2.PdfReader(f)
+        reader = PdfReader(f)
         for page in reader.pages:
             text += page.extract_text() or ""
     return text

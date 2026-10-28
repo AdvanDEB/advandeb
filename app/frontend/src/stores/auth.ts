@@ -89,7 +89,7 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const response = await api.get('/users/me')
       user.value = response.data
-    } catch (error) {
+    } catch {
       clearSession()
     }
   }

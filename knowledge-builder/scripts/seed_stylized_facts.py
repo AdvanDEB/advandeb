@@ -24,8 +24,9 @@ from typing import List, Tuple
 # Allow running from the repo root without installing the package
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from motor.motor_asyncio import AsyncIOMotorClient
+
 from advandeb_kb.config.settings import settings
-from advandeb_kb.database.mongodb import mongodb
 from advandeb_kb.models.knowledge import StylizedFact
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
@@ -99,8 +100,8 @@ async def seed(csv_dir: str, dry_run: bool = False) -> dict:
             logger.info(f"  {cat}: {count}")
         return {"total": len(all_sfs), "inserted": 0, "updated": 0, "dry_run": True}
 
-    await mongodb.connect()
-    db = mongodb.database
+    client = AsyncIOMotorClient(settings.MONGODB_URL)
+    db = client[settings.DATABASE_NAME]
 
     inserted = 0
     updated = 0
@@ -130,7 +131,7 @@ async def seed(csv_dir: str, dry_run: bool = False) -> dict:
         elif result.matched_count:
             updated += 1
 
-    await mongodb.disconnect()
+    client.close()
 
     logger.info(f"Done — inserted: {inserted}, already existed: {updated}")
     return {"total": len(all_sfs), "inserted": inserted, "already_existed": updated}

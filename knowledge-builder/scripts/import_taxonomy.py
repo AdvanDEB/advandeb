@@ -43,8 +43,9 @@ from typing import Dict, Iterator, List, Optional, Set, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from motor.motor_asyncio import AsyncIOMotorClient
+
 from advandeb_kb.config.settings import settings
-from advandeb_kb.database.mongodb import mongodb
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -266,8 +267,8 @@ async def run_import(
             logger.info(f"  Sample: {d['tax_id']} {d['name']} ({d['rank']}) lineage={d['lineage'][-3:]}")
         return {"total": total, "inserted": 0, "dry_run": True}
 
-    await mongodb.connect()
-    db = mongodb.database
+    client = AsyncIOMotorClient(settings.MONGODB_URL)
+    db = client[settings.DATABASE_NAME]
     await ensure_indexes(db)
 
     inserted = 0
@@ -282,7 +283,7 @@ async def run_import(
     if batch:
         inserted += await insert_documents(db, batch)
 
-    await mongodb.disconnect()
+    client.close()
     logger.info(f"Done — {inserted:,} new nodes inserted ({total:,} total processed)")
     return {"total": total, "inserted": inserted}
 
