@@ -128,26 +128,114 @@ def test_page_csp_names_what_the_build_needs():
 
 
 # ── CSP reports ───────────────────────────────────────────────────────────── #
+#
+# A public endpoint built to accept arbitrary bodies. Re-review of 89d5995:
+# deep JSON nesting raised RecursionError (500 + traceback), a 5 MiB body was
+# read in full before the 16 KiB cap applied, and reports went to the shared
+# app log, where a flood could rotate real errors out.
 
-def test_csp_report_is_logged_and_answered_204(client, caplog):
-    report = {"csp-report": {
-        "document-uri": "https://advandeb.com/models/1",
-        "violated-directive": "style-src-elem",
-        "blocked-uri": "inline",
-        "original-policy": "x" * 5000,   # not logged
-    }}
-    with caplog.at_level(logging.WARNING, logger="app.core.security_headers"):
-        r = client.post("/api/csp-report", json=report,
+@pytest.fixture
+def csp_log(monkeypatch):
+    """The dedicated CSP report log (under the tests' temporary LOG_FILE dir)."""
+    import os
+    from app.core import security_headers
+    from app.core.config import settings
+
+    security_headers._seen.clear()
+    path = os.path.join(os.path.dirname(settings.LOG_FILE), "csp-reports.log")
+
+    def read():
+        for h in security_headers.csp_logger.handlers:
+            h.flush()
+        return open(path, encoding="utf-8").read() if os.path.exists(path) else ""
+    start = len(read())
+    return lambda: read()[start:]
+
+
+REPORT = {"csp-report": {
+    "document-uri": "https://advandeb.com/models/1",
+    "violated-directive": "style-src-elem",
+    "blocked-uri": "inline",
+    "original-policy": "x" * 5000,   # not logged
+}}
+
+
+def test_csp_report_goes_to_its_own_log_not_the_app_log(client, csp_log, caplog):
+    with caplog.at_level(logging.DEBUG):
+        r = client.post("/api/csp-report", json=REPORT,
                         headers={"Content-Type": "application/csp-report"})
     assert r.status_code == 204
-    line = caplog.records[-1].getMessage()
-    assert "violated-directive='style-src-elem'" in line
-    assert "original-policy" not in line
+    logged = csp_log()
+    assert "violated-directive='style-src-elem'" in logged
+    assert "original-policy" not in logged
+    assert not [rec for rec in caplog.records if "CSP report" in rec.getMessage()]  # not propagated
 
 
-def test_csp_report_tolerates_junk_and_cannot_inject_log_lines(client, caplog):
+def test_identical_reports_are_logged_once(client, csp_log):
+    for _ in range(5):
+        client.post("/api/csp-report", json=REPORT)
+    assert csp_log().count("CSP report:") == 1
+
+
+def test_extension_noise_is_dropped(client, csp_log):
+    for scheme in ("chrome-extension://abc/inject.js", "moz-extension://x/y.js", "safari-web-extension://z"):
+        r = client.post("/api/csp-report", json={"csp-report": {
+            "violated-directive": "script-src-elem", "blocked-uri": scheme}})
+        assert r.status_code == 204
+    assert csp_log() == ""
+
+
+def test_csp_report_tolerates_junk_and_cannot_inject_log_lines(client, csp_log):
     assert client.post("/api/csp-report", content=b"not json").status_code == 204
-    assert client.post("/api/csp-report", content=b"x" * 20000).status_code == 204
-    with caplog.at_level(logging.WARNING, logger="app.core.security_headers"):
-        client.post("/api/csp-report", json={"csp-report": {"blocked-uri": "a\nFAKE LOG LINE"}})
-    assert "\n" not in caplog.records[-1].getMessage()
+    assert client.post("/api/csp-report", json=["a list"]).status_code == 204
+    client.post("/api/csp-report", json={"csp-report": {"blocked-uri": "a\nFAKE LOG LINE"}})
+    lines = [line for line in csp_log().splitlines() if line]
+    assert len(lines) == 1 and "FAKE LOG LINE" in lines[0]
+
+
+def test_deeply_nested_json_is_not_a_500(client, csp_log):
+    body = b"[" * 8000 + b"]" * 8000            # inside the 16 KiB cap
+    r = client.post("/api/csp-report", content=body, headers={"Content-Type": "application/json"})
+    assert r.status_code == 204
+    nested = b'{"csp-report": ' + b"[" * 5000 + b"]" * 5000 + b"}"
+    assert client.post("/api/csp-report", content=nested).status_code == 204
+
+
+def test_an_oversized_body_is_refused_unread(client):
+    from app.core import security_headers
+
+    r = client.post("/api/csp-report", content=b"x" * 20000)
+    assert r.status_code == 413
+    # Declared too big: refused on the header, before any of the body is read.
+    read = []
+
+    async def never_read(self):
+        read.append(True)
+        yield b""
+    import starlette.requests
+    original = starlette.requests.Request.stream
+    starlette.requests.Request.stream = never_read
+    try:
+        r = client.post("/api/csp-report", content=b"x" * (5 * 1024 * 1024))
+    finally:
+        starlette.requests.Request.stream = original
+    assert r.status_code == 413
+    assert read == []
+    assert security_headers._MAX_REPORT_BYTES == 16 * 1024
+
+
+async def test_a_body_without_content_length_is_cut_off_at_the_cap():
+    """Chunked upload: read until the cap, then stop."""
+    from starlette.requests import Request
+    from app.core.security_headers import _read_capped
+
+    sent = []
+
+    async def receive():
+        sent.append(1)
+        return {"type": "http.request", "body": b"x" * 4096, "more_body": True}
+
+    request = Request({"type": "http", "method": "POST", "path": "/api/csp-report",
+                       "headers": [], "query_string": b""}, receive)
+    assert await _read_capped(request) is None
+    assert len(sent) == 5        # 5 × 4 KiB > 16 KiB, then it stops asking

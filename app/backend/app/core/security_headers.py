@@ -9,8 +9,8 @@ The Content-Security-Policy for the pages is sent as *Report-Only*. It was
 derived from what the production build loads (see PAGE_CSP below), but Plotly,
 KaTeX, the cosmos.gl WebGL graph and the graph worker cannot be exercised
 against it without a deploy. Violations are POSTed to /api/csp-report and
-logged; once the log stays quiet the same string can become the enforced
-policy. API responses are JSON or event streams that are never rendered as a
+logged to logs/csp-reports.log; once that log stays quiet the same string can
+become the enforced policy. API responses are JSON or event streams that are never rendered as a
 document, so they get a strict policy enforced from the start.
 
 In production nginx serves index.html and /assets itself and proxies only
@@ -22,11 +22,15 @@ from __future__ import annotations
 
 import json
 import logging
+import logging.handlers
+import os
+import time
 
 from fastapi import APIRouter, Request, Response
 from starlette.datastructures import MutableHeaders
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
+from app.core.config import settings
 from app.core.limiter import limiter
 
 logger = logging.getLogger(__name__)
@@ -121,6 +125,12 @@ class SecurityHeadersMiddleware:
 
 
 # ── CSP violation reports ─────────────────────────────────────────────────── #
+#
+# A public, unauthenticated endpoint whose job is to accept arbitrary bodies,
+# so it reads at most _MAX_REPORT_BYTES (refusing a larger Content-Length
+# unread), survives any JSON (deep nesting raised RecursionError: a 500 and a
+# traceback), and logs to its own small file, deduplicated, so a flood or a
+# noisy browser extension cannot rotate real errors out of the shared app log.
 
 router = APIRouter()
 
@@ -129,6 +139,29 @@ _REPORTED_FIELDS = (
     "document-uri", "violated-directive", "effective-directive",
     "blocked-uri", "source-file", "line-number", "disposition",
 )
+# Extensions inject scripts and styles into every page; their violations are
+# not ours to fix.
+_EXTENSION_SCHEMES = ("chrome-extension:", "moz-extension:", "safari-extension:",
+                      "safari-web-extension:", "ms-browser-extension:")
+_DEDUPE_SECONDS = 600
+_DEDUPE_MAX = 500
+
+csp_logger = logging.getLogger("advandeb.csp")
+_seen: "dict[tuple, list[float | int]]" = {}   # signature -> [last logged at, suppressed since]
+
+
+def _csp_log_handler() -> None:
+    """Give the CSP logger its own 1 MB x 2 file next to the app log, once."""
+    if csp_logger.handlers:
+        return
+    path = os.path.join(os.path.dirname(settings.LOG_FILE) or ".", "csp-reports.log")
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    handler = logging.handlers.RotatingFileHandler(
+        path, maxBytes=1024 * 1024, backupCount=2, encoding="utf-8")
+    handler.setFormatter(logging.Formatter("%(asctime)s %(message)s", datefmt="%Y-%m-%dT%H:%M:%S"))
+    csp_logger.addHandler(handler)
+    csp_logger.setLevel(logging.INFO)
+    csp_logger.propagate = False
 
 
 def _clip(value: object) -> str:
@@ -136,24 +169,57 @@ def _clip(value: object) -> str:
     return repr(str(value)[:200])
 
 
+async def _read_capped(request: Request) -> bytes | None:
+    """The body, or None if it is (or claims to be) over the cap."""
+    declared = request.headers.get("content-length")
+    if declared is not None and (not declared.isdigit() or int(declared) > _MAX_REPORT_BYTES):
+        return None
+    body = bytearray()
+    async for chunk in request.stream():
+        body += chunk
+        if len(body) > _MAX_REPORT_BYTES:
+            return None
+    return bytes(body)
+
+
+def _record(report: dict, now: float) -> None:
+    if any(str(report.get(k, "")).startswith(_EXTENSION_SCHEMES)
+           for k in ("blocked-uri", "source-file")):
+        return
+    signature = tuple(str(report.get(k, ""))[:200] for k in
+                      ("violated-directive", "effective-directive", "blocked-uri", "source-file"))
+    entry = _seen.get(signature)
+    if entry is not None and now - entry[0] < _DEDUPE_SECONDS:
+        entry[1] += 1
+        return
+    suppressed = entry[1] if entry is not None else 0
+    if len(_seen) >= _DEDUPE_MAX:
+        _seen.clear()
+    _seen[signature] = [now, 0]
+    _csp_log_handler()
+    csp_logger.warning(
+        "CSP report: %s%s",
+        " ".join(f"{k}={_clip(report[k])}" for k in _REPORTED_FIELDS if k in report),
+        f" (+{suppressed} identical in the last {_DEDUPE_SECONDS // 60} min)" if suppressed else "",
+    )
+
+
 @router.post("/csp-report", status_code=204, include_in_schema=False)
 @limiter.limit("60/minute")
 async def csp_report(request: Request) -> Response:
     """Log a browser's CSP violation report (report-uri format). Public.
 
-    Size-capped and rate-limited; only a fixed set of fields is logged.
-    Always 204 — a browser does nothing with the answer.
+    Rate-limited, size-capped before reading, parse-safe; a fixed set of fields
+    goes to logs/csp-reports.log, deduplicated, extension noise dropped.
+    204, or 413 for a body over the cap.
     """
-    body = await request.body()
-    if len(body) > _MAX_REPORT_BYTES:
-        return Response(status_code=204)
+    body = await _read_capped(request)
+    if body is None:
+        return Response(status_code=413)
     try:
         report = json.loads(body).get("csp-report", {})
-    except (ValueError, AttributeError):
+    except (ValueError, AttributeError, RecursionError):
         return Response(status_code=204)
     if isinstance(report, dict) and report:
-        logger.warning(
-            "CSP report: %s",
-            " ".join(f"{k}={_clip(report[k])}" for k in _REPORTED_FIELDS if k in report),
-        )
+        _record(report, time.monotonic())
     return Response(status_code=204)
