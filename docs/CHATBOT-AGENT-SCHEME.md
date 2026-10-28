@@ -1,5 +1,22 @@
 # Chatbot Agent — Utilisation Scheme
 
+> **HISTORICAL — 2026-04-14 snapshot, do not use as a description of the
+> current system** (banner added 2026-10-28).
+>
+> This scheme describes chat when every turn went through `chatbot_agent` on
+> `:8086`. Since then:
+> - the default model became an external NVIDIA model on a shared key;
+> - BYOK providers were added;
+> - most turns now run in the backend's own KAG pipeline
+>   (`app/backend/app/services/byok_chat_service.py`), which calls only the
+>   retrieval agent;
+> - citations now come from the `EvidenceRegistry`.
+>
+> The agent ReAct path below still exists, for sessions with no default key
+> and for BYOK "react" mode.
+>
+> Current description: `docs/SYSTEM-OVERVIEW.md` §4a.
+
 **Status: current implementation, as of 2026-04-14. Written to drive the review of three open issues:**
 
 1. Chat does not finish if the user leaves the website

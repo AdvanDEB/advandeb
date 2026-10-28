@@ -624,7 +624,7 @@ gdb target/debug/advandeb-mcp core
 
 If issues persist after trying these solutions:
 
-1. **Check GitHub Issues**: https://github.com/your-org/advandeb/issues
+1. **Check GitHub Issues**: https://github.com/AdvanDEB/advandeb/issues
 2. **Enable debug logging** and include logs in issue report
 3. **Provide configuration** (sanitize sensitive data)
 4. **Include version info**:

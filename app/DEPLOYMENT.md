@@ -1,5 +1,20 @@
 # Deployment Guide
 
+> **HISTORICAL — do not deploy from this file** (banner added 2026-10-28).
+>
+> It describes a deployment that never matched production:
+> - nginx serving `frontend/dist` from `frontend/nginx.conf`;
+> - backend workers on port 8000;
+> - a frontend on 3000;
+> - "Week 12" targets.
+>
+> How production actually runs: Cloudflare Tunnel → nginx `127.0.0.1:8200`,
+> which serves `app/frontend/dist/` and proxies `/api/` and `/ws/` to the
+> backend on `:8400`. The backend runs as a single uvicorn worker under
+> systemd (`scripts/systemd/`).
+>
+> The canonical instructions are in [`RUNNING.md`](../RUNNING.md).
+
 ## Quick Start
 
 ### Development Mode

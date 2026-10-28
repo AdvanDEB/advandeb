@@ -1,5 +1,20 @@
 # AdvanDEB MCP Gateway
 
+> **How it is used in AdvanDEB (reconciled 2026-10-28).**
+> - **Not on the main chat path.** The app backend calls the chatbot agent
+>   (`:8086`) and the retrieval agent (`:8081`) directly, and the agents call
+>   each other directly. The gateway serves only the REST fallback
+>   `POST /api/chat/`, which the UI does not use.
+> - **Registry is in memory.** `scripts/register_all_agents.sh` fills it
+>   when the stack starts; production reported `{"agents":[]}` on
+>   2026-10-28.
+> - **Does not build at HEAD.** `src/lib.rs` uses `tokio::signal`, but
+>   `Cargo.toml` does not enable tokio's `signal` feature, so `cargo build`
+>   and `cargo test` fail (C1 in `../docs/PLAN-2026-08-26.md`). The deployed
+>   binary dates from 2026-03-13.
+>
+> The feature list below describes the gateway itself.
+
 A high-performance WebSocket gateway for routing Model Context Protocol (MCP) tool calls to multiple agent servers with features like load balancing, circuit breakers, connection pooling, and workflow orchestration.
 
 ## Features
@@ -26,7 +41,7 @@ A high-performance WebSocket gateway for routing Model Context Protocol (MCP) to
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/advandeb.git
+git clone https://github.com/AdvanDEB/advandeb.git
 cd advandeb/mcp
 
 # Build the project
@@ -364,21 +379,22 @@ Client → WebSocket → MCP Gateway → Load Balancer → Agent
 
 ## Testing
 
-Current test coverage: **67 tests** (55 unit + 5 config + 1 health + 4 integration + 2 doc tests)
+Test count when last green: **67 tests** (55 unit + 5 config + 1 health + 4 integration + 2 doc tests).
 
-All tests passing ✅
+*(2026-10-28)* The crate does not currently compile (see the note at the top), so no tests run.
 
 ## License
 
-[Your License Here]
+No licence has been granted; all rights reserved. See the root `README.md`.
 
 ## Contributing
 
-[Contribution guidelines]
+AdvanDEB is currently an internal tool and is not accepting outside
+contributions.
 
 ## Support
 
 For issues and questions:
-- GitHub Issues: [your-repo/issues]
+- GitHub Issues: https://github.com/AdvanDEB/advandeb/issues
 - Documentation: [DEPLOYMENT.md](DEPLOYMENT.md), [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
 - Configuration: [CONFIGURATION.md](CONFIGURATION.md)

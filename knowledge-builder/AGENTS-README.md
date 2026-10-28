@@ -1,8 +1,22 @@
 # AdvanDEB Multi-Agent System
 
+> **Reconciled 2026-10-28.** The fleet is **six** agents: the five
+> specialized agents below, plus `chatbot_agent` (`:8086`), which orchestrates
+> them in a ReAct loop. Agents call each other over the MCP JSON-RPC protocol,
+> **directly**, not through the Rust gateway.
+>
+> Most chat turns in the app no longer pass through this fleet. The app's
+> default and BYOK paths run their own KAG pipeline in the backend and call
+> only `retrieval_agent`. See `../docs/SYSTEM-OVERVIEW.md` §4a. The fleet's
+> ReAct path is used when no default chat key is configured, and for BYOK
+> "react" mode.
+>
+> Sections marked *(historical)* are the original development plan. They are
+> kept for the record and are no longer accurate.
+
 ## Overview
 
-The AdvanDEB Knowledge Builder implements a **multi-agent RAG-KG hybrid system** for semantic search, knowledge graph traversal, and cited answer generation. The system consists of 5 specialized agents that communicate via the MCP (Model Context Protocol) over WebSocket.
+The AdvanDEB Knowledge Builder implements a **multi-agent RAG-KG hybrid system** for semantic search, knowledge graph traversal, and cited answer generation. The system consists of 5 specialized agents plus a chatbot orchestrator. They communicate via the MCP (Model Context Protocol) over WebSocket, connecting to each other directly.
 
 ## Architecture
 
@@ -98,6 +112,17 @@ The AdvanDEB Knowledge Builder implements a **multi-agent RAG-KG hybrid system**
 **Dependencies**:
 - MongoDB (for document, fact, stylized_fact collections)
 - Ollama (for fact extraction)
+
+### 6. Chatbot Agent (Port 8086)
+**Specialization**: Conversation orchestration (ReAct loop)
+
+Receives a chat turn from the app backend over a websocket (`CHATBOT_AGENT_WS`).
+It runs a multi-step ReAct loop (`react_engine.py`), calling retrieval
+(`:8081`), graph explorer (`:8082`) and synthesis (`:8083`) directly. It
+answers with a local Ollama model (`CHAT_ANSWER_MODEL`, default
+`deepseek-r1:latest`), or with the user's BYOK model if one is passed in. It
+is **not** started by `scripts/start_agents.py`; use the repo-level
+`scripts/start_all.sh` or `scripts/start_stack.sh`.
 
 ## Quick Start
 
@@ -312,7 +337,13 @@ pytest tests/test_agent_pipeline.py -v
 
 ### Integration Tests
 
-Integration testing with Dev 2's MCP Gateway is **pending** (Week 6 milestone).
+`tests/integration/test_smoke.py` at the repo root probes the running services
+(gateway, agents, backend, ArangoDB). Run it only against a running stack.
+Its docstring still says "5 agents".
+
+*(2026-10-28)* The "39/39 tests passing" above is historical. The
+knowledge-builder suite is currently red: 2 modules fail to import and 8
+tests fail. See C1 in `../docs/PLAN-2026-08-26.md`.
 
 ## Agent Logs
 
@@ -463,13 +494,11 @@ Current performance targets (Week 11-12 goals):
 
 ## Roadmap
 
-### Week 6: MCP Gateway Integration (🔴 CRITICAL — BLOCKED)
-- **Status**: Not started
-- **Blocker**: Depends on Dev 2's MCP Gateway
-- **Tasks**:
-  - [ ] Connect agents to MCP Gateway
-  - [ ] End-to-end test: App → Gateway → Agents
-  - [ ] Performance testing (<500ms target)
+### Week 6: MCP Gateway Integration *(historical)*
+The gateway was built, and `scripts/register_all_agents.sh` registers all six
+agents with it. The production chat path, however, does not route through the
+gateway (see the note at the top), so "App → Gateway → Agents" is not how
+the system runs. The performance targets below have never been measured.
 
 ### Future Enhancements
 - [ ] Agent load balancing (multiple instances per agent type)
@@ -481,11 +510,14 @@ Current performance targets (Week 11-12 goals):
 
 ## Related Documentation
 
-- [DEV1-KNOWLEDGE-BUILDER-PLAN.md](../docs/DEV1-KNOWLEDGE-BUILDER-PLAN.md) — 12-week implementation plan
-- [KNOWLEDGE-BUILDER-MULTI-AGENT-PLAN.md](../docs/KNOWLEDGE-BUILDER-MULTI-AGENT-PLAN.md) — Multi-agent architecture
-- [DEV1-LOG.md](../DEV1-LOG.md) — Development log and progress tracking
-- [CLAUDE.md](CLAUDE.md) — Development guidelines for this component
+- [`../docs/SYSTEM-OVERVIEW.md`](../docs/SYSTEM-OVERVIEW.md) — components and the actual chat paths
+- [`../RUNNING.md`](../RUNNING.md) — starting the stack, ports, health checks
+- [`../docs/STORAGE-CONTRACT.md`](../docs/STORAGE-CONTRACT.md) — which store each agent's data lives in
+
+The plan documents this file used to link to (`DEV1-KNOWLEDGE-BUILDER-PLAN.md`,
+`KNOWLEDGE-BUILDER-MULTI-AGENT-PLAN.md`, `DEV1-LOG.md`, `CLAUDE.md`) no longer
+exist.
 
 ## License
 
-See main project LICENSE file.
+No licence has been granted; all rights reserved. See the root `README.md`.
