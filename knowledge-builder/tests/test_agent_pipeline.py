@@ -31,7 +31,7 @@ class TestMCPServer:
         self.server = MCPServer(port=9999)
 
     def _run(self, coro):
-        return asyncio.get_event_loop().run_until_complete(coro)
+        return asyncio.run(coro)
 
     def test_tools_list_empty(self):
         resp = json.loads(self._run(
@@ -296,7 +296,7 @@ class TestQueryPlannerAgent:
         self.agent = QueryPlannerAgent()
 
     def _run(self, coro):
-        return asyncio.get_event_loop().run_until_complete(coro)
+        return asyncio.run(coro)
 
     def test_template_plan_has_3_steps(self):
         plan = self._run(self.agent._plan_query(

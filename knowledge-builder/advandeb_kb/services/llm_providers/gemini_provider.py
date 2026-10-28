@@ -14,9 +14,13 @@ throughout the codebase.
 """
 from __future__ import annotations
 
+import asyncio
+import importlib
+import importlib.util
 import logging
+import threading
 import time
-from typing import Any, AsyncIterator, Dict, List, Optional, Tuple
+from typing import Any, AsyncIterator, Callable, Dict, List, Optional, Tuple
 
 from advandeb_kb.services.llm_providers.base import (
     BaseLLMProvider,
@@ -25,6 +29,26 @@ from advandeb_kb.services.llm_providers.base import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+def _detect_sdk() -> Optional[str]:
+    """Name of the Gemini SDK to use: google-genai, else google-generativeai.
+
+    ``find_spec`` locates a module without importing it, so the SDK itself is
+    still imported lazily, by the first provider instance.
+    """
+    for sdk, module in (("google-genai", "google.genai"), ("google-generativeai", "google.generativeai")):
+        try:
+            if importlib.util.find_spec(module) is not None:
+                return sdk
+        except ImportError:  # the parent package ``google`` is missing
+            pass
+    return None
+
+
+# Decided once per process, at import.
+_SDK = _detect_sdk()
+logger.info("Gemini provider SDK: %s", _SDK or "none installed (Gemini BYOK unavailable)")
 
 
 def _to_gemini_messages(
@@ -89,7 +113,40 @@ def _finish_reason(response: Any) -> str:
     return name.lower() if isinstance(name, str) else "stop"
 
 
-class GeminiProvider(BaseLLMProvider):
+def _completion_dict(model: str, response: Any) -> Dict[str, Any]:
+    return {
+        "id": f"gemini-{int(time.time() * 1000)}",
+        "object": "chat.completion",
+        "created": int(time.time()),
+        "model": model,
+        "choices": [
+            {
+                "index": 0,
+                "message": {"role": "assistant", "content": _extract_text(response)},
+                "finish_reason": _finish_reason(response),
+            }
+        ],
+        "usage": _usage_dict(response),
+    }
+
+
+def _chunk_dict(model: str, text: Optional[str]) -> Dict[str, Any]:
+    """A streaming delta; ``text=None`` is the closing chunk."""
+    return {
+        "object": "chat.completion.chunk",
+        "created": int(time.time()),
+        "model": model,
+        "choices": [
+            {
+                "index": 0,
+                "delta": {"content": text} if text is not None else {},
+                "finish_reason": None if text is not None else "stop",
+            }
+        ],
+    }
+
+
+class GenAIGeminiProvider(BaseLLMProvider):
     """Gemini chat provider using the ``google-genai`` SDK."""
 
     provider_name = "gemini"
@@ -106,8 +163,13 @@ class GeminiProvider(BaseLLMProvider):
         if not api_key:
             raise ProviderAuthError("Missing Gemini API key", self.provider_name)
         # Lazy import.
-        from google import genai  # type: ignore
-        from google.genai import types  # type: ignore
+        try:
+            from google import genai  # type: ignore
+            from google.genai import types  # type: ignore
+        except ImportError as e:
+            raise ProviderError(
+                "Gemini needs the google-genai package", provider=self.provider_name
+            ) from e
 
         self._types = types
         self._api_key = api_key
@@ -151,20 +213,7 @@ class GeminiProvider(BaseLLMProvider):
         except Exception as e:
             self._raise_translated(e)
 
-        return {
-            "id": f"gemini-{int(time.time() * 1000)}",
-            "object": "chat.completion",
-            "created": int(time.time()),
-            "model": model,
-            "choices": [
-                {
-                    "index": 0,
-                    "message": {"role": "assistant", "content": _extract_text(response)},
-                    "finish_reason": _finish_reason(response),
-                }
-            ],
-            "usage": _usage_dict(response),
-        }
+        return _completion_dict(model, response)
 
     async def _stream(
         self,
@@ -183,29 +232,12 @@ class GeminiProvider(BaseLLMProvider):
         try:
             async for chunk in chunks:
                 text = _extract_text(chunk)
-                if not text:
-                    continue
-                yield {
-                    "object": "chat.completion.chunk",
-                    "created": int(time.time()),
-                    "model": model_name,
-                    "choices": [
-                        {
-                            "index": 0,
-                            "delta": {"content": text},
-                            "finish_reason": None,
-                        }
-                    ],
-                }
+                if text:
+                    yield _chunk_dict(model_name, text)
         except Exception as e:
             self._raise_translated(e)
 
-        yield {
-            "object": "chat.completion.chunk",
-            "created": int(time.time()),
-            "model": model_name,
-            "choices": [{"index": 0, "delta": {}, "finish_reason": "stop"}],
-        }
+        yield _chunk_dict(model_name, None)
 
     async def list_models(self) -> List[str]:
         """Return Gemini models that support ``generateContent``, live.
@@ -249,3 +281,143 @@ class GeminiProvider(BaseLLMProvider):
         ):
             raise ProviderAuthError(msg, self.provider_name) from e
         raise ProviderError(msg, provider=self.provider_name) from e
+
+
+# ---------------------------------------------------------------------------
+# google-generativeai fallback
+#
+# TODO(env-upgrade): delete LegacyGeminiProvider, _LEGACY_KEY_LOCK and the
+# google-generativeai branch of _detect_sdk once the production env has
+# google-genai installed (the final dependency-upgrade step; google-genai needs
+# anyio>=4.8 and pydantic>=2.12.5, so it arrives with the FastAPI upgrade).
+#
+# Until then this keeps Gemini BYOK working on the old, end-of-life SDK, and
+# keeps its flaw: genai.configure(api_key=...) is process-wide, so concurrent
+# requests with two users' keys could swap them. _LEGACY_KEY_LOCK narrows it:
+# configure() and the request that binds a model's client to the configured
+# key run under one lock. Gemini calls on this path are serialised meanwhile.
+# ---------------------------------------------------------------------------
+
+_LEGACY_KEY_LOCK = threading.Lock()
+
+
+class LegacyGeminiProvider(GenAIGeminiProvider):
+    """Gemini on the end-of-life ``google-generativeai`` SDK (fallback only)."""
+
+    def __init__(self, api_key: str):
+        if not api_key:
+            raise ProviderAuthError("Missing Gemini API key", self.provider_name)
+        self._genai = importlib.import_module("google.generativeai")
+        self._api_key = api_key
+
+    def _with_key(self, call: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
+        """Run a blocking SDK call with this provider's key configured.
+
+        A model binds its client to the configured key on its first request, and
+        list_models() reads it while paging, so the whole call holds the lock.
+        """
+        with _LEGACY_KEY_LOCK:
+            self._genai.configure(api_key=self._api_key)
+            return call(*args, **kwargs)
+
+    def _legacy_model(self, model: str, system_instruction: Optional[str]) -> Any:
+        kwargs: Dict[str, Any] = {"model_name": model}
+        if system_instruction:
+            kwargs["system_instruction"] = system_instruction
+        return self._genai.GenerativeModel(**kwargs)
+
+    async def chat_completion(
+        self,
+        model: str,
+        messages: List[Dict[str, str]],
+        *,
+        stream: bool = False,
+        temperature: float = 0.7,
+        max_tokens: Optional[int] = None,
+        **kwargs: Any,
+    ) -> Dict[str, Any]:
+        system, gemini_msgs = _to_gemini_messages(messages)
+        gen_config: Dict[str, Any] = {"temperature": temperature}
+        if max_tokens is not None:
+            gen_config["max_output_tokens"] = max_tokens
+        gen_model = self._legacy_model(model, system)
+
+        if stream:
+            return self._legacy_stream(gen_model, gemini_msgs, gen_config, model)
+
+        try:
+            response = await asyncio.to_thread(
+                self._with_key, gen_model.generate_content, gemini_msgs,
+                generation_config=gen_config,
+            )
+        except Exception as e:
+            self._raise_translated(e)
+        return _completion_dict(model, response)
+
+    async def _legacy_stream(
+        self,
+        gen_model: Any,
+        gemini_msgs: List[Dict[str, Any]],
+        gen_config: Dict[str, Any],
+        model_name: str,
+    ) -> AsyncIterator[Dict[str, Any]]:
+        # The request (and with it the key) is made under the lock; the chunks
+        # of the returned synchronous iterator are then pulled on worker threads.
+        try:
+            iterator = await asyncio.to_thread(
+                self._with_key, gen_model.generate_content, gemini_msgs,
+                generation_config=gen_config, stream=True,
+            )
+        except Exception as e:
+            self._raise_translated(e)
+            return  # pragma: no cover - _raise_translated always raises
+
+        sentinel = object()
+
+        def _next_chunk():
+            try:
+                return next(iterator)
+            except StopIteration:
+                return sentinel
+
+        try:
+            while True:
+                chunk = await asyncio.to_thread(_next_chunk)
+                if chunk is sentinel:
+                    break
+                text = _extract_text(chunk)
+                if text:
+                    yield _chunk_dict(model_name, text)
+        except Exception as e:
+            self._raise_translated(e)
+
+        yield _chunk_dict(model_name, None)
+
+    async def list_models(self) -> List[str]:
+        def _list() -> List[str]:
+            out: List[str] = []
+            for m in self._genai.list_models():
+                methods = getattr(m, "supported_generation_methods", []) or []
+                if "generateContent" not in methods:
+                    continue
+                name = getattr(m, "name", "") or ""
+                out.append(name[len("models/"):] if name.startswith("models/") else name)
+            return out
+
+        try:
+            return await asyncio.to_thread(self._with_key, _list)
+        except Exception as e:
+            self._raise_translated(e)
+            return []  # pragma: no cover - _raise_translated always raises
+
+    async def close(self) -> None:
+        # google-generativeai keeps a process-global session; nothing to close.
+        return None
+
+
+def _provider_class(sdk: Optional[str]) -> type:
+    return LegacyGeminiProvider if sdk == "google-generativeai" else GenAIGeminiProvider
+
+
+# What the registry instantiates for "gemini" in this process.
+GeminiProvider = _provider_class(_SDK)

@@ -15,7 +15,9 @@ from advandeb_kb.services.llm_providers.base import (  # noqa: E402
     ProviderAuthError,
     ProviderError,
 )
-from advandeb_kb.services.llm_providers.gemini_provider import GeminiProvider  # noqa: E402
+from advandeb_kb.services.llm_providers.gemini_provider import (  # noqa: E402
+    GenAIGeminiProvider as GeminiProvider,
+)
 
 
 async def _aiter(items):

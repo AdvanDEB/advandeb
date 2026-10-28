@@ -58,7 +58,7 @@ jobs:
         run: pytest -q
 
   frontend:
-    name: Frontend (vue-tsc + vitest)
+    name: Frontend (vue-tsc + eslint + vitest)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -78,6 +78,10 @@ jobs:
 
       - name: Typecheck + build
         run: npm run build
+
+      - name: Lint
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run lint
 
       - name: Unit tests
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
