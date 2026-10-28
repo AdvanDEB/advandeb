@@ -2,6 +2,7 @@
  * Typed helpers for the tDEB simulator API (/api/tdeb/*)
  */
 import api from './api'
+import { fetchSocketTicket } from './authRefresh'
 
 export type NodeTypeId =
   | 'food' | 'assimilation' | 'reserve' | 'structure' | 'maturity'
@@ -286,17 +287,18 @@ export async function simulate(
 }
 
 /**
- * Open the streaming-simulation socket.
+ * Open the streaming-simulation socket for a model.
  *
- * The JWT rides as a query param because the browser WebSocket API cannot set
- * an Authorization header on the upgrade request — the same approach the chat
- * socket already uses.
+ * The browser WebSocket API cannot set an Authorization header on the upgrade
+ * request, so the credential rides in the URL — as a one-time ticket from
+ * POST /api/auth/ws-ticket, never the access token, which proxies would log.
  */
-export function openSimulationSocket(modelId: string): WebSocket {
+export async function openSimulationSocket(modelId: string): Promise<WebSocket> {
+  const ticket = await fetchSocketTicket()
+  if (!ticket) throw new Error('Your session has ended. Please sign in again.')
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  const token = localStorage.getItem('access_token') || ''
   const url = `${protocol}//${window.location.host}/api/tdeb/ws/simulate/${modelId}`
-    + `?token=${encodeURIComponent(token)}`
+    + `?ticket=${encodeURIComponent(ticket)}`
   return new WebSocket(url)
 }
 

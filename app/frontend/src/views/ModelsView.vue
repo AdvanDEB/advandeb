@@ -531,7 +531,20 @@ async function runStream(request: SimulationRequest) {
     success: true, message: 'Streamed simulation', n_points: 0,
   }
 
-  socket = tdeb.openSimulationSocket(modelId.value)
+  let opened: WebSocket
+  try {
+    opened = await tdeb.openSimulationSocket(modelId.value)
+  } catch (err) {
+    simError.value = errorMessage(err, 'Could not start the live stream.')
+    streaming.value = false
+    return
+  }
+  // Stopped while the ticket was being fetched.
+  if (!streaming.value) {
+    opened.close()
+    return
+  }
+  socket = opened
 
   socket.onopen = () => {
     socket?.send(JSON.stringify({

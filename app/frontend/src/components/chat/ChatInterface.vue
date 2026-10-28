@@ -173,11 +173,10 @@ import ProvenanceTrail from '@/components/provenance/ProvenanceTrail.vue'
 import type { CitationRef as Citation } from '@/types/chat'
 import type { LLMSessionConfig } from '@/types/llm'
 import api from '@/utils/api'
-import { useAuthStore } from '@/stores/auth'
+import { fetchSocketTicket } from '@/utils/authRefresh'
 import { useChatStore } from '@/stores/chat'
 import { useChatSocket } from '@/composables/useChatSocket'
 
-const authStore = useAuthStore()
 const store = useChatStore()
 
 // UI state
@@ -226,7 +225,7 @@ onUnmounted(() => {
  */
 const chatSocket = useChatSocket({
   sessionId: () => store.currentSessionId,
-  token: () => authStore.accessToken,
+  ticket: fetchSocketTicket,
   onAuthFailure: () => {
     store.messages.push({
       id: crypto.randomUUID(),
