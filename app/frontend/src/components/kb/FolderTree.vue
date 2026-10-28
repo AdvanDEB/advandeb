@@ -6,11 +6,18 @@
         <input
           type="checkbox"
           class="cb"
+          :aria-label="`Select folder ${sub.name}`"
           :checked="isFolderChecked(sub.path)"
           :indeterminate="isFolderIndeterminate(sub.path)"
           @change="toggleFolder(sub)"
         />
-        <button class="ft-expand-btn" @click="toggleExpand(sub.path)">
+        <button
+          type="button"
+          class="ft-expand-btn"
+          :aria-expanded="expanded.has(sub.path)"
+          :aria-label="`${expanded.has(sub.path) ? 'Collapse' : 'Expand'} ${sub.name}`"
+          @click="toggleExpand(sub.path)"
+        >
           {{ expanded.has(sub.path) ? '▾' : '▸' }}
         </button>
         <span class="ft-name">{{ sub.name }}</span>
@@ -32,11 +39,12 @@
         <input
           type="checkbox"
           class="cb"
+          :aria-label="`Select ${f.name}`"
           :checked="selectedFiles.has(f.path)"
           @change="$emit('toggle-file', f.path)"
         />
         <span class="ft-name ft-file-name">{{ f.name }}</span>
-        <span class="ft-count dim">{{ fmtSize(f.size) }}</span>
+        <span class="ft-count dim">{{ formatBytes(f.size) }}</span>
       </div>
     </li>
   </ul>
@@ -44,6 +52,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { formatBytes } from '@/utils/format'
 
 export interface FolderNode {
   path: string
@@ -105,12 +114,6 @@ function isFolderIndeterminate(folderPath: string): boolean {
   const selected = all.filter(p => props.selectedFiles.has(p))
   return selected.length > 0 && selected.length < all.length
 }
-
-function fmtSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
-}
 </script>
 
 <style scoped>
@@ -134,4 +137,8 @@ function fmtSize(bytes: number): string {
 .ft-count     { font-size: 0.68rem; white-space: nowrap; }
 .dim          { color: #64748b; }
 .cb           { accent-color: #6366f1; cursor: pointer; }
+
+@media (pointer: coarse) {
+  .ft-expand-btn { min-width: var(--app-touch); min-height: var(--app-touch); }
+}
 </style>
