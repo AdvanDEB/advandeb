@@ -45,12 +45,25 @@ test.describe('Chat interface', () => {
   test('message appears in list after send (WebSocket mock)', async ({ page }) => {
     // Mock WebSocket by overriding at window level
     await page.addInitScript(() => {
-      (window as any).__wsMessages = []
-      const OrigWS = window.WebSocket
       ;(window as any).WebSocket = class MockWS {
+        // useChatSocket compares readyState with WebSocket.OPEN and sends only
+        // from onopen, so the mock has to open the way a real socket does.
+        static CONNECTING = 0
+        static OPEN = 1
+        static CLOSING = 2
+        static CLOSED = 3
+
+        onopen: (() => void) | null = null
         onmessage: ((e: MessageEvent) => void) | null = null
         onclose: (() => void) | null = null
-        readyState = 1 // OPEN
+        readyState = 0 // CONNECTING
+
+        constructor() {
+          setTimeout(() => {
+            this.readyState = 1
+            this.onopen?.()
+          }, 0)
+        }
 
         send(data: string) {
           const parsed = JSON.parse(data)
@@ -71,6 +84,8 @@ test.describe('Chat interface', () => {
         close() {}
       }
     })
+    // Init scripts apply from the next navigation on; beforeEach already loaded /chat.
+    await page.reload()
 
     await page.fill('textarea', 'What is DEB?')
     await page.keyboard.press('Enter')
@@ -81,6 +96,6 @@ test.describe('Chat interface', () => {
 
   test('export button triggers JSON download', async ({ page }) => {
     // Verify export button exists in toolbar
-    await expect(page.locator('.toolbar-btn')).toContainText('Export')
+    await expect(page.getByRole('button', { name: 'Export' })).toBeVisible()
   })
 })

@@ -113,7 +113,6 @@ let _cachedNodeIds: string[] = []
 let _cachedHoverLabels: string[] = []
 let _cachedNodeSummaries: GraphRenderNodeSummary[] = []
 let _idToVisibleIndex = new Map<string, number>()
-let _selectedIndex: number | null = null
 // Live positions scraped from the running simulation (cosmos space)
 const _livePositions = new Map<string, [number, number]>()
 
@@ -475,13 +474,11 @@ function initGraph() {
       onZoom: () => { scheduleLabelRefresh() },
       onClick: (index, _pos, _ev) => {
         if (index === undefined) {
-          _selectedIndex = null
           graph?.unselectPoints()
           graph?.setConfig({ focusedPointIndex: undefined })
           emit('backgroundClick')
         } else {
           if (index < _cachedNodeSummaries.length) {
-            _selectedIndex = index
             graph?.selectPointByIndex(index, true)
             graph?.setConfig({ focusedPointIndex: index })
             const s = _cachedNodeSummaries[index]
@@ -670,7 +667,6 @@ watch(
       : false
 
     if (dataChanged || layoutModeChanged) {
-      _selectedIndex = null
       _livePositions.clear()
       labels.value = []
       _didInitialFit = false  // re-fit once the new dataset's layout settles
@@ -698,7 +694,6 @@ defineExpose({
   focusNode: (nodeId: string | null) => {
     if (!graph) return
     if (nodeId === null) {
-      _selectedIndex = null
       graph.unselectPoints()
       graph.setConfig({ focusedPointIndex: undefined })
       graph.fitView(500)
@@ -706,7 +701,6 @@ defineExpose({
     }
     const index = _idToVisibleIndex.get(nodeId)
     if (index === undefined) return
-    _selectedIndex = index
     graph.selectPointByIndex(index, true)
     graph.setConfig({ focusedPointIndex: index })
     graph.zoomToPointByIndex(index, 600, 4, true)
