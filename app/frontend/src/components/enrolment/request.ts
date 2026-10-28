@@ -5,7 +5,6 @@
  * `consent_acknowledgement` to a model that requires `name` and `consent`.
  */
 import type { EnrolmentRequest } from '@/types/enrolment.generated'
-import { SF_CATEGORIES } from './categories'
 
 export interface EnrolmentForm {
   name: string
@@ -25,13 +24,20 @@ export function emptyEnrolmentForm(): EnrolmentForm {
   }
 }
 
-export function enrolmentPayload(form: EnrolmentForm): EnrolmentRequest {
+/**
+ * @param categoryKeys the categories the collection offers (from
+ *   loadCategories); a rating for anything else is not sent, since the server
+ *   refuses a category it does not hold.
+ */
+export function enrolmentPayload(
+  form: EnrolmentForm, categoryKeys: readonly string[],
+): EnrolmentRequest {
   // Only categories actually rated: a picked-but-unrated area is not a claim
   // of expertise.
   const rated: Record<string, number> = {}
-  for (const c of SF_CATEGORIES) {
-    const v = form.category_familiarity[c.key]
-    if (typeof v === 'number' && v > 0) rated[c.key] = v
+  for (const key of categoryKeys) {
+    const v = form.category_familiarity[key]
+    if (typeof v === 'number' && v > 0) rated[key] = v
   }
   const opt = (s: string) => s.trim() || null
   return {

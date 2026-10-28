@@ -50,6 +50,18 @@ export interface EnrolmentDecisionResult {
   temp_password: string | null
 }
 
+/** One category of the collection, as offered for self-rating. */
+export interface StylizedFactCategory {
+  key: string
+  label: string
+  n_facts: number
+  currently_assessed: boolean
+}
+
+export interface CategoryList {
+  categories: StylizedFactCategory[]
+}
+
 // ---- requests: fields with a server default may be omitted ----
 
 /** What a prospective participant submits. Public endpoint. */

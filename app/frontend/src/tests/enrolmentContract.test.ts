@@ -13,11 +13,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 
 import { emptyEnrolmentForm, enrolmentPayload } from '@/components/enrolment/request'
+import { clearCategoryCache } from '@/components/enrolment/categories'
 import type {
   AdminStats, CalibrationStatus, ExpertList,
 } from '@/types/elicitation.generated'
 import type {
-  EnrolmentDecisionResult, EnrolmentRequestList, EnrolmentRequestRecord,
+  CategoryList, EnrolmentDecisionResult, EnrolmentRequestList,
+  EnrolmentRequestRecord,
 } from '@/types/enrolment.generated'
 
 const api = vi.hoisted(() => ({ get: vi.fn(), post: vi.fn(), delete: vi.fn() }))
@@ -26,7 +28,22 @@ vi.mock('@/utils/api', () => ({ default: api }))
 beforeEach(() => {
   api.get.mockReset()
   api.post.mockReset()
+  clearCategoryCache()
 })
+
+// As /enrolment/categories serves them: the evidence block first.
+const categories: CategoryList = {
+  categories: [
+    { key: 'core_deb_rules', label: 'Core DEB rules', n_facts: 36, currently_assessed: true },
+    { key: 'hypoxia_dissolved_oxygen', label: 'Hypoxia and dissolved oxygen', n_facts: 14, currently_assessed: true },
+    { key: 'phytoplankton_chlorophyll', label: 'Phytoplankton chlorophyll', n_facts: 5, currently_assessed: true },
+    { key: 'phytoplankton_eps', label: 'Phytoplankton EPS', n_facts: 3, currently_assessed: true },
+    { key: 'phytoplankton_nc_ratio', label: 'Phytoplankton N:C ratio', n_facts: 4, currently_assessed: true },
+    { key: 'reproductive_strategy', label: 'Reproductive strategy', n_facts: 100, currently_assessed: false },
+    { key: 'toxicology_and_ecotoxicology', label: 'Toxicology and ecotoxicology', n_facts: 100, currently_assessed: false },
+  ],
+}
+const categoryKeys = categories.categories.map((c) => c.key)
 
 describe('signup payload', () => {
   it('sends the fields EnrolmentRequest requires — name and consent', () => {
@@ -36,7 +53,7 @@ describe('signup payload', () => {
       years_in_field: 20, deb_experience: 'developer', consent: true,
       category_familiarity: { reproductive_strategy: 5, toxicology_and_ecotoxicology: 0 },
     }
-    expect(enrolmentPayload(form)).toEqual({
+    expect(enrolmentPayload(form, categoryKeys)).toEqual({
       name: 'Tin Klanjšček', email: 'tin@irb.hr', affiliation: 'IRB',
       orcid: null, years_in_field: 20, deb_experience: 'developer',
       // a picked-but-unrated area is not a claim of expertise
@@ -45,7 +62,15 @@ describe('signup payload', () => {
     })
   })
 
+  it('drops a rating for a category the collection does not offer', () => {
+    const form = { ...emptyEnrolmentForm(), name: 'n', email: 'e@x.org',
+      category_familiarity: { core_deb_rules: 4, gone_category: 5 } }
+    expect(enrolmentPayload(form, categoryKeys).category_familiarity)
+      .toEqual({ core_deb_rules: 4 })
+  })
+
   it('posts that payload from the form', async () => {
+    api.get.mockResolvedValue({ data: categories })
     api.post.mockResolvedValue({ data: { status: 'pending' } })
     const { default: EnrolmentView } = await import('@/views/EnrolmentView.vue')
     const w = mount(EnrolmentView, { global: { stubs: { RouterLink: true } } })
@@ -56,6 +81,10 @@ describe('signup payload', () => {
     await w.find('input[type="number"]').setValue('12')
     await w.find('select').setValue('applied')
     await w.find('input[type="checkbox"]').setValue(true)
+    await flushPromises()
+    // Rate one evidence-block area: pick it, then give it a 4.
+    await w.find('[data-category="core_deb_rules"]').trigger('click')
+    await w.findAll('.rate-row .step')[3].trigger('click')
     expect(inputs.length).toBeGreaterThan(3)
     await w.find('form').trigger('submit')
     await flushPromises()
@@ -66,9 +95,39 @@ describe('signup payload', () => {
     expect(body).toMatchObject({
       name: 'Ines Haberle', email: 'ines@irb.hr', consent: true,
       deb_experience: 'applied', years_in_field: 12,
+      category_familiarity: { core_deb_rules: 4 },
     })
     expect(body).not.toHaveProperty('full_name')
     expect(body).not.toHaveProperty('consent_acknowledgement')
+  })
+})
+
+describe('familiarity areas', () => {
+  it('offers the evidence block, from the server, ahead of the rest', async () => {
+    api.get.mockResolvedValue({ data: categories })
+    const { default: EnrolmentView } = await import('@/views/EnrolmentView.vue')
+    const w = mount(EnrolmentView, { global: { stubs: { RouterLink: true } } })
+    await flushPromises()
+    expect(api.get).toHaveBeenCalledWith('/enrolment/categories')
+    const chips = w.findAll('[data-category]').map((c) => c.attributes('data-category'))
+    expect(chips).toEqual(categoryKeys)
+    expect(w.find('[data-group="assessed"]').text()).toBe('Being assessed now')
+    for (const label of ['Core DEB rules', 'Hypoxia and dissolved oxygen',
+      'Phytoplankton chlorophyll', 'Phytoplankton EPS', 'Phytoplankton N:C ratio']) {
+      expect(w.text()).toContain(label)
+    }
+  })
+
+  it('lets the request go without ratings when the areas cannot load', async () => {
+    api.get.mockRejectedValue(new Error('down'))
+    const { default: EnrolmentView } = await import('@/views/EnrolmentView.vue')
+    const w = mount(EnrolmentView, { global: { stubs: { RouterLink: true } } })
+    await flushPromises()
+    expect(w.text()).toContain('could not be loaded')
+    api.get.mockResolvedValue({ data: categories })
+    await w.find('.cat-error .retry').trigger('click')
+    await flushPromises()
+    expect(w.findAll('[data-category]')).toHaveLength(categoryKeys.length)
   })
 })
 
@@ -116,6 +175,7 @@ describe('AdminExpertsView', () => {
         return Promise.resolve({ data: list })
       }
       if (url === '/elicitation/experts') return Promise.resolve({ data: experts })
+      if (url === '/enrolment/categories') return Promise.resolve({ data: categories })
       if (url === '/elicitation/stats/admin') return Promise.resolve({ data: stats })
       return Promise.reject(new Error(`unexpected GET ${url}`))
     })
@@ -139,6 +199,8 @@ describe('AdminExpertsView', () => {
     expect(w.text()).toContain('Given')
     expect(w.text()).toContain('2 authored stylized facts')
     expect(w.text()).toContain('tin_klanjscek')
+    // the rated area under its served label, not its slug
+    expect(w.text()).toContain('Core DEB rules')
   })
 
   it('posts {approve, tier, note} to the request’s id and shows the one-time password', async () => {

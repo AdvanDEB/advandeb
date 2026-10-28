@@ -135,7 +135,17 @@
 
         <section class="block">
           <h2>Familiarity by area</h2>
-          <CategoryFamiliarity v-model="form.category_familiarity" />
+          <p v-if="categoriesError" class="cat-error" role="alert">
+            The list of areas could not be loaded. You can still send the
+            request without rating any,
+            <button type="button" class="retry" @click="fetchCategories">or try again</button>.
+          </p>
+          <p v-else-if="!categories.length" class="cat-loading">Loading areas…</p>
+          <CategoryFamiliarity
+            v-else
+            v-model="form.category_familiarity"
+            :categories="categories"
+          />
         </section>
 
         <section class="block">
@@ -173,9 +183,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import api from '@/utils/api'
 import CategoryFamiliarity from '@/components/enrolment/CategoryFamiliarity.vue'
+import {
+  loadCategories, type StylizedFactCategory,
+} from '@/components/enrolment/categories'
 import {
   emptyEnrolmentForm, enrolmentPayload,
 } from '@/components/enrolment/request'
@@ -186,6 +199,23 @@ const error = ref('')
 const sentTo = ref('')
 
 const form = reactive(emptyEnrolmentForm())
+
+// The collection's categories, from the server — the same source the queue
+// is built from, so the areas offered are the areas facts are judged in.
+const categories = ref<StylizedFactCategory[]>([])
+const categoriesError = ref(false)
+
+async function fetchCategories() {
+  categoriesError.value = false
+  try {
+    categories.value = await loadCategories()
+  } catch {
+    // Familiarity is optional; failing to load it must not block a request.
+    categoriesError.value = true
+  }
+}
+
+onMounted(fetchCategories)
 
 type FieldKey = 'name' | 'email' | 'affiliation' | 'orcid'
   | 'years_in_field' | 'deb_experience'
@@ -256,7 +286,8 @@ async function submit() {
   busy.value = true
   error.value = ''
   try {
-    await api.post('/enrolment/request', enrolmentPayload(form))
+    await api.post('/enrolment/request',
+      enrolmentPayload(form, categories.value.map(c => c.key)))
     sentTo.value = form.email
     submitted.value = true
   } catch (e: any) {
@@ -429,4 +460,5 @@ h2 {
   .actions .el-btn { width: 100%; }
   .back { margin-left: 0; }
 }
+.cat-error, .cat-loading { font-size: var(--el-fs-sm); color: var(--el-ink-3); line-height: var(--el-lh); }
 </style>
