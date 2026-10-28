@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect, Qu
 
 from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 
-from app.core.auth import resolve_user
+from app.core.auth import resolve_socket_user
 from app.core.database import get_database
 from app.services.chat_service import ChatService
 from bson import ObjectId
@@ -16,17 +16,20 @@ from bson import ObjectId
 router = APIRouter()
 
 
-async def _get_ws_user(websocket: WebSocket, token: Optional[str]) -> Optional[dict]:
-    """Resolve the JWT passed as ``?token=`` on the WebSocket upgrade.
+async def _get_ws_user(
+    websocket: WebSocket, ticket: Optional[str], token: Optional[str]
+) -> Optional[dict]:
+    """Resolve the credential on the WebSocket upgrade URL.
 
-    Goes through the shared :func:`resolve_user`, so a suspended account, a
-    revoked session and an external contributor (who has no chat) are refused
-    here exactly as on the REST routes. Returns None for any refusal; there is
-    no anonymous fallback — an unauthenticated socket would spend the shared
-    default-model key and its single global rate limit.
+    A one-time ``?ticket=`` from POST /api/auth/ws-ticket (``?token=`` is the
+    deprecated form). Goes through the shared resolver, so a suspended
+    account, a revoked session and an external contributor (who has no chat)
+    are refused here exactly as on the REST routes. Returns None for any
+    refusal; there is no anonymous fallback — an unauthenticated socket would
+    spend the shared default-model key and its single global rate limit.
     """
     try:
-        return await resolve_user(token, path=websocket.url.path)
+        return await resolve_socket_user(ticket, token, path=websocket.url.path)
     except HTTPException:
         return None
 
@@ -67,15 +70,17 @@ async def _check_generating(session_id: str, user_id: str, websocket: WebSocket)
 async def ws_chat(
     websocket: WebSocket,
     session_id: str,
+    ticket: Optional[str] = Query(default=None),
     token: Optional[str] = Query(default=None),
 ):
     """
     WebSocket endpoint for real-time agentic chat.
 
-    Authentication: pass the JWT access token as ?token=<access_token> on the
-    WebSocket URL. It is required: a missing, invalid or expired token, or an
-    account that may not chat, gets close code 4401. The user_id is taken from
-    the verified token, never from the JSON payload.
+    Authentication: pass a one-time ticket from POST /api/auth/ws-ticket as
+    ?ticket=<ticket> on the WebSocket URL (?token=<access_token> is still
+    accepted, deprecated). It is required: a missing, invalid, expired or used
+    credential, or an account that may not chat, gets close code 4401. The
+    user_id is taken from the verified credential, never from the JSON payload.
 
     Client sends:
       {"type": "user_message", "text": "..."}
@@ -89,7 +94,7 @@ async def ws_chat(
       {"type": "error",          "detail": "..."}
     """
     # Validate token before accepting the connection
-    user = await _get_ws_user(websocket, token)
+    user = await _get_ws_user(websocket, ticket, token)
 
     if user is None:
         # Accept then immediately close so the browser receives a readable

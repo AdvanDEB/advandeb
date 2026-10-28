@@ -10,6 +10,7 @@ from app.core.auth import (
     ROLE_EXTERNAL_CONTRIBUTOR,
     bearer_or_query_token,
     get_current_user,
+    resolve_ticket,
     resolve_user,
 )
 
@@ -56,15 +57,19 @@ async def require_curator(current_user: dict = Depends(get_current_user)):
 
 async def get_current_user_sse(
     request: Request,
+    ticket: Optional[str] = Query(default=None),
     token: Optional[str] = Query(default=None),
     authorization: Optional[str] = Header(default=None),
 ) -> dict:
     """``get_current_user`` for Server-Sent Event streams.
 
-    EventSource cannot send custom headers, so the JWT may arrive as
-    ``?token=``; a Bearer header is accepted for non-browser callers. Resolves
-    through the same :func:`resolve_user` as every other route.
+    EventSource cannot send custom headers, so its credential rides in the
+    URL: a one-time ``?ticket=`` from POST /api/auth/ws-ticket (``?token=``
+    is the deprecated form). A Bearer header is accepted for non-browser
+    callers. Resolves through the same account checks as every other route.
     """
+    if ticket:
+        return await resolve_ticket(ticket, path=request.url.path)
     return await resolve_user(
         bearer_or_query_token(token, authorization), path=request.url.path)
 

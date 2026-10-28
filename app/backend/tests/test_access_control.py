@@ -49,10 +49,12 @@ BATCH_ID = str(ObjectId())
 # (router prefix, method, path, policy, served status, token transport)
 #
 # "served status" is what a caller who passes access control gets back from
-# the stubbed stores — 200 almost everywhere. Transport "query" sends the token
-# as ?token=, the only option an EventSource has.
+# the stubbed stores — 200 almost everywhere. Transport "ticket" sends a
+# one-time ?ticket= from POST /api/auth/ws-ticket, what an EventSource uses;
+# "query" the deprecated raw ?token=.
 ENDPOINTS = [
     ("/api/auth", "GET", "/api/auth/config", "public", 200, "header"),
+    ("/api/auth", "POST", "/api/auth/ws-ticket", "member", 200, "header"),
     ("/api/users", "GET", "/api/users/me", "self", 200, "header"),
     ("/api/users", "GET", "/api/users/", "admin", 200, "header"),
     ("/api/users/me/llm-keys", "GET", "/api/users/me/llm-keys", "self", 200, "header"),
@@ -70,6 +72,7 @@ ENDPOINTS = [
     ("/api/kb/agents", "GET", "/api/kb/agents/models", "curator", 200, "header"),
     ("/api/kb/viz", "GET", "/api/kb/viz/schema/sf_support/status", "curator", 200, "header"),
     ("/api/kb/viz", "GET", "/api/kb/viz/schema/unknown/stream", "curator", 200, "query"),
+    ("/api/kb/viz", "GET", "/api/kb/viz/schema/unknown/stream", "curator", 200, "ticket"),
     ("/api/kb/ingestion", "GET", "/api/kb/ingestion/batches", "curator", 200, "header"),
     ("/api/kb/ingestion", "GET", f"/api/kb/ingestion/batches/{BATCH_ID}/stream", "curator", 200, "query"),
     ("/api/kb/db", "GET", "/api/kb/db/collections", "curator", 200, "header"),
@@ -141,11 +144,23 @@ def stubbed_stores(monkeypatch, fake_mongo, tmp_path):
     arango.db.has_collection.return_value = False
 
 
-def _request(client, method, path, transport, headers):
+def _ticket(user_doc):
+    """Mint a socket ticket directly: the matrix row for /ws-ticket already
+    covers who may ask for one, and a caller refused there (an external
+    contributor) must still be refused where the ticket is presented."""
+    from app.core.auth import create_socket_ticket
+    return create_socket_ticket(user_doc)
+
+
+def _request(client, method, path, transport, headers, user=None):
+    sep = "&" if "?" in path else "?"
     if transport == "query" and headers:
         token = headers["Authorization"].split(" ", 1)[1]
-        sep = "&" if "?" in path else "?"
         return client.request(method, f"{path}{sep}token={token}")
+    if transport == "ticket" and user is not None:
+        return client.request(method, f"{path}{sep}ticket={_ticket(user)}")
+    if transport in ("query", "ticket"):
+        return client.request(method, path)
     body = {"status": "published"} if method == "PATCH" else None
     return client.request(method, path, headers=headers, json=body)
 
@@ -153,14 +168,14 @@ def _request(client, method, path, transport, headers):
 @pytest.mark.parametrize("caller", CALLERS)
 @pytest.mark.parametrize(
     "prefix,method,path,policy,served,transport", ENDPOINTS,
-    ids=[f"{e[1]} {e[2]}" for e in ENDPOINTS],
+    ids=[f"{e[1]} {e[2]} [{e[5]}]" for e in ENDPOINTS],
 )
 def test_access_matrix(client, personas, auth_header, stubbed_stores, monkeypatch,
                        prefix, method, path, policy, served, transport, caller):
     user = None if caller == "anonymous" else personas[caller]
     expected = POLICIES[policy][caller]
 
-    response = _request(client, method, path, transport, auth_header(user))
+    response = _request(client, method, path, transport, auth_header(user), user)
 
     if expected == OK:
         assert response.status_code == served, (
@@ -230,17 +245,27 @@ class _StubChatService:
                "user_id": kwargs["user_id"]}
 
 
+def _ws_credential(user, transport, token_for):
+    if user is None:
+        return ""
+    if transport == "ticket":
+        from app.core.auth import create_socket_ticket
+        return f"?ticket={create_socket_ticket(user)}"
+    return f"?token={token_for(user)}"
+
+
+@pytest.mark.parametrize("transport", ["ticket", "token"])
 @pytest.mark.parametrize("caller", CALLERS)
 def test_chat_websocket_requires_an_account_that_may_chat(
-        client, personas, token_for, monkeypatch, caller):
+        client, personas, token_for, monkeypatch, caller, transport):
     """No anonymous fallback: an unauthenticated socket would spend the shared
     default-model key. External contributors have no chat; suspended accounts
-    nothing."""
+    nothing. ``?token=`` is the deprecated credential, refused the same way."""
     from app.api.routes import ws
 
     monkeypatch.setattr(ws, "ChatService", _StubChatService)
     user = None if caller == "anonymous" else personas[caller]
-    url = "/ws/chat/new" + (f"?token={token_for(user)}" if user else "")
+    url = "/ws/chat/new" + _ws_credential(user, transport, token_for)
 
     with client.websocket_connect(url) as sock:
         # Always send first: a refused socket answers with its close frame, an
@@ -258,11 +283,12 @@ def test_chat_websocket_requires_an_account_that_may_chat(
             assert message["code"] == 4401
 
 
+@pytest.mark.parametrize("transport", ["ticket", "token"])
 @pytest.mark.parametrize("caller", CALLERS)
 def test_tdeb_websocket_requires_an_account_that_may_model(
-        client, personas, token_for, caller):
+        client, personas, token_for, caller, transport):
     user = None if caller == "anonymous" else personas[caller]
-    url = f"/api/tdeb/ws/simulate/{ObjectId()}" + (f"?token={token_for(user)}" if user else "")
+    url = f"/api/tdeb/ws/simulate/{ObjectId()}" + _ws_credential(user, transport, token_for)
 
     if caller in WS_ALLOWED:
         with client.websocket_connect(url) as sock:

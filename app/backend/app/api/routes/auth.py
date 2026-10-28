@@ -4,14 +4,17 @@ Authentication API routes.
 import logging
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 import httpx
 
 from app.core.config import settings
 from app.core.auth import (
     ACTIVE_STATUS,
-    consume_refresh_token,
+    TICKET_TTL_SECONDS,
+    consume_jti,
+    create_socket_ticket,
     create_token_pair,
+    get_current_user,
     ensure_account_active,
     load_user_doc,
     revoke_refresh_token,
@@ -82,7 +85,10 @@ async def token_endpoint(request: Request, login_request: NativeLoginRequest):
 async def google_auth(request: Request, auth_request: GoogleAuthRequest):
     """
     Authenticate with Google OAuth 2.0.
-    Exchange authorization code for tokens and create/update user.
+
+    Exchanges the authorization code (with its PKCE verifier) for tokens and
+    signs in the existing account it belongs to. Accounts are never created
+    here — see UserService.get_google_user.
     """
     if not settings.google_oauth_enabled:
         raise HTTPException(
@@ -132,11 +138,12 @@ async def google_auth(request: Request, auth_request: GoogleAuthRequest):
             full_name = idinfo.get("name")
             avatar_url = idinfo.get("picture")
 
-            # Create or update user
+            # Invitation only: resolves to an existing account or raises 403.
             user_service = UserService()
-            user = await user_service.get_or_create_user(
+            user = await user_service.get_google_user(
                 google_id=google_id,
                 email=email,
+                email_verified=idinfo.get("email_verified") in (True, "true"),
                 full_name=full_name,
                 avatar_url=avatar_url
             )
@@ -200,7 +207,7 @@ async def refresh_token(request: Request, body: RefreshTokenRequest):
     if not old_jti or not isinstance(exp_claim, (int, float)):
         raise invalid
     old_exp_dt = datetime.fromtimestamp(exp_claim, tz=timezone.utc)
-    if not await consume_refresh_token(old_jti, old_exp_dt):
+    if not await consume_jti(old_jti, old_exp_dt):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Refresh token has been revoked",
@@ -215,6 +222,22 @@ async def refresh_token(request: Request, body: RefreshTokenRequest):
         refresh_token=new_refresh_token,
         user=user,
     )
+
+
+@router.post("/ws-ticket")
+@limiter.limit("60/minute")
+async def socket_ticket(request: Request, current_user: dict = Depends(get_current_user)):
+    """A one-time credential for a WebSocket or EventSource URL.
+
+    Those browser APIs cannot send an Authorization header, so whatever
+    authenticates them ends up in a URL, and URLs end up in logs. The ticket
+    is what goes there: good for one connection within TICKET_TTL_SECONDS,
+    and not accepted as a bearer token. Pass it as ``?ticket=``.
+    """
+    user_doc = await load_user_doc(current_user["id"])
+    if user_doc is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+    return {"ticket": create_socket_ticket(user_doc), "expires_in": TICKET_TTL_SECONDS}
 
 
 @router.post("/logout")

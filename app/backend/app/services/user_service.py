@@ -72,52 +72,59 @@ class UserService:
         return await self.collection.find_one(
             {"email": normalize_email(email)}, collation=EMAIL_COLLATION)
 
-    async def get_or_create_user(
+    async def get_google_user(
         self,
         google_id: str,
         email: str,
+        email_verified: bool,
         full_name: Optional[str] = None,
         avatar_url: Optional[str] = None
     ) -> User:
-        """Get existing user or create new one (Google OAuth flow)."""
-        # Try to find existing user
+        """Resolve a Google sign-in to an existing account. Never creates one.
+
+        Registration is by invitation: an administrator creates the account,
+        or approves an enrolment request, and Google sign-in then works for
+        it. The first Google sign-in links the Google identity to the account
+        whose address Google has verified; later ones find it by ``google_id``.
+        Anyone else gets a 403 — this used to hand every Google user on earth
+        an explorator account, with read access to licensed full text.
+        """
         user_doc = await self.collection.find_one({"google_id": google_id})
 
-        if user_doc:
-            # Update avatar and name if changed
-            update_fields = {}
-            if full_name and user_doc.get("full_name") != full_name:
-                update_fields["full_name"] = full_name
-            if avatar_url and user_doc.get("avatar_url") != avatar_url:
-                update_fields["avatar_url"] = avatar_url
+        if user_doc is None:
+            not_invited = HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="No AdvanDEB account for this Google address. "
+                       "Ask an administrator for an invitation.",
+            )
+            if not email_verified:
+                raise not_invited
+            user_doc = await self.find_by_email(email)
+            # An account already linked to a *different* Google identity is
+            # not this caller's to claim, whatever the address says.
+            if user_doc is None or user_doc.get("google_id") not in (None, google_id):
+                raise not_invited
+            await self.collection.update_one(
+                {"_id": user_doc["_id"]}, {"$set": {"google_id": google_id}})
+            user_doc["google_id"] = google_id
 
-            if update_fields:
-                update_fields["updated_at"] = datetime.now(timezone.utc)
-                await self.collection.update_one(
-                    {"_id": user_doc["_id"]},
-                    {"$set": update_fields}
-                )
-                user_doc.update(update_fields)
+        # Update avatar and name if changed
+        update_fields = {}
+        if full_name and user_doc.get("full_name") != full_name:
+            update_fields["full_name"] = full_name
+        if avatar_url and user_doc.get("avatar_url") != avatar_url:
+            update_fields["avatar_url"] = avatar_url
 
-            user_doc["_id"] = str(user_doc["_id"])
-            return User(**user_doc)
+        if update_fields:
+            update_fields["updated_at"] = datetime.now(timezone.utc)
+            await self.collection.update_one(
+                {"_id": user_doc["_id"]},
+                {"$set": update_fields}
+            )
+            user_doc.update(update_fields)
 
-        # Create new user
-        new_user = {
-            "google_id": google_id,
-            "email": normalize_email(email),
-            "full_name": full_name,
-            "avatar_url": avatar_url,
-            "roles": ["knowledge_explorator"],  # Default role
-            "capabilities": [],
-            "status": "active",
-            "created_at": datetime.now(timezone.utc),
-            "updated_at": datetime.now(timezone.utc)
-        }
-
-        result = await self.collection.insert_one(new_user)
-        new_user["_id"] = str(result.inserted_id)
-        return User(**new_user)
+        user_doc["_id"] = str(user_doc["_id"])
+        return User(**user_doc)
 
     async def create_native_user(
         self,

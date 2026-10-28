@@ -499,3 +499,126 @@ def test_refresh_token_payload_carries_iat():
     from app.core.auth import verify_token
     payload = verify_token(create_refresh_token({"sub": "x"}), expected_type="refresh")
     assert isinstance(payload["iat"], int) and payload["jti"]
+
+
+# --------------------------------------------------------------------------- #
+# Socket tickets                                                               #
+# --------------------------------------------------------------------------- #
+
+class _StubChat:
+    async def process_message_stream(self, **kwargs):
+        yield {"type": "message", "content": "stub"}
+
+
+def _ticket_for(client, auth_header, user):
+    response = client.post("/api/auth/ws-ticket", headers=auth_header(user))
+    assert response.status_code == 200, response.text
+    body = response.json()
+    assert body["expires_in"] == 30
+    return body["ticket"]
+
+
+def test_ticket_opens_one_socket_only(client, make_user, auth_header, monkeypatch):
+    from app.api.routes import ws
+
+    monkeypatch.setattr(ws, "ChatService", _StubChat)
+    ticket = _ticket_for(client, auth_header, make_user("w@example.org"))
+
+    with client.websocket_connect(f"/ws/chat/new?ticket={ticket}") as sock:
+        sock.send_json({"type": "user_message", "text": "hi"})
+        assert sock.receive_json()["content"] == "stub"
+
+    with client.websocket_connect(f"/ws/chat/new?ticket={ticket}") as sock:
+        sock.send_json({"type": "user_message", "text": "replayed"})
+        message = sock.receive()
+        assert message["type"] == "websocket.close" and message["code"] == 4401
+
+
+def test_ticket_is_not_a_bearer_token(client, make_user, auth_header):
+    ticket = _ticket_for(client, auth_header, make_user("w@example.org"))
+    response = client.get("/api/users/me", headers={"Authorization": f"Bearer {ticket}"})
+    assert response.status_code == 401
+
+
+def test_access_token_cannot_be_presented_as_a_ticket(client, make_user, token_for):
+    user = make_user("w@example.org", roles=["knowledge_curator"])
+    response = client.get(f"/api/kb/viz/schema/unknown/stream?ticket={token_for(user)}")
+    assert response.status_code == 401
+
+
+def test_expired_ticket_is_refused(client, make_user):
+    from jose import jwt
+    from app.core.config import settings
+
+    user = make_user("w@example.org", roles=["knowledge_curator"])
+    stale = jwt.encode(
+        {"sub": str(user["_id"]), "type": "ticket", "jti": "j1", "ver": 0,
+         "exp": datetime.now(timezone.utc) - timedelta(seconds=1)},
+        settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
+    assert client.get(f"/api/kb/viz/schema/unknown/stream?ticket={stale}").status_code == 401
+
+
+def test_ticket_dies_with_its_session_generation(client, make_user, auth_header, app_db):
+    user = make_user("w@example.org", roles=["knowledge_curator"])
+    ticket = _ticket_for(client, auth_header, user)
+    _user_doc(app_db, user)["token_version"] = 1
+    assert client.get(f"/api/kb/viz/schema/unknown/stream?ticket={ticket}").status_code == 401
+
+
+def test_external_contributor_gets_no_ticket(client, make_user, auth_header):
+    user = make_user("x@example.org", roles=["external_contributor"])
+    assert client.post("/api/auth/ws-ticket", headers=auth_header(user)).status_code == 403
+
+
+# --------------------------------------------------------------------------- #
+# Google sign-in: invitation only                                              #
+# --------------------------------------------------------------------------- #
+
+@pytest.mark.asyncio
+async def test_google_sign_in_never_creates_an_account(fake_mongo, app_db):
+    from app.services.user_service import UserService
+
+    with pytest.raises(HTTPException) as exc_info:
+        await UserService().get_google_user(
+            google_id="g-1", email="stranger@gmail.com", email_verified=True)
+    assert exc_info.value.status_code == 403
+    assert app_db.users.docs == []
+
+
+@pytest.mark.asyncio
+async def test_google_sign_in_links_an_invited_account_by_verified_email(make_user, app_db):
+    from app.services.user_service import UserService
+
+    invited = make_user("Invited@Example.org", password=None)
+    user = await UserService().get_google_user(
+        google_id="g-2", email="invited@example.org", email_verified=True,
+        avatar_url="https://example.org/a.png")
+
+    assert user.id == str(invited["_id"])
+    assert _user_doc(app_db, invited)["google_id"] == "g-2"
+    # Later sign-ins find it by the Google identity.
+    again = await UserService().get_google_user(
+        google_id="g-2", email="changed@example.org", email_verified=False)
+    assert again.id == str(invited["_id"])
+
+
+@pytest.mark.asyncio
+async def test_google_sign_in_needs_a_verified_address(make_user):
+    from app.services.user_service import UserService
+
+    make_user("invited@example.org")
+    with pytest.raises(HTTPException) as exc_info:
+        await UserService().get_google_user(
+            google_id="g-3", email="invited@example.org", email_verified=False)
+    assert exc_info.value.status_code == 403
+
+
+@pytest.mark.asyncio
+async def test_google_sign_in_cannot_claim_an_account_linked_elsewhere(make_user):
+    from app.services.user_service import UserService
+
+    make_user("invited@example.org", google_id="g-original")
+    with pytest.raises(HTTPException) as exc_info:
+        await UserService().get_google_user(
+            google_id="g-other", email="invited@example.org", email_verified=True)
+    assert exc_info.value.status_code == 403

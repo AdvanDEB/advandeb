@@ -19,7 +19,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSock
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
-from app.core.auth import get_current_user, resolve_user
+from app.core.auth import get_current_user, resolve_socket_user
 from app.core.dependencies import require_curator
 from app.tdeb.core import (
     EDITABLE_SECTIONS, Edge, EdgeParams, EnvironmentParams, EquationSet,
@@ -528,20 +528,22 @@ async def simulate(model_id: str, payload: SimRequest,
 
 # ─── WebSocket streaming ──────────────────────────────────────────────
 
-async def _ws_user(websocket: WebSocket, token: Optional[str]) -> Optional[dict]:
-    """Resolve the JWT passed as a query param on the WebSocket upgrade.
+async def _ws_user(websocket: WebSocket, ticket: Optional[str],
+                   token: Optional[str]) -> Optional[dict]:
+    """Resolve the ``?ticket=`` (or deprecated ``?token=``) on the upgrade.
 
     Same resolver as every REST route (status, revocation, role boundary);
     None means "not authenticated".
     """
     try:
-        return await resolve_user(token, path=websocket.url.path)
+        return await resolve_socket_user(ticket, token, path=websocket.url.path)
     except HTTPException:
         return None
 
 
 @router.websocket("/ws/simulate/{model_id}")
 async def stream_simulation(websocket: WebSocket, model_id: str,
+                            ticket: Optional[str] = Query(default=None),
                             token: Optional[str] = Query(default=None)):
     """
     Stream a simulation snapshot per output interval.
@@ -550,7 +552,7 @@ async def stream_simulation(websocket: WebSocket, model_id: str,
     after the connection opens, then receives ``{time, progress, nodes, flows}``
     messages followed by ``{done: true}``.
     """
-    user = await _ws_user(websocket, token)
+    user = await _ws_user(websocket, ticket, token)
     if not user:
         await websocket.close(code=4401)
         return

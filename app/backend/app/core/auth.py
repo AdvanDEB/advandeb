@@ -225,6 +225,75 @@ async def resolve_user(token: Optional[str], *, path: Optional[str] = None) -> d
     return user_context(user_doc)
 
 
+# --------------------------------------------------------------------------- #
+# Socket tickets                                                               #
+# --------------------------------------------------------------------------- #
+#
+# The browser WebSocket and EventSource APIs cannot set an Authorization
+# header, so their credential has to ride in the URL — where proxies and
+# servers log it. A ticket is what goes there instead of the access token:
+# minted over an authenticated POST, valid for TICKET_TTL_SECONDS, good for one
+# connection, and useless as a bearer token (its type is "ticket").
+
+TICKET_TTL_SECONDS = 30
+
+
+def create_socket_ticket(user_doc: dict) -> str:
+    now = datetime.now(timezone.utc)
+    return jwt.encode(
+        {
+            "sub": str(user_doc["_id"]),
+            "type": "ticket",
+            "jti": uuid.uuid4().hex,
+            "ver": user_doc.get("token_version", 0),
+            "iat": now,
+            "exp": now + timedelta(seconds=TICKET_TTL_SECONDS),
+        },
+        settings.JWT_SECRET_KEY,
+        algorithm=settings.JWT_ALGORITHM,
+    )
+
+
+async def resolve_ticket(ticket: Optional[str], *, path: Optional[str] = None) -> dict:
+    """Resolve a socket ticket to its account, consuming it.
+
+    The same account checks as :func:`resolve_user`; the ticket is spent once
+    they pass. Role checks come after (``require_curator`` and the like), so a
+    ticket presented where its holder may not go is spent and refused.
+    """
+    if not ticket:
+        raise _unauthorized("Not authenticated")
+    payload = verify_token(ticket, expected_type="ticket")
+
+    user_doc = await load_user_doc(payload.get("sub"))
+    if user_doc is None:
+        raise _unauthorized()
+    ensure_account_active(user_doc)
+    if token_revoked(payload, user_doc):
+        raise _unauthorized("Session has been revoked")
+    ensure_path_allowed(user_doc, path)
+
+    jti, exp = payload.get("jti"), payload.get("exp")
+    if not jti or not isinstance(exp, (int, float)) or not await consume_jti(
+            jti, datetime.fromtimestamp(exp, tz=timezone.utc)):
+        raise _unauthorized("Ticket already used")
+    return user_context(user_doc)
+
+
+async def resolve_socket_user(
+    ticket: Optional[str], token: Optional[str], *, path: Optional[str] = None
+) -> dict:
+    """The credential a WebSocket/EventSource request carries in its URL.
+
+    ``?ticket=`` is the supported form. ``?token=`` (a raw access token) is
+    still accepted so that browser tabs running an SPA build from before
+    tickets keep working until they reload; remove it once none can be left.
+    """
+    if ticket:
+        return await resolve_ticket(ticket, path=path)
+    return await resolve_user(token, path=path)
+
+
 def bearer_or_query_token(token: Optional[str], authorization: Optional[str]) -> Optional[str]:
     """Pick the JWT from ``?token=`` or an ``Authorization: Bearer`` header.
 
@@ -296,13 +365,15 @@ async def revoke_refresh_token(jti: str, exp: datetime) -> None:
     )
 
 
-async def consume_refresh_token(jti: str, exp: datetime) -> bool:
-    """Atomically mark a refresh token used; False if it already was.
+async def consume_jti(jti: str, exp: datetime) -> bool:
+    """Atomically mark a single-use token used; False if it already was.
 
-    Rotation has to be check-and-set in one step: with a separate "is it
-    revoked?" read followed by a write, two requests presenting the same token
-    both pass the read and both mint a fresh pair. The unique index on
-    ``revoked_tokens.jti`` makes the insert the arbiter.
+    Serves refresh-token rotation and socket tickets. It has to be
+    check-and-set in one step: with a separate "is it revoked?" read followed
+    by a write, two requests presenting the same token both pass the read.
+    The unique index on ``revoked_tokens.jti`` makes the insert the arbiter,
+    and its TTL index on ``exp`` prunes the entry once the token would have
+    expired anyway.
     """
     from pymongo.errors import DuplicateKeyError
     from app.core.database import get_database
