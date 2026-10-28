@@ -7,9 +7,14 @@ Uses the synchronous ArangoDatabase client, dispatched to a thread pool from
 async callers via asyncio.get_running_loop().run_in_executor().
 
 ID conventions:
-  - Document / Fact / StylizedFact _key  = hex ObjectId string (e.g. "69b8471f…")
-  - FactSFRelation _key                  = hex ObjectId string (edge in sf_support)
+  - Document / Fact / StylizedFact _key  = hex ObjectId string (e.g. "69b8471f…"),
+    except reproduction documents: OpenAlex work id ("W2810246872") or a
+    "doi_…" / "rec_…" hash, which their facts carry as document_id
+  - FactSFRelation _key                  = hex ObjectId string or "<fact key>_<sf key>"
+    (edge in sf_support)
   - ArangoDB full vertex ID              = "<collection>/<_key>"
+  The models type these as ObjectIdOrKey: ObjectId for hex keys, the string
+  itself otherwise; str() of either is the _key.
 """
 from __future__ import annotations
 
@@ -45,10 +50,10 @@ def _now_iso() -> str:
 
 
 def _doc_to_model(raw: dict, model_cls):
-    """Map ArangoDB _key → _id (ObjectId alias) and return a pydantic model."""
+    """Map ArangoDB _key → _id (the models' id alias) and return a pydantic model."""
     if raw is None:
         return None
-    # Our models use _id as the ObjectId alias, which is the ArangoDB _key.
+    # Our models use _id as the id alias, which is the ArangoDB _key.
     # ArangoDB's own _id ("facts/<key>") is always present and must not win.
     raw = dict(raw)
     if "_key" in raw:

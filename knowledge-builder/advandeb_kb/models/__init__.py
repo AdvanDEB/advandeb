@@ -1,4 +1,4 @@
-from advandeb_kb.models.common import PyObjectId
+from advandeb_kb.models.common import ObjectIdOrKey, PyObjectId
 from advandeb_kb.models.knowledge import Document, Fact, StylizedFact, FactSFRelation
 from advandeb_kb.models.ingestion import IngestionBatch, IngestionJob
 from advandeb_kb.models.taxonomy import TaxonomyNode
@@ -20,6 +20,7 @@ from advandeb_kb.models.chat import (
 
 __all__ = [
     "PyObjectId",
+    "ObjectIdOrKey",
     "Document",
     "Fact",
     "StylizedFact",

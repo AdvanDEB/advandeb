@@ -5,7 +5,7 @@ from typing import List, Optional, Literal
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field, ConfigDict
 
-from advandeb_kb.models.common import PyObjectId
+from advandeb_kb.models.common import ObjectIdOrKey
 
 
 _BASE_CONFIG = ConfigDict(
@@ -19,7 +19,7 @@ class Document(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
     title: Optional[str] = None
     doi: Optional[str] = None
     authors: List[str] = []
@@ -39,7 +39,9 @@ class Document(BaseModel):
     openalex_id: Optional[str] = None   # bare Work ID, e.g. "W1972661416"
     pmid: Optional[str] = None
     cited_by_count: Optional[int] = None
-    is_retracted: bool = False
+    # None: OpenAlex no longer returns the work (merged or deleted), so
+    # backfill_openalex_metadata.py could not tell.
+    is_retracted: Optional[bool] = False
 
     # Where the document came from
     source_type: Literal["pdf_local", "pdf_upload", "web", "text", "manual"] = "manual"
@@ -48,8 +50,9 @@ class Document(BaseModel):
     # Scope tag for development / domain-limited testing (e.g. "reproduction")
     general_domain: Optional[str] = None
 
+    # "skipped": too little text to extract facts from (run_reproduction_pipeline.py)
     processing_status: Literal[
-        "pending", "processing", "completed", "failed", "excluded"
+        "pending", "processing", "completed", "failed", "excluded", "skipped"
     ] = "pending"
     # Set when processing_status == "excluded" — why the domain-relevance gate
     # skipped fact extraction / SF matching / embedding for this document.
@@ -69,10 +72,10 @@ class Fact(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
     content: str
-    document_id: PyObjectId           # primary source
-    additional_sources: List[PyObjectId] = []   # cross-linked documents reporting the same fact
+    document_id: ObjectIdOrKey        # primary source
+    additional_sources: List[ObjectIdOrKey] = []   # cross-linked documents reporting the same fact
     content_fingerprint: Optional[str] = None  # normalized for deduplication
     page_number: Optional[int] = None
 
@@ -101,7 +104,7 @@ class StylizedFact(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
     statement: str
 
     # Category from source CSV filename, e.g. "reproductive_strategy",
@@ -130,10 +133,10 @@ class DocumentTaxonRelation(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
 
     # References
-    document_id: PyObjectId        # → documents collection
+    document_id: ObjectIdOrKey     # → documents collection
     tax_id: int                    # NCBI taxonomy ID (for fast lookup without join)
 
     # Semantics of the link
@@ -165,9 +168,9 @@ class FactSFRelation(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
-    fact_id: PyObjectId
-    sf_id: PyObjectId
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    fact_id: ObjectIdOrKey
+    sf_id: ObjectIdOrKey
 
     relation_type: Literal["supports", "opposes"]
 
