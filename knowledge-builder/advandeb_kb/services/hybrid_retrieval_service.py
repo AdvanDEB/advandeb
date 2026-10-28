@@ -388,6 +388,12 @@ class HybridRetrievalService:
         stemming, stop words removed) and any token may match — BM25 ranks
         documents matching more and rarer terms higher, unlike the old
         FULLTEXT query, which required every word.
+
+        A hit's id is ``_key``, never ``chunk_id``: the 2.2M reproduction
+        chunks (``W<openalex>_chunk_N``, written by
+        scripts/embed_reproduction_abstracts.py) have no ``chunk_id`` field,
+        and where the field exists it equals ``_key``. ``_key`` is also the
+        id ChromaDB returns, so a chunk both arms find fuses into one result.
         """
         if domain == "reproduction":
             domain_clause = 'AND c.general_domain == "reproduction"'
@@ -453,7 +459,7 @@ class HybridRetrievalService:
             results = []
             for doc in cursor:
                 results.append({
-                    "id": doc.get("chunk_id", str(doc["_id"])),
+                    "id": doc.get("chunk_id") or str(doc["_id"]),
                     "text": doc.get("text", ""),
                     "metadata": {
                         "document_id": str(doc.get("document_id", "")),
@@ -489,10 +495,16 @@ class HybridRetrievalService:
 
     @classmethod
     def _dedupe(cls, hits: list[dict]) -> list[dict]:
-        """Drop repeated passages from one ranked list, keeping the best rank."""
+        """
+        Drop repeated passages from one ranked list, keeping the best rank,
+        and hits without a chunk id: fusion keys scores by id, so id-less hits
+        would all merge into one ``None`` entry carrying their summed score.
+        """
         seen: set[str] = set()
         out = []
         for h in hits:
+            if not h.get("id"):
+                continue
             key = cls._passage_key(h)
             if key not in seen:
                 seen.add(key)
@@ -508,12 +520,16 @@ class HybridRetrievalService:
         Compute RRF scores for all unique passages across both ranked lists.
 
         RRF(d) = Σ 1 / (k + rank(d))  for each list where d appears, with
-        ranks counted after dropping repeated passages from each list.
+        ranks counted after dropping repeated passages and id-less hits from
+        each list.
 
         Returns dict mapping chunk_id → rrf_score, sorted descending; a passage
         is represented by the first chunk id it was seen under (vector first,
-        whose metadata is the richer).
+        whose metadata is the richer). No key is ever None or empty.
         """
+        missing = sum(1 for h in (*vector_results, *keyword_results) if not h.get("id"))
+        if missing:
+            logger.warning("RRF: dropped %d hit(s) without a chunk id", missing)
         k = self.rrf_k
         scores: dict[str, float] = {}
         representative: dict[str, str] = {}
@@ -538,7 +554,8 @@ class HybridRetrievalService:
         keyword_index = {self._passage_key(h): (rank, h) for rank, h in enumerate(self._dedupe(keyword_hits))}
         passage_of: dict[str, str] = {}
         for h in vector_hits + keyword_hits:
-            passage_of.setdefault(h["id"], self._passage_key(h))
+            if h.get("id"):
+                passage_of.setdefault(h["id"], self._passage_key(h))
 
         results = []
         for chunk_id, rrf_score in list(fused.items())[:top_k]:
