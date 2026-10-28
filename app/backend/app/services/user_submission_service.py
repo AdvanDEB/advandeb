@@ -7,6 +7,7 @@ the KB ArangoDB.  A curator approval triggers ingestion into the KB.
 """
 import asyncio
 import logging
+import re
 from datetime import datetime, timezone
 from typing import List, Optional
 
@@ -146,13 +147,21 @@ class UserSubmissionService:
         limit: int = 100,
         search: str = "",
         status: str = "",
+        uploader_id: Optional[str] = None,
     ) -> List[DocumentSubmission]:
-        """List document submissions with optional title search and status filter."""
+        """List document submissions with optional title search and status filter.
+
+        ``search`` is matched literally (escaped), never as a pattern: a
+        caller-supplied regex can be made to backtrack for minutes. Passing
+        ``uploader_id`` restricts the list to that user's own submissions.
+        """
         query: dict = {}
         if search:
-            query["title"] = {"$regex": search, "$options": "i"}
+            query["title"] = {"$regex": re.escape(search), "$options": "i"}
         if status:
             query["status"] = status
+        if uploader_id is not None:
+            query["uploader_id"] = uploader_id
 
         cursor = (
             self.doc_submissions.find(query)
@@ -330,10 +339,13 @@ class UserSubmissionService:
         skip: int = 0,
         limit: int = 100,
         status_filter: Optional[str] = None,
+        creator_id: Optional[str] = None,
     ) -> List[FactSubmission]:
         query: dict = {}
         if status_filter:
             query["status"] = status_filter
+        if creator_id is not None:
+            query["creator_id"] = creator_id
         cursor = (
             self.fact_submissions.find(query)
             .skip(skip)
@@ -400,10 +412,13 @@ class UserSubmissionService:
         skip: int = 0,
         limit: int = 100,
         status_filter: Optional[str] = None,
+        creator_id: Optional[str] = None,
     ) -> List[StylizedFactSubmission]:
         query: dict = {}
         if status_filter:
             query["status"] = status_filter
+        if creator_id is not None:
+            query["creator_id"] = creator_id
         cursor = (
             self.sf_submissions.find(query)
             .skip(skip)

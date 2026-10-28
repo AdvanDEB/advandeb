@@ -1,14 +1,16 @@
 """
 User management API routes.
 """
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
 from typing import Any, Dict, List, Optional
 
-from app.core.auth import get_current_user
+from app.core.auth import create_token_pair, get_current_user
 from app.core.dependencies import require_admin
+from app.core.limiter import limiter
 from app.models.user import (
     PasswordResetResponse,
     PasswordSet,
+    TokenResponse,
     User,
     UserCreateNative,
     UserStatusUpdate,
@@ -45,14 +47,25 @@ async def update_current_user(
     return user
 
 
-@router.put("/me/password", status_code=status.HTTP_204_NO_CONTENT)
+@router.put("/me/password", response_model=TokenResponse)
+@limiter.limit("5/minute")
 async def set_my_password(
+    request: Request,
     body: PasswordSet,
     current_user: dict = Depends(get_current_user)
 ):
-    """Set or change the password for the current user."""
+    """Set or change the password for the current user.
+
+    Requires ``current_password`` when the account already has a password.
+    Every existing session — this one included — is revoked, so the response
+    carries a fresh token pair for the caller to continue with.
+    """
     user_service = UserService()
-    await user_service.set_password(current_user["id"], body.password)
+    await user_service.change_own_password(
+        current_user["id"], body.password, body.current_password)
+    user = await user_service.get_user_by_id(current_user["id"])
+    access_token, refresh_token = create_token_pair(str(user.id), user.email, user.token_version)
+    return TokenResponse(access_token=access_token, refresh_token=refresh_token, user=user)
 
 
 @router.get("/me/chat-access-log")
@@ -82,8 +95,8 @@ async def create_native_user(
 
 @router.get("/")
 async def list_users(
-    skip: int = 0,
-    limit: int = 100,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
     q: Optional[str] = None,
     role: Optional[str] = None,
     status: Optional[str] = None,

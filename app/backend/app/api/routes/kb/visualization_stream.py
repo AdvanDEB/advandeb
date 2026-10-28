@@ -20,13 +20,12 @@ accepted via the ``?token=`` query parameter.  A Bearer Authorization
 header is also accepted for non-browser callers.
 """
 import json
-from typing import Optional
 
-from fastapi import APIRouter, Depends, Header, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from fastapi.responses import StreamingResponse
 
-from app.core.auth import verify_token
 from app.core.database import get_arango_db, get_database
+from app.core.dependencies import require_curator_sse
 from advandeb_kb.services.graph_query_service import GraphQueryService
 
 router = APIRouter()
@@ -38,35 +37,11 @@ VALID_SCHEMAS = {
 }
 
 
-async def _require_curator_sse(
-    token: Optional[str] = Query(default=None),
-    authorization: Optional[str] = Header(default=None),
-) -> dict:
-    jwt_token = token
-    if not jwt_token and authorization and authorization.startswith("Bearer "):
-        jwt_token = authorization[7:]
-    if not jwt_token:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-    payload = verify_token(jwt_token)
-    user_id = payload.get("sub")
-    if not user_id:
-        raise HTTPException(status_code=401, detail="Invalid token")
-    from bson import ObjectId as ObjId
-    db = get_database()
-    user_doc = await db.users.find_one({"_id": ObjId(user_id)})
-    if not user_doc:
-        raise HTTPException(status_code=401, detail="User not found")
-    roles = user_doc.get("roles", [])
-    if not any(r in roles for r in ["administrator", "knowledge_curator"]):
-        raise HTTPException(status_code=403, detail="Curator access required")
-    return {"id": str(user_doc["_id"]), "roles": roles}
-
-
 @router.get("/schema/{schema_id}/stream", summary="Stream graph data as SSE events")
 async def stream_graph(
     schema_id: str,
     limit: int = Query(default=5000, ge=1, le=50_000),
-    current_user: dict = Depends(_require_curator_sse),
+    current_user: dict = Depends(require_curator_sse),
 ):
     """Stream graph nodes and edges as Server-Sent Events, BATCH_SIZE nodes per event."""
     if schema_id not in VALID_SCHEMAS:

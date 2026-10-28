@@ -12,12 +12,12 @@ This router handles the suggestion lifecycle:
   PATCH  /api/documents/{id}/approve   — curator approve/reject
   DELETE /api/documents/{id}           — delete a submission
 """
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, status
+from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile, File, status
 from typing import List, Optional
 from pydantic import BaseModel
 
 from app.core.auth import get_current_user
-from app.core.dependencies import require_curator
+from app.core.dependencies import is_curator, require_curator
 from app.models.user_submission import (
     DocumentSubmission,
     DocumentSubmissionCreate,
@@ -55,16 +55,18 @@ async def upload_document_submission(
 
 @router.get("/", response_model=List[DocumentSubmission])
 async def list_document_submissions(
-    skip: int = 0,
-    limit: int = 100,
-    search: str = "",
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
+    search: str = Query(default="", max_length=200),
     status: str = "",
     current_user: dict = Depends(get_current_user),
 ):
-    """List document submissions. Curators filter by status='suggestion'."""
+    """List document submissions. Curators see all of them (and filter by
+    status='suggestion' to review); everyone else sees only their own."""
     svc = UserSubmissionService()
     return await svc.list_document_submissions(
-        skip=skip, limit=limit, search=search, status=status
+        skip=skip, limit=limit, search=search, status=status,
+        uploader_id=None if is_curator(current_user) else current_user["id"],
     )
 
 
@@ -76,6 +78,9 @@ async def get_document_submission(
     """Get a document submission by ID."""
     svc = UserSubmissionService()
     submission = await svc.get_document_submission(submission_id)
+    # Someone else's submission reads as absent, not forbidden.
+    if submission and not is_curator(current_user) and submission.uploader_id != current_user["id"]:
+        submission = None
     if not submission:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Submission not found"

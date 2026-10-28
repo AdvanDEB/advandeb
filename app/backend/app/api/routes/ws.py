@@ -4,11 +4,11 @@ WebSocket routes — real-time chat streaming.
 import json
 from typing import Optional
 
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Query
+from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect, Query
 
 from advandeb_kb.services.graph_rebuild_queue import graph_rebuild_queue
 
-from app.core.auth import verify_token
+from app.core.auth import resolve_user
 from app.core.database import get_database
 from app.services.chat_service import ChatService
 from bson import ObjectId
@@ -16,34 +16,22 @@ from bson import ObjectId
 router = APIRouter()
 
 
-async def _get_ws_user(token: Optional[str]) -> Optional[dict]:
-    """
-    Validate a JWT passed as a query param on the WebSocket upgrade request.
+async def _get_ws_user(websocket: WebSocket, token: Optional[str]) -> Optional[dict]:
+    """Resolve the JWT passed as ``?token=`` on the WebSocket upgrade.
 
-    Returns a user dict on success, None if no token was provided (unauthenticated
-    fallback — session stored as 'anonymous'), or closes with 4401 if the token is
-    present but invalid.
+    Goes through the shared :func:`resolve_user`, so a suspended account, a
+    revoked session and an external contributor (who has no chat) are refused
+    here exactly as on the REST routes. Returns None for any refusal; there is
+    no anonymous fallback — an unauthenticated socket would spend the shared
+    default-model key and its single global rate limit.
     """
-    if not token:
-        return None
     try:
-        payload = verify_token(token)
-        user_id = payload.get("sub")
-        if not user_id:
-            return None
-        db = get_database()
-        user_doc = await db.users.find_one({"_id": ObjectId(user_id)})
-        if not user_doc:
-            return None
-        return {
-            "id": str(user_doc["_id"]),
-            "email": user_doc.get("email", ""),
-        }
-    except Exception:
+        return await resolve_user(token, path=websocket.url.path)
+    except HTTPException:
         return None
 
 
-async def _check_generating(session_id: str, websocket: WebSocket) -> None:
+async def _check_generating(session_id: str, user_id: str, websocket: WebSocket) -> None:
     """
     On reconnect, check the app chat DB for any assistant messages that are still
     ``status="generating"`` (i.e. the ReAct loop started but the user's
@@ -57,6 +45,11 @@ async def _check_generating(session_id: str, websocket: WebSocket) -> None:
         return
     try:
         db = get_database()
+        # Only the owner's own in-flight generations: the session id comes from
+        # the URL, so without this any caller could probe another user's.
+        if not await db.chat_sessions.find_one(
+                {"_id": ObjectId(session_id), "user_id": user_id}, {"_id": 1}):
+            return
         cursor = db.chat_messages.find(
             {"session_id": session_id, "status": "generating"},
             {"_id": 1},
@@ -80,9 +73,9 @@ async def ws_chat(
     WebSocket endpoint for real-time agentic chat.
 
     Authentication: pass the JWT access token as ?token=<access_token> on the
-    WebSocket URL. If a valid token is provided the server extracts the user_id
-    from it and ignores any user_id in the JSON payload. If no token is provided
-    the session is stored under 'anonymous'.
+    WebSocket URL. It is required: a missing, invalid or expired token, or an
+    account that may not chat, gets close code 4401. The user_id is taken from
+    the verified token, never from the JSON payload.
 
     Client sends:
       {"type": "user_message", "text": "..."}
@@ -96,23 +89,23 @@ async def ws_chat(
       {"type": "error",          "detail": "..."}
     """
     # Validate token before accepting the connection
-    user = await _get_ws_user(token)
+    user = await _get_ws_user(websocket, token)
 
-    if token and user is None:
+    if user is None:
         # Accept then immediately close so the browser receives a readable
         # close frame (code 4401) rather than a raw HTTP 403.
         await websocket.accept()
-        await websocket.close(code=4401, reason="Invalid or expired token")
+        await websocket.close(code=4401, reason="Authentication required")
         return
 
     await websocket.accept()
 
-    # user_id is authoritative from the verified JWT; fall back to anonymous
-    server_user_id = user["id"] if user else "anonymous"
+    # user_id is authoritative from the verified JWT
+    server_user_id = user["id"]
     active_session_id = session_id
 
     # Reconnect catch-up: surface any in-progress generations to the browser
-    await _check_generating(active_session_id, websocket)
+    await _check_generating(active_session_id, server_user_id, websocket)
 
     chat_service = ChatService()
 

@@ -15,12 +15,12 @@ Routes:
   GET    /api/facts/stylized/            — list SF submissions
   PATCH  /api/facts/stylized/{id}/review — curator review
 """
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from typing import List, Optional
 from pydantic import BaseModel
 
 from app.core.auth import get_current_user
-from app.core.dependencies import require_curator
+from app.core.dependencies import is_curator, require_curator
 from app.models.user_submission import (
     FactSubmission,
     FactSubmissionCreate,
@@ -59,15 +59,16 @@ async def create_fact_submission(
 
 @router.get("/", response_model=List[FactSubmission])
 async def list_fact_submissions(
-    skip: int = 0,
-    limit: int = 100,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
     status_filter: Optional[str] = None,
     current_user: dict = Depends(get_current_user),
 ):
-    """List fact submissions."""
+    """List fact submissions: all of them for curators, one's own otherwise."""
     svc = UserSubmissionService()
     return await svc.list_fact_submissions(
-        skip=skip, limit=limit, status_filter=status_filter
+        skip=skip, limit=limit, status_filter=status_filter,
+        creator_id=None if is_curator(current_user) else current_user["id"],
     )
 
 
@@ -79,6 +80,9 @@ async def get_fact_submission(
     """Get a fact submission by ID."""
     svc = UserSubmissionService()
     fact = await svc.get_fact_submission(fact_id)
+    # Someone else's submission reads as absent, not forbidden.
+    if fact and not is_curator(current_user) and fact.creator_id != current_user["id"]:
+        fact = None
     if not fact:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Fact submission not found"
@@ -130,15 +134,16 @@ async def create_sf_submission(
 
 @router.get("/stylized/", response_model=List[StylizedFactSubmission])
 async def list_sf_submissions(
-    skip: int = 0,
-    limit: int = 100,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
     status_filter: Optional[str] = None,
     current_user: dict = Depends(get_current_user),
 ):
-    """List stylized fact submissions."""
+    """List stylized fact submissions: all for curators, one's own otherwise."""
     svc = UserSubmissionService()
     return await svc.list_sf_submissions(
-        skip=skip, limit=limit, status_filter=status_filter
+        skip=skip, limit=limit, status_filter=status_filter,
+        creator_id=None if is_curator(current_user) else current_user["id"],
     )
 
 

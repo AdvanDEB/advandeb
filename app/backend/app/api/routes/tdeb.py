@@ -15,13 +15,11 @@ import asyncio
 import logging
 from typing import Any, Dict, List, Optional
 
-from bson import ObjectId
 from fastapi import APIRouter, Depends, HTTPException, Query, WebSocket, WebSocketDisconnect, status
 from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
-from app.core.auth import get_current_user, verify_token
-from app.core.database import get_database
+from app.core.auth import get_current_user, resolve_user
 from app.core.dependencies import require_curator
 from app.tdeb.core import (
     EDITABLE_SECTIONS, Edge, EdgeParams, EnvironmentParams, EquationSet,
@@ -530,20 +528,15 @@ async def simulate(model_id: str, payload: SimRequest,
 
 # ─── WebSocket streaming ──────────────────────────────────────────────
 
-async def _ws_user(token: Optional[str]) -> Optional[dict]:
-    """Resolve the JWT passed as a query param on the WebSocket upgrade."""
-    if not token:
-        return None
+async def _ws_user(websocket: WebSocket, token: Optional[str]) -> Optional[dict]:
+    """Resolve the JWT passed as a query param on the WebSocket upgrade.
+
+    Same resolver as every REST route (status, revocation, role boundary);
+    None means "not authenticated".
+    """
     try:
-        payload = verify_token(token)
-        user_id = payload.get("sub")
-        if not user_id:
-            return None
-        user_doc = await get_database().users.find_one({"_id": ObjectId(user_id)})
-        if not user_doc:
-            return None
-        return {"id": str(user_doc["_id"]), "email": user_doc.get("email", "")}
-    except Exception:  # noqa: BLE001 — any failure means "not authenticated"
+        return await resolve_user(token, path=websocket.url.path)
+    except HTTPException:
         return None
 
 
@@ -557,7 +550,7 @@ async def stream_simulation(websocket: WebSocket, model_id: str,
     after the connection opens, then receives ``{time, progress, nodes, flows}``
     messages followed by ``{done: true}``.
     """
-    user = await _ws_user(token)
+    user = await _ws_user(websocket, token)
     if not user:
         await websocket.close(code=4401)
         return

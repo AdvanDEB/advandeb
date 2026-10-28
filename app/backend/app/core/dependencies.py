@@ -1,10 +1,19 @@
 """
 Common dependencies for API routes.
 """
-from fastapi import Depends, HTTPException, status
-from typing import Callable, List
+from fastapi import Depends, Header, HTTPException, Query, Request, status
+from typing import Callable, List, Optional
 
-from app.core.auth import get_current_user
+# ROLE_EXTERNAL_CONTRIBUTOR is defined in app.core.auth, which enforces it;
+# enrolment_service imports it from here.
+from app.core.auth import (
+    ROLE_EXTERNAL_CONTRIBUTOR,
+    bearer_or_query_token,
+    get_current_user,
+    resolve_user,
+)
+
+CURATOR_ROLES = ("administrator", "knowledge_curator")
 
 
 def require_role(required_roles: List[str]) -> Callable:
@@ -30,15 +39,39 @@ async def require_admin(current_user: dict = Depends(get_current_user)):
     return current_user
 
 
+def is_curator(current_user: dict) -> bool:
+    """Curator or administrator."""
+    return any(role in CURATOR_ROLES for role in current_user.get("roles", []) or [])
+
+
 async def require_curator(current_user: dict = Depends(get_current_user)):
     """Dependency to require curator role or higher."""
-    user_roles = current_user.get("roles", [])
-    if not any(role in ["administrator", "knowledge_curator"] for role in user_roles):
+    if not is_curator(current_user):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Curator access required"
         )
     return current_user
+
+
+async def get_current_user_sse(
+    request: Request,
+    token: Optional[str] = Query(default=None),
+    authorization: Optional[str] = Header(default=None),
+) -> dict:
+    """``get_current_user`` for Server-Sent Event streams.
+
+    EventSource cannot send custom headers, so the JWT may arrive as
+    ``?token=``; a Bearer header is accepted for non-browser callers. Resolves
+    through the same :func:`resolve_user` as every other route.
+    """
+    return await resolve_user(
+        bearer_or_query_token(token, authorization), path=request.url.path)
+
+
+async def require_curator_sse(current_user: dict = Depends(get_current_user_sse)):
+    """``require_curator`` for Server-Sent Event streams."""
+    return await require_curator(current_user)
 
 
 # --------------------------------------------------------------------------- #
@@ -54,13 +87,10 @@ async def require_curator(current_user: dict = Depends(get_current_user)):
 
 CAP_SF_ELICITATION = "sf_elicitation"
 
-# Minimum-privilege role for external elicitation participants
-# (advandeb_methods docs/10 section 4.1). Defined by what it EXCLUDES: no
-# documents, no chat, no knowledge base, no graph, no models. Every existing
-# role implies read access to curated material, some of it licensed full text
-# that cannot leave the project, so an external contributor must not inherit
-# that by accident.
-ROLE_EXTERNAL_CONTRIBUTOR = "external_contributor"
+# ROLE_EXTERNAL_CONTRIBUTOR (imported above) is the minimum-privilege role for
+# external elicitation participants. What it may reach is enforced centrally,
+# in app.core.auth.resolve_user, so that it holds for every route — including
+# the ones that only ask for get_current_user.
 
 
 def require_capability(capability: str) -> Callable:
