@@ -200,6 +200,7 @@ import type { AutoResolveResult, KgRelation, KgRelationFilter, KgStats } from '@
 import { useKnowledgeBuilderStore } from '@/stores/knowledgeBuilder'
 import { useDialogStore } from '@/stores/dialog'
 import { formatCount } from '@/utils/format'
+import { isPlainShortcut } from '@/utils/hotkeys'
 
 const kb = useKnowledgeBuilderStore()
 const { activeTab } = storeToRefs(kb)
@@ -330,11 +331,13 @@ function advancePastDecided() {
 
 function onReviewKey(ev: KeyboardEvent) {
   if (activeTab.value !== 'kg' || !relations.value.length) return
-  // Never hijack typing in the filter inputs.
-  const tag = (ev.target as HTMLElement | null)?.tagName
-  if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return
-
+  // Never from a focused control or text field, never with Ctrl/Cmd/Alt:
+  // those keys were meant for something else, and y/n change data.
+  // Moving may auto-repeat; deciding may not (holding y confirmed row after row).
   const key = ev.key.toLowerCase()
+  const moves = key === 'j' || key === 'k' || ev.key === 'ArrowDown' || ev.key === 'ArrowUp'
+  if (!isPlainShortcut(ev, { allowRepeat: moves })) return
+
   if (key === 'j' || ev.key === 'ArrowDown') { ev.preventDefault(); moveRelCursor(1) }
   else if (key === 'k' || ev.key === 'ArrowUp') { ev.preventDefault(); moveRelCursor(-1) }
   else if (key === 'y') { ev.preventDefault(); decideCurrent('confirmed') }
