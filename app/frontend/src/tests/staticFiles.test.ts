@@ -52,6 +52,17 @@ describe('robots.txt', () => {
     expect(blocked('/elicitation/join')).toBe(false)
   })
 
+  it('reads the same for parsers that take the first matching rule', () => {
+    // Some crawlers apply the first rule that matches rather than the longest.
+    const rules = lines.filter(l => /^(Allow|Disallow):/.test(l))
+      .map(l => ({ allow: l.startsWith('Allow:'), prefix: l.split(':')[1].trim() }))
+    const firstMatchBlocks = (p: string) => !(rules.find(r => p.startsWith(r.prefix))?.allow ?? true)
+    expect(firstMatchBlocks('/elicitation/join')).toBe(false)
+    expect(firstMatchBlocks('/')).toBe(false)
+    const open = routes.filter(r => r.meta.requiresAuth && !firstMatchBlocks(r.path)).map(r => r.path)
+    expect(open).toEqual([])
+  })
+
   it('names only prefixes that exist', () => {
     const exists = (prefix: string) =>
       prefix === '/api/' || routes.some(r => r.path === prefix || r.path.startsWith(prefix + '/'))
