@@ -22,7 +22,9 @@ from bson.errors import InvalidId
 from app.core.auth import get_password_hash
 from app.core.database import get_database
 from app.core.dependencies import CAP_SF_ELICITATION, ROLE_EXTERNAL_CONTRIBUTOR
-from app.models.enrolment import EnrolmentDecision, EnrolmentRequest
+from app.models.enrolment import (
+    EnrolmentDecision, EnrolmentRequest, category_label,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -49,12 +51,49 @@ class EnrolmentService:
     # Request
     # ------------------------------------------------------------------ #
 
+    async def categories(self) -> List[Dict[str, Any]]:
+        """The collection's categories, for self-rated familiarity.
+
+        Read from `stylized_facts`, the source the queue's strata are built
+        from, so the form offers exactly the categories facts are judged in.
+        The list in the client was hand-written and stopped at the twelve
+        backbone categories, leaving out every category in the evidence block.
+        """
+        counts: Dict[str, int] = {}
+        async for row in self.db.stylized_facts.aggregate(
+                [{"$group": {"_id": "$category", "n": {"$sum": 1}}}]):
+            if row["_id"]:
+                counts[str(row["_id"])] = row["n"]
+        # Categories with evidence items queued — what experts judge now.
+        assessed = {str(s).split("|", 1)[0] for s in
+                    await self.db.elicitation_queue.distinct(
+                        "stratum", {"task": "evidence"})}
+        out = [{"key": k, "label": category_label(k), "n_facts": n,
+                "currently_assessed": k in assessed}
+               for k, n in counts.items()]
+        out.sort(key=lambda c: (not c["currently_assessed"], c["label"]))
+        return out
+
     async def submit_request(self, req: EnrolmentRequest) -> Dict[str, Any]:
         """Record a request. Public endpoint — deliberately says little.
 
         Returns the same shape whether or not the email is already known, so
         the endpoint cannot be used to enumerate who is already enrolled.
         """
+        # Familiarity is stored per category and later joined against
+        # elicitation records by category, so a key that is not a category of
+        # the collection would be a rating of nothing. Refused rather than
+        # dropped: it means the form and the collection have diverged, which
+        # is worth hearing about.
+        if req.category_familiarity:
+            known = {str(k) for k in
+                     await self.db.stylized_facts.distinct("category") if k}
+            unknown = sorted(set(map(str, req.category_familiarity)) - known)
+            if unknown:
+                return {"status": "error",
+                        "detail": f"unknown categor{'y' if len(unknown) == 1 else 'ies'}: "
+                                  f"{', '.join(unknown)}"}
+
         email = req.email.lower().strip()
         existing_user = await self.db.users.find_one({"email": email})
         existing_req = await self.db.enrolment_requests.find_one(

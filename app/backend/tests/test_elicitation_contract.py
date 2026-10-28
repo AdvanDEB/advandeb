@@ -95,3 +95,13 @@ def test_request_records_are_served_with_id():
         "_id": "abc", "name": "n", "email": "a@b.org",
         "created_at": "2026-10-28T00:00:00Z"})
     assert rec.model_dump(by_alias=True)["id"] == "abc"
+
+
+def test_every_evidence_block_category_has_a_label():
+    """The evidence block (facts 1201-1262) spans these five categories; the
+    signup form must offer each under a real label, not a derived one."""
+    for k in ("core_deb_rules", "hypoxia_dissolved_oxygen",
+              "phytoplankton_chlorophyll", "phytoplankton_eps",
+              "phytoplankton_nc_ratio"):
+        assert k in en.CATEGORY_LABELS
+    assert "currently_assessed" in _ts_fields(_enrolment_ts(), "StylizedFactCategory")

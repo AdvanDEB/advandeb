@@ -14,12 +14,24 @@ from fastapi import APIRouter, Depends, HTTPException, Request, status
 from app.core.dependencies import require_admin
 from app.core.limiter import limiter
 from app.models.enrolment import (
-    EnrolmentDecision, EnrolmentDecisionResult, EnrolmentRequest,
+    CategoryList, EnrolmentDecision, EnrolmentDecisionResult, EnrolmentRequest,
     EnrolmentRequestList, EnrolmentSubmitted,
 )
 from app.services.enrolment_service import EnrolmentService
 
 router = APIRouter()
+
+
+@router.get("/categories", response_model=CategoryList)
+@limiter.limit("30/minute")
+async def categories(request: Request):
+    """The collection's categories, for self-rated familiarity. Public.
+
+    Read from the stylized facts themselves — the source the queue is built
+    from — with the ones currently in the evidence block marked, so the form
+    cannot offer a different set from the one experts are judged on.
+    """
+    return {"categories": await EnrolmentService().categories()}
 
 
 @router.post("/request", response_model=EnrolmentSubmitted)
@@ -28,9 +40,14 @@ async def submit_request(request: Request, body: EnrolmentRequest):
     """Request access. Public, rate-limited.
 
     Returns the same response whether or not the email is already known, so it
-    cannot be used to enumerate who is already enrolled.
+    cannot be used to enumerate who is already enrolled. A familiarity rating
+    for a category the collection does not have is a 400.
     """
-    return await EnrolmentService().submit_request(body)
+    result = await EnrolmentService().submit_request(body)
+    if result.get("status") == "error":
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail=result.get("detail", "invalid request"))
+    return result
 
 
 @router.get("/requests", response_model=EnrolmentRequestList)

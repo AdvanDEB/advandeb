@@ -215,6 +215,10 @@ def test_every_api_route_requires_auth_unless_listed_public():
     public = {
         "/api/auth/config", "/api/auth/login", "/api/auth/token", "/api/auth/google",
         "/api/auth/refresh", "/api/auth/logout", "/api/enrolment/request",
+        # The signup form is unauthenticated and rates familiarity by the
+        # collection's categories, so it has to read them: slugs, labels and
+        # fact counts only, rate-limited.
+        "/api/enrolment/categories",
         "/api/info", "/api/health",
     }
 

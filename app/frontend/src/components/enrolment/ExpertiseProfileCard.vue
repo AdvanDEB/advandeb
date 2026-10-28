@@ -78,9 +78,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import type { EnrolmentRequestRecord } from '@/types/enrolment.generated'
-import { prettyCategory } from './categories'
+import { loadCategories, prettyCategory } from './categories'
 
 // A request as the server serves it. The card read `consent_acknowledgement`
 // and `authored_sf_numbers`, which a request does not carry, so it showed
@@ -111,6 +111,10 @@ const specialistCount = computed(() =>
   ratedCategories.value.filter(c => c.value >= 4).length)
 
 const authoredMatches = computed(() => props.profile.matched_authored_sf_numbers || [])
+
+// Labels for the rated categories; until (or unless) they load, the slug is
+// shown readably instead.
+onMounted(() => { loadCategories().catch(() => {}) })
 </script>
 
 <style scoped>

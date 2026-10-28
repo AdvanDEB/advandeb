@@ -87,7 +87,8 @@ TARGETS: List[Target] = [
         en, TYPES_DIR / "enrolment.generated.ts",
         ["Tier", "RequestStatus"],
         [en.EnrolmentSubmitted, en.EnrolmentRequestRecord,
-         en.EnrolmentRequestList, en.EnrolmentDecisionResult],
+         en.EnrolmentRequestList, en.EnrolmentDecisionResult,
+         en.StylizedFactCategory, en.CategoryList],
         [en.EnrolmentRequest, en.EnrolmentDecision],
     ),
 ]

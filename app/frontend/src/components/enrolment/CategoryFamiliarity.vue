@@ -13,20 +13,29 @@
         </span>
       </legend>
 
-      <div class="chips">
-        <button
-          v-for="cat in SF_CATEGORIES"
-          :key="cat.key"
-          type="button"
-          class="chip"
-          :class="{ on: isSelected(cat.key) }"
-          :aria-pressed="isSelected(cat.key)"
-          @click="toggle(cat.key)"
-        >
-          <span class="chip-tick" aria-hidden="true">{{ isSelected(cat.key) ? '✓' : '+' }}</span>
-          {{ cat.label }}
-        </button>
-      </div>
+      <!-- The areas experts are judging now come first: they are where a
+           rating changes what reaches you soonest. -->
+      <template v-for="group in groups" :key="group.title">
+        <p v-if="group.items.length && groups.length > 1" class="group-title"
+           :data-group="group.key">
+          {{ group.title }}
+        </p>
+        <div v-if="group.items.length" class="chips">
+          <button
+            v-for="cat in group.items"
+            :key="cat.key"
+            type="button"
+            class="chip"
+            :class="{ on: isSelected(cat.key) }"
+            :aria-pressed="isSelected(cat.key)"
+            :data-category="cat.key"
+            @click="toggle(cat.key)"
+          >
+            <span class="chip-tick" aria-hidden="true">{{ isSelected(cat.key) ? '✓' : '+' }}</span>
+            {{ cat.label }}
+          </button>
+        </div>
+      </template>
 
       <p class="skip-note">
         Leaving an area out is a real answer, and a more useful one than a guess —
@@ -85,9 +94,13 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { FAMILIARITY_LABELS, SF_CATEGORIES } from './categories'
+import { FAMILIARITY_LABELS, type StylizedFactCategory } from './categories'
 
-const props = defineProps<{ modelValue: Record<string, number> }>()
+const props = defineProps<{
+  modelValue: Record<string, number>
+  /** As served by /enrolment/categories — the collection's own categories. */
+  categories: StylizedFactCategory[]
+}>()
 const emit = defineEmits<{ (e: 'update:modelValue', v: Record<string, number>): void }>()
 
 // Selection is local: an area can be picked before it is rated, and a rated
@@ -97,7 +110,16 @@ const picked = ref<string[]>(Object.keys(props.modelValue || {}))
 
 const selected = computed(() => picked.value)
 const selectedCats = computed(() =>
-  SF_CATEGORIES.filter(c => picked.value.includes(c.key)))
+  props.categories.filter(c => picked.value.includes(c.key)))
+
+const groups = computed(() => {
+  const now = props.categories.filter(c => c.currently_assessed)
+  const rest = props.categories.filter(c => !c.currently_assessed)
+  return [
+    { key: 'assessed', title: 'Being assessed now', items: now },
+    { key: 'rest', title: 'Rest of the collection', items: rest },
+  ].filter(g => g.items.length)
+})
 
 function isSelected(key: string) {
   return picked.value.includes(key)
@@ -132,6 +154,10 @@ function set(key: string, n: number) {
 .familiarity { display: flex; flex-direction: column; gap: var(--el-s4); }
 
 .pick { border: 0; padding: 0; margin: 0; }
+.group-title {
+  font-size: var(--el-fs-xs); color: var(--el-ink-3); text-transform: uppercase;
+  letter-spacing: 0.03em; margin: var(--el-s3) 0 var(--el-s2);
+}
 .legend-title {
   display: flex; align-items: baseline; gap: var(--el-s2); flex-wrap: wrap;
   font-size: var(--el-fs-sm); font-weight: 600; color: var(--el-ink-2);
