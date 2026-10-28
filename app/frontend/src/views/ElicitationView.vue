@@ -31,11 +31,24 @@
     </div>
 
     <!-- ── calibration gate ───────────────────────────────────────── -->
+    <!-- The server refuses to serve or record anything before calibration
+         (docs/10 §5.3), so there is no "skip": skipping only ever led to an
+         empty queue that looked finished. -->
     <CalibrationFlow
       v-else-if="state === 'calibration'"
       @done="onCalibrationDone"
-      @skip="onCalibrationDone"
     />
+
+    <div v-else-if="state === 'calibration-unavailable'" class="state card">
+      <span class="icon">⏳</span>
+      <h2>Calibration is not set up yet</h2>
+      <p>
+        Every expert works the calibration set before their first judgment,
+        and it has not been prepared yet. An administrator needs to seed it;
+        nothing you do here is lost in the meantime.
+      </p>
+      <button class="ghost" @click="load">Check again</button>
+    </div>
 
     <!-- ── queue exhausted ────────────────────────────────────────── -->
     <div v-else-if="state === 'exhausted'" class="state done card">
@@ -60,7 +73,7 @@
           <span v-if="item!.comparison_item" class="badge panel">
             panel comparison item
           </span>
-          <span class="badge cond" :class="condition">
+          <span class="badge cond" :class="condition" data-test="condition">
             {{ condition === 'matched' ? 'judging the evidence set' : 'judging from expertise' }}
           </span>
         </div>
@@ -87,8 +100,11 @@
       </p>
 
       <EvidencePanel
-        v-if="condition === 'matched' && (item!.passages?.length ?? 0) > 0"
-        :passages="item!.passages!"
+        v-if="isEvidence"
+        v-model="evidence"
+        :passages="item!.passages"
+        :total="item!.n_passages_total"
+        :disabled="submitting"
       />
 
       <GuidelinesPanel :task="item!.task" />
@@ -96,7 +112,7 @@
       <!-- Prior machine output stays collapsed. Opening it is logged, so the
            anchoring effect is measurable rather than assumed. -->
       <section v-if="item!.legacy_assessment" class="card collapsed-card">
-        <button class="disclose" @click="revealMachine">
+        <button class="disclose" data-test="machine-toggle" @click="revealMachine">
           {{ machineShown ? '▾' : '▸' }} Earlier automated assessment
           <span class="warn">— judge first, then open if useful</span>
           <kbd class="inline-key">e</kbd>
@@ -116,7 +132,30 @@
         <h2 class="task-title">{{ spec.title }}</h2>
         <p class="task-help">{{ spec.help }}</p>
 
-        <div class="options">
+        <div v-if="isEvidence" class="scores">
+          <fieldset class="score">
+            <legend>Evidence strength — how much support these passages provide</legend>
+            <label v-for="o in STRENGTH_OPTIONS" :key="o.value" class="option"
+                   :class="{ picked: evidence.evidence_strength === o.value }">
+              <input type="radio" name="evidence_strength" :value="o.value"
+                     :checked="evidence.evidence_strength === o.value"
+                     @change="evidence = { ...evidence, evidence_strength: o.value }" />
+              <span><strong>{{ o.label }}</strong> — {{ o.hint }}</span>
+            </label>
+          </fieldset>
+          <fieldset class="score">
+            <legend>Consensus direction — which way the literature points</legend>
+            <label v-for="o in CONSENSUS_OPTIONS" :key="o.value" class="option"
+                   :class="{ picked: evidence.consensus_direction === o.value }">
+              <input type="radio" name="consensus_direction" :value="o.value"
+                     :checked="evidence.consensus_direction === o.value"
+                     @change="evidence = { ...evidence, consensus_direction: o.value }" />
+              <span><strong>{{ o.label }}</strong> — {{ o.hint }}</span>
+            </label>
+          </fieldset>
+        </div>
+
+        <div v-else class="options">
           <label v-for="(o, i) in spec.options" :key="o.value" class="option"
                  :class="{ picked: chosen === o.value }">
             <input type="radio" :value="o.value" :checked="chosen === o.value"
@@ -163,8 +202,9 @@
             {{ submitting ? 'Saving…' : 'Submit and next' }}
             <kbd>⌘⏎</kbd>
           </button>
-          <span v-if="blockedReason && dirty" class="hint">{{ blockedReason }}</span>
-          <span v-if="error" class="error">{{ error }}</span>
+          <span v-if="blockedReason && dirty" class="hint" data-test="blocked">{{ blockedReason }}</span>
+          <span v-if="error" class="error" data-test="error">{{ error }}</span>
+          <button v-if="stale" class="ghost" @click="load">Load the next item</button>
           <span class="timer">{{ elapsed }}s on this item</span>
         </div>
       </section>
@@ -174,8 +214,8 @@
       <h3>What the elicitation so far supports</h3>
       <p><strong>{{ progress.rung }}</strong> — {{ progress.rung_note }}</p>
       <p v-if="progress.next_rung_at" class="muted-text">
-        Next rung at {{ progress.next_rung_at }} decisions
-        ({{ Math.max(progress.next_rung_at - progress.completed, 0) }} to go).
+        Next rung at {{ progress.next_rung_at }} {{ progress.ladder_basis }}
+        ({{ Math.max(progress.next_rung_at - progress.ladder_count, 0) }} to go).
       </p>
       <p class="muted-text">
         {{ progress.completed_by_me }} by you ·
@@ -208,43 +248,36 @@ import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import api from '@/utils/api'
 import CalibrationFlow from '@/components/elicitation/CalibrationFlow.vue'
 import EvidencePanel from '@/components/elicitation/EvidencePanel.vue'
-import type { EvidencePassage } from '@/components/elicitation/EvidencePanel.vue'
 import GuidelinesPanel from '@/components/elicitation/GuidelinesPanel.vue'
 import HistoryPanel from '@/components/elicitation/HistoryPanel.vue'
 import ReferencePanel from '@/components/elicitation/ReferencePanel.vue'
 import ShortcutsOverlay from '@/components/elicitation/ShortcutsOverlay.vue'
 import {
-  OPTION_KEYS, prettyCategory, taskSpec, validateDecision, type TaskType,
+  CONSENSUS_OPTIONS, OPTION_KEYS, STRENGTH_OPTIONS, prettyCategory, taskSpec,
 } from '@/components/elicitation/taskOptions'
+import {
+  blockedReason as reasonBlocked, buildDecision, emptyEvidenceDraft,
+  labelledCount, type EvidenceDraft,
+} from '@/components/elicitation/decision'
+import type {
+  CalibrationStatus, ElicitationEvent, ElicitationProgress, QueueItem,
+} from '@/types/elicitation.generated'
 
-interface QueueItem {
-  queue_position: number
-  task: TaskType
-  sf_number: number
-  statement: string
-  statement_sha256: string
-  category: string
-  collection_version: string
-  legacy_assessment: Record<string, any> | null
-  repeated_judgment: boolean
-  comparison_item?: boolean
-  n_required?: number
-  stratum: string
-  evidence_condition?: 'matched' | 'expertise'
-  passages?: EvidencePassage[]
-}
-
-type State = 'loading' | 'error' | 'calibration' | 'working' | 'exhausted'
+type State =
+  | 'loading' | 'error' | 'calibration' | 'calibration-unavailable'
+  | 'working' | 'exhausted'
 
 const state = ref<State>('loading')
 const item = ref<QueueItem | null>(null)
-const progress = ref<any>(null)
+const progress = ref<ElicitationProgress | null>(null)
 const submitting = ref(false)
 const error = ref('')
+// The queue moved on under this item (409): someone completed it, or it is no
+// longer this expert's head. Offer the next one instead of a dead end.
+const stale = ref(false)
 const machineShown = ref(false)
 const showShortcuts = ref(false)
 const showHistory = ref(false)
-const calibrationSatisfied = ref(false)
 
 const rationaleRef = ref<HTMLTextAreaElement | null>(null)
 const textRef = ref<HTMLInputElement | null>(null)
@@ -260,9 +293,13 @@ let focused = true
 const form = ref<{ choice: string | null; text: string; confidence: number; rationale: string }>({
   choice: null, text: '', confidence: 0, rationale: '',
 })
+const evidence = ref<EvidenceDraft>(emptyEvidenceDraft(null))
 
 const spec = computed(() => taskSpec(item.value?.task))
 const chosen = computed(() => form.value.choice)
+const isEvidence = computed(() => item.value?.task === 'evidence')
+// Decided by the server from the task; never defaulted here. Defaulting to
+// `expertise` when the field was absent is what hid every evidence passage.
 const condition = computed(() => item.value?.evidence_condition ?? 'expertise')
 
 const chosenOption = computed(() =>
@@ -271,12 +308,11 @@ const chosenOption = computed(() =>
 const textRequired = computed(() =>
   !!(chosenOption.value?.requiresText && spec.value.textField))
 
-// Single source of truth, unit-tested in tests/elicitationValidation.test.ts.
-// Deliberately not duplicated as a separate boolean check — two copies of a
-// validation rule drift, and the one that drifts is the one that lets an empty
-// required field through.
+// Single source of truth, unit-tested in tests/elicitationValidation.test.ts
+// and tests/elicitationEvidence.test.ts. Two copies of a validation rule
+// drift, and the one that drifts is the one that lets a gap through.
 const blockedReason = computed(() =>
-  item.value ? validateDecision(item.value.task, form.value) : 'No item')
+  reasonBlocked(item.value, form.value, evidence.value))
 
 const canSubmit = computed(() =>
   !!item.value && !submitting.value && blockedReason.value === null)
@@ -284,49 +320,70 @@ const canSubmit = computed(() =>
 // Only explain what is missing once they have started; an untouched form
 // showing "Pick an option" is noise, not help.
 const dirty = computed(() =>
-  !!form.value.choice || form.value.confidence > 0 || !!form.value.rationale.trim())
+  !!form.value.choice || form.value.confidence > 0 || !!form.value.rationale.trim()
+  || (!!item.value && isEvidence.value && labelledCount(item.value, evidence.value) > 0))
+
+const answered = computed(() => isEvidence.value
+  ? !!item.value && labelledCount(item.value, evidence.value) > 0
+  : !!form.value.choice)
 
 function choose(value: string) {
   form.value.choice = value
   if (!textRequired.value) form.value.text = ''
 }
 
+// Every opening and closing is logged with whether the expert had already
+// answered. Exposure is derived from these on the server; the state at submit
+// time alone would report an open-read-close as "never opened".
+function logEvent(event: ElicitationEvent['event']) {
+  if (!item.value) return
+  const payload: ElicitationEvent = {
+    event,
+    sf_number: item.value.sf_number,
+    task: item.value.task,
+    corpus_id: item.value.corpus_id,
+    answered: answered.value,
+  }
+  api.post('/elicitation/events', payload).catch(() => {
+    // Logging must not block judging; a lost event under-reports exposure,
+    // and the submit-time flag is still recorded beside it.
+  })
+}
+
 function revealMachine() {
   machineShown.value = !machineShown.value
+  logEvent(machineShown.value ? 'machine_verdict_opened' : 'machine_verdict_closed')
 }
 
 function resetForm() {
   form.value = { choice: null, text: '', confidence: 0, rationale: '' }
+  evidence.value = emptyEvidenceDraft(item.value)
   machineShown.value = false
   elapsed.value = 0
   error.value = ''
+  stale.value = false
 }
 
-async function checkCalibration(): Promise<boolean> {
-  if (calibrationSatisfied.value) return true
-  try {
-    const { data } = await api.get('/elicitation/calibration/status')
-    // Absent or non-committal response = not gated. Calibration should train
-    // experts, never lock them out because an endpoint is missing.
-    const required = !!data?.required
-    const complete = !!data?.complete || !!data?.passed
-    calibrationSatisfied.value = !required || complete
-    return calibrationSatisfied.value
-  } catch {
-    calibrationSatisfied.value = true
-    return true
-  }
+/** Where calibration stands, from the typed status contract. */
+async function calibrationState(): Promise<'done' | 'calibration' | 'calibration-unavailable'> {
+  const { data } = await api.get<CalibrationStatus>('/elicitation/calibration/status')
+  if (data.done) return 'done'
+  return data.available ? 'calibration' : 'calibration-unavailable'
 }
 
 async function load() {
   state.value = 'loading'
   error.value = ''
   try {
-    if (!(await checkCalibration())) { state.value = 'calibration'; return }
+    // Not waved through on failure. The server gates /next on calibration,
+    // so a client that guessed "calibrated" only ever showed an empty queue
+    // that looked finished.
+    const cal = await calibrationState()
+    if (cal !== 'done') { state.value = cal; return }
 
     const [next, prog] = await Promise.all([
-      api.get('/elicitation/next'),
-      api.get('/elicitation/progress').catch(() => ({ data: null })),
+      api.get<QueueItem | null>('/elicitation/next'),
+      api.get<ElicitationProgress>('/elicitation/progress').catch(() => ({ data: null })),
     ])
     progress.value = prog.data
     item.value = next.data || null
@@ -339,7 +396,6 @@ async function load() {
 }
 
 function onCalibrationDone() {
-  calibrationSatisfied.value = true
   load()
 }
 
@@ -347,26 +403,14 @@ async function submit() {
   if (!item.value || !canSubmit.value) return
   submitting.value = true
   error.value = ''
-  const t = item.value.task
   try {
-    await api.post('/elicitation/decide', {
-      task: t,
-      sf_number: item.value.sf_number,
-      statement_sha256: item.value.statement_sha256,
-      provenance_type: t === 'provenance' ? form.value.choice : null,
-      source_citation: t === 'provenance' ? (form.value.text.trim() || null) : null,
-      scope_verdict: t === 'scope' ? form.value.choice : null,
-      proposed_scope: t === 'scope' ? (form.value.text.trim() || null) : null,
-      proposed_taxon_ids: [],
-      assessability: t === 'assessability' ? form.value.choice : null,
-      confidence: form.value.confidence,
-      rationale: form.value.rationale.trim(),
-      evidence_condition: condition.value,
+    await api.post('/elicitation/decide', buildDecision(item.value, form.value, evidence.value, {
       time_spent_s: elapsed.value,
       machine_verdict_expanded: machineShown.value,
-    })
+    }))
   } catch (e: any) {
     error.value = e?.response?.data?.detail || 'Could not save'
+    stale.value = e?.response?.status === 409
     submitting.value = false
     return
   }
@@ -462,6 +506,9 @@ onUnmounted(() => {
 .task-help { color: #6b7280; font-size: 0.85rem; margin: 0.35rem 0 0.9rem; line-height: 1.5; }
 
 .options { display: flex; flex-direction: column; gap: 0.45rem; }
+.scores { display: flex; flex-direction: column; gap: 0.9rem; }
+.score { border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.score legend { font-size: 0.85rem; font-weight: 500; color: #374151; margin-bottom: 0.3rem; }
 .option { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.9rem; color: #374151; cursor: pointer; padding: 0.35rem 0.5rem; border-radius: 6px; }
 .option:hover { background: #f9fafb; }
 .option.picked { background: #eef2ff; }

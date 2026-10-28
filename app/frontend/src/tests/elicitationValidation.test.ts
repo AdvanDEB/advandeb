@@ -99,9 +99,14 @@ describe('task specs', () => {
     }
   })
 
-  it('falls back to a usable spec for an unknown task', () => {
-    expect(taskSpec(undefined).options.length).toBeGreaterThan(0)
-    expect(taskSpec(null).title).toBeTruthy()
+  // It used to fall back to the provenance form, which is how evidence items
+  // were rendered as provenance questions without anyone noticing. An unknown
+  // task now gets a spec that says so and cannot be submitted.
+  it('does not dress an unknown task up as another task', () => {
+    expect(taskSpec(undefined).title).toBe('Unknown task')
+    expect(taskSpec(null).options).toEqual([])
+    expect(validateDecision(undefined, complete({ choice: 'published' })))
+      .not.toBeNull()
   })
 
   it('resolves option labels for the history list', () => {

@@ -27,7 +27,7 @@ The design constraints these models exist to satisfy are specified in
 from datetime import datetime
 from typing import Any, Dict, List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 # Day-one tasks operate on the statement alone and need no evidence set, so
@@ -64,6 +64,19 @@ ScopeVerdict = Literal["stated", "implicit", "absent", "not_applicable"]
 AssessabilityVerdict = Literal[
     "assessable", "too_vague", "compound", "not_empirical", "unclear_terms"
 ]
+
+# Which evidence condition a judgment was made under (advandeb_methods docs/09
+# section 5.2; renamed H-EK / H-K in docs/14 section 2). `matched` = the
+# expert saw the frozen evidence set the agents saw; `expertise` = judged from
+# the statement and domain knowledge alone. Determined by the task — evidence
+# items are `matched`, the fact-level tasks are `expertise` — and stamped by
+# the server, never chosen by the client.
+EvidenceCondition = Literal["matched", "expertise"]
+
+# Client-logged interface events. Only the anchoring-relevant one exists so
+# far: whether the machine assessment was ever opened, and when relative to the
+# expert's own answer (docs/09 section 5.4).
+ElicitationEventType = Literal["machine_verdict_opened", "machine_verdict_closed"]
 
 
 class EvidencePassage(BaseModel):
@@ -134,6 +147,12 @@ class QueueItem(BaseModel):
     # one they are being asked.
     n_passages_total: Optional[int] = None
 
+    # The arm this item belongs to, decided by the server from the task. The
+    # client renders from it (passages or not) and never chooses it: the
+    # previous client defaulted to `expertise` because the field was absent,
+    # and so hid the very passages the evidence task exists to show.
+    evidence_condition: EvidenceCondition = "expertise"
+
 
 class ElicitationDecision(BaseModel):
     """What an expert submits. One per (task, fact, expert)."""
@@ -176,10 +195,19 @@ class ElicitationDecision(BaseModel):
     # `expertise` = judged from domain knowledge alone, as in the predecessor
     # review. Running both is what lets a human-machine disagreement be
     # decomposed rather than merely observed.
-    evidence_condition: Optional[Literal["matched", "expertise"]] = "expertise"
+    #
+    # Stamped by the server from the task. A client may echo it; a value that
+    # contradicts the task is refused rather than stored. It used to default
+    # to `expertise` here, which made an omitted field indistinguishable from a
+    # claim, and would have labelled every evidence judgment with the wrong arm.
+    evidence_condition: Optional[EvidenceCondition] = None
 
     # --- captured by the client ---
     time_spent_s: Optional[float] = None
+    # Whether the machine assessment was expanded *at the moment of submit*.
+    # Not the anchoring measure — an expert can open it, read it, and close it
+    # again. The record's `machine_verdict_opened` is derived on the server
+    # from the logged open events instead.
     machine_verdict_expanded: Optional[bool] = None
 
 
@@ -205,10 +233,17 @@ class ElicitationRecord(ElicitationDecision):
     sampling_weight: Optional[float] = None
     # True when this item was routed away from an author of the fact.
     author_excluded: Optional[bool] = None
+    # Anchoring exposure, derived on the server from the logged events
+    # (`elicitation_events`), not from the client's state at submit: whether
+    # the expert opened the machine assessment for this item at any point, how
+    # many times, and whether the first opening came before they had picked
+    # an answer.
+    machine_verdict_opened: Optional[bool] = None
+    machine_verdict_open_events: Optional[int] = None
+    machine_verdict_opened_before_answer: Optional[bool] = None
     created_at: datetime
 
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class ElicitationProgress(BaseModel):
@@ -232,8 +267,15 @@ class ElicitationProgress(BaseModel):
     median_seconds_per_item: Optional[float] = None
     by_task: Dict[str, int] = {}
     by_stratum: Dict[str, int] = {}
+    # Queue items (sf_number, task, corpus_id) with two or more judgments.
     repeated_judgments: int = 0
-    rung: str = "R0"
+    # The claims ladder counts what the doc counts: panel-tier judgments on
+    # the evidence task, the only task the ladder's claims are about (docs/02
+    # section 4.2). Metadata tasks and contributor judgments move nothing up
+    # it, however many there are.
+    ladder_count: int = 0
+    ladder_basis: str = ""
+    rung: str = "pre-R0"
     rung_note: str = ""
     next_rung_at: Optional[int] = None
 
@@ -250,8 +292,19 @@ class TaskOption(BaseModel):
     hint: str
 
 
+# The sections the guidelines are served in: the four tasks, plus the three
+# parts of the evidence task that have their own definitions. It was typed
+# `TaskType`, so serving the evidence sub-sections failed response validation
+# and /guidelines returned 500 from the day the evidence task was added — the
+# client's fallback text hid it.
+GuidelineSection = Literal[
+    "provenance", "scope", "assessability", "evidence",
+    "evidence_role", "evidence_strength", "consensus_direction",
+]
+
+
 class TaskGuideline(BaseModel):
-    task: TaskType
+    task: GuidelineSection
     title: str
     help: str
     options: List[TaskOption] = []
@@ -283,6 +336,7 @@ class HistoryItem(BaseModel):
     consensus_direction: Optional[int] = None
     confidence: int
     rationale: str
+    time_spent_s: Optional[float] = None
     tier: Optional[str] = None
     created_at: datetime
 
@@ -325,12 +379,59 @@ class CalibrationDecision(BaseModel):
 
 
 class CalibrationFeedback(BaseModel):
-    """Immediate feedback — calibration teaches, so it does not withhold."""
+    """Immediate feedback — calibration teaches, so it does not withhold.
+
+    `reference` carries the one reference field for the case's task
+    (`provenance_type`, `scope_verdict` or `assessability`) plus `basis`.
+    """
     correct: bool
-    reference: Dict[str, Any] = {}
+    reference: Dict[str, Optional[str]] = {}
     explanation: str
     completed: int
     total: int
+
+
+class CalibrationStatus(BaseModel):
+    """How far through the calibration set an expert is.
+
+    The contract the client gates on. It used to be an untyped dict, and the
+    client read `required` / `complete` / `passed` — three fields that never
+    existed — so every expert was waved through to a queue the server then
+    refused to serve, and saw "queue exhausted".
+    """
+    total: int
+    completed: int
+    correct: int
+    # True only when a calibration set exists AND this expert has finished
+    # it. An empty set is not a passed one: it means nobody has seeded it,
+    # and the gate stays shut until an administrator does.
+    done: bool
+    # Whether any calibration set exists. Lets the client say "not set up
+    # yet — ask an administrator" instead of offering cases that are not there.
+    available: bool
+
+
+class DecisionReceipt(BaseModel):
+    """What /decide returns when a decision is recorded."""
+    status: Literal["recorded"]
+    id: str
+    round: Literal["primary", "secondary", "adjudication"]
+
+
+class ElicitationEvent(BaseModel):
+    """A client-logged interface event on one queue item."""
+    event: ElicitationEventType
+    sf_number: int
+    task: TaskType
+    corpus_id: Optional[str] = None
+    # Whether the expert had already picked an answer when this happened.
+    # Opening the machine verdict before answering is anchoring exposure;
+    # opening it after is a check. Which one it was is the measurement.
+    answered: bool = False
+
+
+class EventReceipt(BaseModel):
+    status: Literal["logged"]
 
 
 # --------------------------------------------------------------------------- #
@@ -415,8 +516,7 @@ class ExpertReference(BaseModel):
     triggered_readjudication: Optional[bool] = None
     created_at: datetime
 
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class ExpertAssertedEvidence(BaseModel):

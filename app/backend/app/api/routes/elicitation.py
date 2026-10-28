@@ -20,13 +20,29 @@ from app.core.dependencies import require_admin, require_elicitor
 from app.models.elicitation import (
     ExpertReferenceCreate,
     CalibrationDecision, CalibrationFeedback, CalibrationItem,
-    ElicitationDecision, ElicitationProgress, Guidelines, HistoryResponse,
-    QueueItem,
+    CalibrationStatus, DecisionReceipt, ElicitationDecision, ElicitationEvent,
+    ElicitationProgress, EventReceipt, Guidelines, HistoryResponse, QueueItem,
 )
 from app.services.elicitation_service import ElicitationService
 from app.services.expert_reference_service import ExpertReferenceService
 
 router = APIRouter()
+
+
+def _raise_on_error(result: dict, default_code: int = 400) -> dict:
+    """Map a service error to its HTTP status; pass a success through."""
+    if result.get("status") == "error":
+        raise HTTPException(status_code=int(result.get("code") or default_code),
+                            detail=result.get("detail", "could not record"))
+    return result
+
+
+def _refusal(result: dict) -> dict:
+    """A refused rebuild is an error to the caller, not a quiet status."""
+    if result.get("status") == "refused":
+        return {"status": "error", "code": status.HTTP_409_CONFLICT,
+                "detail": result.get("detail")}
+    return result
 
 
 @router.get("/next", response_model=QueueItem | None)
@@ -43,18 +59,31 @@ async def next_item(current_user: dict = Depends(require_elicitor)):
     return await service.next_item(current_user["id"])
 
 
-@router.post("/decide")
+@router.post("/decide", response_model=DecisionReceipt)
 async def submit_decision(
     decision: ElicitationDecision,
     current_user: dict = Depends(require_elicitor),
 ):
-    """Record one elicitation decision."""
+    """Record one elicitation decision — on the item /next serves, only.
+
+    400 the payload does not answer its task · 403 conflict of interest or
+    calibration incomplete · 404 not a queue item · 409 not the head of this
+    expert's queue (already judged, panel requirement met, or never served).
+    """
     service = ElicitationService()
-    result = await service.submit(decision, current_user["id"])
-    if result.get("status") == "error":
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail=result.get("detail", "could not record"))
-    return result
+    return _raise_on_error(await service.submit(decision, current_user["id"]))
+
+
+@router.post("/events", response_model=EventReceipt)
+async def log_event(
+    event: ElicitationEvent,
+    current_user: dict = Depends(require_elicitor),
+):
+    """Log an interface event — so far, opening or closing the machine
+    assessment. Exposure is derived from these at submit time, so anchoring is
+    measured rather than inferred from the panel's state at the last moment."""
+    return _raise_on_error(
+        await ElicitationService().log_event(event, current_user["id"]))
 
 
 @router.get("/progress", response_model=ElicitationProgress)
@@ -76,7 +105,7 @@ async def build_queue(
     reshuffling would silently change what the completed prefix represents.
     """
     service = ElicitationService()
-    return await service.build_queue(force=force)
+    return _raise_on_error(_refusal(await service.build_queue(force=force)))
 
 
 @router.post("/evidence/import")
@@ -104,7 +133,8 @@ async def build_evidence_queue(
     Evidence leads because the human ceiling is the measurement everything
     downstream is blocked on, and expert time is the project's scarcest input.
     """
-    return await ElicitationService().build_evidence_queue(force=force)
+    return _raise_on_error(
+        _refusal(await ElicitationService().build_evidence_queue(force=force)))
 
 
 @router.get("/experts")
@@ -207,22 +237,27 @@ async def calibration_decide(
     """
     result = await ElicitationService().calibration_submit(
         decision, current_user["id"])
-    if result.get("status") == "error":
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail=result.get("detail", "could not record"))
-    return result
+    return _raise_on_error(result)
 
 
-@router.get("/calibration/status")
+@router.get("/calibration/status", response_model=CalibrationStatus)
 async def calibration_status(current_user: dict = Depends(require_elicitor)):
-    """How far through the calibration set this expert is."""
+    """How far through the calibration set this expert is.
+
+    `done` is what the client gates on, and is what the server gates /next
+    and /decide on — false until a set exists and this expert has finished it.
+    """
     return await ElicitationService().calibration_status(current_user["id"])
 
 
 @router.post("/calibration/seed")
 async def calibration_seed(force: bool = False,
                            current_user: dict = Depends(require_admin)):
-    """Build the fixed calibration set from facts with documented provenance."""
+    """Build the fixed calibration set from facts with documented provenance.
+
+    The only way the set comes to exist. /calibration/next used to seed it as
+    a side effect of the first expert opening the page.
+    """
     return await ElicitationService().seed_calibration(force=force)
 
 

@@ -23,7 +23,7 @@
 const emit = defineEmits<{ (e: 'close'): void }>()
 
 const rows: [string[], string][] = [
-  [['a', 's', 'd', 'f', 'g'], 'Select the first…fifth option'],
+  [['a', 's', 'd', 'f', 'g'], 'Select the first…fifth option (statement-only tasks)'],
   [['1', '–', '5'], 'Set your confidence'],
   [['r'], 'Jump to the rationale box'],
   [['e'], 'Expand the earlier automated assessment (recorded)'],

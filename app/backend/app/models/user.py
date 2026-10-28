@@ -105,6 +105,13 @@ class User(UserBase):
     # name. Drives the conflict-of-interest exclusion in the queue: an
     # outsider's conflict is no less a conflict (docs/10 section 5.1).
     authored_sf_numbers: List[int] = []
+    # The `authored_by` slugs this person answers to (e.g. "tin_klanjscek").
+    # Stylized facts and queue items name their authors by slug, never by user
+    # id, so this is the link the conflict-of-interest exclusion needs: without
+    # it an author's own facts are compared against their ObjectId, never
+    # match, and are served to them. Assigned by an administrator (see
+    # scripts/map_author_slugs.py), or matched at enrolment approval.
+    author_slugs: List[str] = []
     # Research-consent flag: whether AdvanDEB staff may review this user's
     # chat history. Defaults to opted-in, matching the existing blanket
     # consent given by current users; self-service opt-out via PUT /users/me.
