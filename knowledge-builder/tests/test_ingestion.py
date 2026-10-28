@@ -1,8 +1,11 @@
 """
-Tests for IngestionService and ingestion_tasks helpers.
+Tests for IngestionService and the ingestion models.
 
-These tests cover import correctness, model field propagation, and the
-SF matching logic — all without requiring a live MongoDB or Celery worker.
+These tests cover import correctness, model field propagation and PDF
+discovery — all without requiring a live MongoDB.
+
+The job/batch status helpers moved with the pipeline into the app backend;
+their tests are in app/backend/tests/test_kb_pipeline_helpers.py.
 """
 import os
 import sys
@@ -12,8 +15,6 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 _KB_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(_KB_ROOT))
-# dev-server path needed so `from celery_app import ...` and `from tasks.xxx` work
-sys.path.insert(0, str(_KB_ROOT / "dev-server"))
 
 from bson import ObjectId
 from advandeb_kb.models.ingestion import IngestionBatch, IngestionJob
@@ -91,84 +92,6 @@ def test_fact_sf_relation_defaults():
     print("  FactSFRelation defaults OK")
 
 
-def test_extract_pdf_text_runs_in_thread():
-    """_extract_pdf_text should be a plain sync function (not async)."""
-    from tasks.ingestion_tasks import _extract_pdf_text
-    import inspect
-    assert not inspect.iscoroutinefunction(_extract_pdf_text)
-    print("  _extract_pdf_text is sync OK")
-
-
-def test_set_job_stage_fields():
-    """_set_job_stage should update stage, status, progress, and updated_at."""
-    from tasks.ingestion_tasks import _set_job_stage
-
-    jobs_mock = MagicMock()
-    oid = ObjectId()
-    _set_job_stage(jobs_mock, oid, "fact_extraction", status="running", progress=30)
-
-    jobs_mock.update_one.assert_called_once()
-    call_args = jobs_mock.update_one.call_args
-    filter_ = call_args[0][0]
-    update = call_args[0][1]["$set"]
-
-    assert filter_ == {"_id": oid}
-    assert update["stage"] == "fact_extraction"
-    assert update["status"] == "running"
-    assert update["progress"] == 30
-    assert "updated_at" in update
-    assert "error_message" not in update
-    print("  _set_job_stage OK")
-
-
-def test_update_batch_status_completed():
-    """Batch should be marked completed when all jobs are done."""
-    from tasks.ingestion_tasks import _update_batch_status
-
-    batch_id = ObjectId()
-    db = MagicMock()
-    db.ingestion_jobs.find.return_value = [
-        {"status": "completed"},
-        {"status": "completed"},
-    ]
-    _update_batch_status(db, batch_id)
-
-    db.ingestion_batches.update_one.assert_called_once()
-    set_fields = db.ingestion_batches.update_one.call_args[0][1]["$set"]
-    assert set_fields["status"] == "completed"
-    print("  _update_batch_status completed OK")
-
-
-def test_update_batch_status_mixed():
-    from tasks.ingestion_tasks import _update_batch_status
-
-    batch_id = ObjectId()
-    db = MagicMock()
-    db.ingestion_jobs.find.return_value = [
-        {"status": "completed"},
-        {"status": "failed"},
-    ]
-    _update_batch_status(db, batch_id)
-    set_fields = db.ingestion_batches.update_one.call_args[0][1]["$set"]
-    assert set_fields["status"] == "mixed"
-    print("  _update_batch_status mixed OK")
-
-
-def test_update_batch_status_still_running():
-    """Should not update batch while jobs are still running."""
-    from tasks.ingestion_tasks import _update_batch_status
-
-    batch_id = ObjectId()
-    db = MagicMock()
-    db.ingestion_jobs.find.return_value = [
-        {"status": "completed"},
-        {"status": "running"},
-    ]
-    _update_batch_status(db, batch_id)
-    db.ingestion_batches.update_one.assert_not_called()
-    print("  _update_batch_status still_running skips OK")
-
-
 def test_pdf_discovery_in_folders():
     """create_jobs_for_batch should discover PDFs recursively."""
     import asyncio
@@ -218,11 +141,6 @@ if __name__ == "__main__":
         test_document_model_fields,
         test_fact_has_document_id,
         test_fact_sf_relation_defaults,
-        test_extract_pdf_text_runs_in_thread,
-        test_set_job_stage_fields,
-        test_update_batch_status_completed,
-        test_update_batch_status_mixed,
-        test_update_batch_status_still_running,
         test_pdf_discovery_in_folders,
     ]
     print(f"Running {len(tests)} ingestion tests...")

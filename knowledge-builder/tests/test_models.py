@@ -133,9 +133,12 @@ def test_taxonomy_node():
 
 
 def test_builtin_schemas():
-    assert len(BUILTIN_SCHEMAS) == 5
     names = {s["name"] for s in BUILTIN_SCHEMAS}
-    assert names == {"citation", "sf_support", "taxonomical", "knowledge_graph", "physiological_process"}
+    assert len(names) == len(BUILTIN_SCHEMAS), "schema names must be unique"
+    assert names == {
+        "citation", "sf_support", "taxonomical", "knowledge_graph",
+        "reproduction", "chatbot", "physiological_process",
+    }
 
     for raw in BUILTIN_SCHEMAS:
         schema = GraphSchema(**raw)
@@ -144,6 +147,11 @@ def test_builtin_schemas():
         assert len(schema.edge_types) >= 1
         # Each edge type references valid node type names within this schema
         node_type_names = {nt.name for nt in schema.node_types}
+        # A schema may split the facts collection into several node types (the
+        # reproduction schema has conclusion / background_knowledge / citation);
+        # its edges then name the generic "fact" to mean any of them.
+        if any(nt.source_collection == "facts" for nt in schema.node_types):
+            node_type_names.add("fact")
         for et in schema.edge_types:
             assert et.source_node_type in node_type_names, (
                 f"{schema.name}: edge '{et.name}' source '{et.source_node_type}' "
