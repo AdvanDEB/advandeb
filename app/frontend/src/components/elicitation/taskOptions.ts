@@ -7,7 +7,14 @@
  * form and another way in the guidelines is a silent source of disagreement.
  */
 
-export type TaskType = 'provenance' | 'scope' | 'assessability'
+import type {
+  EvidentialRole, PassageDirection, TaskType,
+} from '@/types/elicitation.generated'
+
+// The task list comes from the server's models, generated — never restated
+// here. A hand-written copy of it once lacked `evidence`, so evidence items
+// fell through to the provenance form and the passages were never shown.
+export type { TaskType }
 
 export interface TaskOption {
   value: string
@@ -20,8 +27,9 @@ export interface TaskOption {
 export interface TaskSpec {
   title: string
   help: string
-  /** Which field on the decision payload this task fills. */
-  field: 'provenance_type' | 'scope_verdict' | 'assessability'
+  /** Which field on the decision payload this task fills. Null for the
+   *  evidence task, whose answer is per-passage labels plus two scores. */
+  field: 'provenance_type' | 'scope_verdict' | 'assessability' | null
   /** Free-text companion field, where the task has one. */
   textField?: 'source_citation' | 'proposed_scope'
   textPlaceholder?: string
@@ -76,11 +84,65 @@ export const TASKS: Record<TaskType, TaskSpec> = {
       { value: 'unclear_terms', label: 'Unclear terms', hint: 'key terms undefined or ambiguous' },
     ],
   },
+  evidence: {
+    title: 'How well do these passages support the fact?',
+    help:
+      'You are reading the same frozen passages the model panel read, in the same wording. Label every passage, then give the two scores. "Neutral" is a real answer and most passages are — retrieval returns nearest neighbours, not evidence. Judge what the passage says, not what you know about the fact.',
+    field: null,
+    options: [],
+  },
+}
+
+/** Shown in place of a form when the server sends a task this client does
+ *  not know. Never another task's form: falling back to provenance is
+ *  exactly how evidence items were silently mis-rendered. */
+const UNKNOWN_TASK: TaskSpec = {
+  title: 'Unknown task',
+  help: 'This item is of a task this page does not know how to show. Reload the page; if it persists, the client is out of date.',
+  field: null,
+  options: [],
 }
 
 export function taskSpec(task: TaskType | undefined | null): TaskSpec {
-  return TASKS[(task ?? 'provenance') as TaskType] ?? TASKS.provenance
+  return (task && TASKS[task]) || UNKNOWN_TASK
 }
+
+// ---- the evidence task: per-passage labels and two fact-level scores ----
+// Same two axes and the same wording the agents were given (docs/01 4.2a):
+// parity is the point, or a human-machine gap could always be explained away
+// as a difference of instructions.
+
+export interface LabelOption<T extends string | number> {
+  value: T
+  label: string
+  hint: string
+}
+
+export const DIRECTION_OPTIONS: LabelOption<PassageDirection>[] = [
+  { value: 'supports', label: 'Supports', hint: 'consistent with the fact' },
+  { value: 'contradicts', label: 'Contradicts', hint: 'inconsistent with it' },
+  { value: 'neutral', label: 'Neutral', hint: 'another topic, or no bearing either way' },
+]
+
+/** Asked of every passage not called neutral. */
+export const ROLE_OPTIONS: LabelOption<EvidentialRole>[] = [
+  { value: 'primary_evidence', label: 'Primary evidence', hint: 'reports a measurement or observation' },
+  { value: 'restatement', label: 'Restatement', hint: 'asserts the fact, citing rather than testing it' },
+  { value: 'derivation', label: 'Derivation', hint: 'follows from theory or a model, not data' },
+  { value: 'review', label: 'Review', hint: "summarises others' findings" },
+]
+
+export const STRENGTH_OPTIONS: LabelOption<number>[] = [
+  { value: 1, label: '1 — weak or sparse', hint: 'little or no real support here' },
+  { value: 2, label: '2 — moderate', hint: 'some support' },
+  { value: 3, label: '3 — strong', hint: 'multiple clear supporting references' },
+]
+
+export const CONSENSUS_OPTIONS: LabelOption<number>[] = [
+  { value: 1, label: '1 — against', hint: 'predominantly contradicted, or mixed against' },
+  { value: 2, label: '2 — neutral', hint: 'insufficient evidence either way' },
+  { value: 3, label: '3 — corroborated', hint: 'supported, with little conflict' },
+]
 
 export function optionFor(task: TaskType, value: string | null): TaskOption | undefined {
   if (!value) return undefined
@@ -111,6 +173,7 @@ export function validateDecision(
   draft: DraftDecision,
 ): string | null {
   const spec = taskSpec(task)
+  if (!spec.field) return 'This task is not answered with a single option'
   if (!draft.choice) return 'Pick an option'
 
   const option = spec.options.find((o) => o.value === draft.choice)

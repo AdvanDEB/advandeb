@@ -1122,6 +1122,7 @@ class ElicitationService:
                 "consensus_direction": a.get("consensus_direction"),
                 "confidence": a.get("confidence", 3),
                 "rationale": a.get("rationale", ""),
+                "time_spent_s": a.get("time_spent_s"),
                 "tier": a.get("tier"),
                 "created_at": a.get("created_at"),
             })

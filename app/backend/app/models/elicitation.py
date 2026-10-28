@@ -293,8 +293,19 @@ class TaskOption(BaseModel):
     hint: str
 
 
+# The sections the guidelines are served in: the four tasks, plus the three
+# parts of the evidence task that have their own definitions. It was typed
+# `TaskType`, so serving the evidence sub-sections failed response validation
+# and /guidelines returned 500 from the day the evidence task was added — the
+# client's fallback text hid it.
+GuidelineSection = Literal[
+    "provenance", "scope", "assessability", "evidence",
+    "evidence_role", "evidence_strength", "consensus_direction",
+]
+
+
 class TaskGuideline(BaseModel):
-    task: TaskType
+    task: GuidelineSection
     title: str
     help: str
     options: List[TaskOption] = []
@@ -326,6 +337,7 @@ class HistoryItem(BaseModel):
     consensus_direction: Optional[int] = None
     confidence: int
     rationale: str
+    time_spent_s: Optional[float] = None
     tier: Optional[str] = None
     created_at: datetime
 

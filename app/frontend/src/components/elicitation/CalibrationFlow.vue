@@ -4,10 +4,10 @@
       <div>
         <h2>Calibration set</h2>
         <p class="sub">
-          {{ total }} adjudicated cases, worked before the real queue opens.
-          They train the label definitions and give a quality signal that costs
-          no queue items — a disagreement here is cheap, one in the gold set is
-          not.
+          {{ total }} cases with a documented reference answer, worked before
+          the real queue opens. They train the label definitions and give a
+          quality signal that costs no queue items. Agreement here is agreement
+          with the reference, not with truth.
         </p>
       </div>
       <div class="cal-progress">
@@ -31,13 +31,13 @@
       <button class="primary" @click="emit('done')">Start the queue</button>
     </div>
 
+    <!-- No skip. The server will not serve or record a judgment before
+         calibration is finished, so "continue to the queue" could only ever
+         lead to an empty queue that looked complete. -->
     <div v-else-if="!currentCase" class="state card">
-      <p>Calibration is unavailable right now.</p>
+      <p>The next calibration case could not be loaded.</p>
+      <p v-if="error" class="error">{{ error }}</p>
       <button class="ghost" @click="fetchNext">Try again</button>
-      <button class="ghost" @click="emit('skip')">Continue to the queue</button>
-      <p class="muted-text">
-        Skipping is recorded — calibration status travels with your decisions.
-      </p>
     </div>
 
     <template v-else>
@@ -60,12 +60,26 @@
           </label>
         </div>
 
-        <div v-if="!reveal" class="actions">
-          <button class="primary" :disabled="!answer || checking" @click="check">
-            {{ checking ? 'Checking…' : 'Check answer' }}
-          </button>
-          <span v-if="error" class="error">{{ error }}</span>
-        </div>
+        <template v-if="!reveal">
+          <div class="confidence">
+            <label>Your confidence</label>
+            <div class="conf-buttons">
+              <button v-for="n in 5" :key="n" type="button"
+                      :class="['conf', { active: confidence === n }]"
+                      @click="confidence = n">{{ n }}</button>
+            </div>
+            <span class="conf-hint">1 = guessing · 5 = certain</span>
+          </div>
+          <textarea v-model="rationale" class="rationale" rows="2"
+                    placeholder="Why? One line — the same as on a real item."></textarea>
+
+          <div class="actions">
+            <button class="primary" :disabled="!canCheck" @click="check">
+              {{ checking ? 'Checking…' : 'Check answer' }}
+            </button>
+            <span v-if="error" class="error">{{ error }}</span>
+          </div>
+        </template>
 
         <div v-else class="reveal" :class="reveal.correct ? 'ok' : 'miss'">
           <p class="verdict">
@@ -87,83 +101,98 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import api from '@/utils/api'
-import { OPTION_KEYS, prettyCategory, taskSpec, type TaskType } from './taskOptions'
+import type {
+  CalibrationDecision, CalibrationFeedback, CalibrationItem, CalibrationStatus,
+} from '@/types/elicitation.generated'
+import { OPTION_KEYS, prettyCategory, taskSpec } from './taskOptions'
 
-const emit = defineEmits<{ (e: 'done'): void; (e: 'skip'): void }>()
-
-interface CalCase {
-  case_id: string
-  task: TaskType
-  statement: string
-  category?: string
-}
-interface Reveal {
-  correct: boolean
-  reference: string
-  explanation?: string
-}
+const emit = defineEmits<{ (e: 'done'): void }>()
 
 const loading = ref(true)
 const checking = ref(false)
 const error = ref('')
-const currentCase = ref<CalCase | null>(null)
+const currentCase = ref<CalibrationItem | null>(null)
 const answer = ref<string | null>(null)
-const reveal = ref<Reveal | null>(null)
+const confidence = ref(0)
+const rationale = ref('')
+const reveal = ref<CalibrationFeedback | null>(null)
 const completed = ref(0)
-const total = ref(15)
+const total = ref(0)
 const correctCount = ref(0)
 const finished = ref(false)
+let caseStarted = Date.now()
 
 const spec = computed(() => taskSpec(currentCase.value?.task))
+const referenceValue = computed(() => {
+  const field = spec.value.field
+  return field ? reveal.value?.reference?.[field] ?? null : null
+})
 const referenceLabel = computed(() => {
-  const r = reveal.value?.reference
+  const r = referenceValue.value
   return spec.value.options.find((o) => o.value === r)?.label ?? r ?? '—'
 })
+// The server requires both, as on a real item: calibration trains the whole
+// act of judging, rationale included.
+const canCheck = computed(() =>
+  !!answer.value && confidence.value >= 1 && !!rationale.value.trim() && !checking.value)
+
+async function refreshStatus() {
+  try {
+    const { data } = await api.get<CalibrationStatus>('/elicitation/calibration/status')
+    total.value = data.total
+    completed.value = data.completed
+    correctCount.value = data.correct
+  } catch { /* the counts are a courtesy; the case flow does not depend on them */ }
+}
 
 async function fetchNext() {
   loading.value = true
   error.value = ''
   reveal.value = null
   answer.value = null
+  confidence.value = 0
+  rationale.value = ''
   try {
-    const { data } = await api.get('/elicitation/calibration/next')
-    if (!data || data.finished) {
+    const { data } = await api.get<CalibrationItem | null>('/elicitation/calibration/next')
+    if (!data) {
       finished.value = true
       currentCase.value = null
-      if (typeof data?.correct === 'number') correctCount.value = data.correct
-      if (typeof data?.total === 'number') total.value = data.total
+      await refreshStatus()
     } else {
-      currentCase.value = data.case ?? data
-      if (typeof data.completed === 'number') completed.value = data.completed
-      if (typeof data.total === 'number') total.value = data.total
+      currentCase.value = data
+      completed.value = data.completed
+      total.value = data.total
+      caseStarted = Date.now()
     }
-  } catch {
+  } catch (e: any) {
     currentCase.value = null
+    error.value = e?.response?.data?.detail || ''
   } finally {
     loading.value = false
   }
 }
 
 async function check() {
-  if (!answer.value || !currentCase.value) return
+  const c = currentCase.value
+  const field = spec.value.field
+  if (!c || !field || !canCheck.value) return
   checking.value = true
   error.value = ''
+  const payload: CalibrationDecision = {
+    calibration_id: c.calibration_id,
+    task: c.task,
+    [field]: answer.value,
+    confidence: confidence.value,
+    rationale: rationale.value.trim(),
+    time_spent_s: Math.round((Date.now() - caseStarted) / 1000),
+  }
   try {
-    const { data } = await api.post('/elicitation/calibration/answer', {
-      case_id: currentCase.value.case_id,
-      task: currentCase.value.task,
-      answer: answer.value,
-    })
-    reveal.value = {
-      correct: !!data?.correct,
-      reference: data?.reference,
-      explanation: data?.explanation,
-    }
-    if (data?.correct) correctCount.value += 1
-    completed.value = typeof data?.completed === 'number'
-      ? data.completed
-      : completed.value + 1
-    if (typeof data?.total === 'number') total.value = data.total
+    const { data } = await api.post<CalibrationFeedback>(
+      '/elicitation/calibration/decide', payload)
+    reveal.value = data
+    if (data.correct) correctCount.value += 1
+    completed.value = data.completed
+    total.value = data.total
   } catch (e: any) {
     error.value = e?.response?.data?.detail || 'Could not check that answer'
   } finally {
@@ -172,7 +201,11 @@ async function check() {
 }
 
 function next() {
-  if (completed.value >= total.value) { finished.value = true; return }
+  if (total.value && completed.value >= total.value) {
+    finished.value = true
+    refreshStatus()
+    return
+  }
   fetchNext()
 }
 
@@ -187,7 +220,8 @@ function onKey(e: KeyboardEvent) {
     answer.value = spec.value.options[i].value
     return
   }
-  if (e.key === 'Enter' && answer.value) check()
+  if (e.key >= '1' && e.key <= '5') { confidence.value = Number(e.key); return }
+  if (e.key === 'Enter' && canCheck.value) check()
 }
 
 onMounted(() => { fetchNext(); window.addEventListener('keydown', onKey) })
@@ -216,6 +250,13 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 .okey { background: #f3f4f6; border: 1px solid #e5e7eb; border-radius: 4px; padding: 0 0.3rem; font-size: 0.7rem; color: #6b7280; }
 
 .actions { display: flex; align-items: center; gap: 1rem; margin-top: 0.9rem; }
+.confidence { display: flex; align-items: center; gap: 0.6rem; margin-top: 1rem; flex-wrap: wrap; }
+.confidence label { font-size: 0.85rem; color: #374151; font-weight: 500; }
+.conf-buttons { display: flex; gap: 0.25rem; }
+.conf { width: 2rem; height: 2rem; border: 1px solid #d1d5db; background: #fff; border-radius: 6px; cursor: pointer; }
+.conf.active { background: #111827; color: #fff; border-color: #111827; }
+.conf-hint { font-size: 0.75rem; color: #9ca3af; }
+.rationale { margin-top: 0.8rem; width: 100%; padding: 0.6rem 0.7rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; font-family: inherit; resize: vertical; }
 .primary { background: #111827; color: #fff; border: none; border-radius: 6px; padding: 0.55rem 1.1rem; font-size: 0.9rem; cursor: pointer; }
 .primary:disabled { background: #d1d5db; cursor: not-allowed; }
 .ghost { background: #fff; border: 1px solid #d1d5db; border-radius: 6px; padding: 0.45rem 0.9rem; cursor: pointer; font-size: 0.85rem; margin-right: 0.5rem; }

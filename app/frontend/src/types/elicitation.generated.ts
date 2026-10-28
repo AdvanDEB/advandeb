@@ -12,6 +12,7 @@ export type ScopeVerdict = "stated" | "implicit" | "absent" | "not_applicable"
 export type AssessabilityVerdict = "assessable" | "too_vague" | "compound" | "not_empirical" | "unclear_terms"
 export type EvidenceCondition = "matched" | "expertise"
 export type ElicitationEventType = "machine_verdict_opened" | "machine_verdict_closed"
+export type GuidelineSection = "provenance" | "scope" | "assessability" | "evidence" | "evidence_role" | "evidence_strength" | "consensus_direction"
 
 // ---- responses: every field is present ----
 
@@ -88,7 +89,7 @@ export interface TaskOption {
 }
 
 export interface TaskGuideline {
-  task: TaskType
+  task: GuidelineSection
   title: string
   help: string
   options: TaskOption[]
@@ -115,6 +116,7 @@ export interface HistoryItem {
   consensus_direction: number | null
   confidence: number
   rationale: string
+  time_spent_s: number | null
   tier: string | null
   created_at: string
 }

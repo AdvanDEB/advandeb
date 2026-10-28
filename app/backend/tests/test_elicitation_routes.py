@@ -231,3 +231,15 @@ async def test_calibration_next_never_seeds_over_http(scratch_db):
         r = await c.post("/calibration/seed")
         assert r.json()["status"] == "built"
         assert (await c.get("/calibration/next")).json() is not None
+
+
+async def test_guidelines_are_served(scratch_db):
+    """/guidelines failed response validation (500) once the evidence task's
+    sub-sections were added under a `TaskType` field."""
+    user = await _user(scratch_db)
+    async with _client(user) as c:
+        r = await c.get("/guidelines")
+        assert r.status_code == 200, r.text
+        sections = {t["task"] for t in r.json()["tasks"]}
+        assert {"evidence", "evidence_role", "evidence_strength",
+                "consensus_direction"} <= sections

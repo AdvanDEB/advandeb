@@ -49,21 +49,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import api from '@/utils/api'
-import { optionFor, type TaskType } from './taskOptions'
+import type { HistoryItem, HistoryResponse } from '@/types/elicitation.generated'
+import { optionFor } from './taskOptions'
 
-interface HistoryRow {
-  id?: string
-  sf_number: number
-  statement: string
-  task: TaskType
-  provenance_type?: string | null
-  scope_verdict?: string | null
-  assessability?: string | null
-  confidence?: number
-  rationale?: string
-  time_spent_s?: number
-  created_at?: string
-}
+type HistoryRow = HistoryItem & { id?: string }
 
 const rows = ref<HistoryRow[]>([])
 const q = ref('')
@@ -80,6 +69,9 @@ function debouncedFetch() {
 }
 
 function labelFor(r: HistoryRow): string {
+  if (r.task === 'evidence') {
+    return `strength ${r.evidence_strength ?? '—'} · direction ${r.consensus_direction ?? '—'}`
+  }
   const value = r.provenance_type ?? r.scope_verdict ?? r.assessability ?? null
   return optionFor(r.task, value)?.label ?? value ?? '—'
 }
@@ -87,7 +79,7 @@ function labelFor(r: HistoryRow): string {
 async function fetch(reset = false) {
   loading.value = true
   try {
-    const { data } = await api.get('/elicitation/history', {
+    const { data } = await api.get<HistoryResponse & { total?: number }>('/elicitation/history', {
       params: { q: q.value || undefined, limit: LIMIT, offset: offset.value },
     })
     const items: HistoryRow[] = data?.items ?? []

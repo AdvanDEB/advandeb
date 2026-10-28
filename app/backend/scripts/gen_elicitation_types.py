@@ -40,7 +40,7 @@ OUT = BACKEND.parent / "frontend" / "src" / "types" / "elicitation.generated.ts"
 ALIASES = [
     "TaskType", "PassageDirection", "EvidentialRole", "ProvenanceType",
     "ScopeVerdict", "AssessabilityVerdict", "EvidenceCondition",
-    "ElicitationEventType",
+    "ElicitationEventType", "GuidelineSection",
 ]
 
 # What the server sends. Every field is present in the JSON (pydantic
