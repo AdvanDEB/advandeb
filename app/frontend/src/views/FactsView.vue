@@ -41,7 +41,7 @@
       <div v-if="sf.loading" class="state-msg">Loading…</div>
       <div v-else-if="sf.items.length === 0" class="state-msg empty">No stylized facts found.</div>
 
-      <div v-else class="table-wrap">
+      <div v-else v-scroll-region="'Stylized facts'" class="table-wrap">
         <table class="fact-table">
           <thead>
             <tr>
@@ -123,7 +123,7 @@
       <div v-if="kf.loading" class="state-msg">Loading…</div>
       <div v-else-if="kf.items.length === 0" class="state-msg empty">No facts found.</div>
 
-      <div v-else class="table-wrap">
+      <div v-else v-scroll-region="'Facts'" class="table-wrap">
         <table class="fact-table">
           <thead>
             <tr>
@@ -266,6 +266,7 @@
 </template>
 
 <script setup lang="ts">
+import { vScrollRegion } from '@/directives/scrollRegion'
 import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { formatDate } from '@/utils/format'
 import api from '@/utils/api'

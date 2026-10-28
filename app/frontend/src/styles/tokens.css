@@ -83,6 +83,23 @@
 }
 .skip-link:focus { transform: none; outline: var(--app-focus); outline-offset: 2px; }
 
+/* Tables that scroll sideways (directives/scrollRegion.ts): the edge with
+   more content fades out, and the region is a keyboard stop while it
+   overflows. A mask, not a shadow, so it works whatever the cells' background. */
+.scroll-more-right {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+}
+.scroll-more-left {
+  -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to left, #000 calc(100% - 2.5rem), transparent);
+}
+.scroll-more-left.scroll-more-right {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 2.5rem, #000 calc(100% - 2.5rem), transparent);
+}
+[role='region'][tabindex='0']:focus-visible { outline: var(--app-focus); outline-offset: 2px; }
+
 /* A view's heading, focused by components/common/RouteFocus.vue after a
    navigation so screen readers announce the new page. Not a control, so no
    focus ring. */

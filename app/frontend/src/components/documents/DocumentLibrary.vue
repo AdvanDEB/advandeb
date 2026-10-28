@@ -53,7 +53,7 @@
     </div>
 
     <!-- Table -->
-    <div v-else class="table-wrap">
+    <div v-else v-scroll-region="'Documents'" class="table-wrap">
       <table class="doc-table">
         <thead>
           <tr>
@@ -244,6 +244,7 @@
 </template>
 
 <script setup lang="ts">
+import { vScrollRegion } from '@/directives/scrollRegion'
 import { ref, computed, onMounted } from 'vue'
 import { formatDate } from '@/utils/format'
 import api from '@/utils/api'
