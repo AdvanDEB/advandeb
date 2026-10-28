@@ -25,27 +25,37 @@ failed to start took the web app down with it.
 ## Install / migrate from advandeb-stack.service
 
 Needs the live checkout (`/home/adeb/dev/advandeb`) on a commit that contains
-these files (`scripts/run_component.py` must exist).
+these files (`scripts/run_component.py` must exist). Run from the checkout.
+
+Order matters: the *old* advandeb.service has `Requires=advandeb-stack.service`,
+so the new unit files must be loaded (daemon-reload) **before** the legacy
+stack is stopped, or stopping it takes the web app down too.
 
 ```bash
-B=/etc/systemd/system/advandeb-backup-$(date +%Y%m%d-%H%M%S); sudo mkdir -p "$B"
-sudo cp -a /etc/systemd/system/advandeb* "$B"/
-sudo systemctl disable --now advandeb-stack.service
+B=/var/backups/advandeb-systemd-$(date +%Y%m%d-%H%M%S); sudo mkdir -p "$B" && sudo cp -a /etc/systemd/system/advandeb* "$B"/ && echo "backup: $B"
 sudo cp scripts/systemd/advandeb.service scripts/systemd/advandeb.target \
         scripts/systemd/advandeb-stack.target scripts/systemd/advandeb-gateway.service \
         scripts/systemd/advandeb-register-agents.service 'scripts/systemd/advandeb-agent@.service' \
-        /etc/systemd/system/
-sudo cp -r 'scripts/systemd/advandeb-agent@retrieval_agent.service.d' /etc/systemd/system/
-sudo rm /etc/systemd/system/advandeb-stack.service
-sudo systemctl daemon-reload
+        /etc/systemd/system/ \
+  && sudo cp -r 'scripts/systemd/advandeb-agent@retrieval_agent.service.d' /etc/systemd/system/ \
+  && sudo systemctl daemon-reload
+sudo systemctl disable --now advandeb-stack.service
+sudo rm /etc/systemd/system/advandeb-stack.service && sudo systemctl daemon-reload
 sudo systemctl start advandeb-stack.target
 sudo systemctl restart advandeb.service
 ./scripts/status_stack.sh
 ```
 
-Rollback: `sudo systemctl stop advandeb-stack.target`, copy the backup
-directory's files back over `/etc/systemd/system/`, remove the new unit files,
-`sudo systemctl daemon-reload && sudo systemctl enable --now advandeb-stack.service && sudo systemctl restart advandeb.service`.
+Rollback (`$B` = the backup directory printed above):
+
+```bash
+sudo systemctl stop advandeb-stack.target \
+  && sudo rm -rf /etc/systemd/system/advandeb-stack.target /etc/systemd/system/advandeb-gateway.service \
+       /etc/systemd/system/advandeb-register-agents.service '/etc/systemd/system/advandeb-agent@.service' \
+       '/etc/systemd/system/advandeb-agent@retrieval_agent.service.d' \
+  && sudo cp -a "$B"/. /etc/systemd/system/ && sudo systemctl daemon-reload \
+  && sudo systemctl enable --now advandeb-stack.service && sudo systemctl restart advandeb.service
+```
 
 ## Day to day
 
