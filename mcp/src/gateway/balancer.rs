@@ -10,6 +10,12 @@ pub struct RoundRobinBalancer {
     counter: AtomicUsize,
 }
 
+impl Default for RoundRobinBalancer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl RoundRobinBalancer {
     pub fn new() -> Self {
         Self {

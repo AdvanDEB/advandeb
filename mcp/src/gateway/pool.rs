@@ -24,6 +24,12 @@ pub struct ConnectionPool {
     idle: Arc<Mutex<HashMap<String, VecDeque<WsStream>>>>,
 }
 
+impl Default for ConnectionPool {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ConnectionPool {
     pub fn new() -> Self {
         Self {

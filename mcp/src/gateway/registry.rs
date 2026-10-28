@@ -42,6 +42,12 @@ pub struct AgentRegistry {
     tool_index: Arc<RwLock<HashMap<String, Vec<String>>>>,
 }
 
+impl Default for AgentRegistry {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AgentRegistry {
     pub fn new() -> Self {
         Self {
