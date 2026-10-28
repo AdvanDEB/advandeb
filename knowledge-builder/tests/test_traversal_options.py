@@ -198,11 +198,9 @@ def test_expand_from_chunks_round_trips_do_not_grow_with_facts():
         db = RecordingArango()
         svc = GraphExpansionService(db)
         # Lookups stubbed out: only the traversals reach the database.
-        svc._chunk_ids_to_arango_keys = lambda ids: ["d1_chunk_0", "d2_chunk_0"]
-        svc._fetch_vertices = lambda col, keys: [
+        svc._fetch_vertices = lambda col, keys, fields=None: [
             {"_key": k, "document_id": k.split("_")[0]} for k in keys
         ]
-        svc._fetch_by_field = lambda col, field, values: []
         svc._get_facts_for_documents = lambda ids: [
             {"_key": str(i), "document_id": "d1"} for i in range(n_facts)
         ]
