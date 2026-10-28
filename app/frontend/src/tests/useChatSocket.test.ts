@@ -73,6 +73,8 @@ function makeSocket(overrides: Record<string, unknown> = {}) {
     ticket: () => 'tik-abc',
     onEvent: (d) => events.push(d),
     onAuthFailure: () => authFailures.push(1),
+    // Jitter pinned to its maximum: each delay is exactly the exponential step.
+    random: () => 1,
     ...overrides,
   })
   return { sock, events, authFailures }
@@ -293,6 +295,73 @@ describe('useChatSocket — asynchronous tickets', () => {
 
     expect(d.pending).toHaveLength(2)
     expect(authFailures).toHaveLength(0)
+  })
+})
+
+describe('useChatSocket — reconnect backoff', () => {
+  /** Close the current socket abnormally and return how long until the next one opens. */
+  function delayUntilReconnect(): number {
+    const before = live().length
+    live()[before - 1].serverClose(1006)
+    let waited = 0
+    while (live().length === before && waited < 120_000) {
+      vi.advanceTimersByTime(100)
+      waited += 100
+    }
+    return waited
+  }
+
+  it('doubles the delay on each consecutive failure', () => {
+    const { sock } = makeSocket()
+    sock.connect()
+    expect([1, 2, 3, 4].map(() => delayUntilReconnect())).toEqual([2000, 4000, 8000, 16_000])
+  })
+
+  it('caps the delay', () => {
+    const { sock } = makeSocket({ maxReconnectDelayMs: 10_000 })
+    sock.connect()
+    const delays = [1, 2, 3, 4, 5].map(() => delayUntilReconnect())
+    expect(delays.slice(-2)).toEqual([10_000, 10_000])
+  })
+
+  it('jitters so tabs dropped together do not return together', () => {
+    const { sock } = makeSocket({ random: () => 0 })
+    sock.connect()
+    // Equal jitter: never below half the step, never above it.
+    expect([1, 2, 3].map(() => delayUntilReconnect())).toEqual([1000, 2000, 4000])
+  })
+
+  it('resets after a connection that stayed up', () => {
+    const { sock } = makeSocket({ stableAfterMs: 5000 })
+    sock.connect()
+    delayUntilReconnect()                 // 2 s
+    delayUntilReconnect()                 // 4 s
+    live()[live().length - 1].serverOpen()
+    vi.advanceTimersByTime(6000)          // healthy for longer than stableAfterMs
+    expect(delayUntilReconnect()).toBe(2000)
+  })
+
+  it('does not reset for a socket the server accepts and immediately drops', () => {
+    const { sock } = makeSocket({ stableAfterMs: 5000 })
+    sock.connect()
+    delayUntilReconnect()                 // 2 s
+    live()[live().length - 1].serverOpen()
+    vi.advanceTimersByTime(100)           // up, but not for long
+    expect(delayUntilReconnect()).toBe(4000)
+    expect(sock.failures()).toBe(2)
+  })
+
+  it('a deliberate close starts the next session with a fresh backoff', () => {
+    const { sock } = makeSocket()
+    sock.connect()
+    delayUntilReconnect()
+    delayUntilReconnect()
+    expect(sock.failures()).toBe(2)
+
+    sock.close()                           // e.g. switching conversations
+    sock.connect()
+    expect(sock.failures()).toBe(0)
+    expect(delayUntilReconnect()).toBe(2000)
   })
 })
 

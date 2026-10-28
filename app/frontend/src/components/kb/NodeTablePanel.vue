@@ -2,7 +2,7 @@
   <div class="node-table-panel">
     <!-- Toolbar -->
     <div class="ntp-toolbar">
-      <select v-model="filterType" class="ntp-select" title="Filter by node type">
+      <select v-model="filterType" class="ntp-select" title="Filter by node type" aria-label="Filter by node type">
         <option value="">All types</option>
         <option v-for="t in uniqueTypes" :key="t" :value="t">{{ t.replace(/_/g, ' ') }}</option>
       </select>
@@ -10,31 +10,68 @@
         v-model="searchText"
         class="ntp-search"
         placeholder="Search label…"
+        aria-label="Search node labels"
         spellcheck="false"
       />
       <span class="ntp-count">{{ filteredNodes.length }} / {{ nodes.length }}</span>
     </div>
 
-    <!-- Table -->
-    <div class="ntp-scroll">
-      <table class="ntp-table">
-        <thead>
-          <tr>
-            <th class="col-type"  @click="setSort('node_type')">Type<SortIcon :col="'node_type'" :sortKey="sortKey" :sortDir="sortDir" /></th>
-            <th class="col-label" @click="setSort('label')">Label<SortIcon :col="'label'" :sortKey="sortKey" :sortDir="sortDir" /></th>
-            <th class="col-deg"   @click="setSort('degree')">Deg<SortIcon :col="'degree'" :sortKey="sortKey" :sortDir="sortDir" /></th>
-            <th class="col-sup"   @click="setSort('supports')" title="Supporting edges">Sup<SortIcon :col="'supports'" :sortKey="sortKey" :sortDir="sortDir" /></th>
-            <th class="col-opp"   @click="setSort('opposes')" title="Opposing edges">Opp<SortIcon :col="'opposes'" :sortKey="sortKey" :sortDir="sortDir" /></th>
+    <!-- Table. Virtualised: only the rows in view (plus a few either side) are
+         rendered, between two spacer rows that stand in for the rest — a graph
+         can have tens of thousands of nodes. Rows have one fixed height.
+
+         Keyboard: the table is a single tab stop (a grid with an active row,
+         announced through aria-activedescendant); arrows/Page/Home/End move,
+         Enter or Space selects. -->
+    <div ref="scrollEl" class="ntp-scroll" @scroll.passive="onScroll">
+      <table
+        ref="tableEl"
+        class="ntp-table"
+        role="grid"
+        aria-label="Graph nodes"
+        :aria-rowcount="filteredNodes.length + 1"
+        :aria-activedescendant="activeRowId"
+        tabindex="0"
+        :style="{ '--ntp-row-h': `${ROW_HEIGHT}px` }"
+        @keydown="onKeydown"
+      >
+        <thead ref="theadEl">
+          <tr aria-rowindex="1">
+            <th class="col-type" :aria-sort="ariaSort('node_type')">
+              <button type="button" class="ntp-sort" @click="setSort('node_type')">Type<SortIcon :col="'node_type'" :sortKey="sortKey" :sortDir="sortDir" /></button>
+            </th>
+            <th class="col-label" :aria-sort="ariaSort('label')">
+              <button type="button" class="ntp-sort" @click="setSort('label')">Label<SortIcon :col="'label'" :sortKey="sortKey" :sortDir="sortDir" /></button>
+            </th>
+            <th class="col-deg" :aria-sort="ariaSort('degree')">
+              <button type="button" class="ntp-sort" @click="setSort('degree')">Deg<SortIcon :col="'degree'" :sortKey="sortKey" :sortDir="sortDir" /></button>
+            </th>
+            <th class="col-sup" :aria-sort="ariaSort('supports')" title="Supporting edges">
+              <button type="button" class="ntp-sort" @click="setSort('supports')">Sup<SortIcon :col="'supports'" :sortKey="sortKey" :sortDir="sortDir" /></button>
+            </th>
+            <th class="col-opp" :aria-sort="ariaSort('opposes')" title="Opposing edges">
+              <button type="button" class="ntp-sort" @click="setSort('opposes')">Opp<SortIcon :col="'opposes'" :sortKey="sortKey" :sortDir="sortDir" /></button>
+            </th>
             <th class="col-eid">Entity ID</th>
             <th class="col-props">Properties</th>
           </tr>
         </thead>
         <tbody>
+          <tr v-if="padTop > 0" class="ntp-spacer ntp-spacer--top" aria-hidden="true" :style="{ height: `${padTop}px` }">
+            <td colspan="7" />
+          </tr>
           <tr
-            v-for="node in filteredNodes"
+            v-for="(node, i) in visibleNodes"
+            :id="rowId(range.start + i)"
             :key="node._id"
-            :class="{ 'row-selected': selectedNode?._id === node._id }"
-            @click="$emit('select', node)"
+            class="ntp-row"
+            :class="{
+              'row-selected': selectedNode?._id === node._id,
+              'row-active': range.start + i === activeIndex,
+            }"
+            :aria-rowindex="range.start + i + 2"
+            :aria-selected="selectedNode?._id === node._id"
+            @click="selectAt(range.start + i)"
           >
             <td>
               <span class="type-badge" :class="`type-${node.node_type.replace(/_/g, '-')}`">
@@ -48,6 +85,9 @@
             <td class="col-eid-cell mono" :title="node.entity_id">{{ node.entity_id || '—' }}</td>
             <td class="col-props-cell" :title="formatPropsLong(node)">{{ formatProps(node) }}</td>
           </tr>
+          <tr v-if="padBottom > 0" class="ntp-spacer ntp-spacer--bottom" aria-hidden="true" :style="{ height: `${padBottom}px` }">
+            <td colspan="7" />
+          </tr>
           <tr v-if="filteredNodes.length === 0">
             <td colspan="7" class="ntp-empty">No nodes match the current filter</td>
           </tr>
@@ -57,8 +97,16 @@
   </div>
 </template>
 
+<script lang="ts">
+/** Row height in px that the CSS gives every row (see .ntp-row). The rendered
+ *  height is measured once and used instead if it differs (zoom, fonts). */
+export const ROW_HEIGHT = 26
+/** Rows rendered beyond each edge of the viewport, so fast scrolling stays filled. */
+export const OVERSCAN = 8
+</script>
+
 <script setup lang="ts">
-import { ref, computed, defineComponent, h } from 'vue'
+import { ref, computed, defineComponent, h, onBeforeUnmount, onMounted, onUpdated, useId, watch } from 'vue'
 import type { GraphNode } from '@/utils/kbApi'
 
 // ── Props / Emits ────────────────────────────────────────────────────────────
@@ -68,7 +116,7 @@ const props = defineProps<{
   selectedNode: GraphNode | null
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'select', node: GraphNode): void
 }>()
 
@@ -81,9 +129,10 @@ const SortIcon = defineComponent({
     sortDir: { type: String, required: true },
   },
   setup(p) {
+    // aria-hidden: the header's aria-sort already says which way it sorts.
     return () => {
-      if (p.col !== p.sortKey) return h('span', { class: 'sort-icon sort-none' }, ' ⇅')
-      return h('span', { class: 'sort-icon sort-active' }, p.sortDir === 'asc' ? ' ↑' : ' ↓')
+      if (p.col !== p.sortKey) return h('span', { class: 'sort-icon sort-none', 'aria-hidden': 'true' }, ' ⇅')
+      return h('span', { class: 'sort-icon sort-active', 'aria-hidden': 'true' }, p.sortDir === 'asc' ? ' ↑' : ' ↓')
     }
   },
 })
@@ -134,6 +183,141 @@ const filteredNodes = computed<GraphNode[]>(() => {
   return list
 })
 
+// ── Virtual window ───────────────────────────────────────────────────────────
+
+/** Used until the scroll box can be measured (and in tests, where it can't). */
+const FALLBACK_VIEWPORT = 240
+
+const scrollEl  = ref<HTMLElement | null>(null)
+const tableEl   = ref<HTMLTableElement | null>(null)
+const theadEl   = ref<HTMLElement | null>(null)
+const scrollTop = ref(0)
+const viewportH = ref(FALLBACK_VIEWPORT)
+const rowH      = ref(ROW_HEIGHT)
+
+const range = computed(() => {
+  const n = filteredNodes.value.length
+  const first = Math.floor(scrollTop.value / rowH.value)
+  const inView = Math.ceil(viewportH.value / rowH.value)
+  const start = Math.min(n, Math.max(0, first - OVERSCAN))
+  const end = Math.min(n, Math.max(start, first + inView + OVERSCAN))
+  return { start, end }
+})
+
+const visibleNodes = computed(() => filteredNodes.value.slice(range.value.start, range.value.end))
+const padTop       = computed(() => range.value.start * rowH.value)
+const padBottom    = computed(() => (filteredNodes.value.length - range.value.end) * rowH.value)
+
+function onScroll() {
+  if (scrollEl.value) scrollTop.value = scrollEl.value.scrollTop
+}
+
+function measureViewport() {
+  const h = scrollEl.value?.clientHeight ?? 0
+  viewportH.value = h > 0 ? h : FALLBACK_VIEWPORT
+}
+
+// The spacers are only right if rowH is the real row pitch, so take it from a
+// rendered row once there is one. (0 where nothing is laid out, e.g. jsdom.)
+let rowMeasured = false
+function measureRow() {
+  if (rowMeasured) return
+  const row = tableEl.value?.querySelector('tr.ntp-row')
+  const h = row?.getBoundingClientRect().height ?? 0
+  if (h <= 0) return
+  rowMeasured = true
+  if (Math.abs(h - rowH.value) > 0.25) rowH.value = h
+}
+
+let resizeObserver: ResizeObserver | null = null
+
+onMounted(() => {
+  measureViewport()
+  measureRow()
+  if (typeof ResizeObserver !== 'undefined' && scrollEl.value) {
+    resizeObserver = new ResizeObserver(measureViewport)
+    resizeObserver.observe(scrollEl.value)
+  }
+})
+
+onUpdated(measureRow)
+
+onBeforeUnmount(() => { resizeObserver?.disconnect(); resizeObserver = null })
+
+// ── Active row (keyboard) and selection ──────────────────────────────────────
+
+const idPrefix = `ntp-${useId()}`
+const activeIndex = ref(0)
+
+function rowId(index: number): string {
+  return `${idPrefix}-r${index}`
+}
+
+/** Only a rendered row can be the active descendant. */
+const activeRowId = computed(() => {
+  const { start, end } = range.value
+  const i = activeIndex.value
+  return i >= start && i < end ? rowId(i) : undefined
+})
+
+function selectAt(index: number) {
+  const node = filteredNodes.value[index]
+  if (!node) return
+  activeIndex.value = index
+  emit('select', node)
+}
+
+/** Scroll the minimum needed for row `index` to be fully visible below the sticky header. */
+function scrollRowIntoView(index: number) {
+  const el = scrollEl.value
+  if (!el) return
+  const headerH = theadEl.value?.getBoundingClientRect().height ?? 0
+  const visibleH = viewportH.value - headerH
+  const top = index * rowH.value
+  if (top < el.scrollTop) el.scrollTop = top
+  else if (top + rowH.value > el.scrollTop + visibleH) el.scrollTop = top + rowH.value - visibleH
+  scrollTop.value = el.scrollTop
+}
+
+function setActive(index: number) {
+  activeIndex.value = index
+  scrollRowIntoView(index)
+}
+
+function onKeydown(ev: KeyboardEvent) {
+  const n = filteredNodes.value.length
+  if (!n || ev.target !== tableEl.value) return
+  const page = Math.max(1, Math.floor(viewportH.value / rowH.value) - 1)
+  const at = Math.min(activeIndex.value, n - 1)
+  let next: number
+  switch (ev.key) {
+    case 'ArrowDown': next = at + 1; break
+    case 'ArrowUp':   next = at - 1; break
+    case 'PageDown':  next = at + page; break
+    case 'PageUp':    next = at - page; break
+    case 'Home':      next = 0; break
+    case 'End':       next = n - 1; break
+    case 'Enter':
+    case ' ':
+      ev.preventDefault()
+      selectAt(at)
+      return
+    default:
+      return
+  }
+  ev.preventDefault()
+  setActive(Math.min(n - 1, Math.max(0, next)))
+}
+
+// Keep the active row on the selected node — after a click on the canvas, or
+// when filtering/sorting reorders the list — so keyboard navigation resumes
+// from it. This does not scroll: the table stays where the user left it.
+watch([() => props.selectedNode?._id, filteredNodes], ([id]) => {
+  const i = id ? filteredNodes.value.findIndex(n => n._id === id) : -1
+  if (i >= 0) activeIndex.value = i
+  else activeIndex.value = Math.min(activeIndex.value, Math.max(0, filteredNodes.value.length - 1))
+})
+
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function setSort(col: string) {
@@ -143,6 +327,11 @@ function setSort(col: string) {
     sortKey.value = col
     sortDir.value = (col === 'degree' || col === 'supports' || col === 'opposes') ? 'desc' : 'asc'
   }
+}
+
+function ariaSort(col: string): 'ascending' | 'descending' | 'none' {
+  if (sortKey.value !== col) return 'none'
+  return sortDir.value === 'asc' ? 'ascending' : 'descending'
 }
 
 const PROP_KEYS = ['doi', 'year', 'authors', 'journal', 'rank', 'tax_id', 'confidence', 'status', 'category']
@@ -214,10 +403,11 @@ function formatPropsLong(node: GraphNode): string {
   cursor: pointer;
   outline: none;
 }
-.ntp-select:focus { border-color: #3b82f6; }
+.ntp-select:focus { border-color: var(--app-primary); }
 
 .ntp-search {
   flex: 1;
+  min-width: 0;
   max-width: 220px;
   background: #0f172a;
   border: 1px solid #334155;
@@ -228,7 +418,7 @@ function formatPropsLong(node: GraphNode): string {
   outline: none;
 }
 .ntp-search::placeholder { color: #475569; }
-.ntp-search:focus { border-color: #3b82f6; }
+.ntp-search:focus { border-color: var(--app-primary); }
 
 .ntp-count {
   margin-left: auto;
@@ -240,6 +430,7 @@ function formatPropsLong(node: GraphNode): string {
 /* ── Scroll container ────────────────────────────────────────────────────── */
 .ntp-scroll {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: auto;
 }
@@ -247,10 +438,13 @@ function formatPropsLong(node: GraphNode): string {
 /* ── Table ───────────────────────────────────────────────────────────────── */
 .ntp-table {
   width: 100%;
+  min-width: 720px; /* the fixed columns' share; narrower screens scroll sideways */
   border-collapse: collapse;
   font-size: 0.72rem;
   table-layout: fixed;
 }
+.ntp-table:focus { outline: none; }
+.ntp-table:focus-visible { box-shadow: inset 0 0 0 2px #60a5fa; }
 
 .ntp-table thead {
   position: sticky;
@@ -268,11 +462,24 @@ function formatPropsLong(node: GraphNode): string {
   letter-spacing: 0.04em;
   color: #64748b;
   border-bottom: 1px solid #334155;
-  cursor: pointer;
   user-select: none;
   white-space: nowrap;
 }
 .ntp-table th:hover { color: #94a3b8; }
+
+/* Sort control: a real button, styled as the header text it replaces. */
+.ntp-sort {
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.ntp-sort:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; border-radius: 2px; }
 
 .ntp-table td {
   padding: 0.3rem 0.6rem;
@@ -284,14 +491,33 @@ function formatPropsLong(node: GraphNode): string {
   vertical-align: middle;
 }
 
-.ntp-table tbody tr {
+/* One fixed height for every data row (single line, clipped), which is what
+   lets the spacer rows stand in for the unrendered ones. */
+.ntp-table tbody tr.ntp-row td {
+  height: var(--ntp-row-h);
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 1;
+}
+
+.ntp-table tbody tr.ntp-spacer td {
+  padding: 0;
+  border: none;
+}
+
+.ntp-table tbody tr.ntp-row {
   cursor: pointer;
   transition: background 0.1s;
 }
-.ntp-table tbody tr:hover { background: #263348; }
-.ntp-table tbody tr.row-selected {
+.ntp-table tbody tr.ntp-row:hover { background: #263348; }
+.ntp-table tbody tr.ntp-row.row-selected {
   background: #1e3a5f;
-  border-left: 2px solid #3b82f6;
+  border-left: 2px solid var(--app-primary);
+}
+/* The keyboard's current row, while the table has focus. */
+.ntp-table:focus-visible tbody tr.row-active {
+  outline: 1px dashed #60a5fa;
+  outline-offset: -1px;
 }
 
 /* ── Column widths ───────────────────────────────────────────────────────── */
@@ -325,7 +551,7 @@ function formatPropsLong(node: GraphNode): string {
   color: #94a3b8;
   white-space: nowrap;
 }
-.type-badge.type-document           { background: #1d4ed8; color: #bfdbfe; }
+.type-badge.type-document           { background: #1d4ed8; color: var(--app-primary-line); }
 .type-badge.type-external-document  { background: #334155; color: #94a3b8; }
 .type-badge.type-fact               { background: #065f46; color: #6ee7b7; }
 .type-badge.type-stylized-fact      { background: #78350f; color: #fde68a; }
@@ -356,4 +582,14 @@ function formatPropsLong(node: GraphNode): string {
 .ntp-scroll::-webkit-scrollbar-track { background: #0f172a; }
 .ntp-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 .ntp-scroll::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* ── Narrow screens: don't let the table take the whole graph column ────── */
+@media (max-width: 900px) {
+  .node-table-panel { height: 40%; min-height: 160px; }
+}
+
+@media (pointer: coarse) {
+  .ntp-select,
+  .ntp-search { min-height: 36px; }
+}
 </style>

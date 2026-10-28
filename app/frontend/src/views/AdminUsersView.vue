@@ -36,7 +36,10 @@
     <section class="card">
       <p v-if="loading" class="muted">Loading…</p>
       <p v-else-if="users.length === 0" class="muted">No users match this search.</p>
-      <table v-else class="users-table">
+      <!-- Seven columns cannot fit a phone; the table scrolls inside its card
+           instead of pushing the whole page sideways. -->
+      <div v-else class="table-scroll">
+      <table class="users-table">
         <thead>
           <tr>
             <th>Email</th>
@@ -52,15 +55,21 @@
             <td>{{ u.email }}</td>
             <td>{{ u.full_name || '—' }}</td>
             <td>
-              <span
+              <!-- Toggle buttons: these were clickable <span>s, unreachable by
+                   keyboard and announced as plain text. -->
+              <button
                 v-for="r in USER_ROLES"
                 :key="r"
+                type="button"
                 :class="['role-pill', { active: u.roles.includes(r) }]"
+                :aria-pressed="u.roles.includes(r)"
+                :aria-label="`${roleLabel(r)} role for ${u.email}`"
                 :title="u.roles.includes(r) ? `Remove ${roleLabel(r)}` : `Grant ${roleLabel(r)}`"
+                :disabled="busyId === u.id"
                 @click="toggleRole(u, r)"
               >
                 {{ roleLabel(r) }}
-              </span>
+              </button>
             </td>
             <td>
               <span :class="['status-badge', u.status]">{{ u.status }}</span>
@@ -101,6 +110,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
 
       <div v-if="!loading && total > 0" class="pagination">
         <span class="muted">Showing {{ rangeStart }}–{{ rangeEnd }} of {{ total }}</span>
@@ -171,9 +181,11 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
+import { formatDate } from '@/utils/format'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useNotificationsStore } from '@/stores/notifications'
+import { useDialogStore } from '@/stores/dialog'
 import {
   assignRole,
   createUser,
@@ -188,6 +200,7 @@ import { USER_ROLES, type AdminUser } from '@/types/user'
 
 const authStore = useAuthStore()
 const notifs = useNotificationsStore()
+const dialog = useDialogStore()
 const router = useRouter()
 
 const users = ref<AdminUser[]>([])
@@ -231,14 +244,6 @@ function isSelf(u: AdminUser): boolean {
 function viewChats(u: AdminUser) {
   if (!u.chat_history_visible_to_admin) return
   router.push(`/admin/users/${u.id}/chats`)
-}
-
-function formatDate(iso: string): string {
-  try {
-    return new Date(iso).toLocaleDateString()
-  } catch {
-    return iso
-  }
 }
 
 async function refreshUsers() {
@@ -323,7 +328,12 @@ async function toggleRole(u: AdminUser, role: string) {
 
 async function onToggleStatus(u: AdminUser) {
   const next = u.status === 'suspended' ? 'active' : 'suspended'
-  if (next === 'suspended' && !confirm(`Suspend ${u.email}? They won't be able to log in.`)) return
+  if (next === 'suspended' && !(await dialog.confirm({
+    title: `Suspend ${u.email}?`,
+    message: "They won't be able to log in until reactivated.",
+    confirmLabel: 'Suspend',
+    tone: 'danger',
+  }))) return
   busyId.value = u.id
   try {
     const updated = await setStatus(u.id, next)
@@ -338,7 +348,12 @@ async function onToggleStatus(u: AdminUser) {
 }
 
 async function onResetPassword(u: AdminUser) {
-  if (!confirm(`Generate a new password for ${u.email}? Their current password will stop working.`)) return
+  if (!(await dialog.confirm({
+    title: `Reset the password for ${u.email}?`,
+    message: 'A new password is generated and their current one stops working immediately.',
+    confirmLabel: 'Reset password',
+    tone: 'danger',
+  }))) return
   busyId.value = u.id
   try {
     const { password } = await resetPassword(u.id)
@@ -351,7 +366,12 @@ async function onResetPassword(u: AdminUser) {
 }
 
 async function onDelete(u: AdminUser) {
-  if (!confirm(`Permanently delete ${u.email}? This cannot be undone.`)) return
+  if (!(await dialog.confirm({
+    title: `Delete ${u.email}?`,
+    message: 'The account is deleted permanently. This cannot be undone.',
+    confirmLabel: 'Delete user',
+    tone: 'danger',
+  }))) return
   busyId.value = u.id
   try {
     await deleteUser(u.id)
@@ -455,12 +475,18 @@ onMounted(refreshUsers)
   font-size: 0.72rem;
   font-weight: 600;
   cursor: pointer;
-  border: 1px solid #e5e7eb;
-  color: #9ca3af;
-  background: #f9fafb;
+  border: 1px solid var(--app-line);
+  color: var(--app-ink-3);
+  background: var(--app-bg-2);
+  font-family: inherit;
   user-select: none;
 }
-.role-pill.active { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
+.role-pill.active { background: var(--app-primary-soft-2); border-color: #93c5fd; color: var(--app-primary-ink); }
+.role-pill:focus-visible { outline: var(--app-focus); outline-offset: 1px; }
+.role-pill:disabled { opacity: 0.6; cursor: progress; }
+
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll .users-table { min-width: 760px; }
 
 .status-badge {
   padding: 0.15rem 0.55rem;
@@ -537,5 +563,18 @@ onMounted(refreshUsers)
   flex: 1;
   font-size: 0.95rem;
   word-break: break-all;
+}
+
+@media (max-width: 720px) {
+  .admin-users-view { padding: 1rem; gap: 1rem; }
+  .card { padding: 1rem; }
+  .field, .field.grow { min-width: 0; flex: 1 1 100%; }
+  .new-user-btn { margin-left: 0; }
+  .pagination { flex-wrap: wrap; gap: 0.5rem; }
+}
+
+@media (pointer: coarse) {
+  .btn, .btn.small { min-height: var(--app-touch); }
+  .role-pill { min-height: 36px; padding: 0.3rem 0.7rem; }
 }
 </style>

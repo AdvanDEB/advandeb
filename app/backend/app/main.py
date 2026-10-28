@@ -6,8 +6,6 @@ import logging
 import logging.handlers
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 from pathlib import Path
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
@@ -17,6 +15,7 @@ from slowapi.errors import RateLimitExceeded
 from app.core.config import settings
 from app.core.limiter import limiter
 from app.core.metrics import PrometheusMiddleware, metrics_endpoint
+from app.core.spa import mount_spa
 
 # ── File logging ────────────────────────────────────────────────────────────
 def _configure_logging() -> None:
@@ -245,16 +244,10 @@ app.add_api_route("/metrics", metrics_endpoint, methods=["GET"], include_in_sche
 
 
 # Serve Vue SPA static assets and fall back to index.html for client-side routing.
-# Must be mounted last so API routes take priority.
+# Must be mounted last so API routes take priority. Unknown /api/* and /ws/*
+# paths get a JSON 404 rather than the SPA shell (see app/core/spa.py).
 if FRONTEND_DIST.exists():
-    app.mount("/assets", StaticFiles(directory=FRONTEND_DIST / "assets"), name="assets")
-
-    @app.get("/{full_path:path}", include_in_schema=False)
-    async def spa_fallback(full_path: str):
-        return FileResponse(
-            FRONTEND_DIST / "index.html",
-            headers={"Cache-Control": "no-cache, no-store, must-revalidate"},
-        )
+    mount_spa(app, FRONTEND_DIST)
 else:
     @app.get("/")
     async def root_dev_fallback():

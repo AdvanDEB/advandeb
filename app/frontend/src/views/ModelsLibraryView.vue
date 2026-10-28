@@ -112,13 +112,17 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import NewModelDialog from '@/components/tdeb/NewModelDialog.vue'
 import { useAuthStore } from '@/stores/auth'
+import { isCurator as userIsCurator } from '@/utils/access'
 import { useNotificationsStore } from '@/stores/notifications'
+import { useDialogStore } from '@/stores/dialog'
+import { apiErrorMessage } from '@/utils/api'
 import * as tdeb from '@/utils/tdebApi'
 import type { TDebModelSummary, TDebTemplate } from '@/utils/tdebApi'
 
 const router = useRouter()
 const auth = useAuthStore()
 const notifications = useNotificationsStore()
+const dialog = useDialogStore()
 
 const models = ref<TDebModelSummary[]>([])
 const published = ref<TDebModelSummary[]>([])
@@ -130,7 +134,7 @@ const showNew = ref(false)
 
 // Publishing is a curator/administrator act — mirrors require_curator on the API.
 const canPublish = computed(() =>
-  auth.hasRole('administrator') || auth.hasRole('knowledge_curator'))
+  userIsCurator(auth.user))
 
 const visibleModels = computed(() => {
   const q = search.value.trim().toLowerCase()
@@ -138,13 +142,6 @@ const visibleModels = computed(() => {
   return models.value.filter(m =>
     m.name.toLowerCase().includes(q) || m.description.toLowerCase().includes(q))
 })
-
-function message(err: unknown, fallback: string): string {
-  const detail = (err as { response?: { data?: { detail?: unknown } } })
-    ?.response?.data?.detail
-  if (typeof detail === 'string') return detail
-  return err instanceof Error ? err.message : fallback
-}
 
 /** "3 minutes ago" style, falling back to a date once it stops being useful. */
 function relativeTime(iso: string): string {
@@ -175,7 +172,7 @@ async function load() {
     // listing them again as shared templates would just be a duplicate card.
     published.value = shared.filter(p => !mine.some(m => m.id === p.id))
   } catch (err) {
-    error.value = message(err, 'Could not load your models.')
+    error.value = apiErrorMessage(err, 'Could not load your models.')
   } finally {
     loading.value = false
   }
@@ -193,7 +190,7 @@ async function createFromTemplate(templateId: string | null) {
       : await tdeb.createModel({ name: 'New model' })
     open(net.id)
   } catch (err) {
-    notifications.error(message(err, 'Could not create the model.'))
+    notifications.error(apiErrorMessage(err, 'Could not create the model.'))
   }
 }
 
@@ -203,15 +200,17 @@ async function duplicate(model: TDebModelSummary) {
     const copy = await tdeb.duplicateModel(model.id)
     open(copy.id)
   } catch (err) {
-    notifications.error(message(err, 'Could not copy the model.'))
+    notifications.error(apiErrorMessage(err, 'Could not copy the model.'))
   }
 }
 
 async function togglePublish(model: TDebModelSummary) {
   const publishing = !model.is_published
-  if (publishing && !window.confirm(
-    `Publish "${model.name}" as a shared template? Everyone will be able to copy it `
-    + `into their own models.`)) return
+  if (publishing && !(await dialog.confirm({
+    title: 'Publish as a shared template?',
+    message: `Everyone will be able to copy “${model.name}” into their own models.`,
+    confirmLabel: 'Publish',
+  }))) return
 
   try {
     const updated = publishing
@@ -221,17 +220,22 @@ async function togglePublish(model: TDebModelSummary) {
     notifications.success(
       publishing ? 'Published as a shared template.' : 'Withdrawn from shared templates.')
   } catch (err) {
-    notifications.error(message(err, 'Could not change the published state.'))
+    notifications.error(apiErrorMessage(err, 'Could not change the published state.'))
   }
 }
 
 async function remove(model: TDebModelSummary) {
-  if (!window.confirm(`Delete "${model.name}" permanently?`)) return
+  if (!(await dialog.confirm({
+    title: 'Delete model?',
+    message: `“${model.name}” will be deleted permanently.`,
+    confirmLabel: 'Delete',
+    tone: 'danger',
+  }))) return
   try {
     await tdeb.deleteModel(model.id)
     models.value = models.value.filter(m => m.id !== model.id)
   } catch (err) {
-    notifications.error(message(err, 'Could not delete the model.'))
+    notifications.error(apiErrorMessage(err, 'Could not delete the model.'))
   }
 }
 
@@ -246,7 +250,7 @@ function importJson() {
       const net = await tdeb.createModel({ network: JSON.parse(await file.text()) })
       open(net.id)
     } catch (err) {
-      notifications.error(message(err, 'Could not import that file.'))
+      notifications.error(apiErrorMessage(err, 'Could not import that file.'))
     }
   }
   input.click()

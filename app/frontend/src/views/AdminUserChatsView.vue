@@ -16,25 +16,33 @@
         <p v-if="loadingSessions" class="muted pad">Loading…</p>
         <p v-else-if="sessions.length === 0" class="muted pad">No conversations yet.</p>
         <ul v-else class="session-list">
-          <li
-            v-for="s in sessions"
-            :key="s.id"
-            :class="['session-item', { active: s.id === selectedSessionId }]"
-            @click="selectSession(s.id)"
-          >
-            <span class="session-title">{{ s.title || 'Untitled' }}</span>
-            <span class="session-date">{{ formatDate(s.updated_at) }}</span>
+          <li v-for="s in sessions" :key="s.id">
+            <button
+              type="button"
+              :class="['session-item', { active: s.id === selectedSessionId }]"
+              :aria-current="s.id === selectedSessionId ? 'true' : undefined"
+              @click="selectSession(s.id)"
+            >
+              <span class="session-title">{{ s.title || 'Untitled' }}</span>
+              <span class="session-date">{{ formatDateTime(s.updated_at) }}</span>
+            </button>
           </li>
         </ul>
 
-        <div class="access-log-toggle" @click="showAccessLog = !showAccessLog">
+        <button
+          type="button"
+          class="access-log-toggle"
+          :aria-expanded="showAccessLog"
+          aria-controls="access-log"
+          @click="showAccessLog = !showAccessLog"
+        >
           {{ showAccessLog ? 'Hide' : 'Show' }} access log ({{ accessLog.length }})
-        </div>
-        <div v-if="showAccessLog" class="access-log">
+        </button>
+        <div v-if="showAccessLog" id="access-log" class="access-log">
           <p v-if="accessLog.length === 0" class="muted pad">No prior access recorded.</p>
           <div v-for="(entry, i) in accessLog" :key="i" class="access-log-entry">
             <span>{{ entry.admin_email }}</span>
-            <span class="muted">{{ formatDate(entry.accessed_at) }}</span>
+            <span class="muted">{{ formatDateTime(entry.accessed_at) }}</span>
           </div>
         </div>
       </aside>
@@ -53,7 +61,7 @@
                   [{{ c.marker }}]
                 </span>
               </div>
-              <div v-if="m.timestamp" class="msg-timestamp">{{ formatDate(m.timestamp) }}</div>
+              <div v-if="m.timestamp" class="msg-timestamp">{{ formatDateTime(m.timestamp) }}</div>
             </div>
           </div>
         </div>
@@ -64,9 +72,9 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { formatDateTime } from '@/utils/format'
+import { renderMarkdown } from '@/utils/markdown'
 import { useRoute, useRouter } from 'vue-router'
-import { marked } from 'marked'
-import DOMPurify from 'dompurify'
 import { getUser } from '@/utils/usersApi'
 import { getUserAccessLog, getUserSession, listUserSessions } from '@/utils/adminChatApi'
 import type { AdminUser } from '@/types/user'
@@ -85,19 +93,6 @@ const messages = ref<ChatMessage[]>([])
 const loadingMessages = ref(false)
 const accessLog = ref<ChatAccessLogEntry[]>([])
 const showAccessLog = ref(false)
-
-function renderMarkdown(text: string): string {
-  return DOMPurify.sanitize(marked(text) as string)
-}
-
-function formatDate(iso?: string): string {
-  if (!iso) return ''
-  try {
-    return new Date(iso).toLocaleString()
-  } catch {
-    return iso
-  }
-}
 
 async function selectSession(sessionId: string) {
   selectedSessionId.value = sessionId
@@ -197,23 +192,37 @@ onMounted(async () => {
 
 .session-list { list-style: none; overflow-y: auto; flex: 1; padding: 0.3rem 0; margin: 0; }
 .session-item {
+  width: 100%;
   padding: 0.5rem 0.9rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  min-width: 0;
 }
-.session-item:hover { background: #e5e7eb; }
-.session-item.active { background: #dbeafe; }
+.session-item:hover { background: var(--app-line); }
+.session-item.active { background: var(--app-primary-soft-2); }
+.session-item:focus-visible,
+.access-log-toggle:focus-visible { outline: var(--app-focus); outline-offset: -2px; }
+.session-title { max-width: 100%; }
 .session-title { font-size: 0.85rem; color: #111827; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .session-date { font-size: 0.7rem; color: #9ca3af; }
 
 .access-log-toggle {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--app-line);
+  font: inherit;
   padding: 0.5rem 0.9rem;
   font-size: 0.78rem;
-  color: #3b82f6;
+  color: var(--app-primary-strong);
   cursor: pointer;
-  border-top: 1px solid #e5e7eb;
 }
 .access-log { padding: 0 0.9rem 0.75rem; max-height: 160px; overflow-y: auto; }
 .access-log-entry { display: flex; justify-content: space-between; font-size: 0.78rem; padding: 0.25rem 0; gap: 0.5rem; }
@@ -254,4 +263,11 @@ onMounted(async () => {
 }
 
 .msg-timestamp { margin-top: 0.3rem; font-size: 0.7rem; color: #9ca3af; }
+
+@media (max-width: 720px) {
+  .chats-layout { flex-direction: column; overflow: visible; }
+  .session-sidebar { width: auto; max-height: 40vh; }
+  .messages-pane { min-height: 50vh; }
+  .message-bubble { max-width: 90%; }
+}
 </style>

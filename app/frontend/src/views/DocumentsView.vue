@@ -7,15 +7,18 @@
       </div>
       <button
         v-if="isCurator"
+        type="button"
         class="upload-btn"
+        :aria-expanded="showUpload"
+        aria-controls="upload-section"
         @click="showUpload = !showUpload"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         {{ showUpload ? 'Hide upload' : 'Upload document' }}
       </button>
     </header>
 
-    <div v-if="isCurator && showUpload" class="upload-section">
+    <div v-if="isCurator && showUpload" id="upload-section" class="upload-section">
       <DocumentUpload @uploaded="handleUploaded" />
     </div>
 
@@ -26,19 +29,21 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { isCurator as userIsCurator } from '@/utils/access'
 import DocumentUpload from '@/components/documents/DocumentUpload.vue'
 import DocumentLibrary from '@/components/documents/DocumentLibrary.vue'
 
 const auth = useAuthStore()
 const isCurator = computed(
-  () => auth.hasRole('administrator') || auth.hasRole('knowledge_curator'),
+  () => userIsCurator(auth.user),
 )
 
 const showUpload = ref(false)
 const libraryRef = ref<InstanceType<typeof DocumentLibrary>>()
 
-function handleUploaded(_docId: string) {
-  showUpload.value = false
+// The panel stays open: with several files in flight, closing it on the first
+// success hid the progress of the rest.
+function handleUploaded() {
   libraryRef.value?.fetchDocuments()
 }
 </script>
@@ -99,5 +104,15 @@ function handleUploaded(_docId: string) {
   border-radius: 8px;
   padding: 1.25rem;
   flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .documents-view { padding: 1rem; gap: 1rem; }
+  .page-header { flex-wrap: wrap; gap: 0.75rem; }
+  .upload-section { padding: 1rem; }
+}
+
+@media (pointer: coarse) {
+  .upload-btn { min-height: var(--app-touch); }
 }
 </style>

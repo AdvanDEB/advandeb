@@ -1,5 +1,5 @@
 <template>
-  <div ref="listEl" class="message-list">
+  <div ref="listEl" class="message-list" role="region" aria-label="Conversation">
     <div v-if="messages.length === 0" class="empty-state">
       <p>Start a conversation about DEB theory or your data.</p>
     </div>
@@ -8,19 +8,18 @@
       v-for="message in messages"
       :key="message.id"
       :class="['message', message.role]"
-      @mouseenter="hoveredId = message.id"
-      @mouseleave="hoveredId = null"
     >
       <div class="message-bubble">
+        <span class="sr-only">{{ message.role === 'user' ? 'You said:' : 'Assistant:' }}</span>
         <!-- Reconnect placeholder: generating=true AND no content yet -->
-        <div v-if="message.generating && !message.content && !message.streaming" class="generating-indicator">
+        <div v-if="message.generating && !message.content && !message.streaming" class="generating-indicator" aria-hidden="true">
           <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         </div>
 
         <!-- Streaming or normal content -->
         <div v-else class="message-content" v-html="renderMarkdown(message.content)"></div>
         <!-- Streaming cursor -->
-        <span v-if="message.streaming" class="stream-cursor"></span>
+        <span v-if="message.streaming" class="stream-cursor" aria-hidden="true"></span>
 
         <div
           v-if="message.evidence_mode && message.evidence_mode !== 'local'"
@@ -34,60 +33,79 @@
           <button
             v-for="citation in message.citations"
             :key="citation.citation_id"
+            type="button"
             class="citation-badge"
             :title="citationTooltip(citation)"
+            :aria-label="`Source ${citation.marker}${citation.title ? ': ' + citation.title : ''} — show provenance`"
             @click="$emit('show-provenance', citation)"
           >
             [{{ citation.marker }}]<span v-if="citation.title" class="citation-title-inline"> {{ citation.title }}</span>
           </button>
         </div>
 
-        <!-- Timestamp -->
-        <div v-if="message.timestamp && hoveredId === message.id" class="msg-timestamp">
-          {{ formatTimestamp(message.timestamp) }}
+        <!-- Timestamp: revealed on hover or focus, always shown on touch -->
+        <div v-if="message.timestamp" class="msg-timestamp">
+          <time :datetime="message.timestamp">{{ formatRelativeTime(message.timestamp) }}</time>
         </div>
       </div>
 
-      <!-- Message action toolbar (hover) -->
+      <!-- Message actions. These were rendered only while the pointer hovered
+           the message, so a keyboard or touch user could never reach Copy,
+           Retry or the feedback buttons. They are always in the DOM now:
+           faded until hover or focus on a mouse device, plainly visible on a
+           touch screen. -->
       <div
-        v-if="hoveredId === message.id && !message.generating && !message.streaming"
+        v-if="!message.generating && !message.streaming"
         :class="['message-actions', message.role]"
+        role="group"
+        :aria-label="message.role === 'user' ? 'Your message actions' : 'Reply actions'"
       >
-        <button class="action-btn" title="Copy" @click="copyMessage(message.content)">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <button type="button" class="action-btn" title="Copy" aria-label="Copy message" @click="copyMessage(message.content)">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         </button>
         <template v-if="message.role === 'assistant'">
-          <button class="action-btn" title="Retry" @click="$emit('retry', message.id)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <button type="button" class="action-btn" title="Retry" aria-label="Retry this answer" @click="$emit('retry', message.id)">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
           </button>
           <button
+            type="button"
             class="action-btn"
             :class="{ active: message.feedback === 1 }"
             title="Helpful"
+            aria-label="Helpful"
+            :aria-pressed="message.feedback === 1"
             @click="$emit('feedback', message.id, 1)"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
           </button>
           <button
+            type="button"
             class="action-btn"
             :class="{ active: message.feedback === -1 }"
             title="Not helpful"
+            aria-label="Not helpful"
+            :aria-pressed="message.feedback === -1"
             @click="$emit('feedback', message.id, -1)"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
           </button>
         </template>
       </div>
     </div>
+
+    <!-- Streaming tokens are not announced one by one — that would be noise.
+         A screen reader hears "Assistant is responding" when a reply starts
+         and the finished reply once it is complete. -->
+    <div class="sr-only" role="status" aria-live="polite" aria-atomic="true">{{ liveStatus }}</div>
+    <div class="sr-only" aria-live="polite" aria-atomic="true">{{ liveReply }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch, nextTick, onMounted } from 'vue'
-import { marked } from 'marked'
-import hljs from 'highlight.js'
-import DOMPurify from 'dompurify'
 import type { ChatMessage as Message, CitationRef as Citation, EvidenceMode } from '@/types/chat'
+import { renderMarkdown } from '@/utils/markdown'
+import { formatRelativeTime } from '@/utils/format'
 
 const props = defineProps<{
   messages: Message[]
@@ -100,24 +118,8 @@ defineEmits<{
 }>()
 
 const listEl = ref<HTMLElement>()
-const hoveredId = ref<string | null>(null)
-
-// Configure marked with syntax highlighting
-marked.use({
-  hooks: {
-    preprocess: (src) => src,
-    postprocess: (html) => html,
-  },
-  renderer: {
-    code(code: string, infostring?: string) {
-      const lang = infostring?.split(' ')[0] || ''
-      const language = lang && hljs.getLanguage(lang) ? lang : 'plaintext'
-      const highlighted = hljs.highlight(code, { language }).value
-      const escapedCode = code.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
-      return `<div class="code-block-wrapper"><div class="code-block-header"><span class="code-lang">${language}</span><button class="code-copy-btn" data-code="${escapedCode}" title="Copy code">Copy</button></div><pre><code class="hljs language-${language}">${highlighted}</code></pre></div>`
-    },
-  },
-})
+const liveStatus = ref('')
+const liveReply = ref('')
 
 // Delegate copy-code clicks via event delegation on the list container
 onMounted(() => {
@@ -142,9 +144,31 @@ watch(
   },
 )
 
-function renderMarkdown(text: string): string {
-  return DOMPurify.sanitize(marked(text) as string)
+function plainText(markdown: string): string {
+  const el = document.createElement('div')
+  el.innerHTML = renderMarkdown(markdown)
+  return (el.textContent || '').replace(/\s+/g, ' ').trim()
 }
+
+// Announce the start and the end of an assistant reply, nothing in between.
+watch(
+  () => {
+    const last = props.messages[props.messages.length - 1]
+    return last && last.role === 'assistant'
+      ? { id: last.id, busy: !!(last.streaming || last.generating) }
+      : null
+  },
+  (now, before) => {
+    if (!now) return
+    if (now.busy && !(before?.id === now.id && before.busy)) {
+      liveStatus.value = 'Assistant is responding…'
+    } else if (!now.busy && before?.id === now.id && before.busy) {
+      const last = props.messages[props.messages.length - 1]
+      liveStatus.value = 'Assistant replied.'
+      liveReply.value = plainText(last.content)
+    }
+  },
+)
 
 function citationTooltip(c: Citation): string {
   const parts: string[] = []
@@ -161,21 +185,6 @@ function evidenceModeLabel(mode: EvidenceMode): string {
   if (mode === 'local_plus_external') return 'Local KB + external literature'
   if (mode === 'external_fallback_labeled') return 'External literature fallback'
   return 'Local KB'
-}
-
-function formatTimestamp(ts: string): string {
-  try {
-    const d = new Date(ts)
-    const diffMs = Date.now() - d.getTime()
-    const diffMin = Math.floor(diffMs / 60000)
-    if (diffMin < 1) return 'Just now'
-    if (diffMin < 60) return `${diffMin}m ago`
-    const diffHr = Math.floor(diffMin / 60)
-    if (diffHr < 24) return `${diffHr}h ago`
-    return d.toLocaleDateString()
-  } catch {
-    return ''
-  }
 }
 
 function copyMessage(content: string) {
@@ -351,10 +360,11 @@ function copyMessage(content: string) {
 
 .msg-timestamp {
   font-size: 0.7rem;
-  color: #9ca3af;
+  color: var(--app-ink-4);
   margin-top: 0.25rem;
   text-align: right;
 }
+.message.user .msg-timestamp { color: rgba(255, 255, 255, 0.8); }
 .message.assistant .msg-timestamp { text-align: left; }
 
 /* Action toolbar */
@@ -366,6 +376,21 @@ function copyMessage(content: string) {
   margin-bottom: 0.25rem;
 }
 .message-actions.user { order: -1; }
+
+/* On a mouse device the actions and timestamp stay out of the way until the
+   message is hovered or anything in it has keyboard focus. Faded rather than
+   removed, so Tab still reaches them. */
+@media (hover: hover) and (pointer: fine) {
+  .message-actions,
+  .msg-timestamp {
+    opacity: 0;
+    transition: opacity 0.12s ease;
+  }
+  .message:hover .message-actions,
+  .message:focus-within .message-actions,
+  .message:hover .msg-timestamp,
+  .message:focus-within .msg-timestamp { opacity: 1; }
+}
 
 .action-btn {
   background: white;
@@ -379,8 +404,22 @@ function copyMessage(content: string) {
   justify-content: center;
   transition: color 0.15s, border-color 0.15s;
 }
-.action-btn:hover { color: #374151; border-color: #9ca3af; }
-.action-btn.active { color: #2563eb; border-color: #3b82f6; }
+.action-btn:hover { color: var(--app-ink-2); border-color: var(--app-ink-4); }
+.action-btn:focus-visible { outline: var(--app-focus); outline-offset: 1px; }
+.action-btn.active { color: var(--app-primary-strong); border-color: var(--app-primary); }
+
+@media (pointer: coarse) {
+  .action-btn { min-width: 36px; min-height: 36px; }
+}
+
+@media (max-width: 720px) {
+  .message-list { padding: 1rem 0.5rem; }
+  .message-bubble { max-width: 88%; }
+  /* Beside a 88% bubble there is no room for a column of buttons. */
+  .message { flex-wrap: wrap; }
+  .message.user .message-actions { order: 1; width: 100%; justify-content: flex-end; }
+  .message.assistant .message-actions { width: 100%; }
+}
 
 /* Generating / reconnect spinner */
 .generating-indicator {

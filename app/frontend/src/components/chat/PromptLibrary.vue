@@ -1,17 +1,14 @@
 <template>
-  <div class="prompt-library">
+  <div class="prompt-library" role="dialog" aria-labelledby="prompt-library-title" @keydown.esc.stop="$emit('close')">
     <div class="library-header">
-      <span class="library-title">Starter prompts</span>
-      <button class="close-btn" @click="$emit('close')">✕</button>
+      <span id="prompt-library-title" class="library-title">Starter prompts</span>
+      <button type="button" class="close-btn" aria-label="Close starter prompts" @click="$emit('close')">✕</button>
     </div>
     <ul class="prompt-list">
-      <li
-        v-for="(prompt, i) in prompts"
-        :key="i"
-        class="prompt-item"
-        @click="$emit('select', prompt)"
-      >
-        {{ prompt }}
+      <li v-for="(prompt, i) in prompts" :key="i">
+        <button type="button" class="prompt-item" @click="$emit('select', prompt)">
+          {{ prompt }}
+        </button>
       </li>
     </ul>
   </div>
@@ -86,13 +83,20 @@ const prompts = [
 }
 
 .prompt-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--app-bg-2);
   padding: 0.5rem 0.75rem;
+  font: inherit;
   font-size: 0.85rem;
-  color: #374151;
+  color: var(--app-ink-2);
   cursor: pointer;
   line-height: 1.4;
-  border-bottom: 1px solid #f9fafb;
 }
-.prompt-item:last-child { border-bottom: none; }
-.prompt-item:hover { background: #eff6ff; color: #2563eb; }
+.prompt-list li:last-child .prompt-item { border-bottom: none; }
+.prompt-item:hover { background: var(--app-primary-soft); color: var(--app-primary-strong); }
+.prompt-item:focus-visible { outline: var(--app-focus); outline-offset: -2px; }
 </style>

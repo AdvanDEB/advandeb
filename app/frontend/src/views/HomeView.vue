@@ -15,7 +15,9 @@
           <p>Browse and create knowledge facts</p>
         </router-link>
 
-        <router-link to="/kb" class="feature-card">
+        <!-- /kb is curator-only; non-curators used to be shown this card and
+             then silently bounced back here by the router. -->
+        <router-link v-if="showKnowledgeBuilder" to="/kb" class="feature-card">
           <h3>Knowledge Graph</h3>
           <p>Explore the knowledge network</p>
         </router-link>
@@ -129,14 +131,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { canElicit as userCanElicit, canUseKnowledgeBuilder } from '@/utils/access'
 
 const authStore = useAuthStore()
 
-// Elicitation is capability-gated; see AppLayout.
-const canElicit = computed(() =>
-  authStore.hasCapability('sf_elicitation') ||
-  authStore.hasRole('administrator') ||
-  authStore.hasRole('knowledge_curator'))
+// Same rules as the router guard and the sidebar (utils/access.ts).
+const canElicit = computed(() => userCanElicit(authStore.user))
+const showKnowledgeBuilder = computed(() => canUseKnowledgeBuilder(authStore.user))
 </script>
 
 <style scoped>

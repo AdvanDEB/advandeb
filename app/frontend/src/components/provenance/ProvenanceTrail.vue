@@ -55,11 +55,19 @@
           <div class="chunk-meta">
             <span class="relevance">Relevance: {{ chunk.score?.toFixed(3) }}</span>
             <span v-if="chunk.page" class="page">p. {{ chunk.page }}</span>
-            <span class="expand-hint">{{ expandedChunk === chunk.id ? '▲ less' : '▼ more' }}</span>
+            <!-- The card stays clickable for a mouse; this is the keyboard and
+                 screen-reader path, which a bare clickable <div> did not have. -->
+            <button
+              type="button"
+              class="expand-hint"
+              :aria-expanded="expandedChunk === chunk.id"
+              @click.stop="toggleChunk(chunk.id)"
+            >{{ expandedChunk === chunk.id ? '▲ less' : '▼ more' }}</button>
           </div>
           <div v-if="expandedChunk === chunk.id" class="chunk-full">
             <p>{{ chunk.text }}</p>
             <button
+              type="button"
               class="context-btn"
               @click.stop="loadContext(chunk.id)"
             >
@@ -361,7 +369,17 @@ function copyApa(doc: Document) {
   font-size: 0.75rem;
 }
 
-.expand-hint { margin-left: auto; }
+.expand-hint {
+  margin-left: auto;
+  background: none;
+  border: 0;
+  padding: 0.15rem 0.3rem;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: var(--app-radius-sm);
+}
+.expand-hint:focus-visible { outline: var(--app-focus); outline-offset: 1px; }
 
 .chunk-full {
   margin-top: 0.5rem;

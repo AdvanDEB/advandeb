@@ -15,7 +15,9 @@
       <button
         v-for="t in TABS"
         :key="t.key"
+        type="button"
         :class="['tab-btn', { active: activeTab === t.key }]"
+        :aria-pressed="activeTab === t.key"
         @click="activeTab = t.key"
       >
         {{ t.label }}
@@ -26,10 +28,10 @@
     <template v-if="activeTab === 'sf'">
       <div class="filters-bar">
         <div class="search-wrap">
-          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input v-model="sf.search" placeholder="Search statements…" class="search-input" @input="sfDebouncedFetch" />
+          <svg class="search-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input v-model="sf.search" type="search" placeholder="Search statements…" aria-label="Search stylized facts" class="search-input" @input="sfDebouncedFetch" />
         </div>
-        <select v-model="sf.category" class="filter-select" @change="sfResetFetch">
+        <select v-model="sf.category" class="filter-select" aria-label="Category" @change="sfResetFetch">
           <option value="">All categories</option>
           <option v-for="c in SF_CATEGORIES" :key="c.value" :value="c.value">{{ c.label }}</option>
         </select>
@@ -57,7 +59,16 @@
             >
               <td class="col-num text-muted">{{ item.sf_number }}</td>
               <td class="col-statement">
-                <span :class="sf.expandedId === item.id ? '' : 'clamp-2'">{{ item.statement }}</span>
+                <!-- The row stays clickable for a mouse; this button is the
+                     keyboard and screen-reader way to expand it. -->
+                <button
+                  type="button"
+                  class="row-toggle"
+                  :aria-expanded="sf.expandedId === item.id"
+                  @click.stop="sf.expandedId = sf.expandedId === item.id ? null : item.id"
+                >
+                  <span :class="sf.expandedId === item.id ? '' : 'clamp-2'">{{ item.statement }}</span>
+                </button>
               </td>
               <td class="col-cat">
                 <span class="cat-chip">{{ formatCategory(item.category) }}</span>
@@ -98,10 +109,10 @@
     <template v-if="activeTab === 'kbfacts'">
       <div class="filters-bar">
         <div class="search-wrap">
-          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input v-model="kf.search" placeholder="Search fact content…" class="search-input" @input="kfDebouncedFetch" />
+          <svg class="search-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input v-model="kf.search" type="search" placeholder="Search fact content…" aria-label="Search facts" class="search-input" @input="kfDebouncedFetch" />
         </div>
-        <select v-model="kf.domain" class="filter-select" @change="kfResetFetch">
+        <select v-model="kf.domain" class="filter-select" aria-label="Domain" @change="kfResetFetch">
           <option value="">All domains</option>
           <option value="reproduction">Reproduction</option>
           <option value="__none__">No domain</option>
@@ -129,7 +140,14 @@
                 @click="kf.expandedId = kf.expandedId === item.id ? null : item.id"
               >
                 <td class="col-content">
-                  <span :class="kf.expandedId === item.id ? '' : 'clamp-2'">{{ item.content }}</span>
+                  <button
+                    type="button"
+                    class="row-toggle"
+                    :aria-expanded="kf.expandedId === item.id"
+                    @click.stop="kf.expandedId = kf.expandedId === item.id ? null : item.id"
+                  >
+                    <span :class="kf.expandedId === item.id ? '' : 'clamp-2'">{{ item.content }}</span>
+                  </button>
                 </td>
                 <td class="col-conf">
                   <span v-if="item.confidence != null" class="conf-pill">
@@ -192,12 +210,14 @@
     <!-- ── Submissions tab ────────────────────────────────────── -->
     <template v-if="activeTab === 'submissions'">
       <div class="filters-bar">
-        <input v-model="sub.search" placeholder="Search facts…" class="search-input" @input="subDebouncedFetch" />
+        <input v-model="sub.search" type="search" placeholder="Search facts…" aria-label="Search your submitted facts" class="search-input" @input="subDebouncedFetch" />
         <div class="status-tabs">
           <button
             v-for="tab in STATUS_TABS"
             :key="tab.value"
+            type="button"
             :class="['status-tab', { active: sub.statusFilter === tab.value }]"
+            :aria-pressed="sub.statusFilter === tab.value"
             @click="sub.statusFilter = tab.value; fetchSubmissions()"
           >{{ tab.label }}</button>
         </div>
@@ -247,14 +267,16 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, watch } from 'vue'
+import { formatDate } from '@/utils/format'
 import api from '@/utils/api'
 import { useNotificationsStore } from '@/stores/notifications'
 import { useAuthStore } from '@/stores/auth'
+import { isCurator as userIsCurator } from '@/utils/access'
 
 const notifs = useNotificationsStore()
 const auth = useAuthStore()
 const isCurator = computed(
-  () => auth.hasRole('administrator') || auth.hasRole('knowledge_curator'),
+  () => userIsCurator(auth.user),
 )
 
 type TabKey = 'sf' | 'kbfacts' | 'submissions'
@@ -286,10 +308,6 @@ const SF_CATEGORIES = [
 function formatCategory(cat: string): string {
   const found = SF_CATEGORIES.find((c) => c.value === cat)
   return found ? found.label : cat.replace(/_/g, ' ')
-}
-
-function formatDate(iso: string): string {
-  try { return new Date(iso).toLocaleDateString() } catch { return '' }
 }
 
 // ── Stylized Facts state ─────────────────────────────────────────────────
@@ -770,4 +788,41 @@ watch(activeTab, (tab) => {
 .form-range { width: 100%; }
 .range-value { font-size: 0.82rem; color: #6b7280; }
 .modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem; }
+
+/* Row expand control: the cell text, as a button. */
+.row-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: var(--app-radius-sm);
+}
+.row-toggle:focus-visible { outline: var(--app-focus); outline-offset: 2px; }
+.tab-btn:focus-visible,
+.status-tab:focus-visible,
+.page-btn:focus-visible { outline: var(--app-focus); outline-offset: -2px; }
+
+@media (max-width: 720px) {
+  .facts-view { padding: 1rem; height: auto; min-height: 100%; }
+  .page-header { flex-wrap: wrap; gap: 0.75rem; }
+  /* Three tabs and a long label do not fit; scroll the bar, not the page. */
+  .tab-bar { overflow-x: auto; scrollbar-width: none; }
+  .tab-btn { white-space: nowrap; }
+  .search-wrap { min-width: 0; flex-basis: 100%; }
+  .filter-select { flex: 1; }
+  .table-wrap { overflow-x: auto; min-height: 50vh; }
+  .fact-table { min-width: 560px; }
+  .pagination-bar { flex-wrap: wrap; justify-content: center; }
+  .pagination-left, .pagination-right { min-width: 0; }
+  .sub-card { flex-direction: column; gap: 0.5rem; }
+}
+
+@media (pointer: coarse) {
+  .page-btn, .tab-btn, .status-tab { min-height: var(--app-touch); min-width: var(--app-touch); }
+}
 </style>

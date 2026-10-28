@@ -97,6 +97,7 @@ import 'katex/dist/katex.min.css'
 import type { EquationDocument, EquationEntry, TDebEdge, TDebNode } from '@/utils/tdebApi'
 import { TRANSPORT_TYPES, formatNumber } from '@/utils/tdebConstants'
 import { resetEquations, updateEquation, validateFormula } from '@/utils/tdebApi'
+import { useDialogStore } from '@/stores/dialog'
 
 const props = defineProps<{
   equations: EquationDocument | null
@@ -105,6 +106,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{ (e: 'saved', doc: EquationDocument): void }>()
+const dialog = useDialogStore()
 
 const SIMPLE_SECTIONS = [
   { key: 'arrhenius', label: 'Arrhenius correction' },
@@ -199,7 +201,12 @@ async function saveAll() {
 }
 
 async function reset() {
-  if (!window.confirm('Reset every formula to the shipped defaults?')) return
+  if (!(await dialog.confirm({
+    title: 'Reset all formulas?',
+    message: 'Every formula goes back to the shipped defaults. Your edits are lost.',
+    confirmLabel: 'Reset',
+    tone: 'danger',
+  }))) return
   saving.value = true
   try {
     emit('saved', await resetEquations())

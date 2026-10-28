@@ -1,8 +1,8 @@
 <template>
   <div class="llm-config">
     <div class="row">
-      <label>Model source</label>
-      <select v-model="selectedSource" @change="emitConfig">
+      <label for="llm-source">Model source</label>
+      <select id="llm-source" v-model="selectedSource" @change="emitConfig">
         <option value="default">Nemotron (default)</option>
         <option v-for="k in keys" :key="k.id" :value="k.id">
           {{ providerLabel(k.provider) }}{{ k.label ? ` · ${k.label}` : '' }} ••••{{ k.key_last_4 }}
@@ -11,8 +11,8 @@
     </div>
 
     <div class="row" v-if="modelOptions.length">
-      <label>Model<span v-if="loadingModels" class="loading-dot" title="Loading models…"> …</span></label>
-      <select v-model="selectedModel" :disabled="loadingModels" @change="emitConfig">
+      <label for="llm-model">Model<span v-if="loadingModels" class="loading-dot" title="Loading models…"> …</span></label>
+      <select id="llm-model" v-model="selectedModel" :disabled="loadingModels" @change="emitConfig">
         <option v-for="m in modelOptions" :key="m" :value="m">{{ m }}</option>
       </select>
     </div>

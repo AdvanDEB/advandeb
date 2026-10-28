@@ -41,7 +41,9 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vue-vendor':      ['vue', 'vue-router', 'pinia'],
-          'markdown-vendor': ['marked', 'highlight.js'],
+          // highlight.js core only; utils/markdown.ts registers the grammars
+          // it needs. Naming the package root here would pull in all ~190.
+          'markdown-vendor': ['marked', 'dompurify', 'highlight.js/lib/core'],
           'cosmos-vendor':   ['@cosmos.gl/graph'],
           // tDEB simulator libraries. Split out so the (large) Plotly bundle
           // caches separately from the view code and is re-fetched only when

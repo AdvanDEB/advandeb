@@ -340,13 +340,34 @@ export async function scanFolders(folders: string[], files: string[] = [], gener
   return data
 }
 
-export async function uploadPdf(file: File, generalDomain?: string): Promise<UploadResult> {
+export interface UploadPdfOptions {
+  /** Called with 0–100 as the request body is sent. */
+  onProgress?: (percent: number) => void
+  signal?: AbortSignal
+  /** The caller reports the failure itself (see api.ts). */
+  skipErrorToast?: boolean
+}
+
+/**
+ * Save a PDF under PAPERS_ROOT/uploads and queue it for the full ingestion
+ * pipeline (text → facts → SF matching → embedding). Curator/admin only.
+ */
+export async function uploadPdf(
+  file: File,
+  generalDomain?: string,
+  opts: UploadPdfOptions = {},
+): Promise<UploadResult> {
   const form = new FormData()
   form.append('file', file)
   const params = generalDomain ? { general_domain: generalDomain } : {}
   const { data } = await api.post('/kb/ingestion/upload', form, {
     headers: { 'Content-Type': 'multipart/form-data' },
     params,
+    signal: opts.signal,
+    skipErrorToast: opts.skipErrorToast,
+    onUploadProgress: opts.onProgress
+      ? (e) => { if (e.total) opts.onProgress!(Math.round((e.loaded / e.total) * 100)) }
+      : undefined,
   })
   return data
 }

@@ -1,5 +1,7 @@
 <template>
   <div class="app-layout">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
     <!-- Mobile top bar -->
     <div class="mobile-topbar">
       <button
@@ -82,7 +84,8 @@
     </nav>
 
     <!-- Main content area -->
-    <main class="main-content">
+    <!-- tabindex lets the skip link move focus here, not just scroll. -->
+    <main id="main-content" class="main-content" tabindex="-1">
       <slot />
     </main>
 
@@ -94,6 +97,7 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { canElicit as userCanElicit, canUseKnowledgeBuilder, isAdmin, isExternalOnly } from '@/utils/access'
 import ToastNotifications from './ToastNotifications.vue'
 
 const route = useRoute()
@@ -130,15 +134,8 @@ const baseLinks = [
 // their own settings, with no link to documents, chat, knowledge or models —
 // sections they cannot open. The router enforces the same boundary, so this is
 // presentation rather than the security control.
-const externalOnly = computed(() => {
-  const roles = authStore.user?.roles || []
-  return roles.length > 0 && roles.every(r => r === 'external_contributor')
-})
-
-const canElicit = computed(() =>
-  authStore.hasCapability('sf_elicitation') ||
-  authStore.hasRole('administrator') ||
-  authStore.hasRole('knowledge_curator'))
+const externalOnly = computed(() => isExternalOnly(authStore.user))
+const canElicit = computed(() => userCanElicit(authStore.user))
 
 const navLinks = computed(() => {
   if (externalOnly.value) {
@@ -156,10 +153,10 @@ const navLinks = computed(() => {
   if (canElicit.value) {
     links.push({ path: '/elicitation', icon: '✎', label: 'Elicitation' })
   }
-  if (authStore.hasRole('administrator') || authStore.hasRole('knowledge_curator')) {
+  if (canUseKnowledgeBuilder(authStore.user)) {
     links.push({ path: '/kb', icon: '⬡', label: 'Knowledge' })
   }
-  if (authStore.hasRole('administrator')) {
+  if (isAdmin(authStore.user)) {
     links.push({ path: '/admin/experts', icon: '🎓', label: 'Experts' })
     links.push({ path: '/admin/users', icon: '👤', label: 'Admin' })
   }
@@ -193,11 +190,20 @@ watch(mobileOpen, async (open) => {
   sidebarEl.value?.querySelector<HTMLElement>('a, button')?.focus()
 })
 
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+// Close mobile nav on route change. afterEach returns its remover; the hook
+// used to be registered on every mount and never removed, so each logout/login
+// cycle stacked another one onto the router.
+let removeAfterEach: (() => void) | null = null
 
-// Close mobile nav on route change
-router.afterEach(() => { mobileOpen.value = false })
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+  removeAfterEach = router.afterEach(() => { mobileOpen.value = false })
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKeydown)
+  removeAfterEach?.()
+  removeAfterEach = null
+})
 </script>
 
 <style scoped>
@@ -404,6 +410,9 @@ router.afterEach(() => { mobileOpen.value = false })
   flex-direction: column;
   min-width: 0;
 }
+/* Focused only programmatically, by the skip link; a ring round the whole
+   page would read as a bug. */
+.main-content:focus { outline: none; }
 
 .scrim { display: none; }
 

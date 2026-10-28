@@ -45,7 +45,7 @@
           <tr v-for="(entry, i) in log" :key="i">
             <td>{{ entry.admin_email }}</td>
             <td>{{ entry.session_id ? 'Opened a conversation' : 'Viewed your conversation list' }}</td>
-            <td>{{ formatDate(entry.accessed_at) }}</td>
+            <td>{{ formatDateTime(entry.accessed_at) }}</td>
           </tr>
         </tbody>
       </table>
@@ -55,6 +55,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { formatDateTime } from '@/utils/format'
 import { useAuthStore } from '@/stores/auth'
 import { useNotificationsStore } from '@/stores/notifications'
 import { updateMyProfile } from '@/utils/usersApi'
@@ -70,14 +71,6 @@ const log = ref<ChatAccessLogEntry[]>([])
 const logLoading = ref(true)
 
 const optedIn = computed(() => authStore.user?.chat_history_visible_to_admin ?? true)
-
-function formatDate(iso: string): string {
-  try {
-    return new Date(iso).toLocaleString()
-  } catch {
-    return iso
-  }
-}
 
 async function onToggle(event: Event) {
   const checked = (event.target as HTMLInputElement).checked
