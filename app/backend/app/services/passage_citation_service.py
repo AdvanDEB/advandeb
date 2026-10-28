@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import ast
 import asyncio
+import difflib
 import logging
 import re
 import time
@@ -119,6 +120,24 @@ def _is_real_title(title: Optional[str], file_name: Optional[str]) -> bool:
     if file_name and title.strip() == file_name.strip():
         return False
     return not title.lower().endswith(".pdf")
+
+
+def _norm_title(title: Optional[str]) -> str:
+    text = re.sub(r"<[^>]+>", " ", title or "").lower()
+    return " ".join(re.findall(r"[a-z0-9]+", text))
+
+
+def same_work(doc_title: Optional[str], passage_title: Optional[str]) -> bool:
+    """Whether a document record and a passage's own recorded title name the
+    same work. Some reproduction passages carry an OpenAlex id that points at
+    an unrelated work (found by the 2026-10-28 citation report); joining
+    blindly would put another paper's authors on the passage."""
+    a, b = _norm_title(doc_title), _norm_title(passage_title)
+    if not a or not b:
+        return True
+    if a in b or b in a:
+        return True
+    return difflib.SequenceMatcher(None, a, b).ratio() >= 0.8
 
 
 def citation_from(doc: Optional[Dict[str, Any]], *, file_name: Optional[str],
@@ -280,9 +299,11 @@ async def cite_passages(corpus_id: Optional[str],
             except Exception as exc:
                 _mark_store_down(exc)
         for p in passages:
+            doc = docs.get(p.document_id)
+            if doc and not same_work(doc.get("title"), p.title):
+                doc = None
             p.citation = citation_from(
-                docs.get(p.document_id), file_name=None,
-                library_id=p.document_id,
+                doc, file_name=None, library_id=p.document_id,
                 fallback={"title": p.title, "year": p.year, "doi": p.doi})
     except Exception as exc:  # a citation must never block an item
         logger.warning("passage citations failed: %s", exc)

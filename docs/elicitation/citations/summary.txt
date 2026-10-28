@@ -1,0 +1,61 @@
+Passage citation report — evidence_sets v1.0 (sha256 cba67c8bb72bb9ce…), mode: full
+
+Scope: deb and reproduction evidence sets (combined sets ignored; they repeat the same passages).
+Passages: deb 1116, reproduction 1116, total 2232.
+
+1. From ArangoDB alone (full = authors + year + real title + DOI):
+  deb          318 docs, 1116 passages: full 277 docs / 922 passages (82.6%); partial 16 docs / 52 passages (4.7%); unresolved 25 docs / 142 passages (12.7%)
+  reproduction 981 docs, 1116 passages: full 104 docs / 122 passages (10.9%); partial 875 docs / 992 passages (88.9%); unresolved 2 docs / 2 passages (0.2%)
+  all          1299 docs, 2232 passages: full 381 docs / 1044 passages (46.8%); partial 891 docs / 1044 passages (46.8%); unresolved 27 docs / 144 passages (6.5%)
+
+2. After OpenAlex/Crossref (high-confidence candidates and OpenAlex-by-id enrichment only):
+  deb          318 docs, 1116 passages: full 267 docs / 865 passages (77.5%); partial 39 docs / 180 passages (16.1%); unresolved 12 docs / 71 passages (6.4%)
+  reproduction 981 docs, 1116 passages: full 905 docs / 1031 passages (92.4%); partial 76 docs / 85 passages (7.6%); unresolved 0 docs / 0 passages (0.0%)
+  all          1299 docs, 2232 passages: full 1172 docs / 1896 passages (84.9%); partial 115 docs / 265 passages (11.9%); unresolved 12 docs / 71 passages (3.2%)
+
+   Newly full: 818 docs / 997 passages (deb 17, reproduction 801).
+   Complete citation confirmed but no DOI exists in OpenAlex/Crossref (books, theses): 15 docs / 81 passages.
+
+3. Needs manual work: 112 docs / 255 passages (deb 36 docs / 170 passages; reproduction 76 docs / 85 passages).
+   Of these, 101 have at least one scored candidate in unresolved_citations.csv.
+
+4. DOI check (Crossref, then OpenAlex, then DataCite; title fuzzy ratio + year + first author):
+  deb, every record with a DOI: 278 checked: doi_malformed 9, doi_mismatch 34, doi_ok 234, doi_unresolvable 1
+    wrong DOI shown today: 44 docs / 201 passages (of 1116)
+    high-confidence proposals: 29 (12 of them 'no DOI')
+  reproduction, sample of 50 + OpenAlex-screening flags: 56 checked: doi_mismatch 1, doi_ok 55
+    wrong DOI shown today: 1 docs / 1 passages
+    sample alone: 0/50 wrong
+    OpenAlex screening of all 981 docs (stored DOI -> title): 1 disagree
+    high-confidence proposals: 0 (0 of them 'no DOI')
+  citation_corrections.json: 973 documents, field changes {'journal': 834, 'doi': 38, 'title': 4, 'authors': 843, 'year': 4}
+
+5. Join rules that matched:
+    961  documents._key == document_id
+    302  documents.source_path == '<document_id>/<file>' (source_type 'pdf_local')
+     20  documents.doi == passage doi (document_id not a documents._key)
+     14  no match
+      2  documents.source_path same file name in another folder (identical sha256)
+
+6. Data-quality flags (see passage_citations.json 'flags'):
+     35  doi_mismatch
+      9  doi_malformed
+      8  first author mismatch
+      5  passage title differs from record
+      5  document_id W… is an unrelated OpenAlex work
+      3  year mismatch
+      1  doi_unresolvable
+      1  stored DOI resolves to a different title
+  notes (informational):
+     37  OpenAlex merged W…
+     16  same Arango document is cited from the other corpus too
+      7  OpenAlex gives another DOI for the same work
+      5  file-name suffix
+      2  duplicate PDF
+      2  stringified values in record
+  document_meta vs documents for matched deb records: {'identical': 304}
+  reproduction passage text found in the record's abstract/content: {'True': 967, 'None': 10, 'False': 4}
+
+External requests this run: 1 (cache entries: 1807), failures: 0, skipped for an exhausted budget: 135.
+  Budget exhausted (OpenAlex list/search without an API key; resets 00:00 UTC) for: https://api.openalex.org/works. Re-run later to add those candidates; cached answers are reused.
+Bibliography on disk: no DEB key-to-reference bibliography was found under /home/adeb/DEB_library, advandeb_auxiliary or advandeb_methods; the methods paper's verified references.bib (/home/adeb/dev/advandeb_methods/paper/references.bib) is used as a local candidate source.

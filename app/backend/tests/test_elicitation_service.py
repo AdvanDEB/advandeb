@@ -907,7 +907,7 @@ async def test_passages_are_served_with_citations_and_the_set_is_unchanged(
     from app.services import passage_citation_service as pcs
     pcs.reset_cache()
     monkeypatch.setattr(pcs, "_load_documents_by_key", lambda keys: [
-        {"_key": "doc0", "title": "Energy budgets", "year": "2001",
+        {"_key": "doc0", "title": "Paper 0.", "year": "2001",
          "authors": "['S.A.L.M. Kooijman', 'T. Sousa']",
          "journal": "J Theor Biol", "doi": "None"}])
     svc = await _with_evidence(scratch_db, [fact(1)], n_passages=2)
@@ -979,3 +979,23 @@ async def test_references_are_candidates_until_a_curator_decides(scratch_db):
     assert listed["counts"]["accepted"] == 1
     assert listed["candidates"][0]["review_comment"] == "checked the paper"
     assert (await svc.review("nope", "curator", False, None))["code"] == 404
+
+
+async def test_a_record_for_another_work_is_not_joined(scratch_db, monkeypatch):
+    """Some reproduction passages carry an OpenAlex id that points at an
+    unrelated work; the passage's own title and DOI are kept instead."""
+    from app.services import passage_citation_service as pcs
+    pcs.reset_cache()
+    monkeypatch.setattr(pcs, "_load_documents_by_key", lambda keys: [
+        {"_key": "doc0", "title": "Rice leaf morphogenesis", "year": 2013,
+         "authors": ["Someone Else"], "doi": "10.3724/sp.j.1006.2013.00767"}])
+    svc = await _with_evidence(scratch_db, [fact(1)], n_passages=2)
+    e = await expert(scratch_db)
+    item = await svc.next_item(e)
+    while item.corpus_id != "reproduction":
+        await svc.submit(decision_for(item), e)
+        item = await svc.next_item(e)
+    c0 = item.passages[0].citation
+    assert c0.title == "Paper 0" and c0.authors == [] and c0.doi == "10.5555/0"
+    assert c0.status == "partial"
+    assert pcs.same_work("Energy budgets <i>in</i> Daphnia", "Energy budgets in daphnia.")
