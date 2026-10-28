@@ -5,7 +5,7 @@ from typing import List, Optional, Literal
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field, ConfigDict
 
-from advandeb_kb.models.common import PyObjectId
+from advandeb_kb.models.common import ObjectIdOrKey
 
 
 _BASE_CONFIG = ConfigDict(
@@ -19,7 +19,7 @@ class Document(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
     title: Optional[str] = None
     doi: Optional[str] = None
     authors: List[str] = []
@@ -69,10 +69,10 @@ class Fact(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
     content: str
-    document_id: PyObjectId           # primary source
-    additional_sources: List[PyObjectId] = []   # cross-linked documents reporting the same fact
+    document_id: ObjectIdOrKey        # primary source
+    additional_sources: List[ObjectIdOrKey] = []   # cross-linked documents reporting the same fact
     content_fingerprint: Optional[str] = None  # normalized for deduplication
     page_number: Optional[int] = None
 
@@ -101,7 +101,7 @@ class StylizedFact(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
     statement: str
 
     # Category from source CSV filename, e.g. "reproductive_strategy",
@@ -130,10 +130,10 @@ class DocumentTaxonRelation(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
 
     # References
-    document_id: PyObjectId        # → documents collection
+    document_id: ObjectIdOrKey     # → documents collection
     tax_id: int                    # NCBI taxonomy ID (for fast lookup without join)
 
     # Semantics of the link
@@ -165,9 +165,9 @@ class FactSFRelation(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    id: PyObjectId = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
-    fact_id: PyObjectId
-    sf_id: PyObjectId
+    id: ObjectIdOrKey = Field(default_factory=lambda: __import__("bson").ObjectId(), alias="_id")
+    fact_id: ObjectIdOrKey
+    sf_id: ObjectIdOrKey
 
     relation_type: Literal["supports", "opposes"]
 
