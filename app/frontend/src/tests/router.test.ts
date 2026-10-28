@@ -195,8 +195,11 @@ describe('document.title', () => {
     expect(document.title).toBe('Page not found · AdvanDEB')
     await go('/')
     expect(document.title).toBe(APP_TITLE)
-    await go('/documents') // redirected: the title is the page actually shown
+    const redirected = await go('/documents') // the title is the page actually shown
     expect(document.title).toBe('Sign in · AdvanDEB')
+    // F-013: the way back is in the URL, not only in memory.
+    expect(redirected.name).toBe('login')
+    expect(redirected.query.redirect).toBe('/documents')
 
     signIn(admin)
     await go('/admin/experts')

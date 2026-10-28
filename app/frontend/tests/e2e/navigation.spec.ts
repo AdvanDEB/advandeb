@@ -30,7 +30,7 @@ test('keyboard: Sign in from home lands on the login heading with its own title'
   await page.keyboard.press('Enter')
   await expect(page).toHaveURL(/\/login$/)
   await expect(page).toHaveTitle('Sign in · AdvanDEB')
-  await expect.poll(() => focused(page)).toEqual({ tag: 'h1', text: 'Login to AdvanDEB' })
+  await expect.poll(() => focused(page)).toEqual({ tag: 'h1', text: 'Sign in to AdvanDEB' })
 })
 
 test('404 → Go to Home moves focus to the home heading', async ({ page }) => {
@@ -66,4 +66,9 @@ test('signed in: the sidebar lands on the heading, or on <main> with an announce
   await expect(page).toHaveTitle('Chat · AdvanDEB')
   await expect.poll(() => page.evaluate(() => document.activeElement?.id)).toBe('main-content')
   await expect(page.locator('[aria-live="polite"]').filter({ hasText: 'Chat · AdvanDEB' })).toHaveCount(1)
+
+  // Signed in, the 404 renders inside AppLayout's <main>: still one landmark.
+  await page.goto('/no/such/page')
+  await expect(page.locator('h1')).toHaveText('Page not found')
+  await expect(page.getByRole('main')).toHaveCount(1)
 })

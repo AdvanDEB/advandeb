@@ -45,6 +45,8 @@
     </div>
 
     <div v-else class="anonymous">
+      <!-- Signed out, this page renders outside AppLayout and its <main>. -->
+      <main id="main-content" class="anonymous-main" tabindex="-1">
       <section class="hero">
         <h1>AdvanDEB</h1>
         <p class="subtitle">A curated knowledge graph for Dynamic Energy Budget biology</p>
@@ -117,6 +119,7 @@
           </article>
         </div>
       </section>
+      </main>
 
       <footer class="site-footer">
         <p>
@@ -181,11 +184,13 @@ h1 {
 }
 
 /* Anonymous landing */
-.anonymous {
+.anonymous,
+.anonymous-main {
   display: flex;
   flex-direction: column;
   gap: 4rem;
 }
+.anonymous-main:focus { outline: none; }
 
 .hero {
   padding: 3rem 0 1rem;

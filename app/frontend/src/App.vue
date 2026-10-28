@@ -46,6 +46,19 @@ onMounted(async () => {
   box-sizing: border-box;
 }
 
+/* On <body>, not only #app: dialogs and toasts are teleported to <body> and
+   rendered in the browser's default serif. */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Form controls do not inherit the page font by default; inputs, selects and
+   buttons came out in the UA font. Family only: sizes stay as each component
+   sets them. */
+button, input, select, textarea {
+  font-family: inherit;
+}
+
 #app,
 .app-root {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;

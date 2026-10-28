@@ -1,5 +1,13 @@
 <template>
-  <section class="not-found" aria-labelledby="nf-title">
+  <!-- Signed in, this renders inside AppLayout's <main>; signed out it is the
+       whole page and has to be the main landmark itself. -->
+  <component
+    :is="inShell ? 'section' : 'main'"
+    :id="inShell ? undefined : 'main-content'"
+    :tabindex="inShell ? undefined : -1"
+    class="not-found"
+    aria-labelledby="nf-title"
+  >
     <p class="code" aria-hidden="true">404</p>
     <h1 id="nf-title">Page not found</h1>
     <p class="detail">
@@ -10,20 +18,27 @@
       <router-link to="/" class="btn primary">Go to Home</router-link>
       <button v-if="canGoBack" type="button" class="btn ghost" @click="router.back()">Go back</button>
     </div>
-  </section>
+  </component>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()
 const router = useRouter()
+const authStore = useAuthStore()
+/** App.vue wraps signed-in, non-bare routes in AppLayout (which has <main>). */
+const inShell = computed(() => authStore.isAuthenticated)
 
 // A deep link opened in a fresh tab has nowhere to go back to.
 const canGoBack = typeof window !== 'undefined' && window.history.length > 1
 </script>
 
 <style scoped>
+.not-found:focus { outline: none; }
+
 .not-found {
   max-width: 34rem;
   margin: 0 auto;

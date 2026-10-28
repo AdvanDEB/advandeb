@@ -150,7 +150,9 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
   const authStore = useAuthStore()
 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    next({ name: 'login' })
+    // In the URL, not only in memory (route.redirectedFrom), so the way back
+    // survives a reload of /login. LoginView passes it through safeRedirect.
+    next({ name: 'login', query: { redirect: to.fullPath } })
     return
   }
 
