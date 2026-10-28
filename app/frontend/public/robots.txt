@@ -1,10 +1,18 @@
 User-agent: *
 Allow: /
+# Signed-in parts of the app: nothing to index, and every one of them
+# answers a crawler with the sign-in page.
 Disallow: /login
 Disallow: /chat
 Disallow: /kb
 Disallow: /documents
+Disallow: /documentation
 Disallow: /facts
-Disallow: /scenarios
 Disallow: /models
+Disallow: /settings
+Disallow: /admin
+Disallow: /elicitation
+# The expert enrolment form is public on purpose (longest match wins).
+Allow: /elicitation/join
+Disallow: /api/
 Sitemap: https://advandeb.com/sitemap.xml
