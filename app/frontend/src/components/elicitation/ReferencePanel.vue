@@ -1,47 +1,52 @@
 <template>
-  <section class="card refs-card">
-    <button class="disclose" @click="open = !open">
-      {{ open ? '▾' : '▸' }} Cite a publication
+  <section class="refs" :class="{ prominent }">
+    <button type="button" class="disclose" :aria-expanded="isOpen" @click="open = !isOpen">
+      {{ isOpen ? '▾' : '▸' }}
+      {{ prominent ? 'Add the reference you are relying on' : 'Add a reference from your own knowledge' }}
       <span v-if="refs.length" class="count">{{ refs.length }}</span>
-      <span class="hint">— evidence you know of, whether or not the system found it</span>
+      <span class="hint">— optional, by DOI</span>
     </button>
 
-    <div v-if="open" class="body">
+    <div v-if="isOpen" class="body">
       <p class="lede">
-        A DOI you consider to support or oppose this fact. It is recorded as
-        <strong>your</strong> assertion and never changes the automated score.
-        If the paper is missing from the corpus it is queued for ingestion, and
-        the panel re-reads this fact.
+        A paper you know that supports or opposes this fact. It is recorded as
+        your reference and goes to a curator, who decides whether it becomes
+        evidence in the knowledge base. It never changes any score.
       </p>
 
       <div class="form">
+        <label class="sr-only" :for="`doi-${uid}`">DOI</label>
         <input
+          :id="`doi-${uid}`"
           v-model="doi"
           class="doi"
           placeholder="10.1234/abc or https://doi.org/10.1234/abc"
           :disabled="saving"
           @keydown.enter.prevent="submit"
         />
-        <div class="dir">
+        <div class="dir" role="group" aria-label="The paper">
           <button
-            v-for="d in directions" :key="d.value"
+            v-for="d in directions" :key="d.value" type="button"
             :class="['pill', { active: direction === d.value }]"
+            :aria-pressed="direction === d.value"
             :disabled="saving"
             @click="direction = d.value"
           >{{ d.label }}</button>
         </div>
       </div>
+      <label class="sr-only" :for="`note-${uid}`">Why it bears on this fact</label>
       <input
+        :id="`note-${uid}`"
         v-model="note"
         class="note"
         placeholder="Optional — why does it bear on this fact?"
         :disabled="saving"
       />
       <div class="actions">
-        <button class="primary" :disabled="!canSubmit || saving" @click="submit">
-          {{ saving ? 'Resolving…' : 'Add reference' }}
+        <button type="button" class="primary" :disabled="!canSubmit || saving" @click="submit">
+          {{ saving ? 'Checking the DOI…' : 'Add reference' }}
         </button>
-        <span v-if="err" class="err">{{ err }}</span>
+        <span v-if="err" class="err" role="alert">{{ err }}</span>
       </div>
 
       <ul v-if="refs.length" class="list">
@@ -50,40 +55,19 @@
             <span :class="['dirbadge', r.direction]">{{ r.direction }}</span>
             <a :href="'https://doi.org/' + r.doi" target="_blank" rel="noopener"
                class="doi-link">{{ r.doi }}</a>
-            <button class="rm" title="Remove" @click="remove(r._id)">×</button>
+            <button type="button" class="rm" :aria-label="`Remove ${r.doi}`" @click="remove(r._id)">×</button>
           </div>
           <div v-if="r.resolution && r.resolution.resolved_title" class="title">
             {{ r.resolution.resolved_title }}
             <span v-if="r.resolution.resolved_year">({{ r.resolution.resolved_year }})</span>
           </div>
-          <div :class="['status', statusClass(r.resolution && r.resolution.status)]">
+          <div class="status">
             {{ statusLabel(r.resolution && r.resolution.status) }}
-          </div>
-
-          <div v-if="r.resolution && r.resolution.status === 'in_corpus_retrieved'" class="panel-said">
-            <strong>The panel read this paper.</strong>
-            <span v-if="r.resolution.agrees_with_panel === false">
-              It reached a different conclusion from yours, so this is a
-              disagreement about judgment rather than about retrieval.
-            </span>
-            <span v-else-if="r.resolution.agrees_with_panel === true">
-              It agreed with you.
-            </span>
-            <ul class="labels">
-              <li v-for="(ps, scope) in (r.resolution.panel_labels || {})" :key="scope">
-                <em>{{ scope }}</em>: {{ labelsOf(ps) }}
-              </li>
-            </ul>
+            · {{ curationLabel(r.curation && r.curation.status) }}
           </div>
           <div v-if="r.note" class="note-shown">“{{ r.note }}”</div>
         </li>
       </ul>
-
-      <p v-if="evidence && evidence.n_recall_misses" class="miss">
-        {{ evidence.n_recall_misses }} of the papers cited here
-        {{ evidence.n_recall_misses === 1 ? 'was' : 'were' }} already in the
-        corpus but never surfaced by retrieval.
-      </p>
     </div>
   </section>
 </template>
@@ -92,16 +76,24 @@
 import { computed, ref, watch } from 'vue'
 import api from '@/utils/api'
 
-const props = defineProps<{ sfNumber: number; statementSha256: string }>()
+const props = defineProps<{
+  sfNumber: number
+  statementSha256: string
+  /** Open, and worded for it, when the expert says their judgment goes
+   *  beyond the passages — the moment a reference is most worth adding. */
+  prominent?: boolean
+}>()
+const emit = defineEmits<{ (e: 'changed', ids: string[]): void }>()
 
-const open = ref(false)
+const uid = Math.random().toString(36).slice(2, 8)
+const open = ref<boolean | null>(null)
+const isOpen = computed(() => open.value ?? !!props.prominent)
 const doi = ref('')
 const direction = ref<'supports' | 'opposes'>('supports')
 const note = ref('')
 const saving = ref(false)
 const err = ref('')
 const refs = ref<any[]>([])
-const evidence = ref<any>(null)
 
 const directions = [
   { value: 'supports' as const, label: 'Supports' },
@@ -110,28 +102,27 @@ const directions = [
 
 const canSubmit = computed(() => doi.value.trim().includes('/'))
 
-// Each status means something different and the wording has to carry it:
-// "not in corpus" and "not retrieved" have opposite remedies.
+// Where the paper stands, worded for the expert. Not what the machine made of
+// it: that is another judge's answer, and the server no longer sends it.
 const LABELS: Record<string, string> = {
-  pending: 'Resolving…',
-  not_in_corpus: 'Not in the corpus — queued for ingestion, the panel will re-read this fact',
-  in_corpus_not_retrieved: 'In the corpus, but retrieval never surfaced it — recorded as a retrieval miss',
-  in_corpus_retrieved: 'Already read by the panel',
-  in_corpus_retrieval_unknown: 'In the corpus; whether retrieval surfaced it could not be determined',
+  pending: 'Checking…',
+  not_in_corpus: 'Not in our corpus yet',
+  in_corpus_not_retrieved: 'In our corpus, but the search did not find it for this fact',
+  in_corpus_retrieved: 'Already among the passages found for this fact',
+  in_corpus_retrieval_unknown: 'In our corpus',
   unresolvable: 'Could not be resolved',
+}
+const CURATION: Record<string, string> = {
+  pending: 'awaiting curator review',
+  accepted: 'accepted by a curator',
+  rejected: 'not accepted by a curator',
 }
 
 function statusLabel(s?: string | null) {
-  return LABELS[s || 'pending'] || 'Resolving…'
+  return LABELS[s || 'pending'] || 'Checking…'
 }
-function statusClass(s?: string | null) {
-  if (s === 'in_corpus_not_retrieved') return 'miss'
-  if (s === 'not_in_corpus') return 'gap'
-  if (s === 'in_corpus_retrieved') return 'seen'
-  return 'unknown'
-}
-function labelsOf(ps: any) {
-  return Array.isArray(ps) ? ps.map((p: any) => p.label).join(', ') : ''
+function curationLabel(s?: string | null) {
+  return CURATION[s || 'pending'] || CURATION.pending
 }
 
 async function load() {
@@ -141,12 +132,11 @@ async function load() {
       params: { sf_number: props.sfNumber, mine_only: true },
     })
     refs.value = data.references || []
-    evidence.value = data.asserted_evidence || null
   } catch {
     // Secondary to the judgment: a failure here must never block the form.
     refs.value = []
-    evidence.value = null
   }
+  emit('changed', refs.value.map((r) => r._id))
 }
 
 async function submit() {
@@ -183,12 +173,14 @@ async function remove(id: string) {
 }
 
 watch(() => props.sfNumber,
-      () => { refs.value = []; evidence.value = null; load() },
+      () => { refs.value = []; open.value = null; load() },
       { immediate: true })
 </script>
 
 <style scoped>
-.refs-card { padding: 0.6rem 1rem; }
+.refs { margin-top: 0.9rem; border-top: 1px solid #f3f4f6; padding-top: 0.6rem; }
+.refs.prominent .disclose { color: #1f2937; font-weight: 600; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .disclose { background: none; border: none; cursor: pointer; font-size: 0.85rem; color: #4b5563; padding: 0.2rem 0; text-align: left; width: 100%; }
 .disclose .hint { color: #9ca3af; }
 .disclose .count { background: #eef2ff; color: #3730a3; border-radius: 999px; padding: 0 0.4rem; font-size: 0.72rem; margin-left: 0.3rem; }
@@ -210,16 +202,9 @@ watch(() => props.sfNumber,
 .dirbadge { font-size: 0.7rem; font-weight: 600; border-radius: 4px; padding: 0.1rem 0.35rem; }
 .dirbadge.supports { background: #dcfce7; color: #166534; }
 .dirbadge.opposes { background: #fee2e2; color: #991b1b; }
-.doi-link { font-size: 0.78rem; font-family: ui-monospace, monospace; color: #3b82f6; text-decoration: none; }
+.doi-link { font-size: 0.78rem; font-family: ui-monospace, monospace; color: #1d4ed8; text-decoration: none; }
 .rm { margin-left: auto; background: none; border: none; cursor: pointer; color: #9ca3af; font-size: 1rem; }
 .title { font-size: 0.85rem; color: #374151; margin-top: 0.25rem; }
-.status { font-size: 0.75rem; margin-top: 0.3rem; }
-.status.miss { color: #b45309; font-weight: 600; }
-.status.gap { color: #2563eb; }
-.status.seen { color: #6b7280; }
-.status.unknown { color: #9ca3af; }
-.panel-said { margin-top: 0.4rem; background: #f9fafb; border-radius: 6px; padding: 0.45rem 0.55rem; font-size: 0.78rem; color: #374151; }
-.labels { list-style: none; margin-top: 0.25rem; color: #6b7280; }
+.status { font-size: 0.75rem; margin-top: 0.3rem; color: #4b5563; }
 .note-shown { font-size: 0.78rem; color: #6b7280; margin-top: 0.3rem; font-style: italic; }
-.miss { margin-top: 0.7rem; font-size: 0.78rem; color: #b45309; }
 </style>

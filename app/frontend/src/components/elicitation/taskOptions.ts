@@ -85,9 +85,9 @@ export const TASKS: Record<TaskType, TaskSpec> = {
     ],
   },
   evidence: {
-    title: 'How well do these passages support the fact?',
+    title: 'How well is this fact supported?',
     help:
-      'You are reading the same frozen passages the model panel read, in the same wording. Label every passage, then give the two scores. "Neutral" is a real answer and most passages are — retrieval returns nearest neighbours, not evidence. Judge what the passage says, not what you know about the fact.',
+      'Label every passage by what it says. Then judge the fact as an expert — from the passages and from what you know.',
     field: null,
     options: [],
   },
@@ -108,9 +108,10 @@ export function taskSpec(task: TaskType | undefined | null): TaskSpec {
 }
 
 // ---- the evidence task: per-passage labels and two fact-level scores ----
-// Same two axes and the same wording the agents were given (docs/01 4.2a):
-// parity is the point, or a human-machine gap could always be explained away
-// as a difference of instructions.
+// The passage labels keep the axes and wording the agents were given
+// (docs/01 4.2a), so passage-level agreement stays comparable. The two
+// fact-level scores are the expert's own judgment of the fact (H-EK): from
+// the passages and from what they know.
 
 export interface LabelOption<T extends string | number> {
   value: T
@@ -133,16 +134,30 @@ export const ROLE_OPTIONS: LabelOption<EvidentialRole>[] = [
 ]
 
 export const STRENGTH_OPTIONS: LabelOption<number>[] = [
-  { value: 1, label: '1 — weak or sparse', hint: 'little or no real support here' },
-  { value: 2, label: '2 — moderate', hint: 'some support' },
-  { value: 3, label: '3 — strong', hint: 'multiple clear supporting references' },
+  { value: 1, label: 'Weak or sparse', hint: 'little or no real support' },
+  { value: 2, label: 'Moderate', hint: 'some support' },
+  { value: 3, label: 'Strong', hint: 'several clear, independent supporting studies' },
 ]
 
 export const CONSENSUS_OPTIONS: LabelOption<number>[] = [
-  { value: 1, label: '1 — against', hint: 'predominantly contradicted, or mixed against' },
-  { value: 2, label: '2 — neutral', hint: 'insufficient evidence either way' },
-  { value: 3, label: '3 — corroborated', hint: 'supported, with little conflict' },
+  { value: 1, label: 'Against', hint: 'mostly contradicted' },
+  { value: 2, label: 'Inconclusive', hint: 'too little evidence, or it is balanced' },
+  { value: 3, label: 'Corroborated', hint: 'supported, with little conflict' },
 ]
+
+export const DEPARTURE_QUESTION =
+  'Does your judgment go beyond or against what these passages show?'
+
+export const DEPARTURE_OPTIONS: LabelOption<'yes' | 'no'>[] = [
+  { value: 'yes', label: 'Yes', hint: 'I relied on something the passages do not contain' },
+  { value: 'no', label: 'No', hint: 'the passages alone lead me to the same judgment' },
+]
+
+export function corpusName(corpus: string | null | undefined): string {
+  if (corpus === 'deb') return 'DEB literature'
+  if (corpus === 'reproduction') return 'Reproduction abstracts'
+  return corpus || ''
+}
 
 export function optionFor(task: TaskType, value: string | null): TaskOption | undefined {
   if (!value) return undefined

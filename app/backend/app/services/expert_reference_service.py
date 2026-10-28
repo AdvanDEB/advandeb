@@ -320,6 +320,10 @@ class ExpertReferenceService:
             "resolution": resolution,
             "ingestion_queued": ingestion_queued,
             "triggered_readjudication": ingestion_queued,
+            # Enters the knowledge base as a candidate, for a curator to
+            # accept or reject — never as accepted evidence on one expert's
+            # word (see `review`).
+            "curation": {"status": "pending"},
             "created_at": datetime.now(timezone.utc),
         }
         res = await self.db.expert_references.insert_one(doc)
@@ -339,6 +343,83 @@ class ExpertReferenceService:
                 r["created_at"] = r["created_at"].isoformat()
             out.append(r)
         return out
+
+    # ------------------------------------------------------------------ #
+    # Curator review — expert references as evidence candidates
+    # ------------------------------------------------------------------ #
+
+    async def candidates(self, status: str = "pending",
+                         limit: int = 200) -> Dict[str, Any]:
+        """Expert-named papers for curator review, oldest first.
+
+        A reference recorded before curation existed has no `curation` field
+        and counts as pending: it was never reviewed either.
+        """
+        def _q(st: str) -> Dict[str, Any]:
+            if st == "pending":
+                return {"$or": [{"curation.status": "pending"},
+                                {"curation": {"$exists": False}}]}
+            return {"curation.status": st}
+
+        counts = {st: await self.db.expert_references.count_documents(_q(st))
+                  for st in ("pending", "accepted", "rejected")}
+        statements: Dict[int, str] = {}
+        out: List[Dict[str, Any]] = []
+        cursor = self.db.expert_references.find(_q(status)) \
+            .sort("created_at", 1).limit(max(1, min(int(limit), 500)))
+        async for r in cursor:
+            n = r.get("sf_number")
+            if n not in statements:
+                f = await self.db.stylized_facts.find_one(
+                    {"$or": [{"sf_number": n}, {"sf_number": str(n)}]},
+                    {"statement": 1})
+                statements[n] = (f or {}).get("statement", "")
+            res = r.get("resolution") or {}
+            cur = r.get("curation") or {}
+            year = res.get("resolved_year")
+            try:
+                year = int(year) if year is not None else None
+            except (TypeError, ValueError):
+                year = None
+            out.append({
+                "id": str(r["_id"]), "sf_number": n,
+                "statement": statements[n], "doi": r.get("doi"),
+                "direction": r.get("direction"), "note": r.get("note"),
+                "tier": r.get("tier"),
+                "resolved_title": res.get("resolved_title"),
+                "resolved_year": year,
+                "resolution_status": res.get("status"),
+                "status": cur.get("status") or "pending",
+                "review_comment": cur.get("comment"),
+                "created_at": r.get("created_at"),
+                "reviewed_at": cur.get("reviewed_at"),
+            })
+        return {"candidates": out, "counts": counts}
+
+    async def review(self, reference_id: str, reviewer_id: str,
+                     accept: bool, comment: Optional[str]) -> Dict[str, Any]:
+        """Record a curator's decision on one candidate.
+
+        Accepting marks the paper as evidence a curator has checked bears on
+        the fact. It does not move any score — expert-asserted evidence is
+        reported beside the machine's, never summed with it — and it does not
+        ingest anything: a paper missing from the corpus still has to be
+        added under Ingestion, with its PDF.
+        """
+        try:
+            oid = ObjectId(reference_id)
+        except (InvalidId, TypeError):
+            return {"status": "error", "detail": "not found", "code": 404}
+        status = "accepted" if accept else "rejected"
+        res = await self.db.expert_references.update_one(
+            {"_id": oid},
+            {"$set": {"curation": {
+                "status": status, "reviewer_id": reviewer_id,
+                "comment": (comment or "").strip() or None,
+                "reviewed_at": datetime.now(timezone.utc)}}})
+        if not res.matched_count:
+            return {"status": "error", "detail": "not found", "code": 404}
+        return {"id": reference_id, "status": status}
 
     async def delete(self, reference_id: str, expert_id: str,
                      is_admin: bool) -> Dict[str, Any]:

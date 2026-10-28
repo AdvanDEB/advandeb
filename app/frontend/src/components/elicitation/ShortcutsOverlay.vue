@@ -23,13 +23,11 @@
 const emit = defineEmits<{ (e: 'close'): void }>()
 
 const rows: [string[], string][] = [
-  [['a', 's', 'd', 'f', 'g'], 'Select the first…fifth option (statement-only tasks)'],
   [['1', '–', '5'], 'Set your confidence'],
-  [['r'], 'Jump to the rationale box'],
-  [['e'], 'Expand the earlier automated assessment (recorded)'],
-  [['h'], 'Show or hide your decision history'],
-  [['?'], 'This help'],
-  [['⌘/Ctrl', '⏎'], 'Submit and move to the next item'],
+  [['r'], 'Jump to the reason box'],
+  [['h'], 'Show or hide your past assessments'],
+  [['⌘/Ctrl', '⏎'], 'Submit'],
+  [['?'], 'Show or hide this list'],
 ]
 </script>
 

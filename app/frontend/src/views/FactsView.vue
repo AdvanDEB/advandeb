@@ -48,32 +48,48 @@
               <th class="col-num">#</th>
               <th class="col-statement">Statement</th>
               <th class="col-cat">Category</th>
+              <th class="col-verdict">Expert verdict</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="item in sf.items"
-              :key="item.id"
-              :class="['fact-row', { expanded: sf.expandedId === item.id }]"
-              @click="sf.expandedId = sf.expandedId === item.id ? null : item.id"
-            >
-              <td class="col-num text-muted">{{ item.sf_number }}</td>
-              <td class="col-statement">
-                <!-- The row stays clickable for a mouse; this button is the
-                     keyboard and screen-reader way to expand it. -->
-                <button
-                  type="button"
-                  class="row-toggle"
-                  :aria-expanded="sf.expandedId === item.id"
-                  @click.stop="sf.expandedId = sf.expandedId === item.id ? null : item.id"
-                >
-                  <span :class="sf.expandedId === item.id ? '' : 'clamp-2'">{{ item.statement }}</span>
-                </button>
-              </td>
-              <td class="col-cat">
-                <span class="cat-chip">{{ formatCategory(item.category) }}</span>
-              </td>
-            </tr>
+            <template v-for="item in sf.items" :key="item.id">
+              <tr
+                :class="['fact-row', { expanded: sf.expandedId === item.id }]"
+                @click="sf.expandedId = sf.expandedId === item.id ? null : item.id"
+              >
+                <td class="col-num text-muted">{{ item.sf_number }}</td>
+                <td class="col-statement">
+                  <!-- The row stays clickable for a mouse; this button is the
+                       keyboard and screen-reader way to expand it. -->
+                  <button
+                    type="button"
+                    class="row-toggle"
+                    :aria-expanded="sf.expandedId === item.id"
+                    @click.stop="sf.expandedId = sf.expandedId === item.id ? null : item.id"
+                  >
+                    <span :class="sf.expandedId === item.id ? '' : 'clamp-2'">{{ item.statement }}</span>
+                  </button>
+                </td>
+                <td class="col-cat">
+                  <span class="cat-chip">{{ formatCategory(item.category) }}</span>
+                </td>
+                <td class="col-verdict">
+                  <span v-if="sfVerdicts.loading" class="text-muted" aria-hidden="true">…</span>
+                  <ExpertVerdictBadge v-else :summary="verdictFor(item)" :min-n="sfVerdicts.minN" />
+                </td>
+              </tr>
+              <tr v-if="sf.expandedId === item.id" class="expanded-row">
+                <td colspan="4">
+                  <div class="expanded-content">
+                    <ExpertVerdictDetail
+                      :summary="verdictFor(item)"
+                      :min-n="sfVerdicts.minN"
+                      :loading="sfVerdicts.loading"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </template>
           </tbody>
         </table>
       </div>
@@ -273,6 +289,11 @@ import api from '@/utils/api'
 import { useNotificationsStore } from '@/stores/notifications'
 import { useAuthStore } from '@/stores/auth'
 import { isCurator as userIsCurator } from '@/utils/access'
+import ExpertVerdictBadge from '@/components/kb/ExpertVerdictBadge.vue'
+import ExpertVerdictDetail from '@/components/kb/ExpertVerdictDetail.vue'
+import { DEFAULT_MIN_N } from '@/components/kb/expertVerdict'
+import { fetchExpertVerdicts } from '@/components/kb/expertVerdictApi'
+import type { ExpertVerdictSummary } from '@/types/expertVerdict.generated'
 
 const notifs = useNotificationsStore()
 const auth = useAuthStore()
@@ -361,9 +382,46 @@ async function fetchSf() {
     const { data } = await api.get(`/kb/stylized-facts/?${params}`)
     sf.items = data.items ?? []
     sf.total = data.total ?? 0
+    void fetchSfVerdicts(sf.items)
   } catch { /* interceptor shows error */ } finally {
     sf.loading = false
   }
+}
+
+// ── Expert verdicts for the visible page ─────────────────────────────────
+// One batch call per page, after the list. A failure leaves every cell at
+// "—": the verdict is an addition to the table, never a reason it fails.
+
+const sfVerdicts = reactive({
+  byNumber: {} as Record<string, ExpertVerdictSummary>,
+  minN: DEFAULT_MIN_N,
+  loading: false,
+})
+let sfVerdictSeq = 0
+
+async function fetchSfVerdicts(items: SfItem[]) {
+  const seq = ++sfVerdictSeq
+  sfVerdicts.byNumber = {}
+  const nums = items.map((i) => Number(i.sf_number)).filter((n) => Number.isInteger(n))
+  if (nums.length === 0) {
+    sfVerdicts.loading = false
+    return
+  }
+  sfVerdicts.loading = true
+  try {
+    const batch = await fetchExpertVerdicts(nums)
+    if (seq !== sfVerdictSeq) return
+    sfVerdicts.byNumber = batch.verdicts ?? {}
+    sfVerdicts.minN = batch.min_n ?? DEFAULT_MIN_N
+  } catch {
+    /* shown as "—" */
+  } finally {
+    if (seq === sfVerdictSeq) sfVerdicts.loading = false
+  }
+}
+
+function verdictFor(item: SfItem): ExpertVerdictSummary | null {
+  return sfVerdicts.byNumber[String(Number(item.sf_number))] ?? null
 }
 
 // ── KB Facts state ───────────────────────────────────────────────────────
@@ -650,6 +708,7 @@ watch(activeTab, (tab) => {
 .col-num { width: 48px; text-align: right; }
 .col-statement { min-width: 300px; }
 .col-cat { width: 220px; }
+.col-verdict { width: 190px; }
 
 /* KB facts columns */
 .col-content { min-width: 340px; }

@@ -141,7 +141,9 @@ const pending: EnrolmentRequestRecord = {
   user_id: null, note: null,
 }
 
-const cal: CalibrationStatus = { total: 15, completed: 15, correct: 12, done: true, available: true }
+const cal: CalibrationStatus = {
+  total: 3, completed: 3, correct: 2, done: true, available: true, required: false, version: 1,
+}
 
 const stats: AdminStats = {
   total_queue: 3910, completed: 7, repeated_judgments: 2,
@@ -177,6 +179,8 @@ describe('AdminExpertsView', () => {
       if (url === '/elicitation/experts') return Promise.resolve({ data: experts })
       if (url === '/enrolment/categories') return Promise.resolve({ data: categories })
       if (url === '/elicitation/stats/admin') return Promise.resolve({ data: stats })
+      if (url === '/elicitation/calibration/sets') return Promise.resolve({ data: { sets: [], published_version: null } })
+      if (url === '/elicitation/calibration/evidence-sets') return Promise.resolve({ data: { sets: [] } })
       return Promise.reject(new Error(`unexpected GET ${url}`))
     })
   }

@@ -12,7 +12,10 @@ broken in production or stated in the protocol and enforced nowhere:
 * anchoring — exposure derived from logged events, not the state at submit;
 * progress and stats — keyed by corpus, so DEB and reproduction never merge;
 * the claims ladder — the doc's thresholds, counted over the doc's basis;
-* calibration — no seeding from a GET, an empty set is not a passed one.
+* calibration — the team's published set gates once; none published never
+  blocks;
+* the combined mode — the departure answer and the rationale rule;
+* fact-level tasks — kept, and no longer served.
 """
 from __future__ import annotations
 
@@ -31,6 +34,22 @@ from tests.elicitation_support import (
 )
 
 pytestmark = pytest.mark.asyncio
+
+
+@pytest.fixture(autouse=True)
+def _no_knowledge_store(monkeypatch):
+    """Citations are resolved against ArangoDB when an item is served; here
+    against nothing, unless a test supplies records."""
+    from tests.elicitation_support import stub_citation_store
+    stub_citation_store(monkeypatch)
+
+
+@pytest.fixture
+def serve_fact_level(monkeypatch):
+    """The fact-level tasks are not served since 2026-10-28. Their code is
+    kept, and the rules these tests pin down still hold for it, so the tests
+    serve them again — the one-line change reversing the decision would be."""
+    monkeypatch.setattr(es, "SERVED_TASKS", es.DAY_ONE_TASKS + ("evidence",))
 
 
 async def _fact_level(db, facts):
@@ -65,12 +84,12 @@ async def _drain(svc, expert_id, limit=10_000):
 # Calibration gate and calibration contract
 # --------------------------------------------------------------------------- #
 
-async def test_uncalibrated_expert_is_served_nothing_and_cannot_submit(scratch_db):
-    await _fact_level(scratch_db, collection({"growth": 5}))
+async def test_published_set_gates_until_worked(scratch_db):
+    svc = await _with_evidence(scratch_db, collection({"growth": 3}), n_passages=2)
     await calibration_set(scratch_db, 2)
     e = await expert(scratch_db)
-    svc = ElicitationService()
     assert await svc.next_item(e) is None
+    assert (await svc.progress(e)).calibration_required is True
     await calibrate(scratch_db, e)
     item = await svc.next_item(e)
     assert item is not None
@@ -81,54 +100,158 @@ async def test_uncalibrated_expert_is_served_nothing_and_cannot_submit(scratch_d
     assert "calibration" in res["detail"]
 
 
-async def test_empty_calibration_set_is_not_a_passed_one(scratch_db):
+async def test_no_published_set_never_blocks(scratch_db):
+    """Until the team publishes a set, experts work the queue, and their
+    judgments say they were made before calibration."""
+    svc = await _with_evidence(scratch_db, [fact(1)], n_passages=2)
+    await calibration_set(scratch_db, 1, status="draft")
     e = await expert(scratch_db)
-    st = await ElicitationService().calibration_status(e)
-    assert st == {"total": 0, "completed": 0, "correct": 0, "done": False,
-                  "available": False}
+    st = await svc.calibration_status(e)
+    assert st["available"] is False and st["required"] is False
+    assert st["done"] is False and st["version"] is None
+    item = await svc.next_item(e)
+    assert item is not None
+    assert (await svc.submit(decision_for(item), e))["status"] == "recorded"
+    rec = await scratch_db.elicitations.find_one({})
+    assert rec["calibration_version"] is None
+    assert rec["guidelines_version"] == es.GUIDELINES_VERSION
 
 
-async def test_calibration_next_does_not_seed(scratch_db):
-    """A GET used to seed the calibration set. Seeding is an admin action."""
-    await seed_facts(scratch_db, [fact(1201, provenance="published"),
-                                  fact(1237, provenance="new")])
+async def test_judgments_after_calibration_carry_its_version(scratch_db):
+    svc = await _with_evidence(scratch_db, [fact(1)], n_passages=2)
+    await calibration_set(scratch_db, 1, version=3)
     e = await expert(scratch_db)
-    svc = ElicitationService()
-    assert await svc.calibration_next(e) is None
-    assert await scratch_db.elicitation_calibration.count_documents({}) == 0
-    assert (await svc.seed_calibration())["status"] == "built"
-    assert (await svc.calibration_next(e)) is not None
+    await calibrate(scratch_db, e)
+    await svc.submit(decision_for(await svc.next_item(e)), e)
+    assert (await scratch_db.elicitations.find_one({}))["calibration_version"] == 3
+
+
+def _calibration_answer(case, **over):
+    base = dict(
+        calibration_id=case["calibration_id"], evidence_strength=2,
+        consensus_direction=3, departs_from_passages=False, confidence=4,
+        passage_judgments={
+            str(p.index): PassageJudgment(
+                direction="supports" if p.index == 0 else "neutral",
+                evidential_role="primary_evidence" if p.index == 0 else None)
+            for p in case["passages"]})
+    base.update(over)
+    return CalibrationDecision(**base)
 
 
 async def test_calibration_round_trip(scratch_db):
-    await seed_facts(scratch_db, [fact(1201, provenance="published"),
-                                  fact(1237, provenance="new")])
+    ids = await calibration_set(scratch_db, 2)
     svc = ElicitationService()
-    await svc.seed_calibration()
     e = await expert(scratch_db)
     st = await svc.calibration_status(e)
-    assert st["available"] and not st["done"] and st["total"] == 2
+    assert st["available"] and st["required"] and st["total"] == 2
 
-    answers = {"published": True, "new": False}
-    while (case := await svc.calibration_next(e)) is not None:
-        fb = await svc.calibration_submit(CalibrationDecision(
-            calibration_id=case["calibration_id"], task=case["task"],
-            provenance_type="published", confidence=4, rationale="r"), e)
-        ref = fb["reference"]["provenance_type"]
-        assert fb["correct"] is answers[ref]
+    case = await svc.calibration_next(e)
+    assert case["calibration_id"] == ids[0] and len(case["passages"]) == 3
+    assert case["passages"][0].citation.status in (
+        "resolved", "partial", "unresolved")
+    fb = await svc.calibration_submit(_calibration_answer(case), e)
+    assert fb["correct"] is True and fb["passages_compared"] == 1
+    assert fb["passages_agreed"] == 1
+    assert fb["reference"]["explanation"] == "agreed by the team"
+
+    case = await svc.calibration_next(e)
+    fb = await svc.calibration_submit(
+        _calibration_answer(case, consensus_direction=2), e)
+    assert fb["correct"] is False and fb["consensus_matches"] is False
+    assert await svc.calibration_next(e) is None
     st = await svc.calibration_status(e)
-    assert st == {"total": 2, "completed": 2, "correct": 1, "done": True,
-                  "available": True}
+    assert (st["completed"], st["correct"], st["done"], st["required"]) == (
+        2, 1, True, False)
 
 
-async def test_stale_calibration_results_do_not_count(scratch_db):
+async def test_calibration_answer_follows_the_queue_rules(scratch_db):
+    """Calibration trains the act the queue asks for: every passage labelled,
+    and a reason where the judgment departs from the passages."""
+    await calibration_set(scratch_db, 1)
+    svc = ElicitationService()
     e = await expert(scratch_db)
-    await calibration_set(scratch_db, 2)
-    await scratch_db.elicitation_calibration_results.insert_many([
-        {"expert_id": e, "calibration_id": "cal_removed_a", "correct": True},
-        {"expert_id": e, "calibration_id": "cal_removed_b", "correct": True}])
+    case = await svc.calibration_next(e)
+    res = await svc.calibration_submit(
+        _calibration_answer(case, passage_judgments={}), e)
+    assert res["code"] == 400 and "no judgment for passage" in res["detail"]
+    res = await svc.calibration_submit(
+        _calibration_answer(case, departs_from_passages=True), e)
+    assert res["code"] == 400 and "rationale" in res["detail"]
+
+
+async def test_first_calibration_answer_is_the_one_kept(scratch_db):
+    await calibration_set(scratch_db, 1)
+    svc = ElicitationService()
+    e = await expert(scratch_db)
+    case = await svc.calibration_next(e)
+    await svc.calibration_submit(_calibration_answer(case, consensus_direction=1,
+                                                     rationale="hunch"), e)
+    await svc.calibration_submit(_calibration_answer(case), e)
+    st = await svc.calibration_status(e)
+    assert st["completed"] == 1 and st["correct"] == 0
+
+
+async def test_answers_to_a_retired_version_do_not_count(scratch_db):
+    old = await calibration_set(scratch_db, 1, version=1, status="retired")
+    await calibration_set(scratch_db, 1, version=2, first_fact=9100)
+    e = await expert(scratch_db)
+    await scratch_db.elicitation_calibration_answers.insert_one(
+        {"expert_id": e, "calibration_id": old[0], "version": 1,
+         "correct": True})
     st = await ElicitationService().calibration_status(e)
-    assert st["completed"] == 0 and not st["done"]
+    assert st["version"] == 2 and st["completed"] == 0 and st["required"]
+
+
+async def test_draft_publish_and_versioning(scratch_db):
+    from app.models.elicitation import CalibrationSetDraft
+    facts = [fact(1), fact(2)]
+    svc = await _with_evidence(scratch_db, facts, n_passages=3)
+    spec = {"evidence_set_id": "1:deb", "reference": {
+        "evidence_strength": 3, "consensus_direction": 3,
+        "passage_directions": {"0": "supports"}, "explanation": "clear"}}
+    draft = CalibrationSetDraft(items=[spec], note="first pass")
+    v1 = await svc.save_calibration_draft(draft, "admin")
+    assert v1["version"] == 1 and v1["status"] == "draft"
+    assert v1["items"][0]["sf_number"] == 1
+
+    bad = CalibrationSetDraft(items=[{**spec, "reference": {
+        **spec["reference"], "passage_directions": {"7": "supports"}}}])
+    res = await svc.save_calibration_draft(bad, "admin", version=1)
+    assert res["code"] == 400 and "not in the set" in res["detail"]
+    res = await svc.save_calibration_draft(
+        CalibrationSetDraft(items=[{**spec, "evidence_set_id": "nope"}]), "admin")
+    assert res["code"] == 400
+
+    pub = await svc.publish_calibration_set(1)
+    assert pub["status"] == "published"
+    res = await svc.save_calibration_draft(draft, "admin", version=1)
+    assert res["code"] == 409            # published sets are not edited
+
+    v2 = await svc.save_calibration_draft(CalibrationSetDraft(items=[
+        {**spec, "evidence_set_id": "2:deb"}]), "admin")
+    assert v2["version"] == 2
+    await svc.publish_calibration_set(2)
+    listed = await svc.list_calibration_sets()
+    assert listed["published_version"] == 2
+    assert [s["status"] for s in listed["sets"]] == ["published", "retired"]
+    # Both facts were shown with an answer, so neither is measured now.
+    assert await svc.calibration_facts() == {1, 2}
+
+
+async def test_calibration_facts_leave_the_measured_queue(scratch_db):
+    svc = await _with_evidence(scratch_db, [fact(1), fact(2)], n_passages=2)
+    await scratch_db.elicitation_calibration_sets.insert_one({
+        "version": 1, "status": "published", "items": [
+            {"evidence_set_id": "1:reproduction", "sf_number": 1,
+             "corpus_id": "reproduction",
+             "reference": {"evidence_strength": 1, "consensus_direction": 2,
+                           "passage_directions": {}, "explanation": "x"}}],
+        "created_at": None})
+    e = await expert(scratch_db)
+    await calibrate(scratch_db, e)
+    served = await _drain(svc, e)
+    assert {i.sf_number for i in served} == {2}
 
 
 # --------------------------------------------------------------------------- #
@@ -159,7 +282,7 @@ async def test_group_slug_excludes_every_fact_of_the_group(scratch_db):
     assert {i.sf_number for i in await _drain(svc, w)} == {3}
 
 
-async def test_authored_sf_numbers_still_excludes(scratch_db):
+async def test_authored_sf_numbers_still_excludes(scratch_db, serve_fact_level):
     """The enrolment-approval source of authorship keeps working."""
     await _fact_level(scratch_db, [fact(1), fact(2)])
     e = await expert(scratch_db, authored=[1])
@@ -197,7 +320,7 @@ async def test_author_excluded_is_recorded(scratch_db):
 # Head of queue — no self-selection
 # --------------------------------------------------------------------------- #
 
-async def test_only_the_head_of_the_queue_can_be_submitted(scratch_db):
+async def test_only_the_head_of_the_queue_can_be_submitted(scratch_db, serve_fact_level):
     await _fact_level(scratch_db, collection({"growth": 6, "feeding": 6}))
     svc = ElicitationService()
     e = await expert(scratch_db)
@@ -220,7 +343,7 @@ async def test_only_the_head_of_the_queue_can_be_submitted(scratch_db):
     assert ok["status"] == "recorded"
 
 
-async def test_items_whose_panel_requirement_is_met_are_refused(scratch_db):
+async def test_items_whose_panel_requirement_is_met_are_refused(scratch_db, serve_fact_level):
     """Two panel experts load the same single-judgment item; the first to
     submit completes it, and the second is told the queue moved on."""
     await _fact_level(scratch_db, collection({"growth": 6}))
@@ -244,7 +367,7 @@ async def test_items_whose_panel_requirement_is_met_are_refused(scratch_db):
     assert res["code"] == 409 and "already met" in res["detail"]
 
 
-async def test_already_judged_is_refused(scratch_db):
+async def test_already_judged_is_refused(scratch_db, serve_fact_level):
     await _fact_level(scratch_db, collection({"growth": 3}))
     svc = ElicitationService()
     e = await expert(scratch_db)
@@ -255,7 +378,7 @@ async def test_already_judged_is_refused(scratch_db):
     assert res["code"] == 409 and res["detail"] == "already judged by you"
 
 
-async def test_unique_index_prevents_duplicates(scratch_db):
+async def test_unique_index_prevents_duplicates(scratch_db, serve_fact_level):
     """The last line of defence, below every check above it."""
     await _fact_level(scratch_db, collection({"growth": 3}))
     svc = ElicitationService()
@@ -272,7 +395,7 @@ async def test_unique_index_prevents_duplicates(scratch_db):
     await scratch_db.elicitations.insert_one(rec)
 
 
-async def test_statement_hash_must_match(scratch_db):
+async def test_statement_hash_must_match(scratch_db, serve_fact_level):
     await _fact_level(scratch_db, collection({"growth": 3}))
     svc = ElicitationService()
     e = await expert(scratch_db)
@@ -286,7 +409,7 @@ async def test_statement_hash_must_match(scratch_db):
 # The panel requirement and tier
 # --------------------------------------------------------------------------- #
 
-async def test_contributor_never_decrements_n_required(scratch_db):
+async def test_contributor_never_decrements_n_required(scratch_db, serve_fact_level):
     await _fact_level(scratch_db, collection({"growth": 3}))
     svc = ElicitationService()
     contributors = [await expert(scratch_db, tier="contributor", name=f"c{i}")
@@ -306,7 +429,7 @@ async def test_contributor_never_decrements_n_required(scratch_db):
     assert stats["by_tier"] == {"contributor": es.HUMAN_PANEL_SIZE}
 
 
-async def test_panel_judgments_do_satisfy_n_required(scratch_db):
+async def test_panel_judgments_do_satisfy_n_required(scratch_db, serve_fact_level):
     await _fact_level(scratch_db, collection({"growth": 3}))
     svc = ElicitationService()
     panel = [await expert(scratch_db, name=f"p{i}")
@@ -319,7 +442,7 @@ async def test_panel_judgments_do_satisfy_n_required(scratch_db):
     assert (await svc.next_item(panel[-1])).queue_position != 0
 
 
-async def test_tier_is_stamped_at_write_time(scratch_db):
+async def test_tier_is_stamped_at_write_time(scratch_db, serve_fact_level):
     await _fact_level(scratch_db, collection({"growth": 6}))
     svc = ElicitationService()
     e = await expert(scratch_db, tier="contributor")
@@ -361,7 +484,7 @@ async def test_evidence_item_is_served_matched_with_its_passages(scratch_db):
     assert item.evidence_content_hash and item.evidence_set_id
 
 
-async def test_fact_level_item_is_served_under_expertise(scratch_db):
+async def test_fact_level_item_is_served_under_expertise(scratch_db, serve_fact_level):
     await _fact_level(scratch_db, [fact(1)])
     e = await expert(scratch_db)
     await calibrate(scratch_db, e)
@@ -463,7 +586,7 @@ async def test_evidence_scores_are_required(scratch_db):
     assert res["code"] == 400 and "consensus direction" in res["detail"]
 
 
-async def test_evidence_decision_cannot_claim_the_expertise_arm(scratch_db):
+async def test_evidence_decision_cannot_claim_the_expertise_arm(scratch_db, serve_fact_level):
     svc, e, item = await _evidence_item(scratch_db)
     res = await svc.submit(decision_for(item, evidence_condition="expertise"), e)
     assert res["code"] == 400 and "'matched'" in res["detail"]
@@ -492,13 +615,13 @@ async def _fact_item(db, task):
     ({"provenance_type": "published"}, "needs source_citation"),
     ({"evidence_condition": "matched"}, "'expertise'"),
 ])
-async def test_fact_level_payload_must_answer_its_task(scratch_db, over, fragment):
+async def test_fact_level_payload_must_answer_its_task(scratch_db, over, fragment, serve_fact_level):
     svc, e, item = await _fact_item(scratch_db, "provenance")
     res = await svc.submit(decision_for(item, **over), e)
     assert res["code"] == 400 and fragment in res["detail"], res
 
 
-async def test_published_with_citation_is_accepted(scratch_db):
+async def test_published_with_citation_is_accepted(scratch_db, serve_fact_level):
     svc, e, item = await _fact_item(scratch_db, "provenance")
     res = await svc.submit(decision_for(
         item, provenance_type="published",
@@ -512,7 +635,7 @@ async def test_published_with_citation_is_accepted(scratch_db):
 # Anchoring
 # --------------------------------------------------------------------------- #
 
-async def test_exposure_is_derived_from_logged_open_events(scratch_db):
+async def test_exposure_is_derived_from_logged_open_events(scratch_db, serve_fact_level):
     """Opened, read, closed again: submit-time state says `false`, and the
     record must still say the expert saw the machine verdict."""
     await _fact_level(scratch_db, collection({"growth": 6}))
@@ -615,7 +738,7 @@ async def test_ladder_counts_panel_evidence_judgments_only(scratch_db, monkeypat
     assert (await svc.admin_stats())["rung"] == "R0"
 
 
-async def test_metadata_tasks_do_not_climb_the_ladder(scratch_db, monkeypatch):
+async def test_metadata_tasks_do_not_climb_the_ladder(scratch_db, monkeypatch, serve_fact_level):
     monkeypatch.setattr(es, "CLAIMS_LADDER", [(1, "R0", "pilot")])
     await _fact_level(scratch_db, collection({"growth": 4}))
     svc = ElicitationService()
@@ -626,3 +749,233 @@ async def test_metadata_tasks_do_not_climb_the_ladder(scratch_db, monkeypatch):
     prog = await svc.progress(p)
     assert prog.completed == 5 and prog.ladder_count == 0
     assert prog.rung == "pre-R0"
+
+
+# --------------------------------------------------------------------------- #
+# The combined mode (guidelines 2.0): one arm, the departure answer, and a
+# rationale only where the judgment departs from the passages
+# --------------------------------------------------------------------------- #
+
+async def test_fact_level_tasks_are_not_served(scratch_db):
+    """3,786 statement-only items were removed from the queue on 2026-10-28;
+    their rows stay stored, nobody is served them."""
+    facts = collection({"growth": 3})
+    svc = await _with_evidence(scratch_db, facts, n_passages=2, fact_level=True)
+    assert await scratch_db.elicitation_queue.count_documents(
+        {"task": {"$in": list(es.DAY_ONE_TASKS)}}) == 9
+    e = await expert(scratch_db)
+    served = await _drain(svc, e)
+    assert served and {i.task for i in served} == {"evidence"}
+    assert (await svc.progress(e)).total_queue == 6
+    assert (await svc.admin_stats())["total_queue"] == 6
+
+
+async def test_an_unserved_task_cannot_be_recorded(scratch_db):
+    await _fact_level(scratch_db, [fact(1)])
+    e = await expert(scratch_db)
+    q = await scratch_db.elicitation_queue.find_one({"task": "provenance"})
+    from app.models.elicitation import ElicitationDecision
+    res = await ElicitationService().submit(ElicitationDecision(
+        task="provenance", sf_number=q["sf_number"],
+        statement_sha256=q["statement_sha256"], provenance_type="unknown",
+        confidence=3, rationale="r"), e)
+    assert res["code"] == 400 and "no longer served" in res["detail"]
+
+
+async def test_the_departure_answer_is_required(scratch_db):
+    svc, e, item = await _evidence_item(scratch_db)
+    res = await svc.submit(decision_for(item, departs_from_passages=None), e)
+    assert res["code"] == 400 and "departs_from_passages" in res["detail"]
+
+
+async def test_rationale_is_optional_when_the_judgment_follows_the_passages(scratch_db):
+    svc, e, item = await _evidence_item(scratch_db)
+    res = await svc.submit(decision_for(item, rationale=""), e)
+    assert res["status"] == "recorded"
+    rec = await scratch_db.elicitations.find_one({})
+    assert rec["rationale_required"] is False
+    assert rec["score_label_conflicts"] == []
+    assert rec["departs_from_passages"] is False
+
+
+async def test_departing_requires_a_rationale(scratch_db):
+    svc, e, item = await _evidence_item(scratch_db)
+    res = await svc.submit(decision_for(item, departs_from_passages=True,
+                                        rationale="  "), e)
+    assert res["code"] == 400 and "beyond or against" in res["detail"]
+    res = await svc.submit(decision_for(item, departs_from_passages=True,
+                                        rationale="Kooijman 2010 shows it"), e)
+    assert res["status"] == "recorded"
+    assert (await scratch_db.elicitations.find_one({}))["rationale_required"]
+
+
+def _all_neutral(item):
+    return {str(p.index): PassageJudgment(direction="neutral")
+            for p in item.passages}
+
+
+@pytest.mark.parametrize("scores, conflicts", [
+    ({"consensus_direction": 3, "evidence_strength": 1},
+     ["corroborated_without_support"]),
+    ({"consensus_direction": 1, "evidence_strength": 1},
+     ["against_without_contradiction"]),
+    ({"consensus_direction": 2, "evidence_strength": 2},
+     ["strength_without_support"]),
+    ({"consensus_direction": 3, "evidence_strength": 3},
+     ["corroborated_without_support", "strength_without_support"]),
+])
+async def test_scores_beyond_own_labels_require_a_rationale(scratch_db, scores,
+                                                            conflicts):
+    """Decided from the expert's own labels, never from the machine's."""
+    svc, e, item = await _evidence_item(scratch_db)
+    d = decision_for(item, passage_judgments=_all_neutral(item), rationale="",
+                     **scores)
+    res = await svc.submit(d, e)
+    assert res["code"] == 400 and "your own passage labels" in res["detail"]
+    for c in conflicts:
+        assert c in res["detail"]
+    res = await svc.submit(d.model_copy(update={"rationale": "I know of X"}), e)
+    assert res["status"] == "recorded"
+    rec = await scratch_db.elicitations.find_one({})
+    assert rec["score_label_conflicts"] == conflicts
+    assert rec["rationale_required"] is True
+
+
+async def test_inconclusive_weak_with_neutral_passages_is_no_conflict(scratch_db):
+    svc, e, item = await _evidence_item(scratch_db)
+    res = await svc.submit(decision_for(
+        item, passage_judgments=_all_neutral(item), rationale="",
+        consensus_direction=2, evidence_strength=1), e)
+    assert res["status"] == "recorded"
+
+
+async def test_against_with_a_contradicting_passage_is_no_conflict(scratch_db):
+    svc, e, item = await _evidence_item(scratch_db)
+    pj = _all_neutral(item)
+    pj["1"] = PassageJudgment(direction="contradicts",
+                              evidential_role="primary_evidence")
+    res = await svc.submit(decision_for(
+        item, passage_judgments=pj, rationale="", consensus_direction=1,
+        evidence_strength=1), e)
+    assert res["status"] == "recorded"
+
+
+async def test_reference_ids_must_be_own_and_on_this_fact(scratch_db):
+    from bson import ObjectId
+    svc, e, item = await _evidence_item(scratch_db)
+    other = await expert(scratch_db, name="other")
+    mine = (await scratch_db.expert_references.insert_one(
+        {"expert_id": e, "sf_number": item.sf_number, "doi": "10.1/a"})).inserted_id
+    theirs = (await scratch_db.expert_references.insert_one(
+        {"expert_id": other, "sf_number": item.sf_number, "doi": "10.1/b"})).inserted_id
+    elsewhere = (await scratch_db.expert_references.insert_one(
+        {"expert_id": e, "sf_number": 999, "doi": "10.1/c"})).inserted_id
+    for bad in ([str(theirs)], [str(elsewhere)], ["nope"], [str(ObjectId())]):
+        res = await svc.submit(decision_for(item, reference_ids=bad), e)
+        assert res["code"] == 400 and "reference" in res["detail"], bad
+    res = await svc.submit(decision_for(item, reference_ids=[str(mine)]), e)
+    assert res["status"] == "recorded"
+    rec = await scratch_db.elicitations.find_one({})
+    assert rec["reference_ids"] == [str(mine)]
+
+
+async def test_no_machine_score_is_offered_on_an_evidence_item(scratch_db):
+    f = fact(1)
+    f["legacy_assessment"] = {"score_1_100": 80, "confidence": "high"}
+    svc = await _with_evidence(scratch_db, [f], n_passages=2)
+    e = await expert(scratch_db)
+    assert (await svc.next_item(e)).legacy_assessment is None
+
+
+async def test_guidelines_describe_the_combined_mode(scratch_db):
+    g = ElicitationService().guidelines()
+    assert g["version"] == es.GUIDELINES_VERSION == "2.0"
+    assert 4 <= len(g["how_it_works"]) <= 8
+    sections = {s["task"] for s in g["tasks"]}
+    assert {"evidence", "evidence_role", "evidence_strength",
+            "consensus_direction", "departure"} <= sections
+    text = " ".join(g["how_it_works"]).lower()
+    assert "what you know" in text and "machine assessment" in text
+
+
+# --------------------------------------------------------------------------- #
+# Citations — resolved at serve time, the frozen passages untouched
+# --------------------------------------------------------------------------- #
+
+async def test_passages_are_served_with_citations_and_the_set_is_unchanged(
+        scratch_db, monkeypatch):
+    from app.services import passage_citation_service as pcs
+    pcs.reset_cache()
+    monkeypatch.setattr(pcs, "_load_documents_by_key", lambda keys: [
+        {"_key": "doc0", "title": "Energy budgets", "year": "2001",
+         "authors": "['S.A.L.M. Kooijman', 'T. Sousa']",
+         "journal": "J Theor Biol", "doi": "None"}])
+    svc = await _with_evidence(scratch_db, [fact(1)], n_passages=2)
+    before = await scratch_db.evidence_sets.find_one({"_id": "1:reproduction"})
+    e = await expert(scratch_db)
+    item = await svc.next_item(e)
+    while item.corpus_id != "reproduction":
+        await svc.submit(decision_for(item), e)
+        item = await svc.next_item(e)
+    c0 = item.passages[0].citation
+    assert c0.status == "resolved" and c0.authors == ["S.A.L.M. Kooijman",
+                                                      "T. Sousa"]
+    assert c0.year == 2001 and c0.journal == "J Theor Biol"
+    # No DOI in the record: the passage's own, well-formed one is kept.
+    assert c0.doi == "10.5555/0"
+    after = await scratch_db.evidence_sets.find_one({"_id": "1:reproduction"})
+    assert after == before
+
+
+async def test_an_unreachable_store_serves_unresolved_citations(scratch_db,
+                                                                monkeypatch):
+    from app.services import passage_citation_service as pcs
+    pcs.reset_cache()
+
+    def boom(*a):
+        raise ConnectionError("arango down")
+    monkeypatch.setattr(pcs, "_load_deb_documents", boom)
+    monkeypatch.setattr(pcs, "_load_documents_by_key", boom)
+    svc = await _with_evidence(scratch_db, [fact(1)], n_passages=2)
+    await scratch_db.evidence_sets.update_many(
+        {"corpus_id": "deb"}, {"$set": {"passages.$[].title": "Kooy93.pdf",
+                                        "passages.$[].doi": "None"}})
+    e = await expert(scratch_db)
+    item = await svc.next_item(e)
+    assert item.corpus_id == "deb"
+    c = item.passages[0].citation
+    assert c.status == "unresolved" and c.file_name == "Kooy93.pdf"
+    assert c.doi is None
+
+
+# --------------------------------------------------------------------------- #
+# Expert references as evidence candidates for curator review
+# --------------------------------------------------------------------------- #
+
+async def test_references_are_candidates_until_a_curator_decides(scratch_db):
+    from datetime import datetime, timezone
+    from app.services.expert_reference_service import ExpertReferenceService
+    await seed_facts(scratch_db, [fact(7)])
+    now = datetime.now(timezone.utc)
+    new = (await scratch_db.expert_references.insert_one({
+        "sf_number": 7, "doi": "10.1/x", "direction": "supports",
+        "expert_id": "e1", "tier": "panel", "curation": {"status": "pending"},
+        "resolution": {"status": "not_in_corpus", "resolved_title": "T",
+                       "resolved_year": "2004"}, "created_at": now})).inserted_id
+    # Recorded before curation existed: never reviewed, so pending too.
+    await scratch_db.expert_references.insert_one({
+        "sf_number": 7, "doi": "10.1/y", "direction": "opposes",
+        "expert_id": "e2", "created_at": now})
+    svc = ExpertReferenceService()
+    listed = await svc.candidates("pending")
+    assert listed["counts"] == {"pending": 2, "accepted": 0, "rejected": 0}
+    first = listed["candidates"][0]
+    assert first["statement"] == "Stylized fact 7 in growth."
+    assert first["resolved_year"] == 2004 and "expert_id" not in first
+
+    res = await svc.review(str(new), "curator", True, "checked the paper")
+    assert res == {"id": str(new), "status": "accepted"}
+    listed = await svc.candidates("accepted")
+    assert listed["counts"]["accepted"] == 1
+    assert listed["candidates"][0]["review_comment"] == "checked the paper"
+    assert (await svc.review("nope", "curator", False, None))["code"] == 404

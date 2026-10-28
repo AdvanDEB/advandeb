@@ -275,11 +275,15 @@
         </div>
       </template>
     </section>
+
+    <!-- ── Calibration examples: the team's agreed answers, versioned ── -->
+    <CalibrationAdmin />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from 'vue'
+import CalibrationAdmin from '@/components/elicitation/CalibrationAdmin.vue'
 import { formatDate } from '@/utils/format'
 import api from '@/utils/api'
 import ExpertiseProfileCard from '@/components/enrolment/ExpertiseProfileCard.vue'

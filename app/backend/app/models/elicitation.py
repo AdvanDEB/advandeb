@@ -40,6 +40,10 @@ from pydantic import BaseModel, ConfigDict, Field
 # amount of provenance labelling says whether a machine alpha of 0.43 is poor
 # or is the task's noise floor. Only humans reading the *same frozen passages*
 # can say that.
+#
+# Since 2026-10-28 only `evidence` is served (`SERVED_TASKS` in the service).
+# The fact-level tasks stay defined, and their queue rows stay stored, so the
+# decision can be reversed without rebuilding anything.
 TaskType = Literal["provenance", "scope", "assessability", "evidence"]
 
 # Passage-level judgment, deliberately the same two axes and the same wording
@@ -66,17 +70,64 @@ AssessabilityVerdict = Literal[
 ]
 
 # Which evidence condition a judgment was made under (advandeb_methods docs/09
-# section 5.2; renamed H-EK / H-K in docs/14 section 2). `matched` = the
-# expert saw the frozen evidence set the agents saw; `expertise` = judged from
-# the statement and domain knowledge alone. Determined by the task — evidence
-# items are `matched`, the fact-level tasks are `expertise` — and stamped by
-# the server, never chosen by the client.
+# section 5.2; renamed H-EK / H-K in docs/14 section 2). `matched` is the H-EK
+# arm: the expert reads the frozen evidence set the agents read AND judges as
+# an expert, bringing what they know. `expertise` is H-K, the statement and
+# domain knowledge alone. Determined by the task — evidence items are
+# `matched`, the fact-level tasks are `expertise` — and stamped by the server,
+# never chosen by the client.
+#
+# Since guidelines 2.0 only H-EK is served. The project owner decided on
+# 2026-10-28 that experts judge in one combined mode, passages plus their own
+# knowledge, rather than in two arms that read as two different jobs.
 EvidenceCondition = Literal["matched", "expertise"]
+
+# Why a rationale was asked for, beyond the expert's own "my judgment goes
+# beyond these passages". Each is a disagreement between the expert's overall
+# scores and their OWN passage labels — never the machine's, whose verdict is
+# not shown: deciding this from the machine assessment would put an anchor
+# into the very judgment being measured.
+ScoreLabelConflict = Literal[
+    "corroborated_without_support",     # consensus 3, no passage `supports`
+    "against_without_contradiction",    # consensus 1, no passage `contradicts`
+    "strength_without_support",         # strength 2-3, no passage `supports`
+]
+
+# How far a passage's source was resolved to a bibliographic citation.
+CitationStatus = Literal["resolved", "partial", "unresolved"]
 
 # Client-logged interface events. Only the anchoring-relevant one exists so
 # far: whether the machine assessment was ever opened, and when relative to the
 # expert's own answer (docs/09 section 5.4).
 ElicitationEventType = Literal["machine_verdict_opened", "machine_verdict_closed"]
+
+
+class PassageCitation(BaseModel):
+    """Where a passage comes from, as a reader would cite it.
+
+    Resolved when the item is served, by joining the passage's `document_id`
+    against the curated documents in ArangoDB — never written back onto the
+    passage. The evidence sets are a frozen measurement instrument: their text
+    and every hash over it stay exactly as the agent panel read them, and a
+    citation is a label on the passage, not part of it.
+
+    `status` says how much is known. `unresolved` is shown as such rather than
+    dressed up: an expert told "Kooy93.pdf" is entitled to know that is all
+    the system has.
+    """
+
+    status: CitationStatus = "unresolved"
+    authors: List[str] = []
+    year: Optional[int] = None
+    title: Optional[str] = None
+    journal: Optional[str] = None
+    # The bare DOI ("10.1017/..."), normalised; the link is built from it.
+    doi: Optional[str] = None
+    pages: Optional[str] = None
+    # What the evidence set itself recorded, for the unresolved case: the
+    # library file name and its folder in the DEB library.
+    file_name: Optional[str] = None
+    library_id: Optional[str] = None
 
 
 class EvidencePassage(BaseModel):
@@ -87,6 +138,10 @@ class EvidencePassage(BaseModel):
     control positional attention decay (docs/11 section 7.1) and their labels
     are stored against the canonical index too, so the two panels' judgments
     line up passage for passage regardless of what order either one saw.
+
+    `doi`, `title` and `year` are what the evidence set recorded, which for
+    the DEB corpus is a file name and nothing else. `citation` is what the
+    expert is shown.
     """
 
     index: int
@@ -96,6 +151,7 @@ class EvidencePassage(BaseModel):
     title: Optional[str] = None
     year: Optional[Any] = None
     document_id: Optional[str] = None
+    citation: PassageCitation = Field(default_factory=PassageCitation)
 
 
 class PassageJudgment(BaseModel):
@@ -185,9 +241,23 @@ class ElicitationDecision(BaseModel):
     # is not comparable to anything.
     passage_judgments: Dict[str, PassageJudgment] = {}
 
+    # The expert's own answer to "Does your judgment go beyond or against what
+    # these passages show?" — asked of every evidence decision. It is the
+    # human counterpart of the M-EK arm's attribution to passage or memory
+    # (docs/14 section 2.1), and it decides whether a rationale is required.
+    departs_from_passages: Optional[bool] = None
+    # References this expert added from their own knowledge while on this
+    # item (`POST /references`), so the judgment and the literature it leans
+    # on stay linked.
+    reference_ids: List[str] = []
+
     # --- required of every decision ---
     confidence: int = Field(ge=1, le=5)
-    rationale: str = Field(min_length=1)
+    # Required only where a judgment departs from the passages — by the
+    # expert's own answer, or because their scores contradict their own
+    # passage labels — and for the fact-level tasks. Asked of everyone, it was
+    # mostly "agrees with the passages" typed eighteen times a session.
+    rationale: str = ""
 
     # Which evidence condition this judgment was made under
     # (advandeb_methods docs/09 section 5.2). `matched` = the expert saw the
@@ -241,6 +311,15 @@ class ElicitationRecord(ElicitationDecision):
     machine_verdict_opened: Optional[bool] = None
     machine_verdict_open_events: Optional[int] = None
     machine_verdict_opened_before_answer: Optional[bool] = None
+    # The instrument, stamped like the tier: which guidelines the expert
+    # worked under, and which calibration set they had completed (None before
+    # the team published one), so judgments made under different instructions
+    # or before calibration can be told apart afterwards.
+    guidelines_version: Optional[str] = None
+    calibration_version: Optional[int] = None
+    # Computed on the server from the expert's own labels and scores.
+    score_label_conflicts: List[ScoreLabelConflict] = []
+    rationale_required: Optional[bool] = None
     created_at: datetime
 
     model_config = ConfigDict(populate_by_name=True)
@@ -254,12 +333,13 @@ class ElicitationProgress(BaseModel):
     far can support.
     """
 
-    # True until the expert has finished the calibration set. Lets the client
-    # tell "queue exhausted" from "calibrate first" — both make /next return
-    # null, and the documented /next contract stays unchanged.
+    # True while a published calibration set waits for this expert. Lets the
+    # client tell "queue exhausted" from "calibrate first" — both make /next
+    # return null, and the documented /next contract stays unchanged.
     calibration_required: bool = False
     calibration_completed: int = 0
     calibration_total: int = 0
+    calibration_version: Optional[int] = None
 
     total_queue: int
     completed: int
@@ -291,15 +371,15 @@ class TaskOption(BaseModel):
     label: str
     hint: str
 
-
-# The sections the guidelines are served in: the four tasks, plus the three
-# parts of the evidence task that have their own definitions. It was typed
+# The sections the guidelines are served in: the four tasks, plus the parts
+# of the evidence task that have their own definitions. It was typed
 # `TaskType`, so serving the evidence sub-sections failed response validation
 # and /guidelines returned 500 from the day the evidence task was added — the
 # client's fallback text hid it.
 GuidelineSection = Literal[
     "provenance", "scope", "assessability", "evidence",
     "evidence_role", "evidence_strength", "consensus_direction",
+    "departure",
 ]
 
 
@@ -315,9 +395,11 @@ class Guidelines(BaseModel):
 
     The guidelines are a versioned instrument: a mid-study change invalidates
     prior judgments unless they are re-checked, so the version travels with
-    them (docs/02 section 7).
+    them (docs/02 section 7). `how_it_works` is the one-screen introduction an
+    expert reads first; it is part of the instrument for the same reason.
     """
     tasks: List[TaskGuideline] = []
+    how_it_works: List[str] = []
     version: str
 
 
@@ -334,6 +416,7 @@ class HistoryItem(BaseModel):
     corpus_id: Optional[str] = None
     evidence_strength: Optional[int] = None
     consensus_direction: Optional[int] = None
+    departs_from_passages: Optional[bool] = None
     confidence: int
     rationale: str
     time_spent_s: Optional[float] = None
@@ -345,70 +428,164 @@ class HistoryResponse(BaseModel):
     items: List[HistoryItem] = []
 
 
+# --------------------------------------------------------------------------- #
+# Calibration — real evidence items with the team's agreed answers             #
+# --------------------------------------------------------------------------- #
+#
+# Calibration used to be fifteen generated provenance and scope cases. They
+# tested a task no expert is asked to do any more, against answers nobody had
+# agreed, on the facts of one of the experts. It is now a handful of real
+# evidence items (three to five) that the team picks, each with a reference
+# answer and an explanation the team agrees on, versioned so that which set an
+# expert worked is recorded on every judgment they make afterwards.
+
+CalibrationSetStatus = Literal["draft", "published", "retired"]
+
+
+class CalibrationReference(BaseModel):
+    """The team's agreed answer for one calibration item."""
+    evidence_strength: int = Field(ge=1, le=3)
+    consensus_direction: int = Field(ge=1, le=3)
+    # Reference labels for the passages the team chose to label, keyed by
+    # canonical passage index. Optional and partial: the overall scores are
+    # the answer, and labelling all eighteen passages is not required.
+    passage_directions: Dict[str, PassageDirection] = {}
+    explanation: str = Field(min_length=1)
+
+
+class CalibrationItemSpec(BaseModel):
+    """One item of a calibration set, as an administrator enters it."""
+    evidence_set_id: str
+    reference: CalibrationReference
+
+
+class CalibrationSetDraft(BaseModel):
+    """A new or edited draft set. Three to five items is the intent; up to
+    eight is accepted so a draft can hold alternatives while the team
+    decides."""
+    items: List[CalibrationItemSpec] = Field(min_length=1, max_length=8)
+    note: Optional[str] = None
+
+
+class CalibrationSetItem(BaseModel):
+    """A stored calibration item, with what an administrator needs to
+    recognise it."""
+    evidence_set_id: str
+    sf_number: int
+    corpus_id: str
+    category: str = ""
+    statement: str = ""
+    reference: CalibrationReference
+
+
+class CalibrationSet(BaseModel):
+    version: int
+    status: CalibrationSetStatus
+    note: Optional[str] = None
+    items: List[CalibrationSetItem] = []
+    created_by: Optional[str] = None
+    created_at: datetime
+    published_at: Optional[datetime] = None
+    retired_at: Optional[datetime] = None
+
+
+class CalibrationSetList(BaseModel):
+    sets: List[CalibrationSet] = []
+    published_version: Optional[int] = None
+
+
+class EvidenceSetOption(BaseModel):
+    """An evidence set an administrator can pick for calibration."""
+    evidence_set_id: str
+    sf_number: int
+    corpus_id: str
+    category: str = ""
+    statement: str = ""
+    n_passages: int = 0
+    # How many judgments the measured queue already holds for this fact. A
+    # fact used for calibration leaves the measured queue, so picking one
+    # that is already judged throws those judgments' comparability away.
+    n_judgments: int = 0
+
+
+class EvidenceSetOptionList(BaseModel):
+    sets: List[EvidenceSetOption] = []
+
+
+class EvidenceSetDetail(EvidenceSetOption):
+    """One evidence set with the passages an expert would be shown, so the
+    team can enter reference labels against the passages themselves."""
+    passages: List[EvidencePassage] = []
+
+
 class CalibrationItem(BaseModel):
-    """A calibration case, shaped like a queue item so the UI can reuse it."""
+    """A calibration case, shaped like an evidence queue item so the expert
+    works it in the same form as the real thing."""
     calibration_id: str
-    queue_position: int = -1
-    task: TaskType
+    version: int
     sf_number: int
     statement: str
     statement_sha256: str
     category: str
-    collection_version: str
-    existing_provenance: Optional[ProvenanceType] = None
-    existing_source_citation: Optional[str] = None
-    legacy_assessment: Optional[Dict[str, Any]] = None
-    repeated_judgment: bool = False
-    n_required: int = 1
-    comparison_item: bool = False
-    stratum: str = "calibration"
+    corpus_id: str
+    evidence_set_id: str
+    evidence_content_hash: Optional[str] = None
+    passages: List[EvidencePassage] = []
+    n_passages_total: Optional[int] = None
     completed: int = 0
     total: int = 0
 
 
 class CalibrationDecision(BaseModel):
-    """An answer to one calibration case."""
+    """An answer to one calibration case — the same fields as a real
+    evidence decision."""
     calibration_id: str
-    task: TaskType
-    provenance_type: Optional[ProvenanceType] = None
-    scope_verdict: Optional[ScopeVerdict] = None
-    assessability: Optional[AssessabilityVerdict] = None
+    evidence_strength: Optional[int] = Field(default=None, ge=1, le=3)
+    consensus_direction: Optional[int] = Field(default=None, ge=1, le=3)
+    passage_judgments: Dict[str, PassageJudgment] = {}
+    departs_from_passages: Optional[bool] = None
     confidence: int = Field(ge=1, le=5)
-    rationale: str = Field(min_length=1)
+    rationale: str = ""
     time_spent_s: Optional[float] = None
 
 
 class CalibrationFeedback(BaseModel):
     """Immediate feedback — calibration teaches, so it does not withhold.
 
-    `reference` carries the one reference field for the case's task
-    (`provenance_type`, `scope_verdict` or `assessability`) plus `basis`.
+    `correct` is true when both overall scores match the reference. Passage
+    agreement is reported over the passages the team labelled, and only
+    those.
     """
     correct: bool
-    reference: Dict[str, Optional[str]] = {}
-    explanation: str
+    strength_matches: bool
+    consensus_matches: bool
+    passages_compared: int = 0
+    passages_agreed: int = 0
+    reference: CalibrationReference
     completed: int
     total: int
 
 
 class CalibrationStatus(BaseModel):
-    """How far through the calibration set an expert is.
+    """Where an expert stands against the published calibration set.
 
-    The contract the client gates on. It used to be an untyped dict, and the
-    client read `required` / `complete` / `passed` — three fields that never
-    existed — so every expert was waved through to a queue the server then
-    refused to serve, and saw "queue exhausted".
+    The contract the client gates on. `required` is the gate, and it is
+    never shut by the absence of a set: until the team publishes one, experts
+    work the queue and their judgments are stamped as made before
+    calibration. Once a set is published, each expert works it once before
+    their next item.
     """
     total: int
     completed: int
     correct: int
-    # True only when a calibration set exists AND this expert has finished
-    # it. An empty set is not a passed one: it means nobody has seeded it,
-    # and the gate stays shut until an administrator does.
+    # True when this expert has finished the published set.
     done: bool
-    # Whether any calibration set exists. Lets the client say "not set up
-    # yet — ask an administrator" instead of offering cases that are not there.
+    # Whether a published set exists at all.
     available: bool
+    # True while a published set waits for this expert: the queue is closed
+    # to them until they finish it.
+    required: bool
+    version: Optional[int] = None
 
 
 class RecallSummary(BaseModel):
@@ -597,9 +774,58 @@ class ExpertReference(BaseModel):
     resolution: Dict[str, Any] = {}
     ingestion_queued: Optional[bool] = None
     triggered_readjudication: Optional[bool] = None
+    # Curator review. An expert's reference enters the knowledge base as a
+    # CANDIDATE: it is shown to a curator, who accepts or rejects it. It is
+    # never accepted evidence on the expert's word alone.
+    curation: Optional[Dict[str, Any]] = None
     created_at: datetime
 
     model_config = ConfigDict(populate_by_name=True)
+
+
+# --------------------------------------------------------------------------- #
+# Expert references as evidence candidates — the curator's side                #
+# --------------------------------------------------------------------------- #
+
+CandidateStatus = Literal["pending", "accepted", "rejected"]
+
+
+class EvidenceCandidate(BaseModel):
+    """An expert-named paper awaiting (or past) curator review.
+
+    Deliberately carries no expert identity beyond the stamped tier: the
+    curator judges the paper and its bearing on the fact, not the person.
+    """
+    id: str
+    sf_number: int
+    statement: str = ""
+    doi: str
+    direction: ReferenceDirection
+    note: Optional[str] = None
+    tier: Optional[str] = None
+    resolved_title: Optional[str] = None
+    resolved_year: Optional[int] = None
+    resolution_status: Optional[ResolutionStatus] = None
+    status: CandidateStatus
+    review_comment: Optional[str] = None
+    created_at: datetime
+    reviewed_at: Optional[datetime] = None
+
+
+class EvidenceCandidateList(BaseModel):
+    candidates: List[EvidenceCandidate] = []
+    counts: Dict[str, int] = {}
+
+
+class CandidateReview(BaseModel):
+    """A curator's decision on one candidate."""
+    accept: bool
+    comment: Optional[str] = None
+
+
+class CandidateReviewResult(BaseModel):
+    id: str
+    status: CandidateStatus
 
 
 class ExpertAssertedEvidence(BaseModel):

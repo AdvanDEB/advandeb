@@ -41,6 +41,7 @@ sys.path.insert(0, str(BACKEND))
 
 from app.models import elicitation as m  # noqa: E402
 from app.models import enrolment as en  # noqa: E402
+from app.models import expert_verdict as ev  # noqa: E402
 
 TYPES_DIR = BACKEND.parent / "frontend" / "src" / "types"
 OUT = TYPES_DIR / "elicitation.generated.ts"
@@ -50,24 +51,30 @@ OUT = TYPES_DIR / "elicitation.generated.ts"
 ALIASES = [
     "TaskType", "PassageDirection", "EvidentialRole", "ProvenanceType",
     "ScopeVerdict", "AssessabilityVerdict", "EvidenceCondition",
-    "ElicitationEventType", "GuidelineSection",
+    "ElicitationEventType", "GuidelineSection", "ScoreLabelConflict",
+    "CitationStatus", "CalibrationSetStatus", "CandidateStatus",
+    "ReferenceDirection", "ResolutionStatus",
 ]
 
 # What the server sends. Every field is present in the JSON (pydantic
 # serialises defaults), so every field is required on the TypeScript side.
 RESPONSES: List[Type[BaseModel]] = [
-    m.EvidencePassage, m.QueueItem, m.DecisionReceipt, m.EventReceipt,
-    m.ElicitationProgress, m.TaskOption, m.TaskGuideline, m.Guidelines,
-    m.HistoryItem, m.HistoryResponse, m.CalibrationItem,
-    m.CalibrationFeedback, m.CalibrationStatus, m.RecallSummary,
-    m.PanelCoverage, m.ExpertStats, m.AwaitingCalibration, m.AdminStats,
-    m.ExpertListEntry, m.ExpertList,
+    m.PassageCitation, m.EvidencePassage, m.QueueItem, m.DecisionReceipt,
+    m.EventReceipt, m.ElicitationProgress, m.TaskOption, m.TaskGuideline,
+    m.Guidelines, m.HistoryItem, m.HistoryResponse, m.CalibrationItem,
+    m.CalibrationFeedback, m.CalibrationStatus, m.CalibrationSetItem,
+    m.CalibrationSet, m.CalibrationSetList, m.EvidenceSetOption,
+    m.EvidenceSetOptionList, m.EvidenceSetDetail, m.RecallSummary, m.PanelCoverage,
+    m.ExpertStats, m.AwaitingCalibration, m.AdminStats, m.ExpertListEntry,
+    m.ExpertList, m.EvidenceCandidate, m.EvidenceCandidateList,
+    m.CandidateReviewResult,
 ]
 
 # What the client sends. A field with a default may be omitted.
 REQUESTS: List[Type[BaseModel]] = [
     m.PassageJudgment, m.ElicitationDecision, m.CalibrationDecision,
-    m.ElicitationEvent,
+    m.ElicitationEvent, m.CalibrationReference, m.CalibrationItemSpec,
+    m.CalibrationSetDraft, m.CandidateReview,
 ]
 
 
@@ -90,6 +97,14 @@ TARGETS: List[Target] = [
          en.EnrolmentRequestList, en.EnrolmentDecisionResult,
          en.StylizedFactCategory, en.CategoryList],
         [en.EnrolmentRequest, en.EnrolmentDecision],
+    ),
+    Target(
+        ev, TYPES_DIR / "expertVerdict.generated.ts",
+        ["VerdictTier", "VerdictLabel", "WithheldReason"],
+        [ev.ConsensusDistribution, ev.StrengthDistribution,
+         ev.ExpertVerdictGroup, ev.ExpertVerdictSummary,
+         ev.ExpertVerdictBatch],
+        [],
     ),
 ]
 

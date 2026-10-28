@@ -1,7 +1,7 @@
 <template>
   <section class="card guidelines" :class="{ open }">
     <button class="disclose" @click="open = !open">
-      {{ open ? '▾' : '▸' }} Guidelines — {{ spec.title }}
+      {{ open ? '▾' : '▸' }} Definitions of every answer
       <span v-if="version" class="version">v{{ version }}</span>
     </button>
 
@@ -51,10 +51,10 @@ const version = ref<string | null>(null)
 const unavailable = ref(false)
 const served = ref<TaskGuideline[]>([])
 
-// The evidence task is defined in four served sections: the task, the
-// passage role, and the two fact-level scores.
+// The evidence task is defined in five served sections: the passage label,
+// the passage role, the two fact-level scores, and the departure question.
 const SECTIONS: Partial<Record<TaskType, GuidelineSection[]>> = {
-  evidence: ['evidence', 'evidence_role', 'evidence_strength', 'consensus_direction'],
+  evidence: ['evidence', 'evidence_role', 'evidence_strength', 'consensus_direction', 'departure'],
 }
 
 const spec = computed(() => taskSpec(props.task))

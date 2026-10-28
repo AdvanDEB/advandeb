@@ -148,6 +148,13 @@ class Settings(BaseSettings):
     # 26 h = one daily backup plus slack for a late run.
     KB_RESET_MAX_BACKUP_AGE_HOURS: float = 26.0
 
+    # Aggregated expert verdicts next to each stylized fact. A (fact, corpus,
+    # tier) group with fewer judgments than this is not shown at all — "1 of 1"
+    # is an anecdote, not a verdict. Applies to panel and contributor alike.
+    EXPERT_VERDICT_MIN_N: int = 3
+    # The elicitation collection version whose judgments and queue are read.
+    EXPERT_VERDICT_COLLECTION_VERSION: str = "1.0"
+
     # MongoDB connection pool
     MONGO_MAX_POOL_SIZE: int = 10
 

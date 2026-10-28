@@ -217,6 +217,9 @@
         </div>
       </section>
 
+      <!-- ── Papers experts named while assessing a fact ───────────── -->
+      <ExpertEvidenceCandidates />
+
     </div>
   </div>
 </template>
@@ -224,6 +227,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
+import ExpertEvidenceCandidates from '@/components/kb/ExpertEvidenceCandidates.vue'
 import {
   fetchReviewQueues,
   fetchDocumentSuggestions, approveDocument,
