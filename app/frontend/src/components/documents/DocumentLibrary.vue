@@ -268,7 +268,7 @@ interface KbDocument {
   created_at?: string
 }
 
-const props = defineProps<{ isCurator: boolean }>()
+defineProps<{ isCurator: boolean }>()
 
 const documents = ref<KbDocument[]>([])
 const loading = ref(false)
