@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div class="app-root">
+    <!-- Not id="app": main.ts mounts into index.html's #app and this renders
+         inside it, so the id would be on the page twice. -->
     <!-- Authenticated routes use the sidebar layout -->
     <AppLayout v-if="authStore.isAuthenticated && !isBareRoute">
       <router-view />
@@ -42,7 +44,8 @@ onMounted(async () => {
   box-sizing: border-box;
 }
 
-#app {
+#app,
+.app-root {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
