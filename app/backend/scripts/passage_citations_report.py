@@ -700,7 +700,7 @@ def is_real_title(title: Optional[str], fname: Optional[str]) -> bool:
     if not title or not title.strip():
         return False
     t = title.strip()
-    if t.lower().endswith(".pdf"):
+    if t.lower().endswith(".pdf") or squash(t) in ("untitled", "none", "null", "notitle", "abstract"):
         return False
     if fname and squash(t) == squash(fname[:-4] if fname.lower().endswith(".pdf") else fname):
         return False
@@ -792,8 +792,8 @@ def judge_work(w: dict, ref: dict) -> dict:
         amatch = any(name_matches(ref["surnames"][0], ref["surname_kind"], a) for a in authors[:3])
     if sim is not None:
         ok = sim >= 0.75 or (sim >= 0.5 and (ydiff is None or ydiff <= 1) and amatch is not False)
-    elif amatch is not None or ydiff is not None:
-        ok = amatch is not False and (ydiff is None or ydiff <= 1)
+    elif amatch is not None:  # no title to compare: author (and year) must agree
+        ok = amatch and (ydiff is None or ydiff <= 1)
     else:
         ok = None
     # The file name is independent evidence: a DOI whose work contradicts it on both
@@ -1187,7 +1187,7 @@ def process_reproduction(d: dict, oa_by_id: dict, oa_by_doi: dict, look: Optiona
     cands = []
     have_doi = rec_doi or (enrich or {}).get("doi")
     if not have_doi and look:
-        title = (r or {}).get("title") or d["stored_title"]
+        title = next((t for t in ((r or {}).get("title"), d["stored_title"]) if is_real_title(t, None)), None)
         year = (r or {}).get("year") or d["stored_year"]
         first = ((r or {}).get("authors") or (enrich or {}).get("authors") or [None])[0]
         if title:
@@ -1314,7 +1314,7 @@ def doi_ref(d: dict) -> dict:
         title = r.get("title") if is_real_title(r.get("title"), d["stored_title"]) else None
     else:
         fp = None
-        title = r.get("title") or d["stored_title"]
+        title = next((t for t in (r.get("title"), d["stored_title"]) if is_real_title(t, None)), None)
     authors = [a for a in (r.get("authors") or []) if a]
     if authors:
         surnames, kind = [surname_of(a) for a in authors[:2]], "full"
@@ -1358,7 +1358,7 @@ def propose_for_deb(d: dict) -> None:
                       proposal_note=f"the matching work has no DOI in OpenAlex/Crossref: {best['citation'][:160]}")
         else:
             dc.update(proposal_confidence="low", proposal_note="the best candidate carries the stored DOI; check by hand")
-    elif top and top.get("doi") and top["doi"] != stored:
+    elif top and top.get("doi") and top["doi"] != stored and top["scores"]["confidence"] != "low":
         conf = top["scores"]["confidence"]
         dc.update(proposed_doi=top["doi"], proposal_confidence="ambiguous" if conf == "high" else conf,
                   proposal_note=f"top candidate, not certain: {top['citation'][:160]}")
@@ -1369,7 +1369,7 @@ def propose_for_deb(d: dict) -> None:
 def propose_by_search(look: "Lookup", d: dict) -> None:
     """Title + first author + year search for a reproduction document whose DOI failed."""
     r = d.get("arango") or {}
-    title = r.get("title") or d["stored_title"]
+    title = next((t for t in (r.get("title"), d["stored_title"]) if is_real_title(t, None)), None)
     year = r.get("year") or d["stored_year"]
     authors = [a for a in (r.get("authors") or []) if a]
     first = surname_of(authors[0]) if authors else ""
@@ -1410,6 +1410,14 @@ def propose_by_search(look: "Lookup", d: dict) -> None:
 
 
 CORRECTION_FIELDS = ("title", "authors", "year", "journal", "doi")
+BOOKISH = {"book", "monograph", "edited-book", "reference-book", "dissertation", "thesis"}
+
+
+def venue_of(w: dict) -> Optional[str]:
+    """Journal, or for a book/thesis its publisher; never a publisher standing in for a journal."""
+    if w.get("journal"):
+        return w["journal"]
+    return w.get("publisher") if (w.get("type") or "").lower() in BOOKISH else None
 
 
 def build_corrections(docs: list[dict]) -> dict:
@@ -1455,8 +1463,8 @@ def build_corrections(docs: list[dict]) -> dict:
                 put("authors", tw["authors"], "fix: authors of the DOI's work")
             if tw.get("year") and tw.get("year") != r.get("year"):
                 put("year", tw["year"], "fix: year of the DOI's work")
-            if tw.get("journal") or tw.get("publisher"):
-                put("journal", tw.get("journal") or tw.get("publisher"), "fix: venue of the DOI's work")
+            if venue_of(tw):
+                put("journal", venue_of(tw), "fix: venue of the DOI's work")
         dc = d.get("doi_check") or {}
         if dc.get("status") in FAILED_DOI and dc.get("proposal_confidence") == "high":
             new = None if dc.get("proposed_doi") == "no DOI" else dc.get("proposed_doi")
@@ -1480,8 +1488,8 @@ def build_corrections(docs: list[dict]) -> dict:
                 put("year", w["year"], "fix: record year disagrees with the file name and the verified DOI")
             if not r.get("year") and w.get("year"):
                 put("year", w["year"], f"fill: from the verified DOI ({w['source']})")
-            if not r.get("journal") and (w.get("journal") or w.get("publisher")):
-                put("journal", w.get("journal") or w.get("publisher"), f"fill: from the verified DOI ({w['source']})")
+            if not r.get("journal") and venue_of(w):
+                put("journal", venue_of(w), f"fill: from the verified DOI ({w['source']})")
 
         if src and not tw:
             fname = d["stored_title"] if d["corpus"] == "deb" else None
@@ -1495,7 +1503,7 @@ def build_corrections(docs: list[dict]) -> dict:
             elif src.get("year") and r.get("year") and abs(int(r["year"]) - int(src["year"])) > 1 and (
                     d["corpus"] != "deb" or parse_filename(d["stored_title"])["year"] == src["year"]):
                 put("year", src["year"], f"fix: record year differs by more than one from {src_name}")
-            venue = src.get("journal") or src.get("publisher")
+            venue = venue_of(src)
             if venue and not r.get("journal"):
                 put("journal", venue, f"fill: from {src_name}")
             if src.get("doi") and not r.get("doi") and "doi" not in fixes:
@@ -1664,6 +1672,8 @@ def write_outputs(docs: list[dict], meta: dict, mode: str, http: Http) -> None:
             conf, cit, cdoi, src = "none", "", "", ""
         if not best and top and top is not None and conf == "high":
             conf = "ambiguous"
+        if conf == "low":  # not worth a person's time; the JSON keeps the scored candidates
+            conf, cit, cdoi, src = "none", "", "", ""
         rows.append({
             "corpus": d["corpus"], "document_id": d["document_id"], "stored_title": d["stored_title"],
             "n_passages": d["n_passages"], "status_arango": d["status_arango"],

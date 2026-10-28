@@ -4,31 +4,13 @@
  "note": "Proposals only: nothing has been applied. High-confidence changes only, per ArangoDB documents._key; pdf_local rows are mirrored in document_meta under the same _key. 'old' is the raw stored value (strings such as 'None' included); a 'new' of null means the stored value is wrong and no replacement exists.",
  "n_documents": 973,
  "n_field_changes": {
-  "journal": 834,
   "doi": 38,
-  "title": 4,
-  "authors": 843,
-  "year": 4
+  "title": 5,
+  "authors": 844,
+  "journal": 834,
+  "year": 5
  },
  "corrections": {
-  "69d4e10f915338a7a9f84cde": {
-   "collections": [
-    "documents",
-    "document_meta"
-   ],
-   "corpus": "deb",
-   "evidence_document_id": "2420",
-   "source_path": "2420/Gallagher et al. - 2025 - Pattern-informed energetics Energy allocation mod.pdf",
-   "n_passages": 3,
-   "fields": {
-    "journal": {
-     "old": null,
-     "new": "California Digital Library (CDL)",
-     "confidence": "high",
-     "reason": "fill: from the verified DOI (crossref)"
-    }
-   }
-  },
   "69d594eb915338a7a961a0da": {
    "collections": [
     "documents",
@@ -14846,6 +14828,44 @@
      ],
      "confidence": "high",
      "reason": "fill: from openalex by id"
+    }
+   }
+  },
+  "W24595841": {
+   "collections": [
+    "documents"
+   ],
+   "corpus": "reproduction",
+   "evidence_document_id": "W24595841",
+   "source_path": null,
+   "n_passages": 1,
+   "fields": {
+    "title": {
+     "old": "Assessment of Caribbean trade: potentially trade creating?",
+     "new": "Responses of bullfrog tadpoles to hypoxia and predators",
+     "confidence": "high",
+     "reason": "fix: the record's title belongs to another work; the passage text and the DOI agree on this one"
+    },
+    "authors": {
+     "old": [],
+     "new": [
+      "Peter B. McIntyre",
+      "S. Andy McCollum"
+     ],
+     "confidence": "high",
+     "reason": "fix: authors of the DOI's work"
+    },
+    "year": {
+     "old": 2008,
+     "new": 2000,
+     "confidence": "high",
+     "reason": "fix: year of the DOI's work"
+    },
+    "journal": {
+     "old": null,
+     "new": "Oecologia",
+     "confidence": "high",
+     "reason": "fix: venue of the DOI's work"
     }
    }
   },
