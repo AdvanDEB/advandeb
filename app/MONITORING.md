@@ -1,5 +1,14 @@
 # Monitoring & Error Tracking Setup
 
+> **HISTORICAL / PROPOSAL — not what is deployed** (banner added 2026-10-28).
+>
+> Sentry is **not** integrated: there is no `sentry-sdk` in
+> `requirements.txt`. The backend exposes no Prometheus metrics endpoint.
+>
+> What exists is the Prometheus/Grafana configuration under `../monitoring/`.
+> It scrapes the MCP gateway (`:8080`), node exporter, and itself. For health,
+> use `GET /api/health`. Treat the rest of this file as a proposal.
+
 ## Overview
 
 This document covers the setup of monitoring and error tracking for the AdvanDEB platform in production.

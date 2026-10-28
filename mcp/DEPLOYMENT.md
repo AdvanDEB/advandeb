@@ -1,5 +1,14 @@
 # MCP Gateway Deployment Guide
 
+> **Generic guide, not AdvanDEB's deployment** (note added 2026-10-28).
+> - In AdvanDEB the gateway runs loopback-only under
+>   `advandeb-stack.service` (`scripts/systemd/`), started by
+>   `scripts/start_stack.sh`, with no TLS and no fronting proxy. See
+>   `../RUNNING.md`.
+> - The nginx and `*.example.com` sections below are illustrative.
+> - At HEAD the crate does not compile (C1 in
+>   `../docs/PLAN-2026-08-26.md`).
+
 This guide covers deploying the AdvanDEB MCP Gateway to production environments.
 
 ## Table of Contents
@@ -37,7 +46,7 @@ This guide covers deploying the AdvanDEB MCP Gateway to production environments.
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/advandeb.git
+git clone https://github.com/AdvanDEB/advandeb.git
 cd advandeb/mcp
 
 # Build in release mode
@@ -321,9 +330,8 @@ wrk -t4 -c100 -d30s -s benchmark.lua http://localhost:8080/mcp
 ## Support
 
 For issues and questions:
-- GitHub Issues: https://github.com/your-org/advandeb/issues
-- Documentation: https://docs.advandeb.example.com
-- Email: support@advandeb.example.com
+- GitHub Issues: https://github.com/AdvanDEB/advandeb/issues
+- Documentation: this directory and the repo-level `RUNNING.md`
 
 ---
 

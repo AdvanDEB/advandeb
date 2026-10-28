@@ -3,6 +3,16 @@
 > **Reconciled 2026-08-26** against the live ArangoDB `advandeb_kb` instance and
 > the `graph_schemas` registrations in both MongoDB databases. Every collection,
 > edge definition, and named graph below was read from the running system.
+>
+> **Updated 2026-10-28** from the code. Changes:
+> - added the `reproduction` schema, registered since `c828adc` (2026-06-21)
+>   and previously undocumented;
+> - corrected the schema registry;
+> - corrected the `mark_dirty` triggers;
+> - removed the contradiction between the 35- and 6,003-edge `knowledge_graph`
+>   counts.
+>
+> Live counts were **not** re-taken on 2026-10-28; every count below is dated.
 
 ## Read this first: there are two graph layers
 
@@ -10,18 +20,40 @@ The previous revision of this document described a single "knowledge graph."
 There are actually **two distinct layers**, and conflating them is the source of
 most confusion when reading the code:
 
-| | **Canonical layer** | **Materialized layer** |
+| | **Canonical layer** | **Materialized layer (graph artifacts)** |
 |---|---|---|
-| Store | ArangoDB `advandeb_kb` | MongoDB `graph_nodes` / `graph_edges` |
-| Organised by | *named graphs* over edge collections | *schemas* registered in `graph_schemas`, keyed by `schema_id` |
-| Written by | ingestion, KG builder, taxonomy import | `graph_artifact_builder` / `graph_snapshot_service` |
-| Read by | agents, retrieval, provenance reconstruction | the Cosmograph frontend canvas |
+| Store | ArangoDB `advandeb_kb` | gzipped JSON files under `GRAPH_ARTIFACT_DIR` (default `data/graph_artifacts`); metadata in `graph_artifact_meta` in Mongo `advandeb_knowledge_builder_kb` |
+| Organised by | *named graphs* over edge collections | *schemas* from the static `BUILTIN_SCHEMAS`, keyed by `schema_id` |
+| Written by | ingestion, KG builder, taxonomy import | `GraphArtifactBuilder`, driven by `GraphRebuildQueue` — it fetches from ArangoDB (`graph_query_fetchers.py`) and lays out with NetworkX |
+| Read by | agents, retrieval, provenance reconstruction | the Cosmograph frontend canvas, via `/api/kb/viz/...` |
 | Source of truth | **yes** | no — derived, rebuildable |
 
-Some names appear in both layers with **different content** (`knowledge_graph`
-is the sharpest example). Some exist in only one (`chunk_graph` is Arango-only;
-`physiological_process` and `chatbot` are materialized-only). Always state which
-layer you mean.
+> **Correction (2026-10-28).** Earlier revisions, including the 2026-08-26
+> reconciliation, said the materialized layer is MongoDB `graph_nodes` /
+> `graph_edges`, registered in `graph_schemas`, and built from Mongo source
+> collections. **The code no longer works that way.**
+> `advandeb_kb/services/graph_query_service.py` states it outright: *"No
+> graph_schemas / graph_nodes / graph_edges MongoDB collections needed."*
+>
+> - Every schema except `chatbot` is fetched from **ArangoDB**.
+> - `chatbot` reads Mongo chat sessions, plus Arango lookups.
+> - No backend or KB code reads or writes the Mongo `graph_nodes`,
+>   `graph_edges` or `graph_schemas` collections any more.
+>
+> Their live counts below were taken from data left over in Mongo. They
+> describe that legacy data, **not** what the canvas renders. The per-schema
+> node and edge vocabulary is still accurate. Where Layer 2 says "Mongo
+> source", read "the Arango fetcher for that schema".
+
+Some names appear in both layers with **different content**;
+`knowledge_graph` is the sharpest example. Some exist in only one:
+`chunk_graph` is Arango-only, while `physiological_process`, `chatbot` and
+`reproduction` exist only as schemas. Always state which layer you mean.
+
+**One correction to the table above.** The `knowledge_graph` and
+`reproduction` schemas now build their artifacts **from ArangoDB**, through
+`graph_query_fetchers.py`. The table's "materialized layer reads Mongo" rule
+holds only for the older schemas.
 
 ---
 
@@ -136,21 +168,52 @@ tracked as C3 in `docs/PLAN-2026-08-26.md`.
 
 ---
 
-# Layer 2 — Materialized schemas (MongoDB)
+# Layer 2 — Materialized schemas (graph artifacts)
 
-Registered in `graph_schemas`; nodes and edges live in `graph_nodes` /
-`graph_edges` tagged by `schema_id`.
+Each schema is built into one **artifact**:
+- **Builder:** `GraphArtifactBuilder`. It runs the schema's fetcher in
+  `graph_query_fetchers.py`, computes degrees, and lays the graph out with
+  NetworkX.
+- **Storage:** `GraphArtifactStore` writes the result as a gzipped JSON file
+  under `GRAPH_ARTIFACT_DIR`. Its metadata goes in `graph_artifact_meta` in
+  Mongo `advandeb_knowledge_builder_kb`.
+- **Reading:** the frontend loads it through `/api/kb/viz/schema/{id}/artifact`
+  (and `/snapshot`, `/overview`, `/stream`).
 
-**Node fields:** `schema_id`, `node_type`, `entity_collection`, `entity_id`,
-`label`, `properties`, `degree`, `x`/`y`/`z`, `x2d`/`y2d`.
-**Edge fields:** `schema_id`, `edge_type`, `source_node_id`, `target_node_id`,
-`weight`, `properties`.
+**Node fields:** `node_type`, `entity_collection`, `entity_id`, `label`,
+`properties` (including `cluster_id`), `degree`, `x2d`/`y2d`.
+**Edge fields:** `edge_type`, source, target, `weight`, `properties`.
 
-Note that schema definitions reference **Mongo** source collections
-(`taxonomy_nodes`, `documents`, `facts`, …), not the Arango collections. The
-materializer reads Mongo, not Arango.
+`GRAPH_ARTIFACT_LAYOUT_NAME` (currently `schema_default_v4`) stamps the layout functions. If an artifact's
+version does not match, the frontend falls back to a force simulation.
+
+Schema definitions in `BUILTIN_SCHEMAS` still name "source collections" such
+as `taxonomy_nodes`. Those names are vocabulary left over from the Mongo era.
+The fetchers read the Arango collections (`taxa`, `documents`, `facts`, …).
+See the correction under "Read this first".
 
 ## Registered schemas
+
+Schemas are **static**: they come from `BUILTIN_SCHEMAS` in
+`knowledge-builder/advandeb_kb/models/graph.py`. The API accepts exactly
+these seven (`VALID_SCHEMAS` in `app/backend/app/api/routes/kb/visualization.py`).
+`POST /api/kb/viz/seed` is a no-op kept for the frontend.
+
+| Schema | Source of its artifact | Rebuild trigger (`mark_dirty`) |
+|---|---|---|
+| `citation` | Arango (`fetch_citation`) | ingestion (`kb/pipeline.py`), `knowledge_service.py` |
+| `sf_support` | Arango (`fetch_sf_support`) | ingestion (`kb/pipeline.py`) |
+| `taxonomical` | Arango (`fetch_taxonomical`), `taxa` scoped by `knowledge_graph` | KG builder (`kb/pipeline.py`) |
+| `knowledge_graph` | Arango (`fetch_knowledge_graph`) | ingestion + KG builder (`kb/pipeline.py`) |
+| `physiological_process` | Arango (`fetch_physiological`) — see its section | KG builder (`kb/pipeline.py`) |
+| `chatbot` | Mongo chat sessions + Arango lookups (`fetch_chatbot_graph`) | every chat message (`chat_service.py`, `ws.py`) |
+| `reproduction` | Arango (`fetch_reproduction`) | **none** — only a manual rebuild |
+
+`knowledge-builder/tests/test_models.py::test_builtin_schemas` still asserts
+five schemas and fails. That is part of C1 in the plan.
+
+For the record, the 2026-08-26 audit found these legacy registrations in the
+Mongo `graph_schemas` collections. No code reads them any more:
 
 | Schema | `advandeb` | `advandeb_knowledge_builder_kb` |
 |---|:---:|:---:|
@@ -202,8 +265,13 @@ The schema now materializes the taxa referenced by `knowledge_graph` edges
 (documents that study an organism) plus every ancestor on their `lineage`; the
 ancestors are what make the result a connected tree instead of a scatter of
 unrelated species. Referenced taxa carry `properties.studied = true` and are
-drawn larger than the lineage scaffolding around them. Currently 123 nodes /
-122 edges from 28 studied taxa, and it grows as the KG builder runs.
+drawn larger than the lineage scaffolding around them.
+
+When this scope change shipped, the result was 123 nodes / 122 edges from 28
+studied taxa. That was **before** the same-day `knowledge_graph` backfill,
+which raised the number of distinct linked taxa to 2,659. The materialized
+count has not been re-measured since; expect it to be far larger. It grows as
+the KG builder runs.
 
 If nothing references a taxon yet, it falls back to the rank backbone down to
 family (capped at 10,000 nodes) so the view is an orientation aid rather than
@@ -250,7 +318,7 @@ in `graph_query_fetchers.py`):
 
 | Layer | Selection | Count |
 |---|---|---:|
-| `taxa` | referenced by `knowledge_graph` edges + their `lineage` ancestors | 123 |
+| `taxa` | referenced by `knowledge_graph` edges + their `lineage` ancestors | 123 (pre-backfill) |
 | `documents` | `knowledge_graph` endpoints ∪ `citations` endpoints ∪ source docs of the selected facts | 1,213 |
 | `facts` | `knowledge_graph` endpoints ∪ those with an `sf_support` edge | 18,053 |
 | `stylized_facts` | all | 1,236 |
@@ -261,20 +329,90 @@ survive it, which keeps `extracted_from` whole. Lineage tax_ids absent from the
 NCBI import (1, 131567, 2759, 33154) are dropped via `DOCUMENT()`, which skips
 keys with no row.
 
-Artifact went from 38,736 nodes / 8,427 edges to **20,625 nodes / 57,920 edges**
-— smaller because every node now participates in the graph, far denser because
-no edge type is truncated any more: 35/35 `studies`, 8,521/8,521 `cites`,
-31,311/31,311 `supports`+`opposes`, plus 18,053 `extracted_from`.
+Artifact went from 38,736 nodes / 8,427 edges to **20,625 nodes / 57,920
+edges**. It got smaller because every node now participates in the graph, and
+far denser because no edge type is truncated any more:
+- 35/35 `studies`;
+- 8,521/8,521 `cites`;
+- 31,311/31,311 `supports` + `opposes`;
+- plus 18,053 `extracted_from`.
+
+All of this was measured **before** the `knowledge_graph` backfill
+(35 → 6,003 edges). The layer counts and artifact size above are the
+pre-backfill figures.
 
 ### `physiological_process` — registered, materializes nothing
 Nodes: `stylized_fact`, `taxon`.
 Edges: `regulates`, `depends_on` (sf → sf), `exhibited_by` (sf → taxon).
 
-**Live count of all three edge types: zero, in both databases.** The builder
-sources them from `sf_sf_relations` and `sf_taxon_relations`, and neither
-collection exists in either database. The previous revision hedged this with "if
+**Live count of all three edge types in the legacy Mongo layer: zero, in both
+databases.** The old builder sourced them from `sf_sf_relations` and
+`sf_taxon_relations`, and neither collection exists in either database.
+
+The current Arango fetcher (`fetch_physiological`) takes a different route.
+It derives `exhibited_by` (stylized fact → taxon) through
+`sf_support` → `facts` → documents → `knowledge_graph` → `taxa`. It can
+therefore produce edges now that `knowledge_graph` holds 6,003 links.
+`regulates` / `depends_on` still have no source. The artifact's current size
+has **not** been checked. Since 2026-08-29 the KG-builder pipeline marks the
+schema dirty. The previous revision hedged this with "if
 it exists"; the answer is that they do not. This schema is aspirational — it
 should either be built or withdrawn, not left registered and empty.
+
+### `reproduction` — the reproduction-domain subgraph
+Registered since `c828adc` (2026-06-21); undocumented until 2026-10-28. Built
+from **ArangoDB** by `fetch_reproduction` (`graph_query_fetchers.py`), through
+the same edge collections the canonical layer uses: `citations`, `sf_support`
+and `knowledge_graph`.
+
+**Scope.** Documents with `general_domain == 'reproduction'` **and**
+`processing_status == 'completed'`, plus:
+- the facts extracted from them;
+- the stylized facts those facts support or oppose;
+- the taxa the documents study, with their full lineage.
+
+The domain tag alone does not narrow anything. Nearly the whole literature
+index carries it: 3,898,536 of 3,899,789 documents, the exceptions being the
+1,253 curated papers. `processing_status` is the real selector, and in
+August it bounded the set to ~10.7k abstracts.
+
+**Nodes:**
+
+| Node type | Source | Meaning |
+|---|---|---|
+| `document` | `documents` | reproduction-domain paper |
+| `abstract` | `documents` | abstract-only record from the OpenAlex import (`source_type='web'`) |
+| `conclusion` | `facts` (`fact_type='conclusion'`) | the abstract's main finding |
+| `background_knowledge` | `facts` (`fact_type='background_knowledge'`) | what the abstract assumes from prior work, not its own result |
+| `citation` | `facts` (`fact_type='citation'`) | another work the abstract refers to |
+| `stylized_fact` | `stylized_facts` | a stylized fact supported or opposed by a reproduction fact |
+| `taxon` | `taxa` | organism studied; `properties.studied = true` for directly linked taxa, lineage ancestors otherwise |
+
+**Edges:** `cites`, `extracted_from`, `supports`, `opposes`, `studies`.
+
+**How the data gets there.** Scripts in `knowledge-builder/scripts/`, run by
+hand:
+1. `import_reproduction_abstracts.py` imports the OpenAlex corpus into Arango
+   `documents` as `pending`.
+2. `filter_reproduction_abstracts.py` applies a two-stage domain-relevance
+   filter.
+3. `run_reproduction_pipeline.py` makes one small-model Ollama call per
+   abstract and extracts a conclusion, background knowledge and citations as
+   `facts` with a `fact_type`. It is resumable and deduplicates by content
+   fingerprint. It has been run with `OLLAMA_MODEL=gemma2:2b`, the small model
+   that fits the host's memory.
+4. `embed_reproduction_abstracts.py` chunks and embeds the abstracts so chat
+   can retrieve them.
+
+`backfill_domain_gate.py` applies the domain gate retroactively.
+`scripts/rebuild_repro_index.py` and `scripts/check_repro_coverage.py` (repo
+root) maintain and audit the reproduction vector-index cache.
+
+**Rebuild.** Nothing calls `mark_dirty("reproduction")`. The artifact changes
+only when someone rebuilds it from the KB drawer, or with
+`POST /api/kb/viz/schema/reproduction/rebuild`. Rule 5 of
+`docs/STORAGE-CONTRACT.md` §6 says a schema must ship with its trigger; this
+one did not.
 
 ### `chatbot` — previously undocumented
 Present only in `advandeb_knowledge_builder_kb`. Projects chat activity onto the
@@ -303,6 +441,8 @@ schema definitions.
 | `chunk` | `chunks` (Arango only) | — | `chunk_id`, `document_id`, `chunk_index`, `text`, `char_start`, `char_end`, `embedded` |
 | `external_document` | synthesised ghost node | `doi` | `doi`, `internal: false`, `cluster_id: "external"` |
 | `user` / `chat_session` | `chat_sessions` | `user_id` / `title` | `user_id`, `created_at` |
+| `abstract` | `documents` (reproduction) | `title` | `doi`, `year`, `authors`, `journal`, `general_domain` |
+| `conclusion` / `background_knowledge` / `citation` | `facts` by `fact_type` (reproduction) | `content` | `confidence`, `status`, `document_id`, `fact_type` |
 
 ## Edge type reference
 
@@ -313,7 +453,7 @@ schema definitions.
 | `supports` / `opposes` | fact → stylized_fact | both (`sf_support` in Arango) | ✓ |
 | `extracted_from` | fact → document | **materialized only** | ✓ |
 | `cites` | document → document / external_document | both | ✓ |
-| `studies` | document → taxon | materialized only | ✓ 1,341 |
+| `studies` | document → taxon | Arango `knowledge_graph` edges (6,003 incl. fact links, 2026-08-26); materialized in `knowledge_graph`, `taxonomical`, `reproduction` | ✓ |
 | `neutral` | fact → stylized_fact | materialized, **undeclared** | ⚠ 4 |
 | `regulates` / `depends_on` / `exhibited_by` | sf → sf / sf → taxon | materialized only | ✗ **0** |
 | `has_session` / `references_*` | chat session → entity | materialized only (`chatbot`) | ✓ |
@@ -326,10 +466,12 @@ Tracked in `docs/PLAN-2026-08-26.md`:
 
 1. `provenance_traces` is dead schema and provenance is not durable (C3).
 2. `physiological_process` is registered but materializes nothing.
-3. The Arango `knowledge_graph` edge collection (35 edges) and the materialized
-   `knowledge_graph` schema share a name but not content.
+3. The Arango `knowledge_graph` edge collection (6,003 edges since the
+   2026-08-26 backfill; 35 before) and the materialized `knowledge_graph`
+   schema share a name but not content.
 4. The `neutral` edge type is undeclared in the `sf_support` schema vocabulary.
-5. `citation` and `knowledge_graph` are populated in different databases —
+5. `reproduction` has no `mark_dirty` trigger (see its section).
+6. `citation` and `knowledge_graph` are populated in different databases —
    citations mostly in the KB database, taxa only in `advandeb`. Which one the
    frontend reads for which view is not written down. See
    `docs/STORAGE-CONTRACT.md`.

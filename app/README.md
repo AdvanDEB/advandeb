@@ -1,47 +1,71 @@
 # AdvanDEB — App
 
-**Status**: Internal beta — under active development (2026-08).
+**Status**: Internal tool — under active development.
 **Version**: 0.1.0
 
-> Note: this component was historically called the "Modeling Assistant." The
-> modeling assistant proper is Phase 2 and has not been started; this is the
-> AdvanDEB application itself. See `../docs/SYSTEM-OVERVIEW.md`.
+> Note: this component was historically called the "Modeling Assistant", and
+> some strings in the code still say so. It is the AdvanDEB application
+> itself. Its first real modeling feature is the tDEB simulator at `/models`.
+> See `../docs/SYSTEM-OVERVIEW.md`.
 
 ---
 
 ## Overview
 
-AdvanDEB is a full-stack web application providing an interactive interface to a curated knowledge graph for Dynamic Energy Budget (DEB) biology. It integrates knowledge building, document management, and AI-powered chat assistance through a modern, responsive UI.
+The AdvanDEB app is the web interface to a curated knowledge graph for Dynamic
+Energy Budget (DEB) biology. It combines:
+- chat with citations;
+- knowledge exploration and curation;
+- a tDEB model simulator;
+- expert elicitation.
+
+There is one FastAPI backend and one Vue 3 frontend.
 
 ### Key Features
 
-**Real-time Chat Interface**
-- WebSocket-based streaming chat
-- Agent activity visualization
-- Markdown rendering with syntax highlighting
-- Multi-session management
-- Export conversations
+**Chat with citations** (`/chat`)
+- WebSocket streaming (`/ws/chat/{session_id}`), with an agent-activity panel
+- **Shared default model:** NVIDIA Nemotron on one operator key, rate-limited
+  across all users
+- **Bring your own key:** Anthropic, OpenAI, Gemini, GitHub Models (including
+  "Connect with GitHub"), NVIDIA. Keys are encrypted at rest.
+- KAG pipeline with an EvidenceRegistry. Citation markers: `[n]` chunks, `[G]`
+  graph facts, `[SF]` stylized facts, `[D]` AdvanDEB's own docs.
+  See `../docs/SYSTEM-OVERVIEW.md` §4a.
+- Sessions: rename, per-session instructions, prompt library, suggested
+  follow-ups, answer feedback
 
-**Interactive Knowledge Graph**
-- Cosmograph WebGL canvas
-- Multiple layouts (Force, Tree, Circle, Rings)
-- Node filtering and search
-- Graph expansion
-- Multiple graph types (Knowledge, Citation, Taxonomy)
+**Knowledge exploration**
+- Documents (`/documents`), with processing status and user flags
+- Facts (`/facts`): stylized facts, KB facts, user fact suggestions
+- Knowledge Builder (`/kb`, curators and admins):
+  - a Cosmograph WebGL canvas over seven graph schemas;
+  - ingestion, database inspection, KG builder (document→taxon links);
+  - suggestions and review queues
 
-**Provenance Tracking**
-- Citation trails (Answer → Facts → Chunks → Documents)
-- Expandable chunk context
-- Source document linking
-- Note: trails are **reconstructed on read**, not persisted — a historical
-  answer's evidence chain cannot be audited after the fact. See
+**Provenance**
+- Citation trails: Answer → Facts → Chunks → Documents, with expandable chunk
+  context. `[D]` citations resolve to the in-app documentation.
+- Trails are **reconstructed on read**, not persisted. A historical answer's
+  evidence chain cannot be audited after the fact. See
   `../docs/STORAGE-CONTRACT.md` §5.
 
-**Document Management**
-- Drag-and-drop upload
-- PDF processing
-- Search and filtering
-- Embedding status tracking
+**tDEB simulator and model library** (`/models`, `/models/:id`)
+- Per-user transport-network DEB models and editable equations
+- Changes saved as you edit
+- Simulation on the backend (SciPy `solve_ivp`)
+- Templates published by curators
+
+**Expert elicitation** (`/elicitation`, public `/elicitation/join`, admin `/admin/experts`)
+- Stylized-fact judgment queue with a calibration gate
+- Panel and contributor tiers
+- Expert-asserted DOI references
+- See `../docs/ELICITATION.md`.
+
+**Administration** (`/admin/users`, `/admin/experts`)
+- User and role management
+- Consented chat review, with an access audit log
+- Expert enrolment review and capability grants
 
 ---
 
@@ -49,26 +73,31 @@ AdvanDEB is a full-stack web application providing an interactive interface to a
 
 ```
 app/
-├── backend/               # FastAPI backend (serves /api/* and the built SPA)
+├── backend/               # FastAPI backend (serves /api/*, /ws/* and, locally, the built SPA)
 │   ├── app/
-│   │   ├── api/routes/   # API endpoints
-│   │   ├── services/     # Business logic
+│   │   ├── api/routes/   # API endpoints (incl. kb/ for the Knowledge Builder)
+│   │   ├── services/     # Business logic (chat, BYOK/KAG, elicitation, provenance, …)
 │   │   ├── models/       # Pydantic models
-│   │   ├── core/         # Config, auth, database
-│   │   └── clients/      # MCP client
+│   │   ├── core/         # Config, auth, roles/capabilities, crypto, dbguard
+│   │   ├── kb/           # Ingestion pipeline (FastAPI background tasks)
+│   │   ├── tdeb/         # tDEB simulator: network model, equations, solver
+│   │   └── data/         # platform_docs.json — in-app docs, citable in chat as [D]
+│   ├── tests/
 │   └── requirements.txt
 │
-├── frontend/             # Vue 3 frontend (built into backend's static dir)
+├── frontend/             # Vue 3 + TypeScript frontend
 │   ├── src/
 │   │   ├── views/       # Page components
 │   │   ├── components/  # Reusable components
 │   │   ├── stores/      # Pinia state management
 │   │   ├── utils/       # API client, helpers
-│   │   └── router/      # Vue Router config
+│   │   ├── router/      # Vue Router config
+│   │   └── tests/       # vitest unit tests
+│   ├── tests/e2e/       # Playwright specs
 │   └── package.json
 │
-├── DEPLOYMENT.md              # Deployment guide
-├── MONITORING.md              # Monitoring setup
+├── DEPLOYMENT.md              # HISTORICAL — see ../RUNNING.md
+├── MONITORING.md              # HISTORICAL / proposal
 └── README.md                  # This file
 ```
 
@@ -79,30 +108,33 @@ app/
 ### Development Mode
 
 ```bash
-cd advandeb/app
-
+# From the repo root.
 # Terminal 1: Backend (serves /api/* on :8400)
-cd backend
-cp .env.example .env  # Configure environment
+cd app/backend
+cp .env.example .env  # Configure environment (see below)
 pip install -r requirements.txt
 pip install -e ../../knowledge-builder
 uvicorn app.main:app --reload --port 8400
 
-# Terminal 2: Frontend dev server (Vite, hot-reload on :5173)
-cd frontend
+# Terminal 2: Frontend dev server (Vite, hot-reload on :5173), from the repo root
+cd app/frontend
 npm install
 npm run dev
 ```
 
-Access the dev UI at: **http://localhost:5173** (proxies `/api/*` to the backend on :8400).
+Access the dev UI at **http://localhost:5173**. Vite proxies `/api/*` and
+`/ws/*` to the backend on :8400.
 
 ### Production Mode
 
-In production there is no separate web server in front of the app — the FastAPI backend serves both the JSON API at `/api/*` and the built Vue SPA from `frontend/dist/` on port **8400**.
+The built SPA lives in `frontend/dist/`:
+- **Locally**, the FastAPI backend serves it alongside the API on `:8400`.
+- **On advandeb.com**, a Cloudflare Tunnel reaches nginx on `127.0.0.1:8200`.
+  nginx serves `dist/` from disk and proxies `/api/` and `/ws/` to `:8400`.
 
 ```bash
-# Build the frontend (output goes to frontend/dist/)
-cd frontend
+# From the repo root. Build the frontend (output goes to app/frontend/dist/)
+cd app/frontend
 npm run build
 
 # Run the backend; it will mount and serve dist/
@@ -110,7 +142,8 @@ cd ../backend
 uvicorn app.main:app --port 8400
 ```
 
-For canonical ops instructions (systemd unit, service management, environment), see [`RUNNING.md`](../RUNNING.md) at the repo root.
+For the canonical ops instructions (systemd units, service management,
+environment), see [`RUNNING.md`](../RUNNING.md) at the repo root.
 
 ---
 
@@ -118,24 +151,30 @@ For canonical ops instructions (systemd unit, service management, environment), 
 
 ### Backend (.env)
 
-**Required:**
+Start from `backend/.env.example`. The full variable table, including what
+breaks without each one, is in [`RUNNING.md`](../RUNNING.md).
+
+The minimum for a working local app:
+
 ```env
-JWT_SECRET_KEY=your-secret-key-here
-GOOGLE_CLIENT_ID=your-google-client-id
-GOOGLE_CLIENT_SECRET=your-google-client-secret
-GOOGLE_REDIRECT_URI=http://localhost:8400/api/auth/callback
+JWT_SECRET_KEY=<random, ≥32 chars>
+ENVIRONMENT=development
 MONGODB_URI=mongodb://localhost:27017
+ARANGO_USERNAME=<user>
+ARANGO_PASSWORD=<password>
 ```
 
-**Optional:**
+Add these for chat:
+
 ```env
-MCP_SERVER_URL=http://localhost:8080
-OLLAMA_BASE_URL=http://localhost:11434
-CORS_ORIGINS=http://localhost:5173
-LOG_LEVEL=INFO
+DEFAULT_CHAT_API_KEY=<NVIDIA API key>   # shared default model; not in .env.example
+LLM_KEY_ENCRYPTION_KEY=<Fernet key>     # required to save BYOK keys
 ```
 
-See `backend/.env.example` for full configuration.
+Google OAuth variables are optional; the button is hidden in the UI.
+
+**`MONGODB_DB_NAME` defaults to `advandeb`, which is the production
+database.** Anything that writes must use a scratch name; see RUNNING.md.
 
 ---
 
@@ -143,68 +182,56 @@ See `backend/.env.example` for full configuration.
 
 ### Running Tests
 
-**Frontend:**
+**Frontend** (vitest), from the repo root:
 ```bash
-cd frontend
-
-# Unit tests (Vitest)
-npm test
+cd app/frontend
+npm test            # vitest run
 npm run test:watch
 ```
 
-**Backend:**
+`npm test` currently also picks up the Playwright specs in `tests/e2e/`, and
+those two files fail (C1 in `../docs/PLAN-2026-08-26.md`). The 48 unit tests
+pass. Run the Playwright specs with `npm run test:e2e`, against a running app.
+
+**Backend**, from the repo root:
 ```bash
-cd backend
-
-# All tests
-pytest
-
-# With coverage
-pytest --cov=app --cov-report=html
+cd app/backend && JWT_SECRET_KEY=local-test-secret-key-at-least-32-chars ENVIRONMENT=development MONGODB_URI=mongodb://127.0.0.1:1 python -m pytest -q
 ```
+
+Use `python -m pytest`; plain `pytest` cannot import `app.*`. The tests mock
+MongoDB, and the unreachable URI makes sure nothing reaches a live database.
+`tests/verify_*.py` are scripts, not pytest modules. They write to MongoDB, so
+run them only against a guarded scratch database.
 
 ### Building
 
-**Frontend:**
 ```bash
-cd frontend
-npm run build
-# Output: dist/ (served by the FastAPI backend in production)
-
-# Analyze bundle size
-npx vite-bundle-visualizer
+cd app/frontend
+npm run build       # vue-tsc type-check, then vite build → dist/
 ```
 
 ### Code Quality
 
-```bash
-# Frontend
-cd frontend
-npm run lint
-npm run format
-
-# Backend
-cd backend
-black app/
-isort app/
-mypy app/
-```
+`black`, `isort` and `mypy` are in `backend/requirements.txt`; run them from
+`app/backend` against `app/`. CI does not enforce them. The frontend `lint`
+and `format` scripts exist in `package.json`, but there is no ESLint
+configuration in the repo, so `npm run lint` does not do anything useful yet.
 
 ---
 
 ## Deployment
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for deployment guide and [`RUNNING.md`](../RUNNING.md) for canonical ops instructions.
+See [`RUNNING.md`](../RUNNING.md) for the canonical ops instructions.
+[DEPLOYMENT.md](DEPLOYMENT.md) is historical.
 
 ---
 
 ## Monitoring
 
-See [MONITORING.md](MONITORING.md) for monitoring setup including:
-- Sentry error tracking
-- Prometheus metrics
-- Structured logging
-- Alert configuration
+Sentry is not integrated, and the backend has no metrics endpoint. Use
+`GET /api/health`. Prometheus/Grafana configuration for the gateway and host
+is under `../monitoring/`. [MONITORING.md](MONITORING.md) is a proposal, not
+a description.
 
 ---
 
@@ -216,58 +243,96 @@ When running the backend, interactive API docs are available at:
 
 ### Key Endpoints
 
-**Authentication:**
-- `GET /api/auth/google` - Google OAuth login
-- `POST /api/auth/login` - Native login
-- `GET /api/auth/me` - Get current user
+Every router is mounted in `backend/app/main.py`. The ones most often needed:
 
-**Documents:**
-- `GET /api/documents` - List documents
-- `POST /api/documents/upload` - Upload document
-- `POST /api/documents/{id}/embed` - Trigger embedding
+**Authentication** (`/api/auth`):
+- `POST /login` — email + password → access and refresh tokens
+- `POST /token` — OAuth2 password form (for the Swagger "Authorize" button)
+- `POST /refresh` — new access token from a refresh token
+- `POST /logout` — revoke the refresh token
+- `GET /config` — which sign-in methods are enabled
+- `POST /google` — Google sign-in (hidden in the UI)
 
-**Chat:**
-- `POST /api/chat/message` - Send message (REST)
-- `WS /ws/chat/{session_id}` - WebSocket chat stream
+There is no self-registration endpoint. Accounts are created by an
+administrator (`POST /api/users/`) or by approving an elicitation enrolment.
 
-**Knowledge Graph:**
-- `GET /api/graph/{type}` - Get graph data
-- `GET /api/graph/expand` - Expand node neighbors
-- `GET /api/graph/provenance/{id}` - Get citation trail
+**Users** (`/api/users`):
+- `GET` / `PUT /me`, `PUT /me/password`
+- admin: list, create, roles, status, reset password, consented chat review
+
+**BYOK keys** (`/api/users/me/llm-keys`):
+- `GET /providers`
+- `GET` / `POST ""` — list or add a key
+- `POST /{key}/test`, `DELETE /{key}`, `GET /{key}/models`
+- `POST /oauth/github/start`, `POST /oauth/github/poll` — GitHub device flow
+
+**Chat** (`/api/chat`, `/ws`):
+- `WS /ws/chat/{session_id}` — the streaming chat path the UI uses
+- `GET /api/chat/default-model`
+- `GET /api/chat/sessions`, `GET` / `PUT` / `DELETE /api/chat/sessions/{id}`
+- `PUT /sessions/{id}/llm`, `/rename`, `/system-prompt`
+- `POST /api/chat/messages/{id}/feedback`
+- `POST /api/chat/` — REST fallback via the MCP gateway; not used by the UI
+
+**Provenance** (`/api/graph`):
+- `GET /provenance/{citation_id}`
+- `GET /chunk/{chunk_id}/context`
+
+**Documents and facts**:
+- `/api/documents` — list, get, upload, approve, delete
+- `/api/facts` — facts and stylized facts, with review
+
+**Knowledge Builder** (`/api/kb/*`, curators):
+- `viz` — graph schemas, artifacts, rebuild, expansion
+- `ingestion`
+- `db` — collections, review queues, reset
+- `kg` — document→taxon linking
+- `documents`, `facts`, `stylized-facts`, `fs`, `agents`
+
+**tDEB** (`/api/tdeb`):
+- `GET /templates`, `GET /published`
+- models CRUD; nodes and edges
+- `POST /models/{id}/simulate`, `WS /api/tdeb/ws/simulate/{id}`
+- `POST` / `DELETE /models/{id}/publish` (curator)
+- equations: get, update, reset, validate
+
+**Elicitation** (`/api/elicitation`, `/api/enrolment`): see
+`../docs/ELICITATION.md` §9.
+
+**Health**: `GET /api/health` (canonical), `GET /health`, `GET /api/info`.
 
 ---
 
 ## Tech Stack
 
 ### Frontend
-- **Framework**: Vue 3 (Composition API)
-- **Language**: TypeScript
-- **Build Tool**: Vite
-- **State Management**: Pinia
-- **Routing**: Vue Router
-- **Styling**: Tailwind CSS
+- **Framework**: Vue 3 (Composition API), TypeScript, Vite
+- **State / routing**: Pinia, Vue Router
+- **UI**: Element Plus and Tailwind CSS
 - **Graph**: Cosmograph (WebGL)
-- **Markdown**: marked + highlight.js
-- **Testing**: Vitest
+- **Markdown**: marked + highlight.js, sanitised with DOMPurify
+- **Testing**: Vitest (unit), Playwright (e2e)
 
 ### Backend
-- **Framework**: FastAPI
-- **Language**: Python 3.11
+- **Framework**: FastAPI, Python 3.11
 - **Datastores**: ArangoDB (canonical knowledge), ChromaDB (vectors),
-  MongoDB via Motor (application state + materialized graphs).
-  See `../docs/STORAGE-CONTRACT.md`.
+  MongoDB via Motor (application state), graph artifacts as gzipped JSON on
+  disk. See `../docs/STORAGE-CONTRACT.md`.
+- **LLMs**: external providers for chat (NVIDIA default; BYOK Anthropic,
+  OpenAI, Gemini, GitHub Models, NVIDIA); local Ollama for agents,
+  extraction and follow-ups
+- **Simulation**: SciPy (`solve_ivp`) for tDEB
 - **Authentication**: JWT + native password; Google OAuth implemented but
-  currently hidden in the UI; GitHub OAuth device flow
-- **WebSockets**: FastAPI WebSockets
+  currently hidden in the UI; GitHub OAuth device flow for GitHub Models
 - **Testing**: pytest + pytest-asyncio
 
 ### Infrastructure
-- **Web server**: FastAPI (uvicorn) on :8400 — serves API and the built SPA
-- **Process management**: systemd — `advandeb.target` pulls in `advandeb.service`
-  (backend) and `advandeb-stack.service` (MCP gateway + 6 agents)
-- **Monitoring**: Prometheus/Grafana configs under `../monitoring/`; Prometheus
-  currently scrapes the MCP gateway (:8080), node exporter, and itself. The
-  backend exposes no metrics endpoint yet. Sentry is **not** integrated.
+- **Web server**: uvicorn on :8400. In production it sits behind Cloudflare
+  Tunnel → nginx :8200, and nginx serves the SPA.
+- **Process management**: systemd. `advandeb.target` pulls in
+  `advandeb.service` (backend) and `advandeb-stack.service` (MCP gateway + 6
+  agents). The units are in `../scripts/systemd/`.
+- **Monitoring**: see above.
 
 ---
 
@@ -280,51 +345,63 @@ See [`docs/ROADMAP.md`](../docs/ROADMAP.md) for current phase status and outstan
 ## Integration
 
 ### With Knowledge Builder
-- Imports `advandeb_kb` package (`pip install -e ../../knowledge-builder`)
+- Imports the `advandeb_kb` package (`pip install -e ../../knowledge-builder`)
 - Shares the MongoDB application database (`advandeb`)
-- Reads canonical knowledge from ArangoDB (via KB) and renders the
-  *materialized* graph from Mongo `graph_nodes` / `graph_edges`
+- Reads canonical knowledge from ArangoDB, via the KB package, and serves
+  graph views as prebuilt artifacts built from ArangoDB
 - Note: a second Mongo database, `advandeb_knowledge_builder_kb`, is a
   transitional Mongo→Arango migration remnant. Do not add new writers to it.
 
-### With MCP Gateway
-- MCP client for tool calls
-- WebSocket streaming for agent updates
-- No authentication (internal service)
+### With the agents and the MCP gateway
+- The chat path talks to `chatbot_agent` (`CHATBOT_AGENT_WS`, :8086) and
+  `retrieval_agent` (`RETRIEVAL_AGENT_WS`, :8081) **directly**
+- The MCP gateway (:8080) is used only by the REST fallback `POST /api/chat/`
+- No authentication on either (internal, loopback-only)
 
 ---
 
-## User Roles
+## User Roles and Capabilities
 
 Defined in `backend/app/core/dependencies.py`:
 
-- **Administrator**: Full access
-- **Knowledge Curator**: Create/edit knowledge, run agents
-- **Knowledge Explorator**: Read-only access; the default role on account creation
+- **Administrator**: full access, user management, expert management
+- **Knowledge Curator**: create, edit and review knowledge; Knowledge Builder;
+  publish tDEB templates
+- **Knowledge Explorator**: the default role on account creation; chat,
+  read access, own tDEB models
+- **External Contributor**: elicitation and settings only; no documents,
+  chat, KB, graph or models
 
-Role enforcement via FastAPI dependencies.
+Roles are enforced with `require_admin` and `require_curator`.
 
-**Not implemented:** the `capabilities` field on the user model is initialised
-to `[]` and never granted or checked. The capability set described in older
-docs (Knowledge Creation, Agent Access, Analytics Access, Reviewer Status) is a
-design, not a feature.
+**Capabilities** are enforced with `require_capability(...)`. One is in use:
+`sf_elicitation`, which gates every elicitation endpoint. An administrator
+grants it, or enrolment approval does. Curators and external contributors
+pass the check by role. The older capability design (Knowledge Creation,
+Agent Access, Analytics Access, Reviewer Status) remains unimplemented.
 
-**No anonymous access.** Every route requires authentication, including
-read-only browsing.
+**Anonymous access** is limited to:
+- the landing page;
+- login;
+- the elicitation enrolment form (`POST /api/enrolment/request`,
+  rate-limited).
+
+Everything that reads knowledge requires an account.
 
 ---
 
 ## Security
 
-- JWT-based authentication with enforced `type` claims (access vs refresh)
+- JWT-based authentication with enforced `type` claims (access vs refresh).
+  Both tokens are currently held in `localStorage` (C14 in the plan).
 - Refresh-token revocation on logout (`revoked_tokens`, TTL-indexed)
-- `slowapi` rate limiting on auth endpoints
+- `slowapi` rate limiting on auth endpoints and on public enrolment
 - Constant-time login (bcrypt against a dummy hash on user-not-found)
 - `JWT_SECRET_KEY` validator rejects unset/short/example secrets outside development
-- Google OAuth integration (currently hidden in the UI)
-- CORS configuration
-- Security headers (X-Frame-Options, X-Content-Type-Options, etc.)
-- Environment variable secrets
+- BYOK keys Fernet-encrypted at rest (`LLM_KEY_ENCRYPTION_KEY`); only the last
+  four characters are ever shown back
+- Object-level authorization on user-owned resources (`a985b7a`)
+- CORS configuration and security headers
 
 ---
 
@@ -332,12 +409,14 @@ read-only browsing.
 
 ### Frontend not loading
 ```bash
-# In dev: make sure the Vite dev server is running on :5173
-cd frontend && npm run dev
+# In dev: make sure the Vite dev server is running on :5173 (from the repo root)
+cd app/frontend && npm run dev
 
-# In prod: the FastAPI backend serves frontend/dist/ — make sure you ran
+# Locally: the FastAPI backend serves frontend/dist/ — make sure you ran
 #   npm run build
 # and that the backend is up on :8400.
+# In production nginx serves dist/ from disk; a new build is live immediately,
+# but backend changes need a restart of advandeb.service.
 ```
 
 ### Backend connection errors
@@ -349,8 +428,10 @@ mongosh --eval "db.adminCommand('ping')"
 
 ### WebSocket connection failures
 - Verify the backend is reachable on :8400
-- Check backend WebSocket registration in `main.py`
+- Check the backend WebSocket registration in `main.py`
 - In dev, confirm the Vite proxy forwards `/ws/*` to the backend
+
+More failure modes: [`RUNNING.md`](../RUNNING.md) → Common Issues.
 
 ---
 
@@ -359,8 +440,8 @@ mongosh --eval "db.adminCommand('ping')"
 - [Roadmap](../docs/ROADMAP.md)
 - [System overview](../docs/SYSTEM-OVERVIEW.md)
 - [Running the app](../RUNNING.md)
-- [Deployment Guide](DEPLOYMENT.md)
-- [Monitoring Guide](MONITORING.md)
+- [Storage contract](../docs/STORAGE-CONTRACT.md)
+- [Expert elicitation](../docs/ELICITATION.md)
 - [Vue 3 Docs](https://vuejs.org/)
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 
@@ -368,8 +449,9 @@ mongosh --eval "db.adminCommand('ping')"
 
 ## License
 
-[License information]
+No licence has been granted; all rights reserved. See the root
+[`README.md`](../README.md#licensing).
 
 ---
 
-**Last Updated**: 2026-05-18
+**Last Updated**: 2026-10-28

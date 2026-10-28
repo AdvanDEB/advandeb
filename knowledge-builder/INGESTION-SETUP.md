@@ -1,5 +1,21 @@
 # Batch PDF Ingestion Setup Guide
 
+> **HISTORICAL — describes the removed Celery/Redis pipeline** (banner added
+> 2026-10-28).
+>
+> On 2026-03-16 (`8e3de1f`) Celery workers and the Redis broker were replaced
+> by FastAPI background tasks in the app backend (`app/backend/app/kb/pipeline.py`,
+> routes under `/api/kb/ingestion`). Nothing below about `celery worker`,
+> Redis, or a separate `backend/` directory applies. Ingestion is driven from
+> the **Knowledge → Ingestion** tab at `/kb`. For bulk runs (ChromaDB +
+> ArangoDB) use `scripts/batch_ingest_production.py` at the repo root, which
+> supports `--dry-run`. `knowledge-builder/scripts/batch_ingest.py` is stale:
+> it still queues Celery tasks. In-app concurrency is set by
+> `INGESTION_CONCURRENCY`.
+>
+> Current setup: [`../RUNNING.md`](../RUNNING.md). Where ingested data lands:
+> [`../docs/STORAGE-CONTRACT.md`](../docs/STORAGE-CONTRACT.md).
+
 This guide covers the new batch ingestion system for processing large numbers of PDFs from the `papers/` directory.
 
 ## Overview
