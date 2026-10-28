@@ -466,7 +466,9 @@ def test_forwarded_headers_are_trusted_from_localhost_only(client):
     from app.main import app
 
     proxy = next(m for m in app.user_middleware if m.cls is ProxyHeadersMiddleware)
-    assert proxy.options["trusted_hosts"] == "127.0.0.1"
+    # Starlette keeps the keyword arguments in .kwargs since 0.35, .options before.
+    options = proxy.kwargs if hasattr(proxy, "kwargs") else proxy.options
+    assert options["trusted_hosts"] == "127.0.0.1"
 
 
 # --------------------------------------------------------------------------- #
