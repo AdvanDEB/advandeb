@@ -1509,9 +1509,14 @@ class ElicitationService:
         by_tier: Dict[str, int] = {}
         per_expert: Dict[str, Dict[str, Any]] = {}
         panel_counts: Dict[tuple, int] = {}
+        all_counts: Dict[tuple, int] = {}
+        times: List[float] = []
         ladder = 0
 
         async for a in self.db.elicitations.find({}):
+            all_counts[_item_key(a)] = all_counts.get(_item_key(a), 0) + 1
+            if a.get("time_spent_s"):
+                times.append(float(a["time_spent_s"]))
             st = a.get("stratum", "?")
             by_stratum[st] = by_stratum.get(st, 0) + 1
             tk = a.get("task", "?")
@@ -1540,16 +1545,22 @@ class ElicitationService:
                 if tk == LADDER_TASK:
                     ladder += 1
 
-        met = pending = 0
+        met = pending = total_queue = 0
+        comparison_total = comparison_complete = 0
         async for q in self.db.elicitation_queue.find(
                 {"collection_version": collection_version},
-                {"sf_number": 1, "task": 1, "corpus_id": 1, "n_required": 1}):
+                {"sf_number": 1, "task": 1, "corpus_id": 1, "n_required": 1,
+                 "comparison_item": 1}):
+            total_queue += 1
             need = int(q.get("n_required", 1))
             have = panel_counts.get(_item_key(q), 0)
             if have >= need:
                 met += 1
             else:
                 pending += 1
+            if q.get("comparison_item"):
+                comparison_total += 1
+                comparison_complete += have >= need
 
         experts = []
         for eid, v in per_expert.items():
@@ -1578,10 +1589,7 @@ class ElicitationService:
                 "median_s": (statistics.median(v["times"])
                              if v["times"] else None),
                 # Who is cleared to contribute at all (docs/10 section 5.3).
-                "calibration": {"completed": cal["completed"],
-                                "total": cal["total"],
-                                "correct": cal["correct"],
-                                "done": cal["done"]},
+                "calibration": cal,
             })
         experts.sort(key=lambda x: -x["n"])
 
@@ -1615,6 +1623,12 @@ class ElicitationService:
 
         return {
             "expert_references": expert_refs,
+            "total_queue": total_queue,
+            "completed": sum(by_task.values()),
+            "repeated_judgments": sum(1 for v in all_counts.values() if v >= 2),
+            "median_seconds_per_item": statistics.median(times) if times else None,
+            "comparison_total": comparison_total,
+            "comparison_complete": comparison_complete,
             "by_stratum": by_stratum, "by_task": by_task, "by_tier": by_tier,
             "by_expert": experts,
             "by_record_tier": by_tier,

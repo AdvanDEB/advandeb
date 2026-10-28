@@ -13,13 +13,16 @@ from fastapi import APIRouter, Depends, HTTPException, Request, status
 
 from app.core.dependencies import require_admin
 from app.core.limiter import limiter
-from app.models.enrolment import EnrolmentDecision, EnrolmentRequest
+from app.models.enrolment import (
+    EnrolmentDecision, EnrolmentDecisionResult, EnrolmentRequest,
+    EnrolmentRequestList, EnrolmentSubmitted,
+)
 from app.services.enrolment_service import EnrolmentService
 
 router = APIRouter()
 
 
-@router.post("/request")
+@router.post("/request", response_model=EnrolmentSubmitted)
 @limiter.limit("5/minute")
 async def submit_request(request: Request, body: EnrolmentRequest):
     """Request access. Public, rate-limited.
@@ -30,7 +33,7 @@ async def submit_request(request: Request, body: EnrolmentRequest):
     return await EnrolmentService().submit_request(body)
 
 
-@router.get("/requests")
+@router.get("/requests", response_model=EnrolmentRequestList)
 async def list_requests(
     status_filter: str | None = None,
     current_user: dict = Depends(require_admin),
@@ -43,7 +46,8 @@ async def list_requests(
     return {"requests": await EnrolmentService().list_requests(status_filter)}
 
 
-@router.post("/requests/{request_id}/decide")
+@router.post("/requests/{request_id}/decide",
+             response_model=EnrolmentDecisionResult)
 async def decide_request(
     request_id: str,
     decision: EnrolmentDecision,

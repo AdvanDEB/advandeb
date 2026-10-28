@@ -140,7 +140,8 @@ class EnrolmentService:
             # Surface the conflict the queue will have to exclude, so the
             # administrator sees it at the moment of the decision.
             if r.get("status") == "pending" and "matched_authored_sf_numbers" not in r:
-                r["matched_authored_sf_numbers"] = await self.match_authored(
+                (r["matched_authored_sf_numbers"],
+                 r["matched_author_slugs"]) = await self._match(
                     r.get("name", ""), r.get("orcid"))
             out.append(r)
         return out
@@ -227,10 +228,12 @@ class EnrolmentService:
             {"$set": {"status": "approved", "decided_at": now,
                       "decided_by": admin_id, "assigned_tier": decision.tier,
                       "matched_authored_sf_numbers": authored,
+                      "matched_author_slugs": author_slugs,
                       "user_id": user_id, "note": decision.note}})
         logger.info("enrolment approved: %s as %s (%d authored facts)",
                     req["email"], decision.tier, len(authored))
         return {"status": "approved", "tier": decision.tier,
                 "user_id": user_id,
                 "matched_authored_sf_numbers": authored,
+                "author_slugs": author_slugs,
                 "temp_password": temp_password if not existing else None}

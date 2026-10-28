@@ -9,25 +9,33 @@ from __future__ import annotations
 
 import importlib.util
 import re
+import sys
 from pathlib import Path
 
 from app.models import elicitation as m
+from app.models import enrolment as en
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "gen_elicitation_types.py"
 
 
 def _gen():
+    if "gen_elicitation_types" in sys.modules:
+        return sys.modules["gen_elicitation_types"]
     spec = importlib.util.spec_from_file_location("gen_elicitation_types", SCRIPT)
     mod = importlib.util.module_from_spec(spec)
+    # Registered before execution: the script's dataclass resolves its own
+    # module through sys.modules.
+    sys.modules[spec.name] = mod
     spec.loader.exec_module(mod)
     return mod
 
 
 def test_generated_types_are_up_to_date():
     gen = _gen()
-    assert gen.OUT.exists(), f"{gen.OUT} missing — run {SCRIPT.name}"
-    assert gen.OUT.read_text() == gen.render(), (
-        f"{gen.OUT.name} is stale — run scripts/{SCRIPT.name}")
+    for target in gen.TARGETS:
+        assert target.out.exists(), f"{target.out} missing — run {SCRIPT.name}"
+        assert target.out.read_text() == gen.render(target), (
+            f"{target.out.name} is stale — run scripts/{SCRIPT.name}")
 
 
 def _ts_fields(text: str, name: str) -> set:
@@ -39,9 +47,10 @@ def _ts_fields(text: str, name: str) -> set:
 
 def test_every_exported_interface_has_exactly_the_model_fields():
     gen = _gen()
-    text = gen.OUT.read_text()
-    for model in gen.RESPONSES + gen.REQUESTS:
-        assert _ts_fields(text, model.__name__) == set(model.model_fields), model
+    for target in gen.TARGETS:
+        text = target.out.read_text()
+        for model in target.responses + target.requests:
+            assert _ts_fields(text, model.__name__) == set(model.model_fields), model
 
 
 def test_task_type_includes_the_evidence_task():
@@ -56,3 +65,33 @@ def test_calibration_status_declares_what_the_client_gates_on():
         "total", "completed", "correct", "done", "available"}
     assert set(m.CalibrationStatus.model_fields) == {
         "total", "completed", "correct", "done", "available"}
+
+
+def _enrolment_ts() -> str:
+    gen = _gen()
+    return next(t for t in gen.TARGETS if t.module is en).out.read_text()
+
+
+def test_enrolment_request_declares_what_the_server_requires():
+    """The signup form sent `full_name` and `consent_acknowledgement`; the
+    model asks for `name` and `consent`. Every signup was a 422."""
+    fields = _ts_fields(_enrolment_ts(), "EnrolmentRequest")
+    assert {"name", "consent"} <= fields
+    assert not {"full_name", "consent_acknowledgement"} & fields
+
+
+def test_enrolment_decision_is_approve_not_decision():
+    """The admin view posted `{decision: 'approve'}`; the model asks for
+    `{approve: true}`."""
+    assert _ts_fields(_enrolment_ts(), "EnrolmentDecision") == {
+        "approve", "tier", "note"}
+
+
+def test_request_records_are_served_with_id():
+    """Served as `_id` while the admin view read `id`, every decision went to
+    /requests/undefined/decide."""
+    assert "id" in _ts_fields(_enrolment_ts(), "EnrolmentRequestRecord")
+    rec = en.EnrolmentRequestRecord.model_validate({
+        "_id": "abc", "name": "n", "email": "a@b.org",
+        "created_at": "2026-10-28T00:00:00Z"})
+    assert rec.model_dump(by_alias=True)["id"] == "abc"

@@ -243,3 +243,57 @@ async def test_guidelines_are_served(scratch_db):
         sections = {t["task"] for t in r.json()["tasks"]}
         assert {"evidence", "evidence_role", "evidence_strength",
                 "consensus_direction"} <= sections
+
+
+async def test_admin_stats_serve_what_the_dashboard_reads(scratch_db):
+    """The admin view read comparison_total/complete, total_queue, completed,
+    repeated_judgments and median_seconds_per_item — none of which were
+    sent — and rendered `by_expert`, a list, as a mapping."""
+    from app.models.elicitation import AdminStats
+
+    await seed_facts(scratch_db, collection({"growth": 3}))
+    user = await _user(scratch_db)
+    await calibrate(scratch_db, user["id"])
+    async with _client(user) as c:
+        await c.post("/queue/build")
+        item = (await c.get("/next")).json()
+        answer = {"provenance": {"provenance_type": "unknown"},
+                  "scope": {"scope_verdict": "absent"},
+                  "assessability": {"assessability": "assessable"}}[item["task"]]
+        await c.post("/decide", json={
+            "task": item["task"], "sf_number": item["sf_number"],
+            "statement_sha256": item["statement_sha256"], "confidence": 3,
+            "rationale": "r", "time_spent_s": 40, **answer})
+        r = await c.get("/stats/admin")
+    assert r.status_code == 200, r.text
+    s = r.json()
+    assert set(s) == set(AdminStats.model_fields)
+    assert s["total_queue"] == 9 and s["completed"] == 1
+    assert s["comparison_total"] == 1          # position 0
+    assert s["comparison_complete"] == 0       # needs the full panel
+    assert s["median_seconds_per_item"] == 40
+    assert isinstance(s["by_expert"], list) and s["by_expert"][0]["n"] == 1
+    assert s["by_expert"][0]["calibration"]["done"] is True
+
+
+async def test_experts_list_carries_tier_count_and_author_slugs(scratch_db):
+    from app.models.elicitation import ExpertListEntry
+
+    await seed_facts(scratch_db, collection({"growth": 3}))
+    user = await _user(scratch_db, tier="panel", slugs=["tin_klanjscek"])
+    await calibrate(scratch_db, user["id"])
+    async with _client(user) as c:
+        await c.post("/queue/build")
+        item = (await c.get("/next")).json()
+        answer = {"provenance": {"provenance_type": "unknown"},
+                  "scope": {"scope_verdict": "absent"},
+                  "assessability": {"assessability": "assessable"}}[item["task"]]
+        await c.post("/decide", json={
+            "task": item["task"], "sf_number": item["sf_number"],
+            "statement_sha256": item["statement_sha256"], "confidence": 3,
+            "rationale": "r", **answer})
+        body = (await c.get("/experts")).json()
+    row = next(u for u in body["users"] if u["id"] == user["id"])
+    assert set(row) == set(ExpertListEntry.model_fields)
+    assert row["tier"] == "panel" and row["n_elicitations"] == 1
+    assert row["author_slugs"] == ["tin_klanjscek"] and row["can_elicit"]

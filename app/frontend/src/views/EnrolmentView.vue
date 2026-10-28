@@ -40,16 +40,16 @@
         <section class="block">
           <h2>Who you are</h2>
           <div class="grid">
-            <label class="field" :class="{ bad: showErr('full_name') }">
+            <label class="field" :class="{ bad: showErr('name') }">
               <span>Full name <em aria-hidden="true">*</em></span>
               <input
-                v-model.trim="form.full_name"
+                v-model.trim="form.name"
                 autocomplete="name"
                 autocapitalize="words"
-                :aria-invalid="showErr('full_name')"
-                @blur="touch('full_name')"
+                :aria-invalid="showErr('name')"
+                @blur="touch('name')"
               />
-              <small v-if="showErr('full_name')" class="err">{{ errors.full_name }}</small>
+              <small v-if="showErr('name')" class="err">{{ errors.name }}</small>
             </label>
 
             <label class="field" :class="{ bad: showErr('email') }">
@@ -140,7 +140,7 @@
 
         <section class="block">
           <label class="consent">
-            <input type="checkbox" v-model="form.consent_acknowledgement" />
+            <input type="checkbox" v-model="form.consent" />
             <span>
               I consent to being acknowledged as a contributor in publications
               arising from this work, and to being considered for authorship where
@@ -176,25 +176,18 @@
 import { computed, reactive, ref } from 'vue'
 import api from '@/utils/api'
 import CategoryFamiliarity from '@/components/enrolment/CategoryFamiliarity.vue'
-import { SF_CATEGORIES } from '@/components/enrolment/categories'
+import {
+  emptyEnrolmentForm, enrolmentPayload,
+} from '@/components/enrolment/request'
 
 const submitted = ref(false)
 const busy = ref(false)
 const error = ref('')
 const sentTo = ref('')
 
-const form = reactive({
-  full_name: '',
-  email: '',
-  affiliation: '',
-  orcid: '',
-  years_in_field: null as number | null,
-  deb_experience: '',
-  category_familiarity: {} as Record<string, number>,
-  consent_acknowledgement: false,
-})
+const form = reactive(emptyEnrolmentForm())
 
-type FieldKey = 'full_name' | 'email' | 'affiliation' | 'orcid'
+type FieldKey = 'name' | 'email' | 'affiliation' | 'orcid'
   | 'years_in_field' | 'deb_experience'
 
 const touched = reactive<Record<string, boolean>>({})
@@ -203,7 +196,7 @@ const attempted = ref(false)
 function touch(k: FieldKey) { touched[k] = true }
 
 const LABELS: Record<FieldKey, string> = {
-  full_name: 'your name',
+  name: 'your name',
   email: 'your email',
   affiliation: 'your affiliation',
   orcid: 'ORCID',
@@ -216,7 +209,7 @@ const LABELS: Record<FieldKey, string> = {
 // map back onto a field themselves.
 const errors = computed<Partial<Record<FieldKey, string>>>(() => {
   const e: Partial<Record<FieldKey, string>> = {}
-  if (!form.full_name) e.full_name = 'Please give your name.'
+  if (!form.name) e.name = 'Please give your name.'
   if (!form.email) e.email = 'Please give an email address.'
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
     e.email = 'That does not look like an email address.'
@@ -263,14 +256,7 @@ async function submit() {
   busy.value = true
   error.value = ''
   try {
-    // Only send categories that were actually rated; a picked-but-unrated area
-    // is not a claim of expertise.
-    const rated: Record<string, number> = {}
-    for (const c of SF_CATEGORIES) {
-      const v = form.category_familiarity[c.key]
-      if (typeof v === 'number' && v > 0) rated[c.key] = v
-    }
-    await api.post('/enrolment/request', { ...form, category_familiarity: rated })
+    await api.post('/enrolment/request', enrolmentPayload(form))
     sentTo.value = form.email
     submitted.value = true
   } catch (e: any) {

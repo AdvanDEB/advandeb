@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Generate the elicitation API's TypeScript types from its pydantic models.
+"""Generate the elicitation and enrolment APIs' TypeScript types from their
+pydantic models.
 
 The client and server used to describe the same payloads twice, by hand, and
 the copies drifted three ways at once: the evidence task existed on the server
@@ -16,6 +17,11 @@ Usage (from app/backend/):
 `tests/test_elicitation_contract.py` runs the check, so a model change that is
 not regenerated fails the backend suite, and a client that reads a field the
 model does not have fails `vue-tsc`.
+
+Enrolment is generated the same way for the same reason: its client sent
+`full_name` and `consent_acknowledgement` to a model that asks for `name` and
+`consent` (every signup a 422), and the admin view posted `{decision, ...}` to
+a model that asks for `{approve, ...}`.
 """
 from __future__ import annotations
 
@@ -23,7 +29,9 @@ import argparse
 import json
 import sys
 import typing
+from dataclasses import dataclass
 from pathlib import Path
+from types import ModuleType
 from typing import Any, Dict, List, Type
 
 from pydantic import BaseModel
@@ -32,8 +40,10 @@ BACKEND = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND))
 
 from app.models import elicitation as m  # noqa: E402
+from app.models import enrolment as en  # noqa: E402
 
-OUT = BACKEND.parent / "frontend" / "src" / "types" / "elicitation.generated.ts"
+TYPES_DIR = BACKEND.parent / "frontend" / "src" / "types"
+OUT = TYPES_DIR / "elicitation.generated.ts"
 
 # Literal aliases emitted by name, so an enum in a field reads `TaskType`
 # rather than an anonymous union that silently stops matching when one changes.
@@ -49,7 +59,9 @@ RESPONSES: List[Type[BaseModel]] = [
     m.EvidencePassage, m.QueueItem, m.DecisionReceipt, m.EventReceipt,
     m.ElicitationProgress, m.TaskOption, m.TaskGuideline, m.Guidelines,
     m.HistoryItem, m.HistoryResponse, m.CalibrationItem,
-    m.CalibrationFeedback, m.CalibrationStatus,
+    m.CalibrationFeedback, m.CalibrationStatus, m.RecallSummary,
+    m.PanelCoverage, m.ExpertStats, m.AwaitingCalibration, m.AdminStats,
+    m.ExpertListEntry, m.ExpertList,
 ]
 
 # What the client sends. A field with a default may be omitted.
@@ -59,8 +71,31 @@ REQUESTS: List[Type[BaseModel]] = [
 ]
 
 
-def _alias_sets() -> Dict[frozenset, str]:
-    return {frozenset(typing.get_args(getattr(m, a))): a for a in ALIASES}
+@dataclass(frozen=True)
+class Target:
+    """One generated file: a models module and what to export from it."""
+    module: ModuleType
+    out: Path
+    aliases: List[str]
+    responses: List[Type[BaseModel]]
+    requests: List[Type[BaseModel]]
+
+
+TARGETS: List[Target] = [
+    Target(m, OUT, ALIASES, RESPONSES, REQUESTS),
+    Target(
+        en, TYPES_DIR / "enrolment.generated.ts",
+        ["Tier", "RequestStatus"],
+        [en.EnrolmentSubmitted, en.EnrolmentRequestRecord,
+         en.EnrolmentRequestList, en.EnrolmentDecisionResult],
+        [en.EnrolmentRequest, en.EnrolmentDecision],
+    ),
+]
+
+
+def _alias_sets(module: ModuleType = m,
+                aliases: List[str] = ALIASES) -> Dict[frozenset, str]:
+    return {frozenset(typing.get_args(getattr(module, a))): a for a in aliases}
 
 
 def _ts(schema: Dict[str, Any], aliases: Dict[frozenset, str]) -> str:
@@ -120,28 +155,31 @@ def _interface(model: Type[BaseModel], response: bool,
     return "\n".join(lines)
 
 
-def render() -> str:
-    aliases = _alias_sets()
+def render(target: Target = None) -> str:
+    target = target or TARGETS[0]
+    aliases = _alias_sets(target.module, target.aliases)
+    src = target.module.__name__.replace(".", "/")
     out = [
-        "// GENERATED from app/backend/app/models/elicitation.py by",
+        f"// GENERATED from app/backend/{src}.py by",
         "// app/backend/scripts/gen_elicitation_types.py — do not edit by hand.",
         "// Regenerate after changing a model; the backend suite fails while",
         "// this file is stale (tests/test_elicitation_contract.py).",
         "/* eslint-disable */",
         "",
     ]
-    for a in ALIASES:
-        values = " | ".join(json.dumps(v) for v in typing.get_args(getattr(m, a)))
+    for a in target.aliases:
+        values = " | ".join(
+            json.dumps(v) for v in typing.get_args(getattr(target.module, a)))
         out.append(f"export type {a} = {values}")
     out.append("")
     out.append("// ---- responses: every field is present ----")
     out.append("")
-    for model in RESPONSES:
+    for model in target.responses:
         out.append(_interface(model, True, aliases))
         out.append("")
     out.append("// ---- requests: fields with a server default may be omitted ----")
     out.append("")
-    for model in REQUESTS:
+    for model in target.requests:
         out.append(_interface(model, False, aliases))
         out.append("")
     return "\n".join(out).rstrip() + "\n"
@@ -152,17 +190,21 @@ def main() -> int:
     ap.add_argument("--check", action="store_true",
                     help="exit 1 if the committed file is stale; write nothing")
     args = ap.parse_args()
-    text = render()
-    current = OUT.read_text() if OUT.exists() else ""
+    stale = 0
+    for target in TARGETS:
+        text = render(target)
+        current = target.out.read_text() if target.out.exists() else ""
+        if args.check:
+            if current != text:
+                print(f"{target.out} is stale — run "
+                      "scripts/gen_elicitation_types.py", file=sys.stderr)
+                stale += 1
+            continue
+        target.out.write_text(text)
+        print(f"wrote {target.out}")
     if args.check:
-        if current != text:
-            print(f"{OUT} is stale — run scripts/gen_elicitation_types.py",
-                  file=sys.stderr)
-            return 1
-        print("up to date")
-        return 0
-    OUT.write_text(text)
-    print(f"wrote {OUT}")
+        print("up to date" if not stale else f"{stale} file(s) stale")
+        return 1 if stale else 0
     return 0
 
 
