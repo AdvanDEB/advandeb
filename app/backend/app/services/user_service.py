@@ -9,19 +9,24 @@ from typing import List, Optional
 
 import bcrypt
 from bson import ObjectId
+from bson.errors import InvalidId
 from fastapi import HTTPException, status
+from pymongo.errors import DuplicateKeyError
 
-from app.core.auth import get_password_hash, verify_password
-from app.core.database import get_database
-from app.models.user import User, UserCreate, UserUpdate
+from app.core.auth import ROLE_EXTERNAL_CONTRIBUTOR, get_password_hash, revoke_all_sessions, verify_password
+from app.core.database import EMAIL_COLLATION, get_database
+from app.models.user import User, UserCreate, UserUpdate, normalize_email
 
 
 # Precomputed dummy bcrypt hash used to keep authenticate_user's timing
 # constant regardless of whether the email exists. Computed once at import time.
 _DUMMY_BCRYPT_HASH = bcrypt.hashpw(b"dummy", bcrypt.gensalt()).decode()
 
-# Roles accepted by assign_role / remove_role.
-VALID_ROLES = frozenset({"administrator", "knowledge_curator", "knowledge_explorator"})
+# Roles accepted by create_native_user / assign_role / remove_role.
+VALID_ROLES = frozenset({
+    "administrator", "knowledge_curator", "knowledge_explorator",
+    ROLE_EXTERNAL_CONTRIBUTOR,
+})
 
 # Statuses accepted by set_status.
 VALID_STATUSES = frozenset({"active", "suspended"})
@@ -40,6 +45,16 @@ def generate_password(length: int = 14) -> str:
     return "".join(secrets.choice(_PASSWORD_ALPHABET) for _ in range(length))
 
 
+def _validate_roles(roles: List[str]) -> List[str]:
+    unknown = sorted(set(roles) - VALID_ROLES)
+    if unknown:
+        raise HTTPException(status_code=422, detail=f"Unknown role(s): {', '.join(unknown)}")
+    if not roles:
+        raise HTTPException(status_code=422, detail="A user needs at least one role")
+    # De-duplicate, keeping the caller's order.
+    return list(dict.fromkeys(roles))
+
+
 class UserService:
     """Service for user operations."""
 
@@ -47,52 +62,69 @@ class UserService:
         self.db = get_database()
         self.collection = self.db.users
 
-    async def get_or_create_user(
+    async def find_by_email(self, email: str) -> Optional[dict]:
+        """Find a user document by email, ignoring case.
+
+        New addresses are stored normalised (see ``normalize_email``); the
+        case-insensitive collation also finds accounts stored before that, and
+        is the one the unique index is built with, so the lookup can use it.
+        """
+        return await self.collection.find_one(
+            {"email": normalize_email(email)}, collation=EMAIL_COLLATION)
+
+    async def get_google_user(
         self,
         google_id: str,
         email: str,
+        email_verified: bool,
         full_name: Optional[str] = None,
         avatar_url: Optional[str] = None
     ) -> User:
-        """Get existing user or create new one (Google OAuth flow)."""
-        # Try to find existing user
+        """Resolve a Google sign-in to an existing account. Never creates one.
+
+        Registration is by invitation: an administrator creates the account,
+        or approves an enrolment request, and Google sign-in then works for
+        it. The first Google sign-in links the Google identity to the account
+        whose address Google has verified; later ones find it by ``google_id``.
+        Anyone else gets a 403 — this used to hand every Google user on earth
+        an explorator account, with read access to licensed full text.
+        """
         user_doc = await self.collection.find_one({"google_id": google_id})
 
-        if user_doc:
-            # Update avatar and name if changed
-            update_fields = {}
-            if full_name and user_doc.get("full_name") != full_name:
-                update_fields["full_name"] = full_name
-            if avatar_url and user_doc.get("avatar_url") != avatar_url:
-                update_fields["avatar_url"] = avatar_url
+        if user_doc is None:
+            not_invited = HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="No AdvanDEB account for this Google address. "
+                       "Ask an administrator for an invitation.",
+            )
+            if not email_verified:
+                raise not_invited
+            user_doc = await self.find_by_email(email)
+            # An account already linked to a *different* Google identity is
+            # not this caller's to claim, whatever the address says.
+            if user_doc is None or user_doc.get("google_id") not in (None, google_id):
+                raise not_invited
+            await self.collection.update_one(
+                {"_id": user_doc["_id"]}, {"$set": {"google_id": google_id}})
+            user_doc["google_id"] = google_id
 
-            if update_fields:
-                update_fields["updated_at"] = datetime.now(timezone.utc)
-                await self.collection.update_one(
-                    {"_id": user_doc["_id"]},
-                    {"$set": update_fields}
-                )
-                user_doc.update(update_fields)
+        # Update avatar and name if changed
+        update_fields = {}
+        if full_name and user_doc.get("full_name") != full_name:
+            update_fields["full_name"] = full_name
+        if avatar_url and user_doc.get("avatar_url") != avatar_url:
+            update_fields["avatar_url"] = avatar_url
 
-            user_doc["_id"] = str(user_doc["_id"])
-            return User(**user_doc)
+        if update_fields:
+            update_fields["updated_at"] = datetime.now(timezone.utc)
+            await self.collection.update_one(
+                {"_id": user_doc["_id"]},
+                {"$set": update_fields}
+            )
+            user_doc.update(update_fields)
 
-        # Create new user
-        new_user = {
-            "google_id": google_id,
-            "email": email,
-            "full_name": full_name,
-            "avatar_url": avatar_url,
-            "roles": ["knowledge_explorator"],  # Default role
-            "capabilities": [],
-            "status": "active",
-            "created_at": datetime.now(timezone.utc),
-            "updated_at": datetime.now(timezone.utc)
-        }
-
-        result = await self.collection.insert_one(new_user)
-        new_user["_id"] = str(result.inserted_id)
-        return User(**new_user)
+        user_doc["_id"] = str(user_doc["_id"])
+        return User(**user_doc)
 
     async def create_native_user(
         self,
@@ -102,8 +134,9 @@ class UserService:
         roles: List[str]
     ) -> User:
         """Create a new native (email/password) user. Admin only."""
-        existing = await self.collection.find_one({"email": email})
-        if existing:
+        email = normalize_email(email)
+        roles = _validate_roles(roles)
+        if await self.find_by_email(email):
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
                 detail="A user with this email already exists"
@@ -120,7 +153,14 @@ class UserService:
             "updated_at": datetime.now(timezone.utc)
         }
 
-        result = await self.collection.insert_one(new_user)
+        try:
+            result = await self.collection.insert_one(new_user)
+        except DuplicateKeyError:
+            # Lost a race with a concurrent create; the unique index decided.
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="A user with this email already exists"
+            )
         new_user["_id"] = str(result.inserted_id)
         return User(**new_user)
 
@@ -130,7 +170,7 @@ class UserService:
         Always runs bcrypt verification (against a dummy hash if no user / no
         password_hash) to avoid leaking user existence via response timing.
         """
-        user_doc = await self.collection.find_one({"email": email})
+        user_doc = await self.find_by_email(email)
         password_hash = user_doc.get("password_hash") if user_doc else None
 
         if not password_hash:
@@ -145,7 +185,11 @@ class UserService:
         return User(**user_doc)
 
     async def set_password(self, user_id: str, new_password: str) -> None:
-        """Hash and store a new password for a user."""
+        """Hash and store a new password, ending every existing session.
+
+        Whoever knew the old password may hold a refresh token minted with it;
+        a password change that leaves those working has not locked them out.
+        """
         await self.collection.update_one(
             {"_id": ObjectId(user_id)},
             {"$set": {
@@ -153,10 +197,35 @@ class UserService:
                 "updated_at": datetime.now(timezone.utc)
             }}
         )
+        await revoke_all_sessions(user_id)
+
+    async def change_own_password(
+        self, user_id: str, new_password: str, current_password: Optional[str]
+    ) -> None:
+        """Self-service password change; the current password must be proven.
+
+        An account with no password yet (created through Google sign-in) may
+        set one without it — there is nothing to prove.
+        """
+        user_doc = await self.collection.find_one({"_id": ObjectId(user_id)})
+        if user_doc is None:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+        existing_hash = user_doc.get("password_hash")
+        if existing_hash and not (
+                current_password and verify_password(current_password, existing_hash)):
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Current password is incorrect",
+            )
+        await self.set_password(user_id, new_password)
 
     async def get_user_by_id(self, user_id: str) -> Optional[User]:
-        """Get user by ID."""
-        user_doc = await self.collection.find_one({"_id": ObjectId(user_id)})
+        """Get user by ID; None for an unknown or malformed id."""
+        try:
+            oid = ObjectId(user_id)
+        except (InvalidId, TypeError):
+            return None
+        user_doc = await self.collection.find_one({"_id": oid})
         if user_doc:
             user_doc["_id"] = str(user_doc["_id"])
             return User(**user_doc)
@@ -234,6 +303,10 @@ class UserService:
         )
         if result.matched_count == 0:
             return None
+        if new_status == "suspended":
+            # The status check already refuses every token while suspended;
+            # revoking too means reactivation does not revive old sessions.
+            await revoke_all_sessions(user_id)
         return await self.get_user_by_id(user_id)
 
     async def delete_user(self, user_id: str) -> bool:

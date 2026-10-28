@@ -13,7 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from typing import Any, Dict, List
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel
 
 from app.core.auth import get_current_user
@@ -44,8 +44,8 @@ async def list_kb_documents(
     source_type: str = "",
     flagged: str = "",
     include_web: bool = False,
-    limit: int = 50,
-    skip: int = 0,
+    limit: int = Query(default=50, ge=1, le=500),
+    skip: int = Query(default=0, ge=0),
     current_user: dict = Depends(get_current_user),
 ) -> Dict[str, Any]:
     """List KB corpus documents with pagination.

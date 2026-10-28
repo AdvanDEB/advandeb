@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import api from '@/utils/api'
+import { revokeRefreshToken } from '@/utils/authRefresh'
 
 export interface User {
   id: string
@@ -22,16 +23,26 @@ export const useAuthStore = defineStore('auth', () => {
   const hasRole = (role: string) => user.value?.roles.includes(role) || false
   const hasCapability = (capability: string) => user.value?.capabilities.includes(capability) || false
 
-  function _storeTokens(data: { access_token: string; refresh_token: string; user: User }) {
-    accessToken.value = data.access_token
-    refreshToken.value = data.refresh_token
-    user.value = data.user
-    localStorage.setItem('access_token', data.access_token)
-    localStorage.setItem('refresh_token', data.refresh_token)
+  /** Adopt a token pair: the refs and localStorage, kept in step. */
+  function setTokens(access: string, refresh: string) {
+    accessToken.value = access
+    refreshToken.value = refresh
+    localStorage.setItem('access_token', access)
+    localStorage.setItem('refresh_token', refresh)
   }
 
-  async function login(code: string, redirectUri: string) {
-    const response = await api.post('/auth/google', { code, redirect_uri: redirectUri })
+  function _storeTokens(data: { access_token: string; refresh_token: string; user: User }) {
+    setTokens(data.access_token, data.refresh_token)
+    user.value = data.user
+  }
+
+  /** Google sign-in callback. `codeVerifier` is the PKCE secret for this flow. */
+  async function login(code: string, redirectUri: string, codeVerifier?: string) {
+    const response = await api.post('/auth/google', {
+      code,
+      redirect_uri: redirectUri,
+      code_verifier: codeVerifier,
+    })
     _storeTokens(response.data)
   }
 
@@ -49,12 +60,27 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function logout() {
+  /** Forget the session locally. For a session that is already dead. */
+  function clearSession() {
     user.value = null
     accessToken.value = null
     refreshToken.value = null
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
+  }
+
+  /**
+   * Sign out: forget the session here and revoke its refresh token on the
+   * server. Without the revocation the token stays valid for 30 days — a
+   * copy taken from this browser would keep working after "sign out".
+   *
+   * The local state is cleared synchronously, before the request, so callers
+   * that navigate right after (without awaiting) already see a signed-out app.
+   */
+  function logout(): Promise<void> {
+    const token = refreshToken.value || localStorage.getItem('refresh_token')
+    clearSession()
+    return token ? revokeRefreshToken(token) : Promise.resolve()
   }
 
   async function fetchCurrentUser() {
@@ -64,7 +90,7 @@ export const useAuthStore = defineStore('auth', () => {
       const response = await api.get('/users/me')
       user.value = response.data
     } catch (error) {
-      logout()
+      clearSession()
     }
   }
 
@@ -85,6 +111,25 @@ export const useAuthStore = defineStore('auth', () => {
     return _hydration
   }
 
+  // Tabs share localStorage but not this store. Follow the other tabs: a
+  // refresh there rotates the pair (ours would be spent), a sign-out there
+  // ends the session here too.
+  if (typeof window !== 'undefined') {
+    window.addEventListener('storage', (event: StorageEvent) => {
+      if (event.key !== null && event.key !== 'access_token' && event.key !== 'refresh_token') return
+      const access = localStorage.getItem('access_token')
+      const refresh = localStorage.getItem('refresh_token')
+      if (access && refresh) {
+        accessToken.value = access
+        refreshToken.value = refresh
+      } else if (accessToken.value) {
+        user.value = null
+        accessToken.value = null
+        refreshToken.value = null
+      }
+    })
+  }
+
   return {
     user,
     accessToken,
@@ -93,9 +138,11 @@ export const useAuthStore = defineStore('auth', () => {
     isAuthenticated,
     hasRole,
     hasCapability,
+    setTokens,
     login,
     loginNative,
     fetchAuthConfig,
+    clearSession,
     logout,
     fetchCurrentUser,
     hydrate

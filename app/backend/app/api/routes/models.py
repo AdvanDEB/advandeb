@@ -1,7 +1,7 @@
 """
 Models API routes.
 """
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from typing import List
 
 from app.core.auth import get_current_user
@@ -25,8 +25,8 @@ async def create_model(
 
 @router.get("/", response_model=List[Model])
 async def list_models(
-    skip: int = 0,
-    limit: int = 100,
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
     scenario_id: str = None,
     current_user: dict = Depends(get_current_user)
 ):

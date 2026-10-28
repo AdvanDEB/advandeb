@@ -4,23 +4,27 @@ Ingestion API — PDF upload, batch management, progress streaming.
 import asyncio
 import json
 import os
+import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from bson import ObjectId
-from fastapi import APIRouter, BackgroundTasks, Depends, File, Header, HTTPException, Query, UploadFile
+from fastapi import APIRouter, BackgroundTasks, Depends, File, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from advandeb_kb.config.settings import settings
 from advandeb_kb.models.ingestion import IngestionJob
 from advandeb_kb.services.ingestion_service import IngestionService
-from app.core.auth import verify_token
-from app.core.database import get_database as get_main_database, get_kb_database as get_database
-from app.core.dependencies import require_curator
+from app.core.database import get_kb_database as get_database
+from app.core.dependencies import require_curator, require_curator_sse
+from app.core.paths import resolve_within, safe_upload_filename
 from app.kb.pipeline import run_pdf_job, run_batch_worker, cancel_batch
 
 router = APIRouter()
+
+MAX_UPLOAD_BYTES = 100 * 1024 * 1024
+UPLOAD_CHUNK_BYTES = 1024 * 1024
 
 
 class ScanRequest(BaseModel):
@@ -37,31 +41,6 @@ async def _get_service() -> IngestionService:
     return IngestionService(get_database())
 
 
-# SSE streams cannot send custom headers, so we accept the JWT as ?token= query param.
-async def _require_curator_sse(
-    token: Optional[str] = Query(default=None),
-    authorization: Optional[str] = Header(default=None),
-) -> dict:
-    jwt_token = token
-    if not jwt_token and authorization and authorization.startswith("Bearer "):
-        jwt_token = authorization[7:]
-    if not jwt_token:
-        raise HTTPException(status_code=401, detail="Not authenticated")
-    payload = verify_token(jwt_token)
-    user_id = payload.get("sub")
-    if not user_id:
-        raise HTTPException(status_code=401, detail="Invalid token")
-    from bson import ObjectId as ObjId
-    db = get_main_database()  # users live in the main app DB, not the KB DB
-    user_doc = await db.users.find_one({"_id": ObjId(user_id)})
-    if not user_doc:
-        raise HTTPException(status_code=401, detail="User not found")
-    roles = user_doc.get("roles", [])
-    if not any(r in roles for r in ["administrator", "knowledge_curator"]):
-        raise HTTPException(status_code=403, detail="Curator access required")
-    return {"id": str(user_doc["_id"]), "roles": roles}
-
-
 # ---------------------------------------------------------------------------
 # PDF upload
 # ---------------------------------------------------------------------------
@@ -74,16 +53,41 @@ async def upload_pdf(
     current_user: dict = Depends(require_curator),
 ) -> Dict[str, Any]:
     """Upload a single PDF and immediately queue it for ingestion."""
-    if not file.filename.lower().endswith(".pdf"):
+    if not (file.filename or "").lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are supported")
 
     upload_dir = os.path.join(settings.PAPERS_ROOT, "uploads")
     os.makedirs(upload_dir, exist_ok=True)
 
-    dest = os.path.join(upload_dir, file.filename)
-    content = await file.read()
-    with open(dest, "wb") as f:
-        f.write(content)
+    # The client's filename is a display name, never a path: reduce it to one
+    # safe component, and never overwrite an earlier upload of the same name.
+    filename = safe_upload_filename(file.filename, extension=".pdf")
+    if os.path.exists(os.path.join(upload_dir, filename)):
+        filename = f"{filename[:-4]}-{uuid.uuid4().hex[:8]}.pdf"
+    dest = resolve_within(upload_dir, filename)
+
+    # Stream to a temporary name with a size cap, so an oversized or non-PDF
+    # body neither fills memory nor leaves a file behind under its real name.
+    tmp = f"{dest}.part"
+    size = 0
+    try:
+        with open(tmp, "wb") as f:
+            while chunk := await file.read(UPLOAD_CHUNK_BYTES):
+                if size == 0 and b"%PDF" not in chunk[:1024]:
+                    raise HTTPException(status_code=400, detail="File is not a PDF")
+                size += len(chunk)
+                if size > MAX_UPLOAD_BYTES:
+                    raise HTTPException(
+                        status_code=413,
+                        detail=f"File exceeds {MAX_UPLOAD_BYTES // (1024 * 1024)} MB",
+                    )
+                f.write(chunk)
+        if size == 0:
+            raise HTTPException(status_code=400, detail="Empty file")
+        os.replace(tmp, dest)
+    finally:
+        if os.path.exists(tmp):
+            os.remove(tmp)
 
     db = get_database()
     service = IngestionService(db)
@@ -92,7 +96,7 @@ async def upload_pdf(
     job = IngestionJob(
         batch_id=batch.id,
         source_type="pdf_upload",
-        source_path_or_url=f"uploads/{file.filename}",
+        source_path_or_url=f"uploads/{filename}",
         metadata={"general_domain": general_domain} if general_domain else {},
     )
     await db.ingestion_jobs.insert_one(job.model_dump(by_alias=True))
@@ -105,7 +109,7 @@ async def upload_pdf(
     return {
         "batch_id": str(batch.id),
         "job_id": str(job.id),
-        "filename": file.filename,
+        "filename": filename,
         "status": "processing",
     }
 
@@ -146,8 +150,8 @@ async def list_folder_files(
     current_user: dict = Depends(require_curator),
 ) -> Dict[str, Any]:
     """Return a recursive tree of subfolders and PDF files under a folder in PAPERS_ROOT."""
-    root = settings.PAPERS_ROOT
-    folder_path = os.path.join(root, folder) if folder != "." else root
+    root = os.path.realpath(settings.PAPERS_ROOT)
+    folder_path = resolve_within(root, folder)
     if not os.path.isdir(folder_path):
         raise HTTPException(status_code=404, detail=f"Folder not found: {folder}")
 
@@ -159,7 +163,9 @@ async def list_folder_files(
             if os.path.isfile(full) and name.lower().endswith(".pdf"):
                 rel = os.path.relpath(full, root)
                 files.append({"path": rel, "name": name, "size": os.path.getsize(full)})
-            elif os.path.isdir(full):
+            elif os.path.isdir(full) and not os.path.islink(full):
+                # Symlinked directories are skipped: they can point outside the
+                # root, or back up the tree and recurse forever.
                 subdirs.append(build_tree(full))
         rel_dir = os.path.relpath(abs_path, root)
         return {
@@ -184,6 +190,10 @@ async def scan_folders(
     """Scan selected folders (and/or explicit files) and create an ingestion batch + jobs."""
     if not body.folders and not body.files:
         raise HTTPException(status_code=400, detail="No folders or files specified")
+    # The ingestion service joins these onto PAPERS_ROOT as given; refuse any
+    # that would resolve outside it before it does.
+    for rel in [*body.folders, *body.files]:
+        resolve_within(settings.PAPERS_ROOT, rel)
     db = get_database()
     service = IngestionService(db)
     batch = await service.create_batch(body.folders, general_domain=body.general_domain)
@@ -314,7 +324,7 @@ async def stop_batch(
 @router.get("/batches/{batch_id}/stream")
 async def stream_batch_progress(
     batch_id: str,
-    current_user: dict = Depends(_require_curator_sse),
+    current_user: dict = Depends(require_curator_sse),
 ) -> StreamingResponse:
     """SSE: streams job progress every 2 s until the batch finishes."""
     async def event_stream():

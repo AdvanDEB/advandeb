@@ -70,7 +70,7 @@ function makeSocket(overrides: Record<string, unknown> = {}) {
   const authFailures: number[] = []
   const sock = useChatSocket({
     sessionId: () => 'sess-1',
-    token: () => 'tok-abc',
+    ticket: () => 'tik-abc',
     onEvent: (d) => events.push(d),
     onAuthFailure: () => authFailures.push(1),
     ...overrides,
@@ -181,17 +181,118 @@ describe('useChatSocket — reconnect policy', () => {
     expect(live()).toHaveLength(1)
   })
 
-  it('reads the token fresh on reconnect so a refreshed token is used', () => {
-    let token = 'old-token'
-    const { sock } = makeSocket({ token: () => token })
+  it('fetches a fresh ticket for every reconnect — a ticket is single-use', () => {
+    let n = 0
+    const { sock } = makeSocket({ ticket: () => `ticket-${++n}` })
     sock.connect()
-    expect(live()[0].url).toContain('old-token')
+    expect(live()[0].url).toContain('?ticket=ticket-1')
 
-    token = 'new-token'
     live()[0].serverClose(1006)
     vi.advanceTimersByTime(2000)
 
-    expect(live()[1].url).toContain('new-token')
+    expect(live()[1].url).toContain('?ticket=ticket-2')
+  })
+
+  it('never puts an access token in the URL', () => {
+    const { sock } = makeSocket()
+    sock.connect()
+    expect(live()[0].url).not.toContain('token=')
+  })
+})
+
+describe('useChatSocket — asynchronous tickets', () => {
+  /** A ticket fetch the test resolves by hand. */
+  function deferredTicket() {
+    const pending: Array<(t: string | null) => void> = []
+    const rejecters: Array<(e: Error) => void> = []
+    const ticket = () => new Promise<string | null>((resolve, reject) => {
+      pending.push(resolve)
+      rejecters.push(reject)
+    })
+    return { ticket, pending, rejecters }
+  }
+
+  it('opens the socket once the ticket arrives', async () => {
+    const d = deferredTicket()
+    const { sock } = makeSocket({ ticket: d.ticket })
+    sock.connect()
+    expect(live()).toHaveLength(0)
+
+    d.pending[0]('async-ticket')
+    await Promise.resolve()
+
+    expect(live()).toHaveLength(1)
+    expect(live()[0].url).toContain('?ticket=async-ticket')
+  })
+
+  it('a close() during the fetch wins: no socket is opened afterwards', async () => {
+    const d = deferredTicket()
+    const { sock } = makeSocket({ ticket: d.ticket })
+    sock.connect()
+    sock.close() // user navigated away while the ticket was in flight
+
+    d.pending[0]('late-ticket')
+    await Promise.resolve()
+
+    expect(live()).toHaveLength(0)
+    expect(sock.current()).toBeNull()
+  })
+
+  it('a superseded fetch does not open a second socket', async () => {
+    const d = deferredTicket()
+    const { sock } = makeSocket({ ticket: d.ticket })
+    sock.connect()
+    sock.connect() // session switch before the first ticket arrived
+
+    d.pending[1]('second')
+    d.pending[0]('first')
+    await Promise.resolve()
+
+    expect(live()).toHaveLength(1)
+    expect(live()[0].url).toContain('second')
+  })
+
+  it('a send while the ticket is in flight is queued, not a second connect', async () => {
+    const d = deferredTicket()
+    const { sock } = makeSocket({ ticket: d.ticket })
+    sock.send({ type: 'user_message', text: 'early' })
+    sock.send({ type: 'user_message', text: 'early' })
+    expect(d.pending).toHaveLength(1)
+
+    d.pending[0]('t')
+    await Promise.resolve()
+    live()[0].serverOpen()
+
+    expect(live()).toHaveLength(1)
+    expect(JSON.parse(live()[0].sent[0])).toMatchObject({ text: 'early' })
+  })
+
+  it('no ticket (session ended) reports an auth failure and does not retry', async () => {
+    const d = deferredTicket()
+    const { sock, authFailures } = makeSocket({ ticket: d.ticket })
+    sock.connect()
+
+    d.pending[0](null)
+    await Promise.resolve()
+    vi.advanceTimersByTime(10_000)
+
+    expect(live()).toHaveLength(0)
+    expect(authFailures).toHaveLength(1)
+    expect(d.pending).toHaveLength(1)
+  })
+
+  it('a failed fetch is retried like a dropped connection', async () => {
+    const d = deferredTicket()
+    const { sock, authFailures } = makeSocket({ ticket: d.ticket })
+    sock.connect()
+
+    d.rejecters[0](new Error('network'))
+    await Promise.resolve()
+    await Promise.resolve()
+    vi.advanceTimersByTime(2000)
+
+    expect(d.pending).toHaveLength(2)
+    expect(authFailures).toHaveLength(0)
   })
 })
 

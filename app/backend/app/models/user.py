@@ -1,9 +1,35 @@
 """
 User data models.
 """
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Dict, List, Optional
 from datetime import datetime
+
+
+# A new password must be long enough to resist guessing, and short enough for
+# bcrypt, which hashes only the first 72 bytes and (from bcrypt 5) raises on
+# longer input. The ceiling is in bytes, not characters: non-ASCII letters
+# take two to four bytes each in UTF-8.
+PASSWORD_MIN_LENGTH = 8
+PASSWORD_MAX_BYTES = 72
+
+# Login accepts what it is given — the policy applies to passwords being set,
+# not to existing ones — but a bound keeps absurd bodies away from bcrypt.
+LOGIN_PASSWORD_MAX_LENGTH = 1024
+
+
+def validate_new_password(value: str) -> str:
+    """Apply the password policy to a password being set."""
+    if len(value) < PASSWORD_MIN_LENGTH:
+        raise ValueError(f"Password must be at least {PASSWORD_MIN_LENGTH} characters")
+    if len(value.encode("utf-8")) > PASSWORD_MAX_BYTES:
+        raise ValueError(f"Password must be at most {PASSWORD_MAX_BYTES} bytes")
+    return value
+
+
+def normalize_email(value: str) -> str:
+    """The stored and looked-up form of an email address."""
+    return value.strip().lower()
 
 
 class UserBase(BaseModel):
@@ -25,6 +51,8 @@ class UserCreateNative(BaseModel):
     password: str
     roles: List[str] = ["knowledge_explorator"]
 
+    _check_password = field_validator("password")(validate_new_password)
+
 
 class UserUpdate(BaseModel):
     """User update model."""
@@ -34,8 +62,16 @@ class UserUpdate(BaseModel):
 
 
 class PasswordSet(BaseModel):
-    """Model for setting or changing a password."""
+    """Model for setting or changing a password.
+
+    ``current_password`` is required whenever the account already has one; it
+    may be omitted only when setting a first password on an account that has
+    none (one created through Google sign-in).
+    """
     password: str
+    current_password: Optional[str] = Field(default=None, max_length=LOGIN_PASSWORD_MAX_LENGTH)
+
+    _check_password = field_validator("password")(validate_new_password)
 
 
 class UserStatusUpdate(BaseModel):
@@ -51,7 +87,7 @@ class PasswordResetResponse(BaseModel):
 class NativeLoginRequest(BaseModel):
     """Native email/password login request."""
     email: EmailStr
-    password: str
+    password: str = Field(max_length=LOGIN_PASSWORD_MAX_LENGTH)
 
 
 class ExpertiseProfile(BaseModel):
@@ -116,6 +152,9 @@ class User(UserBase):
     # chat history. Defaults to opted-in, matching the existing blanket
     # consent given by current users; self-service opt-out via PUT /users/me.
     chat_history_visible_to_admin: bool = True
+    # Session generation, embedded in every token as ``ver``; bumped to end all
+    # sessions (app.core.auth.revoke_all_sessions). Never serialised.
+    token_version: int = Field(default=0, exclude=True)
     created_at: datetime
     updated_at: datetime
 
@@ -137,9 +176,15 @@ class TokenResponse(BaseModel):
 
 
 class GoogleAuthRequest(BaseModel):
-    """Google OAuth request model."""
+    """Google OAuth request model.
+
+    ``code_verifier`` is the PKCE secret whose S256 challenge the browser sent
+    with the authorization request; Google refuses the exchange without it
+    when a challenge was sent.
+    """
     code: str
     redirect_uri: str
+    code_verifier: Optional[str] = Field(default=None, min_length=43, max_length=128)
 
 
 class RefreshTokenRequest(BaseModel):

@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Any, Dict, List
 
 from app.core.dependencies import require_curator
+from app.core.paths import is_within
 
 router = APIRouter()
 
@@ -19,7 +20,7 @@ async def browse(
     target = path if path else DEFAULT_PATH
     resolved = os.path.realpath(os.path.expanduser(target))
 
-    if not resolved.startswith(FS_ROOT):
+    if not is_within(resolved, FS_ROOT):
         raise HTTPException(status_code=403, detail="Path outside allowed root")
     if not os.path.exists(resolved):
         raise HTTPException(status_code=404, detail=f"Path not found: {target}")
@@ -45,7 +46,7 @@ async def browse(
         raise HTTPException(status_code=403, detail="Permission denied")
 
     parent = str(os.path.dirname(resolved))
-    if not parent.startswith(FS_ROOT):
+    if not is_within(parent, FS_ROOT):
         parent = None
 
     return {"path": resolved, "parent": parent, "entries": entries}

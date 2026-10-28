@@ -48,11 +48,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import axios from 'axios'
 import { useAuthStore } from '@/stores/auth'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { beginGoogleFlow, pkceChallenge, safeRedirect, takeGoogleFlow } from '@/utils/oauth'
 
 const authStore = useAuthStore()
 const router = useRouter()
+const route = useRoute()
 
 const GOOGLE_LOGIN_HIDDEN = true
 
@@ -61,52 +64,83 @@ const password = ref('')
 const loading = ref(false)
 const errorMessage = ref('')
 
+/**
+ * Where to go once signed in: the page that sent the visitor here — as
+ * `?redirect=` when a session expired on it, or the route the guard turned
+ * away — and home otherwise.
+ */
+function afterLogin(): string {
+  return safeRedirect(route.query.redirect ?? route.redirectedFrom?.fullPath)
+}
+
+/** The server's reason, for the refusals worth telling apart. */
+function loginError(err: unknown, fallback: string): string {
+  if (axios.isAxiosError(err) && err.response?.status === 403) {
+    const detail = err.response.data?.detail
+    if (detail === 'Account suspended') return 'This account is suspended. Contact an administrator.'
+    if (typeof detail === 'string') return detail
+  }
+  return fallback
+}
+
 async function handleNativeLogin() {
   errorMessage.value = ''
   loading.value = true
   try {
     await authStore.loginNative(email.value, password.value)
-    router.push('/')
-  } catch {
-    errorMessage.value = 'Invalid email or password.'
+    router.replace(afterLogin())
+  } catch (err) {
+    errorMessage.value = loginError(err, 'Invalid email or password.')
   } finally {
     loading.value = false
   }
 }
 
-function handleGoogleLogin() {
+async function handleGoogleLogin() {
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
   if (!clientId) {
     errorMessage.value = 'Google sign-in is not configured.'
     return
   }
   const redirectUri = `${window.location.origin}/login`
-  const scope = 'openid email profile'
+  // `state` ties the callback to this tab's request (no login CSRF); PKCE
+  // makes an intercepted authorization code useless without the verifier.
+  const flow = beginGoogleFlow(afterLogin())
+  const params = new URLSearchParams({
+    client_id: clientId,
+    redirect_uri: redirectUri,
+    response_type: 'code',
+    scope: 'openid email profile',
+    state: flow.state,
+    code_challenge: await pkceChallenge(flow.codeVerifier),
+    code_challenge_method: 'S256',
+  })
 
-  const authUrl =
-    `https://accounts.google.com/o/oauth2/v2/auth?` +
-    `client_id=${clientId}&` +
-    `redirect_uri=${encodeURIComponent(redirectUri)}&` +
-    `response_type=code&` +
-    `scope=${encodeURIComponent(scope)}&` +
-    `access_type=offline&` +
-    `prompt=consent`
-
-  window.location.href = authUrl
+  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`
 }
 
 // Handle OAuth callback
 const urlParams = new URLSearchParams(window.location.search)
 const code = urlParams.get('code')
 
-if (code) {
-  const redirectUri = `${window.location.origin}/login`
-  authStore.login(code, redirectUri).then(() => {
-    router.replace({ name: 'home', query: {} })
-  }).catch((error) => {
-    console.error('Google login failed:', error)
-    errorMessage.value = 'Google sign-in failed. Please try again.'
-  })
+if (code || urlParams.get('error')) {
+  const flow = takeGoogleFlow(urlParams.get('state'))
+  // Drop code/state from the address bar whatever happens next.
+  router.replace({ name: 'login', query: {} })
+
+  if (!code) {
+    errorMessage.value = 'Google sign-in was cancelled.'
+  } else if (!flow) {
+    errorMessage.value = 'Google sign-in could not be verified. Please try again.'
+  } else {
+    const redirectUri = `${window.location.origin}/login`
+    authStore.login(code, redirectUri, flow.codeVerifier).then(() => {
+      router.replace(flow.redirect)
+    }).catch((error) => {
+      console.error('Google login failed:', error)
+      errorMessage.value = loginError(error, 'Google sign-in failed. Please try again.')
+    })
+  }
 }
 </script>
 

@@ -4,15 +4,21 @@ Authentication API routes.
 import logging
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 import httpx
 
 from app.core.config import settings
 from app.core.auth import (
-    create_access_token,
-    create_refresh_token,
-    is_refresh_token_revoked,
+    ACTIVE_STATUS,
+    TICKET_TTL_SECONDS,
+    consume_jti,
+    create_socket_ticket,
+    create_token_pair,
+    get_current_user,
+    ensure_account_active,
+    load_user_doc,
     revoke_refresh_token,
+    token_revoked,
     verify_token,
 )
 from app.core.limiter import limiter
@@ -47,18 +53,25 @@ async def native_login(request: Request, login_request: NativeLoginRequest):
             detail="Invalid email or password"
         )
 
-    access_token = create_access_token(
-        data={"sub": str(user.id), "email": user.email}
-    )
-    refresh_token = create_refresh_token(
-        data={"sub": str(user.id)}
-    )
+    # Checked only after the password: the answer reveals nothing to someone
+    # who does not already hold the credentials.
+    _refuse_if_suspended(user)
+
+    access_token, refresh_token = create_token_pair(str(user.id), user.email, user.token_version)
 
     return TokenResponse(
         access_token=access_token,
         refresh_token=refresh_token,
         user=user
     )
+
+
+def _refuse_if_suspended(user: User) -> None:
+    if (user.status or ACTIVE_STATUS) != ACTIVE_STATUS:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Account suspended",
+        )
 
 
 @router.post("/token", response_model=TokenResponse)
@@ -72,7 +85,10 @@ async def token_endpoint(request: Request, login_request: NativeLoginRequest):
 async def google_auth(request: Request, auth_request: GoogleAuthRequest):
     """
     Authenticate with Google OAuth 2.0.
-    Exchange authorization code for tokens and create/update user.
+
+    Exchanges the authorization code (with its PKCE verifier) for tokens and
+    signs in the existing account it belongs to. Accounts are never created
+    here — see UserService.get_google_user.
     """
     if not settings.google_oauth_enabled:
         raise HTTPException(
@@ -85,16 +101,19 @@ async def google_auth(request: Request, auth_request: GoogleAuthRequest):
         from google.auth.transport import requests as google_requests
 
         # Exchange code for tokens
+        exchange = {
+            "code": auth_request.code,
+            "client_id": settings.GOOGLE_CLIENT_ID,
+            "client_secret": settings.GOOGLE_CLIENT_SECRET,
+            "redirect_uri": auth_request.redirect_uri,
+            "grant_type": "authorization_code",
+        }
+        if auth_request.code_verifier:
+            exchange["code_verifier"] = auth_request.code_verifier
         async with httpx.AsyncClient() as client:
             token_response = await client.post(
                 "https://oauth2.googleapis.com/token",
-                data={
-                    "code": auth_request.code,
-                    "client_id": settings.GOOGLE_CLIENT_ID,
-                    "client_secret": settings.GOOGLE_CLIENT_SECRET,
-                    "redirect_uri": auth_request.redirect_uri,
-                    "grant_type": "authorization_code",
-                }
+                data=exchange,
             )
 
             if token_response.status_code != 200:
@@ -119,22 +138,20 @@ async def google_auth(request: Request, auth_request: GoogleAuthRequest):
             full_name = idinfo.get("name")
             avatar_url = idinfo.get("picture")
 
-            # Create or update user
+            # Invitation only: resolves to an existing account or raises 403.
             user_service = UserService()
-            user = await user_service.get_or_create_user(
+            user = await user_service.get_google_user(
                 google_id=google_id,
                 email=email,
+                email_verified=idinfo.get("email_verified") in (True, "true"),
                 full_name=full_name,
                 avatar_url=avatar_url
             )
 
+            _refuse_if_suspended(user)
+
             # Create JWT tokens
-            access_token = create_access_token(
-                data={"sub": str(user.id), "email": user.email}
-            )
-            refresh_token = create_refresh_token(
-                data={"sub": str(user.id)}
-            )
+            access_token, refresh_token = create_token_pair(str(user.id), user.email, user.token_version)
 
             return TokenResponse(
                 access_token=access_token,
@@ -157,69 +174,70 @@ async def google_auth(request: Request, auth_request: GoogleAuthRequest):
 async def refresh_token(request: Request, body: RefreshTokenRequest):
     """Refresh access token using a valid refresh token.
 
-    On success, the OLD refresh token's ``jti`` is immediately revoked
-    (refresh-token rotation), so a stolen refresh token can only be used once.
+    On success, the OLD refresh token's ``jti`` is consumed (refresh-token
+    rotation), so a stolen refresh token can only be used once.
     """
+    invalid = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid or expired refresh token",
+    )
     try:
-        payload = verify_token(body.refresh_token)
+        # A refresh token carries type="refresh"; verify_token's default is
+        # "access", which rejected every refresh from 2026-05-21 (8fa44bf8).
+        payload = verify_token(body.refresh_token, expected_type="refresh")
     except HTTPException:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid or expired refresh token",
-        )
+        raise invalid
 
-    if payload.get("type") != "refresh":
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token type",
-        )
-
-    # Refresh-token revocation check (S9). Tokens minted before the jti rollout
-    # have no jti claim — treat those as not-revoked for backwards compatibility.
-    old_jti = payload.get("jti")
-    if old_jti and await is_refresh_token_revoked(old_jti):
+    user_doc = await load_user_doc(payload.get("sub"))
+    if user_doc is None:
+        raise invalid
+    ensure_account_active(user_doc)
+    if token_revoked(payload, user_doc):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Refresh token has been revoked",
         )
 
-    user_id = payload.get("sub")
-    if not user_id:
+    # Rotation. Consuming the jti is the revocation check and the revocation in
+    # one atomic step, so two requests racing with the same token cannot both
+    # succeed. Every refresh token has carried a jti since 2026-05-21 and they
+    # live 30 days, so one without it is forged or long expired.
+    old_jti = payload.get("jti")
+    exp_claim = payload.get("exp")
+    if not old_jti or not isinstance(exp_claim, (int, float)):
+        raise invalid
+    old_exp_dt = datetime.fromtimestamp(exp_claim, tz=timezone.utc)
+    if not await consume_jti(old_jti, old_exp_dt):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid refresh token",
+            detail="Refresh token has been revoked",
         )
 
-    user_service = UserService()
-    user = await user_service.get_user_by_id(user_id)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not found",
-        )
-
-    # Rotation: revoke the OLD refresh token before minting the new pair so
-    # it cannot be replayed. Skip for legacy tokens without a jti.
-    if old_jti:
-        exp_claim = payload.get("exp")
-        if isinstance(exp_claim, (int, float)):
-            old_exp_dt = datetime.fromtimestamp(exp_claim, tz=timezone.utc)
-        else:
-            old_exp_dt = datetime.now(timezone.utc)
-        await revoke_refresh_token(old_jti, old_exp_dt)
-
-    new_access_token = create_access_token(
-        data={"sub": str(user.id), "email": user.email}
-    )
-    new_refresh_token = create_refresh_token(
-        data={"sub": str(user.id)}
-    )
+    user_doc["_id"] = str(user_doc["_id"])
+    user = User(**user_doc)
+    new_access_token, new_refresh_token = create_token_pair(str(user.id), user.email, user.token_version)
 
     return TokenResponse(
         access_token=new_access_token,
         refresh_token=new_refresh_token,
         user=user,
     )
+
+
+@router.post("/ws-ticket")
+@limiter.limit("60/minute")
+async def socket_ticket(request: Request, current_user: dict = Depends(get_current_user)):
+    """A one-time credential for a WebSocket or EventSource URL.
+
+    Those browser APIs cannot send an Authorization header, so whatever
+    authenticates them ends up in a URL, and URLs end up in logs. The ticket
+    is what goes there: good for one connection within TICKET_TTL_SECONDS,
+    and not accepted as a bearer token. Pass it as ``?ticket=``.
+    """
+    user_doc = await load_user_doc(current_user["id"])
+    if user_doc is None:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+    return {"ticket": create_socket_ticket(user_doc), "expires_in": TICKET_TTL_SECONDS}
 
 
 @router.post("/logout")

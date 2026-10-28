@@ -137,9 +137,16 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# Trust X-Forwarded-Proto/For from the nginx reverse proxy so that
-# Starlette generates https:// redirect URLs when behind HTTPS termination.
-app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
+# Trust X-Forwarded-Proto/For from the reverse proxy so that Starlette
+# generates https:// redirect URLs when behind HTTPS termination — but only
+# from the proxy on this host. Uvicorn listens on 0.0.0.0, so with "*" anyone
+# reaching :8400 directly could set X-Forwarded-For and choose the client IP
+# the per-IP rate limits key on. FORWARDED_ALLOW_IPS is the variable uvicorn
+# itself reads for the same setting.
+app.add_middleware(
+    ProxyHeadersMiddleware,
+    trusted_hosts=os.environ.get("FORWARDED_ALLOW_IPS", "127.0.0.1"),
+)
 
 # CORS middleware
 app.add_middleware(

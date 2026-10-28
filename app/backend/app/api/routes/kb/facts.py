@@ -8,7 +8,7 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
 from app.core.auth import get_current_user
 from app.core.database import get_arango_db
@@ -28,8 +28,8 @@ _executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="kb-facts-route
 async def list_stylized_facts(
     search: str = "",
     category: str = "",
-    limit: int = 50,
-    skip: int = 0,
+    limit: int = Query(default=50, ge=1, le=500),
+    skip: int = Query(default=0, ge=0),
     current_user: dict = Depends(get_current_user),
 ) -> Dict[str, Any]:
     arango = get_arango_db()
@@ -90,8 +90,8 @@ async def list_stylized_facts(
 async def list_kb_facts(
     search: str = "",
     domain: str = "",
-    limit: int = 50,
-    skip: int = 0,
+    limit: int = Query(default=50, ge=1, le=500),
+    skip: int = Query(default=0, ge=0),
     current_user: dict = Depends(get_current_user),
 ) -> Dict[str, Any]:
     arango = get_arango_db()

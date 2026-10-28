@@ -23,16 +23,28 @@
  * time**, and only the current socket's handlers may act. Superseded sockets
  * are detached before close, and every handler re-checks identity before
  * touching shared state.
+ *
+ * The credential is a one-time ticket (POST /api/auth/ws-ticket), fetched for
+ * every (re)connect, so the access token never appears in a URL. Fetching it
+ * is asynchronous, which opens a window in which close() or another connect()
+ * can run before the socket exists; a generation counter makes the fetch that
+ * lost that race give up instead of opening a socket nobody owns.
  */
 
 export interface ChatSocketOptions {
   /** Session id to connect to. Read fresh on every (re)connect. */
   sessionId: () => string
-  /** Access token for the `?token=` param. Read fresh so reconnects use the current one. */
-  token: () => string | null
+  /**
+   * Credential for the `?ticket=` param, fetched fresh on every (re)connect —
+   * a ticket is good for one connection. May be async. Resolving null means
+   * there is no session to connect with (reported via onAuthFailure);
+   * rejecting is treated as a transient failure and retried like a drop.
+   */
+  ticket: () => string | null | Promise<string | null>
   /** Called with each parsed server event from the current socket. */
   onEvent: (data: Record<string, unknown>) => void
-  /** Called when the server closes with 4401 (invalid/expired token). No reconnect follows. */
+  /** Called when the server closes with 4401 (invalid/expired credential), or no
+   *  ticket can be had. No reconnect follows. */
   onAuthFailure: () => void
   /** Delay before an unintentional-close reconnect. */
   reconnectDelayMs?: number
@@ -54,6 +66,11 @@ export function useChatSocket(opts: ChatSocketOptions): ChatSocket {
   let reconnectTimer: ReturnType<typeof setTimeout> | null = null
   /** Payload captured while CONNECTING, flushed on open. */
   let outbox: string | null = null
+  /** Bumped by every connect() and close(); a ticket fetch from an older
+   *  generation has been superseded and must not open a socket. */
+  let generation = 0
+  /** A connect() is waiting for its ticket (no socket exists yet). */
+  let fetchingTicket = false
 
   function cancelReconnect() {
     if (reconnectTimer !== null) {
@@ -62,11 +79,18 @@ export function useChatSocket(opts: ChatSocketOptions): ChatSocket {
     }
   }
 
-  function buildUrl(): string {
+  function buildUrl(ticket: string): string {
     const proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const token = opts.token()
-    const tokenParam = token ? `?token=${encodeURIComponent(token)}` : ''
-    return `${proto}//${window.location.host}/ws/chat/${opts.sessionId()}${tokenParam}`
+    return `${proto}//${window.location.host}/ws/chat/${opts.sessionId()}?ticket=${encodeURIComponent(ticket)}`
+  }
+
+  function scheduleReconnect() {
+    cancelReconnect()
+    reconnectTimer = setTimeout(() => {
+      reconnectTimer = null
+      // Don't reconnect if the view has since torn down or has no session.
+      if (opts.sessionId()) connect()
+    }, reconnectDelayMs)
   }
 
   /**
@@ -76,6 +100,8 @@ export function useChatSocket(opts: ChatSocketOptions): ChatSocket {
    */
   function close() {
     cancelReconnect()
+    generation += 1
+    fetchingTicket = false
     outbox = null
     if (!socket) return
     socket.onopen = null
@@ -93,8 +119,36 @@ export function useChatSocket(opts: ChatSocketOptions): ChatSocket {
   function connect() {
     // Guarantees the single-socket invariant even if a caller forgets to close.
     close()
+    const mine = generation
 
-    const s = new WebSocket(buildUrl())
+    const credential = opts.ticket()
+    if (credential === null || typeof credential === 'string') {
+      openWith(credential)
+      return
+    }
+    fetchingTicket = true
+    credential.then(
+      (ticket) => {
+        if (mine !== generation) return // closed or superseded meanwhile
+        fetchingTicket = false
+        openWith(ticket)
+      },
+      () => {
+        if (mine !== generation) return
+        fetchingTicket = false
+        scheduleReconnect()
+      },
+    )
+  }
+
+  function openWith(ticket: string | null) {
+    if (ticket === null) {
+      outbox = null
+      opts.onAuthFailure()
+      return
+    }
+
+    const s = new WebSocket(buildUrl(ticket))
     socket = s
 
     s.onopen = () => {
@@ -127,12 +181,7 @@ export function useChatSocket(opts: ChatSocketOptions): ChatSocket {
         return
       }
 
-      cancelReconnect()
-      reconnectTimer = setTimeout(() => {
-        reconnectTimer = null
-        // Don't reconnect if the view has since torn down or has no session.
-        if (opts.sessionId()) connect()
-      }, reconnectDelayMs)
+      scheduleReconnect()
     }
   }
 
@@ -142,10 +191,11 @@ export function useChatSocket(opts: ChatSocketOptions): ChatSocket {
       socket.send(text)
       return
     }
-    // Still CONNECTING (or gone): hold it rather than dropping it on the floor.
-    // Order matters — connect() clears the outbox, so open the socket first and
-    // queue afterwards, or the payload we are about to hold is wiped.
-    if (!socket) connect()
+    // Still CONNECTING, still fetching a ticket, or gone: hold it rather than
+    // dropping it on the floor. Order matters — connect() clears the outbox,
+    // so open the socket first and queue afterwards, or the payload we are
+    // about to hold is wiped.
+    if (!socket && !fetchingTicket) connect()
     outbox = text
   }
 

@@ -196,4 +196,39 @@ async def ensure_app_indexes(app_db) -> None:
         name="user_oauth_flows_flow_user",
     )
 
+    await _ensure_unique_user_email(app_db)
+
     logger.info("ensure_app_indexes: submission collection indexes verified/created")
+
+
+# Case-insensitive comparison of users.email, shared by the unique index and
+# the lookups that should use it.
+EMAIL_COLLATION = {"locale": "en", "strength": 2}
+
+
+async def _ensure_unique_user_email(app_db) -> None:
+    """One account per email address, ignoring case.
+
+    Case-insensitive (collation strength 2) because a lookup that ignores case
+    is how login finds accounts stored before addresses were normalised; two
+    rows differing only in case would make that lookup ambiguous. Partial on
+    string emails so a document without one is not a duplicate of another.
+
+    Additive and idempotent. If existing rows already collide the build fails;
+    that is logged rather than raised, so startup — and every other index — is
+    not held hostage to a data cleanup.
+    """
+    from pymongo.errors import OperationFailure
+
+    try:
+        await app_db.users.create_index(
+            "email",
+            unique=True,
+            name="users_email_unique_ci",
+            collation=EMAIL_COLLATION,
+            partialFilterExpression={"email": {"$type": "string"}},
+        )
+    except OperationFailure as exc:
+        logger.error(
+            "ensure_app_indexes: could not create unique index on users.email "
+            "(duplicate addresses differing only in case?): %s", exc)
