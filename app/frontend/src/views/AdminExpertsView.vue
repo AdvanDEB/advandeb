@@ -416,6 +416,8 @@ onMounted(() => { loadExperts(); loadRequests(); loadStats() })
 </script>
 
 <style scoped>
+@import '@/styles/elicitation-tokens.css';
+
 .admin-experts-view {
   padding: var(--el-s5) var(--el-s6);
   display: flex; flex-direction: column; gap: var(--el-s5);

@@ -318,6 +318,8 @@ function readError(e: any): string {
 </script>
 
 <style scoped>
+@import '@/styles/elicitation-tokens.css';
+
 .enrol-page {
   /* dvh so a phone's collapsing URL bar does not clip the card */
   min-height: 100vh;

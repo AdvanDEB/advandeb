@@ -40,6 +40,8 @@ defineEmits<{ (e: 'retry'): void }>()
 </script>
 
 <style scoped>
+@import '@/styles/elicitation-tokens.css';
+
 .state {
   display: flex; align-items: center; gap: var(--el-s3); flex-wrap: wrap;
   padding: var(--el-s4) 0;
