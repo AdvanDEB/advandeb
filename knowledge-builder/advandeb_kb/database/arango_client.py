@@ -341,10 +341,12 @@ class ArangoDatabase:
         limit: int = 100,
     ) -> list[dict]:
         """Traverse a named graph from a starting vertex."""
+        # uniqueVertices: 'global' is only accepted with order: 'bfs' (3.8+;
+        # `bfs: true` is the legacy spelling). Anything else is HTTP 400.
         aql = f"""
         FOR v, e, p IN {min_depth}..{max_depth} {direction} @start
             GRAPH @graph
-            OPTIONS {{uniqueVertices: 'global'}}
+            OPTIONS {{uniqueVertices: 'global', order: 'bfs'}}
             LIMIT @limit
             RETURN {{vertex: v, edge: e}}
         """
