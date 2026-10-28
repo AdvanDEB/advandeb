@@ -290,15 +290,19 @@ def test_view_state():
 # scripts/setup_facts_search_views.py
 # ---------------------------------------------------------------------------
 
-SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "setup_facts_search_views.py"
+SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
+
+
+def load_script(name):
+    spec = importlib.util.spec_from_file_location(name, SCRIPTS / f"{name}.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 @pytest.fixture
 def setup_script():
-    spec = importlib.util.spec_from_file_location("setup_facts_search_views", SCRIPT)
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    return load_script("setup_facts_search_views")
 
 
 def fresh_db():
@@ -360,3 +364,12 @@ def test_existing_analyzer_with_other_settings_is_refused(setup_script, monkeypa
     db._analyzer["properties"]["stemming"] = False
     assert run_script(setup_script, monkeypatch, db, "--db", "kb_scratch", "--apply") == 2
     assert db.calls == []
+
+
+def test_chunks_view_script_accepts_the_link_arango_stores():
+    # Its identity-analyzed general_domain comes back as {}; that used to read
+    # as "differs" and re-index all of chunks on every --apply.
+    module = load_script("setup_chunks_search_view")
+    link = module.link_definition(ts.TEXT_ANALYZER)
+    db = FakeRawDB(views={"chunks_text_search": {"links": stored_links({"chunks": link})}})
+    assert module.view_state(db, "chunks_text_search", ts.TEXT_ANALYZER) == "ok"
