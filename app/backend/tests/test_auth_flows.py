@@ -59,7 +59,7 @@ def test_access_token_cannot_refresh(client, make_user):
 
 
 def test_refresh_token_without_jti_is_refused(client, make_user):
-    from jose import jwt
+    import jwt
     from app.core.config import settings
 
     user = make_user("r@example.org")
@@ -547,7 +547,7 @@ def test_access_token_cannot_be_presented_as_a_ticket(client, make_user, token_f
 
 
 def test_expired_ticket_is_refused(client, make_user):
-    from jose import jwt
+    import jwt
     from app.core.config import settings
 
     user = make_user("w@example.org", roles=["knowledge_curator"])
