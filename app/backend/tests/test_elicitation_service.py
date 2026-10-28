@@ -576,7 +576,7 @@ async def test_deb_and_reproduction_judgments_never_merge(scratch_db):
     assert cov == {"n_required_met": 2, "n_required_pending": 0}
 
 
-def test_ladder_thresholds_follow_the_doc():
+async def test_ladder_thresholds_follow_the_doc():
     assert es._rung(0)[0] == "pre-R0"
     assert es._rung(59) == ("pre-R0", es.PRE_LADDER[1], 60)
     assert es._rung(60)[0] == "R0" and es._rung(60)[2] == 400

@@ -27,7 +27,7 @@ The design constraints these models exist to satisfy are specified in
 from datetime import datetime
 from typing import Any, Dict, List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 # Day-one tasks operate on the statement alone and need no evidence set, so
@@ -243,8 +243,7 @@ class ElicitationRecord(ElicitationDecision):
     machine_verdict_opened_before_answer: Optional[bool] = None
     created_at: datetime
 
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class ElicitationProgress(BaseModel):
@@ -517,8 +516,7 @@ class ExpertReference(BaseModel):
     triggered_readjudication: Optional[bool] = None
     created_at: datetime
 
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class ExpertAssertedEvidence(BaseModel):
