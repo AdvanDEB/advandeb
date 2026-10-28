@@ -183,11 +183,13 @@ function onKeydown(e: KeyboardEvent) {
 }
 
 // Opening the drawer moves focus into it, so a keyboard or screen-reader user
-// lands on the navigation rather than continuing behind it.
+// lands on the navigation rather than continuing behind it. The first link,
+// not the first `a, button`: that was the rail toggle, which the phone layout
+// hides, so focus never moved.
 watch(mobileOpen, async (open) => {
   if (!open) return
   await nextTick()
-  sidebarEl.value?.querySelector<HTMLElement>('a, button')?.focus()
+  sidebarEl.value?.querySelector<HTMLElement>('.nav-link')?.focus()
 })
 
 // Close mobile nav on route change. afterEach returns its remover; the hook
@@ -508,13 +510,22 @@ onBeforeUnmount(() => {
     left: 0; bottom: 0;
     width: 260px;
     transform: translateX(-100%);
-    transition: transform var(--el-t-slow) var(--el-ease);
+    /* Closed, the drawer is off-screen but its links were still Tab stops (and
+       read by screen readers). visibility:hidden takes them out; it flips only
+       after the slide-out, and at once on opening. */
+    visibility: hidden;
+    transition: transform var(--el-t-slow) var(--el-ease),
+                visibility 0s linear var(--el-t-slow);
     z-index: 100;
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   .sidebar:hover, .sidebar:focus-within { width: 260px; }
 
-  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar.mobile-open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform var(--el-t-slow) var(--el-ease), visibility 0s;
+  }
 
   /* On a phone the drawer is always the wide form — there is no rail to expand,
      so the toggle has nothing to do and is removed rather than left inert. */

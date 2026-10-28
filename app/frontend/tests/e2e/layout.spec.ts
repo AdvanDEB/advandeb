@@ -40,7 +40,7 @@ async function open(page: Page) {
   // Keep the pointer off the hover-to-expand rail, inside the viewport.
   const { width, height } = page.viewportSize()!
   await page.mouse.move(width - 5, height - 5)
-  await expect(page.locator('.sidebar')).toBeVisible()
+  await expect(page.locator('main#main-content')).toBeVisible()
 }
 
 test.describe('Sidebar rail (desktop)', () => {
@@ -107,4 +107,30 @@ test.describe('Sidebar rail without hover (tablet, reduced motion)', () => {
       await expect.poll(() => railWidth(page)).toBe(200)
     })
   }
+})
+
+test.describe('Phone drawer', () => {
+  test.use({ viewport: { width: 390, height: 844 }, hasTouch: true })
+
+  test('closed: its off-screen links are not Tab stops', async ({ page }) => {
+    await open(page)
+    const stops: (string | null)[] = []
+    for (let i = 0; i < 6; i++) {
+      await page.keyboard.press('Tab')
+      stops.push(await page.evaluate(() =>
+        document.activeElement?.closest('#app-sidebar') ? 'sidebar' : document.activeElement?.tagName ?? null))
+    }
+    expect(stops).not.toContain('sidebar')
+  })
+
+  test('opening it moves focus to the first link; closing hides it again', async ({ page }) => {
+    await open(page)
+    await page.getByRole('button', { name: 'Navigation menu' }).click()
+    await expect.poll(() => page.evaluate(() => {
+      const el = document.activeElement
+      return el?.classList.contains('nav-link') ? el.getAttribute('aria-label') : el?.tagName
+    })).toBe('Home')
+    await page.keyboard.press('Escape')
+    await expect(page.locator('#app-sidebar')).toBeHidden()
+  })
 })
