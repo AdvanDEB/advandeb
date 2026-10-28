@@ -52,6 +52,11 @@ class Settings(BaseSettings):
     # value cannot be taken back from browsers that have seen it. No
     # includeSubDomains (other services run on advandeb.com subdomains).
     SECURITY_HSTS_MAX_AGE: int = 86400
+    # Upper bound for one chat turn (retrieval + model + storage), seconds. A
+    # turn keeps running after the browser leaves (so its answer is stored);
+    # this stops one that would otherwise hold the shared key and an agent
+    # socket indefinitely. On expiry the conversation gets an error message.
+    CHAT_TURN_TIMEOUT_SECONDS: float = 480
     
     # Google OAuth (optional — native login works without these)
     GOOGLE_CLIENT_ID: Optional[str] = None

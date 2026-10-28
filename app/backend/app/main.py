@@ -121,6 +121,11 @@ async def lifespan(app: FastAPI):
 
     yield
 
+    # Chat turns whose browser left: a few seconds to store their answers
+    # before the process goes (app/api/routes/ws.py), while Mongo is still up.
+    from app.api.routes.ws import drain_detached_turns
+    await drain_detached_turns(grace_seconds=5.0)
+
     if primary:
         await batch_watchdog.stop()
         await graph_rebuild_queue.stop()
