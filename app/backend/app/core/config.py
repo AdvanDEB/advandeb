@@ -47,6 +47,11 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 30
+    # Strict-Transport-Security max-age in seconds, on every response; 0 turns
+    # it off. Deliberately short until HTTPS is enforced at the edge: a long
+    # value cannot be taken back from browsers that have seen it. No
+    # includeSubDomains (other services run on advandeb.com subdomains).
+    SECURITY_HSTS_MAX_AGE: int = 86400
     
     # Google OAuth (optional — native login works without these)
     GOOGLE_CLIENT_ID: Optional[str] = None
