@@ -218,9 +218,12 @@ async def _health_payload() -> dict:
         db = get_database()
         await db.command("ping")
         health_status["database"] = "connected"
-    except Exception as e:
+    except Exception:
+        # The endpoint is public: the exception text can carry the connection
+        # URI, hostnames and driver internals. It goes to the log, not out.
+        logging.getLogger(__name__).exception("health check: database ping failed")
         health_status["status"] = "degraded"
-        health_status["database"] = f"error: {str(e)}"
+        health_status["database"] = "unavailable"
 
     return health_status
 
