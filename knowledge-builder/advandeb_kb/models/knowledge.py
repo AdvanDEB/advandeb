@@ -39,7 +39,9 @@ class Document(BaseModel):
     openalex_id: Optional[str] = None   # bare Work ID, e.g. "W1972661416"
     pmid: Optional[str] = None
     cited_by_count: Optional[int] = None
-    is_retracted: bool = False
+    # None: OpenAlex no longer returns the work (merged or deleted), so
+    # backfill_openalex_metadata.py could not tell.
+    is_retracted: Optional[bool] = False
 
     # Where the document came from
     source_type: Literal["pdf_local", "pdf_upload", "web", "text", "manual"] = "manual"
@@ -48,8 +50,9 @@ class Document(BaseModel):
     # Scope tag for development / domain-limited testing (e.g. "reproduction")
     general_domain: Optional[str] = None
 
+    # "skipped": too little text to extract facts from (run_reproduction_pipeline.py)
     processing_status: Literal[
-        "pending", "processing", "completed", "failed", "excluded"
+        "pending", "processing", "completed", "failed", "excluded", "skipped"
     ] = "pending"
     # Set when processing_status == "excluded" — why the domain-relevance gate
     # skipped fact extraction / SF matching / embedding for this document.

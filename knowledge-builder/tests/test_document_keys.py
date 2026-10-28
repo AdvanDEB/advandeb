@@ -190,6 +190,15 @@ def test_openalex_document_row_validates(key):
     assert doc.model_dump(mode="json", by_alias=True)["_id"] == key
 
 
+@pytest.mark.parametrize("field, value", [
+    ("is_retracted", None),           # backfill_openalex_metadata.py: work gone from OpenAlex
+    ("processing_status", "skipped"),  # run_reproduction_pipeline.py: abstract too short
+])
+def test_openalex_document_values_the_writers_set(field, value):
+    doc = _doc_to_model(document_row(**{field: value}), Document)
+    assert getattr(doc, field) == value
+
+
 def test_document_taxon_relation_takes_an_openalex_document():
     rel = DocumentTaxonRelation(document_id=OPENALEX_KEY, tax_id=8030)
     assert rel.document_id == OPENALEX_KEY
