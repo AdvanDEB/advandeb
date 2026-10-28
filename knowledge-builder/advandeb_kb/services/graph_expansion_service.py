@@ -164,10 +164,12 @@ class GraphExpansionService:
         Returns an ordered list of citation hops:
             [{"document": {...}, "edge": {"relation": "cites"}}, ...]
         """
+        # uniqueVertices: 'global' is only accepted with order: 'bfs' (3.8+;
+        # `bfs: true` is the legacy spelling). Anything else is HTTP 400.
         aql = """
         FOR v, e IN 1..@max_depth OUTBOUND @start_id
             GRAPH 'citation_graph'
-            OPTIONS {uniqueVertices: 'global', bfsMode: true}
+            OPTIONS {uniqueVertices: 'global', order: 'bfs'}
             RETURN {
                 document: v,
                 edge: {
@@ -595,10 +597,11 @@ class GraphExpansionService:
         seen: set[str] = set()
 
         for start_id in start_ids:
+            # See get_citation_chain: global uniqueness requires order: 'bfs'.
             aql = f"""
             FOR v, e IN {min_depth}..{max_depth} {direction} @start
                 GRAPH @graph
-                OPTIONS {{uniqueVertices: 'global', bfsMode: true}}
+                OPTIONS {{uniqueVertices: 'global', order: 'bfs'}}
                 LIMIT @limit
                 RETURN {{vertex: v, edge: e}}
             """
