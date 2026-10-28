@@ -1,0 +1,1150 @@
+{
+ "name": "sf_support_fullcorpus",
+ "source": "analysis/sf_support_fullcorpus/raw",
+ "relevance": "paper judged supports/contradicts by both gpt-oss:120b and Claude",
+ "queries": [
+  {
+   "qid": "chl_01",
+   "category": "Chlorophyll",
+   "query": "chl:C increases with dilution rate in nutrient limiting conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "chl_02",
+   "category": "Chlorophyll",
+   "query": "chl:C decreases with dilution rate in light limiting conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "chl_03",
+   "category": "Chlorophyll",
+   "query": "Chlorophyll concentration increases with dilution rate in nutrient limiting conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf",
+     "file:zonn98b.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "chl_04",
+   "category": "Chlorophyll",
+   "query": "Chlorophyll concentration decreases with irradiance.",
+   "relevant": {
+    "deb": [
+     "file:kooy2010.pdf",
+     "file:loremarq2010.pdf",
+     "file:omtallid2009.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "chl_05",
+   "category": "Chlorophyll",
+   "query": "chl:N decreases with irradiance for constant dilution rate in nutrient replete conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "eps_01",
+   "category": "EPS Production",
+   "query": "No EPS production results directly from light-dependent carbon assimilation.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": [
+     "oa:W1969817454"
+    ]
+   }
+  },
+  {
+   "qid": "eps_02",
+   "category": "EPS Production",
+   "query": "Cellular production rates of EPS and other extracellular carbohydrates increase with specific growth rate.",
+   "relevant": {
+    "deb": [
+     "file:livalaga2017.pdf",
+     "file:livanou e.a. - 2019 - a deb-based approach of modeling dissolved organic.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "eps_03",
+   "category": "EPS Production",
+   "query": "EPS type 1 is produced under all conditions while type 2 only in nutrient-limiting cells.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "feeding_01",
+   "category": "Feeding",
+   "query": "Many species (most animals and plants) have an embryo stage that does not feed.",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 2014 - metabolic acceleration in animal ontogeny an evol.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy2012.pdf",
+     "file:kooy93.pdf",
+     "file:zimm2013.pdf"
+    ],
+    "reproduction": [
+     "oa:W129847303",
+     "oa:W1691923223",
+     "oa:W2128356246",
+     "oa:W2140042191",
+     "oa:W2158631687"
+    ]
+   }
+  },
+  {
+   "qid": "feeding_02",
+   "category": "Feeding",
+   "query": "During starvation, organisms are able to reproduce, grow, and survive for some time.",
+   "relevant": {
+    "deb": [
+     "file:jaco2011.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy93.pdf",
+     "file:martzimm2012a.pdf",
+     "file:maurpogg2013.pdf",
+     "file:mccamurd1990.pdf",
+     "file:peeters et al. - 2010 - influence of low and decreasing food levels on dap.pdf",
+     "file:sherborne et al. - 2020 - sublethal effect modelling for environmental risk .pdf",
+     "file:sous2007.pdf",
+     "file:tolla et al. - 2007 - a kinetic inhibition mechanism for maintenance.pdf"
+    ],
+    "reproduction": [
+     "oa:W2031143868",
+     "oa:W2057006548",
+     "oa:W2066820311",
+     "oa:W2277172270",
+     "oa:W2334217535",
+     "oa:W2742428177",
+     "oa:W3111318961",
+     "oa:W3142971625",
+     "oa:W4385347837"
+    ]
+   }
+  },
+  {
+   "qid": "feeding_03",
+   "category": "Feeding",
+   "query": "At abundant food, feeding rate is at a maximum, independent of food density.",
+   "relevant": {
+    "deb": [
+     "file:diekmetz1984.pdf",
+     "file:kooijman - 1986 - population dynamics on the basis of budgets..pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2009a.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy93.pdf",
+     "file:leeu2003.pdf",
+     "file:meer et al. - 2020 - predicting post-natal energy intake of lesser blac.pdf",
+     "file:zimm2013.pdf"
+    ],
+    "reproduction": [
+     "oa:W1993326884",
+     "oa:W2027536087",
+     "oa:W2322700932"
+    ]
+   }
+  },
+  {
+   "qid": "feeding_04",
+   "category": "Feeding",
+   "query": "Organisms show a transient increase in metabolic rate independent of body mass after ingesting food (heat increment of feeding).",
+   "relevant": {
+    "deb": [
+     "file:casabody2015.pdf",
+     "file:kooy2010_c.pdf",
+     "file:sous2007.pdf"
+    ],
+    "reproduction": [
+     "oa:W2053786475",
+     "oa:W2064731167",
+     "oa:W2109871929",
+     "oa:W2147452171",
+     "oa:W2153761383",
+     "oa:W2158591681",
+     "oa:W2176521957",
+     "oa:W2724818809",
+     "oa:W4317886456"
+    ]
+   }
+  },
+  {
+   "qid": "feeding_05",
+   "category": "Feeding",
+   "query": "At abundant food, feeding reduces at high temperatures in some species.",
+   "relevant": {
+    "deb": [
+     "file:bouralun2009.pdf",
+     "file:camp2009.pdf",
+     "file:kooy93.pdf",
+     "file:richard et al. - 2024 - the temperature-size rule in the context of dynami.pdf",
+     "file:sebens e.a. - 2018 - estimation of fitness from energetics and life-his.pdf"
+    ],
+    "reproduction": [
+     "oa:W2105805372",
+     "oa:W2605058006",
+     "oa:W3010282255",
+     "oa:W4394548709"
+    ]
+   }
+  },
+  {
+   "qid": "genphys_01",
+   "category": "General Physiology",
+   "query": "Dissipating heat is a weighted sum of three mass flows: carbon dioxide, dioxygen, and nitrogenous waste.",
+   "relevant": {
+    "deb": [
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy95.pdf",
+     "file:kooynisb2000.pdf",
+     "file:kooytroo2007.pdf",
+     "file:sousmota2006.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "genphys_02",
+   "category": "General Physiology",
+   "query": "Cells in a tissue are metabolically similar regardless of the size of the organism.",
+   "relevant": {
+    "deb": [
+     "file:glaz2005.pdf",
+     "file:glaz2014.pdf",
+     "file:karkach - 2006 - trajectories and models of individual growth.pdf",
+     "file:kearwhit2012.pdf",
+     "file:kozlowski et al. - 2020 - coevolution of body size and metabolic rate in ver.pdf",
+     "file:sous2007.pdf",
+     "file:starkona2013.pdf"
+    ],
+    "reproduction": [
+     "oa:W1519282726",
+     "oa:W1983249745",
+     "oa:W3081702897",
+     "oa:W4287834774",
+     "oa:W4306680375"
+    ]
+   }
+  },
+  {
+   "qid": "genphys_03",
+   "category": "General Physiology",
+   "query": "Some energy always dissipates, also in absence of dioxygen.",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 2020 - the standard dynamic energy budget model has no pl.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_c.pdf",
+     "file:sousdomi2008.pdf"
+    ],
+    "reproduction": [
+     "oa:W2092697513",
+     "oa:W2092827784",
+     "oa:W4295290330"
+    ]
+   }
+  },
+  {
+   "qid": "genphys_04",
+   "category": "General Physiology",
+   "query": "Survivor curves for life span terminated by ageing are typically well described by the Weibull and Gompertz models.",
+   "relevant": {
+    "deb": [
+     "file:guillaumot - 2021 - modelling the response of antarctic marine species.pdf",
+     "file:kooy93.pdf",
+     "file:kooyhoev89.pdf",
+     "file:leeu2003.pdf",
+     "file:leeuvera2010.pdf"
+    ],
+    "reproduction": [
+     "oa:W3113107509",
+     "oa:W40316541"
+    ]
+   }
+  },
+  {
+   "qid": "genphys_05",
+   "category": "General Physiology",
+   "query": "Life span typically increases inter-specifically with maximum body length in endotherms, hardly depends on body length in ectotherms.",
+   "relevant": {
+    "deb": [
+     "file:alunveer2011.pdf",
+     "file:kooijman - 2020 - the standard dynamic energy budget model has no pl.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy93.pdf"
+    ],
+    "reproduction": [
+     "oa:W2030389371",
+     "oa:W2068100539",
+     "oa:W2164464880"
+    ]
+   }
+  },
+  {
+   "qid": "genphys_06",
+   "category": "General Physiology",
+   "query": "Simpler transport network morphologies (also passive transport systems) should have lower maintenance.",
+   "relevant": {
+    "deb": [
+     "file:glaz2014.pdf",
+     "file:schouten et al. - 2020 - integrating dynamic plant growth models and microc.pdf",
+     "file:toll2006.pdf",
+     "file:wier2005.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "genphys_07",
+   "category": "General Physiology",
+   "query": "Within a species or related group, individuals in colder climates tend to be larger, while those in warmer climates are smaller (Bergmann's rule).",
+   "relevant": {
+    "deb": [
+     "file:bazin - 2024 - conséquences écologiques des changements de taille.pdf",
+     "file:cardveer2006.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy93.pdf",
+     "file:lampert - 2025 - daphnia magna.pdf",
+     "file:lee - 2020 - towards improved predictions of growth and metabol.pdf",
+     "file:mariño et al. - 2021 - resource and seasonality drive interspecific varia.pdf",
+     "file:menu - 2020 - modélisation bioénergétique de la variabilité des .pdf",
+     "file:richard et al. - 2024 - the temperature-size rule in the context of dynami.pdf",
+     "file:trookooi2007.pdf"
+    ],
+    "reproduction": [
+     "oa:W1919796378",
+     "oa:W2100819298",
+     "oa:W2131624150",
+     "oa:W2156309935",
+     "oa:W2484115662",
+     "oa:W2785172183",
+     "oa:W2904555371",
+     "oa:W2953020206",
+     "oa:W3102182774",
+     "oa:W3192936762",
+     "oa:W4387816984",
+     "oa:W4391450036"
+    ]
+   }
+  },
+  {
+   "qid": "genphys_08",
+   "category": "General Physiology",
+   "query": "Scaling of maximal feeding rate with size should depend on transport network morphology.",
+   "relevant": {
+    "deb": [
+     "file:everkooy89.pdf",
+     "file:glaz2005.pdf",
+     "file:hirsglaz2014.pdf",
+     "file:jagemart2013.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy86a.pdf",
+     "file:kooy93.pdf"
+    ],
+    "reproduction": [
+     "oa:W2035541450",
+     "oa:W2060967407",
+     "oa:W2133947283"
+    ]
+   }
+  },
+  {
+   "qid": "growth_01",
+   "category": "Growth",
+   "query": "Length of isomorphic organisms at abundant food follows the von Bertalanffy growth curve.",
+   "relevant": {
+    "deb": [
+     "file:jagealda2005.pdf",
+     "file:karkach - 2006 - trajectories and models of individual growth.pdf",
+     "file:kooy2000.pdf",
+     "file:kooybeda2006.pdf",
+     "file:lika and kooijman - 2024 - the metabolic interpretation of the von bertalanff.pdf",
+     "file:marques et al. - 2020 - minimizing direct greenhouse gas emissions in live.pdf",
+     "file:mullnisb2000.pdf",
+     "file:sousdomi2008.pdf",
+     "file:sousdomi2010.pdf",
+     "file:zimm2013.pdf"
+    ],
+    "reproduction": [
+     "oa:W2397619697",
+     "oa:W2902337652",
+     "oa:W2903009808",
+     "oa:W3025332313",
+     "oa:W4394401208"
+    ]
+   }
+  },
+  {
+   "qid": "growth_02",
+   "category": "Growth",
+   "query": "Many species exhibit indeterminate growth, meaning they do not stop growing after reproduction starts.",
+   "relevant": {
+    "deb": [
+     "file:karkach - 2006 - trajectories and models of individual growth.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooytroo2007.pdf",
+     "file:lee - 2020 - towards improved predictions of growth and metabol.pdf",
+     "file:likakooy2003.pdf",
+     "file:sherelln2002.pdf",
+     "file:sousdomi2008.pdf"
+    ],
+    "reproduction": [
+     "oa:W1954475296",
+     "oa:W1992728478",
+     "oa:W2015454790",
+     "oa:W2060962315",
+     "oa:W2072530661",
+     "oa:W2076835723",
+     "oa:W2095253393",
+     "oa:W2332279772",
+     "oa:W2333257486",
+     "oa:W2970948851",
+     "oa:W2994920843",
+     "oa:W4408142270"
+    ]
+   }
+  },
+  {
+   "qid": "growth_03",
+   "category": "Growth",
+   "query": "Growth can be simultaneous with reproduction, but growth can also cease long before reproduction is initiated.",
+   "relevant": {
+    "deb": [
+     "file:augugagn2011.pdf",
+     "file:fili2010.pdf",
+     "file:froepaul2023_comment.pdf",
+     "file:karkach - 2006 - trajectories and models of individual growth.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy97.pdf",
+     "file:kooybeda96.pdf",
+     "file:leeu2003.pdf",
+     "file:leeuzonn2003.pdf"
+    ],
+    "reproduction": [
+     "oa:W1954475296",
+     "oa:W2076835723",
+     "oa:W4367185651",
+     "oa:W4367185841"
+    ]
+   }
+  },
+  {
+   "qid": "growth_04",
+   "category": "Growth",
+   "query": "The logarithm of the von Bertalanffy growth rate of different species corrected for a common body temperature decreases almost linearly with the logarithm of the species maximum size.",
+   "relevant": {
+    "deb": [
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy88c.pdf",
+     "file:meer2018.pdf",
+     "file:müller and koster - 2024 - august pütter (1879–1929) and the mechanistic orig.pdf",
+     "file:sous2007.pdf"
+    ],
+    "reproduction": [
+     "oa:W2313101344"
+    ]
+   }
+  },
+  {
+   "qid": "growth_05",
+   "category": "Growth",
+   "query": "The inverse of the von Bertalanffy growth rate for organisms of the same species at different food availabilities decreases linearly with ultimate length.",
+   "relevant": {
+    "deb": [
+     "file:kooy2000.pdf",
+     "file:kooy2009a.pdf",
+     "file:kooy93.pdf",
+     "file:kooypecq2011.pdf",
+     "file:lika and kooijman - 2024 - the metabolic interpretation of the von bertalanff.pdf",
+     "file:meer2006.pdf",
+     "file:sousdomi2010.pdf"
+    ],
+    "reproduction": [
+     "oa:W1977207788"
+    ]
+   }
+  },
+  {
+   "qid": "growth_06",
+   "category": "Growth",
+   "query": "Foetuses increase in weight proportional to cubed time.",
+   "relevant": {
+    "deb": [
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_c.pdf",
+     "file:maurdesf2022_si.pdf",
+     "file:mauritsson - 2020 - effects of pcb on the population growth rate of ba.pdf",
+     "file:moretti - 2019 - estimating the effect of mid-frequency active sona.pdf",
+     "file:sous2007.pdf",
+     "file:sousdomi2008.pdf"
+    ],
+    "reproduction": [
+     "oa:W1966693107",
+     "oa:W1994799072"
+    ]
+   }
+  },
+  {
+   "qid": "growth_07",
+   "category": "Growth",
+   "query": "Foetuses increase in weight exponentially.",
+   "relevant": {
+    "deb": [
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy93.pdf",
+     "file:maurdesf2022_si.pdf",
+     "file:mauritsson - 2020 - effects of pcb on the population growth rate of ba.pdf",
+     "file:moretti - 2019 - estimating the effect of mid-frequency active sona.pdf",
+     "file:sous2007.pdf"
+    ],
+    "reproduction": [
+     "oa:W1994799072"
+    ]
+   }
+  },
+  {
+   "qid": "growth_08",
+   "category": "Growth",
+   "query": "At constant food density, no substantial shrinking occurs independent of ageing.",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 2020 - the standard dynamic energy budget model has no pl.pdf",
+     "file:kooy2010_i.pdf",
+     "file:likakooy2011.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "growth_09",
+   "category": "Growth",
+   "query": "Increase in temperature reduces ultimate length in some species.",
+   "relevant": {
+    "deb": [
+     "file:2024 - ocean warming and novel species interactions boost.pdf",
+     "file:bazin - 2024 - conséquences écologiques des changements de taille.pdf",
+     "file:giacmari2017.pdf",
+     "file:kooy88c.pdf",
+     "file:lee - 2020 - towards improved predictions of growth and metabol.pdf",
+     "file:marnjusu2017.pdf",
+     "file:richard et al. - 2024 - the temperature-size rule in the context of dynami.pdf",
+     "file:thunell et al. - 2022 - optimal energy allocation trade-off driven by size.pdf"
+    ],
+    "reproduction": [
+     "oa:W1972588091",
+     "oa:W2116968499",
+     "oa:W2120573692",
+     "oa:W2904555371",
+     "oa:W2997312133",
+     "oa:W3030660598",
+     "oa:W3087646956",
+     "oa:W4387816984",
+     "oa:W7104504560"
+    ]
+   }
+  },
+  {
+   "qid": "growth_10",
+   "category": "Growth",
+   "query": "Maximal growth rate in some species can be obtained through high feeding, regardless of nutritional status (energy reserves).",
+   "relevant": {
+    "deb": [
+     "file:campos-candela, e.a. - 2019 - a mechanistic theory of personality-dependent move.pdf",
+     "file:jagebars2013.pdf",
+     "file:lobry et al. - 2025 - fish growth patterns and modeling.pdf",
+     "file:vreddobb2004.pdf"
+    ],
+    "reproduction": [
+     "oa:W1975752688",
+     "oa:W1989003791",
+     "oa:W2100937175",
+     "oa:W2109371672",
+     "oa:W2152650287",
+     "oa:W4380046112"
+    ]
+   }
+  },
+  {
+   "qid": "growth_11",
+   "category": "Growth",
+   "query": "Some species reduce growth during reproduction.",
+   "relevant": {
+    "deb": [
+     "file:fili2010.pdf",
+     "file:froepaul2023_comment.pdf",
+     "file:heininger - 2022 - aging is selected for, adaptive, and programmed. 1.pdf",
+     "file:karkach - 2006 - trajectories and models of individual growth.pdf",
+     "file:kooy2000.pdf",
+     "file:marshall and white - 2018 - have we outgrown the existing models of growth.pdf"
+    ],
+    "reproduction": [
+     "oa:W2326256634",
+     "oa:W2994920843",
+     "oa:W3045153856",
+     "oa:W4367185841"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_01",
+   "category": "Hypoxia / DO",
+   "query": "Organisms reduce their feeding rate with decreasing dissolved oxygen (DO) level.",
+   "relevant": {
+    "deb": [
+     "file:aguijean2018.pdf",
+     "file:davis - 2021 - physiological, molecular, and  ecological response.pdf",
+     "file:davis et al. - 2024 - predicting the effects of hypoxia on oyster (cr.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W2036568734",
+     "oa:W2092742809",
+     "oa:W2105994018",
+     "oa:W2355848270",
+     "oa:W3094434442"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_02",
+   "category": "Hypoxia / DO",
+   "query": "Food assimilation efficiency can be enhanced, unchanged or reduced under hypoxia, depending on species.",
+   "relevant": {
+    "deb": [
+     "file:schwemmer et al. - 2024 - attributing hypoxia responses of early life men.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W2110535496"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_03",
+   "category": "Hypoxia / DO",
+   "query": "Growth decreases with decreasing DO level, due to reduction in energy uptake and/or increase in energy expenditure (dissipation).",
+   "relevant": {
+    "deb": [],
+    "reproduction": [
+     "oa:W2808645480"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_04",
+   "category": "Hypoxia / DO",
+   "query": "Energy allocation is reprioritized to first pay maintenance costs under hypoxic conditions.",
+   "relevant": {
+    "deb": [
+     "file:aguijean2018.pdf",
+     "file:goodchild et al. - 2019 - bioenergetics-adverse outcome pathway linking org.pdf",
+     "file:sokolova - 2021 - bioenergetics in environmental adaptation and stre.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W2593050815",
+     "oa:W28992421"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_05",
+   "category": "Hypoxia / DO",
+   "query": "Under moderate hypoxia, organisms may continue to allocate energy to reproduction even if there is no allocation to structural growth.",
+   "relevant": {
+    "deb": [
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W1964383623",
+     "oa:W3110907929"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_07",
+   "category": "Hypoxia / DO",
+   "query": "Hypoxia can disrupt endocrine functions, affecting gametogenesis, sexual maturity, gamete quality and fecundity.",
+   "relevant": {
+    "deb": [
+     "file:davis - 2021 - physiological, molecular, and  ecological response.pdf",
+     "file:lavaud et al. - 2018 - modeling the impact of hypoxia on the energy budge.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W1964965329",
+     "oa:W2052097318",
+     "oa:W2105420483",
+     "oa:W2128019318",
+     "oa:W2264604014",
+     "oa:W2595058833",
+     "oa:W2887244265",
+     "oa:W2925016913",
+     "oa:W3176773943",
+     "oa:W3199420342",
+     "oa:W3201834362",
+     "oa:W4280504109",
+     "oa:W4388912897",
+     "oa:W4392653164",
+     "oa:W4393931373"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_08",
+   "category": "Hypoxia / DO",
+   "query": "O2 consumption starts to diminish at a reduced PO2 below a critical saturation level; when an animal has an elevated O2 consumption (swimming, digesting, etc.), consumption starts to diminish at a greater PO2 than the critical saturation.",
+   "relevant": {
+    "deb": [
+     "file:aguijean2018.pdf",
+     "file:lobry et al. - 2025 - fish growth patterns and modeling.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W2071154714",
+     "oa:W2087366163",
+     "oa:W2316948813",
+     "oa:W3009257656"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_09",
+   "category": "Hypoxia / DO",
+   "query": "Above the critical saturation, compensatory mechanisms compensate the O2 reduction to maintain respiration and sustain the standard metabolic rate. These responses can lead to increased O2 consumption (e.g. ventilation rate, heartbeat, mobility).",
+   "relevant": {
+    "deb": [
+     "file:aguijean2018.pdf",
+     "file:davis - 2021 - physiological, molecular, and  ecological response.pdf",
+     "file:lampert - 2025 - daphnia magna.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W1480188766",
+     "oa:W2032801058",
+     "oa:W2137476445",
+     "oa:W2743948761",
+     "oa:W2948967936",
+     "oa:W4382196235"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_10",
+   "category": "Hypoxia / DO",
+   "query": "Behavioural responses under hypoxia can lead to decreased O2 consumption (e.g. reduce activity, reduce feeding); some species may also enter a hypometabolic state for surviving.",
+   "relevant": {
+    "deb": [
+     "file:aguijean2018.pdf",
+     "file:davis - 2021 - physiological, molecular, and  ecological response.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W2019061839",
+     "oa:W2043282104",
+     "oa:W2162595267",
+     "oa:W2593050815",
+     "oa:W2597004697",
+     "oa:W2742234657",
+     "oa:W28992421",
+     "oa:W3026457376",
+     "oa:W4375852568"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_11",
+   "category": "Hypoxia / DO",
+   "query": "Anaerobiosis can start under the critical saturation threshold, with less efficient energy production and toxic end-product formation (e.g. lactate, acidosis), leading to a long-lasting (several hours) imprint on metabolism (oxygen debt).",
+   "relevant": {
+    "deb": [
+     "file:frecurqu2016.pdf",
+     "file:lampert - 2025 - daphnia magna.pdf",
+     "file:schwemmer et al. - 2024 - attributing hypoxia responses of early life men.pdf",
+     "file:sokolova - 2013 - energy-limited tolerance to stress as a conceptual.pdf",
+     "file:sokolova - 2021 - bioenergetics in environmental adaptation and stre.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": [
+     "oa:W1573298618",
+     "oa:W1999333889",
+     "oa:W2006544872",
+     "oa:W2092697513",
+     "oa:W2165682218",
+     "oa:W2274513425",
+     "oa:W2318304807",
+     "oa:W4367594321",
+     "oa:W4386715065"
+    ]
+   }
+  },
+  {
+   "qid": "hypoxia_13",
+   "category": "Hypoxia / DO",
+   "query": "Lethal DO level increases with increasing metabolic activity.",
+   "relevant": {
+    "deb": [
+     "file:horocook2015.pdf",
+     "file:sokolova - 2021 - bioenergetics in environmental adaptation and stre.pdf",
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf",
+     "file:weidner et al. - 2020 - hormones as adaptive control systems in juvenile f.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "hypoxia_14",
+   "category": "Hypoxia / DO",
+   "query": "Exponential increase of survival time under anaerobic glycolysis with body mass due to the decrease of mass-specific metabolic rate.",
+   "relevant": {
+    "deb": [
+     "file:thomas et al. - effects of hypoxia on metabolic functions in marin.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "nc_01",
+   "category": "N:C ratio",
+   "query": "N:C increases with dilution rate in nutrient limiting conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "nc_02",
+   "category": "N:C ratio",
+   "query": "N:C decreases with dilution rate in light limiting conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "nc_03",
+   "category": "N:C ratio",
+   "query": "N:C decreases with temperature in nutrient or light limiting conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf",
+     "file:omtabrug2009.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "nc_04",
+   "category": "N:C ratio",
+   "query": "N:C decreases with irradiance in nutrient replete conditions.",
+   "relevant": {
+    "deb": [
+     "file:loremarq2010.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "reproduction_01",
+   "category": "Reproduction",
+   "query": "Many species have a juvenile stage that does not reproduce.",
+   "relevant": {
+    "deb": [
+     "file:ernsting e.a. - 1993 - size at maturity and patterns of growth and reprod.pdf",
+     "file:klagkou et al. - 2024 - dynamic energy budget approach for modeling growth.pdf",
+     "file:koch - 2021 - bioenergetics modeling to link individual- and pop.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy93.pdf",
+     "file:lipcius e.a. - 2019 - modeling quantitative value of habitats for marine.pdf",
+     "file:mccanisb1996.pdf",
+     "file:sous2007.pdf"
+    ],
+    "reproduction": [
+     "oa:W2025365937",
+     "oa:W2330388122",
+     "oa:W4295914406"
+    ]
+   }
+  },
+  {
+   "qid": "reproduction_02",
+   "category": "Reproduction",
+   "query": "Reproduction increases with size intra-specifically but decreases with size inter-specifically.",
+   "relevant": {
+    "deb": [
+     "file:kooy2010.pdf",
+     "file:main2015.pdf",
+     "file:maino e.a. - 2014 - reconciling theories for metabolic scaling..pdf"
+    ],
+    "reproduction": [
+     "oa:W2017094586",
+     "oa:W2051108295",
+     "oa:W2324709263",
+     "oa:W2731180235",
+     "oa:W2994920843"
+    ]
+   }
+  },
+  {
+   "qid": "reproduction_03",
+   "category": "Reproduction",
+   "query": "A range of constant low food levels exists where an individual can survive but reproduction is never initiated.",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 1986 - population dynamics on the basis of budgets..pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy93.pdf",
+     "file:likakooy2011.pdf",
+     "file:smallegange and guenther - 2024 - a development-centric perspective on pace-of-life .pdf"
+    ],
+    "reproduction": [
+     "oa:W1639902769",
+     "oa:W3148319022"
+    ]
+   }
+  },
+  {
+   "qid": "reproduction_04",
+   "category": "Reproduction",
+   "query": "Egg size (or initial reserve) covaries with the nutritional status of the mother.",
+   "relevant": {
+    "deb": [
+     "file:augu2012.pdf",
+     "file:jagegous2023_suppinfo.pdf",
+     "file:jager et al. - 2023 - using the standard deb animal model for toxicokine.pdf",
+     "file:lampert - 2025 - daphnia magna.pdf",
+     "file:pecquerie et al. - 2009 - modeling fish growth and reproduction in the conte.pdf",
+     "file:schlelln2001.pdf",
+     "file:zimm2013.pdf"
+    ],
+    "reproduction": [
+     "oa:W2035340849",
+     "oa:W2103641638",
+     "oa:W2153284619",
+     "oa:W2164476860",
+     "oa:W2327144761",
+     "oa:W2334668810",
+     "oa:W304175675",
+     "oa:W69494429"
+    ]
+   }
+  },
+  {
+   "qid": "reproduction_05",
+   "category": "Reproduction",
+   "query": "In some species energy committed per offspring does not depend significantly on the nutritional status of the mother.",
+   "relevant": {
+    "deb": [
+     "file:haberle et al. - 2023 - fish condition as an indicator of stock status in.pdf",
+     "file:heininger - 2022 - aging is selected for, adaptive, and programmed. 1.pdf",
+     "file:klannisb2007.pdf",
+     "file:lampert - 2025 - daphnia magna.pdf",
+     "file:likaaugu2014.pdf",
+     "file:pecquerie et al. - 2009 - modeling fish growth and reproduction in the conte.pdf",
+     "file:trookooi2008.pdf"
+    ],
+    "reproduction": [
+     "oa:W2131899543",
+     "oa:W2149376709",
+     "oa:W2189336933",
+     "oa:W2388218018",
+     "oa:W2547384993",
+     "oa:W2783236047"
+    ]
+   }
+  },
+  {
+   "qid": "respiration_01",
+   "category": "Respiration",
+   "query": "Freshly laid eggs/seeds initially use negligible amounts of dioxygen.",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 2020 - the standard dynamic energy budget model has no pl.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:mainpirt2017.pdf",
+     "file:sous2007.pdf"
+    ],
+    "reproduction": []
+   }
+  },
+  {
+   "qid": "respiration_02",
+   "category": "Respiration",
+   "query": "Dioxygen use increases with decreasing mass in embryos and increases with mass in juveniles and adults.",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 2020 - the standard dynamic energy budget model has no pl.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy2012.pdf",
+     "file:meer2018.pdf",
+     "file:sous2007.pdf",
+     "file:sousdomi2010.pdf"
+    ],
+    "reproduction": [
+     "oa:W2249648514"
+    ]
+   }
+  },
+  {
+   "qid": "respiration_03",
+   "category": "Respiration",
+   "query": "Dioxygen use by isomorphs scales approximately with body weight raised to the power 0.75 (Kleiber's law).",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 2020 - the standard dynamic energy budget model has no pl.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy2012.pdf",
+     "file:meer2018.pdf",
+     "file:sous2007.pdf"
+    ],
+    "reproduction": [
+     "oa:W1986633641",
+     "oa:W2143117770"
+    ]
+   }
+  },
+  {
+   "qid": "respiration_04",
+   "category": "Respiration",
+   "query": "Intraspecific scaling of maximum dioxygen use with size depends on morphology of the energy and material transport network(s).",
+   "relevant": {
+    "deb": [
+     "file:glazhirs2015.pdf",
+     "file:hirsglaz2014.pdf",
+     "file:karkach - 2006 - trajectories and models of individual growth.pdf",
+     "file:kooy2010.pdf",
+     "file:main2015.pdf",
+     "file:mainokear2015a.pdf",
+     "file:meer2018.pdf",
+     "file:sous2007.pdf",
+     "file:sousdomi2010.pdf"
+    ],
+    "reproduction": [
+     "oa:W2149361279",
+     "oa:W2260205413",
+     "oa:W4404138154"
+    ]
+   }
+  },
+  {
+   "qid": "respiration_05",
+   "category": "Respiration",
+   "query": "Intraspecific scaling of maximum dioxygen use changes with developmental stage.",
+   "relevant": {
+    "deb": [
+     "file:kooijman - 2020 - the standard dynamic energy budget model has no pl.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy2012.pdf",
+     "file:marn and kooijman - 2022 - the comparative energetics of the turtles and croc.pdf",
+     "file:meer2018.pdf",
+     "file:sous2007.pdf",
+     "file:sousdomi2010.pdf"
+    ],
+    "reproduction": [
+     "oa:W2249648514"
+    ]
+   }
+  },
+  {
+   "qid": "stoichiometry_01",
+   "category": "Stoichiometry",
+   "query": "The chemical composition of organisms depends on their nutritional status (starved vs. well-fed).",
+   "relevant": {
+    "deb": [
+     "file:acheniels2012.pdf",
+     "file:bran2002.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_i.pdf",
+     "file:kooy2012.pdf"
+    ],
+    "reproduction": [
+     "oa:W1692617936",
+     "oa:W2071638062",
+     "oa:W2112719989",
+     "oa:W2130636911",
+     "oa:W2156716049",
+     "oa:W2172294805",
+     "oa:W4308713923",
+     "oa:W4366086540"
+    ]
+   }
+  },
+  {
+   "qid": "stoichiometry_02",
+   "category": "Stoichiometry",
+   "query": "Organisms at constant food density converge to a constant chemical composition (weak homeostasis).",
+   "relevant": {
+    "deb": [
+     "file:jusup et al. - 2017 - physics of metabolic organization.pdf",
+     "file:jusup et al. - 2017 - the universality and the future prospects of physi.pdf",
+     "file:kooijman et al. - 2024 - from formulae, via models to theories dynamic ene.pdf",
+     "file:kooy2000.pdf",
+     "file:kooy2010.pdf",
+     "file:kooy2010_c.pdf",
+     "file:kooy2012.pdf",
+     "file:sous2007.pdf",
+     "file:sousdomi2008.pdf",
+     "file:sousdomi2010.pdf"
+    ],
+    "reproduction": [
+     "oa:W1505770057",
+     "oa:W2071638062",
+     "oa:W2083329047",
+     "oa:W2112719989"
+    ]
+   }
+  }
+ ]
+}

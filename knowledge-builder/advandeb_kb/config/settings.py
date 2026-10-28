@@ -74,8 +74,11 @@ class Settings:
     # ------------------------------------------------------------------
     # Max ReAct tool-calling steps before forcing a final answer.
     CHAT_MAX_STEPS: int = getenv_int("CHAT_MAX_STEPS", 15)
-    # Rerank fused hybrid-search candidates with the LLM reranker for precision.
-    CHAT_USE_RERANKING: bool = getenv_bool("CHAT_USE_RERANKING", True)
+    # Rerank fused hybrid-search candidates with the LLM reranker (RERANK_MODEL).
+    # Off by default: on the SF-support eval (59 queries) gemma3 reranking moved
+    # MRR by +0.023 (95% CI -0.061..+0.108) for +1.3 s per search. Until 2026-10
+    # it was nominally on but 404'd on every call (model "llama2" not installed).
+    CHAT_USE_RERANKING: bool = getenv_bool("CHAT_USE_RERANKING", False)
     # Enable adaptive thinking / reasoning-effort on any BYOK provider that
     # supports it (Anthropic adaptive thinking, OpenAI/GitHub reasoning_effort,
     # Gemini thinking, Ollama think). No-ops gracefully where unsupported.
@@ -84,6 +87,33 @@ class Settings:
     )
     # Effort level when adaptive thinking is on: low | medium | high | max.
     CHAT_THINKING_EFFORT: str = getenv("CHAT_THINKING_EFFORT", "high")
+
+    # ------------------------------------------------------------------
+    # Hybrid retrieval (HybridRetrievalService / RetrievalAgent)
+    # ------------------------------------------------------------------
+    # Keyword arm: "auto" = BM25 over the ArangoSearch view when it exists,
+    # otherwise the MongoDB $text fallback; or force "arango" | "mongo" | "none".
+    RETRIEVAL_KEYWORD_BACKEND: str = getenv("RETRIEVAL_KEYWORD_BACKEND", "auto")
+    # ArangoSearch view over chunks.text and the analyzer it indexes with
+    # (created by knowledge-builder/scripts/setup_chunks_search_view.py).
+    RETRIEVAL_CHUNKS_VIEW: str = getenv("RETRIEVAL_CHUNKS_VIEW", "chunks_text_search")
+    RETRIEVAL_TEXT_ANALYZER: str = getenv("RETRIEVAL_TEXT_ANALYZER", "advandeb_text_en")
+    # Ollama model for the LLM reranker (CHAT_USE_RERANKING). Must be
+    # installed; a missing model disables reranking with one warning.
+    RERANK_MODEL: str = getenv("RERANK_MODEL", "gemma3:latest")
+    RERANK_TIMEOUT: float = float(getenv("RERANK_TIMEOUT", "30"))
+
+    # ------------------------------------------------------------------
+    # Fact extraction (app/backend/app/kb/pipeline.py::_extract_facts)
+    # ------------------------------------------------------------------
+    # Ollama loads a model with a 4096-token context (2048 per slot with
+    # OLLAMA_NUM_PARALLEL=2) unless the request sets num_ctx, and silently
+    # drops whatever does not fit. Sections are sized to fit this window.
+    # Matching OLLAMA_NUM_CTX lets ingestion share the chat's loaded runner
+    # instead of forcing a reload.
+    FACT_EXTRACTION_NUM_CTX: int = getenv_int("FACT_EXTRACTION_NUM_CTX", OLLAMA_NUM_CTX)
+    # Output budget reserved inside the window (JSON facts plus <think>).
+    FACT_EXTRACTION_NUM_PREDICT: int = getenv_int("FACT_EXTRACTION_NUM_PREDICT", 4096)
 
     # ------------------------------------------------------------------
     # API / service

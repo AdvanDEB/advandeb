@@ -11,10 +11,24 @@ Separator priority (tried in order):
     ". "    — sentence ends
     " "     — word boundaries
     ""      — character-level fallback
+
+Every chunk is a contiguous slice of the normalised text, located by offsets
+rather than rebuilt from pieces. An earlier version re-joined split pieces and
+re-attached a separator only when it was punctuation, so newline and space
+separators vanished at every merge: line-wrapped PDF text came out as
+"structural volume andthe reserve density", the word-level fallback glued
+words together, and char_start/char_end drifted away from the source. Working
+on offsets makes that impossible: whatever lay between two pieces in the
+source lies between them in the chunk.
+
+Offset contract: char_start/char_end index the text passed to
+chunk_document(), and ``ChunkingService.normalize(text[c.char_start:c.char_end])
+== c.text``. For text that is already normalised the slice equals c.text.
 """
 
 from __future__ import annotations
 
+import bisect
 import re
 from dataclasses import dataclass, field
 from typing import Optional
@@ -44,6 +58,75 @@ class Chunk:
             "char_end": self.char_end,
             **self.metadata,
         }
+
+
+# Typographic ligatures that PDF extractors emit as single code points. The
+# embedding tokenizer does not decompose them (zebra U+FB01 "sh" tokenizes as
+# zebra / U+FB01 / ##sh, never as "fish"), so they are expanded the way NFKC
+# would expand them.
+_LIGATURES = {
+    "\ufb00": "ff",
+    "\ufb01": "fi",
+    "\ufb02": "fl",
+    "\ufb03": "ffi",
+    "\ufb04": "ffl",
+    "\ufb05": "st",
+    "\ufb06": "st",
+}
+
+# One alternative per normalisation rule; the replacement for each match is
+# chosen in _replacement(). Single spaces are deliberately not matched: they
+# need no change, and leaving them out keeps the offset map small.
+_NORMALIZE_RE = re.compile(
+    r"[ \t\r\f\v]{2,}|[\t\r\f\v]"  # horizontal whitespace runs -> one space
+    r"|\n{3,}"                    # runs of blank lines -> one blank line
+    r"|[\ufb00-\ufb06]"             # ligatures -> their letters
+)
+
+
+def _replacement(match: str) -> str:
+    if match[0] == "\n":
+        return "\n\n"
+    if match[0] in _LIGATURES:
+        return _LIGATURES[match[0]]
+    return " "
+
+
+class _OffsetMap:
+    """
+    Maps positions in normalised text back to positions in the original.
+
+    Normalisation is a sequence of segments, each either copied verbatim
+    (positions map linearly) or replaced (the whole replacement maps to the
+    whole original run). Storing segments rather than a per-character table
+    keeps this cheap for millions of short abstracts.
+    """
+
+    __slots__ = ("_norm_starts", "_segments")
+
+    def __init__(self) -> None:
+        self._norm_starts: list[int] = []
+        # (norm_start, norm_len, orig_start, orig_len, copied)
+        self._segments: list[tuple[int, int, int, int, bool]] = []
+
+    def add(self, norm_start: int, norm_len: int, orig_start: int, orig_len: int, copied: bool) -> None:
+        if norm_len <= 0:
+            return
+        self._norm_starts.append(norm_start)
+        self._segments.append((norm_start, norm_len, orig_start, orig_len, copied))
+
+    def _segment(self, pos: int) -> tuple[int, int, int, int, bool]:
+        return self._segments[bisect.bisect_right(self._norm_starts, pos) - 1]
+
+    def start(self, pos: int) -> int:
+        """Original index of the character at normalised position ``pos``."""
+        n_start, _, o_start, _, copied = self._segment(pos)
+        return o_start + (pos - n_start) if copied else o_start
+
+    def end(self, pos: int) -> int:
+        """Original exclusive end for a normalised exclusive end ``pos``."""
+        n_start, _, o_start, o_len, copied = self._segment(pos - 1)
+        return o_start + (pos - n_start) if copied else o_start + o_len
 
 
 class ChunkingService:
@@ -80,125 +163,158 @@ class ChunkingService:
         Split `text` into overlapping chunks and return a list of Chunk objects.
         The `document_id` is embedded in every chunk for traceability.
         """
-        text = self._normalize(text)
-        if not text:
-            return []
-
-        raw_chunks = self._split(text, self.separators)
-        chunks_with_overlap = self._apply_overlap(raw_chunks)
-
+        norm, offsets = self._normalize_with_offsets(text or "")
         result: list[Chunk] = []
-        cursor = 0
-        for i, chunk_text in enumerate(chunks_with_overlap):
-            if len(chunk_text) < self.min_chunk:
-                continue
-            # Find char_start by scanning forward from cursor
-            start = text.find(chunk_text[:20], cursor)
-            if start == -1:
-                start = cursor
-            end = start + len(chunk_text)
+        for start, end in self._chunk_spans(norm):
             result.append(
                 Chunk(
-                    text=chunk_text,
+                    text=norm[start:end],
                     document_id=document_id,
-                    chunk_index=i,
-                    char_start=start,
-                    char_end=min(end, len(text)),
+                    chunk_index=len(result),
+                    char_start=offsets.start(start),
+                    char_end=offsets.end(end),
                 )
             )
-            # Advance cursor to overlap point for next chunk
-            cursor = max(cursor, end - self.overlap)
-
-        # Re-index sequentially after filtering short chunks
-        for idx, chunk in enumerate(result):
-            chunk.chunk_index = idx
-
         return result
 
     def chunk_text(self, text: str) -> list[str]:
         """Simple variant — returns plain strings (no metadata)."""
-        text = self._normalize(text)
-        if not text:
-            return []
-        raw = self._split(text, self.separators)
-        return [c for c in self._apply_overlap(raw) if len(c) >= self.min_chunk]
+        return [c.text for c in self.chunk_document(text, "")]
 
-    # ------------------------------------------------------------------
-    # Internal splitting logic
-    # ------------------------------------------------------------------
-
-    def _normalize(self, text: str) -> str:
+    @staticmethod
+    def normalize(text: str) -> str:
         """Clean up whitespace without destroying paragraph structure."""
-        # Collapse runs of blank lines to a single blank line
-        text = re.sub(r"\n{3,}", "\n\n", text)
-        # Collapse runs of spaces/tabs on a line
-        text = re.sub(r"[ \t]+", " ", text)
-        return text.strip()
+        return _NORMALIZE_RE.sub(lambda m: _replacement(m.group()), text).strip()
 
-    def _split(self, text: str, separators: list[str]) -> list[str]:
-        """
-        Recursively split text using the first separator that produces
-        pieces smaller than chunk_size. Falls back to the next separator
-        if pieces are still too large.
-        """
-        if not separators:
-            # Final fallback: hard split by character count
-            return [text[i: i + self.chunk_size] for i in range(0, len(text), self.chunk_size)]
+    # ------------------------------------------------------------------
+    # Normalisation with offset tracking
+    # ------------------------------------------------------------------
 
-        separator = separators[0]
-        remaining_seps = separators[1:]
+    @staticmethod
+    def _normalize_with_offsets(text: str) -> tuple[str, _OffsetMap]:
+        """
+        normalize(), plus a map from normalised positions to original ones.
+
+        Leading and trailing whitespace is kept here (spans are trimmed later),
+        so the result differs from normalize() only by that whitespace.
+        """
+        out: list[str] = []
+        offsets = _OffsetMap()
+        norm_pos = 0
+        orig_pos = 0
+        for m in _NORMALIZE_RE.finditer(text):
+            if m.start() > orig_pos:
+                n = m.start() - orig_pos
+                out.append(text[orig_pos:m.start()])
+                offsets.add(norm_pos, n, orig_pos, n, copied=True)
+                norm_pos += n
+            raw = m.group()
+            rep = _replacement(raw)
+            offsets.add(norm_pos, len(rep), m.start(), len(raw), copied=False)
+            out.append(rep)
+            norm_pos += len(rep)
+            orig_pos = m.end()
+        if orig_pos < len(text):
+            n = len(text) - orig_pos
+            out.append(text[orig_pos:])
+            offsets.add(norm_pos, n, orig_pos, n, copied=True)
+        return "".join(out), offsets
+
+    # ------------------------------------------------------------------
+    # Span-based splitting
+    # ------------------------------------------------------------------
+
+    def _chunk_spans(self, text: str) -> list[tuple[int, int]]:
+        """Final chunk spans over ``text``: split, overlapped, filtered."""
+        spans = [s for s in (self._trim(text, a, b) for a, b in self._split(text, 0, len(text), self.separators)) if s]
+        spans = self._apply_overlap(text, spans)
+        return [(a, b) for a, b in spans if b - a >= self.min_chunk]
+
+    @staticmethod
+    def _trim(text: str, start: int, end: int) -> Optional[tuple[int, int]]:
+        while start < end and text[start].isspace():
+            start += 1
+        while end > start and text[end - 1].isspace():
+            end -= 1
+        return (start, end) if end > start else None
+
+    def _split(self, text: str, start: int, end: int, separators: list[str]) -> list[tuple[int, int]]:
+        """
+        Recursively split text[start:end] into spans of at most chunk_size,
+        using the first separator that occurs and falling back to finer ones
+        for pieces that are still too large.
+
+        Each piece keeps its trailing separator, so adjacent pieces tile the
+        range exactly and merging two pieces is just widening a span.
+        """
+        if end - start <= self.chunk_size:
+            return [(start, end)]
+
+        separator = separators[0] if separators else ""
+        remaining = separators[1:]
 
         if separator == "":
-            # Character-level split
-            return [text[i: i + self.chunk_size] for i in range(0, len(text), self.chunk_size)]
+            # Character-level split (last resort: a run with no separator).
+            return [(i, min(i + self.chunk_size, end)) for i in range(start, end, self.chunk_size)]
 
-        pieces = text.split(separator) if separator else list(text)
-        # Re-attach separator to all but last piece (preserves sentence ends etc.)
-        if separator.strip():
-            # Punctuation separator — keep it at end of previous piece
-            joined = []
-            for j, p in enumerate(pieces):
-                joined.append(p + (separator if j < len(pieces) - 1 else ""))
-            pieces = joined
+        pieces: list[tuple[int, int]] = []
+        piece_start = start
+        while True:
+            hit = text.find(separator, piece_start, end)
+            if hit == -1:
+                break
+            pieces.append((piece_start, hit + len(separator)))
+            piece_start = hit + len(separator)
+        if piece_start < end:
+            pieces.append((piece_start, end))
 
-        merged: list[str] = []
-        current = ""
+        if len(pieces) == 1:
+            # Separator absent from this range — try the next one.
+            return self._split(text, start, end, remaining)
 
-        for piece in pieces:
-            if not piece:
+        merged: list[tuple[int, int]] = []
+        cur_start, cur_end = pieces[0]
+        for p_start, p_end in pieces[1:]:
+            if p_end - cur_start <= self.chunk_size or cur_end - cur_start < self.min_chunk:
+                # Fits — or the current span is a fragment (a heading, say)
+                # that would be dropped on its own: carry it into the next
+                # piece and let the recursion split the combined range.
+                cur_end = p_end
                 continue
-            candidate = current + piece if not current else current + piece
-
-            if len(candidate) <= self.chunk_size:
-                current = candidate
-            else:
-                if current:
-                    if len(current) > self.chunk_size:
-                        # Current is too large — recurse to split it further
-                        merged.extend(self._split(current, remaining_seps))
-                    else:
-                        merged.append(current)
-                current = piece
-
-        if current:
-            if len(current) > self.chunk_size:
-                merged.extend(self._split(current, remaining_seps))
-            else:
-                merged.append(current)
-
+            merged.extend(self._emit(text, cur_start, cur_end, remaining))
+            cur_start, cur_end = p_start, p_end
+        if merged and cur_end - cur_start < self.min_chunk:
+            # Trailing fragment: attach it to the previous span.
+            merged[-1] = (merged[-1][0], cur_end)
+        else:
+            merged.extend(self._emit(text, cur_start, cur_end, remaining))
         return merged
 
-    def _apply_overlap(self, chunks: list[str]) -> list[str]:
-        """
-        Add overlap between consecutive chunks by prepending the tail of
-        the previous chunk to the current one.
-        """
-        if self.overlap <= 0 or len(chunks) <= 1:
-            return chunks
+    def _emit(self, text: str, start: int, end: int, remaining: list[str]) -> list[tuple[int, int]]:
+        if end - start > self.chunk_size:
+            return self._split(text, start, end, remaining)
+        return [(start, end)]
 
-        result = [chunks[0]]
-        for i in range(1, len(chunks)):
-            prev_tail = chunks[i - 1][-self.overlap:]
-            overlapped = prev_tail + chunks[i]
-            result.append(overlapped)
+    def _apply_overlap(self, text: str, spans: list[tuple[int, int]]) -> list[tuple[int, int]]:
+        """
+        Extend each chunk back by up to ``overlap`` characters into the
+        previous one, starting at a word boundary so no chunk opens on half a
+        word.
+        """
+        if self.overlap <= 0 or len(spans) <= 1:
+            return spans
+
+        result = [spans[0]]
+        for i in range(1, len(spans)):
+            start, end = spans[i]
+            prev_start = spans[i - 1][0]
+            ov = max(prev_start, start - self.overlap)
+            if ov < start and ov > 0 and not text[ov - 1].isspace():
+                # Mid-word: move forward to the next word start.
+                nxt = ov
+                while nxt < start and not text[nxt].isspace():
+                    nxt += 1
+                ov = nxt
+            trimmed = self._trim(text, ov, end)
+            result.append(trimmed if trimmed else (start, end))
         return result

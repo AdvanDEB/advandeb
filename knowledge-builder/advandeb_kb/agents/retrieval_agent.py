@@ -29,14 +29,24 @@ from pymongo import MongoClient
 
 from advandeb_kb.agents.base_agent import BaseAgent
 from advandeb_kb.config.settings import settings
+from advandeb_kb.database.arango_client import ArangoDatabase
 from advandeb_kb.services.cache_service import CacheService
 from advandeb_kb.services.chromadb_service import ChromaDBService
 from advandeb_kb.services.embedding_service import EmbeddingService
-from advandeb_kb.services.hybrid_retrieval_service import HybridRetrievalService
+from advandeb_kb.services.hybrid_retrieval_service import DOMAINS, HybridRetrievalService
 
 logger = logging.getLogger(__name__)
 
 AGENT_PORT = 8081
+
+DOMAIN_FILTER_SCHEMA = {
+    "type": "string",
+    "enum": list(DOMAINS),
+    "description": (
+        "Restrict the corpus: 'deb' = full-text DEB literature library, "
+        "'reproduction' = OpenAlex abstracts on reproduction. Omit to search both."
+    ),
+}
 
 
 class RetrievalAgent(BaseAgent):
@@ -55,6 +65,7 @@ class RetrievalAgent(BaseAgent):
         self._chroma_svc: Optional[ChromaDBService] = None
         self._retrieval_svc: Optional[HybridRetrievalService] = None
         self._mongo_client: Optional[MongoClient] = None
+        self._arango: Optional[ArangoDatabase] = None
 
     # ------------------------------------------------------------------
     # Lifecycle
@@ -72,7 +83,15 @@ class RetrievalAgent(BaseAgent):
         self._chroma_svc = ChromaDBService()
         self._chroma_svc._ensure_connected()
 
-        # Connect to MongoDB for keyword search (sync pymongo — runs in thread pool)
+        # Keyword search: BM25 over the ArangoSearch view on Arango `chunks`
+        # (the same corpus the vector arm searches). MongoDB $text over the
+        # legacy chunks collection stays as the fallback until the view exists.
+        try:
+            self._arango = ArangoDatabase()
+            self._arango.connect()
+        except Exception as exc:
+            logger.warning("RetrievalAgent: ArangoDB unavailable for keyword search: %s", exc)
+            self._arango = None
         self._mongo_client = MongoClient(settings.MONGODB_URI)
         mongo_db = self._mongo_client[settings.KB_DB_NAME]
 
@@ -84,6 +103,7 @@ class RetrievalAgent(BaseAgent):
             embedding_svc=self._embedding_svc,
             chromadb_svc=self._chroma_svc,
             cache=cache,
+            arango_db=self._arango,
             mongo_db=mongo_db,
         )
 
@@ -98,15 +118,15 @@ class RetrievalAgent(BaseAgent):
             name="semantic_search",
             handler=self._semantic_search,
             description=(
-                "Search the knowledge base using semantic similarity. "
-                "Returns the most relevant text chunks for a given query."
+                "Search the knowledge base by embedding similarity alone (no keyword "
+                "matching). Returns the most similar text chunks for a given query."
             ),
             input_schema={
                 "type": "object",
                 "properties": {
                     "query": {"type": "string", "description": "Natural language search query"},
                     "top_k": {"type": "integer", "default": 10, "description": "Number of results"},
-                    "domain_filter": {"type": "string", "description": "Filter by general_domain"},
+                    "domain_filter": DOMAIN_FILTER_SCHEMA,
                 },
                 "required": ["query"],
             },
@@ -123,7 +143,7 @@ class RetrievalAgent(BaseAgent):
                 "properties": {
                     "query": {"type": "string", "description": "Natural language search query"},
                     "top_k": {"type": "integer", "default": 10},
-                    "domain_filter": {"type": "string"},
+                    "domain_filter": DOMAIN_FILTER_SCHEMA,
                     "use_reranking": {"type": "boolean", "default": False},
                 },
                 "required": ["query"],
@@ -165,12 +185,14 @@ class RetrievalAgent(BaseAgent):
         top_k: int = 10,
         domain_filter: Optional[str] = None,
     ) -> dict:
-        results = await self._retrieval_svc.retrieve(
-            query=query,
-            top_k=top_k,
-            domain_filter=domain_filter,
-            use_reranking=False,
-        )
+        try:
+            results = await self._retrieval_svc.vector_search(
+                query=query,
+                top_k=top_k,
+                domain_filter=domain_filter,
+            )
+        except ValueError as exc:
+            return {"query": query, "error": str(exc), "count": 0, "chunks": []}
         return {
             "query": query,
             "count": len(results),
@@ -184,12 +206,15 @@ class RetrievalAgent(BaseAgent):
         domain_filter: Optional[str] = None,
         use_reranking: bool = False,
     ) -> dict:
-        results = await self._retrieval_svc.retrieve(
-            query=query,
-            top_k=top_k,
-            domain_filter=domain_filter,
-            use_reranking=use_reranking,
-        )
+        try:
+            results = await self._retrieval_svc.retrieve(
+                query=query,
+                top_k=top_k,
+                domain_filter=domain_filter,
+                use_reranking=use_reranking,
+            )
+        except ValueError as exc:
+            return {"query": query, "error": str(exc), "count": 0, "chunks": []}
         return {
             "query": query,
             "count": len(results),

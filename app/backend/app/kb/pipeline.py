@@ -944,14 +944,22 @@ async def _extract_facts(text: str) -> List[str]:
     section is processed independently.  Facts are deduplicated by lowercased
     content before returning so overlapping sections don't produce duplicates.
 
-    deepseek-r1 has a 131k-token context (~500k chars).  We use 80k-char
-    sections to stay well within limits while covering the full document.
+    The model's trained context is irrelevant here: Ollama serves a request
+    with the num_ctx it asks for, and without one it loaded deepseek-r1 with a
+    2048-token slot and silently dropped the rest of each 80k-char section.
+    So num_ctx is set explicitly and sections are sized to fit inside it next
+    to the system prompt and the reserved output budget.
     """
     import httpx
     import json as _json
 
-    # Section size in characters and overlap between consecutive sections.
-    FACT_SECTION_CHARS = 80_000
+    num_ctx = settings.FACT_EXTRACTION_NUM_CTX
+    num_predict = settings.FACT_EXTRACTION_NUM_PREDICT
+    # 3 characters per token is the 10th percentile measured on the PDF corpus
+    # with deepseek-r1's (Qwen3) tokenizer, median 3.6; table-heavy text can
+    # go lower, which the prompt_eval_count check below reports. 1024 tokens
+    # cover the system prompt and chat template.
+    FACT_SECTION_CHARS = max(4_000, (num_ctx - num_predict - 1_024) * 3)
     SECTION_OVERLAP    = 2_000
 
     model = settings.OLLAMA_MODEL
@@ -1032,14 +1040,21 @@ async def _extract_facts(text: str) -> List[str]:
                 )},
             ],
             "stream": False,
-            "options": {"temperature": 0.2},
+            "options": {"temperature": 0.2, "num_ctx": num_ctx, "num_predict": num_predict},
         }
 
         try:
             async with httpx.AsyncClient(timeout=300.0) as client:
                 resp = await client.post(f"{settings.OLLAMA_BASE_URL}/api/chat", json=payload)
                 resp.raise_for_status()
-                content = resp.json()["message"]["content"].strip()
+                body = resp.json()
+                content = body["message"]["content"].strip()
+            if body.get("prompt_eval_count", 0) >= num_ctx - num_predict:
+                logger.warning(
+                    "_extract_facts: %s filled the %d-token context (%d prompt tokens): "
+                    "dense text under 3 chars/token, the end of the section may have been cut",
+                    section_label, num_ctx, body.get("prompt_eval_count", 0),
+                )
 
             section_facts = _parse_llm_facts(content)
             for fact in section_facts:
