@@ -143,7 +143,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
-          "expr": "mcp_ws_connections",
+          "expr": "mcp_websocket_connections",
           "legendFormat": "WS Connections",
           "refId": "A"
         }
@@ -231,7 +231,7 @@
         },
         {
           "datasource": { "type": "prometheus", "uid": "advandeb_prometheus" },
-          "expr": "mcp_ws_connections",
+          "expr": "mcp_websocket_connections",
           "legendFormat": "WS Connections",
           "refId": "B"
         }

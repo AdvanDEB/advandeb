@@ -1,0 +1,69 @@
+# Unit tests for advandeb_alerts.yml:
+#   cd monitoring/prometheus && promtool test rules advandeb_alerts_test.yml
+rule_files:
+  - advandeb_alerts.yml
+
+evaluation_interval: 1m
+
+tests:
+  - name: web down and a dependency down
+    interval: 1m
+    input_series:
+      - series: 'up{job="advandeb_backend", instance="localhost:8400"}'
+        values: '0x5'
+      - series: 'advandeb_dependency_up{job="advandeb_backend", dependency="mongodb"}'
+        values: '0x5'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: AdvandebWebDown
+        exp_alerts:
+          - exp_labels: {severity: critical, job: advandeb_backend, instance: "localhost:8400"}
+            exp_annotations:
+              summary: "AdvanDEB web app is not answering /metrics on :8400"
+              description: "Check: systemctl status advandeb.service; journalctl -u advandeb.service -n 100"
+      - eval_time: 3m
+        alertname: AdvandebDependencyDown
+        exp_alerts:
+          - exp_labels: {severity: critical, job: advandeb_backend, dependency: mongodb}
+            exp_annotations:
+              summary: "mongodb is unreachable from the web app"
+              description: "The web app's probe of mongodb has failed for 2 minutes."
+
+  - name: 5xx rate needs both a high ratio and real traffic
+    interval: 1m
+    input_series:
+      # 60 req/min, 6 of them 5xx → 10 %
+      - series: 'advandeb_http_requests_total{route="/api/chat", status="200"}'
+        values: '0+54x20'
+      - series: 'advandeb_http_requests_total{route="/api/chat", status="502"}'
+        values: '0+6x20'
+    alert_rule_test:
+      - eval_time: 16m
+        alertname: AdvandebHigh5xxRate
+        exp_alerts:
+          - exp_labels: {severity: warning}
+            exp_annotations:
+              summary: "10% of web requests are failing with 5xx"
+
+  - name: a single failed chat turn at night is not an alert
+    interval: 1m
+    input_series:
+      - series: 'advandeb_chat_turns_total{path="default", outcome="error"}'
+        values: '0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1'
+    alert_rule_test:
+      - eval_time: 25m
+        alertname: AdvandebChatErrors
+        exp_alerts: []
+
+  - name: crash loop
+    interval: 1m
+    input_series:
+      - series: 'process_start_time_seconds{job="advandeb_backend"}'
+        values: '100 100 200 200 300 300 400 400'
+    alert_rule_test:
+      - eval_time: 7m
+        alertname: AdvandebCrashLooping
+        exp_alerts:
+          - exp_labels: {severity: warning, job: advandeb_backend}
+            exp_annotations:
+              summary: "advandeb_backend  restarted 3 times in 30 min"

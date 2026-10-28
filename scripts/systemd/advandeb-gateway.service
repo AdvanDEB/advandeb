@@ -1,0 +1,28 @@
+[Unit]
+Description=AdvanDEB MCP gateway (Rust, 127.0.0.1:8080)
+Documentation=file:///home/adeb/dev/advandeb/scripts/systemd/README.md
+After=network.target
+PartOf=advandeb-stack.target
+StartLimitIntervalSec=600
+StartLimitBurst=5
+
+[Service]
+# exec: start fails (and the unit shows failed) if the binary is missing,
+# without touching the agents or the web app.
+Type=exec
+User=adeb
+Group=adeb
+Environment=RUST_LOG=info NO_COLOR=1
+# The launcher chdirs to mcp/ (config/default.toml is CWD-relative) and passes
+# only RUST_* / ADVANDEB_MCP_* variables.
+ExecStart=/home/adeb/miniforge3/envs/advandeb/bin/python \
+    /home/adeb/dev/advandeb/scripts/run_component.py gateway
+SyslogIdentifier=advandeb-gateway
+
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+
+# Resident ~17 MB.
+MemoryHigh=384M
+MemoryMax=512M

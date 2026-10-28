@@ -26,7 +26,7 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(REPO_ROOT, "app", "backend", ".env"))
 
 OLLAMA = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
-DB = MongoClient(os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))["deb_abstracts_reproduction"]
+DB = MongoClient(os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))["deb_abstracts_reproduction"]
 WORKERS = int(os.environ.get("EMBED_WORKERS", "6"))
 MAX_CHARS = 1500  # keep chunks under nomic-embed-text's 2048-token context
 BATCH = 400  # abstracts per insert flush

@@ -17,6 +17,7 @@ import json
 import logging
 from abc import ABC, abstractmethod
 
+from advandeb_kb import metrics
 from advandeb_kb.mcp.protocol import MCPClient, MCPServer
 
 logger = logging.getLogger(__name__)
@@ -29,6 +30,7 @@ class BaseAgent(ABC):
     Each agent is a self-contained process that:
       - Exposes tools via an MCP WebSocket server
       - Exposes a tiny HTTP /health endpoint (for gateway health checks)
+        and /metrics (Prometheus) on the same port
       - Can call other agents via MCPClient
 
     Args:
@@ -76,16 +78,24 @@ class BaseAgent(ABC):
         reader: asyncio.StreamReader,
         writer: asyncio.StreamWriter,
     ) -> None:
-        """Respond to any HTTP request with 200 OK JSON health payload."""
+        """Serve ``GET /metrics`` (Prometheus text); anything else gets the health JSON."""
+        request = b""
         try:
-            await reader.read(1024)  # consume request bytes
+            request = await reader.read(1024)  # consume request bytes
         except Exception:
             pass
-        body = json.dumps({"status": "ok", "agent": self.name}).encode()
+        parts = request.split(b"\r\n", 1)[0].split()
+        path = parts[1].split(b"?", 1)[0] if len(parts) >= 2 else b"/"
+        if path == b"/metrics":
+            body, content_type, code = metrics.render()
+            status = b"200 OK" if code == 200 else b"503 Service Unavailable"
+        else:
+            body = json.dumps({"status": "ok", "agent": self.name}).encode()
+            content_type, status = "application/json", b"200 OK"
         response = (
-            b"HTTP/1.1 200 OK\r\n"
-            b"Content-Type: application/json\r\n"
-            b"Connection: close\r\n"
+            b"HTTP/1.1 " + status + b"\r\n"
+            + b"Content-Type: " + content_type.encode() + b"\r\n"
+            + b"Connection: close\r\n"
             + b"Content-Length: " + str(len(body)).encode() + b"\r\n"
             + b"\r\n"
             + body

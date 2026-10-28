@@ -17,8 +17,11 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import time
 import uuid
 from typing import Any, Callable, Optional
+
+from advandeb_kb import metrics
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +53,11 @@ class ToolDefinition:
             "description": self.description,
             "inputSchema": self.input_schema,
         }
+
+
+def _observe_tool(tool: str, method: str, outcome: str, started: float) -> None:
+    metrics.AGENT_TOOL_CALLS.labels(tool, method, outcome).inc()
+    metrics.AGENT_TOOL_DURATION.labels(tool, method).observe(time.perf_counter() - started)
 
 
 # ---------------------------------------------------------------------------
@@ -128,13 +136,19 @@ class MCPServer:
                     return self._error(msg_id, -32601, f"Unknown tool: {tool_name}")
 
                 tool = self._tools[tool_name]
-                if asyncio.iscoroutinefunction(tool.handler):
-                    result = await tool.handler(**arguments)
-                else:
-                    loop = asyncio.get_event_loop()
-                    result = await loop.run_in_executor(
-                        None, lambda: tool.handler(**arguments)
-                    )
+                started = time.perf_counter()
+                outcome = "error"
+                try:
+                    if asyncio.iscoroutinefunction(tool.handler):
+                        result = await tool.handler(**arguments)
+                    else:
+                        loop = asyncio.get_event_loop()
+                        result = await loop.run_in_executor(
+                            None, lambda: tool.handler(**arguments)
+                        )
+                    outcome = "ok"
+                finally:
+                    _observe_tool(tool_name, "call", outcome, started)
 
             else:
                 return self._error(msg_id, -32601, f"Unknown method: {method}")
@@ -204,19 +218,25 @@ class MCPServer:
             return
 
         tool = self._tools[key]
+        started = time.perf_counter()
+        outcome = "incomplete"   # generator ended without a "_final" item
         try:
             async for item in tool.handler(**arguments):
                 if item.get("_final"):
                     # Strip the sentinel and send as final result
                     final = {k: v for k, v in item.items() if k != "_final"}
                     await websocket.send(json.dumps({"id": msg_id, "result": final}))
+                    outcome = "ok"
                     return
                 else:
                     # Intermediate event
                     await websocket.send(json.dumps({"id": msg_id, "event": item}))
         except Exception as exc:
+            outcome = "error"
             logger.exception("Streaming tool '%s' raised: %s", tool_name, exc)
             await websocket.send(self._error(msg_id, -32000, str(exc)))
+        finally:
+            _observe_tool(tool_name, "stream", outcome, started)
 
     async def start(self) -> None:
         """Start the WebSocket server (runs indefinitely)."""

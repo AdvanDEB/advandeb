@@ -1,0 +1,146 @@
+# AdvanDEB alert rules — installed as /etc/prometheus/advandeb_alerts.yml
+# (referenced by rule_files in prometheus.yml).
+#
+#   promtool check rules monitoring/prometheus/advandeb_alerts.yml
+#   promtool test rules  monitoring/prometheus/advandeb_alerts_test.yml
+#
+# No Alertmanager is installed, so these fire into the Prometheus UI
+# (localhost:9090/alerts) and Grafana's alert list, not to a phone. Routing
+# them anywhere needs prometheus-alertmanager — see monitoring/README.md.
+
+groups:
+  - name: advandeb-availability
+    rules:
+      - alert: AdvandebWebDown
+        # Also fires when /metrics answers 503 (prometheus-client missing).
+        expr: up{job="advandeb_backend"} == 0
+        for: 2m
+        labels: {severity: critical}
+        annotations:
+          summary: "AdvanDEB web app is not answering /metrics on :8400"
+          description: "Check: systemctl status advandeb.service; journalctl -u advandeb.service -n 100"
+
+      - alert: AdvandebAgentDown
+        expr: up{job="advandeb_agents"} == 0
+        for: 3m
+        labels: {severity: warning}
+        annotations:
+          summary: "Agent {{ $labels.agent }} is down"
+          description: "Check: systemctl status advandeb-agent@{{ $labels.agent }}.service"
+
+      - alert: AdvandebDependencyDown
+        expr: advandeb_dependency_up == 0
+        for: 2m
+        labels: {severity: critical}
+        annotations:
+          summary: "{{ $labels.dependency }} is unreachable from the web app"
+          description: "The web app's probe of {{ $labels.dependency }} has failed for 2 minutes."
+
+      - alert: AdvandebCrashLooping
+        # Every restart resets process_start_time_seconds. systemd gives up
+        # after 5 starts in 10 min (StartLimitBurst), which then shows as Down.
+        expr: changes(process_start_time_seconds{job=~"advandeb_backend|advandeb_agents"}[30m]) > 2
+        labels: {severity: warning}
+        annotations:
+          summary: "{{ $labels.job }} {{ $labels.agent }} restarted {{ $value }} times in 30 min"
+
+      - alert: MCPGatewayDown
+        # Informational while the gateway carries no traffic.
+        expr: up{job="mcp_gateway"} == 0
+        for: 10m
+        labels: {severity: info}
+        annotations:
+          summary: "MCP gateway is down (it carries no chat traffic today)"
+
+      - alert: NodeExporterDown
+        expr: up{job="node"} == 0
+        for: 5m
+        labels: {severity: warning}
+        annotations:
+          summary: "node-exporter is down — disk and memory alerts are blind"
+
+  - name: advandeb-errors
+    rules:
+      - alert: AdvandebHigh5xxRate
+        expr: |
+          sum(rate(advandeb_http_requests_total{status=~"5.."}[5m]))
+            / sum(rate(advandeb_http_requests_total[5m])) > 0.05
+          and sum(rate(advandeb_http_requests_total[5m])) > 0.05
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: "{{ $value | humanizePercentage }} of web requests are failing with 5xx"
+
+      - alert: AdvandebChatErrors
+        # path=default is the shared NVIDIA key, which intermittently 503s.
+        expr: |
+          sum by (path) (rate(advandeb_chat_turns_total{outcome=~"error|exception"}[15m]))
+            / sum by (path) (rate(advandeb_chat_turns_total[15m])) > 0.25
+          and sum by (path) (increase(advandeb_chat_turns_total[15m])) >= 4
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: "{{ $value | humanizePercentage }} of chat turns on path={{ $labels.path }} end in an error"
+
+      - alert: AdvandebChatSlow
+        expr: |
+          histogram_quantile(0.9,
+            sum by (le, path) (rate(advandeb_chat_turn_duration_seconds_bucket{outcome="ok"}[30m]))
+          ) > 180
+        for: 30m
+        labels: {severity: info}
+        annotations:
+          summary: "p90 chat answer on path={{ $labels.path }} takes {{ $value | humanizeDuration }}"
+
+      - alert: AdvandebGraphRebuildFailing
+        expr: increase(advandeb_graph_rebuilds_total{outcome="error"}[1h]) > 2
+        labels: {severity: warning}
+        annotations:
+          summary: "Graph artifact rebuilds for {{ $labels.schema }} keep failing"
+          description: "See 'GraphRebuildQueue: artifact rebuild failed' in app/backend/logs/app.log"
+
+      - alert: AdvandebGraphRebuildStuck
+        expr: advandeb_graph_rebuild_in_progress == 1
+        for: 1h
+        labels: {severity: warning}
+        annotations:
+          summary: "A graph artifact rebuild has been running for over an hour"
+
+  - name: host
+    rules:
+      - alert: HostDiskSpaceLow
+        expr: |
+          node_filesystem_avail_bytes{fstype!~"tmpfs|ramfs|squashfs|overlay|nsfs"}
+            / node_filesystem_size_bytes{fstype!~"tmpfs|ramfs|squashfs|overlay|nsfs"} < 0.10
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: "{{ $labels.mountpoint }} has {{ $value | humanizePercentage }} free"
+
+      - alert: HostDiskSpaceCritical
+        expr: |
+          node_filesystem_avail_bytes{fstype!~"tmpfs|ramfs|squashfs|overlay|nsfs"}
+            / node_filesystem_size_bytes{fstype!~"tmpfs|ramfs|squashfs|overlay|nsfs"} < 0.05
+        for: 5m
+        labels: {severity: critical}
+        annotations:
+          summary: "{{ $labels.mountpoint }} has {{ $value | humanizePercentage }} free"
+
+      - alert: HostMemoryLow
+        expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes < 0.10
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: "Only {{ $value | humanizePercentage }} of host memory is available"
+
+      - alert: AdvandebProcessMemoryHigh
+        # Early warning below each unit's systemd MemoryHigh (web 4G,
+        # agents 3G, retrieval_agent 16G), before the kernel starts throttling.
+        expr: |
+          process_resident_memory_bytes{job="advandeb_backend"} > 3.5e9
+          or process_resident_memory_bytes{job="advandeb_agents", agent!="retrieval_agent"} > 2.5e9
+          or process_resident_memory_bytes{job="advandeb_agents", agent="retrieval_agent"} > 14e9
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: "{{ $labels.job }} {{ $labels.agent }} RSS is {{ $value | humanize1024 }}B"

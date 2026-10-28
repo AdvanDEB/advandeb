@@ -1,27 +1,43 @@
 [Unit]
-Description=AdvanDEB Modeling Assistant (FastAPI + Vue SPA)
-After=network.target advandeb-stack.service
-Requires=advandeb-stack.service
-# Group with the umbrella target: restarting/stopping advandeb.target
-# propagates here, while this unit stays independently restartable.
+Description=AdvanDEB web app (FastAPI + Vue SPA, 127.0.0.1:8400)
+Documentation=file:///home/adeb/dev/advandeb/scripts/systemd/README.md
+# Wants=, not Requires=: the agents are a soft dependency — chat degrades,
+# the rest of the site keeps working. Under Requires=advandeb-stack.service a
+# stack that failed to start (e.g. the gateway binary missing because HEAD
+# did not compile) kept the whole web app down with it.
+Wants=network-online.target advandeb-stack.target
+After=network-online.target docker.service arangodb3.service advandeb-stack.target
 PartOf=advandeb.target
+# Give up after 5 failed starts in 10 minutes instead of restarting forever
+# (the OOM crash-loop restarted every 10 s, unchecked). Re-arm after a fix:
+#   sudo systemctl reset-failed advandeb.service
+StartLimitIntervalSec=600
+StartLimitBurst=5
 
 [Service]
 Type=simple
 User=adeb
 Group=adeb
 WorkingDirectory=/home/adeb/dev/advandeb/app/backend
-
 EnvironmentFile=/home/adeb/dev/advandeb/app/backend/.env
+Environment=PYTHONUNBUFFERED=1 NO_COLOR=1
 
+# Loopback only. nginx (127.0.0.1:8200, behind the Cloudflare tunnel) is the
+# sole client; on 0.0.0.0 the API was open to the whole LAN, around nginx.
 ExecStart=/home/adeb/miniforge3/envs/advandeb/bin/uvicorn app.main:app \
-    --host 0.0.0.0 \
+    --host 127.0.0.1 \
     --port 8400 \
     --log-level info
 
-Restart=always
+Restart=on-failure
 RestartSec=10
+TimeoutStopSec=30
 
+# Steady-state RSS is ~350 MB (peak ~400 MB). MemoryHigh makes the kernel
+# reclaim/throttle first; MemoryMax OOM-kills inside this unit, so a leak
+# restarts the web app instead of starving vLLM, ArangoDB and the rest.
+MemoryHigh=4G
+MemoryMax=6G
 LimitNOFILE=65536
 
 [Install]

@@ -6,7 +6,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), "..", "app", "backend", ".en
 from pymongo import MongoClient
 from bson import ObjectId
 
-cl = MongoClient(os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))
+cl = MongoClient(os.environ.get("MONGODB_URI") or os.environ.get("MONGODB_URL", "mongodb://localhost:27017"))
 db = cl["deb_abstracts_reproduction"]
 
 print("== reproduction coverage ==", flush=True)

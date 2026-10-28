@@ -1,4 +1,10 @@
 # AdvanDEB Prometheus configuration
+#
+# Installed copy: /etc/prometheus/prometheus.yml (Ubuntu prometheus package).
+# Validate before reloading:  promtool check config monitoring/prometheus/prometheus.yml
+#
+# Every target is on loopback. Prometheus itself and node-exporter must also
+# listen on loopback only — see monitoring/README.md (/etc/default/prometheus*).
 
 global:
   scrape_interval:     15s
@@ -6,18 +12,48 @@ global:
   external_labels:
     monitor: 'advandeb'
 
+rule_files:
+  - /etc/prometheus/advandeb_alerts.yml
+
 scrape_configs:
   - job_name: 'prometheus'
-    scrape_interval: 15s
     static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name: 'mcp_gateway'
-    scrape_interval: 10s
-    static_configs:
-      - targets: ['localhost:8080']
-    metrics_path: '/metrics'
+      - targets: ['127.0.0.1:9090']
 
   - job_name: 'node'
     static_configs:
-      - targets: ['localhost:9100']
+      - targets: ['127.0.0.1:9100']
+
+  # Web app: HTTP latency/status by route, chat turns by LLM path, rebuild
+  # queue, process RSS, and MongoDB/ArangoDB/Ollama reachability probed on
+  # each scrape (advandeb_dependency_up). The probes take up to 2 s.
+  - job_name: 'advandeb_backend'
+    scrape_timeout: 10s
+    static_configs:
+      - targets: ['127.0.0.1:8400']
+        labels:
+          component: 'web'
+
+  # Agents serve /metrics on their health port (ws port + 100).
+  - job_name: 'advandeb_agents'
+    static_configs:
+      - targets: ['127.0.0.1:8181']
+        labels: {agent: 'retrieval_agent'}
+      - targets: ['127.0.0.1:8182']
+        labels: {agent: 'graph_explorer_agent'}
+      - targets: ['127.0.0.1:8183']
+        labels: {agent: 'synthesis_agent'}
+      - targets: ['127.0.0.1:8184']
+        labels: {agent: 'query_planner_agent'}
+      - targets: ['127.0.0.1:8185']
+        labels: {agent: 'curator_agent'}
+      - targets: ['127.0.0.1:8186']
+        labels: {agent: 'chatbot_agent'}
+
+  # The gateway carries no chat traffic today (the web app calls the agents
+  # directly), so most of its series stay flat; it is kept for `up` and for
+  # whenever its role is settled.
+  - job_name: 'mcp_gateway'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['127.0.0.1:8080']

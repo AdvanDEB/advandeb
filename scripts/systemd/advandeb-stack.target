@@ -1,0 +1,23 @@
+[Unit]
+Description=AdvanDEB agent stack (MCP gateway + 6 agents)
+Documentation=file:///home/adeb/dev/advandeb/scripts/systemd/README.md
+# Replaces advandeb-stack.service, which ran all seven processes from one
+# Type=forking script: systemd tracked no main PID (MainPID=0), so a crashed
+# agent was never restarted and there was no per-process memory limit.
+# Now each component is its own unit; this target only groups them.
+Wants=advandeb-gateway.service \
+      advandeb-agent@retrieval_agent.service \
+      advandeb-agent@graph_explorer_agent.service \
+      advandeb-agent@synthesis_agent.service \
+      advandeb-agent@query_planner_agent.service \
+      advandeb-agent@curator_agent.service \
+      advandeb-agent@chatbot_agent.service \
+      advandeb-register-agents.service
+After=advandeb-gateway.service \
+      advandeb-agent@retrieval_agent.service \
+      advandeb-agent@graph_explorer_agent.service \
+      advandeb-agent@synthesis_agent.service \
+      advandeb-agent@query_planner_agent.service \
+      advandeb-agent@curator_agent.service \
+      advandeb-agent@chatbot_agent.service
+PartOf=advandeb.target

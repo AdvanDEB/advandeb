@@ -94,8 +94,11 @@ impl Default for CircuitBreakerConfig {
     }
 }
 
+// Loopback, like config/default.toml. This fallback applies when the gateway
+// is started outside mcp/ (default.toml not found) — it used to listen on
+// every interface in exactly that case.
 fn default_bind() -> String {
-    "0.0.0.0:8080".into()
+    "127.0.0.1:8080".into()
 }
 
 fn default_ollama_host() -> String {

@@ -1,18 +1,35 @@
 """
 Application configuration settings.
 """
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import field_validator
 from typing import List, Optional
 
+from advandeb_kb.config.env import env_file_path
+
 
 class Settings(BaseSettings):
-    """Application settings."""
+    """Application settings.
+
+    Resolution order: process environment, then the env file chosen by
+    ``advandeb_kb.config.env.env_file_path()`` (``$ADVANDEB_ENV_FILE``, else
+    ``app/backend/.env`` by absolute path — no longer whatever ``.env`` the
+    current directory holds), then the defaults below. The KB library resolves
+    the same file the same way, so the two cannot disagree.
+    """
     
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=env_file_path(),
         case_sensitive=True,
-        env_file_encoding='utf-8'
+        env_file_encoding='utf-8',
+        # The shared env file also carries KB-only and agent-only keys; the
+        # BaseSettings default ("forbid") refused to boot on any of them.
+        extra="ignore",
+        # A failed validator must not print the offending value: several of
+        # these fields are secrets (JWT key, Fernet keys, API keys).
+        hide_input_in_errors=True,
     )
     
     # Application
@@ -83,8 +100,8 @@ class Settings(BaseSettings):
     # CORS - comma-separated string that will be split into list
     CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
     
-    # KB ingestion
-    PAPERS_ROOT: str = "/home/adeb/DEB_library"
+    # KB ingestion — source PDFs. The KB library reads the same variable.
+    PAPERS_ROOT: str = str(Path.home() / "DEB_library")
 
     # Graph artifacts
     GRAPH_ARTIFACT_DIR: str = "data/graph_artifacts"
@@ -128,6 +145,10 @@ class Settings(BaseSettings):
     #   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
     # Leave unset to disable the BYOK feature; the rest of the app still boots.
     LLM_KEY_ENCRYPTION_KEY: Optional[str] = None
+    # Key rotation: comma-separated *previous* Fernet keys, still accepted for
+    # decryption while scripts/rotate_llm_key_encryption.py re-encrypts stored
+    # secrets under LLM_KEY_ENCRYPTION_KEY. Empty outside a rotation.
+    LLM_KEY_ENCRYPTION_KEY_PREVIOUS: Optional[str] = None
 
     # Default chat API key — a shared key offered to all users so they can
     # try chat without supplying their own key.  When set, it is used for any
@@ -163,6 +184,23 @@ class Settings(BaseSettings):
             Fernet(value.encode())
         except Exception as exc:  # noqa: BLE001
             raise ValueError(f"LLM_KEY_ENCRYPTION_KEY is not a valid Fernet key: {exc}") from exc
+        return value
+
+    @field_validator("LLM_KEY_ENCRYPTION_KEY_PREVIOUS")
+    @classmethod
+    def _validate_previous_keys(cls, value: Optional[str]) -> Optional[str]:
+        if value in (None, ""):
+            return None
+        from cryptography.fernet import Fernet
+
+        for i, key in enumerate(k.strip() for k in value.split(",") if k.strip()):
+            try:
+                Fernet(key.encode())
+            except Exception as exc:  # noqa: BLE001
+                # Position only — never echo key material into a startup error.
+                raise ValueError(
+                    f"LLM_KEY_ENCRYPTION_KEY_PREVIOUS entry #{i + 1} is not a valid Fernet key"
+                ) from exc
         return value
 
     @field_validator("JWT_SECRET_KEY")

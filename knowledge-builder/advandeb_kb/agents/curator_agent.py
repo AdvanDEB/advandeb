@@ -53,8 +53,8 @@ class CuratorAgent(BaseAgent):
         from motor.motor_asyncio import AsyncIOMotorClient
         from advandeb_kb.services.agent_service import AgentService
 
-        client = AsyncIOMotorClient(settings.MONGODB_URL)
-        self._db = client[settings.DATABASE_NAME]
+        client = AsyncIOMotorClient(settings.MONGODB_URI)
+        self._db = client[settings.KB_DB_NAME]
         self._agent_svc = AgentService(self._db)
 
         logger.info("CuratorAgent initialized (ArangoDB mode — graph data served live)")
@@ -394,6 +394,6 @@ class CuratorAgent(BaseAgent):
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     agent = CuratorAgent()
     agent.run()
