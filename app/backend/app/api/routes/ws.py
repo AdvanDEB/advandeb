@@ -1,8 +1,10 @@
 """
 WebSocket routes — real-time chat streaming.
 """
+import asyncio
 import json
-from typing import Optional
+import logging
+from typing import Any, AsyncIterator, Dict, Optional
 
 from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect, Query
 
@@ -14,6 +16,36 @@ from app.services.chat_service import ChatService
 from bson import ObjectId
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
+# A chat turn runs in its own task and the socket only relays its events. When
+# the browser goes away mid-answer (the user left /chat, closed the tab, lost
+# the network) the turn carries on and stores its answer; it used to be an
+# async generator driven by the socket loop, abandoned at the next send, so the
+# question was stored and the answer never was (F-031). Detached turns are
+# held here until they finish so they are not garbage-collected mid-run.
+_detached_turns: "set[asyncio.Task]" = set()
+_TURN_DONE = object()
+
+
+async def _run_turn(stream: AsyncIterator[Dict[str, Any]], sink: Dict[str, Any]) -> None:
+    """Drive one turn to completion, handing its events to ``sink["queue"]``
+    while someone is listening. An exception is handed over too."""
+    try:
+        async for event in stream:
+            queue = sink["queue"]
+            if queue is not None:
+                queue.put_nowait(event)
+    except Exception as exc:
+        queue = sink["queue"]
+        if queue is not None:
+            queue.put_nowait(exc)
+        else:
+            logger.exception("chat turn failed after its socket closed")
+    finally:
+        queue = sink["queue"]
+        if queue is not None:
+            queue.put_nowait(_TURN_DONE)
 
 
 async def _get_ws_user(
@@ -132,19 +164,35 @@ async def ws_chat(
             if not isinstance(llm_config, dict):
                 llm_config = None
 
-            # Stream all events back to the client as they arrive
-            async for event in chat_service.process_message_stream(
+            # The turn runs on its own (see _run_turn); relay its events.
+            sink: Dict[str, Any] = {"queue": asyncio.Queue()}
+            turn = asyncio.create_task(_run_turn(chat_service.process_message_stream(
                 session_id=active_session_id,
                 message=text,
                 user_id=server_user_id,
                 llm_config=llm_config,
-            ):
-                if event.get("type") == "message" and event.get("session_id"):
-                    active_session_id = str(event["session_id"])
-                    # Chatbot graph artifact depends on chat_sessions /
-                    # chat_messages; refresh it once the turn lands.
-                    graph_rebuild_queue.mark_dirty("chatbot")
-                await websocket.send_text(json.dumps(event, default=str))
+            ), sink))
+            try:
+                while True:
+                    event = await sink["queue"].get()
+                    if event is _TURN_DONE:
+                        break
+                    if isinstance(event, Exception):
+                        raise event
+                    if event.get("type") == "message" and event.get("session_id"):
+                        active_session_id = str(event["session_id"])
+                        # Chatbot graph artifact depends on chat_sessions /
+                        # chat_messages; refresh it once the turn lands.
+                        graph_rebuild_queue.mark_dirty("chatbot")
+                    await websocket.send_text(json.dumps(event, default=str))
+            except BaseException:
+                # The socket is gone (or this handler is being cancelled). Let
+                # the turn finish without a listener, so its answer is stored.
+                if not turn.done():
+                    sink["queue"] = None
+                    _detached_turns.add(turn)
+                    turn.add_done_callback(_detached_turns.discard)
+                raise
 
     except WebSocketDisconnect:
         pass
