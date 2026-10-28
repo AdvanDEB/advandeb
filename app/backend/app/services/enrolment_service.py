@@ -95,21 +95,38 @@ class EnrolmentService:
         Several likely contributors authored facts: the workshop participants
         acknowledged in the predecessor review among them.
         """
+        return (await self._match(name, orcid))[0]
+
+    async def match_author_slugs(self, name: str,
+                                 orcid: Optional[str]) -> List[str]:
+        """The `authored_by` values this person answers to.
+
+        Recorded on the user as `author_slugs` at approval, because the queue
+        names authors by slug and the slug is what its exclusion compares.
+        A group slug such as `advandeb_workshop_2025` never matches a person's
+        name here; mapping workshop participants to it is an administrator's
+        decision (scripts/map_author_slugs.py).
+        """
+        return (await self._match(name, orcid))[1]
+
+    async def _match(self, name: str,
+                     orcid: Optional[str]) -> tuple[List[int], List[str]]:
         want_orcid = _norm_orcid(orcid)
         want_name = _norm_name(name)
         hits: List[int] = []
+        slugs: set = set()
         async for f in self.db.stylized_facts.find(
                 {"authored_by": {"$exists": True, "$ne": []}},
                 {"sf_number": 1, "authored_by": 1}):
             for a in f.get("authored_by") or []:
                 a = str(a)
-                if want_orcid and _norm_orcid(a) == want_orcid:
+                if ((want_orcid and _norm_orcid(a) == want_orcid)
+                        or (want_name
+                            and _norm_name(a.replace("_", " ")) == want_name)):
                     hits.append(int(f["sf_number"]))
+                    slugs.add(a)
                     break
-                if want_name and _norm_name(a.replace("_", " ")) == want_name:
-                    hits.append(int(f["sf_number"]))
-                    break
-        return sorted(set(hits))
+        return sorted(set(hits)), sorted(slugs)
 
     # ------------------------------------------------------------------ #
     # Review
@@ -155,7 +172,8 @@ class EnrolmentService:
             return {"status": "error",
                     "detail": "approving requires a tier: panel or contributor"}
 
-        authored = await self.match_authored(req.get("name", ""), req.get("orcid"))
+        authored, author_slugs = await self._match(
+            req.get("name", ""), req.get("orcid"))
 
         existing = await self.db.users.find_one({"email": req["email"]})
         if existing:
@@ -167,7 +185,8 @@ class EnrolmentService:
                                        "tier": decision.tier},
                           "authored_sf_numbers": authored,
                           "updated_at": now},
-                 "$addToSet": {"capabilities": CAP_SF_ELICITATION}})
+                 "$addToSet": {"capabilities": CAP_SF_ELICITATION,
+                               "author_slugs": {"$each": author_slugs}}})
         else:
             # A one-time password the administrator passes on; the account is
             # created only now, never at request time.
@@ -195,6 +214,7 @@ class EnrolmentService:
                 },
                 "approval": {"by": admin_id, "at": now, "tier": decision.tier},
                 "authored_sf_numbers": authored,
+                "author_slugs": author_slugs,
                 "chat_history_visible_to_admin": True,
                 "created_at": now,
                 "updated_at": now,
