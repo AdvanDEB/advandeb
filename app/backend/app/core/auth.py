@@ -4,8 +4,9 @@ Authentication and authorization utilities.
 import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Optional
-from jose import JWTError, jwt
 import bcrypt
+import jwt
+from jwt import InvalidTokenError
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
@@ -53,7 +54,7 @@ def verify_token(token: str, expected_type: Optional[str] = "access") -> dict:
     """
     try:
         payload = jwt.decode(token, settings.JWT_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
-    except JWTError:
+    except InvalidTokenError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",

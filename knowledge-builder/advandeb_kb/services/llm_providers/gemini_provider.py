@@ -6,15 +6,14 @@ to bridge:
 
 1. Messages use ``parts=[{"text": ...}]`` instead of a flat ``content`` string.
 2. The assistant role is named ``model`` (we map ``assistant`` <-> ``model``).
-3. System prompts are passed once via ``system_instruction`` on the model,
-   not as a message in the conversation.
+3. System prompts are passed once via ``system_instruction`` in the request
+   config, not as a message in the conversation.
 
 Responses are translated back into the OpenAI-compatible shape used
 throughout the codebase.
 """
 from __future__ import annotations
 
-import asyncio
 import logging
 import time
 from typing import Any, AsyncIterator, Dict, List, Optional, Tuple
@@ -91,7 +90,7 @@ def _finish_reason(response: Any) -> str:
 
 
 class GeminiProvider(BaseLLMProvider):
-    """Gemini chat provider using the ``google-generativeai`` SDK."""
+    """Gemini chat provider using the ``google-genai`` SDK."""
 
     provider_name = "gemini"
     # Offline fallback only — the live catalog is fetched via list_models().
@@ -107,27 +106,27 @@ class GeminiProvider(BaseLLMProvider):
         if not api_key:
             raise ProviderAuthError("Missing Gemini API key", self.provider_name)
         # Lazy import.
-        import google.generativeai as genai  # type: ignore
+        from google import genai  # type: ignore
+        from google.genai import types  # type: ignore
 
-        self._genai = genai
+        self._types = types
         self._api_key = api_key
-        # ``genai.configure`` is process-global; setting it here is fine for
-        # the common BYOK case where one key is active per request.
-        genai.configure(api_key=api_key)
-
-    def _build_model(self, model: str, system_instruction: Optional[str]) -> Any:
-        kwargs: Dict[str, Any] = {"model_name": model}
-        if system_instruction:
-            kwargs["system_instruction"] = system_instruction
-        return self._genai.GenerativeModel(**kwargs)
+        # The key belongs to this client. (google-generativeai configured it
+        # process-wide, so two users' concurrent requests could swap keys.)
+        self._client = genai.Client(api_key=api_key)
 
     def _generation_config(
-        self, temperature: float, max_tokens: Optional[int]
-    ) -> Dict[str, Any]:
+        self,
+        system_instruction: Optional[str],
+        temperature: float,
+        max_tokens: Optional[int],
+    ) -> Any:
         cfg: Dict[str, Any] = {"temperature": temperature}
         if max_tokens is not None:
             cfg["max_output_tokens"] = max_tokens
-        return cfg
+        if system_instruction:
+            cfg["system_instruction"] = system_instruction
+        return self._types.GenerateContentConfig(**cfg)
 
     async def chat_completion(
         self,
@@ -140,19 +139,14 @@ class GeminiProvider(BaseLLMProvider):
         **kwargs: Any,
     ) -> Dict[str, Any]:
         system, gemini_msgs = _to_gemini_messages(messages)
-        gen_config = self._generation_config(temperature, max_tokens)
-        gen_model = self._build_model(model, system)
+        config = self._generation_config(system, temperature, max_tokens)
 
         if stream:
-            return self._stream(gen_model, gemini_msgs, gen_config, model)
+            return self._stream(gemini_msgs, config, model)
 
         try:
-            # The SDK's ``generate_content`` is blocking; run in a worker
-            # thread to keep our public API async.
-            response = await asyncio.to_thread(
-                gen_model.generate_content,
-                gemini_msgs,
-                generation_config=gen_config,
+            response = await self._client.aio.models.generate_content(
+                model=model, contents=gemini_msgs, config=config
             )
         except Exception as e:
             self._raise_translated(e)
@@ -174,38 +168,20 @@ class GeminiProvider(BaseLLMProvider):
 
     async def _stream(
         self,
-        gen_model: Any,
         gemini_msgs: List[Dict[str, Any]],
-        gen_config: Dict[str, Any],
+        config: Any,
         model_name: str,
     ) -> AsyncIterator[Dict[str, Any]]:
-        # ``generate_content(stream=True)`` returns a synchronous iterator of
-        # partial ``GenerateContentResponse``s. Pull each chunk on a worker
-        # thread to avoid blocking the event loop.
         try:
-            iterator = await asyncio.to_thread(
-                gen_model.generate_content,
-                gemini_msgs,
-                generation_config=gen_config,
-                stream=True,
+            chunks = await self._client.aio.models.generate_content_stream(
+                model=model_name, contents=gemini_msgs, config=config
             )
         except Exception as e:
             self._raise_translated(e)
             return  # pragma: no cover - _raise_translated always raises
 
-        sentinel = object()
-
-        def _next_chunk():
-            try:
-                return next(iterator)
-            except StopIteration:
-                return sentinel
-
         try:
-            while True:
-                chunk = await asyncio.to_thread(_next_chunk)
-                if chunk is sentinel:
-                    break
+            async for chunk in chunks:
                 text = _extract_text(chunk)
                 if not text:
                     continue
@@ -234,26 +210,20 @@ class GeminiProvider(BaseLLMProvider):
     async def list_models(self) -> List[str]:
         """Return Gemini models that support ``generateContent``, live.
 
-        ``genai.list_models()`` is a blocking, authenticated call — run it on a
-        worker thread. Model names come back as ``models/<id>``; strip the
-        prefix to match what callers pass to ``generate_content``.
+        Model names come back as ``models/<id>``; strip the prefix to match
+        what callers pass to ``generate_content``.
         """
-
-        def _list() -> List[str]:
-            out: List[str] = []
-            for m in self._genai.list_models():
-                methods = getattr(m, "supported_generation_methods", []) or []
-                if "generateContent" not in methods:
+        out: List[str] = []
+        try:
+            async for m in await self._client.aio.models.list():
+                actions = getattr(m, "supported_actions", None) or []
+                if "generateContent" not in actions:
                     continue
                 name = getattr(m, "name", "") or ""
                 out.append(name[len("models/"):] if name.startswith("models/") else name)
-            return out
-
-        try:
-            return await asyncio.to_thread(_list)
         except Exception as e:
             self._raise_translated(e)
-            return []  # pragma: no cover - _raise_translated always raises
+        return out
 
     async def validate(self) -> bool:
         # A successful authenticated list call proves the key works without
@@ -262,14 +232,17 @@ class GeminiProvider(BaseLLMProvider):
         return True
 
     async def close(self) -> None:
-        # google-generativeai uses a process-global session; nothing to close.
-        return None
+        try:
+            await self._client.aio.aclose()
+        except Exception:  # pragma: no cover - best-effort cleanup
+            logger.debug("gemini client close raised", exc_info=True)
 
     def _raise_translated(self, e: BaseException) -> None:
         msg = str(e)
         lowered = msg.lower()
         if (
-            "api key" in lowered
+            getattr(e, "code", None) in (401, 403)
+            or "api key" in lowered
             or "unauthenticated" in lowered
             or "permission" in lowered
             or "invalid authentication" in lowered

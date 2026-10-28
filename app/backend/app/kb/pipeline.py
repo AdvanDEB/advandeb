@@ -284,13 +284,13 @@ async def _set_job_stage(
 
 
 def _extract_pdf_text(file_path: str) -> str:
-    from PyPDF2 import PdfReader
+    from pypdf import PdfReader
     text = ""
     with open(file_path, "rb") as f:
         reader = PdfReader(f)
         # Some PDFs are encrypted with an empty owner password (print-locked
         # but readable).  Try to decrypt with an empty password before giving
-        # up; pycryptodome must be installed for AES-encrypted files.
+        # up; AES-encrypted files need the `cryptography` package.
         if reader.is_encrypted:
             try:
                 result = reader.decrypt("")
