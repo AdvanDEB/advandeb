@@ -27,15 +27,25 @@ class NvidiaProvider(OpenAIProvider):
     supports_tools = True
     available_models = [
         "nvidia/nemotron-3-ultra-550b-a55b",
-        "nvidia/llama-3.3-nemotron-super-49b-v1",
+        "nvidia/nemotron-3-super-120b-a12b",
         "nvidia/llama-3.1-nemotron-70b-instruct",
-        "nvidia/nemotron-mini-4b-instruct",
+        "nvidia/nemotron-nano-3-30b-a3b",
+    ]
+    # Tried in order after the default when it does not answer the key check.
+    # NIM retires models without notice (410 Gone) and a personal key need not
+    # reach the large default, so checking one fixed model rejected good keys.
+    validation_fallbacks = [
+        "nvidia/nemotron-3-super-120b-a12b",
+        "nvidia/llama-3.1-nemotron-70b-instruct",
+        "nvidia/nemotron-nano-3-30b-a3b",
     ]
 
     _base_url = "https://integrate.api.nvidia.com/v1"
 
     def __init__(self, api_key: str, base_url: Optional[str] = None) -> None:
         super().__init__(api_key=api_key, base_url=base_url or self._base_url)
+        #: The model whose test completion proved the key; set by validate().
+        self.validated_model: Optional[str] = None
 
     async def chat_with_tools(
         self,
@@ -106,21 +116,48 @@ class NvidiaProvider(OpenAIProvider):
         accepted any non-empty string. ``/chat/completions`` is the endpoint
         that actually checks credentials: a bad key gets
         ``403 Authorization failed``.
+
+        NIM checks the model before the key: a retired model answers 410 and an
+        unknown one 404 whatever the key, and a model can be degraded or out of
+        reach for a personal account. Only 401/403 says the key is bad, so any
+        other failure moves on to the next live model. The model that answers
+        is kept in ``validated_model`` so the stored default is one that works.
         """
-        try:
-            await self.chat_completion(
-                model=self.default_model,
-                messages=[{"role": "user", "content": "ping"}],
-                max_tokens=1,
-                temperature=0.0,
-            )
-        except ProviderAuthError:
-            raise
-        except ProviderError as exc:
-            # The OpenAI SDK surfaces 403 as PermissionDeniedError, which the
-            # base class maps to a plain ProviderError — re-classify so callers
-            # can tell "bad key" from "NIM is having a moment".
-            if str(getattr(exc, "code", "")) in ("401", "403"):
-                raise ProviderAuthError(str(exc), self.provider_name) from None
-            raise
-        return True
+        candidates: List[str] = []
+        for model in (self.default_model, *self.validation_fallbacks):
+            if model not in candidates:
+                candidates.append(model)
+        catalog = set(await self.list_models())
+        candidates = [m for m in candidates if m in catalog] or candidates
+
+        failures: List[str] = []
+        for model in candidates:
+            try:
+                await self.chat_completion(
+                    model=model,
+                    messages=[{"role": "user", "content": "ping"}],
+                    max_tokens=1,
+                    temperature=0.0,
+                )
+            except ProviderAuthError:
+                raise
+            except ProviderError as exc:
+                # The OpenAI SDK surfaces 403 as PermissionDeniedError, which the
+                # base class maps to a plain ProviderError — re-classify so callers
+                # can tell "bad key" from "NIM is having a moment".
+                if str(getattr(exc, "code", "")) in ("401", "403"):
+                    raise ProviderAuthError(str(exc), self.provider_name) from None
+                logger.info(
+                    "nvidia: key check on %s failed (%s) — trying the next model",
+                    model, exc.code or "no status",
+                )
+                failures.append(f"{model} ({exc.code or 'no answer'})")
+                continue
+            self.validated_model = model
+            return True
+
+        raise ProviderError(
+            "NVIDIA NIM answered no test request, so the key could not be "
+            "checked: " + "; ".join(failures),
+            provider=self.provider_name,
+        )

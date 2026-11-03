@@ -67,11 +67,15 @@ def _pick_default_model(
     """Choose a sensible default model from a live catalog.
 
     Preference order: an explicitly ``preferred`` model that's offered → the
+    model the key check actually reached (``validated_model``, NVIDIA) → the
     provider's curated default if offered → the first catalog entry → whatever
     we were given (so an empty catalog still yields *something*).
     """
     if preferred and preferred in models:
         return preferred
+    validated = getattr(provider_instance, "validated_model", None)
+    if validated:
+        return validated
     curated = getattr(provider_instance, "default_model", "") or None
     if curated and curated in models:
         return curated
@@ -154,9 +158,16 @@ class LLMKeyService:
                 detail=f"API key failed validation: {exc.message}",
             ) from None
         except ProviderError as exc:
+            # Short of a 401/403 the key was not rejected: the provider did not
+            # answer the check (model retired or degraded, outage, timeout).
+            # Say so, or the user goes looking for a problem with a key that is
+            # fine.
+            if str(exc.code) in ("401", "403"):
+                detail = f"API key failed validation: {exc.message}"
+            else:
+                detail = f"Could not check the key, the provider did not answer: {exc.message}"
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"API key failed validation: {exc.message}",
+                status_code=status.HTTP_400_BAD_REQUEST, detail=detail,
             ) from None
         except Exception as exc:  # noqa: BLE001
             # Final safety net — drop the exception details that may have
