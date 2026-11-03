@@ -1074,8 +1074,49 @@ async def _extract_facts(text: str) -> List[str]:
     return all_facts
 
 
+# Bump when the gate prompt changes meaningfully: bulk verdicts recorded under
+# an older version are treated as unreviewed and re-judged.
+#   v1 — "answer NO only if" clearly non-biological (religion, politics, ...).
+#   v2 — names the other senses of "reproduction" (R0, reproducibility, image
+#        reproduction, ...) that v1 let through, and puts human clinical
+#        medicine and human-disease epidemiology out of scope.
+DOMAIN_GATE_VERSION = 2
+
+_DOMAIN_GATE_PROMPT = (
+    "You are a domain-relevance gate for a Dynamic Energy Budget (DEB) / "
+    "organism bioenergetics knowledge base. In scope: the biology of living "
+    "organisms — physiology, growth, development, reproductive biology, "
+    "life history, ecology, evolution, behaviour, aquaculture/fisheries, "
+    "animal and plant science, and toxicology as it affects organisms.\n\n"
+    "Judge whether the paper is PRIMARILY about that scope. Be aware that "
+    "many candidate papers were found by the word \"reproduction\" used in an "
+    "unrelated sense — the epidemic reproduction number (R0), reproducibility "
+    "of results or methods, reproducing an image/colour/sound/document, "
+    "reproducing a physical or climate model, or \"social reproduction\".\n\n"
+    "Answer NO if the primary subject is any of: human clinical medicine or "
+    "patient care (diagnosis, treatment, drugs, surgery, assisted reproduction "
+    "in patients); epidemiology of human disease; software, computing or "
+    "engineering; materials science or chemistry without organism biology; "
+    "physical sciences (oceanography, climate, physics); business, economics, "
+    "law, politics, religion, philosophy, education, arts, history, or other "
+    "social science — unless it is specifically about effects on wildlife, "
+    "fisheries, or ecosystems.\n"
+    "Answer YES for organism biology, including laboratory/model-organism and "
+    "livestock studies.\n\n"
+    'Return ONLY a JSON object: {"relevant": true|false, "reason": "<one short sentence>"}.'
+)
+
+# Reason returned when the gate itself fails and defaults to relevant. Bulk
+# callers that persist verdicts compare against it so a transient Ollama error
+# is retried later instead of being recorded as a real "relevant" judgment.
+DOMAIN_GATE_FAILED_REASON = "domain gate check failed — defaulted to relevant"
+
+
 async def _classify_domain_relevance(
-    title: str, abstract: Optional[str], model: Optional[str] = None
+    title: str,
+    abstract: Optional[str],
+    model: Optional[str] = None,
+    base_url: Optional[str] = None,
 ) -> tuple[bool, str]:
     """Gate a document by domain relevance before the expensive stages
     (fact extraction, SF matching, embedding) run on it.
@@ -1089,6 +1130,8 @@ async def _classify_domain_relevance(
     ``model`` overrides ``settings.OLLAMA_MODEL`` — this is a simple binary
     judgment, so bulk/retroactive callers processing millions of records can
     pass a much smaller, faster model than the one used for live ingestion.
+    ``base_url`` overrides ``settings.OLLAMA_BASE_URL`` for workers pinned to
+    their own Ollama instance.
     """
     import httpx
     import json as _json
@@ -1098,27 +1141,11 @@ async def _classify_domain_relevance(
         # prompting still screens out off-topic tangents within the text.
         return True, "no abstract available for gating"
 
-    system = (
-        "You are a domain-relevance gate for a Dynamic Energy Budget (DEB) / "
-        "organism bioenergetics knowledge base (biology, ecology, physiology, "
-        "zoology, aquaculture, toxicology of organisms, and related quantitative "
-        "life-history modeling).\n\n"
-        "Given a paper's title and abstract, judge whether it is PRIMARILY about "
-        "that domain. Answer YES if the paper is about organisms, ecosystems, or "
-        "their biology/energetics — including papers that touch human social "
-        "topics (policy, economics, culture) SPECIFICALLY as they affect "
-        "wildlife, fisheries, or ecosystems.\n"
-        "Answer NO only if the paper's primary subject is unrelated to organism "
-        "biology — e.g. it is fundamentally about human religion, theology, "
-        "politics, government policy with no ecological/organism angle, pure "
-        "human social science, or an unrelated technical field.\n\n"
-        'Return ONLY a JSON object: {"relevant": true|false, "reason": "<one short sentence>"}.'
-    )
     prompt = f"Title: {title}\n\nAbstract: {abstract[:2000]}"
     payload = {
         "model": model or settings.OLLAMA_MODEL,
         "messages": [
-            {"role": "system", "content": system},
+            {"role": "system", "content": _DOMAIN_GATE_PROMPT},
             {"role": "user", "content": prompt},
         ],
         "stream": False,
@@ -1127,7 +1154,9 @@ async def _classify_domain_relevance(
 
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:
-            resp = await client.post(f"{settings.OLLAMA_BASE_URL}/api/chat", json=payload)
+            resp = await client.post(
+                f"{base_url or settings.OLLAMA_BASE_URL}/api/chat", json=payload
+            )
             resp.raise_for_status()
             raw = resp.json()["message"]["content"].strip()
 
@@ -1135,12 +1164,16 @@ async def _classify_domain_relevance(
         if clean.startswith("```"):
             clean = clean.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
         parsed = _json.loads(clean)
-        is_relevant = bool(parsed.get("relevant", True))
+        verdict = parsed.get("relevant", True)
+        if isinstance(verdict, str):
+            # Small models sometimes quote the boolean; bool("false") is True.
+            verdict = verdict.strip().lower() not in ("false", "no", "0")
+        is_relevant = bool(verdict)
         reason = str(parsed.get("reason") or "").strip()[:300]
         return is_relevant, reason or ("off-topic per domain gate" if not is_relevant else "")
     except Exception as exc:
         logger.warning("_classify_domain_relevance: gate failed, defaulting to relevant: %s", exc)
-        return True, "domain gate check failed — defaulted to relevant"
+        return True, DOMAIN_GATE_FAILED_REASON
 
 
 async def _classify_sf_relations(

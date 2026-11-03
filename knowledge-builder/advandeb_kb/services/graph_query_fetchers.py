@@ -535,6 +535,7 @@ def fetch_reproduction(db: ArangoDatabase, limit: Optional[int]) -> Dict[str, An
     if not docs:
         docs = aql(db,
             f"FOR d IN documents FILTER d.general_domain == 'reproduction' "
+            f"AND d.processing_status != 'excluded' "
             f"SORT d._key {_aql_limit('lim', limit)[0]} RETURN d",
             _aql_limit("lim", limit)[1],
         )
