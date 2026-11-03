@@ -1,0 +1,71 @@
+\section{Tvrdnje iz literature: DEB i MTE}\label{sec:teorija}
+
+\subsection{Teorija dinamičkih energijskih proračuna (DEB)}
+
+\izjava{T1}{Model s devet parametara daje dvadesetak relacija veličine tijela; u njemu unos skalira s površinom, održavanje s volumenom, a energija prolazi kroz rezervu. Respiracija približno skalira s veličinom na $3/4$, i unutar vrste i između vrsta, iako je rast von Bertalanffyjev, a održavanje proporcionalno volumenu. (Kooijman 1986) \pouzd{sažetak}}
+\zaalfa{eksponent $\approx3/4$ nastaje miješanjem površinskih i volumnih procesa. Za to nije potrebna mreža, pa se iz $b\approx3/4$ ne može zaključiti ništa o $\alpha$.}
+
+\izjava{T2}{U DEB-u metaboličko skaliranje proizlazi iz podjele mase na rezervu i strukturu, bez ograničenja opskrbne mreže. Predviđeni eksponent je oko $3/4$ za velike mase, a blizu 1 za male, jer udio rezerve u masi raste s veličinom vrste. Autori navode da taj mehanizam ne proturječi nužno transportnim modelima. (Maino i sur. 2014) \pouzd{sažetak; eksponenti iz disertacije}}
+\zaalfa{interspecifični eksponent ovisi o udjelu rezerve u masi, što još jednom razdvaja $b$ i $\alpha$. Usto MTE radi s ukupnom masom, a DEB sa strukturom (pogl.~\ref{sec:definicija}, \ref{sec:zamke}).}
+
+\izjava{T3}{Akceleracija tipa M: između rođenja i metamorfoze organizam je V1-morf, tj. površina raste proporcionalno volumenu. Maksimalna specifična asimilacija $\pAm$ i energijski conductance $\dot v$ množe se faktorom $s_M=L_j/L_b$. Od pet tipova akceleracije ovaj je daleko najrašireniji i javlja se u svim skupinama s ličinkama. Kod zrakoperki $s_M$ je između 1 i 22,8 (u 8 od 39 redova), a kukci su ekstremni. U AmP-u je implementirana kao modeli \texttt{abj}, \texttt{asj} i \texttt{abp} (Kooijman 2014; Marques i sur. 2018). \pouzd{puni tekst}}
+\zaalfa{DEB već ima faze s $\alpha=1$. Vrijednosti $s_M$ u AmP-u postojeći su skup podataka o tome gdje se takve faze javljaju (vidi jedn.~\ref{eq:norm}).}
+
+\izjava{T4}{Kod kolonija mahovnjaka (Bryozoa), i manipuliranih i netaknutih, metabolizam skalira kao $B\propto M^{0{,}5}$. DEB model alokacije to objašnjava i predviđa apsolutni $B$, a autori zaključuju da „jedinstveni“ eksponent ne postoji. (White i sur. 2011) \pouzd{sažetak}}
+\zaalfa{eksponenti ispod $2/3$ su stvarni. Donja granica $2/3$ nije zakon.}
+
+\izjava{T5}{Kad se izravno usporede pretpostavke DEB-a i WBE-a, predviđanja se najviše razilaze pri manipulaciji regeneracije tkiva, oblika tijela, kondicije (udjela rezervi), temperature i kisika. (Kearney i White 2012) \pouzd{sažetak}}
+\zaalfa{eksperimenti s kondicijom (gladovanje, hranjenje) najjasnije razlikuju hipoteze, što se slaže s P2 i P3.}
+
+\izjava{T6}{Kod ličinki kukaca asimilacija proporcionalna strukturi (V1-sličan rast) daje rast brži od von Bertalanffyjevog, ali sporiji od eksponencijalnog (Maino i Kearney 2015a). Konzumacija hrane skalira s eksponentom 0,70 ontogenetski i 0,89 interspecifično (Maino i Kearney 2015b). \pouzd{sažetak}}
+\zaalfa{kukci su dobar test odvojenih mreža (H5): energija se raznosi hemolimfom, a kisik trahejama.}
+
+\subsection{Teorija metaboličkog skaliranja (MTE) i teorije mreža}
+
+\izjava{T7}{Kapilare su terminalne jedinice nepromjenjive veličine, pa broj kapilara raste proporcionalno metabolizmu, $N_{\mathrm{kap}}\propto B\propto M^{3/4}$. (West, Brown i Enquist 1997) \pouzd{puni tekst}}
+\izjava{T8}{Efektivna površina izmjene $a\propto M^{3/4}$ najveća je moguća za fraktalnu mrežu koja ispunjava volumen; euklidska geometrija daje $A\propto M^{2/3}$. Općenito, u $D$ dimenzija $a\propto M^{D/(D+1)}$. (West, Brown i Enquist 1999) \pouzd{puni tekst}}
+\zaalfa{prema samoj MTE fraktalna mreža daje $\alpha\le3/4$, a ne $\alpha=1$. Krajnji slučaj $\alpha=1$ iz H1 (svaka stanica izravno uz mrežu) traži dodatnu pretpostavku: razmak kapilara ne smije ovisiti o veličini (jedn.~\ref{eq:D3}).}
+
+\izjava{T9}{Uz korekcije za konačnu veličinu mreže WBE predviđa oko 0,81 za raspon veličina sisavaca. Mreža samo s Poiseuilleovim grananjem (presjek raste pri grananju) daje eksponent ispod 1 koji se vrlo sporo, logaritamski, približava 1 kako veličina raste. Čisto grananje s očuvanjem presjeka (pulsatilni tok) teži prema $3/4$. (Savage, Deeds i Fontana 2008) \pouzd{puni tekst}}
+\zaalfa{$\alpha\to1$ ima teorijsko opravdanje za mreže s niskim tlakom i Poiseuilleovim tokom (male životinje, ličinke), ali ne i za velike pulsatilne krvotoke.}
+
+\izjava{T10}{Ako se brzina toka ne mijenja s veličinom, eksponent je $2/3$. Najviše je $3/4$, ako brzina toka raste kao $M^{1/12}$. Za taj rezultat fraktalnost nije potrebna. (Banavar i sur. 2010) \pouzd{sažetak}}
+
+\subsection{Geometrijske (površinske) teorije}
+
+\izjava{T11}{Eksponenti skaliranja površine kreću se od ispod $2/3$ do iznad 1 (superlinearno), uključujući mješovite zakone potencija. Postižu se trima mehanizmima: (i) fraktalnim naboravanjem; (ii) geometrijskom nesličnošću, tj. izduživanjem, spljoštavanjem, zadebljavanjem ili šupljinom; (iii) unutarnjim površinama. Veliki eukariotski fitoplankton šupljinom i unutarnjim membranama postiže gotovo linearno skaliranje. (Okie 2013) \pouzd{sažetak}}
+\izjava{T12}{Hipoteza o granicama metaboličke razine (MLBH): metabolički nagib većinom leži između $2/3$ i 1, a s razinom aktivnosti povezan je U-oblikom. (Glazier 2010) \pouzd{sažetak}}
+\izjava{T13}{Kod pelagijskih beskralježnjaka koji dišu kroz kožu ontogenetski metabolički nagib raste kad se tijelo tijekom rasta spljoštava ili izdužuje. Površinska teorija to predviđa, a mrežne teorije predviđaju suprotan predznak. (Hirst, Glazier i Atkinson 2014) \pouzd{sažetak}}
+\izjava{T14}{Ontogenetski pomaci metaboličkog eksponenta $b_R$ (između približno 1 i manje od 1) u negativnoj su korelaciji s eksponentom duljine $b_L$, a u pozitivnoj s geometrijskim eksponentom površine $b_A$. To podržava površinsku, a ne mrežnu teoriju. (Glazier, Hirst i Atkinson 2015) \pouzd{sažetak}}
+\zaalfa{promjena oblika tijekom rasta mijenja eksponent površine, i to se vidi u podacima. Promjenu oblika treba izmjeriti prije nego se $\alpha$ pripiše mreži.}
+
+\subsection{Spor o ograničenju kisikom}
+
+\izjava{T15}{Teorija ograničenja kisikom preko škrga (GOLT, Pauly) tvrdi da plošne (2D) škrge ne mogu pratiti trodimenzionalno tijelo, pa površina škrga ograničava rast. Lefevre, McKenzie i Nilsson (2017) odgovaraju da naborane škrge mogu skalirati linearno s masom i da površina škrga \emph{prati} potražnju, a ne obrnuto. Spor se nastavlja (Pauly i Cheung 2018; Pauly 2021). \pouzd{sažetak}}
+\zaalfa{protuargument Lefevrea i sur.\ (2017) poseban je slučaj načela simorfoze: struktura je kvantitativno usklađena s funkcionalnom potražnjom. Taylor i Weibel (1981) postavili su tu hipotezu za put kisika i testirali je usporedbom veličine dišnih struktura s maksimalnim primitkom kisika $\dot V_{O_2\max}$ kod sisavaca koji se po masi razlikuju za nekoliko redova veličine. Weibel, Taylor i Hoppeler (1991) zaključuju da simorfoza vrijedi za unutarnje dijelove puta (krv, srce, kapilare mišića, mitohondrije), ali ne i za pluća, sučelje s okolišem, koja imaju višak kapaciteta \pouzd{sažetak}. Ako je mreža dimenzionirana prema \emph{vršnoj} potražnji, pri rutinskim tokovima poput rasta radi ispod svojeg kapaciteta \pouzd{izvedeno}. Morfometrijska površina zato daje \emph{prior} i gornju granicu, a ne izravnu procjenu $\alpha$ (E1, E2, E10).}
+
+\subsection{Fraktalna dimenzija krvožilnih mreža}
+
+\izjava{T16}{Krvožilje normalne mrežnice čovjeka statistički je samoslično. Prema pregledu Mastersa (2004) više neovisnih skupina procjenjuje njegovu fraktalnu dimenziju na 2-D slikama na približno 1,7, što je dimenzija rasta ograničenog difuzijom (DLA); pojedinačna mjerenja navedena su u E9. Lorthois i Cassot (2010) nesuglasje o tome jesu li normalne krvožilne mreže fraktali objašnjavaju dvostupanjskom morfogenezom: kvazi-fraktalna arterijska i venska stabla urastaju u prethodno postojeću homogenu kapilarnu mrežu. U moždanoj kori kapilarna komponenta iznad granične duljine reda veličine svoje karakteristične duljine postaje homogena i ispunjava prostor, a kvazi-fraktalno grananje vidi se tek na većim skalama. \pouzd{sažetak}}
+\zaalfa{ovo je podloga hipoteze H4. Prema P6 plošna dimenzija $D<2$ daje $\alpha_{2D}=D/2<1$: za $D\approx1{,}7$ to je $\alpha_{2D}\approx0{,}85$, a za cijeli raspon 1,3–1,7 iz H4 $\alpha_{2D}=0{,}65$–$0{,}85$. Fraktalna dimenzija stabla dakle ne daje $\alpha=1$. Za $\alpha$ je mjerodavno kapilarno korito (P6): ako ono ispunjava prostor ($D_d=d$), a razmak kapilara ne ovisi o veličini tijela, jedn.~\ref{eq:D3} daje $\alpha=1$, tj. krajnji slučaj iz H1, neovisno o dimenziji stabla. Razmak kapilara prema veličini tijela zato treba izmjeriti (E10), a ne izvoditi iz slika velikih žila.}
+
+\begin{table}[ht]
+\centering\small
+\caption{Što pojedine teorije predviđaju za eksponent površine izmjene.}
+\label{tab:teorije}
+\begin{tabularx}{\linewidth}{@{}Xcl@{}}
+\toprule
+Teorija ili mehanizam & Predviđeni $\alpha$ & Izvor \\
+\midrule
+Euklidski izomorf, izmjena samo preko vanjske površine & $2/3$ & T1, T8 \\
+Mreža s brzinom toka neovisnom o veličini & $2/3$ & T10 \\
+WBE: pulsatilna mreža s očuvanjem presjeka (gornja granica) & $3/4$ & T7, T8 \\
+WBE s korekcijom konačne veličine (sisavci) & $\approx0{,}81$ & T9 \\
+WBE samo s Poiseuilleovim grananjem & $\to1$ (sporo) & T9 \\
+V1-morf, akceleracija tipa M & $1$ & T3 \\
+Promjena oblika, unutarnje površine & $<2/3$ do $>1$ & T11, T13, T14 \\
+Plošna slika fraktalnog stabla, $D=1{,}63$–$1{,}71$ & $D/2\approx0{,}82$–$0{,}86$ & T16, E9, P6 \\
+Kapilarno korito koje ispunjava prostor, stalan razmak kapilara & $1$ & T16, E9, P6 \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -1,0 +1,107 @@
+\section{Protokol procjene $\alpha$}\label{sec:protokol}
+
+\subsection*{Korak 0 · Odluči što $\alpha$ opisuje}
+\begin{itemize}
+\item Koje sučelje: krv ↔ masno tkivo, jetra, mišić. Kod kukaca hemolimfa ↔ masno tijelo.
+\item Koji supstrat: lipidi, glukoza. Kisik se tretira zasebno ($\alpha_{O_2}$) ako ima odvojenu mrežu (H5; npr. traheje kukaca, kožno disanje vodozemaca).
+\item Koji stadij: za vrste s ličinkama ili metamorfozom predvidjeti barem dva $\alpha$ (E4, E5, T3).
+\end{itemize}
+
+\subsection*{Korak 1 · Klasificiraj transportnu mrežu}
+Prvi filtar je tip krvotoka. U \emph{zatvorenom} krvotoku krv ostaje u zasebnim žilama ili prostorima, odvojena od međustanične tekućine, a kapilarne mreže organa poredane su usporedno. U \emph{otvorenom} krvotoku volumen krvi je veći, a protok i tlak niži, i organi se opskrbljuju serijski, pa tkiva dalje od srca dobivaju manje kisika (Monahan-Earley, Dvorak i Aird 2013). Zatvoren krvotok imaju kolutićavci (npr. gujavice) i kralježnjaci. Otvoren imaju člankonošci i većina mekušaca, npr. školjkaši; glavonošci su zatvoren krvotok razvili sekundarno (isti izvor). Granica nije uvijek oštra: i u zatvorenom krvotoku kralježnjaka sinusoidi jetre, slezene i koštane srži izravno dodiruju međustanični prostor (isti izvor).
+
+Zatim treba utvrditi:
+\begin{enumerate*}[label=(\roman*)]
+\item postoji li zasebna mreža za kisik (H5); kod kukaca otvoreni krvotok ne dostavlja kisik (Monahan-Earley, Dvorak i Aird 2013), nego to rade traheje;
+\item je li tijelo spljošteno, izduženo ili modularno, jer promjena oblika mijenja eksponent površine (T13, T14);
+\item gradi li se mreža tijekom ontogeneze (E4, E5).
+\end{enumerate*}
+Rezultat određuje redak u tablici~\ref{tab:priori}.
+
+\subsection*{Korak 2 · Postavi apriornu razdiobu}
+
+\begin{table}[ht]
+\centering\small
+\caption{Radni priori za $\alpha$ po tipu mreže. Rasponi su \emph{pretpostavke}: prosudbe izvedene iz navedenih izvora, a ne mjerenja. Gornja granica $\alpha\le1$ (H3) radna je pretpostavka za izgrađenu mrežu; dok se mreža gradi, izmjereni nagibi prolazno mogu biti veći od 1 (E4).}
+\label{tab:priori}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.2cm}c>{\raggedright\arraybackslash}X@{}}
+\toprule
+Tip mreže & Primjeri & Prior $\alpha$ & Obrazloženje \\
+\midrule
+Samo difuzija, izomorfno tijelo & mali okrugli beskralježnjaci & 0,60–0,75 & euklidska geometrija (T8); $<2/3$ moguće (T11) \\
+Spljošteno, izduženo ili modularno tijelo; V1-morfi & plošnjaci, trakavice, kolonije & 0,85–1,00 & V1-morf (T3); promjena oblika (T13, T14); oprez: mahovnjaci $B\propto M^{0{,}5}$ (T4) \\
+Razgranat gastrovaskularni sustav & planarije, žarnjaci & 0,70–1,00 & grane se dodaju s rastom (E8); eksponent nije izmjeren \\
+Otvoren krvotok (hemolimfa) & školjkaši, rakovi, \emph{Daphnia}, kukci (energija) & 0,67–1,00 & u pregledu nije nađena teorija analogna WBE-u; najveći nedostatak podataka \\
+Zatvoren krvotok, nizak tlak, Poiseuilleov tok & gujavice, ličinke riba & 0,80–1,00 & T9 \\
+Zatvoren pulsatilan krvotok & sisavci, ptice, odrasle ribe & 0,75–0,95 & WBE $3/4$ (T7, T8); morfometrija 0,87–0,92 (E1, E2) \\
+Mreža u izgradnji (prolazno) & prelarve i postlarve riba & može biti $>1$ & E4, E5 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection*{Korak 3 · Prikupi podatke}
+Redoslijed slijedi korisnost za identifikaciju $\alpha$ prema P4 i Monte Carlu (S6, tablica~\ref{tab:mc}). Krivulja rasta korisna je za ostale parametre, ali sama nikad nije dovoljna.
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{Serija gladovanja prema veličini.} Barem tri veličinske klase, barem četiri vremenske točke po klasi i ista temperatura. Mjeriti zalihe (lipide, glikogen), a ne samo masu tijela. Nagib $\log k$ prema $\log V$ daje $\alpha-1$ i ne ovisi o eksponentu asimilacije $a$ (P3). U S6 je to najbolji pojedinačni dizajn (E, RMSE do \MCErmse).
+\item \textbf{Spremište po strukturi prema veličini}, pri poznatoj hrani i temperaturi. Gustoća spremišta skalira kao $V^{a-\alpha}$ (P2), pa daje $\alpha$ samo uz poznat $a$. \emph{Pretvorba:} literatura obično navodi lipide po cijelom tijelu, a model spremište po strukturi (H7). Ako je $\varphi$ maseni udio lipida (na istoj osnovici, mokroj ili suhoj), gustoća spremišta po strukturi je $[E_E]\propto\varphi/(1-\varphi)$, a ne $\varphi$. Za energiju se može uzeti uobičajena približna vrijednost topline izgaranja lipida, $\approx39$~kJ\,g$^{-1}$. Ta konstanta ne utječe na nagib $\log[E_E]$ prema $\log V$, pa ni na $\hat\alpha$; utječe samo na apsolutne vrijednosti parametara.
+\item \textbf{Unos hrane prema veličini} (eksponent $a$). Bez njega gustoća spremišta daje samo razliku $a-\alpha$ (P2), a pogrešno zadan $a$ pristrano pomiče $\hat\alpha$ (S6, dizajni sa zvjezdicom).
+\item \textbf{Morfometrija} (stereologija površine izmjene po jedinici volumena, $S_V\propto V^{\alpha-1}$) služi kao prior ili gornja granica (E1, E2, T15).
+\item \textbf{Obrtaj obilježivača} (stabilni izotopi, klirens lipida iz plazme) služi samo kao provjera, jer miješa obrtaj proteina i razrjeđenje rastom (E6).
+\item \textbf{AmP:} postojeći parametri i $s_M$ (T3) za kontekst i kao početne vrijednosti.
+\end{enumerate}
+
+\begin{kljucno}[Najmanji dizajni prema Monte Carlu (S6)]
+Svi dizajni u S6 uključuju i krivulju rasta: 25 mjerenja duljine s 2~\% šuma. Podaci su idealizirani (bez varijabilnosti među jedinkama, uz poznatu i stalnu hranu i temperaturu), pa su brojke donja granica nesigurnosti i služe za rangiranje dizajna.
+\begin{itemize}[leftmargin=1.4em]
+\item \textbf{Preporučeno, gladovanje (E):} 3 veličinske klase ($L\approx1$, 2 i 3~cm, tj. trostruki raspon duljine) × 4 vremenske točke (0, 10, 20 i 40 dana nakon uklanjanja hrane), s 15~\% mjerne pogreške zaliha. RMSE je do \MCErmse, a otprilike 9 od 10 procjena leži unutar $\pm0{,}05$ od istine. Do zadnje točke spremište u S6 padne na približno 45–70~\% početne vrijednosti; za drugu vrstu vremenske točke treba birati tako da pokriju sličan pad.
+\item \textbf{Bez gladovanja, samo spremište (B, D):} 8 veličina uz $\le10$~\% mjerne pogreške (RMSE do \MCBrmse) ili 16 veličina uz $\sim25$~\% (RMSE do \MCDrmse). Uz 8 veličina i 25~\% pogreške (C) RMSE raste do \MCCrmse. Točke spremišta u S6 pokrivaju $L\approx0{,}6$–3~cm, tj. barem četverostruki raspon duljine.
+\item \textbf{Kombinacija (F):} 8 veličina spremišta (25~\%) i gladovanje kao u E. RMSE do \MCFrmse.
+\item \textbf{Nedovoljno, samo rast (A):} procjene se raspršuju po cijelom dopuštenom rasponu (10.–90.~percentil \MCAsevenfiveLo–\MCAsevenfiveHi{} za istinski $\alpha=0{,}75$), 38–47~\% fitova završi na granici raspona, a RMSE je do \MCArmse.
+\item \textbf{Uz svaki dizajn izmjeriti unos prema veličini.} Ako je istinski $a=0{,}72$, a fit pretpostavlja $2/3$, $\hat\alpha$ je pristran naniže: medijan dizajna C pada s \MCCokMed{} na \MCCmisMed, a dizajna F s \MCFokMed{} na \MCFmisMed{} (istina 0,75). To se slaže s P2, prema kojoj je $\hat\alpha\approx\alpha-(a-2/3)$. Ni gladovanje ne uklanja pristranost kad su u fitu i spremište i rast (F). Za dizajn E pogrešno zadan $a$ nije testiran.
+\end{itemize}
+\end{kljucno}
+
+Vrste treba birati prema dostupnosti \emph{ovih} podataka, prije svega gladovanja i spremišta po veličinama. Unos u AmP-u sam po sebi nije dovoljan razlog za odabir, jer se iz krivulje rasta $\alpha$ ne može procijeniti (P4, S6). Idealne su vremenske serije veličine, mase, dobi i lipida, po mogućnosti odvojeno za krv i tijelo.
+
+\subsection*{Korak 4 · Fitaj}
+\begin{enumerate}[leftmargin=1.6em]
+\item Parametriziraj prema jedn.~\eqref{eq:norm} s $\Vref=V_b$.
+\item Fitaj sve podatke zajedno. Za spremište i gladovanje koristi logaritamske reziduale, s težinama iz mjerne pogreške.
+\item Koristi barem dvije početne vrijednosti $\alpha$ (npr. 0,70 i 0,95). Korak konačnih razlika mora biti veći od tolerancije rješavača (u S6 relativni korak $10^{-3}$ uz toleranciju $10^{-7}$). Provjeri da se fit nije zaustavio na početnoj vrijednosti.
+\item Provjeri je li $\hat\alpha$ završio na granici dopuštenog raspona. To je znak da $\alpha$ nije identificiran: u S6 se to dogodilo u 38–47~\% fitova samo na rast (A), a ni u jednom fitu s gladovanjem (E, F).
+\item Izračunaj profil vjerodostojnosti za $\alpha$ na mreži 0,55–1,10 s korakom 0,025 i navedi 95~\% interval pouzdanosti ($\Delta\chi^2=3{,}84$).
+\item Ako interval obuhvaća cijeli raspon $[2/3,1]$, $\alpha$ \emph{nije} procijenjen. Navedi prior i to jasno napiši.
+\item Bayesovska alternativa: prior iz tablice~\ref{tab:priori} i aposteriorna razdioba za $\alpha$.
+\end{enumerate}
+
+\subsection*{Korak 5 · Provjeri}
+\begin{itemize}
+\item \textbf{Predikcija izvan uzorka:} model fitan na rast i spremište treba predvidjeti krivulju gladovanja, ili obrnuto.
+\item \textbf{Osjetljivost:} na $a$ (S6), na početne uvjete (S5), na $\Vref$ i na temperaturu.
+\item \textbf{Usporedba s morfometrijom:} ako je $\hat\alpha$ znatno iznad morfometrijskog eksponenta, to treba objasniti, npr. gustoćom transportera, jer je „površina“ generalizirana (H2).
+\item \textbf{Biološka prihvatljivost (H8):} je li promjena gustoće spremišta s veličinom koju model predviđa (P2) prihvatljiva za tu vrstu?
+\end{itemize}
+
+\subsection*{Korak 6 · Filogenetski test}
+Za svaku vrstu navedi $\hat\alpha$ s intervalom pouzdanosti. Zatim:
+\begin{enumerate*}[label=(\roman*)]
+\item usporedi tipove mreža filogenetskom regresijom (PGLS) s težinama iz intervala;
+\item procijeni filogenetski signal (Pagelov $\lambda$, Pagel 1999; Blombergov $K$, Blomberg, Garland i Ives 2003) i time testiraj H6;
+\item testiraj H9, tj. poklapa li se $\alpha$ s determiniranim ili indeterminiranim rastom.
+\end{enumerate*}
+
+\textbf{Koliko vrsta.} U simulacijama Blomberga, Garlanda i Ivesa (2003) randomizacijski test filogenetskog signala ima ispravnu stopu pogreške tipa I (uz razinu značajnosti 0,05) i dobru snagu (0,8) za skupove od 20 ili više vrsta. Iz toga slijedi da je približno 20 vrsta s procijenjenim $\alpha$ donja granica za smislen test H6, a ne luksuz.
+
+\begin{kljucno}[Kontrolna lista prije objave vrijednosti $\alpha$]
+\begin{itemize}[label=$\square$,leftmargin=1.6em]
+\item Jasno je koje sučelje i koji supstrat $\alpha$ opisuje (energija ili kisik).
+\item Uz rast postoje podaci o gladovanju ili o spremištu po veličinama; rast sam nije dovoljan.
+\item Spremište je izraženo po \emph{strukturi}, ne po ukupnoj masi.
+\item Eksponent asimilacije $a$ je izmjeren ili je navedena pretpostavka.
+\item Podaci su intraspecifični i ontogenetski, pri poznatoj hrani i temperaturi.
+\item Fit je pokrenut iz barem dviju početnih vrijednosti $\alpha$, nije zapeo na početnoj vrijednosti i nije završio na granici raspona.
+\item Naveden je profil vjerodostojnosti i 95~\% interval pouzdanosti.
+\item Provjerena je osjetljivost na $a$ i na početne uvjete.
+\item Navedeno je je li $\alpha$ ovisan o stadiju.
+\end{itemize}
+\end{kljucno}

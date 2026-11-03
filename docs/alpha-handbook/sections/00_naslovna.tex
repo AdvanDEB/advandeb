@@ -1,0 +1,37 @@
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{1.2cm}
+{\sffamily\small\color{akcent}\MakeUppercase{AdvanDEB · radni priručnik}}\par
+\vspace{0.6cm}
+{\sffamily\bfseries\fontsize{28}{33}\selectfont\color{akcent} Procjena eksponenta $\boldsymbol{\alpha}$\\[2pt] u transportnom DEB-u\par}
+\vspace{0.5cm}
+{\Large Teorija, podaci i protokol za procjenu\\ morfologije transportne mreže\par}
+\vspace{0.9cm}
+{\color{siva}\rule{\linewidth}{0.5pt}}
+\vspace{0.3cm}
+
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\textbf{Verzija} & 1.0 (radna) · 3. studenoga 2026. \\
+\textbf{Temelji} & Pregled literature teorije dinamičkih energijskih proračuna (DEB) i teorije metaboličkog skaliranja (MTE); analitičke propozicije izvedene u priručniku (Dodatak A); simulacije minimalnog modela (Dodatak B). \\
+\textbf{Namjena} & Zajednički radni dokument za odabir vrsta, prikupljanje podataka i procjenu $\alpha$ u transportnom DEB-u (tDEB). \\
+\end{tabularx}
+
+\vspace{0.6cm}
+\begin{kljucno}[Kako čitati ovaj priručnik]
+Svaka tvrdnja ima oznaku koja kaže odakle dolazi i kako se može provjeriti.
+\begin{itemize}[leftmargin=4.2em,labelwidth=3.4em,align=left]
+\item[\textbf{H}] hipoteza ili pretpostavka modela koju priručnik testira; uz svaku je navedeno gdje se testira (propozicija, simulacija ili korak protokola);
+\item[\textbf{T}] tvrdnja iz objavljene literature, izrečena vlastitim riječima, s izvorom;
+\item[\textbf{E}] empirijski podatak (izmjereni eksponent) s izvorom;
+\item[\textbf{P}] propozicija izvedena u ovom priručniku (izvodi u Dodatku A);
+\item[\textbf{S}] rezultat simulacije (kod i postavke u Dodatku B).
+\end{itemize}
+Ostalo je ili izvod u samom tekstu ili je izričito navedeno kao pretpostavka modela. Pouzdanost literaturnog podatka označena je u uglatim zagradama: \pouzd{puni tekst}, \pouzd{sažetak} ili \pouzd{izvedeno}. Bibliografski podaci provjereni su u PubMedu i Crossrefu.
+\end{kljucno}
+
+\vfill
+{\small\color{siva} Dokument je priređen za projekt AdvanDEB uz pomoć Claudea (Anthropic): pregled i provjera literature, izvodi propozicija i simulacije. Sve brojke iz simulacija generirane su skriptama u \texttt{docs/alpha-handbook/sim/} i mogu se reproducirati.\par}
+\end{titlepage}
+
+{\small\setlength{\parskip}{0pt}\tableofcontents}
+\clearpage

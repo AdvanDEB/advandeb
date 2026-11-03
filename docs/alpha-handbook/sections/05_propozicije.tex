@@ -1,0 +1,79 @@
+\section{Što $\alpha$ radi u modelu: propozicije}\label{sec:propozicije}
+
+\subsection{Minimalni model}
+
+Za analizu koristimo vlastiti minimalni transportni DEB (tDEB) ovog priručnika. Model ima četiri varijable stanja: energiju u transportnom kompartimentu $E_T$, energiju u spremištu $E_E$, strukturni volumen $V$ i energiju uloženu u reprodukciju $E_R$ (slika~\ref{fig:shema}). Svi tokovi iz transporta prolaze kroz sučelje normalizirano prema jedn.~\eqref{eq:norm}:
+\begin{align}
+\frac{dE_T}{dt}&=\pd_A-(\beta_S+\beta_R)\,E_T\,r(V)-\beta_E\,(E_T-k_E E_E)\,r(V), \label{eq:mT}\\
+\frac{dE_E}{dt}&=\beta_E\,(E_T-k_E E_E)\,r(V), \label{eq:mE}\\
+\frac{dV}{dt}&=\frac{\beta_S\,E_T\,r(V)-\pM V}{\EG}, \qquad
+\pd_A=\pAm\,f\,V^{2/3}\Big(\frac{V}{\Vref}\Big)^{a-2/3}. \label{eq:mV}
+\end{align}
+Reprodukcija prima tok $dE_R/dt=\beta_R E_T\,r(V)$.
+
+\begin{kljucno}[Pretpostavke minimalnog modela]
+\begin{enumerate}[leftmargin=1.8em,label=(\roman*)]
+\item \textbf{Održavanje se plaća iz somatske grane prije rasta.} Somatski tok $\beta_S E_T\,r(V)$ najprije pokriva održavanje $\pM V$, a rast dobiva samo ostatak (jedn.~\eqref{eq:mV}). Održavanje se ne plaća izravno iz $E_T$ ni iz $E_E$.
+\item \textbf{Transportni kompartiment drži malu stalnu zalihu.} U ravnoteži spremišta vrijedi $E_T=k_E E_E$ (jedn.~\eqref{eq:mE}), uz $k_E\ll1$. Brojčana vrijednost $k_E$ i procjena reda veličine iz podataka dane su u pogl.~\ref{sec:simulacije}.
+\item \textbf{Smanjivanje je dopušteno pri gladovanju.} Kad somatski tok ne pokriva održavanje, $dV/dt<0$, pa se struktura troši za održavanje. Pojednostavljenje: pri smanjivanju vrijedi isti koeficijent $\EG$ kao pri rastu.
+\item \textbf{Asimilacija skalira kao $V^{a}$.} Eksponent asimilacije $a$ zaseban je parametar, neovisan o $\alpha$. Za izomorfe je $a=2/3$.
+\end{enumerate}
+Uz to, hrana $f$ i temperatura su stalne, osim u pokusima gladovanja ($f=0$), a grana reprodukcije je ponor: nema praga zrelosti ni povratnog utjecaja na $E_T$, $E_E$ i $V$.
+\end{kljucno}
+
+\subsection{Propozicije}
+
+\paragraph{Pretpostavka kvazi-ravnoteže.} P1–P3 pretpostavljaju da su vremenske konstante izmjene, $\big((\beta_S+\beta_R+\beta_E)\,r(V)\big)^{-1}$ za transport i $\big(\beta_E k_E\,r(V)\big)^{-1}$ za spremište (Dodatak~\ref{app:izvodi}), kratke u odnosu na vremensku skalu rasta. Za transportni kompartiment to potvrđuju podaci za čovjeka:
+\begin{itemize}
+\item Nakon prekida infuzije obilježivača poluvrijeme obilježenih slobodnih masnih kiselina u plazmi bilo je 3,7~$\pm$~0,1~min (11 zdravih ispitanika; Heiling, Miles i Jensen 1991) \pouzd{sažetak}.
+\item Tijekom stalnog oralnog unosa masti od 175~mg\,kg$^{-1}$\,h$^{-1}$ koncentracija triglicerida u hilomikronima ustalila se na 35~$\pm$~13~mg\,dL$^{-1}$, a brzina njihova ulaska u plazmu bila je jednaka unosu (6 zdravih ispitanika; Park i sur. 2000) \pouzd{sažetak}. Uz volumen plazme od 44~mL\,kg$^{-1}$ (Haller i sur. 1992) \pouzd{sažetak} zaliha iznosi oko 15~mg\,kg$^{-1}$, pa se obrne za oko 5~min \pouzd{izvedeno}.
+\end{itemize}
+Vremena obrtaja od nekoliko minuta zanemariva su prema vremenskoj skali rasta; u simulacijama (pogl.~\ref{sec:simulacije}) ona iznosi $1/\dot r_B=3\EG/\pM=750$~d. Za spremište je razdvajanje mnogo slabije. U masnom tkivu čovjeka trigliceridi se obnove šest puta tijekom prosječnog desetogodišnjeg života adipocita (Arner i sur. 2011) \pouzd{sažetak}, dakle otprilike svakih 1,7 godina \pouzd{izvedeno}. Kvazi-ravnoteža spremišta zato je \emph{pretpostavka modela}, a ne posljedica podataka. Njezine posljedice kvantificiraju S4 (spremište mladih zaostaje za ravnotežom) i S5 (početni uvjeti).
+
+\begin{propozicija}{P1 · κ-pravilo i konačna veličina ne ovise o $\alpha$}
+Neka vrijedi kvazi-ravnoteža: transportni kompartiment je brz, a spremište blizu ravnoteže, $E_T\approx k_E E_E$. Tada somatski tok iznosi
+\[
+\pd_S=\beta_S E_T\, r(V)\approx\kappa\,\pd_A,\qquad \kappa=\frac{\beta_S}{\beta_S+\beta_R},
+\]
+a uz $a=2/3$ i stalnu hranu rast slijedi von Bertalanffyjevu krivulju s
+\[
+L_\infty=\frac{\kappa\,\pAm f}{\pM},\qquad \dot r_B=\frac{\pM}{3\EG},
+\]
+pri čemu nijedna od dviju veličina ne ovisi o $\alpha$. $\alpha$ utječe na rast samo kroz drugi red, tj. kroz energiju koja odlazi u punjenje spremišta.
+\end{propozicija}
+\textbf{Korolar P1 (κ-DEB kao poseban slučaj).} κ-DEB je poseban slučaj tDEB-a uz konstantne $\beta_S$ i $\beta_R$ u kvazi-ravnoteži. Tada se tok kroz transport dijeli u stalnom omjeru $\kappa=\beta_S/(\beta_S+\beta_R)$ između somatske grane i reprodukcije, što je upravo κ-pravilo. Ako $\beta_S$ ili $\beta_R$ ovise o stanju ili o veličini, ili ako kvazi-ravnoteža ne vrijedi, udio toka u somu više nije stalan.
+
+\begin{propozicija}{P2 · Gustoća spremišta po strukturi}
+U istoj kvazi-ravnoteži vrijedi
+\[
+[E_E]^{\ast}=\frac{E_E}{V}=\frac{\pAm f}{(\beta_S+\beta_R)\,k_E}\Big(\frac{V}{\Vref}\Big)^{a-\alpha}.
+\]
+Slaba homeostaza (gustoća neovisna o veličini) vrijedi samo za $\alpha=a$, tj. za izomorfe uz $\alpha=2/3$. Omjer gustoća između dviju veličina je $[E_E](L_1)/[E_E](L_2)=(L_1/L_2)^{3(a-\alpha)}$. Uz $a=2/3$ i $\alpha=1$ gustoća pada kao $1/L$: između $L=0{,}3$ i $L=3$~cm mijenja se deseterostruko.
+\end{propozicija}
+\textbf{Korolar P2 (pogrešno zadan $a$).} Nagib $\log[E_E]$ prema $\log V$ iznosi $a-\alpha$. Ako fit pretpostavlja $a=2/3$, a stvarni eksponent asimilacije je $a$, isti nagib reproducira procjena
+\[
+\hat\alpha\approx\alpha-(a-2/3).
+\]
+Za $a>2/3$ procjena je dakle pristrana prema dolje, a pristranost je jednaka pogrešci u $a$ (provjera u S6).
+
+\textbf{P2 i ograničena homeostaza (H8).} Ako bi omjer spremišta i strukture pri stalnoj hrani trebao ostati približno stalan i kad je $\alpha=1$, P2 traži da asimilacija skalira s istim eksponentom, $a\approx\alpha$, tj. približno s volumenom. Uz izomorfnu asimilaciju ($a=2/3$) i $\alpha=1$ H8 ne vrijedi. Koja od tih kombinacija opisuje pojedinu vrstu, provjerava se mjerenjem unosa hrane prema veličini (Korak 3 i Korak 5, pogl.~\ref{sec:protokol}).
+
+\begin{propozicija}{P3 · Vremenske konstante i gladovanje}
+Sve vremenske konstante izmjene skaliraju kao $V^{1-\alpha}$. Pri gladovanju ($f=0$) spremište se prazni eksponencijalno sa specifičnom brzinom
+\[
+k(V)=\frac{\beta_E k_E(\beta_S+\beta_R)}{\beta_S+\beta_R+\beta_E}\; r(V)\;\propto\;V^{\alpha-1}.
+\]
+Nagib $\log k$ prema $\log V$ unutar vrste je dakle $\alpha-1$ i \emph{ne ovisi} o eksponentu asimilacije $a$.
+\end{propozicija}
+
+\begin{propozicija}{P4 · Identifikabilnost}
+(i) Iz krivulje rasta $L(t)$ $\alpha$ praktički nije identifikabilan (P1). (ii) Gustoća spremišta prema veličini identificira razliku $a-\alpha$, pa daje $\alpha$ samo uz poznat $a$ (P2). (iii) Kinetika gladovanja prema veličini identificira $\alpha-1$ izravno (P3). Najbolji dizajn kombinira (ii) i (iii) s mjerenjem unosa hrane.
+\end{propozicija}
+
+\begin{propozicija}{P5 · Kad $\alpha$ ograničava protok}
+$\alpha$ ograničava \emph{protok} energije samo ako je koncentracija u transportu ograničena regulacijom, slično kao što se regulira koncentracija glukoze u krvi. Uz $E_T/V\le[E_T]_{\max}$ najveća dostava u somu je $\propto V^{\alpha}$. Tada se $\alpha$ ponaša kao eksponent anabolizma u von Bertalanffyjevoj i GOLT logici (T15), pa uz $\alpha<1$ mreža postavlja vlastitu granicu veličine. Bez takvog ograničenja $\alpha$ mijenja samo raspodjelu i puferiranje energije, a ne ukupni protok.
+\end{propozicija}
+
+\begin{propozicija}{P6 · Fraktalna dimenzija i $\alpha$}
+Neka je $D_d$ fraktalna dimenzija skupa terminalnih jedinica izmjene, a $d$ dimenzija prostora u kojem mreža leži. Tada gustoća opskrbe skalira kao $R^{D_d-d}$, pa je $\alpha=D_d/d$, a $\alpha=1$ \emph{samo} ako je $D_d=d$ (mreža ispunjava prostor). Za plošne mreže ($d=2$) dimenzije 1,3–1,7 iz H4 daju $\alpha_{2D}=0{,}65$–$0{,}85$, a ne 1. Usto, dimenzija izmjerena na slikama velikih žila ne opisuje kapilarno korito, a $\alpha$ ovisi upravo o njemu.
+\end{propozicija}

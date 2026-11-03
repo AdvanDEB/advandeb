@@ -1,0 +1,48 @@
+\appendix
+\section{Izvodi propozicija}\label{app:izvodi}
+
+\paragraph{Kvazi-ravnoteža.} Neka su vremenske konstante izmjene, $\big((\beta_S+\beta_R+\beta_E)\,r(V)\big)^{-1}$ i $\big(\beta_E k_E\,r(V)\big)^{-1}$, kratke u odnosu na vremensku skalu rasta. Tada iz~\eqref{eq:mT} i~\eqref{eq:mE} slijedi $E_T\approx k_E E_E$ i, uz zanemaren tok u spremište ($dE_E/dt\approx0$),
+\[
+E_T\approx\frac{\pd_A}{(\beta_S+\beta_R)\,r(V)} .
+\]
+
+\paragraph{P1.} $\pd_S=\beta_S E_T r=\frac{\beta_S}{\beta_S+\beta_R}\pd_A=\kappa\pd_A$. Uvrštavanjem u~\eqref{eq:mV} s $a=2/3$ i $V=L^3$ dobiva se
+\[
+\frac{dL}{dt}=\frac{\kappa\pAm f-\pM L}{3\EG},
+\]
+tj. von Bertalanffyjeva krivulja s $L_\infty=\kappa\pAm f/\pM$ i $\dot r_B=\pM/(3\EG)$. Nijedna ne sadrži $\alpha$. Zanemareni član $dE_E/dt$ umanjuje raspoloživi tok za energiju koja odlazi u spremište, a ona ovisi o $\alpha$ preko P2. To je jedini, drugorazredni, utjecaj $\alpha$ na rast (S1). Uz $a=1$ isti postupak daje $dV/dt=\big(\kappa\pAm f\,\Vref^{-1/3}-\pM\big)V/\EG$, tj. eksponencijalni rast bez asimptote (V1-morf), opet neovisno o $\alpha$.
+
+\paragraph{P2.} $[E_E]=E_E/V=E_T/(k_E V)=\pd_A/\big((\beta_S+\beta_R)k_E\,r(V)\,V\big)$. Uz $\pd_A=\pAm fV^{2/3}(V/\Vref)^{a-2/3}$ i $r(V)\,V=V^{2/3}(V/\Vref)^{\alpha-2/3}$ potencije $V^{2/3}$ se krate, pa ostaje
+\[
+[E_E]^{\ast}=\frac{\pAm f}{(\beta_S+\beta_R)k_E}\Big(\frac{V}{\Vref}\Big)^{a-\alpha}.
+\]
+\emph{Posljedica za H8.} Ako se gustoća spremišta na rasponu volumena od $V_1$ do $V_2$ smije promijeniti najviše $q$ puta, onda je $|a-\alpha|\le\ln q/\ln(V_2/V_1)$. Primjerice, uz $q=2$ i trostruki raspon duljine ($V_2/V_1=27$) to je $|a-\alpha|\le0{,}21$. Ograničena homeostaza dakle zahtijeva $a\approx\alpha$.
+
+\paragraph{P3.} Uz $f=0$ kvazi-ravnoteža transporta daje $E_T\approx\beta_E k_E E_E/(\beta_S+\beta_R+\beta_E)$. Uvrštavanjem u~\eqref{eq:mE}:
+\[
+\frac{dE_E}{dt}=-\beta_E k_E\,\frac{\beta_S+\beta_R}{\beta_S+\beta_R+\beta_E}\,r(V)\,E_E\equiv-k(V)\,E_E,
+\qquad k(V)\propto\frac1L\Big(\frac{V}{\Vref}\Big)^{\alpha-2/3}\propto V^{\alpha-1}.
+\]
+
+\paragraph{P4.} Slijedi izravno iz P1 (rast ne sadrži $\alpha$), P2 (gustoća spremišta sadrži samo razliku $a-\alpha$) i P3 (brzina pražnjenja sadrži samo $\alpha-1$).
+
+\paragraph{P5.} Uz $E_T\le[E_T]_{\max}V$ najveći somatski tok je $\beta_S[E_T]_{\max}V\,r(V)\propto V^{\alpha}$. Rast uz takvo ograničenje, $dV/dt=(cV^{\alpha}-\pM V)/\EG$, ima asimptotu $V_\infty^{1-\alpha}=c/\pM$ za $\alpha<1$. Za $\alpha=1$ mreža ne postavlja granicu, pa veličinu ograničava asimilacija.
+
+\paragraph{P6.} Broj terminalnih jedinica unutar polumjera $R$ raste kao $R^{D_d}$, a volumen (površina) kao $R^{d}$. Gustoća sučelja zato je $\propto R^{D_d-d}=V^{D_d/d-1}$, a usporedbom s $A/V\propto V^{\alpha-1}$ dobiva se $\alpha=D_d/d$.
+
+\section{Reproducibilnost}\label{app:kod}
+
+Sve brojke u poglavlju~\ref{sec:simulacije} i tablice~\ref{tab:rast}, \ref{tab:gladovanje} i~\ref{tab:mc} generirane su automatski. Dokument se prevodi s \texttt{pdflatex} (dva prolaza, zbog sadržaja i unakrsnih poveznica):
+\begin{verbatim}
+cd docs/alpha-handbook/sim
+uv run --no-project --with numpy --with scipy --with matplotlib \
+    python alpha_handbook_sim.py ../figures --reps 40
+python3 make_tables.py ../figures/results.json ../figures/tables
+cd .. && pdflatex prirucnik_alfa.tex && pdflatex prirucnik_alfa.tex
+\end{verbatim}
+Skripta \texttt{alpha\_handbook\_sim.py} sadrži model~\eqref{eq:mT}–\eqref{eq:mV}, profile vjerodostojnosti, analizu gladovanja i početnih uvjeta te Monte Carlo. Uz \texttt{-{}-reps 40} Monte Carlo ima 560 fitova (\MCreps{} ponavljanja za svaki od 14 redaka tablice~\ref{tab:mc}) i na 8 paralelnih procesa traje oko pola sata. Opcija \texttt{-{}-reuse-mc} preskače Monte Carlo ako već postoji \texttt{figures/monte\_carlo\_raw.json}: ponovno se računaju samo deterministički rezultati, sažeci Monte Carla i slike, što traje manje od minute. Pritom treba zadati isti \texttt{-{}-reps} kao u izvornom pokretanju, jer se taj broj sprema u \texttt{results.json} i u tekstu se pojavljuje kao broj ponavljanja:
+\begin{verbatim}
+uv run --no-project --with numpy --with scipy --with matplotlib \
+    python alpha_handbook_sim.py ../figures --reps 40 --reuse-mc
+\end{verbatim}
+Sirovi rezultati spremaju se u datoteke \texttt{figures/results.json} i \texttt{figures/monte\_carlo\_raw.json}. Skripta \texttt{make\_tables.py} iz njih piše tablice i makronaredbe s brojkama u \texttt{figures/tables/}.

@@ -1,0 +1,116 @@
+\section{Što je $\alpha$}\label{sec:definicija}
+
+\subsection{Polazna jednadžba: kinetika izmjene kroz sučelje}\label{sec:polazna}
+
+Transportni DEB (tDEB) razlikuje transportni kompartiment (krv, hemolimfa) s energijom $E_T$ i spremište (storage, npr.\ lipidi u masnom tkivu) s energijom $E_E$. Energija između njih prelazi kroz sučelje veličine $A$. Izmjenu opisujemo trima pretpostavkama modela.
+
+\textbf{Pretpostavka modela 1: djelovanje masa.} Tok iz kompartimenta proporcionalan je koncentraciji energije u kompartimentu iz kojeg izlazi i veličini sučelja kroz koje prolazi:
+\begin{equation}
+\pd_{TE}=k_{TE}\,\frac{E_T}{V_T}\,A,\qquad \pd_{ET}=k_{ET}\,\frac{E_E}{V_E}\,A .
+\end{equation}
+Ovdje je $\pd_{TE}$ tok iz transporta u spremište, $\pd_{ET}$ tok u suprotnom smjeru, a $k_{TE}$ i $k_{ET}$ su konstante brzine po jedinici sučelja.
+
+\textbf{Pretpostavka modela 2: zajednički volumen.} Oba kompartimenta raspoređena su po cijelom tijelu, pa se koncentracije računaju prema istom strukturnom volumenu, $V_T=V_E=V$. Veličina sučelja skalira kao $A=V^{\alpha}$; to je definicija eksponenta $\alpha$ (pogl.~\ref{sec:radna}).
+
+\textbf{Pretpostavka modela 3: isti transporteri, različit broj.} Pojedini transporter prenosi energiju istom brzinom u oba smjera, a smjerovi se razlikuju samo brojem transportera. Tada je $k_{TE}=\beta_G$ i $k_{ET}=k_E\beta_G$, gdje je $k_E$ omjer broja transportera koji prenose energiju iz spremišta u transport i broja onih koji je prenose iz transporta u spremište.
+
+Neto tok iz transporta u spremište tada je
+\begin{equation}\label{eq:ploca}
+\Delta\pd=\pd_{TE}-\pd_{ET}=\beta_G\,\frac{E_T-k_E E_E}{V}\,V^{\alpha}
+\quad\Rightarrow\quad
+\boxed{\;\Delta\pd=\beta_G\,(E_T-k_E\,E_E)\,V^{\alpha-1}\;}
+\end{equation}
+Iz jednadžbe~\eqref{eq:ploca} odmah slijede tri svojstva:
+\begin{itemize}
+\item Izmjena staje ($\Delta\pd=0$) pri $E_T=k_E E_E$. Omjer broja transportera $k_E$ dakle određuje ravnotežni omjer energije u transportu i spremištu: uz mali $k_E$ transport sadrži malen dio energije spremišta.
+\item $\beta_G$ je sposobnost transporta po jedinici sučelja i ponaša se kao conductance. Njegove jedinice ovise o $\alpha$ (pogl.~\ref{sec:normalizacija}).
+\item Specifična brzina izmjene $\Delta\pd/E$ skalira kao $V^{\alpha-1}$. Uz $\alpha<1$ veći organizam sporije izmjenjuje svoje zalihe, a uz $\alpha=1$ brzina ne ovisi o veličini (P3).
+\end{itemize}
+Za izmjenu sa spremištem u modelu je $\beta_G=\beta_E$. Istim su oblikom, ali bez povratnog toka, opisani tokovi iz transporta u strukturu ($\beta_S$) i u reprodukciju ($\beta_R$); slika~\ref{fig:shema} prikazuje sve tokove, a potpuni model dan je jednadžbama~\eqref{eq:mT}–\eqref{eq:mV}. Faktor $V^{\alpha-1}$ u modelu se koristi u normaliziranom obliku, $r(V)\propto V^{\alpha-1}$ (jedn.~\eqref{eq:norm}). Standardni DEB polazi od srodne ideje: mobilizacija rezerve proporcionalna je površini sučelja između rezerve i strukture (Marques i sur. 2018).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  komp/.style={draw=akcent,thick,rounded corners=3pt,minimum width=3.1cm,minimum height=1.15cm,align=center,font=\sffamily\small,fill=svijetla},
+  tok/.style={-{Stealth[length=2.6mm]},thick,color=akcent},
+  lab/.style={font=\small,color=black}]
+\node[komp] (T) {Transport\\ $E_T$ (krv, hemolimfa)};
+\node[komp,right=3.3cm of T] (E) {Spremište\\ $E_E$ (lipidi)};
+\node[komp,below=1.5cm of T,xshift=-2.6cm] (V) {Struktura\\ $V$};
+\node[komp,below=1.5cm of T,xshift=2.6cm] (R) {Reprodukcija\\ $E_R$};
+\node[komp,left=2.4cm of T,minimum width=2.2cm,fill=white] (H) {Hrana};
+\draw[tok] (H) -- node[above,lab]{$\pd_A$} (T);
+\draw[tok] ([yshift=4pt]T.east) -- node[above,lab]{$\beta_E E_T\,r(V)$} ([yshift=4pt]E.west);
+\draw[tok] ([yshift=-4pt]E.west) -- node[below,lab]{$\beta_E k_E E_E\,r(V)$} ([yshift=-4pt]T.east);
+\draw[tok] (T.south west) -- node[left,lab,xshift=-2pt]{$\beta_S E_T\,r(V)$} (V.north);
+\draw[tok] (T.south east) -- node[right,lab,xshift=2pt]{$\beta_R E_T\,r(V)$} (R.north);
+\draw[-{Stealth[length=2.2mm]},thick,color=akcent2] (V.south) -- ++(0,-0.6) node[below,lab]{$\pM V$ (održavanje)};
+\node[font=\small\sffamily,color=akcent2,align=center] at ($(T)!0.5!(E)+(0,1.05)$) {sučelje $A\propto V^{\alpha}$};
+\end{tikzpicture}
+\caption{Minimalni transportni DEB koji se koristi u ovom priručniku. Svi tokovi iz transporta prolaze kroz sučelje čija veličina skalira kao $V^{\alpha}$; faktor $r(V)\propto V^{\alpha-1}$ definiran je jednadžbom~\eqref{eq:norm}. Pretpostavka modela: održavanje strukture $\pM V$ plaća se iz somatskog toka prije rasta (jedn.~\eqref{eq:mV}).}
+\label{fig:shema}
+\end{figure}
+
+\subsection{Pretpostavke i hipoteze o $\alpha$}\label{sec:hipoteze}
+
+Sljedeće hipoteze određuju kako se $\alpha$ tumači i mjeri. Nijedna nije dokazana. Uz svaku je navedeno gdje se u priručniku testira.
+
+\izjava{H1}{\textbf{Granični slučajevi.} $\alpha=1$ znači da svaka stanica leži izravno uz transportnu mrežu, pa kapacitet izmjene raste proporcionalno volumenu. $\alpha<1$ znači da je izravno uz mrežu samo dio stanica, a ostale se opskrbljuju difuzijom kroz intersticij. \emph{Testira se:} geometrijski, jedn.~\eqref{eq:D3} i P6; mjerno, morfometrijom površine izmjene po jedinici volumena (Korak 3).}
+\izjava{H2}{\textbf{Generalizirana površina.} $A$ nije samo geometrijska površina. Obuhvaća broj receptora i transportera, propusnost sučelja, difuziju kroz intersticij i nejednak tlak u mreži, a dio tih učinaka može se pripisati i $\beta$. Difuzija kroz intersticij tretira se kao kašnjenje, a ne kao glavni put transporta, pa u minimalnom modelu nema vlastiti član. \emph{Testira se:} usporedbom procjene $\hat\alpha$ s morfometrijskim eksponentom (Korak 5). Razlika upućuje na gustoću transportera ili propusnost.}
+\izjava{H3}{\textbf{$\alpha$ pripada mreži, a ne kompartimentu.} $\alpha$ je svojstvo morfologije transportne mreže, pa svi tokovi iz transporta dijele isti $\alpha$. Razlike među kompartimentima (spremište, struktura, reprodukcija) ulaze u $\beta_E$, $\beta_S$ i $\beta_R$. Radna gornja granica za izgrađenu mrežu je $\alpha\le1$; prolazne vrijednosti iznad 1 dok se mreža gradi (E4) izvan su ove hipoteze. \emph{Testira se:} zajednički $\alpha$ ugrađen je u model kao pretpostavka (jedn.~\eqref{eq:mT}–\eqref{eq:mV}). Gornja granica se pri fitanju ne nameće (S6, Korak 4), pa je interval pouzdanosti iznad 1 dokaz protiv nje.}
+\izjava{H4}{\textbf{Argument fraktalne dimenzije.} Vaskularne mreže kojima je na plošnim (2D) slikama izmjerena fraktalna dimenzija oko 1,3–1,7 ponekad se uzimaju kao dokaz da je $\alpha=1$, tj. da površina izmjene raste proporcionalno volumenu. \emph{Testira se:} P6. Ishod: dimenzija $D$ izmjerena u ravnini daje $\alpha_{2D}=D/2=0{,}65$–$0{,}85$, a ne 1, jer $\alpha=1$ traži mrežu koja ispunjava prostor. Literaturne vrijednosti fraktalne dimenzije navedene su u pogl.~\ref{sec:teorija}.}
+\izjava{H5}{\textbf{Dvije mreže.} Energija i kisik mogu imati različit $\alpha$ ako ih raznose različite mreže. Kod kukaca kisik dolazi trahejama, a energija hemolimfom; kod vodozemaca dio kisika ulazi kroz kožu. Ograničavajuća tada može postati ona mreža čiji kapacitet sporije raste s veličinom. \emph{Testira se:} u Koraku 0 kisik se tretira zasebno ($\alpha_{O_2}$), a kukci su prirodan test (T6; pogl.~\ref{sec:vrste}). Sprezanje dviju mreža u modelu otvoreno je pitanje (pogl.~\ref{sec:otvoreno}).}
+\izjava{H6}{\textbf{Filogenetska očuvanost.} $\alpha$ je svojstvo tipa mreže ili klade, pa srodne vrste imaju sličan $\alpha$. Ako to vrijedi, $\alpha$ se za vrstu bez podataka može preuzeti od srodnih vrsta umjesto da se fita. \emph{Testira se:} Korak 6 (PGLS među tipovima mreža, Pagelov $\lambda$, Blombergov $K$).}
+\izjava{H7}{\textbf{Spremište mladih i odraslih otkriva $\alpha$.} Gustoća spremišta po strukturi mijenja se s veličinom ovisno o $\alpha$: uz $a=2/3$ i $\alpha=1$ mladi su deblji od odraslih, a uz $\alpha=2/3$ nisu. Mjerenjem spremišta kod mladih i odraslih može se dakle procijeniti $\alpha$, ako je spremište izraženo po strukturi, a ne po ukupnoj masi (pretvorba u Koraku 3). \emph{Testira se:} P2 (kvazi-ravnotežna gustoća $\propto V^{a-\alpha}$), S1 (dinamika rasta), S4 (pristranost naivnog čitanja nagiba) i S5 (osjetljivost na početne uvjete).}
+\izjava{H8}{\textbf{Ograničena homeostaza.} Pri stalnoj hrani omjer spremišta i strukture ne bi se smio drastično mijenjati tijekom ontogeneze. To je zahtjev biološke uvjerljivosti, a ne izmjereni podatak. \emph{Testira se:} P2 pokazuje posljedicu: gustoća spremišta ne ovisi o veličini samo uz $a\approx\alpha$, pa uz $\alpha=1$ hipoteza traži da i asimilacija skalira približno s volumenom. Za pojedinu vrstu provjerava se u Koraku 5.}
+\izjava{H9}{\textbf{$\alpha$ i tip rasta.} $\alpha\neq1$ mogao bi se poklapati s indeterminiranim rastom. Minimalni model to ne reproducira: $L_\infty$ ne ovisi o $\alpha$ (P1), a uz ograničen protok granicu veličine postavlja upravo $\alpha<1$ (P5). Hipoteza zato ostaje otvorena. \emph{Testira se:} Korak 6 na skupu vrsta; vidi i pogl.~\ref{sec:otvoreno}.}
+
+\textbf{Ograda modela: kvazi-ravnoteža.} Propozicije P1–P3 pretpostavljaju da je izmjena između transporta i ostalih kompartimenata brza u odnosu na rast; u P1 i P2 to znači $E_T\approx k_E E_E$. Kod mladih, koji relativno brže rastu, spremište zaostaje za tom ravnotežom. Kvazi-ravnoteža zato dobro opisuje odrasle, a kod mladih daje pristrane nagibe gustoće spremišta (S4). Zbog toga se $\alpha$ procjenjuje fitanjem dinamičkog modela (Korak 4), a ne formulama kvazi-ravnoteže.
+
+\subsection{Radna definicija}\label{sec:radna}
+
+Na temelju jedn.~\eqref{eq:ploca} i hipoteza H1–H3 predlažemo ovu radnu definiciju:
+
+\begin{kljucno}
+$\alpha$ je eksponent kojim \textbf{efektivni kapacitet izmjene} raste sa \textbf{strukturnim volumenom} $V$, \textbf{unutar jedne vrste i jednog životnog stadija}. Kapacitet izmjene je površina sučelja × gustoća transportera × propusnost, između transportnog kompartimenta i tkiva koja primaju ili otpuštaju \textbf{energijske supstrate} (lipide, glukozu).
+\end{kljucno}
+
+Definicija se odnosi na strukturni volumen, a ne na ukupnu masu, jer DEB i MTE ne skaliraju istu veličinu. MTE metabolizam i broj kapilara izražava kao potenciju ukupne tjelesne mase $M$ (T7, T8). DEB masu dijeli na strukturu i rezervu, a udio rezerve u masi mijenja se s veličinom, pa eksponent prema ukupnoj masi nije isti kao eksponent prema strukturi (T1, T2). U tDEB-u i gustoća spremišta po strukturi ovisi o $\alpha$ (P2), pa se $\alpha$ definira prema strukturnom volumenu $V$.
+
+Iz definicije slijede tri ograde:
+\begin{enumerate*}[label=(\roman*)]
+\item $\alpha$ je ontogenetski (intraspecifični) eksponent, a ne interspecifični;
+\item računa se prema strukturi, ne prema ukupnoj masi (T2);
+\item odnosi se na energiju, a kisik ima vlastiti $\alpha_{O_2}$ ako ima odvojenu mrežu (H5).
+\end{enumerate*}
+
+\subsection{Jedinice $\beta$ i prijedlog normalizacije}\label{sec:normalizacija}
+
+\textbf{Zašto jedinice $\beta$ ovise o $\alpha$.} Tok mora imati jedinice energije po vremenu za svaki $\alpha$. U jedn.~\eqref{eq:ploca} je
+\[
+\underbrace{\Delta\pd}_{\mathrm{J\,d^{-1}}}=\beta\cdot\underbrace{\frac{E}{V}}_{\mathrm{J\,cm^{-3}}}\cdot\underbrace{V^{\alpha}}_{\mathrm{cm^{3\alpha}}}
+\qquad\Rightarrow\qquad
+\beta\ \text{ima jedinice}\ \mathrm{cm^{3-3\alpha}\,d^{-1}} .
+\]
+Za $\alpha=2/3$ to su cm\,d$^{-1}$, tj. duljina po vremenu, kao kod energijskog conductancea $\dot v$ u standardnom DEB-u. Za $\alpha=1$ to su d$^{-1}$, a za $\alpha=3/4$ cm$^{3/4}$\,d$^{-1}$. Vrijednosti $\beta$ zato se ne mogu uspoređivati između vrsta s različitim $\alpha$. Usto se sve krivulje $V^{\alpha}$ sijeku pri $V=1$ u odabranim jedinicama, pa bez normalizacije brojčana vrijednost $\beta$ ovisi i o izboru jedinica.
+
+\textbf{Normalizacija.} Predlažemo da se sučelje zapiše kao
+\begin{equation}\label{eq:norm}
+A(V)=V^{2/3}\Big(\frac{V}{\Vref}\Big)^{\alpha-2/3}
+\quad\Rightarrow\quad
+\Delta\pd=\beta\,(E_T-k_E E_E)\;r(V),\qquad r(V)=\frac{1}{L}\Big(\frac{V}{\Vref}\Big)^{\alpha-2/3},
+\end{equation}
+gdje je $L=V^{1/3}$. I dalje vrijedi $A\propto V^{\alpha}$ i $r(V)\propto V^{\alpha-1}$, ali $\beta$ sada ima jedinice cm\,d$^{-1}$ za svaki $\alpha$. Tri su svojstva odmah vidljiva:
+\begin{itemize}
+\item Za $\alpha=2/3$ tok je $\beta\,(E_T-k_E E_E)/L$, pa $\beta$ igra ulogu energijskog conductancea $\dot v$. U standardnom DEB-u $\dot v$ određuje mobilizaciju rezerve i ima jedinice cm\,d$^{-1}$; tipična vrijednost među vrstama pri 20~°C je $\dot v=0{,}02$~cm\,d$^{-1}$ (Marques i sur. 2018, tablica~1).
+\item Za $\alpha=1$ i $\Vref=V_b$ faktor je $(V/V_b)^{1/3}=L/L_b$. To je točno faktor $s_M$ akceleracije tipa M u DEB-u (T3), pa se tDEB izravno spaja s modelima \texttt{abj}/\texttt{asj} iz Add-my-Pet (AmP).
+\item Pri $V=\Vref$ svi $\alpha$ daju isti tok, pa $\beta$ znači „conductance pri referentnoj veličini“. Za usporedbu s AmP-om preporučujemo $\Vref=V_b$ (rođenje).
+\end{itemize}
+
+\subsection{Geometrijsko tumačenje: $\alpha=D/3$}
+
+Neka se sučelje sastoji od terminalnih jedinica nepromjenjive veličine (kapilare, stanice, transporteri) čiji broj raste kao $L^{D}$. Tada je $A\propto L^{D}=V^{D/3}$, odnosno
+\begin{equation}\label{eq:D3}
+\alpha=\frac{D}{3}.
+\end{equation}
+Samo vanjska površina daje $D=2$, tj. $\alpha=2/3$ (T8). WBE mreža daje $D=9/4$, tj. $\alpha=3/4$ (T7, T8). Mreža koja ispunjava prostor uz stalan razmak kapilara daje $D=3$, tj. $\alpha=1$, granični slučaj iz H1. Ovo tumačenje vrijedi između unutarnje granice (kapilara, stanica) i vanjske granice (veličina tijela), ako unutarnja granica ne ovisi o veličini tijela (P6).

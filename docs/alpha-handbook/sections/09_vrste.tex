@@ -1,0 +1,104 @@
+\section{Kandidatske vrste}\label{sec:vrste}
+
+\providecommand{\vrstaVE}[1]{\leavevmode{\sffamily\bfseries\color{akcent}VE#1}}
+
+Tablica~\ref{tab:vrste} predlaže vrste za prvu procjenu $\alpha$ prema protokolu iz pogl.~\ref{sec:protokol}. Vrste su birane prema trima kriterijima:
+\begin{enumerate}[leftmargin=1.6em]
+\item \textbf{Pokrivenost tipova mreže.} Vrste zajedno trebaju pokriti tipove transportne mreže iz tablice~\ref{tab:priori}, jer se H3 i H6 mogu testirati tek usporedbom tipova.
+\item \textbf{Postojeći podaci.} Prednost imaju vrste za koje su već objavljeni podaci o spremištu prema veličini, o unosu hrane prema veličini (eksponent $a$) i o gladovanju u više veličina. Upravo ti podaci identificiraju $\alpha$; krivulja rasta to ne može (P2–P4, S6).
+\item \textbf{Broj vrsta.} Za razvoj i provjeru metode predlažemo najmanje pet vrsta s različitim tipovima mreže. Za filogenetski test (Korak~6) treba približno 20 vrsta: randomizacijski test filogenetskog signala ima dobru snagu (0,8) na simuliranim skupovima s 20 ili više vrsta (Blomberg, Garland i Ives 2003).
+\end{enumerate}
+
+Za svaku vrstu tablica navodi tip mreže, radni prior iz tablice~\ref{tab:priori}, objavljene podatke s brojkama (oznake VE1–VE14) i što još treba izmjeriti. Navedeno je i ima li vrsta unos u zbirci Add-my-Pet (AmP; Marques i sur. 2018), prema popisu vrsta na \url{https://www.bio.vu.nl/thb/deb/deblab/add_my_pet/species_list.html} (stanje 3.~11.~2026.); u zagradi je tip modela. Parametri iz AmP-a služe kao početne vrijednosti i ne zamjenjuju mjerenja iz Koraka~3. Tip rasta (H9) naveden je samo ondje gdje ga izvor dokumentira.
+
+Najpotpunije podatke imaju planarije i komarča: za obje su objavljeni unos, spremište i gladovanje prema veličini (VE1–VE3, VE5–VE7). Kod ostalih vrsta nedostaje barem jedan od tih triju tipova podataka. Pokrivenost ima dvije praznine. Za tip „samo difuzija, izomorfno tijelo“ nismo našli vrstu s objavljenim unutarvrsnim podacima o spremištu ili gladovanju prema veličini. Gujavice (zatvoren krvotok niskog tlaka) imaju unose u AmP-u (\emph{Lumbricus terrestris}, \emph{Eisenia fetida}, oba \texttt{std}), ali takve podatke nismo našli, pa nisu u tablici. Taj tip mreže djelomično pokrivaju ličinke riba.
+
+{\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{6.0cm}>{\raggedright\arraybackslash}p{2.75cm}@{}}
+\caption{Kandidatske vrste za procjenu $\alpha$. VE označava objavljeni podatak uz ovu tablicu; E, T i H upućuju na izjave iz poglavlja~\ref{sec:definicija}–\ref{sec:empirija}.}\label{tab:vrste}\\
+\toprule
+Vrsta / skupina & Mreža & Prior $\alpha$ & Što je poznato & Što treba izmjeriti \\
+\midrule
+\endfirsthead
+\toprule
+Vrsta / skupina & Mreža & Prior $\alpha$ & Što je poznato & Što treba izmjeriti \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Planarije (\emph{Schmidtea mediterranea})
+& bez krvotoka; razgranato crijevo i difuzija
+& 0,70–1,00
+& E7, E8.
+\par \vrstaVE{1} Rast je reverzibilan: duljina se mijenja između $\approx0{,}5$ i $\approx20$~mm, a gladne jedinke se smanjuju gubitkom stanica. Metabolizam $\propto M^{0{,}75\pm0{,}01}$ (vlažna masa), broj stanica $\propto M^{0{,}74\pm0{,}01}$ (suha masa).
+\par \vrstaVE{2} Spremište: triacilgliceroli po stanici 88 puta, a glikogen 8 puta veći kod jedinki od 16~mm nego od 4~mm. Lipidne kapljice su uglavnom u crijevnom epitelu. Energija po stanici $\propto N^{0{,}38\pm0{,}03}$ ($N$ broj stanica).
+\par \vrstaVE{3} Volumen obroka (ad libitum) proporcionalan je broju stanica (eksponent po stanici $0{,}00\pm0{,}03$). Brzina smanjivanja pri gladovanju (\% površine na dan) pada s veličinom, kao i brzina rasta, i jednaka je nakon 1–4, 4–7 i 7–10 tjedana gladovanja. (Thommen i sur. 2019) \pouzd{puni tekst}
+\par AmP: samo srodna \emph{S. polychroa} (\texttt{abj}).
+& lipidi po strukturi (broj stanica kao mjera strukture) prema veličini; pražnjenje lipida, a ne samo površine, pri gladovanju u $\ge3$ veličine; brzina unosa, a ne jedan obrok \\
+\addlinespace
+Trakavica (\emph{Hymenolepis diminuta})
+& bez krvotoka; hrana se upija kroz površinu tijela (tegument)
+& 0,85–1,00
+& \vrstaVE{4} In vitro, u 6~mM glukoze: crv od 5~mg suhe mase upija 80, a crv od 60~mg 35~$\mu$mol glukoze po g suhe mase u 5~min. Autor pad pripisuje manjem omjeru površine i mase. Upijanje po masi pada i s brojem crva u domaćinu: 111, 88 i 77~$\mu$mol\,g$^{-1}$ za 1, 7–8 i 45–50 crva. (Henderson 1977) \pouzd{sažetak}
+\par Iz prvih dviju točaka ukupno upijanje $\propto M^{0{,}67}$ \pouzd{izvedeno}, ispod priora za spljošteno tijelo; dob i veličina tu nisu razdvojene.
+\par AmP: nema trakavica.
+& spremište (glikogen) po strukturi prema veličini; gladovanje domaćina kao pokus gladovanja; razdvojiti dob, veličinu i gustoću crva \\
+\addlinespace
+Šaran (\emph{Cyprinus carpio}), losos (\emph{Oncorhynchus tshawytscha})
+& koža, zatim škrge; zatvoren krvotok u izgradnji
+& stadijski: $>1$ moguće u ličinki, 0,75–0,95 kasnije
+& E4: nagib površine škrga je 7,07 u prelarve, 1,22 u postlarve (do 0,2~g) i 0,79 između 0,2 i 2250~g. E5: pri izlijeganju koža čini $\approx96$~\% površine izmjene, a škrge je prestižu pri 2,5–4~g.
+\par AmP: obje vrste (\texttt{abj}).
+& $\alpha$ po stadiju; spremište, unos i gladovanje ličinki i mlađi u više veličina \\
+\addlinespace
+Komarča (\emph{Sparus aurata})
+& zatvoren pulsatilan krvotok
+& 0,75–0,95
+& \vrstaVE{5} Sastav tijela izmjeren je u 44 skupine riba od 1 do 470~g na komercijalnoj hrani ($W$ je masa u g). Lipidi (mg po g vlažne mase) $=43{,}3\,W^{0{,}243}$, tj. od 43 do 186~mg/g kod riba od $\approx400$~g. Proteini su stalni (176~mg/g), a energija raste od 4,7 do 11,0~kJ/g.
+\par \vrstaVE{6} Unos hrane $=0{,}029\,W^{0{,}598}e^{0{,}057T}$~g po ribi na dan; prirast $=0{,}024\,W^{0{,}514}e^{0{,}060T}$~g na dan ($T$ u~°C; 1–450~g, 20–28~°C).
+\par \vrstaVE{7} Gladovanje do 30 dana: gubitak energije $41{,}5\,W_{\mathrm{kg}}^{0{,}82}$~kJ po ribi na dan i gubitak proteina $0{,}40\,W_{\mathrm{kg}}^{0{,}70}$~g na dan ($W_{\mathrm{kg}}$ u kg). (Lupatsch, Kissil i Sklan 2003) \pouzd{puni tekst}
+\par AmP: da (\texttt{abj}).
+& lipidi po strukturi (ne po vlažnoj masi) pri poznatom obroku; lipidi, a ne samo ukupna energija, tijekom gladovanja u $\ge3$ veličine \\
+\addlinespace
+\emph{Daphnia magna}
+& otvoren krvotok (hemolimfa)
+& 0,67–1,00
+& \vrstaVE{8} Kod \emph{D. magna} i \emph{D. galeata mendotae} količina triacilglicerola korelira s ukupnom biomasom, neovisno o duljini tijela. Biomasa odrasle jedinke tijekom jednog razdoblja između presvlačenja naraste 2–3 puta, a triacilgliceroli čine 16~\% tog prirasta. Pred kraj tog razdoblja spremište prelazi u jajnike. Mladi s mnogo majčinih lipida preživljavaju gladovanje dvostruko dulje od mladih slične mase s malo lipida. (Tessier i sur. 1983) \pouzd{sažetak}
+\par \vrstaVE{9} Međuvrsno, za zooplankton pri 20~°C: vrijeme preživljavanja gladovanja $t=2{,}95\,w^{0{,}25}$~dana ($w$ u $\mu$g suhe mase). Izraz je uspoređen s podacima za 25 vrsta i s novim podacima za \emph{D. magna}; starije jedinke preživljavaju kraće od predviđenog. (Threlkeld 1976) \pouzd{sažetak}
+\par AmP: da (\texttt{std}).
+& lipidi po strukturi prema veličini u istoj fazi presvlačenja; gladovanje u $\ge3$ veličine (lipidi, ne preživljavanje); odvojiti spremište od jajnika \\
+\addlinespace
+Dagnja (\emph{Mytilus edulis})
+& otvoren krvotok
+& 0,67–1,00
+& \vrstaVE{10} Najveća brzina filtracije $F=6{,}773\,W^{0{,}678}$~l/h ($W$ suha masa mekog tkiva u g) i $F\propto L^{2{,}088}$ ($L$ duljina ljušture). Indeks kondicije $W/L^3$ razlikuje se među populacijama i tijekom godine. (Riisgård, Larsen i Pleissner 2014) \pouzd{sažetak}
+\par \vrstaVE{11} Uz hranu ispod potrebe za održavanje potrošnja kisika za 35–40 dana padne na standardnu razinu (Bayne 1973). Pri temperaturnom i prehrambenom stresu gube se ugljikohidrati i proteini, relativno više iz plašta, u kojem je gonada, nego iz ostalih tkiva (Gabbott i Bayne 1973). \pouzd{sažetak}
+\par AmP: \emph{M. edulis} i \emph{M. galloprovincialis} (\texttt{abj}).
+& glikogen i lipidi po strukturi prema veličini, izvan razdoblja zrenja gonade; gladovanje u $\ge3$ veličine; odvojiti spremište od gonade \\
+\addlinespace
+Kukci (\emph{Manduca sexta})
+& otvoren krvotok: hemolimfa za energiju, traheje za kisik (H5)
+& $\alpha_E$: 0,67–1,00; $\alpha_{O_2}$ zasebno
+& T6: unos hrane skalira ontogenetski s eksponentom 0,70.
+\par \vrstaVE{12} Velike traheje određene su pri presvlačenju i ne rastu do idućega, a ličinka unutar jednog stupnja naraste do 10 puta u masi (Callier i Nijhout 2012). U zadnjem stupnju ličinke trahejni sustav ipak znatno raste u masi i volumenu (Helm i Davidowitz 2013). \pouzd{sažetak}
+\par \vrstaVE{13} Udio masti raste kroz sve stadije, uključujući lutanje i metamorfozu, na svim ispitanim umjetnim hranama; jedinke na hrani s manje saharoze znatno su mršavije. (Ojeda-Avila, Woods i Raguso 2003) \pouzd{sažetak}
+\par AmP: da (\texttt{hex}).
+& lipidi masnog tijela po strukturi prema veličini \emph{unutar} stupnja; gladovanje unutar stupnja u više veličina; $\alpha_E$ i $\alpha_{O_2}$ odvojeno \\
+\addlinespace
+Miš (\emph{Mus musculus})
+& zatvoren pulsatilan krvotok
+& 0,75–0,95
+& E1, E2, E10 (međuvrsno, sisavci): površina pluća $\propto M^{0{,}92}$; volumen kapilara lokomotornih mišića $\propto M^{0{,}98}$, uz gotovo stalnu gustoću kapilara.
+\par \vrstaVE{14} Četrdeset inbred sojeva u dobi od $\approx16$ tjedana: srednja masa soja 11,4–39,3~g, udio masti 16–39~\%. Teži sojevi su masniji ($r=0{,}57$), no neki laki sojevi također su masni (SPRET/EiJ: 15,7~g i 26~\% masti). (Reed, Bachmanov i Tordoff 2007) \pouzd{sažetak}
+\par AmP: da (\texttt{stx}).
+& masno tkivo po strukturi (npr. bezmasnoj masi) prema veličini unutar jednog soja, spola i dobi; gladovanje u više veličina \\
+\addlinespace
+Mahovnjaci (Bryozoa)
+& modularne kolonije
+& 0,85–1,00 (oprez: T4)
+& T4: u kolonijama s pokusno smanjenom i netaknutom veličinom $B\propto M^{0{,}5}$; DEB model alokacije objašnjava eksponent i apsolutnu vrijednost $B$.
+\par AmP: četiri vrste, npr. \emph{Flustra foliacea} (\texttt{std}).
+& spremište po zooidu prema veličini kolonije; gladovanje kolonija različite veličine \\
+\end{longtable}
+}

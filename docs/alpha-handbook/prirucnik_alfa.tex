@@ -1,0 +1,105 @@
+% Priručnik: procjena eksponenta alpha u transportnom DEB-u (tDEB)
+% Prevođenje: pdflatex prirucnik_alfa.tex (dva prolaza)
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{libertinus-type1}
+\usepackage{libertinust1math}
+\usepackage{newunicodechar}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≤}{\ensuremath{\le}}
+\newunicodechar{≥}{\ensuremath{\ge}}
+\newunicodechar{↔}{\ensuremath{\leftrightarrow}}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{β}{\ensuremath{\beta}}
+\newunicodechar{κ}{\ensuremath{\kappa}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{χ}{\ensuremath{\chi}}
+\newunicodechar{λ}{\ensuremath{\lambda}}
+\usepackage{microtype}
+\usepackage[a4paper,top=2.4cm,bottom=2.5cm,left=2.4cm,right=2.4cm,headheight=14pt]{geometry}
+\usepackage{booktabs,tabularx,longtable,array,makecell}
+\usepackage{graphicx}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[inline]{enumitem}
+\usepackage{titlesec}
+\usepackage{needspace}
+\newcommand{\sectionbreak}{\needspace{12\baselineskip}}
+\newcommand{\subsectionbreak}{\needspace{6\baselineskip}}
+\usepackage{fancyhdr}
+\usepackage[font=small,labelfont={bf,sf},labelsep=period]{caption}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric,babel}
+\usepackage{csquotes}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{akcent}{HTML}{1F4E79}
+\definecolor{akcent2}{HTML}{C51B7D}
+\definecolor{siva}{HTML}{5A5A5A}
+\definecolor{svijetla}{HTML}{F3F6FA}
+\definecolor{zelena}{HTML}{1B9E77}
+
+\titleformat{\section}{\sffamily\Large\bfseries\color{akcent}}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\sffamily\large\bfseries\color{akcent}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\sffamily\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.6em}{0.7em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\small\color{siva}Procjena eksponenta $\alpha$ u transportnom DEB-u}
+\fancyhead[R]{\sffamily\small\color{siva}AdvanDEB · radni priručnik}
+\fancyfoot[C]{\sffamily\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlist{itemsep=0.25em,topsep=0.4em}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.18}
+
+\input{figures/tables/numbers.tex}
+\makeatletter\let\inputtab\@@input\makeatother
+
+% ---- notacija
+\newcommand{\pd}{\dot{p}}
+\newcommand{\pAm}{\{\dot p_{Am}\}}
+\newcommand{\pM}{[\dot p_M]}
+\newcommand{\EG}{[E_G]}
+\newcommand{\Vref}{V_{\mathrm{ref}}}
+\newcommand{\dc}{{,}}
+
+% ---- okviri za izjave
+\newtcolorbox{kljucno}[1][]{enhanced,breakable,colback=svijetla,colframe=akcent,boxrule=0.6pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fonttitle=\sffamily\bfseries,title=#1}
+\newtcolorbox{upozorenje}[1][]{enhanced,breakable,colback=akcent2!5,colframe=akcent2,boxrule=0.6pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fonttitle=\sffamily\bfseries,title=#1}
+\newtcolorbox{propozicija}[1]{enhanced,breakable,colback=white,colframe=zelena,boxrule=0.6pt,arc=2pt,
+  left=8pt,right=8pt,top=5pt,bottom=5pt,fonttitle=\sffamily\bfseries,coltitle=white,colbacktitle=zelena,title=#1}
+
+% oznake izjava: H (hipoteza), T (literatura), E (empirija), P (propozicija), S (simulacija)
+\newcommand{\izjava}[2]{\par\noindent\hangindent=2.6em\hangafter=1\makebox[2.6em][l]{\sffamily\bfseries\color{akcent}#1}#2\par\vspace{0.25em}}
+\newcommand{\zaalfa}[1]{\par\noindent\hangindent=2.6em\hangafter=0\hspace*{2.6em}{\sffamily\small\bfseries\color{zelena}Za $\alpha$:} #1\par\vspace{0.45em}}
+\newcommand{\pouzd}[1]{{\sffamily\scriptsize\color{siva}[#1]}}
+
+\hypersetup{pdftitle={Procjena eksponenta alfa u transportnom DEB-u},pdfauthor={AdvanDEB},pdflang={hr}}
+
+\begin{document}
+
+\input{sections/00_naslovna}
+\input{sections/01_ukratko}
+\input{sections/02_definicija}
+\input{sections/03_teorija}
+\input{sections/04_empirija}
+\input{sections/05_propozicije}
+\input{sections/06_simulacije}
+\input{sections/07_protokol}
+\input{sections/08_zamke}
+\input{sections/09_vrste}
+\input{sections/10_otvoreno}
+\input{sections/11_literatura}
+\input{sections/12_dodatci}
+\end{document}
