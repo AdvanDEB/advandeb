@@ -16,6 +16,13 @@ abstract's ``_key``, ``general_domain='reproduction'``. The abstract itself is t
 document node (graph node_type ``abstract``); the graph serializer renders each
 ``fact_type`` as its own node type. No stylized-fact matching here.
 
+Domain gate: the corpus was imported on the bare keyword "reproduction", so a
+large share is off-domain (R0 epidemiology, reproducibility, theology, ...).
+Abstracts not already vetted (``is_relevant`` set by
+``filter_reproduction_abstracts.py --propagate``) go through the live
+pipeline's domain classifier first; off-domain ones are marked ``excluded``
+and never extracted.
+
 Built for small models at modest concurrency. Run in the background, e.g.:
 
     cd /home/adeb/dev/advandeb && set -a && . app/backend/.env && set +a
@@ -43,8 +50,13 @@ from typing import Any, Dict, List, Optional, Tuple
 import httpx
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "app" / "backend"))
 
 from advandeb_kb.config.settings import settings  # noqa: E402
+from app.kb.pipeline import (  # noqa: E402
+    DOMAIN_GATE_FAILED_REASON,
+    _classify_domain_relevance,
+)
 
 try:
     from bson import ObjectId  # 24-char hex keys, matching existing facts
@@ -174,6 +186,23 @@ async def process_one(doc: Dict[str, Any], a, dry_run: bool, timeout: float) -> 
                               {"k": key, "t": datetime.now(timezone.utc).isoformat()})
         return "skipped", 0
 
+    if doc.get("is_relevant") is not True:
+        async with SEM:
+            is_relevant, reason = await _classify_domain_relevance(
+                doc.get("title") or "", content, base_url=_OLLAMA_URL)
+        if reason == DOMAIN_GATE_FAILED_REASON:
+            return "error", 0  # leave 'pending' for retry
+        if dry_run:
+            if not is_relevant:
+                logger.info("DRY-RUN %s -> excluded: %s", key, reason)
+                return "excluded", 0
+        elif not is_relevant:
+            await _aql_update(a, "FOR d IN documents FILTER d._key==@k UPDATE d "
+                              "WITH {processing_status:'excluded', is_relevant:false, "
+                              "exclusion_reason:@r, updated_at:@t} IN documents",
+                              {"k": key, "r": reason, "t": datetime.now(timezone.utc).isoformat()})
+            return "excluded", 0
+
     async with SEM:
         try:
             data = await _extract_structured(content, timeout)
@@ -212,7 +241,8 @@ async def process_one(doc: Dict[str, Any], a, dry_run: bool, timeout: float) -> 
         a.db.collection("facts").import_bulk(new_facts, on_duplicate="ignore", halt_on_error=False)
 
     await _aql_update(a, "FOR d IN documents FILTER d._key==@k UPDATE d "
-                      "WITH {processing_status:'completed', num_facts:@n, updated_at:@t} IN documents",
+                      "WITH {processing_status:'completed', is_relevant:true, num_facts:@n, "
+                      "updated_at:@t} IN documents",
                       {"k": key, "n": len(new_facts), "t": now})
     return "completed", len(new_facts)
 
@@ -248,7 +278,7 @@ async def run(limit: int, batch_size: int, concurrency: int, dry_run: bool, time
         logger.info("Nothing to process.")
         return
 
-    counts = {"completed": 0, "skipped": 0, "error": 0, "dry_run": 0}
+    counts = {"completed": 0, "skipped": 0, "excluded": 0, "error": 0, "dry_run": 0}
     total_items = processed = 0
     start = time.time()
     unlimited = (limit == 0)
@@ -268,16 +298,17 @@ async def run(limit: int, batch_size: int, concurrency: int, dry_run: bool, time
             processed += 1
         el = time.time() - start
         rate = processed / el if el else 0
-        logger.info("progress: %d processed (%.2f docs/s) completed=%d skipped=%d error=%d items=%d",
-                    processed, rate, counts["completed"], counts["skipped"], counts["error"], total_items)
+        logger.info("progress: %d processed (%.2f docs/s) completed=%d skipped=%d excluded=%d "
+                    "error=%d items=%d", processed, rate, counts["completed"], counts["skipped"],
+                    counts["excluded"], counts["error"], total_items)
         if not unlimited:
             remaining -= len(docs)
         if dry_run:
             break
 
-    logger.info("DONE — processed=%d completed=%d skipped=%d error=%d items=%d in %.1fs",
-                processed, counts["completed"], counts["skipped"], counts["error"],
-                total_items, time.time() - start)
+    logger.info("DONE — processed=%d completed=%d skipped=%d excluded=%d error=%d items=%d in %.1fs",
+                processed, counts["completed"], counts["skipped"], counts["excluded"],
+                counts["error"], total_items, time.time() - start)
 
 
 def main() -> None:

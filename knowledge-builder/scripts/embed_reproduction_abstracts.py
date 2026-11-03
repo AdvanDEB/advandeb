@@ -12,9 +12,14 @@ script chunks + embeds each abstract and writes it to BOTH stores:
 Chunks are tagged ``general_domain='reproduction'`` so retrieval can optionally
 scope to the reproduction domain (HybridRetrievalService ``domain_filter``).
 
-Selection: documents with ``general_domain=='reproduction'`` and
-``embedding_status != 'embedded'``. Idempotent + resumable — the doc's
-``embedding_status`` flips to ``embedded`` only after its chunks are written, and
+Selection: documents with ``general_domain=='reproduction'``,
+``embedding_status != 'embedded'``, and a confirmed domain verdict
+(``is_relevant == true``, set by ``filter_reproduction_abstracts.py
+--propagate`` or the extraction job's gate). The import was keyword-based and
+heavily off-domain, so unvetted abstracts are not embedded unless
+``--include-unvetted`` is passed; excluded ones never are.
+
+Idempotent + resumable — the doc's ``embedding_status`` flips to ``embedded`` only after its chunks are written, and
 chunk writes use ``on_duplicate='ignore'`` / Chroma upsert, so re-running never
 duplicates. Runs independently of the fact-extraction job.
 
@@ -156,7 +161,7 @@ def _arango_chunk(d: Dict[str, Any], c) -> Dict[str, Any]:
     }
 
 
-def run(limit: int, batch_size: int, dry_run: bool) -> None:
+def run(limit: int, batch_size: int, dry_run: bool, include_unvetted: bool = False) -> None:
     from advandeb_kb.database.arango_client import ArangoDatabase
     from advandeb_kb.services.chunking_service import ChunkingService
     from advandeb_kb.services.embedding_service import EmbeddingService
@@ -166,9 +171,12 @@ def run(limit: int, batch_size: int, dry_run: bool) -> None:
     a.connect()
     ensure_index(a)
 
+    vetted = ("AND d.processing_status != 'excluded' AND d.is_relevant != false"
+              if include_unvetted else "AND d.is_relevant == true")
+    selection = (f"FILTER d.general_domain==@g AND d.embedding_status != 'embedded' "
+                 f"AND d.embedding_status != 'excluded' {vetted}")
     pending = a.aql(
-        "RETURN LENGTH(FOR d IN documents FILTER d.general_domain==@g "
-        "AND d.embedding_status != 'embedded' RETURN 1)", {"g": GENERAL_DOMAIN})[0]
+        f"RETURN LENGTH(FOR d IN documents {selection} RETURN 1)", {"g": GENERAL_DOMAIN})[0]
     logger.info("reproduction docs needing embedding: %d (limit=%s, dry_run=%s)",
                 pending, limit or "all", dry_run)
     if pending == 0:
@@ -188,9 +196,8 @@ def run(limit: int, batch_size: int, dry_run: bool) -> None:
 
     while unlimited or remaining > 0:
         take = batch_size if unlimited else min(batch_size, remaining)
-        docs = a.aql(
-            "FOR d IN documents FILTER d.general_domain==@g AND d.embedding_status != 'embedded' "
-            "LIMIT @n RETURN d", {"g": GENERAL_DOMAIN, "n": take})
+        docs = a.aql(f"FOR d IN documents {selection} LIMIT @n RETURN d",
+                     {"g": GENERAL_DOMAIN, "n": take})
         if not docs:
             break
         r = embed_batch_docs(docs, chunker, embedder, chroma, a, dry_run)
@@ -216,8 +223,10 @@ def main() -> None:
     p.add_argument("--limit", type=int, default=0, help="Max docs this run (0=all)")
     p.add_argument("--batch-size", type=int, default=256, help="Docs per embed batch")
     p.add_argument("--dry-run", action="store_true", help="Count + chunk one batch, write nothing")
+    p.add_argument("--include-unvetted", action="store_true",
+                   help="Also embed abstracts with no domain verdict yet (excluded ones never are)")
     args = p.parse_args()
-    run(args.limit, args.batch_size, args.dry_run)
+    run(args.limit, args.batch_size, args.dry_run, args.include_unvetted)
 
 
 if __name__ == "__main__":
