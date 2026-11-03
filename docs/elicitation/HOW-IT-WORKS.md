@@ -11,9 +11,10 @@ new version.
 
 1. You see one stylized fact at a time, with the passages our search found
    for it. Each passage shows where it comes from.
-2. Label every passage: does it support the fact, contradict it, or neither?
-   Label it by what the passage itself says. For a passage that supports or
-   contradicts, also say what kind of evidence it is.
+2. Label every passage: does it support the fact, dispute it, or neither?
+   Label it by what the passage itself says; if you cannot tell, say so. For
+   a passage that supports or disputes the fact, also say what kind of
+   evidence it is.
 3. Then judge the fact as an expert, from the passages AND from what you
    know: how strong is the evidence, and which way does it point?
 4. Say whether your judgment goes beyond or against what the passages show.
@@ -34,7 +35,7 @@ new version.
 | Where | Text |
 |---|---|
 | Page title | Assess stylized facts — *Judge each fact from the passages shown and from your own knowledge.* |
-| Step 1 | **Label each passage.** Does the passage support the fact, contradict it, or neither? Label it by what the passage itself says — most are neutral. Your own knowledge goes into step 2. |
+| Step 1 | **Label each passage.** Does the passage support the fact, dispute it, or neither? Label it by what the passage itself says — most are neutral. If a passage is garbled or outside what you can assess, choose “Cannot judge”. Your own knowledge goes into step 2. Options: Supports / Disputes / Neutral / Cannot judge. |
 | Step 2 | **Your judgment of the fact.** From these passages *and* from what you know of the literature. *How strong is the evidence for it?* Weak or sparse / Moderate / Strong. *Which way does it point?* Against / Inconclusive / Corroborated. |
 | Step 3 | **Does your judgment go beyond or against what these passages show?** Yes — I relied on something the passages do not contain / No — the passages alone lead me to the same judgment. |
 | Reason | *Why? (required)* when Yes, or when the scores go beyond the expert's own labels; otherwise *Note (optional)*. |

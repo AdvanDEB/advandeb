@@ -7,9 +7,10 @@
       </span>
     </header>
     <p class="note">
-      Does the passage support the fact, contradict it, or neither? Label it
-      by what the passage itself says — most are neutral. Your own knowledge
-      goes into step 2.
+      Does the passage support the fact, dispute it, or neither? Label it
+      by what the passage itself says — most are neutral. If a passage is
+      garbled or outside what you can assess, choose “Cannot judge”. Your own
+      knowledge goes into step 2.
       <template v-if="total && total > passages.length">
         You see {{ passages.length }} of the {{ total }} passages found,
         spread across them rather than only the closest matches.
@@ -69,7 +70,7 @@ import { computed } from 'vue'
 import type {
   EvidencePassage, EvidentialRole, PassageDirection,
 } from '@/types/elicitation.generated'
-import { DIRECTION_OPTIONS, ROLE_OPTIONS } from './taskOptions'
+import { DIRECTION_OPTIONS, ROLE_OPTIONS, bearsOnFact } from './taskOptions'
 import { citationView } from './citation'
 import { passageKey, withDirection, withRole, type EvidenceDraft } from './decision'
 
@@ -98,8 +99,7 @@ function value(p: EvidencePassage) {
   return props.modelValue.passages[passageKey(p)]
 }
 function needsRole(p: EvidencePassage) {
-  const d = value(p)?.direction
-  return !!d && d !== 'neutral'
+  return bearsOnFact(value(p)?.direction)
 }
 function dirClass(p: EvidencePassage) {
   return value(p)?.direction ? `is-${value(p)!.direction}` : 'is-open'
@@ -125,6 +125,7 @@ function setRole(p: EvidencePassage, r: EvidentialRole) {
 .passage.is-supports { border-left-color: #10b981; }
 .passage.is-contradicts { border-left-color: #ef4444; }
 .passage.is-neutral { border-left-color: #9ca3af; }
+.passage.is-cannot_judge { border-left-color: #d1d5db; border-left-style: dashed; }
 
 .p-head { display: flex; align-items: flex-start; gap: var(--el-s2); margin-bottom: var(--el-s2); }
 .n { flex-shrink: 0; background: var(--el-bg-3); border-radius: var(--el-radius-sm); padding: 0 0.4rem; font-weight: 600; font-size: var(--el-fs-sm); color: var(--el-ink-2); }
@@ -149,6 +150,7 @@ function setRole(p: EvidencePassage, r: EvidentialRole) {
 .seg.on.supports { background: #047857; border-color: #047857; }
 .seg.on.contradicts { background: #b91c1c; border-color: #b91c1c; }
 .seg.on.neutral { background: #4b5563; border-color: #4b5563; }
+.seg.on.cannot_judge { background: #6b7280; border-color: #6b7280; border-style: dashed; }
 fieldset:disabled .seg { cursor: default; opacity: 0.7; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>

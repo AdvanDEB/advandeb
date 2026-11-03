@@ -121,9 +121,16 @@ export interface LabelOption<T extends string | number> {
 
 export const DIRECTION_OPTIONS: LabelOption<PassageDirection>[] = [
   { value: 'supports', label: 'Supports', hint: 'consistent with the fact' },
-  { value: 'contradicts', label: 'Contradicts', hint: 'inconsistent with it' },
+  // Stored as `contradicts`, shown as "Disputes" since guidelines 2.1.
+  { value: 'contradicts', label: 'Disputes', hint: 'argues or shows against it' },
   { value: 'neutral', label: 'Neutral', hint: 'another topic, or no bearing either way' },
+  { value: 'cannot_judge', label: 'Cannot judge', hint: 'garbled, or outside what you can assess' },
 ]
+
+/** Labels that bear on the fact: only these are asked an evidential role. */
+export function bearsOnFact(direction: PassageDirection | null | undefined): boolean {
+  return direction === 'supports' || direction === 'contradicts'
+}
 
 /** Asked of every passage not called neutral. */
 export const ROLE_OPTIONS: LabelOption<EvidentialRole>[] = [

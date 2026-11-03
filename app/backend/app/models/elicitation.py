@@ -50,7 +50,12 @@ TaskType = Literal["provenance", "scope", "assessability", "evidence"]
 # the agents were given (advandeb_methods docs/01 section 4.2a). Parity is the
 # point: if the human task differed, a human-machine gap could always be
 # explained away as a difference of instructions rather than of judgment.
-PassageDirection = Literal["supports", "contradicts", "neutral"]
+# `contradicts` is shown as "Disputes" since guidelines 2.1; the stored value
+# is unchanged so records on either side of the relabel stay comparable.
+# `cannot_judge` (2.1) is an abstention: the expert read the passage and
+# cannot say. It is a label, so the passage is not a hole in the record,
+# but it carries no evidential role and joins no agreement count.
+PassageDirection = Literal["supports", "contradicts", "neutral", "cannot_judge"]
 
 # Separating evidence from assertion. Roughly half of what reads as DEB
 # "support" turns out to be restatement of the theory rather than a measurement

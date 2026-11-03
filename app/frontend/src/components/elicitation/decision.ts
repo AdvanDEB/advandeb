@@ -3,7 +3,7 @@
  * functions, so what the client sends is testable rather than assembled
  * inline in a component.
  *
- * One judgment, in one combined mode (guidelines 2.0): label every passage by
+ * One judgment, in one combined mode (guidelines 2.1): label every passage by
  * what it says, judge the fact from the passages AND what you know, and say
  * whether that judgment goes beyond or against the passages. A rationale is
  * required only then — or when the overall scores contradict the expert's own
@@ -17,6 +17,7 @@ import type {
   CalibrationDecision, CalibrationItem, ElicitationDecision, EvidentialRole,
   PassageDirection, PassageJudgment, QueueItem, ScoreLabelConflict,
 } from '@/types/elicitation.generated'
+import { bearsOnFact } from './taskOptions'
 
 export interface PassageDraft {
   direction: PassageDirection | null
@@ -52,8 +53,8 @@ export function emptyEvidenceDraft(item: WithPassages | null): EvidenceDraft {
   return { passages, evidence_strength: null, consensus_direction: null, departs: null }
 }
 
-/** Set a passage's direction. Neutral clears the role: the role is asked only
- *  of passages that bear on the fact, and a stale role on a neutral passage
+/** Set a passage's direction. Neutral or "cannot judge" clears the role: the
+ *  role is asked only of passages that bear on the fact, and a stale role
  *  would be stored as if it had been asked. */
 export function withDirection(
   draft: EvidenceDraft, key: string, direction: PassageDirection,
@@ -65,7 +66,7 @@ export function withDirection(
       ...draft.passages,
       [key]: {
         direction,
-        evidential_role: direction === 'neutral' ? null : prev.evidential_role,
+        evidential_role: bearsOnFact(direction) ? prev.evidential_role : null,
       },
     },
   }
@@ -103,7 +104,7 @@ export function scoreLabelConflicts(
 
 const CONFLICT_TEXT: Record<ScoreLabelConflict, string> = {
   corroborated_without_support: 'you chose “corroborated” but marked no passage as supporting',
-  against_without_contradiction: 'you chose “against” but marked no passage as contradicting',
+  against_without_contradiction: 'you chose “against” but marked no passage as disputing',
   strength_without_support: 'you gave moderate or strong evidence but marked no passage as supporting',
 }
 
@@ -134,7 +135,7 @@ export function validateEvidence(
   if (unlabelled.length) return `Label every passage (${n - unlabelled.length} of ${n} done)`
   const unroled = item.passages
     .map(passageKey)
-    .filter((k) => draft.passages[k].direction !== 'neutral' && !draft.passages[k].evidential_role)
+    .filter((k) => bearsOnFact(draft.passages[k].direction) && !draft.passages[k].evidential_role)
   if (unroled.length) return `Say what kind of evidence passage ${positions(item, unroled)} is`
   if (!draft.evidence_strength) return 'Give the evidence strength'
   if (!draft.consensus_direction) return 'Say which way the evidence points'
@@ -165,7 +166,7 @@ function passageJudgments(item: WithPassages, draft: EvidenceDraft): Record<stri
     if (!d?.direction) continue
     out[passageKey(p)] = {
       direction: d.direction,
-      evidential_role: d.direction === 'neutral' ? null : d.evidential_role,
+      evidential_role: bearsOnFact(d.direction) ? d.evidential_role : null,
     }
   }
   return out

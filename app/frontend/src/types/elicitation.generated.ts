@@ -5,7 +5,7 @@
 /* eslint-disable */
 
 export type TaskType = "provenance" | "scope" | "assessability" | "evidence"
-export type PassageDirection = "supports" | "contradicts" | "neutral"
+export type PassageDirection = "supports" | "contradicts" | "neutral" | "cannot_judge"
 export type EvidentialRole = "primary_evidence" | "restatement" | "derivation" | "review"
 export type ProvenanceType = "published" | "new" | "adapted" | "unknown"
 export type ScopeVerdict = "stated" | "implicit" | "absent" | "not_applicable"

@@ -97,7 +97,16 @@ STRATUM_FLOOR = 3
 # 2.0 (2026-10-28): one combined mode. Experts judge from the passages AND
 # their own knowledge (H-EK), may add references of their own, and give a
 # rationale only where their judgment departs from the passages.
-GUIDELINES_VERSION = "2.0"
+# 2.1 (2026-11-03): the `contradicts` label reads "Disputes" (stored value
+# unchanged; the machine panel's prompt is reworded to match), and a fourth
+# passage label, `cannot_judge`, lets an expert abstain on a passage instead
+# of forcing a guess. Experts found "contradicts" too strong a word for a
+# passage that argues against a fact without refuting it.
+GUIDELINES_VERSION = "2.1"
+
+# Passage labels that bear on the fact. Only these are asked an evidential
+# role; `neutral` and `cannot_judge` are not.
+BEARING_DIRECTIONS = ("supports", "contradicts")
 
 # Tasks offered before evidence sets exist in the platform. All three operate
 # on the statement alone.
@@ -191,9 +200,10 @@ LADDER_BASIS = "panel-tier judgments on the evidence task"
 HOW_IT_WORKS = [
     "You see one stylized fact at a time, with the passages our search found "
     "for it. Each passage shows where it comes from.",
-    "Label every passage: does it support the fact, contradict it, or "
-    "neither? Label it by what the passage itself says. For a passage that "
-    "supports or contradicts, also say what kind of evidence it is.",
+    "Label every passage: does it support the fact, dispute it, or neither? "
+    "Label it by what the passage itself says; if you cannot tell, say so. "
+    "For a passage that supports or disputes the fact, also say what kind of "
+    "evidence it is.",
     "Then judge the fact as an expert, from the passages AND from what you "
     "know: how strong is the evidence, and which way does it point?",
     "Say whether your judgment goes beyond or against what the passages "
@@ -291,12 +301,13 @@ def judgment_problem(evidence_strength: Optional[int],
         return (f"judgments for passage(s) {', '.join(extra)} that were "
                 "not shown")
     unroled = sorted((k for k, j in judgments.items()
-                      if j.direction != "neutral" and j.evidential_role is None),
+                      if j.direction in BEARING_DIRECTIONS
+                      and j.evidential_role is None),
                      key=_as_int)
     if unroled:
         return (f"passage(s) {', '.join(unroled)} are labelled supports or "
-                "contradicts but carry no evidential role; the role is "
-                "asked of every passage not called neutral")
+                "disputes but carry no evidential role; the role is "
+                "asked of every passage that bears on the fact")
     if departs is None:
         return ("say whether your judgment goes beyond or against what these "
                 "passages show (departs_from_passages)")
@@ -1344,26 +1355,30 @@ class ElicitationService:
                     "task": "evidence",
                     "title": "Label each passage",
                     "help": (
-                        "Does the passage support the fact, contradict it, or "
+                        "Does the passage support the fact, dispute it, or "
                         "neither? Label it by what the passage itself says. "
                         "Neutral is a real answer, and most passages are: "
-                        "retrieval finds nearby text, not evidence. What you "
+                        "retrieval finds nearby text, not evidence. If the "
+                        "passage is garbled or outside what you can assess, "
+                        "say you cannot judge it rather than guess. What you "
                         "know beyond the passage goes into your overall "
                         "judgment below."),
                     "options": [
                         {"value": "supports", "label": "Supports",
                          "hint": "the passage is consistent with the fact"},
-                        {"value": "contradicts", "label": "Contradicts",
-                         "hint": "the passage is inconsistent with it"},
+                        {"value": "contradicts", "label": "Disputes",
+                         "hint": "the passage argues or shows against it"},
                         {"value": "neutral", "label": "Neutral",
                          "hint": "another topic, or no bearing either way"},
+                        {"value": "cannot_judge", "label": "Cannot judge",
+                         "hint": "garbled, or outside what you can assess"},
                     ],
                 },
                 {
                     "task": "evidence_role",
                     "title": "What kind of evidence is it?",
                     "help": (
-                        "Asked of every passage you did not call neutral. "
+                        "Asked of every passage that supports or disputes the fact. "
                         "Nearly half of what reads as support for DEB "
                         "restates the theory rather than tests it, and a "
                         "literature that agrees with itself is not the same "

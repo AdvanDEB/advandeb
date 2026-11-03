@@ -101,7 +101,7 @@
                       :aria-label="`Agreed label for passage ${p.index + 1}`">
                 <option value="">—</option>
                 <option value="supports">Supports</option>
-                <option value="contradicts">Contradicts</option>
+                <option value="contradicts">Disputes</option>
                 <option value="neutral">Neutral</option>
               </select>
               <span class="p-text">{{ p.text.slice(0, 220) }}{{ p.text.length > 220 ? '…' : '' }}</span>

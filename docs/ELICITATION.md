@@ -40,8 +40,12 @@ own knowledge**, in one combined mode — the H-EK arm of
 `advandeb_methods/docs/14` §2. For each item they:
 
 1. read the fact and up to 18 passages, each shown with its citation (§2a);
-2. label every passage `supports` / `contradicts` / `neutral`, **by what the
-   passage itself says**, and give an evidential role to each non-neutral one.
+2. label every passage `supports` / `contradicts` / `neutral` /
+   `cannot_judge`, **by what the passage itself says**, and give an
+   evidential role to each `supports` or `contradicts` one. Since guidelines
+   2.1 the form shows `contradicts` as **Disputes** (the stored value is
+   unchanged), and `cannot_judge` lets an expert abstain on a passage; it is
+   excluded from agreement counts as a missing value.
    The passage labels keep the agents' axes and wording, so passage-level
    agreement stays comparable with the machine panel;
 3. judge the fact: `evidence_strength` (1–3) and `consensus_direction` (1–3),
@@ -86,7 +90,7 @@ to stop serving them, and `/decide` refuses them.
   not a calibration example (§4).
 
 Guidelines and the one-screen *How this works* text are served by
-`GET /api/elicitation/guidelines` with `GUIDELINES_VERSION = "2.0"`. A
+`GET /api/elicitation/guidelines` with `GUIDELINES_VERSION = "2.1"`. A
 judgment record stamps:
 - the expert's tier (§3), `collection_version`, queue position and stratum;
 - `round`: `primary`, or `secondary` once an earlier judgment exists;

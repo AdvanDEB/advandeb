@@ -580,6 +580,28 @@ async def test_non_neutral_passages_need_an_evidential_role(scratch_db):
     assert res["code"] == 400 and "evidential role" in res["detail"]
 
 
+async def test_cannot_judge_is_a_label_that_asks_no_role(scratch_db):
+    # 2.1: an abstention labels the passage (no hole in the record) and, like
+    # neutral, is not asked what kind of evidence it is.
+    svc, e, item = await _evidence_item(scratch_db)
+    d = decision_for(item)
+    pj = dict(d.passage_judgments)
+    pj["2"] = PassageJudgment(direction="cannot_judge")
+    res = await svc.submit(d.model_copy(update={"passage_judgments": pj}), e)
+    assert res["status"] == "recorded", res
+    rec = await scratch_db.elicitations.find_one({})
+    assert rec["passage_judgments"]["2"]["direction"] == "cannot_judge"
+    assert rec["guidelines_version"] == "2.1"
+
+
+async def test_disputes_shows_the_stored_contradicts_value(scratch_db):
+    g = ElicitationService().guidelines()
+    evidence = next(t for t in g["tasks"] if t["task"] == "evidence")
+    labels = {o["value"]: o["label"] for o in evidence["options"]}
+    assert labels == {"supports": "Supports", "contradicts": "Disputes",
+                      "neutral": "Neutral", "cannot_judge": "Cannot judge"}
+
+
 async def test_evidence_scores_are_required(scratch_db):
     svc, e, item = await _evidence_item(scratch_db)
     res = await svc.submit(decision_for(item, consensus_direction=None), e)
@@ -889,7 +911,7 @@ async def test_no_machine_score_is_offered_on_an_evidence_item(scratch_db):
 
 async def test_guidelines_describe_the_combined_mode(scratch_db):
     g = ElicitationService().guidelines()
-    assert g["version"] == es.GUIDELINES_VERSION == "2.0"
+    assert g["version"] == es.GUIDELINES_VERSION == "2.1"
     assert 4 <= len(g["how_it_works"]) <= 8
     sections = {s["task"] for s in g["tasks"]}
     assert {"evidence", "evidence_role", "evidence_strength",

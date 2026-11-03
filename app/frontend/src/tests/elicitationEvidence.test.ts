@@ -90,6 +90,16 @@ describe('evidence draft', () => {
     expect(d.passages['1']).toEqual({ direction: 'neutral', evidential_role: null })
   })
 
+  it('treats “cannot judge” as a label that asks no role', () => {
+    const item = evidenceItem(2)
+    let d = labelAll(item)
+    d = withDirection(d, '1', 'supports')
+    d = withRole(d, '1', 'restatement')
+    d = withDirection(d, '1', 'cannot_judge')
+    expect(d.passages['1']).toEqual({ direction: 'cannot_judge', evidential_role: null })
+    expect(validateEvidence(item, d, common)).toBeNull()
+  })
+
   it('requires every passage to be labelled, then roles, named by position', () => {
     const item = evidenceItem(4)
     let d = labelAll(item)
@@ -127,7 +137,7 @@ describe('evidence draft', () => {
     const corroborated = { ...labelAll(item), consensus_direction: 3, evidence_strength: 3 }
     expect(scoreLabelConflicts(item, corroborated)).toEqual([
       'corroborated_without_support', 'strength_without_support'])
-    expect(conflictText(['against_without_contradiction'])).toMatch(/no passage as contradicting/)
+    expect(conflictText(['against_without_contradiction'])).toMatch(/no passage as disputing/)
     expect(validateEvidence(item, corroborated, common)).toMatch(/your passage labels/)
     // A supporting passage resolves both.
     const supported = withRole(withDirection(corroborated, '1', 'supports'), '1', 'primary_evidence')
