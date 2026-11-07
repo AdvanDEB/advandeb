@@ -72,41 +72,52 @@ const router = createRouter({
       meta: { title: 'Documentation', requiresAuth: true }
     },
     // The workshop wiki. Every page carries its language, so a link opens in
-    // the language it was shared in; /wiki alone picks the reader's.
+    // the language it was shared in; /2026Workshop alone picks the reader's.
     {
-      path: '/wiki',
+      path: '/2026Workshop',
       name: 'wiki',
       redirect: () => ({ name: 'wiki-home', params: { lang: preferredLang() } }),
       meta: { title: 'Wiki', requiresAuth: true }
     },
     {
-      path: '/wiki/:lang(hr|en)',
+      path: '/2026Workshop/:lang(hr|en)',
       name: 'wiki-home',
       component: () => import('@/views/WikiView.vue'),
       meta: { title: 'Wiki', requiresAuth: true }
     },
     {
-      path: '/wiki/:lang(hr|en)/n/:id',
+      path: '/2026Workshop/:lang(hr|en)/n/:id',
       name: 'wiki-note',
       component: () => import('@/views/WikiView.vue'),
       meta: { title: 'Wiki', requiresAuth: true }
     },
     {
-      path: '/wiki/:lang(hr|en)/graph',
+      path: '/2026Workshop/:lang(hr|en)/graph',
       name: 'wiki-graph',
       component: () => import('@/views/WikiView.vue'),
       meta: { title: 'Wiki', requiresAuth: true }
     },
     {
-      path: '/wiki/:lang(hr|en)/search',
+      path: '/2026Workshop/:lang(hr|en)/search',
       name: 'wiki-search',
       component: () => import('@/views/WikiView.vue'),
       meta: { title: 'Wiki', requiresAuth: true }
     },
     {
-      path: '/wiki/:lang(hr|en)/tag/:tag(.*)',
+      path: '/2026Workshop/:lang(hr|en)/tag/:tag(.*)',
       name: 'wiki-tag',
       component: () => import('@/views/WikiView.vue'),
+      meta: { title: 'Wiki', requiresAuth: true }
+    },
+    // The wiki's first address. Kept so that links shared before the rename
+    // still open the same page.
+    {
+      path: '/wiki/:rest(.*)*',
+      name: 'wiki-legacy',
+      redirect: (to) => {
+        const rest = ([] as string[]).concat(to.params.rest ?? []).map(encodeURIComponent).join('/')
+        return { path: `/2026Workshop${rest ? `/${rest}` : ''}`, query: to.query, hash: to.hash }
+      },
       meta: { title: 'Wiki', requiresAuth: true }
     },
     {

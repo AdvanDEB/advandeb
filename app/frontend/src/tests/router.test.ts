@@ -114,33 +114,46 @@ describe('router', () => {
     })
   })
 
-  describe('/wiki', () => {
+  describe('/2026Workshop (the wiki)', () => {
     it('is open to every member, in the language the URL names', async () => {
       signIn(explorer)
-      const route = await go('/wiki/en/n/Slaba%20homeostaza')
+      const route = await go('/2026Workshop/en/n/Slaba%20homeostaza')
       expect(route.name).toBe('wiki-note')
       expect(route.params).toMatchObject({ lang: 'en', id: 'Slaba homeostaza' })
-      expect((await go('/wiki/hr/tag/tema/alpha')).params.tag).toBe('tema/alpha')
+      expect((await go('/2026Workshop/hr/tag/tema/alpha')).params.tag).toBe('tema/alpha')
     })
 
     it('picks a language when the URL names none', async () => {
       signIn(explorer)
       localStorage.setItem('wiki.lang', 'hr')
-      const route = await go('/wiki')
+      const route = await go('/2026Workshop')
       expect(route.name).toBe('wiki-home')
       expect(route.params.lang).toBe('hr')
     })
 
     it('knows no third language', async () => {
       signIn(explorer)
-      expect((await go('/wiki/de')).name).toBe('not-found')
+      expect((await go('/2026Workshop/de')).name).toBe('not-found')
     })
 
     it('stays closed to external contributors and to visitors', async () => {
       signIn(external)
-      expect((await go('/wiki/en')).name).toBe('elicitation')
+      expect((await go('/2026Workshop/en')).name).toBe('elicitation')
       signIn(null)
-      expect((await go('/wiki/en')).name).toBe('login')
+      expect((await go('/2026Workshop/en')).name).toBe('login')
+    })
+
+    it('sends the first /wiki addresses to the same page', async () => {
+      signIn(explorer)
+      const note = await go('/wiki/en/n/Slaba%20homeostaza')
+      expect(note.name).toBe('wiki-note')
+      expect(note.path).toBe('/2026Workshop/en/n/Slaba%20homeostaza')
+      expect(note.params.id).toBe('Slaba homeostaza')
+      const tag = await go('/wiki/hr/tag/tema/alpha')
+      expect(tag.name).toBe('wiki-tag')
+      expect(tag.params.tag).toBe('tema/alpha')
+      expect((await go('/wiki/en/search?q=kappa')).query.q).toBe('kappa')
+      expect((await go('/wiki')).name).toBe('wiki-home')
     })
   })
 
@@ -174,7 +187,7 @@ describe('Home cards agree with the guard', () => {
     await flushPromises()
     expect(targets(w)).not.toContain('/kb')
     expect(targets(w)).not.toContain('/elicitation')
-    expect(targets(w)).toContain('/wiki')
+    expect(targets(w)).toContain('/2026Workshop')
   })
 
   it('shows it to curators', async () => {

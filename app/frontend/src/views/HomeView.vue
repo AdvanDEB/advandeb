@@ -32,7 +32,7 @@
           <p>Role-aware guide to the app</p>
         </router-link>
 
-        <router-link to="/wiki" class="feature-card">
+        <router-link to="/2026Workshop" class="feature-card">
           <h3>Workshop Wiki</h3>
           <p>Results of the November 2026 workshop, in Croatian and English</p>
         </router-link>

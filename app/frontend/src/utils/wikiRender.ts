@@ -7,7 +7,7 @@ import { BADGES, badgeLabel } from '@/utils/wikiText'
  * A wiki note's markdown → safe HTML for v-html.
  *
  * The builder has already turned Obsidian links into
- * `<a class="wl" href="/wiki/…" data-id="…">`, so marked only does markdown.
+ * `<a class="wl" href="/2026Workshop/…" data-id="…">`, so marked only does markdown.
  * DOMPurify runs on the result like everywhere else in the app. After that,
  * claim badges (`R`, `T` …) get their colour and tooltip, Obsidian callouts
  * (`> [!note] Title`) become boxes, and embedded images get their data URI

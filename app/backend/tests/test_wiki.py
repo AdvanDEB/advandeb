@@ -20,7 +20,7 @@ from app.services.wiki_service import CAP_WIKI_INTERNAL, fold, get_wiki_store
 
 def _link(nid, text, lang="hr", cls="wl"):
     # The shape app/scripts/wiki/build_wiki.py emits (Vault.anchor).
-    return f'<a class="{cls}" href="/wiki/{lang}/n/{quote(nid, safe="")}" data-id="{nid}">{text}</a>'
+    return f'<a class="{cls}" href="/2026Workshop/{lang}/n/{quote(nid, safe="")}" data-id="{nid}">{text}</a>'
 
 
 def _note(nid, section, tier, md_hr, md_en=None, out=(), inn=(), title_en=None):

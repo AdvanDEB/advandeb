@@ -26,10 +26,10 @@ describe('renderWikiHtml', () => {
   })
 
   it('keeps the builder\'s wiki links and their target', () => {
-    const md = 'Vidi <a class="wl" href="/wiki/hr/n/Rezerva" data-id="Rezerva">rezervu</a>.'
+    const md = 'Vidi <a class="wl" href="/2026Workshop/hr/n/Rezerva" data-id="Rezerva">rezervu</a>.'
     const a = dom(renderWikiHtml(md, 'hr')).querySelector('a.wl') as HTMLAnchorElement
     expect(a.dataset.id).toBe('Rezerva')
-    expect(a.getAttribute('href')).toBe('/wiki/hr/n/Rezerva')
+    expect(a.getAttribute('href')).toBe('/2026Workshop/hr/n/Rezerva')
   })
 
   it('makes Obsidian callouts into boxes', () => {

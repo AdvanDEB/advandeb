@@ -126,7 +126,7 @@ const baseLinks = [
   { path: '/documents',  icon: '📄', label: 'Documents' },
   { path: '/facts',      icon: '🔬', label: 'Facts' },
   { path: '/documentation', icon: '?', label: 'Docs' },
-  { path: '/wiki',       icon: '📖', label: '2026Workshop' },
+  { path: '/2026Workshop', icon: '📖', label: '2026Workshop' },
   { path: '/models',     icon: '📐', label: 'Models' },
   { path: '/settings/llm-keys', icon: '🔑', label: 'LLM Keys' },
   { path: '/settings/privacy', icon: '🔒', label: 'Privacy' },

@@ -344,7 +344,7 @@ class Vault:
     def href(self, lang: str, nid: str) -> str:
         if self.links == "hash":
             return f"#/{lang}/{quote(nid, safe='')}"
-        return f"/wiki/{lang}/n/{quote(nid, safe='')}"
+        return f"/2026Workshop/{lang}/n/{quote(nid, safe='')}"
 
     def load(self):
         for rel, p in walk_vault(self.vault):
@@ -521,7 +521,7 @@ def main():
     ap.add_argument("--json", type=Path, help="write the bundle here")
     ap.add_argument("--html", type=Path, help="write a self-contained preview here")
     ap.add_argument("--links", choices=["app", "hash"], default=None,
-                    help="link style: app (/wiki/...) or hash (#/..., for the preview); "
+                    help="link style: app (/2026Workshop/...) or hash (#/..., for the preview); "
                          "default: hash when only --html is given")
     ap.add_argument("--template", type=Path, default=HERE / "preview_template.html")
     ap.add_argument("--marked", type=Path)
