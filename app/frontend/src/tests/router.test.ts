@@ -19,6 +19,7 @@ vi.mock('@/views/AdminUsersView.vue', () => stub('AdminUsersView'))
 vi.mock('@/views/ChatView.vue', () => stub('ChatView'))
 vi.mock('@/views/LLMKeysView.vue', () => stub('LLMKeysView'))
 vi.mock('@/views/EnrolmentView.vue', () => stub('EnrolmentView'))
+vi.mock('@/views/WikiView.vue', () => stub('WikiView'))
 
 const { default: router, APP_TITLE } = await import('@/router')
 const { default: HomeView } = await import('@/views/HomeView.vue')
@@ -113,6 +114,36 @@ describe('router', () => {
     })
   })
 
+  describe('/wiki', () => {
+    it('is open to every member, in the language the URL names', async () => {
+      signIn(explorer)
+      const route = await go('/wiki/en/n/Slaba%20homeostaza')
+      expect(route.name).toBe('wiki-note')
+      expect(route.params).toMatchObject({ lang: 'en', id: 'Slaba homeostaza' })
+      expect((await go('/wiki/hr/tag/tema/alpha')).params.tag).toBe('tema/alpha')
+    })
+
+    it('picks a language when the URL names none', async () => {
+      signIn(explorer)
+      localStorage.setItem('wiki.lang', 'hr')
+      const route = await go('/wiki')
+      expect(route.name).toBe('wiki-home')
+      expect(route.params.lang).toBe('hr')
+    })
+
+    it('knows no third language', async () => {
+      signIn(explorer)
+      expect((await go('/wiki/de')).name).toBe('not-found')
+    })
+
+    it('stays closed to external contributors and to visitors', async () => {
+      signIn(external)
+      expect((await go('/wiki/en')).name).toBe('elicitation')
+      signIn(null)
+      expect((await go('/wiki/en')).name).toBe('login')
+    })
+  })
+
   describe('role-gated sections', () => {
     it('keep /kb to curators and administrators', async () => {
       signIn(explorer)
@@ -143,6 +174,7 @@ describe('Home cards agree with the guard', () => {
     await flushPromises()
     expect(targets(w)).not.toContain('/kb')
     expect(targets(w)).not.toContain('/elicitation')
+    expect(targets(w)).toContain('/wiki')
   })
 
   it('shows it to curators', async () => {

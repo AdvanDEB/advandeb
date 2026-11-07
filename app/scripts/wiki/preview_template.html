@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdvanDEB Wiki</title>
+<style>
+:root {
+  --bg: #f7f6f2; --surface: #ffffff; --surface-2: #f0eee8; --line: #e2dfd6;
+  --ink: #1f2328; --ink-2: #4b5059; --ink-3: #7a7f88;
+  --accent: #2563eb; --accent-soft: #e6edfc; --broken: #b42318;
+  --app-rail: #1e293b; --app-rail-ink: #94a3b8; --app-rail-hover: #334155;
+  --b-R: #b45309; --b-D: #475569; --b-T: #15803d; --b-E: #0f766e;
+  --b-P: #7c3aed; --b-S: #4338ca; --b-H: #be123c; --b-I: #6b7280;
+  --c-note: #2563eb; --c-warning: #b45309; --c-info: #0f766e;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161a; --surface: #1b1e23; --surface-2: #23272e; --line: #30353d;
+    --ink: #e6e3dc; --ink-2: #b9b6ae; --ink-3: #8a8780;
+    --accent: #7aa2ff; --accent-soft: #1f2a44; --broken: #ff8a7a;
+    --app-rail: #0b1220;
+    --b-R: #f0a64a; --b-D: #94a3b8; --b-T: #4ade80; --b-E: #2dd4bf;
+    --b-P: #b794f6; --b-S: #8c9cff; --b-H: #fb7185; --b-I: #a1a1aa;
+    --c-note: #7aa2ff; --c-warning: #f0a64a; --c-info: #2dd4bf;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14161a; --surface: #1b1e23; --surface-2: #23272e; --line: #30353d;
+  --ink: #e6e3dc; --ink-2: #b9b6ae; --ink-3: #8a8780;
+  --accent: #7aa2ff; --accent-soft: #1f2a44; --broken: #ff8a7a;
+  --app-rail: #0b1220;
+  --b-R: #f0a64a; --b-D: #94a3b8; --b-T: #4ade80; --b-E: #2dd4bf;
+  --b-P: #b794f6; --b-S: #8c9cff; --b-H: #fb7185; --b-I: #a1a1aa;
+  --c-note: #7aa2ff; --c-warning: #f0a64a; --c-info: #2dd4bf;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans); }
+a { color: var(--accent); }
+button, input { font: inherit; color: inherit; }
+
+/* Shell: [app rail][wiki nav][content][context] */
+.shell { display: grid; grid-template-columns: 56px 272px minmax(0, 1fr) 300px; height: 100vh; }
+.app-rail { background: var(--app-rail); display: flex; flex-direction: column; align-items: center; padding: 12px 0; gap: 2px; }
+.app-rail .brand { font-size: 22px; margin-bottom: 14px; }
+.app-rail .ico { width: 40px; height: 36px; display: grid; place-items: center; border-radius: 6px; color: var(--app-rail-ink); font-size: 17px; cursor: default; position: relative; }
+.app-rail .ico:hover { background: var(--app-rail-hover); }
+.app-rail .ico.active { background: #3b82f6; color: #fff; }
+.app-rail .ico[data-tip]:hover::after { content: attr(data-tip); position: absolute; left: 46px; white-space: nowrap; background: #0f172a; color: #e2e8f0; font-size: 12px; padding: 3px 8px; border-radius: 4px; z-index: 50; }
+.app-rail .new { position: absolute; top: 2px; right: 2px; width: 7px; height: 7px; border-radius: 50%; background: #f59e0b; }
+
+.nav { background: var(--surface); border-right: 1px solid var(--line); display: flex; flex-direction: column; min-height: 0; }
+.nav-head { padding: 14px 14px 10px; border-bottom: 1px solid var(--line); }
+.nav-title { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.nav-title h1 { font: 600 17px/1.2 var(--serif); margin: 0; letter-spacing: .01em; }
+.nav-title h1 a { color: inherit; text-decoration: none; }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; flex-shrink: 0; }
+.lang button { border: 0; background: transparent; padding: 2px 10px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--ink-3); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.sub { color: var(--ink-3); font-size: 12px; margin: 4px 0 10px; }
+.search { width: 100%; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); outline: none; }
+.search:focus { border-color: var(--accent); }
+.nav-body { overflow-y: auto; padding: 8px 6px 24px; flex: 1; }
+.pin { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 14px; }
+.pin:hover { background: var(--surface-2); }
+.pin.active { background: var(--accent-soft); color: var(--accent); }
+.pin .k { width: 18px; text-align: center; color: var(--ink-3); }
+.grp { margin-top: 6px; }
+.grp > button { width: 100%; display: flex; align-items: center; gap: 6px; border: 0; background: none; padding: 6px 10px; cursor: pointer; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; text-align: left; }
+.grp > button .n { margin-left: auto; font-weight: 500; letter-spacing: 0; }
+.grp > button .car { transition: transform .15s; display: inline-block; }
+.grp.closed > button .car { transform: rotate(-90deg); }
+.grp.closed ul { display: none; }
+.grp ul { list-style: none; margin: 0; padding: 0; }
+.grp li a { display: flex; gap: 6px; align-items: baseline; padding: 4px 10px 4px 26px; color: var(--ink-2); text-decoration: none; font-size: 13.5px; border-radius: 6px; line-height: 1.35; }
+.grp li a:hover { background: var(--surface-2); color: var(--ink); }
+.grp li a.active { background: var(--accent-soft); color: var(--accent); }
+.hrtag { font-size: 10px; color: var(--ink-3); border: 1px solid var(--line); border-radius: 3px; padding: 0 3px; margin-left: auto; flex-shrink: 0; }
+
+.main { overflow-y: auto; min-width: 0; }
+.page { max-width: 760px; margin: 0 auto; padding: 28px 40px 80px; }
+.crumbs { font-size: 12px; color: var(--ink-3); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.crumbs a { color: var(--ink-3); text-decoration: none; }
+.crumbs a:hover { color: var(--accent); }
+.page h1.title { font: 600 30px/1.2 var(--serif); margin: 8px 0 6px; letter-spacing: -.005em; text-wrap: balance; }
+.meta-line { color: var(--ink-3); font-size: 12.5px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+.chip { display: inline-block; font-size: 11.5px; padding: 1px 8px; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); text-decoration: none; border: 1px solid var(--line); }
+a.chip:hover { border-color: var(--accent); color: var(--accent); }
+.banner { border: 1px solid var(--line); background: var(--surface-2); border-radius: 8px; padding: 9px 12px; font-size: 13px; color: var(--ink-2); margin: 0 0 18px; }
+.banner.warn { border-color: color-mix(in srgb, var(--c-warning) 45%, var(--line)); }
+
+.prose { font: 17px/1.65 var(--serif); }
+.prose h2 { font: 600 20px/1.3 var(--serif); margin: 30px 0 10px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
+.prose h3 { font: 600 17px/1.3 var(--serif); margin: 22px 0 8px; }
+.prose p { margin: 0 0 12px; }
+.prose ul, .prose ol { padding-left: 22px; margin: 0 0 14px; }
+.prose li { margin: 4px 0; }
+.prose li::marker { color: var(--ink-3); }
+.prose code { font: 13px var(--mono); background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+.prose pre { background: var(--surface-2); padding: 12px; border-radius: 8px; overflow-x: auto; }
+.prose pre code { background: none; padding: 0; }
+.prose table { border-collapse: collapse; width: 100%; font: 14px/1.45 var(--sans); margin: 8px 0 18px; display: block; overflow-x: auto; }
+.prose th, .prose td { border: 1px solid var(--line); padding: 6px 9px; text-align: left; vertical-align: top; }
+.prose th { background: var(--surface-2); font-weight: 600; }
+.prose blockquote { margin: 0 0 14px; padding: 4px 14px; border-left: 3px solid var(--line); color: var(--ink-2); }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
+.prose img { max-width: 100%; max-height: 380px; object-fit: contain; border-radius: 6px; cursor: zoom-in; border: 1px solid var(--line); background: var(--surface-2); }
+.lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.82); display: grid; place-items: center; z-index: 100; cursor: zoom-out; padding: 16px; }
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 4px; }
+.prose figure.embed { margin: 14px 0; }
+.prose figcaption { font: 12px var(--sans); color: var(--ink-3); margin-top: 4px; }
+a.wl { text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+a.wl:hover { border-bottom-color: var(--accent); background: var(--accent-soft); }
+.wl.broken { color: var(--broken); border-bottom: 1px dashed var(--broken); cursor: help; }
+.audio-embed { display: inline-block; font: 13px var(--sans); padding: 3px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface-2); margin: 2px 0; }
+.muted { color: var(--ink-3); }
+
+code.badge { font: 700 11px/1 var(--sans); padding: 3px 0; width: 19px; display: inline-block; text-align: center; border-radius: 4px; color: #fff; vertical-align: 2px; cursor: help; letter-spacing: 0; }
+code.badge-R { background: var(--b-R); } code.badge-D { background: var(--b-D); } code.badge-T { background: var(--b-T); }
+code.badge-E { background: var(--b-E); } code.badge-P { background: var(--b-P); } code.badge-S { background: var(--b-S); }
+code.badge-H { background: var(--b-H); } code.badge-I { background: var(--b-I); }
+:root[data-theme="dark"] code.badge { color: #111; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) code.badge { color: #111; } }
+.prose.filtering li:has(> code.badge):not(.keep) { opacity: .22; }
+
+.callout { border: 1px solid var(--line); border-left: 3px solid var(--c-note); border-radius: 6px; padding: 8px 12px; margin: 0 0 14px; background: color-mix(in srgb, var(--c-note) 6%, var(--surface)); font: 14.5px/1.55 var(--sans); color: var(--ink-2); }
+.callout-title { font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.callout.warning { border-left-color: var(--c-warning); background: color-mix(in srgb, var(--c-warning) 7%, var(--surface)); }
+.callout.info { border-left-color: var(--c-info); background: color-mix(in srgb, var(--c-info) 7%, var(--surface)); }
+.callout p:last-child { margin-bottom: 0; }
+
+.shell.noctx { grid-template-columns: 56px 272px minmax(0, 1fr); }
+.shell.noctx .ctx { display: none; }
+.ctx { border-left: 1px solid var(--line); background: var(--surface); overflow-y: auto; padding: 18px 16px 40px; font-size: 13px; }
+.ctx h4 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 18px 0 8px; font-weight: 600; }
+.ctx h4:first-child { margin-top: 0; }
+.ctx ul { list-style: none; padding: 0; margin: 0; }
+.ctx li a { display: block; padding: 3px 0; color: var(--ink-2); text-decoration: none; line-height: 1.35; }
+.ctx li a:hover { color: var(--accent); }
+.ctx .sec { color: var(--ink-3); font-size: 11px; }
+.ctx .empty { color: var(--ink-3); font-style: italic; }
+.badgebar { display: flex; flex-wrap: wrap; gap: 6px; }
+.badgebar button { border: 1px solid var(--line); background: var(--bg); border-radius: 6px; padding: 2px 7px 2px 3px; cursor: pointer; display: inline-flex; gap: 5px; align-items: center; font-size: 12px; }
+.badgebar button[aria-pressed="true"] { border-color: var(--ink-2); background: var(--surface-2); }
+.badgebar code.badge { vertical-align: 0; }
+svg.local { width: 100%; height: 230px; display: block; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; }
+
+/* Home */
+.hero p.lede { font: 18px/1.6 var(--serif); color: var(--ink-2); margin: 0 0 18px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin: 0 0 22px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.stat b { display: block; font: 600 24px/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--ink-3); }
+.claims { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 26px; }
+.claims .bar { display: flex; height: 12px; border-radius: 3px; overflow: hidden; gap: 2px; margin: 8px 0 8px; }
+.claims .bar span { display: block; height: 100%; }
+.claims .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink-2); }
+.claims .legend code.badge { vertical-align: 0; margin-right: 4px; }
+.hint { font-size: 12.5px; color: var(--ink-3); }
+
+/* Graph */
+.graph-wrap { position: relative; height: calc(100vh - 0px); }
+.graph-wrap svg { width: 100%; height: 100%; display: block; cursor: grab; }
+.graph-wrap svg:active { cursor: grabbing; }
+.graph-panel { position: absolute; top: 14px; left: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 12.5px; max-width: 280px; box-shadow: 0 4px 18px rgba(0,0,0,.06); }
+.graph-panel h2 { font: 600 16px var(--serif); margin: 0 0 6px; }
+.graph-panel label { display: flex; align-items: center; gap: 6px; padding: 1px 0; cursor: pointer; }
+.graph-panel .sw { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.graph-tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--surface); font-size: 12px; padding: 3px 8px; border-radius: 4px; display: none; white-space: nowrap; }
+g.node text { font: 11px var(--sans); fill: var(--ink-2); pointer-events: none; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; }
+g.node circle { stroke: var(--bg); stroke-width: 1.5px; cursor: pointer; }
+g.node.dim { opacity: .12; }
+line.edge { stroke: var(--ink-3); stroke-opacity: .22; }
+line.edge.hi { stroke: var(--accent); stroke-opacity: .8; }
+
+/* List pages */
+.list { list-style: none; padding: 0; margin: 0; }
+.list li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.list li a.t { font: 600 16px var(--serif); text-decoration: none; color: var(--ink); }
+.list li a.t:hover { color: var(--accent); }
+.list .snip { color: var(--ink-2); font-size: 13.5px; margin-top: 2px; }
+.list .snip mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; }
+
+.mtop { display: none; }
+@media (max-width: 1180px) {
+  .shell { grid-template-columns: 56px 260px minmax(0, 1fr); }
+  .ctx { display: none; }
+  .ctx-inline { display: block !important; }
+}
+.ctx-inline { display: none; margin-top: 34px; border-top: 1px solid var(--line); padding-top: 10px; }
+@media (max-width: 760px) {
+  .shell, .shell.noctx { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0,1fr); }
+  .app-rail { display: none; }
+  .mtop { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--app-rail); color: #fff; }
+  .mtop button { background: none; border: 0; color: #fff; font-size: 20px; cursor: pointer; }
+  .nav { position: fixed; inset: 46px 0 0 0; z-index: 40; display: none; }
+  .nav.open { display: flex; }
+  .page { padding: 18px 16px 60px; }
+  .page h1.title { font-size: 25px; }
+  .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .prose { font-size: 16.5px; }
+}
+</style>
+</head>
+<body>
+<div class="shell" id="shell">
+  <div class="mtop"><button id="mnav" aria-label="Menu">☰</button><b>AdvanDEB · Wiki</b></div>
+  <nav class="app-rail" aria-label="AdvanDEB app (preview)">
+    <div class="brand">🧬</div>
+    <span class="ico" data-tip="Home">⌂</span>
+    <span class="ico" data-tip="Chat">💬</span>
+    <span class="ico" data-tip="Documents">📄</span>
+    <span class="ico" data-tip="Facts">🔬</span>
+    <span class="ico" data-tip="Docs">?</span>
+    <span class="ico active" data-tip="Wiki · Workshop 2026" id="rail-wiki">📖<span class="new"></span></span>
+    <span class="ico" data-tip="Models">📐</span>
+    <span class="ico" data-tip="Elicitation">✎</span>
+    <span class="ico" data-tip="Knowledge">⬡</span>
+    <span style="flex:1"></span>
+    <span class="ico" data-tip="LLM Keys">🔑</span>
+    <span class="ico" data-tip="Privacy">🔒</span>
+  </nav>
+  <aside class="nav" id="nav">
+    <div class="nav-head">
+      <div class="nav-title">
+        <h1><a href="#" id="home-link">AdvanDEB Wiki</a></h1>
+        <div class="lang" role="group" aria-label="Language">
+          <button data-lang="hr">HR</button><button data-lang="en">EN</button>
+        </div>
+      </div>
+      <div class="sub" id="nav-sub"></div>
+      <input class="search" id="q" type="search" autocomplete="off">
+    </div>
+    <div class="nav-body" id="nav-body"></div>
+  </aside>
+  <main class="main" id="main"></main>
+  <aside class="ctx" id="ctx"></aside>
+</div>
+<div class="graph-tip" id="tip"></div>
+
+<script>/*__MARKED__*/</script>
+<script>/*__PURIFY__*/</script>
+<script id="wiki-data" type="application/json">__DATA__</script>
+<script>
+(() => {
+const DATA = JSON.parse(document.getElementById('wiki-data').textContent);
+const NOTES = DATA.notes;
+const IDS = Object.keys(NOTES);
+
+const UI = {
+  hr: {
+    sub: 'Radionica AdvanDEB · 2.–5. 11. 2026. · second brain',
+    search: 'Pretraži bilješke…  ( / )',
+    home: 'Početna', hub: 'Sažetak radionice', graph: 'Graf znanja', questions: 'Otvorena pitanja', livenotes: 'Bilješke uživo',
+    sections: { concepts: 'Pojmovi', models: 'Modeli', organisms: 'Organizmi', project: 'Projekt', literature: 'Literatura',
+      journal: 'Dnevnik', slides: 'Prezentacije', drive: 'Projektni dokumenti', transcripts: 'Transkripti', maps: 'Mape (MOC)',
+      questions: 'Pitanja', meta: 'Meta', home: 'Početna', hub: 'Hub', livenotes: 'Bilješke uživo', other: 'Ostalo' },
+    out: 'Povezuje na', in: 'Poveznice prema ovoj bilješci', local: 'Lokalni graf', claims: 'Tvrdnje po vrsti',
+    filterHint: 'Klik na značku ističe samo te tvrdnje.', none: 'nema', meta: 'Podaci',
+    created: 'stvoreno', updated: 'ažurirano', aliases: 'drugi nazivi',
+    enMissing: '', enOutdated: '',
+    hrOnly: 'HR', results: n => `${n} rezultata`, noResults: 'Nema rezultata.',
+    tag: 'Oznaka', notesIn: n => `${n} bilješki`, notFound: 'Bilješka nije pronađena.',
+    graphTitle: 'Graf znanja', graphHint: 'Kotačić = zum, povuci = pomak, klik = otvori. Veličina čvora = broj veza.',
+    showLabels: 'Prikaži sve nazive',
+    statNotes: 'bilješki', statLinks: 'veza', statClaims: 'označenih tvrdnji', statSources: 'provjerenih izvora',
+    claimsTitle: 'Odakle dolaze tvrdnje', claimsHint: 'Svaka tvrdnja u atomarnoj bilješci nosi značku izvora.',
+    lede: 'Second brain s radionice AdvanDEB o Dynamic Energy Budget teoriji i transportnom DEB-u: atomarne bilješke, modeli, organizmi, provjerena literatura i kronologija, povezani poveznicama.',
+    transcriptBanner: 'Automatski Whisper transkript, samo na hrvatskom, s mogućim greškama. Izvorna građa, nije za citiranje.',
+    driveBanner: 'Sažetak internog projektnog dokumenta (Drive). Tvrdnje nose oznaku D: zapisano, ne nužno točno.',
+    built: 'Izgrađeno',
+  },
+  en: {
+    sub: 'AdvanDEB workshop · 2–5 Nov 2026 · second brain',
+    search: 'Search notes…  ( / )',
+    home: 'Home', hub: 'Workshop summary', graph: 'Knowledge graph', questions: 'Open questions', livenotes: 'Live notes',
+    sections: { concepts: 'Concepts', models: 'Models', organisms: 'Organisms', project: 'Project', literature: 'Literature',
+      journal: 'Journal', slides: 'Slides & talks', drive: 'Project documents', transcripts: 'Transcripts', maps: 'Maps (MOC)',
+      questions: 'Questions', meta: 'Meta', home: 'Home', hub: 'Hub', livenotes: 'Live notes', other: 'Other' },
+    out: 'Links to', in: 'Linked from', local: 'Local graph', claims: 'Claims by type',
+    filterHint: 'Click a badge to highlight only those claims.', none: 'none', meta: 'Details',
+    created: 'created', updated: 'updated', aliases: 'aliases',
+    enMissing: 'Not translated yet: showing the Croatian original.',
+    enOutdated: 'The Croatian original changed after this translation was made; the English text may be out of date.',
+    hrOnly: 'HR', results: n => `${n} results`, noResults: 'No results.',
+    tag: 'Tag', notesIn: n => `${n} notes`, notFound: 'Note not found.',
+    graphTitle: 'Knowledge graph', graphHint: 'Wheel = zoom, drag = pan, click = open. Node size = number of links.',
+    showLabels: 'Show all labels',
+    statNotes: 'notes', statLinks: 'links', statClaims: 'tagged claims', statSources: 'verified sources',
+    claimsTitle: 'Where the claims come from', claimsHint: 'Every claim in an atomic note carries a source badge.',
+    lede: 'Second brain from the AdvanDEB workshop on Dynamic Energy Budget theory and transport DEB: atomic notes, models, organisms, verified literature and a chronology, all cross-linked.',
+    transcriptBanner: 'Automatic Whisper transcript, Croatian only, may contain errors. Raw source material, not for citation.',
+    driveBanner: 'Summary of an internal project document (Drive). Its claims carry badge D: written down, not necessarily true.',
+    built: 'Built',
+  }
+};
+const BADGES = {
+  R: { hr: 'rečeno na radionici (predavanje, rasprava, slajd)', en: 'said at the workshop (talk, discussion, slide)' },
+  D: { hr: 'projektni dokument s Drivea', en: 'project document from Drive' },
+  T: { hr: 'provjerena literatura (DOI u Crossrefu/PubMedu)', en: 'verified literature (DOI checked in Crossref/PubMed)' },
+  E: { hr: 'empirijski podatak s izvorom', en: 'empirical measurement with a source' },
+  P: { hr: 'propozicija: slijedi iz modela', en: 'proposition: follows from the model' },
+  S: { hr: 'rezultat simulacije', en: 'simulation result' },
+  H: { hr: 'hipoteza: otvoreno i provjerljivo', en: 'hypothesis: open and testable' },
+  I: { hr: 'tumačenje bez provjerenog izvora', en: 'interpretation without a verified source' },
+};
+const TAGS = {
+  'tema/homeostaza': ['Homeostaza', 'Homeostasis'], 'tema/rezerva-struktura': ['Rezerva i struktura', 'Reserve & structure'],
+  'tema/kdeb': ['κ-DEB', 'κ-DEB'], 'tema/tdeb': ['tDEB', 'tDEB'], 'tema/alpha': ['α', 'α'],
+  'tema/reprodukcija': ['Reprodukcija', 'Reproduction'], 'tema/rast': ['Rast', 'Growth'], 'tema/energetika': ['Energetika', 'Energetics'],
+  'tema/skaliranje': ['Skaliranje', 'Scaling'], 'tema/fiziologija': ['Fiziologija', 'Physiology'],
+  'tema/metodologija': ['Metodologija', 'Methodology'], 'tema/projekt': ['Projekt', 'Project'],
+};
+const TYPES = { pojam: 'concept', model: 'model', organizam: 'organism', projekt: 'project', izvor: 'source', pitanja: 'questions',
+  moc: 'map', dnevnik: 'journal day', meta: 'meta', preusmjeravanje: 'redirect', dokument: 'document', pregled: 'overview',
+  prezentacija: 'presentation', transkript: 'transcript', 'bilješka': 'note' };
+const SEC_COLOR = { concepts: '#2563eb', models: '#7c3aed', organisms: '#15803d', project: '#b45309', literature: '#0f766e',
+  journal: '#64748b', slides: '#db2777', drive: '#a16207', transcripts: '#94a3b8', maps: '#111827', questions: '#be123c',
+  meta: '#9ca3af', home: '#111827', hub: '#111827', livenotes: '#ea580c', other: '#9ca3af' };
+
+const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+                set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+let lang = store.get('wiki.lang') || 'hr';
+const closed = new Set(JSON.parse(store.get('wiki.closed') || '["drive","transcripts","meta","maps"]'));
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+const t = k => UI[lang][k];
+const title = id => NOTES[id].title[lang] || NOTES[id].title.hr;
+const href = (id, l = lang) => `#/${l}/${encodeURIComponent(id)}`;
+const coll = new Intl.Collator(lang === 'hr' ? 'hr' : 'en', { sensitivity: 'base', numeric: true });
+const isTranslated = id => NOTES[id].md.en != null;
+
+marked.setOptions({ gfm: true, breaks: true });
+
+// ---------- plain text for search ----------
+const PLAIN = {};
+function plain(id, l) {
+  const k = id + '|' + l;
+  if (!(k in PLAIN)) {
+    const md = NOTES[id].md[l] ?? NOTES[id].md.hr ?? '';
+    PLAIN[k] = md.replace(/<[^>]+>/g, ' ').replace(/[#*_`>|\-]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+  return PLAIN[k];
+}
+
+// ---------- routing ----------
+function parse() {
+  const h = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+  const m = h.match(/^(hr|en)(?:\/(.*))?$/);
+  if (!m) return { lang, view: 'home' };
+  const rest = m[2] || '';
+  if (!rest) return { lang: m[1], view: 'home' };
+  if (rest === ':graph') return { lang: m[1], view: 'graph' };
+  if (rest.startsWith(':tag/')) return { lang: m[1], view: 'tag', tag: rest.slice(5) };
+  if (rest.startsWith(':search/')) return { lang: m[1], view: 'search', q: rest.slice(8) };
+  return { lang: m[1], view: 'note', id: rest };
+}
+function go(path) { location.hash = `#/${lang}${path ? '/' + path : ''}`; }
+
+function setLang(l) {
+  lang = l; store.set('wiki.lang', l);
+  document.documentElement.lang = l;
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+  $('#nav-sub').textContent = t('sub');
+  $('#q').placeholder = t('search');
+  $('#home-link').href = `#/${l}`;
+}
+
+// ---------- nav ----------
+function renderNav(cur) {
+  const pins = [
+    ['', '⌂', t('home'), 'Početna'], ['Sažetak radionice', '◎', t('hub'), 'Sažetak radionice'],
+    [':graph', '✱', t('graph')], ['Otvorena pitanja', '?', t('questions'), 'Otvorena pitanja'],
+    ['AdvanDEB radionica', '✎', t('livenotes'), 'AdvanDEB radionica'],
+  ];
+  let h = '';
+  for (const [p, k, label, id] of pins) {
+    const active = (p === '' && cur.view === 'home') || (p === ':graph' && cur.view === 'graph') || (id && cur.id === id && p);
+    h += `<a class="pin${active ? ' active' : ''}" href="#/${lang}${p ? '/' + encodeURIComponent(p) : ''}"><span class="k">${k}</span>${esc(label)}</a>`;
+  }
+  for (const sec of DATA.sections) {
+    const ids = IDS.filter(id => NOTES[id].section === sec);
+    if (!ids.length) continue;
+    ids.sort(sec === 'journal' || sec === 'transcripts' ? (a, b) => a.localeCompare(b) : (a, b) => coll.compare(title(a), title(b)));
+    h += `<div class="grp${closed.has(sec) && !ids.includes(cur.id) ? ' closed' : ''}" data-sec="${sec}">
+      <button><span class="car">▾</span>${esc(t('sections')[sec])}<span class="n">${ids.length}</span></button><ul>`;
+    for (const id of ids) {
+      const tag = lang === 'en' && !isTranslated(id) ? `<span class="hrtag">${t('hrOnly')}</span>` : '';
+      h += `<li><a href="${href(id)}" class="${cur.id === id ? 'active' : ''}">${esc(title(id))}${tag}</a></li>`;
+    }
+    h += '</ul></div>';
+  }
+  $('#nav-body').innerHTML = h;
+  $('#nav-body').querySelectorAll('.grp > button').forEach(b => b.onclick = () => {
+    const g = b.parentElement, s = g.dataset.sec;
+    g.classList.toggle('closed');
+    g.classList.contains('closed') ? closed.add(s) : closed.delete(s);
+    store.set('wiki.closed', JSON.stringify([...closed]));
+  });
+  const act = $('#nav-body a.active');
+  if (act) act.scrollIntoView({ block: 'nearest' });
+}
+
+// ---------- rendering markdown ----------
+function renderMd(md) {
+  const htmlStr = DOMPurify.sanitize(marked.parse(md), { ADD_ATTR: ['data-id', 'data-asset'] });
+  const div = document.createElement('div');
+  div.innerHTML = htmlStr;
+  div.querySelectorAll('img[data-asset]').forEach(img => { const a = DATA.assets[img.dataset.asset]; if (a) img.src = a; });
+  div.querySelectorAll('code').forEach(c => {
+    const b = c.textContent.trim();
+    if (BADGES[b] && c.parentElement.tagName !== 'PRE') {
+      c.classList.add('badge', 'badge-' + b); c.title = `${b} · ${BADGES[b][lang]}`; c.dataset.b = b;
+    }
+  });
+  div.querySelectorAll('blockquote').forEach(q => {
+    const p = q.firstElementChild;
+    if (!p || p.tagName !== 'P') return;
+    const m = p.innerHTML.match(/^\s*\[!(\w+)\][+-]?\s*([\s\S]*?)(?:<br>\n?|$)([\s\S]*)$/);
+    if (!m) return;
+    const box = document.createElement('div');
+    box.className = 'callout ' + m[1].toLowerCase();
+    const head = document.createElement('div');
+    head.className = 'callout-title';
+    head.innerHTML = m[2] || m[1];
+    box.appendChild(head);
+    if (m[3].trim()) { const rest = document.createElement('p'); rest.innerHTML = m[3]; box.appendChild(rest); }
+    [...q.children].slice(1).forEach(ch => box.appendChild(ch));
+    q.replaceWith(box);
+  });
+  div.querySelectorAll('a[href^="http"]').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+  div.querySelectorAll('a.asset-link, figure.embed img').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); lightbox(DATA.assets[a.dataset.asset]);
+  }));
+  div.querySelectorAll('li').forEach(li => { const c = li.querySelector(':scope > code.badge'); if (c) li.dataset.b = c.dataset.b; });
+  return div;
+}
+
+function lightbox(src) {
+  if (!src) return;
+  const o = document.createElement('div');
+  o.className = 'lightbox';
+  o.innerHTML = `<img src="${src}" alt="">`;
+  o.onclick = () => o.remove();
+  document.addEventListener('keydown', function k(e) { if (e.key === 'Escape') { o.remove(); document.removeEventListener('keydown', k); } });
+  document.body.appendChild(o);
+}
+
+function crumb(id) {
+  const n = NOTES[id];
+  return `<div class="crumbs"><a href="#/${lang}">${esc(t('home'))}</a> › <span>${esc(t('sections')[n.section])}</span></div>`;
+}
+
+function metaLine(n) {
+  const parts = [];
+  parts.push(`<span class="chip">${esc(lang === 'en' ? (TYPES[n.type] || n.type) : n.type)}</span>`);
+  for (const tg of n.tags.filter(x => x !== 'advandeb')) {
+    const lbl = TAGS[tg] ? TAGS[tg][lang === 'en' ? 1 : 0] : tg;
+    parts.push(`<a class="chip" href="#/${lang}/:tag/${encodeURIComponent(tg)}">#${esc(lbl)}</a>`);
+  }
+  if (n.updated) parts.push(`<span>${t('updated')} ${esc(n.updated)}</span>`);
+  return `<div class="meta-line">${parts.join('')}</div>`;
+}
+
+function ctxPanel(id) {
+  const n = NOTES[id];
+  const li = ids => ids.length
+    ? '<ul>' + ids.slice().sort((a, b) => coll.compare(title(a), title(b))).map(x =>
+        `<li><a href="${href(x)}">${esc(title(x))} <span class="sec">· ${esc(t('sections')[NOTES[x].section])}</span></a></li>`).join('') + '</ul>'
+    : `<div class="empty">${t('none')}</div>`;
+  let badges = '';
+  const bk = Object.keys(n.badges);
+  if (bk.length) {
+    badges = `<h4>${t('claims')}</h4><div class="badgebar">` + 'RDTEPSHI'.split('').filter(b => n.badges[b]).map(b =>
+      `<button data-b="${b}" title="${esc(BADGES[b][lang])}" aria-pressed="false"><code class="badge badge-${b}">${b}</code>${n.badges[b]}</button>`).join('') +
+      `</div><div class="hint" style="margin-top:6px">${t('filterHint')}</div>`;
+  }
+  const al = n.aliases.length ? `<div style="margin-top:6px"><span class="muted">${t('aliases')}:</span> ${esc(n.aliases.join(' · '))}</div>` : '';
+  return `${badges}<h4>${t('local')}</h4>${localGraph(id)}
+    <h4>${t('in')} (${n.in.length})</h4>${li(n.in)}
+    <h4>${t('out')} (${n.out.length})</h4>${li(n.out)}
+    <h4>${t('meta')}</h4><div class="muted">${n.created ? t('created') + ' ' + esc(n.created) : ''}${n.updated ? ' · ' + t('updated') + ' ' + esc(n.updated) : ''}</div>${al}
+    <div class="muted" style="margin-top:4px;font-family:var(--mono);font-size:11px">${esc(n.rel)}</div>`;
+}
+
+function localGraph(id) {
+  const n = NOTES[id];
+  const nb = [...new Set([...n.in, ...n.out])].slice(0, 28);
+  const W = 268, H = 230, cx = W / 2, cy = H / 2;
+  let s = `<svg class="local" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(t('local'))}">`;
+  const pos = nb.map((x, i) => { const a = (i / nb.length) * Math.PI * 2 - Math.PI / 2, r = nb.length > 14 ? (i % 2 ? 92 : 64) : 84;
+    return [x, cx + Math.cos(a) * r * 1.15, cy + Math.sin(a) * r * 0.92]; });
+  for (const [x, px, py] of pos) s += `<line x1="${cx}" y1="${cy}" x2="${px}" y2="${py}" stroke="var(--ink-3)" stroke-opacity=".3"/>`;
+  for (const [x, px, py] of pos) {
+    s += `<a href="${href(x)}"><circle cx="${px}" cy="${py}" r="5" fill="${SEC_COLOR[NOTES[x].section]}"><title>${esc(title(x))}</title></circle></a>`;
+  }
+  s += `<circle cx="${cx}" cy="${cy}" r="8" fill="${SEC_COLOR[n.section]}" stroke="var(--ink)" stroke-width="2"/></svg>`;
+  return s;
+}
+
+function bindBadgeFilter(prose) {
+  const sel = new Set();
+  document.querySelectorAll('.badgebar button').forEach(b => b.onclick = () => {
+    const k = b.dataset.b;
+    sel.has(k) ? sel.delete(k) : sel.add(k);
+    document.querySelectorAll(`.badgebar button[data-b="${k}"]`).forEach(x => x.setAttribute('aria-pressed', sel.has(k)));
+    prose.classList.toggle('filtering', sel.size > 0);
+    prose.querySelectorAll('li[data-b]').forEach(li => li.classList.toggle('keep', sel.has(li.dataset.b)));
+  });
+}
+
+function renderNote(id) {
+  const n = NOTES[id];
+  if (!n) { $('#main').innerHTML = `<div class="page"><p>${t('notFound')}</p></div>`; $('#ctx').innerHTML = ''; return; }
+  const md = (lang === 'en' && n.md.en != null) ? n.md.en : n.md.hr;
+  let banner = '';
+  if (n.section === 'transcripts') banner = `<div class="banner warn">${t('transcriptBanner')}</div>`;
+  else if (lang === 'en' && n.md.en == null) banner = `<div class="banner">${t('enMissing')}</div>`;
+  else if (lang === 'en' && n.en_status === 'outdated') banner = `<div class="banner warn">${t('enOutdated')}</div>`;
+  if (n.section === 'drive') banner += `<div class="banner">${t('driveBanner')}</div>`;
+  const page = document.createElement('div');
+  page.className = 'page';
+  page.innerHTML = `${crumb(id)}<h1 class="title">${esc(title(id))}</h1>${metaLine(n)}${banner}`;
+  const prose = renderMd(md);
+  prose.className = 'prose';
+  if (lang === 'en' && n.md.en == null) prose.lang = 'hr';
+  page.appendChild(prose);
+  const inl = document.createElement('div');
+  inl.className = 'ctx-inline';
+  inl.innerHTML = ctxPanel(id);
+  page.appendChild(inl);
+  $('#main').replaceChildren(page);
+  $('#main').scrollTop = 0;
+  $('#ctx').innerHTML = ctxPanel(id);
+  bindBadgeFilter(prose);
+  document.title = `${title(id)} · AdvanDEB Wiki`;
+}
+
+function renderHome() {
+  const home = 'Početna';
+  const all = Object.values(NOTES);
+  const links = all.reduce((a, n) => a + n.out.length, 0);
+  const tot = {}; let claims = 0;
+  for (const n of all) for (const [b, c] of Object.entries(n.badges)) { tot[b] = (tot[b] || 0) + c; claims += c; }
+  const sources = all.filter(n => n.section === 'literature').length;
+  const bar = 'RDTEPSHI'.split('').filter(b => tot[b]).map(b =>
+    `<span style="flex:${tot[b]};background:var(--b-${b})" title="${b} · ${tot[b]}"></span>`).join('');
+  const legend = 'RDTEPSHI'.split('').filter(b => tot[b]).map(b =>
+    `<span><code class="badge badge-${b}">${b}</code>${esc(BADGES[b][lang])} · <b>${tot[b]}</b></span>`).join('');
+  const page = document.createElement('div');
+  page.className = 'page hero';
+  page.innerHTML = `<div class="crumbs">${t('built')} ${esc(DATA.built.replace('T', ' '))}</div>
+    <h1 class="title">${esc(title(home))}</h1>
+    <p class="lede">${esc(t('lede'))}</p>
+    <div class="stats">
+      <div class="stat"><b>${all.length}</b><span>${t('statNotes')}</span></div>
+      <div class="stat"><b>${links}</b><span>${t('statLinks')}</span></div>
+      <div class="stat"><b>${claims}</b><span>${t('statClaims')}</span></div>
+      <div class="stat"><b>${sources}</b><span>${t('statSources')}</span></div>
+    </div>
+    <div class="claims"><b>${t('claimsTitle')}</b> <span class="hint">${t('claimsHint')}</span>
+      <div class="bar">${bar}</div><div class="legend">${legend}</div></div>`;
+  const md = (lang === 'en' && NOTES[home].md.en != null) ? NOTES[home].md.en : NOTES[home].md.hr;
+  const prose = renderMd(md); prose.className = 'prose';
+  page.appendChild(prose);
+  $('#main').replaceChildren(page);
+  $('#main').scrollTop = 0;
+  $('#ctx').innerHTML = ctxPanel(home);
+  bindBadgeFilter(prose);
+  document.title = 'AdvanDEB Wiki';
+}
+
+function renderTag(tag) {
+  const ids = IDS.filter(id => NOTES[id].tags.includes(tag)).sort((a, b) => coll.compare(title(a), title(b)));
+  const lbl = TAGS[tag] ? TAGS[tag][lang === 'en' ? 1 : 0] : tag;
+  $('#main').innerHTML = `<div class="page"><div class="crumbs"><a href="#/${lang}">${esc(t('home'))}</a> › ${t('tag')}</div>
+    <h1 class="title">#${esc(lbl)}</h1><div class="meta-line">${t('notesIn')(ids.length)}</div>
+    <ul class="list">${ids.map(id => `<li><a class="t" href="${href(id)}">${esc(title(id))}</a>
+      <div class="snip">${esc(t('sections')[NOTES[id].section])} · ${esc(plain(id, lang).slice(0, 180))}…</div></li>`).join('')}</ul></div>`;
+  $('#ctx').innerHTML = '';
+  document.title = `#${lbl} · AdvanDEB Wiki`;
+}
+
+function search(q) {
+  const terms = fold(q).split(/\s+/).filter(Boolean);
+  if (!terms.length) return [];
+  const res = [];
+  for (const id of IDS) {
+    const ti = fold(title(id) + ' ' + NOTES[id].aliases.join(' ') + ' ' + NOTES[id].title.hr);
+    const body = plain(id, lang), fb = fold(body);
+    let score = 0, ok = true;
+    for (const w of terms) {
+      const inT = ti.includes(w), inB = fb.includes(w);
+      if (!inT && !inB) { ok = false; break; }
+      score += (inT ? 10 : 0) + (inB ? Math.min(5, fb.split(w).length - 1) : 0);
+    }
+    if (!ok) continue;
+    if (NOTES[id].section === 'transcripts') score *= 0.4;
+    const pos = fb.indexOf(terms[0]);
+    const from = Math.max(0, pos - 70);
+    let snip = body.slice(from, from + 200);
+    snip = esc(snip);
+    for (const w of terms) {
+      // highlight on the folded text, mapped back by position (same length after folding Latin diacritics)
+      const fs = fold(snip); let out = '', i = 0, j;
+      while ((j = fs.indexOf(w, i)) !== -1) { out += snip.slice(i, j) + '<mark>' + snip.slice(j, j + w.length) + '</mark>'; i = j + w.length; }
+      snip = out + snip.slice(i);
+    }
+    res.push({ id, score, snip: (from ? '…' : '') + snip + '…' });
+  }
+  return res.sort((a, b) => b.score - a.score);
+}
+
+function renderSearch(q) {
+  const res = search(q);
+  $('#main').innerHTML = `<div class="page"><div class="crumbs"><a href="#/${lang}">${esc(t('home'))}</a> › „${esc(q)}“</div>
+    <h1 class="title">${t('results')(res.length)}</h1>
+    ${(document.title = `„${q}“ · AdvanDEB Wiki`, '')}${res.length ? `<ul class="list">${res.slice(0, 80).map(r => `<li><a class="t" href="${href(r.id)}">${esc(title(r.id))}</a>
+      <div class="snip"><span class="muted">${esc(t('sections')[NOTES[r.id].section])} · </span>${r.snip}</div></li>`).join('')}</ul>` : `<p>${t('noResults')}</p>`}</div>`;
+  $('#ctx').innerHTML = '';
+}
+
+// ---------- global graph (small force layout, no dependencies) ----------
+let GRAPH = null;
+function layoutGraph() {
+  if (GRAPH) return GRAPH;
+  const nodes = IDS.map((id, i) => {
+    const a = i * 2.399963, r = 14 * Math.sqrt(i + 1);
+    return { id, x: Math.cos(a) * r, y: Math.sin(a) * r, vx: 0, vy: 0, deg: NOTES[id].in.length + NOTES[id].out.length };
+  });
+  const idx = Object.fromEntries(nodes.map((n, i) => [n.id, i]));
+  const edges = [];
+  for (const n of nodes) for (const o of NOTES[n.id].out) if (idx[o] != null) edges.push([idx[n.id], idx[o]]);
+  const N = nodes.length;
+  for (let it = 0; it < 360; it++) {
+    const alpha = 1 - it / 360;
+    for (let i = 0; i < N; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < N; j++) {
+        const b = nodes[j]; let dx = a.x - b.x, dy = a.y - b.y; let d2 = dx * dx + dy * dy + 0.01;
+        if (d2 > 250000) continue;
+        const f = 2200 / d2; dx *= f; dy *= f; a.vx += dx; a.vy += dy; b.vx -= dx; b.vy -= dy;
+      }
+    }
+    for (const [i, j] of edges) {
+      const a = nodes[i], b = nodes[j]; const dx = b.x - a.x, dy = b.y - a.y; const d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const f = (d - 80) * 0.01; a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f;
+    }
+    for (const n of nodes) { n.vx -= n.x * 0.004; n.vy -= n.y * 0.004; n.x += n.vx * alpha * 0.5; n.y += n.vy * alpha * 0.5; n.vx *= 0.6; n.vy *= 0.6; }
+  }
+  GRAPH = { nodes, edges, idx };
+  return GRAPH;
+}
+
+const hidden = new Set(JSON.parse(store.get('wiki.ghidden') || '["transcripts","journal","meta"]'));
+let showLabels = false;
+function renderGraph() {
+  const { nodes, edges } = layoutGraph();
+  const LABEL_DEG = nodes.map(n => n.deg).sort((a, b) => b - a)[24] || 10;
+  const secs = [...new Set(nodes.map(n => NOTES[n.id].section))];
+  const wrap = document.createElement('div');
+  wrap.className = 'graph-wrap';
+  wrap.innerHTML = `<div class="graph-panel"><h2>${t('graphTitle')}</h2><div class="hint" style="margin-bottom:8px">${t('graphHint')}</div>
+    ${secs.map(s => `<label><input type="checkbox" data-s="${s}" ${hidden.has(s) ? '' : 'checked'}><span class="sw" style="background:${SEC_COLOR[s]}"></span>${esc(t('sections')[s])}</label>`).join('')}
+    <label style="margin-top:6px"><input type="checkbox" id="lbls" ${showLabels ? 'checked' : ''}>${t('showLabels')}</label></div>`;
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  const g = document.createElementNS(NS, 'g');
+  svg.appendChild(g); wrap.appendChild(svg);
+  $('#main').replaceChildren(wrap);
+  $('#ctx').innerHTML = '';
+  document.title = `${t('graphTitle')} · AdvanDEB Wiki`;
+
+  const vis = n => !hidden.has(NOTES[n.id].section);
+  const draw = () => {
+    g.innerHTML = '';
+    const vnodes = nodes.filter(vis);
+    const vset = new Set(vnodes.map(n => n.id));
+    const eg = document.createElementNS(NS, 'g'); g.appendChild(eg);
+    for (const [i, j] of edges) {
+      const a = nodes[i], b = nodes[j];
+      if (!vset.has(a.id) || !vset.has(b.id)) continue;
+      const l = document.createElementNS(NS, 'line');
+      l.setAttribute('x1', a.x); l.setAttribute('y1', a.y); l.setAttribute('x2', b.x); l.setAttribute('y2', b.y);
+      l.setAttribute('class', 'edge'); l.dataset.a = a.id; l.dataset.b = b.id; eg.appendChild(l);
+    }
+    for (const n of vnodes) {
+      const ng = document.createElementNS(NS, 'g'); ng.setAttribute('class', 'node'); ng.dataset.id = n.id;
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', n.x); c.setAttribute('cy', n.y); c.setAttribute('r', 3 + Math.sqrt(n.deg) * 1.3);
+      c.setAttribute('fill', SEC_COLOR[NOTES[n.id].section]); ng.appendChild(c);
+      if (showLabels || n.deg >= LABEL_DEG) {
+        const tx = document.createElementNS(NS, 'text');
+        tx.setAttribute('x', n.x + 6 + Math.sqrt(n.deg)); tx.setAttribute('y', n.y + 4); tx.textContent = title(n.id); ng.appendChild(tx);
+      }
+      ng.addEventListener('click', () => { location.hash = href(n.id); });
+      ng.addEventListener('mouseenter', e => hover(n.id, e));
+      ng.addEventListener('mouseleave', () => hover(null));
+      g.appendChild(ng);
+    }
+  };
+  const tip = $('#tip');
+  const hover = (id, e) => {
+    if (!id) { tip.style.display = 'none'; g.querySelectorAll('.dim,.hi').forEach(x => x.classList.remove('dim', 'hi')); return; }
+    const nb = new Set([id, ...NOTES[id].in, ...NOTES[id].out]);
+    g.querySelectorAll('g.node').forEach(x => x.classList.toggle('dim', !nb.has(x.dataset.id)));
+    g.querySelectorAll('line.edge').forEach(x => x.classList.toggle('hi', x.dataset.a === id || x.dataset.b === id));
+    tip.textContent = title(id); tip.style.display = 'block';
+    tip.style.left = (e.clientX + 12) + 'px'; tip.style.top = (e.clientY + 12) + 'px';
+  };
+  // fit view
+  const xs = nodes.map(n => n.x), ys = nodes.map(n => n.y);
+  let view = { x: Math.min(...xs) - 40, y: Math.min(...ys) - 40, w: Math.max(...xs) - Math.min(...xs) + 80, h: Math.max(...ys) - Math.min(...ys) + 80 };
+  const apply = () => svg.setAttribute('viewBox', `${view.x} ${view.y} ${view.w} ${view.h}`);
+  apply(); draw();
+  svg.addEventListener('wheel', e => {
+    e.preventDefault();
+    const r = svg.getBoundingClientRect(); const k = e.deltaY > 0 ? 1.12 : 1 / 1.12;
+    const sc = Math.max(view.w / r.width, view.h / r.height);
+    const mx = view.x + (e.clientX - r.left) * sc, my = view.y + (e.clientY - r.top) * sc;
+    view = { x: mx - (mx - view.x) * k, y: my - (my - view.y) * k, w: view.w * k, h: view.h * k }; apply();
+  }, { passive: false });
+  let drag = null;
+  svg.addEventListener('pointerdown', e => { if (e.target.tagName === 'svg') { drag = { x: e.clientX, y: e.clientY, v: { ...view } }; svg.setPointerCapture(e.pointerId); } });
+  svg.addEventListener('pointermove', e => {
+    if (!drag) return; const r = svg.getBoundingClientRect(); const sc = Math.max(view.w / r.width, view.h / r.height);
+    view = { ...drag.v, x: drag.v.x - (e.clientX - drag.x) * sc, y: drag.v.y - (e.clientY - drag.y) * sc }; apply();
+  });
+  svg.addEventListener('pointerup', () => { drag = null; });
+  wrap.querySelectorAll('input[data-s]').forEach(cb => cb.onchange = () => {
+    cb.checked ? hidden.delete(cb.dataset.s) : hidden.add(cb.dataset.s);
+    store.set('wiki.ghidden', JSON.stringify([...hidden])); draw();
+  });
+  wrap.querySelector('#lbls').onchange = e => { showLabels = e.target.checked; draw(); };
+}
+
+// ---------- main ----------
+function route() {
+  const r = parse();
+  if (r.lang !== lang || !document.documentElement.dataset.ready) { setLang(r.lang); document.documentElement.dataset.ready = 1; }
+  renderNav(r);
+  if (r.view === 'home') renderHome();
+  else if (r.view === 'graph') renderGraph();
+  else if (r.view === 'tag') renderTag(r.tag);
+  else if (r.view === 'search') { renderSearch(r.q); $('#q').value = r.q; }
+  else renderNote(r.id);
+  $('#shell').classList.toggle('noctx', !$('#ctx').innerHTML.trim());
+  $('#nav').classList.remove('open');
+}
+
+document.querySelectorAll('.lang button').forEach(b => b.onclick = () => {
+  const r = parse(); const l = b.dataset.lang;
+  const rest = location.hash.replace(/^#\/(hr|en)/, '');
+  setLang(l);
+  location.hash = `#/${l}${rest}`;
+  if (rest === location.hash) route();
+});
+let qTimer;
+$('#q').addEventListener('input', e => {
+  clearTimeout(qTimer);
+  const v = e.target.value.trim();
+  qTimer = setTimeout(() => { if (v) location.hash = `#/${lang}/:search/${encodeURIComponent(v)}`; }, 220);
+});
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== $('#q')) { e.preventDefault(); $('#q').focus(); $('#q').select(); }
+  if (e.key === 'Escape') $('#q').blur();
+});
+$('#mnav').onclick = () => $('#nav').classList.toggle('open');
+window.addEventListener('hashchange', route);
+route();
+})();
+</script>
+</body>
+</html>

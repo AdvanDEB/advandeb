@@ -57,6 +57,11 @@ class Settings(BaseSettings):
     # this stops one that would otherwise hold the shared key and an agent
     # socket indefinitely. On expiry the conversation gets an error message.
     CHAT_TURN_TIMEOUT_SECONDS: float = 480
+
+    # The workshop wiki bundle (app/scripts/wiki/build_wiki.py). It lives outside
+    # the repository because it summarises internal project documents; the
+    # backend re-reads it whenever the file changes (app/services/wiki_service.py).
+    WIKI_BUNDLE_PATH: str = str(Path.home() / "advandeb-data" / "wiki" / "wiki-bundle.json")
     
     # Google OAuth (optional — native login works without these)
     GOOGLE_CLIENT_ID: Optional[str] = None

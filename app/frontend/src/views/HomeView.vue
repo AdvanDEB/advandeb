@@ -32,6 +32,11 @@
           <p>Role-aware guide to the app</p>
         </router-link>
 
+        <router-link to="/wiki" class="feature-card">
+          <h3>Workshop Wiki</h3>
+          <p>Results of the November 2026 workshop, in Croatian and English</p>
+        </router-link>
+
         <router-link v-if="canElicit" to="/elicitation" class="feature-card">
           <h3>Elicitation</h3>
           <p>Provide expert judgment on stylized facts</p>

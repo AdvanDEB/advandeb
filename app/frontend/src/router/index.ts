@@ -4,6 +4,7 @@ import {
   canElicit, canUseKnowledgeBuilder, isAdmin, isAllowedForExternal, isExternalOnly,
 } from '@/utils/access'
 import { forgetAutoReload, isChunkLoadError, recoverFromChunkError } from '@/utils/staleChunk'
+import { preferredLang } from '@/utils/wikiText'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -69,6 +70,44 @@ const router = createRouter({
       name: 'documentation',
       component: () => import('@/views/DocumentationView.vue'),
       meta: { title: 'Documentation', requiresAuth: true }
+    },
+    // The workshop wiki. Every page carries its language, so a link opens in
+    // the language it was shared in; /wiki alone picks the reader's.
+    {
+      path: '/wiki',
+      name: 'wiki',
+      redirect: () => ({ name: 'wiki-home', params: { lang: preferredLang() } }),
+      meta: { title: 'Wiki', requiresAuth: true }
+    },
+    {
+      path: '/wiki/:lang(hr|en)',
+      name: 'wiki-home',
+      component: () => import('@/views/WikiView.vue'),
+      meta: { title: 'Wiki', requiresAuth: true }
+    },
+    {
+      path: '/wiki/:lang(hr|en)/n/:id',
+      name: 'wiki-note',
+      component: () => import('@/views/WikiView.vue'),
+      meta: { title: 'Wiki', requiresAuth: true }
+    },
+    {
+      path: '/wiki/:lang(hr|en)/graph',
+      name: 'wiki-graph',
+      component: () => import('@/views/WikiView.vue'),
+      meta: { title: 'Wiki', requiresAuth: true }
+    },
+    {
+      path: '/wiki/:lang(hr|en)/search',
+      name: 'wiki-search',
+      component: () => import('@/views/WikiView.vue'),
+      meta: { title: 'Wiki', requiresAuth: true }
+    },
+    {
+      path: '/wiki/:lang(hr|en)/tag/:tag(.*)',
+      name: 'wiki-tag',
+      component: () => import('@/views/WikiView.vue'),
+      meta: { title: 'Wiki', requiresAuth: true }
     },
     {
       path: '/elicitation',

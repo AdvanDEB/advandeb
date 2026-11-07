@@ -69,6 +69,8 @@ ENDPOINTS = [
     ("/api/tdeb", "GET", "/api/tdeb/templates", "member", 200, "header"),
     ("/api/graph", "GET", "/api/graph/provenance/chunk:abc", "member", 200, "header"),
     ("/api/graph", "GET", "/api/graph/chunk/abc/context", "member", 200, "header"),
+    ("/api/wiki", "GET", "/api/wiki/index", "member", 200, "header"),
+    ("/api/wiki", "POST", "/api/wiki/reload", "admin", 200, "header"),
     ("/api/kb/agents", "GET", "/api/kb/agents/models", "curator", 200, "header"),
     ("/api/kb/viz", "GET", "/api/kb/viz/schema/sf_support/status", "curator", 200, "header"),
     ("/api/kb/viz", "GET", "/api/kb/viz/schema/unknown/stream", "curator", 200, "query"),
@@ -131,6 +133,11 @@ def stubbed_stores(monkeypatch, fake_mongo, tmp_path):
     monkeypatch.setattr(visualization, "_get_artifact_builder", lambda: _StubArtifactBuilder())
     monkeypatch.setattr(filesystem, "FS_ROOT", str(tmp_path))
     monkeypatch.setattr(filesystem, "DEFAULT_PATH", str(tmp_path))
+
+    # The wiki serves a bundle file; give it an empty one.
+    bundle = tmp_path / "wiki-bundle.json"
+    bundle.write_text(json.dumps({"built": "test", "sections": [], "notes": {}, "assets": {}}))
+    monkeypatch.setattr(settings, "WIKI_BUNDLE_PATH", str(bundle))
 
     # The ingestion stream polls until its batch is terminal; start it there.
     fake_mongo[settings.KB_DB_NAME].ingestion_batches.docs.append(
