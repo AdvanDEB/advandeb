@@ -37,9 +37,17 @@ Purge
 -----
 ``--purge`` excludes every completed document judged off-domain: the document
 record stays (``processing_status='excluded'`` + ``exclusion_reason``), while its
-facts, chunks, chunk vectors and graph edges are deleted — the same step as
-``filter_reproduction_abstracts.py --propagate``. All of it is regenerable: to
-overturn a verdict, set the document back to pending and re-run extraction.
+facts, chunks and graph edges are deleted — the same step as
+``filter_reproduction_abstracts.py --propagate``, minus the vectors. All of it
+is regenerable: to overturn a verdict, set the document back to pending and
+re-run extraction.
+
+The vectors are a separate step, ``--purge-vectors``, because ChromaDB is an
+embedded store and the retrieval agent of ``advandeb-stack.service`` holds it
+open with its index in memory: a second process writing to it is unsafe, and
+the agent would go on serving deleted chunks anyway. Stop the stack, run
+``--purge-vectors``, start it again. It deletes by ``document_id`` every vector
+of an excluded document, so it can run any time after ``--purge``.
 
 Model
 -----
@@ -58,6 +66,9 @@ Usage
     GATE_OPENAI_API_KEY=... python scripts/backfill_domain_gate.py --regate \\
         --openai-url http://127.0.0.1:8001 --model qwen3-32b --concurrency 32
     python scripts/backfill_domain_gate.py --purge --dry-run
+    sudo systemctl stop advandeb-stack
+    python scripts/backfill_domain_gate.py --purge-vectors
+    sudo systemctl start advandeb-stack
 """
 
 from __future__ import annotations
@@ -111,6 +122,15 @@ FOR d IN documents
     SORT d._key
     LIMIT @limit
     RETURN [d._key, d.domain_gate_reason]
+"""
+
+EXCLUDED_EMBEDDED_AQL = """
+FOR d IN documents
+    FILTER d.processing_status == 'excluded' AND d.embedding_status == 'excluded'
+    FILTER @domain == null OR d.general_domain == @domain
+    SORT d._key
+    LIMIT @limit
+    RETURN d._key
 """
 
 
@@ -197,17 +217,10 @@ def purge(db: ArangoDatabase, args: argparse.Namespace) -> None:
     if not keys:
         return
 
-    chroma = None
-    if not args.dry_run:
-        from advandeb_kb.services.chromadb_service import ChromaDBService
-
-        chroma = ChromaDBService()
-        print(f"ChromaDB vectors before: {chroma.count()}", flush=True)
-
     totals: dict[str, int] = {}
     started = time.time()
     for i in range(0, len(keys), args.purge_batch):
-        n = _purge_batch(db, chroma, keys[i:i + args.purge_batch], reasons, args.dry_run)
+        n = _purge_batch(db, None, keys[i:i + args.purge_batch], reasons, args.dry_run)
         for k, v in n.items():
             totals[k] = totals.get(k, 0) + v
         print(f"  {min(i + args.purge_batch, len(keys))}/{len(keys)}  {totals}  "
@@ -215,8 +228,34 @@ def purge(db: ArangoDatabase, args: argparse.Namespace) -> None:
 
     verb = "would remove" if args.dry_run else "removed"
     print(f"\nDONE {verb} for {totals.get('documents', 0)} documents: {totals}", flush=True)
-    if chroma is not None:
-        print(f"ChromaDB vectors after: {chroma.count()}", flush=True)
+    if totals.get("embedded_docs"):
+        print(f"{totals['embedded_docs']} of them have vectors: stop advandeb-stack and "
+              f"run --purge-vectors", flush=True)
+
+
+def purge_vectors(db: ArangoDatabase, args: argparse.Namespace) -> None:
+    from advandeb_kb.config.settings import settings as kb_settings
+    from advandeb_kb.services.chromadb_service import ChromaDBService
+
+    # Run from a worktree, the default persist dir resolves inside it and
+    # Chroma would quietly create an empty store there.
+    if not os.path.isdir(kb_settings.CHROMA_PERSIST_DIR):
+        sys.exit(f"No ChromaDB at {kb_settings.CHROMA_PERSIST_DIR}; set CHROMA_PERSIST_DIR")
+
+    keys = db.aql(EXCLUDED_EMBEDDED_AQL, bind_vars={"limit": args.limit, "domain": args.domain})
+    chroma = ChromaDBService()
+    before = chroma.count()
+    print(f"{len(keys)} excluded documents with vectors | ChromaDB {chroma.persist_dir} "
+          f"holds {before} | dry_run={args.dry_run}", flush=True)
+    if not keys or args.dry_run:
+        return
+    started = time.time()
+    for i in range(0, len(keys), args.purge_batch):
+        chroma.collection.delete(where={"document_id": {"$in": keys[i:i + args.purge_batch]}})
+        print(f"  {min(i + args.purge_batch, len(keys))}/{len(keys)}  "
+              f"({time.time() - started:.0f}s)", flush=True)
+    after = chroma.count()
+    print(f"\nDONE removed {before - after} vectors; ChromaDB now holds {after}", flush=True)
 
 
 def main() -> None:
@@ -232,7 +271,9 @@ def main() -> None:
                         help="OpenAI-compatible server (e.g. vLLM) instead of Ollama; "
                              "key from GATE_OPENAI_API_KEY")
     parser.add_argument("--purge", action="store_true",
-                        help="Exclude off-domain documents and delete what they produced")
+                        help="Exclude off-domain documents and delete their facts, chunks, edges")
+    parser.add_argument("--purge-vectors", action="store_true",
+                        help="Delete ChromaDB vectors of excluded documents (stop advandeb-stack first)")
     parser.add_argument("--purge-batch", type=int, default=200)
     parser.add_argument("--domain", default="reproduction",
                         help="general_domain to work on, or 'any'")
@@ -248,6 +289,8 @@ def main() -> None:
 
     if args.purge:
         purge(db, args)
+    elif args.purge_vectors:
+        purge_vectors(db, args)
     else:
         asyncio.run(judge_all(db, args))
 

@@ -375,7 +375,12 @@ async def _load_verdicts(db) -> Tuple[Dict[str, str], List[str], int]:
 
 
 def _purge_batch(a, chroma, keys: List[str], reasons: Dict[str, str], dry_run: bool) -> Dict[str, int]:
-    """Exclude one batch of documents and delete everything derived from them."""
+    """Exclude one batch of documents and delete everything derived from them.
+
+    ``chroma=None`` leaves the vectors alone — for when another process holds
+    the embedded store open. The caller must then delete them by
+    ``document_id`` afterwards; the chunk keys are gone with the Arango chunks.
+    """
     doc_ids = [f"documents/{k}" for k in keys]
     q = a.aql
     n: Dict[str, int] = {}
@@ -406,11 +411,12 @@ def _purge_batch(a, chroma, keys: List[str], reasons: Dict[str, str], dry_run: b
 
     # Vectors first: if a later step fails, a re-run still finds the Arango
     # chunks and retries — the reverse order could orphan vectors.
-    for i in range(0, len(chunk_keys), 5000):
-        chroma.collection.delete(ids=chunk_keys[i:i + 5000])
-    if embedded:
-        # Catch-all for vectors whose Arango chunk record never got written.
-        chroma.collection.delete(where={"document_id": {"$in": embedded}})
+    if chroma is not None:
+        for i in range(0, len(chunk_keys), 5000):
+            chroma.collection.delete(ids=chunk_keys[i:i + 5000])
+        if embedded:
+            # Catch-all for vectors whose Arango chunk record never got written.
+            chroma.collection.delete(where={"document_id": {"$in": embedded}})
 
     for col in _FACT_EDGE_COLLECTIONS:
         if fact_ids:
