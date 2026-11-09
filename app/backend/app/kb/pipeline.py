@@ -1117,6 +1117,7 @@ async def _classify_domain_relevance(
     abstract: Optional[str],
     model: Optional[str] = None,
     base_url: Optional[str] = None,
+    openai_api_key: Optional[str] = None,
 ) -> tuple[bool, str]:
     """Gate a document by domain relevance before the expensive stages
     (fact extraction, SF matching, embedding) run on it.
@@ -1131,7 +1132,9 @@ async def _classify_domain_relevance(
     judgment, so bulk/retroactive callers processing millions of records can
     pass a much smaller, faster model than the one used for live ingestion.
     ``base_url`` overrides ``settings.OLLAMA_BASE_URL`` for workers pinned to
-    their own Ollama instance.
+    their own Ollama instance. With ``openai_api_key``, ``base_url`` is an
+    OpenAI-compatible server instead (e.g. vLLM), so bulk re-gating can use a
+    large model that is already loaded; Qwen3 thinking is switched off there.
     """
     import httpx
     import json as _json
@@ -1142,23 +1145,37 @@ async def _classify_domain_relevance(
         return True, "no abstract available for gating"
 
     prompt = f"Title: {title}\n\nAbstract: {abstract[:2000]}"
-    payload = {
-        "model": model or settings.OLLAMA_MODEL,
-        "messages": [
-            {"role": "system", "content": _DOMAIN_GATE_PROMPT},
-            {"role": "user", "content": prompt},
-        ],
-        "stream": False,
-        "options": {"temperature": 0.0},
-    }
+    messages = [
+        {"role": "system", "content": _DOMAIN_GATE_PROMPT},
+        {"role": "user", "content": prompt},
+    ]
+    if openai_api_key:
+        url = f"{base_url}/v1/chat/completions"
+        headers = {"Authorization": f"Bearer {openai_api_key}"}
+        payload = {
+            "model": model,
+            "messages": messages,
+            "temperature": 0.0,
+            "max_tokens": 200,
+            "chat_template_kwargs": {"enable_thinking": False},
+        }
+    else:
+        url = f"{base_url or settings.OLLAMA_BASE_URL}/api/chat"
+        headers = {}
+        payload = {
+            "model": model or settings.OLLAMA_MODEL,
+            "messages": messages,
+            "stream": False,
+            "options": {"temperature": 0.0},
+        }
 
     try:
         async with httpx.AsyncClient(timeout=60.0) as client:
-            resp = await client.post(
-                f"{base_url or settings.OLLAMA_BASE_URL}/api/chat", json=payload
-            )
+            resp = await client.post(url, json=payload, headers=headers)
             resp.raise_for_status()
-            raw = resp.json()["message"]["content"].strip()
+            body = resp.json()
+            message = body["choices"][0]["message"] if openai_api_key else body["message"]
+            raw = message["content"].strip()
 
         clean = re.sub(r"<think>.*?</think>", "", raw, flags=re.DOTALL).strip()
         if clean.startswith("```"):

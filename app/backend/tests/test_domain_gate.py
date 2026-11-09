@@ -61,3 +61,18 @@ async def test_base_url_override_is_used():
     _, post = await _gate(json.dumps({"relevant": True, "reason": "ok"}),
                           base_url="http://gpu3:11434")
     assert post.call_args.args[0] == "http://gpu3:11434/api/chat"
+
+
+async def test_openai_compatible_server():
+    resp = MagicMock()
+    resp.raise_for_status = MagicMock()
+    resp.json = MagicMock(return_value={"choices": [{"message": {
+        "content": json.dumps({"relevant": False, "reason": "human clinical medicine"})}}]})
+    with patch("httpx.AsyncClient.post", new=AsyncMock(return_value=resp)) as post:
+        is_relevant, reason = await _classify_domain_relevance(
+            "Title", "Some abstract text.", model="qwen3-32b",
+            base_url="http://127.0.0.1:8001", openai_api_key="k")
+    assert (is_relevant, reason) == (False, "human clinical medicine")
+    assert post.call_args.args[0] == "http://127.0.0.1:8001/v1/chat/completions"
+    assert post.call_args.kwargs["headers"] == {"Authorization": "Bearer k"}
+    assert post.call_args.kwargs["json"]["model"] == "qwen3-32b"
