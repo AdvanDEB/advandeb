@@ -42,6 +42,13 @@ ROLE_EXTERNAL_CONTRIBUTOR = "external_contributor"
 # in the frontend router, which is presentation; this is the control.
 EXTERNAL_CONTRIBUTOR_ALLOWED_PREFIXES = ("/api/elicitation", "/api/users/me")
 
+# The 2026Workshop wiki is for the experts who were at the workshop, and some
+# of them hold the external-contributor role. An administrator grants it per
+# user (app/api/routes/wiki.py), and the grant opens the wiki's API to an
+# external contributor too: nothing beyond it.
+CAP_WORKSHOP_2026 = "workshop_2026"
+EXTERNAL_CAPABILITY_PREFIXES = {CAP_WORKSHOP_2026: ("/api/wiki",)}
+
 # bcrypt hashes the first 72 bytes of a password and, from bcrypt 5, raises on
 # anything longer rather than truncating silently.
 BCRYPT_MAX_PASSWORD_BYTES = 72
@@ -132,12 +139,12 @@ def is_external_only(roles: Optional[Iterable[str]]) -> bool:
     return bool(roles) and all(r == ROLE_EXTERNAL_CONTRIBUTOR for r in roles)
 
 
-def path_allowed_for_external(path: str) -> bool:
+def path_allowed_for_external(path: str, capabilities: Optional[Iterable[str]] = None) -> bool:
     """Whether an external-contributor-only account may reach ``path``."""
-    return any(
-        path == prefix or path.startswith(prefix + "/")
-        for prefix in EXTERNAL_CONTRIBUTOR_ALLOWED_PREFIXES
-    )
+    prefixes = list(EXTERNAL_CONTRIBUTOR_ALLOWED_PREFIXES)
+    for cap in capabilities or ():
+        prefixes.extend(EXTERNAL_CAPABILITY_PREFIXES.get(cap, ()))
+    return any(path == prefix or path.startswith(prefix + "/") for prefix in prefixes)
 
 
 def token_revoked(payload: dict, user_doc: dict) -> bool:
@@ -168,7 +175,8 @@ def ensure_path_allowed(user_doc: dict, path: Optional[str]) -> None:
     """Confine an external-contributor-only account to its allowlist."""
     if path is None:
         return
-    if is_external_only(user_doc.get("roles")) and not path_allowed_for_external(path):
+    if is_external_only(user_doc.get("roles")) and not path_allowed_for_external(
+            path, user_doc.get("capabilities")):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not available to external contributors",

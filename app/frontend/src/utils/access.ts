@@ -24,6 +24,10 @@ export const KB_ROLES = ['administrator', 'knowledge_curator'] as const
  */
 export const EXTERNAL_ALLOWED_PREFIXES = ['/elicitation', '/settings', '/login'] as const
 
+/** The 2026Workshop wiki, and its first address (which redirects to it). */
+export const WORKSHOP_PREFIXES = ['/2026Workshop', '/wiki'] as const
+export const CAP_WORKSHOP = 'workshop_2026'
+
 function roles(u: AccessSubject | null | undefined): string[] {
   return u?.roles ?? []
 }
@@ -66,7 +70,22 @@ export function isExternalOnly(u: AccessSubject | null | undefined): boolean {
   return r.length > 0 && r.every(x => x === 'external_contributor')
 }
 
-/** `path` is a route path (no query string). */
-export function isAllowedForExternal(path: string): boolean {
-  return EXTERNAL_ALLOWED_PREFIXES.some(p => path === p || path.startsWith(p + '/'))
+/**
+ * The 2026Workshop wiki is for the experts who were at the workshop: an
+ * administrator grants it per account (Admin › Experts), and new accounts start
+ * without it. Mirrors the backend's require_workshop (app/core/dependencies.py).
+ */
+export function canSeeWorkshop(u: AccessSubject | null | undefined): boolean {
+  return isAdmin(u) || (u?.capabilities ?? []).includes(CAP_WORKSHOP)
+}
+
+const under = (path: string, prefixes: readonly string[]) =>
+  prefixes.some(p => path === p || path.startsWith(p + '/'))
+
+/**
+ * `path` is a route path (no query string). An external contributor granted the
+ * workshop may open it too, as the backend lets them reach /api/wiki.
+ */
+export function isAllowedForExternal(path: string, u?: AccessSubject | null): boolean {
+  return under(path, EXTERNAL_ALLOWED_PREFIXES) || (canSeeWorkshop(u) && under(path, WORKSHOP_PREFIXES))
 }

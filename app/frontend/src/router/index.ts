@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, type RouteLocationNormalized, type NavigationGuardNext } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import {
-  canElicit, canUseKnowledgeBuilder, isAdmin, isAllowedForExternal, isExternalOnly,
+  canElicit, canSeeWorkshop, canUseKnowledgeBuilder, isAdmin, isAllowedForExternal, isExternalOnly,
 } from '@/utils/access'
 import { forgetAutoReload, isChunkLoadError, recoverFromChunkError } from '@/utils/staleChunk'
 import { preferredLang } from '@/utils/wikiText'
@@ -14,6 +14,8 @@ declare module 'vue-router' {
     requiresAdmin?: boolean
     /** The sf_elicitation capability, or a role that implies it (utils/access.ts canElicit). */
     requiresElicitation?: boolean
+    /** The 2026Workshop wiki: administrators and accounts granted it (utils/access.ts canSeeWorkshop). */
+    requiresWorkshop?: boolean
     /** Shown as "<title> · AdvanDEB" in the tab; home keeps APP_TITLE. */
     title?: string
   }
@@ -77,37 +79,37 @@ const router = createRouter({
       path: '/2026Workshop',
       name: 'wiki',
       redirect: () => ({ name: 'wiki-home', params: { lang: preferredLang() } }),
-      meta: { title: 'Wiki', requiresAuth: true }
+      meta: { title: 'Wiki', requiresAuth: true, requiresWorkshop: true }
     },
     {
       path: '/2026Workshop/:lang(hr|en)',
       name: 'wiki-home',
       component: () => import('@/views/WikiView.vue'),
-      meta: { title: 'Wiki', requiresAuth: true }
+      meta: { title: 'Wiki', requiresAuth: true, requiresWorkshop: true }
     },
     {
       path: '/2026Workshop/:lang(hr|en)/n/:id',
       name: 'wiki-note',
       component: () => import('@/views/WikiView.vue'),
-      meta: { title: 'Wiki', requiresAuth: true }
+      meta: { title: 'Wiki', requiresAuth: true, requiresWorkshop: true }
     },
     {
       path: '/2026Workshop/:lang(hr|en)/graph',
       name: 'wiki-graph',
       component: () => import('@/views/WikiView.vue'),
-      meta: { title: 'Wiki', requiresAuth: true }
+      meta: { title: 'Wiki', requiresAuth: true, requiresWorkshop: true }
     },
     {
       path: '/2026Workshop/:lang(hr|en)/search',
       name: 'wiki-search',
       component: () => import('@/views/WikiView.vue'),
-      meta: { title: 'Wiki', requiresAuth: true }
+      meta: { title: 'Wiki', requiresAuth: true, requiresWorkshop: true }
     },
     {
       path: '/2026Workshop/:lang(hr|en)/tag/:tag(.*)',
       name: 'wiki-tag',
       component: () => import('@/views/WikiView.vue'),
-      meta: { title: 'Wiki', requiresAuth: true }
+      meta: { title: 'Wiki', requiresAuth: true, requiresWorkshop: true }
     },
     // The wiki's first address. Kept so that links shared before the rename
     // still open the same page.
@@ -118,7 +120,7 @@ const router = createRouter({
         const rest = ([] as string[]).concat(to.params.rest ?? []).map(encodeURIComponent).join('/')
         return { path: `/2026Workshop${rest ? `/${rest}` : ''}`, query: to.query, hash: to.hash }
       },
-      meta: { title: 'Wiki', requiresAuth: true }
+      meta: { title: 'Wiki', requiresAuth: true, requiresWorkshop: true }
     },
     {
       path: '/elicitation',
@@ -221,7 +223,7 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
   if (
     authStore.isAuthenticated &&
     isExternalOnly(user) &&
-    !isAllowedForExternal(to.path)
+    !isAllowedForExternal(to.path, user)
   ) {
     next({ name: 'elicitation' })
     return
@@ -233,6 +235,11 @@ router.beforeEach(async (to: RouteLocationNormalized, _from: RouteLocationNormal
   }
 
   if (to.meta.requiresAdmin && !isAdmin(user)) {
+    next({ name: 'home' })
+    return
+  }
+
+  if (to.meta.requiresWorkshop && !canSeeWorkshop(user)) {
     next({ name: 'home' })
     return
   }

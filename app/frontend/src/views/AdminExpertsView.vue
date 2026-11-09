@@ -155,6 +155,71 @@
       </table>
     </section>
 
+    <!-- ── 2026Workshop access ─────────────────────────────────────── -->
+    <section class="el-card">
+      <div class="card-head">
+        <h2>2026Workshop access</h2>
+        <span v-if="workshop.length" class="count-pill ghost">{{ workshopWithAccess }} with access</span>
+      </div>
+      <p class="muted ws-intro">
+        Who may open the 2026Workshop wiki. Administrators always can. Every other
+        account, experts included, starts without access until it is granted here.
+      </p>
+
+      <div v-if="expertsWithout.length" class="ws-bulk">
+        <p>
+          <strong>{{ expertsWithout.length }}</strong>
+          {{ expertsWithout.length === 1 ? 'expert has' : 'experts have' }} no access yet:
+          {{ expertsWithout.map(u => u.name).join(', ') }}.
+        </p>
+        <button class="el-btn" :disabled="workshopBusy"
+                @click="setWorkshop(expertsWithout.map(u => u.id), true)">
+          {{ workshopBusy ? '…' : (expertsWithout.length === 1 ? 'Grant to this expert' : `Grant to these ${expertsWithout.length} experts`) }}
+        </button>
+      </div>
+      <p v-if="workshopError" class="row-error" role="alert">{{ workshopError }}</p>
+
+      <LoadState
+        :loading="loadingWorkshop"
+        :error="errWorkshop"
+        :empty="!workshop.length"
+        empty-text="No users found."
+        @retry="loadWorkshop"
+      />
+
+      <table v-if="workshop.length" class="experts-table">
+        <thead>
+          <tr>
+            <th>Name</th><th>Roles</th><th>Joined</th><th>Access</th><th><span class="sr">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="u in workshop" :key="u.id">
+            <td data-h="Name">
+              {{ u.name }}
+              <span v-if="u.is_expert" class="slugs">expert</span>
+            </td>
+            <td data-h="Roles">
+              <span v-for="r in u.roles" :key="r" class="role-pill">{{ prettyRole(r) }}</span>
+            </td>
+            <td data-h="Joined">{{ formatDate(u.created_at, '—') }}</td>
+            <td data-h="Access">
+              <span class="status-badge" :class="u.has_access ? 'active' : 'off'">
+                {{ u.has_access ? 'can open' : 'no access' }}
+              </span>
+              <span v-if="u.is_admin" class="via-role">as administrator</span>
+            </td>
+            <td class="actions-cell">
+              <button v-if="!u.is_admin" class="el-btn el-btn--ghost act" :disabled="workshopBusy"
+                      @click="setWorkshop([u.id], !u.granted)">
+                {{ u.granted ? 'Revoke' : 'Grant' }}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
     <!-- ── Progress ───────────────────────────────────────────────── -->
     <section class="el-card">
       <div class="card-head"><h2>Progress</h2></div>
@@ -313,6 +378,30 @@ const errRequests = ref('')
 const errStats = ref('')
 const busyId = ref<string | null>(null)
 
+// ── 2026Workshop access (/api/wiki/access) ──────────────────────────────
+interface WorkshopUser {
+  id: string
+  name: string
+  email: string | null
+  roles: string[]
+  status: string
+  created_at: string | null
+  is_admin: boolean
+  is_expert: boolean
+  granted: boolean
+  has_access: boolean
+}
+const workshop = ref<WorkshopUser[]>([])
+const workshopWithAccess = ref(0)
+const loadingWorkshop = ref(true)
+const errWorkshop = ref('')
+const workshopBusy = ref(false)
+const workshopError = ref('')
+// The people who were at the workshop are the current experts: offered as one
+// batch, named, so the grant is a single, informed confirmation.
+const expertsWithout = computed(() =>
+  workshop.value.filter(u => u.is_expert && !u.has_access && u.status === 'active'))
+
 function canElicit(u: ExpertListEntry): boolean {
   return u.can_elicit
 }
@@ -383,6 +472,27 @@ async function loadStats() {
   finally { loadingStats.value = false }
 }
 
+async function loadWorkshop() {
+  loadingWorkshop.value = true
+  errWorkshop.value = ''
+  try {
+    const { data } = await api.get<{ users: WorkshopUser[]; with_access: number }>('/wiki/access')
+    workshop.value = data.users
+    workshopWithAccess.value = data.with_access
+  } catch (e) { errWorkshop.value = readError(e); workshop.value = [] }
+  finally { loadingWorkshop.value = false }
+}
+
+async function setWorkshop(ids: string[], granted: boolean) {
+  workshopBusy.value = true
+  workshopError.value = ''
+  try {
+    await api.post('/wiki/access', { user_ids: ids, granted })
+    await loadWorkshop()
+  } catch (e) { workshopError.value = readError(e) }
+  finally { workshopBusy.value = false }
+}
+
 async function setCapability(u: ExpertListEntry, granted: boolean) {
   busyId.value = u.id
   delete rowError[u.id]
@@ -416,7 +526,7 @@ function dismissIssued(email: string) {
   issued.value = issued.value.filter((c) => c.email !== email)
 }
 
-onMounted(() => { loadExperts(); loadRequests(); loadStats() })
+onMounted(() => { loadExperts(); loadRequests(); loadStats(); loadWorkshop() })
 </script>
 
 <style scoped>
@@ -544,6 +654,13 @@ onMounted(() => { loadExperts(); loadRequests(); loadStats() })
 .status-badge.active { background: var(--el-ok-bg); color: var(--el-ok-ink); }
 .status-badge.off { background: var(--el-bg-3); color: var(--el-ink-4); }
 .via-role { font-size: var(--el-fs-xs); color: var(--el-ink-4); margin-left: var(--el-s1); }
+.ws-intro { margin: 0 0 var(--el-s3); }
+.ws-bulk {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--el-s2) var(--el-s4);
+  margin-bottom: var(--el-s3); padding: var(--el-s3) var(--el-s4);
+  background: var(--el-warn-bg); color: var(--el-warn-ink); border-radius: var(--el-radius);
+}
+.ws-bulk p { margin: 0; flex: 1 1 320px; font-size: var(--el-fs-sm); line-height: 1.5; }
 
 .panel-coverage { margin-bottom: var(--el-s4); }
 .pc-head {

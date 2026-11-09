@@ -54,6 +54,9 @@ const expert = user(['knowledge_explorator'], ['sf_elicitation'])
 const curator = user(['knowledge_curator'])
 const admin = user(['administrator'])
 const external = user(['external_contributor'])
+// At the workshop: granted the 2026Workshop wiki by an administrator.
+const attendee = user(['knowledge_explorator'], ['sf_elicitation', 'workshop_2026'])
+const externalAttendee = user(['external_contributor'], ['sf_elicitation', 'workshop_2026'])
 
 describe('router', () => {
   beforeEach(() => {
@@ -115,8 +118,8 @@ describe('router', () => {
   })
 
   describe('/2026Workshop (the wiki)', () => {
-    it('is open to every member, in the language the URL names', async () => {
-      signIn(explorer)
+    it('opens, in the language the URL names, to those granted it', async () => {
+      signIn(attendee)
       const route = await go('/2026Workshop/en/n/Slaba%20homeostaza')
       expect(route.name).toBe('wiki-note')
       expect(route.params).toMatchObject({ lang: 'en', id: 'Slaba homeostaza' })
@@ -124,7 +127,7 @@ describe('router', () => {
     })
 
     it('picks a language when the URL names none', async () => {
-      signIn(explorer)
+      signIn(attendee)
       localStorage.setItem('wiki.lang', 'hr')
       const route = await go('/2026Workshop')
       expect(route.name).toBe('wiki-home')
@@ -132,19 +135,35 @@ describe('router', () => {
     })
 
     it('knows no third language', async () => {
-      signIn(explorer)
+      signIn(attendee)
       expect((await go('/2026Workshop/de')).name).toBe('not-found')
     })
 
-    it('stays closed to external contributors and to visitors', async () => {
+    it('is closed by default, to new experts and curators too', async () => {
+      for (const u of [explorer, expert, curator]) {
+        signIn(u)
+        expect((await go('/2026Workshop/en')).name).toBe('home')
+        expect((await go('/wiki/en/graph')).name).toBe('home')
+      }
+      signIn(admin)
+      expect((await go('/2026Workshop/en')).name).toBe('wiki-home')
+    })
+
+    it('opens to an external expert granted it, and nothing else with it', async () => {
+      signIn(externalAttendee)
+      expect((await go('/2026Workshop/en/graph')).name).toBe('wiki-graph')
+      expect((await go('/chat')).name).toBe('elicitation')
       signIn(external)
       expect((await go('/2026Workshop/en')).name).toBe('elicitation')
+    })
+
+    it('needs a session at all', async () => {
       signIn(null)
       expect((await go('/2026Workshop/en')).name).toBe('login')
     })
 
     it('sends the first /wiki addresses to the same page', async () => {
-      signIn(explorer)
+      signIn(attendee)
       const note = await go('/wiki/en/n/Slaba%20homeostaza')
       expect(note.name).toBe('wiki-note')
       expect(note.path).toBe('/2026Workshop/en/n/Slaba%20homeostaza')
@@ -187,6 +206,12 @@ describe('Home cards agree with the guard', () => {
     await flushPromises()
     expect(targets(w)).not.toContain('/kb')
     expect(targets(w)).not.toContain('/elicitation')
+    expect(targets(w)).not.toContain('/2026Workshop')
+  })
+
+  it('shows the 2026Workshop card only to those granted it', async () => {
+    const w = home(attendee)
+    await flushPromises()
     expect(targets(w)).toContain('/2026Workshop')
   })
 
@@ -218,6 +243,10 @@ describe('access rules', () => {
     expect(isAllowedForExternal('/settings/privacy')).toBe(true)
     expect(isAllowedForExternal('/settingsx')).toBe(false)
     expect(isAllowedForExternal('/chat')).toBe(false)
+    expect(isAllowedForExternal('/2026Workshop/en')).toBe(false)
+    expect(isAllowedForExternal('/2026Workshop/en', external)).toBe(false)
+    expect(isAllowedForExternal('/2026Workshop/en', externalAttendee)).toBe(true)
+    expect(isAllowedForExternal('/2026Workshopx', externalAttendee)).toBe(false)
   })
 
   it('grant elicitation by capability or implying role', () => {

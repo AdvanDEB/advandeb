@@ -42,6 +42,10 @@ POLICIES = {
                 "external_contributor": 403, "suspended": 401},
     "admin": {"anonymous": 401, "explorator": 403, "curator": 403, "admin": OK,
               "external_contributor": 403, "suspended": 401},
+    # The 2026Workshop wiki: administrators, and accounts granted workshop_2026
+    # (none of the matrix personas but the administrator hold it).
+    "workshop": {"anonymous": 401, "explorator": 403, "curator": 403, "admin": OK,
+                 "external_contributor": 403, "suspended": 401},
 }
 
 BATCH_ID = str(ObjectId())
@@ -69,8 +73,9 @@ ENDPOINTS = [
     ("/api/tdeb", "GET", "/api/tdeb/templates", "member", 200, "header"),
     ("/api/graph", "GET", "/api/graph/provenance/chunk:abc", "member", 200, "header"),
     ("/api/graph", "GET", "/api/graph/chunk/abc/context", "member", 200, "header"),
-    ("/api/wiki", "GET", "/api/wiki/index", "member", 200, "header"),
+    ("/api/wiki", "GET", "/api/wiki/index", "workshop", 200, "header"),
     ("/api/wiki", "POST", "/api/wiki/reload", "admin", 200, "header"),
+    ("/api/wiki", "GET", "/api/wiki/access", "admin", 200, "header"),
     ("/api/kb/agents", "GET", "/api/kb/agents/models", "curator", 200, "header"),
     ("/api/kb/viz", "GET", "/api/kb/viz/schema/sf_support/status", "curator", 200, "header"),
     ("/api/kb/viz", "GET", "/api/kb/viz/schema/unknown/stream", "curator", 200, "query"),

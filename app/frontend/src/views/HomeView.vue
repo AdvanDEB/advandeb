@@ -32,7 +32,7 @@
           <p>Role-aware guide to the app</p>
         </router-link>
 
-        <router-link to="/2026Workshop" class="feature-card">
+        <router-link v-if="showWorkshop" to="/2026Workshop" class="feature-card">
           <h3>Workshop Wiki</h3>
           <p>Results of the November 2026 workshop, in Croatian and English</p>
         </router-link>
@@ -139,13 +139,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import { canElicit as userCanElicit, canUseKnowledgeBuilder } from '@/utils/access'
+import { canElicit as userCanElicit, canSeeWorkshop, canUseKnowledgeBuilder } from '@/utils/access'
 
 const authStore = useAuthStore()
 
 // Same rules as the router guard and the sidebar (utils/access.ts).
 const canElicit = computed(() => userCanElicit(authStore.user))
 const showKnowledgeBuilder = computed(() => canUseKnowledgeBuilder(authStore.user))
+const showWorkshop = computed(() => canSeeWorkshop(authStore.user))
 </script>
 
 <style scoped>

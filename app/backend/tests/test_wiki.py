@@ -15,6 +15,7 @@ from urllib.parse import quote
 
 import pytest
 
+from app.core.auth import CAP_WORKSHOP_2026
 from app.services.wiki_service import CAP_WIKI_INTERNAL, fold, get_wiki_store
 
 
@@ -69,9 +70,10 @@ def bundle_path(tmp_path, monkeypatch):
 @pytest.fixture
 def readers(make_user):
     return {
-        "member": make_user("member@example.org", roles=["knowledge_explorator"]),
+        "member": make_user("member@example.org", roles=["knowledge_explorator"],
+                            capabilities=[CAP_WORKSHOP_2026]),
         "insider": make_user("insider@example.org", roles=["knowledge_explorator"],
-                             capabilities=[CAP_WIKI_INTERNAL]),
+                             capabilities=[CAP_WORKSHOP_2026, CAP_WIKI_INTERNAL]),
         "admin": make_user("admin@example.org", roles=["administrator"]),
     }
 
@@ -175,3 +177,75 @@ def test_one_store_per_path(tmp_path):
     a, b = tmp_path / "a.json", tmp_path / "b.json"
     assert get_wiki_store(str(a)) is get_wiki_store(str(a))
     assert get_wiki_store(str(a)) is not get_wiki_store(str(b))
+
+
+# --------------------------------------------------------------------------- #
+# Who may open the wiki at all                                                  #
+# --------------------------------------------------------------------------- #
+
+WIKI_GETS = ["/api/wiki/index", "/api/wiki/graph", "/api/wiki/notes/" + quote("Čovjek")]
+
+
+def test_new_accounts_do_not_see_the_wiki(client, auth_header, make_user, bundle_path):
+    """New users and new experts start without it; only a grant opens it."""
+    newcomers = [
+        make_user("new@example.org", roles=["knowledge_explorator"]),
+        make_user("new-expert@example.org", roles=["knowledge_explorator"], capabilities=["sf_elicitation"]),
+        make_user("curator@example.org", roles=["knowledge_curator"]),
+        make_user("external@example.org", roles=["external_contributor"], capabilities=["sf_elicitation"]),
+    ]
+    for user in newcomers:
+        for path in WIKI_GETS:
+            assert _get(client, auth_header, user, path).status_code == 403, (user["email"], path)
+        assert _get(client, auth_header, user, "/api/wiki/search", q="x").status_code == 403
+
+
+def test_the_grant_opens_the_wiki_to_an_external_expert_and_nothing_else(
+        client, auth_header, make_user, bundle_path):
+    expert = make_user("visitor@example.org", roles=["external_contributor"],
+                       capabilities=["sf_elicitation", CAP_WORKSHOP_2026])
+    for path in WIKI_GETS:
+        assert _get(client, auth_header, expert, path).status_code == 200, path
+    # Still confined everywhere else.
+    assert _get(client, auth_header, expert, "/api/documents/").status_code == 403
+    assert _get(client, auth_header, expert, "/api/chat/sessions").status_code == 403
+    # And no administration of the wiki.
+    assert _get(client, auth_header, expert, "/api/wiki/access").status_code == 403
+
+
+def test_an_administrator_lists_and_grants_access(client, auth_header, make_user, readers, bundle_path):
+    admin = readers["admin"]
+    expert = make_user("expert@example.org", roles=["knowledge_explorator"], capabilities=["sf_elicitation"])
+    plain = make_user("plain@example.org", roles=["knowledge_explorator"])
+
+    listing = _get(client, auth_header, admin, "/api/wiki/access").json()
+    rows = {u["email"]: u for u in listing["users"]}
+    assert rows["expert@example.org"]["is_expert"] and not rows["expert@example.org"]["has_access"]
+    assert not rows["plain@example.org"]["is_expert"]
+    assert rows["admin@example.org"]["has_access"] and not rows["admin@example.org"]["is_expert"]
+    assert rows["member@example.org"]["granted"]
+
+    r = client.post("/api/wiki/access", headers=auth_header(admin),
+                    json={"user_ids": [str(expert["_id"]), str(plain["_id"])], "granted": True})
+    assert r.status_code == 200 and r.json()["matched"] == 2
+    assert _get(client, auth_header, expert, "/api/wiki/index").status_code == 200
+    assert _get(client, auth_header, plain, "/api/wiki/index").status_code == 200
+
+    r = client.post("/api/wiki/access", headers=auth_header(admin),
+                    json={"user_ids": [str(plain["_id"])], "granted": False})
+    assert r.status_code == 200
+    assert _get(client, auth_header, plain, "/api/wiki/index").status_code == 403
+    assert _get(client, auth_header, expert, "/api/wiki/index").status_code == 200
+
+
+def test_granting_is_for_administrators_and_checks_its_input(client, auth_header, readers, bundle_path):
+    r = client.post("/api/wiki/access", headers=auth_header(readers["member"]),
+                    json={"user_ids": [str(readers["member"]["_id"])], "granted": True})
+    assert r.status_code == 403
+    admin = auth_header(readers["admin"])
+    assert client.post("/api/wiki/access", headers=admin,
+                       json={"user_ids": ["not-an-id"], "granted": True}).status_code == 400
+    assert client.post("/api/wiki/access", headers=admin,
+                       json={"user_ids": [], "granted": True}).status_code == 422
+    assert client.post("/api/wiki/access", headers=admin,
+                       json={"user_ids": ["6560f0f0f0f0f0f0f0f0f0f0"], "granted": True}).status_code == 404

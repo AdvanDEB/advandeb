@@ -7,6 +7,7 @@ from typing import Callable, List, Optional
 # ROLE_EXTERNAL_CONTRIBUTOR is defined in app.core.auth, which enforces it;
 # enrolment_service imports it from here.
 from app.core.auth import (
+    CAP_WORKSHOP_2026,
     ROLE_EXTERNAL_CONTRIBUTOR,
     bearer_or_query_token,
     get_current_user,
@@ -122,3 +123,8 @@ def require_capability(capability: str) -> Callable:
 
 
 require_elicitor = require_capability(CAP_SF_ELICITATION)
+
+# The 2026Workshop wiki: administrators, and whoever an administrator granted it
+# (by default, the experts who were at the workshop). Defined in app.core.auth,
+# which also lets an external contributor holding it reach /api/wiki.
+require_workshop = require_capability(CAP_WORKSHOP_2026)

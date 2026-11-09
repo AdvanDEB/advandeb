@@ -98,7 +98,9 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import { canElicit as userCanElicit, canUseKnowledgeBuilder, isAdmin, isExternalOnly } from '@/utils/access'
+import {
+  canElicit as userCanElicit, canSeeWorkshop, canUseKnowledgeBuilder, isAdmin, isExternalOnly,
+} from '@/utils/access'
 import ToastNotifications from './ToastNotifications.vue'
 
 const route = useRoute()
@@ -126,7 +128,6 @@ const baseLinks = [
   { path: '/documents',  icon: '📄', label: 'Documents' },
   { path: '/facts',      icon: '🔬', label: 'Facts' },
   { path: '/documentation', icon: '?', label: 'Docs' },
-  { path: '/2026Workshop', icon: '📖', label: '2026Workshop' },
   { path: '/models',     icon: '📐', label: 'Models' },
   { path: '/settings/llm-keys', icon: '🔑', label: 'LLM Keys' },
   { path: '/settings/privacy', icon: '🔒', label: 'Privacy' },
@@ -140,16 +141,23 @@ const baseLinks = [
 const externalOnly = computed(() => isExternalOnly(authStore.user))
 const canElicit = computed(() => userCanElicit(authStore.user))
 
+// The 2026Workshop wiki is for those who were at the workshop: an administrator
+// grants it per account, external contributors included.
+const workshopLink = { path: '/2026Workshop', icon: '📖', label: '2026Workshop' }
+
 const navLinks = computed(() => {
   if (externalOnly.value) {
     // Their queue, and nothing else. Privacy settings are deliberately not
     // advertised here — that page is about chat-history visibility, and an
     // external contributor has no chat. The route stays reachable if they are
     // sent there directly; it simply is not offered.
-    return [{ path: '/elicitation', icon: '✎', label: 'Elicitation' }]
+    const own = [{ path: '/elicitation', icon: '✎', label: 'Elicitation' }]
+    if (canSeeWorkshop(authStore.user)) own.push(workshopLink)
+    return own
   }
 
   const links = [...baseLinks]
+  if (canSeeWorkshop(authStore.user)) links.splice(5, 0, workshopLink) // after Docs
   // Elicitation is capability-gated: the DEB experts who provide the judgments
   // hold knowledge_explorator only, so the link follows the capability rather
   // than the role. Showing it to everyone would mean a 403 on click.
